@@ -1,0 +1,63 @@
+
+# Plan for Agent-Human Generation
+
+## Goal
+
+> [!CHECK] Global objective
+> This plan aims to design a **system for generating research notes in an Obsidian vault**.
+> A research vault is a **modular reasoning system** answering a research question through a sequence of atomic inferential steps.
+> The decisive object is the **inferential contract of each note inside the vault-level argument**, rather than the polished note itself.
+
+**Criteria**: The system must:
+
+- provide structured procedures, workflows and artifacts to orchestrate AI-human interaction on research projects,
+- combine AI autonomy, human control and their interaction,
+- implement the best design practices: modularity, separation of concerns, flexibility, extensibility, predictability and maintainability.
+
+One main challenge addressed by the system is to constrain AI agents at the level of **inferential behavior**: what must be proven, from which premises, in what order, and what counts as success.
+
+---
+
+## Components of the system
+
+The system is built around eight core components:
+
+| Component                                               | Key role                                                                                                                        | Contents                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[Decision rules](../quality-criteria/decision-rules.md)**                 | Verifiable criteria that operationalize quality criteria (depth, relevance, motivation)                                         | Four-layer organization: epistemic rules govern generation-time decision criteria, argumentative rules enforce logical chaining and claim–derivation separation, stylistic rules impose tone and writing style, integrative rules handle scope admissibility and divergence resolution. Includes composite rule files for writing principles and mathematical standards.                                                                                                                 |
+| **[Formal contracts](formal-contracts.md)**             | Per-note specification that 1. fixes the inferential scope *before* drafting and 2. validates the contribution *after* drafting | Two-phase structure: scope commitment (objective, utility, typed imports, expected contribution) and execution plan (proof strategy, admissibility table, section skeleton, termination and success criteria). Post-draft fields record the validated contribution and any divergence. One contract template per note type.                                                                                                                                                             |
+| **[Note types](note-types.md)**                         | Per-type constraints on what a note may contain, prove, and how its contract is structured                                      | Each type specifies required and forbidden sections, type-specific contract fields, admissible proof strategies, and the inferential scope the note may cover. Includes index note specifications for project and module levels.                                                                                                                                                                                                                                                       |
+| **[Procedural workflows](procedural-workflows.md)**     | Staged pipelines that separate reasoning tasks and enforce sequential gates with human control points                           | Pass model (architect, derivation, writing, audit), context injection protocol (pass-specific file delivery), handoff artifacts, return triggers, and decision-rule dispatch tables.                                                                                                                                                                                                                                                                                                   |
+| **[Workspace architecture](workspace-architecture.md)** | Directory layout and file organization that separates normative governance from descriptive state                               | Hierarchical file layout (governance, registries, tools, projects), normative/descriptive split, global instruction file specification, and file naming conventions.                                                                                                                                                                                                                                                                                                                   |
+| **[Audits](audits.md)**                                 | Post-draft verification system with structured checklists and reports                                                           | Eight audit dimensions (contract compliance, coherence, mathematical rigor, redundancy, argumentative, motivation, terminology, integration), audit report template, and note-type enforcement.                                                                                                                                                                                                                                                                                       |
+| **[Registries and validation](registries.md)**          | Machine-readable project state and automated validation toolchain                                                               | Four registries (reasoning graph, open questions, dependencies, terminology), validation architecture (schema enforcement, referential integrity, graph integrity, status transitions), staging area, and three validation scripts.                                                                                                                                                                                                                                                    |
+| **[Prompt writing methods](prompt-writing-methods.md)** | Methods for writing effective agent prompts                                                                                     | Foundational principles (specification-behavior gap, separation of concerns, falsifiability), structural architecture (section ordering, demarcation, hierarchy), section-level guidance (role, constraints, context/grounding, reasoning schema with model-class taxonomy, output specification, edge cases, verification/postconditions), linguistic form, valid/invalid examples with economy principles, context-window economics, and multi-turn/multi-agent prompt architecture. |
+
+---
+
+## Problem statement & Diagnosis
+
+This section describes the failure modes that the current system aims to address, and their underlying causes. The diagnosis highlights the necessity for the components described above, and the rationale behind their design.
+
+**Hierarchy of failure rates**:
+
+- style rules are easy to follow
+- local formatting rules are easy to follow
+- abstract values like rigor and pedagogy are partially followable
+- global architectural constraints across many notes are much harder unless externalized into explicit contracts and metadata
+
+**Dominant failure modes**:
+
+- The instruction set emphasizes **syntactic and presentation rules** that are all **downstream** of the reasoning process (style, formatting, prose quality criteria, modularity, note structure...).
+- The **reasoning process itself remains unguided**: to advance toward a determinate answer, the agent needs to be constrained at the level of _argumentative logic_ (semantic-epistemic rules). It needs an _operative_ mechanism to decide what must be proven, in what order, using what premises, why this is the next necessary step, and what counts as success.
+- The **global epistemic architecture** is under-specified.
+
+|Problem|Symptoms|Cause|
+|---|---|---|
+|**Superficiality**|The agent produces content that is _plausibly_ related rather than _logically or argumentatively necessary_ to answer the question. It defaults to associative retrieval: collects related material, provides a summary...|**Weak atomicity**: the _unit of work_ is not rigorously defined. The note is generated from a vague or thematic intention, the "question" is too broad, not sharply delineated.  <br>**Absence of pre-committed argumentative skeleton**: the agent is not forced to commit, _before_ writing, to an exact logical structure.  <br>**Missing decision criteria**: the instructions constrain _form_ and _second-order desiderata_ (e.g. "avoid redundancy", "separate concerns") rather than _inferential behavior_ (e.g. "include _only_ material required to establish the note's result").|
+|**Accumulation**|The agent:  <br>- accumulates loosely related material  <br>- drifts in scope  <br>- appends remarks that are not inferentially necessary  <br>- implicitly broadens the note's purpose|**Missing a termination criterion**: no endpoint or success criterion is formalized. This is especially severe in research writing because neighboring ideas are often genuinely interesting.|
+|**Arbitrary and misdirected depth**|The agent optimizes visible sophistication instead of inferential usefulness, such as:  <br>- generality (prove a broad but low-utility property)  <br>- density of mathematics (elaborate on properties that do not constrain the target phenomenon)  <br>- abstraction (analyze an object because it is mathematically available, not because it is explanatory)  <br>- technicallity (instead of proof architecture)  <br>- formalism (accumulate definitions instead of conceptual economy)|**Missing relevance criteria**: depth is requested (e.g. "be rigorous", "provide deep insight") without specifying _what kind of understanding is sought_.  <br>**Missing proof strategy**: depth is not tied to a target explanatory question.|
+|**Poor motivation for introduced objects**|The agent introduces concepts because they are topically proximate, not because they are _necessary steps_ in a committed proof strategy. It adds generic and decorative prose (e.g. "it is natural to consider…", "to gain intuition…", "this helps understand…").|**Missing functional justification**: motivation is requested only rhetorically and stylistically (e.g. prompts ask for "motivate concepts", "provide intuition", and "be pedagogical").|
+|**Global incoherence**|The agent optimizes local completeness instead of global coherence, producing:  <br>- overlaps  <br>- concepts introduced without clear downstream role  <br>- lack of vault-level novelty|**No operative model of the vault's established knowledge**: the dependency graph is not encoded explicitly, and he instruction set presumably does not force the agent to explicitly map, before writing, which prior results are available as premises. Thus, the agent does not have a strong representation of what has already been _established_ (versus merely mentioned) and what gap remains open.|
+|**Redundancy**|Each note is generated as if it were semi-autonomous, producing rederivations.|**Missing a rule to counteract the implicit default's objective**: language models are naturally biased toward producing self-contained, polished documents.|
+|**Application failures**|Even a strong style guide does not prevent drift in rule application.|**Missing procedural workflows**: The instruction system is too _declarative_, it describes the desired output but _does not prescribe the internal workflow_. The main instructions file mixes:  <br>- global style rules  <br>- epistemic rules  <br>- project architecture  <br>- local note objective|

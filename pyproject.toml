@@ -1,0 +1,84 @@
+# ==================================================================================================
+# Pyproject Configuration for the gnomon Package
+#
+# Gnomon is a research organization system: the formal epistemic framework for
+# organizing mathematical research, independent of automated quality validation.
+# ==================================================================================================
+
+# --- Build System Requirements --------------------------------------------------------------------
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+# --- Package Metadata -----------------------------------------------------------------------------
+
+[project]
+name = "gnomon"
+version = "0.0.0"
+authors = [{name = "eresther"}]
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+readme = {file = "README.md", content-type = "text/markdown"}
+description = "Formal epistemic framework for organizing mathematical research."
+keywords = ["research", "organization", "mathematics", "epistemic", "registry", "workflow"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Development Status :: 2 - Pre-Alpha"
+]
+urls = {homepage = "https://github.com/esther-poniatowski/gnomon"}
+
+
+# --- Dependencies ---------------------------------------------------------------------------------
+
+requires-python = ">=3.12"
+
+dependencies = [
+    "pyyaml>=6.0",
+    "typer>=0.9",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "mypy",
+    "types-pyyaml",
+]
+
+
+# --- Package Source Code --------------------------------------------------------------------------
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# Include non-Python data files shipped with the package
+[tool.setuptools.package-data]
+gnomon = [
+    "data/**/*.md",
+    "data/**/*.yaml",
+    "data/**/*.yml",
+    "data/**/*.json",
+    "data/**/*.toml",
+]
+
+
+# --- CLI Entry Points -----------------------------------------------------------------------------
+
+[project.scripts]
+gnomon = "gnomon.cli:app"
+
+
+# --- Tool Configurations --------------------------------------------------------------------------
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
