@@ -21,7 +21,7 @@ authors = [{name = "eresther"}]
 license = "GPL-3.0-or-later"
 license-files = ["LICENSE"]
 readme = {file = "README.md", content-type = "text/markdown"}
-description = "Formal epistemic framework for organizing mathematical research."
+description = "Organizes mathematical research into a traceable graph of results, dependencies, and open questions."
 keywords = ["research", "organization", "mathematics", "epistemic", "registry", "workflow"]
 classifiers = [
     "Programming Language :: Python :: 3",
