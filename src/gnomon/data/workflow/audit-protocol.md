@@ -158,15 +158,15 @@ literal string is absent. Revise any sentence that:
 
 ---
 
-### Phase 6 — Linter
+### Phase 6 — Optional automated checks
 
-Run the eutaxis linter on all modified files:
+If a project-local writing checker is configured, run it on all modified files
+and fix all reported issues before proceeding.
 
-```
-eutaxis lint <modified_paths>
-```
-
-Fix all reported issues before proceeding. The linter catches imperative openings, forbidden phrases, heading articles, procedural link text heuristics, bare-symbol patterns after prepositions, and bare pronouns after display lines. Linter compliance is necessary but not sufficient — the linter does not catch all violations covered by Phase 3.
+Automated checks are supplementary. They can catch imperative openings,
+forbidden phrases, procedural link text heuristics, bare-symbol patterns after
+prepositions, and similar local violations, but they do not replace the manual
+checks in Phase 3 and Phase 5.
 
 ---
 
@@ -177,7 +177,7 @@ Return the text only when all of the following are true:
 - Phase 3: no sentence fails any of the seven checks
 - Phase 4: no structural redundancy or callout dispatch violation remains
 - Phase 5: no forbidden string appears outside code blocks
-- Phase 6: linter reports no issues
+- Phase 6: any configured automated checker reports no issues
 
 If any condition is false, return to the appropriate phase and revise. Do not return partial output.
 

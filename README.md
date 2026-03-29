@@ -130,8 +130,9 @@ Design documents are maintained in [`docs/design/`](docs/design/):
 - [Quality criteria](docs/design/quality-criteria/) --- Reasoning principles and
   decision rules.
 
-Quality validation tooling (audits, style linting) is provided by
-[eutaxis](https://github.com/esther-poniatowski/eutaxis).
+Writing-quality rules are maintained in
+[hermeneia](https://github.com/esther-poniatowski/hermeneia). Note-governance
+audits and workflow gates are maintained in gnomon.
 
 ---
 

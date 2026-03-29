@@ -1,7 +1,7 @@
 # Workspace architecture
 
 > [!INFO] See also
-> Part of the [agent instruction system](plan-agents-humain-generation.md). Related: [decision rules](../quality-criteria/decision-rules.md) — [formal contracts](formal-contracts.md) — [note types](note-types.md) — [procedural workflows](procedural-workflows.md) — [audits](audits.md) — [registries and validation](registries.md).
+> Part of the [agent instruction system](plan-agents-humain-generation.md). Related: [decision rules](../quality-criteria/decision-rules.md) — [formal contracts](formal-contracts.md) — [note types](note-types.md) — [procedural workflows](procedural-workflows.md) — [audits](../../governance/post-draft-audits.md) — [registries and validation](registries.md).
 
 ## Hierarchical levels
 
@@ -25,7 +25,7 @@ The vault's governance is distributed across the following components, each spec
 | Decision rules | `governance/rules/` | [decision-rules.md](../quality-criteria/decision-rules.md) |
 | Note specifications | `governance/specs/` | [note-types.md](note-types.md) |
 | Contract templates | `governance/contracts/` | [formal-contracts.md](formal-contracts.md) |
-| Audit checklists and report | `governance/audits/` | [audits.md](audits.md) |
+| Audit checklists and report | `governance/audits/` | [post-draft-audits.md](../../governance/post-draft-audits.md) |
 | Workflow and pass specs | `governance/workflow/` | [procedural-workflows.md](procedural-workflows.md) |
 | Registry files and validation | `registries/` + `tools/` + `governance/schemas/` | [registries.md](registries.md) |
 
@@ -104,7 +104,7 @@ The vault root contains `AGENTS.md` (the agent entry point, always loaded first)
 - `rules/` — one file per [decision rule](../quality-criteria/decision-rules.md), plus an `_index.md` as cross-referencing hub
 - `specs/` — one [note specification](note-types.md) per type, plus an `_index.md` as note type index
 - `contracts/` — one [contract template](formal-contracts.md) per note type
-- `audits/` — [audit checklists and report template](audits.md)
+- `audits/` — [audit checklists and report template](../../governance/post-draft-audits.md)
 - `schemas/` — one JSON Schema per [registry file](registries.md#schema-requirements)
 - `workflow/` — pipeline prompts and [pass specifications](procedural-workflows.md)
 

@@ -24,7 +24,9 @@ Each note type is associated with two files in the workspace:
 | **Assumption registry** | Centralize recurring assumptions used across multiple notes in a module. | Each assumption with: name, formal statement, notes that use it, role it plays                                           | Derivations, proofs, extended exposition, interpretive commentary                                                                                                     |
 | **Notation table**      | Stabilize symbols and admissible variants for a module or project.       | Each symbol with: canonical form, meaning, forbidden variants, defining note                                             | Exposition beyond identification, proofs, derivations                                                                                                                 |
 
-The [audit](audits.md) pass must verify that the note's declared type matches its actual content — see [audit enforcement by note type](audits.md#audit-enforcement-by-note-type).
+The [audit](../../governance/post-draft-audits.md) pass must verify that the
+note's declared type matches its actual content — see [audit enforcement by
+note type](../../governance/post-draft-audits.md#audit-enforcement-by-note-type).
 
 ## Index note specifications
 
