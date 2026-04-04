@@ -1,67 +1,70 @@
 # Usage
 
 Gnomon organizes mathematical research into a traceable graph of results,
-dependencies, and open questions. The tool scaffolds workspaces, validates
-registry files, and reports the inferential position of a research project.
+dependencies, and open questions.
 
-## Scaffolding a Research Workspace
+## Diagnostics
 
-The `init` command creates a structured workspace from the standard template:
+The `info` command prints the package version and platform details:
+
+```sh
+gnomon info
+```
+
+Example output:
+
+```text
+gnomon 0.0.0 | Platform: Darwin Python 3.12.4
+```
+
+The `--version` / `-v` flag prints only the version string:
+
+```sh
+gnomon --version
+```
+
+## Planned Commands
+
+The following commands exist in the CLI but are not yet functional. Each prints
+a stub message and exits.
+
+### `init` — Scaffold a Research Workspace
 
 ```sh
 gnomon init --target ./my-research
 ```
 
-The generated workspace follows the hierarchical organization documented in
-[Workspace Architecture](../design/methods/workspace-architecture.md): project
-and module scales, each with its own registries and frontier tracking.
+Intended behavior: create a structured workspace directory from the standard
+template, mirroring the hierarchical organization of projects and modules.
 
-## Writing Notes with Contracts
-
-Every note begins with a binding contract that fixes its scope, dependencies,
-and expected contribution. The contract must be completed before drafting
-begins.
-
-The note type determines the structural constraints. Available types include
-problem, result, definition, tool, synthesis, comparison, and frontier. See
-[Note Types](../design/methods/note-types.md) for the full specification of
-each type.
-
-## Maintaining Registries
-
-Machine-readable YAML registries track reasoning graphs, dependency maps, open
-questions, and terminology. Validate all registry files against their schemas:
+### `validate` — Validate Registry Files
 
 ```sh
 gnomon validate registries/
 ```
 
-## Reporting the Inferential Position
+Intended behavior: check YAML registry files against their JSON schemas
+(reasoning graph, open questions, dependencies, terminology).
 
-The `status` command reports the current state of the workspace: established
-results, open questions, in-progress notes, and blocked entries:
-
-```sh
-gnomon status
-```
-
-The report helps identify where gaps remain in the reasoning graph and which
-results are blocked by unresolved dependencies.
-
-## Tracking Upstream Revisions
-
-When an upstream result is revised, downstream consumers may become unstable.
-Gnomon propagates instability warnings through the dependency graph:
+### `status` — Report Inferential Position
 
 ```sh
-gnomon check-stability
+gnomon status --target ./my-research
 ```
 
-## Next Steps
+Intended behavior: summarize established results, open questions, in-progress
+notes, and blocked entries within a workspace.
 
-- [Formal Contracts](../design/methods/formal-contracts.md) — Per-note
-  inferential specifications.
-- [Registries](../design/methods/registries.md) — Machine-readable project
-  state and reasoning graphs.
-- [Procedural Workflows](../design/methods/procedural-workflows.md) — Staged
-  pipelines and pass model.
+## Data Templates
+
+The package ships template files under `src/gnomon/data/`, accessible at
+runtime via `gnomon.data_path()`. Five subdirectories provide starter content
+for consuming projects:
+
+| Directory      | Contents                                                    |
+| -------------- | ----------------------------------------------------------- |
+| `contracts/`   | Per-note-type contract templates (pre-draft and post-draft) |
+| `registries/`  | YAML templates for reasoning graphs, questions, terms, deps |
+| `schemas/`     | JSON schemas for validating registry files                  |
+| `specs/`       | Note type specifications (sections, strategies, scope)      |
+| `workflow/`    | Staged pipeline definitions and the audit protocol          |
