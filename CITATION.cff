@@ -1,0 +1,17 @@
+# ==================================================================================================
+# Citation File Format (CFF) for gnomon
+#
+# Notes
+# -----
+# The `version` field is automatically updated by the `python-semantic-release` tool. It should be
+# set to a valid semantic version placeholder (e.g., "0.0.0", "1.0.0") to be recognized by the tool.
+# ==================================================================================================
+cff-version: 1.2.0
+message: "Please cite this codebase using the following metadata."
+title: "gnomon"
+version: "0.0.0"
+authors:
+  - family-names: "Poniatowski"
+    given-names: "Esther"
+license: "GPL-3.0-or-later"
+repository-code: "https://github.com/esther-poniatowski/gnomon"

@@ -17,7 +17,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "gnomon"
 version = "0.0.0"
-authors = [{name = "eresther"}]
+authors = [{name = "Esther Poniatowski", email = "esther.poniatowski@ens.psl.eu"}]
 license = "GPL-3.0-or-later"
 license-files = ["LICENSE"]
 readme = {file = "README.md", content-type = "text/markdown"}
