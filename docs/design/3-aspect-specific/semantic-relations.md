@@ -1,0 +1,36 @@
+# Semantic relations
+
+> [!INFO] Tier and source
+> **Tier 3 (per aspect).** Stub file. Holds criteria that constrain the typed relation vocabulary between epistemic objects. Traces to [t2-narrow-ontology](vendor/gnomon/docs/design/2-architecture/constraints#^t2-narrow-ontology), [t2-non-redundancy](vendor/gnomon/docs/design/2-architecture/constraints#^t2-non-redundancy), [t2-dependency-management](vendor/gnomon/docs/design/2-architecture/constraints#^t2-dependency-management), [closed typed relations](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-typed-relation-vocabulary), and [relation storage locus](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-relation-storage-locus) (objects author edges). The actual relation vocabulary is deferred to [the project TODO](vendor/gnomon/docs/TODO).
+
+---
+
+## Criteria
+
+### Minimal closed relation vocabulary ^t3-minimal-closed-relation-vocabulary
+
+No relation label may exist outside the schema-declared set. The vocabulary is closed at design time.
+
+### Typed relations with declared endpoints ^t3-typed-relations
+
+Every relation has a declared source type and target type. A relation that does not constrain its endpoints is ill-formed.
+
+### Two strata: canonical vs. inquiry-relative relations ^t3-two-strata-relations
+
+Relations split into two strata: relations declared in the canonical schema between canonical objects, and relations that live inside an assembly because they depend on the inquiry. The second stratum lives inside the assembly's authored content per [locus of justificatory annotations](vendor/gnomon/docs/design/2-architecture/reasoning-structure#^t2-reasoning-annotation-attachment) and [promotion of assembly-local records](vendor/gnomon/docs/design/2-architecture/reasoning-structure#^t2-assembly-record-promotion); it is not exposed as canonical edges.
+
+### Semantic vs. justificatory dependence ^t3-semantic-vs-justificatory-dependence
+
+The relation vocabulary distinguishes semantic dependence (what an object's content presupposes) from justificatory dependence (what supports an object's claim). Conflating them obscures both.
+
+---
+
+## Decisions
+
+*To be drafted at the relation-vocabulary work in [the project TODO](vendor/gnomon/docs/TODO).*
+
+---
+
+## Open questions
+
+*To be drafted at the relation-vocabulary work in [the project TODO](vendor/gnomon/docs/TODO).*
