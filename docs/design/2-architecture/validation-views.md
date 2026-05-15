@@ -38,3 +38,13 @@ Validation rules and validator implementations are separated into different laye
 > [!QUESTION] Is structural validation mechanical and schema-driven, or does it require human judgment?
 
 **Mechanical and schema-driven** for structural well-formedness — required-field checks, edge typing, warrant presence, DAG acyclicity within snapshots, discharge accounting. Motivational adequacy, explanatory relevance, and teleological usefulness can be audited by rules or heuristics, but their full assessment may still require human judgment. The placement is set by [t2-validator-placement](#^t2-validator-placement); the criterion that this validation is mechanical is recorded at [t2-mechanical-validation](vendor/gnomon/docs/design/2-architecture/constraints#^t2-mechanical-validation).
+
+---
+
+## Open questions
+
+### Interpretive-hazard lint rules ^t2-interpretive-hazard-lint
+
+> [!QUESTION] Should the validator carry author-time lint rules that flag phrasing patterns posing a known interpretive hazard?
+
+The worked-example suite (example 34) surfaces a fragment carrying teleological-looking phrasing — "the abstractions useful for the task" — that reads as a hazard without being an error: the phrasing risks an unintended teleological reading. This is not a content kind and not a domain claim; it is an **author-time lint rule** — a heuristic check that flags a span for an interpretive risk and emits a warning, leaving the fragment unrewritten. It belongs with the mechanical-and-heuristic validation governed by [t2-validation-placement](#^t2-validation-placement): structural checks are mechanical, but a hazard lint is a heuristic warning, closer to the "audited by rules or heuristics" tier than to a hard schema check. Re-homed here from the dissolved metalinguistic-content candidate at [_fleeting-ideas](vendor/gnomon/docs/design/_fleeting-ideas#^fleeting-metalinguistic-content); the open question is the rule vocabulary — which phrasing patterns warrant a hazard flag, and whether the catalogue is closed.

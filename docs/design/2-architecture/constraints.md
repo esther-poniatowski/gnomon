@@ -79,6 +79,11 @@ Subtype variations (e.g., `theorem`, `lemma`, `corollary` as variants of `claim`
 
 *Source*: criteria-taxonomy §No strict inheritance relation.
 
+> [!missing] Reopen pending
+> A staged proposal in [_fleeting-ideas](../_fleeting-ideas#^fleeting-python-oop) (Python-inspired OOP for epistemic objects) admits OOP inheritance as a candidate primitive for subtypes of epistemic objects. The reopen has been admitted; the counter-proposal — Haskell-style type classes / Scala traits / Rust traits — is also staged in the same fleeting entry and gives polymorphism without subtype substitutability. Re-ratification weighs both against the current ratified path.
+>
+> Downstream commitments that travel with this reopen — each must be re-evaluated together: [t2-subtype-safety](#^t2-subtype-safety), [t2-layer-replaceability](#^t2-layer-replaceability), [t2-common-abstract-base](object-kinds#^t2-common-abstract-base), and the open question [t2-subtype-discipline](object-kinds#^t2-subtype-discipline). The alternatives now on the table for the re-ratification: tagged unions (current ratified path), schema refinement, hybrid, OOP inheritance (from the Python proposal), and type classes / traits (from the Haskell/Scala/Rust assessment).
+
 ### Subtype safety ^t2-subtype-safety
 
 Subtype labels must not imply that one subtype can stand in for another, shares the same validity semantics, or plays the same graph role when those properties do not hold. The architecture must ensure that introducing a subtype does not silently inherit interchangeability from a base type.
@@ -119,7 +124,7 @@ The framework must terminate reasoning-description at a finite library of primit
 
 ### Revision semantics ^t2-revision-semantics
 
-> [!INFO] Migrated to [revision semantics](_framework-criteria#^t2-revision-semantics) (the headline F is preserved at its original anchor in `_framework-criteria.md`). The forward-edge / revision-edge / propagation specification becomes T2 D's in the validity-revision theme.
+> [!INFO] Migrated to [revision accountability](_framework-criteria#^t1-revision-accountability) (promoted from T2 to T1, anchor renamed from `^t2-revision-semantics` to `^t1-revision-accountability`). The criterion now requires dependency tracking and correction propagation, not only the representation of revision events; the forward-edge / revision-edge / propagation specification becomes three separate T2 decisions (revision-recording, dependency-tracking, propagation) in the validity-revision theme.
 
 The framework must represent how reasoning states are revised when sub-arguments fail, assumptions are weakened, or goals are reformulated. Without this, the framework can represent only completed reasoning, not research reasoning in progress.
 
@@ -135,7 +140,7 @@ The DAG acyclicity condition (enforced on individual reasoning snapshots) and th
 
 ### Defeasibility and regime stratification ^t2-defeasibility
 
-> [!INFO] Migrated to [mixed monotonicity](_framework-criteria#^t1-mixed-monotonicity) (the boundary-interface F); the binary-classification clause is dropped (covered by the warrant-kind enum).
+> [!INFO] Migrated to [composition of warrant kinds](_framework-criteria#^t1-mixed-monotonicity) (the boundary-interface criterion; anchor unchanged, label retitled from "Mixed monotonicity" to "Composition of warrant kinds" to foreground the warrant-kind grain). The binary-classification clause is dropped — it is covered by the warrant-kind enum at `^t3-warrant-kind-enum`.
 
 The framework must distinguish monotonic (proof-theoretic) and non-monotonic (argumentation-theoretic) validity regimes, and must specify the interface between them. At every node of the reasoning graph, the validity regime must be explicit so that a downstream consumer can determine whether the node's conclusion is retractable.
 
@@ -155,7 +160,7 @@ Every inferential node must record more than the rule that licenses its conclusi
 
 ### Snapshot DAG acyclicity ^t2-snapshot-dag
 
-> [!INFO] Migrated to [no circular reasoning](_framework-criteria#^t1-no-circular-reasoning) (the F); DAG acyclicity becomes a derived T2 property `^t2-snapshot-dag-property` on the relational-graph representation.
+> [!INFO] Migrated to [no circular reasoning](_framework-criteria#^t1-no-circular-reasoning) (the F); DAG acyclicity becomes a derived T2 property, recorded in the classification table as `^t2-snapshot-dag-property` on the relational-graph representation, to be created during Step C of the refactor.
 
 At a fixed time, the relations (`depends_on`, `supports`, ...) and the sub-goal or sub-question hierarchy must form a directed acyclic graph. Cycles in a snapshot indicate circular reasoning and are a hard error.
 
@@ -188,7 +193,7 @@ Motivational adequacy, explanatory relevance, and teleological usefulness can be
 
 ### Representation vs. generation disambiguation ^t2-repr-vs-gen
 
-> [!INFO] Migrated to [representation versus generation](_framework-criteria#^t1-representation-vs-generation) (promoted T2 → T1). The blanket per-criterion mode-annotation requirement is dropped.
+> [!INFO] Retired in pass-5. The pass-4 promotion to `^t1-representation-vs-generation` was reversed: pass-5 audit found that the "modes" framing conflated three distinct axes already covered by sibling T1 criteria — [partial formalization tolerance](_framework-criteria#^t1-partial-formalization) (maturity), [activity coverage](_framework-criteria#^t1-activity-coverage) and [activity separation](_framework-criteria#^t1-activity-separation) (activity-kind), and [inquiry content and progression](_framework-criteria#^t1-inquiry-content-and-progression) (static-vs-dynamic). The architectural decision `^t2-representation-vs-generation` (in `operations-and-modes.md`) is reframed as the chosen response to these three sibling criteria. The blanket per-criterion mode-annotation requirement is dropped.
 
 The framework distinguishes two modes, each with different requirements:
 

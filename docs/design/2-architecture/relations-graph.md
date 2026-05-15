@@ -22,6 +22,9 @@ Queryability and addressability of the resulting graph are enforced by [t2-graph
 
 The actual relation-vocabulary contents are aspect-specific; see [Semantic relations](vendor/gnomon/docs/design/3-aspect-specific/semantic-relations).
 
+> [!missing] Tension with progressive relation formalization
+> A staged proposal in [_fleeting-ideas](vendor/gnomon/docs/design/_fleeting-ideas#^fleeting-relation-formalization) (concept-map linking phrases) argues for free-text relation labels that harden progressively into controlled types — `free linking phrase → controlled relation type → formal predicate`. This tensions with the closed-and-typed commitment here. The closed vocabulary applies partial formalization to *content* but not to *edges*; the proposal extends [t1-partial-formalization](vendor/gnomon/docs/design/_framework-criteria#^t1-partial-formalization) to the relation grain. The tension is recorded for whoever resolves the relation vocabulary; this decision is not reopened. Resolution must state whether a draft profile admits free linking phrases that a stricter profile later resolves to declared types, or whether closure holds at every maturity level.
+
 ### Relation storage locus ^t2-relation-storage-locus
 
 > [!QUESTION] Where are typed relations between objects authored, and where are they read?

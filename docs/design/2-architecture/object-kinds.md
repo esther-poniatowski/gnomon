@@ -46,6 +46,14 @@ Concrete kinds extend the contract with fields that belong to the kind under [t2
 
 This assimilation avoids overengineering the object ontology (per [t2-narrow-ontology](vendor/gnomon/docs/design/2-architecture/constraints#^t2-narrow-ontology)) and lets the system reclassify objects as questions or goals without changing identity or relations.
 
+> [!important] Underlying construct: the epistemic gap
+> The unified kind represents an **epistemic gap** — a localised lack of resolution that motivates inquiry. Interrogative framing surfaces the gap as a Question; imperative framing surfaces it as a Goal. The `objective` field carries the framing; the kind itself carries the gap. This reading sharpens the rationale for the collapse without altering it: a single underlying construct admits two surface framings.
+>
+> Two follow-ups are parked here, neither requiring re-ratification:
+>
+> - Kind-naming. If the gap reading is taken seriously, `EpistemicGap` is a more faithful name for the kind than `Question`. The choice is editorial, not architectural, and can be made when the ontology decision is drafted.
+> - Subtypes of the gap. A candidate five-type taxonomy (paradox, missing mechanism, incomplete characterisation, case mapping, comparison) is recorded as an open question under [subtypes of the epistemic-gap kind](vendor/gnomon/docs/design/3-aspect-specific/ontology#^t3-epistemic-gap-subtypes). Resolution is bounded by [t2-subtype-discipline](#^t2-subtype-discipline).
+
 ### Epistemic status (maturity record) ^t2-epistemic-status
 
 > [!QUESTION] How does the framework record the maturity of an epistemic object — where it stands in the lifecycle from initial conjecture to established result — and how does it transition through that lifecycle?
@@ -67,7 +75,10 @@ Alternatives:
 - **Tagged unions** — each variant is selected by a discriminator and has its own field contract.
 - **Schema refinement** — variants extend a base schema by adding fields and constraints, without assuming that one variant can stand in for another.
 - **Hybrid** — tagged union at the semantic level, schema refinement at the validation level.
+- **OOP inheritance** — admitted as a candidate primitive by the staged Python-inspired-formalism proposal; see the reopen below.
+- **Type classes / traits** — an interface is satisfied by a type without the satisfying type being a subtype of the interface; gives polymorphism without subtype substitutability.
 
-OOP-style inheritance is excluded by [t2-no-inheritance](vendor/gnomon/docs/design/2-architecture/constraints#^t2-no-inheritance).
+> [!missing] Reopen travels with `^t2-no-inheritance`
+> The exclusion of OOP-style inheritance was ratified at [t2-no-inheritance](vendor/gnomon/docs/design/2-architecture/constraints#^t2-no-inheritance), but that commitment now carries a `[!missing] Reopen pending` callout: a staged proposal admits OOP inheritance as a candidate primitive, with type classes / traits staged as the counter-proposal. The reopen travels with this open question — the two must be re-ratified together. The five alternatives above are the full set on the table; the last two are live only while the reopen stands.
 
 Bearing criteria: [t2-no-inheritance](vendor/gnomon/docs/design/2-architecture/constraints#^t2-no-inheritance), [t2-subtype-safety](vendor/gnomon/docs/design/2-architecture/constraints#^t2-subtype-safety), [t2-narrow-ontology](vendor/gnomon/docs/design/2-architecture/constraints#^t2-narrow-ontology), [t2-layer-replaceability](vendor/gnomon/docs/design/2-architecture/constraints#^t2-layer-replaceability).
