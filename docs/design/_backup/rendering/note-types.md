@@ -2,7 +2,7 @@
 
 Each note type is associated with two files in the workspace:
 - a **note specification** in `governance/specs/` that defines the structural requirements (required sections), forbidden patterns, and type-specific audit criteria,
-- a **contract template** in `governance/contracts/` that instantiates the [contract structure](../rendering/formal-contracts.md#^contract-template) with type-specific fields (e.g., expected output format for problem notes, proof strategy for result notes).
+- a **contract template** in `governance/contracts/` that instantiates the [contract structure](formal-contracts.md#^contract-template) with type-specific fields (e.g., expected output format for problem notes, proof strategy for result notes).
 
 ## Main note types
 
