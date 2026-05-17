@@ -1,7 +1,7 @@
 # Registries and indexes
 
 > [!INFO] Tier and source
-> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the derived registries and indexes the build produces. Traces to [t2-dependency-management](vendor/gnomon/docs/design/2-architecture/constraints#^t2-dependency-management), [t2-single-source-of-truth](vendor/gnomon/docs/design/2-architecture/constraints#^t2-single-source-of-truth), [t1-dual-usability](vendor/gnomon/docs/design/1-framework/operational-quality#^t1-dual-usability), and the read-locus rule fixed at [relation storage locus](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-relation-storage-locus).
+> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the derived registries and indexes the build produces. Traces to [t2-dependency-management](vendor/gnomon/docs/design/2-architecture/constraints#^t2-dependency-management), [t2-single-source-of-truth](vendor/gnomon/docs/design/2-architecture/constraints#^t2-single-source-of-truth), [t1-dual-usability](../1-framework/cost-ergonomics#^t1-read-side-automation), and the read-locus rule fixed at [relation storage locus](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-relation-storage-locus).
 
 ---
 

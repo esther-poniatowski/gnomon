@@ -42,7 +42,7 @@ Alternatives:
 - **Schema calculus** — a small set of primitive constructors from which domain schemas are derived (constructor proposals in [Operation schemas](vendor/gnomon/docs/design/3-aspect-specific/operation-schemas)).
 - **Open library** — implicitly ruled out by all sources, recorded as a pole.
 
-Bearing criteria: [t2-closed-operational-core](vendor/gnomon/docs/design/2-architecture/constraints#^t2-closed-operational-core), [t1-expressivity](vendor/gnomon/docs/design/1-framework/content-adequacy#^t1-expressivity), tension [X1](vendor/gnomon/docs/design/2-architecture/constraints#^t2-x1). Tension X1 favors deriving schemas from a small calculus.
+Bearing criteria: [t2-closed-operational-core](vendor/gnomon/docs/design/2-architecture/constraints#^t2-closed-operational-core), [t1-expressivity](../1-framework/expressive-depth#^t1-reasoning-types-coverage), tension [X1](vendor/gnomon/docs/design/2-architecture/constraints#^t2-x1). Tension X1 favors deriving schemas from a small calculus.
 
 ### Synchronization between planning and execution ^t2-planning-execution-sync
 
@@ -55,4 +55,4 @@ Alternatives:
 - **`StateDelta` objects** emitted by work units update the snapshot, which contains both goals and content.
 - **Single bidirectional reasoning graph** — no separate goal graph.
 
-Bearing criteria: [t2-revision-semantics](vendor/gnomon/docs/design/2-architecture/constraints#^t2-revision-semantics), [t1-non-arbitrary](vendor/gnomon/docs/design/1-framework/content-adequacy#^t1-non-arbitrary).
+Bearing criteria: [t2-revision-semantics](vendor/gnomon/docs/design/2-architecture/constraints#^t2-revision-semantics), [t1-non-arbitrary](../1-framework/reasoning-integrity#^t1-served-goal).

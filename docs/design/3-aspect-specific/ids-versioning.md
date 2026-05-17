@@ -1,7 +1,7 @@
 # IDs, namespaces, versioning
 
 > [!INFO] Tier and source
-> **Tier 3 (aspect-specific).** Stub file. Holds criteria for stable identifiers, namespace structure, and ontology versioning. Traces to [t1-modularity](vendor/gnomon/docs/design/1-framework/structural-quality#^t1-modularity), [t2-revision-semantics](vendor/gnomon/docs/design/2-architecture/constraints#^t2-revision-semantics), and [t1-feasibility](vendor/gnomon/docs/design/1-framework/operational-quality#^t1-feasibility). Cross-references the [git-delegation policy](vendor/gnomon/docs/design/1-framework/external-interfaces#^t1-git-delegation): in-state identity at HEAD only.
+> **Tier 3 (aspect-specific).** Stub file. Holds criteria for stable identifiers, namespace structure, and ontology versioning. Traces to [t1-modularity](../1-framework/modular-content-organization#^t1-reuse), [t2-revision-semantics](vendor/gnomon/docs/design/2-architecture/constraints#^t2-revision-semantics), and [t1-feasibility](../1-framework/cost-ergonomics#^t1-system-scale). Cross-references the [git-delegation policy](vendor/gnomon/docs/design/1-framework/external-interfaces#^t1-git-delegation): in-state identity at HEAD only.
 
 ---
 
@@ -9,7 +9,7 @@
 
 ### Stable persistent identifiers ^t3-stable-identifiers
 
-Identifiers are persistent and not content-addressable. A reference resolves to the same logical object across revisions, even when the object's content changes (per [t1-modularity](vendor/gnomon/docs/design/1-framework/structural-quality#^t1-modularity)).
+Identifiers are persistent and not content-addressable. A reference resolves to the same logical object across revisions, even when the object's content changes (per [t1-modularity](../1-framework/modular-content-organization#^t1-reuse)).
 
 ### Namespace hierarchy with declared interfaces ^t3-namespace-hierarchy
 

@@ -15,7 +15,7 @@
 
 > [!QUESTION] How does the architecture distinguish monotonic from defeasible support — what is annotated, and where?
 
-**Warrant kind on each edge.** Warrant kind is drawn from a closed enum declared in the schema and recorded on the edge. This keeps each support relation independently auditable and supports reuse of canonical objects across contexts (consistent with [t1-modularity](vendor/gnomon/docs/design/1-framework/structural-quality#^t1-modularity) and [t2-object-kind-admission](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-object-kind-admission)).
+**Warrant kind on each edge.** Warrant kind is drawn from a closed enum declared in the schema and recorded on the edge. This keeps each support relation independently auditable and supports reuse of canonical objects across contexts (consistent with [t1-modularity](../1-framework/modular-content-organization#^t1-reuse) and [t2-object-kind-admission](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-object-kind-admission)).
 
 **Derived from edges, not stored in node.** Whether a node's conclusion is defeasible is a property of *how* it is supported, not of what it is: the warrant kinds of its incoming support edges are combined to determine the regime.
 

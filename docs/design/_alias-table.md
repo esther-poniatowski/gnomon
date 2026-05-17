@@ -1,7 +1,7 @@
 # Terminology alias table
 
 > [!INFO] Status
-> Sibling to [classification table](_classification-table) and [refactor handoff](_refactor-handoff). Records eight alias clusters detected after Step A.2's six adversarial-audit passes. Each cluster names the same underlying object or field under multiple labels across the active design and the backup files. Step C migration consults this table before minting any new anchor and consolidates `^bk-` D's that turn out to share a referent.
+> Sibling to [classification table](_classification-table) and [refactor handoff](_handoff-refactor). Records eight alias clusters detected after Step A.2's six adversarial-audit passes. Each cluster names the same underlying object or field under multiple labels across the active design and the backup files. Step C migration consults this table before minting any new anchor and consolidates `^bk-` D's that turn out to share a referent.
 
 ---
 

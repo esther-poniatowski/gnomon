@@ -40,7 +40,7 @@ A note rarely depends on another note as a whole. It depends on a definition, a 
 **Per-note entry fields.** The file opens with a `project` block containing `main_question` and `main_outputs`. The `notes` array contains one entry per note with the following fields:
 
 - `id`, `path`, `contract`, `audit`: identification and file locations
-- `type`: one of the admissible note types (see [note types](vendor/gnomon/docs/rendering/note-types))
+- `type`: one of the admissible note types (see [note types](rendering/note-types.md))
 - `status`: `pending`, `in-progress`, `done`, or `revised`
 - `question`: the note's local objective as a question
 - `expected_contribution`, `validated_contribution`, `divergence`: contribution tracking (pre-draft vs. post-draft)
@@ -58,7 +58,7 @@ A note rarely depends on another note as a whole. It depends on a definition, a 
 
 **Mandatory drafting gate.** Before any drafting pass begins, the agent must check whether any declared import has `propagation_status: unresolved` in the reasoning graph. If so, drafting is blocked until the upstream instability is resolved (by confirming that the downstream note's argument remains valid under the revised premise, or by revising the downstream note). ^mandatory-drafting-gate
 
-> [!INFO] The gating *capability* is migrated to [staleness gating](_framework-criteria#^t1-staleness-gating). The local mechanism (read `propagation_status` and refuse drafting) survives as the D `^bk-drafting-gate` in `2-architecture/validity-revision.md` Conditional on the F.
+> [!INFO] The gating *capability* is migrated to [staleness gating](../1-framework/research-activities-workflows#^t1-staleness-gating). The local mechanism (read `propagation_status` and refuse drafting) survives as the D `^bk-drafting-gate` in `2-architecture/validity-revision.md` Conditional on the F.
 
 #### Open questions
 

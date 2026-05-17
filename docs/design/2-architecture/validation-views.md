@@ -3,7 +3,7 @@
 > [!INFO] Tier and scope
 > **Tier 2 (architectural).** This file holds the commitments and decisions about how validation is organized — where rules live, where implementations live — and where view profiles belong. Both concerns share a placement question: which layer is the home for which artifact?
 >
-> Cross-cutting Tier-2 criteria that constrain decisions in this file: see [Architectural constraints](vendor/gnomon/docs/design/2-architecture/constraints), in particular [t2-mechanical-validation](vendor/gnomon/docs/design/2-architecture/constraints#^t2-mechanical-validation), [t2-separation-of-concerns](vendor/gnomon/docs/design/2-architecture/constraints#^t2-separation-of-concerns), [t2-layer-replaceability](vendor/gnomon/docs/design/2-architecture/constraints#^t2-layer-replaceability), [t1-dual-usability](vendor/gnomon/docs/design/1-framework/operational-quality#^t1-dual-usability).
+> Cross-cutting Tier-2 criteria that constrain decisions in this file: see [Architectural constraints](vendor/gnomon/docs/design/2-architecture/constraints), in particular [t2-mechanical-validation](vendor/gnomon/docs/design/2-architecture/constraints#^t2-mechanical-validation), [t2-separation-of-concerns](vendor/gnomon/docs/design/2-architecture/constraints#^t2-separation-of-concerns), [t2-layer-replaceability](vendor/gnomon/docs/design/2-architecture/constraints#^t2-layer-replaceability), [t1-dual-usability](../1-framework/cost-ergonomics#^t1-read-side-automation).
 
 ---
 

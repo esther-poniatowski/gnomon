@@ -11,9 +11,9 @@ The general lessons each example yields are propagated to the relevant criteria,
 
 ---
 
-## 0. Definition by genus and differentia ^example-genus-differentia
+## 0. Definition by genus and differentia
 
-**Statement.** "A feedforward network is a network where the flow of information is unidirectional."
+**Statement.** "A feedforward network is a network where the flow of information is unidirectional." ^example-genus-differentia
 
 **Normalized roles.** The statement is a definition with four components:
 
@@ -31,7 +31,7 @@ The general lessons each example yields are propagated to the relevant criteria,
 - The four-way role split matches the [concept-type taxonomy](3-aspect-specific/ontology#^t3-concept-type-taxonomy): `network` is a *system*, `feedforward network` a *subtype*, `flow of information` a *property*, `unidirectional` the *value* the property takes.
 - The unintroduced terms `network` and `flow of information` are admitted as forward references under the draft profile of [t2-partial-formalization-profiles](2-architecture/granularity#^t2-partial-formalization-profiles); this is the anti-infinite-regress mechanism.
 - For the roles to stay clear while the referents are undefined, each forward reference carries a *typed placeholder* — a kind tag (system, property) and an undefined status — and is promoted to a full definition later under the promotion rule, without rewriting referencing content. Whether such a placeholder is a distinct kind, a maturity state, or a kind-annotated reference is recorded as the open sub-question [normalized definition form](3-aspect-specific/ontology#^t3-definition-normal-form).
-- Each component is an addressable typed object per [t1-typed-object-decomposition](_framework-criteria#^t1-typed-object-decomposition), with roles assigned by function per [t1-function-driven-typology](_framework-criteria#^t1-function-driven-typology).
+- Each component is an addressable typed object per [t1-typed-object-decomposition](1-framework/framework-foundations#^t1-typed-object-decomposition), with roles assigned by function per [t1-function-driven-typology](1-framework/framework-foundations#^t1-function-driven-typology).
 - The genus link (`feedforward network` subtype-of `network`) and the differentia link are typed relations; their maturity is governed by [progressive relation formalization](_fleeting-ideas#^fleeting-relation-formalization).
 
 **General lesson propagated.** The genus-differentia normal form and the typed-placeholder forward-reference mechanism are recorded as the open question [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) in the ontology theme. A second expert review of this example contributed further refinements: the definition-structure refinements (template registry, template-inferred hole kinds, typed ambiguity, stable cross-statement placeholders, lexical/concept separation, the three-operation split) are folded into that same open question; the undischarged-commitment refinements (presuppositions, commitment strengths, definitional force) are filed as [t3-undischarged-commitments](3-aspect-specific/arguments-reasoning#^t3-undischarged-commitments). All are kept general rather than tied to this example.
@@ -65,7 +65,7 @@ The candidate object model:
 
 ## 1. Definitions with unstable genus and implicit criterion shift
 
-> A feedforward network is not merely a network without recurrence, but a computational regime in which the relevant causal dependencies can be represented as an acyclic order, provided that feedback-like effects introduced by training, normalization, or external control are not counted as part of the forward computation.
+> A feedforward network is not merely a network without recurrence, but a computational regime in which the relevant causal dependencies can be represented as an acyclic order, provided that feedback-like effects introduced by training, normalization, or external control are not counted as part of the forward computation. ^example-definitions-with-unstable-genus-and-implicit-criterion-shift
 
 | Difficulty              | Description                                                           |
 | ----------------------- | --------------------------------------------------------------------- |
@@ -85,7 +85,7 @@ The candidate object model:
 
 ## 2. Conceptual distinction that also revises the target concept
 
-> The distinction between information being present in a representation and information being used by the system is not an additional refinement of representational analysis; it changes what should count as representation in the first place.
+> The distinction between information being present in a representation and information being used by the system is not an additional refinement of representational analysis; it changes what should count as representation in the first place. ^example-conceptual-distinction-that-also-revises-the-target-concept
 
 |Difficulty|Description|
 |---|---|
@@ -104,7 +104,7 @@ The candidate object model:
 
 ## 3. Argument with an undercutting condition hidden inside an example
 
-> If a variable is linearly decodable from every hidden layer but ablating the subspace carrying it has no effect on the model’s behaviour, then the decodability result looks less like evidence of representation and more like evidence of redundant statistical alignment.
+> If a variable is linearly decodable from every hidden layer but ablating the subspace carrying it has no effect on the model’s behaviour, then the decodability result looks less like evidence of representation and more like evidence of redundant statistical alignment. ^example-argument-with-an-undercutting-condition-hidden-inside-an-example
 
 |Difficulty|Description|
 |---|---|
@@ -122,7 +122,7 @@ The candidate object model:
 
 ## 4. Research question embedded in a critique
 
-> The problem with asking whether a network “contains” a concept is that the question presupposes a container model of representation, whereas the more relevant issue may be whether the concept is stabilized across transformations that preserve the task.
+> The problem with asking whether a network “contains” a concept is that the question presupposes a container model of representation, whereas the more relevant issue may be whether the concept is stabilized across transformations that preserve the task. ^example-research-question-embedded-in-a-critique
 
 |Difficulty|Description|
 |---|---|
@@ -132,7 +132,7 @@ The candidate object model:
 |task-relative criterion|“preserve the task” is itself theoretically loaded|
 |soft modality|“may be” marks tentative redirection|
 
-**Resolution.** The *question critique* is an attack whose target is a `Question` object — specifically its presupposition ("contains" presupposes a container model). [t3-attack-target](3-aspect-specific/arguments-reasoning#^t3-attack-target) covers attacks on inferences; the extension to attacks on a question's *framing* is recorded against that open question, and connects to [undischarged-commitments](3-aspect-specific/arguments-reasoning#^t3-undischarged-commitments): the critique surfaces a presupposition the question carries. The *alternative inquiry* (a replacement question is introduced) is a question-to-question move — the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary)'s `problematize` plus a reframing move, bearing on [goal-driven reasoning](_framework-criteria#^t1-goal-driven-reasoning) since it restructures the question network. *Metaphor diagnosis* ("container model" named as a metaphor, not a formal claim) is now carried by [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content) (metaphor as a diagnosable object). *Soft modality* is the modal gap again.
+**Resolution.** The *question critique* is an attack whose target is a `Question` object — specifically its presupposition ("contains" presupposes a container model). [t3-attack-target](3-aspect-specific/arguments-reasoning#^t3-attack-target) covers attacks on inferences; the extension to attacks on a question's *framing* is recorded against that open question, and connects to [undischarged-commitments](3-aspect-specific/arguments-reasoning#^t3-undischarged-commitments): the critique surfaces a presupposition the question carries. The *alternative inquiry* (a replacement question is introduced) is a question-to-question move — the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary)'s `problematize` plus a reframing move, bearing on [served goal](1-framework/reasoning-integrity#^t1-served-goal) since it restructures the question network. *Metaphor diagnosis* ("container model" named as a metaphor, not a formal claim) is now carried by [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content) (metaphor as a diagnosable object). *Soft modality* is the modal gap again.
 
 **General lesson** → propagated to [t3-attack-target](3-aspect-specific/arguments-reasoning#^t3-attack-target) and [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content). Two gaps. (a) A statement can *attack the framing or presupposition of a question*, not a claim or an inference — `^t3-attack-target` now records a third attack target, an attack on a `Question`'s framing, alongside rebuttal and undercutter. (b) A conceptual metaphor ("container model") can be a named, diagnosable object that an argument targets — recorded as metaphor-as-object in the metalinguistic-content candidate.
 
@@ -140,7 +140,7 @@ The candidate object model:
 
 ## 5. Definition by refusal of inadequate operationalizations
 
-> Task-relevance cannot be identified with decodability, causal effect, or mutual information alone, because each captures a different shadow of the relation between a representation and a task.
+> Task-relevance cannot be identified with decodability, causal effect, or mutual information alone, because each captures a different shadow of the relation between a representation and a task. ^example-definition-by-refusal-of-inadequate-operationalizations
 
 |Difficulty|Description|
 |---|---|
@@ -150,7 +150,7 @@ The candidate object model:
 |missing positive definition|no direct criterion is supplied|
 |relation reification|“relation between representation and task” becomes the true object|
 
-**Resolution.** *Negative triangulation* extends the negative-definition gap from example 1: here the definition rejects *several* approximations at once (decodability, causal effect, mutual information), each rejected as partial rather than false. The multi-rejection negative-definition pattern added to [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) carries this, including the *plural partial adequacy* — that template records each rejection's adequacy grade, so a rejected criterion can be marked partially adequate rather than false. *Missing positive definition* is handled by [t1-partial-formalization](_framework-criteria#^t1-partial-formalization): a definition may rest at a stage where only the negative boundary is drawn. *Relation reification* ("the relation between representation and task" becomes the object) is the reified-relation convergence noted in [progressive relation formalization](_fleeting-ideas#^fleeting-relation-formalization). *Metaphorical content* ("shadow") is carried by the metaphor-as-object item of [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content).
+**Resolution.** *Negative triangulation* extends the negative-definition gap from example 1: here the definition rejects *several* approximations at once (decodability, causal effect, mutual information), each rejected as partial rather than false. The multi-rejection negative-definition pattern added to [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) carries this, including the *plural partial adequacy* — that template records each rejection's adequacy grade, so a rejected criterion can be marked partially adequate rather than false. *Missing positive definition* is handled by [t1-partial-formalization](1-framework/expressive-depth#^t1-partial-formalization): a definition may rest at a stage where only the negative boundary is drawn. *Relation reification* ("the relation between representation and task" becomes the object) is the reified-relation convergence noted in [progressive relation formalization](_fleeting-ideas#^fleeting-relation-formalization). *Metaphorical content* ("shadow") is carried by the metaphor-as-object item of [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content).
 
 **General lesson** → propagated to [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form). Negative definition generalises to multi-rejection — a definition stated by rejecting several partial approximations at once, now a template-registry row whose rejections each carry an adequacy grade (a rejected criterion can be partially adequate, not false).
 
@@ -158,7 +158,7 @@ The candidate object model:
 
 ## 6. Claim whose force depends on disciplinary perspective
 
-> In neuroscience, calling a feature “represented” often means that it is recoverable from activity; in mechanistic interpretability, the same word is misleading unless the feature participates in the computation.
+> In neuroscience, calling a feature “represented” often means that it is recoverable from activity; in mechanistic interpretability, the same word is misleading unless the feature participates in the computation. ^example-claim-whose-force-depends-on-disciplinary-perspective
 
 |Difficulty|Description|
 |---|---|
@@ -168,7 +168,7 @@ The candidate object model:
 |implicit contrast|recoverability versus participation|
 |sociolinguistic content|the statement describes scientific usage norms|
 
-**Resolution.** *Discipline-relative semantics* and *no global definition* are the [ontology-modularity](_fleeting-ideas#^fleeting-ontology-modularity) candidate exactly: the same term ("represented") carries different definitions in neuroscience and mechanistic interpretability, and the framework must hold both without forcing a global canonical concept — the recorded tension with [t1-canonical-terminology](_framework-criteria#^t1-canonical-terminology). *Implicit contrast* (recoverability vs. participation) is a contrastive edge in the [linking-phrase taxonomy](_fleeting-ideas#^fleeting-relation-formalization). *Pragmatic evaluation* ("misleading" — not truth-functional) reinforces the modal/epistemic-attitude propositional gaps. *Sociolinguistic content* — the statement *describes a usage norm* rather than asserting a fact about the domain — is now carried by the usage-norm item of [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content).
+**Resolution.** *Discipline-relative semantics* and *no global definition* are the [ontology-modularity](_fleeting-ideas#^fleeting-ontology-modularity) candidate exactly: the same term ("represented") carries different definitions in neuroscience and mechanistic interpretability, and the framework must hold both without forcing a global canonical concept — the recorded tension with [t1-canonical-terminology](1-framework/modular-content-organization#^t1-canonical-terminology). *Implicit contrast* (recoverability vs. participation) is a contrastive edge in the [linking-phrase taxonomy](_fleeting-ideas#^fleeting-relation-formalization). *Pragmatic evaluation* ("misleading" — not truth-functional) reinforces the modal/epistemic-attitude propositional gaps. *Sociolinguistic content* — the statement *describes a usage norm* rather than asserting a fact about the domain — is now carried by the usage-norm item of [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content).
 
 **General lesson** → propagated to [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content). A statement may assert a *usage norm* — a fact about how a scientific community uses a term — rather than a fact about the research domain. This metalinguistic content is now a staged candidate; it converges with the lexical-term level of the [definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) five-level term/concept separation.
 
@@ -176,7 +176,7 @@ The candidate object model:
 
 ## 7. Derivation whose conclusion is a changed viewpoint
 
-> Once the context variable is treated not as an input feature but as an instruction selecting a task, the apparent geometry of the representation should no longer be interpreted as encoding a larger stimulus space, but as implementing a family of conditional coordinate systems.
+> Once the context variable is treated not as an input feature but as an instruction selecting a task, the apparent geometry of the representation should no longer be interpreted as encoding a larger stimulus space, but as implementing a family of conditional coordinate systems. ^example-derivation-whose-conclusion-is-a-changed-viewpoint
 
 |Difficulty|Description|
 |---|---|
@@ -186,15 +186,15 @@ The candidate object model:
 |metaphorical-formal hybrid|“conditional coordinate systems” is both suggestive and technical|
 |dependency on modelling choice|conclusion depends on how context is treated|
 
-**Resolution.** *Reclassification of object* (the context variable is re-typed from input feature to instruction) and *dependency on modelling choice* (the whole conclusion is conditional on that re-typing) are the same phenomenon as example 19 — a modelling choice changes an object's kind. The re-typing here is a *modelling-choice re-typing*, governed as a branch point by the ratified [t3-no-hidden-branch-choice](3-aspect-specific/arguments-reasoning#^t3-no-hidden-branch-choice) (recorded as a branch with siblings); the conclusion that depends on it inherits a conditional commitment ([undischarged-commitments](3-aspect-specific/arguments-reasoning#^t3-undischarged-commitments)). An earlier draft routed this to a unifying `re-type` move; that move was dissolved by audit as fusing three distinct phenomena. *Interpretation shift* (geometry gets a new explanatory role) is a `Perspective`-change in the [kind-set](_fleeting-ideas#^fleeting-kind-set). *Negative and positive reading* is the reject-one/introduce-another structure of examples 1 and 5. *Metaphorical-formal hybrid* ("conditional coordinate systems" is both suggestive and technical) — a term occupying a metaphorical and a formal register at once — is the hybrid-register item of [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content), distinct from metaphor-diagnosis (ex. 4) because here the metaphor is *used*, not diagnosed.
+**Resolution.** *Reclassification of object* (the context variable is re-typed from input feature to instruction) and *dependency on modelling choice* (the whole conclusion is conditional on that re-typing) are the same phenomenon as example 19 — a modelling choice changes an object's kind. The re-typing here is a *modelling-choice re-typing*, governed as a branch point by the ratified [rationale and rejected-alternative record](3-aspect-specific/arguments-reasoning#^t3-d-rationale-record) (recorded as a branch with siblings); the conclusion that depends on it inherits a conditional commitment ([undischarged-commitments](3-aspect-specific/arguments-reasoning#^t3-undischarged-commitments)). An earlier draft routed this to a unifying `re-type` move; that move was dissolved by audit as fusing three distinct phenomena. *Interpretation shift* (geometry gets a new explanatory role) is a `Perspective`-change in the [kind-set](_fleeting-ideas#^fleeting-kind-set). *Negative and positive reading* is the reject-one/introduce-another structure of examples 1 and 5. *Metaphorical-formal hybrid* ("conditional coordinate systems" is both suggestive and technical) — a term occupying a metaphorical and a formal register at once — is the hybrid-register item of [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content), distinct from metaphor-diagnosis (ex. 4) because here the metaphor is *used*, not diagnosed.
 
-**General lesson** → propagated to [t3-no-hidden-branch-choice](3-aspect-specific/arguments-reasoning#^t3-no-hidden-branch-choice) and [metaphor as a diagnosable object](_fleeting-ideas#^fleeting-metalinguistic-content). Modelling-choice re-typing is a branch point governed by the ratified no-hidden-branch-choice criterion; conclusions reached after a re-typing carry a conditional commitment on it. A term may sit in a *hybrid register*, simultaneously metaphorical and technical — the metaphor-as-object item of the meta-conceptual-content candidate.
+**General lesson** → propagated to [rationale and rejected-alternative record](3-aspect-specific/arguments-reasoning#^t3-d-rationale-record) and [metaphor as a diagnosable object](_fleeting-ideas#^fleeting-metalinguistic-content). Modelling-choice re-typing is a branch point: the chosen route must record at least one rejected alternative, per the [rationale and rejected-alternative record](3-aspect-specific/arguments-reasoning#^t3-d-rationale-record); conclusions reached after a re-typing carry a conditional commitment on it. A term may sit in a *hybrid register*, simultaneously metaphorical and technical — the metaphor-as-object item of the meta-conceptual-content candidate.
 
 ---
 
 ## 8. Argument where the warrant is methodological rather than propositional
 
-> The reason to compare representational geometries across contexts is not that geometry is the final object of interest, but that geometry is the least arbitrary level at which global transformations can be made visible without committing to a particular decoder.
+> The reason to compare representational geometries across contexts is not that geometry is the final object of interest, but that geometry is the least arbitrary level at which global transformations can be made visible without committing to a particular decoder. ^example-argument-where-the-warrant-is-methodological-rather-than-propositional
 
 |Difficulty|Description|
 |---|---|
@@ -204,7 +204,7 @@ The candidate object model:
 |implicit alternatives|decoders are rejected without being enumerated|
 |visualization role|“made visible” mixes cognition, method, and explanation|
 
-**Resolution.** *Methodological justification* — the warrant is "do this analysis because it is the least arbitrary level", an argument *for an analysis strategy*, not for a propositional claim. The three-level justification model at [t1-reasoning-understandability](_framework-criteria#^t1-reasoning-understandability) (Licensing / Strategic / Explanatory) justifies *reasoning moves*; a justification for a *method choice* is a distinct argument target, recorded as a candidate methodological argument scheme against the [reasoning-schemes](3-aspect-specific/arguments-reasoning#^t3-reasoning-schemes) open question. *Non-finality* (the chosen object is instrumental) and *comparative criterion* ("least arbitrary" is a value judgment) are evaluative content — the [QOC option-under-criteria substructure](_fleeting-ideas#^fleeting-qoc-substructure) handles option-assessed-against-criterion, and "least arbitrary" is such a criterion. *Implicit alternatives* (decoders rejected without enumeration) is a forward-reference case: the rejected alternatives are referenced but undefined ([definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) placeholders). *Visualization role* ("made visible" mixing cognition, method, explanation) touches the Explanatory level of understandability.
+**Resolution.** *Methodological justification* — the warrant is "do this analysis because it is the least arbitrary level", an argument *for an analysis strategy*, not for a propositional claim. The five-level justification model at [t1-recoverable-reasoning](1-framework/reasoning-integrity#^t1-justification-levels) (Licensing / Teleological / Strategic / Explanatory / Manipulability) justifies *reasoning moves*; a justification for a *method choice* is a distinct argument target, recorded as a candidate methodological argument scheme against the [reasoning-schemes](3-aspect-specific/arguments-reasoning#^t3-reasoning-schemes) open question. *Non-finality* (the chosen object is instrumental) and *comparative criterion* ("least arbitrary" is a value judgment) are evaluative content — the [QOC option-under-criteria substructure](_fleeting-ideas#^fleeting-qoc-substructure) handles option-assessed-against-criterion, and "least arbitrary" is such a criterion. *Implicit alternatives* (decoders rejected without enumeration) is a forward-reference case: the rejected alternatives are referenced but undefined ([definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) placeholders). *Visualization role* ("made visible" mixing cognition, method, explanation) touches the Explanatory level of recoverable reasoning.
 
 **General lesson** → propagated to the [reasoning-schemes](3-aspect-specific/arguments-reasoning#^t3-reasoning-schemes) open question. A warrant may justify a *method or analysis-strategy choice* rather than a propositional inference; methodological justification is a distinct argument target — a candidate methodological argument scheme.
 
@@ -212,7 +212,7 @@ The candidate object model:
 
 ## 9. Statement that introduces an explanatory gap rather than a claim
 
-> Even if two contexts produce separable manifolds, it remains unclear whether this separation is the mechanism by which the network solves the task or merely the geometric trace of some lower-level routing process.
+> Even if two contexts produce separable manifolds, it remains unclear whether this separation is the mechanism by which the network solves the task or merely the geometric trace of some lower-level routing process. ^example-statement-that-introduces-an-explanatory-gap-rather-than-a-claim
 
 |Difficulty|Description|
 |---|---|
@@ -222,7 +222,7 @@ The candidate object model:
 |hidden demand|asks for criteria distinguishing mechanism from trace|
 |non-assertive structure|the statement advances inquiry by suspending commitment|
 
-**Resolution.** This is the cleanest fit so far. *Uncertainty as content* and *non-assertive structure* — the statement's payload *is* an unresolved gap, not a claim — is exactly the [epistemic-gap](2-architecture/object-kinds#^t2-question-vs-goal) reading of the unified Question/Goal kind, and the gap is of the *missing-mechanism* subtype in [t3-epistemic-gap-subtypes](3-aspect-specific/ontology#^t3-epistemic-gap-subtypes). *Hidden demand* (the statement asks for criteria distinguishing mechanism from trace) is the gap's success condition under [goal-driven reasoning](_framework-criteria#^t1-goal-driven-reasoning). *Alternative explanations* (mechanism vs. trace) and *same observation, different roles* (separability is causal or epiphenomenal) are competing-explanation edges over one observation — the [argumentation-graph](_fleeting-ideas#^fleeting-argumentation-graph) authored-edge subset. **Resolved, pending ratification** — the gap-as-content reading is ratified (`^t2-question-vs-goal`), but the gap-subtype taxonomy is the open question `^t3-epistemic-gap-subtypes` and the competing-explanation edges are the staged argumentation-graph candidate. No new mechanism is needed; the covering parts must be ratified.
+**Resolution.** This is the cleanest fit so far. *Uncertainty as content* and *non-assertive structure* — the statement's payload *is* an unresolved gap, not a claim — is exactly the [epistemic-gap](2-architecture/object-kinds#^t2-question-vs-goal) reading of the unified Question/Goal kind, and the gap is of the *missing-mechanism* subtype in [t3-epistemic-gap-subtypes](3-aspect-specific/ontology#^t3-epistemic-gap-subtypes). *Hidden demand* (the statement asks for criteria distinguishing mechanism from trace) is the gap's success condition under [served goal](1-framework/reasoning-integrity#^t1-served-goal). *Alternative explanations* (mechanism vs. trace) and *same observation, different roles* (separability is causal or epiphenomenal) are competing-explanation edges over one observation — the [argumentation-graph](_fleeting-ideas#^fleeting-argumentation-graph) authored-edge subset. **Resolved, pending ratification** — the gap-as-content reading is ratified (`^t2-question-vs-goal`), but the gap-subtype taxonomy is the open question `^t3-epistemic-gap-subtypes` and the competing-explanation edges are the staged argumentation-graph candidate. No new mechanism is needed; the covering parts must be ratified.
 
 **General lesson** — none; no propagation. This example confirms that the epistemic-gap kind, the gap-subtype taxonomy, and competing-explanation edges together cover statements whose entire content is a suspended commitment.
 
@@ -230,7 +230,7 @@ The candidate object model:
 
 ## 10. Conceptual move that changes granularity
 
-> What appears as one representation at the layer level may decompose into several task-specific sub-representations once the computation is analysed along paths rather than units.
+> What appears as one representation at the layer level may decompose into several task-specific sub-representations once the computation is analysed along paths rather than units. ^example-conceptual-move-that-changes-granularity
 
 |Difficulty|Description|
 |---|---|
@@ -240,7 +240,7 @@ The candidate object model:
 |implicit methodological intervention|path analysis changes the ontology|
 |object instability|“one representation” may not survive refinement|
 
-**Resolution.** *Perspective-dependent ontology* (what counts as one representation depends on whether the analysis is layer-level or path-level) is a `Perspective` object from the [kind-set](_fleeting-ideas#^fleeting-kind-set): the same content yields different object decompositions under different analytical perspectives. *Scale dependence* and *object instability* ("one representation" may not survive refinement) are now filed as [granularity-relative object identity](_fleeting-ideas#^fleeting-object-scope), which carries the tension with [t1-typed-object-decomposition](_framework-criteria#^t1-typed-object-decomposition) (a `[!missing]` callout is placed there). *Implicit methodological intervention* (path analysis changes the ontology) is the method-object entanglement of example 26. *Modal re-description* ("may decompose") is the modal gap.
+**Resolution.** *Perspective-dependent ontology* (what counts as one representation depends on whether the analysis is layer-level or path-level) is a `Perspective` object from the [kind-set](_fleeting-ideas#^fleeting-kind-set): the same content yields different object decompositions under different analytical perspectives. *Scale dependence* and *object instability* ("one representation" may not survive refinement) are now filed as [granularity-relative object identity](_fleeting-ideas#^fleeting-object-scope), which carries the tension with [t1-typed-object-decomposition](1-framework/framework-foundations#^t1-typed-object-decomposition) (a `[!missing]` callout is placed there). *Implicit methodological intervention* (path analysis changes the ontology) is the method-object entanglement of example 26. *Modal re-description* ("may decompose") is the modal gap.
 
 **General lesson** → propagated to [granularity-relative object identity](_fleeting-ideas#^fleeting-object-scope). Typed-object decomposition is not granularity-invariant: one object at a coarse grain may be several at a finer grain, and neither decomposition is privileged. The candidate proposes a `Perspective`-indexed family of decompositions; a `[!missing]` tension callout is placed on `^t1-typed-object-decomposition`.
 
@@ -248,7 +248,7 @@ The candidate object model:
 
 ## 11. Claim with locally scoped technical vocabulary
 
-> In this project, “attention” should not mean a learned weighting mechanism in the transformer sense, but any context-dependent deformation of representational geometry that selectively increases task-relevant separability.
+> In this project, “attention” should not mean a learned weighting mechanism in the transformer sense, but any context-dependent deformation of representational geometry that selectively increases task-relevant separability. ^example-claim-with-locally-scoped-technical-vocabulary
 
 |Difficulty|Description|
 |---|---|
@@ -258,7 +258,7 @@ The candidate object model:
 |normative terminology|“should not mean” is a methodological stipulation|
 |composite criterion|deformation, selectivity, task relevance, separability|
 
-**Resolution.** *Local stipulation* (the term "attention" gets a project-specific meaning) is the [ontology-modularity](_fleeting-ideas#^fleeting-ontology-modularity) candidate at the per-project grain: a module-local definition overriding the standard one. *Exclusion of standard meaning* (transformer attention explicitly rejected) is a negative-definition component — the gap recurring from examples 1 and 5. *Functional redefinition* (attention becomes a geometric operation) is a [function-driven typology](_framework-criteria#^t1-function-driven-typology) move: the redefinition keys on function, not surface form. *Normative terminology* ("should not mean") is the definitional-force axis of [undischarged-commitments](3-aspect-specific/arguments-reasoning#^t3-undischarged-commitments). *Composite criterion* (the new definition stacks deformation + selectivity + task-relevance + separability) is a genus-differentia definition with a *conjunctive* differentia — the [definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) template registry, with each conjunct a forward-reference placeholder. **Resolved via staged candidates**, mostly by the ontology-modularity candidate (itself in tension with the ratified `^t1-canonical-terminology`) plus the negative-definition template; no new gap.
+**Resolution.** *Local stipulation* (the term "attention" gets a project-specific meaning) is the [ontology-modularity](_fleeting-ideas#^fleeting-ontology-modularity) candidate at the per-project grain: a module-local definition overriding the standard one. *Exclusion of standard meaning* (transformer attention explicitly rejected) is a negative-definition component — the gap recurring from examples 1 and 5. *Functional redefinition* (attention becomes a geometric operation) is a [function-driven typology](1-framework/framework-foundations#^t1-function-driven-typology) move: the redefinition keys on function, not surface form. *Normative terminology* ("should not mean") is the definitional-force axis of [undischarged-commitments](3-aspect-specific/arguments-reasoning#^t3-undischarged-commitments). *Composite criterion* (the new definition stacks deformation + selectivity + task-relevance + separability) is a genus-differentia definition with a *conjunctive* differentia — the [definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) template registry, with each conjunct a forward-reference placeholder. **Resolved via staged candidates**, mostly by the ontology-modularity candidate (itself in tension with the ratified `^t1-canonical-terminology`) plus the negative-definition template; no new gap.
 
 **General lesson** — none; no propagation. Confirms that ontology modularity (module-local term meaning) plus the negative-definition template row together cover project-specific stipulative redefinition. The conjunctive differentia is a template-registry variant already implied by `^t3-definition-normal-form`.
 
@@ -266,7 +266,7 @@ The candidate object model:
 
 ## 12. Argument whose premise is an analogy with restricted scope
 
-> The analogy with eigenvectors is useful only insofar as both aim to identify intrinsic directions of transformation; it becomes misleading as soon as one forgets that neural representations need not be governed by a linear operator with stable invariant subspaces.
+> The analogy with eigenvectors is useful only insofar as both aim to identify intrinsic directions of transformation; it becomes misleading as soon as one forgets that neural representations need not be governed by a linear operator with stable invariant subspaces. ^example-argument-whose-premise-is-an-analogy-with-restricted-scope
 
 |Difficulty|Description|
 |---|---|
@@ -284,7 +284,7 @@ The candidate object model:
 
 ## 13. A claim whose truth depends on the level of explanation
 
-> At the computational level, the task demands an invariant decision rule; at the algorithmic level, the network may implement this through equivariant intermediate representations rather than invariant ones.
+> At the computational level, the task demands an invariant decision rule; at the algorithmic level, the network may implement this through equivariant intermediate representations rather than invariant ones. ^example-a-claim-whose-truth-depends-on-the-level-of-explanation
 
 |Difficulty|Description|
 |---|---|
@@ -294,15 +294,15 @@ The candidate object model:
 |modality|“may implement” is not categorical|
 |relation between levels|implementation relation is central but implicit|
 
-**Resolution.** *Multi-level structure* (the claim is stated at the computational level and the algorithmic level) and *explanatory compatibility* (two claims that look contradictory coexist because they sit at different levels) are the *explanation-level index* — a Marr level is a context index on a claim, now filed at [Context as a first-class object](_fleeting-ideas#^fleeting-context-object). Its operative effect is on validation: a contradiction-detection validator must read two claims` explanation-level indices before firing. The three-level justification model at [t1-reasoning-understandability](_framework-criteria#^t1-reasoning-understandability) is a different stratification (Licensing/Strategic/Explanatory of *one* move); Marr-style computational/algorithmic/implementation levels stratify *the claim itself*. *Apparent contradiction* (invariant rule vs. equivariant representations) is resolved by the level index — without it the two claims would read as inconsistent. *Relation between levels* (the `implements` relation between a computational rule and an algorithmic realisation) is recorded against that candidate. *Modality* is the modal gap.
+**Resolution.** *Multi-level structure* (the claim is stated at the computational level and the algorithmic level) and *explanatory compatibility* (two claims that look contradictory coexist because they sit at different levels) are the *explanation-level index* — a Marr level is a context index on a claim, now filed at [Context as a first-class object](_fleeting-ideas#^fleeting-context-object). Its operative effect is on validation: a contradiction-detection validator must read two claims` explanation-level indices before firing. The five-level justification model at [justification levels](1-framework/reasoning-integrity#^t1-justification-levels) stratifies one move; Marr-style computational/algorithmic/implementation levels stratify *the claim itself*. *Apparent contradiction* (invariant rule vs. equivariant representations) is resolved by the level index — without it the two claims would read as inconsistent. *Relation between levels* (the `implements` relation between a computational rule and an algorithmic realisation) is recorded against that candidate. *Modality* is the modal gap.
 
-**General lesson** → propagated to [Context as a first-class object](_fleeting-ideas#^fleeting-context-object). A claim may be true *at one explanation level* and a different, apparently conflicting claim true *at another* (Marr's computational / algorithmic / implementation levels). An explanation level is a context index on a claim; the candidate carries it and an `implements` relation between levels, and its effect is to stop a contradiction validator from firing on level-relative claims. Distinct from the three-level justification model.
+**General lesson** → propagated to [Context as a first-class object](_fleeting-ideas#^fleeting-context-object). A claim may be true *at one explanation level* and a different, apparently conflicting claim true *at another* (Marr's computational / algorithmic / implementation levels). An explanation level is a context index on a claim; the candidate carries it and an `implements` relation between levels, and its effect is to stop a contradiction validator from firing on level-relative claims. This claim-level index differs from the five-level justification model for reasoning moves.
 
 ---
 
 ## 14. Open-ended inquiry move disguised as a conclusion
 
-> The failure of pairwise similarity measures is therefore not merely empirical; it suggests that the object being compared has been underspecified.
+> The failure of pairwise similarity measures is therefore not merely empirical; it suggests that the object being compared has been underspecified. ^example-open-ended-inquiry-move-disguised-as-a-conclusion
 
 |Difficulty|Description|
 |---|---|
@@ -312,7 +312,7 @@ The candidate object model:
 |non-deductive inference|“suggests” expresses abductive movement|
 |underspecification target|unclear whether object is representation, geometry, context, or task|
 
-**Resolution.** *Conclusion opens problem* (a result that generates a new question rather than closing one) is the progressive-problem-solving stance already in [goal-driven reasoning](_framework-criteria#^t1-goal-driven-reasoning) — a move can open a sub-question — and the new question is a [missing-mechanism or incomplete-characterisation gap](3-aspect-specific/ontology#^t3-epistemic-gap-subtypes). *Hidden presupposition* (comparison requires a defined object of comparison) is exactly [undischarged-commitments](3-aspect-specific/arguments-reasoning#^t3-undischarged-commitments): the method's failure surfaces a presupposition it leaned on. *Non-deductive inference* ("suggests" — abductive movement) is a warrant kind: [t1-mixed-monotonicity](_framework-criteria#^t1-mixed-monotonicity) governs monotonic vs. defeasible warrants, and `abductive` is already a ratified entry in the warrant-kind enum of the warrant-vocabulary theme, already classed as defeasible. *Empirical-to-conceptual shift* (a method failure diagnoses an underspecified *object*, not a wrong result) and *underspecification target* (unclear which object is underspecified) connect to the typed-ambiguity mechanism in the open question [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form): the underspecified term carries a candidate set. **Resolved** — `^t1-mixed-monotonicity` and the abductive warrant entry are ratified; the underspecified-object reading rests on the typed-ambiguity open question.
+**Resolution.** *Conclusion opens problem* (a result that generates a new question rather than closing one) is the progressive-problem-solving stance already in [served goal](1-framework/reasoning-integrity#^t1-served-goal) — a move can open a sub-question — and the new question is a [missing-mechanism or incomplete-characterisation gap](3-aspect-specific/ontology#^t3-epistemic-gap-subtypes). *Hidden presupposition* (comparison requires a defined object of comparison) is exactly [undischarged-commitments](3-aspect-specific/arguments-reasoning#^t3-undischarged-commitments): the method's failure surfaces a presupposition it leaned on. *Non-deductive inference* ("suggests" — abductive movement) is a warrant kind: [valid licensing](1-framework/reasoning-integrity#^t1-valid-licensing) governs monotonic vs. defeasible warrants, and `abductive` is already a ratified entry in the warrant-kind enum of the warrant-vocabulary theme, already classed as defeasible. *Empirical-to-conceptual shift* (a method failure diagnoses an underspecified *object*, not a wrong result) and *underspecification target* (unclear which object is underspecified) connect to the typed-ambiguity mechanism in the open question [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form): the underspecified term carries a candidate set. **Resolved** — `^t1-valid-licensing` and the abductive warrant entry are ratified; the underspecified-object reading rests on the typed-ambiguity open question.
 
 **General lesson** — none; no propagation. A method failure can be diagnosed as the *object of study being underspecified* rather than the method being wrong — an empirical-to-conceptual diagnostic move; the framework's gap and undischarged-commitment machinery cover this. Abduction ("suggests") is already a ratified entry in the warrant-kind enum of the warrant-vocabulary theme, already classed as a defeasible warrant — nothing to record.
 
@@ -320,7 +320,7 @@ The candidate object model:
 
 ## 15. Source-sensitive claim with interpretive uncertainty
 
-> Saxe et al. seem to treat learning dynamics as revealing the structure of the task through singular modes, but it is not obvious whether this should be read as a claim about representations themselves or about the input-output map implemented by the whole network.
+> Saxe et al. seem to treat learning dynamics as revealing the structure of the task through singular modes, but it is not obvious whether this should be read as a claim about representations themselves or about the input-output map implemented by the whole network. ^example-source-sensitive-claim-with-interpretive-uncertainty
 
 |Difficulty|Description|
 |---|---|
@@ -330,7 +330,7 @@ The candidate object model:
 |theory-object ambiguity|representations versus global map|
 |requires hermeneutic tracking|interpretation may later be revised|
 
-**Resolution.** *Source-sensitive meaning* and *uncertain attribution* — the claim is about *what an author means*, hedged with "seem to treat" — is the source-interpretation item now filed at [content about sources](_fleeting-ideas#^fleeting-source-facing-content). [Citation-intent](_fleeting-ideas#^fleeting-citation-intent) types how the *citing* work uses the cited one; an *interpretation* of the cited work is a distinct, separately-filed content kind, exposition-adjacent (the framework treats literature-facing work as secondary per [t1-activity-separation](_framework-criteria#^t1-activity-separation)). *Interpretive ambiguity* (two readings of the source are possible) is a candidate-set field per [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) applied to a source-interpretation object. *Theory-object ambiguity* (representations vs. global map) is the same ambiguity at the object level. *Requires hermeneutic tracking* (the interpretation may later be revised) is [revision accountability](_framework-criteria#^t1-revision-accountability): an interpretation is revisable content with provenance.
+**Resolution.** *Source-sensitive meaning* and *uncertain attribution* — the claim is about *what an author means*, hedged with "seem to treat" — is the source-interpretation item now filed at [content about sources](_fleeting-ideas#^fleeting-source-facing-content). [Citation-intent](_fleeting-ideas#^fleeting-citation-intent) types how the *citing* work uses the cited one; an *interpretation* of the cited work is a distinct, separately-filed content kind, exposition-adjacent (the framework treats literature-facing work as secondary per [t1-activity-access-rights](1-framework/research-activities-workflows#^t1-activity-access-rights)). *Interpretive ambiguity* (two readings of the source are possible) is a candidate-set field per [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) applied to a source-interpretation object. *Theory-object ambiguity* (representations vs. global map) is the same ambiguity at the object level. *Requires hermeneutic tracking* (the interpretation may later be revised) is [revision accountability](1-framework/research-activities-workflows#^t1-revision-accountability): an interpretation is revisable content with provenance.
 
 **General lesson** → propagated to [content about sources](_fleeting-ideas#^fleeting-source-facing-content). An *interpretation of a source* — a hedged claim about what an author means — is a distinct content kind, revisable and about a source rather than the domain; it is exposition-adjacent and the candidate records it at the boundary of the exposition-is-derived deferral.
 
@@ -338,7 +338,7 @@ The candidate object model:
 
 ## 16. Claim involving partial formalization and residual intuition
 
-> The covariance recursion gives a precise handle on how correlations propagate, but the sense in which this constitutes an explanation of representation formation remains partly metaphorical unless the relevant task variables are identified inside the recursion.
+> The covariance recursion gives a precise handle on how correlations propagate, but the sense in which this constitutes an explanation of representation formation remains partly metaphorical unless the relevant task variables are identified inside the recursion. ^example-claim-involving-partial-formalization-and-residual-intuition
 
 |Difficulty|Description|
 |---|---|
@@ -348,15 +348,15 @@ The candidate object model:
 |missing bridge|task variables must be identified in formal dynamics|
 |layered evaluation|precision and understanding are separated|
 
-**Resolution.** *Formal tool with interpretive gap* and *layered evaluation* — a result is mathematically precise yet its *explanatory* status is unclear — is the Licensing-vs-Explanatory split inside [t1-reasoning-understandability](_framework-criteria#^t1-reasoning-understandability): a step can be licensed (formally valid) without delivering the Explanatory-level gain. The example confirms that criterion's "formal validity is not understanding" thesis directly. *Partial adequacy* (the recursion is useful but insufficient) is the graded-adequacy axis surfaced at example 5. *Missing bridge* (task variables must be identified inside the formal dynamics for the recursion to count as explanation) is an [undischarged-commitment](3-aspect-specific/arguments-reasoning#^t3-undischarged-commitments) — a deferred obligation the formal result leans on — and a [partial-formalization](_framework-criteria#^t1-partial-formalization) state: the formalization is incomplete in a specific, nameable way. *Metaphor diagnosis* ("explanation" may be only metaphorical) is the metaphor gap from examples 4–5. **Covered** — the primary difficulty is handled by the ratified Licensing/Explanatory split in `^t1-reasoning-understandability`; the graded-adequacy and metaphor items are already surfaced (staged at the edge-scope and metalinguistic candidates) and add no new gap.
+**Resolution.** *Formal tool with interpretive gap* and *layered evaluation* — a result is mathematically precise yet its *explanatory* status is unclear — is the Licensing-vs-Explanatory split inside [t1-recoverable-reasoning](1-framework/reasoning-integrity#^t1-justification-levels): a step can be licensed (formally valid) without delivering the Explanatory-level gain. The example confirms that criterion's "formal validity is not understanding" thesis directly. *Partial adequacy* (the recursion is useful but insufficient) is the graded-adequacy axis surfaced at example 5. *Missing bridge* (task variables must be identified inside the formal dynamics for the recursion to count as explanation) is an [undischarged-commitment](3-aspect-specific/arguments-reasoning#^t3-undischarged-commitments) — a deferred obligation the formal result leans on — and a [partial-formalization](1-framework/expressive-depth#^t1-partial-formalization) state: the formalization is incomplete in a specific, nameable way. *Metaphor diagnosis* ("explanation" may be only metaphorical) is the metaphor gap from examples 4–5. **Covered** — the primary difficulty is handled by the ratified Licensing/Explanatory split in `^t1-justification-levels`; the graded-adequacy and metaphor items are already surfaced (staged at the edge-scope and metalinguistic candidates) and add no new gap.
 
-**General lesson** — none; no propagation. Confirms that the Licensing-vs-Explanatory distinction in `^t1-reasoning-understandability` already separates formal precision from explanatory adequacy. Reinforces the graded-adequacy axis (ex. 5, propagated to [the reified relation object](_fleeting-ideas#^fleeting-edge-scope)) and the metaphor item (ex. 4, propagated to [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content)).
+**General lesson** — none; no propagation. Confirms that the Licensing-vs-Explanatory distinction in `^t1-justification-levels` already separates formal precision from explanatory adequacy. Reinforces the graded-adequacy axis (ex. 5, propagated to [the reified relation object](_fleeting-ideas#^fleeting-edge-scope)) and the metaphor item (ex. 4, propagated to [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content)).
 
 ---
 
 ## 17. Statement with deferred object identity
 
-> The same “representation” may be the activity vector, the subspace spanned by task-relevant variation, the equivalence class under readout-preserving transformations, or the causal role played in the computation.
+> The same “representation” may be the activity vector, the subspace spanned by task-relevant variation, the equivalence class under readout-preserving transformations, or the causal role played in the computation. ^example-statement-with-deferred-object-identity
 
 |Difficulty|Description|
 |---|---|
@@ -376,7 +376,7 @@ The candidate object model:
 
 ## 18. Conceptual critique with implicit desiderata
 
-> A metric that changes under arbitrary reparameterizations of the hidden layer may still be statistically informative, but it cannot serve as an intrinsic characterization of the network’s computation.
+> A metric that changes under arbitrary reparameterizations of the hidden layer may still be statistically informative, but it cannot serve as an intrinsic characterization of the network’s computation. ^example-conceptual-critique-with-implicit-desiderata
 
 |Difficulty|Description|
 |---|---|
@@ -394,7 +394,7 @@ The candidate object model:
 
 ## 19. Claim where context changes the type of the object
 
-> When the cue is treated as a context, the representation is a family indexed by tasks; when the cue is treated as a stimulus, the representation is a single geometry over an enlarged input space.
+> When the cue is treated as a context, the representation is a family indexed by tasks; when the cue is treated as a stimulus, the representation is a single geometry over an enlarged input space. ^example-claim-where-context-changes-the-type-of-the-object
 
 |Difficulty|Description|
 |---|---|
@@ -404,15 +404,15 @@ The candidate object model:
 |no empirical difference necessarily|distinction may be conceptual|
 |formalization fork|later analyses diverge from this choice|
 
-**Resolution.** *Modelling choice changes object type* and *formalization fork* — treating the cue as context vs. as stimulus yields a task-indexed family vs. a single geometry, and later analyses diverge from the choice — is the same re-typing-as-move phenomenon as example 7, plus a new emphasis: the modelling choice is a *branch point* in the inquiry, and [t3-no-hidden-branch-choice](3-aspect-specific/arguments-reasoning#^t3-no-hidden-branch-choice) already requires branch choices to be explicit. So a re-typing modelling choice is a recordable branch, and the divergent downstream analyses are the branch's children. *Same data, different ontology* (the cue gets different roles, no empirical difference necessarily) is [typed ambiguity](3-aspect-specific/ontology#^t3-definition-normal-form) at the modelling grain. *Indexical structure* (context induces a task-indexed representation) is the [context-object](_fleeting-ideas#^fleeting-context-object) candidate. **Partially resolved** — the branch-point reading rests on the ratified `^t3-no-hidden-branch-choice`, but the context-as-object and typed-ambiguity parts are a staged candidate and an open question; confirms re-typing is a branch choice.
+**Resolution.** *Modelling choice changes object type* and *formalization fork* — treating the cue as context vs. as stimulus yields a task-indexed family vs. a single geometry, and later analyses diverge from the choice — is the same re-typing-as-move phenomenon as example 7, plus a new emphasis: the modelling choice is a *branch point* in the inquiry, and [rationale and rejected-alternative record](3-aspect-specific/arguments-reasoning#^t3-d-rationale-record) already requires branch choices to be explicit. So a re-typing modelling choice is a recordable branch, and the divergent downstream analyses are the branch's children. *Same data, different ontology* (the cue gets different roles, no empirical difference necessarily) is [typed ambiguity](3-aspect-specific/ontology#^t3-definition-normal-form) at the modelling grain. *Indexical structure* (context induces a task-indexed representation) is the [context-object](_fleeting-ideas#^fleeting-context-object) candidate. **Partially resolved** — the branch-point reading rests on the ratified the [rationale and rejected-alternative record](3-aspect-specific/arguments-reasoning#^t3-d-rationale-record), but the context-as-object and typed-ambiguity parts are a staged candidate and an open question; confirms re-typing is a branch choice.
 
-**General lesson** — none; no propagation. Confirms that a modelling/re-typing choice is a branch point governed by `^t3-no-hidden-branch-choice`, and that purely conceptual forks (no empirical difference) must still be recorded as explicit branches. Reinforces re-typing-as-move (ex. 7, propagated to the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary)) and context-as-object.
+**General lesson** — none; no propagation. Confirms that a modelling/re-typing choice is a branch point governed by the [rationale and rejected-alternative record](3-aspect-specific/arguments-reasoning#^t3-d-rationale-record), and that purely conceptual forks (no empirical difference) must still be recorded as explicit branches. Reinforces re-typing-as-move (ex. 7, propagated to the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary)) and context-as-object.
 
 ---
 
 ## 20. Research move involving strategic non-definition
 
-> It may be premature to define task-relevance directly; instead, the inquiry should first isolate the transformations under which any acceptable definition must remain invariant.
+> It may be premature to define task-relevance directly; instead, the inquiry should first isolate the transformations under which any acceptable definition must remain invariant. ^example-research-move-involving-strategic-non-definition
 
 |Difficulty|Description|
 |---|---|
@@ -422,7 +422,7 @@ The candidate object model:
 |non-object-level content|concerns order of investigation|
 |negative operationality|defines what not to do yet|
 
-**Resolution.** *Intentional deferral* (the definition of task-relevance is deliberately postponed) is the [partial-formalization](_framework-criteria#^t1-partial-formalization) draft-profile stance made into an explicit *move*: the deferral is chosen, not incidental. *Meta-criterion first* (invariance constraints must be settled before the definition) is the [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) three-operation split — normalization/completion/validation — read as an *ordering*. *Inquiry strategy* and *non-object-level content* — the statement directs the research *process*, it is not a claim about the domain — is the inquiry-steering item now filed at [non-assertive statement categories](_fleeting-ideas#^fleeting-non-assertive-statements); the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary)'s `metadiscourse` move names the act of producing such a statement. *Negative operationality* (defining what *not* to do yet) is the negative-definition pattern turned toward process.
+**Resolution.** *Intentional deferral* (the definition of task-relevance is deliberately postponed) is the [partial-formalization](1-framework/expressive-depth#^t1-partial-formalization) draft-profile stance made into an explicit *move*: the deferral is chosen, not incidental. *Meta-criterion first* (invariance constraints must be settled before the definition) is the [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) three-operation split — normalization/completion/validation — read as an *ordering*. *Inquiry strategy* and *non-object-level content* — the statement directs the research *process*, it is not a claim about the domain — is the inquiry-steering item now filed at [non-assertive statement categories](_fleeting-ideas#^fleeting-non-assertive-statements); the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary)'s `metadiscourse` move names the act of producing such a statement. *Negative operationality* (defining what *not* to do yet) is the negative-definition pattern turned toward process.
 
 **General lesson** → propagated to [non-assertive statement categories](_fleeting-ideas#^fleeting-non-assertive-statements). A statement may be *inquiry-steering* — its content is a directive about the research process, not a claim about the domain. The candidate records it as a statement category distinct from domain content, so it is not validated as a claim. Recurs at examples 31 and 40.
 
@@ -430,7 +430,7 @@ The candidate object model:
 
 ## 21. Boundary case as concept probe
 
-> A neuron that carries task information only because it is correlated with another genuinely causal feature is precisely the kind of case that forces the difference between encoding and use to become explicit.
+> A neuron that carries task information only because it is correlated with another genuinely causal feature is precisely the kind of case that forces the difference between encoding and use to become explicit. ^example-boundary-case-as-concept-probe
 
 |Difficulty|Description|
 |---|---|
@@ -448,7 +448,7 @@ The candidate object model:
 
 ## 22. Statement whose content is a failure mode of a concept
 
-> The danger of “representation” is that it can name either the structure that explains the computation or merely the structure that an external observer can recover from the system.
+> The danger of “representation” is that it can name either the structure that explains the computation or merely the structure that an external observer can recover from the system. ^example-statement-whose-content-is-a-failure-mode-of-a-concept
 
 |Difficulty|Description|
 |---|---|
@@ -468,7 +468,7 @@ The candidate object model:
 
 ## 23. Mixed epistemic status within a single statement
 
-> It is plausible, though not yet demonstrated, that the context-dependent rotation observed in the hidden space reflects a learned gating mechanism rather than a mere change in decoding basis.
+> It is plausible, though not yet demonstrated, that the context-dependent rotation observed in the hidden space reflects a learned gating mechanism rather than a mere change in decoding basis. ^example-mixed-epistemic-status-within-a-single-statement
 
 |Difficulty|Description|
 |---|---|
@@ -478,7 +478,7 @@ The candidate object model:
 |evidential weakness|not yet demonstrated|
 |modality is local|uncertainty applies to one inferential link, not all terms|
 
-**Resolution.** *Explicit uncertainty* and *evidential weakness* ("plausible, though not yet demonstrated") are an [epistemic status](2-architecture/object-kinds#^t2-epistemic-status): the claim sits at a conjecture/plausible maturity level, which the per-kind status enums already carry. *Observation-to-mechanism inference* (a geometric observation suggests a mechanism) is a defeasible warrant under [t1-mixed-monotonicity](_framework-criteria#^t1-mixed-monotonicity) — abductive, like example 14. *Competing explanation* (gating mechanism vs. decoding basis) is a competing-explanation edge, the [argumentation-graph](_fleeting-ideas#^fleeting-argumentation-graph) authored subset. The genuinely sharp difficulty — *modality is local*, the uncertainty attaching to *one inferential link* rather than the whole statement — is the *edge-local epistemic status* index now filed at [the reified relation object](_fleeting-ideas#^fleeting-edge-scope).
+**Resolution.** *Explicit uncertainty* and *evidential weakness* ("plausible, though not yet demonstrated") are an [epistemic status](2-architecture/object-kinds#^t2-epistemic-status): the claim sits at a conjecture/plausible maturity level, which the per-kind status enums already carry. *Observation-to-mechanism inference* (a geometric observation suggests a mechanism) is a defeasible warrant under [valid licensing](1-framework/reasoning-integrity#^t1-valid-licensing) — abductive, like example 14. *Competing explanation* (gating mechanism vs. decoding basis) is a competing-explanation edge, the [argumentation-graph](_fleeting-ideas#^fleeting-argumentation-graph) authored subset. The genuinely sharp difficulty — *modality is local*, the uncertainty attaching to *one inferential link* rather than the whole statement — is the *edge-local epistemic status* index now filed at [the reified relation object](_fleeting-ideas#^fleeting-edge-scope).
 
 **General lesson** → propagated to [the reified relation object](_fleeting-ideas#^fleeting-edge-scope). Epistemic status / uncertainty can scope to a *single inferential link inside a statement*, not to the whole statement or its objects — now the edge-local-status index of the edge-scope candidate, so a statement can be partly asserted and partly hedged.
 
@@ -486,7 +486,7 @@ The candidate object model:
 
 ## 24. Derivation with a hidden change of representation language
 
-> Rewriting the network function as a sum over paths makes some distributed effects look local, but only because locality has been moved from units to paths.
+> Rewriting the network function as a sum over paths makes some distributed effects look local, but only because locality has been moved from units to paths. ^example-derivation-with-a-hidden-change-of-representation-language
 
 |Difficulty|Description|
 |---|---|
@@ -504,7 +504,7 @@ The candidate object model:
 
 ## 25. Statement introducing a comparative adequacy criterion
 
-> A useful notion of task-relevance should reject both features that are merely decodable and features that are causally active only under interventions that destroy the computation being studied.
+> A useful notion of task-relevance should reject both features that are merely decodable and features that are causally active only under interventions that destroy the computation being studied. ^example-statement-introducing-a-comparative-adequacy-criterion
 
 |Difficulty|Description|
 |---|---|
@@ -522,7 +522,7 @@ The candidate object model:
 
 ## 26. Statement where a method produces the object it measures
 
-> A clustering analysis of representations may reveal task-relevant groups, but it may also impose the very discreteness that later appears as evidence for those groups.
+> A clustering analysis of representations may reveal task-relevant groups, but it may also impose the very discreteness that later appears as evidence for those groups. ^example-statement-where-a-method-produces-the-object-it-measures
 
 |Difficulty|Description|
 |---|---|
@@ -534,13 +534,13 @@ The candidate object model:
 
 **Resolution.** *Method-object circularity* — a clustering analysis may *reveal* task-relevant groups or may *impose* the discreteness it then reports as evidence — is the *method-result circularity* pattern now recorded as a structured undercutter at [what an attack edge targets](3-aspect-specific/arguments-reasoning#^t3-attack-target): the method partly constructs its object, which is not a justification cycle but an undercutter whose ground is the method-object relation. *Epistemic contamination* (the evidence depends on the analysis procedure) and *reflexive critique* are that undercutting relation — the critique attacks the inference from clustering-result to task-groups by noting the method shaped the result. *Ambiguous outcome* (reveal vs. impose) is a competing-reading edge. *No simple support/attack* (the same method is both useful and suspect) is mixed evidential status (ex. 23).
 
-**General lesson** → propagated to [what an attack edge targets](3-aspect-specific/arguments-reasoning#^t3-attack-target). Method-result circularity — a method partly constructing the object it then measures — is distinct from the justification-chain circularity `^t1-no-circular-reasoning` forbids and from mutual constraint; it is a structured undercutter whose ground is the method-object relation, recorded against the attack-target open question.
+**General lesson** → propagated to [what an attack edge targets](3-aspect-specific/arguments-reasoning#^t3-attack-target). Method-result circularity — a method partly constructing the object it then measures — is distinct from the justification-chain circularity `^t1-valid-licensing` forbids and from mutual constraint; it is a structured undercutter whose ground is the method-object relation, recorded against the attack-target open question.
 
 ---
 
 ## 27. Claim with temporal evolution and conceptual instability
 
-> Early in training, the network may encode context as an auxiliary feature; later, the same context may become the organizing principle of the representation space.
+> Early in training, the network may encode context as an auxiliary feature; later, the same context may become the organizing principle of the representation space. ^example-claim-with-temporal-evolution-and-conceptual-instability
 
 |Difficulty|Description|
 |---|---|
@@ -550,7 +550,7 @@ The candidate object model:
 |developmental explanation|learning trajectory matters|
 |vague transition|no precise boundary between stages|
 
-**Resolution.** *Diachronic change* and *same object changes type* — over training, context shifts from an auxiliary feature to the organizing principle of the representation space — is the *process-time re-typing* variant now recorded in the re-typing-as-a-move enrichment of the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary): the object's kind changes as a fact about the phenomenon over time, distinct from the modelling-choice re-typing of examples 7 and 19, and distinct from authored revision tracked by [revision accountability](_framework-criteria#^t1-revision-accountability). *Non-static relation* (the context-representation relation itself evolves) and *vague transition* (no precise stage boundary) compound this — the relation is time-indexed and the index is fuzzy.
+**Resolution.** *Diachronic change* and *same object changes type* — over training, context shifts from an auxiliary feature to the organizing principle of the representation space — is the *process-time re-typing* variant now recorded in the re-typing-as-a-move enrichment of the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary): the object's kind changes as a fact about the phenomenon over time, distinct from the modelling-choice re-typing of examples 7 and 19, and distinct from authored revision tracked by [revision accountability](1-framework/research-activities-workflows#^t1-revision-accountability). *Non-static relation* (the context-representation relation itself evolves) and *vague transition* (no precise stage boundary) compound this — the relation is time-indexed and the index is fuzzy.
 
 **General lesson** → propagated to the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary). An object's kind or role can change along a *modelled process trajectory* (e.g. over training) — a fact about the phenomenon, distinct from authored revision. The re-typing enrichment records the need for a time-indexed object whose kind can differ at different points of a trajectory, with fuzzy stage boundaries.
 
@@ -558,7 +558,7 @@ The candidate object model:
 
 ## 28. Statement using absence as evidence
 
-> The absence of a clean context axis does not show that context is absent from the representation; it may show that context acts by deforming the whole space rather than occupying a separable direction.
+> The absence of a clean context axis does not show that context is absent from the representation; it may show that context acts by deforming the whole space rather than occupying a separable direction. ^example-statement-using-absence-as-evidence
 
 |Difficulty|Description|
 |---|---|
@@ -576,7 +576,7 @@ The candidate object model:
 
 ## 29. Conceptual dependence between two definitions
 
-> The definition of “task variable” cannot be fixed independently of the definition of “task,” because what counts as a variable depends on which distinctions the task itself makes relevant.
+> The definition of “task variable” cannot be fixed independently of the definition of “task,” because what counts as a variable depends on which distinctions the task itself makes relevant. ^example-conceptual-dependence-between-two-definitions
 
 |Difficulty|Description|
 |---|---|
@@ -586,7 +586,7 @@ The candidate object model:
 |circularity risk|task and task variable constrain each other|
 |intensional relation|“makes relevant” is not a simple attribute|
 
-**Resolution.** *Mutual dependence* and *circularity risk* — "task variable" cannot be defined independently of "task", and vice versa — is the *co-definition* item of [legitimate mutual constraint vs. vicious circularity](_fleeting-ideas#^fleeting-mutual-constraint), which carries the tension with [t1-no-circular-reasoning](_framework-criteria#^t1-no-circular-reasoning) (a `[!missing]` callout is placed there) and with the [definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form). *Anti-modular pressure* (the concepts cannot be defined one at a time) is what that candidate's co-definition construct addresses — a cluster of definitions co-authored, neither a stable placeholder for the other. *Intensional relation* ("makes relevant" is not a simple attribute) is a relation the closed vocabulary does not yet carry.
+**Resolution.** *Mutual dependence* and *circularity risk* — "task variable" cannot be defined independently of "task", and vice versa — is the *co-definition* item of [legitimate mutual constraint vs. vicious circularity](_fleeting-ideas#^fleeting-mutual-constraint), which carries the tension with [valid licensing](1-framework/reasoning-integrity#^t1-valid-licensing) (a `[!missing]` callout is placed there) and with the [definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form). *Anti-modular pressure* (the concepts cannot be defined one at a time) is what that candidate's co-definition construct addresses — a cluster of definitions co-authored, neither a stable placeholder for the other. *Intensional relation* ("makes relevant" is not a simple attribute) is a relation the closed vocabulary does not yet carry.
 
 **General lesson** → propagated to [legitimate mutual constraint vs. vicious circularity](_fleeting-ideas#^fleeting-mutual-constraint). Two definitions can be *mutually dependent* — co-defined, neither prior — which the genus-differentia normal form does not accommodate and which must be distinguished from vicious circularity. The candidate proposes a co-definition construct: a cluster of definitions admitted together, the mutual constraint recorded and marked legitimate.
 
@@ -594,7 +594,7 @@ The candidate object model:
 
 ## 30. Statement where a term is intentionally overloaded
 
-> The word “geometry” is useful here precisely because it can refer at once to metric relations, transformation structure, and the visual intuition that makes changes in representation intelligible.
+> The word “geometry” is useful here precisely because it can refer at once to metric relations, transformation structure, and the visual intuition that makes changes in representation intelligible. ^example-statement-where-a-term-is-intentionally-overloaded
 
 |Difficulty|Description|
 |---|---|
@@ -604,15 +604,15 @@ The candidate object model:
 |anti-normalization pressure|forced splitting may lose meaning|
 |pragmatic justification|usefulness depends on cognitive role|
 
-**Resolution.** This example directly tests the framework against its own discipline. *Productive ambiguity* and *intentional non-disambiguation* — "geometry" is *deliberately* left meaning metric relations, transformation structure, and visual intuition at once — is, under the re-cut at [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form), a candidate set with resolution policy `will-not-resolve`: distinct from `will-resolve` (awaiting resolution) and from a defect claim (a diagnosed pathology, example 22). The `[!missing]` callouts on [t1-canonical-terminology](_framework-criteria#^t1-canonical-terminology) and [t1-stable-boundaries](_framework-criteria#^t1-stable-boundaries) record that a `will-not-resolve` term must not be flagged by the canonicity check. *Pragmatic justification* (the overload is justified by its cognitive role) is the recorded rationale a `will-not-resolve` policy carries.
+**Resolution.** This example directly tests the framework against its own discipline. *Productive ambiguity* and *intentional non-disambiguation* — "geometry" is *deliberately* left meaning metric relations, transformation structure, and visual intuition at once — is, under the re-cut at [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form), a candidate set with resolution policy `will-not-resolve`: distinct from `will-resolve` (awaiting resolution) and from a defect claim (a diagnosed pathology, example 22). The `[!missing]` callouts on [t1-canonical-terminology](1-framework/modular-content-organization#^t1-canonical-terminology) and [t1-stable-boundaries](1-framework/framework-foundations#^t1-stable-boundaries) record that a `will-not-resolve` term must not be flagged by the canonicity check. *Pragmatic justification* (the overload is justified by its cognitive role) is the recorded rationale a `will-not-resolve` policy carries.
 
-**General lesson** → propagated to [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) (the resolution-policy field), with `[!missing]` callouts on two criteria. The callout on [t1-canonical-terminology](_framework-criteria#^t1-canonical-terminology) records a genuine tension — the automatic canonicity check would flag a `will-not-resolve` term as drift, and must exempt it. The callout on [t1-stable-boundaries](_framework-criteria#^t1-stable-boundaries) is a *scoping clarification*, not a tension — a `will-not-resolve` content concept is not a violation of that criterion, which governs framework-component boundaries rather than content concepts. A term can be *intentionally and productively ambiguous* — the `will-not-resolve` resolution policy, distinct from `will-resolve` and from a defect claim. Recurs at example 40.
+**General lesson** → propagated to [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) (the resolution-policy field), with `[!missing]` callouts on two criteria. The callout on [t1-canonical-terminology](1-framework/modular-content-organization#^t1-canonical-terminology) records a genuine tension — the automatic canonicity check would flag a `will-not-resolve` term as drift, and must exempt it. The callout on [t1-stable-boundaries](1-framework/framework-foundations#^t1-stable-boundaries) is a *scoping clarification*, not a tension — a `will-not-resolve` content concept is not a violation of that criterion, which governs framework-component boundaries rather than content concepts. A term can be *intentionally and productively ambiguous* — the `will-not-resolve` resolution policy, distinct from `will-resolve` and from a defect claim. Recurs at example 40.
 
 ---
 
 ## 31. Qualitative theoretical conjecture with no clean predicate form
 
-> Perhaps what matters is not whether the network has learned a representation of the context, but whether the context has become a principle according to which other variables are organized.
+> Perhaps what matters is not whether the network has learned a representation of the context, but whether the context has become a principle according to which other variables are organized. ^example-qualitative-theoretical-conjecture-with-no-clean-predicate-form
 
 |Difficulty|Description|
 |---|---|
@@ -622,7 +622,7 @@ The candidate object model:
 |no direct predicate|difficult to formalize without distortion|
 |conceptual reframing|advances inquiry by changing focus|
 
-**Resolution.** *Exploratory conjecture* ("perhaps what matters is...") is a low-maturity [epistemic status](2-architecture/object-kinds#^t2-epistemic-status) and a draft-profile [partial-formalization](_framework-criteria#^t1-partial-formalization) statement. *Question transformation* and *conceptual reframing* — the statement shifts the inquiry's object from "representation of context" to "context as an organizing principle" — is a reframing move on the question network, governed by [goal-driven reasoning](_framework-criteria#^t1-goal-driven-reasoning) and the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary)'s `problematize`/reframe. *No direct predicate* — the conjecture resists formalization without distortion — is the [partial-formalization](_framework-criteria#^t1-partial-formalization) draft profile combined with [t1-rich-prose-expressivity](_framework-criteria#^t1-rich-prose-expressivity): a statement may stay at the prose maturity level precisely because forcing a predicate would distort it. *Abstract relation* ("context organizes other variables") is an intensional relation, like example 29's "makes relevant". **Covered** — the primary parts are ratified (`^t2-epistemic-status`, `^t1-goal-driven-reasoning`, `^t1-partial-formalization`, `^t1-rich-prose-expressivity`); the per-profile draft-vs-strict distinction is the open question `^t2-partial-formalization-profiles`. No new gap.
+**Resolution.** *Exploratory conjecture* ("perhaps what matters is...") is a low-maturity [epistemic status](2-architecture/object-kinds#^t2-epistemic-status) and a draft-profile [partial-formalization](1-framework/expressive-depth#^t1-partial-formalization) statement. *Question transformation* and *conceptual reframing* — the statement shifts the inquiry's object from "representation of context" to "context as an organizing principle" — is a reframing move on the question network, governed by [served goal](1-framework/reasoning-integrity#^t1-served-goal) and the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary)'s `problematize`/reframe. *No direct predicate* — the conjecture resists formalization without distortion — is the [partial-formalization](1-framework/expressive-depth#^t1-partial-formalization) draft profile combined with [t1-rich-prose-expressivity](1-framework/expressive-depth#^t1-rich-prose-expressivity): a statement may stay at the prose maturity level precisely because forcing a predicate would distort it. *Abstract relation* ("context organizes other variables") is an intensional relation, like example 29's "makes relevant". **Covered** — the primary parts are ratified (`^t2-epistemic-status`, `^t1-served-goal`, `^t1-partial-formalization`, `^t1-rich-prose-expressivity`); the per-profile draft-vs-strict distinction is the open question `^t2-partial-formalization-profiles`. No new gap.
 
 **General lesson** — none; no propagation. Confirms that an exploratory conjecture resisting clean predicate form is a legitimate low-maturity, prose-level statement under `^t1-partial-formalization` and `^t1-rich-prose-expressivity`, and that reframing the inquiry's object is a move on the question network. Reinforces intensional relations (ex. 29).
 
@@ -630,7 +630,7 @@ The candidate object model:
 
 ## 32. Ambiguous explanatory priority
 
-> The task may explain the geometry, but the learned geometry may also explain which aspects of the task the network effectively treats as relevant.
+> The task may explain the geometry, but the learned geometry may also explain which aspects of the task the network effectively treats as relevant. ^example-ambiguous-explanatory-priority
 
 |Difficulty|Description|
 |---|---|
@@ -640,7 +640,7 @@ The candidate object model:
 |explanatory priority unresolved|no direction is privileged|
 |requires co-determination model|simple cause/effect relation is insufficient|
 
-**Resolution.** *Bidirectional explanation* and *circular-looking relation* — the task explains the geometry and the geometry explains which aspects of the task are effectively treated as relevant — is the relation-grain counterpart of example 29's mutually dependent definitions. It tensions with [t1-no-circular-reasoning](_framework-criteria#^t1-no-circular-reasoning): a bidirectional explanatory dependency is not a vicious justification cycle, but the framework must distinguish the two. *Requires co-determination model* makes the point explicit — a simple directed `explains` edge is insufficient; the framework needs a co-determination relation. *Distinction between task and effective task* (the objective task vs. the network-internal task) is a `Distinction` object, and it is what *breaks the apparent circularity*: the two `explains` edges have different endpoints once task and effective-task are separated, so it is not strictly circular. **Partially covered**; surfaces co-determination as a relation type and confirms a `Distinction` can dissolve apparent circularity.
+**Resolution.** *Bidirectional explanation* and *circular-looking relation* — the task explains the geometry and the geometry explains which aspects of the task are effectively treated as relevant — is the relation-grain counterpart of example 29's mutually dependent definitions. It tensions with [valid licensing](1-framework/reasoning-integrity#^t1-valid-licensing): a bidirectional explanatory dependency is not a vicious justification cycle, but the framework must distinguish the two. *Requires co-determination model* makes the point explicit — a simple directed `explains` edge is insufficient; the framework needs a co-determination relation. *Distinction between task and effective task* (the objective task vs. the network-internal task) is a `Distinction` object, and it is what *breaks the apparent circularity*: the two `explains` edges have different endpoints once task and effective-task are separated, so it is not strictly circular. **Partially covered**; surfaces co-determination as a relation type and confirms a `Distinction` can dissolve apparent circularity.
 
 **General lesson** → propagated to [legitimate mutual constraint vs. vicious circularity](_fleeting-ideas#^fleeting-mutual-constraint). Two objects can stand in a *co-determination* relation — each explains an aspect of the other — which is not a vicious cycle; it is the relation-grain sibling of co-definition (ex. 29), now the candidate's second sub-item. A precise `Distinction` (task vs. effective task) often dissolves the apparent circularity by separating the endpoints.
 
@@ -648,7 +648,7 @@ The candidate object model:
 
 ## 33. Meta-theoretical claim about formalization
 
-> Formalizing representation as an equivalence class may solve the problem of arbitrary coordinates, but it also risks erasing the very implementation details that make the representation mechanistically informative.
+> Formalizing representation as an equivalence class may solve the problem of arbitrary coordinates, but it also risks erasing the very implementation details that make the representation mechanistically informative. ^example-meta-theoretical-claim-about-formalization
 
 |Difficulty|Description|
 |---|---|
@@ -668,7 +668,7 @@ The candidate object model:
 
 ## 34. Statement whose main content is a research constraint
 
-> Any account of hierarchical build-up must explain not only why deeper layers are more abstract, but why the particular abstractions that emerge are those useful for the task.
+> Any account of hierarchical build-up must explain not only why deeper layers are more abstract, but why the particular abstractions that emerge are those useful for the task. ^example-statement-whose-main-content-is-a-research-constraint
 
 |Difficulty|Description|
 |---|---|
@@ -678,7 +678,7 @@ The candidate object model:
 |emergence requirement|process of abstraction matters|
 |comparative scope|applies to any acceptable account|
 
-**Resolution.** *Adequacy constraint* and *comparative scope* — the statement imposes a burden that *any acceptable account* of hierarchical build-up must meet — is a constraint on a class of theories, the same shape as example 25's constraint-on-a-definition, generalised from definitions to *explanatory accounts*. It feeds the validation operation of [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) generalised, and it is a [criterion](_fleeting-ideas#^fleeting-kind-set) object — an explicit standard of adequacy. *Rejects weak explanation* (abstraction alone is insufficient) is the negative half of the constraint. *Teleological-looking language* ("useful for the task") is flagged content: it reads as teleological and needs care — this is a content-quality concern the framework should mark, kin to the metaphor-diagnosis gap (a fragment flagged for a specific interpretive hazard). *Emergence requirement* (the *process* of abstraction matters, not just the end state) is the dynamic dimension of [t1-inquiry-content-and-progression](_framework-criteria#^t1-inquiry-content-and-progression). **Resolved via staged candidate** — the `Criterion` object is one of the staged `^fleeting-kind-set` kinds, and the constraint-on-accounts is the generalisation of example 25's constraint-on-a-definition; the teleological-phrasing flag is filed at the metalinguistic-content candidate.
+**Resolution.** *Adequacy constraint* and *comparative scope* — the statement imposes a burden that *any acceptable account* of hierarchical build-up must meet — is a constraint on a class of theories, the same shape as example 25's constraint-on-a-definition, generalised from definitions to *explanatory accounts*. It feeds the validation operation of [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) generalised, and it is a [criterion](_fleeting-ideas#^fleeting-kind-set) object — an explicit standard of adequacy. *Rejects weak explanation* (abstraction alone is insufficient) is the negative half of the constraint. *Teleological-looking language* ("useful for the task") is flagged content: it reads as teleological and needs care — this is a content-quality concern the framework should mark, kin to the metaphor-diagnosis gap (a fragment flagged for a specific interpretive hazard). *Emergence requirement* (the *process* of abstraction matters, not just the end state) is the dynamic dimension of [t1-inquiry-content-and-progression](1-framework/framework-foundations#^t1-inquiry-content-and-progression). **Resolved via staged candidate** — the `Criterion` object is one of the staged `^fleeting-kind-set` kinds, and the constraint-on-accounts is the generalisation of example 25's constraint-on-a-definition; the teleological-phrasing flag is filed at the metalinguistic-content candidate.
 
 **General lesson** → propagated to [meta-conceptual content](_fleeting-ideas#^fleeting-metalinguistic-content) (hazard-flagged fragment). A constraint on a *class of acceptable accounts* is a `Criterion` object, the generalisation of example 25's constraint-on-a-definition — nothing new there. The one filed item: teleological-looking phrasing ("useful for the task") is a fragment that may warrant a flag for an interpretive hazard, now the hazard-flagged-fragment item of the metalinguistic-content candidate, kin to metaphor diagnosis (ex. 4).
 
@@ -686,7 +686,7 @@ The candidate object model:
 
 ## 35. Ambiguous relation between model and phenomenon
 
-> The model is not intended to describe biological attention, but to isolate a computational structure that biological attention might instantiate under some conditions.
+> The model is not intended to describe biological attention, but to isolate a computational structure that biological attention might instantiate under some conditions. ^example-ambiguous-relation-between-model-and-phenomenon
 
 |Difficulty|Description|
 |---|---|
@@ -704,7 +704,7 @@ The candidate object model:
 
 ## 36. Claim that creates a new object by criticism
 
-> The failure of the decoding criterion does not merely motivate a better criterion; it reveals that “criterion” itself is too narrow, since task-relevance may require a family of tests with different failure modes.
+> The failure of the decoding criterion does not merely motivate a better criterion; it reveals that “criterion” itself is too narrow, since task-relevance may require a family of tests with different failure modes. ^example-claim-that-creates-a-new-object-by-criticism
 
 |Difficulty|Description|
 |---|---|
@@ -714,7 +714,7 @@ The candidate object model:
 |not simple refinement|changes the class of acceptable solutions|
 |inquiry expansion|opens a new design space|
 
-**Resolution.** *Criticism creates new target* and *meta-level revision* — the failure of the decoding criterion does not motivate a *better criterion*, it reveals that "criterion" itself is the wrong object type, which should be a *family of tests* — is the *critique-driven re-typing* variant recorded in the re-typing-as-a-move enrichment of the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary): an [undercutter](3-aspect-specific/arguments-reasoning#^t3-attack-target) whose payload is not a defeated claim but a re-typing of the question's target object. *Failure-mode reasoning* (the tests in the family are characterized by *how they fail*) connects to the [reasoning-schemes](3-aspect-specific/arguments-reasoning#^t3-reasoning-schemes) critical-questions mechanism — a critical question is a named failure mode. *Not simple refinement* / *inquiry expansion* (the move changes the class of acceptable solutions, opening a design space) is a question-network restructuring move under [goal-driven reasoning](_framework-criteria#^t1-goal-driven-reasoning).
+**Resolution.** *Criticism creates new target* and *meta-level revision* — the failure of the decoding criterion does not motivate a *better criterion*, it reveals that "criterion" itself is the wrong object type, which should be a *family of tests* — is the *critique-driven re-typing* variant recorded in the re-typing-as-a-move enrichment of the [move vocabulary](_fleeting-ideas#^fleeting-move-vocabulary): an [undercutter](3-aspect-specific/arguments-reasoning#^t3-attack-target) whose payload is not a defeated claim but a re-typing of the question's target object. *Failure-mode reasoning* (the tests in the family are characterized by *how they fail*) connects to the [reasoning-schemes](3-aspect-specific/arguments-reasoning#^t3-reasoning-schemes) critical-questions mechanism — a critical question is a named failure mode. *Not simple refinement* / *inquiry expansion* (the move changes the class of acceptable solutions, opening a design space) is a question-network restructuring move under [served goal](1-framework/reasoning-integrity#^t1-served-goal).
 
 **General lesson** → propagated to [what an attack edge targets](3-aspect-specific/arguments-reasoning#^t3-attack-target). A critique can do more than defeat a claim or open a sub-question: it can *re-type the inquiry's target object* — an undercutter whose payload is an object re-typing, now recorded as the critique-driven re-typing pattern at `^t3-attack-target`.
 
@@ -722,7 +722,7 @@ The candidate object model:
 
 ## 37. Statement with implicit dependency on counterfactuals
 
-> To say that a feature contributes to the task is to say something about what the computation would have been without it, but that counterfactual is meaningful only relative to an admissible way of removing the feature.
+> To say that a feature contributes to the task is to say something about what the computation would have been without it, but that counterfactual is meaningful only relative to an admissible way of removing the feature. ^example-statement-with-implicit-dependency-on-counterfactuals
 
 |Difficulty|Description|
 |---|---|
@@ -740,7 +740,7 @@ The candidate object model:
 
 ## 38. Statement where the same relation is descriptive and normative
 
-> The paper treats invariance as a desirable property of the metric, but in the present project invariance is not merely desirable; it is part of what makes the metric interpretable.
+> The paper treats invariance as a desirable property of the metric, but in the present project invariance is not merely desirable; it is part of what makes the metric interpretable. ^example-statement-where-the-same-relation-is-descriptive-and-normative
 
 |Difficulty|Description|
 |---|---|
@@ -758,7 +758,7 @@ The candidate object model:
 
 ## 39. Critique of a hidden assumption in a literature tradition
 
-> Much of the literature assumes that if two representational spaces are aligned, then the corresponding systems share some internal organization, but this inference may conflate similarity of outputs with similarity of mechanisms.
+> Much of the literature assumes that if two representational spaces are aligned, then the corresponding systems share some internal organization, but this inference may conflate similarity of outputs with similarity of mechanisms. ^example-critique-of-a-hidden-assumption-in-a-literature-tradition
 
 |Difficulty|Description|
 |---|---|
@@ -776,7 +776,7 @@ The candidate object model:
 
 ## 40. Statement whose role is to preserve ambiguity
 
-> For now, it is better to keep “representation geometry” deliberately ambiguous between metric structure and transformation structure, because deciding too early would force the analysis toward either comparison or dynamics.
+> For now, it is better to keep “representation geometry” deliberately ambiguous between metric structure and transformation structure, because deciding too early would force the analysis toward either comparison or dynamics. ^example-statement-whose-role-is-to-preserve-ambiguity
 
 |Difficulty|Description|
 |---|---|
@@ -786,7 +786,7 @@ The candidate object model:
 |anti-resolution move|framework must preserve rather than solve ambiguity|
 |metacognitive function|statement governs inquiry strategy|
 
-**Resolution.** *Deliberate ambiguity* and *anti-resolution move* — "representation geometry" is kept deliberately ambiguous between metric structure and transformation structure — is, under the re-cut at [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form), a candidate set with resolution policy `will-not-resolve`. *Temporal scope* ("for now") is the *time-bounded* sub-case the resolution-policy field records: `will-not-resolve` with a review date, the term held plural by policy with resolution deferred rather than refused, connecting to the [partial-formalization](_framework-criteria#^t1-partial-formalization) maturity axis. *Competing futures* (comparison vs. dynamics) is the candidate set itself. *Metacognitive function* (the statement governs inquiry strategy, it is not domain content) is the inquiry-steering item of [non-assertive statement categories](_fleeting-ideas#^fleeting-non-assertive-statements), which names this example.
+**Resolution.** *Deliberate ambiguity* and *anti-resolution move* — "representation geometry" is kept deliberately ambiguous between metric structure and transformation structure — is, under the re-cut at [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form), a candidate set with resolution policy `will-not-resolve`. *Temporal scope* ("for now") is the *time-bounded* sub-case the resolution-policy field records: `will-not-resolve` with a review date, the term held plural by policy with resolution deferred rather than refused, connecting to the [partial-formalization](1-framework/expressive-depth#^t1-partial-formalization) maturity axis. *Competing futures* (comparison vs. dynamics) is the candidate set itself. *Metacognitive function* (the statement governs inquiry strategy, it is not domain content) is the inquiry-steering item of [non-assertive statement categories](_fleeting-ideas#^fleeting-non-assertive-statements), which names this example.
 
 **General lesson** → propagated to [t3-definition-normal-form](3-aspect-specific/ontology#^t3-definition-normal-form) (the resolution-policy field) and [non-assertive statement categories](_fleeting-ideas#^fleeting-non-assertive-statements). Ambiguity-preservation can be a *time-bounded policy* — a term held plural *for now* with a review date; the resolution-policy field records this as the time-bounded sub-case of `will-not-resolve`. The statement that sets such a policy is itself inquiry-steering content (ex. 20).
 

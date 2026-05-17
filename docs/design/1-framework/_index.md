@@ -1,11 +1,23 @@
-# Tier 1 — Framework-level desiderata
+---
+tags:
+  - index
+project: gnomon
+aliases:
+  - Framework-level criteria
+---
+# Tier 1 — Framework-level criteria
 
-Tier-1 criteria fix what the framework must achieve as a whole. They are the success conditions for the project and cannot be overridden by architectural or aspect-specific decisions. Each criterion is anchored at its definition site below.
+These criteria fix the overall objectives and desiderata that the framework must achieve as a whole. They are the success conditions for the project and cannot be overridden by architectural or aspect-specific decisions.
 
-## Files
+> [!TIP] Reading order
+> Criteria are grouped by conceptual theme. Within each group, foundational criteria appear before derived ones. Cross-group dependencies flow downward.
 
-- [Content adequacy](vendor/gnomon/docs/design/1-framework/content-adequacy) — what the framework must represent: `^t1-epistemic-adequacy`, `^t1-expressivity`, `^t1-non-arbitrary`, `^t1-concrete-execution`.
-- [Epistemic adequacy](vendor/gnomon/docs/design/1-framework/epistemic-adequacy) — what genuine understanding demands: `^t1-intelligibility`.
-- [Structural quality](vendor/gnomon/docs/design/1-framework/structural-quality) — framework-level structural criteria: `^t1-modularity`.
-- [Operational quality](vendor/gnomon/docs/design/1-framework/operational-quality) — operational tolerances and capabilities: `^t1-partial-formalization`, `^t1-dual-usability`, `^t1-feasibility`.
-- [External interfaces](vendor/gnomon/docs/design/1-framework/external-interfaces) — how the framework relates to external systems: `^t1-git-delegation`, `^t1-no-runtime-inference`.
+| Theme                                                                               | Description                                                                                                                                                    |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Framework foundation](vendor/gnomon/docs/design/1-framework/framework-foundations) | What the framework *is* as a system, general commitment about the contents it records or the activities it supports.                                           |
+| [Expressive depth](expressive-depth.md)                                             | What the framework must capture, support, and admit to reflect research reasoning, with what range and at what depth.                                          |
+| [Reasoning integrity](reasoning-integrity.md)                                       | Whether the reasoning system is valid, well-formed, and recoverable.                                                                                           |
+| [Modular content organization](modular-content-organization.md)                     | How content is structured across the corpus so that each piece is named, locatable, and held in a single canonical place.                                      |
+| [Research activities and workflows](research-activities-workflows.md)               | How distinct research activities are partitioned and disciplined at run time.                                                                                  |
+| [Cost and Ergonomics](cost-ergonomics.md)                                           | Which cost dimensions the framework must keep bounded and the scale at which it must remain usable.                                                            |
+| [External interfaces](external-interfaces.md)                                       | What the framework delegates to systems outside its own machinery: version history is left to Git, and warrant evaluation admits no run-time inference engine. |

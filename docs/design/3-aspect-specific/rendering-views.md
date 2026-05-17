@@ -1,7 +1,7 @@
 # Rendering and views
 
 > [!INFO] Tier and source
-> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the rendering layer and view specifications. Traces to [t2-separation-of-concerns](vendor/gnomon/docs/design/2-architecture/constraints#^t2-separation-of-concerns), [t2-single-source-of-truth](vendor/gnomon/docs/design/2-architecture/constraints#^t2-single-source-of-truth), [t1-dual-usability](vendor/gnomon/docs/design/1-framework/operational-quality#^t1-dual-usability), and the rendered-vs-canonical distinction fixed at [derived artifacts](vendor/gnomon/docs/design/2-architecture/layering#^t2-derived-artifacts) and [view specifications](vendor/gnomon/docs/design/2-architecture/layering#^t2-view-specifications).
+> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the rendering layer and view specifications. Traces to [t2-separation-of-concerns](vendor/gnomon/docs/design/2-architecture/constraints#^t2-separation-of-concerns), [t2-single-source-of-truth](vendor/gnomon/docs/design/2-architecture/constraints#^t2-single-source-of-truth), [t1-dual-usability](../1-framework/cost-ergonomics#^t1-read-side-automation), and the rendered-vs-canonical distinction fixed at [derived artifacts](vendor/gnomon/docs/design/2-architecture/layering#^t2-derived-artifacts) and [view specifications](vendor/gnomon/docs/design/2-architecture/layering#^t2-view-specifications).
 
 ---
 

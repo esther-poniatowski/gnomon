@@ -1,7 +1,7 @@
 # Workflows
 
 > [!INFO] Tier and source
-> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the inquiry workflow: how an inquiry begins, how its scope is bounded, and how each new object is justified. Traces to [t1-non-arbitrary](vendor/gnomon/docs/design/1-framework/content-adequacy#^t1-non-arbitrary) and [t1-modularity](vendor/gnomon/docs/design/1-framework/structural-quality#^t1-modularity).
+> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the inquiry workflow: how an inquiry begins, how its scope is bounded, and how each new object is justified. Traces to [t1-non-arbitrary](../1-framework/reasoning-integrity#^t1-served-goal) and [t1-modularity](../1-framework/modular-content-organization#^t1-reuse).
 
 ---
 

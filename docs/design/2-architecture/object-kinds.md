@@ -82,3 +82,16 @@ Alternatives:
 > The exclusion of OOP-style inheritance was ratified at [t2-no-inheritance](vendor/gnomon/docs/design/2-architecture/constraints#^t2-no-inheritance), but that commitment now carries a `[!missing] Reopen pending` callout: a staged proposal admits OOP inheritance as a candidate primitive, with type classes / traits staged as the counter-proposal. The reopen travels with this open question — the two must be re-ratified together. The five alternatives above are the full set on the table; the last two are live only while the reopen stands.
 
 Bearing criteria: [t2-no-inheritance](vendor/gnomon/docs/design/2-architecture/constraints#^t2-no-inheritance), [t2-subtype-safety](vendor/gnomon/docs/design/2-architecture/constraints#^t2-subtype-safety), [t2-narrow-ontology](vendor/gnomon/docs/design/2-architecture/constraints#^t2-narrow-ontology), [t2-layer-replaceability](vendor/gnomon/docs/design/2-architecture/constraints#^t2-layer-replaceability).
+
+### Object identity: absolute or grain-relative ^t2-object-identity-grain
+
+> [!QUESTION] Is the decomposition of content into typed objects unique, or does the same content yield different object sets at different grains of analysis?
+
+[t1-typed-object-decomposition](../1-framework/framework-foundations#^t1-typed-object-decomposition) requires inquiry content to be decomposed into typed objects, but it does not guarantee the decomposition is unique. The same content can split into different sets of typed objects depending on the grain of analysis, and no grain is inherently privileged. The question is whether an object's identity is:
+
+- **absolute** — fixed once and for all; one content has one canonical object decomposition;
+- **grain-relative** — the same content yields different object sets at different analysis grains, none privileged.
+
+A worked example exhibits the problem: [a conceptual move that changes granularity](vendor/gnomon/docs/design/_worked-examples#^example-conceptual-move-that-changes-granularity). A candidate answer is staged at [grain-indexed object decompositions](vendor/gnomon/docs/design/_fleeting-ideas#^fleeting-object-scope) — a family of decompositions indexed by analysis grain. Resolution must state which regime holds, and if grain-relative, how the [object-kind admission](#^t2-object-kind-admission) test applies per grain.
+
+Bearing criteria: [t1-typed-object-decomposition](../1-framework/framework-foundations#^t1-typed-object-decomposition).

@@ -54,9 +54,9 @@ Many initial proposals are backed up in the `_backup/` folder, and some have bee
 
 - [Layered model](_backup/architecture-1-layered-model.md)
 - [Registries-indexes](_backup/registries-indexes.md) / [Validation tooling](_backup/tooling-validation.md): Machine-readable project state
-- [Rendering and views](vendor/gnomon/docs/rendering/rendering-and-views)
+- [Rendering and views](_backup/rendering/rendering-and-views.md)
 - [Workflows](_backup/workflow-for-users.md)
 - [Object types ontology](vendor/gnomon/docs/object-types-ontology/_index)
 - [Argument bundles](_backup/arguments-reasoning/argument-bundles.md)
-- Criteria files: [criteria-G backup](_backup/criteria-framework.md), [criteria taxonomy backup](_backup/object-types-ontology/criteria-taxonomy-ontology.md).
+- Criteria files: [criteria-G backup](_backup/criteria-framework.md), [criteria taxonomy backup](_backup/object-types-ontology/taxo-criteria-ontology.md).
 - The [reference frameworks](vendor/gnomon/docs/references-methods/overview-formal-frameworks) ground several criteria.

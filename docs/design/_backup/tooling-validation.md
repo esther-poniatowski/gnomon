@@ -3,11 +3,11 @@
 
 Registry corruption is a silent, compounding failure: it does not surface immediately but progressively degrades the agent's ability to reason about the vault's established knowledge. Validation must be **external, automated, and a hard gate** — it cannot rely on the agent's self-correction.
 
-> [!INFO] The externality commitment ("validation cannot rely on the agent's self-correction") is migrated to [validation externality](_framework-criteria#^t1-validation-externality). The layered-architecture, gating-policy, and human-review mechanisms survive as the D's `^bk-validation-architecture`, `^bk-validation-gating`, and `^bk-human-review-gate` in `2-architecture/validation-views.md` Conditional on the F.
+> [!INFO] The externality commitment ("validation cannot rely on the agent's self-correction") is migrated to [validation externality](../1-framework/research-activities-workflows#^t1-validation-externality). The layered-architecture, gating-policy, and human-review mechanisms survive as the D's `^bk-validation-architecture`, `^bk-validation-gating`, and `^bk-human-review-gate` in `2-architecture/validation-views.md` Conditional on the F.
 
 ## Architecture ^validation-architecture
 
-> [!INFO] The *Terminology enforcement* row's canonicity *capability* is migrated to [terminology canonicity](_framework-criteria#^t1-terminology-canonicity). The linter mechanism survives as the D `^bk-terminology-enforcement` in `2-architecture/validation-views.md`.
+> [!INFO] The *Terminology enforcement* row's canonicity *capability* is migrated to [canonical terminology](../1-framework/modular-content-organization#^t1-canonical-terminology) (pass-5 rename of "Terminology canonicity" / `^t1-terminology-canonicity`). The linter mechanism survives as the D `^bk-terminology-enforcement` in `2-architecture/validation-views.md`.
 
 | Layer | Mechanism | Failure mode addressed |
 | --- | --- | --- |

@@ -11,7 +11,7 @@
 
 ### Separation of concerns ^t2-separation-of-concerns
 
-> [!INFO] Migrated to [activity separation](_framework-criteria#^t1-activity-separation)
+> [!INFO] Migrated to [activity separation](../1-framework/research-activities-workflows#^t1-activity-access-rights)
 
 Content and presentation are separated: canonical epistemic objects must be distinct from expository views, and neither may be edited through the other. This is the classical model-view separation (MVC, literate programming, source vs. executable).
 
@@ -67,7 +67,7 @@ The narrowness of the ontology ([t2-narrow-ontology](#^t2-narrow-ontology)) does
 
 ### Non-redundancy ^t2-non-redundancy
 
-> [!INFO] Migrated to [non-redundancy](_framework-criteria#^t1-non-redundancy) (promoted T2 → T1).
+> [!INFO] Migrated to [non-redundancy](../1-framework/modular-content-organization#^t1-non-redundancy) (promoted T2 → T1).
 
 Each interpretive point, result, or entity appears exactly once across the system. Duplication across notes, registries, or bundles is a hard error, not a style issue. This is the consistency condition that makes [t2-single-source-of-truth](#^t2-single-source-of-truth) enforceable.
 
@@ -98,7 +98,7 @@ Every field declared by any canonical kind, assembly kind, revision object, or o
 
 ### Graph queryability ^t2-graph-queryability
 
-> [!INFO] Migrated to [relational queryability](_framework-criteria#^t1-relational-queryability) (the F); the graph-representation mechanism becomes a T2 D in `relations-graph.md`.
+> [!INFO] Migrated to [relational queryability](../1-framework/modular-content-organization#^t1-relational-queryability) (the F); the graph-representation mechanism becomes a T2 D in `relations-graph.md`.
 
 The set of typed relations must be queryable as an addressable structure (e.g., for dependency analysis, reverse-impact, orphan detection). The dependency graph must exist as an addressable artifact, not merely as scattered references in prose.
 
@@ -124,7 +124,7 @@ The framework must terminate reasoning-description at a finite library of primit
 
 ### Revision semantics ^t2-revision-semantics
 
-> [!INFO] Migrated to [revision accountability](_framework-criteria#^t1-revision-accountability) (promoted from T2 to T1, anchor renamed from `^t2-revision-semantics` to `^t1-revision-accountability`). The criterion now requires dependency tracking and correction propagation, not only the representation of revision events; the forward-edge / revision-edge / propagation specification becomes three separate T2 decisions (revision-recording, dependency-tracking, propagation) in the validity-revision theme.
+> [!INFO] Migrated to [revision accountability](../1-framework/research-activities-workflows#^t1-revision-accountability) (promoted from T2 to T1, anchor renamed from `^t2-revision-semantics` to `^t1-revision-accountability`). The criterion now requires dependency tracking and correction propagation, not only the representation of revision events; the forward-edge / revision-edge / propagation specification becomes three separate T2 decisions (revision-recording, dependency-tracking, propagation) in the validity-revision theme.
 
 The framework must represent how reasoning states are revised when sub-arguments fail, assumptions are weakened, or goals are reformulated. Without this, the framework can represent only completed reasoning, not research reasoning in progress.
 
@@ -140,7 +140,7 @@ The DAG acyclicity condition (enforced on individual reasoning snapshots) and th
 
 ### Defeasibility and regime stratification ^t2-defeasibility
 
-> [!INFO] Migrated to [composition of warrant kinds](_framework-criteria#^t1-mixed-monotonicity) (the boundary-interface criterion; anchor unchanged, label retitled from "Mixed monotonicity" to "Composition of warrant kinds" to foreground the warrant-kind grain). The binary-classification clause is dropped — it is covered by the warrant-kind enum at `^t3-warrant-kind-enum`.
+> [!INFO] Migrated to [valid licensing](../1-framework/reasoning-integrity#^t1-valid-licensing) — the warrant-composition facet of the *Licensing*-level criterion. The standalone `^t1-mixed-monotonicity` criterion was retired when the *Reasoning integrity* theme was restructured to one criterion per justification level; sound composition of warrant kinds is now the third facet of `^t1-valid-licensing`. The binary-classification clause is dropped — it is covered by the warrant-kind enum at `^t3-warrant-kind-enum`.
 
 The framework must distinguish monotonic (proof-theoretic) and non-monotonic (argumentation-theoretic) validity regimes, and must specify the interface between them. At every node of the reasoning graph, the validity regime must be explicit so that a downstream consumer can determine whether the node's conclusion is retractable.
 
@@ -160,7 +160,7 @@ Every inferential node must record more than the rule that licenses its conclusi
 
 ### Snapshot DAG acyclicity ^t2-snapshot-dag
 
-> [!INFO] Migrated to [no circular reasoning](_framework-criteria#^t1-no-circular-reasoning) (the F); DAG acyclicity becomes a derived T2 property, recorded in the classification table as `^t2-snapshot-dag-property` on the relational-graph representation, to be created during Step C of the refactor.
+> [!INFO] Migrated to [valid licensing](../1-framework/reasoning-integrity#^t1-valid-licensing) — the no-circular-reasoning facet of the *Licensing*-level criterion. The standalone `^t1-no-circular-reasoning` criterion was retired when the *Reasoning integrity* theme was restructured to one criterion per justification level. DAG acyclicity becomes a derived T2 property, recorded in the classification table as `^t2-snapshot-dag-property` on the relational-graph representation, to be created during Step C of the refactor.
 
 At a fixed time, the relations (`depends_on`, `supports`, ...) and the sub-goal or sub-question hierarchy must form a directed acyclic graph. Cycles in a snapshot indicate circular reasoning and are a hard error.
 
@@ -168,18 +168,18 @@ At a fixed time, the relations (`depends_on`, `supports`, ...) and the sub-goal 
 
 ### Justificatory-level discrimination ^t2-justificatory-level-placement
 
-The [three justificatory levels (t1-intelligibility)](vendor/gnomon/docs/design/1-framework/epistemic-adequacy#^t1-intelligibility) — licensing, strategic, explanatory — are functionally distinct: 
+The [three justificatory levels (t1-intelligibility)](../1-framework/reasoning-integrity#^t1-justification-levels) — licensing, strategic, explanatory — are functionally distinct:
 
-- licensing is intrinsic to the *inferential move*, 
-- strategic and explanatory support depend on the *inquiry* that recruits the move. 
+- licensing is intrinsic to the *inferential move*,
+- strategic and explanatory support depend on the *inquiry* that recruits the move.
 
 The architecture must respect this distinction wherever a reasoning annotation is recorded. A locus that conflates the levels is forbidden, because it asserts that inquiry-dependent content is intrinsic. For instance, a single intrinsic field on a canonical object must not mix licensing and strategic content.
 
-*Source*: [t1-intelligibility](vendor/gnomon/docs/design/1-framework/epistemic-adequacy#^t1-intelligibility).
+*Source*: [t1-intelligibility](../1-framework/reasoning-integrity#^t1-justification-levels).
 
 ### Mechanical validation ^t2-mechanical-validation
 
-> [!INFO] Migrated to [read-side automation](_framework-criteria#^t1-read-side-automation) and [write-side automation](_framework-criteria#^t1-write-side-automation) (split + promoted T2 → T1).
+> [!INFO] Migrated to [read-side automation](../1-framework/cost-ergonomics#^t1-read-side-automation) and [write-side automation](../1-framework/cost-ergonomics#^t1-write-side-automation) (split + promoted T2 → T1).
 
 Schema validators must check whether objects, relations, and structures relative to a target are well formed; human judgment must not do that work. Examples of mechanical validators: required-field checks, edge typing, warrant presence, DAG acyclicity within snapshots, discharge accounting.
 
@@ -193,7 +193,7 @@ Motivational adequacy, explanatory relevance, and teleological usefulness can be
 
 ### Representation vs. generation disambiguation ^t2-repr-vs-gen
 
-> [!INFO] Retired in pass-5. The pass-4 promotion to `^t1-representation-vs-generation` was reversed: pass-5 audit found that the "modes" framing conflated three distinct axes already covered by sibling T1 criteria — [partial formalization tolerance](_framework-criteria#^t1-partial-formalization) (maturity), [activity coverage](_framework-criteria#^t1-activity-coverage) and [activity separation](_framework-criteria#^t1-activity-separation) (activity-kind), and [inquiry content and progression](_framework-criteria#^t1-inquiry-content-and-progression) (static-vs-dynamic). The architectural decision `^t2-representation-vs-generation` (in `operations-and-modes.md`) is reframed as the chosen response to these three sibling criteria. The blanket per-criterion mode-annotation requirement is dropped.
+> [!INFO] Retired in pass-5. The pass-4 promotion to `^t1-representation-vs-generation` was reversed: pass-5 audit found that the "modes" framing conflated three distinct axes already covered by sibling T1 criteria — [partial formalization tolerance](../1-framework/expressive-depth#^t1-partial-formalization) (maturity), [activity coverage](../1-framework/expressive-depth#^t1-activity-coverage) and [activity separation](../1-framework/research-activities-workflows#^t1-activity-access-rights) (activity-kind), and [inquiry content and progression](../1-framework/framework-foundations#^t1-inquiry-content-and-progression) (static-vs-dynamic). The architectural decision `^t2-representation-vs-generation` (in `operations-and-modes.md`) is reframed as the chosen response to these three sibling criteria. The blanket per-criterion mode-annotation requirement is dropped.
 
 The framework distinguishes two modes, each with different requirements:
 
@@ -212,19 +212,19 @@ Four tensions across the criteria are irreducible. They cannot be dissolved by b
 
 ### X1 — Expressivity vs. non-arbitrariness ^t2-x1
 
-[t1-expressivity](vendor/gnomon/docs/design/1-framework/content-adequacy#^t1-expressivity) demands support for reasoning patterns not anticipated by the schema inventory. [t1-non-arbitrary](vendor/gnomon/docs/design/1-framework/content-adequacy#^t1-non-arbitrary) demands that operations be schema-governed. Either the schema inventory is closed (and expressivity is bounded) or it is open (and non-arbitrariness is nominal).
+[t1-expressivity](../1-framework/expressive-depth#^t1-reasoning-types-coverage) demands support for reasoning patterns not anticipated by the schema inventory. [t1-non-arbitrary](../1-framework/reasoning-integrity#^t1-served-goal) demands that operations be schema-governed. Either the schema inventory is closed (and expressivity is bounded) or it is open (and non-arbitrariness is nominal).
 
 *Resolution pattern*: adopt a schema calculus — a small set of primitive schema constructors from which schemas for domains are derived. This bounds the schema space structurally while admitting new schemas under principled construction. Settled at [t2-operation-primitiveness](vendor/gnomon/docs/design/2-architecture/operations-and-modes#^t2-operation-primitiveness) (open) and instantiated in [Operation schemas](vendor/gnomon/docs/design/3-aspect-specific/operation-schemas).
 
 ### X2 — Formalization depth vs. usability ^t2-x2
 
-[t1-intelligibility](vendor/gnomon/docs/design/1-framework/epistemic-adequacy#^t1-intelligibility) demands that every step carry licensing, strategic, and explanatory justification. [t1-partial-formalization](vendor/gnomon/docs/design/1-framework/operational-quality#^t1-partial-formalization) and [t1-feasibility](vendor/gnomon/docs/design/1-framework/operational-quality#^t1-feasibility) demand that the annotation burden not exceed what researchers tolerate. These are in irreducible tension for moderately complex proofs and informal arguments.
+[t1-intelligibility](../1-framework/reasoning-integrity#^t1-justification-levels) demands that every step carry licensing, strategic, and explanatory justification. [t1-partial-formalization](../1-framework/expressive-depth#^t1-partial-formalization) and [t1-feasibility](../1-framework/cost-ergonomics#^t1-system-scale) demand that the annotation burden not exceed what researchers tolerate. These are in irreducible tension for moderately complex proofs and informal arguments.
 
 *Resolution pattern*: each profile partitions fields into mandatory and optional sets, with named guarantees that weaken when the profile loosens. Selected at [t2-reasoning-annotation-fields](vendor/gnomon/docs/design/2-architecture/reasoning-structure#^t2-reasoning-annotation-fields) and instantiated in [Reasoning-annotation field set](vendor/gnomon/docs/design/3-aspect-specific/reasoning-fields). Profile contents deferred to [t2-partial-formalization-profiles](vendor/gnomon/docs/design/2-architecture/granularity#^t2-partial-formalization-profiles).
 
 ### X3 — Narrow ontology vs. coverage completeness ^t2-x3
 
-[t2-narrow-ontology](#^t2-narrow-ontology) demands few object kinds. [t1-expressivity](vendor/gnomon/docs/design/1-framework/content-adequacy#^t1-expressivity) and [t2-coverage-completeness](#^t2-coverage-completeness) demand that the ontology span all epistemic moves.
+[t2-narrow-ontology](#^t2-narrow-ontology) demands few object kinds. [t1-expressivity](../1-framework/expressive-depth#^t1-reasoning-types-coverage) and [t2-coverage-completeness](#^t2-coverage-completeness) demand that the ontology span all epistemic moves.
 
 *Resolution pattern*: the operational test in [t2-narrow-ontology](#^t2-narrow-ontology) (five conditions) is the discriminator. A candidate is admitted only if it passes all five; otherwise it becomes a field, status, relation, or annotation. Recorded at [t2-object-kind-admission](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-object-kind-admission).
 
@@ -240,7 +240,7 @@ Reasoning snapshots must be DAGs ([t2-snapshot-dag](#^t2-snapshot-dag), discharg
 
 The following are demanded by the reference frameworks and by the internal audits but are not yet operationalized. They are blocking gaps for Phase 1 of the operational route and must be filled before aspect-specific decisions are frozen.
 
-- **G1 — Partial formalization policy** ([t1-partial-formalization](vendor/gnomon/docs/design/1-framework/operational-quality#^t1-partial-formalization)). What exactly is mandatory vs. optional at each note type and each formalization profile? Currently undefined; addressed at [t2-partial-formalization-profiles](vendor/gnomon/docs/design/2-architecture/granularity#^t2-partial-formalization-profiles) (open).
+- **G1 — Partial formalization policy** ([t1-partial-formalization](../1-framework/expressive-depth#^t1-partial-formalization)). What exactly is mandatory vs. optional at each note type and each formalization profile? Currently undefined; addressed at [t2-partial-formalization-profiles](vendor/gnomon/docs/design/2-architecture/granularity#^t2-partial-formalization-profiles) (open).
 - **G2 — Revision propagation semantics** ([t2-revision-semantics](#^t2-revision-semantics)). When an upstream object is revised, what exactly happens to downstream bundles, arguments, and rendered notes? Settled at [t2-revision-feedback](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-revision-feedback) and its sub-questions.
 - **G3 — Validity regime interface** ([t2-defeasibility](#^t2-defeasibility)). How do monotonic and non-monotonic regions of the reasoning graph interoperate at their boundary? Settled at [t2-warrant-annotation](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-warrant-annotation) together with [t2-propagation](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-propagation).
 - **G4 — Closed operational core termination** ([t2-closed-operational-core](#^t2-closed-operational-core)). The current treatment asserts primitivity without deriving it. Addressed at [t2-operation-primitiveness](vendor/gnomon/docs/design/2-architecture/operations-and-modes#^t2-operation-primitiveness) (open).
