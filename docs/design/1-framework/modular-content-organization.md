@@ -65,7 +65,7 @@ Each piece of content is stated **exactly once across the system**. This implies
 
 **Upstream dependencies.**
 
-- [Stable boundaries](framework-foundations#^t1-stable-boundaries) (cross-group parent criterion in *Framework foundation*): canonical names are one mechanism by which component boundaries remain unambiguous in prose. Canonical terminology is the prose-grain specialisation of stable-boundaries' meta-integrity commitment.
+- [Functional separation of concerns](framework-foundations#^t1-functional-separation) (cross-group parent criterion in *Framework foundation*): canonical names are one mechanism by which component boundaries remain unambiguous in prose. Canonical terminology is the prose-grain specialisation of that criterion's commitment to clearly bounded, functionally separated components.
 
 **Downstream consequences.**
 

@@ -13,7 +13,7 @@ The framework provides an integrated system of **formal language and tooling**:
 
 | Aspect              | Goal                                                                                                                                                                                                                      | Criteria                                                                                                                                                                                                 |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Formal language** | Express epistemic knowledge and processes. It encodes *statements* in general, record epistemic contents (e.g. definitions, questions, relations, claims, proofs, warrants), and the reasoning moves that transform them. | *Inquiry content and progression*, *Typed-object decomposition*, *Stable boundaries*, *Function-driven typology*                                                                                         |
+| **Formal language** | Express epistemic knowledge and processes. It encodes *statements* in general, record epistemic contents (e.g. definitions, questions, relations, claims, proofs, warrants), and the reasoning moves that transform them. | *Inquiry content and progression*, *Typed-object decomposition*, *Functional separation of concerns*                                                                                                     |
 | **Tooling**         | Facilitate research activities. reads that recorded structure to check validity, index objects, query relations, navigate questions and arguments, visualize dependencies, gate activity.                                 | *Research activities and workflows* (validation externality, staleness gating), *Cost and Ergonomics* (read-side and write-side automation), *Relational queryability* in *Modular content organization* |
 
 The language is primary: the tooling operates over what the language records. Tooling may expose, validate, or enforce structure, but the recorded language remains the source of truth for that structure.
@@ -28,8 +28,7 @@ The language is primary: the tooling operates over what the language records. To
 
 - [Inquiry content and progression](#^t1-inquiry-content-and-progression) (sub-criterion): the formal language must record both standing content and the moves that transform it.
 - [Typed-object decomposition](#^t1-typed-object-decomposition) (sub-criterion): the language must expose the object kinds and fields that tooling validates.
-- [Stable boundaries](#^t1-stable-boundaries) (sub-criterion): language components and tooling components must have clear scopes.
-- [Function-driven typology](#^t1-function-driven-typology) (sub-criterion): the shared language-tooling interface must classify components by their function in inquiry.
+- [Functional separation of concerns](#^t1-functional-separation) (sub-criterion): language and tooling components are separated by function, each boundary carrying a separation-of-concerns rationale.
 - [Relational queryability](modular-content-organization#^t1-relational-queryability) (cross-group sub-criterion in *Modular content organization*): tooling can query relations only when the language records those relations explicitly.
 - [Validation externality](research-activities-workflows#^t1-validation-externality) (cross-group sub-criterion in *Research activities and workflows*): validation tooling checks authored structure rather than replacing it.
 - [Read-side automation](cost-ergonomics#^t1-read-side-automation) and [write-side automation](cost-ergonomics#^t1-write-side-automation) (cross-group sub-criteria in *Cost and Ergonomics*): automation remains bounded because tools operate over declared language structure.
@@ -66,6 +65,48 @@ The framework captures **research inquiry** as a **state-transforming process** 
 - [Move coverage](object-kinds#^t2-move-coverage) (theme-local criterion): the operation library must span every epistemic move the framework supports.
 - [Valid licensing](reasoning-integrity#^t1-valid-licensing) (sub-criterion): the recorded reasoning must rest on checkable warrants — non-circular, complete, and soundly composed across warrant kinds.
 
+## No run-time inference engine ^t1-no-runtime-inference
+
+The [framework's tooling](#^t1-language-tooling-integration) **records and validates authored reasoning, but it does not perform automated inference**. No run-time inference engine evaluates warrant conditions or defeat conditions: argument validity is fixed by authored objects and authored revision events, never derived by an automated reasoner. 
+
+*Consequence*: Automated inference must be run it outside the framework.
+
+**Failure mode prevented.** A framework with a run-time prover or argument engine can change what is warranted without any authored change to the corpus, inducing a hidden evaluation layer rather than a traceable revision process. Defeasibility would then be a silent derivation rather than an authored, inspectable record. 
+
+> [!HINT] Future extension
+> Automated inference may be a future extension, but admitting it now would be a significant departure from the current design.
+
+**Upstream dependencies.**
+
+- [Language-tooling integration](#^t1-language-tooling-integration) (parent criterion): the criterion fixes the boundary of the *tooling* half — which activities the tooling performs and which it excludes.
+- [Valid licensing](reasoning-integrity#^t1-valid-licensing) (cross-group criterion in *Reasoning integrity*): warrant kinds and defeat conditions must be recorded explicitly, since no reasoner derives them.
+- [Revision accountability](research-activities-workflows#^t1-revision-accountability) (cross-group criterion in *Research activities and workflows*): upstream changes must reach dependents through traceable revision events, since no reasoner re-evaluates them.
+
+**Downstream consequences.**
+
+- [Warrant-kind annotation on support relations](2-architecture/validity-revision#^t2-warrant-annotation) (decision in the validity-revision theme): support edges record warrant kinds so that propagation can be parameterized without run-time warrant evaluation.
+- [Revision and feedback semantics](2-architecture/validity-revision#^t2-revision-feedback) (decision in the validity-revision theme): all changes that affect warrants are revision events driven by the author.
+- [Dependent flagging](2-architecture/validity-revision#^t2-dependent-flagging) (decision in the validity-revision theme): tooling computes stale marks from the registry and emits diagnostics for the author, rather than mutating dependents automatically.
+- [Relational queryability](modular-content-organization#^t1-relational-queryability) (cross-group sub-criterion in *Modular content organization*): query tools retrieve authored and derived registry structure; they do not infer new warrants at run time.
+
+## No version history ^t1-no-version-history
+
+The framework **does not reimplement a version-history system**. It records and reasons about the *current state* of an inquiry — the standing content and the authored revision events that produced it — but it maintains no parallel store of past versions, no commit graph, no per-reference version pinning. 
+
+*Consequence*: Tracking the history of files is left to the researcher's choice: an external version-control system, a manual archival process, or none. The framework neither requires nor integrates with a particular one.
+
+**Failure mode prevented.** A framework that maintains its own version-history layer duplicates whatever the researcher's version-control system already keeps; references, supersession, and current-state queries are recorded twice. The opposite over-reach — pinning every reference to a past version — would fragment the active corpus into historical snapshots and lose the single shared current state of the inquiry.
+
+**Upstream dependencies.**
+
+- [Language-tooling integration](#^t1-language-tooling-integration) (parent criterion): the criterion fixes a scope boundary of the framework as a system — what its language records (current state) and what it does not (file history).
+
+**Downstream consequences.**
+
+- [Revision and feedback semantics](2-architecture/validity-revision#^t2-revision-feedback) (decision in the validity-revision theme): revision objects record in-state revision events, not version history.
+- [Archival](2-architecture/validity-revision#^t2-archival) (decision in the validity-revision theme): outdated objects move within the source tree rather than into a parallel history store.
+- [Epistemic status as a maturity record](object-kinds#^t2-epistemic-status) (decision in the object-kinds theme): supersession is excluded from the maturity vocabulary; status records the object's current standing.
+
 ## Typed-object decomposition ^t1-typed-object-decomposition
 
 The framework decomposes inquiry content into a structured set of **typed objects of distinct kinds** (e.g. claims, definitions, proofs, questions, warrants, …). Specifically:
@@ -93,46 +134,30 @@ The framework decomposes inquiry content into a structured set of **typed object
 - Object-kind admission test (decision in the object-kinds theme): determines which candidate kinds are admissible.
 - Field typing (decision in the object-kinds theme): determines the admissible shapes of the field sets each kind carries.
 - Progression-encoding decisions (in the relations-graph, reasoning-structure, and arguments-reasoning themes): how inferential progression is recorded over the typed objects.
-- [Function-driven typology](#^t1-function-driven-typology) (peer sub-criterion): function — not surface form — is what distinguishes object kinds.
+- [Functional separation of concerns](#^t1-functional-separation) (peer sub-criterion): function — not surface form — is what distinguishes object kinds, and each kind boundary carries a separation-of-concerns rationale.
 - [Addressability](modular-content-organization#^t1-addressability) (cross-group sub-criterion in *Modular content organization*): typed-object decomposition makes content addressable by giving each unit a kind-tagged identity.
 
-## Stable boundaries ^t1-stable-boundaries
+## Functional separation of concerns ^t1-functional-separation
 
-Every component of the framework — every object kind, field, relation, vocabulary, operation, layer — is **defined with stable boundaries**: its scope, its admissible values, and its distinction from neighbouring components are stated unambiguously, with minimal overlap to ensure a clear identity for each component, and with a clear rationale for why the boundary is drawn where it is.
+The framework's components — object kinds, fields, relations, vocabularies, operations, layers — are separated **by function**. Two commitments make this concrete:
 
-**Failure mode prevented.** A component whose boundary is fuzzy admits content that should belong to another component, and rejects content that should belong to it. Drift accumulates over time, the system loses self-consistency.
+- **Function draws the boundary.** Boundaries between components track their *roles* or *contributions* in inquiry. A boundary is never drawn on superficial structure or syntactic form.
+- **Every boundary carries a stated rationale.** Each component's scope, its admissible values, and its distinction from its neighbours are stated unambiguously, accounting for the *separation of concerns* it realises.
 
-**Upstream dependencies.**
-
-- None (root): a meta-integrity commitment about the framework's own definitional clarity, independent of what content the framework records.
-
-**Downstream consequences.**
-
-- [Function-driven typology](#^t1-function-driven-typology) (peer sub-criterion): boundaries are stable when they track function rather than surface form.
-- [Object-kind admission test](object-kinds#^t2-object-kind-admission) (decision): the test that determines whether a candidate is admissible as an object kind ensures the kind boundary is well-defined.
-- [Canonical terminology](modular-content-organization#^t1-canonical-terminology) (cross-group sub-criterion in *Modular content organization*): canonical names are one mechanism by which boundaries remain unambiguous in prose.
-
-> [!NOTE] Distinguishing the framework's own components from the content it discusses
-> This criterion concerns the boundaries of the framework's *own components* (object kinds, fields, relations, vocabularies, operations, layers...), **not** the specific *concepts* that the inquiry manipulates (e.g. a scientific notion such as "geometry"). A concept appearing inside the content may have a vague or contested boundary without violating this criterion.
-
-## Function-driven typology ^t1-function-driven-typology
-
-Every component is distinguished by its **function** in the framework, not by its superficial structure or syntactic form. Boundaries between kinds track function across all unit types:
-
-- content kinds are distinguished by the role each plays in inquiry;
-- operation kinds by are distinguished by the transformation each performs;
-- activity kinds by are distinguished by the contribution each brings to research.
-
-**Failure mode prevented.** A taxonomy keyed on surface form collapses or proliferates when the form drifts. A function-keyed taxonomy survives reformatting and remains stable across notational and structural changes.
+**Failure mode prevented.** A taxonomy keyed on surface form collapses or proliferates when the form drifts, and becomes unstable and prone to misclassifications. Function-keyed boundaries survive reformatting; rationale-bearing boundaries can be checked.
 
 **Upstream dependencies.**
 
-- [Inquiry content and progression](#^t1-inquiry-content-and-progression) (parent criterion): function is what the representation must capture, across both static and dynamic dimensions.
-- [Stable boundaries](#^t1-stable-boundaries) (peer sub-criterion): function-keyed boundaries are the ones that remain stable; surface-keyed boundaries drift.
+- [Language-tooling integration](#^t1-language-tooling-integration) (parent criterion): a clear scope for each component is what lets tooling check and enforce structure.
+- [Inquiry content and progression](#^t1-inquiry-content-and-progression) (parent criterion): function — the role a component plays in inquiry — is what the representation must capture and what the boundaries must track.
 
 **Downstream consequences.**
 
+- [Object-kind admission test](object-kinds#^t2-object-kind-admission) (decision): the admission test decides a candidate kind by its function, ensuring each kind boundary is well-defined and functionally justified.
 - Motivation-encoding mechanism (decision in the reasoning-structure theme): implements the function-vs-form split at the motivation grain.
 - Epistemic-work-encoding mechanism (decision in the reasoning-structure theme): implements the function-vs-form split at the work grain.
-- [Object-kind admission](object-kinds#^t2-object-kind-admission) (decision): tests candidates by function, not by structural resemblance.
 - Activity admission (decision in the workflows theme): tests candidate activities by their function in inquiry progression, not by surface resemblance to existing workflows.
+- [Canonical terminology](modular-content-organization#^t1-canonical-terminology) (cross-group sub-criterion in *Modular content organization*): canonical names are one mechanism by which component boundaries remain unambiguous in prose.
+
+> [!NOTE] Criterion scope
+> The boundaries at stake are those of the framework's *own components* (object kinds, fields, relations, vocabularies, operations, layers), **not** the *concepts* the inquiry manipulates (e.g. a scientific notion such as "geometry"). A concept appearing inside the content may have a vague or contested boundary without violating this criterion; how the framework handles content concepts with unstable boundaries is the candidate-set machinery of [the definition normal form](3-aspect-specific/ontology#^t3-definition-normal-form).

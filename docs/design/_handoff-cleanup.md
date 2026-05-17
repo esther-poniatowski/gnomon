@@ -3,13 +3,13 @@
 This handoff owns only Step A.4: removing source bodies whose Tier-1 content has already moved into the canonical framework criteria. For the broader refactor sequence, use [_handoff-refactor](_handoff-refactor).
 
 > [!IMPORTANT] The canonical Tier-1 criteria are now the `1-framework/` theme files
-> The single file `_framework-criteria.md` no longer exists. Its criteria were split into seven per-theme files under `1-framework/` — `framework-foundations.md`, `expressive-depth.md`, `reasoning-integrity.md`, `modular-content-organization.md`, `research-activities-workflows.md`, `cost-ergonomics.md`, and the retained `external-interfaces.md` — indexed by `1-framework/_index.md`. Wherever this handoff says "the target criterion", it means the criterion in its `1-framework/` theme file. The cleanup-target table below already names the new theme-file anchors.
+> The single file `_framework-criteria.md` no longer exists. Its criteria were split into six per-theme files under `1-framework/` — `framework-foundations.md`, `expressive-depth.md`, `reasoning-integrity.md`, `modular-content-organization.md`, `research-activities-workflows.md`, `cost-ergonomics.md` — indexed by `1-framework/_index.md`. Wherever this handoff says "the target criterion", it means the criterion in its `1-framework/` theme file. The cleanup-target table below already names the new theme-file anchors.
 
 ---
 
 ## Status
 
-- **The `1-framework/` portion of Step A.4 is complete.** The four migration-stub files — `content-adequacy.md`, `epistemic-adequacy.md`, `operational-quality.md`, `structural-quality.md` — have been deleted. Their criterion bodies were already migrated; the stubs were removed and every inbound link across the Tier-2/Tier-3 theme files re-pointed to the new `1-framework/` theme-file anchor (Step C's redirect sweep was brought forward for these files). `external-interfaces.md` is **retained** — its two criteria (`^t1-git-delegation`, `^t1-no-runtime-inference`) have full bodies and were never migrated.
+- **The `1-framework/` portion of Step A.4 is complete.** The four migration-stub files — `content-adequacy.md`, `epistemic-adequacy.md`, `operational-quality.md`, `structural-quality.md` — have been deleted. Their criterion bodies were already migrated; the stubs were removed and every inbound link across the Tier-2/Tier-3 theme files re-pointed to the new `1-framework/` theme-file anchor (Step C's redirect sweep was brought forward for these files). The former `external-interfaces.md` was also removed: its two criteria were reframed as scope-circumscription commitments (`^t1-no-runtime-inference`; `^t1-git-delegation` renamed `^t1-no-version-history`) and moved into `framework-foundations.md`, with inbound references swept.
 - **Files 5–11 (Tier-2/3 and backup sources) remain pending.** Their migrated bodies still sit under `[!INFO] Migrated to ...` callouts and must be removed; the callouts already point to the correct `1-framework/` theme-file anchors.
 - `_classification-table.md` still contains prose mentions of the deleted `1-framework/` file paths (mint rows, count rows); reconciling those is Step A.5 ledger work.
 
@@ -67,7 +67,7 @@ The four legacy `1-framework/` stub files — `content-adequacy.md`, `epistemic-
 | `3-aspect-specific/arguments-reasoning.md` | — (no longer eligible) | The `## Criteria` section, including `^t3-discharge-accounting`, was removed and rebuilt as a machinery-decision section; nothing remains to clean. See the File 7 note. |
 | `_backup/criteria-framework.md` | migrated core-requirements rows | target criteria named by each adjacent callout |
 | `_backup/criteria-framework.md` | `Quality constraints` operation list | `^t1-manipulable-reasoning` in `reasoning-integrity.md` |
-| `_backup/object-types-ontology/taxo-criteria-ontology.md` | functional criterion paragraph | `^t1-function-driven-typology` in `framework-foundations.md` |
+| `_backup/object-types-ontology/taxo-criteria-ontology.md` | functional criterion paragraph | `^t1-functional-separation` in `framework-foundations.md` |
 | `_backup/registries-indexes.md` | mandatory drafting gate paragraph | `^t1-staleness-gating` in `research-activities-workflows.md` |
 | `_backup/tooling-validation.md` | externality and hard-gate sentence | `^t1-validation-externality` in `research-activities-workflows.md` |
 | `_backup/tooling-validation.md` | terminology-enforcement row | `^t1-canonical-terminology` in `modular-content-organization.md` |
