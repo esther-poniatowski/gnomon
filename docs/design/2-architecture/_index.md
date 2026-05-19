@@ -6,18 +6,19 @@ Tier-2 files fix the structural decisions that compose the architecture: how lay
 
 Each thematic file follows the same structure:
 
-1. **Header** — the theme's scope and the cross-cutting Tier-2 criteria from [Architectural constraints](vendor/gnomon/docs/design/2-architecture/constraints) that bear on its decisions.
-2. **Decisions** — ratified architectural commitments, each opened by a `[!QUESTION]` callout that names the design question the decision answers.
-3. **Open questions** — pending decisions, each opened by a `[!QUESTION]` callout with the alternatives.
+1. **Header** — the theme's scope and the criteria that bear on its decisions.
+2. **Criteria** (where the theme has theme-local well-formedness requirements) — Tier-2 criteria binding only that theme, each linked to its upstream framework-level criterion.
+3. **Decisions** — ratified architectural commitments, each opened by a `[!QUESTION]` callout that names the design question the decision answers.
+4. **Open questions** — pending decisions, each opened by a `[!QUESTION]` callout with the alternatives.
 
-Criteria that cut across themes live separately in [constraints](vendor/gnomon/docs/design/2-architecture/constraints); they constrain decisions across multiple themes.
+Tier-2 criteria are theme-local: each lives in the `## Criteria` section of the theme it binds (for example, [object-kind set smallness](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-ontology-small) in object-kinds, [layer replaceability](vendor/gnomon/docs/design/2-architecture/layering#^t2-layering-replaceability) in layering). The one exception is the meta-schema rule [field-typing discipline](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-field-typing), which binds every field-declaring theme; it is hosted in object-kinds as the primary field-declaring surface and referenced cross-file.
 
 ## Files
 
-- [Architectural constraints](vendor/gnomon/docs/design/2-architecture/constraints) — cross-cutting Tier-2 criteria (structural, epistemic, operational), four irreducible tensions, and known gaps.
-- [Layering and source-of-truth](vendor/gnomon/docs/design/2-architecture/layering) — meta vs. instance, canonical layer as source of truth, derived artifacts, view specifications, build vs. mutation, argument-aware indexes; open question on layer-feedback.
-- [Object kinds and their admission](vendor/gnomon/docs/design/2-architecture/object-kinds) — object-kind admission test, common abstract base, Question-vs-Goal, epistemic status; open question on subtype discipline.
-- [Relations and the dependency graph](vendor/gnomon/docs/design/2-architecture/relations-graph) — typed relation vocabulary, relation storage locus and authoring-vs-querying asymmetry.
+- [Known gaps](vendor/gnomon/docs/design/2-architecture/_gaps) — registry of un-operationalized architectural gaps, each naming the criterion it leaves unmet and the decision that addresses it.
+- [Layering and source-of-truth](vendor/gnomon/docs/design/2-architecture/layering) — criterion: layer replaceability. Decisions: meta vs. instance, canonical layer as source of truth, derived artifacts, view specifications, build vs. mutation, argument-aware indexes; open question on layer-feedback policy.
+- [Object kinds and their admission](vendor/gnomon/docs/design/2-architecture/object-kinds) — criteria: object-kind set smallness, role purity, subtype safety, field-typing discipline. Decisions: object-kind admission test, common abstract base, Question-vs-Goal, epistemic status; open question on subtype discipline.
+- [Relations and the dependency graph](vendor/gnomon/docs/design/2-architecture/relations-graph) — typed relation vocabulary, relation storage locus and authoring-vs-querying asymmetry, relational graph representation; open questions on relation reification and dependency-graph layering.
 - [Reasoning structure: assemblies vs. canonical objects](vendor/gnomon/docs/design/2-architecture/reasoning-structure) — assemblies relative to a target, where reasoning notes attach, gap and gain, records local to a target, and the field regime for reasoning notes.
 - [Validity regimes, warrant, and revision](vendor/gnomon/docs/design/2-architecture/validity-revision) — warrant kind on edges, revision and feedback semantics (kinds, recording, archival, dependent flagging, propagation).
 - [Validation rules and view profiles](vendor/gnomon/docs/design/2-architecture/validation-views) — validator placement (rules vs. implementations), view-profile placement, validation-mechanism scope.

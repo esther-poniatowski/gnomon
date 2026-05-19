@@ -7,7 +7,7 @@ Each example is a free-form statements for an expressive inquiry framework. Thes
 The general lessons each example yields are propagated to the relevant criteria, decisions, and open questions, rather than restated example-by-example in those parts.
 
 > [!INFO] Propagation status
-> Examples 1–40 are resolved, and the general lesson each one surfaced is propagated to its destination in [_fleeting-ideas](_fleeting-ideas) or the tier files. Each resolution below names the framework part — already ratified, or now a staged candidate — that covers each difficulty; each **General lesson** line names where that lesson landed. The [triage log](_fleeting-ideas#^fleeting-triage-log) summarises the suite’s propagation; the per-example destinations are the **General lesson** lines here.
+> Examples 1–40 are resolved, and the general lesson each one surfaced is propagated to its destination in [fleeting-ideas](_fleeting-ideas) or the tier files. Each resolution below names the framework part — already ratified, or now a staged candidate — that covers each difficulty; each **General lesson** line names where that lesson landed. The [triage log](_fleeting-ideas#^fleeting-triage-log) summarises the suite’s propagation; the per-example destinations are the **General lesson** lines here.
 
 ---
 

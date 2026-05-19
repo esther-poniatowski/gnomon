@@ -55,6 +55,9 @@ Distinct [supported activities](expressive-depth#^t1-activity-coverage) are char
 - [Single source of truth](#^t1-single-source-of-truth) (peer sub-criterion): the access-rights regime presupposes that each piece of content has one owning locus to assign rights against.
 - [Non-redundancy](modular-content-organization#^t1-non-redundancy) (cross-group sub-criterion in *Modular content organization*): once each activity writes only within its declared scope, non-redundancy is enforceable across the system.
 
+> [!HINT]
+> Separating content and presentation is the classical model-view separation (MVC, literate programming, source vs. executable).
+
 ## Single source of truth ^t1-single-source-of-truth
 
 Each piece of content has **one canonical locus** that owns it; every other artefact that presents the same content **derives from** that locus rather than asserting it independently.
@@ -89,7 +92,7 @@ The framework **gates dependent activity** — drafting, citation, downstream de
 
 **Downstream consequences.**
 
-- Drafting-gate mechanism (decision in the validity-revision theme): the chosen way to block dependent activity until upstream resolution.
+- [Drafting gate on import readiness](../2-architecture/validity-revision#^t2-drafting-gate) (open question in the validity-revision theme): the chosen way to check that a set of imports is ready before drafting new content that consumes them.
 
 ## Validation externality ^t1-validation-externality
 

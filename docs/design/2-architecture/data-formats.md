@@ -1,13 +1,11 @@
 # Source languages, metadata, and grammar
 
 > [!INFO] Tier and scope
-> **Tier 2 (architectural).** This file fixes the source languages, file metadata contract, declaration wrappers, rich content blocks, and parser rules used by framework files. It instantiates [t1-dual-usability](../1-framework/cost-ergonomics#^t1-read-side-automation), [t1-git-delegation](vendor/gnomon/docs/design/1-framework/external-interfaces#^t1-git-delegation), [t2-field-typing](vendor/gnomon/docs/design/2-architecture/constraints#^t2-field-typing), [t2-mechanical-validation](vendor/gnomon/docs/design/2-architecture/constraints#^t2-mechanical-validation), and [t2-single-source-of-truth](vendor/gnomon/docs/design/2-architecture/constraints#^t2-single-source-of-truth).
+> **Tier 2 (architectural).** This file fixes the source languages, file metadata contract, declaration wrappers, rich content blocks, and parser rules used by framework files. It instantiates [t1-dual-usability](../1-framework/cost-ergonomics#^t1-read-side-automation), [no version history](vendor/gnomon/docs/design/1-framework/framework-foundations#^t1-no-version-history), the meta-schema rule [field-typing discipline](object-kinds#^t2-field-typing), [read-side automation](../1-framework/cost-ergonomics#^t1-read-side-automation), and [single source of truth](../1-framework/research-activities-workflows#^t1-single-source-of-truth).
 
 ---
 
-## Decisions
-
-### Format criteria ^t2-data-format-criteria
+## Criteria ^t2-data-format-criteria
 
 > [!INFO] The *prose+formulas+math* sub-claim is migrated to [rich prose expressivity](../1-framework/expressive-depth#^t1-rich-prose-expressivity) (promoted T2 → T1). The remaining sub-claims redirect to the cost-axis cluster, field typing, and write-side automation.
 
@@ -19,6 +17,8 @@ The format must:
 - support controlled fields (for example `type`, `status`, and relation labels);
 - support Markdown fields with prose, formulas, and Obsidian-rendered math;
 - produce stable Git diffs at the file level.
+
+## Decisions
 
 ### Source languages ^t2-source-languages
 

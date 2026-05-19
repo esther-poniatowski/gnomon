@@ -115,17 +115,17 @@ The *recorded statement of what becomes available after a step*.
 
 | Variant | Sources |
 | --- | --- |
-| **epistemic gain** | `_backup/architecture-2-spec.md`, `_backup/criteria-framework.md` |
+| **epistemic gain** | `_backup/architecture-2-spec.md`, `_backup/criteria-framework.md` (retired) |
 | **gain_kind** / **gain kind** | Active `^t3-gain-kind-enum` (canonical) |
-| **conceptual effect** | `_backup/criteria-framework.md`, `_backup/arguments-reasoning/argument-bundles.md` (Proposal 2) |
-| **step contribution** | `_classification-table.md` cross-cutting note (BK-minted from criteria-framework) |
-| **cognitive gain** | `_backup/criteria-framework.md` |
+| **conceptual effect** | `_backup/criteria-framework.md` (retired), `_backup/arguments-reasoning/argument-bundles.md` (Proposal 2) |
+| **step contribution** | `_classification-table.md` cross-cutting note (BK-minted from criteria-framework, retired) |
+| **cognitive gain** | `_backup/criteria-framework.md` (retired) |
 | **forward productivity** | `_backup/arguments-reasoning/derivation-proof-encoding-G.md` |
 
 **Affected anchors**:
 
 - `^t3-gain-kind-enum` (active open D) **(canonical)** — the closed enum of gain values.
-- `^t3-step-contribution-enum` (BK D minted from criteria-framework) **(folds into `^t3-gain-kind-enum`)** — the cross-cutting note at line 472 of [classification table](_classification-table) explicitly says these "describe the same step from dual angles". Merger pre-decided.
+- `^t3-step-contribution-enum` (BK D minted from the retired criteria-framework backup) **(folds into `^t3-gain-kind-enum`)** — the cross-cutting note at line 472 of [classification table](_classification-table) explicitly says these "describe the same step from dual angles". Merger pre-decided.
 - `^bk-forward-productivity` **(folds into `^t3-gain-kind-enum`)** — the forward-direction prong of the local-intelligibility criterion is the same field as gain-kind, named under a different label. Merger.
 - *epistemic gain* field of `^bk-planning-schema-fields` **(folds into the canonical gain field at planning grain)**.
 - *conceptual effect* field of Proposal 2 under `^bk-bundle-fields` **(folds into the canonical gain field at per-step grain)**.
@@ -140,7 +140,7 @@ A *child node in the question-decomposition tree*.
 | --- | --- |
 | **subquestion** | Active design (canonical, 28 hits), `_backup/workflow-for-users.md` |
 | **sub-goal** / **subgoal** | `_backup/arguments-reasoning/derivation-proof-encoding-G.md`, `_backup/architecture-2-spec.md` |
-| **branch** | `_backup/criteria-framework.md` |
+| **branch** | `_backup/criteria-framework.md` (retired) |
 | **question decomposition** / **question-decomposition tree** | `_backup/arguments-reasoning/argument-bundles.md`, `^bk-bundle-component-taxonomy` |
 
 **Affected anchors**:
@@ -160,18 +160,21 @@ A *derived addressable lookup structure*.
 | --- | --- |
 | **registry** | Active design (canonical), all backup files |
 | **index** | Active design (canonical for read-side projections), backup files |
-| **catalogue** / **catalog** | `_backup/registries-indexes.md` |
-| **store** | `_backup/registries-indexes.md` |
+| **catalogue** / **catalog** | Active `^t3-registry-component-taxonomy` (canonical realisation of the catalogue concept). |
+| **store** | Active `^t3-registry-component-taxonomy` (canonical realisation of the store concept). |
 
 **Affected anchors**:
 
-- `^bk-registry-component-taxonomy` (BK D, eleven-component inventory) **(canonical)**.
-- `^bk-registry-scale-layering` **(grain-distinct)** — workspace / project / module strata, orthogonal to the component partition.
-- `^t3-dependency-graph-first-class` (R after the queryability split) **(folds into `^bk-registry-component-taxonomy`'s "dependency graph" component)** — same object, different label.
-- `^bk-terminology-enforcement` **(grain-distinct)** — the validator-policy decision; the *terminology index* component of the taxonomy is the underlying registry that the linter consumes.
-- `^bk-open-questions-registry`, `^bk-dependencies-registry` **(refinements)** — per-component schemas under the umbrella taxonomy.
+- `^t3-registry-component-taxonomy` (active D, eleven-component inventory) **(canonical)** — executed from the former `^bk-registry-component-taxonomy` plan.
+- `^t3-registry-scope-per-scale` (active open question) **(grain-distinct)** — workspace / project / module strata, orthogonal to the component partition. Executed as an open question from the former `^bk-registry-scale-layering` plan.
+- `^t3-dependency-graph-first-class` (R after the queryability split) **(folds into `^t3-registry-component-taxonomy`'s dependency-graph component)** — same object, different label.
+- `^t3-dependency-graph-artifact` (active open question) — the maintenance-policy refinement of the dependency-graph component.
+- The former `^bk-terminology-enforcement` (validator-policy) **(grain-distinct, still pending)** — the *terminology-index* component of the taxonomy is the underlying registry that the linter consumes; the linter realisation remains to be drafted at the validation work.
+- `^t3-open-questions-index` (active D) **(refinement)** — per-component schema under the umbrella taxonomy. Executed from the former `^bk-open-questions-registry` plan.
+- `^t3-terminology-index-schema` (active D) **(refinement)** — per-component schema for the terminology-index component.
+- The former `^bk-dependencies-registry` **(superseded)** — its content is fully covered by the canonical object store, the dependency-graph component, and the reverse-dependency-index component of `^t3-registry-component-taxonomy`.
 
-**Resolution**: the eleven-component taxonomy is the canonical decomposition. Several individual-component anchors (dependency-graph, terminology-index) alias to entries in the taxonomy. Step C collapses these aliases.
+**Resolution**: the eleven-component taxonomy is the canonical decomposition; the brought-forward execution has lifted the BK plans into active `^t3-*` anchors. Step C collapses any remaining individual-component aliases against the taxonomy.
 
 ## Cluster 8 — Validator rule ≈ Validator check ≈ Audit defect ≈ Integrity invariant ^cluster-validator
 
@@ -182,7 +185,7 @@ A *well-formedness check enforced at validation time*.
 | **validation rule** / **validator rule** | Active `^t2-validator-placement` (canonical), backup files |
 | **integrity invariant** / **invariant** | `_backup/architecture-C.md`, `_backup/schema-fields-base.md` |
 | **audit defect** | `_backup/arguments-reasoning/derivation-proof-encoding-G.md` |
-| **integrity check** | `_backup/registries-indexes.md` |
+| **integrity check** | Active `^t3-registry-component-taxonomy` (the integrity-report-structures component of the catalogue). |
 
 **Affected anchors**:
 

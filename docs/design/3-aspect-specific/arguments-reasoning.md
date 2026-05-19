@@ -1,7 +1,7 @@
 # Arguments and reasoning
 
 > [!INFO] Tier and source
-> **Tier 3 (per aspect).** Stub file. Holds criteria that constrain the structure and quality of argumentative reasoning (assemblies relative to a target and their internal moves). Traces to [t1-intelligibility](../1-framework/reasoning-integrity#^t1-justification-levels), [t1-non-arbitrary](../1-framework/reasoning-integrity#^t1-served-goal), [t2-revision-semantics](vendor/gnomon/docs/design/2-architecture/constraints#^t2-revision-semantics), and what an assembly may contain under [promotion of assembly-local records](vendor/gnomon/docs/design/2-architecture/reasoning-structure#^t2-assembly-record-promotion).
+> **Tier 3 (per aspect).** Stub file. Holds criteria that constrain the structure and quality of argumentative reasoning (assemblies relative to a target and their internal moves). Traces to [t1-intelligibility](../1-framework/reasoning-integrity#^t1-justification-levels), [t1-non-arbitrary](../1-framework/reasoning-integrity#^t1-served-goal), [revision accountability](../1-framework/research-activities-workflows#^t1-revision-accountability), and what an assembly may contain under [promotion of assembly-local records](vendor/gnomon/docs/design/2-architecture/reasoning-structure#^t2-assembly-record-promotion).
 
 ---
 
@@ -26,7 +26,7 @@ Implements the [adequate-justification facet](../1-framework/reasoning-integrity
 
 Implements the [no-circular-reasoning facet](../1-framework/reasoning-integrity#^t1-vl-no-circular) of *valid licensing*.
 
-**Chosen rule.** Within a reasoning snapshot, the dependency graph (`depends_on`, `supports`, and the sub-goal hierarchy) must be a directed acyclic graph; a cycle is a hard build-time error, realising [the snapshot dependency graph is a DAG](vendor/gnomon/docs/design/2-architecture/constraints#^t2-snapshot-dag). The rule must **exempt** structures marked as a legitimate mutual constraint — co-definition or co-determination — rather than flag them; how that exemption is expressed is the open question [vicious cycle versus legitimate mutual constraint](#^t3-mutual-constraint).
+**Chosen rule.** Within a reasoning snapshot, the dependency graph (`depends_on`, `supports`, and the sub-goal hierarchy) must be a directed acyclic graph; a cycle is a hard build-time error, realising [snapshot acyclicity](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-snapshot-dag-property). The rule must **exempt** structures marked as a legitimate mutual constraint — co-definition or co-determination — rather than flag them; how that exemption is expressed is the open question [vicious cycle versus legitimate mutual constraint](#^t3-mutual-constraint).
 
 ---
 
@@ -64,7 +64,7 @@ Implements the [adequate-justification facet](../1-framework/reasoning-integrity
 
 > [!QUESTION] When a step under one warrant kind supports a step under another, how does the downstream step inherit strength and defeat conditions?
 
-Implements the [warrant-composition facet](../1-framework/reasoning-integrity#^t1-vl-warrant-composition) of *valid licensing*. At a warrant-kind boundary — a monotonic step supporting a defeasible one, or the reverse — the downstream step's strength and defeat conditions are not self-evident. Resolution must state the inheritance rule; it is shared with the validity-revision theme's boundary-rule decision and with [defeasibility and regime stratification](vendor/gnomon/docs/design/2-architecture/constraints#^t2-defeasibility).
+Implements the [warrant-composition facet](../1-framework/reasoning-integrity#^t1-vl-warrant-composition) of *valid licensing*. At a warrant-kind boundary — a monotonic step supporting a defeasible one, or the reverse — the downstream step's strength and defeat conditions are not self-evident. Resolution must state the inheritance rule; it is shared with the validity-revision theme's [warrant-kind annotation on support relations](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-warrant-annotation).
 
 #### Commitment-calibration check ^t3-d-commitment-calibration
 
@@ -214,7 +214,7 @@ Candidate schemes for a research framework: argument from analogy (transfer a st
 
 A use of a scheme is a separate object — a scheme instance — pairing the scheme with its slot values, local qualifiers, and local defeaters.
 
-Bears on [t2-operation-primitiveness](vendor/gnomon/docs/design/2-architecture/operations-and-modes#^t2-operation-primitiveness): a scheme is one candidate form an operation schema can take. Bears on [served goal](../1-framework/reasoning-integrity#^t1-served-goal): the critical questions of a scheme are a source of admissible sub-gaps. Staged inputs and the broader paradigm survey are in [_fleeting-ideas](vendor/gnomon/docs/design/_fleeting-ideas#^fleeting-move-vocabulary).
+Bears on [t2-operation-primitiveness](vendor/gnomon/docs/design/2-architecture/operations-and-modes#^t2-operation-primitiveness): a scheme is one candidate form an operation schema can take. Bears on [served goal](../1-framework/reasoning-integrity#^t1-served-goal): the critical questions of a scheme are a source of admissible sub-gaps. Staged inputs and the broader paradigm survey are in [fleeting-ideas](vendor/gnomon/docs/design/_fleeting-ideas#^fleeting-move-vocabulary).
 
 > [!WARNING] Editable templates, not fixed labels
 > A scheme is a template authors edit, extend, and instantiate, not a closed taxonomic label. Treating schemes as a fixed category set would make them classificatory rather than productive.
@@ -236,7 +236,7 @@ A third attack target is the **framing of a question**: a critique that the ques
 
 **Critique-driven re-typing** is a further undercutter pattern (worked-example suite, example 36). A critique can do more than defeat a claim: it can re-type the inquiry's *target object* — the failure of a decoding criterion reveals that "an acceptable criterion" is the wrong object kind, and the target should instead be "a family of tests characterized by their failure modes". The undercutter's payload is not a defeated conclusion but a re-typing of what the question is about. This is distinct from a modelling-choice re-typing (which is a branch point whose rejected alternative is recorded per the [rationale and rejected-alternative record](#^t3-d-rationale-record)) and from a process-trajectory re-typing (a temporal fact about the phenomenon): only the critique-driven case is an attack edge, and it belongs here.
 
-Bears on [t2-typed-relation-vocabulary](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-typed-relation-vocabulary): the relation vocabulary either carries distinct `rebuts`, `undercuts`, and framing-attack labels, or a single `attacks` label with a target-discriminator field. The acceptance-set computation that structured argumentation builds on these edges is out of scope per [t1-no-runtime-inference](vendor/gnomon/docs/design/1-framework/external-interfaces#^t1-no-runtime-inference); only the authored, typed edges are in scope.
+Bears on [t2-typed-relation-vocabulary](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-typed-relation-vocabulary): the relation vocabulary either carries distinct `rebuts`, `undercuts`, and framing-attack labels, or a single `attacks` label with a target-discriminator field. The acceptance-set computation that structured argumentation builds on these edges is out of scope per [t1-no-runtime-inference](vendor/gnomon/docs/design/1-framework/framework-foundations#^t1-no-runtime-inference); only the authored, typed edges are in scope.
 
 ### Undischarged commitments of a statement ^t3-undischarged-commitments
 
@@ -252,7 +252,7 @@ Three refinements distinguish what a statement commits to:
 
 Bearing criteria: [valid licensing](../1-framework/reasoning-integrity#^t1-valid-licensing) (no-silent-incompleteness facet), [t1-partial-formalization](../1-framework/expressive-depth#^t1-partial-formalization), [t2-epistemic-status](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-epistemic-status).
 
-The motivating worked example and the companion definition-structure refinements are recorded at [normalized definition form](vendor/gnomon/docs/design/3-aspect-specific/ontology#^t3-definition-normal-form) and [_worked-examples](vendor/gnomon/docs/design/_worked-examples#^example-genus-differentia).
+The motivating worked example and the companion definition-structure refinements are recorded at [normalized definition form](vendor/gnomon/docs/design/3-aspect-specific/ontology#^t3-definition-normal-form) and [worked-examples](vendor/gnomon/docs/design/_worked-examples#^example-genus-differentia).
 
 ### Vicious cycle versus legitimate mutual constraint ^t3-mutual-constraint
 

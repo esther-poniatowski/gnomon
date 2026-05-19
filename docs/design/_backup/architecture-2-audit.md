@@ -164,18 +164,6 @@ For the use cases described (mathematical proofs, informal reasoning, empirical 
 The proposed framework reinvents components of proof theory, AI planning (STRIPS/PDDL precondition-effect-action structures), and argumentation theory without acknowledging these antecedents or demonstrating what it adds beyond them.
 
 ---
-## Verdict by Criterion
-
-|Criterion|Assessment|
-|---|---|
-|**Conceptual soundness**|Partially sound. Layer separation is principled but incomplete. Regress termination is asserted, not derived.|
-|**Epistemic adequacy**|Inadequate. The framework produces objects, not understanding. No epistemic state model. No abduction, no defeasibility, no revision.|
-|**Practical usability**|Questionable. Overhead is substantial; partial formalization is undefined; no empirical evidence of usability.|
-|**Minimal sufficiency**|Not demonstrated. Five layers exceed what antecedent formalisms require for the same use cases.|
-|**Expressivity**|Incomplete. Exploratory reasoning, abductive inference, analogical reasoning, and revision reasoning are inexpressible.|
-|**Human-AI compatibility**|Potentially viable for AI manipulation; human overhead appears prohibitive at full formalization.|
-
----
 
 ## Alternative Decompositions
 
@@ -224,3 +212,4 @@ Define precisely what properties are guaranteed in each mode and what the minima
 5. **Audit against existing formalisms** (natural deduction, PDDL, Toulmin, Dung argumentation) and demonstrate what the proposed architecture adds that these do not already provide. The burden of novelty has not been discharged.
     
 6. **Define the partial formalization boundary** precisely: which layers are mandatory, which are optional, and what formal guarantees degrade under relaxation.
+

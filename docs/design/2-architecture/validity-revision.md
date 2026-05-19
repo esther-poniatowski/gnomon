@@ -3,9 +3,9 @@
 > [!INFO] Tier and scope
 > **Tier 2 (architectural).** This file holds the commitments and decisions about how the architecture distinguishes monotonic from defeasible support, and how it handles revision events that propagate to dependents. The two concerns are connected: warrant kind annotated on each support edge parameterizes how dependents respond to upstream revisions.
 >
-> Cross-cutting Tier-2 criteria that constrain decisions in this file: see [Architectural constraints](vendor/gnomon/docs/design/2-architecture/constraints), in particular [t2-defeasibility](vendor/gnomon/docs/design/2-architecture/constraints#^t2-defeasibility), [t2-revision-semantics](vendor/gnomon/docs/design/2-architecture/constraints#^t2-revision-semantics), [t2-multi-regime-reasoning](vendor/gnomon/docs/design/2-architecture/constraints#^t2-multi-regime-reasoning), [t2-snapshot-dag](vendor/gnomon/docs/design/2-architecture/constraints#^t2-snapshot-dag).
+> Criteria that constrain decisions in this file: [valid licensing](../1-framework/reasoning-integrity#^t1-valid-licensing) — its warrant-composition facet requires sound composition of monotonic and defeasible warrants; [revision accountability](../1-framework/research-activities-workflows#^t1-revision-accountability) — revision must be dependency-tracked and propagated; [snapshot acyclicity](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-snapshot-dag-property) — the inferential-support graph stays a DAG within a snapshot. Framework-level criterion bearing on this theme: [reasoning-types coverage](../1-framework/expressive-depth#^t1-reasoning-types-coverage) — the framework admits multiple reasoning regimes, so support edges must carry warrant kinds.
 >
-> Two framework-level commitments govern this theme: [t1-git-delegation](vendor/gnomon/docs/design/1-framework/external-interfaces#^t1-git-delegation) (versioning is delegated to git; this file covers only in-state semantics at HEAD) and [t1-no-runtime-inference](vendor/gnomon/docs/design/1-framework/external-interfaces#^t1-no-runtime-inference) (defeasibility and revision share one operational mechanism — author edits, not run-time inference).
+> Two framework-level commitments govern this theme: [no version history](vendor/gnomon/docs/design/1-framework/framework-foundations#^t1-no-version-history) (the framework does not reimplement a version-history system; this file covers only in-state semantics) and [t1-no-runtime-inference](vendor/gnomon/docs/design/1-framework/framework-foundations#^t1-no-runtime-inference) (defeasibility and revision share one operational mechanism — author edits, not run-time inference).
 
 ---
 
@@ -27,7 +27,7 @@ For enum entries and the combination rule, see [warrant vocabulary](vendor/gnomo
 
 The question decomposes into five sub-decisions: revision kinds, recording, archival, dependent flagging, propagation. Each is settled below.
 
-The two related questions — warrant kind on edges (above) and revision propagation — interact: the warrant kind on each support edge controls how dependents respond to upstream revisions. Neither subsumes the other; they share the mechanism mandated by [t1-no-runtime-inference](vendor/gnomon/docs/design/1-framework/external-interfaces#^t1-no-runtime-inference).
+The two related questions — warrant kind on edges (above) and revision propagation — interact: the warrant kind on each support edge controls how dependents respond to upstream revisions. Neither subsumes the other; they share the mechanism mandated by [t1-no-runtime-inference](vendor/gnomon/docs/design/1-framework/framework-foundations#^t1-no-runtime-inference).
 
 #### Revision kinds ^t2-revision-kinds
 
@@ -62,7 +62,7 @@ Revision-object field set and authorship partition: see [Revision vocabulary](ve
 
 **Derived metadata and the build/mutation separation.** The result of a build computation can be routed to revision-object fields by a specific command. This does not violate [t2-build-vs-mutation](vendor/gnomon/docs/design/2-architecture/layering#^t2-build-vs-mutation) or [t2-relation-storage-locus](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-relation-storage-locus): derived metadata lives in the build-output registry, not silently written into the source. The human reviewer remains free to write the derived metadata into the revision object or override it.
 
-The dependency graph stays DAG-acyclic per [t2-snapshot-dag](vendor/gnomon/docs/design/2-architecture/constraints#^t2-snapshot-dag): revisions are recorded as objects in `revisions/`, not as edges.
+The dependency graph stays DAG-acyclic per [snapshot acyclicity](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-snapshot-dag-property): revisions are recorded as objects in `revisions/`, not as edges.
 
 #### Archival ^t2-archival
 
@@ -102,9 +102,11 @@ Retraction recipe and the validator diagnostic strings: see [Revision vocabulary
 
 **Automated flagging.** Tooling reads each revision object in `revisions/`. For each object in the `dependents` field, it appends the ID of the revision object into the index entry for that dependent.
 
-**Registry-derived property.** Stale-marks are centralized in the registry (per [t2-single-source-of-truth](vendor/gnomon/docs/design/2-architecture/constraints#^t2-single-source-of-truth)). Dependent source files are not automatically modified (per [t2-relation-storage-locus](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-relation-storage-locus)).
+**Registry-derived property.** Stale-marks are centralized in the registry (per [single source of truth](../1-framework/research-activities-workflows#^t1-single-source-of-truth)). Dependent source files are not automatically modified (per [t2-relation-storage-locus](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-relation-storage-locus)).
 
 **Researcher autonomy.** The researcher decides per dependent whether it still holds without adjustment, needs adjustment, or needs retraction in turn.
+
+**Downstream consequence.** The staleness signal this index produces is read by the open question [drafting gate on import readiness](#^t2-drafting-gate): the gate checks that every import of new content is clear of unresolved flaggings before drafting begins.
 
 > [!hint] Distinction from revision-episode dependent identification
 > The flagging mechanism described here goes from a single dependent to (possibly multiple) revision episodes. The identification process in [t2-revision-recording](#^t2-revision-recording) goes the other direction: from a single revision episode to (possibly multiple) dependent objects. The two processes serve different views: the identification process gives the researcher all subsequent actions for one episode; the flagging mechanism gives the researcher all constraints on one object across episodes, supporting a globally-aware revision.
@@ -126,3 +128,21 @@ Transmission and sensitivity examples, and the provisional combination rule for 
 > [!missing] Open subsidiary questions
 > - **Transmitting relation set** — which exact relation kinds transmit revision? Deferred to the relation-vocabulary decision in [the project TODO](vendor/gnomon/docs/TODO).
 > - **Combination rule for priority** — exact rule combining `revision_kind` priority with `warrant_kind` sensitivity into the per-dependent priority; provisional formulation in [Revision vocabulary](vendor/gnomon/docs/design/3-aspect-specific/revision-vocabulary).
+
+---
+
+## Open questions
+
+### Drafting gate on import readiness ^t2-drafting-gate
+
+> [!QUESTION] How does the framework check that a set of imports is ready before new content that consumes them is drafted?
+
+[Staleness gating](../1-framework/research-activities-workflows#^t1-staleness-gating) commits *that* dependent activity is gated on the resolution of upstream revision staleness. This question concerns the *mechanism* at the drafting workflow: before drafting new content, the framework should verify that every object the new content imports is in a state fit to build on — none carrying an unresolved upstream revision.
+
+The check reads the staleness signal produced by [dependent flagging](#^t2-dependent-flagging): a flagged dependent whose revision episode is not yet resolved is not ready to be imported. Drafting of the consuming content does not begin until every import is either clear of unresolved flaggings or explicitly overridden.
+
+Open sub-questions for resolution:
+
+- **Readiness signal** — whether each flagging relationship carries an explicit resolution state (for example `unresolved` / `checked` / `cleared`), or readiness is derived from the presence or absence of an open revision episode on the import.
+- **Override** — how an explicit override is recorded when drafting proceeds against an unresolved import, so that the override is itself auditable.
+- **Granularity** — whether the gate is checked per import or once over the whole import set of the content being drafted.

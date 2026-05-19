@@ -1,7 +1,7 @@
 # Status vocabulary
 
 > [!INFO] Tier and source
-> **Tier 3 (per aspect).** Instantiates the architectural commitment at [epistemic status as a maturity record](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-epistemic-status), resolved as status enums by object kind that close at design time. The architecture commits *that* each object kind declares its own status enum in the schema. This file fixes the enum entries for each kind and the distinction between maturity and warrant kind.
+> **Tier 3 (per aspect).** Instantiates the architectural commitment at [epistemic status as a maturity record](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-epistemic-status): maturity is recorded in a schema-declared status field, closed at design time. The architecture commits *that* maturity is enum-recorded; the *grain* of the enum — one per object kind, or one uniform enum — is an open question in this file. This file carries the candidate enum entries, the open grain question, and the distinction between maturity and warrant kind.
 
 ---
 
@@ -19,21 +19,6 @@ Status and [warrant kind](vendor/gnomon/docs/design/3-aspect-specific/warrant-vo
 
 ## Decisions
 
-### Per-kind status enums ^t3-per-kind-status-enums
-
-> [!QUESTION] What status enum does each object kind declare?
-
-Each object kind declares its own enum. The entries below are working proposals, to be ratified by the schema work. The enums are closed at design time.
-
-| Object kind | Status enum (proposal) |
-| --- | --- |
-| Claim / theorem | `preliminary` \| `hypothesized` \| `informally_backed` \| `formally_proven` \| `accepted` \| `retracted` |
-| Question | `open` \| `refined` \| `answered` \| `abandoned` |
-| Proof | `sketched` \| `drafted` \| `verified` \| `retracted` |
-| Definition | `provisional` \| `stabilized` \| `retracted` |
-
-Other object kinds (example, method, assumption, ...) declare their own enums under the same convention.
-
 ### Maturity vs. warrant kind ^t3-maturity-vs-warrant
 
 > [!QUESTION] Are epistemic maturity and warrant kind independent properties, and how do they interact?
@@ -45,11 +30,33 @@ Epistemic maturity records the object's *current standing*; [warrant kind](vendo
 - A *formally proven* result that depends on an empirical premise has maturity `accepted` and defeasible support.
 - A *retracted* claim has maturity `retracted`; its warrant kinds become operationally inert.
 
-Supersession is not a maturity value; it is a git-history phenomenon, per [t1-git-delegation](vendor/gnomon/docs/design/1-framework/external-interfaces#^t1-git-delegation). The maturity enum records the in-state standing of the object at HEAD.
+Supersession is not a maturity value; it is a version-history phenomenon, outside the frameworks scope per [no version history](vendor/gnomon/docs/design/1-framework/framework-foundations#^t1-no-version-history). The maturity enum records only the objects current in-state standing.
 
 ---
 
 ## Open questions
+
+### Per-kind status enums ^t3-per-kind-status-enums
+
+> [!QUESTION] Does each object kind declare its own status enum, or do all kinds share one uniform maturity enum?
+
+[Epistemic status as a maturity record](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-epistemic-status) commits *that* maturity is recorded in a schema-declared enum, but the grain of that enum is unsettled.
+
+- **Per-kind enums** — each object kind declares its own enum, closed at design time. This fits each kind's lifecycle precisely: a `Proof` matures through `sketched | drafted | verified`, a `Question` through `open | refined | answered | abandoned`, which a shared enum cannot express.
+- **Uniform enum** — all kinds share one maturity enum. This keeps the framework smaller: maturity status is not a central concern, and per-kind enums multiply the vocabulary the schema declares, the validators check, and the reader learns.
+
+The tension is between **lifecycle fidelity** and **framework economy**. The per-kind enum was the earlier working answer; its kind-specific entries are the candidate for that alternative:
+
+| Object kind | Status enum (per-kind candidate) |
+| --- | --- |
+| Claim / theorem | `preliminary` \| `hypothesized` \| `informally_backed` \| `formally_proven` \| `accepted` \| `retracted` |
+| Question | `open` \| `refined` \| `answered` \| `abandoned` |
+| Proof | `sketched` \| `drafted` \| `verified` \| `retracted` |
+| Definition | `provisional` \| `stabilized` \| `retracted` |
+
+Resolution must hold whichever grain it picks against [object-kind set smallness](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-ontology-small) and the terminal-value requirement at [t3-status-terminal-value](#^t3-status-terminal-value): every enum, per-kind or uniform, must carry a `retracted` or equivalent terminal value.
+
+Bearing criteria: [terminal value required in every per-kind enum](#^t3-status-terminal-value), [object-kind set smallness](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-ontology-small).
 
 ### Status transitions and revision propagation ^t3-status-transition-propagation
 
@@ -59,4 +66,15 @@ Supersession is not a maturity value; it is a git-history phenomenon, per [t1-gi
 - **Strengthening transitions** (e.g., `hypothesized -> formally_proven`): may not require propagation. A downstream argument that flagged its conclusion as tentative because its premise was only `hypothesized` should be re-examined when the premise strengthens, but no stale mark is needed because the support is now stronger, not weaker. Whether to record such transitions as a `correction` kind for queries across projects is open.
 - **Lateral transitions** within an enum (e.g., for questions, `open -> refined`): no propagation; the question is being clarified, not retracted.
 
-A precise table that maps transitions to propagation behavior is deferred until the enums by kind are ratified.
+A precise table that maps transitions to propagation behavior is deferred until [the status-enum grain](#^t3-per-kind-status-enums) is settled.
+
+An earlier draft proposed a single closed transition table over a generic four-state workflow vocabulary, with any unlisted transition rejected as a validation error:
+
+| From | Allowed transitions |
+| --- | --- |
+| `pending` | `in-progress` |
+| `in-progress` | `done`, `pending` (with justification) |
+| `done` | `revised` |
+| `revised` | `done` |
+
+This is a **candidate**, not a settled table. Its states predate the per-kind framing and do not transcribe onto the kind-specific enums; resolution must restate the permitted transitions over whichever enum grain wins. The candidate's transferable commitment is the **closed-table rule** — transition legality is schema-declared and a transition outside the table is a validation error — which the [catalogue of structural validators](vendor/gnomon/docs/design/2-architecture/validation-views#^t2-validator-catalogue) checks under its status-transitions entry.

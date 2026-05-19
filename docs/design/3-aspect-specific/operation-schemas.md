@@ -9,7 +9,7 @@
 
 ### Constructor admissibility specification ^t3-constructor-admissibility
 
-Each constructor that generates operation schemas (or, in alternatives without a calculus, each primitive operation schema) must declare a typed signature, admissibility conditions, transformation semantics, success condition, and license kind, per [t2-closed-operational-core](vendor/gnomon/docs/design/2-architecture/constraints#^t2-closed-operational-core).
+Each constructor that generates operation schemas (or, in alternatives without a calculus, each primitive operation schema) must declare a typed signature, admissibility conditions, transformation semantics, success condition, and license kind. This five-part admissibility specification is the Tier-3 form of what makes the operational core closed, the architectural response to [no infinite regress](../1-framework/expressive-depth#^t1-no-infinite-regress).
 
 ---
 
@@ -26,7 +26,7 @@ If a calculus generates schemas, the meta-schema declares operation **constructo
 - **Conditional branching** — `branch(condition, s_true, s_false)`: select a schema by a predicate over inputs.
 - **Iterative refinement** — `iterate(s, until)`: apply a schema repeatedly until a termination predicate holds.
 
-Constructors compose: a schema built by `compose(branch(...), iterate(...))` is itself an operation schema in the derived library. The proof that constructor chains terminate, required by [t2-closed-operational-core](vendor/gnomon/docs/design/2-architecture/constraints#^t2-closed-operational-core), follows from the admissibility conditions for the constructors (per [t3-constructor-admissibility](#^t3-constructor-admissibility)).
+Constructors compose: a schema built by `compose(branch(...), iterate(...))` is itself an operation schema in the derived library. The proof that constructor chains terminate, required by [no infinite regress](../1-framework/expressive-depth#^t1-no-infinite-regress), follows from the admissibility conditions for the constructors (per [t3-constructor-admissibility](#^t3-constructor-admissibility)).
 
 ### Contents under each primitiveness alternative ^t3-contents-per-o5-alternative
 

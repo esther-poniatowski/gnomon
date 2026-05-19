@@ -20,3 +20,5 @@ These criteria fix the overall objectives and desiderata that the framework must
 | [Modular content organization](modular-content-organization.md)       | How content is structured across the corpus so that each piece is named, locatable, and held in a single canonical place.                                                                            |
 | [Research activities and workflows](research-activities-workflows.md) | How distinct research activities are partitioned and disciplined at run time.                                                                                                                        |
 | [Cost and Ergonomics](cost-ergonomics.md)                             | Which cost dimensions the framework must keep bounded and the scale at which it must remain usable.                                                                                                  |
+
+The four irreducible tensions between these framework-level criteria are recorded separately in [Irreducible tensions](_tensions.md): each names two opposing criteria and the resolution pattern the architecture adopts.

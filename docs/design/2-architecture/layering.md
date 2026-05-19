@@ -3,9 +3,17 @@
 > [!INFO] Tier and scope
 > **Tier 2 (architectural).** This file holds the commitments and decisions that fix the architecture's stratification: which layers exist, which is the source of truth, how they relate, and what operations may write to which layer.
 >
-> Cross-cutting Tier-2 criteria that constrain decisions in this file: see [Architectural constraints](vendor/gnomon/docs/design/2-architecture/constraints), in particular [t2-separation-of-concerns](vendor/gnomon/docs/design/2-architecture/constraints#^t2-separation-of-concerns), [t2-single-source-of-truth](vendor/gnomon/docs/design/2-architecture/constraints#^t2-single-source-of-truth), [t2-layer-dependency](vendor/gnomon/docs/design/2-architecture/constraints#^t2-layer-dependency), [t2-layer-replaceability](vendor/gnomon/docs/design/2-architecture/constraints#^t2-layer-replaceability).
+> This file opens with a `## Criteria` section holding the theme-local criterion [layer replaceability](#^t2-layering-replaceability); the strict-direction question is the open question [layer-feedback policy](#^t2-layer-feedback). Framework-level criteria bearing on this theme: [activity separation](../1-framework/research-activities-workflows#^t1-activity-access-rights) and [single source of truth](../1-framework/research-activities-workflows#^t1-single-source-of-truth).
 
 ---
+
+## Criteria
+
+### Layer replaceability ^t2-layering-replaceability
+
+Each layer must be replaceable without redefining the others. Replacing the rendering layer must not require touching the canonical objects; if it does, the layering is leaking. Replaceability is the test for whether a layer boundary is principled or merely convenient.
+
+A layer that duplicates another's content cannot be replaced cleanly, so this criterion is a consequence of [non-redundancy](../1-framework/modular-content-organization#^t1-non-redundancy): a leaking layer is a form of cross-layer redundancy. It bears on the layer-feedback decision and on every per-theme commitment that introduces a layer.
 
 ## Decisions
 
@@ -75,6 +83,6 @@ Alternatives:
 - **One-way for content, with revision edges as a second edge class** permitted across layers.
 - **Bidirectional reasoning edges, one-way persistence edges** (mixed).
 
-Bearing criteria: [t2-layer-dependency](vendor/gnomon/docs/design/2-architecture/constraints#^t2-layer-dependency), [t2-layer-replaceability](vendor/gnomon/docs/design/2-architecture/constraints#^t2-layer-replaceability), [t2-revision-semantics](vendor/gnomon/docs/design/2-architecture/constraints#^t2-revision-semantics).
+Bearing criteria: [layer replaceability](#^t2-layering-replaceability), [revision accountability](../1-framework/research-activities-workflows#^t1-revision-accountability).
 
 The strict-one-way alternative is closed by [t2-registries-arguments](#^t2-registries-arguments). The remaining two alternatives are open.

@@ -1,23 +1,23 @@
 # Source-file cleanup handoff — Step A.4
 
-This handoff owns only Step A.4: removing source bodies whose Tier-1 content has already moved into the canonical framework criteria. For the broader refactor sequence, use [_handoff-refactor](_handoff-refactor).
+This handoff owns only Step A.4: removing source bodies whose Tier-1 content has already moved into the canonical framework criteria. For the broader refactor sequence, use the [refactor handoff](_handoff-refactor.md).
 
-> [!IMPORTANT] The canonical Tier-1 criteria are now the `1-framework/` theme files
-> The single file `_framework-criteria.md` no longer exists. Its criteria were split into six per-theme files under `1-framework/` — `framework-foundations.md`, `expressive-depth.md`, `reasoning-integrity.md`, `modular-content-organization.md`, `research-activities-workflows.md`, `cost-ergonomics.md` — indexed by `1-framework/_index.md`. Wherever this handoff says "the target criterion", it means the criterion in its `1-framework/` theme file. The cleanup-target table below already names the new theme-file anchors.
+> [!IMPORTANT] The canonical Tier-1 criteria are the [framework theme files](1-framework/_index.md)
+> Wherever this handoff says "the target criterion", it means the criterion in its [framework theme file](1-framework/_index.md). The cleanup-target table below names the theme file and anchor for each source.
 
 ---
 
 ## Status
 
-- **The `1-framework/` portion of Step A.4 is complete.** The four migration-stub files — `content-adequacy.md`, `epistemic-adequacy.md`, `operational-quality.md`, `structural-quality.md` — have been deleted. Their criterion bodies were already migrated; the stubs were removed and every inbound link across the Tier-2/Tier-3 theme files re-pointed to the new `1-framework/` theme-file anchor (Step C's redirect sweep was brought forward for these files). The former `external-interfaces.md` was also removed: its two criteria were reframed as scope-circumscription commitments (`^t1-no-runtime-inference`; `^t1-git-delegation` renamed `^t1-no-version-history`) and moved into `framework-foundations.md`, with inbound references swept.
-- **Files 5–11 (Tier-2/3 and backup sources) remain pending.** Their migrated bodies still sit under `[!INFO] Migrated to ...` callouts and must be removed; the callouts already point to the correct `1-framework/` theme-file anchors.
-- `_classification-table.md` still contains prose mentions of the deleted `1-framework/` file paths (mint rows, count rows); reconciling those is Step A.5 ledger work.
+- **The framework-tier and [data formats](2-architecture/data-formats.md) portions of Step A.4 are complete.** The legacy framework stub files were deleted and their inbound links swept; `data-formats.md` had every cleanup-eligible body replaced with a `[!INFO]` callout.
+- **The architectural-constraints file, the criteria-framework backup, the tooling-validation backup, and the registries-indexes backup are done and have since been deleted.** Each was reduced to migrated/folded/repaired content, then retired: inbound references were swept to the live anchors (a Step-C action brought forward, with user ratification). The registries-indexes deletion executed a substantial brought-forward Step-C/D sweep, recorded in the [refactor handoff](_handoff-refactor.md)'s brought-forward-work callout.
+- **One backup source remains pending.** The remaining file in the target table below needs only the named-passage check — it carries no migrated bodies under `[!INFO]` callouts.
 
 ---
 
 ## Cleanup rule
 
-A heading is cleanup-eligible only when its Tier-1 content is already integrated into the canonical criterion in its `1-framework/` theme file.
+A heading is cleanup-eligible only when its Tier-1 content is already integrated into the canonical criterion in its [framework theme file](1-framework/_index.md).
 
 For each cleanup-eligible heading:
 
@@ -25,11 +25,11 @@ For each cleanup-eligible heading:
 - Replace migrated prose with one `[!INFO] Migrated to ...` callout.
 - Delete migrated prose only after comparing it against the current target criterion.
 - Preserve content that belongs to a Tier-2 or Tier-3 decision.
-- Do not add redirects, move files, or reorganize sections during Step A.4.
+- By default, do not add redirects, move files, or reorganize sections during Step A.4 — these belong to later steps. **But the user may explicitly direct such extended actions**, per [Opportunistic scope](_handoff#^opportunistic-scope) in the main handoff: under explicit user direction, the cleanup may redirect references, delete files, create or rename entries and anchors. When it does, it records the [deferred synchronization debt](_handoff#^deferred-synchronization-debt) and surfaces it at the next stopping point.
 
 When source content is not clearly covered by the target criterion, stop and ask the user to choose one route:
 
-- migrate the content into the relevant `1-framework/` theme file;
+- migrate the content into the relevant [framework theme file](1-framework/_index.md);
 - move it to a backup or staging location for later Tier-2/Tier-3 work;
 - discard it with explicit approval.
 
@@ -40,7 +40,7 @@ Never delete substantive unintegrated content without that approval.
 ## Workflow per file
 
 1. Read the whole source file.
-2. Read each target criterion in its `1-framework/` theme file (the cleanup-target table names the file and anchor).
+2. Read each target criterion in its theme file (the cleanup-target table names the file and anchor).
 3. Compare every source paragraph, list, table, example, callout, citation, and cross-reference with the target criterion.
 4. Report covered content and flagged content to the user.
 5. Apply only approved deletions or migrations.
@@ -51,44 +51,17 @@ Never delete substantive unintegrated content without that approval.
 
 ## Cleanup targets
 
-The four legacy `1-framework/` stub files — `content-adequacy.md`, `epistemic-adequacy.md`, `operational-quality.md`, `structural-quality.md` — were deleted and their inbound links redirected (see Status); those rows are **done** and dropped from this table. The remaining targets:
+The framework-tier stub files, [data formats](2-architecture/data-formats.md), the now-deleted architectural-constraints file, the now-deleted criteria-framework backup, the now-deleted tooling-validation backup, and the now-deleted registries-indexes backup are done (see Status) and dropped from this table. The remaining target is one backup source:
 
-| File | Cleanup-eligible source | Target or disposition |
-| --- | --- | --- |
-| `2-architecture/constraints.md` | `^t2-separation-of-concerns` | `^t1-activity-access-rights` in `research-activities-workflows.md` |
-| `2-architecture/constraints.md` | `^t2-non-redundancy` | `^t1-non-redundancy` in `modular-content-organization.md` |
-| `2-architecture/constraints.md` | `^t2-graph-queryability` | `^t1-relational-queryability` in `modular-content-organization.md` |
-| `2-architecture/constraints.md` | `^t2-defeasibility` | `^t1-valid-licensing` in `reasoning-integrity.md` — its warrant-composition facet |
-| `2-architecture/constraints.md` | `^t2-snapshot-dag` | `^t1-valid-licensing` in `reasoning-integrity.md` — its no-circular-reasoning facet |
-| `2-architecture/constraints.md` | `^t2-mechanical-validation` | split across `^t1-read-side-automation` and `^t1-write-side-automation` in `cost-ergonomics.md` |
-| `2-architecture/constraints.md` | `^t2-repr-vs-gen` | retired; concerns absorbed by `^t1-partial-formalization` (`expressive-depth.md`), `^t1-activity-coverage` (`expressive-depth.md`), `^t1-activity-access-rights` (`research-activities-workflows.md`), and `^t1-inquiry-content-and-progression` (`framework-foundations.md`) |
-| `2-architecture/constraints.md` | `^t2-revision-semantics` | `^t1-revision-accountability` in `research-activities-workflows.md` |
-| `2-architecture/data-formats.md` | `^t2-data-format-criteria` | prose, formulas, and math sub-claim to `^t1-rich-prose-expressivity` in `expressive-depth.md`; other sub-claims redirect to existing cost and automation criteria |
-| `3-aspect-specific/arguments-reasoning.md` | — (no longer eligible) | The `## Criteria` section, including `^t3-discharge-accounting`, was removed and rebuilt as a machinery-decision section; nothing remains to clean. See the File 7 note. |
-| `_backup/criteria-framework.md` | migrated core-requirements rows | target criteria named by each adjacent callout |
-| `_backup/criteria-framework.md` | `Quality constraints` operation list | `^t1-manipulable-reasoning` in `reasoning-integrity.md` |
-| `_backup/object-types-ontology/taxo-criteria-ontology.md` | functional criterion paragraph | `^t1-functional-separation` in `framework-foundations.md` |
-| `_backup/registries-indexes.md` | mandatory drafting gate paragraph | `^t1-staleness-gating` in `research-activities-workflows.md` |
-| `_backup/tooling-validation.md` | externality and hard-gate sentence | `^t1-validation-externality` in `research-activities-workflows.md` |
-| `_backup/tooling-validation.md` | terminology-enforcement row | `^t1-canonical-terminology` in `modular-content-organization.md` |
+| File                                                                                | Cleanup-eligible source              | Target or disposition                                                                                                                                                                                                                                                                                                                                                       |
+| ----------------------------------------------------------------------------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [ontology-criteria backup](_backup/object-types-ontology/taxo-criteria-ontology.md) | functional criterion paragraph       | `^t1-functional-separation` in [framework foundations](1-framework/framework-foundations.md)                                                                                                                                                                                                                                                                                |
 
-Anything not listed here is outside Step A.4 unless the user explicitly expands scope.
+This backup file carries no migrated bodies under `[!INFO] Migrated to ...` callouts and may need only the named-passage check. Anything not listed here is outside Step A.4 unless the user explicitly expands scope.
 
 ---
 
-## File-specific warnings
-
-### `2-architecture/constraints.md`
-
-Only the eight listed subsections are eligible. Leave all other constraints, gaps, and tensions intact. Preserve any cross-reference in a callout when the source body points to a downstream decision that still matters.
-
-### `2-architecture/data-formats.md`
-
-Only `^t2-data-format-criteria` is eligible. The rest of the source-language and grammar decisions remain active.
-
-### `3-aspect-specific/arguments-reasoning.md` — no longer in scope
-
-The Step A.4 plan once treated `^t3-discharge-accounting`'s criterion clause as cleanup-eligible. That is now moot: the file's entire `## Criteria` section was removed and rebuilt as a machinery section of decisions and open questions (each implementing a Tier-1 reasoning-integrity facet). The discharge-accounting content survives as the open question `^t3-assumption-discharge-mechanism`. Nothing in this file remains to clean.
+## File-specific warning
 
 ### Backup sources
 
@@ -102,7 +75,7 @@ After each file, report:
 
 - headings cleaned;
 - flagged content and the user's decision for each flag;
-- content migrated into a `1-framework/` theme file;
+- content migrated into a [framework theme file](1-framework/_index.md);
 - content moved to backup or staging;
 - content discarded with explicit approval;
 - classification-table rows updated.

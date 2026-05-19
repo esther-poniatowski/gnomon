@@ -56,7 +56,7 @@ Phase 1 contains the following fields:
 - **Parent question.** The broader question this note serves within the global argument.
 - **Local objective.** The single, precisely bounded question this note answers. The formulation must be such that a yes/no or a formal proposition constitutes a complete answer.
 - **Utility.** Why this note must exist in the global argument — for which downstream consumers, or as the natural continuation of which upstream analyses.
-- **Typed imports.** A table with columns: source note, kind (using the [admissible import kinds](../../../eutaxis/docs/design/architecture.md#^admissible-import-kinds) enum), object name, and what the import is used for in this note.
+- **Typed imports.** A table with columns: source note, kind (per the [typed-reference format](../../3-aspect-specific/registries-indexes.md#^t3-typed-references)), object name, and what the import is used for in this note.
 - **Imports forbidden to rederive.** A table listing source note, kind, and object for each import that must not be re-derived locally.
 - **Expected contribution.** One sentence stating the inferential advance this note provides relative to the existing vault — what it adds that no existing note provides. Does not restate the proposition; states its novelty relative to declared dependencies. This field is **binding**: drafting must remain within the same local inferential objective and must not introduce an independent advance not authorized by the contract.
 - **Excluded nearby topics.** List of topics explicitly outside scope.
@@ -88,7 +88,7 @@ The integration record contains the following sections:
 
 - **Validated contribution.** One sentence stating the inferential advance actually established by the note.
 - **Divergence assessment** (filled only if validated ≠ expected). Contains: discrepancy class (`sharpening` / `weakening` / `lateral drift` / `scope expansion`), what changed and why, whether the termination criterion was respected, downstream impact, and resolution. The [divergence resolution rules](../../../references-methods/decision-rules.md#^divergence-resolution) determine the appropriate action.
-- **Actual outputs.** A table with columns: Output ID, Type (using [admissible output types](../../../eutaxis/docs/design/architecture.md#^admissible-output-types)), Statement role (using [admissible statement roles](../../../eutaxis/docs/design/architecture.md#^admissible-statement-roles)), and Anchor (block reference in the note).
+- **Actual outputs.** A table with columns: Output ID, Type (per the [typed-reference format](../../3-aspect-specific/registries-indexes.md#^t3-typed-references)), Statement role, and Anchor (block reference in the note).
 - **Failure modes identified.** List of failure modes or limitations discovered during drafting.
 - **Downstream uses confirmed.** For each consumer note: whether it can import the output directly, or whether adaptation is needed.
 - **Registry additions.** Objects to add to `registry/dependencies.yaml`, notes to update in `registry/reasoning_graph.yaml`, and new questions for `registry/open_questions.yaml`.

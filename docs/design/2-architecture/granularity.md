@@ -3,7 +3,7 @@
 > [!INFO] Tier and scope
 > **Tier 2 (architectural).** This file holds the commitments and decisions about how reasoning is stratified into units of varying granularity, and about how formalization scales — which fields and validators are mandatory at each profile, and what guarantees degrade under relaxation.
 >
-> Cross-cutting Tier-2 criteria that constrain decisions in this file: see [Architectural constraints](vendor/gnomon/docs/design/2-architecture/constraints), in particular [t2-narrow-ontology](vendor/gnomon/docs/design/2-architecture/constraints#^t2-narrow-ontology), [t2-coverage-completeness](vendor/gnomon/docs/design/2-architecture/constraints#^t2-coverage-completeness), [t1-partial-formalization](../1-framework/expressive-depth#^t1-partial-formalization), tension [X2](vendor/gnomon/docs/design/2-architecture/constraints#^t2-x2).
+> Theme-local criterion bearing on this file: [object-kind set smallness](object-kinds#^t2-ontology-small). Framework-level criteria bearing on this theme: [activity coverage](../1-framework/expressive-depth#^t1-activity-coverage) and [t1-partial-formalization](../1-framework/expressive-depth#^t1-partial-formalization). See also tension [X2](../1-framework/_tensions#^t2-x2).
 
 ---
 
@@ -21,7 +21,7 @@ Alternatives:
 
 The fields-on-canonical-objects alternative is closed by [t2-reasoning-annotation-attachment](vendor/gnomon/docs/design/2-architecture/reasoning-structure#^t2-reasoning-annotation-attachment): strategic and explanatory justification cannot live on canonical objects under the placement rule, so reasoning records cannot be canonical-object annotations.
 
-Bearing criteria: [t1-intelligibility](../1-framework/reasoning-integrity#^t1-justification-levels), [t2-non-redundancy](vendor/gnomon/docs/design/2-architecture/constraints#^t2-non-redundancy), [t1-feasibility](../1-framework/cost-ergonomics#^t1-system-scale), [t2-revision-semantics](vendor/gnomon/docs/design/2-architecture/constraints#^t2-revision-semantics).
+Bearing criteria: [t1-intelligibility](../1-framework/reasoning-integrity#^t1-justification-levels), [non-redundancy](../1-framework/modular-content-organization#^t1-non-redundancy), [t1-feasibility](../1-framework/cost-ergonomics#^t1-system-scale), [revision accountability](../1-framework/research-activities-workflows#^t1-revision-accountability).
 
 ### Granularity strata for reasoning ^t2-granularity-strata
 
@@ -34,7 +34,7 @@ Alternatives:
 - **Two strata only** — bundle (target-relative selection) / canonical objects.
 - **Mixed** — `ReasoningBundle` containing `WorkUnit`s containing `OperationApplication`s, plus `StateDelta`s.
 
-Bearing criteria: [t2-narrow-ontology](vendor/gnomon/docs/design/2-architecture/constraints#^t2-narrow-ontology), [t1-expressivity](../1-framework/expressive-depth#^t1-reasoning-types-coverage), [t2-coverage-completeness](vendor/gnomon/docs/design/2-architecture/constraints#^t2-coverage-completeness).
+Bearing criteria: [object-kind set smallness](object-kinds#^t2-ontology-small), [t1-reasoning-types-coverage](../1-framework/expressive-depth#^t1-reasoning-types-coverage), [t1-activity-coverage](../1-framework/expressive-depth#^t1-activity-coverage).
 
 ### Partial-formalization profiles ^t2-partial-formalization-profiles
 
@@ -48,4 +48,4 @@ A **formalization profile** is a named tuple `(mandatory_field_set, validator_se
 
 Records advertise the profile they claim; validators check the claim. The profile vocabulary is closed at design time. The architecture commits to *that* profiles have this shape; the named profiles, their contents, and their degradation chain are aspect-specific (Tier 3).
 
-Bearing criteria: [t1-partial-formalization](../1-framework/expressive-depth#^t1-partial-formalization), [t1-feasibility](../1-framework/cost-ergonomics#^t1-system-scale), tension [X2](vendor/gnomon/docs/design/2-architecture/constraints#^t2-x2).
+Bearing criteria: [t1-partial-formalization](../1-framework/expressive-depth#^t1-partial-formalization), [t1-feasibility](../1-framework/cost-ergonomics#^t1-system-scale), tension [X2](../1-framework/_tensions#^t2-x2).

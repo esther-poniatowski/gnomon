@@ -66,7 +66,7 @@ Every reasoning move is **validly licensed**: it rests on a warrant whose suppor
 
 - **No circular reasoning** ^t1-vl-no-circular
   A step's justification must not *ultimately rest on itself*. Tracing the licensing chain from any step must not return to that step.
-  *Implementing machinery*: [the snapshot dependency graph is a DAG](2-architecture/constraints#^t2-snapshot-dag) (Tier-2 decision) and [cycle-detection rule](3-aspect-specific/arguments-reasoning#^t3-d-cycle-detection) (Tier-3 machinery decision).
+  *Implementing machinery*: [the snapshot dependency graph is a DAG](2-architecture/relations-graph#^t2-snapshot-dag-property) (Tier-2 decision) and [cycle-detection rule](3-aspect-specific/arguments-reasoning#^t3-d-cycle-detection) (Tier-3 machinery decision).
 
 - **No silent incompleteness** ^t1-vl-no-silent
   A chain and its conclusion must not secretly depend on an unstated hypothesis or an undischarged assumption; the licensing must explicitly account for which assumptions remain open.
@@ -77,8 +77,8 @@ Every reasoning move is **validly licensed**: it rests on a warrant whose suppor
   *Implementing machinery*: the [warrant-completeness rule](3-aspect-specific/arguments-reasoning#^t3-d-warrant-completeness) (Tier-3 machinery decision) and [warrant adequacy](3-aspect-specific/arguments-reasoning#^t3-d-warrant-adequacy) (Tier-3 machinery open question).
 
 - **Composition of warrant kinds** ^t1-vl-warrant-composition
-  A chain may combine steps governed by warrants of different kinds: *monotonic* warrants license steps valid regardless of the state of the inquiry, defeasible only by revision of the warrant itself; *defeasible* warrants license steps valid only under the current state, defeatable by new content. Whenever a step of one kind supports a step of the other (a "warrant-kind boundary"), the licensing must specify how the downstream step inherits the upstream step's strength and defeat conditions.
-   *Implementing machinery*: [defeasibility and regime stratification](2-architecture/constraints#^t2-defeasibility) (Tier-2 decision) and the warrant-kind boundary rule in the validity-revision theme.
+  A chain may combine steps governed by warrants of different kinds: *monotonic* (proof-theoretic) warrants license steps valid regardless of the state of the inquiry, defeasible only by revision of the warrant itself; *defeasible* (argumentation-theoretic) warrants license steps valid only under the current state, defeatable by new content. The warrant kind of a step must be explicit, so that a downstream consumer can determine whether the step's conclusion is retractable. Whenever a step of one kind supports a step of the other (a "warrant-kind boundary"), the licensing must specify how the downstream step inherits the upstream step's strength and defeat conditions.
+   *Implementing machinery*: [warrant-kind annotation on support relations](2-architecture/validity-revision#^t2-warrant-annotation) (Tier-2 decision) and the warrant-kind boundary rule in the validity-revision theme.
 
 - **Calibrated commitment** ^t1-vl-calibrated-commitment
   The modal strength attached to a conclusion (possible, plausible, supported, established, necessary) matches is the support actually marshalled for it.

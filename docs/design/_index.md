@@ -24,7 +24,7 @@ Every criterion in the project belongs to exactly one of the following tiers.
 Each tier follows the same logical structure (criteria → commitments/decisions), implemented per tier:
 
 - **Tier 1:** criteria for the whole framework, organized by axis. Each axis file holds its criteria directly. No commitments or decisions yet at the framework level.
-- **Tier 2:** architectural criteria that cut across themes in [constraints](vendor/gnomon/docs/design/2-architecture/constraints); thematic files for the commitments and decisions, each section opened by a `[!QUESTION]` callout naming the design question it answers.
+- **Tier 2:** architectural criteria, commitments, and decisions, all theme-local: each thematic file opens with an optional `## Criteria` section of well-formedness requirements binding that theme, followed by `## Decisions` and `## Open questions`, each opened by a `[!QUESTION]` callout naming the design question it answers. The former cross-cutting `constraints` file has been retired: every constraint it held was promoted to Tier 1 or moved to its theme-local home.
 - **Tier 3:** criteria, commitments, and open questions for each theme all live within each thematic file.
 
 ### Axes
@@ -45,7 +45,7 @@ Each tier is developed its own sub-folder with an index file that organizes the 
 | Index                                                              | Folder organization                                                                                                     | Anchors |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ------- |
 | [Tier 1 index](vendor/gnomon/docs/design/1-framework/_index)       | Desiderata for the whole framework organized by axis                                                                    | `^t1-*` |
-| [Tier 2 index](vendor/gnomon/docs/design/2-architecture/_index)    | Criteria in [constraints](vendor/gnomon/docs/design/2-architecture/constraints) and per-theme commitments and decisions | `^t2-*` |
+| [Tier 2 index](vendor/gnomon/docs/design/2-architecture/_index)    | Per-theme criteria, commitments, and decisions                                                                          | `^t2-*` |
 | [Tier 3 index](vendor/gnomon/docs/design/3-aspect-specific/_index) | Criteria, commitments, and open questions for each aspect                                                               | `^t3-*` |
 
 ## Other design documents
@@ -53,10 +53,9 @@ Each tier is developed its own sub-folder with an index file that organizes the 
 Many initial proposals are backed up in the `_backup/` folder, and some have been migrated to the main design documentation. The following documents are relevant to the design but not yet integrated into the tiered structure:
 
 - [Layered model](_backup/architecture-1-layered-model.md)
-- [Registries-indexes](_backup/registries-indexes.md) / [Validation tooling](_backup/tooling-validation.md): Machine-readable project state
 - [Rendering and views](_backup/rendering/rendering-and-views.md)
 - [Workflows](_backup/workflow-for-users.md)
 - [Object types ontology](vendor/gnomon/docs/object-types-ontology/_index)
 - [Argument bundles](_backup/arguments-reasoning/argument-bundles.md)
-- Criteria files: [criteria-G backup](_backup/criteria-framework.md), [criteria taxonomy backup](_backup/object-types-ontology/taxo-criteria-ontology.md).
+- Criteria files: [criteria taxonomy backup](_backup/object-types-ontology/taxo-criteria-ontology.md).
 - The [reference frameworks](vendor/gnomon/docs/references-methods/overview-formal-frameworks) ground several criteria.

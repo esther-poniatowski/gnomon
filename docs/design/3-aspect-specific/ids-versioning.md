@@ -1,7 +1,7 @@
 # IDs, namespaces, versioning
 
 > [!INFO] Tier and source
-> **Tier 3 (aspect-specific).** Stub file. Holds criteria for stable identifiers, namespace structure, and ontology versioning. Traces to [t1-modularity](../1-framework/modular-content-organization#^t1-reuse), [t2-revision-semantics](vendor/gnomon/docs/design/2-architecture/constraints#^t2-revision-semantics), and [t1-feasibility](../1-framework/cost-ergonomics#^t1-system-scale). Cross-references the [git-delegation policy](vendor/gnomon/docs/design/1-framework/external-interfaces#^t1-git-delegation): in-state identity at HEAD only.
+> **Tier 3 (aspect-specific).** Stub file. Holds criteria for stable identifiers, namespace structure, and ontology versioning. Traces to [t1-modularity](../1-framework/modular-content-organization#^t1-reuse), [revision accountability](../1-framework/research-activities-workflows#^t1-revision-accountability), and [t1-feasibility](../1-framework/cost-ergonomics#^t1-system-scale). Cross-references the [git-delegation policy](vendor/gnomon/docs/design/1-framework/framework-foundations#^t1-no-version-history): in-state identity at HEAD only.
 
 ---
 

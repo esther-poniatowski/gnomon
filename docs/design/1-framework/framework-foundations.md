@@ -27,11 +27,40 @@ The language is primary: the tooling operates over what the language records. To
 **Downstream consequences.**
 
 - [Inquiry content and progression](#^t1-inquiry-content-and-progression) (sub-criterion): the formal language must record both standing content and the moves that transform it.
+- [Formal expression of all content](#^t1-formal-expression) (sub-criterion): every semantically loaded field is grammar-bound; free prose is confined to fields with no epistemic load.
 - [Typed-object decomposition](#^t1-typed-object-decomposition) (sub-criterion): the language must expose the object kinds and fields that tooling validates.
 - [Functional separation of concerns](#^t1-functional-separation) (sub-criterion): language and tooling components are separated by function, each boundary carrying a separation-of-concerns rationale.
+- [Component-set adequacy](#^t1-component-set-adequacy) (sub-criterion): the set of components the language and tooling provide must be sufficient, necessary, and adequately compressed.
 - [Relational queryability](modular-content-organization#^t1-relational-queryability) (cross-group sub-criterion in *Modular content organization*): tooling can query relations only when the language records those relations explicitly.
 - [Validation externality](research-activities-workflows#^t1-validation-externality) (cross-group sub-criterion in *Research activities and workflows*): validation tooling checks authored structure rather than replacing it.
 - [Read-side automation](cost-ergonomics#^t1-read-side-automation) and [write-side automation](cost-ergonomics#^t1-write-side-automation) (cross-group sub-criteria in *Cost and Ergonomics*): automation remains bounded because tools operate over declared language structure.
+
+## Formal expression of all content ^t1-formal-expression
+
+The framework achieves expressivity **exclusively by formalization**, never by admitting free-form natural language as semantic content. Every field that any operation, validator, query, relation, or analysis reads conforms to a **known grammar** — a controlled vocabulary, a typed reference, a structured record, a mathematical expression, a closed-vocabulary tag, or any other shape declared in the language's schema. Natural language appears only in fields that are **strictly unessential to inquiry**: explicitly-marked authoring scratch (TODO, FIX), human-facing labels, external comments, exposition aimed at a reader. An unessential field is one that **no operation, validator, relation, or query reads** — a field whose removal would not change what the framework records, infers, or checks about the corpus.
+
+This commitment partitions every field into two disjoint classes:
+
+- **Semantic fields** — the content the framework manipulates. Grammar-bound, schema-declared, validator-checked. A claim's body, a warrant's licensing condition, a strategic move's rationale, a gap's diagnostic — all are semantic and therefore grammatical.
+- **Unessential fields** — annotations the framework stores but does not interpret. Prose is permitted here; the framework treats their content as opaque.
+
+**Failure mode prevented.** A framework that admits free prose inside semantic fields wears the appearance of formalization while reproducing the failure modes of conventional note-taking that the [project's stance](../../project-overview.md) targets — loss of dependency visibility, dilution of argumentative structure, mixing of epistemic roles. Half-predictable content forfeits the operationalization the framework exists to deliver: such fields cannot be queried by structure, manipulated by operations, validated for soundness, or analyzed for dependency. Permissiveness at the field level silently undoes typing at the object level.
+
+> [!NOTE] Criterion scope
+> This criterion fixes *how* content is expressed, not *what* content is admissible. It does not prescribe which grammars the semantic fields use, nor how rich each grammar must be. Those are downstream decisions per kind of content. It does require that wherever the framework currently lets a semantic field default to prose, a grammar must be supplied.
+
+**Upstream dependencies.**
+
+- [Language-tooling integration](#^t1-language-tooling-integration) (parent criterion): the language is the source of truth that tooling operates over; tooling can manipulate, query, or validate a field only when that field is grammatical.
+
+**Downstream consequences.**
+
+- [Rich prose expressivity](expressive-depth#^t1-rich-prose-expressivity) (peer sub-criterion in *Expressive depth*): expressivity targets — formulas, multi-step derivations, diagrams — must be met by *formal* shapes (math grammars, structured derivation records, declarative diagram languages), not by prose bodies.
+- [Partial formalization tolerance](expressive-depth#^t1-partial-formalization) (peer sub-criterion in *Expressive depth*): partial formalization means grammatical annotations may be **absent**; it never means a semantic field is filled with sub-formal prose.
+- [Field-typing discipline](../2-architecture/object-kinds#^t2-field-typing) (decision in the object-kinds theme): the field-typing meta-schema must partition fields into semantic (grammar-bound) and unessential (free-prose, framework-opaque), and forbid free prose in any semantic position.
+- [Object-kind admission test](../2-architecture/object-kinds#^t2-object-kind-admission) (decision in the object-kinds theme): no candidate kind is admissible whose canonical content is prose.
+- Reasoning-field grammars (open question, to be staged in [the fleeting-ideas catalogue](../_fleeting-ideas.md)): strategic rationale, explanatory gain, route selection, and rejected-alternative records require grammars rather than prose defaults.
+- Validator obligation (cross-group consequence in [validation views](../2-architecture/validation-views.md)): a validator checks that no semantic field contains ungrammatical content.
 
 ## Inquiry content and progression ^t1-inquiry-content-and-progression
 
@@ -135,7 +164,33 @@ The framework decomposes inquiry content into a structured set of **typed object
 - Field typing (decision in the object-kinds theme): determines the admissible shapes of the field sets each kind carries.
 - Progression-encoding decisions (in the relations-graph, reasoning-structure, and arguments-reasoning themes): how inferential progression is recorded over the typed objects.
 - [Functional separation of concerns](#^t1-functional-separation) (peer sub-criterion): function — not surface form — is what distinguishes object kinds, and each kind boundary carries a separation-of-concerns rationale.
+- [Component-set adequacy](#^t1-component-set-adequacy) (cross-reference): the object-kind set this criterion commits to is one component set the adequacy standard judges.
 - [Addressability](modular-content-organization#^t1-addressability) (cross-group sub-criterion in *Modular content organization*): typed-object decomposition makes content addressable by giving each unit a kind-tagged identity.
+
+## Component-set adequacy ^t1-component-set-adequacy
+
+The framework's components — object kinds, fields, relations, vocabularies, operations, layers — must together form a **set that represents research reasoning with no gap and no distorting surplus**. Three conditions state the standard:
+
+- **Sufficient.** The component set covers every aspect of research reasoning the framework must represent — the static epistemic content, the dynamic logic of inquiry, and the activities through which inquiry advances. Nothing a researcher must record falls outside the admitted components.
+- **Necessary.** Each admitted component earns its place: it represents something no other component already represents. A component whose function another component already discharges is not admitted.
+- **Compressed under operational adequacy.** Among the sufficient and necessary sets, the framework prefers the one that introduces the fewest components — but compression stops wherever a further merge would erase a distinction that materially improves intelligibility, force heterogeneous content into one schema, or shift essential content into opaque fields. Expressivity and function-faithfulness are the targets; compression is the discipline applied only as far as they allow.
+
+**Failure mode prevented.** A component set that is insufficient forces research content outside the framework, where it cannot be validated or related. A set carrying unnecessary components proliferates kinds, raising per-action cost and inviting misclassification between near-synonymous components. Over-compression is the opposite failure: merging components that differ in epistemic function, dependency profile, or graph behaviour flattens distinctions that carry intelligibility, so the set ceases to be optimally expressive.
+
+> [!NOTE] Criterion scope
+> This criterion is a standard the design must meet, not a procedure for meeting it. It does not name *which* components satisfy it. Each component theme operationalises the standard at its own grain — the object-kind admission test and the object-kind smallness criterion in the object-kinds theme apply it to the object set; the closed-vocabulary and relation-vocabulary decisions apply it to the controlled vocabularies; the operation-library decisions apply it to the operation set.
+
+**Upstream dependencies.**
+
+- [Language-tooling integration](#^t1-language-tooling-integration) (parent criterion): the component inventory whose set this criterion judges — object kinds, fields, relations, vocabularies, operations, layers — is exactly the inventory the integrated language and tooling provide.
+
+**Downstream consequences.**
+
+- [Functional separation of concerns](#^t1-functional-separation) (peer sub-criterion): functional separation draws each component boundary; component-set adequacy judges whether the resulting set has the right members. The two are complementary — one governs boundaries, the other coverage.
+- [Object-kind admission test](object-kinds#^t2-object-kind-admission) (decision in the object-kinds theme): the object-kind specialisation — the five-condition test by which a candidate kind is judged sufficient and necessary.
+- [Object-kind smallness](object-kinds#^t2-ontology-small) (theme-local criterion): the compression condition at the object-kinds grain, bounded there too by role purity and coverage.
+- [Admissibility under the five-condition test](3-aspect-specific/ontology#^t3-admissibility-five-conditions) and [primary-content, operational, and non-distortion conditions](3-aspect-specific/ontology#^t3-primary-content-conditions) (criteria in the ontology theme): the object-kind-set consequences of this standard — sufficiency, necessity, and non-distortion stated for the canonical object set.
+- [Non-redundancy](modular-content-organization#^t1-non-redundancy) (cross-group sub-criterion in *Modular content organization*): the necessity condition extends to content instances, not only to components.
 
 ## Functional separation of concerns ^t1-functional-separation
 
@@ -150,6 +205,7 @@ The framework's components — object kinds, fields, relations, vocabularies, op
 
 - [Language-tooling integration](#^t1-language-tooling-integration) (parent criterion): a clear scope for each component is what lets tooling check and enforce structure.
 - [Inquiry content and progression](#^t1-inquiry-content-and-progression) (parent criterion): function — the role a component plays in inquiry — is what the representation must capture and what the boundaries must track.
+- [Component-set adequacy](#^t1-component-set-adequacy) (peer sub-criterion): functional separation draws each component boundary; component-set adequacy judges whether the set of components so bounded is sufficient, necessary, and adequately compressed.
 
 **Downstream consequences.**
 

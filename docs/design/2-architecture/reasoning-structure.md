@@ -3,7 +3,7 @@
 > [!INFO] Tier and scope
 > **Tier 2 (architectural).** This file holds the commitments and decisions that govern reasoning relative to a target: how assemblies relate to canonical objects, where reasoning notes attach, and which records may live inside an assembly.
 >
-> Cross-cutting Tier-2 criteria that constrain decisions in this file: see [Architectural constraints](vendor/gnomon/docs/design/2-architecture/constraints), in particular [t2-justificatory-level-placement](vendor/gnomon/docs/design/2-architecture/constraints#^t2-justificatory-level-placement), [t2-multi-regime-reasoning](vendor/gnomon/docs/design/2-architecture/constraints#^t2-multi-regime-reasoning), [t2-annotation-richness](vendor/gnomon/docs/design/2-architecture/constraints#^t2-annotation-richness), [t2-narrow-ontology](vendor/gnomon/docs/design/2-architecture/constraints#^t2-narrow-ontology), [t2-non-redundancy](vendor/gnomon/docs/design/2-architecture/constraints#^t2-non-redundancy).
+> Theme-local criteria bearing on this file: [object-kind set smallness](object-kinds#^t2-ontology-small). The meta-schema rule [field-typing discipline](object-kinds#^t2-field-typing) binds the reasoning-note fields declared here. Framework-level criteria bearing on this theme: [non-redundancy](../1-framework/modular-content-organization#^t1-non-redundancy); [justification levels](../1-framework/reasoning-integrity#^t1-justification-levels) — the five-level desideratum, whose intrinsic-vs-inquiry-dependent split and annotation-richness requirement are realised by [t2-reasoning-annotation-attachment](#^t2-reasoning-annotation-attachment) — and [reasoning-types coverage](../1-framework/expressive-depth#^t1-reasoning-types-coverage), the multi-regime requirement.
 
 ---
 
@@ -29,7 +29,7 @@ An assembly is a record-with-identity that lives in a parallel store from canoni
 
 > [!QUESTION] Which locus — canonical object or assembly — hosts each of the three justificatory levels?
 
-[t2-justificatory-level-placement](vendor/gnomon/docs/design/2-architecture/constraints#^t2-justificatory-level-placement) forbids loci that conflate the levels. Two loci suffice to honor that constraint, because licensing is intrinsic to the move while strategic and explanatory support depend on the inquiry that recruits the move:
+The justificatory-level placement rule forbids loci that conflate the levels. Two loci suffice to honor that constraint, because licensing is intrinsic to the move while strategic and explanatory support depend on the inquiry that recruits the move:
 
 | Justificatory level | Locus | Example fields |
 | --- | --- | --- |
@@ -74,6 +74,6 @@ An assembly is a record-with-identity that lives in a parallel store from canoni
 
 **Fields vary by profile.** Each locus × content kind has a mandatory spine and a structured optional layer. The formalization profile determines which optional fields become mandatory (per [t2-partial-formalization-profiles](vendor/gnomon/docs/design/2-architecture/granularity#^t2-partial-formalization-profiles)). The spine is mandatory at every profile; optional fields become mandatory at higher profiles.
 
-The choice follows the pattern that [t1-partial-formalization](../1-framework/expressive-depth#^t1-partial-formalization) prescribes for tension [X2](vendor/gnomon/docs/design/2-architecture/constraints#^t2-x2): each profile partitions fields into mandatory and optional sets, with named guarantees that weaken when the profile loosens. The minimal-spine regime leaves no surface to grade; the regime that structures only canonical records demotes the strategic and explanatory levels that [t2-justificatory-level-placement](vendor/gnomon/docs/design/2-architecture/constraints#^t2-justificatory-level-placement) made first class.
+The choice follows the pattern that [t1-partial-formalization](../1-framework/expressive-depth#^t1-partial-formalization) prescribes for tension [X2](../1-framework/_tensions#^t2-x2): each profile partitions fields into mandatory and optional sets, with named guarantees that weaken when the profile loosens. The minimal-spine regime leaves no surface to grade; the regime that structures only canonical records demotes the strategic and explanatory levels that the [locus of justificatory annotations](#^t2-reasoning-annotation-attachment) made first class.
 
 **Architectural commitment only.** The actual field set for each cell, the field types, the `gain_kind` enum, and the named profiles are deferred to [fields for reasoning notes](vendor/gnomon/docs/design/3-aspect-specific/reasoning-fields) and to [t2-partial-formalization-profiles](vendor/gnomon/docs/design/2-architecture/granularity#^t2-partial-formalization-profiles).

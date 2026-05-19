@@ -1,7 +1,7 @@
 # Semantic relations
 
 > [!INFO] Tier and source
-> **Tier 3 (per aspect).** Stub file. Holds criteria that constrain the typed relation vocabulary between epistemic objects. Traces to [t2-narrow-ontology](vendor/gnomon/docs/design/2-architecture/constraints#^t2-narrow-ontology), [t2-non-redundancy](vendor/gnomon/docs/design/2-architecture/constraints#^t2-non-redundancy), [t2-dependency-management](vendor/gnomon/docs/design/2-architecture/constraints#^t2-dependency-management), [closed typed relations](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-typed-relation-vocabulary), and [relation storage locus](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-relation-storage-locus) (objects author edges). The actual relation vocabulary is deferred to [the project TODO](vendor/gnomon/docs/TODO).
+> **Tier 3 (per aspect).** Stub file. Holds criteria that constrain the typed relation vocabulary between epistemic objects. Traces to [object-kind role purity](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-ontology-role-pure), [non-redundancy](../1-framework/modular-content-organization#^t1-non-redundancy), [relational graph representation](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-relational-graph-representation), [closed typed relations](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-typed-relation-vocabulary), and [relation storage locus](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-relation-storage-locus) (objects author edges). The actual relation vocabulary is deferred to [the project TODO](vendor/gnomon/docs/TODO).
 
 ---
 

@@ -3,7 +3,7 @@
 > [!INFO] Tier and scope
 > **Tier 2 (architectural).** This file holds the commitments and decisions about the operational core — where operation schemas live, on what grounds the schema regress terminates, how representation and generation modes relate, and how planning synchronizes with execution.
 >
-> Cross-cutting Tier-2 criteria that constrain decisions in this file: see [Architectural constraints](vendor/gnomon/docs/design/2-architecture/constraints), in particular [t2-closed-operational-core](vendor/gnomon/docs/design/2-architecture/constraints#^t2-closed-operational-core), [t2-repr-vs-gen](vendor/gnomon/docs/design/2-architecture/constraints#^t2-repr-vs-gen), [t2-revision-semantics](vendor/gnomon/docs/design/2-architecture/constraints#^t2-revision-semantics), tension [X1](vendor/gnomon/docs/design/2-architecture/constraints#^t2-x1).
+> Framework-level criteria bearing on this file: [no infinite regress](../1-framework/expressive-depth#^t1-no-infinite-regress) — the requirement that reasoning-description terminate, which the closed operational core implements — and [reasoning-types coverage](../1-framework/expressive-depth#^t1-reasoning-types-coverage). The meta-schema rule [field-typing discipline](object-kinds#^t2-field-typing) binds the operation-schema fields declared here. See also tension [X1](../1-framework/_tensions#^t2-x1).
 
 ---
 
@@ -42,7 +42,7 @@ Alternatives:
 - **Schema calculus** — a small set of primitive constructors from which domain schemas are derived (constructor proposals in [Operation schemas](vendor/gnomon/docs/design/3-aspect-specific/operation-schemas)).
 - **Open library** — implicitly ruled out by all sources, recorded as a pole.
 
-Bearing criteria: [t2-closed-operational-core](vendor/gnomon/docs/design/2-architecture/constraints#^t2-closed-operational-core), [t1-expressivity](../1-framework/expressive-depth#^t1-reasoning-types-coverage), tension [X1](vendor/gnomon/docs/design/2-architecture/constraints#^t2-x1). Tension X1 favors deriving schemas from a small calculus.
+Bearing criteria: [no infinite regress](../1-framework/expressive-depth#^t1-no-infinite-regress), [t1-expressivity](../1-framework/expressive-depth#^t1-reasoning-types-coverage), tension [X1](../1-framework/_tensions#^t2-x1). Tension X1 favors deriving schemas from a small calculus.
 
 ### Synchronization between planning and execution ^t2-planning-execution-sync
 
@@ -55,4 +55,4 @@ Alternatives:
 - **`StateDelta` objects** emitted by work units update the snapshot, which contains both goals and content.
 - **Single bidirectional reasoning graph** — no separate goal graph.
 
-Bearing criteria: [t2-revision-semantics](vendor/gnomon/docs/design/2-architecture/constraints#^t2-revision-semantics), [t1-non-arbitrary](../1-framework/reasoning-integrity#^t1-served-goal).
+Bearing criteria: [revision accountability](../1-framework/research-activities-workflows#^t1-revision-accountability), [t1-non-arbitrary](../1-framework/reasoning-integrity#^t1-served-goal).
