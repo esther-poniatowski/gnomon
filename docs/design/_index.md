@@ -1,8 +1,15 @@
+---
+tags:
+  - index
+index: "[gnomon documentation](../_index.md)"
+aliases:
+  - Design documentation
+---
 # Design Documentation — Methods
 
-Reference documents for the gnomon epistemic framework. These files describe the rationale, structure, and specification of the research organization system. They inform the design of the governance content in the [runtime data directory](vendor/gnomon/src/gnomon/data) but are not loaded at runtime.
+Reference documents for the gnomon epistemic framework. These files describe the rationale, structure, and specification of the research organization system. They inform the design of the governance content in the [runtime data directory](../../src/gnomon/data) but are not loaded at runtime.
 
-For the project's goal and the failure modes that motivate the architecture, see [project overview](vendor/gnomon/docs/project-overview). The present document organizes the design itself.
+For the project's goal and the failure modes that motivate the architecture, see [project overview](../project-overview.md). The present document organizes the design itself.
 
 ## Tiers and axes
 
@@ -44,18 +51,31 @@ Each tier is developed its own sub-folder with an index file that organizes the 
 
 | Index                                                              | Folder organization                                                                                                     | Anchors |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ------- |
-| [Tier 1 index](vendor/gnomon/docs/design/1-framework/_index)       | Desiderata for the whole framework organized by axis                                                                    | `^t1-*` |
-| [Tier 2 index](vendor/gnomon/docs/design/2-architecture/_index)    | Per-theme criteria, commitments, and decisions                                                                          | `^t2-*` |
-| [Tier 3 index](vendor/gnomon/docs/design/3-aspect-specific/_index) | Criteria, commitments, and open questions for each aspect                                                               | `^t3-*` |
+| [Tier 1 index](1-framework/_index.md)       | Desiderata for the whole framework organized by axis                                                                    | `^t1-*` |
+| [Tier 2 index](2-architecture/_index.md)    | Per-theme criteria, commitments, and decisions                                                                          | `^t2-*` |
+| [Tier 3 index](3-aspect-specific/_index.md) | Criteria, commitments, and open questions for each aspect                                                               | `^t3-*` |
 
-## Other design documents
+## Files in this folder
 
-Many initial proposals are backed up in the `_backup/` folder, and some have been migrated to the main design documentation. The following documents are relevant to the design but not yet integrated into the tiered structure:
+| Note | Content |
+| --- | --- |
+| [Design handoff](_handoff.md) | Project-level state for a new agent, and which focused handoff governs the work about to start. |
+| [Design refactor handoff](_handoff-refactor.md) | State of the Step A–D refactor sequence. |
+| [Source-file cleanup handoff](_handoff-cleanup.md) | State of Step A.4 alone: removing source bodies whose Tier-1 content has already moved into the framework criteria. |
+| [Design classification table](_classification-table.md) | Each source entry under its current class tags, with the final state each tag produces. |
+| [Migration table](_migration-table.md) | Where each migrated entry came from and where it now lives, with the anchor on each side. |
+| [Terminology alias table](_alias-table.md) | Eight clusters of labels that denote one referent, each with the term retained for forward use. |
+| [Worked examples](_worked-examples.md) | Statements the framework must be able to represent, each paired with the parts that handle it. |
+| [Fleeting ideas](_fleeting-ideas.md) | Ideas awaiting triage, held until each one feeds a TODO entry, an open decision, a stub, or none. |
 
-- [Layered model](_backup/architecture-1-layered-model.md)
-- [Rendering and views](_backup/rendering/rendering-and-views.md)
-- [Workflows](_backup/workflow-for-users.md)
-- [Object types ontology](vendor/gnomon/docs/object-types-ontology/_index)
-- [Argument bundles](_backup/arguments-reasoning/argument-bundles.md)
-- Criteria files: [criteria taxonomy backup](_backup/object-types-ontology/taxo-criteria-ontology.md).
-- The [reference frameworks](vendor/gnomon/docs/references-methods/overview-formal-frameworks) ground several criteria.
+## Superseded proposals
+
+[The earlier proposals, registered by group](_backup/_index.md), remain informational sources. Five are consulted for commitments that the tier files record without re-deriving:
+
+- [the layered model](_backup/architecture-1-layered-model.md);
+- [the rendering proposal](_backup/rendering/rendering-and-views.md);
+- [the user workflow](_backup/workflow-for-users.md);
+- [argument bundles](_backup/arguments-reasoning/argument-bundles.md);
+- [the conditions a canonical object must satisfy](_backup/object-types-ontology/taxo-criteria-ontology.md).
+
+Several criteria are grounded in [the formal reasoning domains](../references-methods/formal-frameworks-overview.md).

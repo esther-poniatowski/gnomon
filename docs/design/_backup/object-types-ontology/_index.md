@@ -1,3 +1,14 @@
+---
+tags:
+  - index
+  - backup
+index: "[Superseded design proposals](../_index.md)"
+aliases:
+  - Object-kind candidates
+---
+# Object-kind candidates
+
+Each candidate notion receives one specification, which names the encoding scheme the candidate takes. A candidate that survives admission stays a primitive object kind; the others are absorbed into a carrier, a supertype, a composite, or a relation.
 
 ## Encoding scheme categories
 
@@ -38,3 +49,13 @@
 | [ANALOGY](obj-analogy.md)                             |            |
 | [RATIONALE](obj-rationale-motivation.md)              |            |
 | [EVALUATION (meta-epistemic)](obj-evaluation-meta.md) |            |
+
+## Cross-cutting records
+
+| Record | Content |
+| --- | --- |
+| [Families of objects](taxo-families-objects.md) | The families into which the candidate kinds group. |
+| [Object boundary comparisons](taxo-boundaries.md) | Pairs of kinds a reader may conflate, each compared under one structure. |
+| [Object admission criteria](taxo-criteria-ontology.md) | The five conditions a candidate must satisfy to exist as a canonical object. |
+| [Typed graph edges](relations-graph-edges.md) | The typed relations between objects that raise query precision. |
+| [Unlabelled object candidate](obj-.md) | A specification carrying no object label, retained as the template of the others. |
