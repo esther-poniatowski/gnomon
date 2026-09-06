@@ -13,17 +13,17 @@ aliases:
 
 ## Table of Contents
 
-1. [Initial Question: Design Principles for a Fully Formal Research Reasoning Language](#1-initial-question-design-principles-for-a-fully-formal-research-reasoning-language)
-2. [Clarifications on Language, Grammar, Ontology, and the Status of Relations](#2-clarifications-on-language-grammar-ontology-and-the-status-of-relations)
-3. [Beyond Deduction: A Calculus of Constructive Epistemic Operations](#3-beyond-deduction-a-calculus-of-constructive-epistemic-operations)
-4. [Extending the Operation Inventory](#4-extending-the-operation-inventory)
-5. [From Operation Inventory to Concrete Execution](#5-from-operation-inventory-to-concrete-execution)
-6. [Reasoning as Explicit Stepwise Construction](#6-reasoning-as-explicit-stepwise-construction)
-7. [Two Foundational Clarifications: Objects-as-Moves and the Rule Catalog](#7-two-foundational-clarifications-objects-as-moves-and-the-rule-catalog)
+1. [Initial Question: Design Principles for a Fully Formal Research Reasoning Language](#^design-principles)
+2. [Clarifications on Language, Grammar, Ontology, and the Status of Relations](#^vocabulary-clarifications)
+3. [Beyond Deduction: A Calculus of Constructive Epistemic Operations](#^operations-calculus)
+4. [Extending the Operation Inventory](#^operation-inventory)
+5. [From Operation Inventory to Concrete Execution](#^execution-semantics)
+6. [Reasoning as Explicit Stepwise Construction](#^stepwise-construction)
+7. [Two Foundational Clarifications: Objects-as-Moves and the Rule Catalog](#^objects-as-moves)
 
 ---
 
-## 1. Initial Question: Design Principles for a Fully Formal Research Reasoning Language
+## 1. Initial Question: Design Principles for a Fully Formal Research Reasoning Language ^design-principles
 
 ### Context
 
@@ -185,7 +185,7 @@ The deepest commitment is this: a formal research-reasoning language is a *calcu
 
 ---
 
-## 2. Clarifications on Language, Grammar, Ontology, and the Status of Relations
+## 2. Clarifications on Language, Grammar, Ontology, and the Status of Relations ^vocabulary-clarifications
 
 ### Questions
 
@@ -312,7 +312,7 @@ Relations are reducible to reified objects via the standard construction, and th
 
 ---
 
-## 3. Beyond Deduction: A Calculus of Constructive Epistemic Operations
+## 3. Beyond Deduction: A Calculus of Constructive Epistemic Operations ^operations-calculus
 
 ### Question
 
@@ -450,7 +450,7 @@ Once $\mathcal{S}$ is enlarged to include signatures, questions, mappings, schem
 
 ---
 
-## 4. Extending the Operation Inventory
+## 4. Extending the Operation Inventory ^operation-inventory
 
 ### Question
 
@@ -582,7 +582,7 @@ The right disposition: *open-ended but principled*.
 
 ---
 
-## 5. From Operation Inventory to Concrete Execution
+## 5. From Operation Inventory to Concrete Execution ^execution-semantics
 
 ### Question
 
@@ -642,7 +642,7 @@ An invocation producing none of these is *vacuous* and should be flagged.
 
 ---
 
-## 6. Reasoning as Explicit Stepwise Construction
+## 6. Reasoning as Explicit Stepwise Construction ^stepwise-construction
 
 ### Disagreement and Correction
 
@@ -811,7 +811,7 @@ The corrected design takes the operational discipline of proof assistants and ge
 
 ---
 
-## 7. Two Foundational Clarifications: Objects-as-Moves and the Rule Catalog
+## 7. Two Foundational Clarifications: Objects-as-Moves and the Rule Catalog ^objects-as-moves
 
 ### Questions
 

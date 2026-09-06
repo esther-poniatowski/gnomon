@@ -61,7 +61,7 @@ followed by nine numbered sections corresponding one-to-one to the checklists:
 checklist question that was violated. Section 9 collects all required revisions
 with severity and recommended action.
 
-## Audit enforcement by note type
+## Audit enforcement by note type ^audit-by-note-type
 
 The audit pass must verify that the note's declared type matches its actual
 content. If a note contains sections that match a forbidden pattern for its
