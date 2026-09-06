@@ -3,7 +3,7 @@
 > [!IMPORTANT]
 > To contribute effectively, please conform to those guidelines and use the provided templates.
 
-## Submitting Issues
+## Submitting issues
 
 To submit a new issue:
 
@@ -11,7 +11,7 @@ To submit a new issue:
 2. Select and fill the issue template.
 3. Add relevant labels, assignees, and milestone if applicable.
 
-## Developing the Code
+## Developing the code
 
 Contributions to the codebase should be developed in a local clone of the repository. Follow these
 steps to set up a development environment:
@@ -42,7 +42,7 @@ steps to set up a development environment:
    pip install -e /src/gnomon
    ```
 
-### Using the Commit Message Template
+### Using the commit message template
 
 1. Edit the commit template (`.gitmessage`, at the root of the repository) to specify the name and
    email address of the committer.
@@ -59,7 +59,7 @@ steps to set up a development environment:
    git config --get commit.template
    ```
 
-### Commit Message Format
+### Commit message format
 
 > [!NOTE]
 > To write a commit message with this template, adhere to the following format:
@@ -72,11 +72,11 @@ steps to set up a development environment:
 - Use the body to explain what and why (not how)
 - Add references to issues or other commits using [GitHub keywords](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/using-keywords-in-issues-and-pull-requests)
 
-## Configuration File Organization
+## Configuration file organization
 
 This project separates configuration concerns between two locations:
 
-### `pyproject.toml` — Project Management
+### `pyproject.toml` — Project management
 
 Contains only build system, package metadata, dependencies, entry points, and tool configurations
 that **must** reside in `pyproject.toml` (because the tool does not support external config paths):
@@ -89,7 +89,7 @@ that **must** reside in `pyproject.toml` (because the tool does not support exte
 - `[tool.setuptools]` — Package discovery and source layout
 - `[tool.pytest.ini_options]` — Pytest settings (pytest does not support custom config paths)
 
-### `config/tools/` — Tool-Specific Settings
+### `config/tools/` — Tool-specific settings
 
 Contains dedicated configuration files for each development tool. This achieves modular,
 tool-specific settings that are decoupled from the main project file:
@@ -103,7 +103,7 @@ tool-specific settings that are decoupled from the main project file:
 | `pyrightconfig.json`  | Pyright                | Static type analysis overrides    |
 | `releaserc.toml`      | Python Semantic Release| Versioning and changelog           |
 
-### `config/dictionaries/` — Spell Checking
+### `config/dictionaries/` — Spell checking
 
 Custom word lists for CSpell (VS Code spell checker):
 
