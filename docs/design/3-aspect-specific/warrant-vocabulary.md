@@ -8,7 +8,7 @@ aliases:
 # Warrant vocabulary
 
 > [!INFO] Tier and source
-> **Tier 3 (per aspect).** Instantiates the architectural commitment at [warrant-kind annotation on support relations](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-warrant-annotation), resolved as warrant kind on each edge, with node defeasibility derived from incoming edges. The architecture commits *that* a closed enum for warrant kinds exists, *that* edges carry warrant kinds, and *that* a combination rule over incoming edges determines node defeasibility. This file fixes the enum entries and the combination rule.
+> **Tier 3 (per aspect).** Instantiates the architectural commitment at [warrant-kind annotation on support relations](../2-architecture/validity-revision.md#^t2-warrant-annotation), resolved as warrant kind on each edge, with node defeasibility derived from incoming edges. The architecture commits *that* a closed enum for warrant kinds exists, *that* edges carry warrant kinds, and *that* a combination rule over incoming edges determines node defeasibility. This file fixes the enum entries and the combination rule.
 
 ---
 
@@ -56,7 +56,7 @@ For each node, the warrant kinds of its incoming support edges combine as follow
 
 > [!QUESTION] Does the warrant enum inside assemblies coincide with the enum for canonical edges above, or admit looser kinds used only in assemblies?
 
-[promotion of assembly-local records](vendor/gnomon/docs/design/2-architecture/reasoning-structure#^t2-assembly-record-promotion) admits support edges inside assemblies between endpoints that are not canonical. Those edges carry `warrant_kind`; the enum choice depends on which fields [the reasoning note schema](vendor/gnomon/docs/design/3-aspect-specific/reasoning-fields) selects.
+[promotion of assembly-local records](../2-architecture/reasoning-structure.md#^t2-assembly-record-promotion) admits support edges inside assemblies between endpoints that are not canonical. Those edges carry `warrant_kind`; the enum choice depends on which fields [the reasoning note schema](reasoning-fields.md) selects.
 
 ### Methodological / definitional / interpretive classification ^t3-mdi-warrant-classification
 

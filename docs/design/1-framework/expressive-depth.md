@@ -25,12 +25,12 @@ For every activity in this set, the framework must provide a **representation**,
 
 **Upstream dependencies.**
 
-- [Inquiry content and progression](framework-foundations#^t1-inquiry-content-and-progression) (parent criterion): the dynamic dimension is realised through these activities; coverage of the dynamic dimension requires coverage of the activities.
+- [Inquiry content and progression](framework-foundations.md#^t1-inquiry-content-and-progression) (parent criterion): the dynamic dimension is realised through these activities; coverage of the dynamic dimension requires coverage of the activities.
 
 **Downstream consequences.**
 
-- [Activity access rights](research-activities-workflows#^t1-activity-access-rights) (cross-group sub-criterion in *Research activities and workflows*): each activity in this taxonomy is assigned defined read and write rights.
-- [Move coverage](object-kinds#^t2-move-coverage) (theme-local criterion): the operation library must span every activity in this taxonomy at the per-step grain.
+- [Activity access rights](research-activities-workflows.md#^t1-activity-access-rights) (cross-group sub-criterion in *Research activities and workflows*): each activity in this taxonomy is assigned defined read and write rights.
+- [Move coverage](../2-architecture/object-kinds.md#^t2-move-coverage) (theme-local criterion): the operation library must span every activity in this taxonomy at the per-step grain.
 - Workflow decisions in the workflows theme: each activity has a workflow specifying how the user performs it.
 
 ## Reasoning-types coverage ^t1-reasoning-types-coverage
@@ -47,11 +47,11 @@ The framework admits the **range of reasoning kinds** that research actually emp
 
 **Upstream dependencies.**
 
-- [Inquiry content and progression](framework-foundations#^t1-inquiry-content-and-progression) (parent criterion): without coverage across reasoning kinds the framework cannot capture genuine research.
+- [Inquiry content and progression](framework-foundations.md#^t1-inquiry-content-and-progression) (parent criterion): without coverage across reasoning kinds the framework cannot capture genuine research.
 
 **Downstream consequences.**
 
-- [Valid licensing](reasoning-integrity#^t1-valid-licensing) (sub-criterion): its warrant-composition facet becomes pertinent only once warrants of different kinds coexist within a single chain.
+- [Valid licensing](reasoning-integrity.md#^t1-valid-licensing) (sub-criterion): its warrant-composition facet becomes pertinent only once warrants of different kinds coexist within a single chain.
 
 ## Rich content expressivity ^t1-rich-prose-expressivity
 
@@ -61,18 +61,18 @@ The framework's semantic fields admit **content shapes richer than short scalars
 
 **Upstream dependencies.**
 
-- [Inquiry content and progression](framework-foundations#^t1-inquiry-content-and-progression) (parent criterion): research artefacts include rich mathematical and structural content; an adequate framework must host such content as first-class.
-- [Formal expression of all content](framework-foundations#^t1-formal-expression) (peer sub-criterion of *Language-tooling integration*): the richness this criterion demands must be supplied by formal grammars, not by prose.
+- [Inquiry content and progression](framework-foundations.md#^t1-inquiry-content-and-progression) (parent criterion): research artefacts include rich mathematical and structural content; an adequate framework must host such content as first-class.
+- [Formal expression of all content](framework-foundations.md#^t1-formal-expression) (peer sub-criterion of *Language-tooling integration*): the richness this criterion demands must be supplied by formal grammars, not by prose.
 
 **Downstream consequences.**
 
-- [Field-typing discipline](../2-architecture/object-kinds#^t2-field-typing) (decision): the admissible shapes for semantic fields include math grammars, structured-derivation records, and declarative diagram languages — never free-text bodies.
-- [Object-kind admission test](../2-architecture/object-kinds#^t2-object-kind-admission) (decision): a candidate kind is admissible only when its canonical content has a grammar of suitable richness; prose canonical content is not admissible.
+- [Field-typing discipline](../2-architecture/object-kinds.md#^t2-field-typing) (decision): the admissible shapes for semantic fields include math grammars, structured-derivation records, and declarative diagram languages — never free-text bodies.
+- [Object-kind admission test](../2-architecture/object-kinds.md#^t2-object-kind-admission) (decision): a candidate kind is admissible only when its canonical content has a grammar of suitable richness; prose canonical content is not admissible.
 - Canonical-vs-exposition encoding (structural note): the canonical layer carries grammar-bound semantic content; the exposition layer renders that content for human readers and may carry prose around it.
 
 ## Partial formalization tolerance ^t1-partial-formalization
 
-**The level of formalization is set per object**, not globally by the framework. Partiality applies to **which annotations are present**, never to the grammar of the annotations themselves: every annotation that is present is grammar-bound per [formal expression of all content](framework-foundations#^t1-formal-expression). Two facets:
+**The level of formalization is set per object**, not globally by the framework. Partiality applies to **which annotations are present**, never to the grammar of the annotations themselves: every annotation that is present is grammar-bound per [formal expression of all content](framework-foundations.md#^t1-formal-expression). Two facets:
 
 - Contents (concept, claim, argument...) are admissible as legitimate intermediate items before their full formal characterization is available: a partially-specified content is a first-class participant in the framework, not a placeholder. The content fields that *are* recorded conform to their grammar; the fields that are not yet known are marked absent rather than filled with prose.
 - For any individual object, some aspects (warrant, motivation, status, scope, …) may be left unannotated. The framework specifies, for each aspect, which annotations are mandatory, which are optional, and which formal guarantees no longer hold under relaxation. An unannotated aspect is recorded as *absent*; it is never approximated by a prose stand-in inside a semantic field.
@@ -81,14 +81,14 @@ The framework's semantic fields admit **content shapes richer than short scalars
 
 **Upstream dependencies.**
 
-- [Inquiry content and progression](framework-foundations#^t1-inquiry-content-and-progression) (parent criterion): research operates on partially specified objects.
-- [Formal expression of all content](framework-foundations#^t1-formal-expression) (peer sub-criterion of *Language-tooling integration*): partiality is *annotation absence*, not *sub-formal prose*; the two criteria together define the only admissible form of partial formalization.
+- [Inquiry content and progression](framework-foundations.md#^t1-inquiry-content-and-progression) (parent criterion): research operates on partially specified objects.
+- [Formal expression of all content](framework-foundations.md#^t1-formal-expression) (peer sub-criterion of *Language-tooling integration*): partiality is *annotation absence*, not *sub-formal prose*; the two criteria together define the only admissible form of partial formalization.
 
 **Downstream consequences.**
 
 - Partial-formalization profile (open decision in the validity-revision theme): answers *which profiles are admissible* under this criterion.
-- [Justification levels](reasoning-integrity#^t1-justification-levels) (tension per `^t2-x2`): deeper formalization improves the recoverability of reasoning at the cost of authoring overhead.
-- [Apt strategy](reasoning-integrity#^t1-apt-strategy) (tension per `^t2-x2`): same tradeoff at the motivation grain — full annotation of every move's rationale and every sub-gap's admissibility conditions is heavy.
+- [Justification levels](reasoning-integrity.md#^t1-justification-levels) (tension per `^t2-x2`): deeper formalization improves the recoverability of reasoning at the cost of authoring overhead.
+- [Apt strategy](reasoning-integrity.md#^t1-apt-strategy) (tension per `^t2-x2`): same tradeoff at the motivation grain — full annotation of every move's rationale and every sub-gap's admissibility conditions is heavy.
 
 ## Concrete analytical execution ^t1-concrete-execution
 
@@ -98,7 +98,7 @@ Reasoning chains encode **actual epistemic work**: step-by-step proofs, computat
 
 **Upstream dependencies.**
 
-- [Inquiry content and progression](framework-foundations#^t1-inquiry-content-and-progression) (cross-group parent criterion in *Framework foundation*): genuine reasoning is the actual epistemic work, not its label.
+- [Inquiry content and progression](framework-foundations.md#^t1-inquiry-content-and-progression) (cross-group parent criterion in *Framework foundation*): genuine reasoning is the actual epistemic work, not its label.
 
 **Downstream consequences.**
 
@@ -118,4 +118,4 @@ Describing a reasoning **terminates**, it does not lead to an open-ended demand 
 **Downstream consequences.**
 
 - Closed-library mechanism (decision in the operation-schemas theme): one chosen answer — a different framework could satisfy this criterion by other means (e.g., a meta-rule reducing every operation to a fixed computational basis).
-- [Operation-primitiveness](operations-and-modes#^t2-operation-primitiveness) (open decision): selects among four termination strategies — definitional fiat, well-foundedness derivation, schema calculus, open library.
+- [Operation-primitiveness](../2-architecture/operations-and-modes.md#^t2-operation-primitiveness) (open decision): selects among four termination strategies — definitional fiat, well-foundedness derivation, schema calculus, open library.

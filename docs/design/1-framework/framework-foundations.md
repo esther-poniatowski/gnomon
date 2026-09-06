@@ -31,9 +31,9 @@ The language is primary: the tooling operates over what the language records. To
 - [Typed-object decomposition](#^t1-typed-object-decomposition) (sub-criterion): the language must expose the object kinds and fields that tooling validates.
 - [Functional separation of concerns](#^t1-functional-separation) (sub-criterion): language and tooling components are separated by function, each boundary carrying a separation-of-concerns rationale.
 - [Component-set adequacy](#^t1-component-set-adequacy) (sub-criterion): the set of components the language and tooling provide must be sufficient, necessary, and adequately compressed.
-- [Relational queryability](modular-content-organization#^t1-relational-queryability) (cross-group sub-criterion in *Modular content organization*): tooling can query relations only when the language records those relations explicitly.
-- [Validation externality](research-activities-workflows#^t1-validation-externality) (cross-group sub-criterion in *Research activities and workflows*): validation tooling checks authored structure rather than replacing it.
-- [Read-side automation](cost-ergonomics#^t1-read-side-automation) and [write-side automation](cost-ergonomics#^t1-write-side-automation) (cross-group sub-criteria in *Cost and Ergonomics*): automation remains bounded because tools operate over declared language structure.
+- [Relational queryability](modular-content-organization.md#^t1-relational-queryability) (cross-group sub-criterion in *Modular content organization*): tooling can query relations only when the language records those relations explicitly.
+- [Validation externality](research-activities-workflows.md#^t1-validation-externality) (cross-group sub-criterion in *Research activities and workflows*): validation tooling checks authored structure rather than replacing it.
+- [Read-side automation](cost-ergonomics.md#^t1-read-side-automation) and [write-side automation](cost-ergonomics.md#^t1-write-side-automation) (cross-group sub-criteria in *Cost and Ergonomics*): automation remains bounded because tools operate over declared language structure.
 
 ## Formal expression of all content ^t1-formal-expression
 
@@ -55,10 +55,10 @@ This commitment partitions every field into two disjoint classes:
 
 **Downstream consequences.**
 
-- [Rich prose expressivity](expressive-depth#^t1-rich-prose-expressivity) (peer sub-criterion in *Expressive depth*): expressivity targets — formulas, multi-step derivations, diagrams — must be met by *formal* shapes (math grammars, structured derivation records, declarative diagram languages), not by prose bodies.
-- [Partial formalization tolerance](expressive-depth#^t1-partial-formalization) (peer sub-criterion in *Expressive depth*): partial formalization means grammatical annotations may be **absent**; it never means a semantic field is filled with sub-formal prose.
-- [Field-typing discipline](../2-architecture/object-kinds#^t2-field-typing) (decision in the object-kinds theme): the field-typing meta-schema must partition fields into semantic (grammar-bound) and unessential (free-prose, framework-opaque), and forbid free prose in any semantic position.
-- [Object-kind admission test](../2-architecture/object-kinds#^t2-object-kind-admission) (decision in the object-kinds theme): no candidate kind is admissible whose canonical content is prose.
+- [Rich prose expressivity](expressive-depth.md#^t1-rich-prose-expressivity) (peer sub-criterion in *Expressive depth*): expressivity targets — formulas, multi-step derivations, diagrams — must be met by *formal* shapes (math grammars, structured derivation records, declarative diagram languages), not by prose bodies.
+- [Partial formalization tolerance](expressive-depth.md#^t1-partial-formalization) (peer sub-criterion in *Expressive depth*): partial formalization means grammatical annotations may be **absent**; it never means a semantic field is filled with sub-formal prose.
+- [Field-typing discipline](../2-architecture/object-kinds.md#^t2-field-typing) (decision in the object-kinds theme): the field-typing meta-schema must partition fields into semantic (grammar-bound) and unessential (free-prose, framework-opaque), and forbid free prose in any semantic position.
+- [Object-kind admission test](../2-architecture/object-kinds.md#^t2-object-kind-admission) (decision in the object-kinds theme): no candidate kind is admissible whose canonical content is prose.
 - Reasoning-field grammars (open question, to be staged in [the fleeting-ideas catalogue](../_fleeting-ideas.md)): strategic rationale, explanatory gain, route selection, and rejected-alternative records require grammars rather than prose defaults.
 - Validator obligation (cross-group consequence in [validation views](../2-architecture/validation-views.md)): a validator checks that no semantic field contains ungrammatical content.
 
@@ -86,13 +86,13 @@ The framework captures **research inquiry** as a **state-transforming process** 
 
 **Downstream consequences.**
 
-- [Activity coverage](expressive-depth#^t1-activity-coverage) (sub-criterion): the dynamic dimension requires that the framework support the canonical activities through which inquiry progresses.
-- [Concrete analytical execution](expressive-depth#^t1-concrete-execution) (sub-criterion): the per-step specialisation of the dynamic dimension — every step's progression must be recorded as actual epistemic work.
+- [Activity coverage](expressive-depth.md#^t1-activity-coverage) (sub-criterion): the dynamic dimension requires that the framework support the canonical activities through which inquiry progresses.
+- [Concrete analytical execution](expressive-depth.md#^t1-concrete-execution) (sub-criterion): the per-step specialisation of the dynamic dimension — every step's progression must be recorded as actual epistemic work.
 - Inferential-progression partition (decision in the reasoning-structure theme): how the framework segments the dynamic dimension into recordable steps.
-- [Object-kind taxonomy fidelity](object-kinds#^t2-ontology-content-fidelity) (theme-local criterion): the kind set must cover the static dimension's substantive content without omission or distortion.
-- [Subtype safety](object-kinds#^t2-ontology-subtype-safety) (theme-local criterion): subtype labels must not silently imply substitutability between kinds with different reasoning roles.
-- [Move coverage](object-kinds#^t2-move-coverage) (theme-local criterion): the operation library must span every epistemic move the framework supports.
-- [Valid licensing](reasoning-integrity#^t1-valid-licensing) (sub-criterion): the recorded reasoning must rest on checkable warrants — non-circular, complete, and soundly composed across warrant kinds.
+- [Object-kind taxonomy fidelity](../2-architecture/object-kinds.md#^t2-ontology-content-fidelity) (theme-local criterion): the kind set must cover the static dimension's substantive content without omission or distortion.
+- [Subtype safety](../2-architecture/object-kinds.md#^t2-ontology-subtype-safety) (theme-local criterion): subtype labels must not silently imply substitutability between kinds with different reasoning roles.
+- [Move coverage](../2-architecture/object-kinds.md#^t2-move-coverage) (theme-local criterion): the operation library must span every epistemic move the framework supports.
+- [Valid licensing](reasoning-integrity.md#^t1-valid-licensing) (sub-criterion): the recorded reasoning must rest on checkable warrants — non-circular, complete, and soundly composed across warrant kinds.
 
 ## No run-time inference engine ^t1-no-runtime-inference
 
@@ -108,15 +108,15 @@ The [framework's tooling](#^t1-language-tooling-integration) **records and valid
 **Upstream dependencies.**
 
 - [Language-tooling integration](#^t1-language-tooling-integration) (parent criterion): the criterion fixes the boundary of the *tooling* half — which activities the tooling performs and which it excludes.
-- [Valid licensing](reasoning-integrity#^t1-valid-licensing) (cross-group criterion in *Reasoning integrity*): warrant kinds and defeat conditions must be recorded explicitly, since no reasoner derives them.
-- [Revision accountability](research-activities-workflows#^t1-revision-accountability) (cross-group criterion in *Research activities and workflows*): upstream changes must reach dependents through traceable revision events, since no reasoner re-evaluates them.
+- [Valid licensing](reasoning-integrity.md#^t1-valid-licensing) (cross-group criterion in *Reasoning integrity*): warrant kinds and defeat conditions must be recorded explicitly, since no reasoner derives them.
+- [Revision accountability](research-activities-workflows.md#^t1-revision-accountability) (cross-group criterion in *Research activities and workflows*): upstream changes must reach dependents through traceable revision events, since no reasoner re-evaluates them.
 
 **Downstream consequences.**
 
-- [Warrant-kind annotation on support relations](2-architecture/validity-revision#^t2-warrant-annotation) (decision in the validity-revision theme): support edges record warrant kinds so that propagation can be parameterized without run-time warrant evaluation.
-- [Revision and feedback semantics](2-architecture/validity-revision#^t2-revision-feedback) (decision in the validity-revision theme): all changes that affect warrants are revision events driven by the author.
-- [Dependent flagging](2-architecture/validity-revision#^t2-dependent-flagging) (decision in the validity-revision theme): tooling computes stale marks from the registry and emits diagnostics for the author, rather than mutating dependents automatically.
-- [Relational queryability](modular-content-organization#^t1-relational-queryability) (cross-group sub-criterion in *Modular content organization*): query tools retrieve authored and derived registry structure; they do not infer new warrants at run time.
+- [Warrant-kind annotation on support relations](../2-architecture/validity-revision.md#^t2-warrant-annotation) (decision in the validity-revision theme): support edges record warrant kinds so that propagation can be parameterized without run-time warrant evaluation.
+- [Revision and feedback semantics](../2-architecture/validity-revision.md#^t2-revision-feedback) (decision in the validity-revision theme): all changes that affect warrants are revision events driven by the author.
+- [Dependent flagging](../2-architecture/validity-revision.md#^t2-dependent-flagging) (decision in the validity-revision theme): tooling computes stale marks from the registry and emits diagnostics for the author, rather than mutating dependents automatically.
+- [Relational queryability](modular-content-organization.md#^t1-relational-queryability) (cross-group sub-criterion in *Modular content organization*): query tools retrieve authored and derived registry structure; they do not infer new warrants at run time.
 
 ## No version history ^t1-no-version-history
 
@@ -132,9 +132,9 @@ The framework **does not reimplement a version-history system**. It records and 
 
 **Downstream consequences.**
 
-- [Revision and feedback semantics](2-architecture/validity-revision#^t2-revision-feedback) (decision in the validity-revision theme): revision objects record in-state revision events, not version history.
-- [Archival](2-architecture/validity-revision#^t2-archival) (decision in the validity-revision theme): outdated objects move within the source tree rather than into a parallel history store.
-- [Epistemic status as a maturity record](object-kinds#^t2-epistemic-status) (decision in the object-kinds theme): supersession is excluded from the maturity vocabulary; status records the object's current standing.
+- [Revision and feedback semantics](../2-architecture/validity-revision.md#^t2-revision-feedback) (decision in the validity-revision theme): revision objects record in-state revision events, not version history.
+- [Archival](../2-architecture/validity-revision.md#^t2-archival) (decision in the validity-revision theme): outdated objects move within the source tree rather than into a parallel history store.
+- [Epistemic status as a maturity record](../2-architecture/object-kinds.md#^t2-epistemic-status) (decision in the object-kinds theme): supersession is excluded from the maturity vocabulary; status records the object's current standing.
 
 ## Typed-object decomposition ^t1-typed-object-decomposition
 
@@ -150,7 +150,7 @@ The framework decomposes inquiry content into a structured set of **typed object
 > This criterion requires inquiry content to be decomposed into typed objects, but it does not prescribe:
 > - *which* object types are admitted;
 > - *how* inferential progression is recorded;
-> - *how* relations between objects are encoded (open question: [relation reification threshold](2-architecture/relations-graph#^t2-relation-reification)).
+> - *how* relations between objects are encoded (open question: [relation reification threshold](../2-architecture/relations-graph.md#^t2-relation-reification)).
 >
 > These decisions are downstream. The criterion does not guarantee that the decomposition is **unique**: the same content may yield different object sets at different grains of analysis.
 
@@ -165,7 +165,7 @@ The framework decomposes inquiry content into a structured set of **typed object
 - Progression-encoding decisions (in the relations-graph, reasoning-structure, and arguments-reasoning themes): how inferential progression is recorded over the typed objects.
 - [Functional separation of concerns](#^t1-functional-separation) (peer sub-criterion): function — not surface form — is what distinguishes object kinds, and each kind boundary carries a separation-of-concerns rationale.
 - [Component-set adequacy](#^t1-component-set-adequacy) (cross-reference): the object-kind set this criterion commits to is one component set the adequacy standard judges.
-- [Addressability](modular-content-organization#^t1-addressability) (cross-group sub-criterion in *Modular content organization*): typed-object decomposition makes content addressable by giving each unit a kind-tagged identity.
+- [Addressability](modular-content-organization.md#^t1-addressability) (cross-group sub-criterion in *Modular content organization*): typed-object decomposition makes content addressable by giving each unit a kind-tagged identity.
 
 ## Component-set adequacy ^t1-component-set-adequacy
 
@@ -187,10 +187,10 @@ The framework's components — object kinds, fields, relations, vocabularies, op
 **Downstream consequences.**
 
 - [Functional separation of concerns](#^t1-functional-separation) (peer sub-criterion): functional separation draws each component boundary; component-set adequacy judges whether the resulting set has the right members. The two are complementary — one governs boundaries, the other coverage.
-- [Object-kind admission test](object-kinds#^t2-object-kind-admission) (decision in the object-kinds theme): the object-kind specialisation — the five-condition test by which a candidate kind is judged sufficient and necessary.
-- [Object-kind smallness](object-kinds#^t2-ontology-small) (theme-local criterion): the compression condition at the object-kinds grain, bounded there too by role purity and coverage.
-- [Admissibility under the five-condition test](3-aspect-specific/ontology#^t3-admissibility-five-conditions) and [primary-content, operational, and non-distortion conditions](3-aspect-specific/ontology#^t3-primary-content-conditions) (criteria in the ontology theme): the object-kind-set consequences of this standard — sufficiency, necessity, and non-distortion stated for the canonical object set.
-- [Non-redundancy](modular-content-organization#^t1-non-redundancy) (cross-group sub-criterion in *Modular content organization*): the necessity condition extends to content instances, not only to components.
+- [Object-kind admission test](../2-architecture/object-kinds.md#^t2-object-kind-admission) (decision in the object-kinds theme): the object-kind specialisation — the five-condition test by which a candidate kind is judged sufficient and necessary.
+- [Object-kind smallness](../2-architecture/object-kinds.md#^t2-ontology-small) (theme-local criterion): the compression condition at the object-kinds grain, bounded there too by role purity and coverage.
+- [Admissibility under the five-condition test](../3-aspect-specific/ontology.md#^t3-admissibility-five-conditions) and [primary-content, operational, and non-distortion conditions](../3-aspect-specific/ontology.md#^t3-primary-content-conditions) (criteria in the ontology theme): the object-kind-set consequences of this standard — sufficiency, necessity, and non-distortion stated for the canonical object set.
+- [Non-redundancy](modular-content-organization.md#^t1-non-redundancy) (cross-group sub-criterion in *Modular content organization*): the necessity condition extends to content instances, not only to components.
 
 ## Functional separation of concerns ^t1-functional-separation
 
@@ -209,11 +209,11 @@ The framework's components — object kinds, fields, relations, vocabularies, op
 
 **Downstream consequences.**
 
-- [Object-kind admission test](object-kinds#^t2-object-kind-admission) (decision): the admission test decides a candidate kind by its function, ensuring each kind boundary is well-defined and functionally justified.
+- [Object-kind admission test](../2-architecture/object-kinds.md#^t2-object-kind-admission) (decision): the admission test decides a candidate kind by its function, ensuring each kind boundary is well-defined and functionally justified.
 - Motivation-encoding mechanism (decision in the reasoning-structure theme): implements the function-vs-form split at the motivation grain.
 - Epistemic-work-encoding mechanism (decision in the reasoning-structure theme): implements the function-vs-form split at the work grain.
 - Activity admission (decision in the workflows theme): tests candidate activities by their function in inquiry progression, not by surface resemblance to existing workflows.
-- [Canonical terminology](modular-content-organization#^t1-canonical-terminology) (cross-group sub-criterion in *Modular content organization*): canonical names are one mechanism by which component boundaries remain unambiguous in prose.
+- [Canonical terminology](modular-content-organization.md#^t1-canonical-terminology) (cross-group sub-criterion in *Modular content organization*): canonical names are one mechanism by which component boundaries remain unambiguous in prose.
 
 > [!NOTE] Criterion scope
-> The boundaries at stake are those of the framework's *own components* (object kinds, fields, relations, vocabularies, operations, layers), **not** the *concepts* the inquiry manipulates (e.g. a scientific notion such as "geometry"). A concept appearing inside the content may have a vague or contested boundary without violating this criterion; how the framework handles content concepts with unstable boundaries is the candidate-set machinery of [the definition normal form](3-aspect-specific/ontology#^t3-definition-normal-form).
+> The boundaries at stake are those of the framework's *own components* (object kinds, fields, relations, vocabularies, operations, layers), **not** the *concepts* the inquiry manipulates (e.g. a scientific notion such as "geometry"). A concept appearing inside the content may have a vague or contested boundary without violating this criterion; how the framework handles content concepts with unstable boundaries is the candidate-set machinery of [the definition normal form](../3-aspect-specific/ontology.md#^t3-definition-normal-form).

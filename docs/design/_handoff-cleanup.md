@@ -32,7 +32,7 @@ For each cleanup-eligible heading:
 - Replace migrated prose with one `[!INFO] Migrated to ...` callout.
 - Delete migrated prose only after comparing it against the current target criterion.
 - Preserve content that belongs to a Tier-2 or Tier-3 decision.
-- By default, do not add redirects, move files, or reorganize sections during Step A.4 — these belong to later steps. **But the user may explicitly direct such extended actions**, per [Opportunistic scope](_handoff#^opportunistic-scope) in the main handoff: under explicit user direction, the cleanup may redirect references, delete files, create or rename entries and anchors. When it does, it records the [deferred synchronization debt](_handoff#^deferred-synchronization-debt) and surfaces it at the next stopping point.
+- By default, do not add redirects, move files, or reorganize sections during Step A.4 — these belong to later steps. **But the user may explicitly direct such extended actions**, per [Opportunistic scope](_handoff.md#^opportunistic-scope) in the main handoff: under explicit user direction, the cleanup may redirect references, delete files, create or rename entries and anchors. When it does, it records the [deferred synchronization debt](_handoff.md#^deferred-synchronization-debt) and surfaces it at the next stopping point.
 
 When source content is not clearly covered by the target criterion, stop and ask the user to choose one route:
 

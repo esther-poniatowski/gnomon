@@ -48,7 +48,7 @@ This criterion excludes candidates that are **not epistemic units**, such as:
 
 ### Functional criterion
 
-> [!INFO] The "unit of progression vs. unit of epistemic work" distinction is migrated to [functional separation of concerns](../../1-framework/framework-foundations#^t1-functional-separation). The motivation-encoding and epistemic-work-encoding decisions remain as theme-local D's.
+> [!INFO] The "unit of progression vs. unit of epistemic work" distinction is migrated to [functional separation of concerns](../../1-framework/framework-foundations.md#^t1-functional-separation). The motivation-encoding and epistemic-work-encoding decisions remain as theme-local D's.
 
 The framework must introduce object types that are necessary to encode the local advancement of inquiry and preserve intelligibility. 
 

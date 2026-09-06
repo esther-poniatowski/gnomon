@@ -42,9 +42,9 @@ Per-action cost is **bounded**: each authoring action — adding an object, reco
 
 **Downstream consequences.**
 
-- [Object-kind smallness](object-kinds#^t2-ontology-small) (theme-local criterion): more kinds raise per-action cost.
+- [Object-kind smallness](../2-architecture/object-kinds.md#^t2-ontology-small) (theme-local criterion): more kinds raise per-action cost.
 - [System scale](#^t1-system-scale) (sub-criterion): bounds per-action cost as the corpus grows.
-- [Justification levels](reasoning-integrity#^t1-justification-levels) (tension per `^t2-x2`): deeper annotation lowers ambiguity at the cost of more per-action work.
+- [Justification levels](reasoning-integrity.md#^t1-justification-levels) (tension per `^t2-x2`): deeper annotation lowers ambiguity at the cost of more per-action work.
 
 ## Read-side automation ^t1-read-side-automation
 
@@ -59,7 +59,7 @@ The system supports **automated reading**: query, search, navigation, comparison
 
 **Downstream consequences.**
 
-- [Relational queryability](modular-content-organization#^t1-relational-queryability) (sub-criterion): one consumer of automated reading.
+- [Relational queryability](modular-content-organization.md#^t1-relational-queryability) (sub-criterion): one consumer of automated reading.
 - [System scale](#^t1-system-scale) (sub-criterion): bounds automated-reading cost as the corpus grows.
 
 ## Write-side automation ^t1-write-side-automation
@@ -76,7 +76,7 @@ The system supports **automated writing**: validation, build, registry update, o
 **Downstream consequences.**
 
 - No-manual-edit policy on derived artefacts (sub-criterion): once the build can regenerate any derived artefact, manual edits become unnecessary and unsafe.
-- [Validation externality](research-activities-workflows#^t1-validation-externality) (cross-group sub-criterion in *Research activities and workflows*): externalised validators are the standard consumer of automated writing.
+- [Validation externality](research-activities-workflows.md#^t1-validation-externality) (cross-group sub-criterion in *Research activities and workflows*): externalised validators are the standard consumer of automated writing.
 - [System scale](#^t1-system-scale) (sub-criterion): bounds automated-writing cost as the corpus grows.
 
 ## System scale ^t1-system-scale
@@ -91,4 +91,4 @@ The four cost axes above remain **bounded as project size grows**. The framework
 
 **Downstream consequences.**
 
-- [Object-kind smallness](object-kinds#^t2-ontology-small) (theme-local criterion): kind proliferation degrades scaling.
+- [Object-kind smallness](../2-architecture/object-kinds.md#^t2-ontology-small) (theme-local criterion): kind proliferation degrades scaling.

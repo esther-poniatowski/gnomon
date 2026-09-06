@@ -8,7 +8,7 @@ aliases:
 # Scope fields
 
 > [!INFO] Tier and source
-> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the scope fields that bound an inquiry. Traces to [t1-non-arbitrary](../1-framework/reasoning-integrity#^t1-served-goal) and [t1-modularity](../1-framework/modular-content-organization#^t1-reuse); cross-references the workflow criterion [^t3-target-question-with-output](vendor/gnomon/docs/design/3-aspect-specific/workflows#^t3-target-question-with-output).
+> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the scope fields that bound an inquiry. Traces to [t1-non-arbitrary](../1-framework/reasoning-integrity.md#^t1-served-goal) and [t1-modularity](../1-framework/modular-content-organization.md#^t1-reuse); cross-references the workflow criterion [^t3-target-question-with-output](workflows.md#^t3-target-question-with-output).
 
 ---
 

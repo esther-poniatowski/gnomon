@@ -8,13 +8,13 @@ aliases:
 # Source languages, metadata, and grammar
 
 > [!INFO] Tier and scope
-> **Tier 2 (architectural).** This file fixes the source languages, file metadata contract, declaration wrappers, rich content blocks, and parser rules used by framework files. It instantiates [t1-dual-usability](../1-framework/cost-ergonomics#^t1-read-side-automation), [no version history](vendor/gnomon/docs/design/1-framework/framework-foundations#^t1-no-version-history), the meta-schema rule [field-typing discipline](object-kinds#^t2-field-typing), [read-side automation](../1-framework/cost-ergonomics#^t1-read-side-automation), and [single source of truth](../1-framework/research-activities-workflows#^t1-single-source-of-truth).
+> **Tier 2 (architectural).** This file fixes the source languages, file metadata contract, declaration wrappers, rich content blocks, and parser rules used by framework files. It instantiates [t1-dual-usability](../1-framework/cost-ergonomics.md#^t1-read-side-automation), [no version history](../1-framework/framework-foundations.md#^t1-no-version-history), the meta-schema rule [field-typing discipline](object-kinds.md#^t2-field-typing), [read-side automation](../1-framework/cost-ergonomics.md#^t1-read-side-automation), and [single source of truth](../1-framework/research-activities-workflows.md#^t1-single-source-of-truth).
 
 ---
 
 ## Criteria ^t2-data-format-criteria
 
-> [!INFO] The *prose+formulas+math* sub-claim is migrated to [rich prose expressivity](../1-framework/expressive-depth#^t1-rich-prose-expressivity) (promoted T2 → T1). The remaining sub-claims redirect to the cost-axis cluster, field typing, and write-side automation.
+> [!INFO] The *prose+formulas+math* sub-claim is migrated to [rich prose expressivity](../1-framework/expressive-depth.md#^t1-rich-prose-expressivity) (promoted T2 → T1). The remaining sub-claims redirect to the cost-axis cluster, field typing, and write-side automation.
 
 The format must:
 

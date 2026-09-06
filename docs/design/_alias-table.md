@@ -8,7 +8,7 @@ aliases:
 # Terminology alias table
 
 > [!INFO] Status
-> Sibling to [classification table](_classification-table) and [refactor handoff](_handoff-refactor). Records eight alias clusters detected after Step A.2's six adversarial-audit passes. Each cluster names the same underlying object or field under multiple labels across the active design and the backup files. Step C migration consults this table before minting any new anchor and consolidates `^bk-` D's that turn out to share a referent.
+> Sibling to [classification table](_classification-table.md) and [refactor handoff](_handoff-refactor.md). Records eight alias clusters detected after Step A.2's six adversarial-audit passes. Each cluster names the same underlying object or field under multiple labels across the active design and the backup files. Step C migration consults this table before minting any new anchor and consolidates `^bk-` D's that turn out to share a referent.
 
 ---
 
@@ -19,7 +19,7 @@ Each cluster row records:
 - **Canonical term**: the label used in the active design (or, when the active design is silent, the label chosen by the project for forward use).
 - **Surface variants**: every label encountered in source files (active or backup) that denotes the same referent.
 - **Sources**: the files that use each variant.
-- **Affected anchors**: the `^t<n>-` and `^bk-` anchors in [classification table](_classification-table) that name the same referent.
+- **Affected anchors**: the `^t<n>-` and `^bk-` anchors in [classification table](_classification-table.md) that name the same referent.
 - **Resolution**: how the redundancy collapses during Step C migration — which anchor survives, which folds, which is reframed.
 
 Anchors marked **(canonical)** are the survivors; anchors marked **(folds into X)** collapse against the canonical anchor during Step C; anchors marked **(grain-distinct)** describe the same referent at a different grain and survive as refinements of the canonical anchor.
@@ -132,7 +132,7 @@ The *recorded statement of what becomes available after a step*.
 **Affected anchors**:
 
 - `^t3-gain-kind-enum` (active open D) **(canonical)** — the closed enum of gain values.
-- `^t3-step-contribution-enum` (BK D minted from the retired criteria-framework backup) **(folds into `^t3-gain-kind-enum`)** — the cross-cutting note at line 472 of [classification table](_classification-table) explicitly says these "describe the same step from dual angles". Merger pre-decided.
+- `^t3-step-contribution-enum` (BK D minted from the retired criteria-framework backup) **(folds into `^t3-gain-kind-enum`)** — the cross-cutting note at line 472 of [classification table](_classification-table.md) explicitly says these "describe the same step from dual angles". Merger pre-decided.
 - `^bk-forward-productivity` **(folds into `^t3-gain-kind-enum`)** — the forward-direction prong of the local-intelligibility criterion is the same field as gain-kind, named under a different label. Merger.
 - *epistemic gain* field of `^bk-planning-schema-fields` **(folds into the canonical gain field at planning grain)**.
 - *conceptual effect* field of Proposal 2 under `^bk-bundle-fields` **(folds into the canonical gain field at per-step grain)**.

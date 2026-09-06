@@ -8,7 +8,7 @@ aliases:
 # Revision vocabulary
 
 > [!INFO] Tier and source
-> **Tier 3 (per aspect).** Instantiates the architectural commitments at [revision and feedback semantics](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-revision-feedback) and its sub-questions: [revision kinds](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-revision-kinds), [revision recording](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-revision-recording), [archival](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-archival), [upstream-change propagation](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-propagation). The architecture commits *that* a closed enum for revision kinds exists and allows multiple tags, *that* each kind has a default propagation priority, *that* revision objects distinguish authored and derived fields, and *that* archival diagnostics name the required action without performing it. This file fixes the contents.
+> **Tier 3 (per aspect).** Instantiates the architectural commitments at [revision and feedback semantics](../2-architecture/validity-revision.md#^t2-revision-feedback) and its sub-questions: [revision kinds](../2-architecture/validity-revision.md#^t2-revision-kinds), [revision recording](../2-architecture/validity-revision.md#^t2-revision-recording), [archival](../2-architecture/validity-revision.md#^t2-archival), [upstream-change propagation](../2-architecture/validity-revision.md#^t2-propagation). The architecture commits *that* a closed enum for revision kinds exists and allows multiple tags, *that* each kind has a default propagation priority, *that* revision objects distinguish authored and derived fields, and *that* archival diagnostics name the required action without performing it. This file fixes the contents.
 
 ---
 
@@ -20,7 +20,7 @@ A single revision episode must admit multiple kind tags. The schema cannot force
 
 ### Cross-aspect vocabulary partition ^t3-vocabulary-partition
 
-The enum for revision kinds, the enum for failure kinds, the [warrant-kind enum](vendor/gnomon/docs/design/3-aspect-specific/warrant-vocabulary), and the gain-kind enum (per [Reasoning-annotation field set](vendor/gnomon/docs/design/3-aspect-specific/reasoning-fields)) must partition cleanly rather than overlap. No vocabulary entry may be ambiguous between two enums.
+The enum for revision kinds, the enum for failure kinds, the [warrant-kind enum](warrant-vocabulary.md), and the gain-kind enum (per [Reasoning-annotation field set](reasoning-fields.md)) must partition cleanly rather than overlap. No vocabulary entry may be ambiguous between two enums.
 
 ### Authored-vs-derived field classification ^t3-author-derived-split
 
@@ -34,7 +34,7 @@ Each revision-object field must be classified as authored, derived, or author-du
 
 > [!QUESTION] Which revision kinds does the system recognize, and what default propagation priority does each carry?
 
-Closed enum; a revision episode may carry multiple tags; each kind carries a default propagation priority. When a revision episode carries multiple tags, the episode priority is the max over the default priorities of its tags ([upstream-change propagation](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-propagation) refines this with warrant kind sensitivity).
+Closed enum; a revision episode may carry multiple tags; each kind carries a default propagation priority. When a revision episode carries multiple tags, the episode priority is the max over the default priorities of its tags ([upstream-change propagation](../2-architecture/validity-revision.md#^t2-propagation) refines this with warrant kind sensitivity).
 
 | Kind                    | Meaning                                                                                                                                                                                                                                                                                                                                                     | Default propagation priority |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
@@ -57,14 +57,14 @@ Initial entries: `derivation_blocked`, `requires_unavailable_object`, `obstructe
 
 > [!QUESTION] What field set does a revision object carry, and which fields are authored vs. derived?
 
-Per [revision recording](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-revision-recording), every revision episode is a record at `revisions/{id}.md` with the following fields:
+Per [revision recording](../2-architecture/validity-revision.md#^t2-revision-recording), every revision episode is a record at `revisions/{id}.md` with the following fields:
 
 | Field              | Description                                                                                                                                                      | Author                                                                              |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | `revised_objects`  | List of upstream object IDs revised in this episode (multi-target permitted when several objects are revised together as part of one coherent revision process). | Human reviewer at creation                                                          |
 | `revision_kinds`   | One or more tags from the enum for revision kinds above.                                                                                                        | Human reviewer at creation                                                          |
 | `rationale`        | *Why* the revision was issued, via the enum for failure kinds above plus optional prose.                                                                         | Human reviewer at creation                                                          |
-| `priority`         | Urgency for treating the revision.                                                                                                                               | Derived automatically (see [upstream-change propagation](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-propagation)), specified by human reviewer |
+| `priority`         | Urgency for treating the revision.                                                                                                                               | Derived automatically (see [upstream-change propagation](../2-architecture/validity-revision.md#^t2-propagation)), specified by human reviewer |
 | `dependents`       | List of subsequent objects (IDs) requiring revision, identified by traversing the dependency registry from each entry in `revised_objects`.                      | Derived automatically, specified by human reviewer                                  |
 | `status`           | `open`, `in_progress`, `resolved`                                                                                                                                | Human reviewer during lifecycle                                                     |
 | `dependent.status` | Per-dependent records `pending`, `revised`, `confirmed_unaffected`, `retracted`.                                                                                 | Human reviewer during lifecycle                                                     |
@@ -73,7 +73,7 @@ Per [revision recording](vendor/gnomon/docs/design/2-architecture/validity-revis
 
 > [!QUESTION] What diagnostics does the archival validator emit on incomplete tombstone/revision pairings?
 
-Per [archival](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-archival), when the status of a canonical object flips to `retracted`, the author must:
+Per [archival](../2-architecture/validity-revision.md#^t2-archival), when the status of a canonical object flips to `retracted`, the author must:
 
 1. Create a revision object in `revisions/` carrying `revision_kinds: [retraction]`, naming the retracted ID in `revised_objects` with `rationale` filled in.
 2. Move the file to `archive/{kind}/{id}.md`.
@@ -88,9 +88,9 @@ Similarly, when a revision object flips to `resolved`, the author moves it to `a
 
 ### Propagation parameter examples ^t3-propagation-examples
 
-> [!QUESTION] Which relation kinds transmit revision; which warrant kinds determine sensitivity; how do priority components combine? ([upstream-change propagation](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-propagation))
+> [!QUESTION] Which relation kinds transmit revision; which warrant kinds determine sensitivity; how do priority components combine? ([upstream-change propagation](../2-architecture/validity-revision.md#^t2-propagation))
 
-The examples below draw on the relation vocabulary deferred to [the project TODO](vendor/gnomon/docs/TODO) and the [warrant-kind enum](vendor/gnomon/docs/design/3-aspect-specific/warrant-vocabulary). They illustrate how the three propagation parameters combine; the relation vocabulary work settles the actual transmission set and combination rule.
+The examples below draw on the relation vocabulary deferred to [the project TODO](../../TODO.md) and the [warrant-kind enum](warrant-vocabulary.md). They illustrate how the three propagation parameters combine; the relation vocabulary work settles the actual transmission set and combination rule.
 
 - **Transmission examples.** `depends_on`, `supports`, `uses` transmit revision; `contrasts_with`, `exemplifies` (in some readings) do not.
 - **Sensitivity examples.** Monotonic warrants (deductive) are sensitive only to retraction of premises or invalidation of the inference rule (e.g., `retraction`, `taxonomic_restructure`, `correction`). Defeasible warrants (empirical, abductive, analogical, heuristic) are additionally sensitive to qualifying or counter-evidence introduced upstream (e.g., `scope_narrowing`, `scope_generalization`, `reorientation`).
@@ -104,7 +104,7 @@ The examples below draw on the relation vocabulary deferred to [the project TODO
 
 > [!QUESTION] Which exact relation kinds transmit revision?
 
-Deferred to the relation-vocabulary decision in [the project TODO](vendor/gnomon/docs/TODO); see also [upstream-change propagation](vendor/gnomon/docs/design/2-architecture/validity-revision#^t2-propagation).
+Deferred to the relation-vocabulary decision in [the project TODO](../../TODO.md); see also [upstream-change propagation](../2-architecture/validity-revision.md#^t2-propagation).
 
 ### Combination rule for priority ^t3-priority-combination-rule
 

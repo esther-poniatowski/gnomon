@@ -8,7 +8,7 @@ aliases:
 # Rendering and views
 
 > [!INFO] Tier and source
-> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the rendering layer and view specifications. Traces to [activity access rights](../1-framework/research-activities-workflows#^t1-activity-access-rights), [single source of truth](../1-framework/research-activities-workflows#^t1-single-source-of-truth), [t1-dual-usability](../1-framework/cost-ergonomics#^t1-read-side-automation), and the rendered-vs-canonical distinction fixed at [derived artifacts](vendor/gnomon/docs/design/2-architecture/layering#^t2-derived-artifacts) and [view specifications](vendor/gnomon/docs/design/2-architecture/layering#^t2-view-specifications).
+> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the rendering layer and view specifications. Traces to [activity access rights](../1-framework/research-activities-workflows.md#^t1-activity-access-rights), [single source of truth](../1-framework/research-activities-workflows.md#^t1-single-source-of-truth), [t1-dual-usability](../1-framework/cost-ergonomics.md#^t1-read-side-automation), and the rendered-vs-canonical distinction fixed at [derived artifacts](../2-architecture/layering.md#^t2-derived-artifacts) and [view specifications](../2-architecture/layering.md#^t2-view-specifications).
 
 ---
 

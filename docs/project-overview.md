@@ -51,8 +51,8 @@ These failures are structural: they follow from a document-centric organization 
 
 The architecture instantiates three software-engineering principles in the knowledge domain:
 
-- [separation of concerns](vendor/gnomon/docs/design/1-framework/research-activities-workflows#^t1-activity-access-rights) between content and presentation,
-- [single source of truth](vendor/gnomon/docs/design/1-framework/research-activities-workflows#^t1-single-source-of-truth) for each piece of canonical content,
-- [explicit dependency management](vendor/gnomon/docs/design/2-architecture/relations-graph#^t2-relational-graph-representation) through a typed relation graph.
+- [separation of concerns](design/1-framework/research-activities-workflows.md#^t1-activity-access-rights) between content and presentation,
+- [single source of truth](design/1-framework/research-activities-workflows.md#^t1-single-source-of-truth) for each piece of canonical content,
+- [explicit dependency management](design/2-architecture/relations-graph.md#^t2-relational-graph-representation) through a typed relation graph.
 
-Each failure mode above maps to one or more architectural responses recorded in the [design](vendor/gnomon/docs/design/_index).
+Each failure mode above maps to one or more architectural responses recorded in the [design](design/_index.md).

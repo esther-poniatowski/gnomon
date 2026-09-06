@@ -50,7 +50,7 @@ Concepts therefore support reasoning without themselves asserting claims.
 
 **Pros.**
 - Breaks the circularity in which claims require concepts while concepts derive from claims.
-- Supports a [primitive operation schema](3-aspect-specific/ontology.md#^t3-concept-type-taxonomy) for concept definition with fixed semantics.
+- Supports a [primitive operation schema](../../3-aspect-specific/ontology.md#^t3-concept-type-taxonomy) for concept definition with fixed semantics.
 
 **Cons.**
 - Leaves applicability and scope to linked `CLAIM`s rather than intrinsic concept content.

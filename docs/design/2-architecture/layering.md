@@ -10,7 +10,7 @@ aliases:
 > [!INFO] Tier and scope
 > **Tier 2 (architectural).** This file holds the commitments and decisions that fix the architecture's stratification: which layers exist, which is the source of truth, how they relate, and what operations may write to which layer.
 >
-> This file opens with a `## Criteria` section holding the theme-local criterion [layer replaceability](#^t2-layering-replaceability); the strict-direction question is the open question [layer-feedback policy](#^t2-layer-feedback). Framework-level criteria bearing on this theme: [activity separation](../1-framework/research-activities-workflows#^t1-activity-access-rights) and [single source of truth](../1-framework/research-activities-workflows#^t1-single-source-of-truth).
+> This file opens with a `## Criteria` section holding the theme-local criterion [layer replaceability](#^t2-layering-replaceability); the strict-direction question is the open question [layer-feedback policy](#^t2-layer-feedback). Framework-level criteria bearing on this theme: [activity separation](../1-framework/research-activities-workflows.md#^t1-activity-access-rights) and [single source of truth](../1-framework/research-activities-workflows.md#^t1-single-source-of-truth).
 
 ---
 
@@ -20,7 +20,7 @@ aliases:
 
 Each layer must be replaceable without redefining the others. Replacing the rendering layer must not require touching the canonical objects; if it does, the layering is leaking. Replaceability is the test for whether a layer boundary is principled or merely convenient.
 
-A layer that duplicates another's content cannot be replaced cleanly, so this criterion is a consequence of [non-redundancy](../1-framework/modular-content-organization#^t1-non-redundancy): a leaking layer is a form of cross-layer redundancy. It bears on the layer-feedback decision and on every per-theme commitment that introduces a layer.
+A layer that duplicates another's content cannot be replaced cleanly, so this criterion is a consequence of [non-redundancy](../1-framework/modular-content-organization.md#^t1-non-redundancy): a leaking layer is a form of cross-layer redundancy. It bears on the layer-feedback decision and on every per-theme commitment that introduces a layer.
 
 ## Decisions
 
@@ -34,7 +34,7 @@ A layer that duplicates another's content cannot be replaced cleanly, so this cr
 
 > [!QUESTION] Where is the primary epistemic content stored, and what guarantees its primacy?
 
-**In a canonical layer of stable, addressable epistemic objects.** The exact taxonomy is deferred to [the project TODO](vendor/gnomon/docs/TODO). Each canonical object carries a stable identifier; no content lives only in a rendered artifact; no artifact may be edited as a substitute for editing its canonical source. Object kinds are admitted under [t2-object-kind-admission](vendor/gnomon/docs/design/2-architecture/object-kinds#^t2-object-kind-admission).
+**In a canonical layer of stable, addressable epistemic objects.** The exact taxonomy is deferred to [the project TODO](../../TODO.md). Each canonical object carries a stable identifier; no content lives only in a rendered artifact; no artifact may be edited as a substitute for editing its canonical source. Object kinds are admitted under [t2-object-kind-admission](object-kinds.md#^t2-object-kind-admission).
 
 ### Object-centric, not document-centric ^t2-object-centric
 
@@ -90,6 +90,6 @@ Alternatives:
 - **One-way for content, with revision edges as a second edge class** permitted across layers.
 - **Bidirectional reasoning edges, one-way persistence edges** (mixed).
 
-Bearing criteria: [layer replaceability](#^t2-layering-replaceability), [revision accountability](../1-framework/research-activities-workflows#^t1-revision-accountability).
+Bearing criteria: [layer replaceability](#^t2-layering-replaceability), [revision accountability](../1-framework/research-activities-workflows.md#^t1-revision-accountability).
 
 The strict-one-way alternative is closed by [t2-registries-arguments](#^t2-registries-arguments). The remaining two alternatives are open.

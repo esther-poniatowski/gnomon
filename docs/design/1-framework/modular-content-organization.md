@@ -15,7 +15,7 @@ Every piece of **epistemic content** can be referenced by a stable identifier.
 
 **Upstream dependencies.**
 
-- [Inquiry content and progression](framework-foundations#^t1-inquiry-content-and-progression) (parent criterion): research artefacts must be referable by construction.
+- [Inquiry content and progression](framework-foundations.md#^t1-inquiry-content-and-progression) (parent criterion): research artefacts must be referable by construction.
 - [Reuse](#^t1-reuse) (peer sub-criterion): mutually presupposed.
 
 **Downstream consequences.**
@@ -32,7 +32,7 @@ The same **epistemic achievements** (e.g. definition, claim, proof, mechanism, i
 
 **Upstream dependencies.**
 
-- [Inquiry content and progression](framework-foundations#^t1-inquiry-content-and-progression) (parent criterion): research artefacts are reused across inquiries by construction.
+- [Inquiry content and progression](framework-foundations.md#^t1-inquiry-content-and-progression) (parent criterion): research artefacts are reused across inquiries by construction.
 - [Addressability](#^t1-addressability) (peer sub-criterion): mutually presupposed — reuse without addressability cannot reach the content.
 
 **Downstream consequences.**
@@ -47,15 +47,15 @@ Each piece of content is stated **exactly once across the system**. This implies
 
 **Upstream dependencies.**
 
-- [Single source of truth](research-activities-workflows#^t1-single-source-of-truth) (cross-group parent criterion in *Research activities and workflows*): a single canonical locus per content is the precondition for stating each piece of content exactly once.
-- [Activity access rights](research-activities-workflows#^t1-activity-access-rights) (cross-group criterion in *Research activities and workflows*): once each activity writes only within its declared scope, non-redundancy is enforceable across the system.
+- [Single source of truth](research-activities-workflows.md#^t1-single-source-of-truth) (cross-group parent criterion in *Research activities and workflows*): a single canonical locus per content is the precondition for stating each piece of content exactly once.
+- [Activity access rights](research-activities-workflows.md#^t1-activity-access-rights) (cross-group criterion in *Research activities and workflows*): once each activity writes only within its declared scope, non-redundancy is enforceable across the system.
 - [Reuse](#^t1-reuse) (peer sub-criterion): non-redundancy is the consistency condition that makes reuse enforceable.
 
 **Downstream consequences.**
 
-- [Layer replaceability](layering#^t2-layering-replaceability) (theme-local criterion): a layer that duplicates content of another cannot be replaced cleanly.
-- [Layering with no silent coupling](layering#^t2-layering-no-silent-coupling) (theme-local criterion): silent coupling between layers introduces hidden duplication.
-- [Object-kind role purity](object-kinds#^t2-ontology-role-pure) (theme-local criterion): two kinds with overlapping epistemic function would duplicate each other.
+- [Layer replaceability](../2-architecture/layering.md#^t2-layering-replaceability) (theme-local criterion): a layer that duplicates content of another cannot be replaced cleanly.
+- [Layering with no silent coupling](../2-architecture/layering.md#^t2-layering-no-silent-coupling) (theme-local criterion): silent coupling between layers introduces hidden duplication.
+- [Object-kind role purity](../2-architecture/object-kinds.md#^t2-ontology-role-pure) (theme-local criterion): two kinds with overlapping epistemic function would duplicate each other.
 
 ## Canonical terminology ^t1-canonical-terminology
 
@@ -65,20 +65,20 @@ Each piece of content is stated **exactly once across the system**. This implies
 
 **Upstream dependencies.**
 
-- [Functional separation of concerns](framework-foundations#^t1-functional-separation) (cross-group parent criterion in *Framework foundation*): canonical names are one mechanism by which component boundaries remain unambiguous in prose. Canonical terminology is the prose-grain specialisation of that criterion's commitment to clearly bounded, functionally separated components.
+- [Functional separation of concerns](framework-foundations.md#^t1-functional-separation) (cross-group parent criterion in *Framework foundation*): canonical names are one mechanism by which component boundaries remain unambiguous in prose. Canonical terminology is the prose-grain specialisation of that criterion's commitment to clearly bounded, functionally separated components.
 
 **Downstream consequences.**
 
 - Terminology-enforcement mechanism (decision in the validation-views theme): the chosen tool that flags non-canonical names.
-- [Validation externality](research-activities-workflows#^t1-validation-externality) (peer sub-criterion): the enforcement tool runs outside the authoring loop.
+- [Validation externality](research-activities-workflows.md#^t1-validation-externality) (peer sub-criterion): the enforcement tool runs outside the authoring loop.
 
-This criterion commits to canonical terminology but does not fix the *scope* over which canonicity holds — global across the corpus, or local to a project or module. That scope question is the open decision [scope of terminology canonicity](3-aspect-specific/ontology#^t3-canonicity-scope).
+This criterion commits to canonical terminology but does not fix the *scope* over which canonicity holds — global across the corpus, or local to a project or module. That scope question is the open decision [scope of terminology canonicity](../3-aspect-specific/ontology.md#^t3-canonicity-scope).
 
 A second tension concerns a term whose plurality is deliberate rather than scoped.
 
 > [!missing] Tension with deliberate productive ambiguity
 > A term may be *deliberately* left plural because the ambiguity carries cognitive value, with resolution refused or deferred by an authored choice.
-> *Examples*: a [term kept plural by intentional overload](_worked-examples.md#^example-statement-where-a-term-is-intentionally-overloaded) and the [statement that preserves representation-geometry ambiguity](_worked-examples.md#^example-statement-whose-role-is-to-preserve-ambiguity).
+> *Examples*: a [term kept plural by intentional overload](../_worked-examples.md#^example-statement-where-a-term-is-intentionally-overloaded) and the [statement that preserves representation-geometry ambiguity](../_worked-examples.md#^example-statement-whose-role-is-to-preserve-ambiguity).
 
 ## Relational queryability ^t1-relational-queryability
 

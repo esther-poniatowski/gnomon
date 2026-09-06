@@ -8,7 +8,7 @@ aliases:
 # Workflows
 
 > [!INFO] Tier and source
-> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the inquiry workflow: how an inquiry begins, how its scope is bounded, and how each new object is justified. Traces to [t1-non-arbitrary](../1-framework/reasoning-integrity#^t1-served-goal) and [t1-modularity](../1-framework/modular-content-organization#^t1-reuse).
+> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the inquiry workflow: how an inquiry begins, how its scope is bounded, and how each new object is justified. Traces to [t1-non-arbitrary](../1-framework/reasoning-integrity.md#^t1-served-goal) and [t1-modularity](../1-framework/modular-content-organization.md#^t1-reuse).
 
 ---
 
@@ -31,7 +31,7 @@ Each new object introduced into an inquiry justifies four points:
 - what gap it fills;
 - what would break if absent.
 
-The first three are recorded as strategic annotation in the introducing assembly per [strategic annotations attach to the assembly](vendor/gnomon/docs/design/2-architecture/reasoning-structure#^t2-reasoning-annotation-attachment); the fourth is auditable via the dependency graph.
+The first three are recorded as strategic annotation in the introducing assembly per [strategic annotations attach to the assembly](../2-architecture/reasoning-structure.md#^t2-reasoning-annotation-attachment); the fourth is auditable via the dependency graph.
 
 ---
 

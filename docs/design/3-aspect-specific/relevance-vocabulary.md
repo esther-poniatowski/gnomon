@@ -8,7 +8,7 @@ aliases:
 # Relevance vocabulary
 
 > [!INFO] Tier and source
-> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the relevance-kind vocabulary that classifies why one object is relevant to another. Traces to [t1-non-arbitrary](../1-framework/reasoning-integrity#^t1-served-goal).
+> **Tier 3 (aspect-specific).** Stub file. Holds criteria for the relevance-kind vocabulary that classifies why one object is relevant to another. Traces to [t1-non-arbitrary](../1-framework/reasoning-integrity.md#^t1-served-goal).
 
 ---
 
