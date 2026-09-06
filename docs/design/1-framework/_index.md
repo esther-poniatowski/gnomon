@@ -1,7 +1,7 @@
 ---
 tags:
   - index
-project: gnomon
+index: "[Design documentation](../_index.md)"
 aliases:
   - Framework-level criteria
 ---

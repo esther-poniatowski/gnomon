@@ -1,3 +1,11 @@
+---
+tags:
+  - backup
+  - architecture
+index: "[Superseded design proposals](_index.md)"
+aliases:
+  - Operational framework audit
+---
 # Operational Framework for Research Reasoning
 
 ---

@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - Registries and indexes
+---
 # Registries and indexes
 
 > [!INFO] Tier and source

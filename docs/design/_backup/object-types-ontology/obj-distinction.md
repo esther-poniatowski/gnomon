@@ -1,3 +1,11 @@
+---
+tags:
+  - backup
+  - object-candidate
+index: "[Object-kind candidates](_index.md)"
+aliases:
+  - Distinction (object candidate)
+---
 # Object candidate — Distinction
 
 ## Role

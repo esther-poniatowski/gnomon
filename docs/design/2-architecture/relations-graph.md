@@ -1,3 +1,10 @@
+---
+tags:
+  - architecture
+index: "[Architectural commitments](_index.md)"
+aliases:
+  - Relations and dependency graph
+---
 # Relations and the dependency graph
 
 > [!INFO] Tier and scope

@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - Workflows
+---
 # Workflows
 
 > [!INFO] Tier and source

@@ -1,3 +1,10 @@
+---
+tags:
+  - architecture
+index: "[Architectural commitments](_index.md)"
+aliases:
+  - Validity, warrant, and revision
+---
 # Validity regimes, warrant, and revision
 
 > [!INFO] Tier and scope

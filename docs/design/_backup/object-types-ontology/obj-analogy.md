@@ -1,3 +1,11 @@
+---
+tags:
+  - backup
+  - object-candidate
+index: "[Object-kind candidates](_index.md)"
+aliases:
+  - Analogy (object candidate)
+---
 # Object candidate — Analogy
 
 ## Role

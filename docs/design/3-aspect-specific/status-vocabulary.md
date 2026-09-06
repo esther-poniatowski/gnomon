@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - Status vocabulary
+---
 # Status vocabulary
 
 > [!INFO] Tier and source

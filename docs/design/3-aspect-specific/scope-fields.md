@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - Scope fields
+---
 # Scope fields
 
 > [!INFO] Tier and source

@@ -1,3 +1,11 @@
+---
+tags:
+  - backup
+  - object-candidate
+index: "[Object-kind candidates](_index.md)"
+aliases:
+  - Derivation and proof (object candidate)
+---
 # Object candidate — Derivation / Proof
 
 ## Role

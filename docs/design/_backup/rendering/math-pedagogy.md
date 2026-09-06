@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Rendering proposals](_index.md)"
+aliases:
+  - Mathematical pedagogy
+---
 # Mathematical Pedagogy (High-Level)
 
 This reference defines high-level argument and structure requirements for mathematical notes.

@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+index: "[References and methods](_index.md)"
+aliases:
+  - Classical AI planning
+---
 ## Domain III — Classical AI Planning (STRIPS / PDDL)
 
 ### III — Knowledge Model

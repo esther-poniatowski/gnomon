@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - Arguments and reasoning
+---
 # Arguments and reasoning
 
 > [!INFO] Tier and source

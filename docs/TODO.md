@@ -1,3 +1,10 @@
+---
+tags:
+  - tasks
+index: "[gnomon documentation](_index.md)"
+aliases:
+  - Design TODO
+---
 # Advancing the design of `gnomon`
 
 ## Current state

@@ -1,3 +1,10 @@
+---
+tags:
+  - architecture
+index: "[Architectural commitments](_index.md)"
+aliases:
+  - Object kinds and admission
+---
 # Object kinds and their admission
 
 > [!INFO] Tier and scope

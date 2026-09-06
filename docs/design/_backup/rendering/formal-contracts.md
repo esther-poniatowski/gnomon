@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Rendering proposals](_index.md)"
+aliases:
+  - Formal contracts
+---
 # Formal contracts
 
 ## Overview

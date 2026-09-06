@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Argument and reasoning proposals](_index.md)"
+aliases:
+  - Primitive operations
+---
 
 # Primitive operations to avoid infinite regress
 

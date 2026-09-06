@@ -1,3 +1,10 @@
+---
+tags:
+  - table
+index: "[Design documentation](_index.md)"
+aliases:
+  - Design classification table
+---
 # Design classification — Step A output
 
 > [!INFO] Status

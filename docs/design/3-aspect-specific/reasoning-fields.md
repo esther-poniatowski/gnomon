@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - Reasoning-annotation fields
+---
 # Reasoning-annotation field set
 
 > [!INFO] Tier and source

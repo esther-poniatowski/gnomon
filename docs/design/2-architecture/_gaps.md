@@ -1,7 +1,7 @@
 ---
 tags:
   - gaps
-project: gnomon
+index: "[Architectural commitments](_index.md)"
 aliases:
   - Known gaps
 ---

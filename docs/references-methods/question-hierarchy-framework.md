@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+index: "[References and methods](_index.md)"
+aliases:
+  - Question hierarchy framework
+---
 # Question Hierarchy Framework
 
 ## Core Problem

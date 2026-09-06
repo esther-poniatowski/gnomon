@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - Operation schemas
+---
 # Operation schemas
 
 > [!INFO] Tier and source

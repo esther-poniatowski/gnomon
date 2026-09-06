@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+index: "[References and methods](_index.md)"
+aliases:
+  - Hierarchical task network planning
+---
 ## Domain IV — Hierarchical Task Network Planning (HTN)
 
 HTN planning is the planning substrate most directly relevant to the proposed framework's goal decomposition layer, and merits separate treatment.

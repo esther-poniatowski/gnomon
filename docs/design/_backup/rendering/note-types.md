@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Rendering proposals](_index.md)"
+aliases:
+  - Note types
+---
 # Note types
 
 Each note type is associated with two files in the workspace:

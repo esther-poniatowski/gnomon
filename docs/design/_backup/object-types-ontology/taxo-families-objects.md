@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Object-kind candidates](_index.md)"
+aliases:
+  - Families of objects
+---
 
 # Families of objects
 

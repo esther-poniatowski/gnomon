@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - Rendering and views
+---
 # Rendering and views
 
 > [!INFO] Tier and source

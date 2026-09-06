@@ -1,3 +1,10 @@
+---
+tags:
+  - guide
+index: "[User guide](_index.md)"
+aliases:
+  - Installation
+---
 # Installation
 
 ## Prerequisites

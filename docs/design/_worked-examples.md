@@ -1,3 +1,10 @@
+---
+tags:
+  - examples
+index: "[Design documentation](_index.md)"
+aliases:
+  - Worked examples
+---
 # Worked examples
 
 Concrete expressivity test cases and their resolutions. Each example states a statement the framework must be able to represent, then a brief resolution naming the framework parts that handle it.

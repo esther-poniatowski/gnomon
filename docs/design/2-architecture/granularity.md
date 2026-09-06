@@ -1,3 +1,10 @@
+---
+tags:
+  - architecture
+index: "[Architectural commitments](_index.md)"
+aliases:
+  - Granularity and partial formalization
+---
 # Granularity and partial formalization
 
 > [!INFO] Tier and scope

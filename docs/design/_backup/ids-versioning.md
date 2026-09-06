@@ -1,3 +1,11 @@
+---
+tags:
+  - backup
+  - aspect
+index: "[Superseded design proposals](_index.md)"
+aliases:
+  - Identifier and versioning proposal
+---
 ## IDs, Versioning and Provenance
 
 Each object carries **stable identifiers**:

@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+index: "[References and methods](_index.md)"
+aliases:
+  - Decision rules
+---
 # Decision rules
 
 > [!TIP] Single source of truth

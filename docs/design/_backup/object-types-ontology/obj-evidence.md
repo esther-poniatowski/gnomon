@@ -1,3 +1,11 @@
+---
+tags:
+  - backup
+  - object-candidate
+index: "[Object-kind candidates](_index.md)"
+aliases:
+  - Evidence (object candidate)
+---
 # Object candidate — Evidence
 
 ## Role

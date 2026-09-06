@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - Ontology of object kinds
+---
 # Ontology of object kinds
 
 > [!INFO] Tier and source

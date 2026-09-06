@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Object-kind candidates](_index.md)"
+aliases:
+  - Typed graph edges
+---
 # Relations - Graph edges
 
 To improve query precision, the graph use typed relations (edges between objects).

@@ -1,3 +1,10 @@
+---
+tags:
+  - guide
+index: "[User guide](_index.md)"
+aliases:
+  - CLI reference
+---
 # CLI Reference
 
 All commands are invoked through the `gnomon` entry point.

@@ -1,3 +1,10 @@
+---
+tags:
+  - architecture
+index: "[Architectural commitments](_index.md)"
+aliases:
+  - Source languages and metadata
+---
 # Source languages, metadata, and grammar
 
 > [!INFO] Tier and scope

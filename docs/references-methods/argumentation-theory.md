@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+index: "[References and methods](_index.md)"
+aliases:
+  - Argumentation theory
+---
 ## Domain V — Argumentation Theory
 
 ### V — Knowledge Model

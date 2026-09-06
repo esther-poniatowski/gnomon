@@ -1,3 +1,10 @@
+---
+tags:
+  - table
+index: "[Design documentation](_index.md)"
+aliases:
+  - Terminology alias table
+---
 # Terminology alias table
 
 > [!INFO] Status

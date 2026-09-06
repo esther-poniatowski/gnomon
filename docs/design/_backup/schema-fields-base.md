@@ -1,3 +1,11 @@
+---
+tags:
+  - backup
+  - aspect
+index: "[Superseded design proposals](_index.md)"
+aliases:
+  - Schema and fields proposal
+---
 # Schema & Fields
 
 ## Criteria 

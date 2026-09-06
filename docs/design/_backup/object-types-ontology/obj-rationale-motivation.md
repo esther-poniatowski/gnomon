@@ -1,3 +1,11 @@
+---
+tags:
+  - backup
+  - object-candidate
+index: "[Object-kind candidates](_index.md)"
+aliases:
+  - Rationale (object candidate)
+---
 # Object candidate — Rationale / Motivation / Decision
 
 ## Role

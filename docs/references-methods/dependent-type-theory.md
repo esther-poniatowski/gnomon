@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+index: "[References and methods](_index.md)"
+aliases:
+  - Dependent type theory
+---
 ## Domain II — Dependent Type Theory (Martin-Löf)
 
 ### II — Knowledge Model

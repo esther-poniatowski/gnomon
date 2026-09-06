@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+index: "[References and methods](_index.md)"
+aliases:
+  - Belief revision and dynamic epistemic logic
+---
 ## Domain VI — Belief Revision and Dynamic Epistemic Logic
 
 These two frameworks address **how epistemic states change** — the component most absent from the proposed architecture's current form.

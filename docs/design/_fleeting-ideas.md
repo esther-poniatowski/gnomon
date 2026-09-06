@@ -1,3 +1,10 @@
+---
+tags:
+  - ideas
+index: "[Design documentation](_index.md)"
+aliases:
+  - Fleeting ideas
+---
 # Fleeting ideas
 
 Staging area for new ideas pending triage. Items move out to their final destination once classified. The triage policy in the [main handoff](_handoff) governs decisions: each idea feeds an existing TODO, a Tier-2 open decision, a Tier-3 stub, or none.

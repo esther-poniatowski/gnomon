@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Rendering proposals](_index.md)"
+aliases:
+  - Rendering and views proposal
+---
 
 # Rendering and Views
 

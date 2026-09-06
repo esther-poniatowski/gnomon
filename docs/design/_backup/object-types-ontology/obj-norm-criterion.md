@@ -1,3 +1,11 @@
+---
+tags:
+  - backup
+  - object-candidate
+index: "[Object-kind candidates](_index.md)"
+aliases:
+  - Norm (object candidate)
+---
 # Object candidate — Norm / Criterion / Rule / Principle
 
 ## Role

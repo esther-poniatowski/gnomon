@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - Revision vocabulary
+---
 # Revision vocabulary
 
 > [!INFO] Tier and source

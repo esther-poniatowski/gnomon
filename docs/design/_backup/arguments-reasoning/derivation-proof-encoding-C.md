@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Argument and reasoning proposals](_index.md)"
+aliases:
+  - Derivation encoding — variant C
+---
 ## Problem
 
 Given a claim sequence $C_1, C_2, \ldots, C_n$ answering a sub-question $Q$, three distinct failures produce opacity:

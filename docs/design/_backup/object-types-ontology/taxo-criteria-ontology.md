@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Object-kind candidates](_index.md)"
+aliases:
+  - Object admission criteria
+---
 
 # Ontology of epistemic entities — Quality Criteria and Principles
 

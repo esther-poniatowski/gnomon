@@ -1,3 +1,10 @@
+---
+tags:
+  - overview
+index: "[gnomon documentation](_index.md)"
+aliases:
+  - Project overview
+---
 # Project overview
 
 This file states the objectives of the `gnomon` project: the failure modes of conventional note-taking, and the architectural stance that responds to them.

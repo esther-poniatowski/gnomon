@@ -1,3 +1,10 @@
+---
+tags:
+  - guide
+index: "[User guide](_index.md)"
+aliases:
+  - Usage
+---
 # Usage
 
 Gnomon organizes mathematical research into a traceable graph of results,

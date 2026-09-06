@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+index: "[References and methods](_index.md)"
+aliases:
+  - Reasoning principles by field
+---
 
 # Principles of reasoning and argumentation - By field
 

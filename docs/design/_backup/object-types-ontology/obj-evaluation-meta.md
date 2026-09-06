@@ -1,3 +1,11 @@
+---
+tags:
+  - backup
+  - object-candidate
+index: "[Object-kind candidates](_index.md)"
+aliases:
+  - Meta-epistemic evaluation (object candidate)
+---
 # Object candidate — Evaluation (meta-epistemic)
 
 ## Role

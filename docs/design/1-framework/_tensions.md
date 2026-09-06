@@ -1,7 +1,7 @@
 ---
 tags:
   - tensions
-project: gnomon
+index: "[Framework-level criteria](_index.md)"
 aliases:
   - Irreducible tensions
 ---

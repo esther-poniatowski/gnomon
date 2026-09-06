@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+index: "[References and methods](_index.md)"
+aliases:
+  - Proof theory
+---
 ## Domain I — Proof Theory (Natural Deduction and Sequent Calculus)
 
 ### I — Knowledge Model

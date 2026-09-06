@@ -1,3 +1,10 @@
+---
+tags:
+  - architecture
+index: "[Architectural commitments](_index.md)"
+aliases:
+  - Layering and source-of-truth
+---
 # Layering and source-of-truth
 
 > [!INFO] Tier and scope

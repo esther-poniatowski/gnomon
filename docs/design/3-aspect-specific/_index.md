@@ -1,3 +1,10 @@
+---
+tags:
+  - index
+index: "[Design documentation](../_index.md)"
+aliases:
+  - Aspect-specific decisions
+---
 # Tier 3 — Aspect-specific decisions
 
 Tier 3 files fill in what the architecture defers: vocabulary entries, field sets, validator diagnostics, and choices that belong to a single aspect. Each file follows a uniform structure:

@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+index: "[References and methods](_index.md)"
+aliases:
+  - Formal reasoning domains overview
+---
 
 # Internal Workings of Formal Reasoning Domains
 

@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - Semantic relations
+---
 # Semantic relations
 
 > [!INFO] Tier and source

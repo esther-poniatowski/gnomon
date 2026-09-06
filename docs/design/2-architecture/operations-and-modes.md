@@ -1,3 +1,10 @@
+---
+tags:
+  - architecture
+index: "[Architectural commitments](_index.md)"
+aliases:
+  - Operation schemas and reasoning modes
+---
 # Operation schemas and reasoning modes
 
 > [!INFO] Tier and scope

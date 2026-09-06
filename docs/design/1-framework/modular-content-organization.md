@@ -1,7 +1,7 @@
 ---
 tags:
   - criteria
-index: "[[_index|Framework-level criteria]]"
+index: "[Framework-level criteria](_index.md)"
 aliases:
   - Modular content organization (criteria)
 ---

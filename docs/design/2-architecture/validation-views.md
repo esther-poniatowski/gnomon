@@ -1,3 +1,10 @@
+---
+tags:
+  - architecture
+index: "[Architectural commitments](_index.md)"
+aliases:
+  - Validation rules and view profiles
+---
 # Validation rules and view profiles
 
 > [!INFO] Tier and scope

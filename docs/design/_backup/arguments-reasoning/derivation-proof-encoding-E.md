@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Argument and reasoning proposals](_index.md)"
+aliases:
+  - Atomic epistemic acts — variant E
+---
 # Proof and Derivation Encoding - Atomic Epistemic Acts
 
 It seems that there exists a family of epistemic acts that are *atomic* in the sense that they perform a single transformation or introduce a single new information. 

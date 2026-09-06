@@ -1,3 +1,10 @@
+---
+tags:
+  - handoff
+index: "[Design documentation](_index.md)"
+aliases:
+  - Design refactor handoff
+---
 # Refactor handoff — design folder
 
 This handoff owns the Step A-D refactor state. It does not repeat the project brief in [main handoff](_handoff.md) or the Step A.4 file-by-file mechanics in [cleanup handoff](_handoff-cleanup.md).

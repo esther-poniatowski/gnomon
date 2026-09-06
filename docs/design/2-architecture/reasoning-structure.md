@@ -1,3 +1,10 @@
+---
+tags:
+  - architecture
+index: "[Architectural commitments](_index.md)"
+aliases:
+  - Reasoning structure
+---
 # Reasoning structure: assemblies vs. canonical objects
 
 > [!INFO] Tier and scope

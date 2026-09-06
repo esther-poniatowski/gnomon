@@ -1,3 +1,10 @@
+---
+tags:
+  - aspect
+index: "[Aspect-specific decisions](_index.md)"
+aliases:
+  - IDs, namespaces, versioning
+---
 # IDs, namespaces, versioning
 
 > [!INFO] Tier and source

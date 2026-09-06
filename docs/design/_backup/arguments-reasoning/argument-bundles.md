@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Argument and reasoning proposals](_index.md)"
+aliases:
+  - Argument bundles
+---
 
 # Argument bundles
 

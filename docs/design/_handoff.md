@@ -1,3 +1,10 @@
+---
+tags:
+  - handoff
+index: "[Design documentation](_index.md)"
+aliases:
+  - Design handoff
+---
 # Handoff — gnomon design
 
 This file gives the project-level state for a new agent. Read this file first, then read the focused handoff for the work you are about to do:

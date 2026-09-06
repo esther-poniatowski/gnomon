@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Object-kind candidates](_index.md)"
+aliases:
+  - Object boundary comparisons
+---
 # Comparisons and boundary analysis
 
 > [!NOTE] These comparisons state boundaries between objects only.

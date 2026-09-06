@@ -1,3 +1,10 @@
+---
+tags:
+  - backup
+index: "[Argument and reasoning proposals](_index.md)"
+aliases:
+  - Derivation encoding — variant G
+---
 
 # Encoding derivations and proofs
 

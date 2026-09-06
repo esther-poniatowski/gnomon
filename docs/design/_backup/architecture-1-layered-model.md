@@ -1,3 +1,11 @@
+---
+tags:
+  - backup
+  - architecture
+index: "[Superseded design proposals](_index.md)"
+aliases:
+  - Layered model proposal
+---
 # Architecture - Layered Model
 
 ## Core design principle

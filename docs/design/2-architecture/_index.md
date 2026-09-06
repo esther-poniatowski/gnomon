@@ -1,3 +1,10 @@
+---
+tags:
+  - index
+index: "[Design documentation](../_index.md)"
+aliases:
+  - Architectural commitments
+---
 # Tier 2 — Architectural commitments and decisions
 
 Tier-2 files fix the structural decisions that compose the architecture: how layers relate, what objects are admitted, how relations are typed and queried, how reasoning is structured, how validity and revision interact, how validation is organized, and how operations and granularity are stratified.

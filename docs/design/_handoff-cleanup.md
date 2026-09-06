@@ -1,3 +1,10 @@
+---
+tags:
+  - handoff
+index: "[Design documentation](_index.md)"
+aliases:
+  - Source-file cleanup handoff
+---
 # Source-file cleanup handoff — Step A.4
 
 This handoff owns only Step A.4: removing source bodies whose Tier-1 content has already moved into the canonical framework criteria. For the broader refactor sequence, use the [refactor handoff](_handoff-refactor.md).
