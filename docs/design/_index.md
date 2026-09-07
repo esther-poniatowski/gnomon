@@ -78,4 +78,4 @@ Each tier is developed its own sub-folder with an index file that organizes the 
 - [argument bundles](_backup/arguments-reasoning/argument-bundles.md);
 - [the conditions a canonical object must satisfy](_backup/object-types-ontology/taxo-criteria-ontology.md).
 
-Several criteria are grounded in [the formal reasoning domains](../references-methods/formal-frameworks-overview.md).
+Several criteria are grounded in [the formal reasoning domains](../methods-reasoning/formal-frameworks-overview.md).

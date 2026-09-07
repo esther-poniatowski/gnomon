@@ -14,15 +14,6 @@ External work grounds the design and is recorded here on its own terms, before i
 - [Reasoning principles by field](reasoning-argumentation-principles-by-field.md): what each discipline that has theorized reasoning demands of a valid argument, an explanation, and an understanding.
 - [Reasoning principles across fields](reasoning-argumentation-principles-cross-field.md): the same material reorganized as a cross-domain taxonomy. The design consumes this form rather than the field-by-field inventory.
 
-## Taxonomic construction
-
-Three records answer one question — what warrants a classification — and are kept apart because each was produced independently. A fourth record turns that warrant into a construction procedure.
-
-- [Taxonomic construction principles](taxonomic-construction-principles.md): the three axes along which philosophy of science organizes the question, and the traversal that extracts one operational principle per tradition.
-- [Taxonomic construction principles — variant C](taxonomic-construction-principles-c.md): seven principles consolidated from those traditions, from declaring the function of a taxonomy to tolerating plural classifications of one domain.
-- [Taxonomic construction principles — variant G](taxonomic-construction-principles-g.md): nine principles for classifying a body of literature, each tied to the philosophical source that supports it.
-- [Taxonomic construction procedure](taxonomic-construction-procedure.md): the division of labour between the domain-dependent elicitation of candidate distinctions and the domain-independent reduction that operates on them, and the pipeline chaining the two. Still a draft: the middle of the pipeline holds two unmerged variants.
-
 ## Problem decomposition
 
 - [Question hierarchy framework](question-hierarchy-framework.md): the criterion admitting a sub-question — its resolution must change the status of the target question — and the protocol that generates, filters, and ranks candidates.

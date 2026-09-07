@@ -50,7 +50,7 @@ A **schema** may be treated as primitive only if the framework can provide all o
 If one of these elements is missing, the schema is still too vague and should not enter the primitive library.
 
 > [!NOTE] Analogy
-> This is exactly how [formal systems](../../../references-methods/formal-frameworks-overview.md) avoid regress: 
+> This is exactly how [formal systems](../../../methods-reasoning/formal-frameworks-overview.md) avoid regress: 
 > - proof theory: inference rules
 > - programming languages: primitive instructions
 > - workflow systems: typed tasks with contracts
