@@ -34,3 +34,20 @@ htmlcov/
 
 ## Documentation Build
 docs/_build/
+
+## Obsidian vault state (json files)
+## Machine-local interface state, rewritten on every pane move.
+.obsidian/types.json
+.obsidian/workspace.json
+
+## Obsidian plugin code. A plugin distribution (`main.js`, `styles.css`, vendored dependencies)
+## is downloaded from the community registry and is treated as build output. Two files per
+## plugin carry vault configuration and are tracked instead: `manifest.json` fixes the identity
+## and version, `data.json` holds the settings. Which plugins are enabled is recorded in
+## `.obsidian/community-plugins.json`.
+## Consequence: a fresh clone carries the configuration but not the code, so each plugin must
+## be reinstalled from the registry. The settings survive, because `data.json` is already in
+## place when the plugin loads.
+.obsidian/plugins/*/*
+!.obsidian/plugins/*/manifest.json
+!.obsidian/plugins/*/data.json
