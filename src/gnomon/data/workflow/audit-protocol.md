@@ -144,29 +144,20 @@ Additionally search for the pattern `the .* case` (the X case as a noun phrase) 
 
 ### Phase 5b — Semantic audit
 
-Search for semantic equivalents of forbidden patterns even when the
-literal string is absent. Revise any sentence that:
+Search for semantic equivalents of forbidden patterns even when the literal string is absent. Revise any sentence that:
 
-- places a process nominalization as the grammatical subject with an
-  existence verb ("Differential amplification occurs when …")
-- names a derivation procedure as the grammatical object of a note-
-  or section-centered sentence
-- uses a relation noun — comparison, coupling, independence, variation,
-  modulation — without naming the operands
-- uses a link text that names a procedure, container, or analysis rather
-  than a result or object
+- places a process nominalization as the grammatical subject with an existence verb ("Differential amplification occurs when …")
+- names a derivation procedure as the grammatical object of a note- or section-centered sentence
+- uses a relation noun — comparison, coupling, independence, variation, modulation — without naming the operands
+- uses a link text that names a procedure, container, or analysis rather than a result or object
 
 ---
 
 ### Phase 6 — Optional automated checks
 
-If a project-local writing checker is configured, run it on all modified files
-and fix all reported issues before proceeding.
+If a project-local writing checker is configured, run it on all modified files and fix all reported issues before proceeding.
 
-Automated checks are supplementary. They can catch imperative openings,
-forbidden phrases, procedural link text heuristics, bare-symbol patterns after
-prepositions, and similar local violations, but they do not replace the manual
-checks in Phase 3 and Phase 5.
+Automated checks are supplementary. They can catch imperative openings, forbidden phrases, procedural link text heuristics, bare-symbol patterns after prepositions, and similar local violations, but they do not replace the manual checks in Phase 3 and Phase 5.
 
 ---
 

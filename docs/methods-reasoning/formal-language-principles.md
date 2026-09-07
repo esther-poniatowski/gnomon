@@ -363,8 +363,7 @@ Concept construction enlarges $\Sigma$. Several discrete species:
 
 The state transition is:
 
-$$
-s = \langle \Sigma, T, \ldots \rangle \;\longmapsto\; s' = \langle \Sigma \cup \{P\}, T \cup \mathrm{Ax}(P), \ldots \rangle
+$$ s = \langle \Sigma, T, \ldots \rangle \;\longmapsto\; s' = \langle \Sigma \cup \{P\}, T \cup \mathrm{Ax}(P), \ldots \rangle
 $$
 
 ### 3.3 Taxonomy and Classification

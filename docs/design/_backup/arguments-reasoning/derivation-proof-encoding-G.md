@@ -17,8 +17,7 @@ The previous methodology concerns the **macro-structure** of inquiry: decomposit
 For a fixed subquestion $Q$, a derivation or a proof is usually represented as a sequence of claims:
 $$  
 C_0 \to C_1 \to \cdots \to C_n  
-$$
-where every implication is *valid*.
+$$ where every implication is *valid*.
 
 This representation is insufficient because it lack **local intelligibility**: each step appears arbitrary since the "idea behind" the move remains implicit.
 
@@ -65,8 +64,7 @@ Each transition records:
 So the structure is rather:
 $$  
 (S_k, T_k, O_k)\xrightarrow{m_k}(S_{k+1}, T_{k+1}, O_{k+1})  
-$$
-where:
+$$ where:
 
 - $S_k$ is the local epistemic state
 - $T_k$ is the current target

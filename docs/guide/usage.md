@@ -7,8 +7,7 @@ aliases:
 ---
 # Usage
 
-Gnomon organizes mathematical research into a traceable graph of results,
-dependencies, and open questions.
+Gnomon organizes mathematical research into a traceable graph of results, dependencies, and open questions.
 
 ## Diagnostics
 
@@ -32,8 +31,7 @@ gnomon --version
 
 ## Planned Commands
 
-The following commands exist in the CLI but are not yet functional. Each prints
-a stub message and exits.
+The following commands exist in the CLI but are not yet functional. Each prints a stub message and exits.
 
 ### `init` — Scaffold a Research Workspace
 
@@ -41,8 +39,7 @@ a stub message and exits.
 gnomon init --target ./my-research
 ```
 
-Intended behavior: create a structured workspace directory from the standard
-template, mirroring the hierarchical organization of projects and modules.
+Intended behavior: create a structured workspace directory from the standard template, mirroring the hierarchical organization of projects and modules.
 
 ### `validate` — Validate Registry Files
 
@@ -50,8 +47,7 @@ template, mirroring the hierarchical organization of projects and modules.
 gnomon validate registries/
 ```
 
-Intended behavior: check YAML registry files against their JSON schemas
-(reasoning graph, open questions, dependencies, terminology).
+Intended behavior: check YAML registry files against their JSON schemas (reasoning graph, open questions, dependencies, terminology).
 
 ### `status` — Report Inferential Position
 
@@ -59,14 +55,11 @@ Intended behavior: check YAML registry files against their JSON schemas
 gnomon status --target ./my-research
 ```
 
-Intended behavior: summarize established results, open questions, in-progress
-notes, and blocked entries within a workspace.
+Intended behavior: summarize established results, open questions, in-progress notes, and blocked entries within a workspace.
 
 ## Data Templates
 
-The package ships template files under `src/gnomon/data/`, accessible at
-runtime via `gnomon.data_path()`. Five subdirectories provide starter content
-for consuming projects:
+The package ships template files under `src/gnomon/data/`, accessible at runtime via `gnomon.data_path()`. Five subdirectories provide starter content for consuming projects:
 
 | Directory      | Contents                                                    |
 | -------------- | ----------------------------------------------------------- |

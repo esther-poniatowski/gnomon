@@ -118,22 +118,12 @@ namespace: claims.task_relevance
 
 <!--gnomon:decl:object-->
 ```yaml
-id: claim.task_relevance.invariance_criterion
-type: claim
-title: "Invariance criterion for task relevance"
-status: provisional
-depends_on:
-  - id: def.task
-    relation: requires
-  - id: def.representation
-    relation: requires
-  - id: crit.invariance
-    relation: requires
-answers:
-  - quest.task_relevance.main
-scope:
-  architectures: [feedforward]
-  tasks: [classification]
+id: claim.task_relevance.invariance_criterion type: claim title: "Invariance criterion for task relevance" status: provisional depends_on:
+  - id: def.task relation: requires
+  - id: def.representation relation: requires
+  - id: crit.invariance relation: requires answers:
+  - quest.task_relevance.main scope:
+  architectures: [feedforward] tasks: [classification]
 ```
 
 <!--gnomon:proof-->
@@ -197,9 +187,7 @@ namespace: defs.task_relevance
 
 <!--gnomon:decl:object-->
 ```yaml
-id: def.task_relevance
-type: definition
-title: "Task relevance of a representation"
+id: def.task_relevance type: definition title: "Task relevance of a representation"
 ```
 
 <!--gnomon:statement-->
@@ -209,12 +197,8 @@ Statement for the lead object.
 
 <!--gnomon:decl:object-->
 ```yaml
-id: claim.task_relevance.invariance_criterion
-type: claim
-title: "Invariance criterion for task relevance"
-depends_on:
-  - id: def.task_relevance
-    relation: requires
+id: claim.task_relevance.invariance_criterion type: claim title: "Invariance criterion for task relevance" depends_on:
+  - id: def.task_relevance relation: requires
 ```
 
 <!--gnomon:statement-->

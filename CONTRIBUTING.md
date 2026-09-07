@@ -13,8 +13,7 @@ To submit a new issue:
 
 ## Developing the code
 
-Contributions to the codebase should be developed in a local clone of the repository. Follow these
-steps to set up a development environment:
+Contributions to the codebase should be developed in a local clone of the repository. Follow these steps to set up a development environment:
 
 ### Installation
 
@@ -32,8 +31,7 @@ steps to set up a development environment:
    conda env create -f environment.yml
    ```
 
-   By default, the environment will be named `gnomon`, as specified in the `environment.yml`
-   file. This name can be modified by passing the `-n` option.
+   By default, the environment will be named `gnomon`, as specified in the `environment.yml` file. This name can be modified by passing the `-n` option.
 
 3. Register the packages in "editable mode":
 
@@ -44,8 +42,7 @@ steps to set up a development environment:
 
 ### Using the commit message template
 
-1. Edit the commit template (`.gitmessage`, at the root of the repository) to specify the name and
-   email address of the committer.
+1. Edit the commit template (`.gitmessage`, at the root of the repository) to specify the name and email address of the committer.
 
 2. Configure `git` to use this file as a commit template:
 
@@ -74,9 +71,7 @@ steps to set up a development environment:
 
 ## Writing documentation
 
-Every Markdown file under `docs/` is a note: it declares its metadata in a YAML frontmatter block,
-and it is registered in the index of the folder holding it. A file that satisfies neither is
-invisible to a reader navigating by index, and is effectively lost while appearing to exist.
+Every Markdown file under `docs/` is a note: it declares its metadata in a YAML frontmatter block, and it is registered in the index of the folder holding it. A file that satisfies neither is invisible to a reader navigating by index, and is effectively lost while appearing to exist.
 
 ### Frontmatter block
 
@@ -93,9 +88,7 @@ aliases:
 ```
 
 - `tags` names the kind of the note, drawn from the vocabulary below.
-- `index` links the entry point of the folder holding the note, as a relative Markdown link. An
-  `_index.md` points one level up instead, at the index of its parent folder; the documentation
-  root has no parent and omits the key.
+- `index` links the entry point of the folder holding the note, as a relative Markdown link. An `_index.md` points one level up instead, at the index of its parent folder; the documentation root has no parent and omits the key.
 - `aliases` fixes the name under which the note is cited. Each alias is unique across `docs/`.
 
 The order is fixed, so that a divergence shows up in a diff.
@@ -121,17 +114,13 @@ The order is fixed, so that a divergence shows up in a diff.
 
 ### Registering a note
 
-Each folder carries an `_index.md` registering every file it holds, images included. Register a new
-file in the same edit that creates it: a later pass answers a different concern and leaves orphans
-behind.
+Each folder carries an `_index.md` registering every file it holds, images included. Register a new file in the same edit that creates it: a later pass answers a different concern and leaves orphans behind.
 
-An entry names the note and states what a reader obtains from it, so that a reader chooses one file
-rather than opening several.
+An entry names the note and states what a reader obtains from it, so that a reader chooses one file rather than opening several.
 
 ### Cross-references
 
-A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both
-in an editor and on the repository page:
+A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both in an editor and on the repository page:
 
 ```markdown
 [the conditions a canonical object must satisfy](../2-architecture/object-kinds.md)
@@ -143,8 +132,7 @@ A finer reference appends a block anchor, declared at the end of the target line
 [object-kind set smallness](../2-architecture/object-kinds.md#^t2-ontology-small)
 ```
 
-Link text names the result, the object, or the message found at the target, never the file name and
-never a bare category word.
+Link text names the result, the object, or the message found at the target, never the file name and never a bare category word.
 
 ## Configuration file organization
 
@@ -152,8 +140,7 @@ This project separates configuration concerns between two locations:
 
 ### `pyproject.toml` — Project management
 
-Contains only build system, package metadata, dependencies, entry points, and tool configurations
-that **must** reside in `pyproject.toml` (because the tool does not support external config paths):
+Contains only build system, package metadata, dependencies, entry points, and tool configurations that **must** reside in `pyproject.toml` (because the tool does not support external config paths):
 
 - `[build-system]` — Build backend (setuptools)
 - `[project]` — Name, version, authors, license, description, keywords, classifiers, URLs
@@ -165,8 +152,7 @@ that **must** reside in `pyproject.toml` (because the tool does not support exte
 
 ### `config/tools/` — Tool-specific settings
 
-Contains dedicated configuration files for each development tool. This achieves modular,
-tool-specific settings that are decoupled from the main project file:
+Contains dedicated configuration files for each development tool. This achieves modular, tool-specific settings that are decoupled from the main project file:
 
 | File                  | Tool                   | Purpose                           |
 |-----------------------|------------------------|-----------------------------------|
@@ -192,5 +178,4 @@ Custom word lists for CSpell (VS Code spell checker):
 - **Modularity**: Each tool's configuration is self-contained and independently editable.
 - **Clarity**: `pyproject.toml` stays concise and focused on project identity.
 - **Discoverability**: Tool configs are grouped in a single directory, easy to locate.
-- **Flexibility**: Tools with complex configs (Pylint, MyPy) benefit from dedicated files
-  with inline comments explaining each setting.
+- **Flexibility**: Tools with complex configs (Pylint, MyPy) benefit from dedicated files with inline comments explaining each setting.

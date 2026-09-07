@@ -26,8 +26,7 @@ gnomon info
 
 **Arguments:** none.
 
-**Output:** one line containing the package name, version, operating system,
-and Python version.
+**Output:** one line containing the package name, version, operating system, and Python version.
 
 ## `init`
 
@@ -61,8 +60,7 @@ gnomon validate <paths...>
 
 > Stub — prints "Workspace status reporting is not yet implemented."
 
-Report the inferential position of a research workspace: established results,
-open questions, in-progress notes, and blocked entries.
+Report the inferential position of a research workspace: established results, open questions, in-progress notes, and blocked entries.
 
 ```sh
 gnomon status --target <dir>

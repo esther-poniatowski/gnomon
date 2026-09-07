@@ -1,7 +1,6 @@
 # Registry Templates
 
-Template files for machine-readable project state. Consuming projects
-copy and fill these templates for their own registries:
+Template files for machine-readable project state. Consuming projects copy and fill these templates for their own registries:
 
 - `reasoning_graph.yaml` — inferential architecture
 - `open_questions.yaml` — current frontier

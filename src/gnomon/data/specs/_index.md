@@ -7,5 +7,4 @@ One specification per note type, defining:
 - Admissible proof strategies
 - Inferential scope the note may cover
 
-See the design documentation in `docs/design/methods/note-types.md`
-for the full specification framework.
+See the design documentation in `docs/design/methods/note-types.md` for the full specification framework.

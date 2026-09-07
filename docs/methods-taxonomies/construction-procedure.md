@@ -96,8 +96,7 @@ Each attribute $a$ is formally a *function* that maps objects to values in a val
 $$a:U\rightarrow V_a$$
 
 The problem corresponds to a **formal context**:
-$$\mathbb{K} = (U, A, I)$$
-where:
+$$\mathbb{K} = (U, A, I)$$ where:
 - $U$ is the set of items, 
 - $A$ is the set of candidate attributes, 
 - $I \subseteq U \times A$ is the incidence, that is, the set of pairs $(x,a)$ such that object $x$ has attribute $a$.
@@ -134,8 +133,7 @@ The central notion is that of **reduct**:
 > A reduct is a **minimal collection of attributes having the same discriminatory power as the complete attribute vocabulary**. 
 
 Formally, a reduct is a subset of attributes $R\subseteq A$, that satisfies:
-$$\operatorname{IND}(R)=\operatorname{IND}(A)$$
-while no proper subset of $R$ does.
+$$\operatorname{IND}(R)=\operatorname{IND}(A)$$ while no proper subset of $R$ does.
  
 > [!WARNING] Non-uniqueness: reducts are generally **multiple and non-isomorphic**.
 
@@ -144,8 +142,7 @@ The intersection of all reducts is the **core**: it contains the attributes that
 Reducts can be identified mechanically by the **Skowron–Rauszer procedure**: ^skowron-rauszer-procedure
 
 1. Construct the discernibility matrix $c_{ij} = \{a \in A : a \text{ separates } x_i, x_j\}$. Each entry $c_{ij}$ contains a set of attributes that discern between objects $x_i$ and $x_j$.
-2. Form the discernibility function, a Boolean function over the attributes. It takes in arguments the attributes and outputs whether they form a reduct: ==TODO: explain the steps to compute the value from the arguments.==
-$$f = \bigwedge_{i<j} \ \bigvee_{a \in c_{ij}} a$$
+2. Form the discernibility function, a Boolean function over the attributes. It takes in arguments the attributes and outputs whether they form a reduct: ==TODO: explain the steps to compute the value from the arguments.== $$f = \bigwedge_{i<j} \ \bigvee_{a \in c_{ij}} a$$
 3. Convert the discernibility function $f$ into a disjunction of conjunctions of attributes. ==TODO: explain how to construct this disjunction of conjunctions.== Each conjunction is a set of attributes that corresponds to a candidate reduct.
 4. The reducts are the prime implicants. ==TODO: what are they?==
 
@@ -160,8 +157,7 @@ $$f = \bigwedge_{i<j} \ \bigvee_{a \in c_{ij}} a$$
 > This alternative decomposition method aims to preserve the concept lattice $\underline{\mathfrak{B}}(\mathbb{K})$ up to isomorphism. 
 
 The framework starts from objects and attributes and studies their logical structure. It defines **attribute implications**:
-$$A\rightarrow B$$
-meaning that whenever an object possesses all attributes in $A$, it necessarily possesses those in $B$.
+$$A\rightarrow B$$ meaning that whenever an object possesses all attributes in $A$, it necessarily possesses those in $B$.
 
 An attribute $a$ is **reducible** iff its extent is an intersection of other attribute extents:
 $$\{a\}' = \bigcap_{n \in N} \{n\}', \qquad N \subseteq A \setminus \{a\}$$
