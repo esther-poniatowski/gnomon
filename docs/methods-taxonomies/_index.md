@@ -3,7 +3,7 @@ tags:
   - index
 index: "[gnomon documentation](../_index.md)"
 aliases:
-  - Taxonomic construction principles
+  - Methods for taxonomies
 ---
 
 > [!QUESTION] Goal: What principles from Philosophy of Science and Epistemology guide the construction of classifications and taxonomies?

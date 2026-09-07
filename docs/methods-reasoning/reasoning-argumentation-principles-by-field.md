@@ -1,7 +1,7 @@
 ---
 tags:
   - reference
-index: "[References and methods](_index.md)"
+index: "[Methods for reasoning](_index.md)"
 aliases:
   - Reasoning principles by field
 ---

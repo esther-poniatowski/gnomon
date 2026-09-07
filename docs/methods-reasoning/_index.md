@@ -3,9 +3,9 @@ tags:
   - index
 index: "[gnomon documentation](../_index.md)"
 aliases:
-  - References and methods
+  - Methods for reasoning
 ---
-# References and methods
+# Methods for reasoning
 
 External work grounds the design and is recorded here on its own terms, before it is applied to `gnomon`. Each of the four groups collects the material that plays one role.
 
