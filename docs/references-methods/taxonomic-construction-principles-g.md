@@ -7,9 +7,6 @@ aliases:
 ---
 
 # Principles for taxonomic construction - G
-
-
-
 ## Practical synthesis
 
 A strong classification for literature synthesis should satisfy the following principles.

@@ -8,7 +8,7 @@ aliases:
 
 ## Objective
 
-Several [theories and research fields](principles-reasoning-argumentation-by-field.md) establish the principles of validity, reasoning, explanations, understanding versus logical validity. The current classification moves from a **field-by-field inventory** to a **cross-domain taxonomy**.
+Several [theories and research fields](reasoning-argumentation-principles-by-field.md) establish the principles of validity, reasoning, explanations, understanding versus logical validity. The current classification moves from a **field-by-field inventory** to a **cross-domain taxonomy**.
 
 ### Cross-fields synthesis
 
