@@ -16,11 +16,12 @@ External work grounds the design and is recorded here on its own terms, before i
 
 ## Taxonomic construction
 
-Three records answer one question — what warrants a classification — and are kept apart because each was produced independently.
+Three records answer one question — what warrants a classification — and are kept apart because each was produced independently. A fourth record turns that warrant into a construction procedure.
 
 - [Taxonomic construction principles](taxonomic-construction-principles.md): the three axes along which philosophy of science organizes the question, and the traversal that extracts one operational principle per tradition.
 - [Taxonomic construction principles — variant C](taxonomic-construction-principles-c.md): seven principles consolidated from those traditions, from declaring the function of a taxonomy to tolerating plural classifications of one domain.
 - [Taxonomic construction principles — variant G](taxonomic-construction-principles-g.md): nine principles for classifying a body of literature, each tied to the philosophical source that supports it.
+- [Taxonomic construction procedure](taxonomic-construction-procedure.md): the division of labour between the domain-dependent elicitation of candidate distinctions and the domain-independent reduction that operates on them, and the pipeline chaining the two. Still a draft: the middle of the pipeline holds two unmerged variants.
 
 ## Problem decomposition
 
