@@ -15,6 +15,7 @@ Each entry answers one class of question about `gnomon`, so a reader consults on
 | [Design documentation](design/_index.md) | What the framework must achieve, how it is structured, and what each aspect decides. Three tiers separate the criteria that cannot be overridden from the decisions implementing them. |
 | [Methods for reasoning](methods-reasoning/_index.md) | How reasoning is conducted and formalized outside `gnomon`, from what a discipline demands of a valid argument to the formal domains that model an epistemic state and its transitions. |
 | [Methods for taxonomies](methods-taxonomies/_index.md) | Which criteria warrant a classification, and the procedure that applies them to build a taxonomy. No algorithm yields a universally correct partition, so each classification must declare the function it serves. |
+| [Epistemology](epistemology/_index.md) | What a researcher must fix to specify an inquiry, from what the question is about to the form of the answer it seeks. Each choice rests on results from the philosophy of models, of explanation and of questions. |
 | [Design TODO](TODO.md) | Where the design currently stands, and which steps remain open. |
 
 ## Note conventions

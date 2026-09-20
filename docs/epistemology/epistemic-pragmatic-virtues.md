@@ -14,10 +14,12 @@ source:
 This [layer of inquiry](inquiry-specification.md) names additional properties of the answer that **increase its value beyond minimally satisfying the epistemic task**. These properties typically characterize practical and cognitive effects that are _not already constitutive of the specified epistemic task_, but make an admissible answer more useful, illuminating, or reusable. They separate answers that are merely valid from answers that are actually useful.
 
 Adequacy is **relational and evaluative**:
-$$\operatorname{Adequate}(M\mid Q,C)$$
-where $Q$ is the specified epistemic problem and $C$ contains *relevant methodological and pragmatic circumstances*.
+$$\operatorname{Adequate}(M\mid Q,\Gamma)$$
+where $Q$ is the specified epistemic problem and $\Gamma$ contains *relevant methodological and pragmatic circumstances*, following the [notation registry](notation.md).
 
-These desiderata provide additional constrains that shape the form of an adequate answer (e.g. the types of variables, the nature of equations). Several answers or models may provide an equally admissible explanation but not provide the same practical and cognitive effects.
+These desiderata provide additional constrains that shape the form of an adequate answer (e.g. the types of variables, the nature of equations). Indeed, several answers or models may provide an equally admissible explanation but not yield the same practical and cognitive effects.
+
+> [!ERROR] Listed virtues do not restate requirements for the epistemic task
 
 *Examples*: 
 
@@ -29,18 +31,23 @@ These desiderata provide additional constrains that shape the form of an adequat
 
 | Virtue                                  | Operational question                                                                          | Main epistemic benefit                                              | Representative account                                                                |
 | --------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| **Unification**                         | Does the account explain many phenomena through a small number of common principles/patterns? | scope; systematic integration                                       | Friedman; Kitcher                                                                     |
-| **Generality / scope**                  | Does the same explanatory structure extend across cases or parameter regimes?                 | transfer and reuse                                                  | closely related to unification, but without requiring a common explanatory derivation |
-| **Robustness**                          | Do the relevant conclusions survive changes in parameters, assumptions, or representation?    | identifies which conclusions depend on incidental modelling choices | robustness-analysis literature                                                        |
+| **Unification** | Does the account explain many phenomena through a small number of common principles/patterns? | scope; systematic integration                                       | Friedman; Kitcher                                                                     |
+| **Generality / scope** | Does the same explanatory structure extend across cases or parameter regimes?                 | transfer and reuse                                                  | closely related to unification, but without requiring a common explanatory derivation |
+| **Robustness** | Do the relevant conclusions survive changes in parameters, assumptions, or representation?    | identifies which conclusions depend on incidental modelling choices | robustness-analysis literature                                                        |
 | **Intelligibility / qualitative grasp** | Can characteristic consequences be recognized without carrying out the full calculation?      | understanding; qualitative anticipation                             | de Regt                                                                               |
-| **Structural transparency**             | Does the representation make the important components, relations, and dependencies salient?   | grasp of organization / dependence                                  | accounts of scientific understanding; Grimm/Kvanvig                                   |
-| **Economy / simplicity**                | Does it achieve its purpose without unnecessary representational or computational complexity? | cognitive and methodological efficiency                             | traditional theoretical virtues; modelling literature                                 |
-| **Tractability**                        | Can the model actually be analyzed, computed, manipulated, or used under available resources? | practical usability                                                 | modelling / adequacy-for-purpose literature, Parker                                   |
+| **Structural transparency** | Does the representation make the important components, relations, and dependencies salient?   | grasp of organization / dependence                                  | accounts of scientific understanding; Grimm/Kvanvig                                   |
+| **Economy / simplicity** | Does it achieve its purpose without unnecessary representational or computational complexity? | cognitive and methodological efficiency                             | traditional theoretical virtues; modelling literature                                 |
+| **Tractability** | Can the model actually be analyzed, computed, manipulated, or used under available resources? | practical usability                                                 | modelling / adequacy-for-purpose literature, Parker                                   |
 
-> [!ERROR] Virtues should restate requirements for the epistemic task.
-> Include here only properties that improve an already admissible answer without defining what makes it an answer of the requested kind. In particular:
-> - *predictive accuracy* should not be considered as an additional virtue when prediction is the task itself: it is then a constitutive success condition;
-> - difference-making (Strevens) should not be listed as a generic virtue if it is being used to characterize what makes an explanation explanatory; that would duplicate the task's constitutive requirements.
+- **Some aims force the selection of virtues.** When the product of the aim is itself a cognitive state, the properties that constitute that state are *selected with the aim*, instead of being added to it. ^entailed-virtues
+
+| Epistemic aim                                                                   | Virtues that the aim forces to select                                                                                                                               |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Understanding**                                                               | intelligibility / qualitative grasp, and structural transparency                                                                                                    |
+| **Prediction**                                                                  | none of the listed virtues: *predictive accuracy* is not considered as an additional virtue, since it is the product itself, fixed by the required accuracy $\tau$, |
+| **Description, exploration, explanation, modal knowledge, knowledge of models** | none by default: these virtues bear on the answer only if the question selects them                                                                                 |
+
+- **A forced virtue is constitutive, not merely preferred.** Once the aim forces a virtue, the [product test](satisfaction-conditions.md) applies it as a success condition, and the appraisal no longer counts it a second time.
 
 > [!CHECK] Support from the literature
 > Parker's adequacy-for-purpose framework argues that the adequacy of a model depends on what they are being used to accomplish and on the *broader circumstances of use*.

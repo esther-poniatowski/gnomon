@@ -45,7 +45,7 @@ Specifying a mechanism requires a several aspects:
 
 **Componenthood is relational and scale-dependent**. A component may itself contain internal structure. *Example*: a neuron is an entity at one explanatory level and an organized system of entities at another.
 
-**Activity is local, organization is global**. Activity is a *local process or transformation*, whereas organization is the coordination of *multiple entities and activities*, i.e. how these transformations are arranged relative to one another. *Example*: "$A$ inhibits $B$" describes an activity or interaction, whereas "$A$ inhibits $B$ after $C$ activates $A$, forming a delayed negative-feedback loop" describes organization.
+**Activity is local, organization is global**. Activity is a *local process or transformation*, whereas organization is the coordination of *multiple entities and activities*, i.e. how these transformations are arranged relative to one another. *Example*: "$c_1$ inhibits $c_2$" describes an activity or interaction, whereas "$c_1$ inhibits $c_2$ after $c_3$ activates $c_1$, forming a delayed negative-feedback loop" describes organization.
 
 **Dynamics is one possible realization of causal structure**. Dynamics specifies how system states evolve, typically through differential equations. However, causal dependencies need not themselves constitute a temporal dynamical law, and not all mechanistic descriptions admit local ODE representations. Causal structure might specify *which changes would make a difference to which other changes*, typically through intervention-supporting or counterfactual dependencies. Mechanistic accounts may explicitly add intervention-invariant causal dependence to the description of component behavior (Woodward).
 
@@ -57,56 +57,56 @@ Specifying a mechanism requires a several aspects:
 
 ## Formalism (proposed)
 
-> [!WARNING] No canonical mathematical notations exist in the philosophical literature.
+> [!WARNING] No canonical mathematical notations exist in the philosophical literature. The symbols below are those of the [notation registry](notation.md), shared with the [answer form](answer-form.md).
 
-**Mechanism**. A generic mechanistic schema is a tuple
-$$M=(E,A,O)$$
+**Mechanism**. A generic mechanistic schema is a triple
+$$\langle C,L,O\rangle$$
 where:
-- $E$: entities/components;
-- $A$: activities or interaction rules;
-- $O$: organization of those entities and activities.
+- $C$: components, also called entities or parts;
+- $L$: activities or interaction rules;
+- $O$: organization of those components and activities.
 
 **Components**: A set of objects
-$$E=\{e_1,\dots,e_n\}$$
-where each object $e_i$ has a state space $X_i$, parameters $\theta_i$, and a state:
-$$x_i(t)\in X_i$$
+$$C=\{c_1,\dots,c_n\}$$
+where each component $c_i$ has a state space $\mathcal{X}_i$, parameters $\theta_i$, and a state:
+$$x_i(t)\in \mathcal{X}_i$$
 
-**Activity**: Often a dynamical rule that specifies how the state of one component changes in response to the states of other components. For each component $e_i$:
-$$\frac{dx_i}{dt} = F_i \left( x_i, \{x_j:j\in N_i\}, \theta \right)$$
+**Activity**: Often a dynamical rule that specifies how the state of one component changes in response to the states of other components. For each component $c_i$:
+$$\frac{dx_i}{dt} = F_i \left( x_i, \{x_j:j\in \mathcal{N}_i\}, \theta \right)$$
 where:
 - $x_i$ is the state of the component;
-- $N_i$ is the set of components that influence $e_i$ (from the structure);
-- $F_i$ is a function specifies a local operation or interaction rule.
+- $\mathcal{N}_i$ is the set of components that influence $c_i$ (from the structure);
+- $F_i$ is a function that specifies a local operation or interaction rule.
 
 **Organization**: A relational structure over components and activities, written as a family of typed relations:
-$$O=\{R_1,\ldots,R_m\}, \qquad R_k\subseteq U^{n_k}, \qquad U = E \sqcup A$$
-where each relation $R_k$ encodes an organizational constraint.
+$$O=\{\rho_1,\ldots,\rho_m\}, \qquad \rho_k\subseteq U^{n_k}, \qquad U = C \sqcup L$$
+where each relation $\rho_k$ encodes an organizational constraint.
 *Example*:
-$$R_{\mathrm{part}}\subseteq E\times A,\qquad R_{\mathrm{temp}}\subseteq A\times A,\qquad R_{\mathrm{causal}}\subseteq A\times A$$
+$$\rho_{\mathrm{part}}\subseteq C\times L,\qquad \rho_{\mathrm{temp}}\subseteq L\times L,\qquad \rho_{\mathrm{causal}}\subseteq L\times L$$
 could respectively state which components perform which activities, which activities precede which, and which activities causally influence which others.
 
 **Relation**: A family of relations, each selecting a subset of objects (of arbitrary arity $k$):
-$$R=\{R_k\}_{k\ge1}, \qquad R_k\subseteq E^k$$
+$$\rho=\{\rho_k\}_{k\ge1}, \qquad \rho_k\subseteq C^k$$
 *Examples*: A binary relation may be written:
-$$r_{ij} = (e_i,e_j)\in R \qquad \text{or} \qquad r_{ij}=(i,j,w_{ij},\tau_{ij},\ldots)$$
+$$r_{ij} = (c_i,c_j)\in \rho \qquad \text{or} \qquad r_{ij}=(i,j,w_{ij},\delta_{ij},\ldots)$$
 for richer relations that include additional properties (e.g. weight, delay)
 
 *Examples*: relations can encode productive constraints such spatial adjacency, temporal precedence, causal dependence, participation of a component in an activity, hierarchical containment.
 
-- $e_i\prec e_j$ may encode temporal precedence,
-- $d(e_i,e_j)<\varepsilon$ may encode a spatial constraint,
-- $a_i\rightarrow a_j$ may encode a causal ordering.
+- $c_i\prec c_j$ may encode temporal precedence,
+- $d(c_i,c_j)<\varepsilon$ may encode a spatial constraint,
+- $\ell_i\rightarrow \ell_j$ may encode a causal ordering, where $L=\{\ell_1,\dots,\ell_m\}$.
 
 **Phenomenon**. Often represented as a predicate on system trajectories:
 $$P[x(\cdot)]$$
 or as an input-output behavior:
-$$P:X_{\mathrm{in}}\rightarrow X_{\mathrm{out}}$$
+$$P:\mathcal{X}_{\mathrm{in}}\rightarrow \mathcal{X}_{\mathrm{out}}$$
 *Example*: Population oscillation could be characterized by a property of the aggregate activity trajectory $y(t)$.
 
 **Mechanism**. A mechanism produces a phenomenon $P$:
-$$(E,A,O)\models P$$
+$$\langle C,L,O\rangle\models P$$
 or, more explicitly, with a realization map:
-$$\Phi(E,A,O)=P$$
+$$\Phi(C,L,O)=P$$
 *Example*: in a neural mechanism,
 
 - the phenomenon is a population oscillation
