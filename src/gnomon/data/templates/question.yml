@@ -1,0 +1,53 @@
+# Method: docs/epistemology/subject-of-inquiry.md, contrast.md, domain.md, epistemic-task.md,
+# modal-strength.md, explanans-level.md, epistemic-pragmatic-virtues.md.
+# Replace every UPPERCASE placeholder. Any closed field accepts the value `open`.
+# Fill this file before any candidate answer is evaluated.
+
+id: quest.TOPIC.NAME
+type: question
+title: "SHORT NAME OF THE QUESTION"
+status: open                     # open | refined | answered | abandoned
+
+subject:
+  target_system: system.TOPIC
+  phenomenon: phen.TOPIC.NAME
+  contrast:
+    locus: open                  # other-outcome | other-system | other-condition | none | open
+    foil_set:                       # listed alternatives, or one rule; default: the other values of the explanandum variable
+      - "FOIL"
+    compatibility: derived       # follows from the locus: exclusive for other-outcome, compatible otherwise
+    foil_status: open            # observed | counterfactual | not-applicable | open
+  domain:                        # restrictions of the a priori specification only; the assumptions of the analysis belong to the answer
+    parameter_restrictions:
+      - parameter: "PARAMETER OF THE SYSTEM OR OF AN EXTERNAL SYSTEM"
+        values: "SUBSET OF ITS ADMITTED VALUES"
+    state_restrictions:
+      - variable: "STATE VARIABLE"
+        restriction: "CLAMPED VALUE | RESTRICTED VALUES | INITIAL STATES | STATIONARY STATES ONLY | TRAJECTORIES WITHOUT EVENT"
+    limit: null                  # "QUANTITY -> LIMIT VALUE", only when the question concerns the limit system itself
+
+task:
+  epistemic_aim: open                      # description | exploration | prediction | explanation | understanding | modal-knowledge | model-knowledge | open
+  requested_relation: open                 # causal-intervention | causal-mechanistic | constitutive | function | nomological | statistical | mathematical | not-applicable | open
+  modal_strength: open           # actual | possible | necessary | open
+  level:                         # optional: leave null to let proportionality select the level
+    compositional: null          # "CONSTITUENTS, SUB-PARTS OR AGGREGATES"
+    aggregation: null            # mean-or-sum | projection | order-parameter | distribution-statistics
+    substrate: null              # specific | independent | link
+  required_accuracy:
+    level: open                  # qualitative | order-of-magnitude | numeric-bound | structural-only | open
+    outputs_to_match:
+      - model_output: "OUTPUT OF THE MODEL"
+        target_output: "OBSERVABLE OF THE TARGET THAT IT MUST MATCH"
+        tolerance: "TOLERANCE"
+    structures_to_match:
+      - model_structure: "STRUCTURE OF THE MODEL"
+        target_structure: "STRUCTURE OF THE TARGET THAT IT MUST MATCH"
+
+virtues:                         # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability
+  - "VIRTUE"                     # the aim forces some: understanding forces intelligibility and structural-transparency
+
+question_statement: "In [target system] under [domain], [interrogative word selected by the aim] [phenomenon] rather than [contrast]?"
+
+maturity:                        # optional, per field: open | provisional | stabilized; a field left out inherits the status of the record
+  FIELD.PATH: open

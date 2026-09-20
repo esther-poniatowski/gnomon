@@ -1,0 +1,37 @@
+# Method: docs/epistemology/satisfaction-conditions.md. One file per candidate answer assessed.
+# Replace every UPPERCASE placeholder. A test whose specification is empty in the question
+# takes the verdict not-applicable. The appraisal is filled for one answer at a time, and it
+# names another candidate only when one exists.
+
+id: assess.TOPIC.NAME
+type: assessment
+title: "SHORT NAME OF THE ASSESSMENT"
+status: provisional              # provisional | stabilized | retracted
+assesses: ans.TOPIC.NAME
+against: quest.TOPIC.NAME
+
+tests:                           # verdict: pending | pass | fail | not-applicable
+  admissibility:
+    scope: {verdict: pending, evidence: "DERIVATION, SIMULATION, MEASUREMENT OR COMPARISON THAT SETTLES THE TEST"}
+    grain: {verdict: pending, evidence: ""}
+    contrast: {verdict: pending, evidence: ""}
+    relation: {verdict: pending, evidence: ""}
+    individuation: {verdict: pending, evidence: ""}
+    level: {verdict: pending, evidence: ""}
+    modal-strength: {verdict: pending, evidence: ""}
+    product: {verdict: pending, evidence: ""}
+  warrant:
+    phenomenon-established: {verdict: pending, evidence: ""}
+    foil-evidence: {verdict: pending, evidence: ""}
+    closure: {verdict: pending, evidence: ""}
+    fidelity: {verdict: pending, evidence: ""}
+    robustness: {verdict: pending, evidence: ""}
+    selection: {verdict: pending, evidence: ""}
+
+appraisal:                       # one entry per virtue that the question selected or that its aim forced
+  - virtue: "VIRTUE"
+    assessment: "WHAT THE OPERATIONAL QUESTION OF THAT VIRTUE RETURNS FOR THIS ANSWER"
+    preferred_over: "THE CANDIDATES THAT THIS ONE BEATS ON THAT VIRTUE, when others have been assessed"
+
+maturity:                        # optional, per specification: open | provisional | stabilized; one left out inherits the status of the record
+  FIELD.PATH: open

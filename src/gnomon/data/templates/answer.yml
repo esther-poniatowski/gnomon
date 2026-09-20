@@ -1,0 +1,43 @@
+# Method: docs/epistemology/answer-form.md. One file per candidate answer.
+# Replace every UPPERCASE placeholder. The elements follow the order of the answer tuple
+# <C, V, L, O, I, E>. The verdicts of the tests are recorded apart, in an assessment file.
+
+id: ans.TOPIC.NAME
+type: answer
+title: "SHORT NAME OF THE CANDIDATE ANSWER"
+status: preliminary              # preliminary | hypothesized | informally-backed | formally-proven | accepted | retracted
+answers: quest.TOPIC.NAME
+
+constituents:                    # C: the units that the answer treats as bearers
+  - name: "UNIT"
+    kind:                        # declared | derived
+    map: "MAP FROM THE DECLARED CONSTITUENTS, for a derived unit"
+
+terms:                           # V: the quantities, structures and properties that the answer uses
+  - name: "TERM"
+    type:                        # quantity | structure | property
+    kind:                        # declared | derived | posited
+    definition: "MAP FROM THE DECLARED VARIABLES, for a derived term"
+
+laws:                            # L: the dependences that link the terms to the explanandum variable
+  - statement: "LAW OR STRUCTURAL RELATION, formulas allowed"
+    status:                      # derived (from the laws of the system) | derived-in-a-limit | posited | fitted | measured
+    rests_on: "THE LAWS, THE IDEALIZATION OR THE DATA THAT THE STATUS REFERS TO"
+
+organization: "ARRANGEMENT OF THE CONSTITUENTS AND THEIR ACTIVITIES"   # O: required when the relation is mechanistic or constitutive
+
+idealizations:                   # I: the distortions that the analysis introduces
+  - assumption: "ASSUMPTION OF THE ANALYSIS"
+    role:                        # tractability (the undistorted system resists analysis) | isolation (it removes a factor judged irrelevant) | limit (it exposes the behavior of a limit system)
+    buys: "WHAT THE ANSWER GAINS BY IT: the derivation it makes possible, or the factor it exposes"
+    holds_for: "RANGE OVER WHICH IT HOLDS"
+
+explanans:                       # E: the load-bearing factors, which differ between fact and foil
+  - claim: "WHAT MAKES THE DIFFERENCE BETWEEN FACT AND FOIL"
+    kind:                        # condition | structural-property | law-property | organizational
+    bears_on: "TERM OR ORGANIZATION"
+
+answer_statement: "In [target system] under [domain], [phenomenon] rather than [contrast], because [explanans], related to [explanandum variable] by [relation] through [laws], assuming [idealizations]."
+
+maturity:                        # optional, per specification: open | provisional | stabilized; one left out inherits the status of the record
+  FIELD.PATH: open

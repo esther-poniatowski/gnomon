@@ -1,0 +1,53 @@
+# Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
+# Replace every UPPERCASE placeholder. Any closed field accepts the value `open`.
+# The specifications appear in the order of the method note.
+# For an exploratory question, leave the statement and the category open, and fill the
+# candidate observables, the varied conditions and the detection criterion.
+
+id: phen.TOPIC.NAME
+type: phenomenon
+title: "SHORT NAME OF THE PHENOMENON"
+status: provisional              # provisional | stabilized | retracted
+target_system: system.TOPIC
+
+statement:                       # reads as: bearer, behavior, precipitating condition
+  bearer: "THE SYSTEM, A PART OF IT, OR AN AGGREGATE OF PARTS"
+  behavior: "VERB PHRASE: WHAT THE BEARER DOES OR UNDERGOES"
+
+category: open                   # particular-event | regularity | capacity | structural-property | open
+
+explanandum_variables:           # the variables that restate the behavior in terms of the state of the system
+  - name: "Y"
+    values: "POSSIBLE VALUES OF Y"
+    observed: "VALUE y AMONG THEM"
+    scale:                       # categorical | ordinal | quantitative
+    parts_covered: "THE CONSTITUENTS THAT THE VARIABLE COVERS: every unit, a named subpopulation, or one unit"
+    aggregation:                 # each-constituent | summary | distribution | not-applicable
+    followed_along: none         # time | parameter | none
+    profile:                     # single-value | summary | full-profile | not-applicable
+
+scope_over_instances: open       # single | typical | ensemble-summary | ensemble-distribution | not-applicable | open
+
+conditions_and_byproducts:       # a factor that the question varies leaves the domain of conditions
+  precipitating:
+    - "CONDITION THAT TRIGGERS THE BEHAVIOR"
+  inhibiting:
+    - "CONDITION THAT PREVENTS THE BEHAVIOR"
+  modulating:
+    - condition: "CONDITION"
+      feature: "FEATURE OF THE BEHAVIOR THAT IT CHANGES"
+      effect: "DIRECTION OR SIZE OF THE CHANGE"
+  nonstandard:
+    - "UNUSUAL CIRCUMSTANCE UNDER WHICH THE BEHAVIOR CAN BE MADE TO OCCUR"
+  byproducts:
+    - "FURTHER EFFECT OF THE BEHAVIOR, OUTSIDE THE PHENOMENON ITSELF"
+
+evidential_status: open          # established | reported | predicted | derived | open
+
+detection_criterion: "WHAT A CANDIDATE PATTERN MUST SATISFY TO COUNT AS ESTABLISHED, for instance stability across instances"
+
+data:
+  - "POINTER TO A DATA SET, A RECORDING OR A DERIVATION"
+
+maturity:                        # optional, per specification: open | provisional | stabilized; one left out inherits the status of the record
+  FIELD.PATH: open

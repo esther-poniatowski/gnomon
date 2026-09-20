@@ -1,0 +1,54 @@
+# Method: docs/epistemology/target-system.md. One file per target system.
+# Replace every UPPERCASE placeholder. Any closed field accepts the value `open`.
+# The specifications appear in the order of the method note.
+
+id: system.TOPIC
+type: target-system
+title: "NAME OF THE SYSTEM"
+status: provisional              # provisional | stabilized | retracted
+
+target_type: open                # particular | class-actual | class-possible | hypothetical | no-external-target | open
+
+reference_class:                 # a name only: the specifications below generate the class, so they are not restated here
+  name: "KIND OF SYSTEM"
+  selection_criteria:            # only when the specifications below do not fix membership
+    - criterion: "CRITERION"
+      kind:                      # a-priori | outcome-dependent
+
+constituents:
+  - kind: "KIND OF UNIT"
+    number: "NUMBER OR RANGE"
+
+state_variables:                 # the state space is the product of the value sets of the non-aggregate variables
+  - name: "VARIABLE"
+    values: "SET OF VALUES"
+    defined_over: ["KIND OF UNIT"]   # one entry per place: one for a unit, two for a pair, none for the system as a whole
+    shared: false                # true when one value holds for every tuple of constituents
+    definition: "MAP FROM THE CONSTITUENT VARIABLES, for an aggregate"
+
+parameters:                      # quantities held fixed while the phenomenon unfolds
+  - name: "PARAMETER"
+    values: "SET OF ADMITTED VALUES"
+    defined_over: ["KIND OF UNIT", "KIND OF UNIT"]   # one entry per place: a connectivity weight names two neurons
+    shared: false                # true when one value holds for every tuple of constituents
+
+laws:                            # the behaviors of the components or of the system that are admitted a priori
+  - label: "LAW LABEL"
+    statement: "STATEMENT OF THE LAW, formulas allowed"
+    applies_to: ["KIND OF UNIT"] # the constituents it governs, one entry per place; none for the system as a whole
+    granularity:                 # local (each constituent from its neighbours) | collective (depends on the whole system)
+    function:                    # succession (how the state changes) | coexistence (which states are admissible) | measurement (how an instrument registers the state)
+
+closure: open                    # complete (formal target: the laws define the system) | partial (empirical target) | open
+
+interface:
+  - variable: "SHARED VARIABLE"
+    direction:                   # input | output | coupling
+
+external_systems:
+  - name: "EXTERNAL SYSTEM"
+    shares: ["SHARED VARIABLE"]
+    constrains: "THE PROPERTIES THAT CONSTRAIN THE SHARED VARIABLES"
+
+maturity:                        # optional, per specification: open | provisional | stabilized; one left out inherits the status of the record
+  FIELD.PATH: open
