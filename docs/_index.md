@@ -16,6 +16,7 @@ Each entry answers one class of question about `gnomon`, so a reader consults on
 | [Methods for reasoning](methods-reasoning/_index.md) | How reasoning is conducted and formalized outside `gnomon`, from what a discipline demands of a valid argument to the formal domains that model an epistemic state and its transitions. |
 | [Methods for taxonomies](methods-taxonomies/_index.md) | Which criteria warrant a classification, and the procedure that applies them to build a taxonomy. No algorithm yields a universally correct partition, so each classification must declare the function it serves. |
 | [Epistemology](epistemology/_index.md) | What a researcher must fix to specify an inquiry, from what the question is about to the form of the answer it seeks. Each choice rests on results from the philosophy of models, of explanation and of questions. |
+| [Architecture decisions](adr/_index.md) | Which design constraint each substantive choice answers, the options weighed against it, and what the choice costs. |
 | [Design TODO](TODO.md) | Where the design currently stands, and which steps remain open. |
 
 ## Note conventions
