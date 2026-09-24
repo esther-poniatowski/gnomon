@@ -1,0 +1,56 @@
+# Method: docs/epistemology/subject-of-inquiry.md, contrast.md, domain.md, epistemic-task.md,
+# modal-strength.md, admissible-explanans.md, epistemic-pragmatic-virtues.md.
+# The question is specified before any candidate answer is evaluated.
+
+title: "Necessary and sufficient constraints for stable coexistence"
+statement: "Across microbial-community models, which constraints on resource-mediated or higher-order interactions are necessary, sufficient, or both for feasible and locally stable coexistence rather than competitive exclusion or an unstable positive equilibrium, and which sufficient constraints remain valid as resource supply varies?"
+id: quest.microbial.stable-coexistence-constraints
+type: question
+status: open                     # open | refined | answered | abandoned
+subject:
+  target_system: system.microbial-formal-population-models
+  phenomenon: phen.microbial.stable-coexistence
+  contrast:
+    locus: other-outcome         # other-outcome | other-system | other-condition | none | open
+    foil_set:
+      - name: "competitive exclusion"
+        symbol: exclusion
+        expression: ["mN <= 0"]
+        reading: "no equilibrium has every microbial-population abundance positive, as under competitive exclusion"
+      - name: "feasible but unstable equilibrium"
+        symbol: unstable
+        expression: ["mN > 0", "alpha >= 0"]
+        reading: "an equilibrium has every microbial-population abundance positive but is locally dynamically unstable"
+    compatibility: derived       # exclusive for an other-outcome contrast
+    foil_status: counterfactual
+  domain:
+    restrictions: []
+    limit: null                  # the question does not concern a limit system
+
+task:
+  epistemic_aim: modal-knowledge
+  requested_relation: mathematical
+  modal_strength: necessary      # actual | possible | necessary | open
+  admissible_explanans:
+    compositional: [system.microbial-formal-population-models#pop, system.microbial-formal-population-models#res]
+    substrate: independent
+    justification: "the sought constraints concern interactions among populations and, for resource-explicit members, the pools that mediate those interactions; no taxon-specific identity may carry the result"
+  required_accuracy:
+    standard: not-applicable        # the answer is derived, not matched against a measurement
+    outputs_to_match: []
+    structures_to_match: []
+  proof_obligations:             # the inquiry asks for both directions, so each is its own obligation
+    - name: "necessity of the constraint"
+      reading: "every member model with a feasible and locally stable equilibrium satisfies the proposed constraint, so the constraint is necessary"
+      antecedent: ["mN > 0", "alpha < 0"]
+      consequent: [open]         # the constraint itself is what the inquiry seeks
+    - name: "sufficiency of the constraint"
+      reading: "every member model satisfying the proposed constraint has a feasible and locally stable equilibrium, so the constraint is sufficient"
+      antecedent: [open]
+      consequent: ["mN > 0", "alpha < 0"]
+
+virtues: []
+
+maturity:
+  task.proof_obligations.necessity.consequent: open
+  task.proof_obligations.sufficiency.antecedent: open

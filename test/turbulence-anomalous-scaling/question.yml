@@ -1,0 +1,73 @@
+# Method: docs/epistemology/subject-of-inquiry.md, contrast.md, domain.md, epistemic-task.md,
+# modal-strength.md, admissible-explanans.md, epistemic-pragmatic-virtues.md.
+# The research question is specified before any candidate answer is evaluated.
+
+title: "Necessary constraints on anomalous scaling"
+statement: "At Re -> ∞, which mathematical constraints of statistically stationary three-dimensional incompressible Navier–Stokes flow necessarily produce non-self-similar joint longitudinal and transverse increment statistics, and which resulting relations and exponents remain invariant across admitted forcing and boundary families?"
+id: quest.turbulence.anomalous-scaling-constraints
+type: question
+status: open                     # open | refined | answered | abandoned
+subject:
+  target_system: system.turbulence-incompressible-navier-stokes
+  phenomenon: phen.turbulence.velocity-increment-distributions
+  contrast:
+    locus: other-outcome         # other-outcome | other-system | other-condition | none | open
+    foil_set:
+      - name: "self-similar scaling"
+        symbol: self_similar
+        expression: ["zetaL(p) = p / 3", "zetaT(p) = p / 3"]
+        reading: "classical self-similar scale dependence of the velocity-increment distributions"
+      - name: "identical longitudinal and transverse intermittency"
+        symbol: identical_scaling
+        expression: ["zetaL = zetaT"]
+        reading: "identical scaling exponents for longitudinal and transverse velocity increments"
+    compatibility: derived       # exclusive for an other-outcome contrast
+    foil_status: counterfactual
+  domain:
+    restrictions:
+      - of: system.turbulence-incompressible-navier-stokes#u
+        restriction: stationary
+        values: "subset(maps(prod(Om, interval(reals)), vectors(reals, 3)), stationary)"
+        justification: "the structure functions average over positions and times, so a flow whose statistics still drift would make each average a mixture of two regimes"
+    limit:
+      expression: "Re -> infinity"
+      justification: "the inertial range separates the injection scale from the dissipation scale only as the viscosity vanishes, so the exponents are defined on the limit system rather than on any one flow"
+
+task:
+  epistemic_aim: explanation
+  requested_relation: mathematical
+  modal_strength: necessary
+  admissible_explanans:
+    compositional: [system.turbulence-incompressible-navier-stokes#x]
+    substrate: independent
+    justification: "the exponents are claimed across forcing and boundary families, so an explanans built from the boundary data of one flow would not answer; position-resolved variables are admitted because an increment is defined across a separation"
+  required_accuracy:
+    standard: numeric-bound
+    outputs_to_match:
+      - target: phen.turbulence.velocity-increment-distributions#zetaL
+        tolerance:
+          metric: "abs(answer - target)"
+          bound: open            # the reported uncertainty interval differs with the order p
+        justification: "the departure of the longitudinal exponents from the self-similar line is part of the content of intermittency, and its size at each order separates competing accounts"
+      - target: phen.turbulence.velocity-increment-distributions#zetaT
+        tolerance:
+          metric: "abs(answer - target)"
+          bound: open            # the reported uncertainty interval differs with the order p
+        justification: "the transverse exponents and their difference from the longitudinal exponents are needed to test whether an account explains both sectors"
+    structures_to_match:
+      - target: phen.turbulence.velocity-increment-distributions#P
+        justification: "the exponents are moments of that distribution, so an account fixing the moments while predicting the wrong shape would reproduce the targets by construction"
+
+virtues:
+  - virtue: generality
+    standing: preferred
+    justification: "the question asks which results persist across forcing and boundary families, but it must still admit a correct answer that identifies a narrower domain of universality"
+  - virtue: intelligibility
+    standing: constitutive
+    justification: "the question asks which constraints produce the departure from self-similarity, and an account whose steps cannot be followed leaves that dependence ungrasped however accurate its exponents"
+  - virtue: structural-transparency
+    standing: constitutive
+    justification: "the mechanism producing the departure from self-similarity must be exhibited, and reproducing the exponents alone does not exhibit it"
+
+maturity:
+  task.required_accuracy.outputs_to_match.tolerance.bound: open

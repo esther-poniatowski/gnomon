@@ -1,0 +1,37 @@
+# Method: docs/epistemology/subject-of-inquiry.md, contrast.md, domain.md, epistemic-task.md,
+# modal-strength.md, admissible-explanans.md, epistemic-pragmatic-virtues.md.
+# Fill this file before any candidate answer is evaluated.
+
+title: "Phase exploration across size and dimension"
+statement: "Which macroscopic phases occur in spatially extended two-species nonreciprocal stochastic models as their control parameters vary? Does each detected phase persist for finite L in each selected spatial dimension, and does it survive as L -> infinity?"
+id: quest.nonreciprocal-active-matter.phase-exploration
+type: question
+status: open                     # open | refined | answered | abandoned
+subject:
+  target_system: system.nonreciprocal-active-matter
+  phenomenon: phen.nonreciprocal-active-matter.collective-phases
+  contrast:
+    locus: none                  # other-outcome | other-system | other-condition | none | open
+    foil_set: []                 # listed alternatives, or one rule; default: the other values of the explanandum variable
+    compatibility: derived       # follows from the locus: exclusive for other-outcome, compatible otherwise
+    foil_status: not-applicable  # observed | counterfactual | not-applicable | open
+  domain:                        # restrictions of the a priori specification only; the assumptions of the analysis belong to the answer
+    restrictions: []
+    limit: null                  # finite-size scaling supplies the thermodynamic-limit result without restricting the whole question to the limit system
+
+task:
+  epistemic_aim: exploration     # description | exploration | prediction | explanation | modal-knowledge | model-knowledge | open
+  requested_relation: not-applicable # causal-intervention | causal-mechanistic | constitutive | function | nomological | statistical | mathematical | not-applicable | open
+  modal_strength: actual         # actual | possible | necessary | open
+  admissible_explanans:
+    compositional: null
+    substrate: null
+    justification: "the aim is exploration, so the inquiry seeks a phenomenon rather than an account of one, and no explanans is requested that a bound could restrict"
+  required_accuracy:
+    standard: not-applicable        # a formal exploration matches no measurement
+    outputs_to_match: []
+    structures_to_match: []
+
+virtues: []                      # no virtue is selected beyond the search and persistence requirements of the question
+
+maturity: {}                     # optional, per field: open | provisional | stabilized; a field left out inherits the status of the record

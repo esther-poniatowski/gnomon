@@ -1,0 +1,25 @@
+# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
+# The operators the records of this problem use beyond the canonical set of the framework.
+# An operator is typed over the sets the records of this problem declare.
+
+title: "Operators of the localized-state inquiry"
+id: ops.swift-hohenberg-localized-states
+type: operators
+status: provisional              # provisional | stabilized | retracted
+target_system: system.swift-hohenberg-localized-states
+
+operators:
+  - name: "the common value approached by a scalar field at both spatial infinities"
+    symbol: far_field
+    notation: '\lim_{x \to \infty} #1'
+    signature: ["maps(reals, reals)"]
+    values: reals
+  - name: "the set of all subsets of a declared set"
+    symbol: powerset
+    notation: '\mathcal{P}( #1 )'
+    for_any: [S]
+    signature: [S]
+    values: open
+
+maturity:
+  operators.powerset.values: open

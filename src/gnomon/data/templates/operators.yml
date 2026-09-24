@@ -1,0 +1,22 @@
+# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
+# The operators the records of this problem use beyond the canonical set of the framework.
+# An operator is typed over the sets the records of this problem declare, whichever record
+# declares them, so the file is read against the whole problem rather than one record.
+# Replace every UPPERCASE placeholder.
+
+title: "SHORT NAME OF THE PROBLEM WHOSE OPERATORS THESE ARE"
+id: ops.TOPIC
+type: operators
+status: provisional              # provisional | stabilized | retracted
+target_system: system.TOPIC
+
+operators:
+  - name: "WHAT THE OPERATOR COMPUTES"
+    symbol: SYMBOL
+    notation: 'LATEX TEMPLATE, with #0 for the bound indices and #1 for each argument'
+    for_any: [SYMBOL]            # the type variables it is general in, which its types below may name; omitted when it acts on declared sets alone
+    signature: ["SET EXPRESSION OVER DECLARED SYMBOLS OR A VARIABLE ABOVE"]
+    values: "SET EXPRESSION OVER DECLARED SYMBOLS OR A VARIABLE ABOVE"
+
+maturity:                        # optional, per specification: open | provisional | stabilized; one left out inherits the status of the record
+  FIELD.PATH: open

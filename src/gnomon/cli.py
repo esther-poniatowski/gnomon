@@ -9,10 +9,15 @@ info : Display diagnostic information.
 init : Scaffold research workspace structure into a target directory.
 validate : Validate registry files against schemas.
 status : Report inferential position in the research workspace.
+vocabulary : Collect the symbols and operators of one problem into a table.
 """
 
+from pathlib import Path
+
 import typer
+
 from . import info as pkg_info, __version__
+from .vocabulary import load_problem, render_markdown, render_yaml
 
 app = typer.Typer(add_completion=False, no_args_is_help=True)
 
@@ -48,6 +53,34 @@ def cli_status(
     """Report inferential position: established results, open questions, in-progress notes, blocked entries."""
     typer.echo("Workspace status reporting is not yet implemented.")
     raise typer.Exit(code=0)
+
+
+@app.command("vocabulary")
+def cli_vocabulary(
+    directory: str = typer.Argument(..., help="Directory holding the filled records of one problem."),
+    output: str = typer.Option(
+        "vocabulary.yml", "--output", "-o", help="Record written inside that directory."
+    ),
+    markdown: bool = typer.Option(
+        False, "--markdown", "-m", help="Also build the Markdown view beside the record."
+    ),
+) -> None:
+    """Collect the symbols and operators of one problem into a table its author can consult."""
+    source = Path(directory)
+    if not source.is_dir():
+        typer.echo(f"no such directory: {source}", err=True)
+        raise typer.Exit(code=1)
+    problem = load_problem(source)
+    target = source / output
+    target.write_text(render_yaml(problem), encoding="utf-8")
+    if markdown:
+        (source / f"{target.stem}.md").write_text(render_markdown(problem), encoding="utf-8")
+    repeated = problem.collisions()
+    typer.echo(
+        f"{target}: {len(problem.declarations)} symbols, "
+        f"{len(problem.local)} operators of the problem, "
+        f"{len(repeated)} symbols reused across records"
+    )
 
 
 @app.callback()

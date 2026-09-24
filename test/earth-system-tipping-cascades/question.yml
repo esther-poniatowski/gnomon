@@ -1,0 +1,55 @@
+# Method: docs/epistemology/subject-of-inquiry.md, contrast.md, domain.md, epistemic-task.md,
+# modal-strength.md, admissible-explanans.md, epistemic-pragmatic-virtues.md.
+# Fill this file before any candidate answer is evaluated.
+
+title: "Transition-sequence forecasts under warming overshoot"
+statement: "For the selected tipping-relevant subsystems of the actual Earth system, what joint probability distribution governs transition sequences through a stated horizon under each specified warming trajectory? How does a temporary overshoot change that distribution relative to a matched non-overshoot trajectory?"
+id: quest.earth-tipping-subsystems.overshoot-sequence-forecast
+type: question
+status: open                     # open | refined | answered | abandoned
+subject:
+  target_system: system.earth-tipping-subsystems
+  phenomenon: phen.earth-tipping-subsystems.transition-sequences
+  contrast:
+    locus: other-condition       # other-outcome | other-system | other-condition | none | open
+    foil_set:                    # listed alternatives, or one rule; default: the other values of the explanandum variable
+      - name: "matched non-overshoot trajectory"
+        symbol: no_overshoot
+        expression: ["peak <= conv"]
+        reading: "a non-overshoot warming trajectory matched to the overshoot trajectory on the long-term convergence level and on every comparison property fixed for the analysis"
+    compatibility: derived       # follows from the locus: exclusive for other-outcome, compatible otherwise
+    foil_status: counterfactual  # observed | counterfactual | not-applicable | open
+  domain:                        # restrictions of the a priori specification only; the assumptions of the analysis belong to the answer
+    restrictions: []
+    limit: null                  # only when the question concerns a limit system
+
+task:
+  epistemic_aim: prediction      # description | exploration | prediction | explanation | modal-knowledge | model-knowledge | open
+  requested_relation: statistical # causal-intervention | causal-mechanistic | constitutive | function | nomological | statistical | mathematical | not-applicable | open
+  modal_strength: actual         # actual | possible | necessary | open
+  admissible_explanans:                         # optional: leave null to let proportionality select the level
+    compositional: [system.earth-tipping-subsystems#sub]
+    substrate: specific          # specific | independent | link
+    justification: "the forecast names which subsystem transitions and when, so the explanans must be resolved to individual subsystems and to their own parameters; an account holding for any system of that shape would not say which one tips first"
+  required_accuracy:
+    standard: numeric-bound         # qualitative | order-of-magnitude | numeric-bound | structural-only | open
+    outputs_to_match:            # the answer reproduces each target observable
+      - target: phen.earth-tipping-subsystems.transition-sequences#pi
+        tolerance:
+          metric: "abs(answer - target)"
+          bound: open
+        justification: "a forecast is usable only if it commits to how likely each transition is, so an answer naming which transitions are possible does not meet the question"
+      - target: phen.earth-tipping-subsystems.transition-sequences#Fi
+        tolerance:
+          metric: "max_{t}( abs(answer - target) )"
+          bound: open
+        justification: "the timing carries the lead time available for any response, so the distribution is required beyond the probability that the event occurs at all"
+    structures_to_match: []
+
+virtues:                         # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability
+  - virtue: structural-transparency
+    standing: constitutive
+    justification: "the interactions are what carries a cascade, so an answer whose transmission pathway cannot be inspected cannot be held to the architecture the question requires it to reproduce"
+
+maturity:                        # optional, per field: open | provisional | stabilized; a field left out inherits the status of the record
+  task.required_accuracy.outputs_to_match.tolerance.bound: open

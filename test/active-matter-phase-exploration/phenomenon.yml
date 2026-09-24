@@ -1,0 +1,225 @@
+# Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
+# The specifications appear in the order of the method note.
+
+title: "Collective phases under nonreciprocal coupling"
+statement: open                  # the phenomenon is the product of this inquiry
+id: phen.nonreciprocal-active-matter.collective-phases
+type: phenomenon
+status: provisional              # provisional | stabilized | retracted
+target_system: system.nonreciprocal-active-matter
+
+category: open                   # particular-event | regularity | capacity | structural-property | open
+
+index_sets:                      # the indices the candidate observables introduce
+  - name: "spatial separation"
+    symbol: rsep
+    notation: 'r'
+    extent: "vectors(reals, d)"
+    structure: continuum
+  - name: "temporal lag"
+    symbol: lag
+    extent: "nonneg(reals)"
+    structure: continuum
+  - name: "wavevector"
+    symbol: k
+    extent: "vectors(reals, d)"
+    structure: continuum
+  - name: "frequency"
+    symbol: omega
+    notation: '\omega'
+    extent: reals
+    structure: continuum
+  - name: "lattice displacement"
+    symbol: rsite
+    variant: lattice
+    extent: "sites(d, L, bgeom)"
+    structure: discrete-set
+  - name: "lattice wavevector"
+    symbol: klat
+    variant: lattice
+    extent: "sites(d, L, bgeom)"
+    structure: discrete-set
+
+explanandum_variables:           # candidate observables for an open phase search
+  - name: "species-resolved correlation matrix"
+    symbol: C
+    variant: continuum
+    signature: [sp, sp, rsep, lag]
+    values: reals
+    expression: "mean_{x, t}( u(sp, x, t) * u(sp, x + rsep, t + lag) )"
+    reading: "the correlation between species fields at a spatial separation and a temporal lag"
+  - name: "species-resolved spectral matrix"
+    symbol: S
+    variant: continuum
+    signature: [sp, sp, k, omega]
+    values: complex
+    expression: "ft_{rsep, lag}( C )"
+    reading: "the same correlation read in wavevector and frequency"
+  - name: "species-resolved empirical distribution of the local field state"
+    symbol: rho_emp
+    notation: '\hat{\rho}'
+    variant: continuum
+    signature: [sp]
+    values: "measures(U(sp))"
+    expression: "dist_{x, t}( u )"
+    reading: "the distribution of the local state of each species after positions and times are pooled"
+  - name: "species-resolved lattice correlation"
+    symbol: Cl
+    notation: 'C_{\mathrm{lat}}'
+    variant: lattice
+    signature: [sp, sp, rsite, lag]
+    values: reals
+    expression: "mean_{q, t}( v(sp, q, t) * v(sp, q + rsite, t + lag) )"
+    reading: "the correlation between the two lattice species at a site displacement and a temporal lag"
+  - name: "species-resolved lattice spectrum"
+    symbol: Sl
+    notation: 'S_{\mathrm{lat}}'
+    variant: lattice
+    signature: [sp, sp, klat, omega]
+    values: complex
+    expression: "ft_{rsite, lag}( Cl )"
+    reading: "the lattice correlation represented by wavevector and frequency"
+  - name: "species-resolved empirical distribution of the lattice state"
+    symbol: rho_lat
+    notation: '\hat{\rho}_{\mathrm{lat}}'
+    variant: lattice
+    signature: [sp]
+    values: "measures(U(sp))"
+    expression: "dist_{q, t}( v )"
+    reading: "the distribution of the local lattice state of each species after sites and times are pooled"
+  - name: "phase diagnostic for the continuum variant"
+    symbol: diag
+    variant: continuum
+    signature: [L, d]
+    values: open
+    expression: open             # the diagnostic is the product of the inquiry
+  - name: "phase diagnostic for the lattice variant"
+    symbol: diag_lattice
+    variant: lattice
+    signature: [L, d]
+    values: open
+    expression: open
+
+manifestations:                  # the phase catalogue is what the inquiry seeks
+  - name: "catalogue of distinguishable collective regimes"
+    symbol: phase_catalogue
+    variant: continuum
+    form: open
+    expression: open
+    features:
+      - name: "candidate collective phase"
+        symbol: phase
+        values: open
+        observed: open
+  - name: "catalogue of distinguishable lattice regimes"
+    symbol: phase_catalogue_lattice
+    variant: lattice
+    form: open
+    expression: open
+    features:
+      - name: "candidate collective lattice phase"
+        symbol: phase_lattice
+        values: open
+        observed: open
+
+scope_over_instances:            # the diagnostics are distributions over sampled controls and realizations
+  - name: "stochastic realizations at fixed controls"
+    symbol: realization
+    variant: continuum
+    over: [W]
+    source: realization
+    quantification: ensemble-distribution
+    conditional_on: [coupling, selfdyn]
+  - name: "admitted nonreciprocal cross-coupling operators"
+    symbol: coupling
+    variant: continuum
+    over: [G]
+    source: parameter-draw
+    quantification: ensemble-distribution
+    conditional_on: []
+  - name: "admitted self-dynamics, diffusion coefficients and noise laws"
+    symbol: selfdyn
+    variant: continuum
+    over: [F, Q, D]
+    source: parameter-draw
+    quantification: ensemble-distribution
+    conditional_on: []
+  - name: "stochastic lattice realizations at fixed controls"
+    symbol: realization_lattice
+    variant: lattice
+    over: [Xi]
+    source: realization
+    quantification: ensemble-distribution
+    conditional_on: [coupling_lattice, selfdyn_lattice]
+  - name: "admitted nonreciprocal lattice couplings"
+    symbol: coupling_lattice
+    variant: lattice
+    over: [Gl]
+    source: parameter-draw
+    quantification: ensemble-distribution
+    conditional_on: []
+  - name: "admitted lattice self-dynamics, diffusion coefficients and noise laws"
+    symbol: selfdyn_lattice
+    variant: lattice
+    over: [Fl, Ql, Dl]
+    source: parameter-draw
+    quantification: ensemble-distribution
+    conditional_on: []
+
+conditions_and_byproducts:       # every swept control is an index or a source of variation, so no effect is asserted
+  precipitating: []
+  inhibiting: []
+  modulating: []
+  nonstandard: []
+  byproducts: []
+
+evidential_status: open          # established | reported | predicted | derived | open
+
+detection_criterion:             # the diagnostic separating phases is the product of the inquiry
+  - name: "recurrence across realizations and windows"
+    variant: continuum
+    across: [realization]
+    expression: open
+    procedure: "a candidate regime recurs across stochastic realizations and survives longer observation windows"
+  - name: "separation in the sampled control space"
+    variant: continuum
+    across: [coupling, selfdyn]
+    expression: open
+    procedure: "the regime occupies a distinguishable region of the sampled control space"
+  - name: "persistence in the thermodynamic limit"
+    variant: continuum
+    across: []
+    expression: open
+    procedure: "persistence in the thermodynamic limit is shown by finite-size scaling in L, or the regime is labelled finite-size"
+  - name: "recurrence of lattice regimes across realizations and windows"
+    variant: lattice
+    across: [realization_lattice]
+    expression: open
+    procedure: "a candidate lattice regime recurs across stochastic realizations and survives longer observation windows"
+  - name: "separation of lattice regimes in the sampled control space"
+    variant: lattice
+    across: [coupling_lattice, selfdyn_lattice]
+    expression: open
+    procedure: "the lattice regime occupies a distinguishable region of the sampled control space"
+  - name: "persistence of a lattice regime in the thermodynamic limit"
+    variant: lattice
+    across: []
+    expression: open
+    procedure: "finite-size scaling in L separates a lattice phase that persists in the thermodynamic limit from a finite-size regime"
+
+data: []
+
+maturity:                        # the phase catalogue and its characterization remain the product of the inquiry
+  statement: open
+  category: open
+  manifestations.form: open
+  manifestations.expression: open
+  manifestations.features.values: open
+  manifestations.features.observed: open
+  explanandum_variables.diag.values: open
+  explanandum_variables.diag.expression: open
+  explanandum_variables.diag_lattice.values: open
+  explanandum_variables.diag_lattice.expression: open
+  detection_criterion.expression: open
+  evidential_status: open

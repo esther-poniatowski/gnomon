@@ -1,0 +1,135 @@
+# Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
+# The specifications appear in the order of the method note.
+
+title: "Transition sequences under warming trajectories"
+statement: "The selected coupled tipping-relevant subsystems of the actual Earth system undergo ordered regime transitions whose identities and event times depend on the prescribed warming trajectory and on interactions among subsystems"
+id: phen.earth-tipping-subsystems.transition-sequences
+type: phenomenon
+status: provisional              # provisional | stabilized | retracted
+target_system: system.earth-tipping-subsystems
+
+category: regularity             # particular-event | regularity | capacity | structural-property | open
+
+index_sets:                      # the index the forecast observables introduce
+  - name: "prediction horizon"
+    symbol: H
+    extent: "interval(reals)"
+    structure: interval
+
+explanandum_variables:           # the observables that restate the behavior in terms of the state of the system
+  - name: "transition time of a subsystem"
+    symbol: Tev
+    notation: 'T'
+    signature: [sub]
+    values: "nonneg(reals)"
+    expression: "min_{t}( r != baseline )"
+    reading: "the first time the subsystem leaves its baseline regime"
+    event:
+      origin: "0"
+      horizon: H
+      censoring: right
+      reading: "the event is the subsystem leaving its baseline regime; a subsystem that has not left by the horizon is recorded as censored, not as transitioning late"
+  - name: "marked transition sequence"
+    symbol: Z
+    signature: []
+    values: open
+    expression: "sequence(sub, Tev)"
+    reading: "the subsystems that transition, in the order their transition times fall"
+  - name: "joint law of the marked transition sequence"
+    symbol: PZ
+    notation: 'P_Z'
+    signature: [H]
+    values: "measures(Z)"
+    expression: "dist_{realization, param, struct}( Z )"
+    reading: "the law of the whole ordered sequence, taken over every declared source of spread"
+  - name: "probability that a subsystem transitions by the horizon"
+    symbol: pi
+    notation: 'p_i'
+    signature: [sub, H]
+    values: "interval(0, 1)"
+    expression: "dist_{realization, param, struct}( Tev <= H )"
+    reading: "the fraction of the ensemble in which the transition has already occurred, so the number characterizes the scenario and the model class rather than any one trajectory"
+  - name: "censored transition-time distribution"
+    symbol: Fi
+    notation: 'F_i'
+    signature: [sub, H]
+    values: "maps(t, interval(0, 1))"
+    expression: "dist_{realization, param, struct}( Tev <= t )"
+    reading: "the cumulative distribution of each transition time through the horizon, with non-events retained as right-censored observations"
+
+manifestations:                  # the sequence law and its dependence on the warming trajectory
+  - name: "dependence of the transition sequence on the warming trajectory"
+    symbol: overshoot_dependence
+    form: dependence
+    expression: "depends_on(PZ, DGMT)"
+    reading: "which subsystems transition, and in which order, is not fixed by the system alone: two trajectories reaching the same warming by different routes can produce different sequences"
+    features:
+      - name: "effect of an overshoot trajectory on the sequence law"
+        symbol: overshoot_effect
+        values: open
+        observed: open
+
+scope_over_instances:            # the predictive spread decomposes into declared sources
+  - name: "internal climate variability"
+    symbol: realization
+    over: [eta]
+    source: realization
+    quantification: ensemble-distribution
+    conditional_on: [param, struct, scenario]
+  - name: "admissible dynamical parameters of each subsystem"
+    symbol: param
+    over: [Theta, tau, intern]
+    source: parameter-draw
+    quantification: ensemble-distribution
+    conditional_on: [scenario]
+  - name: "admissible interaction architectures among subsystems"
+    symbol: struct
+    over: [Aij, s, emit]
+    source: structure-draw
+    quantification: ensemble-distribution
+    conditional_on: [scenario]
+  - name: "prescribed emission scenario"
+    symbol: scenario
+    over: [DGMT]
+    source: scenario
+    quantification: single
+    conditional_on: []
+
+conditions_and_byproducts:       # the scenario is a source of variation; no necessary trigger is asserted across the partially known actual system
+  precipitating: []
+  inhibiting: []
+  modulating:
+    - name: "rate of warming"
+      reading: "the warming rate changes the time spent beyond a threshold and can also trigger rate-induced transitions, so its effect need not be monotone"
+      effect: "depends_on(pi, rate)"
+  nonstandard: []
+  byproducts: []
+
+evidential_status: predicted     # established | reported | predicted | derived | open
+
+detection_criterion:             # what would establish the sequence law for the actual Earth system
+  - name: "robustness across admissible parameters and structures"
+    across: [param, struct]
+    expression: open
+    procedure: "the conclusions hold across the scientifically admissible parameters and interaction structures"
+  - name: "predeclared criteria and calibrated probabilities"
+    across: []
+    expression: open
+    procedure: "each transition criterion is predeclared, and the event probabilities are calibrated against independent evidence"
+    limited_by: [system.earth-tipping-subsystems#observation]
+  - name: "separable sources of spread"
+    across: [realization, param, struct, scenario]
+    expression: open
+    procedure: "the contribution of each source of spread stays separately identifiable"
+
+data:
+  - "Wunderling et al. (2023), https://doi.org/10.1038/s41558-022-01545-9: a four-element network-model ensemble under stylized overshoot trajectories"
+  - "Wunderling et al. (2024), https://doi.org/10.5194/esd-15-41-2024: evidence synthesis for interactions among tipping elements and nonlinear mediators"
+
+maturity:                        # the sequence law and the overshoot effect remain the product of the inquiry
+  explanandum_variables.Z.values: open
+  manifestations.features.values: open
+  manifestations.features.observed: open
+  scope_over_instances: provisional
+  detection_criterion.expression: open

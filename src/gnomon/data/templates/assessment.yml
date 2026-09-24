@@ -3,11 +3,12 @@
 # takes the verdict not-applicable. The appraisal is filled for one answer at a time, and it
 # names another candidate only when one exists.
 
+title: "SHORT NAME OF THE ASSESSMENT"
 id: assess.TOPIC.NAME
 type: assessment
-title: "SHORT NAME OF THE ASSESSMENT"
 status: provisional              # provisional | stabilized | retracted
 assesses: ans.TOPIC.NAME
+
 against: quest.TOPIC.NAME
 
 tests:                           # verdict: pending | pass | fail | not-applicable
@@ -17,19 +18,24 @@ tests:                           # verdict: pending | pass | fail | not-applicab
     contrast: {verdict: pending, evidence: ""}
     relation: {verdict: pending, evidence: ""}
     individuation: {verdict: pending, evidence: ""}
-    level: {verdict: pending, evidence: ""}
+    admissible-explanans: {verdict: pending, evidence: ""}
     modal-strength: {verdict: pending, evidence: ""}
     product: {verdict: pending, evidence: ""}
   warrant:
     phenomenon-established: {verdict: pending, evidence: ""}
     foil-evidence: {verdict: pending, evidence: ""}
+    law-warrant: {verdict: pending, evidence: ""}
     closure: {verdict: pending, evidence: ""}
     fidelity: {verdict: pending, evidence: ""}
     robustness: {verdict: pending, evidence: ""}
     selection: {verdict: pending, evidence: ""}
 
-appraisal:                       # one entry per virtue that the question selected or that its aim forced
-  - virtue: "VIRTUE"
+obligations:                     # one entry per proof obligation the question states, in its order
+  - verdict: pending             # pending | pass | fail | not-applicable
+    evidence: "THE DERIVATION OR THE COUNTEREXAMPLE THAT SETTLES THE IMPLICATION"
+
+appraisal:                       # one entry per virtue the question marks preferred; a constitutive one is settled by the product test instead
+  - virtue:                      # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability
     assessment: "WHAT THE OPERATIONAL QUESTION OF THAT VIRTUE RETURNS FOR THIS ANSWER"
     preferred_over: "THE CANDIDATES THAT THIS ONE BEATS ON THAT VIRTUE, when others have been assessed"
 

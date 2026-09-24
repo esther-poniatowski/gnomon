@@ -1,0 +1,53 @@
+# Method: docs/epistemology/subject-of-inquiry.md, contrast.md, domain.md, epistemic-task.md,
+# modal-strength.md, admissible-explanans.md, epistemic-pragmatic-virtues.md.
+# The research question is specified before any candidate answer is evaluated.
+
+title: "Validity domain of neural tangent dynamics"
+statement: "At fixed depth as width tends to infinity, under which assumptions do the empirical kernel and nonlinear trajectory approach the linearization governed by the initial kernel? Which finite-width error bounds and training horizons follow from the model?"
+id: quest.ntk.linearized-dynamics-validity
+type: question
+status: open
+subject:
+  target_system: system.ntk-gradient-flow
+  phenomenon: phen.ntk.linearized-dynamics
+  contrast:
+    locus: none
+    foil_set: []
+    compatibility: derived
+    foil_status: not-applicable
+  domain:
+    restrictions: []
+    limit:
+      expression: "m -> infinity"
+      justification: "the limit varies width while holding the dataset size and values, input dimension, depth, activation and training rate fixed; finite-width bounds connect that limit to individual networks"
+
+task:
+  epistemic_aim: model-knowledge
+  requested_relation: mathematical
+  modal_strength: necessary
+  admissible_explanans:
+    compositional: null
+    substrate: null
+    justification: "the question asks what follows from the model, so what may appear in a consequence is whatever the model declares, and a bound would exclude part of the model from its own consequences"
+  required_accuracy:
+    standard: not-applicable
+    outputs_to_match: []
+    structures_to_match: []
+  proof_obligations:
+    - name: "nonlinear path approaches its linearization"
+      reading: "the assumptions must imply a finite-width output-path bound that vanishes as width grows, over an explicitly stated training horizon and mode of convergence"
+      antecedent: [open]
+      consequent: ["max_{t <= Tout}(Eout(m, t)) <= Bout(m)", "limit_{m}(Bout(m)) = 0"]
+    - name: "empirical kernel remains near its initial value"
+      reading: "the assumptions must imply a finite-width kernel-drift bound that vanishes as width grows, over an explicitly stated training horizon and mode of convergence"
+      antecedent: [open]
+      consequent: ["max_{t <= Tdrift}(Edrift(m, t)) <= Bdrift(m)", "limit_{m}(Bdrift(m)) = 0"]
+    - name: "initial empirical kernel approaches its deterministic limit"
+      reading: "the assumptions must imply a finite-width initialization bound that vanishes in the stated convergence mode"
+      antecedent: [open]
+      consequent: ["Elimit(m) <= Binit(m)", "limit_{m}(Binit(m)) = 0"]
+
+virtues: []
+
+maturity:
+  task.proof_obligations.antecedent: open

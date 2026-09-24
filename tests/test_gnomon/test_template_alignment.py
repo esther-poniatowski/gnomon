@@ -22,6 +22,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / "docs" / "epistemology"
 TEMPLATES = ROOT / "src" / "gnomon" / "data" / "templates"
+REGISTRY = ROOT / "src" / "gnomon" / "data"
 
 # Fields that identify a record rather than specify an inquiry, so no note documents them.
 RECORD_FIELDS = frozenset(
@@ -123,11 +124,28 @@ def documented_keys(note: str, header: str, paths: Sequence[str], prefix: str) -
 PAIRS = [
     ("target-system", "target-system.md", "| Specification", "target-system.yml", None, "", ELSEWHERE_MATURITY),
     ("phenomenon", "phenomenon.md", "| Specification", "phenomenon.yml", None, "", ELSEWHERE_MATURITY),
+    (
+        "operators",
+        "symbols-and-expressions.md",
+        "| Specification",
+        "operators.yml",
+        None,
+        "",
+        ELSEWHERE_MATURITY,
+    ),
     ("subject-of-inquiry", "subject-of-inquiry.md", "| Component", "question.yml", "subject", "subject", {}),
     ("contrast", "contrast.md", "| Specification", "question.yml", "subject.contrast", "subject.contrast", {}),
     ("domain", "domain.md", "| Specification", "question.yml", "subject.domain", "subject.domain", {}),
     ("epistemic-task", "epistemic-task.md", "| Dimension", "question.yml", "task", "task", {}),
-    ("explanans-level", "explanans-level.md", "| Axis", "question.yml", "task.level", "task.level", {}),
+    (
+        "admissible-explanans",
+        "admissible-explanans.md",
+        "| Specification",
+        "question.yml",
+        "task.admissible_explanans",
+        "task.admissible_explanans",
+        {},
+    ),
     (
         "answer-form",
         "answer-form.md",
@@ -193,6 +211,77 @@ def test_no_key_of_the_template_is_undocumented(pair: tuple) -> None:
     assert not undocumented, f"{tpl}: {undocumented} appear in no row of {note}"
 
 
+def test_the_operator_note_lists_the_registry(): 
+    """The registry is the source; the note documents it and must not drift from it."""
+    note = (DOCS / "symbols-and-expressions.md").read_text(encoding="utf-8")
+    bullet = re.search(r"- \*\*The canonical operators.*?\^operator-groups", note, re.S)
+    assert bullet is not None, "the note declares no canonical operators"
+    documented = set(re.findall(r"`([A-Za-z_][A-Za-z_0-9]*)`", bullet.group(0)))
+    declared = {e["symbol"] for e in yaml.safe_load((REGISTRY / "operators.yml").read_text())["operators"]}
+    assert documented == declared, f"note and registry differ: {documented ^ declared}"
+
+
+def test_the_aim_note_lists_the_requirement_registry() -> None:
+    """Each row of the aim table states what the registry declares for that aim."""
+    note = (DOCS / "epistemic-aim.md").read_text(encoding="utf-8")
+    section = re.search(r"\| Aim \| Additionally required \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)", note)
+    assert section is not None, "the note carries no requirement table"
+    documented = {}
+    for row in section.group(1).splitlines():
+        cells = [c.strip() for c in row.strip("|").split("|")]
+        documented[cells[0].strip("`")] = (
+            [i.split("=")[0].strip() for i in re.findall(r"`([^`]+)`", cells[1])],
+            re.findall(r"`([^`]+)`", cells[2]) if len(cells) > 2 else [],
+        )
+    declared = yaml.safe_load((REGISTRY / "requirements.yml").read_text())["by_aim"]
+    assert set(documented) == set(declared), f"aims differ: {set(documented) ^ set(declared)}"
+    for aim, (required, relaxed) in documented.items():
+        entry = declared[aim]
+        assert required == [e["path"] for e in entry.get("required") or []], f"{aim}: required differs"
+        assert relaxed == list(entry.get("open") or []), f"{aim}: relaxed differs"
+
+
+@pytest.mark.parametrize("kind,note", [("target-system", "target-system.md"), ("phenomenon", "phenomenon.md")])
+def test_the_always_rows_of_a_note_are_the_registry_entries(kind: str, note: str) -> None:
+    """A specification the note marks required always is one the registry lists."""
+    lines = (DOCS / note).read_text(encoding="utf-8").splitlines()
+    start = next(i for i, line in enumerate(lines) if line.startswith("| Specification"))
+    documented = []
+    for line in lines[start + 2:]:
+        if not line.startswith("|"):
+            break
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) > 1 and cells[1].lower().startswith("always"):
+            documented.append(".".join(slug(part) for part in cells[0].split(" — ")[0].split(": ")))
+    declared = yaml.safe_load((REGISTRY / "requirements.yml").read_text())["always"][kind]
+    assert documented == declared, f"{note}: {documented} against {declared}"
+
+
+@pytest.mark.parametrize("name", ["target-system.yml", "phenomenon.yml", "question.yml", "answer.yml", "assessment.yml"])
+def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
+    """The registry is the source; a template comment documents it and must not drift from it."""
+    vocab = re.compile(r"#\s*([a-z][a-z-]*(?: \([^)]*\))?(?: \| [a-z][a-z-]*(?: \([^)]*\))?)+)")
+    documented, block = {}, ""
+    for line in (TEMPLATES / name).read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^(\s*)(- )?([a-z_]+):(.*)$", line)
+        if not m:
+            continue
+        if len(m.group(1)) == 0:
+            block = m.group(3)
+        found = vocab.search(m.group(4))
+        if found:
+            key = f"{'' if len(m.group(1)) == 0 else block}.{m.group(3)}"
+            documented[key] = [
+                re.match(r"([a-z-]+)", option.strip()).group(1)
+                for option in found.group(1).split(" | ")
+            ]
+    kind = template(name)["type"]
+    declared = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"][kind]
+    assert set(documented) == set(declared), f"{name}: {set(documented) ^ set(declared)}"
+    for key, options in documented.items():
+        assert options == [e["value"] for e in declared[key]], f"{name} {key}: {options}"
+
+
 def test_the_virtues_of_the_note_are_the_options_of_the_question() -> None:
     note = (DOCS / "epistemic-pragmatic-virtues.md").read_text(encoding="utf-8")
     table = re.search(r"\| Virtue.*?\n\n", note, re.S)
@@ -202,7 +291,7 @@ def test_the_virtues_of_the_note_are_the_options_of_the_question() -> None:
         for name in re.findall(r"^\| \*\*([^|*]+)\*\*", table.group(0), re.M)
     ]
     question = (TEMPLATES / "question.yml").read_text(encoding="utf-8")
-    options = re.search(r"^virtues: *#(.*)$", question, re.M)
+    options = re.search(r"^ *- virtue: *#(.*)$", question, re.M)
     assert options is not None, "no option list beside the virtues of the question"
     assert names == [opt.strip() for opt in options.group(1).split("|")]
 

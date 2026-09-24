@@ -1,0 +1,43 @@
+# Method: docs/epistemology/subject-of-inquiry.md, contrast.md, domain.md, epistemic-task.md,
+# modal-strength.md, admissible-explanans.md, epistemic-pragmatic-virtues.md.
+# The research question is specified before any candidate answer is evaluated.
+
+title: "Description of localized-state structure"
+statement: "Across the admitted coefficient domain, what profile and bifurcation structure characterizes the localized stationary states, including their symmetry and stability?"
+id: quest.swift-hohenberg.localized-states-description
+type: question
+status: open
+subject:
+  target_system: system.swift-hohenberg-localized-states
+  phenomenon: phen.swift-hohenberg.localized-states
+  contrast:
+    locus: none
+    foil_set: []
+    compatibility: derived
+    foil_status: not-applicable
+  domain:
+    restrictions: []
+    limit: null
+
+task:
+  epistemic_aim: description
+  requested_relation: not-applicable
+  modal_strength: actual
+  admissible_explanans:
+    compositional: null
+    substrate: null
+    justification: "the aim is description, so the answer characterizes the states rather than accounting for them, and no explanans is requested that a bound could restrict"
+  required_accuracy:
+    standard: structural-only
+    outputs_to_match: []
+    structures_to_match:
+      - target: phen.swift-hohenberg.localized-states#topology
+        justification: "the description must distinguish snaking branches, connecting ladders and isolas when each occurs"
+      - target: phen.swift-hohenberg.localized-states#symmetry
+        justification: "the symmetry class distinguishes the two symmetric snaking families from asymmetric connecting states"
+      - target: phen.swift-hohenberg.localized-states#stability
+        justification: "the description must state where each branch is linearly stable because existence alone does not characterize the localized states"
+
+virtues: []
+
+maturity: {}

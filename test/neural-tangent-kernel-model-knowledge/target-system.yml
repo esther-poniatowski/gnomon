@@ -1,0 +1,181 @@
+# Method: docs/epistemology/target-system.md. One file per target system.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
+# The specifications appear in the order of the method note.
+
+title: "Wide neural networks trained by gradient flow"
+id: system.ntk-gradient-flow
+type: target-system
+status: provisional              # provisional | stabilized | retracted
+target_type: no-external-target  # the formal network class is itself the target
+
+reference_class:
+  name: "fully connected scalar-output networks under neural tangent parameterization, trained by gradient flow with squared loss"
+  selection_criteria: []         # the remaining specifications fix membership
+
+constituents: []                 # the representation by a parameter vector introduces no unit kind
+
+index_sets:
+  - name: "index of training examples"
+    symbol: a
+    extent: "range(n)"
+    structure: discrete-set
+  - name: "training time"
+    symbol: t
+    extent: "nonneg(reals)"
+    structure: interval
+
+variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate ones determined within
+  - name: "trainable parameter vector"
+    symbol: theta
+    notation: '\theta'
+    determined: within
+    signature: [t]
+    values: "vectors(reals, p)"
+    expression: null
+    shared: false
+  - name: "network outputs on the training examples"
+    symbol: f
+    determined: within
+    signature: [a, t]
+    values: reals
+    expression: "network(theta, X, L, m, sigma)"
+    reading: "the nonlinear network maps its current parameters and each training input to an output"
+    shared: false
+  - name: "empirical neural tangent kernel"
+    symbol: K
+    determined: within
+    signature: [a, a, t]
+    values: reals
+    expression: "ntk(theta, X, L, m, sigma)"
+    reading: "the parameter Jacobian induces a kernel between each pair of training examples"
+    shared: false
+  - name: "outputs of the model linearized at initialization"
+    symbol: flin
+    notation: 'f_{\text{lin}}'
+    determined: within
+    signature: [a, t]
+    values: reals
+    condition: "diff(flin, t) = -eta * K0 * grad_output(risk(flin, y), flin)"
+    selects: unique
+    reading: "the linearized outputs follow gradient flow under the kernel frozen at initialization"
+    shared: false
+
+parameters:
+  - name: "number of training examples"
+    symbol: n
+    signature: []
+    values: "pos(ints)"
+    expression: null
+  - name: "dimension of each training input"
+    symbol: d
+    signature: []
+    values: "pos(ints)"
+    expression: null
+  - name: "width of each hidden layer"
+    symbol: m
+    signature: []
+    values: "pos(ints)"
+    expression: null
+  - name: "number of hidden layers"
+    symbol: L
+    signature: []
+    values: "pos(ints)"
+    expression: null
+  - name: "number of trainable parameters"
+    symbol: p
+    signature: []
+    values: "pos(ints)"
+    expression: "parameter_count(m, L)"
+    reading: "the architecture fixes the dimension of the parameter vector"
+  - name: "rate of gradient flow"
+    symbol: eta
+    notation: '\eta'
+    signature: []
+    values: "pos(reals)"
+    expression: null
+  - name: "training inputs"
+    symbol: X
+    signature: [a]
+    values: "vectors(reals, d)"
+    expression: null
+    shared: false
+  - name: "training targets"
+    symbol: y
+    signature: [a]
+    values: reals
+    expression: null
+    shared: false
+  - name: "activation function"
+    symbol: sigma
+    notation: '\sigma'
+    signature: []
+    values: "maps(reals, reals)"
+    expression: null
+  - name: "initialization distribution"
+    symbol: rho0
+    notation: '\rho_0'
+    signature: []
+    values: "measures(vectors(reals, p))"
+    expression: null
+  - name: "initial parameter vector"
+    symbol: theta0
+    notation: '\theta_0'
+    signature: []
+    values: "vectors(reals, p)"
+    expression: null
+  - name: "empirical neural tangent kernel at initialization"
+    symbol: K0
+    notation: 'K_0'
+    signature: [a, a]
+    values: reals
+    expression: "ntk(theta0, X, L, m, sigma)"
+    reading: "the initial parameter Jacobian induces a kernel between training examples"
+    shared: false
+  - name: "deterministic infinite-width neural tangent kernel"
+    symbol: Kinf
+    notation: 'K_\infty'
+    signature: [a, a]
+    values: reals
+    expression: "limiting_ntk(X, L, sigma)"
+    reading: "the architecture, activation, and training inputs fix the deterministic limiting kernel"
+    shared: false
+
+laws:
+  - name: "parameter gradient flow"
+    symbol: flow
+    signature: [t]
+    role: evolution
+    expression: "diff(theta, t) = -eta * grad_parameter(risk(f, y), theta)"
+    reading: "the parameters follow continuous gradient flow for squared empirical risk"
+    warrant: posited
+    rests_on: "the training scheme the class fixes"
+  - name: "parameter initialization"
+    symbol: init_state
+    signature: []
+    role: state-constraint
+    expression: "at_zero(theta) = theta0"
+    reading: "the trainable trajectory begins at the sampled initial parameter vector"
+    warrant: posited
+    rests_on: "the initialization scheme the class fixes"
+  - name: "initialization draw"
+    symbol: init_draw
+    signature: []
+    role: distribution
+    expression: "drawn_from(theta0, rho0)"
+    reading: "the initial parameter vector is sampled from the declared initialization distribution"
+    warrant: posited
+    rests_on: "the initialization distribution the class fixes"
+  - name: "shared initial outputs"
+    symbol: shared_init
+    signature: [a]
+    role: state-constraint
+    expression: "at_zero(flin) = at_zero(f)"
+    reading: "the nonlinear and linearized trajectories begin with the same outputs"
+    warrant: derived
+    rests_on: "the definition of the linearized model at the initial parameters"
+
+closure: complete
+
+external_systems: []
+
+maturity: {}

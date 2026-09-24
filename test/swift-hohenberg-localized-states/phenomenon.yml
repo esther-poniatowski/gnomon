@@ -1,0 +1,68 @@
+# Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
+# The specifications appear in the order of the method note.
+
+title: "Stationary localized states organized by homoclinic snaking"
+statement: "Stationary solutions of the generalized Swift-Hohenberg equation form patterned states localized within the homogeneous background"
+id: phen.swift-hohenberg.localized-states
+type: phenomenon
+status: provisional              # provisional | stabilized | retracted
+target_system: system.swift-hohenberg-localized-states
+
+category: capacity
+
+index_sets: []                   # the target already declares every index used here
+
+explanandum_variables:
+  - name: "set of localized stationary profiles"
+    symbol: Uloc
+    notation: 'U_{\text{loc}}'
+    signature: [r, b]
+    values: "powerset(maps(reals, reals))"
+    condition: "diff(u, t) = 0"
+    selects: all
+    reading: "the set contains every stationary profile under the target's localized boundary condition"
+
+manifestations:
+  - name: "existence of localized stationary states"
+    symbol: localized_states_exist
+    form: value
+    expression: "max_{r, b}( card(Uloc(r, b)) ) > 0"
+    reading: "at least one admitted coefficient pair permits a profile patterned over a finite region and flat outside it"
+    features:
+      - name: "solution-branch topology"
+        symbol: topology
+        values: "powerset(enum(\"disconnected\", \"snaking\", \"ladders\", \"isolas\", \"other\"))"
+        observed: open
+      - name: "profile symmetry classes"
+        symbol: symmetry
+        values: "powerset(enum(\"even\", \"odd\", \"asymmetric\"))"
+        observed: open
+      - name: "linear-stability intervals along the branches"
+        symbol: stability
+        values: "powerset(interval(reals))"
+        observed: open
+
+scope_over_instances: []         # the coefficient dependence is retained in the signature of Uloc
+
+conditions_and_byproducts:
+  precipitating: []
+  inhibiting: []
+  modulating: []
+  nonstandard: []
+  byproducts: []
+
+evidential_status: derived
+
+detection_criterion:
+  - name: "stationary localized solution"
+    across: []
+    expression: "max_{r, b}( card(Uloc(r, b)) ) > 0"
+    procedure: "continue stationary solutions in the coefficients, then check the equation residual and the decay to the homogeneous far field"
+
+data:
+  - "burke2006: https://doi.org/10.1103/PhysRevE.73.056211"
+  - "beck2009: https://doi.org/10.1137/080713306"
+
+maturity:
+  manifestations.features.observed: open

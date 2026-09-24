@@ -24,11 +24,12 @@ These notes turn results from the philosophy of models, of explanation and of qu
     - [Epistemic aim](epistemic-aim.md): classifies the cognitive achievements an inquiry can seek, from exploration to knowledge of models, with one question per aim on a shared example.
     - [Requested relation](requested-relation.md): classifies the kinds of dependence that an explanans can bear to the explanandum, and separates causal production from constitutive organization on one phenomenon.
     - [Modal strength](modal-strength.md): fixes whether the answer must show that its explanans holds of the system, that it could hold, or that no alternative could.
-    - [Level of the explanans](explanans-level.md): bounds which variables an answer may use, along compositional level and substrate dependence, and maps Marr's levels onto these axes.
+    - [Admissible explanans](admissible-explanans.md): bounds which variables an answer may use, along compositional level and substrate dependence, and maps Marr's levels onto these axes.
 - [Epistemic and pragmatic virtues](epistemic-pragmatic-virtues.md): lists the properties that make an admissible answer more useful, without defining what counts as an answer.
 - [Answer form](answer-form.md): derives from the specifications already fixed the elements of a candidate answer, and maps them onto a mechanism when the requested relation is mechanistic. An answer may re-individuate the system it answers about, so the form carries the units it treats as bearers together with the map that defines them.
 - [Conditions of satisfaction](satisfaction-conditions.md): derives the tests a candidate must pass, so that success is fixed before any candidate is evaluated. Each test names the research action that settles it, and an answer that passes is then appraised on the virtues the question selected.
 - [Mechanism](mechanism.md): defines the constituents of a mechanism (components, activities, organization) that mechanistic answers use. Its phenomenon is the explanandum of a mechanism, whereas the phenomenon component specifies the explanandum of a question.
 - [Notation](notation.md): registers which symbol denotes which quantity, so that one letter keeps one meaning across the notes. A note that introduces a new one adds its row before using a letter.
+- [Symbols and expressions](symbols-and-expressions.md): gives every quantity a record declares a symbol, so that a formula in one field reaches a quantity another field declares, and fixes how an expression consumes an index. The indices left free form the signature of the quantity defined.
 - [Note template](-template.md): the frontmatter and heading from which a new note of this folder starts.
 

@@ -1,54 +1,106 @@
 # Method: docs/epistemology/target-system.md. One file per target system.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
 # Replace every UPPERCASE placeholder. Any closed field accepts the value `open`.
 # The specifications appear in the order of the method note.
 
+title: "NAME OF THE SYSTEM"
 id: system.TOPIC
 type: target-system
-title: "NAME OF THE SYSTEM"
 status: provisional              # provisional | stabilized | retracted
-
 target_type: open                # particular | class-actual | class-possible | hypothetical | no-external-target | open
 
 reference_class:                 # a name only: the specifications below generate the class, so they are not restated here
   name: "KIND OF SYSTEM"
-  selection_criteria:            # only when the specifications below do not fix membership
-    - criterion: "CRITERION"
-      kind:                      # a-priori | outcome-dependent
+  selection_criteria:            # only when membership is conditioned on an outcome of the dynamics; a restriction on prior values is a restriction of the domain, which one question imposes and another need not
+    - name: "NAME OF THE CRITERION"
+      expression: "EXPRESSION A MEMBER SATISFIES, over declared symbols"
+      justification: "WHY THE POPULATION IS SELECTED THIS WAY, and what the selection does to what can be inferred from it"
 
-constituents:
-  - kind: "KIND OF UNIT"
-    number: "NUMBER OR RANGE"
+variants:                        # the shapes a member may take when they differ in what they declare; empty when every member has one shape
+  - name: "NAME OF THE VARIANT"
+    symbol: SYMBOL
+    differentiation: "WHAT A MEMBER OF THIS VARIANT CARRIES THAT THE OTHERS DO NOT"
+    caveat: "WHAT THE RECORD LEAVES UNSTATED HERE, and why"
 
-state_variables:                 # the state space is the product of the value sets of the non-aggregate variables
-  - name: "VARIABLE"
-    values: "SET OF VALUES"
-    defined_over: ["KIND OF UNIT"]   # one entry per place: one for a unit, two for a pair, none for the system as a whole
-    shared: false                # true when one value holds for every tuple of constituents
-    definition: "MAP FROM THE CONSTITUENT VARIABLES, for an aggregate"
+constituents:                    # empty for a field system that decomposes into no unit
+  - name: "KIND OF UNIT"
+    symbol: SYMBOL
+    notation: 'LATEX FORM, when it differs from the symbol itself'
+    variant: SYMBOL              # the variant that carries it; omitted when every member does
+    extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
+
+index_sets:                      # the sets that index a quantity without being units: a continuum, a lattice, a sample space
+  - name: "NAME OF THE SET"
+    symbol: SYMBOL
+    notation: 'LATEX FORM, when it differs from the symbol itself'
+    variant: SYMBOL              # the variant that carries it; omitted when every member does
+    extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    structure:                   # continuum | discrete-set | interval
+
+variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate ones determined within
+  - name: "NAME OF THE VARIABLE"
+    symbol: SYMBOL
+    notation: 'LATEX FORM, when it differs from the symbol itself'
+    of: SYMBOL                   # the external system it characterizes; omitted when it characterizes the target
+    variant: SYMBOL              # the variant that carries it; omitted when every member does
+    determined:                  # within (its value is fixed inside the system) | outside (set beyond it, and varying all the same)
+    signature: [SYMBOL]          # one entry per place: a constituent kind or an index set; empty for the system as a whole
+    values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    expression: "EXPRESSION OVER DECLARED SYMBOLS, for a quantity another builds"
+    condition: "EXPRESSION THE QUANTITY SATISFIES, for a quantity no map builds"
+    selects:                     # unique | any | all, required with a condition
+    reading: "WHAT THE EXPRESSION ENCODES, in words"
+    shared: false                # true when one value holds for every tuple of the signature
 
 parameters:                      # quantities held fixed while the phenomenon unfolds
-  - name: "PARAMETER"
-    values: "SET OF ADMITTED VALUES"
-    defined_over: ["KIND OF UNIT", "KIND OF UNIT"]   # one entry per place: a connectivity weight names two neurons
-    shared: false                # true when one value holds for every tuple of constituents
+  - name: "NAME OF THE PARAMETER"
+    symbol: SYMBOL
+    notation: 'LATEX FORM, when it differs from the symbol itself'
+    of: SYMBOL                   # the external system it characterizes; omitted when it characterizes the target
+    variant: SYMBOL              # the variant that carries it; omitted when every member does
+    signature: [SYMBOL, SYMBOL]  # one entry per place: a connectivity weight names two neurons
+    values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    expression: "EXPRESSION OVER DECLARED SYMBOLS, for a derived parameter"
+    condition: "EXPRESSION THE QUANTITY SATISFIES, for a quantity no map builds"
+    selects:                     # unique | any | all, required with a condition
+    reading: "WHAT THE EXPRESSION ENCODES, in words"
+    shared: false                # true when one value holds for every tuple of the signature
 
 laws:                            # the behaviors of the components or of the system that are admitted a priori
-  - label: "LAW LABEL"
-    statement: "STATEMENT OF THE LAW, formulas allowed"
-    applies_to: ["KIND OF UNIT"] # the constituents it governs, one entry per place; none for the system as a whole
-    granularity:                 # local (each constituent from its neighbours) | collective (depends on the whole system)
-    function:                    # succession (how the state changes) | coexistence (which states are admissible) | measurement (how an instrument registers the state)
+  - name: "NAME OF THE LAW"
+    symbol: SYMBOL
+    variant: SYMBOL              # the variant it governs; omitted when it governs every member
+    signature: [SYMBOL]          # the places the claim ranges over, one entry per place; empty for a claim about the system as a whole
+    role:                        # evolution (how the state changes along the course) | input-output (how one quantity is determined by others at the same point) | measurement (how an instrument registers the state) | state-constraint (which states may hold together, including at the start and at the boundary) | distribution (the law of a random quantity) | admissibility (a restriction on the parameters or the forms a member may take)
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"   # what the law asserts, and the only part of the entry that can be false of the system
+    reading: "WHAT THE LAW STATES, in words"
+    warrant:                     # derived (from other laws of the system) | derived-in-a-limit | posited | fitted | measured
+    rests_on: "THE LAWS, THE LIMIT OR THE DATA THE WARRANT REFERS TO"
 
 closure: open                    # complete (formal target: the laws define the system) | partial (empirical target) | open
 
-interface:
-  - variable: "SHARED VARIABLE"
-    direction:                   # input | output | coupling
+organization:                    # the relations among the parts and the laws whose arrangement produces the behavior
+  - name: "NAME OF THE RELATION"
+    symbol: SYMBOL
+    variant: SYMBOL              # the variant that carries it; omitted when every member does
+    reading: "WHAT THE ARRANGEMENT IS, beyond what the relation and the laws state"
+    relates: "prod(SOURCE, REACH), or subset(prod(SOURCE, REACH), ADJACENCY)"   # when the ends are parts: the tuples it runs along, the reach last
+    among: [SYMBOL]              # when the ends are laws: the laws it orders, the reach last; exactly one of relates and among
+    realized_by: [SYMBOL]        # the laws that state a relation among parts; what carries it is read from their expressions
 
-external_systems:
+external_systems:                # the boundary of the system is the set of variables these share
   - name: "EXTERNAL SYSTEM"
-    shares: ["SHARED VARIABLE"]
-    constrains: "THE PROPERTIES THAT CONSTRAIN THE SHARED VARIABLES"
+    symbol: SYMBOL
+    variant: SYMBOL              # the variant that carries it; omitted when every member does
+    class: "SET EXPRESSION OVER DECLARED SYMBOLS"   # the systems it may be, as a reference class is for the target; open where the record fixes no class
+    shares: [SYMBOL]
+    constrains:                  # what it imposes on the shared variables, beyond their declared value sets; an empty list says it imposes none
+      - name: "NAME OF THE CONSTRAINT"
+        signature: [SYMBOL]      # the places the claim ranges over; empty for a claim about the system as a whole
+        role:                    # evolution | input-output | measurement | state-constraint | distribution | admissibility
+        expression: "EXPRESSION OVER DECLARED SYMBOLS"
+        reading: "WHAT THE CONSTRAINT STATES, in words"
+    reading: "WHAT THE SYSTEM SUPPLIES OR IMPOSES, beyond what the shared variables already name"
 
 maturity:                        # optional, per specification: open | provisional | stabilized; one left out inherits the status of the record
   FIELD.PATH: open

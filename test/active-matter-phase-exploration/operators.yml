@@ -1,0 +1,33 @@
+# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
+# The operators the records of this problem use beyond the canonical set of the framework.
+# An operator is typed over the sets the records of this problem declare.
+
+title: "Operators of the active-matter inquiry"
+id: ops.nonreciprocal-active-matter
+type: operators
+status: provisional              # provisional | stabilized | retracted
+target_system: system.nonreciprocal-active-matter
+
+operators:
+  - name: "the admissible regions of a space, of a given linear size and boundary geometry"
+    symbol: regions
+    notation: '\operatorname{Reg}_{#3}( #1, #2 )'
+    for_any: [S, B]
+    signature: [S, "pos(reals)", B]
+    values: open
+  - name: "the sites of a finite lattice of a given dimension, size and boundary geometry"
+    symbol: sites
+    notation: '\operatorname{Sites}_{#3}( #1, #2 )'
+    for_any: [B]
+    signature: ["pos(ints)", "pos(reals)", B]
+    values: open
+  - name: "the discrete Laplacian on the declared lattice"
+    symbol: lattice_lap
+    notation: '\Delta_{\mathrm{lat}} #1'
+    for_any: [S]
+    signature: ["maps(q, S)"]
+    values: "maps(q, S)"
+
+maturity:
+  operators.regions.values: open
+  operators.sites.values: open

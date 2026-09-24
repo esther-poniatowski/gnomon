@@ -1,0 +1,19 @@
+# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
+# The operators the records of this problem use beyond the canonical set of the framework.
+# An operator is typed over the sets the records of this problem declare.
+
+title: "Operators of the tipping-cascade inquiry"
+id: ops.earth-tipping-subsystems
+type: operators
+status: provisional              # provisional | stabilized | retracted
+target_system: system.earth-tipping-subsystems
+
+operators:
+  - name: "the ordered sequence of identities paired with their event times"
+    symbol: sequence
+    notation: '\operatorname{seq}( #1, #2 )'
+    signature: [sub, "maps(sub, nonneg(reals))"]
+    values: open
+
+maturity:
+  operators.sequence.values: open

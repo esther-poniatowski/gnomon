@@ -1,0 +1,145 @@
+# Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
+# The specifications appear in the order of the method note.
+
+title: "Scale-dependent velocity-increment distributions"
+statement: "Ordered pairs of spatial locations in statistically stationary flow realizations have joint longitudinal and transverse velocity increments whose probability distribution varies with separation magnitude and orientation"
+id: phen.turbulence.velocity-increment-distributions
+type: phenomenon
+status: provisional              # provisional | stabilized | retracted
+target_system: system.turbulence-incompressible-navier-stokes
+
+category: regularity             # particular-event | regularity | capacity | structural-property | open
+
+index_sets:                      # the indices the observables introduce
+  - name: "separation magnitude"
+    symbol: rmag
+    notation: '\lvert r \rvert'
+    extent: "pos(reals)"
+    structure: continuum
+  - name: "separation direction, a unit vector"
+    symbol: rdir
+    notation: '\hat{r}'
+    extent: "subset(vectors(reals, 3), norm_one)"
+    structure: continuum
+  - name: "order of the structure function"
+    symbol: p
+    extent: "pos(reals)"
+    structure: continuum
+
+explanandum_variables:           # the observables that restate the behavior in terms of the velocity field
+  - name: "velocity increment across a separation"
+    symbol: du
+    notation: '\delta u'
+    signature: [x, t, rmag, rdir]
+    values: "vectors(reals, 3)"
+    expression: "u(x + rmag * rdir, t) - u(x, t)"
+    reading: "the velocity difference between two points at a given separation and direction"
+  - name: "longitudinal increment"
+    symbol: duL
+    notation: '\delta u_L'
+    signature: [x, t, rmag, rdir]
+    values: reals
+    expression: "dot(du, rdir)"
+    reading: "the component of the increment along the separation"
+  - name: "transverse increment"
+    symbol: duT
+    notation: '\delta u_T'
+    signature: [x, t, rmag, rdir]
+    values: "nonneg(reals)"
+    expression: "abs(du - duL * rdir)"
+    reading: "the magnitude of the component of the increment perpendicular to the separation"
+  - name: "joint increment distribution"
+    symbol: P
+    signature: [rmag, rdir]
+    values: "measures(prod(reals, nonneg(reals)))"
+    expression: "dist_{x, t}( duL, duT )"
+    reading: "the joint law of the two increment components, taken over positions and times"
+  - name: "longitudinal structure function"
+    symbol: S
+    signature: [p, rmag, rdir]
+    values: "nonneg(reals)"
+    expression: "mean_{x, t}( abs(duL)^p )"
+    reading: "the moment of order p of the longitudinal increment, averaged over positions and times"
+  - name: "transverse structure function"
+    symbol: ST
+    notation: 'S_T'
+    signature: [p, rmag, rdir]
+    values: "nonneg(reals)"
+    expression: "mean_{x, t}( duT^p )"
+    reading: "the moment of order p of the transverse-increment magnitude, averaged over positions and times"
+
+manifestations:                  # what the observables do
+  - name: "power-law scaling of the longitudinal structure functions"
+    symbol: anomalous_scaling
+    form: scaling
+    expression: "S ~ rmag^zetaL(p)"
+    reading: "each longitudinal moment follows a power of the separation, with an exponent that can depart from the self-similar value"
+    features:
+      - name: "longitudinal scaling exponents, one per order"
+        symbol: zetaL
+        notation: '\zeta_L'
+        values: "maps(pos(reals), reals)"
+        observed: open
+        condition: "zetaL(4) != 4 / 3"
+        selects: any
+        procedure: "estimate the structure-function slopes over the inertial range and establish a fourth-order departure from the self-similar value within uncertainty"
+        caveat: "the record declares no curvature operator, so the concavity the measurements show is not written"
+  - name: "power-law scaling of the transverse structure functions"
+    symbol: transverse_scaling
+    form: scaling
+    expression: "ST ~ rmag^zetaT(p)"
+    reading: "each transverse moment follows a power of the separation, with its own exponent"
+    features:
+      - name: "transverse scaling exponents, one per order"
+        symbol: zetaT
+        notation: '\zeta_T'
+        values: "maps(pos(reals), reals)"
+        observed: open
+        condition: "zetaT(4) != 4 / 3"
+        selects: any
+        procedure: "estimate the transverse structure-function slopes over the inertial range and establish a fourth-order departure from the self-similar value within uncertainty"
+  - name: "longitudinal-transverse intermittency disparity"
+    symbol: increment_disparity
+    form: relation
+    expression: "zetaL != zetaT"
+    reading: "the longitudinal and transverse exponent functions are not identical"
+    features: []
+
+scope_over_instances:            # one entry per source of variation across instances
+  - name: "flow realizations under one forcing and boundary family"
+    symbol: realization
+    over: []
+    source: realization
+    quantification: ensemble-distribution
+    conditional_on: [family]
+  - name: "admitted forcing and boundary families"
+    symbol: family
+    over: [f, b]
+    source: class-member
+    quantification: open
+    conditional_on: []
+
+conditions_and_byproducts:       # no additional condition is asserted by the case description
+  precipitating:
+    - name: "separation above the dissipation scale"
+      expression: "rmag > etaK"
+      justification: "below that scale viscosity smooths the increments, so the moments follow the analytic prediction of a smooth field and carry no cascade to scale"
+    - name: "separation below the forcing scale"
+      expression: "rmag < Lc"
+      justification: "above that scale the increments are set by how the flow is stirred, so the exponents would record the forcing rather than the cascade"
+  inhibiting: []
+  modulating: []                # the width of the scaling range follows from the two conditions above, so stating it here would restate them
+  nonstandard: []
+  byproducts: []                # the dissipative anomaly is one, and writing it needs a dissipation rate the record does not declare
+
+evidential_status: reported      # established | reported | predicted | derived | open
+
+detection_criterion: null        # not required for an established phenomenon
+
+data:
+  - "buaria2026: https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/turbulence-intermittency-and-velocity-gradients/83110A5131F55CF9B890415703AA7770"
+
+maturity:                        # the exponent values and their universality remain products of the inquiry
+  manifestations.features.observed: open
+  scope_over_instances.quantification: open

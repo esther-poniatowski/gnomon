@@ -1,0 +1,140 @@
+# Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
+# The specifications appear in the order of the method note.
+
+title: "Convergence toward neural tangent dynamics"
+statement: "For neural-tangent-parameterized network families satisfying suitable regularity and scaling assumptions, the empirical kernel and output trajectory approach the linearized dynamics governed by the initial kernel as width increases"
+id: phen.ntk.linearized-dynamics
+type: phenomenon
+status: provisional              # provisional | stabilized | retracted
+target_system: system.ntk-gradient-flow
+
+category: regularity
+
+index_sets: []                   # the target already declares the training-example and time indices
+
+explanandum_variables:
+  - name: "discrepancy between output trajectories"
+    symbol: Eout
+    signature: [m, t]
+    values: "nonneg(reals)"
+    expression: "norm_{a}(f(a, t) - flin(a, t))"
+    reading: "the norm compares nonlinear and linearized outputs across the training examples"
+  - name: "drift of the empirical kernel"
+    symbol: Edrift
+    signature: [m, t]
+    values: "nonneg(reals)"
+    expression: "norm_{a1, a2}(K(a1, a2, t) - K0(a1, a2))"
+    reading: "the norm compares the empirical kernel during training with its initial value"
+  - name: "discrepancy from the limiting kernel at initialization"
+    symbol: Elimit
+    signature: [m]
+    values: "nonneg(reals)"
+    expression: "norm_{a1, a2}(K0(a1, a2) - Kinf(a1, a2))"
+    reading: "the norm compares the initial empirical kernel with its deterministic infinite-width limit"
+
+manifestations:
+  - name: "convergence of the network output to the linearized output"
+    symbol: output_converges
+    form: scaling
+    expression: "max_{t <= Tout}(Eout(m, t)) <= Bout(m)"
+    reading: "the nonlinear output trajectory stays within a bound that vanishes as width grows over the stated training horizon"
+    features:
+      - name: "finite-width bound on output discrepancy"
+        symbol: Bout
+        values: "maps(pos(ints), nonneg(reals))"
+        observed: open
+        condition: "limit_{m}(Bout(m)) = 0"
+        selects: any
+      - name: "training horizon for the output bound"
+        symbol: Tout
+        values: "pos(reals)"
+        observed: open
+      - name: "mode of convergence of the output bound over initialization draws"
+        symbol: mode_out
+        values: "enum(\"in-probability\", \"almost-sure\", \"mean-square\", \"in-distribution\")"
+        observed: open
+  - name: "vanishing drift of the empirical kernel"
+    symbol: kernel_drift_vanishes
+    form: scaling
+    expression: "max_{t <= Tdrift}(Edrift(m, t)) <= Bdrift(m)"
+    reading: "the empirical kernel stays within a bound that vanishes as width grows over the stated training horizon"
+    features:
+      - name: "finite-width bound on the drift of the empirical kernel"
+        symbol: Bdrift
+        values: "maps(pos(ints), nonneg(reals))"
+        observed: open
+        condition: "limit_{m}(Bdrift(m)) = 0"
+        selects: any
+      - name: "training horizon for the bound on kernel drift"
+        symbol: Tdrift
+        values: "pos(reals)"
+        observed: open
+      - name: "mode of convergence of the kernel-drift bound over initialization draws"
+        symbol: mode_drift
+        values: "enum(\"in-probability\", \"almost-sure\", \"mean-square\", \"in-distribution\")"
+        observed: open
+  - name: "vanishing distance to the limiting kernel"
+    symbol: limit_error_vanishes
+    form: scaling
+    expression: "Elimit(m) <= Binit(m)"
+    reading: "the initial empirical kernel stays within a bound that vanishes as width grows"
+    features:
+      - name: "finite-width bound on the discrepancy from the limiting kernel"
+        symbol: Binit
+        values: "maps(pos(ints), nonneg(reals))"
+        observed: open
+        condition: "limit_{m}(Binit(m)) = 0"
+        selects: any
+      - name: "mode of convergence of the initial kernel over initialization draws"
+        symbol: mode_init
+        values: "enum(\"in-probability\", \"almost-sure\", \"mean-square\", \"in-distribution\")"
+        observed: open
+
+scope_over_instances:
+  - name: "width-indexed network and training specification"
+    symbol: spec
+    over: [X, y, L, sigma, eta, rho0]
+    source: class-member
+    quantification: open
+    conditional_on: []
+    differentiation: "the validity domain is the product of the inquiry, so the record does not assert that every activation, dataset and initialization family in the target class converges"
+  - name: "initialization draw"
+    symbol: init_draw
+    over: [theta0]
+    source: realization
+    quantification: ensemble-distribution
+    conditional_on: [spec, m]
+    differentiation: "the width limit quantifies over the initialization distribution, so one sampled network cannot establish the claim"
+
+conditions_and_byproducts:
+  precipitating: []
+  inhibiting: []
+  modulating: []                # the width already carries the manifestations, so a modulation by width would restate them
+  nonstandard: []
+  byproducts: []
+
+evidential_status: derived
+
+detection_criterion:
+  - name: "uniform output-path control on the stated horizon"
+    across: [init_draw, spec]
+    expression: "max_{t <= Tout}(Eout(m, t)) <= Bout(m)"
+    procedure: "derive the finite-width path bound under stated assumptions and prove that the bound vanishes in the declared convergence mode"
+  - name: "uniform empirical-kernel control on the stated horizon"
+    across: [init_draw, spec]
+    expression: "max_{t <= Tdrift}(Edrift(m, t)) <= Bdrift(m)"
+    procedure: "derive the finite-width kernel-drift bound and prove that it vanishes in the declared convergence mode"
+  - name: "initial-kernel convergence"
+    across: [init_draw, spec]
+    expression: "Elimit(m) <= Binit(m)"
+    procedure: "derive the finite-width initialization bound and prove that it vanishes in the declared convergence mode"
+
+data:
+  - "jacot2018: https://papers.nips.cc/paper/2018/hash/5a4be1fa34e62bb8a6ec6b91d2462f5a-Abstract.html"
+  - "lee2019: https://papers.nips.cc/paper_files/paper/2019/hash/0d1a9651497a38d8b1c3871c84528bd4-Abstract.html"
+  - "chizat2019: https://papers.nips.cc/paper/8559-on-lazy-training-in-differentiable-programming.pdf"
+
+maturity:
+  manifestations.features.observed: open
+  scope_over_instances.quantification: open

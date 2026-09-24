@@ -1,0 +1,46 @@
+# What a filled inquiry must carry. Source of truth for the checkers; the method notes document
+# these requirements and are checked against this file.
+#
+# `always` lists the specifications every record of a kind carries, whatever the inquiry.
+# `by_aim` adds requirements an epistemic aim imposes, and relaxes general ones the aim cannot
+# ask for: an inquiry that produces a phenomenon cannot state that phenomenon in advance.
+# A requirement names a field path. An aim fixes what an answer must deliver, never which value
+# a field takes, so no entry constrains a value.
+
+id: registry.requirements
+type: requirement-registry
+
+always:
+  operators: [operators]
+  target-system: [target_type, reference_class, variables, laws, closure]
+  phenomenon: [statement, category, manifestations, evidential_status]
+
+by_aim:
+  description:
+    required: []
+    open: []
+  exploration:
+    required:
+      - path: phenomenon.detection_criterion
+    open:
+      - phenomenon.statement
+      - phenomenon.category
+      - phenomenon.evidential_status
+  prediction:
+    required:
+      - path: phenomenon.manifestations
+      - path: question.task.required_accuracy.outputs_to_match
+    open: []
+  explanation:
+    required:
+      - path: question.subject.contrast.foil_set
+      - path: question.task.requested_relation
+    open: []
+  modal-knowledge:
+    required:
+      - path: question.task.modal_strength
+      - path: question.task.proof_obligations
+    open: []
+  model-knowledge:
+    required: []
+    open: []

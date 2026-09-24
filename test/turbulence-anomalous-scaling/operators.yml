@@ -1,0 +1,43 @@
+# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
+# The operators the records of this problem use beyond the canonical set of the framework.
+# An operator is typed over the sets the records of this problem declare.
+
+title: "Operators of the anomalous-scaling inquiry"
+id: ops.turbulence-incompressible-navier-stokes
+type: operators
+status: provisional              # provisional | stabilized | retracted
+target_system: system.turbulence-incompressible-navier-stokes
+
+operators:
+  - name: "whether a three-dimensional vector has unit Euclidean norm"
+    symbol: norm_one
+    notation: '\lVert #1 \rVert_2 = 1'
+    signature: ["vectors(reals, 3)"]
+    values: bools
+  - name: "the restriction of a field to a region"
+    symbol: restrict
+    notation: '#1|_{#2}'
+    for_any: [A, S]
+    signature: ["maps(A, S)", "regions(A)"]
+    values: "maps(A, S)"
+  - name: "the admissible regions of a space"
+    symbol: regions
+    notation: '\operatorname{Reg}( #1 )'
+    for_any: [S]
+    signature: [S]
+    values: open
+  - name: "the boundary of a spatial domain"
+    symbol: boundary
+    notation: '\partial #1'
+    for_any: [S]
+    signature: ["regions(S)"]
+    values: "regions(S)"
+  - name: "whether a time-indexed field has time-translation-invariant statistics"
+    symbol: stationary
+    notation: '\operatorname{stationary}( #1 )'
+    for_any: [A, T, S]
+    signature: ["maps(prod(A, T), S)"]
+    values: bools
+
+maturity:
+  operators.regions.values: open

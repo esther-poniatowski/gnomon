@@ -1,0 +1,213 @@
+# Method: docs/epistemology/target-system.md. One file per target system.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
+# The specifications appear in the order of the method note.
+
+title: "Coupled tipping-relevant subsystems of the actual Earth system"
+id: system.earth-tipping-subsystems
+type: target-system
+status: provisional              # provisional | stabilized | retracted
+target_type: particular          # particular | class-actual | class-possible | hypothetical | no-external-target | open
+
+reference_class:                 # a name only: the specifications below generate the class, so they are not restated here
+  name: "the selected tipping-relevant subsystems of the actual Earth system"
+  selection_criteria: []         # only when the specifications below do not fix membership
+
+constituents:
+  - name: "climate subsystem"
+    symbol: sub
+    extent: "enum(\"Greenland ice sheet\", \"West Antarctic ice sheet\", \"Atlantic Meridional Overturning Circulation\", \"Amazon rainforest\")"
+
+index_sets:
+  - name: "time"
+    symbol: t
+    extent: "interval(reals)"
+    structure: interval
+
+variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate ones determined within
+  - name: "physical state of a subsystem, in its empirically admissible state space"
+    symbol: z
+    determined: within
+    signature: [sub, t]
+    values: open
+    expression: null             # a declared subsystem state, not an aggregate
+    shared: false
+  - name: "qualitative regime of a subsystem"
+    symbol: r
+    determined: within
+    signature: [sub, t]
+    values: "enum(\"baseline\", \"transition\", \"alternative\")"
+    expression: null             # the law below states it, and a law can be false of the system
+    shared: false
+  - name: "physical signal transmitted from one subsystem to another: the climatic flux or field specific to that ordered pair"
+    symbol: u
+    determined: within
+    signature: [sub, sub, t]
+    values: open
+    expression: null             # the law below states it, and a law can be false of the system
+    shared: false
+  - name: "physical indicators of a subsystem state"
+    symbol: ind
+    determined: within
+    signature: [sub, t]
+    values: open
+    expression: null
+    shared: false
+  - name: "unresolved internal climate variability"
+    symbol: eta
+    notation: '\eta'
+    determined: within
+    signature: [sub, t]
+    values: open
+  - name: "prescribed trajectory of global mean surface temperature"
+    symbol: DGMT
+    notation: '\Delta T_{\text{GMT}}'
+    of: scenario_source
+    determined: outside
+    signature: [t]
+    values: reals
+  - name: "rate of prescribed warming"
+    symbol: rate
+    of: scenario_source
+    determined: outside
+    signature: [t]
+    values: reals
+    expression: "diff(DGMT, t)"
+    reading: "how fast the prescribed forcing is changing; a subsystem crossing a threshold responds to that speed as well as to the level reached"
+
+parameters:                      # quantities held fixed while the phenomenon unfolds
+  - name: "critical forcing threshold"
+    symbol: Theta
+    notation: '\Theta'
+    signature: [sub]
+    values: reals
+    expression: null
+    shared: false
+  - name: "intrinsic transition timescale"
+    symbol: tau
+    notation: '\tau'
+    signature: [sub]
+    values: "pos(reals)"
+    expression: null
+    shared: false
+  - name: "directed interaction architecture"
+    symbol: Aij
+    notation: 'A_{ij}'
+    signature: [sub, sub]
+    values: bools
+    expression: null
+    shared: false
+  - name: "directed interaction response law"
+    symbol: s
+    signature: [sub, sub]
+    values: open
+    expression: null
+    shared: false
+  - name: "internal feedback law of a subsystem"
+    symbol: intern
+    signature: [sub]
+    values: open
+    expression: null
+    shared: false
+  - name: "emission law of a transmitted signal"
+    symbol: emit
+    signature: [sub, sub]
+    values: open
+    expression: null
+    shared: false
+  - name: "regime and event detection rule"
+    symbol: detect
+    signature: [sub]
+    values: open
+    expression: null
+    shared: false
+  - name: "baseline regime of a subsystem"
+    symbol: baseline
+    signature: [sub]
+    values: "enum(\"baseline\")"
+    expression: null
+    shared: false
+  - name: "end of the prescribed scenario"
+    symbol: Tend
+    of: scenario_source
+    signature: []
+    values: "nonneg(reals)"
+    expression: null
+  - name: "peak prescribed warming"
+    symbol: peak
+    of: scenario_source
+    signature: []
+    values: reals
+    expression: "max_{t}( DGMT )"
+    reading: "the highest level the trajectory reaches; an overshoot scenario is one that passes above its settling level and returns below it"
+  - name: "convergence level of the prescribed warming"
+    symbol: conv
+    of: scenario_source
+    signature: []
+    values: reals
+    expression: "DGMT(Tend)"
+    reading: "the level the trajectory has settled at once the scenario ends, and the property a matched comparator holds fixed"
+
+laws:                            # the behaviors of the components or of the system that are admitted a priori
+  - name: "subsystem evolution"
+    symbol: evolve
+    signature: [sub]
+    role: evolution
+    expression: "diff(z, t) = intern(z, Theta, tau, DGMT) + s(u) + eta"
+    reading: "each subsystem changes under its internal feedbacks, the signals it receives and unresolved variability"
+    warrant: posited
+    rests_on: "the conceptual model of interacting tipping elements"
+  - name: "directed subsystem interaction"
+    symbol: transmit
+    signature: [sub, sub, t]
+    role: input-output
+    expression: "u = emit(z, Aij)"
+    reading: "a subsystem transmits along each present interaction according to its own state"
+    warrant: posited
+    rests_on: "the conceptual model of interacting tipping elements"
+  - name: "regime and event detection"
+    symbol: detect_law
+    signature: [sub]
+    role: measurement
+    expression: "r = detect(ind)"
+    reading: "the regime of a subsystem is assigned from its observed indicators"
+    warrant: fitted
+    rests_on: "the calibration that relates instruments and paleoclimate proxies to subsystem regimes"
+
+closure: partial                 # complete (formal target: the laws define the system) | partial (empirical target) | open
+
+organization:
+  - name: "directed subsystem coupling"
+    symbol: coupling
+    reading: "one subsystem changes the state of another by transmitting a physical signal, and a cascade is a sequence of such transmissions rather than a joint response to the forcing"
+    relates: "subset(prod(sub, sub), Aij)"
+    realized_by: [transmit, evolve]
+
+external_systems:
+  - name: "specification of the forcing scenario and Earth-system processes outside the selected subsystems"
+    symbol: scenario_source
+    class: open                  # the admitted scenario generators are not declared, only the trajectory they prescribe
+    shares: [DGMT]
+    constrains:
+      - name: "stabilized scenario"
+        signature: []
+        role: state-constraint
+        expression: "rate(Tend) = 0"
+        reading: "the prescribed trajectory has stopped changing by the end of the scenario, and only then is its convergence level well defined"
+    reading: "the warming trajectory is prescribed from outside, so no subsystem transition feeds back onto it"
+  - name: "Earth observation and paleoclimate measurement systems"
+    symbol: observation
+    class: open                  # instruments and proxies are not declared quantities of this record
+    shares: [ind]
+    constrains: []               # the detection law already fixes how the regime is read; the phenomenon criterion names the required coverage and uncertainty bound
+    reading: "the regime indicator is read off instruments and proxies, so what counts as a transition depends on what those resolve"
+
+maturity:                        # optional, per specification: open | provisional | stabilized; one left out inherits the status of the record
+  variables.z.values: open
+  variables.u.values: open
+  variables.ind.values: open
+  variables.eta.values: open
+  parameters.s.values: open
+  parameters.intern.values: open
+  parameters.emit.values: open
+  parameters.detect.values: open
+  external_systems.class: open

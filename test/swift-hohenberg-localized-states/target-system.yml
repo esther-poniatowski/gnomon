@@ -1,0 +1,70 @@
+# Method: docs/epistemology/target-system.md. One file per target system.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
+# The specifications appear in the order of the method note.
+
+title: "One-dimensional generalized Swift-Hohenberg equation"
+id: system.swift-hohenberg-localized-states
+type: target-system
+status: provisional              # provisional | stabilized | retracted
+target_type: no-external-target  # the equation is itself the target
+
+reference_class:
+  name: "one-dimensional generalized Swift-Hohenberg equations with quadratic-cubic nonlinearity and localized boundary conditions"
+  selection_criteria: []         # the remaining specifications fix membership
+
+constituents: []                 # the scalar field decomposes into no units
+
+index_sets:
+  - name: "spatial position"
+    symbol: x
+    extent: reals
+    structure: continuum
+  - name: "time"
+    symbol: t
+    extent: "nonneg(reals)"
+    structure: interval
+
+variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate ones determined within
+  - name: "pattern-amplitude field"
+    symbol: u
+    determined: within
+    signature: [x, t]
+    values: reals
+    expression: null
+    shared: false
+
+parameters:
+  - name: "linear control coefficient"
+    symbol: r
+    signature: []
+    values: reals
+    expression: null
+  - name: "quadratic nonlinear coefficient"
+    symbol: b
+    signature: []
+    values: reals
+    expression: null
+
+laws:
+  - name: "quadratic-cubic Swift-Hohenberg evolution"
+    symbol: evolve
+    signature: [x]
+    role: evolution
+    expression: "diff(u, t) = r * u - u - 2 * diff(diff(u, x), x) - diff(diff(diff(diff(u, x), x), x), x) + b * u * u - u * u * u"
+    reading: "the field follows the standard quadratic-cubic pattern-forming dynamics"
+    warrant: posited
+    rests_on: "the definition of the model class"
+  - name: "localized far-field boundary condition"
+    symbol: localized
+    signature: []
+    role: state-constraint
+    expression: "far_field(u) = 0"
+    reading: "the field approaches the homogeneous state at both spatial infinities"
+    warrant: posited
+    rests_on: "the boundary condition that individuates a localized state"
+
+closure: complete
+
+external_systems: []
+
+maturity: {}

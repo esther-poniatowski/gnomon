@@ -1,53 +1,68 @@
 # Method: docs/epistemology/subject-of-inquiry.md, contrast.md, domain.md, epistemic-task.md,
-# modal-strength.md, explanans-level.md, epistemic-pragmatic-virtues.md.
+# modal-strength.md, admissible-explanans.md, epistemic-pragmatic-virtues.md.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md. A quantity of another
+# record is named by that record's identifier and its symbol, as in system.TOPIC#SYMBOL.
 # Replace every UPPERCASE placeholder. Any closed field accepts the value `open`.
 # Fill this file before any candidate answer is evaluated.
 
+title: "SHORT NAME OF THE QUESTION"
+statement: "THE QUESTION IN WORDS" # a reading of the fields below; `gnomon render` composes the same question from them
 id: quest.TOPIC.NAME
 type: question
-title: "SHORT NAME OF THE QUESTION"
 status: open                     # open | refined | answered | abandoned
-
 subject:
   target_system: system.TOPIC
   phenomenon: phen.TOPIC.NAME
   contrast:
     locus: open                  # other-outcome | other-system | other-condition | none | open
-    foil_set:                       # listed alternatives, or one rule; default: the other values of the explanandum variable
-      - "FOIL"
+    foil_set:                    # listed alternatives; default: the other values of the explanandum variable
+      - name: "NAME OF THE ALTERNATIVE"
+        symbol: SYMBOL
+        expression: ["EXPRESSION OVER DECLARED SYMBOLS"]
+        reading: "WHAT THE ALTERNATIVE WOULD MEAN, beyond what the name and the expression state"
     compatibility: derived       # follows from the locus: exclusive for other-outcome, compatible otherwise
     foil_status: open            # observed | counterfactual | not-applicable | open
   domain:                        # restrictions of the a priori specification only; the assumptions of the analysis belong to the answer
-    parameter_restrictions:
-      - parameter: "PARAMETER OF THE SYSTEM OR OF AN EXTERNAL SYSTEM"
-        values: "SUBSET OF ITS ADMITTED VALUES"
-    state_restrictions:
-      - variable: "STATE VARIABLE"
-        restriction: "CLAMPED VALUE | RESTRICTED VALUES | INITIAL STATES | STATIONARY STATES ONLY | TRAJECTORIES WITHOUT EVENT"
-    limit: null                  # "QUANTITY -> LIMIT VALUE", only when the question concerns the limit system itself
+    restrictions:                # one entry per restriction the question imposes on the specification
+      - name: "NAME OF THE RESTRICTION"   # required when no quantity names the entry
+        of: system.TOPIC#SYMBOL    # the quantity held, omitted when no single one carries the restriction
+        restriction:               # clamped | restricted | initial | stationary | without-event; only where the entry names a variable, since a parameter is already fixed
+        values: "SET EXPRESSION OVER DECLARED SYMBOLS"   # the set the quantity is held to
+        expression: "EXPRESSION OVER DECLARED SYMBOLS"   # instead of a set, when no single quantity carries the restriction
+        justification: "WHY THE QUESTION IS PUT ONLY UNDER IT"
+    limit:                       # only when the question concerns the limit system itself
+      expression: "SYMBOL -> LIMIT VALUE"
+      justification: "WHY THE LIMIT SYSTEM IS WHAT THE QUESTION IS ABOUT"
 
 task:
-  epistemic_aim: open                      # description | exploration | prediction | explanation | understanding | modal-knowledge | model-knowledge | open
-  requested_relation: open                 # causal-intervention | causal-mechanistic | constitutive | function | nomological | statistical | mathematical | not-applicable | open
+  epistemic_aim: open            # description | exploration | prediction | explanation | modal-knowledge | model-knowledge | open
+  requested_relation: open       # causal-intervention | causal-mechanistic | constitutive | function | nomological | statistical | mathematical | not-applicable | open
   modal_strength: open           # actual | possible | necessary | open
-  level:                         # optional: leave null to let proportionality select the level
-    compositional: null          # "CONSTITUENTS, SUB-PARTS OR AGGREGATES"
-    aggregation: null            # mean-or-sum | projection | order-parameter | distribution-statistics
+  admissible_explanans:          # optional: leave null to let proportionality bound the answer
+    compositional: [SYMBOL]      # the constituent kinds or index sets whose parts may enter the explanans; empty for the system as a whole
     substrate: null              # specific | independent | link
+    justification: "WHY THE ANSWER IS BOUND TO THESE VARIABLES, and what an answer outside them would fail to deliver"
   required_accuracy:
-    level: open                  # qualitative | order-of-magnitude | numeric-bound | structural-only | open
-    outputs_to_match:
-      - model_output: "OUTPUT OF THE MODEL"
-        target_output: "OBSERVABLE OF THE TARGET THAT IT MUST MATCH"
-        tolerance: "TOLERANCE"
+    standard: open               # qualitative | order-of-magnitude | numeric-bound | structural-only | not-applicable | open
+    outputs_to_match:            # the answer reproduces each, so only the target side is named
+      - target: phen.TOPIC.NAME#SYMBOL
+        tolerance:               # omitted when the accuracy level is qualitative or structural-only
+          metric: "EXPRESSION OVER `answer` AND `target`, measuring their difference"
+          bound: "EXPRESSION THE METRIC MUST NOT EXCEED"
+        justification: "WHY REPRODUCING THIS OUTPUT IS WHAT THE QUESTION DEMANDS"
     structures_to_match:
-      - model_structure: "STRUCTURE OF THE MODEL"
-        target_structure: "STRUCTURE OF THE TARGET THAT IT MUST MATCH"
+      - target: phen.TOPIC.NAME#SYMBOL
+        justification: "WHY REPRODUCING THIS STRUCTURE IS WHAT THE QUESTION DEMANDS"
+  proof_obligations:             # when the answer must derive a statement rather than match a measurement
+    - name: "NAME OF THE OBLIGATION"
+      reading: "THE IMPLICATION THE ANSWER MUST ESTABLISH, in words"
+      antecedent: ["EXPRESSION OVER DECLARED SYMBOLS"]
+      consequent: ["EXPRESSION OVER DECLARED SYMBOLS"]
 
-virtues:                         # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability
-  - "VIRTUE"                     # the aim forces some: understanding forces intelligibility and structural-transparency
-
-question_statement: "In [target system] under [domain], [interrogative word selected by the aim] [phenomenon] rather than [contrast]?"
+virtues:                         # one entry per virtue the inquiry weighs, whatever its aim
+  - virtue:                      # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability
+    standing:                    # constitutive (the product test applies it) | preferred (appraisal ranks on it)
+    justification: "WHY THE INQUIRY WEIGHS THIS VIRTUE, and what an answer lacking it would fail to deliver"
 
 maturity:                        # optional, per field: open | provisional | stabilized; a field left out inherits the status of the record
   FIELD.PATH: open

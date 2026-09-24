@@ -1,0 +1,44 @@
+# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
+# The operators the records of this problem use beyond the canonical set of the framework.
+# An operator is typed over the sets the records of this problem declare.
+
+title: "Operators of the neural-tangent-kernel inquiry"
+id: ops.ntk-gradient-flow
+type: operators
+status: provisional              # provisional | stabilized | retracted
+target_system: system.ntk-gradient-flow
+
+operators:
+  - name: "the outputs of a fully connected network"
+    symbol: network
+    signature: ["vectors(reals, p)", "maps(a, vectors(reals, d))", "pos(ints)", "pos(ints)", "maps(reals, reals)"]
+    values: "maps(a, reals)"
+  - name: "the empirical neural tangent kernel"
+    symbol: ntk
+    signature: ["vectors(reals, p)", "maps(a, vectors(reals, d))", "pos(ints)", "pos(ints)", "maps(reals, reals)"]
+    values: "matrices(reals, a, a)"
+  - name: "the deterministic neural tangent kernel in the infinite-width limit"
+    symbol: limiting_ntk
+    signature: ["maps(a, vectors(reals, d))", "pos(ints)", "maps(reals, reals)"]
+    values: "matrices(reals, a, a)"
+  - name: "the number of parameters fixed by width and depth"
+    symbol: parameter_count
+    signature: ["pos(ints)", "pos(ints)"]
+    values: "pos(ints)"
+  - name: "the squared empirical risk"
+    symbol: risk
+    signature: ["maps(a, reals)", "maps(a, reals)"]
+    values: "nonneg(reals)"
+  - name: "the gradient with respect to the parameter vector"
+    symbol: grad_parameter
+    signature: ["reals", "vectors(reals, p)"]
+    values: "vectors(reals, p)"
+  - name: "the gradient with respect to the output vector"
+    symbol: grad_output
+    signature: ["reals", "maps(a, reals)"]
+    values: "maps(a, reals)"
+  - name: "the value of a trajectory at zero training time"
+    symbol: at_zero
+    for_any: [A, S]
+    signature: ["maps(A, S)"]
+    values: S

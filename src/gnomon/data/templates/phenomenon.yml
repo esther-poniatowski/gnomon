@@ -1,50 +1,109 @@
 # Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
 # Replace every UPPERCASE placeholder. Any closed field accepts the value `open`.
 # The specifications appear in the order of the method note.
-# For an exploratory question, leave the statement and the category open, and fill the
-# candidate observables, the varied conditions and the detection criterion.
+# For an exploratory question, leave the statement, the category and the manifestation form
+# open, and fill the candidate observables, the varied indices and the detection criterion.
 
+title: "SHORT NAME OF THE PHENOMENON"
+statement: "THE PHENOMENON IN WORDS: what bears it, and what that bearer does" # a reading: the signatures fix the bearer and the manifestations fix the behavior
 id: phen.TOPIC.NAME
 type: phenomenon
-title: "SHORT NAME OF THE PHENOMENON"
 status: provisional              # provisional | stabilized | retracted
 target_system: system.TOPIC
 
-statement:                       # reads as: bearer, behavior, precipitating condition
-  bearer: "THE SYSTEM, A PART OF IT, OR AN AGGREGATE OF PARTS"
-  behavior: "VERB PHRASE: WHAT THE BEARER DOES OR UNDERGOES"
-
 category: open                   # particular-event | regularity | capacity | structural-property | open
 
-explanandum_variables:           # the variables that restate the behavior in terms of the state of the system
-  - name: "Y"
-    values: "POSSIBLE VALUES OF Y"
-    observed: "VALUE y AMONG THEM"
-    scale:                       # categorical | ordinal | quantitative
-    parts_covered: "THE CONSTITUENTS THAT THE VARIABLE COVERS: every unit, a named subpopulation, or one unit"
-    aggregation:                 # each-constituent | summary | distribution | not-applicable
-    followed_along: none         # time | parameter | none
-    profile:                     # single-value | summary | full-profile | not-applicable
+index_sets:                      # the indices the observables introduce, beyond those the target declares
+  - name: "NAME OF THE SET"
+    symbol: SYMBOL
+    notation: 'LATEX FORM, when it differs from the symbol itself'
+    extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    structure:                   # continuum | discrete-set | interval
 
-scope_over_instances: open       # single | typical | ensemble-summary | ensemble-distribution | not-applicable | open
+explanandum_variables:           # the observables that restate the behavior in terms of the state of the system
+  - reference: system.TOPIC#SYMBOL   # when the observable is a quantity the target already declares, the keys below are omitted
+    name: "NAME OF THE OBSERVABLE"
+    symbol: SYMBOL
+    notation: 'LATEX FORM, when it differs from the symbol itself'
+    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
+    signature: [SYMBOL]          # the indices the observable still takes; empty for a scalar
+    values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    expression: "EXPRESSION OVER DECLARED SYMBOLS, for a derived observable"
+    condition: "EXPRESSION THE QUANTITY SATISFIES, for a quantity no map builds"
+    selects:                     # unique | any | all, required with a condition
+    reading: "WHAT THE EXPRESSION ENCODES, in words"
+    event:                       # when the observable is the time of an event; the expression above states the criterion
+      origin: "EXPRESSION FIXING WHEN THE CLOCK STARTS"
+      horizon: "EXPRESSION FIXING WHEN OBSERVATION STOPS"
+      censoring:                 # right | left | interval | none
+      reading: "WHAT COUNTS AS THE EVENT AND WHAT IS RECORDED WHEN IT IS NOT SEEN, in words"
 
-conditions_and_byproducts:       # a factor that the question varies leaves the domain of conditions
-  precipitating:
-    - "CONDITION THAT TRIGGERS THE BEHAVIOR"
-  inhibiting:
-    - "CONDITION THAT PREVENTS THE BEHAVIOR"
-  modulating:
-    - condition: "CONDITION"
-      feature: "FEATURE OF THE BEHAVIOR THAT IT CHANGES"
-      effect: "DIRECTION OR SIZE OF THE CHANGE"
-  nonstandard:
-    - "UNUSUAL CIRCUMSTANCE UNDER WHICH THE BEHAVIOR CAN BE MADE TO OCCUR"
-  byproducts:
-    - "FURTHER EFFECT OF THE BEHAVIOR, OUTSIDE THE PHENOMENON ITSELF"
+manifestations:                  # what the observables do; the behavior stated over them, once per form
+  - name: "NAME OF THE MANIFESTATION"
+    symbol: SYMBOL
+    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
+    form:                        # value | dependence | functional-form | scaling | relation | open
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"
+    reading: "WHAT THE EXPRESSION MEANS, beyond what the name and the form already state"
+    features:                    # the quantities of the form that characterize the behavior
+      - name: "NAME OF THE FEATURE"
+        symbol: SYMBOL
+        values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+        observed: "VALUE AMONG THEM"
+        condition: "EXPRESSION THE FEATURE SATISFIES, when the measurement constrains it without fixing a value"
+        selects:                 # unique | any | all, required with a condition
+        procedure: "WHAT THE MEASUREMENT ESTABLISHES, beyond what the name and the value set already state"
+        caveat: "WHAT THE RECORD LEAVES UNSTATED HERE, and why"
+
+scope_over_instances:            # one entry per source of variation across the instances; empty for a single instance
+  - name: "NAME OF THE SOURCE OF VARIATION"
+    symbol: SYMBOL
+    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
+    over: [SYMBOL]               # the declared quantities this source varies; empty when the instance itself varies
+    source:                      # class-member | realization | parameter-draw | structure-draw | scenario
+    quantification:              # single | typical | ensemble-summary | ensemble-distribution | universal | open
+    conditional_on: [SYMBOL]     # the entries of this list held fixed while this one varies
+    differentiation: "WHAT THE VARIATION MEANS FOR THE CLAIM, beyond what the name already states"
+
+conditions_and_byproducts:       # a factor that the question varies is an index or a scope entry, not a condition
+  precipitating:                 # what must hold for the behavior to occur
+    - name: "NAME OF THE CONDITION"
+      variant: SYMBOL            # the variant of the target that carries it; omitted when every member does
+      expression: "EXPRESSION OVER DECLARED SYMBOLS"
+      justification: "WHY IT TRIGGERS THE BEHAVIOR, beyond what the expression states"
+  inhibiting:                    # what prevents the behavior
+    - name: "NAME OF THE CONDITION"
+      variant: SYMBOL            # the variant of the target that carries it; omitted when every member does
+      expression: "EXPRESSION OVER DECLARED SYMBOLS"
+      justification: "WHY IT PREVENTS THE BEHAVIOR, beyond what the expression states"
+      caveat: "WHAT THE RECORD LEAVES UNSTATED HERE, and why"
+  modulating:                    # what changes a feature of the behavior without preventing it
+    - name: "NAME OF THE CONDITION"
+      variant: SYMBOL            # the variant of the target that carries it; omitted when every member does
+      expression: "EXPRESSION FIXING THE REGIME IT HOLDS IN, when it holds in one only"
+      reading: "WHAT THE MODULATION MEANS, beyond what the effect states"
+      effect: "RELATION OVER DECLARED SYMBOLS, naming the feature that changes and what changes it"
+  nonstandard:                   # the behavior occurs only where the circumstance is arranged
+    - name: "NAME OF THE CIRCUMSTANCE"
+      variant: SYMBOL            # the variant of the target that carries it; omitted when every member does
+      expression: "EXPRESSION OVER DECLARED SYMBOLS"
+      differentiation: "WHAT MAKES THE CIRCUMSTANCE UNUSUAL, and how it is arranged"
+  byproducts:                    # further effects of the behavior, outside the phenomenon
+    - name: "NAME OF THE BYPRODUCT"
+      variant: SYMBOL            # the variant of the target that carries it; omitted when every member does
+      expression: "EXPRESSION OVER DECLARED SYMBOLS"
+      justification: "WHY IT FALLS OUTSIDE THE PHENOMENON, beyond what the expression states"
 
 evidential_status: open          # established | reported | predicted | derived | open
 
-detection_criterion: "WHAT A CANDIDATE PATTERN MUST SATISFY TO COUNT AS ESTABLISHED, for instance stability across instances"
+detection_criterion:             # what a candidate pattern must satisfy to count as established
+  - name: "NAME OF THE TEST"
+    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
+    across: [SYMBOL]             # the sources of variation over which it must hold
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"
+    procedure: "HOW THE TEST IS CARRIED OUT, beyond what the name already states"
+    limited_by: [SYMBOL]         # the external systems of the target whose reach bounds what the test can establish
 
 data:
   - "POINTER TO A DATA SET, A RECORDING OR A DERIVATION"

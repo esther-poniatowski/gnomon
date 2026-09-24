@@ -1,0 +1,19 @@
+# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
+# The operator below types finite samples as subsets of the declared example space.
+
+title: "Operators of the delayed-generalization inquiry"
+id: ops.delayed-generalization-networks
+type: operators
+status: provisional
+target_system: system.delayed_generalization_networks
+
+operators:
+  - name: "the set of all subsets of a declared set"
+    symbol: powerset
+    notation: '\mathcal{P}( #1 )'
+    for_any: [S]
+    signature: [S]
+    values: open
+
+maturity:
+  operators.powerset.values: open

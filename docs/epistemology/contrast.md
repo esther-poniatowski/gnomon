@@ -21,7 +21,7 @@ The contrast passes the [inclusion test](subject-of-inquiry.md#^inclusion-test):
 | Specification | When it is required | Options or frame | Examples | Source |
 | ------------- | ------------------- | ---------------- | -------- | ------ |
 | Locus | for a contrastive why-question | other outcome (same system and conditions, other value of $P$) · other system ($P$ absent) · other condition (same system, other condition or intervention) | synchronous rather than asynchronous activity (outcome); this network rather than a network without inhibitory neurons (system); a strong rather than a weak stimulus (condition) | [vanfraassen1980]; [lipton2004]; potential outcomes $Y_i(d)$ vs $Y_i(d')$ [lundberg2021] |
-| Foil set | for a contrastive why-question; it defaults to the other values of the explanandum variable | listed alternatives, or a rule | asynchronous activity (listed); every other oscillation frequency (rule) | [woodward2003] |
+| Foil set | for a contrastive why-question; it defaults to the other values of the explanandum variable | per foil, the expressions over the declared observables that hold in that case, with a reading | asynchronous activity (listed); every other oscillation frequency (rule) | [woodward2003] |
 | Compatibility | never stated on its own: the locus fixes it | exclusive · compatible (fact and foil co-occur in different systems) | synchronous versus asynchronous activity of one network (exclusive); Smith versus Jones contracting paresis (compatible) | [vanfraassen1980]; [lipton2004] |
 | Foil status | with a foil set | observed (a realized comparison case) · counterfactual | a recorded control network (observed); the same network trained on another task (counterfactual) | [lipton2004] |
 

@@ -1,0 +1,211 @@
+# The operator vocabulary the framework supplies. A problem declares in its own records the
+# mathematics it brings beyond this set. Source of truth for the checkers; the method note
+# docs/epistemology/symbols-and-expressions.md documents it and is checked against it.
+#
+# `notation` renders the operator in LaTeX. `#0` stands for the indices a binder consumes and
+# `#1`, `#2` for its arguments, so a renderer composes the form without parsing the operator.
+
+id: registry.operators
+type: operator-registry
+operators:
+- symbol: mean
+  kind: binder
+  name: the mean over the indices it binds
+  notation: '\langle #1 \rangle_{#0}'
+- symbol: sum
+  kind: binder
+  name: the sum over the indices it binds
+  notation: '\sum_{#0} #1'
+- symbol: min
+  kind: binder
+  name: the least value over the indices it binds
+  notation: '\min_{#0} #1'
+- symbol: max
+  kind: binder
+  name: the greatest value over the indices it binds
+  notation: '\max_{#0} #1'
+- symbol: limit
+  kind: binder
+  name: the limit as the indices it binds approach their stated value
+  notation: '\lim_{#0} #1'
+- symbol: norm
+  kind: binder
+  name: the norm over the indices it binds
+  notation: '\lVert #1 \rVert_{#0}'
+- symbol: dist
+  kind: binder
+  name: the distribution formed over the indices it binds
+  notation: '\mathbb{P}_{#0}( #1 )'
+- symbol: implies
+  kind: relation
+  name: the implication between two statements
+  notation: '#1 \Rightarrow #2'
+- symbol: depends_on
+  kind: relation
+  name: the dependence of one quantity on another
+  notation: '\operatorname{dep}( #1, #2 )'
+- symbol: increasing
+  kind: relation
+  name: the monotone increase of one quantity in another
+  notation: '\operatorname{incr}( #1, #2 )'
+- symbol: decreasing
+  kind: relation
+  name: the monotone decrease of one quantity in another
+  notation: '\operatorname{decr}( #1, #2 )'
+- symbol: drawn_from
+  kind: relation
+  name: the quantity is distributed as the law given
+  notation: '#1 \sim #2'
+- symbol: abs
+  kind: map
+  name: the magnitude of a number or a vector
+  notation: '\lvert #1 \rvert'
+- symbol: ft
+  kind: binder
+  name: the Fourier transform over the indices it binds, introducing their conjugates
+  notation: '\widehat{#1}'
+  for_any: [A, S]
+  signature: ["maps(A, S)"]
+  values: "maps(A, S)"
+- symbol: dot
+  kind: map
+  name: the inner product of two vectors
+  notation: '#1 \cdot #2'
+  for_any: [S, n]
+  signature: ["vectors(S, n)", "vectors(S, n)"]
+  values: S
+- symbol: adjoint
+  kind: map
+  name: the adjoint of a map of a set to itself
+  notation: '#1^{\dagger}'
+  for_any: [S]
+  signature: ["maps(S, S)"]
+  values: "maps(S, S)"
+- symbol: re
+  kind: map
+  name: the real part of a complex number
+  notation: '\operatorname{Re} #1'
+  signature: [complex]
+  values: reals
+- symbol: spectrum
+  kind: map
+  name: the eigenvalues of a square array
+  notation: '\operatorname{spec}( #1 )'
+  for_any: [A]
+  signature: ["matrices(reals, A, A)"]
+  values: complex
+- symbol: jacobian
+  kind: map
+  name: the matrix of first derivatives of a map, at a point
+  notation: '\operatorname{J}_{#3}( #1 )'
+  for_any: [A]
+  signature: ["maps(A, reals)", A, A]
+  values: "matrices(reals, A, A)"
+- symbol: grad
+  kind: map
+  name: the gradient of a field over its domain
+  notation: '\nabla #1'
+  for_any: [A, S, n]
+  signature: ["maps(A, S)"]
+  values: "maps(A, vectors(S, n))"
+- symbol: div
+  kind: map
+  name: the divergence of a vector field over its domain
+  notation: '\nabla \cdot #1'
+  for_any: [A, S, n]
+  signature: ["maps(A, vectors(S, n))"]
+  values: "maps(A, S)"
+- symbol: lap
+  kind: map
+  name: the Laplacian of a field over its domain
+  notation: '\Delta #1'
+  for_any: [A, S]
+  signature: ["maps(A, S)"]
+  values: "maps(A, S)"
+- symbol: infinity
+  kind: constant
+  name: the unbounded limit of a quantity
+  notation: '\infty'
+- symbol: diff
+  kind: map
+  name: the derivative of a quantity along the index given
+  notation: '\\partial_{#2} #1'
+  for_any: [A, S]
+  signature: ["maps(A, S)", A]
+  values: "maps(A, S)"
+- symbol: reals
+  kind: set
+  name: the real numbers
+  notation: \mathbb{R}
+- symbol: ints
+  kind: set
+  name: the integers
+  notation: \mathbb{Z}
+- symbol: bools
+  kind: set
+  name: the truth values
+  notation: \mathbb{B}
+- symbol: pos
+  kind: set
+  name: the strictly positive members of a set
+  notation: '#1_{>0}'
+- symbol: nonneg
+  kind: set
+  name: the nonnegative members of a set
+  notation: '#1_{\geq 0}'
+- symbol: vectors
+  kind: set
+  name: the tuples of a given length over a set
+  notation: '#1^{#2}'
+- symbol: matrices
+  kind: set
+  name: the arrays over a set, indexed by two sets
+  notation: '#1^{#2 \times #3}'
+- symbol: prod
+  kind: set
+  name: the product of two sets
+  notation: '#1 \times #2'
+- symbol: enum
+  kind: set
+  name: the set of the listed members
+  notation: '\{ #1 \}'
+- symbol: range
+  kind: set
+  name: the identifiers of a finite collection, given its size
+  notation: '\{ 1, \dots, #1 \}'
+- symbol: interval
+  kind: set
+  name: an interval of an ordered set, or the interval between two bounds
+  notation: '[ #1, #2 ]'
+- symbol: maps
+  kind: set
+  name: the maps from one set to another
+  notation: '#1 \to #2'
+- symbol: measures
+  kind: set
+  name: the probability measures on a set
+  notation: '\mathcal{P}( #1 )'
+- symbol: intersect
+  kind: set
+  name: the members two sets share
+  notation: '#1 \cap #2'
+- symbol: union
+  kind: set
+  name: the members of either set
+  notation: '#1 \cup #2'
+- symbol: empty
+  kind: set
+  name: the set with no member
+  notation: '\emptyset'
+- symbol: complex
+  kind: set
+  name: the complex numbers
+  notation: '\mathbb{C}'
+- symbol: card
+  kind: set
+  name: the size of a set
+  notation: '\lvert #1 \rvert'
+- symbol: subset
+  kind: set
+  name: the members of a set satisfying a predicate
+  notation: '\{ x \in #1 : #2(x) \}'

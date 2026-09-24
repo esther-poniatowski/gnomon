@@ -1,0 +1,271 @@
+# The closed vocabularies of the inquiry records, keyed by the block that encloses each field
+# and the field itself. A key opening with a dot names a field of the record itself.
+#
+# Source of truth for the checkers. Every closed field also accepts `open`, which is not listed.
+# A key repeats across blocks only where it carries the same vocabulary. The template comments
+# document these vocabularies and are checked against this file, so no check reads a document.
+
+id: registry.vocabularies
+type: vocabulary-registry
+vocabularies:
+  answer:
+    .status:
+    - value: preliminary
+    - value: hypothesized
+    - value: informally-backed
+    - value: formally-proven
+    - value: accepted
+    - value: retracted
+    laws.warrant:
+    - value: derived
+      name: from the laws of the system
+    - value: derived-in-a-limit
+    - value: posited
+    - value: fitted
+    - value: measured
+    idealizations.motive:
+    - value: tractability
+      name: the undistorted system resists analysis
+    - value: isolation
+      name: it removes a factor judged irrelevant
+    - value: limit
+      name: it exposes the behavior of a limit system
+    explanans.factor:
+    - value: condition
+    - value: structural-property
+    - value: law-property
+    - value: organization
+    index_sets.structure:
+    - value: continuum
+    - value: discrete-set
+    - value: interval
+    laws.role:
+    - value: evolution
+      name: how the state changes along the course
+    - value: input-output
+      name: how one quantity is determined by others at the same point
+    - value: measurement
+      name: how an instrument registers the state
+    - value: state-constraint
+      name: which states may hold together, including at the start and at the boundary
+    - value: distribution
+      name: the law of a random quantity
+    - value: admissibility
+      name: a restriction on the parameters or the forms a member may take
+    variables.determined:
+    - value: within
+    - value: outside
+    variables.selects:
+    - value: unique
+    - value: any
+    - value: all
+    parameters.selects:
+    - value: unique
+    - value: any
+    - value: all
+  assessment:
+    .status:
+    - value: provisional
+    - value: stabilized
+    - value: retracted
+    obligations.verdict:
+    - value: pending
+    - value: pass
+    - value: fail
+    - value: not-applicable
+    appraisal.virtue:
+    - value: unification
+    - value: generality
+    - value: robustness
+    - value: intelligibility
+    - value: structural-transparency
+    - value: economy
+    - value: tractability
+  phenomenon:
+    .status:
+    - value: provisional
+    - value: stabilized
+    - value: retracted
+    .category:
+    - value: particular-event
+    - value: regularity
+    - value: capacity
+    - value: structural-property
+    - value: open
+    index_sets.structure:
+    - value: continuum
+    - value: discrete-set
+    - value: interval
+    explanandum_variables.selects:
+    - value: unique
+    - value: any
+    - value: all
+    manifestations.selects:
+    - value: unique
+    - value: any
+    - value: all
+    explanandum_variables.censoring:
+    - value: right
+    - value: left
+    - value: interval
+    - value: none
+    manifestations.form:
+    - value: value
+    - value: dependence
+    - value: functional-form
+    - value: scaling
+    - value: relation
+    - value: open
+    scope_over_instances.source:
+    - value: class-member
+    - value: realization
+    - value: parameter-draw
+    - value: structure-draw
+    - value: scenario
+    scope_over_instances.quantification:
+    - value: single
+    - value: typical
+    - value: ensemble-summary
+    - value: ensemble-distribution
+    - value: universal
+    - value: open
+    .evidential_status:
+    - value: established
+    - value: reported
+    - value: predicted
+    - value: derived
+    - value: open
+  question:
+    .status:
+    - value: open
+    - value: refined
+    - value: answered
+    - value: abandoned
+    subject.locus:
+    - value: other-outcome
+    - value: other-system
+    - value: other-condition
+    - value: none
+    - value: open
+    subject.foil_status:
+    - value: observed
+    - value: counterfactual
+    - value: not-applicable
+    - value: open
+    subject.restriction:
+    - value: clamped
+    - value: restricted
+    - value: initial
+    - value: stationary
+    - value: without-event
+    task.epistemic_aim:
+    - value: description
+    - value: exploration
+    - value: prediction
+    - value: explanation
+    - value: modal-knowledge
+    - value: model-knowledge
+    - value: open
+    task.requested_relation:
+    - value: causal-intervention
+    - value: causal-mechanistic
+    - value: constitutive
+    - value: function
+    - value: nomological
+    - value: statistical
+    - value: mathematical
+    - value: not-applicable
+    - value: open
+    task.modal_strength:
+    - value: actual
+    - value: possible
+    - value: necessary
+    - value: open
+    task.substrate:
+    - value: specific
+    - value: independent
+    - value: link
+    task.standard:
+    - value: qualitative
+    - value: order-of-magnitude
+    - value: numeric-bound
+    - value: structural-only
+    - value: not-applicable
+    - value: open
+    virtues.standing:
+    - value: constitutive
+    - value: preferred
+    virtues.virtue:
+    - value: unification
+    - value: generality
+    - value: robustness
+    - value: intelligibility
+    - value: structural-transparency
+    - value: economy
+    - value: tractability
+  target-system:
+    .status:
+    - value: provisional
+    - value: stabilized
+    - value: retracted
+    .target_type:
+    - value: particular
+    - value: class-actual
+    - value: class-possible
+    - value: hypothetical
+    - value: no-external-target
+    - value: open
+    index_sets.structure:
+    - value: continuum
+    - value: discrete-set
+    - value: interval
+    variables.determined:
+    - value: within
+    - value: outside
+    variables.selects:
+    - value: unique
+    - value: any
+    - value: all
+    parameters.selects:
+    - value: unique
+    - value: any
+    - value: all
+    external_systems.role:
+    - value: evolution
+      name: how the state changes along the course
+    - value: input-output
+      name: how one quantity is determined by others at the same point
+    - value: measurement
+      name: how an instrument registers the state
+    - value: state-constraint
+      name: which states may hold together, including at the start and at the boundary
+    - value: distribution
+      name: the law of a random quantity
+    - value: admissibility
+      name: a restriction on the parameters or the forms a member may take
+    laws.warrant:
+    - value: derived
+      name: from other laws of the system
+    - value: derived-in-a-limit
+    - value: posited
+    - value: fitted
+    - value: measured
+    laws.role:
+    - value: evolution
+      name: how the state changes along the course
+    - value: input-output
+      name: how one quantity is determined by others at the same point
+    - value: measurement
+      name: how an instrument registers the state
+    - value: state-constraint
+      name: which states may hold together, including at the start and at the boundary
+    - value: distribution
+      name: the law of a random quantity
+    - value: admissibility
+      name: a restriction on the parameters or the forms a member may take
+    .closure:
+    - value: complete
+      name: 'formal target: the laws define the system'
+    - value: partial
+      name: empirical target
+    - value: open

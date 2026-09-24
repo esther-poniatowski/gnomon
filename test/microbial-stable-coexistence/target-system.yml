@@ -1,0 +1,305 @@
+# Method: docs/epistemology/target-system.md. One file per target system.
+# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
+# The specifications appear in the order of the method note.
+
+title: "Formal microbial-community population models"
+id: system.microbial-formal-population-models
+type: target-system
+status: provisional              # provisional | stabilized | retracted
+target_type: class-possible      # particular | class-actual | class-possible | hypothetical | no-external-target | open
+
+reference_class:                 # a name only: the specifications below generate the class, so they are not restated here
+  name: "Microbial-community population models with resource-mediated or higher-order interactions"
+  selection_criteria: []         # the remaining specifications fix membership
+
+variants:                        # the class holds resource-explicit and direct-interaction models, whose state spaces differ
+  - name: "resource-explicit community"
+    symbol: resource_explicit
+    differentiation: "the abiotic pools are part of the state, so two populations reach each other only by drawing on a pool both use"
+  - name: "direct-interaction community"
+    symbol: direct
+    differentiation: "the pools are integrated out, so one population enters another's growth through a coefficient and the state is the abundances alone"
+
+constituents:
+  - name: "microbial population"
+    symbol: pop
+    extent: "range(S)"
+  - name: "abiotic resource pool"
+    symbol: res
+    variant: resource_explicit
+    extent: "range(M)"
+
+index_sets:
+  - name: "time"
+    symbol: t
+    extent: "interval(reals)"
+    structure: interval
+
+variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate ones determined within
+  - name: "microbial-population abundance"
+    symbol: N
+    determined: within
+    signature: [pop, t]
+    values: "nonneg(reals)"
+    expression: null             # a declared abundance, not an aggregate
+    shared: false
+  - name: "resource concentration"
+    symbol: R
+    variant: resource_explicit
+    determined: within
+    signature: [res, t]
+    values: "nonneg(reals)"
+    expression: null
+    shared: false
+
+parameters:                      # quantities held fixed while one model trajectory unfolds
+  - name: "number of microbial populations"
+    symbol: S
+    signature: []
+    values: "pos(ints)"
+    expression: null
+  - name: "number of abiotic resource pools"
+    symbol: M
+    variant: resource_explicit
+    signature: []
+    values: "pos(ints)"
+    expression: null
+  - name: "resource-supply rate"
+    symbol: rho
+    notation: '\rho'
+    variant: resource_explicit
+    signature: [res]
+    values: "nonneg(reals)"
+    expression: null
+    shared: false
+  - name: "consumer mortality rate"
+    symbol: mu
+    notation: '\mu'
+    signature: [pop]
+    values: "nonneg(reals)"
+    expression: null
+    shared: false
+  - name: "resource-consumption coefficient"
+    symbol: C
+    variant: resource_explicit
+    signature: [res, pop]
+    values: "nonneg(reals)"
+    expression: null
+    shared: false
+  - name: "resource-production coefficient"
+    symbol: Pr
+    variant: resource_explicit
+    signature: [res, pop]
+    values: "nonneg(reals)"
+    expression: null
+    shared: false
+  - name: "pairwise interaction coefficient"
+    symbol: A
+    variant: direct
+    signature: [pop, pop]
+    values: reals
+    expression: null
+    shared: false
+  - name: "higher-order interaction coefficient"
+    symbol: B
+    variant: direct
+    signature: [pop, pop, pop]
+    values: reals
+    expression: null
+    shared: false
+  - name: "interaction-law specification: the admissible functional forms and coefficients of one member model"
+    symbol: theta
+    notation: '\theta'
+    signature: []
+    values: open
+    expression: null
+    reading: "one member specification fixes a variant and its functional forms, and therefore supplies only the coefficient families that variant declares"
+  - name: "per-capita population growth law of a resource-explicit member"
+    symbol: Fr
+    notation: 'F_{\mathrm{res}}'
+    variant: resource_explicit
+    signature: [pop]
+    values: "maps(prod(vectors(nonneg(reals), S), vectors(nonneg(reals), M)), reals)"
+    expression: null
+    reading: "the abundance vector and the resource vector determine the per-capita growth of each population"
+    shared: false
+  - name: "per-capita population growth law of a direct-interaction member"
+    symbol: Fd
+    notation: 'F_{\mathrm{dir}}'
+    variant: direct
+    signature: [pop]
+    values: "maps(vectors(nonneg(reals), S), reals)"
+    expression: null
+    reading: "the abundance vector directly determines the per-capita growth of each population"
+    shared: false
+  - name: "resource-turnover law"
+    symbol: G
+    variant: resource_explicit
+    signature: [res]
+    values: "maps(prod(prod(vectors(nonneg(reals), S), vectors(nonneg(reals), M)), vectors(nonneg(reals), M)), reals)"
+    expression: null
+    shared: false
+
+laws:                            # the component and system behaviors admitted a priori
+  - name: "population evolution under resource competition"
+    symbol: grow_resource
+    variant: resource_explicit
+    signature: [pop]
+    role: evolution
+    expression: "diff(N, t) = N * Fr(N, R)"
+    reading: "each population grows or declines in proportion to its own abundance and its per-capita growth"
+    warrant: posited
+    rests_on: "the consumer-resource form the variant fixes"
+  - name: "population evolution under direct interaction"
+    symbol: grow_direct
+    variant: direct
+    signature: [pop]
+    role: evolution
+    expression: "diff(N, t) = N * Fd(N)"
+    reading: "each population grows or declines in proportion to its own abundance and to a per-capita rate that the other abundances set directly"
+    warrant: posited
+    rests_on: "the direct-interaction form the variant fixes"
+  - name: "resource evolution"
+    symbol: turnover
+    variant: resource_explicit
+    signature: [res]
+    role: evolution
+    expression: "diff(R, t) = G(N, R, rho)"
+    reading: "each resource pool changes under supply, consumption and any cross-feeding"
+    warrant: posited
+    rests_on: "the consumer-resource form the variant fixes"
+  - name: "direct pairwise influence"
+    symbol: pairwise
+    variant: direct
+    signature: [pop, pop]
+    role: admissibility
+    expression: "depends_on(Fd, A)"
+    reading: "one population enters another's growth with no declared intermediary between them, and that absence is what makes the interaction direct rather than resource-mediated"
+    warrant: posited
+    rests_on: "the functional form the variant admits"
+  - name: "higher-order influence"
+    symbol: higher_order
+    variant: direct
+    signature: [pop, pop, pop]
+    role: admissibility
+    expression: "depends_on(Fd, B)"
+    reading: "two populations change the growth of a third together, and the pair carries an effect that neither of them carries alone, so this influence runs along triples"
+    warrant: posited
+    rests_on: "the functional form the variant admits"
+  - name: "resource consumption"
+    symbol: consume
+    variant: resource_explicit
+    signature: [res, pop]
+    role: admissibility
+    expression: "depends_on(G, C)"
+    reading: "a population lowers the pools it draws on, and that edge is the one competition runs along"
+    warrant: posited
+    rests_on: "the functional form the variant admits"
+  - name: "resource production"
+    symbol: produce
+    variant: resource_explicit
+    signature: [res, pop]
+    role: admissibility
+    expression: "depends_on(G, Pr)"
+    reading: "a population raises the pools it produces, and that edge is the one cross-feeding runs along"
+    warrant: posited
+    rests_on: "the functional form the variant admits"
+  - name: "resource-mediated growth"
+    symbol: mediate
+    variant: resource_explicit
+    signature: [pop, res]
+    role: admissibility
+    expression: "depends_on(Fr, C)"
+    reading: "what a pool supports is set by the same coefficients that drain it, so two populations sharing a pool reach each other through it without any direct term"
+    warrant: posited
+    rests_on: "the functional form the variant admits"
+  - name: "mortality dependence of resource-mediated growth"
+    symbol: mortality_resource
+    variant: resource_explicit
+    signature: [pop]
+    role: admissibility
+    expression: "depends_on(Fr, mu)"
+    reading: "the per-capita growth law includes the mortality rate of each population"
+    warrant: posited
+    rests_on: "the functional form the variant admits"
+  - name: "mortality dependence of direct growth"
+    symbol: mortality_direct
+    variant: direct
+    signature: [pop]
+    role: admissibility
+    expression: "depends_on(Fd, mu)"
+    reading: "the direct per-capita growth law includes the mortality rate of each population"
+    warrant: posited
+    rests_on: "the functional form the variant admits"
+  - name: "community size"
+    symbol: size_bound
+    signature: []
+    role: admissibility
+    expression: "S >= 2"
+    reading: "the community holds at least two populations, so coexistence is a question at all"
+    warrant: posited
+    rests_on: "the selection criterion of the class"
+  - name: "nonnegative resource invariance"
+    symbol: pools_nonneg
+    variant: resource_explicit
+    signature: [res]
+    role: admissibility
+    expression: "R = 0 implies diff(R, t) >= 0"
+    reading: "the resource vector field points into the nonnegative region at its boundary"
+    warrant: posited
+    rests_on: "the admitted turnover laws of the resource-explicit variant"
+  - name: "nonnegative state-space invariance"
+    symbol: abundance_nonneg
+    signature: []
+    role: state-constraint
+    expression: "N >= 0"
+    reading: "no population abundance becomes negative because each rate of change contains that abundance as a factor"
+    warrant: derived
+    rests_on: "the growth law and the nonnegative value set of the abundances"
+
+closure: complete                # the selected laws and parameters define each formal member
+
+organization:
+  - name: "direct pairwise coupling"
+    symbol: pairing
+    variant: direct
+    reading: "one population enters another's growth with no declared intermediary between them, and that absence is what makes the coupling direct"
+    relates: "prod(pop, pop)"
+    realized_by: [pairwise]
+  - name: "higher-order coupling"
+    symbol: triplet
+    variant: direct
+    reading: "two populations change the growth of a third together, and the pair carries an effect that neither of them carries alone"
+    relates: "prod(pop, pop, pop)"
+    realized_by: [higher_order]
+  - name: "resource drawdown"
+    symbol: drawdown
+    variant: resource_explicit
+    reading: "a population lowers the pools it draws on, and that edge is the one competition runs along"
+    relates: "prod(pop, res)"
+    realized_by: [consume]
+  - name: "cross-feeding"
+    symbol: feeding
+    variant: resource_explicit
+    reading: "a population raises the pools it produces, and that edge is the one cross-feeding runs along"
+    relates: "prod(pop, res)"
+    realized_by: [produce]
+  - name: "resource-mediated coupling"
+    symbol: mediation
+    variant: resource_explicit
+    reading: "what a pool supports is set by the same coefficients that drain it, so two populations sharing a pool reach each other through it without any direct term"
+    relates: "prod(res, pop)"
+    realized_by: [mediate]
+
+external_systems:
+  - name: "formal resource-supply environment"
+    symbol: supply
+    variant: resource_explicit
+    class: open                  # the environment is individuated by the one vector that rho already declares
+    shares: [rho]
+    constrains: []               # nonnegativity is already the declared value set of rho
+    reading: "the resource inflow is set outside the community, so no population alters what it receives"
+
+maturity:
+  parameters.theta.values: open  # the two variants have different member-specification types
+  external_systems.class: open

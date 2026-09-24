@@ -20,14 +20,14 @@ Every note of this module draws its symbols from the table below. One letter den
 | $S$                        | the target system                                          | [target system](target-system.md)                    |
 | $N$                        | the number of units of a kind in $S$                       | [target system](target-system.md)                    |
 | $P$                        | the phenomenon, which is the explanandum                   | [phenomenon](phenomenon.md)                          |
-| $Y$                        | the explanandum variable that expresses $P$                | [phenomenon](phenomenon.md)                          |
+| $Y$                        | an explanandum variable that expresses $P$                 | [phenomenon](phenomenon.md)                          |
 | $X$                        | the contrast class, whose members are the foils            | [contrast](contrast.md)                              |
 | $D$                        | the domain of conditions held fixed                        | [domain of conditions](domain.md)                    |
 | $T$                        | the epistemic task, $T=\langle A,R,\mu,\lambda,\tau\rangle$ | [epistemic task](epistemic-task.md)                  |
 | $A$                        | the epistemic aim                                          | [epistemic aim](epistemic-aim.md)                    |
 | $R$                        | the requested relation                                     | [requested relation](requested-relation.md)          |
 | $\mu$                      | the modal strength                                         | [modal strength](modal-strength.md)                  |
-| $\lambda$                  | the level of the explanans                                 | [level of the explanans](explanans-level.md)         |
+| $\lambda$                  | the admissible explanans                                 | [admissible explanans](admissible-explanans.md)         |
 | $\tau$                     | the required accuracy                                      | [epistemic task](epistemic-task.md)                  |
 | $Q$                        | the question, $Q=\langle\Sigma,T\rangle$                   | [inquiry specification](inquiry-specification.md)    |
 | $\Gamma$                   | the circumstances under which adequacy is judged           | [virtues](epistemic-pragmatic-virtues.md)            |
@@ -38,10 +38,12 @@ Every note of this module draws its symbols from the table below. One letter den
 | $O$                        | the organization                                           | [answer form](answer-form.md); [mechanism](mechanism.md) |
 | $I$                        | the idealizations of the analysis                          | [answer form](answer-form.md)                        |
 | $E$                        | the explanans                                              | [answer form](answer-form.md)                        |
-| $i$, $k$, $t$              | the indices of parts, of instances, and of time or of a parameter | [phenomenon](phenomenon.md)                          |
+| $i$, $k$, $t$              | the index families of parts, of instances, and of the course, each admitting several indices | [phenomenon](phenomenon.md)                          |
 
 - **A mechanism is written with the symbols of an answer.** A mechanistic answer is an answer, so its components are the constituents $C$, its activities and interaction rules are the laws $L$, and its organization is the organization $O$. The [mechanism](mechanism.md) note therefore declares no private symbols, and the [mapping of a mechanism onto an answer](answer-form.md) states which aspect fills which field, instead of translating one alphabet into another.
 
 - **Subscripted and calligraphic letters stay free of the registry.** A letter that indexes or that names a mathematical object local to one formula does not enter the table: the state space $\mathcal{X}_i$ of a component, its neighborhood $\mathcal{N}_i$, a typed relation $\rho_k$ of an organization. These are read inside the formula that introduces them.
+
+- **The records carry their own symbols, registered nowhere here.** A letter of this table denotes a component of the method, whereas [a symbol declared by an inquiry record](symbols-and-expressions.md) denotes a quantity of one studied system and is unique within that record alone. A target system declaring $L$ for a length therefore collides with no entry above.
 
 - **The registry is a constraint on new notes.** A note that needs a quantity without a symbol adds a row here before using a letter, so that the letter is not already taken elsewhere.
