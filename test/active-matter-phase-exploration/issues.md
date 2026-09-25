@@ -1,7 +1,7 @@
 ---
 tags:
   - examples
-index: "[Active-matter phase exploration](_index.md)"
+index: "[Active-matter phase exploration](test/active-matter-phase-exploration/_index.md)"
 aliases:
   - Active-matter phase exploration issues
 ---

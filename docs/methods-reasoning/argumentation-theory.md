@@ -1,7 +1,7 @@
 ---
 tags:
   - reference
-index: "[Methods for reasoning](_index.md)"
+index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
 aliases:
   - Argumentation theory
 ---

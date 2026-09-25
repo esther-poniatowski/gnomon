@@ -1,7 +1,7 @@
 ---
 tags:
   - examples
-index: "[Earth-system tipping cascades](_index.md)"
+index: "[Earth-system tipping cascades](test/earth-system-tipping-cascades/_index.md)"
 aliases:
   - Climate tipping-cascade test description
 ---

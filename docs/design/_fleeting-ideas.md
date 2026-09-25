@@ -1,7 +1,7 @@
 ---
 tags:
   - ideas
-index: "[Design documentation](_index.md)"
+index: "[Design documentation](docs/design/_index.md)"
 aliases:
   - Fleeting ideas
 ---

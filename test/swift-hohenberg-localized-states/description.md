@@ -1,7 +1,7 @@
 ---
 tags:
   - examples
-index: "[Localized Swift-Hohenberg states](_index.md)"
+index: "[Localized Swift-Hohenberg states](test/swift-hohenberg-localized-states/_index.md)"
 aliases:
   - Swift-Hohenberg description test
 ---

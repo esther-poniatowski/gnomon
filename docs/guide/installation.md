@@ -1,7 +1,7 @@
 ---
 tags:
   - guide
-index: "[User guide](_index.md)"
+index: "[User guide](docs/guide/_index.md)"
 aliases:
   - Installation
 ---

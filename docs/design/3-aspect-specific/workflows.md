@@ -1,7 +1,7 @@
 ---
 tags:
   - aspect
-index: "[Aspect-specific decisions](_index.md)"
+index: "[Aspect-specific decisions](docs/design/3-aspect-specific/_index.md)"
 aliases:
   - Workflows
 ---

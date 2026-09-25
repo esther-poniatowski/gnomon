@@ -1,7 +1,7 @@
 ---
 tags:
   - generated
-index: "[microbial-stable-coexistence](_index.md)"
+index: "[microbial-stable-coexistence](test/microbial-stable-coexistence/_index.md)"
 ---
 # Vocabulary of microbial-stable-coexistence
 

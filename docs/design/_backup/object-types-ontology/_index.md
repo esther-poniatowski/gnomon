@@ -2,7 +2,7 @@
 tags:
   - index
   - backup
-index: "[Superseded design proposals](../_index.md)"
+index: "[Superseded design proposals](docs/design/_backup/_index.md)"
 aliases:
   - Object-kind candidates
 ---

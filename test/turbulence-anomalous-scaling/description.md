@@ -1,7 +1,7 @@
 ---
 tags:
   - examples
-index: "[Turbulence anomalous scaling](_index.md)"
+index: "[Turbulence anomalous scaling](test/turbulence-anomalous-scaling/_index.md)"
 aliases:
   - Turbulence intermittency test description
 ---

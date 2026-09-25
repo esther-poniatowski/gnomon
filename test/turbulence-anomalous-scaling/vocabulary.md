@@ -1,7 +1,7 @@
 ---
 tags:
   - generated
-index: "[turbulence-anomalous-scaling](_index.md)"
+index: "[turbulence-anomalous-scaling](test/turbulence-anomalous-scaling/_index.md)"
 ---
 # Vocabulary of turbulence-anomalous-scaling
 

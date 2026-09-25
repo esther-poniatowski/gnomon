@@ -1,7 +1,7 @@
 ---
 tags:
   - generated
-index: "[data](_index.md)"
+index: "[data](src/gnomon/data/_index.md)"
 ---
 # Vocabulary of data
 

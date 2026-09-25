@@ -1,7 +1,7 @@
 ---
 tags:
   - generated
-index: "[grokking-delayed-generalization](_index.md)"
+index: "[grokking-delayed-generalization](test/grokking-delayed-generalization/_index.md)"
 ---
 # Vocabulary of grokking-delayed-generalization
 

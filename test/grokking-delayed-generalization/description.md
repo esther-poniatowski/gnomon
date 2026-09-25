@@ -1,7 +1,7 @@
 ---
 tags:
   - examples
-index: "[Delayed generalization](_index.md)"
+index: "[Delayed generalization](test/grokking-delayed-generalization/_index.md)"
 aliases:
   - Grokking test description
 ---

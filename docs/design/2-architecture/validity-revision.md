@@ -1,7 +1,7 @@
 ---
 tags:
   - architecture
-index: "[Architectural commitments](_index.md)"
+index: "[Architectural commitments](docs/design/2-architecture/_index.md)"
 aliases:
   - Validity, warrant, and revision
 ---

@@ -81,14 +81,14 @@ Three keys open every note, in this order:
 ---
 tags:
   - criteria
-index: "[Framework-level criteria](_index.md)"
+index: "[Framework-level criteria](docs/design/1-framework/_index.md)"
 aliases:
   - Cost and Ergonomics (criteria)
 ---
 ```
 
 - `tags` names the kind of the note, drawn from the vocabulary below.
-- `index` links the entry point of the folder holding the note, as a relative Markdown link. An `_index.md` points one level up instead, at the index of its parent folder; the documentation root has no parent and omits the key.
+- `index` links the entry point of the folder holding the note, as a Markdown link whose path starts at the repository root. An `_index.md` points one level up instead, at the index of its parent folder; the documentation root has no parent and omits the key.
 - `aliases` fixes the name under which the note is cited. Each alias is unique across `docs/`.
 
 The order is fixed, so that a divergence shows up in a diff.

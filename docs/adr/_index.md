@@ -1,6 +1,7 @@
 ---
 tags:
   - index
+index: "[gnomon documentation](docs/_index.md)"
 aliases:
   - Architecture decisions
 ---

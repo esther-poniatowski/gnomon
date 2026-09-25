@@ -1,7 +1,7 @@
 ---
 tags:
   - backup
-index: "[Rendering proposals](_index.md)"
+index: "[Rendering proposals](docs/design/_backup/rendering/_index.md)"
 aliases:
   - Note types
 ---

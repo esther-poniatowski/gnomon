@@ -2,7 +2,7 @@
 tags:
   - backup
   - object-candidate
-index: "[Object-kind candidates](_index.md)"
+index: "[Object-kind candidates](docs/design/_backup/object-types-ontology/_index.md)"
 aliases:
   - Analogy (object candidate)
 ---

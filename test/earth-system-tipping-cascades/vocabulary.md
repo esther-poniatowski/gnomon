@@ -1,7 +1,7 @@
 ---
 tags:
   - generated
-index: "[earth-system-tipping-cascades](_index.md)"
+index: "[earth-system-tipping-cascades](test/earth-system-tipping-cascades/_index.md)"
 ---
 # Vocabulary of earth-system-tipping-cascades
 

@@ -1,7 +1,7 @@
 ---
 tags:
   - examples
-index: "[Earth-system tipping cascades](_index.md)"
+index: "[Earth-system tipping cascades](test/earth-system-tipping-cascades/_index.md)"
 aliases:
   - Earth-system tipping-cascade issues
 ---

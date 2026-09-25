@@ -1,7 +1,7 @@
 ---
 tags:
   - index
-index: "[Theoretical modeling tests](../_index.md)"
+index: "[Theoretical modeling tests](test/_index.md)"
 aliases:
   - Neural tangent kernel model-knowledge test
 ---

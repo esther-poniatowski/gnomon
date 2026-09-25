@@ -1,7 +1,7 @@
 ---
 tags:
   - generated
-index: "[neural-tangent-kernel-model-knowledge](_index.md)"
+index: "[neural-tangent-kernel-model-knowledge](test/neural-tangent-kernel-model-knowledge/_index.md)"
 ---
 # Vocabulary of neural-tangent-kernel-model-knowledge
 

@@ -2,7 +2,7 @@
 tags:
   - index
   - backup
-index: "[Design documentation](../_index.md)"
+index: "[Design documentation](docs/design/_index.md)"
 aliases:
   - Superseded design proposals
 ---

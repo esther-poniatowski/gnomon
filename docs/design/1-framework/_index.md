@@ -1,7 +1,7 @@
 ---
 tags:
   - index
-index: "[Design documentation](../_index.md)"
+index: "[Design documentation](docs/design/_index.md)"
 aliases:
   - Framework-level criteria
 ---

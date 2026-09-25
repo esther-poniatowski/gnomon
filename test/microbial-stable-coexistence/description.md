@@ -1,7 +1,7 @@
 ---
 tags:
   - examples
-index: "[Stable microbial coexistence](_index.md)"
+index: "[Stable microbial coexistence](test/microbial-stable-coexistence/_index.md)"
 aliases:
   - Microbial coexistence test description
 ---

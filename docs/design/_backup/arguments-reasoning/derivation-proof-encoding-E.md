@@ -1,7 +1,7 @@
 ---
 tags:
   - backup
-index: "[Argument and reasoning proposals](_index.md)"
+index: "[Argument and reasoning proposals](docs/design/_backup/arguments-reasoning/_index.md)"
 aliases:
   - Atomic epistemic acts — variant E
 ---

@@ -1,7 +1,7 @@
 ---
 tags:
   - generated
-index: "[active-matter-phase-exploration](_index.md)"
+index: "[active-matter-phase-exploration](test/active-matter-phase-exploration/_index.md)"
 ---
 # Vocabulary of active-matter-phase-exploration
 

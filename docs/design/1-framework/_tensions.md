@@ -1,7 +1,7 @@
 ---
 tags:
   - tensions
-index: "[Framework-level criteria](_index.md)"
+index: "[Framework-level criteria](docs/design/1-framework/_index.md)"
 aliases:
   - Irreducible tensions
 ---

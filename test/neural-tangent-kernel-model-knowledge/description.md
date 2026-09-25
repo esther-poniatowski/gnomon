@@ -1,7 +1,7 @@
 ---
 tags:
   - examples
-index: "[Neural tangent dynamics](_index.md)"
+index: "[Neural tangent dynamics](test/neural-tangent-kernel-model-knowledge/_index.md)"
 aliases:
   - Neural tangent kernel model-knowledge test description
 ---

@@ -1,7 +1,7 @@
 ---
 tags:
   - reference
-index: "[Methods for taxonomies](_index.md)"
+index: "[Methods for taxonomies](docs/methods-taxonomies/_index.md)"
 aliases:
   - Taxonomic construction principles — variant C
 ---

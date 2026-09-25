@@ -1,7 +1,7 @@
 ---
 tags:
   - tasks
-index: "[gnomon documentation](_index.md)"
+index: "[gnomon documentation](docs/_index.md)"
 aliases:
   - Design TODO
 ---

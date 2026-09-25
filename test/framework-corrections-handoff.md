@@ -1,7 +1,7 @@
 ---
 tags:
   - handoff
-index: "[Theoretical modeling tests](_index.md)"
+index: "[Theoretical modeling tests](test/_index.md)"
 aliases:
   - Framework correction handoff
 ---

@@ -1,7 +1,7 @@
 ---
 tags:
   - reference
-index: "[Methods for taxonomies](_index.md)"
+index: "[Methods for taxonomies](docs/methods-taxonomies/_index.md)"
 aliases:
   - Taxonomic construction principles — variant G
 ---
@@ -147,7 +147,7 @@ This avoids forcing premature equivalence across literatures.
 
 ## 7. Wittgensteinian family resemblance and polythetic classification
 
-Wittgenstein’s later philosophy rejects the assumption that every meaningful category must have one common essence. Some concepts are unified by overlapping similarities rather than necessary and sufficient conditions. The SEP notes that Wittgenstein replaces the search for strict form or essence with similarity of a family-resemblance kind. ([Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/wittgenstein/?utm_source=chatgpt.com "Ludwig Wittgenstein - Stanford Encyclopedia of Philosophy"))
+Wittgenstein’s later philosophy rejects the assumption that every meaningful category must have one common essence. Some concepts are unified by overlapping similarities rather than necessary and sufficient conditions. The SEP notes that Wittgenstein replaces the search for strict form or essence with similarity of a family-resemblance kind. ([Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/wittgenstein/ "Ludwig Wittgenstein - Stanford Encyclopedia of Philosophy"))
 
 **Use for literature synthesis:** some research families should be classified polythetically:
 

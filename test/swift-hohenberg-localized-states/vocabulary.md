@@ -1,7 +1,7 @@
 ---
 tags:
   - generated
-index: "[swift-hohenberg-localized-states](_index.md)"
+index: "[swift-hohenberg-localized-states](test/swift-hohenberg-localized-states/_index.md)"
 ---
 # Vocabulary of swift-hohenberg-localized-states
 
