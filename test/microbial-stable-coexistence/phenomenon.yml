@@ -1,17 +1,13 @@
-# Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
-# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
-# The specifications appear in the order of the method note.
-
 title: "Feasible and dynamically stable coexistence"
-statement: "All microbial populations in a member model can possess an equilibrium with every population abundance positive and return to that equilibrium after sufficiently small state perturbations"
+statement: "The microbial populations of a member model can possess an equilibrium at which every abundance is positive and to which they return after sufficiently small perturbations of the state."
 id: phen.microbial.stable-coexistence
 type: phenomenon
-status: provisional              # provisional | stabilized | retracted
+status: provisional
 target_system: system.microbial-formal-population-models
 
-category: capacity               # particular-event | regularity | capacity | structural-property | open
+category: capacity
 
-explanandum_variables:           # the observables that restate feasibility and local stability separately
+explanandum_variables:           # restate feasibility and local stability separately
   - name: "complete equilibrium state"
     symbol: Xstar
     notation: 'X^{*}'
@@ -19,65 +15,65 @@ explanandum_variables:           # the observables that restate feasibility and 
     values: open
     condition: "equilibrium(theta, Xstar)"
     selects: any
-    reading: "the selected equilibrium contains population abundances alone in a direct-interaction member and contains both abundances and resource concentrations in a resource-explicit member"
-  - name: "equilibrium population abundance"
+    reading: "For a member with direct interactions, the selected equilibrium contains population abundances alone. For a member whose resources are explicit, the equilibrium also contains their concentrations."
+  - name: "abundance of each population at equilibrium"
     symbol: Nstar
     notation: 'N^{*}'
     signature: [pop]
     values: "nonneg(reals)"
     expression: "population_component(theta, Xstar, pop)"
-    reading: "the abundance of each population at the selected complete equilibrium"
-  - name: "community Jacobian at the equilibrium"
+    reading: "The variable holds the abundance of each population at the selected complete equilibrium."
+  - name: "Jacobian of the community at the equilibrium"
     symbol: J
     signature: []
     values: open
     expression: "community_jacobian(theta, Xstar)"
-    reading: "the linearization of every dynamical variable of the member model about the selected equilibrium"
-  - name: "minimum equilibrium population abundance"
+    reading: "The Jacobian linearizes every dynamical variable of the member model about the selected equilibrium."
+  - name: "minimum population abundance at equilibrium"
     symbol: mN
     notation: 'm_N'
     signature: []
     values: reals
     expression: "min_{pop}( Nstar )"
-    reading: "the smallest equilibrium abundance, positive exactly when every population persists"
-  - name: "equilibrium spectral abscissa"
+    reading: "The smallest equilibrium abundance is positive exactly when every population persists."
+  - name: "spectral abscissa at the equilibrium"
     symbol: alpha
     notation: '\alpha'
     signature: []
     values: reals
     expression: "max( re( spectrum(J) ) )"
-    reading: "the largest real part in the spectrum, negative exactly when the equilibrium attracts nearby states"
+    reading: "The largest real part in the spectrum is negative exactly when the equilibrium attracts nearby states."
 
-manifestations:                  # feasibility and local stability are separate conjuncts of coexistence
+manifestations:                  # feasibility and local stability as separate conjuncts of coexistence
   - name: "feasible coexistence equilibrium"
     symbol: feasible
     form: value
     expression: "mN > 0"
-    reading: "every population has positive abundance at the selected equilibrium"
+    reading: "Every population has positive abundance at the selected equilibrium."
     features: []
   - name: "local asymptotic stability of the coexistence equilibrium"
     symbol: stable
     form: value
     expression: "alpha < 0"
-    reading: "every eigenvalue of the complete linearized dynamics has negative real part"
+    reading: "Every eigenvalue of the complete linearized dynamics has negative real part."
     features: []
 
-scope_over_instances:            # the claim ranges over the admitted class rather than a sample of it
+scope_over_instances:            # every member of the admitted class
   - name: "member models of the admitted class"
     symbol: member
     over: [theta]
     source: class-member
     quantification: open
     conditional_on: []
-  - name: "admitted nonnegative resource-supply vectors"
+  - name: "admitted nonnegative vectors of resource supply"
     symbol: supply
     variant: resource_explicit
     over: [rho]
-    source: parameter-draw
+    source: random-parameters
     quantification: open
     conditional_on: []
 
-conditions_and_byproducts:       # the resource supply is a declared source of variation, not a condition of known effect
+conditions_and_byproducts:       # resource supply declared as a source of variation, not a condition of known effect
   precipitating: []
   inhibiting: []
   modulating: []
@@ -91,12 +87,12 @@ detection_criterion:
     variant: resource_explicit
     across: [member, supply]
     expression: "mN > 0"
-    procedure: "solve the complete equilibrium conditions and check that every population abundance is strictly positive"
+    procedure: "Solve the complete equilibrium conditions and check that every population abundance is strictly positive."
   - name: "local stability of the same equilibrium"
     variant: resource_explicit
     across: [member, supply]
     expression: "alpha < 0"
-    procedure: "linearize the complete member-model dynamics at that equilibrium and compute the largest real part of its spectrum"
+    procedure: "Linearize the complete dynamics of the member model at that equilibrium and compute the largest real part of the spectrum."
 
 data:
   - "butler2018: https://www.nature.com/articles/s41467-018-05308-z"

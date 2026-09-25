@@ -11,10 +11,10 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 
 | Symbol | Declared in | Block | Signature | Gloss |
 | --- | --- | --- | --- | --- |
-| `Fi` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | sub, H | censored transition-time distribution |
-| `PZ` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | H | joint law of the marked transition sequence |
+| `Fi` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | sub, H | censored distribution of the transition time |
+| `PZ` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | H | joint law of the marked sequence of transitions |
 | `Tev` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | sub | transition time of a subsystem |
-| `Z` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | — | marked transition sequence |
+| `Z` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | — | marked sequence of transitions |
 | `pi` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | sub, H | probability that a subsystem transitions by the horizon |
 | `H` | phen.earth-tipping-subsystems.transition-sequences | index sets | — | prediction horizon |
 | `overshoot_dependence` | phen.earth-tipping-subsystems.transition-sequences | manifestations | — | dependence of the transition sequence on the warming trajectory |
@@ -24,27 +24,27 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `scenario` | phen.earth-tipping-subsystems.transition-sequences | scope over instances | — | prescribed emission scenario |
 | `struct` | phen.earth-tipping-subsystems.transition-sequences | scope over instances | — | admissible interaction architectures among subsystems |
 | `sub` | system.earth-tipping-subsystems | constituents | — | climate subsystem |
-| `observation` | system.earth-tipping-subsystems | external systems | — | Earth observation and paleoclimate measurement systems |
+| `observation` | system.earth-tipping-subsystems | external systems | — | systems of Earth observation and paleoclimate measurement |
 | `scenario_source` | system.earth-tipping-subsystems | external systems | — | specification of the forcing scenario and Earth-system processes outside the selected subsystems |
 | `t` | system.earth-tipping-subsystems | index sets | — | time |
-| `detect_law` | system.earth-tipping-subsystems | laws | sub | regime and event detection |
-| `evolve` | system.earth-tipping-subsystems | laws | sub | subsystem evolution |
-| `transmit` | system.earth-tipping-subsystems | laws | sub, sub, t | directed subsystem interaction |
-| `coupling` | system.earth-tipping-subsystems | organization | — | directed subsystem coupling |
-| `Aij` | system.earth-tipping-subsystems | parameters | sub, sub | directed interaction architecture |
+| `detect_law` | system.earth-tipping-subsystems | laws | sub | detection of regimes and events |
+| `evolve` | system.earth-tipping-subsystems | laws | sub | evolution of a subsystem |
+| `transmit` | system.earth-tipping-subsystems | laws | sub, sub, t | directed interaction between subsystems |
+| `coupling` | system.earth-tipping-subsystems | organization | — | directed coupling between subsystems |
+| `Aij` | system.earth-tipping-subsystems | parameters | sub, sub | directed architecture of the interactions |
 | `Tend` | system.earth-tipping-subsystems | parameters | — | end of the prescribed scenario |
-| `Theta` | system.earth-tipping-subsystems | parameters | sub | critical forcing threshold |
+| `Theta` | system.earth-tipping-subsystems | parameters | sub | critical threshold of the forcing |
 | `baseline` | system.earth-tipping-subsystems | parameters | sub | baseline regime of a subsystem |
 | `conv` | system.earth-tipping-subsystems | parameters | — | convergence level of the prescribed warming |
-| `detect` | system.earth-tipping-subsystems | parameters | sub | regime and event detection rule |
+| `detect` | system.earth-tipping-subsystems | parameters | sub | rule detecting regimes and events |
 | `emit` | system.earth-tipping-subsystems | parameters | sub, sub | emission law of a transmitted signal |
-| `intern` | system.earth-tipping-subsystems | parameters | sub | internal feedback law of a subsystem |
-| `peak` | system.earth-tipping-subsystems | parameters | — | peak prescribed warming |
-| `s` | system.earth-tipping-subsystems | parameters | sub, sub | directed interaction response law |
-| `tau` | system.earth-tipping-subsystems | parameters | sub | intrinsic transition timescale |
+| `intern` | system.earth-tipping-subsystems | parameters | sub | law of the internal feedback of a subsystem |
+| `peak` | system.earth-tipping-subsystems | parameters | — | peak of the prescribed warming |
+| `s` | system.earth-tipping-subsystems | parameters | sub, sub | law of the response along a directed interaction |
+| `tau` | system.earth-tipping-subsystems | parameters | sub | intrinsic timescale of the transition |
 | `DGMT` | system.earth-tipping-subsystems | variables | t | prescribed trajectory of global mean surface temperature |
-| `eta` | system.earth-tipping-subsystems | variables | sub, t | unresolved internal climate variability |
-| `ind` | system.earth-tipping-subsystems | variables | sub, t | physical indicators of a subsystem state |
+| `eta` | system.earth-tipping-subsystems | variables | sub, t | internal climate variability left unresolved |
+| `ind` | system.earth-tipping-subsystems | variables | sub, t | physical indicators of the state of a subsystem |
 | `r` | system.earth-tipping-subsystems | variables | sub, t | qualitative regime of a subsystem |
 | `rate` | system.earth-tipping-subsystems | variables | t | rate of prescribed warming |
 | `u` | system.earth-tipping-subsystems | variables | sub, sub, t | physical signal transmitted from one subsystem to another: the climatic flux or field specific to that ordered pair |
@@ -56,6 +56,7 @@ The nodes are kinds, not identified members: which tuples are joined is fixed by
 
 | Sources | Edge | Reach | Through | Ordered tuples |
 | --- | --- | --- | --- | --- |
+| `sub` | `model_coupling` | `sub` | — | `subset(prod(sub, sub), Aij)` |
 | `sub` | `coupling` | `sub` | `Aij`, `emit`, `s`, `u` | `subset(prod(sub, sub), Aij)` |
 
 ## Operators

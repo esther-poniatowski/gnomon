@@ -162,7 +162,7 @@ PAIRS = [
         "assessment.yml",
         None,
         "",
-        {**ELSEWHERE_MATURITY, "assesses": "satisfaction-conditions.md", "against": "satisfaction-conditions.md"},
+        {**ELSEWHERE_MATURITY, "answer": "satisfaction-conditions.md", "question": "satisfaction-conditions.md"},
     ),
 ]
 

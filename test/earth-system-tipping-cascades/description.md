@@ -9,7 +9,7 @@ aliases:
 
 ## Research problem
 
-Earth-system tipping elements may interact, so one transition can change the conditions governing another. Under specified warming trajectories, what probability distribution governs transition sequences and their timing? How does temporary temperature overshoot alter that distribution?
+Tipping elements of the Earth system may interact, so one transition can change the conditions that govern another. Under specified warming trajectories, what probability distribution governs transition sequences and their timing? How does temporary temperature overshoot alter that distribution?
 
 ## Formal target
 
@@ -17,15 +17,15 @@ The target is the actual Earth system represented by four coupled subsystems: th
 
 ## Expressivity challenge
 
-The later test must require the framework to:
+The test is built to require the framework to:
 
 - represent a particular empirical target with partial closure and explicit interfaces among subsystems;
-- describe all attributes of a future transition sequence (identity, order, and timing) through an ensemble distribution;
+- describe every attribute of a future transition sequence (identity, order, and timing) through an ensemble distribution;
 - distinguish a forcing trajectory that conditions a prediction from restrictions that delimit the question's domain;
 - request a statistical prediction with separate accuracy requirements for event probabilities and transition times;
-- distinguish sources of predictive spread (physical randomness, parameter uncertainty, and uncertainty about model structure).
+- distinguish sources of predictive spread (physical randomness, imprecisely known parameter values, and an unsettled model structure).
 
-The current [phenomenon record](../../src/gnomon/data/templates/phenomenon.yml) admits repeatable, conditioned scope axes. The case tests whether those axes preserve distinct sources of predictive uncertainty through the requested distribution.
+The phenomenon template admits [scope axes that repeat and that condition the requested distribution](../../src/gnomon/data/templates/phenomenon.yml). The case tests whether those axes keep the distinct sources of predictive uncertainty apart in that distribution.
 
 ## Scope boundary
 
@@ -33,4 +33,4 @@ The case does not assume that every proposed tipping element belongs in one mode
 
 ## Scientific basis
 
-Interactions among tipping elements can alter thresholds and enable cascades ([wunderling2024](https://esd.copernicus.org/articles/15/41/2024/)). Temporary warming overshoots increase tipping-cascade risks in a stylized network model ([wunderling2023](https://www.nature.com/articles/s41558-022-01545-9)).
+Interactions among tipping elements can alter thresholds and enable cascades ([wunderling2024](https://esd.copernicus.org/articles/15/41/2024/)). Temporary warming overshoots increase the risk of tipping cascades in a stylized network model ([wunderling2023](https://www.nature.com/articles/s41558-022-01545-9)).

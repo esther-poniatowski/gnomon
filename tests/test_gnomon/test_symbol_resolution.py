@@ -594,7 +594,7 @@ def test_an_unbounded_explanans_with_no_declaration_is_reported() -> None:
 
 def test_a_question_asking_for_a_link_needs_the_mapping() -> None:
     """Neither description answers how a role is realized, so the answer states the mapping."""
-    question = {"task": {"admissible_explanans": {"substrate": "link"}}}
+    question = {"task": {"admissible_explanans": {"substrate": "mapping"}}}
     assert unrealized_link(question, {}) == [
         "the question asks for a link, and the answer maps no quantity onto its realization"
     ]

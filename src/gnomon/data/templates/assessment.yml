@@ -1,15 +1,15 @@
-# Method: docs/epistemology/satisfaction-conditions.md. One file per candidate answer assessed.
-# Replace every UPPERCASE placeholder. A test whose specification is empty in the question
-# takes the verdict not-applicable. The appraisal is filled for one answer at a time, and it
-# names another candidate only when one exists.
+# method: `docs/epistemology/satisfaction-conditions.md`; one file per assessed candidate answer
+# replace every UPPERCASE placeholder
+# give `not-applicable` to a test whose specification is empty in the question
+# fill the appraisal for one answer at a time; name another candidate only when one exists
 
 title: "SHORT NAME OF THE ASSESSMENT"
 id: assess.TOPIC.NAME
 type: assessment
 status: provisional              # provisional | stabilized | retracted
-assesses: ans.TOPIC.NAME
+answer: ans.TOPIC.NAME
 
-against: quest.TOPIC.NAME
+question: quest.TOPIC.NAME
 
 tests:                           # verdict: pending | pass | fail | not-applicable
   admissibility:
@@ -30,14 +30,14 @@ tests:                           # verdict: pending | pass | fail | not-applicab
     robustness: {verdict: pending, evidence: ""}
     selection: {verdict: pending, evidence: ""}
 
-obligations:                     # one entry per proof obligation the question states, in its order
+obligations:                     # one entry per proof obligation of the question, in the same order
   - verdict: pending             # pending | pass | fail | not-applicable
     evidence: "THE DERIVATION OR THE COUNTEREXAMPLE THAT SETTLES THE IMPLICATION"
 
-appraisal:                       # one entry per virtue the question marks preferred; a constitutive one is settled by the product test instead
+appraisal:                       # one entry per `preferred` virtue of the question; the product test already settles each `constitutive` virtue
   - virtue:                      # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability
-    assessment: "WHAT THE OPERATIONAL QUESTION OF THAT VIRTUE RETURNS FOR THIS ANSWER"
-    preferred_over: "THE CANDIDATES THAT THIS ONE BEATS ON THAT VIRTUE, when others have been assessed"
+    assessment: "THE RESULT OF THE OPERATIONAL QUESTION OF THAT VIRTUE FOR THIS ANSWER"
+    preferred_over: "THE CANDIDATES THAT THIS ANSWER OUTRANKS ON THAT VIRTUE"   # fill when other candidates have been assessed
 
-maturity:                        # optional, per specification: open | provisional | stabilized; one left out inherits the status of the record
+maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
   FIELD.PATH: open

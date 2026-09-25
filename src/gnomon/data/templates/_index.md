@@ -1,23 +1,26 @@
 # Inquiry specification templates
 
-Templates that a research project copies and fills to specify an inquiry, following the method of `docs/epistemology/inquiry-specification.md`. One target system serves several phenomena, and one phenomenon serves several questions, so each is a separate object that the next one references by its identifier.
+These templates specify an inquiry: a research project copies and fills them, following the method of `docs/epistemology/inquiry-specification.md`. Each object of the inquiry takes a separate file, because one target system can support several phenomena, and each phenomenon can be the subject of more than one question. A file therefore references each object that it depends on by its identifier.
 
-Filling order:
+The templates are filled in this order:
 
-1. `target-system.yml` — the system studied: its reference class, constituents, state variables, parameters, laws with their closure, interface and external systems, once per system.
-2. `phenomenon.yml` — the behavior of that system that questions concern, once per phenomenon.
-3. `question.yml` — one research question: its subject, contrast, domain, epistemic task, required accuracy and selected virtues, filled before any candidate answer is evaluated.
-4. `answer.yml` — one candidate answer: its constituents, terms, laws, organization, idealizations and explanans, once per candidate.
-5. `assessment.yml` — the verdict and the evidence of each test of `docs/epistemology/satisfaction-conditions.md`, and the assessment of the answer on each selected virtue, once per candidate assessed. It is kept apart from the answer, so that a candidate can be restated without touching its assessment.
+1. `target-system.yml`, once per system studied: to declare the system that every later record refers to.
+2. `phenomenon.yml`, once per phenomenon: to state the behavior of that system that questions address.
+3. `question.yml`, once per research question: to fix the question before any candidate answer is evaluated.
+4. `answer.yml`, once per candidate: to state one proposed answer in the terms that the question has fixed.
+5. `assessment.yml`, once per candidate assessed: to record whether the candidate passes the tests of the question. The assessment stays apart from the answer, so that a candidate can be restated without altering its verdicts.
 
-Beside them, `operators.yml` holds the operators the records of one problem use beyond the canonical set. It is not a step of the order above: it opens when the first formula needs an operator of its own, and every record of the problem reads it.
+One template stands outside this order: `operators.yml`, filled once per problem as soon as a formula requires an operator beyond the canonical set. It declares every such operator that the records of the problem need.
 
-Format:
+Each template follows eight conventions of format:
 
-- each file is pure YAML, so that a slot owning dependent fields carries them as nested keys instead of splitting one slot between a structured field and a prose block;
-- closed option lists sit in a comment beside their field, so that a schema can check them, and every closed field accepts `open`;
-- free text sits in the value of its own field, written in UPPERCASE as a placeholder, with formulas allowed;
-- the slots follow the order of the method note that defines them, and each row of that note names its key, so that the two can be compared mechanically;
-- within one entry the keys run from what the entry is called to what it is built from: its name, then its symbol and notation, then its type, then its construction, then the prose field rendering that construction in words.
+- each file is pure YAML, so that a slot carries its dependent fields as nested keys;
+- each closed field lists its options in lowercase, first in the comment of its line, so that a schema can check them, and accepts `open` as well;
+- each field that holds prose starts as a placeholder consisting only of an UPPERCASE description of the expected content, and the text replacing it may contain formulas;
+- the guidance for filling a field stands in the comment of its line, as terse lowercase instructions that never restate the key: "optional", "omit when the target declares the quantity";
+- each value that holds prose consists of complete sentences, with an initial capital and a final period;
+- each filled `name` value is a short lowercase label without a final period, capitalized only for a proper noun;
+- the slots follow the rows of their method note, and each row names the key of its slot, so that a template can be checked mechanically against its note;
+- within one entry, the keys run from designation to construction: name, symbol and notation, type, defining expression, then a prose field stating it in words.
 
-This format departs from `docs/design/2-architecture/data-formats.md`, which rejects YAML-only sources for framework notes carrying prose, proofs and rendered math. These files carry records rather than notes, so that objection does not reach them; the architecture note has yet to record the distinction.
+Pure YAML departs from the format rule of `docs/design/2-architecture/data-formats.md`. That rule excludes sources written only in YAML for any framework note carrying prose, proofs and rendered math. The rule does not reach the templates: they hold records, not notes. The architecture note, however, does not yet state this distinction between records and notes.

@@ -1,7 +1,7 @@
-# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
-# The operator below types finite samples as subsets of the declared example space.
+# types finite samples and the quantities the candidate answer defines on learned representations
+# open carriers: the target leaves the type of its heterogeneous architecture unresolved
 
-title: "Operators of the delayed-generalization inquiry"
+title: "Operators of the inquiry into delayed generalization"
 id: ops.delayed-generalization-networks
 type: operators
 status: provisional
@@ -14,6 +14,22 @@ operators:
     for_any: [S]
     signature: [S]
     values: open
+  - name: "the learned representation extracted from a parameter trajectory"
+    symbol: representation
+    signature: [open]
+    values: open
+  - name: "the fraction of the relations consistent with the task that are realized by a learned representation"
+    symbol: representation_quality
+    signature: [open]
+    values: "interval(0, 1)"
+  - name: "the effective loss on a learned representation"
+    symbol: effective_loss
+    signature: [open]
+    values: reals
 
 maturity:
   operators.powerset.values: open
+  operators.representation.signature: open
+  operators.representation.values: open
+  operators.representation_quality.signature: open
+  operators.effective_loss.signature: open

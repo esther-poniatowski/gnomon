@@ -1,109 +1,106 @@
-# Method: docs/epistemology/answer-form.md. One file per candidate answer.
-# A proposed answer is a model, and a model is a system: its constituents, its indices, its
-# variables, its parameters and its laws are declared as a target system declares them, and a
-# quantity the target already declares is referenced rather than restated. What belongs to the
-# answer alone is the warrant of each law, the idealizations its analysis introduced, and the
-# factors it relies on. The verdicts of the tests are recorded apart, in an assessment file.
+# method: `docs/epistemology/answer-form.md`; one file per candidate answer
+# declare the model's constituents, indices, variables, parameters and laws in target-system form; only reference a quantity the target already declares
+# answer-only elements: the warrant of each law, the idealizations, the explanans factors
+# record test verdicts in an assessment file
 
 title: "SHORT NAME OF THE CANDIDATE ANSWER"
-statement: "THE ANSWER IN WORDS" # a reading of the elements below; `gnomon render` composes the same answer from them
+statement: "THE ANSWER IN WORDS" # restate the specifications from which `gnomon render` composes the same answer
 id: ans.TOPIC.NAME
 type: answer
 status: preliminary              # preliminary | hypothesized | informally-backed | formally-proven | accepted | retracted
 answers: quest.TOPIC.NAME
-variant: SYMBOL                  # the variant of the target this answer accounts for; omitted when it accounts for every member of the class
+variant: SYMBOL                  # symbol of the target variant this answer accounts for; omit when the answer covers every member of the class
 
-constituents:                    # C: the units the answer treats as bearers, declared as a target system declares them
-  - reference: system.TOPIC#SYMBOL   # when the answer treats a unit the target already declares, the keys below are omitted
+constituents:                    # C: units treated as bearers, in target-system form
+  - reference: system.TOPIC#SYMBOL   # for a unit the target already declares, give only this reference
     name: "KIND OF UNIT"
     symbol: SYMBOL
-    notation: 'LATEX FORM, when it differs from the symbol itself'
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
+    notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
 
-index_sets:                      # the sets the answer's own quantities are indexed by, beyond those the target declares
+index_sets:                      # only sets beyond those the target declares, indexing quantities the answer introduces
   - name: "NAME OF THE SET"
     symbol: SYMBOL
-    notation: 'LATEX FORM, when it differs from the symbol itself'
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
+    notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
     structure:                   # continuum | discrete-set | interval
 
-variables:                       # V, in part: what varies in the proposed model
-  - reference: system.TOPIC#SYMBOL   # when the answer uses a quantity the target already declares, the keys below are omitted
+variables:                       # part of V: quantities that vary in the model
+  - reference: system.TOPIC#SYMBOL   # for a quantity the target already declares, give only this reference
     name: "NAME OF THE VARIABLE"
     symbol: SYMBOL
-    notation: 'LATEX FORM, when it differs from the symbol itself'
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
-    determined:                  # within (its value is fixed inside the model) | outside (set beyond it, and varying all the same)
-    signature: [SYMBOL]          # one entry per place: a constituent kind or an index set; empty for the model as a whole
+    notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
+    determined:                  # within (its value is fixed inside the model) | outside (its value varies but is set beyond the model)
+    signature: [SYMBOL]          # one constituent kind or index set per place; empty for the model as a whole
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    expression: "EXPRESSION OVER DECLARED SYMBOLS, for a quantity another builds"
-    condition: "EXPRESSION THE QUANTITY SATISFIES, for a quantity no map builds"
-    selects:                     # unique | any | all, required with a condition
-    reading: "WHAT THE EXPRESSION ENCODES, in words"
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give when a map builds the quantity from declared symbols
+    condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
+    selects:                     # unique | any | all; required with a condition
+    reading: "THE EXPRESSION IN WORDS"
     shared: false                # true when one value holds for every tuple of the signature
 
-parameters:                      # V, in part: what the proposed model holds fixed
-  - reference: system.TOPIC#SYMBOL   # when the answer uses a quantity the target already declares, the keys below are omitted
+parameters:                      # part of V: quantities the model holds fixed
+  - reference: system.TOPIC#SYMBOL   # for a quantity the target already declares, give only this reference
     name: "NAME OF THE PARAMETER"
     symbol: SYMBOL
-    notation: 'LATEX FORM, when it differs from the symbol itself'
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
+    notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
     signature: [SYMBOL]
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    expression: "EXPRESSION OVER DECLARED SYMBOLS, for a derived parameter"
-    condition: "EXPRESSION THE QUANTITY SATISFIES, for a quantity no map builds"
-    selects:                     # unique | any | all, required with a condition
-    reading: "WHAT THE EXPRESSION ENCODES, in words"
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived parameter
+    condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
+    selects:                     # unique | any | all; required with a condition
+    reading: "THE EXPRESSION IN WORDS"
     shared: false                # true when one value holds for every tuple of the signature
 
-laws:                            # L: the dependences that link the quantities to the explanandum variables
+laws:                            # L: dependences linking the quantities to the explanandum variables
   - name: "NAME OF THE LAW"
     symbol: SYMBOL
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
-    signature: [SYMBOL]          # the places the claim ranges over; empty for a claim about the model as a whole
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
+    signature: [SYMBOL]          # places the claim ranges over; empty for a claim about the model as a whole
     role:                        # evolution | input-output | measurement | state-constraint | distribution | admissibility
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
-    reading: "WHAT THE LAW STATES, in words"
+    reading: "THE LAW IN WORDS"
     warrant:                     # derived (from the laws of the system) | derived-in-a-limit | posited | fitted | measured
-    rests_on: "THE LAWS, THE IDEALIZATION OR THE DATA THE WARRANT REFERS TO"
+    rests_on: "THE LAWS, THE IDEALIZATION OR THE DATA THAT THE WARRANT REFERS TO"
 
-organization:                    # O: the relations among the parts and the laws whose arrangement produces the behavior
+organization:                    # O: relations among parts and laws whose arrangement produces the behavior
   - name: "NAME OF THE RELATION"
     symbol: SYMBOL
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
-    reading: "WHAT THE ARRANGEMENT IS, beyond what the relation and the laws state"
-    relates: "prod(SOURCE, REACH), or subset(prod(SOURCE, REACH), ADJACENCY)"   # when the ends are parts: the tuples it runs along, the reach last
-    among: [SYMBOL]              # when the ends are laws: the laws it orders, the reach last; exactly one of relates and among
-    realized_by: [SYMBOL]        # the laws that state a relation among parts; what carries it is read from their expressions
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
+    reading: "THE ARRANGEMENT IN WORDS"   # only content beyond the relation and the laws
+    relates: "prod(SOURCE, REACH), or subset(prod(SOURCE, REACH), ADJACENCY)"   # for a relation among parts: the connected tuples, reach last
+    among: [SYMBOL]              # for a relation among laws: the laws, reach last; fill exactly one of `relates` and `among`
+    realized_by: [SYMBOL]        # laws stating a relation among parts; the parts are read from their expressions
 
-
-realizations:                    # when the question asks for a link: how each substrate-independent quantity or law is realized by the substrate-specific ones, both descriptions being declared in the blocks above
+realizations:                    # fill when the question asks for a link: how substrate-specific quantities and laws realize each substrate-independent one; declare both as quantities and laws of this answer
   - name: "NAME OF THE MAPPING"
     symbol: SYMBOL
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
-    reading: "WHAT THE MAPPING PRESERVES, beyond what the expression states"
-    realizes: SYMBOL             # the substrate-independent quantity or law
-    by: "EXPRESSION OVER THE SUBSTRATE-SPECIFIC SYMBOLS that realizes it"
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
+    reading: "THE STRUCTURE THAT THE MAPPING PRESERVES"   # only content beyond the expression of `by`
+    realizes: SYMBOL             # a substrate-independent quantity or law
+    by: "EXPRESSION OVER THE SYMBOLS SPECIFIC TO THE SUBSTRATE"   # realizes the quantity or law named in `realizes`
 
-idealizations:                   # I: the distortions that the analysis introduces
+idealizations:                   # I: distortions the analysis introduces
   - assumption: "ASSUMPTION OF THE ANALYSIS"
     motive:                      # tractability (the undistorted system resists analysis) | isolation (it removes a factor judged irrelevant) | limit (it exposes the behavior of a limit system)
-    buys: "WHAT THE ANSWER GAINS BY IT: the derivation it makes possible, or the factor it exposes"
-    holds_for: "RANGE OVER WHICH IT HOLDS"
+    buys: "THE GAIN FOR THE ANSWER"   # a derivation the idealization makes possible, or a factor it exposes
+    holds_for: "RANGE OVER WHICH THE ASSUMPTION HOLDS"
 
-explanans:                       # E: the load-bearing factors the answer relies on to produce the phenomenon
+explanans:                       # E: factors the answer needs to produce the phenomenon
   - name: "NAME OF THE FACTOR"
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
     factor:                      # condition (on a quantity) | structural-property (of a structure, such as sparsity or low rank) | law-property (of a law, such as invariance, additivity or factorization) | organization (of the arrangement, such as a feedback loop or a modular composition)
-    holds: "EXPRESSION OVER DECLARED SYMBOLS, what the factor asserts; `open` where the answer has not yet formalized it, with a caveat saying so"
-    bears_on: [SYMBOL]           # what the factor is a property of, or a condition on: one entry per element, and several where it is a property of a family
-    through: [SYMBOL]            # the laws and relations that carry its effect from what it bears on to the explanandum
-    produces: SYMBOL             # the explanandum variable or the manifestation it accounts for
-    separates: [SYMBOL]          # the foils of the question's contrast that this factor rules out, by the symbols the foil set gives them; empty where the contrast has no locus
-    appeals_to: [SYMBOL]         # the external systems of the target that the factor draws on, by the symbols the target gives them; empty when the factor draws on the target alone
-    procedure: "HOW THE FACTOR PRODUCES WHAT IT PRODUCES, beyond what the chain above states"
+    holds: "EXPRESSION OVER DECLARED SYMBOLS THAT STATES THE CLAIM OF THE FACTOR"   # `open` while the claim is unformalized, with a caveat naming the gap
+    bears_on: [SYMBOL]           # elements the factor applies to as a property or condition; one entry per element, so a family spans several entries
+    through: [SYMBOL]            # laws and relations carrying the effect from `bears_on` to the explanandum
+    produces: SYMBOL             # explanandum variable or manifestation the factor accounts for
+    separates: [SYMBOL]          # foils ruled out, by their symbols in the foil set; empty where the contrast has no locus
+    appeals_to: [SYMBOL]         # external systems of the target drawn on, by declared symbol; empty when none
+    procedure: "HOW THE FACTOR PRODUCES ITS EFFECT"   # only content beyond the chain `bears_on`, `through`, `produces`
 
-maturity:                        # optional, per specification: open | provisional | stabilized; one left out inherits the status of the record
+maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
   FIELD.PATH: open

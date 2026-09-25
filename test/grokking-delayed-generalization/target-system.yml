@@ -1,22 +1,18 @@
-# Method: docs/epistemology/target-system.md. One file per target system.
-# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
-# The specifications appear in the order of the method note.
-
-title: "Finite neural-network training systems"
+title: "Finite neural networks and their training"
 id: system.delayed_generalization_networks
 type: target-system
-status: provisional              # provisional | stabilized | retracted
-target_type: no-external-target  # particular | class-actual | class-possible | hypothetical | no-external-target | open
+status: provisional
+target_type: no-external-target
 
-reference_class:                 # a name only: the specifications below generate the class, so they are not restated here
-  name: "finite neural-network training systems"
-  selection_criteria: []         # membership is not conditioned on an outcome; the overparameterization the inquiry needs is a restriction of its domain
+reference_class:
+  name: "systems that train finite neural networks"
+  selection_criteria: []         # membership not conditioned on an outcome; the inquiry restricts the domain to overparameterized networks instead
 
 constituents:
   - name: "computational unit"
     symbol: unit
     extent: "range(Nu)"
-  - name: "trainable parameter coordinate"
+  - name: "coordinate of the trainable parameters"
     symbol: coord
     extent: "range(P)"
 
@@ -34,8 +30,8 @@ index_sets:
     extent: test_set
     structure: discrete-set
 
-variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate ones determined within
-  - name: "network parameter coordinate"
+variables:
+  - name: "coordinate of the network parameters"
     symbol: theta
     notation: '\theta'
     determined: within
@@ -43,19 +39,19 @@ variables:                       # quantities that vary while the phenomenon unf
     values: reals
     expression: null
     shared: false
-  - name: "optimizer auxiliary state, of the finite dimension the selected optimizer fixes"
+  - name: "auxiliary state of the optimizer, of the finite dimension that the selected optimizer fixes"
     symbol: z
     determined: within
     signature: [step]
     values: open
     expression: null
     shared: false
-  - name: "network prediction, in the prediction space of the task readout"
+  - name: "prediction of the network, in the prediction space of the task readout"
     symbol: pred
     determined: within
     signature: [step]
     values: "maps(data, reals)"
-    expression: null             # the law below states it, and a law can be false of the system
+    expression: null             # the forward law states the prediction, and that law can be false of the system
     shared: false
   - name: "training loss"
     symbol: Ltrain
@@ -64,7 +60,7 @@ variables:                       # quantities that vary while the phenomenon unf
     signature: [step]
     values: "nonneg(reals)"
     expression: "mean_{train}( ell(pred(train), train) )"
-    reading: "the average task loss over the training sample at the current parameters"
+    reading: "The variable averages the task loss over the training sample at the current parameters."
     shared: false
   - name: "test loss"
     symbol: Ltest
@@ -73,16 +69,16 @@ variables:                       # quantities that vary while the phenomenon unf
     signature: [step]
     values: "nonneg(reals)"
     expression: "mean_{test}( ell(pred(test), test) )"
-    reading: "the average task loss over the held-out sample at the current parameters"
+    reading: "The variable averages the task loss over the held-out sample at the current parameters."
     shared: false
 
-parameters:                      # quantities held fixed while the phenomenon unfolds
+parameters:
   - name: "number of computational units"
     symbol: Nu
     signature: []
     values: "pos(ints)"
     expression: null
-  - name: "number of trainable parameter coordinates"
+  - name: "number of coordinates of the trainable parameters"
     symbol: P
     signature: []
     values: "pos(ints)"
@@ -92,12 +88,12 @@ parameters:                      # quantities held fixed while the phenomenon un
     signature: []
     values: open
     expression: null
-  - name: "architecture specification: a finite computation graph with activation functions and a task readout"
+  - name: "specification of the architecture: a finite computation graph with activation functions and a task readout"
     symbol: Arch
     signature: []
     values: open
     expression: null
-  - name: "gradient-based optimizer specification with its hyperparameters"
+  - name: "specification of the gradient-based optimizer with its hyperparameters"
     symbol: opt
     signature: []
     values: open
@@ -129,7 +125,7 @@ parameters:                      # quantities held fixed while the phenomenon un
     signature: []
     values: open
     expression: null
-  - name: "near-zero training-loss threshold"
+  - name: "near-zero threshold on the training loss"
     symbol: eps_fit
     notation: '\varepsilon_{\text{fit}}'
     signature: []
@@ -159,71 +155,71 @@ parameters:                      # quantities held fixed while the phenomenon un
     signature: []
     values: "powerset(data)"
     expression: null
-  - name: "optimizer auxiliary-state update rule"
+  - name: "update rule for the auxiliary state of the optimizer"
     symbol: opt_state
     signature: []
     values: open
     expression: null
-  - name: "initial optimizer auxiliary state"
+  - name: "initial auxiliary state of the optimizer"
     symbol: z0
     signature: []
     values: open
     expression: null
 
-laws:                            # the behaviors of the components or of the system that are admitted a priori
+laws:
   - name: "forward computation"
     symbol: forward
     signature: []
     role: input-output
     expression: "pred = Arch(theta, data)"
-    reading: "the architecture maps the current parameters and the inputs to predictions"
+    reading: "The architecture maps the current parameters and the inputs to predictions."
     warrant: posited
-    rests_on: "the architecture the class fixes"
+    rests_on: "The class fixes the architecture."
   - name: "initialization draw"
     symbol: init_draw
     signature: []
     role: distribution
     expression: "drawn_from(theta0, p0)"
-    reading: "the full initial parameter vector is sampled from the declared initialization law"
+    reading: "The full parameter vector at step zero is sampled from the declared initialization law."
     warrant: posited
-    rests_on: "the initialization scheme the class fixes"
-  - name: "initial parameter state"
+    rests_on: "The class fixes the initialization scheme."
+  - name: "initial state of the parameters"
     symbol: initial_state
     signature: [coord]
     role: state-constraint
     expression: "theta(coord, 0) = theta0"
-    reading: "the training trajectory begins at the sampled initial parameter vector"
+    reading: "The training trajectory begins at the sampled initial parameter vector."
     warrant: posited
-    rests_on: "the initialization draw"
+    rests_on: "The law follows from the initialization draw."
   - name: "gradient-based update"
     symbol: update
     signature: [coord]
     role: evolution
     expression: "diff(theta, step) = opt(grad(Ltrain), z)"
-    reading: "the optimizer moves the parameters along the training-loss gradient, carrying its own state"
+    reading: "The optimizer moves the parameters along the gradient of the training loss, using its own auxiliary state."
     warrant: posited
-    rests_on: "the optimizer the class fixes"
-  - name: "optimizer-state update"
+    rests_on: "The class fixes the optimizer."
+  - name: "update of the optimizer state"
     symbol: update_state
     signature: []
     role: evolution
     expression: "diff(z, step) = opt_state(grad(Ltrain), z)"
-    reading: "the optimizer updates its auxiliary state together with the trainable parameters"
+    reading: "The optimizer updates its auxiliary state together with the trainable parameters."
     warrant: posited
-    rests_on: "the optimizer the class fixes"
-  - name: "initial optimizer state"
+    rests_on: "The class fixes the optimizer."
+  - name: "initial state of the optimizer"
     symbol: initial_optimizer_state
     signature: []
     role: state-constraint
     expression: "z(0) = z0"
-    reading: "the auxiliary optimizer state begins at the value fixed by the optimizer specification"
+    reading: "The auxiliary state begins at the value fixed by the optimizer specification."
     warrant: posited
-    rests_on: "the optimizer the class fixes"
+    rests_on: "The class fixes the optimizer."
 
-closure: complete                # complete (formal target: the laws define the system) | partial (empirical target) | open
+closure: complete
 
 external_systems:
-  - name: "task data-generating process"
+  - name: "process that generates the task data"
     symbol: source
     class: "subset(measures(data), algorithmic)"
     shares: [data, train_set, test_set]
@@ -232,8 +228,8 @@ external_systems:
         signature: []
         role: admissibility
         expression: "intersect(train_set, test_set) = empty()"
-        reading: "no example scored for generalization was available to the fit, so the two losses are different measurements rather than one taken twice"
-    reading: "the task distribution supplies the two disjoint samples, so the test loss is measured on data the fit never saw"
+        reading: "No example scored for generalization was available to the fit, so the two losses are different measurements."
+    reading: "The task distribution supplies the two disjoint samples."
 
 maturity:
   variables.z.values: open

@@ -9,11 +9,11 @@ aliases:
 
 ## Research problem
 
-Microbial communities can contain more persistent populations than simple competitive-exclusion arguments predict. Which constraints on interactions mediated by resources or involving higher orders are necessary or sufficient for feasible, dynamically stable coexistence? Which constraints continue to hold as resource supplies vary?
+Microbial communities can contain more persistent populations than simple arguments from competitive exclusion predict. Which constraints on interactions, whether mediated by resources or of higher order, are necessary or sufficient for feasible, dynamically stable coexistence? Which constraints continue to hold as resource supplies vary?
 
 ## Formal target
 
-The target is a class of formal population models with explicit ecological components (consumer populations, resource concentrations, and interaction laws). Positive equilibrium abundances characterize feasibility. Recovery after a perturbation characterizes stability. Competitive exclusion and dynamically unstable coexistence supply distinct foils.
+The target is a class of formal models with explicit ecological components (consumer populations, resource concentrations, and interaction laws). Positive equilibrium abundances characterize feasibility. Recovery after a perturbation characterizes stability. The question contrasts this coexistence with two distinct foils: competitive exclusion and dynamically unstable coexistence.
 
 ## Expressivity challenge
 
@@ -31,4 +31,4 @@ The case does not assume that pairwise competition or one resource geometry supp
 
 ## Scientific basis
 
-When microbes consume but do not produce resources, every positive equilibrium is locally stable in one model that represents resources explicitly ([butler2018](https://www.nature.com/articles/s41467-018-05308-z)). Correlations between pairwise and higher-order interactions can support robust coexistence ([gibbs2024](https://onlinelibrary.wiley.com/doi/10.1111/ele.14458)).
+In one explicit consumer-resource model, every positive equilibrium is locally stable when microbes consume but do not produce the resources ([butler2018](https://www.nature.com/articles/s41467-018-05308-z)). Correlations between pairwise and higher-order interactions can support robust coexistence ([gibbs2024](https://onlinelibrary.wiley.com/doi/10.1111/ele.14458)).

@@ -13,16 +13,16 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | --- | --- | --- | --- | --- |
 | `Uloc` | phen.swift-hohenberg.localized-states | explanandum variables | r, b | set of localized stationary profiles |
 | `localized_states_exist` | phen.swift-hohenberg.localized-states | manifestations | — | existence of localized stationary states |
-| `stability` | phen.swift-hohenberg.localized-states | manifestations.features | — | linear-stability intervals along the branches |
-| `symmetry` | phen.swift-hohenberg.localized-states | manifestations.features | — | profile symmetry classes |
-| `topology` | phen.swift-hohenberg.localized-states | manifestations.features | — | solution-branch topology |
+| `stability` | phen.swift-hohenberg.localized-states | manifestations.features | — | intervals of linear stability along the branches |
+| `symmetry` | phen.swift-hohenberg.localized-states | manifestations.features | — | symmetry classes of the profiles |
+| `topology` | phen.swift-hohenberg.localized-states | manifestations.features | — | topology of the solution branches |
 | `t` | system.swift-hohenberg-localized-states | index sets | — | time |
 | `x` | system.swift-hohenberg-localized-states | index sets | — | spatial position |
-| `evolve` | system.swift-hohenberg-localized-states | laws | x | quadratic-cubic Swift-Hohenberg evolution |
-| `localized` | system.swift-hohenberg-localized-states | laws | — | localized far-field boundary condition |
-| `b` | system.swift-hohenberg-localized-states | parameters | — | quadratic nonlinear coefficient |
-| `r` | system.swift-hohenberg-localized-states | parameters | — | linear control coefficient |
-| `u` | system.swift-hohenberg-localized-states | variables | x, t | pattern-amplitude field |
+| `evolve` | system.swift-hohenberg-localized-states | laws | x | Swift-Hohenberg evolution with quadratic and cubic nonlinearities |
+| `localized` | system.swift-hohenberg-localized-states | laws | — | localized boundary condition in the far field |
+| `b` | system.swift-hohenberg-localized-states | parameters | — | coefficient of the quadratic nonlinearity |
+| `r` | system.swift-hohenberg-localized-states | parameters | — | control coefficient of the linear term |
+| `u` | system.swift-hohenberg-localized-states | variables | x, t | amplitude field of the pattern |
 
 ## Operators
 

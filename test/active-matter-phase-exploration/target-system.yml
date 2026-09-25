@@ -1,24 +1,20 @@
-# Method: docs/epistemology/target-system.md. One file per target system.
-# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
-# The specifications appear in the order of the method note.
-
-title: "Spatially extended two-species nonreciprocal stochastic systems"
+title: "Spatially extended stochastic systems of two species with nonreciprocal couplings"
 id: system.nonreciprocal-active-matter
 type: target-system
-status: provisional              # provisional | stabilized | retracted
-target_type: no-external-target  # particular | class-actual | class-possible | hypothetical | no-external-target | open
+status: provisional
+target_type: no-external-target
 
-reference_class:                 # a name only: the specifications below generate the class, so they are not restated here
-  name: "spatially extended two-species stochastic models with nonreciprocal cross-couplings"
-  selection_criteria: []         # only when the specifications below do not fix membership
+reference_class:
+  name: "spatially extended stochastic models of two species with nonreciprocal cross-couplings"
+  selection_criteria: []
 
-variants:                        # the class covers a continuum field and a lattice realization, whose position indices differ
+variants:                        # continuum field and lattice realization; the two differ in their position index
   - name: "continuum field"
     symbol: continuum
-    differentiation: "position runs over a region of space, so the state is a field and the dynamics is a stochastic partial differential equation"
+    differentiation: "Position runs over a region of space, so the state is a field and the dynamics is a stochastic partial differential equation."
   - name: "lattice realization"
     symbol: lattice
-    differentiation: "position runs over the sites of a lattice, so the state is one variable per site"
+    differentiation: "Position runs over the sites of a lattice, so the state is one variable per site."
 
 constituents:
   - name: "species field"
@@ -41,14 +37,14 @@ index_sets:
     extent: "interval(reals)"
     structure: interval
 
-variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate ones determined within
+variables:
   - name: "local state of a species field"
     symbol: u
     variant: continuum
     determined: within
     signature: [sp, x, t]
     values: "U(sp)"
-    expression: null             # a declared local state variable, not an aggregate
+    expression: null             # u declared directly, so no aggregate expression
     shared: false
   - name: "stochastic increment of a species field"
     symbol: W
@@ -72,8 +68,8 @@ variables:                       # quantities that vary while the phenomenon unf
     signature: [sp, q, t]
     values: "U(sp)"
 
-parameters:                      # quantities held fixed while the phenomenon unfolds
-  - name: "common admitted local state space of the two species"
+parameters:
+  - name: "admitted local state space common to the two species"
     symbol: U
     signature: [sp]
     values: open
@@ -89,41 +85,41 @@ parameters:                      # quantities held fixed while the phenomenon un
     signature: []
     values: "pos(reals)"
     expression: null
-  - name: "periodic boundary geometry"
+  - name: "periodic geometry of the boundary"
     symbol: bgeom
     notation: '\partial\Omega'
     signature: []
     values: "enum(\"periodic\")"
     expression: null
-  - name: "local self-dynamics operator"
+  - name: "operator of the local self-dynamics"
     symbol: F
     variant: continuum
     signature: [sp]
     values: "maps(U(sp), U(sp))"
     expression: null
     shared: false
-  - name: "linear cross-coupling operator"
+  - name: "linear operator of the cross-coupling"
     symbol: G
     variant: continuum
     signature: [sp, sp]
     values: "maps(U(sp), U(sp))"
     expression: null
     shared: false
-  - name: "continuum diffusion coefficient"
+  - name: "diffusion coefficient of the continuum"
     symbol: D
     variant: continuum
     signature: [sp]
     values: "pos(reals)"
     expression: null
     shared: false
-  - name: "local noise distribution"
+  - name: "distribution of the local noise"
     symbol: Q
     variant: continuum
     signature: [sp]
     values: "measures(U(sp))"
     expression: null
     shared: false
-  - name: "lattice self-dynamics operator"
+  - name: "operator of the lattice self-dynamics"
     symbol: Fl
     notation: 'F_{\mathrm{lat}}'
     variant: lattice
@@ -131,7 +127,7 @@ parameters:                      # quantities held fixed while the phenomenon un
     values: "maps(U(sp), U(sp))"
     expression: null
     shared: false
-  - name: "linear lattice cross-coupling operator"
+  - name: "linear operator of the lattice cross-coupling"
     symbol: Gl
     notation: 'G_{\mathrm{lat}}'
     variant: lattice
@@ -139,7 +135,7 @@ parameters:                      # quantities held fixed while the phenomenon un
     values: "maps(U(sp), U(sp))"
     expression: null
     shared: false
-  - name: "lattice diffusion coefficient"
+  - name: "diffusion coefficient on the lattice"
     symbol: Dl
     notation: 'D_{\mathrm{lat}}'
     variant: lattice
@@ -147,7 +143,7 @@ parameters:                      # quantities held fixed while the phenomenon un
     values: "pos(reals)"
     expression: null
     shared: false
-  - name: "lattice noise law"
+  - name: "noise law on the lattice"
     symbol: Ql
     notation: 'Q_{\mathrm{lat}}'
     variant: lattice
@@ -156,79 +152,79 @@ parameters:                      # quantities held fixed while the phenomenon un
     expression: null
     shared: false
 
-laws:                            # the behaviors of the components or of the system that are admitted a priori
+laws:
   - name: "local stochastic evolution"
     symbol: evolve
     variant: continuum
     signature: [sp, x, t]
     role: evolution
     expression: "diff(u, t) = D * lap(u) + F(u) + G(u) + W"
-    reading: "each species field evolves under spatial diffusion, its own local dynamics, the coupling from the other species and noise"
+    reading: "The field of each species diffuses in space and evolves under its own local dynamics. A noise term and the cross-coupling from the other species also drive the field."
     warrant: posited
-    rests_on: "the definition of the model class"
-  - name: "local noise distribution"
+    rests_on: "The definition of the model class posits this law."
+  - name: "distribution of the local noise"
     symbol: noiselaw
     variant: continuum
     signature: [sp, x]
     role: distribution
     expression: "dist_{t}( W ) = Q"
-    reading: "the stochastic increments are distributed according to the declared noise law"
+    reading: "The stochastic increments are distributed according to the declared noise law."
     warrant: posited
-    rests_on: "the noise law the class admits"
+    rests_on: "The class admits this noise law."
   - name: "nonreciprocity of the cross-coupling"
     symbol: nonrecip
     variant: continuum
     signature: [sp, sp]
     role: admissibility
     expression: "G != adjoint(G)"
-    reading: "the action of one species on the other differs from the reciprocal action, so the coupling is nonreciprocal"
+    reading: "One species acts on the other differently than the other acts on it, so the coupling is nonreciprocal."
     warrant: posited
-    rests_on: "the definition of the continuum variant as a class with only nonreciprocal couplings"
-  - name: "local stochastic lattice evolution"
+    rests_on: "The continuum variant is defined as a class with only nonreciprocal couplings."
+  - name: "local stochastic evolution on the lattice"
     symbol: evolve_lattice
     variant: lattice
     signature: [sp, q, t]
     role: evolution
     expression: "diff(v, t) = Dl * lattice_lap(v) + Fl(v) + Gl(v) + Xi"
-    reading: "each lattice state evolves under nearest-site diffusion, local dynamics, coupling from the other species and stochastic increments"
+    reading: "Each lattice state diffuses between neighbouring sites and evolves under its local dynamics. Stochastic increments and the cross-coupling from the other species also drive the state."
     warrant: posited
-    rests_on: "the definition of the lattice variant"
-  - name: "local lattice noise distribution"
+    rests_on: "The definition of the lattice variant posits this law."
+  - name: "distribution of the local noise on the lattice"
     symbol: noiselaw_lattice
     variant: lattice
     signature: [sp, q]
     role: distribution
     expression: "dist_{t}( Xi ) = Ql"
-    reading: "the lattice increments are distributed according to the declared lattice noise law"
+    reading: "The lattice increments follow the noise law declared for that variant."
     warrant: posited
-    rests_on: "the noise law of the lattice variant"
+    rests_on: "The lattice variant declares this noise law."
   - name: "nonreciprocity of the lattice cross-coupling"
     symbol: nonrecip_lattice
     variant: lattice
     signature: [sp, sp]
     role: admissibility
     expression: "Gl != adjoint(Gl)"
-    reading: "the two directed lattice couplings are not reciprocal"
+    reading: "The two directed lattice couplings are not reciprocal."
     warrant: posited
-    rests_on: "the definition of the lattice variant as a class with only nonreciprocal couplings"
+    rests_on: "The lattice variant is defined as a class with only nonreciprocal couplings."
 
-closure: complete                # complete (formal target: the laws define the system) | partial (empirical target) | open
+closure: complete
 
 organization:
   - name: "nonreciprocal cross-coupling"
     symbol: crosscoupling
     variant: continuum
-    reading: "each species field acts on the other, and the second law denies that the two actions are adjoint, so the pair of edges carries unequal weights in the two directions"
+    reading: "Each species field acts on the other. The nonreciprocity law forbids the two actions from being adjoint, so the pair of edges carries unequal weights in the two directions."
     relates: "prod(sp, sp)"
     realized_by: [evolve, nonrecip]
-  - name: "nonreciprocal lattice cross-coupling"
+  - name: "nonreciprocal cross-coupling on the lattice"
     symbol: crosscoupling_lattice
     variant: lattice
-    reading: "each lattice species acts on the other through directed couplings whose reciprocal equality is excluded"
+    reading: "Each lattice species acts on the other through directed couplings, and the nonreciprocity law excludes their reciprocal equality."
     relates: "prod(sp, sp)"
     realized_by: [evolve_lattice, nonrecip_lattice]
 
 external_systems: []
 
 maturity:
-  parameters.U.values: open       # the inquiry deliberately ranges over scalar and vector order parameters
+  parameters.U.values: open       # ranges deliberately over scalar and vector order parameters

@@ -11,7 +11,7 @@ symbols:
   signature:
   - rmag
   - rdir
-  name: joint increment distribution
+  name: joint distribution of the increments
 - symbol: S
   declared_in: phen.turbulence.velocity-increment-distributions
   block: explanandum_variables
@@ -64,12 +64,12 @@ symbols:
   declared_in: phen.turbulence.velocity-increment-distributions
   block: index_sets
   signature: []
-  name: separation direction, a unit vector
+  name: direction of the separation, a unit vector
 - symbol: rmag
   declared_in: phen.turbulence.velocity-increment-distributions
   block: index_sets
   signature: []
-  name: separation magnitude
+  name: magnitude of the separation
 - symbol: anomalous_scaling
   declared_in: phen.turbulence.velocity-increment-distributions
   block: manifestations
@@ -79,7 +79,7 @@ symbols:
   declared_in: phen.turbulence.velocity-increment-distributions
   block: manifestations
   signature: []
-  name: longitudinal-transverse intermittency disparity
+  name: disparity between longitudinal and transverse intermittency
 - symbol: transverse_scaling
   declared_in: phen.turbulence.velocity-increment-distributions
   block: manifestations
@@ -99,17 +99,17 @@ symbols:
   declared_in: phen.turbulence.velocity-increment-distributions
   block: scope_over_instances
   signature: []
-  name: admitted forcing and boundary families
+  name: admitted families of forcing and boundary conditions
 - symbol: realization
   declared_in: phen.turbulence.velocity-increment-distributions
   block: scope_over_instances
   signature: []
-  name: flow realizations under one forcing and boundary family
+  name: flow realizations under one family of forcing and boundary conditions
 - symbol: boundaryenv
   declared_in: system.turbulence-incompressible-navier-stokes
   block: external_systems
   signature: []
-  name: formal boundary environment
+  name: formal environment at the boundary
 - symbol: forcing
   declared_in: system.turbulence-incompressible-navier-stokes
   block: external_systems
@@ -172,7 +172,7 @@ symbols:
   declared_in: system.turbulence-incompressible-navier-stokes
   block: parameters
   signature: []
-  name: mean energy injection rate of the forcing
+  name: mean rate of energy injection by the forcing
 - symbol: etaK
   declared_in: system.turbulence-incompressible-navier-stokes
   block: parameters
@@ -196,14 +196,14 @@ symbols:
   signature:
   - x
   - t
-  name: body-force field
+  name: field of body force
 - symbol: pr
   declared_in: system.turbulence-incompressible-navier-stokes
   block: variables
   signature:
   - x
   - t
-  name: kinematic-pressure field
+  name: field of kinematic pressure
 - symbol: u
   declared_in: system.turbulence-incompressible-navier-stokes
   block: variables
@@ -262,5 +262,5 @@ operators:
     norm_one: whether a three-dimensional vector has unit Euclidean norm
     regions: the admissible regions of a space
     restrict: the restriction of a field to a region
-    stationary: whether a time-indexed field has time-translation-invariant statistics
+    stationary: whether the statistics of a field indexed by time are invariant under time translation
 interactions: []

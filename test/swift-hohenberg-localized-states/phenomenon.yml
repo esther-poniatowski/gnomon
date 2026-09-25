@@ -1,12 +1,8 @@
-# Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
-# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
-# The specifications appear in the order of the method note.
-
 title: "Stationary localized states organized by homoclinic snaking"
-statement: "Stationary solutions of the generalized Swift-Hohenberg equation form patterned states localized within the homogeneous background"
+statement: "Stationary solutions of the generalized Swift-Hohenberg equation form patterned states localized within the homogeneous background."
 id: phen.swift-hohenberg.localized-states
 type: phenomenon
-status: provisional              # provisional | stabilized | retracted
+status: provisional
 target_system: system.swift-hohenberg-localized-states
 
 category: capacity
@@ -21,29 +17,29 @@ explanandum_variables:
     values: "powerset(maps(reals, reals))"
     condition: "diff(u, t) = 0"
     selects: all
-    reading: "the set contains every stationary profile under the target's localized boundary condition"
+    reading: "The set contains every stationary profile under the localized boundary condition of the target."
 
 manifestations:
   - name: "existence of localized stationary states"
     symbol: localized_states_exist
     form: value
     expression: "max_{r, b}( card(Uloc(r, b)) ) > 0"
-    reading: "at least one admitted coefficient pair permits a profile patterned over a finite region and flat outside it"
+    reading: "At least one admitted pair of coefficients permits a profile that is patterned over a finite region and flat beyond its edges."
     features:
-      - name: "solution-branch topology"
+      - name: "topology of the solution branches"
         symbol: topology
         values: "powerset(enum(\"disconnected\", \"snaking\", \"ladders\", \"isolas\", \"other\"))"
         observed: open
-      - name: "profile symmetry classes"
+      - name: "symmetry classes of the profiles"
         symbol: symmetry
         values: "powerset(enum(\"even\", \"odd\", \"asymmetric\"))"
         observed: open
-      - name: "linear-stability intervals along the branches"
+      - name: "intervals of linear stability along the branches"
         symbol: stability
         values: "powerset(interval(reals))"
         observed: open
 
-scope_over_instances: []         # the coefficient dependence is retained in the signature of Uloc
+scope_over_instances: []         # the signature of Uloc retains the dependence on the coefficients
 
 conditions_and_byproducts:
   precipitating: []
@@ -58,7 +54,7 @@ detection_criterion:
   - name: "stationary localized solution"
     across: []
     expression: "max_{r, b}( card(Uloc(r, b)) ) > 0"
-    procedure: "continue stationary solutions in the coefficients, then check the equation residual and the decay to the homogeneous far field"
+    procedure: "Stationary solutions are continued in the coefficients. The residual of the equation and the decay to the homogeneous far field are then checked."
 
 data:
   - "burke2006: https://doi.org/10.1103/PhysRevE.73.056211"

@@ -1,18 +1,14 @@
-# Method: docs/epistemology/target-system.md. One file per target system.
-# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
-# The specifications appear in the order of the method note.
-
 title: "Wide neural networks trained by gradient flow"
 id: system.ntk-gradient-flow
 type: target-system
-status: provisional              # provisional | stabilized | retracted
+status: provisional
 target_type: no-external-target  # the formal network class is itself the target
 
 reference_class:
-  name: "fully connected scalar-output networks under neural tangent parameterization, trained by gradient flow with squared loss"
-  selection_criteria: []         # the remaining specifications fix membership
+  name: "fully connected networks with scalar output under neural tangent parameterization, trained by gradient flow with squared loss"
+  selection_criteria: []
 
-constituents: []                 # the representation by a parameter vector introduces no unit kind
+constituents: []                 # a parameter vector represents the network; no unit kind
 
 index_sets:
   - name: "index of training examples"
@@ -24,7 +20,7 @@ index_sets:
     extent: "nonneg(reals)"
     structure: interval
 
-variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate ones determined within
+variables:
   - name: "trainable parameter vector"
     symbol: theta
     notation: '\theta'
@@ -39,7 +35,7 @@ variables:                       # quantities that vary while the phenomenon unf
     signature: [a, t]
     values: reals
     expression: "network(theta, X, L, m, sigma)"
-    reading: "the nonlinear network maps its current parameters and each training input to an output"
+    reading: "The nonlinear network maps its current parameters and each training input to an output."
     shared: false
   - name: "empirical neural tangent kernel"
     symbol: K
@@ -47,7 +43,7 @@ variables:                       # quantities that vary while the phenomenon unf
     signature: [a, a, t]
     values: reals
     expression: "ntk(theta, X, L, m, sigma)"
-    reading: "the parameter Jacobian induces a kernel between each pair of training examples"
+    reading: "The parameter Jacobian induces a kernel between each pair of training examples."
     shared: false
   - name: "outputs of the model linearized at initialization"
     symbol: flin
@@ -57,7 +53,7 @@ variables:                       # quantities that vary while the phenomenon unf
     values: reals
     condition: "diff(flin, t) = -eta * K0 * grad_output(risk(flin, y), flin)"
     selects: unique
-    reading: "the linearized outputs follow gradient flow under the kernel frozen at initialization"
+    reading: "The linearized outputs follow gradient flow under the kernel frozen at initialization."
     shared: false
 
 parameters:
@@ -86,7 +82,7 @@ parameters:
     signature: []
     values: "pos(ints)"
     expression: "parameter_count(m, L)"
-    reading: "the architecture fixes the dimension of the parameter vector"
+    reading: "The architecture fixes the dimension of the parameter vector."
   - name: "rate of gradient flow"
     symbol: eta
     notation: '\eta'
@@ -129,50 +125,50 @@ parameters:
     signature: [a, a]
     values: reals
     expression: "ntk(theta0, X, L, m, sigma)"
-    reading: "the initial parameter Jacobian induces a kernel between training examples"
+    reading: "The initial parameter Jacobian induces a kernel between training examples."
     shared: false
-  - name: "deterministic infinite-width neural tangent kernel"
+  - name: "deterministic neural tangent kernel at infinite width"
     symbol: Kinf
     notation: 'K_\infty'
     signature: [a, a]
     values: reals
     expression: "limiting_ntk(X, L, sigma)"
-    reading: "the architecture, activation, and training inputs fix the deterministic limiting kernel"
+    reading: "The architecture, the activation, and the training inputs fix the deterministic limiting kernel."
     shared: false
 
 laws:
-  - name: "parameter gradient flow"
+  - name: "gradient flow of the parameters"
     symbol: flow
     signature: [t]
     role: evolution
     expression: "diff(theta, t) = -eta * grad_parameter(risk(f, y), theta)"
-    reading: "the parameters follow continuous gradient flow for squared empirical risk"
+    reading: "The parameters follow continuous gradient flow for squared empirical risk."
     warrant: posited
-    rests_on: "the training scheme the class fixes"
-  - name: "parameter initialization"
+    rests_on: "The law rests on the training scheme that the class fixes."
+  - name: "initialization of the parameters"
     symbol: init_state
     signature: []
     role: state-constraint
     expression: "at_zero(theta) = theta0"
-    reading: "the trainable trajectory begins at the sampled initial parameter vector"
+    reading: "The trainable trajectory begins at the sampled initial parameter vector."
     warrant: posited
-    rests_on: "the initialization scheme the class fixes"
+    rests_on: "The law rests on the initialization scheme that the class fixes."
   - name: "initialization draw"
     symbol: init_draw
     signature: []
     role: distribution
     expression: "drawn_from(theta0, rho0)"
-    reading: "the initial parameter vector is sampled from the declared initialization distribution"
+    reading: "The initial parameter vector is drawn from the declared distribution `rho0`."
     warrant: posited
-    rests_on: "the initialization distribution the class fixes"
+    rests_on: "The law rests on the initialization distribution that the class fixes."
   - name: "shared initial outputs"
     symbol: shared_init
     signature: [a]
     role: state-constraint
     expression: "at_zero(flin) = at_zero(f)"
-    reading: "the nonlinear and linearized trajectories begin with the same outputs"
+    reading: "The nonlinear and linearized trajectories begin with the same outputs."
     warrant: derived
-    rests_on: "the definition of the linearized model at the initial parameters"
+    rests_on: "The law rests on the definition of the linearized model at the initial parameters."
 
 closure: complete
 

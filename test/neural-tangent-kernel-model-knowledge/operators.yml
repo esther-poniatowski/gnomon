@@ -1,11 +1,7 @@
-# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
-# The operators the records of this problem use beyond the canonical set of the framework.
-# An operator is typed over the sets the records of this problem declare.
-
-title: "Operators of the neural-tangent-kernel inquiry"
+title: "Operators of the inquiry into the neural tangent kernel"
 id: ops.ntk-gradient-flow
 type: operators
-status: provisional              # provisional | stabilized | retracted
+status: provisional
 target_system: system.ntk-gradient-flow
 
 operators:
@@ -42,3 +38,13 @@ operators:
     for_any: [A, S]
     signature: ["maps(A, S)"]
     values: S
+  - name: "predicate that a real-valued map is Lipschitz continuous"
+    symbol: lipschitz
+    for_any: [A]
+    signature: ["maps(A, reals)"]
+    values: bools
+  - name: "predicate that a real-valued map has a Lipschitz derivative"
+    symbol: lipschitz_derivative
+    for_any: [A]
+    signature: ["maps(A, reals)"]
+    values: bools

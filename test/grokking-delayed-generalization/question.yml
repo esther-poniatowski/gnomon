@@ -1,66 +1,62 @@
-# Method: docs/epistemology/subject-of-inquiry.md, contrast.md, domain.md, epistemic-task.md,
-# modal-strength.md, admissible-explanans.md, epistemic-pragmatic-virtues.md.
-# The research question is specified before any candidate answer is evaluated.
-
 title: "Mathematical explanation of delayed generalization"
-statement: "Which mathematical properties of finite overparameterized neural-network training on algorithmic tasks explain delayed generalization rather than immediate generalization or persistent memorization, including its duration and variation across random initializations?"
+statement: "Which mathematical properties of training finite overparameterized neural networks on algorithmic tasks explain delayed generalization? The contrast is with immediate generalization and with persistent memorization. An answer must also account for the duration of the delay and its variation across random initializations."
 id: quest.grokking.explain_delay
 type: question
-status: open                     # open | refined | answered | abandoned
+status: posed
 subject:
   target_system: system.delayed_generalization_networks
   phenomenon: phen.grokking.delayed_generalization
   contrast:
-    locus: other-outcome         # other-outcome | other-system | other-condition | none | open
-    foil_set:                    # listed alternatives, or one rule; default: the other values of the explanandum variable
+    locus: other-outcome
+    foil_set:
       - name: "immediate generalization"
         symbol: no_delay
         expression: ["delay = 0"]
-        reading: "immediate generalization: the delay vanishes within the temporal resolution of the evaluation protocol"
+        reading: "Under immediate generalization, the delay vanishes within the temporal resolution of the evaluation protocol."
       - name: "persistent memorization"
         symbol: no_generalization
         expression: ["min_{step <= T}( Ltest ) > eps_gen"]
-        reading: "persistent memorization: the generalization event time is right-censored at the finite observation horizon"
-    compatibility: derived       # follows from the locus: exclusive for other-outcome, compatible otherwise
-    foil_status: observed        # observed | counterfactual | not-applicable | open
-  domain:                        # restrictions of the a priori specification only; the assumptions of the analysis belong to the answer
+        reading: "Under persistent memorization, the time of the generalization event is right-censored at the finite observation horizon."
+    compatibility: derived
+    foil_status: observed
+  domain:
     restrictions:
       - name: "algorithmic supervised task"
         expression: "algorithmic(source)"
-        justification: "the delay is reported for tasks whose exact structure a network can memorize before it is learned, and on a task without that structure the contrast between fitting and generalizing has no purchase"
+        justification: "The delay is reported for algorithmic tasks, whose training examples a network can memorize before it learns their exact rule. Without an exact rule, the contrast between fitting and generalizing does not apply."
       - name: "overparameterized architecture"
         expression: "P > card(train)"
-        justification: "this restriction selects the interpolation regime in which delayed generalization is studied; it does not claim that fewer parameters make interpolation impossible"
-    limit: null                  # only when the question concerns the limit system itself
+        justification: "This restriction selects the interpolation regime in which delayed generalization is studied. The restriction does not claim that fewer parameters make that regime unreachable."
+    limit: null
 
 task:
-  epistemic_aim: explanation     # description | exploration | prediction | explanation | modal-knowledge | model-knowledge | open
-  requested_relation: mathematical # causal-intervention | causal-mechanistic | constitutive | function | nomological | statistical | mathematical | not-applicable | open
-  modal_strength: actual         # actual | possible | necessary | open
+  epistemic_aim: explanation
+  requested_relation: mathematical
+  modal_strength: actual
   admissible_explanans:
     compositional: null
     substrate: null
   required_accuracy:
-    standard: qualitative           # qualitative | order-of-magnitude | numeric-bound | structural-only | open
+    standard: qualitative
     outputs_to_match:
       - target: phen.grokking.delayed_generalization#crossing_order
         tolerance: null
-        justification: "the explanandum is that fitting comes first, so an account producing the opposite order would explain a different phenomenon"          # a qualitative accuracy admits no metric
+        justification: "The explanandum is that fitting comes first, so an account that produces the opposite order addresses a different phenomenon."
       - target: phen.grokking.delayed_generalization#delay
         tolerance: null
-        justification: "an account under which the delay vanishes in the regime where it is observed contradicts the phenomenon, so a strictly positive delay is what any candidate must produce"
+        justification: "An account under which the delay vanishes in the regime where it is observed contradicts the phenomenon. Any candidate must therefore produce a strictly positive delay."
       - target: phen.grokking.delayed_generalization#Pdelay
         tolerance: null
-        justification: "the question asks why runs initialized differently generalize at different times, so an account must recover the qualitative spread and censoring pattern rather than one representative duration"
+        justification: "The question asks why runs with distinct initializations generalize at different times, so an account must recover the whole distribution of durations: its qualitative spread and its censoring pattern. One representative duration does not answer the question."
     structures_to_match: []
 
-virtues:                         # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability
+virtues:
   - virtue: unification
     standing: preferred
-    justification: "an account that covers several training specifications is preferred once each specification has been explained on its own terms"
+    justification: "An account that covers several training specifications is preferred once each of them has been explained on its own terms."
   - virtue: structural-transparency
     standing: constitutive
-    justification: "the explanandum is a change of regime during training, so the mechanism producing it must be exhibited rather than fitted after the fact"
+    justification: "The explanandum is a change of regime during training, so the mechanism that produces it must be exhibited. A curve fitted to the transition after the fact does not meet this requirement."
 
 maturity:
-  task.admissible_explanans: open  # fixing the level prematurely would exclude an account the analysis has not yet reached                     # optional, per field: open | provisional | stabilized; a field left out inherits the status of the record
+  task.admissible_explanans: open  # keep open: a level fixed prematurely would exclude an account the analysis has not yet reached

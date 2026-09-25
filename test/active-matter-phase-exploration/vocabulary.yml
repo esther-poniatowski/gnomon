@@ -13,7 +13,7 @@ symbols:
   - sp
   - rsep
   - lag
-  name: species-resolved correlation matrix
+  name: correlation matrix between species
 - symbol: Cl
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: explanandum_variables
@@ -22,7 +22,7 @@ symbols:
   - sp
   - rsite
   - lag
-  name: species-resolved lattice correlation
+  name: correlation matrix between species on the lattice
 - symbol: S
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: explanandum_variables
@@ -31,7 +31,7 @@ symbols:
   - sp
   - k
   - omega
-  name: species-resolved spectral matrix
+  name: spectral matrix between species
 - symbol: Sl
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: explanandum_variables
@@ -40,33 +40,33 @@ symbols:
   - sp
   - klat
   - omega
-  name: species-resolved lattice spectrum
+  name: spectral matrix between species on the lattice
 - symbol: diag
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: explanandum_variables
   signature:
   - L
   - d
-  name: phase diagnostic for the continuum variant
+  name: diagnostic of phases for the continuum variant
 - symbol: diag_lattice
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: explanandum_variables
   signature:
   - L
   - d
-  name: phase diagnostic for the lattice variant
+  name: diagnostic of phases for the lattice variant
 - symbol: rho_emp
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: explanandum_variables
   signature:
   - sp
-  name: species-resolved empirical distribution of the local field state
+  name: empirical distribution of the local field state of each species
 - symbol: rho_lat
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: explanandum_variables
   signature:
   - sp
-  name: species-resolved empirical distribution of the lattice state
+  name: empirical distribution of the lattice state of each species
 - symbol: k
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: index_sets
@@ -116,17 +116,17 @@ symbols:
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: manifestations.features
   signature: []
-  name: candidate collective lattice phase
+  name: candidate collective phase on the lattice
 - symbol: coupling
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: scope_over_instances
   signature: []
-  name: admitted nonreciprocal cross-coupling operators
+  name: admitted nonreciprocal operators of cross-coupling
 - symbol: coupling_lattice
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: scope_over_instances
   signature: []
-  name: admitted nonreciprocal lattice couplings
+  name: admitted nonreciprocal couplings on the lattice
 - symbol: realization
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: scope_over_instances
@@ -136,7 +136,7 @@ symbols:
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: scope_over_instances
   signature: []
-  name: stochastic lattice realizations at fixed controls
+  name: stochastic realizations of the lattice at fixed controls
 - symbol: selfdyn
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: scope_over_instances
@@ -146,7 +146,7 @@ symbols:
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: scope_over_instances
   signature: []
-  name: admitted lattice self-dynamics, diffusion coefficients and noise laws
+  name: admitted self-dynamics, diffusion coefficients and noise laws of the lattice
 - symbol: sp
   declared_in: system.nonreciprocal-active-matter
   block: constituents
@@ -182,21 +182,21 @@ symbols:
   - sp
   - q
   - t
-  name: local stochastic lattice evolution
+  name: local stochastic evolution on the lattice
 - symbol: noiselaw
   declared_in: system.nonreciprocal-active-matter
   block: laws
   signature:
   - sp
   - x
-  name: local noise distribution
+  name: distribution of the local noise
 - symbol: noiselaw_lattice
   declared_in: system.nonreciprocal-active-matter
   block: laws
   signature:
   - sp
   - q
-  name: local lattice noise distribution
+  name: distribution of the local noise on the lattice
 - symbol: nonrecip
   declared_in: system.nonreciprocal-active-matter
   block: laws
@@ -220,45 +220,45 @@ symbols:
   declared_in: system.nonreciprocal-active-matter
   block: organization
   signature: []
-  name: nonreciprocal lattice cross-coupling
+  name: nonreciprocal cross-coupling on the lattice
 - symbol: D
   declared_in: system.nonreciprocal-active-matter
   block: parameters
   signature:
   - sp
-  name: continuum diffusion coefficient
+  name: diffusion coefficient of the continuum
 - symbol: Dl
   declared_in: system.nonreciprocal-active-matter
   block: parameters
   signature:
   - sp
-  name: lattice diffusion coefficient
+  name: diffusion coefficient on the lattice
 - symbol: F
   declared_in: system.nonreciprocal-active-matter
   block: parameters
   signature:
   - sp
-  name: local self-dynamics operator
+  name: operator of the local self-dynamics
 - symbol: Fl
   declared_in: system.nonreciprocal-active-matter
   block: parameters
   signature:
   - sp
-  name: lattice self-dynamics operator
+  name: operator of the lattice self-dynamics
 - symbol: G
   declared_in: system.nonreciprocal-active-matter
   block: parameters
   signature:
   - sp
   - sp
-  name: linear cross-coupling operator
+  name: linear operator of the cross-coupling
 - symbol: Gl
   declared_in: system.nonreciprocal-active-matter
   block: parameters
   signature:
   - sp
   - sp
-  name: linear lattice cross-coupling operator
+  name: linear operator of the lattice cross-coupling
 - symbol: L
   declared_in: system.nonreciprocal-active-matter
   block: parameters
@@ -269,24 +269,24 @@ symbols:
   block: parameters
   signature:
   - sp
-  name: local noise distribution
+  name: distribution of the local noise
 - symbol: Ql
   declared_in: system.nonreciprocal-active-matter
   block: parameters
   signature:
   - sp
-  name: lattice noise law
+  name: noise law on the lattice
 - symbol: U
   declared_in: system.nonreciprocal-active-matter
   block: parameters
   signature:
   - sp
-  name: common admitted local state space of the two species
+  name: admitted local state space common to the two species
 - symbol: bgeom
   declared_in: system.nonreciprocal-active-matter
   block: parameters
   signature: []
-  name: periodic boundary geometry
+  name: periodic geometry of the boundary
 - symbol: d
   declared_in: system.nonreciprocal-active-matter
   block: parameters
@@ -382,10 +382,15 @@ operators:
   - vectors
   declared:
     lattice_lap: the discrete Laplacian on the declared lattice
-    regions: the admissible regions of a space, of a given linear size and boundary
-      geometry
+    regions: the admissible regions of a space, of a given linear size and boundary geometry
     sites: the sites of a finite lattice of a given dimension, size and boundary geometry
 interactions:
+- edge: answer_crosscoupling
+  sources:
+  - sp
+  reach: sp
+  through: []
+  tuples: prod(sp, sp)
 - edge: crosscoupling
   sources:
   - sp

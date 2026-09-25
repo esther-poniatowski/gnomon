@@ -1,16 +1,12 @@
-# Method: docs/epistemology/target-system.md. One file per target system.
-# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
-# The specifications appear in the order of the method note.
-
 title: "One-dimensional generalized Swift-Hohenberg equation"
 id: system.swift-hohenberg-localized-states
 type: target-system
-status: provisional              # provisional | stabilized | retracted
+status: provisional
 target_type: no-external-target  # the equation is itself the target
 
 reference_class:
-  name: "one-dimensional generalized Swift-Hohenberg equations with quadratic-cubic nonlinearity and localized boundary conditions"
-  selection_criteria: []         # the remaining specifications fix membership
+  name: "one-dimensional generalized Swift-Hohenberg equations with quadratic and cubic nonlinearities and localized boundary conditions"
+  selection_criteria: []
 
 constituents: []                 # the scalar field decomposes into no units
 
@@ -24,8 +20,8 @@ index_sets:
     extent: "nonneg(reals)"
     structure: interval
 
-variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate ones determined within
-  - name: "pattern-amplitude field"
+variables:
+  - name: "amplitude field of the pattern"
     symbol: u
     determined: within
     signature: [x, t]
@@ -34,34 +30,34 @@ variables:                       # quantities that vary while the phenomenon unf
     shared: false
 
 parameters:
-  - name: "linear control coefficient"
+  - name: "control coefficient of the linear term"
     symbol: r
     signature: []
     values: reals
     expression: null
-  - name: "quadratic nonlinear coefficient"
+  - name: "coefficient of the quadratic nonlinearity"
     symbol: b
     signature: []
     values: reals
     expression: null
 
 laws:
-  - name: "quadratic-cubic Swift-Hohenberg evolution"
+  - name: "Swift-Hohenberg evolution with quadratic and cubic nonlinearities"
     symbol: evolve
     signature: [x]
     role: evolution
     expression: "diff(u, t) = r * u - u - 2 * diff(diff(u, x), x) - diff(diff(diff(diff(u, x), x), x), x) + b * u * u - u * u * u"
-    reading: "the field follows the standard quadratic-cubic pattern-forming dynamics"
+    reading: "The field forms patterns under the standard dynamics with quadratic and cubic nonlinearities."
     warrant: posited
-    rests_on: "the definition of the model class"
-  - name: "localized far-field boundary condition"
+    rests_on: "The law rests on the definition of the model class."
+  - name: "localized boundary condition in the far field"
     symbol: localized
     signature: []
     role: state-constraint
     expression: "far_field(u) = 0"
-    reading: "the field approaches the homogeneous state at both spatial infinities"
+    reading: "The field approaches the homogeneous state at both spatial infinities."
     warrant: posited
-    rests_on: "the boundary condition that individuates a localized state"
+    rests_on: "The law rests on the boundary condition that individuates a localized state."
 
 closure: complete
 

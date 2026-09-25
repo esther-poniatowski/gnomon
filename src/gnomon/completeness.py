@@ -168,7 +168,7 @@ def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> l
     descriptions are declared in the ordinary blocks; the mapping is what the answer would
     otherwise leave to a reader to reconstruct.
     """
-    if at(question, "task.admissible_explanans.substrate") != "link":
+    if at(question, "task.admissible_explanans.substrate") != "mapping":
         return []
     realizations = answer.get("realizations") or []
     if not realizations:

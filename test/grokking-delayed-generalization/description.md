@@ -9,7 +9,7 @@ aliases:
 
 ## Research problem
 
-Delayed generalization occurs when a network reaches near-zero training error long before its test error falls. For overparameterized networks trained on algorithmic tasks, what produces this delay? What determines its duration and its variation across random initial conditions?
+Delayed generalization occurs when a network reaches a training error close to zero long before its test error falls. For overparameterized networks trained on algorithmic tasks, what produces this delay? What determines its duration and its variation across random initial conditions?
 
 ## Formal target
 
@@ -27,8 +27,8 @@ The later test must require the framework to:
 
 ## Scope boundary
 
-The case does not presuppose that one proposed mechanism explains every instance of delayed generalization. A prediction for one benchmark does not constitute a complete answer by itself.
+The case does not presuppose that one proposed mechanism explains every instance of delayed generalization. Likewise, an answer that predicts one benchmark is not complete by itself.
 
 ## Scientific basis
 
-In an effective theory, structured representations emerge within a restricted regime near memorization, so generalization is delayed ([liu2022](https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html)). Local complexity measures provide a distinct account of the transition from memorization to generalization ([humayun2024](https://proceedings.mlr.press/v235/humayun24a.html)).
+In an effective theory, structured representations emerge within a restricted regime near memorization, so generalization is delayed ([liu2022](https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html)). A distinct account tracks how a network passes from memorization to generalization through local complexity measures ([humayun2024](https://proceedings.mlr.press/v235/humayun24a.html)).

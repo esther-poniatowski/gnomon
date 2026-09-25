@@ -11,13 +11,13 @@ symbols:
   signature:
   - sub
   - H
-  name: censored transition-time distribution
+  name: censored distribution of the transition time
 - symbol: PZ
   declared_in: phen.earth-tipping-subsystems.transition-sequences
   block: explanandum_variables
   signature:
   - H
-  name: joint law of the marked transition sequence
+  name: joint law of the marked sequence of transitions
 - symbol: Tev
   declared_in: phen.earth-tipping-subsystems.transition-sequences
   block: explanandum_variables
@@ -28,7 +28,7 @@ symbols:
   declared_in: phen.earth-tipping-subsystems.transition-sequences
   block: explanandum_variables
   signature: []
-  name: marked transition sequence
+  name: marked sequence of transitions
 - symbol: pi
   declared_in: phen.earth-tipping-subsystems.transition-sequences
   block: explanandum_variables
@@ -80,13 +80,12 @@ symbols:
   declared_in: system.earth-tipping-subsystems
   block: external_systems
   signature: []
-  name: Earth observation and paleoclimate measurement systems
+  name: systems of Earth observation and paleoclimate measurement
 - symbol: scenario_source
   declared_in: system.earth-tipping-subsystems
   block: external_systems
   signature: []
-  name: specification of the forcing scenario and Earth-system processes outside the
-    selected subsystems
+  name: specification of the forcing scenario and Earth-system processes outside the selected subsystems
 - symbol: t
   declared_in: system.earth-tipping-subsystems
   block: index_sets
@@ -97,13 +96,13 @@ symbols:
   block: laws
   signature:
   - sub
-  name: regime and event detection
+  name: detection of regimes and events
 - symbol: evolve
   declared_in: system.earth-tipping-subsystems
   block: laws
   signature:
   - sub
-  name: subsystem evolution
+  name: evolution of a subsystem
 - symbol: transmit
   declared_in: system.earth-tipping-subsystems
   block: laws
@@ -111,19 +110,19 @@ symbols:
   - sub
   - sub
   - t
-  name: directed subsystem interaction
+  name: directed interaction between subsystems
 - symbol: coupling
   declared_in: system.earth-tipping-subsystems
   block: organization
   signature: []
-  name: directed subsystem coupling
+  name: directed coupling between subsystems
 - symbol: Aij
   declared_in: system.earth-tipping-subsystems
   block: parameters
   signature:
   - sub
   - sub
-  name: directed interaction architecture
+  name: directed architecture of the interactions
 - symbol: Tend
   declared_in: system.earth-tipping-subsystems
   block: parameters
@@ -134,7 +133,7 @@ symbols:
   block: parameters
   signature:
   - sub
-  name: critical forcing threshold
+  name: critical threshold of the forcing
 - symbol: baseline
   declared_in: system.earth-tipping-subsystems
   block: parameters
@@ -151,7 +150,7 @@ symbols:
   block: parameters
   signature:
   - sub
-  name: regime and event detection rule
+  name: rule detecting regimes and events
 - symbol: emit
   declared_in: system.earth-tipping-subsystems
   block: parameters
@@ -164,25 +163,25 @@ symbols:
   block: parameters
   signature:
   - sub
-  name: internal feedback law of a subsystem
+  name: law of the internal feedback of a subsystem
 - symbol: peak
   declared_in: system.earth-tipping-subsystems
   block: parameters
   signature: []
-  name: peak prescribed warming
+  name: peak of the prescribed warming
 - symbol: s
   declared_in: system.earth-tipping-subsystems
   block: parameters
   signature:
   - sub
   - sub
-  name: directed interaction response law
+  name: law of the response along a directed interaction
 - symbol: tau
   declared_in: system.earth-tipping-subsystems
   block: parameters
   signature:
   - sub
-  name: intrinsic transition timescale
+  name: intrinsic timescale of the transition
 - symbol: DGMT
   declared_in: system.earth-tipping-subsystems
   block: variables
@@ -195,14 +194,14 @@ symbols:
   signature:
   - sub
   - t
-  name: unresolved internal climate variability
+  name: internal climate variability left unresolved
 - symbol: ind
   declared_in: system.earth-tipping-subsystems
   block: variables
   signature:
   - sub
   - t
-  name: physical indicators of a subsystem state
+  name: physical indicators of the state of a subsystem
 - symbol: r
   declared_in: system.earth-tipping-subsystems
   block: variables
@@ -223,8 +222,8 @@ symbols:
   - sub
   - sub
   - t
-  name: 'physical signal transmitted from one subsystem to another: the climatic flux
-    or field specific to that ordered pair'
+  name: 'physical signal transmitted from one subsystem to another: the climatic flux or field specific
+    to that ordered pair'
 - symbol: z
   declared_in: system.earth-tipping-subsystems
   block: variables
@@ -281,6 +280,12 @@ operators:
   declared:
     sequence: the ordered sequence of identities paired with their event times
 interactions:
+- edge: model_coupling
+  sources:
+  - sub
+  reach: sub
+  through: []
+  tuples: subset(prod(sub, sub), Aij)
 - edge: coupling
   sources:
   - sub

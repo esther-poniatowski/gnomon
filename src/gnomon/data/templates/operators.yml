@@ -1,22 +1,21 @@
-# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
-# The operators the records of this problem use beyond the canonical set of the framework.
-# An operator is typed over the sets the records of this problem declare, whichever record
-# declares them, so the file is read against the whole problem rather than one record.
-# Replace every UPPERCASE placeholder.
+# method: `docs/epistemology/symbols-and-expressions.md`; one file per problem
+# declare only operators beyond the framework's canonical set that the problem's records use
+# type each operator over sets declared by any record of the problem; declarations are read against every record
+# replace every UPPERCASE placeholder
 
-title: "SHORT NAME OF THE PROBLEM WHOSE OPERATORS THESE ARE"
+title: "SHORT NAME OF THE PROBLEM THAT THE OPERATORS SERVE"
 id: ops.TOPIC
 type: operators
 status: provisional              # provisional | stabilized | retracted
 target_system: system.TOPIC
 
 operators:
-  - name: "WHAT THE OPERATOR COMPUTES"
+  - name: "THE QUANTITY THAT THE OPERATOR COMPUTES"
     symbol: SYMBOL
-    notation: 'LATEX TEMPLATE, with #0 for the bound indices and #1 for each argument'
-    for_any: [SYMBOL]            # the type variables it is general in, which its types below may name; omitted when it acts on declared sets alone
-    signature: ["SET EXPRESSION OVER DECLARED SYMBOLS OR A VARIABLE ABOVE"]
-    values: "SET EXPRESSION OVER DECLARED SYMBOLS OR A VARIABLE ABOVE"
+    notation: 'LATEX TEMPLATE'       # write #0 for the bound indices and #1 for each argument
+    for_any: [SYMBOL]            # type variables the operator is general over, usable in `signature` and `values`; omit when the operator acts on declared sets alone
+    signature: ["SET EXPRESSION OVER DECLARED SYMBOLS OR A TYPE VARIABLE"]
+    values: "SET EXPRESSION OVER DECLARED SYMBOLS OR A TYPE VARIABLE"
 
-maturity:                        # optional, per specification: open | provisional | stabilized; one left out inherits the status of the record
+maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
   FIELD.PATH: open

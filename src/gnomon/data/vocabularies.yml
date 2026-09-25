@@ -91,7 +91,6 @@ vocabularies:
     - value: regularity
     - value: capacity
     - value: structural-property
-    - value: open
     index_sets.structure:
     - value: continuum
     - value: discrete-set
@@ -115,12 +114,11 @@ vocabularies:
     - value: functional-form
     - value: scaling
     - value: relation
-    - value: open
     scope_over_instances.source:
     - value: class-member
     - value: realization
-    - value: parameter-draw
-    - value: structure-draw
+    - value: random-parameters
+    - value: random-structure
     - value: scenario
     scope_over_instances.quantification:
     - value: single
@@ -128,16 +126,14 @@ vocabularies:
     - value: ensemble-summary
     - value: ensemble-distribution
     - value: universal
-    - value: open
     .evidential_status:
     - value: established
     - value: reported
     - value: predicted
     - value: derived
-    - value: open
   question:
     .status:
-    - value: open
+    - value: posed
     - value: refined
     - value: answered
     - value: abandoned
@@ -146,12 +142,10 @@ vocabularies:
     - value: other-system
     - value: other-condition
     - value: none
-    - value: open
     subject.foil_status:
     - value: observed
     - value: counterfactual
     - value: not-applicable
-    - value: open
     subject.restriction:
     - value: clamped
     - value: restricted
@@ -165,33 +159,29 @@ vocabularies:
     - value: explanation
     - value: modal-knowledge
     - value: model-knowledge
-    - value: open
     task.requested_relation:
     - value: causal-intervention
     - value: causal-mechanistic
     - value: constitutive
-    - value: function
+    - value: functional
     - value: nomological
     - value: statistical
     - value: mathematical
     - value: not-applicable
-    - value: open
     task.modal_strength:
     - value: actual
     - value: possible
     - value: necessary
-    - value: open
     task.substrate:
     - value: specific
     - value: independent
-    - value: link
+    - value: mapping
     task.standard:
     - value: qualitative
     - value: order-of-magnitude
     - value: numeric-bound
     - value: structural-only
     - value: not-applicable
-    - value: open
     virtues.standing:
     - value: constitutive
     - value: preferred
@@ -210,11 +200,10 @@ vocabularies:
     - value: retracted
     .target_type:
     - value: particular
-    - value: class-actual
-    - value: class-possible
+    - value: actual-systems
+    - value: possible-systems
     - value: hypothetical
     - value: no-external-target
-    - value: open
     index_sets.structure:
     - value: continuum
     - value: discrete-set
@@ -268,4 +257,3 @@ vocabularies:
       name: 'formal target: the laws define the system'
     - value: partial
       name: empirical target
-    - value: open

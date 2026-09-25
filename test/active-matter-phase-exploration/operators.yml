@@ -1,11 +1,7 @@
-# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
-# The operators the records of this problem use beyond the canonical set of the framework.
-# An operator is typed over the sets the records of this problem declare.
-
-title: "Operators of the active-matter inquiry"
+title: "Operators of the inquiry into active matter"
 id: ops.nonreciprocal-active-matter
 type: operators
-status: provisional              # provisional | stabilized | retracted
+status: provisional
 target_system: system.nonreciprocal-active-matter
 
 operators:

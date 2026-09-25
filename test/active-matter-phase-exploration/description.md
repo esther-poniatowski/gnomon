@@ -13,7 +13,7 @@ Nonreciprocal active matter poses an exploratory problem because local interacti
 
 ## Formal target
 
-The target comprises spatially extended two-species systems whose cross-couplings violate reciprocity. Stochastic field equations or lattice dynamics can formalize the local laws, although the phase catalogue remains an object of inquiry. Candidate macroscopic observables must let researchers detect phases without defining the admissible outcomes in advance.
+The target comprises spatially extended systems of two species whose mutual couplings violate reciprocity. The local laws can be formalized by stochastic field equations or by lattice dynamics, although the phase catalogue remains an object of inquiry. Because the catalogue is open, candidate macroscopic observables must let researchers detect phases without defining the admissible outcomes in advance.
 
 ## Expressivity challenge
 
@@ -21,7 +21,7 @@ The later test must require the framework to:
 
 - represent a formal target whose local stochastic laws are fixed although its macroscopic behaviors remain open;
 - supply an operational search specification (candidate observables, varied conditions, and a detection criterion) without assigning a statement or category in advance;
-- distinguish controls varied to discover phases from restrictions that define the question's domain;
+- distinguish controls varied to discover phases from restrictions that define the domain of the question;
 - allow an exploratory aim for which no explanatory relation is requested yet;
 - state separately whether phases persist in finite systems and in the thermodynamic limit.
 

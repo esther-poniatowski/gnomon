@@ -14,7 +14,7 @@ symbols:
   declared_in: phen.grokking.delayed_generalization
   block: explanandum_variables
   signature: []
-  name: delay duration
+  name: duration of the delay
 - symbol: tfit
   declared_in: phen.grokking.delayed_generalization
   block: explanandum_variables
@@ -39,7 +39,7 @@ symbols:
   declared_in: phen.grokking.delayed_generalization
   block: manifestations.features
   signature: []
-  name: observed delay duration
+  name: observed duration of the delay
 - symbol: init
   declared_in: phen.grokking.delayed_generalization
   block: scope_over_instances
@@ -54,7 +54,7 @@ symbols:
   declared_in: system.delayed_generalization_networks
   block: constituents
   signature: []
-  name: trainable parameter coordinate
+  name: coordinate of the trainable parameters
 - symbol: unit
   declared_in: system.delayed_generalization_networks
   block: constituents
@@ -64,7 +64,7 @@ symbols:
   declared_in: system.delayed_generalization_networks
   block: external_systems
   signature: []
-  name: task data-generating process
+  name: process that generates the task data
 - symbol: step
   declared_in: system.delayed_generalization_networks
   block: index_sets
@@ -94,13 +94,13 @@ symbols:
   declared_in: system.delayed_generalization_networks
   block: laws
   signature: []
-  name: initial optimizer state
+  name: initial state of the optimizer
 - symbol: initial_state
   declared_in: system.delayed_generalization_networks
   block: laws
   signature:
   - coord
-  name: initial parameter state
+  name: initial state of the parameters
 - symbol: update
   declared_in: system.delayed_generalization_networks
   block: laws
@@ -111,13 +111,13 @@ symbols:
   declared_in: system.delayed_generalization_networks
   block: laws
   signature: []
-  name: optimizer-state update
+  name: update of the optimizer state
 - symbol: Arch
   declared_in: system.delayed_generalization_networks
   block: parameters
   signature: []
-  name: 'architecture specification: a finite computation graph with activation functions
-    and a task readout'
+  name: 'specification of the architecture: a finite computation graph with activation functions and a
+    task readout'
 - symbol: Nu
   declared_in: system.delayed_generalization_networks
   block: parameters
@@ -127,7 +127,7 @@ symbols:
   declared_in: system.delayed_generalization_networks
   block: parameters
   signature: []
-  name: number of trainable parameter coordinates
+  name: number of coordinates of the trainable parameters
 - symbol: T
   declared_in: system.delayed_generalization_networks
   block: parameters
@@ -152,7 +152,7 @@ symbols:
   declared_in: system.delayed_generalization_networks
   block: parameters
   signature: []
-  name: near-zero training-loss threshold
+  name: near-zero threshold on the training loss
 - symbol: eps_gen
   declared_in: system.delayed_generalization_networks
   block: parameters
@@ -162,12 +162,12 @@ symbols:
   declared_in: system.delayed_generalization_networks
   block: parameters
   signature: []
-  name: gradient-based optimizer specification with its hyperparameters
+  name: specification of the gradient-based optimizer with its hyperparameters
 - symbol: opt_state
   declared_in: system.delayed_generalization_networks
   block: parameters
   signature: []
-  name: optimizer auxiliary-state update rule
+  name: update rule for the auxiliary state of the optimizer
 - symbol: p0
   declared_in: system.delayed_generalization_networks
   block: parameters
@@ -177,8 +177,8 @@ symbols:
   declared_in: system.delayed_generalization_networks
   block: parameters
   signature: []
-  name: evaluation protocol fixing when the losses are read and how a crossing time
-    is classified before the horizon
+  name: evaluation protocol fixing when the losses are read and how a crossing time is classified before
+    the horizon
 - symbol: test_set
   declared_in: system.delayed_generalization_networks
   block: parameters
@@ -199,7 +199,7 @@ symbols:
   declared_in: system.delayed_generalization_networks
   block: parameters
   signature: []
-  name: initial optimizer auxiliary state
+  name: initial auxiliary state of the optimizer
 - symbol: Ltest
   declared_in: system.delayed_generalization_networks
   block: referenced
@@ -227,21 +227,20 @@ symbols:
   block: variables
   signature:
   - step
-  name: network prediction, in the prediction space of the task readout
+  name: prediction of the network, in the prediction space of the task readout
 - symbol: theta
   declared_in: system.delayed_generalization_networks
   block: variables
   signature:
   - coord
   - step
-  name: network parameter coordinate
+  name: coordinate of the network parameters
 - symbol: z
   declared_in: system.delayed_generalization_networks
   block: variables
   signature:
   - step
-  name: optimizer auxiliary state, of the finite dimension the selected optimizer
-    fixes
+  name: auxiliary state of the optimizer, of the finite dimension that the selected optimizer fixes
 reused_across_records: {}
 operators:
   canonical:
@@ -289,5 +288,14 @@ operators:
   - union
   - vectors
   declared:
+    effective_loss: the effective loss on a learned representation
     powerset: the set of all subsets of a declared set
-interactions: []
+    representation: the learned representation extracted from a parameter trajectory
+    representation_quality: the fraction of the relations consistent with the task that are realized by
+      a learned representation
+interactions:
+- edge: two_timescale_training
+  sources: []
+  reach: null
+  through: []
+  tuples: null

@@ -1,11 +1,7 @@
-# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
-# The operators the records of this problem use beyond the canonical set of the framework.
-# An operator is typed over the sets the records of this problem declare.
-
-title: "Operators of the anomalous-scaling inquiry"
+title: "Operators of the inquiry into anomalous scaling"
 id: ops.turbulence-incompressible-navier-stokes
 type: operators
-status: provisional              # provisional | stabilized | retracted
+status: provisional
 target_system: system.turbulence-incompressible-navier-stokes
 
 operators:
@@ -32,7 +28,7 @@ operators:
     for_any: [S]
     signature: ["regions(S)"]
     values: "regions(S)"
-  - name: "whether a time-indexed field has time-translation-invariant statistics"
+  - name: "whether the statistics of a field indexed by time are invariant under time translation"
     symbol: stationary
     notation: '\operatorname{stationary}( #1 )'
     for_any: [A, T, S]

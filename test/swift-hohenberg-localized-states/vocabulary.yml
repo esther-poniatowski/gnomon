@@ -21,17 +21,17 @@ symbols:
   declared_in: phen.swift-hohenberg.localized-states
   block: manifestations.features
   signature: []
-  name: linear-stability intervals along the branches
+  name: intervals of linear stability along the branches
 - symbol: symmetry
   declared_in: phen.swift-hohenberg.localized-states
   block: manifestations.features
   signature: []
-  name: profile symmetry classes
+  name: symmetry classes of the profiles
 - symbol: topology
   declared_in: phen.swift-hohenberg.localized-states
   block: manifestations.features
   signature: []
-  name: solution-branch topology
+  name: topology of the solution branches
 - symbol: t
   declared_in: system.swift-hohenberg-localized-states
   block: index_sets
@@ -47,29 +47,29 @@ symbols:
   block: laws
   signature:
   - x
-  name: quadratic-cubic Swift-Hohenberg evolution
+  name: Swift-Hohenberg evolution with quadratic and cubic nonlinearities
 - symbol: localized
   declared_in: system.swift-hohenberg-localized-states
   block: laws
   signature: []
-  name: localized far-field boundary condition
+  name: localized boundary condition in the far field
 - symbol: b
   declared_in: system.swift-hohenberg-localized-states
   block: parameters
   signature: []
-  name: quadratic nonlinear coefficient
+  name: coefficient of the quadratic nonlinearity
 - symbol: r
   declared_in: system.swift-hohenberg-localized-states
   block: parameters
   signature: []
-  name: linear control coefficient
+  name: control coefficient of the linear term
 - symbol: u
   declared_in: system.swift-hohenberg-localized-states
   block: variables
   signature:
   - x
   - t
-  name: pattern-amplitude field
+  name: amplitude field of the pattern
 reused_across_records: {}
 operators:
   canonical:

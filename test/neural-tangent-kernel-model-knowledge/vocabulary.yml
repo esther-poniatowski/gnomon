@@ -54,22 +54,22 @@ symbols:
   declared_in: phen.ntk.linearized-dynamics
   block: manifestations.features
   signature: []
-  name: finite-width bound on output discrepancy
+  name: finite-width bound on the discrepancy between output trajectories
 - symbol: Tdrift
   declared_in: phen.ntk.linearized-dynamics
   block: manifestations.features
   signature: []
-  name: training horizon for the bound on kernel drift
+  name: training horizon for the bound on the drift of the kernel
 - symbol: Tout
   declared_in: phen.ntk.linearized-dynamics
   block: manifestations.features
   signature: []
-  name: training horizon for the output bound
+  name: training horizon for the bound on the outputs
 - symbol: mode_drift
   declared_in: phen.ntk.linearized-dynamics
   block: manifestations.features
   signature: []
-  name: mode of convergence of the kernel-drift bound over initialization draws
+  name: mode of convergence of the bound on the drift of the kernel over initialization draws
 - symbol: mode_init
   declared_in: phen.ntk.linearized-dynamics
   block: manifestations.features
@@ -79,7 +79,7 @@ symbols:
   declared_in: phen.ntk.linearized-dynamics
   block: manifestations.features
   signature: []
-  name: mode of convergence of the output bound over initialization draws
+  name: mode of convergence of the bound on the outputs over initialization draws
 - symbol: init_draw
   declared_in: phen.ntk.linearized-dynamics
   block: scope_over_instances
@@ -89,7 +89,7 @@ symbols:
   declared_in: phen.ntk.linearized-dynamics
   block: scope_over_instances
   signature: []
-  name: width-indexed network and training specification
+  name: specification of the network and its training, indexed by width
 - symbol: a
   declared_in: system.ntk-gradient-flow
   block: index_sets
@@ -105,7 +105,7 @@ symbols:
   block: laws
   signature:
   - t
-  name: parameter gradient flow
+  name: gradient flow of the parameters
 - symbol: init_draw
   declared_in: system.ntk-gradient-flow
   block: laws
@@ -115,7 +115,7 @@ symbols:
   declared_in: system.ntk-gradient-flow
   block: laws
   signature: []
-  name: parameter initialization
+  name: initialization of the parameters
 - symbol: shared_init
   declared_in: system.ntk-gradient-flow
   block: laws
@@ -135,7 +135,7 @@ symbols:
   signature:
   - a
   - a
-  name: deterministic infinite-width neural tangent kernel
+  name: deterministic neural tangent kernel at infinite width
 - symbol: L
   declared_in: system.ntk-gradient-flow
   block: parameters
@@ -275,6 +275,8 @@ operators:
     grad_output: the gradient with respect to the output vector
     grad_parameter: the gradient with respect to the parameter vector
     limiting_ntk: the deterministic neural tangent kernel in the infinite-width limit
+    lipschitz: predicate that a real-valued map is Lipschitz continuous
+    lipschitz_derivative: predicate that a real-valued map has a Lipschitz derivative
     network: the outputs of a fully connected network
     ntk: the empirical neural tangent kernel
     parameter_count: the number of parameters fixed by width and depth

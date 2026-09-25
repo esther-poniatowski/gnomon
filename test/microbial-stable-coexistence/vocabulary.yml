@@ -9,13 +9,13 @@ symbols:
   declared_in: phen.microbial.stable-coexistence
   block: explanandum_variables
   signature: []
-  name: community Jacobian at the equilibrium
+  name: Jacobian of the community at the equilibrium
 - symbol: Nstar
   declared_in: phen.microbial.stable-coexistence
   block: explanandum_variables
   signature:
   - pop
-  name: equilibrium population abundance
+  name: abundance of each population at equilibrium
 - symbol: Xstar
   declared_in: phen.microbial.stable-coexistence
   block: explanandum_variables
@@ -25,12 +25,12 @@ symbols:
   declared_in: phen.microbial.stable-coexistence
   block: explanandum_variables
   signature: []
-  name: equilibrium spectral abscissa
+  name: spectral abscissa at the equilibrium
 - symbol: mN
   declared_in: phen.microbial.stable-coexistence
   block: explanandum_variables
   signature: []
-  name: minimum equilibrium population abundance
+  name: minimum population abundance at equilibrium
 - symbol: feasible
   declared_in: phen.microbial.stable-coexistence
   block: manifestations
@@ -50,7 +50,7 @@ symbols:
   declared_in: phen.microbial.stable-coexistence
   block: scope_over_instances
   signature: []
-  name: admitted nonnegative resource-supply vectors
+  name: admitted nonnegative vectors of resource supply
 - symbol: pop
   declared_in: system.microbial-formal-population-models
   block: constituents
@@ -65,7 +65,7 @@ symbols:
   declared_in: system.microbial-formal-population-models
   block: external_systems
   signature: []
-  name: formal resource-supply environment
+  name: formal environment that supplies the resources
 - symbol: t
   declared_in: system.microbial-formal-population-models
   block: index_sets
@@ -75,7 +75,7 @@ symbols:
   declared_in: system.microbial-formal-population-models
   block: laws
   signature: []
-  name: nonnegative state-space invariance
+  name: invariance of the nonnegative state space
 - symbol: consume
   declared_in: system.microbial-formal-population-models
   block: laws
@@ -88,13 +88,13 @@ symbols:
   block: laws
   signature:
   - pop
-  name: population evolution under direct interaction
+  name: evolution of the populations under direct interaction
 - symbol: grow_resource
   declared_in: system.microbial-formal-population-models
   block: laws
   signature:
   - pop
-  name: population evolution under resource competition
+  name: evolution of the populations under competition for resources
 - symbol: higher_order
   declared_in: system.microbial-formal-population-models
   block: laws
@@ -109,19 +109,19 @@ symbols:
   signature:
   - pop
   - res
-  name: resource-mediated growth
+  name: growth mediated by resources
 - symbol: mortality_direct
   declared_in: system.microbial-formal-population-models
   block: laws
   signature:
   - pop
-  name: mortality dependence of direct growth
+  name: mortality in the growth law with direct interactions
 - symbol: mortality_resource
   declared_in: system.microbial-formal-population-models
   block: laws
   signature:
   - pop
-  name: mortality dependence of resource-mediated growth
+  name: mortality in the growth law with explicit resources
 - symbol: pairwise
   declared_in: system.microbial-formal-population-models
   block: laws
@@ -134,7 +134,7 @@ symbols:
   block: laws
   signature:
   - res
-  name: nonnegative resource invariance
+  name: invariance of nonnegative resources
 - symbol: produce
   declared_in: system.microbial-formal-population-models
   block: laws
@@ -152,7 +152,7 @@ symbols:
   block: laws
   signature:
   - res
-  name: resource evolution
+  name: evolution of the resources
 - symbol: drawdown
   declared_in: system.microbial-formal-population-models
   block: organization
@@ -167,7 +167,7 @@ symbols:
   declared_in: system.microbial-formal-population-models
   block: organization
   signature: []
-  name: resource-mediated coupling
+  name: coupling mediated by resources
 - symbol: pairing
   declared_in: system.microbial-formal-population-models
   block: organization
@@ -184,7 +184,7 @@ symbols:
   signature:
   - pop
   - pop
-  name: pairwise interaction coefficient
+  name: coefficient of pairwise interaction
 - symbol: B
   declared_in: system.microbial-formal-population-models
   block: parameters
@@ -192,32 +192,32 @@ symbols:
   - pop
   - pop
   - pop
-  name: higher-order interaction coefficient
+  name: coefficient of higher-order interaction
 - symbol: C
   declared_in: system.microbial-formal-population-models
   block: parameters
   signature:
   - res
   - pop
-  name: resource-consumption coefficient
+  name: coefficient of resource consumption
 - symbol: Fd
   declared_in: system.microbial-formal-population-models
   block: parameters
   signature:
   - pop
-  name: per-capita population growth law of a direct-interaction member
+  name: per-capita growth law with direct interactions
 - symbol: Fr
   declared_in: system.microbial-formal-population-models
   block: parameters
   signature:
   - pop
-  name: per-capita population growth law of a resource-explicit member
+  name: per-capita growth law with explicit resources
 - symbol: G
   declared_in: system.microbial-formal-population-models
   block: parameters
   signature:
   - res
-  name: resource-turnover law
+  name: law of resource turnover
 - symbol: M
   declared_in: system.microbial-formal-population-models
   block: parameters
@@ -229,7 +229,7 @@ symbols:
   signature:
   - res
   - pop
-  name: resource-production coefficient
+  name: coefficient of resource production
 - symbol: S
   declared_in: system.microbial-formal-population-models
   block: parameters
@@ -240,26 +240,26 @@ symbols:
   block: parameters
   signature:
   - pop
-  name: consumer mortality rate
+  name: mortality rate of each consumer
 - symbol: rho
   declared_in: system.microbial-formal-population-models
   block: parameters
   signature:
   - res
-  name: resource-supply rate
+  name: rate of resource supply
 - symbol: theta
   declared_in: system.microbial-formal-population-models
   block: parameters
   signature: []
-  name: 'interaction-law specification: the admissible functional forms and coefficients
-    of one member model'
+  name: 'specification of the interaction laws: the admissible functional forms and coefficients of one
+    member model'
 - symbol: N
   declared_in: system.microbial-formal-population-models
   block: variables
   signature:
   - pop
   - t
-  name: microbial-population abundance
+  name: abundance of each microbial population
 - symbol: R
   declared_in: system.microbial-formal-population-models
   block: variables
@@ -271,12 +271,12 @@ symbols:
   declared_in: system.microbial-formal-population-models
   block: variants
   signature: []
-  name: direct-interaction community
+  name: community with direct interactions
 - symbol: resource_explicit
   declared_in: system.microbial-formal-population-models
   block: variants
   signature: []
-  name: resource-explicit community
+  name: community with explicit resources
 reused_across_records:
   supply:
   - phen.microbial.stable-coexistence
@@ -327,12 +327,10 @@ operators:
   - union
   - vectors
   declared:
-    community_jacobian: the Jacobian of the complete member-model dynamics at a selected
-      equilibrium
-    equilibrium: the predicate that a complete member state belongs to an equilibrium
-      of the member-model dynamics
-    population_component: the population-abundance component of a complete member
-      state
+    community_jacobian: the Jacobian of the complete dynamics of the member model at a selected equilibrium
+    equilibrium: the predicate that a complete member state belongs to an equilibrium of the dynamics
+      of the member model
+    population_component: the component of a complete member state that holds the population abundances
 interactions:
 - edge: pairing
   sources:

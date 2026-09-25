@@ -7,6 +7,12 @@ aliases:
 ---
 # Architecture decisions
 
-One record per decision that later work must respect. Each states the constraint that forced the choice, the options weighed against it, and what the choice costs, so a reader can tell whether a changed constraint reopens the question.
+Each record fixes one decision that later work must respect. To let a reader decide whether a changed constraint reopens the decision, each record states:
 
-- [Surface syntax and parseable core for expressions](expression-syntax.md) keeps the infix form authors write and defines it over an S-expression core, so a parser becomes available without changing what a record looks like.
+- the constraint that forced the choice;
+- the options weighed against that constraint;
+- the cost of the choice.
+
+The records:
+
+- [Surface syntax and parseable core of expressions](expression-syntax.md): to know which notation formulas must use, and which change of constraint would reopen that choice.

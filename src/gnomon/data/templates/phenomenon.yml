@@ -1,112 +1,111 @@
-# Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
-# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
-# Replace every UPPERCASE placeholder. Any closed field accepts the value `open`.
-# The specifications appear in the order of the method note.
-# For an exploratory question, leave the statement, the category and the manifestation form
-# open, and fill the candidate observables, the varied indices and the detection criterion.
+# method: `docs/epistemology/phenomenon.md`; one file per phenomenon of one target system
+# symbols and expressions: `docs/epistemology/symbols-and-expressions.md`
+# replace every UPPERCASE placeholder; any closed field accepts `open`
+# specifications follow the order of the method note
+# exploratory question: leave the statement, the category and the manifestation form open; fill the candidate observables, the varied indices and the detection criterion
 
 title: "SHORT NAME OF THE PHENOMENON"
-statement: "THE PHENOMENON IN WORDS: what bears it, and what that bearer does" # a reading: the signatures fix the bearer and the manifestations fix the behavior
+statement: "THE PHENOMENON IN WORDS: THE BEARER AND ITS BEHAVIOR" # a reading only: the signatures fix the bearer, the manifestations fix the behavior
 id: phen.TOPIC.NAME
 type: phenomenon
 status: provisional              # provisional | stabilized | retracted
 target_system: system.TOPIC
 
-category: open                   # particular-event | regularity | capacity | structural-property | open
+category: open                   # particular-event | regularity | capacity | structural-property
 
-index_sets:                      # the indices the observables introduce, beyond those the target declares
+index_sets:                      # only sets the observables introduce beyond those the target declares
   - name: "NAME OF THE SET"
     symbol: SYMBOL
-    notation: 'LATEX FORM, when it differs from the symbol itself'
+    notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
     structure:                   # continuum | discrete-set | interval
 
-explanandum_variables:           # the observables that restate the behavior in terms of the state of the system
-  - reference: system.TOPIC#SYMBOL   # when the observable is a quantity the target already declares, the keys below are omitted
+explanandum_variables:           # observables restating the behavior in terms of the system state
+  - reference: system.TOPIC#SYMBOL   # for an observable the target already declares as a quantity, give only this reference
     name: "NAME OF THE OBSERVABLE"
     symbol: SYMBOL
-    notation: 'LATEX FORM, when it differs from the symbol itself'
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
-    signature: [SYMBOL]          # the indices the observable still takes; empty for a scalar
+    notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
+    signature: [SYMBOL]          # indices the observable still takes; empty for a scalar
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    expression: "EXPRESSION OVER DECLARED SYMBOLS, for a derived observable"
-    condition: "EXPRESSION THE QUANTITY SATISFIES, for a quantity no map builds"
-    selects:                     # unique | any | all, required with a condition
-    reading: "WHAT THE EXPRESSION ENCODES, in words"
-    event:                       # when the observable is the time of an event; the expression above states the criterion
-      origin: "EXPRESSION FIXING WHEN THE CLOCK STARTS"
-      horizon: "EXPRESSION FIXING WHEN OBSERVATION STOPS"
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived observable
+    condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
+    selects:                     # unique | any | all; required with a condition
+    reading: "THE EXPRESSION IN WORDS"
+    event:                       # fill when the observable is the time of an event; the observable's `expression` then states the event criterion
+      origin: "EXPRESSION FIXING THE ORIGIN OF TIME"
+      horizon: "EXPRESSION FIXING THE END OF OBSERVATION"
       censoring:                 # right | left | interval | none
-      reading: "WHAT COUNTS AS THE EVENT AND WHAT IS RECORDED WHEN IT IS NOT SEEN, in words"
+      reading: "THE EVENT IN WORDS, AND THE VALUE RECORDED WHEN IT IS NOT OBSERVED"
 
-manifestations:                  # what the observables do; the behavior stated over them, once per form
+manifestations:                  # one entry per form of the observables' behavior
   - name: "NAME OF THE MANIFESTATION"
     symbol: SYMBOL
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
-    form:                        # value | dependence | functional-form | scaling | relation | open
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
+    form:                        # value | dependence | functional-form | scaling | relation
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
-    reading: "WHAT THE EXPRESSION MEANS, beyond what the name and the form already state"
-    features:                    # the quantities of the form that characterize the behavior
+    reading: "THE MEANING OF THE EXPRESSION"   # only content beyond the name and the form
+    features:                    # quantities of the form that characterize the behavior
       - name: "NAME OF THE FEATURE"
         symbol: SYMBOL
         values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-        observed: "VALUE AMONG THEM"
-        condition: "EXPRESSION THE FEATURE SATISFIES, when the measurement constrains it without fixing a value"
-        selects:                 # unique | any | all, required with a condition
-        procedure: "WHAT THE MEASUREMENT ESTABLISHES, beyond what the name and the value set already state"
-        caveat: "WHAT THE RECORD LEAVES UNSTATED HERE, and why"
+        observed: "ONE ELEMENT OF THE VALUE SET"
+        condition: "EXPRESSION THAT THE FEATURE SATISFIES"   # give when the measurement constrains the feature without fixing its value
+        selects:                 # unique | any | all; required with a condition
+        procedure: "THE FINDING THAT THE MEASUREMENT ESTABLISHES"   # only content beyond the name and the value set
+        caveat: "THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION"
 
-scope_over_instances:            # one entry per source of variation across the instances; empty for a single instance
+scope_over_instances:            # one entry per source of variation across instances; empty when the phenomenon occurs once
   - name: "NAME OF THE SOURCE OF VARIATION"
     symbol: SYMBOL
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
-    over: [SYMBOL]               # the declared quantities this source varies; empty when the instance itself varies
-    source:                      # class-member | realization | parameter-draw | structure-draw | scenario
-    quantification:              # single | typical | ensemble-summary | ensemble-distribution | universal | open
-    conditional_on: [SYMBOL]     # the entries of this list held fixed while this one varies
-    differentiation: "WHAT THE VARIATION MEANS FOR THE CLAIM, beyond what the name already states"
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
+    over: [SYMBOL]               # declared quantities this source changes; empty when the instance itself varies
+    source:                      # class-member | realization | random-parameters | random-structure | scenario
+    quantification:              # single | typical | ensemble-summary | ensemble-distribution | universal
+    conditional_on: [SYMBOL]     # other sources held fixed while this one varies
+    differentiation: "THE CONSEQUENCE OF THE VARIATION FOR THE CLAIM"   # only content beyond the name
 
-conditions_and_byproducts:       # a factor that the question varies is an index or a scope entry, not a condition
-  precipitating:                 # what must hold for the behavior to occur
+conditions_and_byproducts:       # put a factor the question varies among the indices or the scope entries instead
+  precipitating:                 # conditions required for the behavior to occur
     - name: "NAME OF THE CONDITION"
-      variant: SYMBOL            # the variant of the target that carries it; omitted when every member does
+      variant: SYMBOL            # symbol of the target variant carrying the entry; omit when every member of the class carries it
       expression: "EXPRESSION OVER DECLARED SYMBOLS"
-      justification: "WHY IT TRIGGERS THE BEHAVIOR, beyond what the expression states"
-  inhibiting:                    # what prevents the behavior
+      justification: "WHY THE CONDITION TRIGGERS THE BEHAVIOR"   # only content beyond the expression
+  inhibiting:                    # conditions that prevent the behavior
     - name: "NAME OF THE CONDITION"
-      variant: SYMBOL            # the variant of the target that carries it; omitted when every member does
+      variant: SYMBOL            # symbol of the target variant carrying the entry; omit when every member of the class carries it
       expression: "EXPRESSION OVER DECLARED SYMBOLS"
-      justification: "WHY IT PREVENTS THE BEHAVIOR, beyond what the expression states"
-      caveat: "WHAT THE RECORD LEAVES UNSTATED HERE, and why"
-  modulating:                    # what changes a feature of the behavior without preventing it
+      justification: "WHY THE CONDITION PREVENTS THE BEHAVIOR"   # only content beyond the expression
+      caveat: "THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION"
+  modulating:                    # conditions that change a feature of the behavior but not its occurrence
     - name: "NAME OF THE CONDITION"
-      variant: SYMBOL            # the variant of the target that carries it; omitted when every member does
-      expression: "EXPRESSION FIXING THE REGIME IT HOLDS IN, when it holds in one only"
-      reading: "WHAT THE MODULATION MEANS, beyond what the effect states"
-      effect: "RELATION OVER DECLARED SYMBOLS, naming the feature that changes and what changes it"
-  nonstandard:                   # the behavior occurs only where the circumstance is arranged
+      variant: SYMBOL            # symbol of the target variant carrying the entry; omit when every member of the class carries it
+      expression: "EXPRESSION THAT FIXES THE REGIME OF THE MODULATION"   # give when the modulation holds in a single regime only
+      reading: "THE MEANING OF THE MODULATION"   # only content beyond the `effect`
+      effect: "RELATION OVER DECLARED SYMBOLS"   # relate the modulating factor to the affected feature
+  nonstandard:                   # circumstances that must be arranged for the behavior to occur
     - name: "NAME OF THE CIRCUMSTANCE"
-      variant: SYMBOL            # the variant of the target that carries it; omitted when every member does
+      variant: SYMBOL            # symbol of the target variant carrying the entry; omit when every member of the class carries it
       expression: "EXPRESSION OVER DECLARED SYMBOLS"
-      differentiation: "WHAT MAKES THE CIRCUMSTANCE UNUSUAL, and how it is arranged"
-  byproducts:                    # further effects of the behavior, outside the phenomenon
+      differentiation: "WHY THE CIRCUMSTANCE IS UNUSUAL, AND HOW IT IS ARRANGED"
+  byproducts:                    # further effects of the behavior outside the phenomenon
     - name: "NAME OF THE BYPRODUCT"
-      variant: SYMBOL            # the variant of the target that carries it; omitted when every member does
+      variant: SYMBOL            # symbol of the target variant carrying the entry; omit when every member of the class carries it
       expression: "EXPRESSION OVER DECLARED SYMBOLS"
-      justification: "WHY IT FALLS OUTSIDE THE PHENOMENON, beyond what the expression states"
+      justification: "WHY THE BYPRODUCT FALLS OUTSIDE THE PHENOMENON"   # only content beyond the expression
 
-evidential_status: open          # established | reported | predicted | derived | open
+evidential_status: open          # established | reported | predicted | derived
 
-detection_criterion:             # what a candidate pattern must satisfy to count as established
+detection_criterion:             # conditions a candidate pattern must satisfy to count as established
   - name: "NAME OF THE TEST"
-    variant: SYMBOL              # the variant of the target that carries it; omitted when every member does
-    across: [SYMBOL]             # the sources of variation over which it must hold
+    variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
+    across: [SYMBOL]             # sources of variation the test must hold across
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
-    procedure: "HOW THE TEST IS CARRIED OUT, beyond what the name already states"
-    limited_by: [SYMBOL]         # the external systems of the target whose reach bounds what the test can establish
+    procedure: "HOW THE TEST IS CARRIED OUT"   # only content beyond the name of the test
+    limited_by: [SYMBOL]         # external systems of the target whose reach bounds what the test can establish
 
 data:
   - "POINTER TO A DATA SET, A RECORDING OR A DERIVATION"
 
-maturity:                        # optional, per specification: open | provisional | stabilized; one left out inherits the status of the record
+maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
   FIELD.PATH: open

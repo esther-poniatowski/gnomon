@@ -1,25 +1,21 @@
-# Method: docs/epistemology/symbols-and-expressions.md. One file per problem.
-# The operators the records of this problem use beyond the canonical set of the framework.
-# An operator is typed over the sets the records of this problem declare.
-
-title: "Operators of the microbial-coexistence inquiry"
+title: "Operators of the inquiry into microbial coexistence"
 id: ops.microbial-formal-population-models
 type: operators
-status: provisional              # provisional | stabilized | retracted
+status: provisional
 target_system: system.microbial-formal-population-models
 
 operators:
-  - name: "the predicate that a complete member state belongs to an equilibrium of the member-model dynamics"
+  - name: "the predicate that a complete member state belongs to an equilibrium of the dynamics of the member model"
     symbol: equilibrium
     notation: '\operatorname{Eq}_{#1}( #2 )'
     signature: [open, open]
     values: bools
-  - name: "the population-abundance component of a complete member state"
+  - name: "the component of a complete member state that holds the population abundances"
     symbol: population_component
     notation: '\operatorname{pop}_{#1}( #2, #3 )'
     signature: [open, open, pop]
     values: "nonneg(reals)"
-  - name: "the Jacobian of the complete member-model dynamics at a selected equilibrium"
+  - name: "the Jacobian of the complete dynamics of the member model at a selected equilibrium"
     symbol: community_jacobian
     notation: '\operatorname{J}_{#1}( #2 )'
     signature: [open, open]

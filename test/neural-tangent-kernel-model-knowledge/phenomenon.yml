@@ -1,17 +1,13 @@
-# Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
-# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
-# The specifications appear in the order of the method note.
-
 title: "Convergence toward neural tangent dynamics"
-statement: "For neural-tangent-parameterized network families satisfying suitable regularity and scaling assumptions, the empirical kernel and output trajectory approach the linearized dynamics governed by the initial kernel as width increases"
+statement: "As width increases in network families under neural tangent parameterization, the empirical kernel and the output trajectory approach the linearized dynamics governed by the initial kernel. Both quantities converge only under suitable assumptions on regularity and scaling."
 id: phen.ntk.linearized-dynamics
 type: phenomenon
-status: provisional              # provisional | stabilized | retracted
+status: provisional
 target_system: system.ntk-gradient-flow
 
 category: regularity
 
-index_sets: []                   # the target already declares the training-example and time indices
+index_sets: []                   # the target already declares the training-example index and the time index
 
 explanandum_variables:
   - name: "discrepancy between output trajectories"
@@ -19,38 +15,38 @@ explanandum_variables:
     signature: [m, t]
     values: "nonneg(reals)"
     expression: "norm_{a}(f(a, t) - flin(a, t))"
-    reading: "the norm compares nonlinear and linearized outputs across the training examples"
+    reading: "The norm compares nonlinear and linearized outputs across the training examples."
   - name: "drift of the empirical kernel"
     symbol: Edrift
     signature: [m, t]
     values: "nonneg(reals)"
     expression: "norm_{a1, a2}(K(a1, a2, t) - K0(a1, a2))"
-    reading: "the norm compares the empirical kernel during training with its initial value"
+    reading: "The norm compares the empirical kernel during training with its initial value."
   - name: "discrepancy from the limiting kernel at initialization"
     symbol: Elimit
     signature: [m]
     values: "nonneg(reals)"
     expression: "norm_{a1, a2}(K0(a1, a2) - Kinf(a1, a2))"
-    reading: "the norm compares the initial empirical kernel with its deterministic infinite-width limit"
+    reading: "The norm compares the initial empirical kernel with its deterministic limit at infinite width."
 
 manifestations:
   - name: "convergence of the network output to the linearized output"
     symbol: output_converges
     form: scaling
     expression: "max_{t <= Tout}(Eout(m, t)) <= Bout(m)"
-    reading: "the nonlinear output trajectory stays within a bound that vanishes as width grows over the stated training horizon"
+    reading: "Over the stated training horizon, the nonlinear output trajectory stays within a bound that vanishes as width grows."
     features:
-      - name: "finite-width bound on output discrepancy"
+      - name: "finite-width bound on the discrepancy between output trajectories"
         symbol: Bout
         values: "maps(pos(ints), nonneg(reals))"
         observed: open
         condition: "limit_{m}(Bout(m)) = 0"
         selects: any
-      - name: "training horizon for the output bound"
+      - name: "training horizon for the bound on the outputs"
         symbol: Tout
         values: "pos(reals)"
         observed: open
-      - name: "mode of convergence of the output bound over initialization draws"
+      - name: "mode of convergence of the bound on the outputs over initialization draws"
         symbol: mode_out
         values: "enum(\"in-probability\", \"almost-sure\", \"mean-square\", \"in-distribution\")"
         observed: open
@@ -58,7 +54,7 @@ manifestations:
     symbol: kernel_drift_vanishes
     form: scaling
     expression: "max_{t <= Tdrift}(Edrift(m, t)) <= Bdrift(m)"
-    reading: "the empirical kernel stays within a bound that vanishes as width grows over the stated training horizon"
+    reading: "Over the stated training horizon, the empirical kernel stays within a bound that vanishes as width grows."
     features:
       - name: "finite-width bound on the drift of the empirical kernel"
         symbol: Bdrift
@@ -66,11 +62,11 @@ manifestations:
         observed: open
         condition: "limit_{m}(Bdrift(m)) = 0"
         selects: any
-      - name: "training horizon for the bound on kernel drift"
+      - name: "training horizon for the bound on the drift of the kernel"
         symbol: Tdrift
         values: "pos(reals)"
         observed: open
-      - name: "mode of convergence of the kernel-drift bound over initialization draws"
+      - name: "mode of convergence of the bound on the drift of the kernel over initialization draws"
         symbol: mode_drift
         values: "enum(\"in-probability\", \"almost-sure\", \"mean-square\", \"in-distribution\")"
         observed: open
@@ -78,7 +74,7 @@ manifestations:
     symbol: limit_error_vanishes
     form: scaling
     expression: "Elimit(m) <= Binit(m)"
-    reading: "the initial empirical kernel stays within a bound that vanishes as width grows"
+    reading: "The initial empirical kernel stays within a bound that vanishes as width grows."
     features:
       - name: "finite-width bound on the discrepancy from the limiting kernel"
         symbol: Binit
@@ -92,43 +88,43 @@ manifestations:
         observed: open
 
 scope_over_instances:
-  - name: "width-indexed network and training specification"
+  - name: "specification of the network and its training, indexed by width"
     symbol: spec
     over: [X, y, L, sigma, eta, rho0]
     source: class-member
     quantification: open
     conditional_on: []
-    differentiation: "the validity domain is the product of the inquiry, so the record does not assert that every activation, dataset and initialization family in the target class converges"
+    differentiation: "The inquiry must establish the validity domain, so the record does not assert that every activation, dataset, and initialization family in the target class converges."
   - name: "initialization draw"
     symbol: init_draw
     over: [theta0]
     source: realization
     quantification: ensemble-distribution
     conditional_on: [spec, m]
-    differentiation: "the width limit quantifies over the initialization distribution, so one sampled network cannot establish the claim"
+    differentiation: "The width limit quantifies over the initialization distribution, so one sampled network cannot establish the claim."
 
 conditions_and_byproducts:
   precipitating: []
   inhibiting: []
-  modulating: []                # the width already carries the manifestations, so a modulation by width would restate them
+  modulating: []                # the manifestations already vary with the width; a modulating condition would restate that dependence
   nonstandard: []
   byproducts: []
 
 evidential_status: derived
 
 detection_criterion:
-  - name: "uniform output-path control on the stated horizon"
+  - name: "uniform control of the output path on the stated horizon"
     across: [init_draw, spec]
     expression: "max_{t <= Tout}(Eout(m, t)) <= Bout(m)"
-    procedure: "derive the finite-width path bound under stated assumptions and prove that the bound vanishes in the declared convergence mode"
-  - name: "uniform empirical-kernel control on the stated horizon"
+    procedure: "Under stated assumptions, the bound at finite width on the output path is derived and proved to vanish in the declared convergence mode."
+  - name: "uniform control of the empirical kernel on the stated horizon"
     across: [init_draw, spec]
     expression: "max_{t <= Tdrift}(Edrift(m, t)) <= Bdrift(m)"
-    procedure: "derive the finite-width kernel-drift bound and prove that it vanishes in the declared convergence mode"
-  - name: "initial-kernel convergence"
+    procedure: "The bound at finite width on the drift of the empirical kernel is derived and proved to vanish in the declared convergence mode."
+  - name: "convergence of the initial kernel"
     across: [init_draw, spec]
     expression: "Elimit(m) <= Binit(m)"
-    procedure: "derive the finite-width initialization bound and prove that it vanishes in the declared convergence mode"
+    procedure: "The bound at finite width on the distance between the initial kernel and its limit is derived and proved to vanish in the declared convergence mode."
 
 data:
   - "jacot2018: https://papers.nips.cc/paper/2018/hash/5a4be1fa34e62bb8a6ec6b91d2462f5a-Abstract.html"

@@ -1,17 +1,13 @@
-# Method: docs/epistemology/phenomenon.md. One file per phenomenon of one target system.
-# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
-# The specifications appear in the order of the method note.
-
 title: "Delayed generalization"
-statement: "A finite neural-network training system reaches the near-zero training-loss criterion before its test loss crosses the generalization criterion after a positive delay"
+statement: "A finite neural network brings its training loss under a threshold close to zero, and its test loss crosses the generalization criterion only after a positive delay."
 id: phen.grokking.delayed_generalization
 type: phenomenon
-status: provisional              # provisional | stabilized | retracted
+status: provisional
 target_system: system.delayed_generalization_networks
 
-category: regularity             # particular-event | regularity | capacity | structural-property | open
+category: regularity
 
-explanandum_variables:           # the loss trajectories are quantities the target declares, so they are referenced
+explanandum_variables:           # reference the loss trajectories: the target declares them as quantities
   - reference: system.delayed_generalization_networks#Ltrain
   - reference: system.delayed_generalization_networks#Ltest
   - name: "first crossing time of the training criterion"
@@ -20,63 +16,63 @@ explanandum_variables:           # the loss trajectories are quantities the targ
     signature: []
     values: step
     expression: "min_{step}( Ltrain <= eps_fit )"
-    reading: "the first step at which the training loss reaches its near-zero threshold"
+    reading: "The training loss reaches its threshold close to zero for the first time at this step."
     event:
       origin: "0"
       horizon: T
       censoring: right
-      reading: "the event is the training loss first reaching its threshold; a run that never fits by the horizon is recorded as censored"
+      reading: "The event occurs when the training loss first reaches its threshold, and a run that never fits by the horizon is recorded as censored."
   - name: "first crossing time of the generalization criterion"
     symbol: tgen
     notation: 't_{\text{gen}}'
     signature: []
     values: step
     expression: "min_{step}( Ltest <= eps_gen )"
-    reading: "the first step at which the test loss reaches its generalization threshold"
+    reading: "The test loss reaches its generalization threshold for the first time at this step."
     event:
       origin: "0"
       horizon: T
       censoring: right
-      reading: "the event is the test loss first reaching its threshold; a run that never reaches it is recorded as exceeding the horizon, not as a large delay"
-  - name: "delay duration"
+      reading: "The event occurs when the test loss first reaches its threshold. A run that never reaches the threshold is recorded as exceeding the horizon. The record does not read such a run as a large delay."
+  - name: "duration of the delay"
     symbol: delay
     notation: '\Delta t'
     signature: []
     values: "nonneg(ints)"
     expression: "tgen - tfit"
-    reading: "how long generalization lags behind fitting when both events occur"
+    reading: "The delay counts the steps by which generalization follows fitting, when both events occur."
     event:
       origin: tfit
       horizon: "T - tfit"
       censoring: right
-      reading: "when generalization has not occurred by the observation horizon, the delay is right-censored at the remaining observation time"
+      reading: "When generalization has not occurred by the observation horizon, the delay is right-censored at the time left after fitting."
   - name: "distribution of the delay across initialization draws"
     symbol: Pdelay
     notation: 'P_{\Delta t}'
     signature: []
     values: "measures(nonneg(ints))"
     expression: "dist_{init}( delay )"
-    reading: "the distribution records completed delay durations and retains right-censored runs at the observation horizon"
+    reading: "The distribution records completed delay durations and retains right-censored runs at the observation horizon."
 
-manifestations:                  # the training criterion is reached first, and the delay is positive
+manifestations:                  # training-loss criterion reached first; delay positive
   - name: "order of the two crossing times"
     symbol: crossing_order
     form: relation
     expression: "tfit < tgen"
-    reading: "the ordering identifies a delayed-generalization run when both crossings occur; its frequency and duration are read over initialization draws"
+    reading: "When both crossings occur, the ordering identifies a run with delayed generalization. The frequency and the duration of such runs are read over initialization draws."
     features: []
   - name: "strictly positive delay"
     symbol: positive_delay
     form: value
     expression: "delay > 0"
-    reading: "generalization arrives strictly after fitting, rather than together with it"
+    reading: "The network generalizes strictly after it fits the training set."
     features:
-      - name: "observed delay duration"
+      - name: "observed duration of the delay"
         symbol: delay_obs
         values: "pos(ints)"
-        observed: open           # the delay depends on the training specification, over which the case does not commit
+        observed: open           # the delay depends on the training specification, and the case fixes none
 
-scope_over_instances:            # the distribution ranges over initializations at one fixed training specification
+scope_over_instances:            # distribution over initializations at one fixed training specification
   - name: "initialization draw"
     symbol: init
     over: [theta0]
@@ -89,25 +85,25 @@ scope_over_instances:            # the distribution ranges over initializations 
     source: class-member
     quantification: single
     conditional_on: []
-    differentiation: "one specification fixes the architecture, the optimizer, the task loss and the evaluation protocol together, so a claim holding for one need not hold for another"
+    differentiation: "Each specification fixes the architecture, the optimizer, the task loss, and the evaluation protocol together. A claim that holds for one specification therefore need not hold for another."
 
 conditions_and_byproducts:
   precipitating: []
   inhibiting: []
   modulating:
     - name: "size of the training sample"
-      reading: "the training-set size changes which learning phase is reached and can therefore change the delay without imposing a universal monotone direction"
+      reading: "The size of the training set selects which learning phase is reached, so the size can alter the delay, although in no universal monotone direction."
       effect: "depends_on(delay, card(train))"
   nonstandard: []
   byproducts: []
 
-evidential_status: established   # established | reported | predicted | derived | open
+evidential_status: established
 
 detection_criterion: null
 
 data:
-  - "liu2022: empirical phase evidence across repeated seeds: https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
-  - "humayun2024: delayed-generalization trajectories across neural-network architectures and tasks: https://proceedings.mlr.press/v235/humayun24a.html"
+  - "liu2022: Empirical phase evidence across repeated seeds: https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
+  - "humayun2024: Trajectories of delayed generalization across neural architectures and tasks: https://proceedings.mlr.press/v235/humayun24a.html"
 
 maturity:
   manifestations.features.observed: open

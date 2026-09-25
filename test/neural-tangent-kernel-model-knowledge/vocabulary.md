@@ -19,22 +19,22 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `output_converges` | phen.ntk.linearized-dynamics | manifestations | — | convergence of the network output to the linearized output |
 | `Bdrift` | phen.ntk.linearized-dynamics | manifestations.features | — | finite-width bound on the drift of the empirical kernel |
 | `Binit` | phen.ntk.linearized-dynamics | manifestations.features | — | finite-width bound on the discrepancy from the limiting kernel |
-| `Bout` | phen.ntk.linearized-dynamics | manifestations.features | — | finite-width bound on output discrepancy |
-| `Tdrift` | phen.ntk.linearized-dynamics | manifestations.features | — | training horizon for the bound on kernel drift |
-| `Tout` | phen.ntk.linearized-dynamics | manifestations.features | — | training horizon for the output bound |
-| `mode_drift` | phen.ntk.linearized-dynamics | manifestations.features | — | mode of convergence of the kernel-drift bound over initialization draws |
+| `Bout` | phen.ntk.linearized-dynamics | manifestations.features | — | finite-width bound on the discrepancy between output trajectories |
+| `Tdrift` | phen.ntk.linearized-dynamics | manifestations.features | — | training horizon for the bound on the drift of the kernel |
+| `Tout` | phen.ntk.linearized-dynamics | manifestations.features | — | training horizon for the bound on the outputs |
+| `mode_drift` | phen.ntk.linearized-dynamics | manifestations.features | — | mode of convergence of the bound on the drift of the kernel over initialization draws |
 | `mode_init` | phen.ntk.linearized-dynamics | manifestations.features | — | mode of convergence of the initial kernel over initialization draws |
-| `mode_out` | phen.ntk.linearized-dynamics | manifestations.features | — | mode of convergence of the output bound over initialization draws |
+| `mode_out` | phen.ntk.linearized-dynamics | manifestations.features | — | mode of convergence of the bound on the outputs over initialization draws |
 | `init_draw` | phen.ntk.linearized-dynamics | scope over instances | — | initialization draw |
-| `spec` | phen.ntk.linearized-dynamics | scope over instances | — | width-indexed network and training specification |
+| `spec` | phen.ntk.linearized-dynamics | scope over instances | — | specification of the network and its training, indexed by width |
 | `a` | system.ntk-gradient-flow | index sets | — | index of training examples |
 | `t` | system.ntk-gradient-flow | index sets | — | training time |
-| `flow` | system.ntk-gradient-flow | laws | t | parameter gradient flow |
+| `flow` | system.ntk-gradient-flow | laws | t | gradient flow of the parameters |
 | `init_draw` | system.ntk-gradient-flow | laws | — | initialization draw |
-| `init_state` | system.ntk-gradient-flow | laws | — | parameter initialization |
+| `init_state` | system.ntk-gradient-flow | laws | — | initialization of the parameters |
 | `shared_init` | system.ntk-gradient-flow | laws | a | shared initial outputs |
 | `K0` | system.ntk-gradient-flow | parameters | a, a | empirical neural tangent kernel at initialization |
-| `Kinf` | system.ntk-gradient-flow | parameters | a, a | deterministic infinite-width neural tangent kernel |
+| `Kinf` | system.ntk-gradient-flow | parameters | a, a | deterministic neural tangent kernel at infinite width |
 | `L` | system.ntk-gradient-flow | parameters | — | number of hidden layers |
 | `X` | system.ntk-gradient-flow | parameters | a | training inputs |
 | `d` | system.ntk-gradient-flow | parameters | — | dimension of each training input |
@@ -58,4 +58,4 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 ## Operators
 
 - Canonical: `abs`, `adjoint`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
-- Declared by this problem: `at_zero` (the value of a trajectory at zero training time), `grad_output` (the gradient with respect to the output vector), `grad_parameter` (the gradient with respect to the parameter vector), `limiting_ntk` (the deterministic neural tangent kernel in the infinite-width limit), `network` (the outputs of a fully connected network), `ntk` (the empirical neural tangent kernel), `parameter_count` (the number of parameters fixed by width and depth), `risk` (the squared empirical risk).
+- Declared by this problem: `at_zero` (the value of a trajectory at zero training time), `grad_output` (the gradient with respect to the output vector), `grad_parameter` (the gradient with respect to the parameter vector), `limiting_ntk` (the deterministic neural tangent kernel in the infinite-width limit), `lipschitz` (predicate that a real-valued map is Lipschitz continuous), `lipschitz_derivative` (predicate that a real-valued map has a Lipschitz derivative), `network` (the outputs of a fully connected network), `ntk` (the empirical neural tangent kernel), `parameter_count` (the number of parameters fixed by width and depth), `risk` (the squared empirical risk).

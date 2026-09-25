@@ -1,16 +1,12 @@
-# Method: docs/epistemology/target-system.md. One file per target system.
-# Symbols and expressions: docs/epistemology/symbols-and-expressions.md.
-# The specifications appear in the order of the method note.
-
 title: "Three-dimensional incompressible Navier–Stokes flows"
 id: system.turbulence-incompressible-navier-stokes
 type: target-system
-status: provisional              # provisional | stabilized | retracted
-target_type: no-external-target  # particular | class-actual | class-possible | hypothetical | no-external-target | open
+status: provisional
+target_type: no-external-target
 
-reference_class:                 # a name only: the specifications below generate the class, so they are not restated here
+reference_class:
   name: "Three-dimensional incompressible Navier–Stokes flows"
-  selection_criteria: []         # the remaining specifications fix membership
+  selection_criteria: []
 
 constituents: []                 # an Eulerian field decomposes into no unit
 
@@ -24,22 +20,22 @@ index_sets:
     extent: "interval(reals)"
     structure: interval
 
-variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate ones determined within
+variables:
   - name: "velocity field"
     symbol: u
     determined: within
     signature: [x, t]
     values: "vectors(reals, 3)"
-    expression: null             # a declared local state variable, not an aggregate
+    expression: null
     shared: false
-  - name: "kinematic-pressure field"
+  - name: "field of kinematic pressure"
     symbol: pr
     determined: within
     signature: [x, t]
     values: reals
     expression: null
     shared: false
-  - name: "body-force field"
+  - name: "field of body force"
     symbol: f
     of: forcing
     determined: outside
@@ -52,8 +48,8 @@ variables:                       # quantities that vary while the phenomenon unf
     signature: [x, t]
     values: "vectors(reals, 3)"
 
-parameters:                      # quantities held fixed while one statistically stationary realization unfolds
-  - name: "mean energy injection rate of the forcing"
+parameters:
+  - name: "mean rate of energy injection by the forcing"
     symbol: eps
     notation: '\varepsilon'
     of: forcing
@@ -82,14 +78,14 @@ parameters:                      # quantities held fixed while one statistically
     signature: []
     values: "pos(reals)"
     expression: "U * Lc / nu"
-    reading: "the ratio of inertial to viscous transport at the characteristic scales"
+    reading: "The Reynolds number gives the ratio of inertial to viscous transport at the characteristic scales."
   - name: "Kolmogorov dissipation scale"
     symbol: etaK
     notation: '\eta_K'
     signature: []
     values: pos(reals)
     expression: "(nu^3 / eps)^(1/4)"
-    reading: "the scale at which viscous dissipation balances the energy handed down the cascade"
+    reading: "At this scale, viscous dissipation balances the energy transferred down the cascade."
   - name: "flow domain"
     symbol: Om
     notation: '\Omega'
@@ -97,60 +93,60 @@ parameters:                      # quantities held fixed while one statistically
     values: "regions(vectors(reals, 3))"
     expression: null
 
-laws:                            # the component and system behaviors admitted a priori
+laws:
   - name: "incompressible momentum balance"
     symbol: momentum
     signature: [x]
     role: evolution
     expression: "diff(u, t) + dot(u, grad(u)) = - grad(pr) + nu * lap(u) + f"
-    reading: "the velocity changes under its own advection, the pressure gradient, viscous diffusion and the applied force"
+    reading: "The velocity changes under its own advection, the pressure gradient, viscous diffusion, and the applied force."
     warrant: posited
-    rests_on: "the definition of the model class"
+    rests_on: "The law rests on the definition of the model class."
   - name: "incompressibility constraint"
     symbol: incompressible
     signature: [x]
     role: state-constraint
     expression: "div(u) = 0"
-    reading: "the flow neither compresses nor expands any element of fluid"
+    reading: "The flow neither compresses nor expands any element of fluid."
     warrant: posited
-    rests_on: "the definition of the model class"
+    rests_on: "The law rests on the definition of the model class."
   - name: "pressure gauge"
     symbol: gauge
     signature: []
     role: state-constraint
     expression: "mean_{x}( pr ) = 0"
-    reading: "the pressure is fixed only up to a constant, so its spatial mean is set to zero"
+    reading: "The pressure is fixed only up to a constant, so its spatial mean is set to zero."
     warrant: posited
-    rests_on: "a gauge choice that fixes the pressure only up to a constant"
+    rests_on: "The law rests on a gauge choice that fixes the pressure only up to a constant."
   - name: "boundary constraint"
     symbol: boundary_law
     signature: [x]
     role: state-constraint
     expression: "restrict(u, boundary(Om)) = b"
-    reading: "the velocity on the boundary of the domain is the prescribed boundary data"
+    reading: "The velocity on the boundary of the domain equals the prescribed data."
     warrant: posited
-    rests_on: "the boundary data the environment supplies"
+    rests_on: "The law rests on the boundary data that the environment supplies."
 
-closure: complete                # the equations and admitted inputs define the formal system
+closure: complete                # the equations and the admitted inputs define the formal system
 
 external_systems:
   - name: "formal forcing process"
     symbol: forcing
-    class: open                  # the admitted forcing processes are not narrowed beyond the injection rate below
+    class: open                  # only the constraint on the mean injection rate narrows the admitted forcing processes
     shares: [f]
     constrains:
-      - name: "mean energy injection"
+      - name: "mean injection of energy"
         signature: []
         role: state-constraint
         expression: "mean_{x, t}( dot(f, u) ) = eps"
-        reading: "the force does work on the flow at one rate, so a realization injecting more or less belongs to another family"
-    reading: "the force sustains the flow at a fixed mean injection rate, and that rate is what the inertial range carries down the cascade"
-  - name: "formal boundary environment"
+        reading: "The force does work on the flow at one rate, so a realization that injects more or less energy belongs to another family."
+    reading: "The force sustains the flow at a fixed mean injection rate. The inertial range carries this rate down the cascade."
+  - name: "formal environment at the boundary"
     symbol: boundaryenv
-    class: open                  # the record declares no boundary geometry to range over
+    class: open                  # no boundary geometry declared to range over
     shares: [b]
-    constrains: []               # the case states no constraint beyond the declared values of Om and b
-    reading: "the boundary values are imposed from outside, so external data close the domain"
+    constrains: []               # none beyond the declared values of Om and b
+    reading: "The boundary values are imposed from outside, so external data close the domain."
 
 maturity:
-  external_systems.class: open   # the universality domain over forcing and boundary families remains a product of the inquiry
+  external_systems.class: open   # universality domain over the forcing and boundary families not yet established

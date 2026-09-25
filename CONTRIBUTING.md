@@ -134,6 +134,16 @@ A finer reference appends a block anchor, declared at the end of the target line
 
 Link text names the result, the object, or the message found at the target, never the file name and never a bare category word.
 
+### Source entries
+
+A note cites a work by a key of the form `authYYYY`, placed as a tail tag after the claim it supports. The "Sources" section of the note lists every cited key once, in alphabetical order, in the following form:
+
+```markdown
+- [craver2007] ◐ [Craver, *Explaining the Brain*, Oxford University Press, 2007](https://philpapers.org/rec/CRAETB-2)
+```
+
+The mark after the key states how the entry was checked, so that a reader can judge how far to rely on it: ✓ the text was read in full · ◐ the entry was checked through an abstract, the publisher page, or a secondary summary · ○ the entry is cited from standard knowledge without a check. ^reading-marks
+
 ## Configuration file organization
 
 This project separates configuration concerns between two locations:

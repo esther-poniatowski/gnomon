@@ -14,35 +14,35 @@ source:
 
 The contrast is the third component of the [subject of inquiry](subject-of-inquiry.md): the foils relative to which the phenomenon is questioned.
 
-The contrast passes the [inclusion test](subject-of-inquiry.md#^inclusion-test): changing the foil changes the cause that explains.
+The contrast is [admitted as a specification because it changes the admissible answers](subject-of-inquiry.md#^inclusion-test): the foil determines which cause explains the phenomenon.
 
-*Example*: [lipton2004] "Syphilis explains why Smith rather than Jones contracted paresis when Jones lacked syphilis. It does not explain why Smith rather than Doe contracted it when Doe also had syphilis."
+*Example*: Smith and Doe had syphilis and Jones did not. Only Smith contracted paresis. Syphilis explains why Smith rather than Jones contracted paresis, but not why Smith rather than Doe did [lipton2004].
 
 | Specification | When it is required | Options or frame | Examples | Source |
 | ------------- | ------------------- | ---------------- | -------- | ------ |
-| Locus | for a contrastive why-question | other outcome (same system and conditions, other value of $P$) · other system ($P$ absent) · other condition (same system, other condition or intervention) | synchronous rather than asynchronous activity (outcome); this network rather than a network without inhibitory neurons (system); a strong rather than a weak stimulus (condition) | [vanfraassen1980]; [lipton2004]; potential outcomes $Y_i(d)$ vs $Y_i(d')$ [lundberg2021] |
-| Foil set | for a contrastive why-question; it defaults to the other values of the explanandum variable | per foil, the expressions over the declared observables that hold in that case, with a reading | asynchronous activity (listed); every other oscillation frequency (rule) | [woodward2003] |
+| Locus | for a contrastive why-question | other outcome (same system and conditions, other value of $P$) · other system ($P$ absent) · other condition (same system, different setting or intervention) | synchronous rather than asynchronous activity (outcome); this network rather than a network without inhibitory neurons (system); a strong rather than a weak stimulus (condition) | [vanfraassen1980]; [lipton2004]; potential outcomes $Y_i(d)$ vs $Y_i(d')$ [lundberg2021] |
+| Foil set | for a contrastive why-question, with the other values of the explanandum variable as default | per foil, the expressions over the declared observables that hold in that case, with a reading | asynchronous activity (listed); every other oscillation frequency (rule) | [woodward2003] |
 | Compatibility | never stated on its own: the locus fixes it | exclusive · compatible (fact and foil co-occur in different systems) | synchronous versus asynchronous activity of one network (exclusive); Smith versus Jones contracting paresis (compatible) | [vanfraassen1980]; [lipton2004] |
 | Foil status | with a foil set | observed (a realized comparison case) · counterfactual | a recorded control network (observed); the same network trained on another task (counterfactual) | [lipton2004] |
 
-- **Compatibility is fixed by the locus.** Outcome foils are exclusive, system and condition foils are compatible.  *Example*: one single network, under fixed conditions, cannot be both synchronous and asynchronous. In contrast, "Smith contracted paresis" and "Jones contracted paresis" could both be true. Although the formal definition of a contrast class admits exclusive foils only [vanfraassen1980], compatible foils remain legitimate, because they ask for a factor that differs between the two cases [lipton2004].
+- **Compatibility is fixed by the locus.** Outcome foils are exclusive. System and condition foils, by contrast, are compatible. *Example*: one network under fixed conditions cannot be both synchronous and asynchronous, whereas "Smith contracted paresis" and "Jones contracted paresis" can both be true. The formal definition of a contrast class admits exclusive foils only [vanfraassen1980]. Compatible foils nevertheless remain legitimate, because the question then asks for a factor that differs between the two cases [lipton2004].
     
-- **Foil status determines where the evidence comes from.** A *contrastive explanation* names a factor present in the case of the fact and absent in the case of the foil [lipton2004]. When the foil has been observed (e.g. a control animal, a second trained network), the factor is searched for by *comparing* the two recorded cases. When the foil never occurred (e.g. the same network, trained differently), its case must first be *produced*, by an intervention or by simulating a model. An observed foil also adds a presupposition: the comparison case exists and has been recorded.
+- **Foil status determines the source of the evidence.** A *contrastive explanation* names a factor present in the case of the fact and absent in the case of the foil [lipton2004]. When the foil has been observed (e.g. a control animal, a second trained network), the factor is searched for by *comparing* the two recorded cases. When the foil never occurred (e.g. the same network, trained differently), the case of the foil must first be *produced*, by an intervention or by simulating a model. An observed foil also adds a presupposition: the comparison case exists and has been recorded.
     
-- **Whether a contrast $X$ is required depends on the form of the question:**
+- **The form of the question determines whether a contrast $X$ is required:**
     
     - mandatory for contrastive why-questions;
-    - implicit in causal-effect questions, where it is the comparator;
+    - implicit in questions about a causal effect, where the contrast is the comparator;
     - optional for how-questions and for descriptive aims.
-    
-    A condition foil (i.e. the same system under another condition) often names a circumstance already listed among the conditions of $P$, for instance an inhibiting condition. The foil then refers to that entry instead of describing the circumstance a second time.
+
+- **A condition foil may reuse an entry of the conditions of $P$.** A condition foil (i.e. the same system in another setting) often names such an entry, for instance an inhibiting circumstance. The foil then refers to that entry, so the circumstance is described only once.
 
 ---
 ## Sources
 
-Marks: ✓ the text itself was read · ◐ checked through an abstract, the publisher page or a secondary summary · ○ cited from standard knowledge, not fetched in this session.
+Marks follow [the legend that states how each entry was checked](../../CONTRIBUTING.md#^reading-marks).
 
-- [lipton2004] ◐ Lipton, _Inference to the Best Explanation_, 2nd ed., ch. 3; [Lipton, "Making a difference"](https://www.hps.cam.ac.uk/files/lipton-making-difference.pdf)
-- [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)
-- [vanfraassen1980] ◐ van Fraassen, _The Scientific Image_, ch. 5; [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
-- [woodward2003] ○ [Woodward, _Making Things Happen_, OUP, 2003](https://academic.oup.com/book/4324)
+- [lipton2004] ◐ Lipton, _Inference to the Best Explanation_, 2nd ed., ch. 3; [Lipton, "Making a difference"](https://www.hps.cam.ac.uk/files/lipton-making-difference.pdf)
+- [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)
+- [vanfraassen1980] ✓ van Fraassen, _The Scientific Image_, ch. 5; [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
+- [woodward2003] ○ [Woodward, _Making Things Happen_, OUP, 2003](https://academic.oup.com/book/4324)
