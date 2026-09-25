@@ -17,7 +17,12 @@ This list holds the goals of `gnomon` that span several parts of the project. Th
 
 ## Frameworks
 
+- [ ] Update the README to register the new orientation of the framework and the pending features.
+- [ ] Improve the answer and assessment templates from the test cases.
 - [ ] Build a framework that formalizes definitions, grounded in the authoritative literature of epistemology and checked against concrete problems of `geonexus`. 🆔 definitions-framework
 - [ ] Build a framework that formalizes the decomposition of a question into subquestions. It extends the partly settled [decisions on questions](docs/TODO.md). 🆔 question-decomposition
 - [ ] Define a vocabulary of atomic research actions. It bears on the open decision on [primitive operations](docs/design/2-architecture/operations-and-modes.md#^t2-operation-primitiveness). 🆔 research-actions
 - [ ] Build a framework that formalizes derivation (the analysis), its results, and synthesis (the answer). It extends the open decision on [arguments and derivations](docs/design/3-aspect-specific/arguments-reasoning.md) and the [answer form](docs/epistemology/answer-form.md). 🆔 derivation-framework
+- [ ] Refactor the documentation for the epistemic framework. Create one file that enumerates all the fields by alphabetic order (including nested paths) and links to a markdown anchor that documents this field.
+
+
