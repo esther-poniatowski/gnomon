@@ -17,7 +17,7 @@ This list holds the goals of `gnomon` that span several parts of the project. Th
 
 ## Frameworks
 
-- [ ] Update the README to register the new orientation of the framework and the pending features.
+- [x] Update the README to register the new orientation of the framework and the pending features.
 - [ ] Improve the answer and assessment templates from the test cases.
 - [ ] Build a framework that formalizes definitions, grounded in the authoritative literature of epistemology and checked against concrete problems of `geonexus`. 🆔 definitions-framework
 - [ ] Build a framework that formalizes the decomposition of a question into subquestions. It extends the partly settled [decisions on questions](docs/TODO.md). 🆔 question-decomposition
