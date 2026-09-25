@@ -69,6 +69,25 @@ Contributions to the codebase should be developed in a local clone of the reposi
 - Use the body to explain what and why (not how)
 - Add references to issues or other commits using [GitHub keywords](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/using-keywords-in-issues-and-pull-requests)
 
+### Verifying a change
+
+A change is verified by the narrowest checks that exercise it. A change to a shared template reaches every dependent fixture and every downstream template, so those fixtures and templates are checked in the same pass.
+
+- **Alignment of notes and templates:** each row of a method table resolves to one key, in the same order, and every key of a template is documented.
+- **Symbol resolution:** each symbol is unique within its record, and every reference and every identifier of a formula resolves to a declaration. Each rule carries a planted negative case that fails for the intended reason.
+- **YAML integrity:** every template and every fixture parses, keeps its `id` and its `type`, and holds no uppercase placeholder.
+- **Reference integrity:** each identifier pointing to another record, and each Markdown link, resolves to one existing target.
+- **Downstream consistency:** a change to a requirement of the epistemic task updates every field of an answer or an assessment that reads that requirement.
+
+## Owner of each contract
+
+Each contract of the framework has one owning file. A contributor reads that file before editing any file that depends on the contract.
+
+- The [expression language](docs/epistemology/symbols-and-expressions.md) fixes the syntax of symbols, expressions and signatures.
+- The [specification method](docs/epistemology/_index.md) fixes the meaning of every inquiry field and the options that the field admits.
+- The [record templates](src/gnomon/data/templates/_index.md) fix the machine-readable shape of each record and the order of its keys.
+- The tests of [template alignment](tests/test_gnomon/test_template_alignment.py) and of [symbol resolution](tests/test_gnomon/test_symbol_resolution.py) enforce that each method table aligns with its template, and that every symbol and every reference resolves.
+
 ## Writing documentation
 
 Every Markdown file under `docs/` is a note: it declares its metadata in a YAML frontmatter block, and it is registered in the index of the folder holding it. A file that satisfies neither is invisible to a reader navigating by index, and is effectively lost while appearing to exist.
@@ -133,6 +152,8 @@ A finer reference appends a block anchor, declared at the end of the target line
 ```
 
 Link text names the result, the object, or the message found at the target, never the file name and never a bare category word.
+
+Renaming a note, an anchor or an identifier requires updating every inbound reference in the same change, so that no link is left dangling.
 
 ### Source entries
 

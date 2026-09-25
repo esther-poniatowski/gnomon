@@ -22,14 +22,6 @@ Two ratified stages replace resolution by prose name. ^stages
 
 The contract of both stages is owned by the syntax, the binders and the resolution rule of the [expression language](../docs/epistemology/symbols-and-expressions.md). A stage is not complete while any dependent record still resolves a reference by prose.
 
-A filled inquiry draws on three vocabularies, each with one author and one reach. ^three-vocabularies
-
-| Vocabulary | Author | Reach | Where it lives |
-| --- | --- | --- | --- |
-| Fields and their option lists | Designer | Every problem | The method notes and the templates, kept aligned by the structural checks. |
-| Symbols of one problem | Author of that problem | Its own records | The records themselves, collected into one generated table per problem. |
-| Operators | Mixed | Canonical part everywhere, the rest in one problem | The [canonical set](../docs/epistemology/symbols-and-expressions.md#^operator-groups) sits in the registry. The remainder sits in one `operators.yml` per problem, read by all its records. |
-
 ## Task state
 
 Seven theoretical inquiries each fill the three inquiry records, and six of them also carry a candidate answer and its assessment. Each proposed change rests on evidence recorded in the [diagnosis of reported problems](framework-issues-synthesis.md), so each row below records only the implementation state of its change.
@@ -248,39 +240,14 @@ Two candidates *shrank* without changing owner. First, the requested implication
 
 Unknown scientific results are not implementation candidates: their values remain `open`.
 
-## Source ownership
-
-Each responsibility has one source. Read the current owner before editing any dependent file. ^source-ownership
-
-- The [expression language](../docs/epistemology/symbols-and-expressions.md) owns the language contract: the syntax of symbols, expressions and signatures.
-- The [specification method](../docs/epistemology/_index.md) owns the semantic contract: the meaning and admissible options of every inquiry field.
-- The [record templates](../src/gnomon/data/templates/_index.md) own the representation contract: the machine-readable record shapes and their field order.
-- The [synthesis of reported problems](framework-issues-synthesis.md) owns the diagnosis: the evidence and smallest required capability behind each problem, supported by the five case logs.
-- The tests of [template alignment](../tests/test_gnomon/test_template_alignment.py) and of [symbol resolution](../tests/test_gnomon/test_symbol_resolution.py) own the structural checks: method tables align with templates, and every symbol and reference resolves.
-
-## Verification contract
-
-Each stage uses the narrowest checks that exercise its changes. A change to a shared template still requires checking every dependent fixture and downstream template.
-
-- **Alignment of notes and templates:** each row of a method table resolves to one key, in the same order, and every key is documented.
-- **Symbol resolution:** each symbol is unique within its record. References and the identifiers in a formula all resolve to declarations. Each rule has a planted negative case that fails for the intended reason.
-- **YAML integrity:** every template and fixture parses, retains its `id` and `type`, and contains no uppercase placeholder.
-- **Reference integrity:** each identifier that points to another record and each Markdown link resolves to one existing target.
-- **Downstream consistency:** a change to a task requirement also updates every dependent answer or assessment field.
-
-The documented `gnomon` conda environment is absent. Because Python must not run in the base environment, the read-only checks to date ran in `dev`. Obtain approval before creating the project environment or installing any package.
-
 ## Active constraints
 
 - The designer controls each approval gate. Prepare a proposal and a targeted diff, but do not begin an unreviewed stage.
 - Unknown scientific conclusions remain `open`. A protocol choice not yet made stays pending and never becomes `open`.
 - Every stage changes its semantic source together with all dependent implementation and verification artifacts.
-- The YAML templates remain pure data records. Explanatory prose belongs in the method notes or case descriptions.
-- Every new Markdown file needs frontmatter and an entry in its folder index. Every renamed identifier requires sweeping all its inbound references.
-- Reread each current file immediately before editing it and preserve concurrent user changes.
 - The worktree contains unrelated changes under `.obsidian/` and `docs/methods-taxonomies/`. Do not modify or discard those changes.
 - Changes under `docs/design/` require an explicit dependency and designer approval.
-- No new package may be installed without approval.
+- No new package may be installed without approval. The documented `gnomon` conda environment is absent, so the read-only checks to date ran in `dev`.
 
 ## Open questions
 
@@ -295,54 +262,40 @@ The documented `gnomon` conda environment is absent. Because Python must not run
 
 ## Decision log
 
+Decisions that later work must respect are recorded apart, in the [architecture decisions](../docs/adr/_index.md). This log holds the remaining choices, each local to one stage of this work.
+
 | Date | Decision | Rationale |
 | --- | --- | --- |
-| 2026-09-21 | Promote a limitation to the shared schema only when a typed distinction recurs or changes the admissible answers. | The rule keeps a complication specific to one case from expanding every record. |
 | 2026-09-21 | Keep local author choices separate from unresolved scientific results. | Only scientific results warrant `open`. |
 | 2026-09-22 | Reorient the records toward a modeling language, through the two [ratified stages](#^stages). | The records already depended on references, yet those links were unreliable, because a prose name carried a symbol, a gloss, a signature and sometimes a definition at once. |
 | 2026-09-22 | Fold symbols into the fixture migration. | Symbols added after the migration would have required a further pass over every record. |
-| 2026-09-22 | Derive grain from the signature and the definition. Retire the retention field, since it restated grain. | Every index absent from the signature was consumed by a binder that already names the map. |
-| 2026-09-22 | Collect no table of record symbols, and keep the operator vocabulary in one source instead. | Each record scopes its own symbols, so their availability across the corpus needs no decision. The operator vocabulary, by contrast, needed one source, because of all vocabularies only the operator set was written in two places. |
-| 2026-09-22 | Generate one symbol table per problem, reversing the earlier decision to collect none. | The earlier decision inferred that no table was needed because symbols have no scope across the corpus. An author fills and consults the records of one problem together, so a table serves at that level. |
-| 2026-09-22 | Split the operator vocabulary by writer, per the [division by author and reach](#^three-vocabularies). | Of 26 operators in the canonical set, four were used by three or more problems and eight by none, since the set had grown one case at a time. |
+| 2026-09-22 | Split the operator vocabulary by writer, per the [division by author and reach](../docs/adr/registries-as-source.md). | Of 26 operators in the canonical set, four were used by three or more problems and eight by none, since the set had grown one case at a time. |
 | 2026-09-22 | Name a law's third role `constraint` rather than `coexistence`. | The records already labelled those laws an incompressibility constraint and an invariance of the state space, so the working term matched that usage. |
 | 2026-09-23 | Keep the infix surface and define it over an S-expression core, per the [syntax decision](../docs/adr/expression-syntax.md). | A parser becomes available while records keep their current surface, and an operator stays a declared symbol, never a reserved word. |
 | 2026-09-23 | Write a LaTeX form in single quotes. | A serializer reads the backslash of `\nu` inside double quotes as an escape, so the form arrives as a newline and a letter. The defect is of the same class as the symbol that a serializer read as a boolean. |
 | 2026-09-23 | Write a deliberately invalid value as `no-such-role`, a string that no single edit turns into an admitted token. | A string close to an admitted value reads as a typo awaiting correction. Once corrected, such a string leaves the check unable to fail. |
 | 2026-09-22 | Treat `status` as one concept whose states vary with the record kind, not as a generic slot. | Where `kind` named seven unrelated distinctions, `status` names the lifecycle of a record everywhere it appears. Only the admissible states depend on the content of the record. |
-| 2026-09-22 | Declare every vocabulary and requirement in package data, and let the notes document those registries. | A checker that parses prose couples the logic of the framework to the formatting of a document. Such a checker also made the package depend on a workspace that holds `docs/`. Only the alignment check has reason to read a document. |
-| 2026-09-22 | Record no list, per aim, of fields that must stay empty. | Three counterexamples refute such a list: a formal model class appears with two matched outputs, with one, and with none. Neither the aim, the target type nor the requested relation therefore decides the exclusion. |
 | 2026-09-22 | Admit a gloss beside an expression, bounded by the rule that it carries no commitment. | The language became formal enough that a reader must reconstruct a condition such as `d_t(N) = 0`. A gloss in words costs less than that reconstruction or a guess. |
-| 2026-09-22 | Declare a quantity of an external system among the record's own entries, and mark it with its owner. | The uniqueness rule, the resolver and every inbound reference assume one flat symbol table per record. A quantity nested inside an external system would introduce scopes for one attribute. |
 | 2026-09-22, revised 2026-09-24 | Keep the constraints of an external system in its entry, outside the laws, and give each one the form of a law. | Two of the three reasons for keeping the constraints bare have expired. `granularity` is retired, and a role applies: of the three constraints written, two are `state-constraint` and one is an admissibility. The third reason, the object that a claim governs, was contestable from the start, and a constraint ranges over places as a law does. The constraints nevertheless stay with the external systems, because their block exists to state the boundary and no law of the target concerns an external system. |
-| 2026-09-22 | Infer a shared variable's direction from its declaring block, and retire the field that stated it separately. | Input, output and coupling restated whether the variable is exogenous or internal, so a check was needed to hold the two consistent. |
 | 2026-09-22 | Declare a variable set outside the system that varies during the dynamics as exogenous. | The rule that an interface variable is a state variable or a parameter forced a false choice. A driving force, a prescribed trajectory and a noise process are determined outside the system, yet none is held fixed. |
 | 2026-09-22 | Type operators with `signature` and `values` rather than `takes` and `gives`. | A quantity indexed by a set and an operator taking an argument in that set have the same shape. Moreover, quantities and the method notes already relied on the two keywords. |
 | 2026-09-22 | Move the overparameterization restriction from the question's domain to the selection criteria of the reference class. | Membership depends on a joint property of the architecture and the sample that no other specification fixes. A selection criterion records exactly such a property. Moreover, all five problems had left the field empty, while one of them carried its criterion as prose elsewhere. |
-| 2026-09-22 | Carry every formula under `expression`, and let its block fix its role. | A law can be false and a definition cannot, but the block already separates the two, so two field names encoded the distinction twice. |
 | 2026-09-23 | Open every entry with its name and its statement, before its symbol and its notation. | A reader identifies an entry by its name, and the symbol serves afterwards as the handle for the checker and for other expressions. |
 | 2026-09-23 | Remove a definition that restates a law that the same record states. | A law can be false of the system and a definition cannot, so one formula carried under both hid which commitment the record makes. |
 | 2026-09-23 | Divide the three identifiers of an entry. The name labels the entry, formulas use the symbol as a handle, and the gloss states the content that neither of them carries. | A gloss that paraphrases its name reads as content and states nothing, so it survives review while the entry stays unexplained. |
 | 2026-09-23 | Collect the operators of a problem in one file, read against all its records. | An operator was typed over sets declared in the target and used in the phenomenon, so neither record could both own it and hold every set that its type names. |
 | 2026-09-23 | Carry the reason for a requirement in a gloss beside it, and no longer in the case description. | Each restriction states the cases that it excludes. No field stated the reason, so a later reader could not tell a scientific commitment from an arbitrary narrowing. |
 | 2026-09-23 | Retire `task.level.aggregation` without a replacement. | Every proposed replacement carried a presupposition that the level must not make: that an explanans uses aggregates, and that each of them relates a single variable to another. A satisfaction test already checks the admissibility of an aggregate. The [declaration of the aggregate](../docs/epistemology/target-system.md#^aggregate-admissibility) carries the commitment. |
-| 2026-09-23 | Do not infer from a case missing among the seven fixtures that no requirement exists. | The fixtures request no causal relation, yet inquiries seeking one are ordinary. A field is therefore justified by the *design* of the framework. |
-| 2026-09-23 | Name the record kinds that the checkers read, separately from the blocks that declare symbols. | One constant had served both purposes, so adding a kind that declares no symbol silently excluded it from every check. |
-| 2026-09-23 | Keep a dead declaration wherever its purpose can be stated, and connect it to the record. | In three cases, the purpose could be stated. Four microbial coefficients now type the interaction specification. In the case on delayed generalization, a law now draws the parameters from the declared initialization distribution. In the case on active matter, a domain is now fixed by its size and its boundary geometry. Without these declarations, the typed content would be lost and the missing law hidden. |
 | 2026-09-23 | Let a requirement path traverse a list, where it formerly read a block of tokens. | A field whose entries carry a reason is a list of mappings. An aim that requires a value in every entry therefore needs a path that traverses the list. |
 | 2026-09-23 | Write a modulating condition as a relation over declared symbols, no longer as a direction in words. | `increasing` and `decreasing` were already canonical, since a manifestation may take the form of a dependence. The direction of a modulation therefore needed no vocabulary of its own. |
 | 2026-09-23 | Admit no `open` in an external constraint, and mark a genuine unknown with `maturity` instead. | The value `open` carried two meanings that a reader cannot tell apart. One of the two meanings silently hides the quantities that a constraint would have named. |
 | 2026-09-23 | Require every carrier of an interaction to be indexed by both its endpoints. | With this requirement, the record reads as a graph. A quantity indexed by the source alone is excluded, because it states a property of that endpoint and carries no influence on another part. |
 | 2026-09-23 | Generate the interaction graph over kinds, not over members. | The ordered pairs that are joined are fixed by a parameter of a member model. A target record leaves that parameter unvalued, so it states where to read the edges and lists no edge. |
-| 2026-09-23 | Express a variant as a partition of one symbol table, not as a nested schema. | The uniqueness rule and every inbound reference assume one flat table per record, so a nested schema would introduce scopes for one attribute. |
 | 2026-09-23 | Keep at the root a quantity that every member has, and let the laws differ. | A growth law renamed per variant broke the microbial phenomenon that takes its Jacobian. Every member has a growth law, and these laws differ only in their arguments. The law itself states those arguments. |
-| 2026-09-23 | State an interaction on the law that asserts it, not in a block of its own. | Wherever a law existed, the block restated that law. Where none existed, the record could write one: a dependence of a growth law on a coefficient is falsifiable and expressible with the canonical relations. |
-| 2026-09-23 | Merge the internal and exogenous variables, and keep the parameters apart. | No key belonged to one of the three blocks alone, so the first two encoded one distinction. The boundary of the third block survives because it carries a rule: a parameter may not be indexed by the course. |
 | 2026-09-23 | Return the overparameterization restriction to the question, reversing the move of 2026-09-22. | The domain had held one parameter to a set, a form that no joint proposition fits, and that limitation forced the earlier move. The domain now carries a joint restriction, so the constraint sits with the inquiry that imposes it and another question may be put below the same line. |
 | 2026-09-23 | Read the endpoints of an influence from the order of its pairs. | Separate names for the endpoints restated `applies_to` on one side and the pair order on the other. For an influence between two parts of one kind, the pair of names carried no information. |
 | 2026-09-23 | Rebuild a vocabulary from the assertions of the records, not from the needs of the first cases. | `constraint` had absorbed three fifths of the laws, as `distribution-statistics` had the aggregations. A value that draws no distinction hides the claims of the entries that it labels. |
 | 2026-09-23 | Admit an influence of more than two places. | A binary product presupposed that every influence has one source. The phenomenon records were corrected for exactly that fixed arity: a higher-order term has an effect that neither of its two sources carries alone. |
-| 2026-09-23 | Merge two blocks when their boundary only restates the quantity that an entry names. | Restrictions on a parameter and on a variable differ in the kind of quantity that they name. The target record already classifies that kind. The separate blocks left implicit and unchecked the only rule that the boundary carried: only a variable can be clamped or held stationary. |
 | 2026-09-23 | Read which members carry a symbol from the target, in the phenomenon as in the laws. | A phenomenon declares no variant of its own. The rule that an unmarked claim must be readable by every member that it ranges over therefore needs a fact held one record upstream, in the target. |
 | 2026-09-23 | Let a maturity marker license a gap that a check would otherwise report. | The marker had no consumer, so a record could admit a gap and no check would read the admission. A check that consults the marker distinguishes an omission from a decision. |
 | 2026-09-23 | Give an operator type variables before elevating any. | An operator typed at its one call site carries that site into every inheriting record. An elevated adjoint would thus have imported the state space of one problem into all those records. |
@@ -359,7 +312,6 @@ The documented `gnomon` conda environment is absent. Because Python must not run
 | 2026-09-24 | Keep the vocabulary of factors, and let each bear on several elements. | The earlier reading that the vocabulary restates `bears_on` was mistaken. A `law-property` is a property of a law, such as invariance, additivity or factorization. No record names a law property before an answer uncovers one. Each kind names the object that carries the factor, and a property of a family bears on each of its members. |
 | 2026-09-24 | Check the warrant that a law claims, beyond recording it in a field. | The decision that a warrant propagates to every result resting on it has no force unless a check confirms that each law marked derived follows from its premises. Without that check, the field would record only an intention. |
 | 2026-09-25 | Rename the opaque option values and the reference keys of an assessment. | Each value now names what it selects: `class-actual` and `class-possible` became `actual-systems` and `possible-systems`, `parameter-draw` and `structure-draw` became `random-parameters` and `random-structure`, `link` became `mapping`, and `function` became `functional`, the only noun among the adjectives of the requested relation. The keys `assesses` and `against` became `answer` and `question`, like the reference keys of the other records. |
-| 2026-09-25 | Never list `open` in a closed vocabulary, and name the first state of a question `posed`. | The registry accepts `open` in every closed field and stated that it lists none, yet twelve vocabularies listed it. The lifecycle state `open` of a question also gave the sentinel a second meaning, so that state is now `posed`. |
 
 ## Synchronization debt
 
