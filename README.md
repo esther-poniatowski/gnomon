@@ -75,6 +75,8 @@ Design documents are maintained in `docs/design/`:
 
 Writing-quality rules are maintained in [hermeneia](https://github.com/esther-poniatowski/hermeneia).
 
+The [project goals](TODO.md) are listed apart from the design decisions.
+
 ---
 
 ## Contributing
