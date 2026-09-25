@@ -1,0 +1,91 @@
+# tests the answer form against an exploratory inquiry
+
+title: "Catalogue of exceptional phase transitions"
+statement: "For a deterministic continuum subfamily near a bifurcation at weak amplitude, nonreciprocal coupling changes the spectrum of the linearization of two order parameters. The catalogue that results contains the three regimes named in the second law. The catalogue omits the lattice variant and the persistence tests required for stochastic phases."
+id: ans.nonreciprocal-active-matter.exceptional-transition-catalogue
+type: answer
+status: informally-backed
+answers: quest.nonreciprocal-active-matter.phase-exploration
+variant: continuum
+
+constituents:
+  - reference: system.nonreciprocal-active-matter#sp
+
+index_sets: []
+
+variables:
+  - reference: system.nonreciprocal-active-matter#u
+  - name: "Jacobian of the homogeneous dynamics of the two species"
+    symbol: Jlin
+    determined: within
+    signature: []
+    values: "matrices(reals, 2, 2)"
+    expression: "jacobian(F + G)"
+    reading: "The Jacobian linearizes the deterministic local dynamics about the homogeneous ordered state."
+    shared: true
+  - name: "largest growth rate of a mode"
+    symbol: gamma_max
+    notation: '\gamma_{\max}'
+    determined: within
+    signature: []
+    values: reals
+    expression: "max(re(spectrum(Jlin)))"
+    reading: "The variable takes the largest real part among the linearized collective modes."
+    shared: true
+
+parameters:
+  - reference: system.nonreciprocal-active-matter#F
+  - reference: system.nonreciprocal-active-matter#G
+  - reference: system.nonreciprocal-active-matter#D
+  - reference: system.nonreciprocal-active-matter#L
+  - reference: system.nonreciprocal-active-matter#d
+
+laws:
+  - name: "classification of the linear spectrum near onset"
+    symbol: spectral_classification
+    signature: []
+    role: state-constraint
+    expression: "gamma_max = max(re(spectrum(Jlin)))"
+    reading: "The real and imaginary parts of the leading eigenmodes distinguish a stationary loss of stability from an oscillatory nonreciprocal one."
+    warrant: derived-in-a-limit
+    rests_on: "The law follows from a linearization at weak amplitude and a bifurcation analysis, https://doi.org/10.1038/s41586-021-03375-9 [fruchart2021]."
+  - name: "continuum catalogue near onset"
+    symbol: continuum_catalogue
+    signature: []
+    role: measurement
+    expression: "phase_catalogue = enum(\"static ordered\", \"time-dependent chiral\", \"spatially patterned\")"
+    reading: "The reduced continuum theory separates the three regimes that this law names."
+    warrant: derived-in-a-limit
+    rests_on: "The law rests on published phase diagrams of the normal form and on continuum examples [fruchart2021]."
+
+organization:
+  - name: "directed feedback between the two species"
+    symbol: answer_crosscoupling
+    reading: "The two species form a feedback pair whose directed couplings need not be reciprocal, so the linearized generator can be non-normal."
+    relates: "prod(sp, sp)"
+    realized_by: [spectral_classification]
+
+realizations: []
+
+idealizations:
+  - assumption: "The stochastic increments are neglected in the classification near onset."
+    motive: isolation
+    buys: "The idealization yields a deterministic bifurcation problem whose stationary and oscillatory instabilities can be separated spectrally."
+    holds_for: "The idealization holds in regimes in which fluctuations do not destroy or reorder the deterministic phases."
+  - assumption: "The dynamics are reduced to weak amplitudes about a homogeneous ordered state."
+    motive: tractability
+    buys: "The idealization yields a finite-dimensional normal form and a phase catalogue near the instability."
+    holds_for: "The idealization holds for the continuum subfamily sufficiently close to the bifurcation studied in the cited analysis."
+
+explanans:
+  - name: "nonreciprocal spectral instability"
+    factor: law-property
+    holds: "G != adjoint(G) and gamma_max >= 0"
+    bears_on: [G, Jlin]
+    through: [spectral_classification, continuum_catalogue]
+    produces: phase_catalogue
+    separates: []
+    appeals_to: []
+    procedure: "Classify the eigenvalue collision and the unstable mode, then continue the resulting branch, whether its solutions are stationary or vary in time."
+
+maturity: {}

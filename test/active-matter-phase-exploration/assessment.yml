@@ -1,0 +1,61 @@
+# tests one deliberately narrow exploratory candidate
+
+title: "Assessment of the catalogue of exceptional phase transitions"
+id: assess.nonreciprocal-active-matter.exceptional-transition-catalogue
+type: assessment
+status: stabilized
+answer: ans.nonreciprocal-active-matter.exceptional-transition-catalogue
+question: quest.nonreciprocal-active-matter.phase-exploration
+
+tests:
+  admissibility:
+    scope:
+      verdict: fail
+      evidence: "The answer covers one deterministic continuum subfamily at weak amplitude, whereas the question includes the continuum and lattice variants. The search of the question also varies the stochastic realization and the spatial dimension, along with the admitted self-dynamics and coupling operators."
+    grain:
+      verdict: fail
+      evidence: "The catalogue supplies three qualitative labels but no diagnostic at each (L, d). The answer also supplies neither recurrence distributions nor the finite-size scaling that separates a regime that disappears as L grows from a thermodynamic phase."
+    contrast:
+      verdict: not-applicable
+      evidence: "The question declares locus: none and names no foil."
+    relation:
+      verdict: not-applicable
+      evidence: "Exploration requests no relation between an explanans and an already specified phenomenon."
+    individuation:
+      verdict: pass
+      evidence: "The answer retains the declared species fields and derives its Jacobian from the target operators, so it introduces no incompatible bearer."
+    admissible-explanans:
+      verdict: not-applicable
+      evidence: "The exploratory question requests no explanans. The admissibility bound therefore has nothing to restrict."
+    modal-strength:
+      verdict: fail
+      evidence: "The requested strength is actual for the admitted stochastic models. The answer establishes only possible phases of a deterministic reduced subfamily."
+    product:
+      verdict: fail
+      evidence: "An exploration must return the detected catalogue and persistence classification over the declared search space. The candidate omits the lattice search and every persistence result."
+  warrant:
+    phenomenon-established:
+      verdict: not-applicable
+      evidence: "The phenomenon is the product of the exploration and was deliberately left open."
+    foil-evidence:
+      verdict: not-applicable
+      evidence: "No foil is specified."
+    law-warrant:
+      verdict: pass
+      evidence: "The candidate labels both laws as limit derivations tied to a published bifurcation analysis [fruchart2021]. The labels therefore claim no measured property of the full target class."
+    closure:
+      verdict: fail
+      evidence: "The generic target laws do not select the homogeneous ordered state or the normal form at weak amplitude from which the candidate laws are derived."
+    fidelity:
+      verdict: not-applicable
+      evidence: "The question declares required accuracy not applicable because no empirical measurement is being matched."
+    robustness:
+      verdict: fail
+      evidence: "The answer relaxes neither the idealization that removes noise nor the reduction to weak amplitude, and it supplies no finite-size analysis."
+    selection:
+      verdict: not-applicable
+      evidence: "Membership in the target class is not conditioned on observing a phase."
+
+obligations: []
+appraisal: []
+maturity: {}

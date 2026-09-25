@@ -1,0 +1,62 @@
+# qualitative description omitting the requested map over the full coefficient domain
+
+title: "Assessment of the snakes-and-ladders catalogue"
+id: assess.swift-hohenberg.snakes-ladders-catalogue
+type: assessment
+status: stabilized
+answer: ans.swift-hohenberg.snakes-ladders-catalogue
+question: quest.swift-hohenberg.localized-states-description
+
+tests:
+  admissibility:
+    scope:
+      verdict: fail
+      evidence: "The answer combines representative numerical slices with analytic results on the branches. The answer does not assign a topology and a stability structure throughout the full real domain of the coefficients (r, b) declared by the target."
+    grain:
+      verdict: fail
+      evidence: "The answer states the topology and symmetry classes. The stability result supplies a criterion but omits the requested intervals along every branch."
+    contrast:
+      verdict: not-applicable
+      evidence: "The descriptive question declares no foil."
+    relation:
+      verdict: not-applicable
+      evidence: "The descriptive aim requests a characterization and no explanatory relation."
+    individuation:
+      verdict: pass
+      evidence: "The answer keeps the target field as its bearer. The candidate derives both the continuation norm and the stability eigenvalue from the target field and its evolution law."
+    admissible-explanans:
+      verdict: not-applicable
+      evidence: "The descriptive aim requests no explanans. The question therefore deliberately places no bound on the explanans."
+    modal-strength:
+      verdict: pass
+      evidence: "At the coefficient values explored by continuation, the reported branches are actual stationary solutions of the formal equation."
+    product:
+      verdict: fail
+      evidence: "The answer names all requested feature kinds but omits their values across the admitted domain. The catalogue is therefore only partial."
+  warrant:
+    phenomenon-established:
+      verdict: pass
+      evidence: "Numerical continuation yields stationary localized profiles. Each profile is checked against the stationary equation and the boundary condition of localization."
+    foil-evidence:
+      verdict: not-applicable
+      evidence: "No foil is specified."
+    law-warrant:
+      verdict: pass
+      evidence: "The stationary equation is derived from the target law. Branch topology and stability are accurately marked as numerical results of the cited studies."
+    closure:
+      verdict: pass
+      evidence: "Both numerical procedures, continuation and the computation of eigenvalues, use the complete formal Swift-Hohenberg equation that the target declares."
+    fidelity:
+      verdict: fail
+      evidence: "The `structural-only` requirement covers three features. The answer supplies topology and symmetry but does not match stability at the requested grain over coefficients."
+    robustness:
+      verdict: pending
+      evidence: "The answer states the idealization of a finite domain. The answer does not check that each reported branch regime survives an enlarged domain."
+    selection:
+      verdict: not-applicable
+      evidence: "Membership in the equation class does not depend on whether localized states were found."
+
+obligations: []
+appraisal: []
+maturity:
+  tests.warrant.robustness: open

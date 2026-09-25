@@ -1,0 +1,137 @@
+# rests on the effective theory of representation learning [liu2022]
+
+title: "Account of grokking through a structured representation that forms slowly"
+statement: "In the toy addition models, the decoder fits the training data first, and the embedding representation acquires its structure more slowly [liu2022]. A positive rate of representation learning eventually produces generalization. A zero rate leaves persistent memorization, and a faster rate removes the delay."
+id: ans.grokking.slow-structured-representation
+type: answer
+status: informally-backed
+answers: quest.grokking.explain_delay
+
+constituents:
+  - reference: system.delayed_generalization_networks#unit
+  - reference: system.delayed_generalization_networks#coord
+
+index_sets: []
+
+variables:
+  - reference: system.delayed_generalization_networks#theta
+  - reference: system.delayed_generalization_networks#Ltrain
+  - reference: system.delayed_generalization_networks#Ltest
+  - name: "normalized learned representation"
+    symbol: Rrep
+    notation: 'R'
+    determined: within
+    signature: [step]
+    values: open
+    expression: "representation(theta)"
+    reading: "The variable holds the normalized input embeddings extracted from the trained model."
+    shared: true
+  - name: "representation quality index"
+    symbol: RQI
+    signature: [step]
+    values: "interval(0, 1)"
+    expression: "representation_quality(Rrep)"
+    reading: "The index gives the fraction of parallelograms consistent with the task that the learned embedding geometry realizes."
+    shared: true
+  - name: "effective Hessian of the representation"
+    symbol: Hrep
+    signature: []
+    values: open
+    expression: "jacobian(grad(effective_loss(Rrep)))"
+    reading: "The variable is the Hessian of the normalized effective loss of the representation."
+    shared: true
+  - name: "slowest positive rate of representation learning"
+    symbol: lambda3
+    notation: '\lambda_3'
+    determined: within
+    signature: []
+    values: "nonneg(reals)"
+    expression: "min(pos(re(spectrum(Hrep))))"
+    reading: "The variable gives the first nonzero relaxation rate of the effective dynamics of the representation."
+    shared: true
+
+parameters:
+  - reference: system.delayed_generalization_networks#Arch
+  - reference: system.delayed_generalization_networks#opt
+  - reference: system.delayed_generalization_networks#train_set
+  - reference: system.delayed_generalization_networks#test_set
+  - name: "learning rate of the embedding"
+    symbol: eta_rep
+    notation: '\eta_R'
+    signature: []
+    values: "pos(reals)"
+    reading: "The optimizer applies this step size to the embedding coordinates."
+  - name: "threshold of representation quality for generalization"
+    symbol: q_gen
+    signature: []
+    values: "interval(0, 1)"
+    reading: "The held-out task criterion is reached at this representation quality."
+
+laws:
+  - name: "effective relaxation of the representation"
+    symbol: representation_flow
+    signature: [step]
+    role: evolution
+    expression: "diff(Rrep, step) = -eta_rep * Hrep * Rrep"
+    reading: "The toy effective theory relaxes the normalized embedding geometry along the modes of its representation Hessian."
+    warrant: posited
+    rests_on: "The law uses a published effective loss, https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html [liu2022]."
+  - name: "timescale of representation learning"
+    symbol: representation_time
+    signature: []
+    role: input-output
+    expression: "depends_on(tgen - tfit, 1 / (lambda3 * eta_rep))"
+    reading: "The inverse of the slowest nonzero representation rate sets the scale of the delay after fitting."
+    warrant: derived-in-a-limit
+    rests_on: "The law follows from the linear effective dynamics in the limit of an infinitesimal decoder step [liu2022]."
+  - name: "structured representation supports held-out prediction"
+    symbol: generalization_link
+    signature: [step]
+    role: state-constraint
+    expression: "RQI >= q_gen implies Ltest <= eps_gen"
+    reading: "Once additive structure consistent with the task is present in the embeddings, unseen input pairs share the representation used for trained pairs."
+    warrant: measured
+    rests_on: "The law rests on the correspondence between representation quality and held-out accuracy reported across the toy experiments [liu2022]."
+
+organization:
+  - name: "decoder fit precedes representation learning"
+    symbol: two_timescale_training
+    reading: "The decoder reaches the training criterion before the slower embedding geometry acquires the structure that supports generalization."
+    among: [generalization_link, representation_flow]
+    realized_by: [representation_time]
+
+realizations: []
+
+idealizations:
+  - assumption: "The task is the toy addition problem with a learned embedding table and a decoder."
+    motive: tractability
+    buys: "The idealization supplies an explicit observable of representation quality and an effective loss over embedding geometry."
+    holds_for: "The idealization holds only for the toy addition architecture and for closely matched experiments. The idealization does not extend to arbitrary algorithmic tasks or architectures."
+  - assumption: "In the effective theory, the step of the decoder is infinitesimal relative to representation learning."
+    motive: isolation
+    buys: "The idealization supplies a closed linear relaxation law for the normalized representation."
+    holds_for: "The idealization holds in the timescale regime in which decoder motion does not alter the effective representation Hessian."
+
+explanans:
+  - name: "slow but positive relaxation of the representation"
+    factor: condition
+    holds: "0 < lambda3 * eta_rep and tfit < 1 / (lambda3 * eta_rep)"
+    bears_on: [lambda3, eta_rep]
+    through: [representation_flow, representation_time, generalization_link]
+    produces: positive_delay
+    separates: [no_delay]
+    appeals_to: []
+    procedure: "The decoder first memorizes the training sample. The slower positive representation mode then builds geometry consistent with the task and lowers the held-out loss."
+  - name: "nonzero mode of representation learning"
+    factor: condition
+    holds: "lambda3 > 0"
+    bears_on: [Hrep]
+    through: [representation_flow, generalization_link]
+    produces: crossing_order
+    separates: [no_generalization]
+    appeals_to: []
+    procedure: "A positive relaxation rate lets the structured representation emerge before the observation horizon. A zero rate leaves the memorizing solution without that route to generalization."
+
+maturity:
+  variables.Rrep.values: open
+  variables.Hrep.values: open

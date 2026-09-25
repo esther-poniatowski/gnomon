@@ -1,0 +1,64 @@
+# tests a mechanistically transparent but deliberately narrow grokking account
+
+title: "Assessment of the account through a structured representation"
+id: assess.grokking.slow-structured-representation
+type: assessment
+status: stabilized
+answer: ans.grokking.slow-structured-representation
+question: quest.grokking.explain_delay
+
+tests:
+  admissibility:
+    scope:
+      verdict: fail
+      evidence: "The account is derived for a toy architecture that learns addition and is supported by selected experiments on that task and on permutation tasks. Further evidence comes from transformer and MNIST experiments. The question, however, ranges over finite overparameterized networks on algorithmic tasks."
+    grain:
+      verdict: fail
+      evidence: "The candidate explains a positive delay scale for a training specification but does not derive the requested censored distribution Pdelay across initialization draws."
+    contrast:
+      verdict: pass
+      evidence: "A faster representation mode removes the delay. With lambda3 = 0, no representation is learned and memorization persists. The two factors therefore address both declared foils."
+    relation:
+      verdict: pass
+      evidence: "Within the effective toy theory, the spectral decomposition of Hrep yields the timescale of the delay mathematically. The declared link law then connects that timescale to the held-out loss through representation quality."
+    individuation:
+      verdict: pass
+      evidence: "The account retains the computational units and parameter coordinates of the target and defines its representation and Hessian from the parameter trajectory."
+    admissible-explanans:
+      verdict: pending
+      evidence: "The question deliberately leaves the admissible level open. The candidate supplies an account at the level of the representation, but no prior bound determines whether that choice is admissible."
+    modal-strength:
+      verdict: fail
+      evidence: "The effective theory and selected experiments do not establish that the proposed relation holds across the actual target class."
+    product:
+      verdict: fail
+      evidence: "The mechanism is structurally transparent in the toy setting, but it does not explain the distribution of durations or the phenomenon across the declared class."
+  warrant:
+    phenomenon-established:
+      verdict: pass
+      evidence: "Delayed generalization and the associated phase diagrams are observed across repeated runs in the cited study and in the independent evidence of the phenomenon record."
+    foil-evidence:
+      verdict: pass
+      evidence: "The phase diagrams contain the memorization and confusion regimes as well as comprehension and grokking. Both foil outcomes therefore occur under measured training specifications."
+    law-warrant:
+      verdict: pass
+      evidence: "The answer labels the effective flow as posited, the spectral timescale as derived only within that reduction, and the generalization link as measured. These warrants match the cited evidence."
+    closure:
+      verdict: fail
+      evidence: "The architecture and optimizer laws of the target do not derive the proposed effective loss of the representation. The mathematical chain therefore does not close on the original training dynamics."
+    fidelity:
+      verdict: fail
+      evidence: "The source reports qualitative agreement together with quantitative discrepancies. The candidate also does not reproduce the distribution Pdelay that the question requires."
+    robustness:
+      verdict: fail
+      evidence: "The candidate does not show that the derivation survives without the toy architecture or without the infinitesimal decoder step."
+    selection:
+      verdict: not-applicable
+      evidence: "Membership in the target class is not conditioned on exhibiting grokking."
+
+obligations: []
+appraisal:
+  - virtue: unification
+    assessment: "The virtue is not appraised, because the candidate fails admissibility and warrant. The template has no dedicated representation for withholding appraisal when those gates fail."
+maturity:
+  tests.admissibility.admissible-explanans: open

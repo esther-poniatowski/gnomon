@@ -1,0 +1,110 @@
+# tests description at an incomplete grain of reporting
+
+title: "Snakes-and-ladders catalogue of localized states"
+statement: "Numerical continuation of the one-dimensional Swift-Hohenberg equation with quadratic and cubic nonlinearities finds two snaking branches of localized profiles. Both branches are symmetric under reflection. Asymmetric ladder branches connect the two snaking families. Selected segments between folds are stable. Other coefficient regimes contain isolas. The published qualitative catalogue does not map every topology and stability interval over the full admitted (r, b) domain."
+id: ans.swift-hohenberg.snakes-ladders-catalogue
+type: answer
+status: informally-backed
+answers: quest.swift-hohenberg.localized-states-description
+
+constituents: []
+index_sets: []
+
+variables:
+  - reference: system.swift-hohenberg-localized-states#u
+  - name: "norm of the profile used for continuation"
+    symbol: Nu
+    notation: 'N_u'
+    determined: within
+    signature: [r, b]
+    values: "nonneg(reals)"
+    expression: "norm_{x}(u)"
+    reading: "The norm serves as the vertical coordinate that distinguishes branches of localized solutions in a continuation diagram."
+    shared: false
+  - name: "largest temporal growth rate of a stationary profile"
+    symbol: lambda_max
+    notation: '\lambda_{\max}'
+    determined: within
+    signature: [r, b]
+    values: reals
+    expression: "max(re(spectrum(jacobian(evolve))))"
+    reading: "The sign of the leading eigenvalue classifies the linear stability of a continued stationary profile."
+    shared: false
+
+parameters:
+  - reference: system.swift-hohenberg-localized-states#r
+  - reference: system.swift-hohenberg-localized-states#b
+
+laws:
+  - name: "localized stationary equation"
+    symbol: stationary_equation
+    signature: [x]
+    role: state-constraint
+    expression: "0 = r * u - u - 2 * diff(diff(u, x), x) - diff(diff(diff(diff(u, x), x), x), x) + b * u * u - u * u * u"
+    reading: "Each catalogue entry solves the target equation at steady state and satisfies the localized condition in the far field."
+    warrant: derived
+    rests_on: "The equation rests on the evolution law of the target, with diff(u, t) = 0."
+  - name: "qualitative topology of the branches"
+    symbol: branch_catalogue
+    signature: []
+    role: state-constraint
+    expression: "topology = enum(\"snaking\", \"ladders\", \"isolas\")"
+    reading: "In the standard pinning regime, asymmetric ladders connect two symmetric snakes. Disconnected isolas occur in other regimes of the coefficients."
+    warrant: measured
+    rests_on: "The law rests on numerical continuation, https://doi.org/10.1103/PhysRevE.73.056211 [burke2006]. The law also rests on an analysis, https://doi.org/10.1137/080713306 [beck2009]."
+  - name: "classification by symmetry"
+    symbol: symmetry_catalogue
+    signature: []
+    role: state-constraint
+    expression: "symmetry = enum(\"even\", \"odd\", \"asymmetric\")"
+    reading: "The two snaking families preserve reflection symmetry with opposite phase, and the connecting ladder states are asymmetric."
+    warrant: derived
+    rests_on: "The law rests on spatial reversibility and on the construction of the branches [burke2006] [beck2009]."
+  - name: "classification by linear stability"
+    symbol: branch_stability
+    signature: [r, b]
+    role: state-constraint
+    expression: "lambda_max < 0"
+    reading: "Segments whose leading temporal eigenvalue is negative are linearly stable. The stability of a segment changes at the folds that continuation tracks."
+    warrant: measured
+    rests_on: "The law rests on reported numerical computations of the eigenvalues [burke2006]."
+
+organization: []
+realizations: []
+
+idealizations:
+  - assumption: "The infinite spatial line is represented by a large finite numerical domain."
+    motive: tractability
+    buys: "The idealization makes possible the numerical continuation of localized profiles and of their temporal eigenvalues."
+    holds_for: "The idealization holds for profiles whose tails decay before the numerical boundary. The branches of these profiles must also stay unchanged when the domain is enlarged."
+
+explanans:
+  - name: "classification of the connectivity of branches by continuation"
+    factor: law-property
+    holds: "branch_catalogue"
+    bears_on: [stationary_equation]
+    through: [branch_catalogue]
+    produces: topology
+    separates: []
+    appeals_to: []
+    procedure: "Every detected localized stationary branch is continued through its folds. The record states whether each branch snakes, connects as a ladder, or closes as an isola."
+  - name: "reflection class of each continued profile"
+    factor: structural-property
+    holds: "symmetry_catalogue"
+    bears_on: [u]
+    through: [symmetry_catalogue]
+    produces: symmetry
+    separates: []
+    appeals_to: []
+    procedure: "Each stationary profile is compared with its reflection. The two symmetric phases are classified separately from the asymmetric states."
+  - name: "sign of the leading temporal eigenvalue"
+    factor: condition
+    holds: "lambda_max < 0"
+    bears_on: [lambda_max]
+    through: [branch_stability]
+    produces: stability
+    separates: []
+    appeals_to: []
+    procedure: "The temporal equation is linearized about each continued profile. The record lists the coefficient intervals on which every eigenvalue has a negative real part."
+
+maturity: {}

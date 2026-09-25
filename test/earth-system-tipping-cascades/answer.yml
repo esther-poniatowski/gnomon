@@ -1,0 +1,106 @@
+# tests prediction against a partially known empirical target
+
+title: "Overshoot forecast from a network of four elements"
+statement: "In a stylized ensemble of four interacting tipping elements, temporary warming overshoots change the distribution of tipping events. Across the studied scenarios, aggregate risk can rise by up to 72 percent relative to matched non-overshoot trajectories. The model does not establish the requested joint sequence law for the actual Earth system."
+id: ans.earth-tipping-subsystems.four-element-overshoot-network
+type: answer
+status: informally-backed
+answers: quest.earth-tipping-subsystems.overshoot-sequence-forecast
+
+constituents:
+  - reference: system.earth-tipping-subsystems#sub
+
+index_sets:
+  - name: "trajectory in the comparison"
+    symbol: traj_case
+    extent: "enum(\"overshoot\", \"matched non-overshoot\")"
+    structure: discrete-set
+
+variables:
+  - reference: system.earth-tipping-subsystems#z
+  - reference: system.earth-tipping-subsystems#DGMT
+  - name: "modelled law of the marked sequence"
+    symbol: PZ_model
+    notation: 'P_Z^{\mathrm{model}}'
+    determined: within
+    signature: [traj_case, H]
+    values: "measures(Z)"
+    expression: "dist_{param, struct}(Z)"
+    reading: "The stylized model ensemble generates the law of the marked sequence for each prescribed trajectory."
+    shared: false
+  - name: "modelled probability of at least one tipping event"
+    symbol: p_any
+    notation: 'p_{\mathrm{any}}'
+    determined: within
+    signature: [traj_case, H]
+    values: "interval(0, 1)"
+    expression: "dist_{param, struct}(min_{sub}(Tev) <= H)"
+    reading: "The value gives the ensemble probability that at least one of the four modelled elements tips by the horizon."
+    shared: false
+
+parameters:
+  - reference: system.earth-tipping-subsystems#Theta
+  - reference: system.earth-tipping-subsystems#tau
+  - reference: system.earth-tipping-subsystems#Aij
+  - reference: system.earth-tipping-subsystems#s
+  - reference: system.earth-tipping-subsystems#peak
+  - reference: system.earth-tipping-subsystems#conv
+
+laws:
+  - name: "forecast from the stylized ensemble"
+    symbol: sequence_ensemble
+    signature: [traj_case, H]
+    role: distribution
+    expression: "PZ_model = dist_{param, struct}(Z)"
+    reading: "A Monte Carlo ensemble propagates the uncertainties of thresholds and interactions into a distribution over tipping sequences for each warming trajectory."
+    warrant: derived
+    rests_on: "The law rests on the network equations for four elements and on the design of their ensemble, https://doi.org/10.1038/s41558-022-01545-9 [wunderling2023]."
+  - name: "increase of risk under overshoot"
+    symbol: overshoot_risk
+    signature: [H]
+    role: state-constraint
+    expression: "p_any(\"overshoot\", H) > p_any(\"matched non-overshoot\", H)"
+    reading: "Within the studied scenarios, overshoot raises the aggregate modelled tipping risk. The reported relative increase reaches at most 72 percent."
+    warrant: measured
+    rests_on: "The law rests on a reported model ensemble [wunderling2023]."
+
+organization:
+  - name: "modelled directed network of cascades"
+    symbol: model_coupling
+    reading: "Directed links transmit a state change from one modelled subsystem to another, so a transition can alter later event probabilities."
+    relates: "subset(prod(sub, sub), Aij)"
+    realized_by: [sequence_ensemble]
+
+realizations: []
+
+idealizations:
+  - assumption: "Each selected subsystem is replaced by a low-dimensional normal form of a tipping element."
+    motive: tractability
+    buys: "The idealization makes possible an ensemble forecast over the uncertainty in thresholds, timescales, and couplings."
+    holds_for: "The idealization holds for the qualitative propagation of risk in the stylized network of four elements. The idealization does not cover calibrated dynamics of the actual subsystems."
+  - assumption: "The prescribed trajectory of global temperature receives no feedback from the modelled subsystem transitions."
+    motive: isolation
+    buys: "The idealization makes possible paired simulations, with and without overshoot, in which the forcing is held fixed from outside."
+    holds_for: "The idealization holds for scenario comparisons that neglect the feedback of the transitions on global mean temperature."
+
+explanans:
+  - name: "time spent above the convergence temperature"
+    factor: condition
+    holds: "peak > conv"
+    bears_on: [DGMT, peak, conv]
+    through: [sequence_ensemble, overshoot_risk]
+    produces: overshoot_effect
+    separates: [no_overshoot]
+    appeals_to: [scenario_source]
+    procedure: "Paired trajectories with the same convergence level are compared, and each member of a pair is propagated through the same ensemble of parameters and couplings."
+  - name: "directed coupling of tipping elements"
+    factor: organization
+    holds: "card(Aij) > 0"
+    bears_on: [model_coupling]
+    through: [sequence_ensemble]
+    produces: PZ
+    separates: []
+    appeals_to: []
+    procedure: "When one node transitions, the forcing that downstream nodes experience may shift before their event times are sampled."
+
+maturity: {}

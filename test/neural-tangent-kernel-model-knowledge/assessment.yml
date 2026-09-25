@@ -1,0 +1,68 @@
+# positive for a candidate that states a theorem under explicit assumptions
+
+title: "Assessment of the theorem of uniform linearization"
+id: assess.ntk.uniform-linearization-theorem
+type: assessment
+status: stabilized
+answer: ans.ntk.uniform-linearization-theorem
+question: quest.ntk.linearized-dynamics-validity
+
+tests:
+  admissibility:
+    scope:
+      verdict: pass
+      evidence: "The answer states assumptions on depth and inputs. The theorem also states the regularity of the activation and the initialization law. A final assumption imposes a positive gap of the limiting kernel. Together the assumptions identify a validity domain inside the declared model class."
+    grain:
+      verdict: pass
+      evidence: "Separate bounds of order m^(-1/2) are given for Eout, Edrift, and Elimit. The two claims about trajectories cover every nonnegative training time. The claim about the limit gives convergence in probability over initialization."
+    contrast:
+      verdict: not-applicable
+      evidence: "The question declares no foil."
+    relation:
+      verdict: pass
+      evidence: "The source theorem proves the three mathematical implications from the stated assumptions to the discrepancy bounds."
+    individuation:
+      verdict: pass
+      evidence: "The answer retains the target's parameter vector, output trajectories, and empirical kernel and introduces only scalar bounds derived from these quantities."
+    admissible-explanans:
+      verdict: not-applicable
+      evidence: "The question deliberately admits every declared part of the formal model as a source of its consequences."
+    modal-strength:
+      verdict: pass
+      evidence: "Conditional on the assumptions of the theorem, the bounds follow necessarily from the model laws with probability tending to one over the declared initialization distribution."
+    product:
+      verdict: pass
+      evidence: "The answer supplies a validity domain and three bounds at finite width. The record also supplies their convergence modes and full training horizons. Together, these fields deliver the requested consequences of the model."
+  warrant:
+    phenomenon-established:
+      verdict: pass
+      evidence: "The cited theorem at finite width and the result on the kernel limit derive all three manifestations of convergence."
+    foil-evidence:
+      verdict: not-applicable
+      evidence: "No foil is specified."
+    law-warrant:
+      verdict: pass
+      evidence: "Each answer law identifies the theorem or limiting result on which its declared derivation rests."
+    closure:
+      verdict: pass
+      evidence: "The proof starts from the declared fully connected network and its initialization under neural tangent parameterization. The proof also uses gradient flow on the squared loss and the shared initial output. The proof then bounds the resulting trajectories."
+    fidelity:
+      verdict: not-applicable
+      evidence: "The question requests consequences of a formal model and declares measurement accuracy not applicable."
+    robustness:
+      verdict: not-applicable
+      evidence: "The answer introduces no idealization beyond the hypotheses of the theorem."
+    selection:
+      verdict: not-applicable
+      evidence: "Membership in the network class does not depend on whether the linearization under neural tangent parameterization succeeds."
+
+obligations:
+  - verdict: pass
+    evidence: "The uniform output bound gives Tout = infinity, Bout = Bout_ans, and max_{t >= 0} Eout <= Bout_ans with Bout_ans tending to zero at order m^(-1/2)."
+  - verdict: pass
+    evidence: "The estimate of kernel stability gives Tdrift = infinity and max_{t >= 0} Edrift <= Bdrift_ans with a bound of order m^(-1/2) that vanishes as width grows."
+  - verdict: pass
+    evidence: "The initial kernel concentrates, so Elimit <= Binit_ans holds in probability, with Binit_ans tending to zero at order m^(-1/2)."
+
+appraisal: []
+maturity: {}

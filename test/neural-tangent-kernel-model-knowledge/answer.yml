@@ -1,0 +1,127 @@
+# positive fixture for answer and assessment
+
+title: "Theorem of uniform linearization under neural tangent parameterization"
+statement: "At fixed depth, the theorem assumes bounded inputs and a regular activation. The theorem also assumes independent initialization under neural tangent parameterization and a positive spectral gap of the limiting kernel on the training set. Under the four assumptions, gradient flow keeps the empirical kernel within order m^(-1/2) of its initial value. The nonlinear output obeys a bound of the same order relative to its linearization at the initial kernel. Both bounds hold uniformly over nonnegative training time with probability tending to one."
+id: ans.ntk.uniform-linearization-theorem
+type: answer
+status: formally-proven
+answers: quest.ntk.linearized-dynamics-validity
+
+constituents: []
+index_sets: []
+
+variables:
+  - reference: system.ntk-gradient-flow#theta
+  - reference: system.ntk-gradient-flow#f
+  - reference: system.ntk-gradient-flow#flin
+  - reference: system.ntk-gradient-flow#K
+
+parameters:
+  - reference: system.ntk-gradient-flow#m
+  - reference: system.ntk-gradient-flow#L
+  - reference: system.ntk-gradient-flow#X
+  - reference: system.ntk-gradient-flow#y
+  - reference: system.ntk-gradient-flow#sigma
+  - reference: system.ntk-gradient-flow#rho0
+  - reference: system.ntk-gradient-flow#K0
+  - reference: system.ntk-gradient-flow#Kinf
+  - name: "constant bounding the discrepancy between outputs"
+    symbol: Cout
+    signature: []
+    values: "pos(reals)"
+    reading: "The constant does not depend on width and is fixed by the training specification and the spectral gap of the limiting kernel."
+  - name: "constant bounding the drift of the kernel"
+    symbol: Cdrift
+    signature: []
+    values: "pos(reals)"
+    reading: "The constant does not depend on width and enters the uniform estimate of the drift of the kernel."
+  - name: "constant bounding the distance of the initial kernel to its limit"
+    symbol: Cinit
+    signature: []
+    values: "pos(reals)"
+    reading: "The constant does not depend on width and governs the concentration of the initial empirical kernel."
+  - name: "finite-width bound on the discrepancy between outputs"
+    symbol: Bout_ans
+    notation: 'B_{\mathrm{out}}^{\mathrm{ans}}'
+    signature: [m]
+    values: "nonneg(reals)"
+    condition: "m * Bout_ans(m) * Bout_ans(m) <= Cout * Cout"
+    selects: any
+    reading: "The value gives an upper bound of order m^(-1/2) on the discrepancy between the nonlinear and the linearized outputs."
+  - name: "finite-width bound on the drift of the kernel"
+    symbol: Bdrift_ans
+    notation: 'B_{\mathrm{drift}}^{\mathrm{ans}}'
+    signature: [m]
+    values: "nonneg(reals)"
+    condition: "m * Bdrift_ans(m) * Bdrift_ans(m) <= Cdrift * Cdrift"
+    selects: any
+    reading: "The value gives an upper bound of order m^(-1/2) on the drift of the empirical kernel."
+  - name: "finite-width bound on the distance of the initial kernel to its limit"
+    symbol: Binit_ans
+    notation: 'B_{\mathrm{init}}^{\mathrm{ans}}'
+    signature: [m]
+    values: "nonneg(reals)"
+    condition: "m * Binit_ans(m) * Binit_ans(m) <= Cinit * Cinit"
+    selects: any
+    reading: "The value gives a concentration bound of order m^(-1/2) for the initial empirical kernel."
+
+laws:
+  - name: "uniform bound on the deviation of the output from its linearization"
+    symbol: output_bound
+    signature: [m]
+    role: state-constraint
+    expression: "max_{t >= 0}(Eout(m, t)) <= Bout_ans(m)"
+    reading: "With probability tending to one over initialization, the nonlinear output remains uniformly close to its linearization for all training times."
+    warrant: derived
+    rests_on: "The law rests on Theorem 2.1, https://papers.nips.cc/paper_files/paper/2019/hash/0d1a9651497a38d8b1c3871c84528bd4-Abstract.html [lee2019]."
+  - name: "uniform bound on the drift of the empirical kernel"
+    symbol: kernel_bound
+    signature: [m]
+    role: state-constraint
+    expression: "max_{t >= 0}(Edrift(m, t)) <= Bdrift_ans(m)"
+    reading: "With probability tending to one, the empirical neural tangent kernel moves by at most order m^(-1/2) throughout training."
+    warrant: derived
+    rests_on: "The law rests on the part of Theorem 2.1 that establishes the stability of the kernel [lee2019]."
+  - name: "concentration of the initial kernel"
+    symbol: initial_kernel_bound
+    signature: [m]
+    role: distribution
+    expression: "Elimit(m) <= Binit_ans(m)"
+    reading: "The empirical kernel at initialization converges in probability to the deterministic limiting kernel at order m^(-1/2)."
+    warrant: derived-in-a-limit
+    rests_on: "The law rests on a concentration result for the kernel at finite width that the theorem uses [lee2019]. The law also rests on the result that establishes the limiting kernel, https://papers.nips.cc/paper/2018/hash/5a4be1fa34e62bb8a6ec6b91d2462f5a-Abstract.html [jacot2018]."
+
+organization: []
+realizations: []
+idealizations: []
+
+explanans:
+  - name: "positive spectral gap of the limiting kernel"
+    factor: condition
+    holds: "min(re(spectrum(Kinf))) > 0"
+    bears_on: [Kinf]
+    through: [output_bound, kernel_bound]
+    produces: output_converges
+    separates: []
+    appeals_to: []
+    procedure: "The positive gap of the kernel makes the linearized risk contract. The gap also bounds the displacement of the parameters and closes the uniform perturbation estimate."
+  - name: "bounded inputs and regular activation"
+    factor: condition
+    holds: "max_{a}(norm(X)) <= 1 and lipschitz(sigma) and lipschitz_derivative(sigma)"
+    bears_on: [X, sigma]
+    through: [initial_kernel_bound, kernel_bound, output_bound]
+    produces: kernel_drift_vanishes
+    separates: []
+    appeals_to: []
+    procedure: "The regularity bounds control the parameter Jacobian and its change inside the neighborhood of the initialization."
+  - name: "independent initialization under neural tangent parameterization"
+    factor: law-property
+    holds: "drawn_from(theta0, rho0)"
+    bears_on: [rho0, K0]
+    through: [initial_kernel_bound]
+    produces: limit_error_vanishes
+    separates: []
+    appeals_to: []
+    procedure: "The initial parameter coordinates are drawn independently, so the empirical kernel at time zero concentrates around its deterministic limit as width grows."
+
+maturity: {}
