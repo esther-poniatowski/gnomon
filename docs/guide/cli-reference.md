@@ -69,3 +69,23 @@ gnomon status --target <dir>
 | Option           | Default | Description                      |
 | ---------------- | ------- | -------------------------------- |
 | `--target`, `-t` | `.`     | Research workspace directory.    |
+
+## `vocabulary`
+
+An author choosing a symbol for a new quantity needs every symbol and operator that the records of one problem already declare. The `vocabulary` command collects them from the filled records of a problem folder into a vocabulary record, and optionally into a Markdown table beside it. Running it from the workspace root writes both files into the problem folder:
+
+```sh
+gnomon vocabulary <directory> --markdown
+```
+
+| Argument      | Description                                      |
+| ------------- | ------------------------------------------------ |
+| `<directory>` | Folder holding the filled records of one problem. |
+
+| Option             | Default          | Description                                                                 |
+| ------------------ | ---------------- | --------------------------------------------------------------------------- |
+| `--output`, `-o`   | `vocabulary.yml` | Name of the vocabulary record written inside the problem folder.           |
+| `--markdown`, `-m` | off              | Also write the Markdown table, named after the record.                     |
+| `--root`, `-r`     | `.`              | Workspace root from which the table links the index of the problem folder. |
+
+**Output:** one line with the number of symbols, the number of operators that the problem declares, and the number of symbols reused across its records. The command exits with an error, before writing any file, when the problem folder lies outside the workspace root.

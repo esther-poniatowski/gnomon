@@ -64,17 +64,26 @@ def cli_vocabulary(
     markdown: bool = typer.Option(
         False, "--markdown", "-m", help="Also build the Markdown view beside the record."
     ),
+    root: str = typer.Option(
+        ".", "--root", "-r", help="Workspace root from which the Markdown view links its index."
+    ),
 ) -> None:
     """Collect the symbols and operators of one problem into a table its author can consult."""
     source = Path(directory)
     if not source.is_dir():
         typer.echo(f"no such directory: {source}", err=True)
         raise typer.Exit(code=1)
+    try:
+        index_path = (source / "_index.md").resolve().relative_to(Path(root).resolve())
+    except ValueError:
+        typer.echo(f"{source} lies outside the workspace root {root}", err=True)
+        raise typer.Exit(code=1)
     problem = load_problem(source)
     target = source / output
     target.write_text(render_yaml(problem), encoding="utf-8")
     if markdown:
-        (source / f"{target.stem}.md").write_text(render_markdown(problem), encoding="utf-8")
+        page = render_markdown(problem, index_path=index_path.as_posix())
+        (source / f"{target.stem}.md").write_text(page, encoding="utf-8")
     repeated = problem.collisions()
     typer.echo(
         f"{target}: {len(problem.declarations)} symbols, "

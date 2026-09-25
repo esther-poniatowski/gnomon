@@ -991,14 +991,28 @@ def render_yaml(problem: Problem) -> str:
         "# A symbol is unique within its record, so the same letter may return under another record.\n"
     )
     return header + yaml.safe_dump(as_data(problem), sort_keys=False, allow_unicode=True, width=100)
-def render_markdown(problem: Problem) -> str:
-    """Return the table an author reads, built from the same record."""
+def render_markdown(problem: Problem, index_path: str = "_index.md") -> str:
+    """Return the table an author reads, built from the same record.
+
+    Parameters
+    ----------
+    problem : Problem
+        The vocabulary of one problem.
+    index_path : str
+        Target of the frontmatter ``index`` link: the index of the folder holding the problem,
+        written from the root of the workspace, since notes link their parent index from there.
+
+    Returns
+    -------
+    str
+        The Markdown page, frontmatter included.
+    """
     data = as_data(problem)
     lines = [
         "---",
         "tags:",
         "  - generated",
-        f'index: "[{problem.name}](_index.md)"',
+        f'index: "[{problem.name}]({index_path})"',
         "---",
         f"# Vocabulary of {problem.name}",
         "",
