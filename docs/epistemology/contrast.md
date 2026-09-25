@@ -14,7 +14,7 @@ source:
 
 The contrast is the third component of the [subject of inquiry](subject-of-inquiry.md): the foils relative to which the phenomenon is questioned.
 
-The contrast is [admitted as a specification because it changes the admissible answers](subject-of-inquiry.md#^inclusion-test): the foil determines which cause explains the phenomenon.
+The contrast passes the [inclusion test](subject-of-inquiry.md#^inclusion-test) for a specification, because it changes the admissible answers: the foil determines which cause explains the phenomenon.
 
 *Example*: Smith and Doe had syphilis and Jones did not. Only Smith contracted paresis. Syphilis explains why Smith rather than Jones contracted paresis, but not why Smith rather than Doe did [lipton2004].
 
@@ -40,7 +40,7 @@ The contrast is [admitted as a specification because it changes the admissible a
 ---
 ## Sources
 
-Marks follow [the legend that states how each entry was checked](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
 
 - [lipton2004] ◐ Lipton, _Inference to the Best Explanation_, 2nd ed., ch. 3; [Lipton, "Making a difference"](https://www.hps.cam.ac.uk/files/lipton-making-difference.pdf)
 - [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)

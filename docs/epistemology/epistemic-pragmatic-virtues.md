@@ -15,7 +15,7 @@ The virtues form a [layer of the inquiry specification](inquiry-specification.md
 
 Adequacy is **relational and evaluative**:
 $$\operatorname{Adequate}(M\mid Q,\Gamma)$$
-where $Q$ is the specified epistemic problem and $\Gamma$ contains *relevant methodological and pragmatic circumstances*. Both symbols follow the [notation registry shared across the framework](notation.md).
+where $Q$ is the specified epistemic problem and $\Gamma$ contains *relevant methodological and pragmatic circumstances*. Both symbols follow the [notation registry](notation.md) shared across the framework.
 
 The virtues constrain an adequate answer beyond its admissibility: some bear on the range of its claims, and the others on the *form* in which it presents them (e.g. the types of variables, the nature of equations). These constraints are needed because several answers or models may provide equally admissible explanations and still differ in their practical and cognitive effects.
 
@@ -39,11 +39,11 @@ The virtues constrain an adequate answer beyond its admissibility: some bear on 
 | **Economy / simplicity** | Does the account achieve its purpose without unnecessary representational or computational complexity? | cognitive and methodological efficiency                             | traditional theoretical virtues; modelling literature                                 |
 | **Tractability** | Can the model be analyzed, computed, manipulated, or used with the available resources? | practical usability                                                 | adequacy for purpose [parker2020]; modelling literature                               |
 
-- **Each virtue entry states its standing, independently of the aim.** A virtue bears on an answer in one of two ways. A **constitutive** virtue is a condition of the product: its absence makes an answer inadmissible however accurate. Such a virtue is applied by the product test, [one of the levels at which a candidate answer is evaluated](satisfaction-conditions.md#^conditions-satisfaction). A **preferred** virtue ranks answers that are already admissible, and is applied by appraisal. The same virtue takes either standing in different inquiries. For example, in one inquiry, intelligibility may be required of any answer regardless of the product sought. In another, the same virtue only decides between two adequate accounts. The question therefore states the standing on each entry. Each virtue is then applied by exactly one tier. ^virtue-standing
+- **Each virtue entry states its standing, independently of the aim.** A virtue bears on an answer in one of two ways. A **constitutive** virtue is a condition of the product: its absence makes an answer inadmissible however accurate. Such a virtue is applied by the product test, one of the [levels of evaluation](satisfaction-conditions.md#^conditions-satisfaction) of a candidate answer. A **preferred** virtue ranks answers that are already admissible, and is applied by appraisal. The same virtue takes either standing in different inquiries. For example, in one inquiry, intelligibility may be required of any answer regardless of the product sought. In another, the same virtue only decides between two adequate accounts. The question therefore states the standing on each entry. Each virtue is then applied by exactly one tier. ^virtue-standing
 
 - **Predictive accuracy is not among the virtues.** Predictive accuracy is the product of the predictive aim itself, fixed by the required accuracy $\tau$, and is therefore tested, not weighed.
 
-- **The virtues divide in two by the aspect of the answer that they bear on.** Unification, generality and robustness bear on the *content* of an answer: its claims and their range. When held constitutive, these three virtues subject the explanatory structure to the scope criterion that already governs the claim: [the whole reference class under the domain must be reached](satisfaction-conditions.md#^conditions-satisfaction). Intelligibility, structural transparency, economy and tractability bear instead on the *form* in which that content is presented. No other test checks these four virtues, because every other criterion bears only on the *assertions* of an answer. An inquiry seeking understanding therefore adds nothing to its subject or its task, and states all its specific demands among the virtues. This placement holds because intelligibility is a property of a theory as scientists use it, not a product beside explanation [deregt2005]. ^virtue-kinds
+- **The virtues divide in two by the aspect of the answer that they bear on.** Unification, generality and robustness bear on the *content* of an answer: its claims and their range. When held constitutive, these three virtues subject the explanatory structure to the [scope criterion](satisfaction-conditions.md#^conditions-satisfaction) that already governs the claim: the whole reference class under the domain must be reached. Intelligibility, structural transparency, economy and tractability bear instead on the *form* in which that content is presented. No other test checks these four virtues, because every other criterion bears only on the *assertions* of an answer. An inquiry seeking understanding therefore adds nothing to its subject or its task, and states all its specific demands among the virtues. This placement holds because intelligibility is a property of a theory as scientists use it, not a product beside explanation [deregt2005]. ^virtue-kinds
 
 > [!CHECK] Support from the literature
 > The adequacy of a model depends on the purpose that it serves and on the *broader circumstances of use* [parker2020].
@@ -52,7 +52,7 @@ The virtues constrain an adequate answer beyond its admissibility: some bear on 
 ---
 ## Sources
 
-Marks follow [the legend that states how each entry was checked](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
 
 - [deregt2005] ◐ [de Regt & Dieks, "A contextual approach to scientific understanding", _Synthese_ 144, 2005](https://link.springer.com/article/10.1007/s11229-005-5000-4); criterion for intelligibility checked through secondary summaries
 - [parker2020] ◐ [Parker, "Model evaluation: an adequacy-for-purpose view", _Philosophy of Science_ 87(3), 457–477, 2020](https://doi.org/10.1086/708691)

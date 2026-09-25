@@ -12,7 +12,7 @@ source:
 
 > [!QUESTION] Goal: what must be fixed to specify the relation that an explanans must bear to the explanandum?
 
-The requested relation is the second dimension of the [task that sets the kind of knowledge sought](epistemic-task.md). The requested relation acts as a relevance relation: it fixes the **kind of dependence between the explanans and the explanandum** that counts as the answer. The relation is specified separately because two questions can share the explanandum and the modal status yet demand different explanatory information.
+The requested relation is the second dimension of the [epistemic task](epistemic-task.md), the layer that sets the kind of knowledge sought. The requested relation acts as a relevance relation: it fixes the **kind of dependence between the explanans and the explanandum** that counts as the answer. The relation is specified separately because two questions can share the explanandum and the modal status yet demand different explanatory information.
 
 | Requested relation                                  | Content the explanans must provide                                                                                                                                       | Example                                                                                                                                                                                                             | Canonical source                                                           |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
@@ -35,7 +35,7 @@ The requested relation is the second dimension of the [task that sets the kind o
 ---
 ## Sources
 
-Marks follow [the legend that states how each entry was checked](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
 
 - [craver2007] ◐ [Craver, *Explaining the Brain*, OUP, 2007](https://philpapers.org/rec/CRAETB-2)
 - [friedman1974] ◐ [Friedman, "Explanation and scientific understanding", _The Journal of Philosophy_ 71(1), 5–19, 1974](https://philpapers.org/rec/FRIEAS)

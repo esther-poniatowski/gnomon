@@ -32,16 +32,16 @@ By this test, a background factor moves from the domain $D$ into the conditions 
 
 - **Each entry of $D$ restricts a set of admitted values.** The slots of $S$ state the value sets that define the system. An entry of $D$ records only the *restriction* that the question chooses within one of those sets. An empty $D$ means that the question covers the whole reference class.
 	
-- **The domain $D$ need not contain every assumption endorsed during the analysis.** The question fixes $D$ before the answer is sought. The analysis introduces its own assumptions afterwards, for instance a mean-field approximation or a separation of time scales. [The answer records these assumptions as its idealizations](answer-form.md#^answer-elements). An answer that relies on such an assumption is valid for the question only where that idealization is accurate. ^analysis-assumptions
+- **The domain $D$ need not contain every assumption endorsed during the analysis.** The question fixes $D$ before the answer is sought. The analysis introduces its own assumptions afterwards, for instance a mean-field approximation or a separation of time scales. The answer records these assumptions as its [idealizations](answer-form.md#^answer-elements). An answer that relies on such an assumption is valid for the question only where that idealization is accurate. ^analysis-assumptions
 	
 - **A clamped state variable is removed from the dynamics.** When the question clamps a variable, the rule that determines it is replaced by a fixed value. In a causal model, an intervention likewise replaces the structural equation of the targeted variable by a constant [pearl2009]. For the question, the clamped variable therefore acts as an input. *Example*: a voltage clamp turns the membrane potential into an exogenous variable.
 	
-- **A limit belongs to $D$ only when the question concerns the limit system.** A limit system counts as a system of its own, because it can have properties that no finite system has [norton2012]. *Example*: a question about the kernel regime of infinitely wide networks concerns such a limit system. When a limit only simplifies the analysis of finite systems, [the answer records the limit as an assumption](#^analysis-assumptions).
+- **A limit belongs to $D$ only when the question concerns the limit system.** A limit system counts as a system of its own, because it can have properties that no finite system has [norton2012]. *Example*: a question about the kernel regime of infinitely wide networks concerns such a limit system. When a limit only simplifies the analysis of finite systems, the answer records the limit as one of its [analysis assumptions](#^analysis-assumptions).
 
 ---
 ## Sources
 
-Marks follow [the legend that states how each entry was checked](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
 
 - [ich2019] ◐ [ICH E9(R1) Addendum on Estimands](https://en.wikipedia.org/wiki/ICH_E9\(R1\)_Addendum_On_Estimands_and_Sensitivity_Analyses_in_Clinical_Trials)
 - [lipton2004] ◐ Lipton, _Inference to the Best Explanation_, 2nd ed., ch. 3; [Lipton, "Making a difference"](https://www.hps.cam.ac.uk/files/lipton-making-difference.pdf)

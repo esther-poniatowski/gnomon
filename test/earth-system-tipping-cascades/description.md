@@ -25,7 +25,7 @@ The test is built to require the framework to:
 - request a statistical prediction with separate accuracy requirements for event probabilities and transition times;
 - distinguish sources of predictive spread (physical randomness, imprecisely known parameter values, and an unsettled model structure).
 
-The phenomenon template admits [scope axes that repeat and that condition the requested distribution](../../src/gnomon/data/templates/phenomenon.yml). The case tests whether those axes keep the distinct sources of predictive uncertainty apart in that distribution.
+The [phenomenon template](../../src/gnomon/data/templates/phenomenon.yml) admits scope axes that repeat and that condition the requested distribution. The case tests whether those axes keep the distinct sources of predictive uncertainty apart in that distribution.
 
 ## Scope boundary
 

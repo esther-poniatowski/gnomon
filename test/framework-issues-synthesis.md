@@ -44,4 +44,4 @@ No local edit supplies an unknown scientific result: such a result remains `open
 
 The designer ratified reorienting the records toward a modeling language. In that language, every declared quantity carries a symbol. Each formula is an expression over those symbols. Most of the proposed changes are absorbed or reduced by that reorientation. The reorientation addresses several rows at once, because they report one defect as it surfaces in different places: a field typed as a token or a prose string where the record required a construction.
 
-Each change carries its disposition in [the review state of every candidate and the implementation sequence](framework-corrections-handoff.md). The rows of this note keep their diagnosis and their acceptance test, whereas the handoff alone tracks implementation.
+Each change carries its disposition in the [corrections handoff](framework-corrections-handoff.md), with the review state of every candidate and the implementation sequence. The rows of this note keep their diagnosis and their acceptance test, whereas the handoff alone tracks implementation.

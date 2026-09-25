@@ -12,7 +12,7 @@ source:
 
 > [!QUESTION] Goal: What must a researcher fix to specify an inquiry, and which results of the philosophy of science support each choice?
 
-These notes introduce a method to specify a research inquiry, based on results from the philosophy of models, of explanation and of questions. A research project applies the method by filling one [form per target system, phenomenon, question and candidate answer](../../src/gnomon/data/templates/_index.md).
+These notes introduce a method to specify a research inquiry, based on results from the philosophy of models, of explanation and of questions. A research project applies the method by filling one [template](../../src/gnomon/data/templates/_index.md) per target system, phenomenon, question and candidate answer.
 
 - [Specifying an inquiry](inquiry-specification.md): to locate each decision of a research project in the layer of the specification that holds it.
 - [Subject of inquiry](subject-of-inquiry.md): to fix what a research question is about, before deciding what kind of answer to seek.

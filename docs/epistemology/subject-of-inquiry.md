@@ -12,7 +12,7 @@ source:
 
 > [!QUESTION] Goal: what must be fixed to specify the objects that an inquiry studies?
 
-The subject of inquiry is one of the [four layers that specify a research objective](inquiry-specification.md). The layer covers the *subject* of a research question: the objects under study.
+The subject of inquiry is one of the four [layers of specification](inquiry-specification.md) of a research objective. The layer covers the *subject* of a research question: the objects under study.
 
 ## Components of the subject
 
@@ -30,7 +30,7 @@ The four components fill a statement frame. The [epistemic aim](epistemic-aim.md
 
 > In [$S$] under [$D$], [interrogative word] [$P$] rather than [$X$]?
 
-> [!WARNING] The domain $D$ holds only [restrictions of the a priori specification](domain.md#^domain-restrictions).
+> [!WARNING] The domain $D$ holds only [restrictions](domain.md#^domain-restrictions) of the a priori specification.
 
 ## Selecting the specifications
 
@@ -68,7 +68,7 @@ Quantitative methodology already specifies questions through fixed slots. For ex
 - population-level summary → scope over instances in $P$;
 - intercurrent events → state restrictions in the domain $D$.
 
-Both frameworks keep the question separate from any model. The [specification of an inquiry separates its subject from the answer layer](inquiry-specification.md) in the same way. Both frameworks, however, cover only questions about causal effects. The two frameworks therefore support the design of the slots, but not the option lists for capacities, mechanisms, and mathematical explanation.
+Both frameworks keep the question separate from any model. The [inquiry specification](inquiry-specification.md) separates its subject from the answer layer in the same way. Both frameworks, however, cover only questions about causal effects. The two frameworks therefore support the design of the slots, but not the option lists for capacities, mechanisms, and mathematical explanation.
 
 ---
 ## Sources
@@ -91,7 +91,7 @@ Both frameworks keep the question separate from any model. The [specification of
 > 	- the consistency conditions between specifications (target type with $\mu$, phenomenon category with $R$, foil status with the source of evidence).
 > - **Absent from the literature:** a complete form for research questions.
 
-Marks follow [the legend that states how each entry was checked](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
 
 - [belnap1976] ◐ Belnap & Steel, _The Logic of Questions and Answers_, Yale UP, 1976, via [SEP, Questions](https://plato.stanford.edu/entries/questions/). The subject/request distinction was checked only through a summary returned by a search engine.
 - [colaco2018] ◐ [Colaço, "Rip it up and start again", _SHPS A_ 72, 2018](https://www.sciencedirect.com/science/article/abs/pii/S003936811730211X)

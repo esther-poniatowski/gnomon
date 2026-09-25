@@ -25,7 +25,7 @@ The mathematical explanans and its admissible level are research products. The r
 
 ## Answer and assessment trial
 
-[The answer built on structured representations](answer.yml) supplies one proposed mechanism after the inquiry is fixed. [The proposed mechanism passes the two foil comparisons and the mathematical relation inside the effective theory](assessment.yml). The mechanism fails five tests:
+The [answer built on structured representations](answer.yml) supplies one proposed mechanism after the inquiry is fixed. In its [assessment](assessment.yml), the proposed mechanism passes the two foil comparisons and the mathematical relation inside the effective theory. The mechanism fails five tests:
 
 - scope;
 - distributional grain;
@@ -33,4 +33,4 @@ The mathematical explanans and its admissible level are research products. The r
 - fidelity;
 - robustness.
 
-The preferred virtue exposes a separate defect of the assessment form. Under the satisfaction conditions, a virtue may be appraised only after admissibility and warrant pass. The template, however, requests one entry for every preferred virtue and provides no `withheld` state. The assessment therefore keeps the entry and states that the virtue was not appraised. The conflict is recorded once for all cases among [the defects shared by the answer and assessment templates](../answer-assessment-template-issues.md).
+The preferred virtue exposes a separate defect of the assessment form. Under the satisfaction conditions, a virtue may be appraised only after admissibility and warrant pass. The template, however, requests one entry for every preferred virtue and provides no `withheld` state. The assessment therefore keeps the entry and states that the virtue was not appraised. The conflict is recorded once for all cases among the [template defects](../answer-assessment-template-issues.md) that the answer and the assessment share.

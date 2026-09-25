@@ -12,7 +12,7 @@ source:
 
 > [!QUESTION] Goal: what must be fixed to specify which variables an answer may use?
 
-The level $\lambda$ fixes which **variables an admissible explanans may contain**. The level forms the fourth dimension of the [task that sets the kind of knowledge sought](epistemic-task.md).
+The level $\lambda$ fixes which **variables an admissible explanans may contain**. The level forms the fourth dimension of the [epistemic task](epistemic-task.md), the layer that sets the kind of knowledge sought.
 
 *Example.* One gamma oscillation admits explanantia at three levels:
 
@@ -36,7 +36,7 @@ Two independent axes supply the options for the level $\lambda$. In addition, a 
 	
 - **The three levels of analysis decompose onto the two axes and the other dimensions of the task.** The framework of three levels applies only to information-processing systems [marr1982]. Each of its levels maps onto dimensions that apply to any system (proposal):
 	
-    - The computational level states the computation and its rationale. This level corresponds to a [relation of function or optimization requested of the explanans](requested-relation.md), because it accounts for the computation through the demands that the environment places on the system [bechtel2015].
+    - The computational level states the computation and its rationale. This level corresponds to a relation of [function or optimization](requested-relation.md) requested of the explanans, because it accounts for the computation through the demands that the environment places on the system [bechtel2015].
     - The algorithmic level uses substrate-independent variables: representations and procedures.
     - The implementational level uses substrate-specific variables at a compositional level.
 	
@@ -49,7 +49,7 @@ Two independent axes supply the options for the level $\lambda$. In addition, a 
 ---
 ## Sources
 
-Marks follow [the legend that states how each entry was checked](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
 
 - [batterman2000] ◐ [Batterman, "Multiple realizability and universality", *British Journal for the Philosophy of Science* 51(1), 2000](https://philpapers.org/rec/BATMRA)
 - [bechtel2015] ◐ [Bechtel & Shagrir, "The non-redundant contributions of Marr's three levels of analysis for explaining information-processing mechanisms", *Topics in Cognitive Science* 7(2), 2015](https://onlinelibrary.wiley.com/doi/10.1111/tops.12141)

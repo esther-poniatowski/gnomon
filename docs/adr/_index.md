@@ -15,4 +15,4 @@ Each record fixes one decision that later work must respect. To let a reader dec
 
 The records:
 
-- [Surface syntax and parseable core of expressions](expression-syntax.md): to know which notation formulas must use, and which change of constraint would reopen that choice.
+- [Surface syntax and parseable core for expressions](expression-syntax.md): to know which notation formulas must use, and which change of constraint would reopen that choice.

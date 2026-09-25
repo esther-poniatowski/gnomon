@@ -12,7 +12,7 @@ source:
 
 > [!QUESTION] Goal: how does a record name its quantities, so that a formula in one field reaches an entry of another field?
 
-Within an inquiry record, each declared quantity carries a symbol that no other entry shares. Through that symbol, one field reaches a quantity that another field declares: a reference names it directly, and a formula combines it with others into an expression. The same rule governs the symbols of the method itself: [one letter carries one meaning across the notes](notation.md).
+Within an inquiry record, each declared quantity carries a symbol that no other entry shares. Through that symbol, one field reaches a quantity that another field declares: a reference names it directly, and a formula combines it with others into an expression. The same rule governs the symbols of the method itself: one letter carries one meaning across the notes, under the [notation registry](notation.md).
 
 A prose name cannot replace the symbol, because such a name resolves to no entry. For example, a name written as "velocity field u(x,t)" holds a symbol, a name and a signature at once. A second field then reaches the quantity only by repeating the whole string, and a formula can name a symbol that no entry declares.
 

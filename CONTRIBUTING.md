@@ -123,7 +123,7 @@ An entry names the note and states what a reader obtains from it, so that a read
 A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both in an editor and on the repository page:
 
 ```markdown
-[the conditions a canonical object must satisfy](../2-architecture/object-kinds.md)
+the [conditions on a canonical object](../2-architecture/object-kinds.md)
 ```
 
 A finer reference appends a block anchor, declared at the end of the target line:
