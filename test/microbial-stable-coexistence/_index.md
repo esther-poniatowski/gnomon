@@ -11,6 +11,7 @@ This case checks whether the framework can keep each requirement in its proper l
 
 - [Research problem](description.md): to understand what the case demands of the framework before reading its records.
 - [Target system](target-system.yml): to know which model variants the question covers.
+- [Background laws](background.yml): to know which laws of the target the question admits, and on what warrant.
 - [Phenomenon](phenomenon.yml): to know which property of a community the question concerns.
 - [Question](question.yml): to know which implications an answer must prove.
 - [Candidate answer](answer.yml): to examine a candidate that proves one direction for one subclass of models.

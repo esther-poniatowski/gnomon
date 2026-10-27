@@ -2,10 +2,19 @@ title: "Formal population models of microbial communities"
 id: system.microbial-formal-population-models
 type: target-system
 status: provisional
+commitment: specified
 target_type: possible-systems
+
+identification:
+  description: "the formal population models of microbial communities whose consumer populations interact either through explicit resource pools or through direct pairwise and higher-order coefficients"
+  pointers:
+    - "butler2018: https://www.nature.com/articles/s41467-018-05308-z"
+    - "gibbs2024: https://onlinelibrary.wiley.com/doi/10.1111/ele.14458"
 
 reference_class:
   name: "population models of microbial communities with interactions mediated by resources or of higher order"
+  projectibility:
+    status: not-claimed
   selection_criteria: []
 
 variants:                        # explicit-resource models and direct-interaction models, with different state spaces
@@ -107,7 +116,7 @@ parameters:
     symbol: theta
     notation: '\theta'
     signature: []
-    values: open
+    values:
     expression: null
     reading: "One member specification fixes a variant and its functional forms. The specification therefore supplies only the coefficient families that the variant declares."
   - name: "per-capita growth law with explicit resources"
@@ -136,162 +145,11 @@ parameters:
     expression: null
     shared: false
 
-laws:
-  - name: "evolution of the populations under competition for resources"
-    symbol: grow_resource
-    variant: resource_explicit
-    signature: [pop]
-    role: evolution
-    expression: "diff(N, t) = N * Fr(N, R)"
-    reading: "Each population grows or declines in proportion to its own abundance and its per-capita growth."
-    warrant: posited
-    rests_on: "The variant fixes the consumer-resource form."
-  - name: "evolution of the populations under direct interaction"
-    symbol: grow_direct
-    variant: direct
-    signature: [pop]
-    role: evolution
-    expression: "diff(N, t) = N * Fd(N)"
-    reading: "Each population grows or declines in proportion to its own abundance and to a per-capita rate that the others set directly."
-    warrant: posited
-    rests_on: "The variant fixes the form of direct interaction."
-  - name: "evolution of the resources"
-    symbol: turnover
-    variant: resource_explicit
-    signature: [res]
-    role: evolution
-    expression: "diff(R, t) = G(N, R, rho)"
-    reading: "Each resource pool changes under supply, consumption, and any cross-feeding."
-    warrant: posited
-    rests_on: "The variant fixes the consumer-resource form."
-  - name: "direct pairwise influence"
-    symbol: pairwise
-    variant: direct
-    signature: [pop, pop]
-    role: admissibility
-    expression: "depends_on(Fd, A)"
-    reading: "One population enters the growth of another with no declared intermediary. The coupling is therefore direct and passes through no resource."
-    warrant: posited
-    rests_on: "The variant admits this functional form."
-  - name: "higher-order influence"
-    symbol: higher_order
-    variant: direct
-    signature: [pop, pop, pop]
-    role: admissibility
-    expression: "depends_on(Fd, B)"
-    reading: "Two populations jointly change the growth of a third. The pair has an effect that neither member carries alone, so this influence acts on triples of populations."
-    warrant: posited
-    rests_on: "The variant admits this functional form."
-  - name: "resource consumption"
-    symbol: consume
-    variant: resource_explicit
-    signature: [res, pop]
-    role: admissibility
-    expression: "depends_on(G, C)"
-    reading: "A population lowers the pools that it draws on. Populations compete through this consumption edge."
-    warrant: posited
-    rests_on: "The variant admits this functional form."
-  - name: "resource production"
-    symbol: produce
-    variant: resource_explicit
-    signature: [res, pop]
-    role: admissibility
-    expression: "depends_on(G, Pr)"
-    reading: "A population raises the pools that it produces. Cross-feeding acts through this production edge."
-    warrant: posited
-    rests_on: "The variant admits this functional form."
-  - name: "growth mediated by resources"
-    symbol: mediate
-    variant: resource_explicit
-    signature: [pop, res]
-    role: admissibility
-    expression: "depends_on(Fr, C)"
-    reading: "The same coefficients set the growth that a pool supports and drain that pool. Two populations that share a pool therefore interact through the pool without any direct term."
-    warrant: posited
-    rests_on: "The variant admits this functional form."
-  - name: "mortality in the growth law with explicit resources"
-    symbol: mortality_resource
-    variant: resource_explicit
-    signature: [pop]
-    role: admissibility
-    expression: "depends_on(Fr, mu)"
-    reading: "The per-capita growth law includes the mortality rate of each population."
-    warrant: posited
-    rests_on: "The variant admits this functional form."
-  - name: "mortality in the growth law with direct interactions"
-    symbol: mortality_direct
-    variant: direct
-    signature: [pop]
-    role: admissibility
-    expression: "depends_on(Fd, mu)"
-    reading: "The direct per-capita growth law includes the mortality rate of each population."
-    warrant: posited
-    rests_on: "The variant admits this functional form."
-  - name: "community size"
-    symbol: size_bound
-    signature: []
-    role: admissibility
-    expression: "S >= 2"
-    reading: "The community holds at least two populations, so that coexistence can be posed as a question."
-    warrant: posited
-    rests_on: "The law restates the selection criterion of the class."
-  - name: "invariance of nonnegative resources"
-    symbol: pools_nonneg
-    variant: resource_explicit
-    signature: [res]
-    role: admissibility
-    expression: "R = 0 implies diff(R, t) >= 0"
-    reading: "The resource vector field points into the nonnegative region at its boundary."
-    warrant: posited
-    rests_on: "The turnover laws admitted for the variant with explicit resources guarantee this invariance."
-  - name: "invariance of the nonnegative state space"
-    symbol: abundance_nonneg
-    signature: []
-    role: state-constraint
-    expression: "N >= 0"
-    reading: "Each rate of change contains its own abundance as a factor, so no population becomes negative."
-    warrant: derived
-    rests_on: "The growth law and the nonnegative value set of the abundances imply this bound."
-
-closure: complete
-
-organization:
-  - name: "direct pairwise coupling"
-    symbol: pairing
-    variant: direct
-    reading: "One population enters the growth of another with no declared intermediary between the two, so the coupling is direct."
-    relates: "prod(pop, pop)"
-    realized_by: [pairwise]
-  - name: "higher-order coupling"
-    symbol: triplet
-    variant: direct
-    reading: "Two populations jointly change the growth of a third. The pair has an effect that neither member carries alone."
-    relates: "prod(pop, pop, pop)"
-    realized_by: [higher_order]
-  - name: "resource drawdown"
-    symbol: drawdown
-    variant: resource_explicit
-    reading: "A population lowers the pools that it draws on. Populations compete through this consumption edge."
-    relates: "prod(pop, res)"
-    realized_by: [consume]
-  - name: "cross-feeding"
-    symbol: feeding
-    variant: resource_explicit
-    reading: "A population raises the pools that it produces. Cross-feeding acts through this production edge."
-    relates: "prod(pop, res)"
-    realized_by: [produce]
-  - name: "coupling mediated by resources"
-    symbol: mediation
-    variant: resource_explicit
-    reading: "The same coefficients set the growth that a pool supports and drain that pool. Two populations that share a pool therefore interact through the pool without any direct term."
-    relates: "prod(res, pop)"
-    realized_by: [mediate]
-
 external_systems:
   - name: "formal environment that supplies the resources"
     symbol: supply
     variant: resource_explicit
-    class: open                  # environment individuated by the supply vector that rho already declares
+    class:                       # environment individuated by the supply vector that rho already declares
     shares: [rho]
     constrains: []               # the declared value set of rho already imposes nonnegativity
     reading: "The resource inflow is set outside the community, so no population alters its own supply."

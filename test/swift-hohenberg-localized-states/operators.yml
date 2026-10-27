@@ -15,7 +15,7 @@ operators:
     notation: '\mathcal{P}( #1 )'
     for_any: [S]
     signature: [S]
-    values: open
+    values:
 
 maturity:
   operators.powerset.values: open

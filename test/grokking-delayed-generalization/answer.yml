@@ -4,7 +4,8 @@ title: "Account of grokking through a structured representation that forms slowl
 statement: "In the toy addition models, the decoder fits the training data first, and the embedding representation acquires its structure more slowly [liu2022]. A positive rate of representation learning eventually produces generalization. A zero rate leaves persistent memorization, and a faster rate removes the delay."
 id: ans.grokking.slow-structured-representation
 type: answer
-status: informally-backed
+status: hypothesized
+support: informal
 answers: quest.grokking.explain_delay
 
 constituents:
@@ -22,7 +23,7 @@ variables:
     notation: 'R'
     determined: within
     signature: [step]
-    values: open
+    values:
     expression: "representation(theta)"
     reading: "The variable holds the normalized input embeddings extracted from the trained model."
     shared: true
@@ -36,7 +37,7 @@ variables:
   - name: "effective Hessian of the representation"
     symbol: Hrep
     signature: []
-    values: open
+    values:
     expression: "jacobian(grad(effective_loss(Rrep)))"
     reading: "The variable is the Hessian of the normalized effective loss of the representation."
     shared: true

@@ -13,18 +13,18 @@ operators:
     notation: '\mathcal{P}( #1 )'
     for_any: [S]
     signature: [S]
-    values: open
+    values:
   - name: "the learned representation extracted from a parameter trajectory"
     symbol: representation
-    signature: [open]
-    values: open
+    signature:
+    values:
   - name: "the fraction of the relations consistent with the task that are realized by a learned representation"
     symbol: representation_quality
-    signature: [open]
+    signature:
     values: "interval(0, 1)"
   - name: "the effective loss on a learned representation"
     symbol: effective_loss
-    signature: [open]
+    signature:
     values: reals
 
 maturity:

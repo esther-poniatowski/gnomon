@@ -1,0 +1,25 @@
+title: "The generalized Swift-Hohenberg equation and its localized states"
+id: bg.swift-hohenberg-localized-states.equation
+type: background
+status: provisional
+describes: system.swift-hohenberg-localized-states
+
+laws:
+  - name: "Swift-Hohenberg evolution with quadratic and cubic nonlinearities"
+    symbol: evolve
+    signature: [x]
+    role: evolution
+    expression: "diff(u, t) = r * u - u - 2 * diff(diff(u, x), x) - diff(diff(diff(diff(u, x), x), x), x) + b * u * u - u * u * u"
+    reading: "The field forms patterns under the standard dynamics with quadratic and cubic nonlinearities."
+    warrant: posited
+    rests_on: "The law rests on the definition of the model class."
+  - name: "localized boundary condition in the far field"
+    symbol: localized
+    signature: []
+    role: state-constraint
+    expression: "far_field(u) = 0"
+    reading: "The field approaches the homogeneous state at both spatial infinities."
+    warrant: posited
+    rests_on: "The law rests on the boundary condition that individuates a localized state."
+
+closure: complete

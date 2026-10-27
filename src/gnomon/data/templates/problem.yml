@@ -1,0 +1,22 @@
+# method: `docs/epistemology/problem.md`; one file per research problem
+# definitions: `docs/epistemology/definitions/problem-and-question.md`
+# the questions serving this problem name it in their field `addresses`
+# replace every UPPERCASE placeholder; leave a field empty while it is not filled
+
+title: "SHORT NAME OF THE PROBLEM"
+statement: "THE PROBLEM IN WORDS: THE RESULT SOUGHT, AND THE OBSTACLE TO OBTAINING IT"
+id: prob.TOPIC.NAME
+type: problem
+status: posed                    # posed | refined | solved | dissolved | abandoned
+kind:                            # empirical (the problem concerns the objects of a domain) | conceptual (the problem concerns the consistency of a theory or its fit with other theories)
+demand: "THE RESULT REQUIRED OF A SOLUTION"
+constraints:                     # conditions on every solution; empty when the demand alone delimits the solutions
+  - name: "NAME OF THE CONSTRAINT"
+    statement: "THE CONDITION ON A SOLUTION"
+    source: "POINTER TO THE RESULT, THE BACKGROUND LAW OR THE PUBLICATION THAT IMPOSES THE CONDITION"
+explicanda:                      # terms used in the statement before any record fixes their sense
+  - term: "TERM AS USED IN THE STATEMENT"
+    pointer: "POINTER TO THE DATA, THE RESULT OR THE PUBLICATION THAT FIXES THE USE OF THE TERM"
+sources:
+  - "POINTER TO THE PUBLICATION, THE DATA OR THE ANOMALY THAT RAISES THE PROBLEM"
+significance: "THE CONSEQUENCES OF A SOLUTION FOR OTHER WORK"

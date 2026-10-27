@@ -5,6 +5,7 @@ type: question
 status: posed
 subject:
   target_system: system.microbial-formal-population-models
+  background: [bg.microbial-formal-population-models.population-dynamics]
   phenomenon: phen.microbial.stable-coexistence
   contrast:
     locus: other-outcome
@@ -39,10 +40,10 @@ task:
     - name: "necessity of the constraint"
       reading: "Every member model with a feasible and locally stable equilibrium satisfies the proposed constraint."
       antecedent: ["mN > 0", "alpha < 0"]
-      consequent: [open]         # the constraint itself is the sought result
+      consequent:                # the constraint itself is the sought result
     - name: "sufficiency of the constraint"
       reading: "Every member model that satisfies the proposed constraint has a feasible and locally stable equilibrium."
-      antecedent: [open]
+      antecedent:
       consequent: ["mN > 0", "alpha < 0"]
 
 virtues: []

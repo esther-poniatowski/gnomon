@@ -1,11 +1,24 @@
 title: "Collective phases under nonreciprocal coupling"
-statement: open                  # product of this inquiry
+statement:                             # product of this inquiry
 id: phen.nonreciprocal-active-matter.collective-phases
 type: phenomenon
 status: provisional
+commitment: identified
 target_system: system.nonreciprocal-active-matter
 
-category: open
+identification:
+  description: "the collective phases that the two-species dynamics of the class display as their coupling parameters vary, in finite domains and in the thermodynamic limit"
+  pointers:
+    - "fruchart2021: https://www.nature.com/articles/s41586-021-03375-9"
+
+category:
+
+course:
+  index: t
+  grain:
+  varies: []
+
+occurrence:
 
 index_sets:
   - name: "spatial separation"
@@ -88,36 +101,36 @@ explanandum_variables:           # candidate observables for an open search for 
     symbol: diag
     variant: continuum
     signature: [L, d]
-    values: open
-    expression: open             # product of the inquiry
+    values:
+    expression:                  # product of the inquiry
   - name: "diagnostic of phases for the lattice variant"
     symbol: diag_lattice
     variant: lattice
     signature: [L, d]
-    values: open
-    expression: open
+    values:
+    expression:
 
 manifestations:                  # phase catalogue is the sought product of the inquiry
   - name: "catalogue of distinguishable collective regimes"
     symbol: phase_catalogue
     variant: continuum
-    form: open
-    expression: open
+    form:
+    expression:
     features:
       - name: "candidate collective phase"
         symbol: phase
-        values: open
-        observed: open
+        values:
+        observed:
   - name: "catalogue of distinguishable lattice regimes"
     symbol: phase_catalogue_lattice
     variant: lattice
-    form: open
-    expression: open
+    form:
+    expression:
     features:
       - name: "candidate collective phase on the lattice"
         symbol: phase_lattice
-        values: open
-        observed: open
+        values:
+        observed:
 
 scope_over_instances:            # distributions over sampled controls and realizations
   - name: "stochastic realizations at fixed controls"
@@ -170,38 +183,38 @@ conditions_and_byproducts:       # every swept control is an index or a source o
   nonstandard: []
   byproducts: []
 
-evidential_status: open
+evidential_status:
 
 detection_criterion:             # the phase-separating diagnostic is the product of the inquiry
   - name: "recurrence across realizations and windows"
     variant: continuum
     across: [realization]
-    expression: open
+    expression:
     procedure: "A candidate regime recurs across stochastic realizations and persists over longer observation windows."
   - name: "separation in the sampled control space"
     variant: continuum
     across: [coupling, selfdyn]
-    expression: open
+    expression:
     procedure: "The regime occupies a distinguishable region of the sampled control space."
   - name: "persistence in the thermodynamic limit"
     variant: continuum
     across: []
-    expression: open
+    expression:
     procedure: "Finite-size scaling in L must show that the regime persists in the thermodynamic limit. Otherwise, the regime is labelled as absent from that limit."
   - name: "recurrence of lattice regimes across realizations and windows"
     variant: lattice
     across: [realization_lattice]
-    expression: open
+    expression:
     procedure: "A candidate lattice regime recurs across stochastic realizations and persists over longer observation windows."
   - name: "separation of lattice regimes in the sampled control space"
     variant: lattice
     across: [coupling_lattice, selfdyn_lattice]
-    expression: open
+    expression:
     procedure: "The lattice regime occupies a distinguishable region of the sampled control space."
   - name: "persistence of a lattice regime in the thermodynamic limit"
     variant: lattice
     across: []
-    expression: open
+    expression:
     procedure: "Finite-size scaling in L separates a lattice phase that persists in the thermodynamic limit from a regime that vanishes as L grows."
 
 data: []

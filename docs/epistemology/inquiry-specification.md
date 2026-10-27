@@ -47,6 +47,22 @@ Three results of the literature support separating the subject from the task:
 - A model is evaluated for a purpose in two steps. First, the purpose and its criterion of success are fixed. Second, the model is assessed for its reliability in meeting that criterion [parker2020].
 - An explanatory question is specified separately from the rules that evaluate its candidate answers [vanfraassen1980].
 
+## Problems and linked questions
+
+A question rarely stands alone. A question typically serves a research problem. Its answer may supply the explanans of another question or presuppose the answer of a third. Therefore, the question record names the [problem](problem.md) that it addresses and the questions to which it is linked. The relations of a link are defined with the [linked questions](definitions/problem-and-question.md#^linked-questions).
+
+| Field | When it is required | Content | Example |
+| ----- | ------------------- | ------- | ------- |
+| Addresses | when a problem record states the problem that the question serves | the identifier of one problem record | the problem of the delay before generalization |
+| Links | when the answer to another question bears on this one | per link, the other question, the relation, and the record shared by the two questions | — |
+| Links: question | with every link | the identifier of the other question record | the question that describes the representation geometry of a network |
+| Links: relation | with every link | subquestion-of · explanans-from · presupposes | `explanans-from`, for a question that explains a readout capacity by that geometry |
+| Links: via | when the two questions share a record | the identifier of the shared record, such as a phenomenon | the phenomenon record of the geometry |
+
+- **One object can be the explanandum of one question and the explanans of another.** *Example*: a first question describes the representation geometry of a class of networks, so the geometry is its phenomenon. A second question explains how well a linear readout separates classes of inputs, and its answer rests on that geometry as a factor. The second question links to the first with `explanans-from`, through the phenomenon record of the geometry. Therefore, neither question restates the content fixed by the other. ^explanandum-and-explanans
+
+- **The steps that answer a question are recorded in a plan.** A [plan](plan.md) lists the activities that lead from a problem to its questions, and from a question to its answers and their assessments. The plan check verifies that each step takes the types of artifact required by its activity.
+
 ## Goals of the specification
 
 The specification of an inquiry serves four goals. ^specification-goals

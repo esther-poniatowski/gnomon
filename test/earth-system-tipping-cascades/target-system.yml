@@ -2,10 +2,19 @@ title: "Coupled tipping elements of the actual Earth system"
 id: system.earth-tipping-subsystems
 type: target-system
 status: provisional
+commitment: specified
 target_type: particular
+
+identification:
+  description: "the Greenland and West Antarctic ice sheets, the Atlantic Meridional Overturning Circulation and the Amazon rainforest, taken together as four coupled tipping elements of the actual Earth system"
+  pointers:
+    - "wunderling2024: https://doi.org/10.5194/esd-15-41-2024"
+    - "wunderling2023: https://doi.org/10.1038/s41558-022-01545-9"
 
 reference_class:
   name: "the selected subsystems of the actual Earth system that are relevant to tipping"
+  projectibility:
+    status: not-claimed
   selection_criteria: []
 
 constituents:
@@ -24,7 +33,7 @@ variables:
     symbol: z
     determined: within
     signature: [sub, t]
-    values: open
+    values:
     expression: null             # z is the declared subsystem state, so no aggregate expression
     shared: false
   - name: "qualitative regime of a subsystem"
@@ -38,14 +47,14 @@ variables:
     symbol: u
     determined: within
     signature: [sub, sub, t]
-    values: open
+    values:
     expression: null             # the transmission law supplies the expression, and a law can be false of the system
     shared: false
   - name: "physical indicators of the state of a subsystem"
     symbol: ind
     determined: within
     signature: [sub, t]
-    values: open
+    values:
     expression: null
     shared: false
   - name: "internal climate variability left unresolved"
@@ -53,7 +62,7 @@ variables:
     notation: '\eta'
     determined: within
     signature: [sub, t]
-    values: open
+    values:
   - name: "prescribed trajectory of global mean surface temperature"
     symbol: DGMT
     notation: '\Delta T_{\text{GMT}}'
@@ -95,25 +104,25 @@ parameters:
   - name: "law of the response along a directed interaction"
     symbol: s
     signature: [sub, sub]
-    values: open
+    values:
     expression: null
     shared: false
   - name: "law of the internal feedback of a subsystem"
     symbol: intern
     signature: [sub]
-    values: open
+    values:
     expression: null
     shared: false
   - name: "emission law of a transmitted signal"
     symbol: emit
     signature: [sub, sub]
-    values: open
+    values:
     expression: null
     shared: false
   - name: "rule detecting regimes and events"
     symbol: detect
     signature: [sub]
-    values: open
+    values:
     expression: null
     shared: false
   - name: "baseline regime of a subsystem"
@@ -143,45 +152,10 @@ parameters:
     expression: "DGMT(Tend)"
     reading: "The trajectory has settled at the convergence level once the scenario ends. The matched comparator of the question holds this level fixed."
 
-laws:
-  - name: "evolution of a subsystem"
-    symbol: evolve
-    signature: [sub]
-    role: evolution
-    expression: "diff(z, t) = intern(z, Theta, tau, DGMT) + s(u) + eta"
-    reading: "Each subsystem changes under its internal feedbacks, under the signals that it receives, and under unresolved variability."
-    warrant: posited
-    rests_on: "The law rests on the conceptual model of interacting tipping elements."
-  - name: "directed interaction between subsystems"
-    symbol: transmit
-    signature: [sub, sub, t]
-    role: input-output
-    expression: "u = emit(z, Aij)"
-    reading: "A subsystem transmits a signal along each present interaction according to its own state."
-    warrant: posited
-    rests_on: "The law rests on the conceptual model of interacting tipping elements."
-  - name: "detection of regimes and events"
-    symbol: detect_law
-    signature: [sub]
-    role: measurement
-    expression: "r = detect(ind)"
-    reading: "The regime of a subsystem is assigned from its observed indicators."
-    warrant: fitted
-    rests_on: "The law rests on the calibration that relates instruments and paleoclimate proxies to subsystem regimes."
-
-closure: partial
-
-organization:
-  - name: "directed coupling between subsystems"
-    symbol: coupling
-    reading: "One subsystem changes the state of another by transmitting a physical signal. A cascade is a *sequence* of such transmissions between subsystems. A joint response of the subsystems to the common forcing does not count as a cascade."
-    relates: "subset(prod(sub, sub), Aij)"
-    realized_by: [transmit, evolve]
-
 external_systems:
   - name: "specification of the forcing scenario and Earth-system processes outside the selected subsystems"
     symbol: scenario_source
-    class: open                  # no admitted scenario generator named; only the trajectory they prescribe is declared
+    class:                       # no admitted scenario generator named; only the trajectory they prescribe is declared
     shares: [DGMT]
     constrains:
       - name: "stabilized scenario"
@@ -192,7 +166,7 @@ external_systems:
     reading: "The warming trajectory is prescribed from outside, so no subsystem transition feeds back onto the forcing."
   - name: "systems of Earth observation and paleoclimate measurement"
     symbol: observation
-    class: open                  # no quantity declared for the instruments and proxies
+    class:                       # no quantity declared for the instruments and proxies
     shares: [ind]
     constrains: []               # the detection law already fixes how the regime is read; required coverage and uncertainty bound belong to the detection criterion of the phenomenon
     reading: "The regime indicator is read off instruments and proxies, so the criterion for a transition depends on the quantities that these measurements resolve."

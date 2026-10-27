@@ -10,11 +10,14 @@ aliases:
 This case checks whether the framework can keep a temporal regularity apart from its competing explanations.
 
 - [Research problem](description.md): to understand what the case demands of the framework before reading its records.
+- [Problem record](problem.yml): to know the demand and the constraints that the question serves.
 - [Target system](target-system.yml): to know which class of training systems the question covers.
+- [Background laws](background.yml): to know which laws of the target the question admits, and on what warrant.
 - [Phenomenon](phenomenon.yml): to know which regularity the question concerns and how its delay is measured.
 - [Question](question.yml): to know what an explanation must establish, and against which alternatives.
 - [Candidate answer](answer.yml): to examine a candidate explanation drawn from a published effective theory.
 - [Assessment](assessment.yml): to learn which tests the candidate passes or fails, and why.
+- [Plan](plan.yml): to follow the steps of the inquiry, from the problem to the test of the candidate, with the verdict of each norm.
 - [Operators](operators.yml): to find the operators that the records of this problem use beyond the canonical set.
 - [Open issues](issues.md): to know which limitations of the framework the case still exposes.
 - [Vocabulary](vocabulary.yml): to choose a new symbol without colliding with one already declared.

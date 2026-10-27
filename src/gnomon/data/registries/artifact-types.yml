@@ -1,0 +1,113 @@
+# Registry of the types of epistemic artifact: the closed list of the inputs and the outputs of
+# the epistemic activities. The plan check reads this registry, and the overview of the activity
+# taxonomy documents the list (`docs/epistemology/definitions/activities/epistemic-activities.md`).
+#
+# The list derives from the taxonomy, not from the records of the framework. When no record kind
+# holds a type yet, the type stays in the list, marked `to-create`, so that the records are
+# extended to match it.
+#
+# Each entry names the record kinds that hold an artifact of the type, and the field that holds it
+# when only a part of a record does. Its status states how far the records cover the type:
+#   - `exists`: a record kind holds the type in full;
+#   - `partial`: a record holds part of the type, and the condition names the missing part;
+#   - `to-create`: no record kind holds the type, so a plan reaches it only as the output of a step.
+# `record: external pointer` marks a type held outside the records and reached by a pointer.
+# A `when` mapping states the state in which a record of a listed kind holds the type:
+#   - `commitment`: the admitted levels of commitment of the record;
+#   - `slots`: `placeholder` when some subject slot of a question holds a placeholder, `identified`
+#     when every slot names a record;
+#   - `status`: the admitted statuses of the record.
+# The plan check computes the type of a referenced record from its kind and its state. A
+# `condition` states in words the part of the type that the fields of a record hold.
+
+id: registry.artifact-types
+type: artifact-type-registry
+
+artifact_types:
+  - id: source
+    record: external pointer
+    status: exists
+    condition: "A pointer to a publication, a data set or an observation, held by the sources of a problem and the pointers of an identification."
+  - id: problem
+    record: [problem]
+    status: exists
+  - id: question-schema
+    record: [question]
+    when: {slots: placeholder}
+    status: exists
+  - id: question
+    record: [question]
+    when: {slots: identified}
+    status: exists
+  - id: identified-subject
+    record: [target-system, phenomenon]
+    when: {commitment: [identified, specified]}
+    status: exists
+  - id: concept
+    record: to-create
+    status: to-create
+  - id: classification
+    record: [target-system]
+    field_path: reference_class
+    status: exists
+  - id: measurement-procedure
+    record: [target-system]
+    field_path: "variables[].scale, variables[].expression"
+    status: partial
+    condition: "The scale and the defining expression of a quantity; the procedure that assigns its values has no field."
+  - id: design
+    record: to-create
+    status: to-create
+  - id: data
+    record: [phenomenon]
+    field_path: data
+    status: partial
+    condition: "Pointers to the data that establish the phenomenon; the data themselves stay outside the records."
+  - id: phenomenon
+    record: [phenomenon]
+    status: exists
+  - id: target-specification
+    record: [target-system]
+    when: {commitment: [specified]}
+    status: exists
+  - id: background-model
+    record: [background]
+    status: exists
+  - id: model
+    record: [answer]
+    field_path: "constituents, index_sets, variables, parameters, laws, organization"
+    status: exists
+  - id: consequence
+    record: [answer, assessment]
+    field_path: "answer: laws[] with warrant `derived`; assessment: obligations"
+    status: partial
+    condition: "A derived law of an answer, or a settled proof obligation. A consequence has a record only when an answer states it as a law or an assessment settles it as an obligation."
+  - id: hypothesis
+    record: [answer]
+    when: {status: [hypothesized]}
+    status: exists
+  - id: verdict
+    record: [assessment]
+    field_path: tests
+    status: exists
+  - id: credence
+    record: [assessment]
+    field_path: credence
+    status: exists
+  - id: ranking
+    record: [assessment]
+    field_path: "appraisal[].preferred_over"
+    status: exists
+  - id: explanation
+    record: [answer]
+    field_path: explanans
+    status: exists
+    condition: "An answer whose explanans bears the requested relation to the explanandum."
+  - id: inter-theory-relation
+    record: to-create
+    status: to-create
+  - id: knowledge-state-change
+    record: [problem, question, answer, assessment, target-system, phenomenon, background]
+    field_path: status
+    status: partial
+    condition: "A change of the status of a record. A log of the revisions, with their grounds, is still to be created."

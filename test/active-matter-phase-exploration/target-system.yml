@@ -2,10 +2,18 @@ title: "Spatially extended stochastic systems of two species with nonreciprocal 
 id: system.nonreciprocal-active-matter
 type: target-system
 status: provisional
+commitment: specified
 target_type: no-external-target
+
+identification:
+  description: "the class of spatially extended stochastic dynamics of two species whose mutual couplings violate reciprocity, in a continuum formulation by stochastic field equations and in a lattice formulation"
+  pointers:
+    - "fruchart2021: https://www.nature.com/articles/s41586-021-03375-9"
 
 reference_class:
   name: "spatially extended stochastic models of two species with nonreciprocal cross-couplings"
+  projectibility:
+    status: not-claimed
   selection_criteria: []
 
 variants:                        # continuum field and lattice realization; the two differ in their position index
@@ -72,7 +80,7 @@ parameters:
   - name: "admitted local state space common to the two species"
     symbol: U
     signature: [sp]
-    values: open
+    values:
     expression: null
     shared: true
   - name: "spatial dimension"
@@ -151,78 +159,6 @@ parameters:
     values: "measures(U(sp))"
     expression: null
     shared: false
-
-laws:
-  - name: "local stochastic evolution"
-    symbol: evolve
-    variant: continuum
-    signature: [sp, x, t]
-    role: evolution
-    expression: "diff(u, t) = D * lap(u) + F(u) + G(u) + W"
-    reading: "The field of each species diffuses in space and evolves under its own local dynamics. A noise term and the cross-coupling from the other species also drive the field."
-    warrant: posited
-    rests_on: "The definition of the model class posits this law."
-  - name: "distribution of the local noise"
-    symbol: noiselaw
-    variant: continuum
-    signature: [sp, x]
-    role: distribution
-    expression: "dist_{t}( W ) = Q"
-    reading: "The stochastic increments are distributed according to the declared noise law."
-    warrant: posited
-    rests_on: "The class admits this noise law."
-  - name: "nonreciprocity of the cross-coupling"
-    symbol: nonrecip
-    variant: continuum
-    signature: [sp, sp]
-    role: admissibility
-    expression: "G != adjoint(G)"
-    reading: "One species acts on the other differently than the other acts on it, so the coupling is nonreciprocal."
-    warrant: posited
-    rests_on: "The continuum variant is defined as a class with only nonreciprocal couplings."
-  - name: "local stochastic evolution on the lattice"
-    symbol: evolve_lattice
-    variant: lattice
-    signature: [sp, q, t]
-    role: evolution
-    expression: "diff(v, t) = Dl * lattice_lap(v) + Fl(v) + Gl(v) + Xi"
-    reading: "Each lattice state diffuses between neighbouring sites and evolves under its local dynamics. Stochastic increments and the cross-coupling from the other species also drive the state."
-    warrant: posited
-    rests_on: "The definition of the lattice variant posits this law."
-  - name: "distribution of the local noise on the lattice"
-    symbol: noiselaw_lattice
-    variant: lattice
-    signature: [sp, q]
-    role: distribution
-    expression: "dist_{t}( Xi ) = Ql"
-    reading: "The lattice increments follow the noise law declared for that variant."
-    warrant: posited
-    rests_on: "The lattice variant declares this noise law."
-  - name: "nonreciprocity of the lattice cross-coupling"
-    symbol: nonrecip_lattice
-    variant: lattice
-    signature: [sp, sp]
-    role: admissibility
-    expression: "Gl != adjoint(Gl)"
-    reading: "The two directed lattice couplings are not reciprocal."
-    warrant: posited
-    rests_on: "The lattice variant is defined as a class with only nonreciprocal couplings."
-
-closure: complete
-
-organization:
-  - name: "nonreciprocal cross-coupling"
-    symbol: crosscoupling
-    variant: continuum
-    reading: "Each species field acts on the other. The nonreciprocity law forbids the two actions from being adjoint, so the pair of edges carries unequal weights in the two directions."
-    relates: "prod(sp, sp)"
-    realized_by: [evolve, nonrecip]
-  - name: "nonreciprocal cross-coupling on the lattice"
-    symbol: crosscoupling_lattice
-    variant: lattice
-    reading: "Each lattice species acts on the other through directed couplings, and the nonreciprocity law excludes their reciprocal equality."
-    relates: "prod(sp, sp)"
-    realized_by: [evolve_lattice, nonrecip_lattice]
 
 external_systems: []
 

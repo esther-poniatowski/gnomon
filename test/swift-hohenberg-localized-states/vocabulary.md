@@ -11,6 +11,8 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 
 | Symbol | Declared in | Block | Signature | Gloss |
 | --- | --- | --- | --- | --- |
+| `evolve` | bg.swift-hohenberg-localized-states.equation | laws | x | Swift-Hohenberg evolution with quadratic and cubic nonlinearities |
+| `localized` | bg.swift-hohenberg-localized-states.equation | laws | — | localized boundary condition in the far field |
 | `Uloc` | phen.swift-hohenberg.localized-states | explanandum variables | r, b | set of localized stationary profiles |
 | `localized_states_exist` | phen.swift-hohenberg.localized-states | manifestations | — | existence of localized stationary states |
 | `stability` | phen.swift-hohenberg.localized-states | manifestations.features | — | intervals of linear stability along the branches |
@@ -18,8 +20,6 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `topology` | phen.swift-hohenberg.localized-states | manifestations.features | — | topology of the solution branches |
 | `t` | system.swift-hohenberg-localized-states | index sets | — | time |
 | `x` | system.swift-hohenberg-localized-states | index sets | — | spatial position |
-| `evolve` | system.swift-hohenberg-localized-states | laws | x | Swift-Hohenberg evolution with quadratic and cubic nonlinearities |
-| `localized` | system.swift-hohenberg-localized-states | laws | — | localized boundary condition in the far field |
 | `b` | system.swift-hohenberg-localized-states | parameters | — | coefficient of the quadratic nonlinearity |
 | `r` | system.swift-hohenberg-localized-states | parameters | — | control coefficient of the linear term |
 | `u` | system.swift-hohenberg-localized-states | variables | x, t | amplitude field of the pattern |

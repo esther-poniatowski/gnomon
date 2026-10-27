@@ -11,6 +11,7 @@ This case checks whether the framework can specify the knowledge sought about a 
 
 - [Research problem](description.md): to understand what the case demands of the framework before reading its records.
 - [Target system](target-system.yml): to know which class of networks and which training problem the question covers.
+- [Background laws](background.yml): to know which laws of the target the question admits, and on what warrant.
 - [Phenomenon](phenomenon.yml): to know which behavior of the model the question asks to delimit.
 - [Question](question.yml): to know which consequences an answer must derive, and over which widths and training horizons.
 - [Candidate answer](answer.yml): to examine a candidate that passes every test and serves as the positive reference of the suite.

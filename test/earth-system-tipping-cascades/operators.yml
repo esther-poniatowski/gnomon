@@ -9,7 +9,7 @@ operators:
     symbol: sequence
     notation: '\operatorname{seq}( #1, #2 )'
     signature: [sub, "maps(sub, nonneg(reals))"]
-    values: open
+    values:
 
 maturity:
   operators.sequence.values: open

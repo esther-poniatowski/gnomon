@@ -5,6 +5,7 @@ type: question
 status: posed
 subject:
   target_system: system.swift-hohenberg-localized-states
+  background: [bg.swift-hohenberg-localized-states.equation]
   phenomenon: phen.swift-hohenberg.localized-states
   contrast:
     locus: none

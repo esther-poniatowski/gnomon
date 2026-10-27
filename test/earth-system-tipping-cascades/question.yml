@@ -5,6 +5,7 @@ type: question
 status: posed
 subject:
   target_system: system.earth-tipping-subsystems
+  background: [bg.earth-tipping-subsystems.subsystem-dynamics]
   phenomenon: phen.earth-tipping-subsystems.transition-sequences
   contrast:
     locus: other-condition
@@ -33,12 +34,12 @@ task:
       - target: phen.earth-tipping-subsystems.transition-sequences#pi
         tolerance:
           metric: "abs(answer - target)"
-          bound: open
+          bound:
         justification: "A forecast is usable only if it assigns each transition a probability, so an answer that only lists possible events does not meet the question."
       - target: phen.earth-tipping-subsystems.transition-sequences#Fi
         tolerance:
           metric: "max_{t}( abs(answer - target) )"
-          bound: open
+          bound:
         justification: "The time of each transition fixes the lead time available for any response. The question therefore requires, for each transition, its probability and the distribution of its time."
     structures_to_match: []
 

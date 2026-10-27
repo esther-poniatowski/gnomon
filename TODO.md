@@ -10,6 +10,7 @@ This list holds the goals of `gnomon` that span several parts of the project. Th
 
 ## Conventions
 
+- [x] In the YAML forms, use an **empty value** instead of the sentinel `open`. This strategy is fragile: "open" must be free so that it can be used as an allowed value in certain fields. Moreover, the sentinel is not necessary. The empty convention aligns with the implementation in ekphrasis. ⏫
 - [ ] Align the conventions of `gnomon` with those of `geonexus`, recorded in `/Users/eresther/Documents/research/geonexus/CONVENTIONS.md`. 🆔 geonexus-conventions
 	- [ ] Compare the two workspaces on frontmatter keys, conventional file types (task lists, dashboards, handoffs), and task syntax.
 	- [ ] Adopt the conventions retained, in this list and in the [design task list](docs/TODO.md) first.

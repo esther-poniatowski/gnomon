@@ -11,6 +11,14 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 
 | Symbol | Declared in | Block | Signature | Gloss |
 | --- | --- | --- | --- | --- |
+| `evolve` | bg.nonreciprocal-active-matter.local-dynamics | laws | sp, x, t | local stochastic evolution |
+| `evolve_lattice` | bg.nonreciprocal-active-matter.local-dynamics | laws | sp, q, t | local stochastic evolution on the lattice |
+| `noiselaw` | bg.nonreciprocal-active-matter.local-dynamics | laws | sp, x | distribution of the local noise |
+| `noiselaw_lattice` | bg.nonreciprocal-active-matter.local-dynamics | laws | sp, q | distribution of the local noise on the lattice |
+| `nonrecip` | bg.nonreciprocal-active-matter.local-dynamics | laws | sp, sp | nonreciprocity of the cross-coupling |
+| `nonrecip_lattice` | bg.nonreciprocal-active-matter.local-dynamics | laws | sp, sp | nonreciprocity of the lattice cross-coupling |
+| `crosscoupling` | bg.nonreciprocal-active-matter.local-dynamics | organization | — | nonreciprocal cross-coupling |
+| `crosscoupling_lattice` | bg.nonreciprocal-active-matter.local-dynamics | organization | — | nonreciprocal cross-coupling on the lattice |
 | `C` | phen.nonreciprocal-active-matter.collective-phases | explanandum variables | sp, sp, rsep, lag | correlation matrix between species |
 | `Cl` | phen.nonreciprocal-active-matter.collective-phases | explanandum variables | sp, sp, rsite, lag | correlation matrix between species on the lattice |
 | `S` | phen.nonreciprocal-active-matter.collective-phases | explanandum variables | sp, sp, k, omega | spectral matrix between species |
@@ -39,14 +47,6 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `q` | system.nonreciprocal-active-matter | index sets | — | lattice site |
 | `t` | system.nonreciprocal-active-matter | index sets | — | time |
 | `x` | system.nonreciprocal-active-matter | index sets | — | spatial position |
-| `evolve` | system.nonreciprocal-active-matter | laws | sp, x, t | local stochastic evolution |
-| `evolve_lattice` | system.nonreciprocal-active-matter | laws | sp, q, t | local stochastic evolution on the lattice |
-| `noiselaw` | system.nonreciprocal-active-matter | laws | sp, x | distribution of the local noise |
-| `noiselaw_lattice` | system.nonreciprocal-active-matter | laws | sp, q | distribution of the local noise on the lattice |
-| `nonrecip` | system.nonreciprocal-active-matter | laws | sp, sp | nonreciprocity of the cross-coupling |
-| `nonrecip_lattice` | system.nonreciprocal-active-matter | laws | sp, sp | nonreciprocity of the lattice cross-coupling |
-| `crosscoupling` | system.nonreciprocal-active-matter | organization | — | nonreciprocal cross-coupling |
-| `crosscoupling_lattice` | system.nonreciprocal-active-matter | organization | — | nonreciprocal cross-coupling on the lattice |
 | `D` | system.nonreciprocal-active-matter | parameters | sp | diffusion coefficient of the continuum |
 | `Dl` | system.nonreciprocal-active-matter | parameters | sp | diffusion coefficient on the lattice |
 | `F` | system.nonreciprocal-active-matter | parameters | sp | operator of the local self-dynamics |

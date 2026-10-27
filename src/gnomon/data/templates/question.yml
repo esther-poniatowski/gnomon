@@ -1,7 +1,7 @@
 # method: `docs/epistemology/subject-of-inquiry.md`, `contrast.md`, `domain.md`, `epistemic-task.md`, `modal-strength.md`, `admissible-explanans.md`, `epistemic-pragmatic-virtues.md`
 # symbols and expressions: `docs/epistemology/symbols-and-expressions.md`
 # name a quantity of another record by source identifier and symbol: `system.TOPIC#SYMBOL`
-# replace every UPPERCASE placeholder; any closed field accepts `open`
+# replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # fix the question before evaluating any candidate answer
 
 title: "SHORT NAME OF THE QUESTION"
@@ -9,18 +9,26 @@ statement: "THE QUESTION IN WORDS" # restate the fields from which `gnomon rende
 id: quest.TOPIC.NAME
 type: question
 status: posed                     # posed | refined | answered | abandoned
+addresses: prob.TOPIC.NAME        # the problem that the question serves; omit when no problem record exists
+links:                            # questions linked to this question by one of three relations; empty when none
+  - question: quest.TOPIC.NAME
+    relation:                     # subquestion-of | explanans-from | presupposes
+    via: phen.TOPIC.NAME          # the record shared by both questions, such as a phenomenon; omit when they share none
 subject:
-  target_system: system.TOPIC
-  phenomenon: phen.TOPIC.NAME
+  target_system: system.TOPIC     # a record identifier; in a question schema, a placeholder written as for `phenomenon`
+  background: [bg.TOPIC.NAME]     # background records whose laws the question admits; empty when it admits none
+  phenomenon:                     # a record identifier `phen.TOPIC.NAME`; in a question schema, the placeholder below
+    placeholder:                  # system | phenomenon | observable | contrast | condition
+    description: "THE ITEM AWAITED BY THE SLOT"
   contrast:
-    locus: open                  # other-outcome | other-system | other-condition | none
+    locus:                       # other-outcome | other-system | other-condition | none
     foil_set:                    # default: the other values of the explanandum variable
       - name: "NAME OF THE ALTERNATIVE"
         symbol: SYMBOL
         expression: ["EXPRESSION OVER DECLARED SYMBOLS"]
         reading: "THE MEANING OF THE ALTERNATIVE"   # only content beyond the name and the expression
     compatibility: derived       # follows from the locus: `exclusive` for `other-outcome`, `compatible` otherwise
-    foil_status: open            # observed | counterfactual | not-applicable
+    foil_status:                 # observed | counterfactual | not-applicable
   domain:                        # only restrictions of the a priori specification; assumptions of the analysis belong to the answer
     restrictions:                # one entry per restriction the question imposes on the specification
       - name: "NAME OF THE RESTRICTION"   # required when no quantity names the entry
@@ -34,15 +42,16 @@ subject:
       justification: "WHY THE QUESTION CONCERNS THE LIMIT SYSTEM"
 
 task:
-  epistemic_aim: open            # description | exploration | prediction | explanation | modal-knowledge | model-knowledge
-  requested_relation: open       # causal-intervention | causal-mechanistic | constitutive | functional | nomological | statistical | mathematical | not-applicable
-  modal_strength: open           # actual | possible | necessary
+  epistemic_aim:                 # description | exploration | prediction | explanation | modal-knowledge | model-knowledge
+  requested_relation:            # causal-intervention | causal-mechanistic | constitutive | functional | nomological | statistical | mathematical | not-applicable
+  function_sense:                # causal-role | etiological; required when the requested relation is `functional`
+  modal_strength:                # actual | possible | necessary
   admissible_explanans:          # optional; when null, proportionality bounds the answer
     compositional: [SYMBOL]      # constituent kinds or index sets whose parts may enter the explanans; empty for the system as a whole
     substrate: null              # specific | independent | mapping
     justification: "WHY THE ANSWER IS BOUND TO THESE VARIABLES"   # also state the shortfall of an answer that draws on other variables
   required_accuracy:
-    standard: open               # qualitative | order-of-magnitude | numeric-bound | structural-only | not-applicable
+    standard:                    # qualitative | order-of-magnitude | numeric-bound | structural-only | not-applicable
     outputs_to_match:            # name only the target side; the answer reproduces each output
       - target: phen.TOPIC.NAME#SYMBOL
         tolerance:               # omit when the standard is `qualitative` or `structural-only`

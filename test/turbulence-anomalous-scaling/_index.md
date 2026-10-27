@@ -11,6 +11,7 @@ This case checks whether the framework can specify regularities of probability d
 
 - [Research problem](description.md): to understand what the case demands of the framework before reading its records.
 - [Target system](target-system.yml): to know which flows and which admissible variations the question covers.
+- [Background laws](background.yml): to know which laws of the target the question admits, and on what warrant.
 - [Phenomenon](phenomenon.yml): to know which statistical behavior the question concerns.
 - [Question](question.yml): to know what an account must establish, and with what accuracy.
 - [Operators](operators.yml): to find the operators that the records of this problem use beyond the canonical set.

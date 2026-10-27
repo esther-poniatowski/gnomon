@@ -4,7 +4,8 @@ title: "Theorem of uniform linearization under neural tangent parameterization"
 statement: "At fixed depth, the theorem assumes bounded inputs and a regular activation. The theorem also assumes independent initialization under neural tangent parameterization and a positive spectral gap of the limiting kernel on the training set. Under the four assumptions, gradient flow keeps the empirical kernel within order m^(-1/2) of its initial value. The nonlinear output obeys a bound of the same order relative to its linearization at the initial kernel. Both bounds hold uniformly over nonnegative training time with probability tending to one."
 id: ans.ntk.uniform-linearization-theorem
 type: answer
-status: formally-proven
+status: accepted
+support: formally-proven
 answers: quest.ntk.linearized-dynamics-validity
 
 constituents: []

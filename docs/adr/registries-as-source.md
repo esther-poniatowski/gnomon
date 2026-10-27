@@ -27,7 +27,7 @@ Package data declares every closed vocabulary, every requirement of an epistemic
 
 - **A checker must not parse prose.** A checker that reads a document couples the logic of the framework to the formatting of that document, and it makes the package depend on a workspace that holds `docs/`. Only the alignment check has reason to read a note.
 - **One constant serves one purpose.** A single constant had named both the record kinds that the checkers read and the blocks that declare symbols, so adding a kind that declares no symbol excluded that kind from every check without any report.
-- **A sentinel carries one meaning.** Every closed field accepts `open` for a value that an inquiry has not settled, so no vocabulary lists it, and the first state of a question is `posed`.
+- **An empty value states only that the field is not filled.** Every word stays free for the vocabularies: a vocabulary may admit `open` as an ordinary value. The requirements registry tells whether an empty field is a gap or a value produced by the inquiry, and a question starts in the state `posed`.
 
 ## Options weighed
 

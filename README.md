@@ -42,15 +42,16 @@ The **language** states the content of each concern. Every declared quantity car
 The vocabulary of the framework is declared in **registries**, written by hand and stored in package data:
 
 - the admitted values of each closed field;
-- the requirements of each epistemic aim;
-- the canonical operators.
+- the requirements of each level of commitment and of each epistemic aim;
+- the canonical operators;
+- the epistemic activities, with the types of artifact that each takes and produces.
 
 Each declaration is documented in the method notes.
 
 The language and the registries together serve one design goal: a record is **machine-checkable**. Three classes of defect are reported:
 
 - a reference resolving to no declaration;
-- a field left open although the epistemic aim requires a value;
+- a field left empty although the epistemic aim requires a value;
 - a claim ranging beyond the members bearing it.
 
 The framework has been validated against seven real research problems, each filled as a complete specification.
@@ -63,6 +64,7 @@ The framework has been validated against seven real research problems, each fill
 - [x] Resolves every symbol, reference and formula of a research problem, and reports each identifier that resolves to no declaration.
 - [x] Checks each filled record against the requirements of its epistemic aim, and each closed field against its registry.
 - [x] Collects the symbols and the operators of a research problem into one table.
+- [x] Checks each step of a plan of inquiry against the registry of epistemic activities.
 - [ ] Scaffolds a research workspace from a standard template.
 - [ ] Validates registry files against schemas.
 - [ ] Reports the inferential position of a workspace: established results, open questions, blocked entries.

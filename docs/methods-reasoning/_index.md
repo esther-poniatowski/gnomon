@@ -7,7 +7,7 @@ aliases:
 ---
 # Methods for reasoning
 
-External work grounds the design and is recorded here on its own terms, before it is applied to `gnomon`. Each of the four groups collects the material that plays one role.
+The external work grounding the design of `gnomon` is recorded on its own terms, before `gnomon` applies that work. Each of the four groups collects the material that plays one role.
 
 ## Reasoning principles
 

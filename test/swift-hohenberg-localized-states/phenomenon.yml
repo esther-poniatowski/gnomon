@@ -3,9 +3,23 @@ statement: "Stationary solutions of the generalized Swift-Hohenberg equation for
 id: phen.swift-hohenberg.localized-states
 type: phenomenon
 status: provisional
+commitment: specified
 target_system: system.swift-hohenberg-localized-states
 
+identification:
+  description: "the stationary patterned states of the equation that are localized within the homogeneous background, with the snaking branches that organize them"
+  pointers:
+    - "burke2006: https://doi.org/10.1103/PhysRevE.73.056211"
+    - "beck2009: https://doi.org/10.1137/080713306"
+
 category: capacity
+
+course:
+  index: t
+  grain:
+  varies: []
+
+occurrence: not-applicable
 
 index_sets: []                   # the target already declares every index used here
 
@@ -29,15 +43,15 @@ manifestations:
       - name: "topology of the solution branches"
         symbol: topology
         values: "powerset(enum(\"disconnected\", \"snaking\", \"ladders\", \"isolas\", \"other\"))"
-        observed: open
+        observed:
       - name: "symmetry classes of the profiles"
         symbol: symmetry
         values: "powerset(enum(\"even\", \"odd\", \"asymmetric\"))"
-        observed: open
+        observed:
       - name: "intervals of linear stability along the branches"
         symbol: stability
         values: "powerset(interval(reals))"
-        observed: open
+        observed:
 
 scope_over_instances: []         # the signature of Uloc retains the dependence on the coefficients
 

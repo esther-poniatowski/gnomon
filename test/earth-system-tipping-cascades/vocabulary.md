@@ -11,6 +11,10 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 
 | Symbol | Declared in | Block | Signature | Gloss |
 | --- | --- | --- | --- | --- |
+| `detect_law` | bg.earth-tipping-subsystems.subsystem-dynamics | laws | sub | detection of regimes and events |
+| `evolve` | bg.earth-tipping-subsystems.subsystem-dynamics | laws | sub | evolution of a subsystem |
+| `transmit` | bg.earth-tipping-subsystems.subsystem-dynamics | laws | sub, sub, t | directed interaction between subsystems |
+| `coupling` | bg.earth-tipping-subsystems.subsystem-dynamics | organization | — | directed coupling between subsystems |
 | `Fi` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | sub, H | censored distribution of the transition time |
 | `PZ` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | H | joint law of the marked sequence of transitions |
 | `Tev` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | sub | transition time of a subsystem |
@@ -27,10 +31,6 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `observation` | system.earth-tipping-subsystems | external systems | — | systems of Earth observation and paleoclimate measurement |
 | `scenario_source` | system.earth-tipping-subsystems | external systems | — | specification of the forcing scenario and Earth-system processes outside the selected subsystems |
 | `t` | system.earth-tipping-subsystems | index sets | — | time |
-| `detect_law` | system.earth-tipping-subsystems | laws | sub | detection of regimes and events |
-| `evolve` | system.earth-tipping-subsystems | laws | sub | evolution of a subsystem |
-| `transmit` | system.earth-tipping-subsystems | laws | sub, sub, t | directed interaction between subsystems |
-| `coupling` | system.earth-tipping-subsystems | organization | — | directed coupling between subsystems |
 | `Aij` | system.earth-tipping-subsystems | parameters | sub, sub | directed architecture of the interactions |
 | `Tend` | system.earth-tipping-subsystems | parameters | — | end of the prescribed scenario |
 | `Theta` | system.earth-tipping-subsystems | parameters | sub | critical threshold of the forcing |

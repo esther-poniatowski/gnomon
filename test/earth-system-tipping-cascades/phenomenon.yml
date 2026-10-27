@@ -3,9 +3,22 @@ statement: "The selected tipping elements of the actual Earth system are coupled
 id: phen.earth-tipping-subsystems.transition-sequences
 type: phenomenon
 status: provisional
+commitment: specified
 target_system: system.earth-tipping-subsystems
 
+identification:
+  description: "the sequences and the timing of the regime transitions of the four tipping elements under prescribed warming trajectories, including trajectories that temporarily overshoot"
+  pointers:
+    - "wunderling2023: https://doi.org/10.1038/s41558-022-01545-9"
+
 category: regularity
+
+course:
+  index: t
+  grain:
+  varies: []
+
+occurrence: not-applicable
 
 index_sets:
   - name: "prediction horizon"
@@ -29,7 +42,7 @@ explanandum_variables:
   - name: "marked sequence of transitions"
     symbol: Z
     signature: []
-    values: open
+    values:
     expression: "sequence(sub, Tev)"
     reading: "The sequence lists the subsystems that transition, ordered by their event times."
   - name: "joint law of the marked sequence of transitions"
@@ -63,8 +76,8 @@ manifestations:                  # sequence law as a function of the warming tra
     features:
       - name: "effect of an overshoot trajectory on the sequence law"
         symbol: overshoot_effect
-        values: open
-        observed: open
+        values:
+        observed:
 
 scope_over_instances:            # predictive spread decomposes into declared sources
   - name: "internal climate variability"
@@ -107,16 +120,16 @@ evidential_status: predicted
 detection_criterion:
   - name: "robustness across admissible parameters and structures"
     across: [param, struct]
-    expression: open
+    expression:
     procedure: "The conclusions hold across the scientifically admissible parameters and interaction structures."
   - name: "predeclared criteria and calibrated probabilities"
     across: []
-    expression: open
+    expression:
     procedure: "Each transition criterion is predeclared, and the event probabilities are calibrated against independent evidence."
     limited_by: [system.earth-tipping-subsystems#observation]
   - name: "separable sources of spread"
     across: [realization, param, struct, scenario]
-    expression: open
+    expression:
     procedure: "Each source of spread keeps a separately identifiable contribution."
 
 data:

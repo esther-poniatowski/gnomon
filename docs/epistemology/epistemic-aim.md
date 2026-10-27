@@ -32,18 +32,18 @@ The epistemic aim specifies the cognitive achievement that an answer must delive
 
 ## Specifications each aim requires
 
-Because an aim fixes the product that an answer must deliver, the aim also determines the specifications that the inquiry cannot leave open. Each aim adds specifications to those every inquiry fixes. An aim may also relax some general specifications: an aim that produces a phenomenon cannot require the question to state it in advance. The third column therefore lists the specifications that a note marks as always required but that the aim admits open. A dash marks an aim that neither adds nor relaxes a specification. Each dash is attested by a filled inquiry that pursues the aim and fixes nothing beyond the general requirements. Each entry names a field path. Each row documents the entry for one aim in the registry of [required fields](../../src/gnomon/data/requirements.yml), the authoritative source of the table. ^required-by-aim
+Because an aim fixes the product that an answer must deliver, the aim also determines the specifications that the inquiry cannot leave empty. Each aim adds specifications to those every inquiry fixes. Under some aims, the inquiry itself produces some general specifications: an aim that produces a phenomenon cannot require the question to state it in advance. Therefore, the third column lists the specifications that a note marks as required in general but that the inquiry itself produces. On those paths alone, an empty field is admitted. A dash marks an aim that neither adds nor produces a specification. Each dash is attested by a filled inquiry that pursues the aim and fixes nothing beyond the general requirements. Each entry names a field path. Each row documents the entry for one aim in the registry of [required fields](../../src/gnomon/data/requirements.yml), the authoritative source of the table. ^required-by-aim
 
-| Aim | Additionally required | Admitted open, although required in general |
+| Aim | Additionally required | Produced by the inquiry, although required in general |
 | --- | --- | --- |
 | `description` | — | — |
-| `exploration` | `phenomenon.detection_criterion` | `phenomenon.statement`, `phenomenon.category`, `phenomenon.evidential_status` |
+| `exploration` | `phenomenon.detection_criterion` | `phenomenon.statement`, `phenomenon.category`, `phenomenon.occurrence`, `phenomenon.evidential_status` |
 | `prediction` | `phenomenon.manifestations`, `question.task.required_accuracy.outputs_to_match` | — |
 | `explanation` | `question.subject.contrast.foil_set`, `question.task.requested_relation` | — |
 | `modal-knowledge` | `question.task.modal_strength`, `question.task.proof_obligations` | — |
 | `model-knowledge` | — | — |
 
-- **An exploratory inquiry fixes no phenomenon in advance, so it must fix the criterion that would establish one.** The exploratory inquiry leaves open the statement, the category, the evidential status and the form of the manifestation, although every other aim fixes these four specifications. In their place, the detection criterion states the test that a candidate pattern must pass. The exploratory case illustrates a general division: a general requirement lists the fields of a complete record, and an aim marks the fields that an incomplete record may omit without error.
+- **An exploratory inquiry fixes no phenomenon in advance, so it must fix the criterion that would establish one.** The exploratory inquiry produces the statement, the category, the occurrence class and the evidential status, although every other aim fixes these four specifications. In their place, the detection criterion states the test that a candidate pattern must pass. The exploratory case illustrates a general division: a general requirement lists the fields of a complete record, and an aim marks the fields that the inquiry itself fills.
 
 - **Only prediction compares an output against a measurement in every inquiry**, so the field `outputs_to_match` is required for this aim alone. An aim that seeks a proof, by contrast, requires no output to match, so an absent accuracy is *correct* for that aim.
 

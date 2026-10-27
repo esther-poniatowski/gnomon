@@ -4,7 +4,8 @@ title: "Snakes-and-ladders catalogue of localized states"
 statement: "Numerical continuation of the one-dimensional Swift-Hohenberg equation with quadratic and cubic nonlinearities finds two snaking branches of localized profiles. Both branches are symmetric under reflection. Asymmetric ladder branches connect the two snaking families. Selected segments between folds are stable. Other coefficient regimes contain isolas. The published qualitative catalogue does not map every topology and stability interval over the full admitted (r, b) domain."
 id: ans.swift-hohenberg.snakes-ladders-catalogue
 type: answer
-status: informally-backed
+status: hypothesized
+support: informal
 answers: quest.swift-hohenberg.localized-states-description
 
 constituents: []

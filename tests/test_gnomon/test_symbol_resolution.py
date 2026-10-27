@@ -23,10 +23,17 @@ from gnomon.completeness import (
     always_required,
     inadmissible_values,
     malformed_restrictions,
+    malformed_credence,
     contradictory_accuracy,
+    placeholder_types,
     record_kinds,
     requirements_by_aim,
+    requirements_by_commitment,
     unmet_by_aim,
+    unmet_commitment,
+    unresolved_question_references,
+    unresolved_slots,
+    unstated_function_sense,
     undecided_boundaries,
     undeclared_explanans_bound,
     unrealized_link,
@@ -66,6 +73,7 @@ from gnomon.vocabulary import (
     render_markdown,
     render_yaml,
     unresolved,
+    upstream_of,
 )
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -92,6 +100,14 @@ def symbols_of(record: Mapping[str, Any]) -> list[str]:
 
 CASES = records()
 IDS = [name for name, _ in CASES] or ["no-fixture"]
+
+#: Every fixture record of a checked kind, keyed by identifier.
+BY_ID: dict[str, Mapping[str, Any]] = {str(r["id"]): r for _, r in CASES if "id" in r}
+
+
+def backgrounds_of(target: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    """Return the background records that describe ``target``."""
+    return [r for r in BY_ID.values() if r.get("type") == "background" and r.get("describes") == target.get("id")]
 
 
 def problem_of(name: str) -> str:
@@ -137,8 +153,7 @@ def test_no_symbol_is_declared_twice(case: tuple[str, Mapping[str, Any]]) -> Non
 @pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
 def test_every_reference_and_formula_identifier_resolves(case: tuple[str, Mapping[str, Any]]) -> None:
     name, record = case
-    targets = {r["id"]: r for _, r in CASES if r.get("type") == "target-system"}
-    upstream = targets.get(record.get("target_system", ""), {})
+    upstream = upstream_of(record, BY_ID)
     # an operator is typed over the sets of its whole problem, so it reads against all of them
     # an operator and a question are both read against the whole problem: the first is typed over
     # whatever set declares it, the second reaches the target and the phenomenon alike
@@ -226,7 +241,7 @@ def test_every_external_system_decides_what_it_imposes(case: tuple[str, Mapping[
 def test_every_interaction_runs_along_ordered_pairs(case: tuple[str, Mapping[str, Any]]) -> None:
     """The direction of an influence is the order of its pairs, so the pairs name two kinds."""
     name, record = case
-    unordered = unordered_interactions(record)
+    unordered = unordered_interactions(record, upstream_of(record, BY_ID))
     assert not unordered, f"{name}: {unordered}"
 
 
@@ -285,7 +300,7 @@ def test_every_call_passes_what_its_operator_takes(case: tuple[str, Mapping[str,
 def test_every_variant_is_carried_or_admitted_open(case: tuple[str, Mapping[str, Any]]) -> None:
     """A variant nothing carries names a member the record cannot generate, unless it says so."""
     name, record = case
-    unborne = unborne_variants(record)
+    unborne = unborne_variants(record, backgrounds_of(record))
     assert not unborne, f"{name}: {unborne}"
 
 
@@ -355,8 +370,10 @@ def test_a_variant_named_in_prose_is_still_unborne() -> None:
     record["maturity"] = {"variants.lattice": "open"}
     assert unborne_variants(record) == []
     del record["maturity"]
-    record["organization"] = [{"symbol": "coupling", "variant": "lattice"}]
-    assert unborne_variants(record) == []   # a relation carries a variant as a declaration does
+    background = {"type": "background", "organization": [{"symbol": "coupling", "variant": "lattice"}]}
+    assert unborne_variants(record, [background]) == []   # a relation carries a variant as a declaration does
+    background["type"] = "phenomenon"
+    assert len(unborne_variants(record, [background])) == 1   # only a block that declares counts
 
 
 @pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
@@ -370,7 +387,7 @@ def test_no_declaration_asserts_of_all_members_what_only_some_carry(
     parts it runs between and the laws realizing it, an external system through what it shares.
     """
     name, record = case
-    overreaching = overreaching_declarations(record)
+    overreaching = overreaching_declarations(record, upstream_of(record, BY_ID))
     assert not overreaching, f"{name}: {overreaching}"
 
 
@@ -381,7 +398,7 @@ def test_every_interaction_passes_through_a_shared_quantity(
 ) -> None:
     """A quantity indexed by one endpoint alone cannot carry an influence between two."""
     name, record = case
-    misrouted = misrouted_interactions(record)
+    misrouted = misrouted_interactions(record, upstream_of(record, BY_ID))
     assert not misrouted, f"{name}: {misrouted}"
 
 
@@ -392,17 +409,19 @@ def test_the_record_generates_a_directed_interaction_graph(
 ) -> None:
     """Every edge the record states resolves to declared nodes and declared carriers."""
     name, record = case
-    declared = {entry.symbol for entry in declarations(record)}
+    upstream = upstream_of(record, BY_ID)
+    declared = {entry.symbol for entry in declarations(record) + declarations(upstream)}
     relations = {
         entry.get("symbol") for entry in record.get("organization") or [] if isinstance(entry, Mapping)
     }
     kinds = {
         entry.get("symbol")
+        for source in (record, upstream)
         for block in ("constituents", "index_sets")
-        for entry in record.get(block) or []
+        for entry in source.get(block) or []
         if isinstance(entry, Mapping)
     }
-    for edge in interaction_graph(record):
+    for edge in interaction_graph(record, upstream):
         assert edge["edge"] in relations, f"{name}: {edge['edge']} is no relation of the record"
         for endpoint in edge["sources"] + [edge["reach"]]:
             assert endpoint in kinds, f"{name}: {endpoint} is no constituent kind or index set"
@@ -522,8 +541,18 @@ REQUIRED = requirements_by_aim()
 QUESTIONS = sorted(FIXTURES.glob("*/question.yml")) if FIXTURES.is_dir() else []
 
 
+REQUIRED_BY_COMMITMENT = requirements_by_commitment()
+
+
 def records_of(directory: Path) -> dict[str, Any]:
-    kinds = {"question": "question.yml", "phenomenon": "phenomenon.yml", "target-system": "target-system.yml"}
+    kinds = {
+        "question": "question.yml",
+        "phenomenon": "phenomenon.yml",
+        "target-system": "target-system.yml",
+        "background": "background.yml",
+        "problem": "problem.yml",
+        "plan": "plan.yml",
+    }
     return {
         prefix: yaml.safe_load((directory / name).read_text(encoding="utf-8"))
         for prefix, name in kinds.items()
@@ -539,10 +568,10 @@ def test_each_inquiry_fixes_what_its_aim_requires(path: Path) -> None:
     assert not missing, f"{path.parent.name}: {missing}"
 
 
-def relaxed_for(aim: str, kind: str) -> set[str]:
-    """Return the paths of ``kind`` that ``aim`` admits open, with the record prefix stripped."""
+def produced_for(aim: str, kind: str) -> set[str]:
+    """Return the paths of ``kind`` that ``aim`` produces, with the record prefix stripped."""
     entry = REQUIRED.get(aim) or {}
-    return {p.split(".", 1)[1] for p in entry.get("open", []) if p.startswith(f"{kind}.")}
+    return {p.split(".", 1)[1] for p in entry.get("to_produce", []) if p.startswith(f"{kind}.")}
 
 
 @pytest.mark.skipif(not QUESTIONS, reason="the expressivity fixtures are absent")
@@ -557,18 +586,83 @@ def test_each_record_carries_what_the_notes_require_always(path: Path) -> None:
             continue
         missing += [
             f"{kind}: {m}"
-            for m in unmet_general(record, always_required(kind), relaxed_for(aim, kind))
+            for m in unmet_general(record, always_required(kind), produced_for(aim, kind))
         ]
     assert not missing, f"{path.parent.name} ({aim}): {missing}"
 
 
-def test_an_aim_relaxes_only_what_the_note_lets_it_relax() -> None:
-    """A record leaving an always-required specification open needs its aim to admit it."""
-    record = {"type": "phenomenon", "statement": "open",
-              "category": "regularity", "manifestations": [{}], "evidential_status": "established"}
-    paths = always_required("phenomenon")
-    assert unmet_general(record, paths) == ["always required: statement"]
-    assert unmet_general(record, paths, {"statement"}) == []
+@pytest.mark.skipif(not QUESTIONS, reason="the expressivity fixtures are absent")
+@pytest.mark.parametrize("path", QUESTIONS, ids=[p.parent.name for p in QUESTIONS] or ["none"])
+def test_each_record_carries_what_its_commitment_requires(path: Path) -> None:
+    """A record at `identified` fixes its referent; one at `specified` also writes its declarations."""
+    records = records_of(path.parent)
+    aim = str(((records["question"].get("task") or {}).get("epistemic_aim")))
+    missing = [
+        f"{kind}: {m}"
+        for kind in ("target-system", "phenomenon")
+        if kind in records
+        for m in unmet_commitment(records[kind], REQUIRED_BY_COMMITMENT, produced_for(aim, kind))
+    ]
+    assert not missing, f"{path.parent.name} ({aim}): {missing}"
+
+
+def test_a_record_lacking_what_its_commitment_requires_is_reported() -> None:
+    """The levels are cumulative, so a specified record also carries what identification needs."""
+    phenomenon = {"type": "phenomenon", "commitment": "identified", "statement": "A behavior.",
+                  "identification": {"description": "the behavior", "pointers": []}}
+    assert unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT) == []
+    phenomenon["commitment"] = "specified"
+    assert unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT) == [
+        "commitment specified requires: category",
+        "commitment specified requires: course",
+        "commitment specified requires: occurrence",
+        "commitment specified requires: manifestations",
+        "commitment specified requires: evidential_status",
+    ]
+    del phenomenon["identification"]
+    phenomenon["commitment"] = "identified"
+    assert unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT) == [
+        "commitment identified requires: identification"
+    ]
+    target = {"type": "target-system", "commitment": "specified", "target_type": "particular",
+              "reference_class": {"name": "a basin"}, "identification": {"description": "the basin"}}
+    assert unmet_commitment(target, REQUIRED_BY_COMMITMENT) == ["commitment specified requires: variables"]
+
+
+def test_a_record_stating_no_commitment_is_reported() -> None:
+    assert unmet_general({"type": "phenomenon", "commitment": None}, always_required("phenomenon")) == [
+        "always required: commitment"
+    ]
+
+
+def test_an_empty_value_leaves_a_required_specification_unfilled() -> None:
+    """Null, an empty string and an empty block are unfilled; `open` is an ordinary value now."""
+    paths = ["statement", "category", "manifestations"]
+    record = {"type": "phenomenon", "statement": None, "category": "", "manifestations": []}
+    assert unmet_general(record, paths) == [
+        "always required: statement",
+        "always required: category",
+        "always required: manifestations",
+    ]
+    record.update(statement="open", category="regularity", manifestations=[{"form": "value"}])
+    assert unmet_general(record, paths) == []
+
+
+def test_a_path_that_the_aim_produces_may_stay_empty() -> None:
+    """The registry, not the record, says whether an empty field is a gap or a product."""
+    record = {"type": "phenomenon", "statement": None, "category": None}
+    assert unmet_general(record, ["statement", "category"], {"statement"}) == ["always required: category"]
+    produced = produced_for("exploration", "phenomenon")
+    assert {"statement", "category", "occurrence", "evidential_status"} <= produced
+    assert produced_for("explanation", "phenomenon") == set()
+
+
+def test_an_empty_boundary_is_reported_and_an_empty_list_is_not() -> None:
+    """An empty value leaves the boundary undecided; `[]` states that it imposes nothing."""
+    record = {"external_systems": [{"symbol": "bath", "constrains": None}, {"symbol": "decoder", "constrains": []}]}
+    assert undecided_boundaries(record) == [
+        "external_systems.bath: constrains is empty, so the boundary is named without being decided"
+    ]
 
 
 @pytest.mark.skipif(not QUESTIONS, reason="the expressivity fixtures are absent")
@@ -682,9 +776,18 @@ def test_a_match_listed_under_an_inapplicable_accuracy_is_reported() -> None:
 def test_the_requirement_table_is_read_from_the_registry() -> None:
     assert REQUIRED["exploration"]["required"] == ["phenomenon.detection_criterion"]
     assert "question.subject.contrast.foil_set" in REQUIRED["explanation"]["required"]
-    assert REQUIRED["description"] == {"required": [], "open": []}
-    assert "phenomenon.category" in REQUIRED["exploration"]["open"]
-    assert REQUIRED["prediction"]["open"] == []
+    assert REQUIRED["description"] == {"required": [], "to_produce": []}
+    assert "phenomenon.category" in REQUIRED["exploration"]["to_produce"]
+    assert REQUIRED["prediction"]["to_produce"] == []
+    assert REQUIRED_BY_COMMITMENT["identified"]["target-system"] == ["target_type", "identification", "reference_class"]
+    assert always_required("background") == ["describes", "laws", "closure"]
+
+
+def test_a_registry_naming_an_unknown_level_is_reported(tmp_path: Path) -> None:
+    source = tmp_path / "requirements.yml"
+    source.write_text("by_commitment:\n  sketched:\n    phenomenon: [statement]\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="unknown levels of commitment"):
+        requirements_by_commitment(source)
 
 
 def test_an_inquiry_leaving_a_required_specification_open_is_reported() -> None:
@@ -711,9 +814,13 @@ def test_a_value_outside_its_vocabulary_is_reported() -> None:
     ``no-such-role`` is a deliberate sentinel rather than a typo awaiting correction: replacing it
     with an admitted value would leave the check unable to fail.
     """
-    admitted = admitted_values("target-system")
-    record = {"type": "target-system", "laws": [{"role": "no-such-role"}, {"role": "state-constraint"}]}
+    admitted = admitted_values("background")
+    record = {"type": "background", "laws": [{"role": "no-such-role"}, {"role": "state-constraint"}]}
     assert inadmissible_values(record, admitted) == ["laws.role: no-such-role is not admitted"]
+    record["laws"][0]["role"] = "open"   # no longer a sentinel: an ordinary value, and not this one
+    assert inadmissible_values(record, admitted) == ["laws.role: open is not admitted"]
+    record["laws"][0]["role"] = None     # an empty field holds no value, so no vocabulary bears on it
+    assert inadmissible_values(record, admitted) == []
 
 
 def test_a_record_field_is_read_apart_from_a_field_of_the_same_name() -> None:
@@ -905,3 +1012,9 @@ def test_the_markdown_view_is_built_from_that_record() -> None:
     assert page.startswith("---")
     assert "## Symbols" in page and "## Operators" in page
     assert all(f"`{entry.symbol}`" in page for entry in problem.declarations)
+
+
+def test_an_empty_formula_is_skipped_and_open_is_an_unresolved_identifier() -> None:
+    """With no sentinel left, `open` in an expression is a word that resolves to no declaration."""
+    record = {"type": "target-system", "parameters": [{"symbol": "nu", "values": None}, {"symbol": "mu", "values": "open"}]}
+    assert unresolved(record, CANONICAL) == ["parameters.values -> open"]

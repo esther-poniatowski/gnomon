@@ -3,8 +3,10 @@ statement: "Which mathematical properties of training finite overparameterized n
 id: quest.grokking.explain_delay
 type: question
 status: posed
+addresses: prob.grokking.delayed-generalization
 subject:
   target_system: system.delayed_generalization_networks
+  background: [bg.delayed_generalization_networks.training-specification]
   phenomenon: phen.grokking.delayed_generalization
   contrast:
     locus: other-outcome

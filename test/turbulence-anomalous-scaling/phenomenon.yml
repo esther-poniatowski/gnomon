@@ -3,9 +3,22 @@ statement: "Ordered pairs of spatial locations in statistically stationary flow 
 id: phen.turbulence.velocity-increment-distributions
 type: phenomenon
 status: provisional
+commitment: specified
 target_system: system.turbulence-incompressible-navier-stokes
 
+identification:
+  description: "the dependence of the joint distribution of longitudinal and transverse velocity increments on the magnitude and the orientation of their separation, in statistically stationary turbulent flows"
+  pointers:
+    - "buaria2026: https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/turbulence-intermittency-and-velocity-gradients/83110A5131F55CF9B890415703AA7770"
+
 category: regularity
+
+course:
+  index: t
+  grain:
+  varies: []
+
+occurrence: not-applicable
 
 index_sets:
   - name: "magnitude of the separation"
@@ -76,7 +89,7 @@ manifestations:
         symbol: zetaL
         notation: '\zeta_L'
         values: "maps(pos(reals), reals)"
-        observed: open
+        observed:
         condition: "zetaL(4) != 4 / 3"
         selects: any
         procedure: "The slopes of the structure functions are estimated over the inertial range. The estimate must establish, within uncertainty, that the exponent of order four departs from the self-similar value."
@@ -91,7 +104,7 @@ manifestations:
         symbol: zetaT
         notation: '\zeta_T'
         values: "maps(pos(reals), reals)"
-        observed: open
+        observed:
         condition: "zetaT(4) != 4 / 3"
         selects: any
         procedure: "The slopes of the transverse structure functions are estimated over the inertial range. The estimate must establish, within uncertainty, that the exponent of order four departs from the self-similar value."
@@ -113,7 +126,7 @@ scope_over_instances:
     symbol: family
     over: [f, b]
     source: class-member
-    quantification: open
+    quantification:
     conditional_on: []
 
 conditions_and_byproducts:       # the case description asserts no additional condition

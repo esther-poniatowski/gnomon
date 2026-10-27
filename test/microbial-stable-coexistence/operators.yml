@@ -8,18 +8,18 @@ operators:
   - name: "the predicate that a complete member state belongs to an equilibrium of the dynamics of the member model"
     symbol: equilibrium
     notation: '\operatorname{Eq}_{#1}( #2 )'
-    signature: [open, open]
+    signature: [null, null]
     values: bools
   - name: "the component of a complete member state that holds the population abundances"
     symbol: population_component
     notation: '\operatorname{pop}_{#1}( #2, #3 )'
-    signature: [open, open, pop]
+    signature: [null, null, pop]
     values: "nonneg(reals)"
   - name: "the Jacobian of the complete dynamics of the member model at a selected equilibrium"
     symbol: community_jacobian
     notation: '\operatorname{J}_{#1}( #2 )'
-    signature: [open, open]
-    values: open
+    signature: [null, null]
+    values:
 
 maturity:
   operators.equilibrium.signature: open

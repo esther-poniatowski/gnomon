@@ -1,16 +1,26 @@
 # method: `docs/epistemology/target-system.md`; one file per target system
 # symbols and expressions: `docs/epistemology/symbols-and-expressions.md`
-# replace every UPPERCASE placeholder; any closed field accepts `open`
+# the admitted laws, their closure and the organization: `background.yml`, one or more records per target
+# replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # specifications follow the order of the method note
 
 title: "NAME OF THE SYSTEM"
 id: system.TOPIC
 type: target-system
 status: provisional              # provisional | stabilized | retracted
-target_type: open                # particular | actual-systems | possible-systems | hypothetical | no-external-target
+commitment:                      # identified (a definite description and pointers fix the referent) | specified (the record writes its declarations, and their symbols resolve)
+target_type:                     # particular | actual-systems | possible-systems | hypothetical | no-external-target
+
+identification:                  # fixes the referent before any quantity is declared
+  description: "A DEFINITE DESCRIPTION THAT PICKS OUT THE SYSTEM OR THE CLASS OF SYSTEMS"
+  pointers:
+    - "POINTER TO A DATA SET, A RESULT OR A PUBLICATION THAT FIXES THE REFERENT"
 
 reference_class:                 # name only; the remaining specifications of the record generate the class
   name: "KIND OF SYSTEM"
+  projectibility:                # whether a claim about some members can be projected onto the class
+    status:                      # assumed | tested | not-claimed
+    evidence: "THE TEST OR THE ARGUMENT THAT SUPPORTS PROJECTING THE CLAIM ONTO THE CLASS"   # omit when the status is `not-claimed`
   selection_criteria:            # fill only when membership depends on an outcome of the dynamics; put a restriction on prior values in the domain of the question that imposes it, since other questions may leave them free
     - name: "NAME OF THE CRITERION"
       expression: "EXPRESSION OVER DECLARED SYMBOLS THAT A MEMBER SATISFIES"
@@ -46,6 +56,7 @@ variables:                       # quantities that vary while the phenomenon unf
     determined:                  # within (its value is fixed inside the system) | outside (its value varies but is set beyond the system)
     signature: [SYMBOL]          # one constituent kind or index set per place; empty for the system as a whole
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give when a map builds the quantity from declared symbols
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
     selects:                     # unique | any | all; required with a condition
@@ -60,41 +71,20 @@ parameters:                      # quantities held fixed while the phenomenon un
     variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
     signature: [SYMBOL, SYMBOL]  # one entry per place, e.g. two neurons for a connectivity weight
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived parameter
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
     selects:                     # unique | any | all; required with a condition
     reading: "THE EXPRESSION IN WORDS"
     shared: false                # true when one value holds for every tuple of the signature
 
-laws:                            # behaviors of the components or of the system admitted a priori
-  - name: "NAME OF THE LAW"
-    symbol: SYMBOL
-    variant: SYMBOL              # variant the law governs; omit when the law governs every member
-    signature: [SYMBOL]          # one entry per place the claim ranges over; empty for a claim about the system as a whole
-    role:                        # evolution (how the state changes along the course) | input-output (how one quantity is determined by others at the same point) | measurement (how an instrument registers the state) | state-constraint (which states may hold together, including at the start and at the boundary) | distribution (the law of a random quantity) | admissibility (a restriction on the parameters or the forms that a member may take)
-    expression: "EXPRESSION OVER DECLARED SYMBOLS"   # the claim of the law: the only part of the entry that can be false of the system
-    reading: "THE LAW IN WORDS"
-    warrant:                     # derived (from other laws of the system) | derived-in-a-limit | posited | fitted | measured
-    rests_on: "THE LAWS, THE LIMIT OR THE DATA THAT THE WARRANT REFERS TO"
-
-closure: open                    # complete (formal target: the laws define the system) | partial (empirical target)
-
-organization:                    # relations among parts and laws whose arrangement produces the behavior
-  - name: "NAME OF THE RELATION"
-    symbol: SYMBOL
-    variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
-    reading: "THE ARRANGEMENT IN WORDS"   # only content beyond the relation and the laws
-    relates: "prod(SOURCE, REACH), or subset(prod(SOURCE, REACH), ADJACENCY)"   # for a relation among parts: the connected tuples, reach last
-    among: [SYMBOL]              # for a relation among laws: the laws, reach last; fill exactly one of `relates` and `among`
-    realized_by: [SYMBOL]        # laws stating a relation among parts; the parts are read from their expressions
-
 external_systems:                # the variables shared with these systems form the target's boundary
   - name: "EXTERNAL SYSTEM"
     symbol: SYMBOL
     variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
-    class: "SET EXPRESSION OVER DECLARED SYMBOLS"   # candidates for the external system, as a reference class for the target; `open` where the record fixes no class
+    class: "SET EXPRESSION OVER DECLARED SYMBOLS"   # candidates for the external system, as a reference class for the target; empty where the record fixes no class
     shares: [SYMBOL]
-    constrains:                  # constraints on the shared variables beyond their declared value sets; empty when there is none
+    constrains:                  # constraints on the shared variables beyond their declared value sets; `[]` when there is none
       - name: "NAME OF THE CONSTRAINT"
         signature: [SYMBOL]      # places the claim ranges over; empty for a claim about the system as a whole
         role:                    # evolution | input-output | measurement | state-constraint | distribution | admissibility

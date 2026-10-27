@@ -1,0 +1,308 @@
+"""Plans of inquiry, checked against the registries of activities and artifact types.
+
+The registries transcribe the taxonomy of epistemic activities, whose notes are the source of the
+content, so the first tests check the registries against those notes. The remaining tests plant
+one defect per check of :func:`gnomon.plans.plan_problems` in a plan that passes, and confirm
+that the check reports it for the intended reason.
+"""
+
+from __future__ import annotations
+
+import copy
+import re
+from pathlib import Path
+from typing import Any
+
+import pytest
+import yaml
+
+from gnomon.plans import (
+    activities,
+    record_types,
+    artifact_types,
+    cycles,
+    malformed_registry,
+    plan_problems,
+)
+
+ROOT = Path(__file__).resolve().parents[2]
+ACTIVITY_NOTES = ROOT / "docs" / "epistemology" / "definitions" / "activities"
+FIXTURES = ROOT / "test"
+VOCABULARY = yaml.safe_load((ROOT / "src" / "gnomon" / "data" / "vocabularies.yml").read_text())
+ACTS = activities()
+TYPES = artifact_types()
+
+
+def test_the_registries_are_consistent() -> None:
+    modes = [entry["value"] for entry in VOCABULARY["vocabularies"]["plan"]["steps.mode"]]
+    assert malformed_registry(ACTS, TYPES, modes) == []
+
+
+def test_a_registry_naming_an_unknown_type_mode_or_norm_is_reported() -> None:
+    act = ACTS["derivation"]
+    broken = {"derivation": type(act)(**{**act.__dict__, "output": "theorem", "mode": "intuitive",
+                                         "norm": "norm.proof"})}
+    assert malformed_registry(broken, TYPES, ["deductive"]) == [
+        "derivation: theorem is no artifact type",
+        "derivation: intuitive is no admitted mode",
+        "derivation: its norm norm.proof is not the test norm.derivation",
+    ]
+
+
+def signature_rows() -> dict[str, list[str]]:
+    """Return, per activity of the notes, the cells of its row in the table of signatures."""
+    rows: dict[str, list[str]] = {}
+    for note in sorted(ACTIVITY_NOTES.glob("*.md")):
+        text = note.read_text(encoding="utf-8")
+        table = re.search(r"\| Activity \| Inputs \| Output \| Mode \| Context \|\n\|[^\n]*\n((?:\|[^\n]*\n)+)", text)
+        if table is None:
+            continue
+        for line in table.group(1).splitlines():
+            cells = [cell.strip() for cell in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
+            rows[cells[0].strip("`")] = [note.stem, *cells[1:]]
+    return rows
+
+
+ROWS = signature_rows()
+
+
+def typed(cell: str) -> set[str]:
+    """Return the type names a cell sets in code, including alternatives written in one span.
+
+    >>> sorted(typed("`hypothesis \\| model`, `data` (several)"))
+    ['data', 'hypothesis', 'model']
+    """
+    return {name for span in re.findall(r"`([^`]*)`", cell) for name in re.findall(r"[a-z][a-z-]*", span)}
+
+
+@pytest.mark.skipif(not ROWS, reason="the notes of the activity taxonomy carry no table of signatures")
+def test_the_registry_lists_the_activities_of_the_notes() -> None:
+    assert set(ROWS) == set(ACTS), f"notes and registry differ: {set(ROWS) ^ set(ACTS)}"
+
+
+@pytest.mark.skipif(not ROWS, reason="the notes of the activity taxonomy carry no table of signatures")
+@pytest.mark.parametrize("identifier", sorted(ACTS))
+def test_each_activity_has_the_signature_its_note_states(identifier: str) -> None:
+    """The family, the input and output types, the mode and the context agree with the note."""
+    if identifier not in ROWS:
+        pytest.fail(f"{identifier} has no row in the notes")
+    family, inputs, output, mode, context = ROWS[identifier][:5]
+    act = ACTS[identifier]
+    assert act.family == family
+    assert typed(inputs) == {t for s in act.inputs for t in s.types}
+    assert typed(output) == {act.output}
+    assert (act.mode, act.context) == (mode, context)
+
+
+def artifact_rows() -> dict[str, str]:
+    note = ACTIVITY_NOTES / "epistemic-activities.md"
+    if not note.is_file():
+        return {}
+    found = {}
+    for line in note.read_text(encoding="utf-8").splitlines():
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if line.startswith("| `") and len(cells) == 4 and cells[-1] in ("exists", "partial", "to-create"):
+            found[cells[0].strip("`")] = cells[-1]
+    return found
+
+
+ARTIFACT_ROWS = artifact_rows()
+
+
+@pytest.mark.skipif(not ARTIFACT_ROWS, reason="the overview of the taxonomy carries no table of artifact types")
+def test_the_registry_lists_the_artifact_types_of_the_overview() -> None:
+    registry = yaml.safe_load((ROOT / "src/gnomon/data/registries/artifact-types.yml").read_text())
+    declared = {entry["id"]: entry["status"] for entry in registry["artifact_types"]}
+    assert declared == ARTIFACT_ROWS
+
+
+# A plan that passes every check, over records that the planted cases modify one at a time.
+RECORDS: dict[str, dict[str, Any]] = {
+    "prob.geometry": {"type": "problem"},
+    "quest.geometry": {"type": "question"},
+    "system.networks": {"type": "target-system"},
+    "phen.readout": {"type": "phenomenon"},
+    "ans.kernel": {"type": "answer"},
+}
+PLAN: dict[str, Any] = {
+    "type": "plan",
+    "addresses": "prob.geometry",
+    "steps": [
+        {"id": "pose", "activity": "problematization",
+         "inputs": [{"type": "source", "ref": "doi:10.1000/anomaly"}],
+         "output": {"type": "problem", "ref": "prob.geometry"},
+         "norm": {"test": "norm.problematization", "verdict": "pass"}, "mode": "non-inferential"},
+        {"id": "derive", "activity": "derivation",
+         "inputs": [{"type": "model", "ref": "ans.kernel"}],
+         "output": {"type": "consequence"},
+         "norm": {"test": "norm.derivation", "verdict": "pending"}, "mode": "deductive"},
+        {"id": "design", "activity": "experimental-design",
+         "inputs": [{"type": "question", "ref": "quest.geometry"}, {"type": "model", "ref": "ans.kernel"}],
+         "output": {"type": "design"},
+         "norm": {"test": "norm.experimental-design", "verdict": "pending"}},
+        {"id": "observe", "activity": "observation",
+         "inputs": [{"type": "design", "ref": "design"}],
+         "output": {"type": "data"},
+         "norm": {"test": "norm.observation", "verdict": "pending"}},
+    ],
+}
+
+
+def planted(**changes: Any) -> dict[str, Any]:
+    """Return a copy of the passing plan with the steps named in ``changes`` updated."""
+    plan = copy.deepcopy(PLAN)
+    for step in plan["steps"]:
+        step.update(changes.get(step["id"], {}))
+    return plan
+
+
+def test_a_well_formed_plan_passes() -> None:
+    assert plan_problems(PLAN, RECORDS) == []
+
+
+def test_an_unregistered_activity_is_reported() -> None:
+    assert plan_problems(planted(derive={"activity": "intuition"}), RECORDS) == [
+        "steps.derive: intuition is no registered activity"
+    ]
+
+
+def test_input_types_that_do_not_fill_the_activity_are_reported() -> None:
+    plan = planted(derive={"inputs": [{"type": "data", "ref": "phen.readout"}]})
+    assert plan_problems(plan, RECORDS) == [
+        "steps.derive: derivation takes one input of background-model or model, and the step gives 0",
+        "steps.derive: derivation takes no input of type data",
+    ]
+
+
+def test_a_slot_taking_several_inputs_counts_them() -> None:
+    step = {"id": "select", "activity": "model-selection",
+            "inputs": [{"type": "model", "ref": "ans.kernel"}, {"type": "data", "ref": "phen.readout"}],
+            "output": {"type": "ranking"}, "norm": {"test": "norm.model-selection", "verdict": "pending"}}
+    plan = copy.deepcopy(PLAN)
+    plan["steps"].append(step)
+    assert plan_problems(plan, RECORDS) == [
+        "steps.select: model-selection takes 2 or more inputs of model, and the step gives 1"
+    ]
+    step["inputs"].append({"type": "model", "ref": "derive"})
+    assert plan_problems(plan, RECORDS) == ["steps.select: the step derive produces consequence, not model"]
+
+
+def test_an_output_type_other_than_the_activity_output_is_reported() -> None:
+    assert plan_problems(planted(derive={"output": {"type": "verdict"}}), RECORDS) == [
+        "steps.derive: derivation produces consequence, and the step states verdict"
+    ]
+
+
+def test_an_input_reference_of_the_wrong_kind_or_to_nothing_is_reported() -> None:
+    wrong = planted(derive={"inputs": [{"type": "model", "ref": "phen.readout"}]})
+    assert plan_problems(wrong, RECORDS) == [
+        "steps.derive: phen.readout holds data or phenomenon or knowledge-state-change, not model"
+    ]
+    absent = planted(derive={"inputs": [{"type": "model", "ref": "ans.missing"}]})
+    assert plan_problems(absent, RECORDS) == ["steps.derive: ans.missing is neither a step nor a record"]
+
+
+def test_a_type_that_no_record_holds_is_reached_only_through_a_step() -> None:
+    plan = planted(observe={"inputs": [{"type": "design", "ref": "quest.geometry"}]})
+    assert plan_problems(plan, RECORDS) == [
+        "steps.observe: no record holds a design, so its input names a step, and quest.geometry is none"
+    ]
+
+
+def test_an_output_reference_of_the_wrong_kind_is_reported() -> None:
+    plan = planted(pose={"output": {"type": "problem", "ref": "quest.geometry"}})
+    assert plan_problems(plan, RECORDS) == [
+        "steps.pose: quest.geometry holds question or knowledge-state-change, not problem"
+    ]
+
+
+def test_a_norm_verdict_or_mode_outside_the_registries_is_reported() -> None:
+    plan = planted(derive={"norm": {"test": "norm.simulation", "verdict": "likely"}, "mode": "inductive"})
+    assert plan_problems(plan, RECORDS) == [
+        "steps.derive: the norm of derivation is norm.derivation, and the step names norm.simulation",
+        "steps.derive: 'likely' is no verdict",
+        "steps.derive: derivation proceeds by deductive inference, and the step states inductive",
+    ]
+
+
+def test_a_cycle_among_the_steps_is_reported() -> None:
+    plan = planted(design={"inputs": [{"type": "question", "ref": "quest.geometry"},
+                                      {"type": "model", "ref": "ans.kernel"},
+                                      {"type": "data", "ref": "observe"}]})
+    found = plan_problems(plan, RECORDS)
+    assert "steps: design -> observe -> design forms a cycle" in found
+    assert cycles({"a": {"a"}}) == [["a", "a"]]
+
+
+def test_a_plan_addressing_no_problem_or_question_and_a_repeated_step_are_reported() -> None:
+    plan = copy.deepcopy(PLAN)
+    plan["addresses"] = "phen.readout"
+    plan["steps"].append(copy.deepcopy(plan["steps"][0]))
+    assert plan_problems(plan, RECORDS)[:2] == [
+        "addresses: phen.readout is no problem or question record",
+        "steps: the identifier pose names several steps",
+    ]
+
+
+def fixture_plans() -> list[Path]:
+    return sorted(FIXTURES.glob("*/plan.yml")) if FIXTURES.is_dir() else []
+
+
+@pytest.mark.skipif(not fixture_plans(), reason="no fixture carries a plan")
+@pytest.mark.parametrize("path", fixture_plans(), ids=[p.parent.name for p in fixture_plans()] or ["none"])
+def test_every_plan_of_the_fixtures_passes(path: Path) -> None:
+    records = {}
+    for source in sorted(path.parent.glob("*.yml")):
+        record = yaml.safe_load(source.read_text(encoding="utf-8"))
+        if isinstance(record, dict) and "id" in record:
+            records[str(record["id"])] = record
+    plan = yaml.safe_load(path.read_text(encoding="utf-8"))
+    assert plan_problems(plan, records) == []
+
+
+def test_the_type_of_a_record_follows_from_its_state() -> None:
+    """A schema is a question with a placeholder slot; commitment and status decide the other types."""
+    records = {
+        "quest.schema": {"type": "question", "subject": {"target_system": "system.a",
+                                                         "phenomenon": {"placeholder": "observable"}}},
+        "system.a": {"type": "target-system", "commitment": "identified"},
+        "ans.a": {"type": "answer", "status": "entertained"},
+        "prob.a": {"type": "problem"},
+    }
+    plan = {
+        "addresses": "prob.a",
+        "steps": [
+            {"id": "select", "activity": "question-decomposition",
+             "inputs": [{"type": "question", "ref": "quest.schema"}], "output": {"type": "question"},
+             "norm": {"test": "norm.question-decomposition", "verdict": "pending"}},
+            {"id": "predict", "activity": "prediction",
+             "inputs": [{"type": "model", "ref": "ans.a"}, {"type": "target-specification", "ref": "system.a"}],
+             "output": {"type": "consequence"}, "norm": {"test": "norm.prediction", "verdict": "pending"}},
+            {"id": "judge", "activity": "testing",
+             "inputs": [{"type": "hypothesis", "ref": "ans.a"}, {"type": "consequence", "ref": "predict"},
+                        {"type": "data", "ref": "phen.none"}],
+             "output": {"type": "verdict"}, "norm": {"test": "norm.testing", "verdict": "pending"}},
+        ],
+    }
+    assert plan_problems(plan, records) == [
+        "steps.select: quest.schema holds question-schema or knowledge-state-change, not question",
+        "steps.predict: system.a holds identified-subject or classification or measurement-procedure"
+        " or knowledge-state-change, not target-specification",
+        "steps.judge: ans.a holds model or consequence or explanation or knowledge-state-change, not hypothesis",
+        "steps.judge: phen.none is neither a step nor a record",
+    ]
+    records["quest.schema"]["subject"]["phenomenon"] = "phen.b"
+    records["system.a"]["commitment"] = "specified"
+    records["ans.a"]["status"] = "hypothesized"
+    plan["steps"][2]["inputs"][2]["ref"] = "predict"
+    assert plan_problems(plan, records) == ["steps.judge: the step predict produces consequence, not data"]
+
+
+def test_a_specified_record_still_holds_an_identified_subject() -> None:
+    """Commitment is cumulative for the identified subject, and strict for the target specification."""
+    specified = {"type": "target-system", "commitment": "specified"}
+    identified = {"type": "target-system", "commitment": "identified"}
+    assert {"identified-subject", "target-specification"} <= set(record_types(specified, TYPES))
+    assert "identified-subject" in record_types(identified, TYPES)
+    assert "target-specification" not in record_types(identified, TYPES)
+    assert "identified-subject" not in record_types({"type": "target-system"}, TYPES)

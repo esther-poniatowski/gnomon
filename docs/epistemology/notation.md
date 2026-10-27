@@ -17,7 +17,7 @@ A single registry assigns every symbol of the method. One letter denotes one obj
 | Symbol                     | Denotes                                                    | Declared in                                          |
 | -------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
 | $\Sigma$                   | the subject of inquiry, $\Sigma=\langle S,P,X,D\rangle$    | [subject of inquiry](subject-of-inquiry.md)          |
-| $S$                        | the target system                                          | [target system](target-system.md)                    |
+| $S$                        | the target: the system, or the class of systems, that the inquiry is about | [target system](target-system.md)                    |
 | $N$                        | the number of units of a kind in $S$                       | [target system](target-system.md)                    |
 | $P$                        | the phenomenon, identified with the explanandum            | [phenomenon](phenomenon.md)                          |
 | $Y$                        | an explanandum variable that expresses $P$                 | [phenomenon](phenomenon.md)                          |
@@ -43,7 +43,12 @@ A single registry assigns every symbol of the method. One letter denotes one obj
 
 - **A mechanism is written with the symbols of an answer.** A mechanism fills the fields of the answer form: its components are the constituents $C$, its activities and interaction rules are the laws $L$, and its organization is $O$. The [constituents of a mechanism](mechanism.md) therefore receive no private symbols. The [mapping onto the answer form](answer-form.md) states which aspect of a mechanism fills which field.
 
-- **Subscripted and calligraphic letters stay free of the registry.** A letter that serves as an index, or that names a mathematical object local to one formula, does not enter the registry. Examples are the state space $\mathcal{X}_i$ of a component, its neighborhood $\mathcal{N}_i$, and a typed relation $\rho_k$ of an organization. The formula that introduces such a letter also fixes its meaning.
+- **Subscripted letters, calligraphic letters and names set in sans-serif stay free of the registry.** Such a symbol serves as an index, or names a mathematical object local to one note. The formula that introduces the symbol also fixes its meaning. *Examples*:
+    - the state space $\mathcal{X}_i$ of a component, and its neighborhood $\mathcal{N}_i$;
+    - a typed relation $\rho_k$ of an organization;
+    - the composition $\mathsf{Comp}(\sigma)$ of a system $\sigma$.
+
+- **Bold letters are not used.** A structure or a class of structures is named in sans-serif, as the classes of models $\mathsf{M}_p$ and $\mathsf{M}$ of a [structuralist theory](definitions/theory.md).
 
 - **The records carry their own symbols, registered nowhere here.** A letter of the registry denotes a component of the method. By contrast, a [symbol of an inquiry](symbols-and-expressions.md) names a quantity of one studied system and is unique only within its record. A target system declaring $L$ for a length therefore collides with no entry of the registry.
 

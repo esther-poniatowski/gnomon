@@ -3,9 +3,23 @@ statement: "A finite neural network brings its training loss under a threshold c
 id: phen.grokking.delayed_generalization
 type: phenomenon
 status: provisional
+commitment: specified
 target_system: system.delayed_generalization_networks
 
+identification:
+  description: "the delay between the fit of the training data and the generalization to held-out data, observed in networks of the class across random initializations"
+  pointers:
+    - "liu2022: https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
+    - "humayun2024: https://proceedings.mlr.press/v235/humayun24a.html"
+
 category: regularity
+
+course:
+  index: step
+  grain: "1"
+  varies: []
+
+occurrence: not-applicable
 
 explanandum_variables:           # reference the loss trajectories: the target declares them as quantities
   - reference: system.delayed_generalization_networks#Ltrain
@@ -70,7 +84,7 @@ manifestations:                  # training-loss criterion reached first; delay 
       - name: "observed duration of the delay"
         symbol: delay_obs
         values: "pos(ints)"
-        observed: open           # the delay depends on the training specification, and the case fixes none
+        observed:                # the delay depends on the training specification, and the case fixes none
 
 scope_over_instances:            # distribution over initializations at one fixed training specification
   - name: "initialization draw"

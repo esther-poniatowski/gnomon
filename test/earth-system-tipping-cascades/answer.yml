@@ -4,7 +4,8 @@ title: "Overshoot forecast from a network of four elements"
 statement: "In a stylized ensemble of four interacting tipping elements, temporary warming overshoots change the distribution of tipping events. Across the studied scenarios, aggregate risk can rise by up to 72 percent relative to matched non-overshoot trajectories. The model does not establish the requested joint sequence law for the actual Earth system."
 id: ans.earth-tipping-subsystems.four-element-overshoot-network
 type: answer
-status: informally-backed
+status: hypothesized
+support: informal
 answers: quest.earth-tipping-subsystems.overshoot-sequence-forecast
 
 constituents:

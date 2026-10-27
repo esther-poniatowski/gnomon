@@ -4,7 +4,8 @@ title: "Theorem that feasibility implies stability in consumer-resource models"
 statement: "The theorem concerns the model with explicit resource pools that microbes consume but never produce. In that model, every feasible equilibrium is locally stable when the resource pools are at least as numerous as the populations [butler2018]. The theorem therefore supplies a sufficient result for this subclass, but its condition is not necessary across all admitted microbial models."
 id: ans.microbial.feasibility-implies-stability
 type: answer
-status: formally-proven
+status: accepted
+support: formally-proven
 answers: quest.microbial.stable-coexistence-constraints
 variant: resource_explicit
 

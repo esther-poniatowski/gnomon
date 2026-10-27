@@ -1,0 +1,431 @@
+# Registry of the epistemic activities, one entry per activity of the taxonomy.
+# The plan check reads this registry. The notes of `docs/epistemology/definitions/activities/`
+# state each activity with its norm, and this registry transcribes their identifiers, their types
+# and their attributes.
+#
+# An activity is epistemic when its output is an epistemic object: a representation whose content
+# bears on what is asked, known or warranted. Each activity has exactly one output type, and that
+# type fixes the family of the activity. Activities of one family differ by their norm.
+#
+# Each input names an artifact type of `artifact-types.yml`, written as the family notes write it.
+# A bare type takes one record of that type. A mapping adds qualifiers:
+#   - `several: true` (two or more records of the type) or `count` (an exact number of records);
+#   - `role`: the part played by the record, stated in the note of the family;
+#   - `types`: alternative types, written `a | b` in the notes, of which the step takes one record.
+# `norm` names the test that judges an instance of the activity, and a plan records its verdict.
+# `mode` names the inference that the activity performs, from the modes listed under `plan` in
+# `../vocabularies.yml`. `context` states whether the activity serves discovery, justification,
+# or both.
+
+id: registry.activities
+type: activity-registry
+
+families: [problem-posing, conceptual-activities, empirical-activities, model-building, model-analysis, ampliative-inference, evaluation, explanation-and-integration, revision]
+contexts: [discovery, justification, both]
+
+activities:
+  - id: problematization
+    family: problem-posing
+    inputs:
+      - source
+    output: problem
+    norm: norm.problematization
+    mode: non-inferential
+    context: discovery
+  - id: constraint-specification
+    family: problem-posing
+    inputs:
+      - problem
+      - background-model
+    output: problem
+    norm: norm.constraint-specification
+    mode: deductive
+    context: discovery
+  - id: question-formulation
+    family: problem-posing
+    inputs:
+      - problem
+    output: question-schema
+    norm: norm.question-formulation
+    mode: non-inferential
+    context: discovery
+  - id: subject-identification
+    family: problem-posing
+    inputs:
+      - question-schema
+    output: identified-subject
+    norm: norm.subject-identification
+    mode: non-inferential
+    context: discovery
+  - id: question-decomposition
+    family: problem-posing
+    inputs:
+      - question
+    output: question
+    norm: norm.question-decomposition
+    mode: deductive
+    context: discovery
+  - id: question-selection
+    family: problem-posing
+    inputs:
+      - {type: question, several: true}
+    output: question
+    norm: norm.question-selection
+    mode: non-inferential
+    context: discovery
+  - id: explicit-definition
+    family: conceptual-activities
+    inputs:
+      - concept
+    output: concept
+    norm: norm.explicit-definition
+    mode: deductive
+    context: both
+  - id: explication
+    family: conceptual-activities
+    inputs:
+      - concept
+    output: concept
+    norm: norm.explication
+    mode: non-inferential
+    context: discovery
+  - id: operationalization
+    family: conceptual-activities
+    inputs:
+      - concept
+    output: measurement-procedure
+    norm: norm.operationalization
+    mode: non-inferential
+    context: both
+  - id: classification
+    family: conceptual-activities
+    inputs:
+      - concept
+      - data
+    output: classification
+    norm: norm.classification
+    mode: inductive
+    context: both
+  - id: concept-revision
+    family: conceptual-activities
+    inputs:
+      - concept
+      - phenomenon
+    output: concept
+    norm: norm.concept-revision
+    mode: abductive
+    context: discovery
+  - id: experimental-design
+    family: empirical-activities
+    inputs:
+      - question
+      - model
+    output: design
+    norm: norm.experimental-design
+    mode: deductive
+    context: justification
+  - id: observation
+    family: empirical-activities
+    inputs:
+      - design
+    output: data
+    norm: norm.observation
+    mode: non-inferential
+    context: justification
+  - id: measurement
+    family: empirical-activities
+    inputs:
+      - measurement-procedure
+      - design
+    output: data
+    norm: norm.measurement
+    mode: non-inferential
+    context: justification
+  - id: intervention
+    family: empirical-activities
+    inputs:
+      - design
+    output: data
+    norm: norm.intervention
+    mode: non-inferential
+    context: justification
+  - id: phenomenon-detection
+    family: empirical-activities
+    inputs:
+      - data
+    output: phenomenon
+    norm: norm.phenomenon-detection
+    mode: inductive
+    context: justification
+  - id: delimitation
+    family: model-building
+    inputs:
+      - question
+      - identified-subject
+    output: target-specification
+    norm: norm.delimitation
+    mode: non-inferential
+    context: discovery
+  - id: background-appraisal
+    family: model-building
+    inputs:
+      - source
+    output: background-model
+    norm: norm.background-appraisal
+    mode: inductive
+    context: justification
+  - id: transfer
+    family: model-building
+    inputs:
+      - {type: background-model, role: other class}
+      - target-specification
+    output: background-model
+    norm: norm.transfer
+    mode: analogical
+    context: justification
+  - id: abstraction
+    family: model-building
+    inputs:
+      - model
+    output: model
+    norm: norm.abstraction
+    mode: non-inferential
+    context: discovery
+  - id: idealization
+    family: model-building
+    inputs:
+      - model
+    output: model
+    norm: norm.idealization
+    mode: non-inferential
+    context: discovery
+  - id: de-idealization
+    family: model-building
+    inputs:
+      - model
+    output: model
+    norm: norm.de-idealization
+    mode: deductive
+    context: justification
+  - id: decomposition-localization
+    family: model-building
+    inputs:
+      - phenomenon
+      - target-specification
+    output: model
+    norm: norm.decomposition-localization
+    mode: abductive
+    context: discovery
+  - id: model-analogy
+    family: model-building
+    inputs:
+      - {type: model, role: source}
+    output: model
+    norm: norm.model-analogy
+    mode: analogical
+    context: discovery
+  - id: formalization
+    family: model-building
+    inputs:
+      - model
+    output: model
+    norm: norm.formalization
+    mode: non-inferential
+    context: both
+  - id: fitting
+    family: model-building
+    inputs:
+      - model
+      - data
+    output: model
+    norm: norm.fitting
+    mode: inductive
+    context: justification
+  - id: derivation
+    family: model-analysis
+    inputs:
+      - {types: [model, background-model]}
+    output: consequence
+    norm: norm.derivation
+    mode: deductive
+    context: justification
+  - id: simulation
+    family: model-analysis
+    inputs:
+      - model
+      - design
+    output: consequence
+    norm: norm.simulation
+    mode: deductive
+    context: justification
+  - id: robustness-analysis
+    family: model-analysis
+    inputs:
+      - {type: model, several: true, role: family}
+    output: consequence
+    norm: norm.robustness-analysis
+    mode: deductive
+    context: justification
+  - id: thought-experiment
+    family: model-analysis
+    inputs:
+      - model
+    output: consequence
+    norm: norm.thought-experiment
+    mode: deductive
+    context: discovery
+  - id: prediction
+    family: model-analysis
+    inputs:
+      - model
+      - target-specification
+    output: consequence
+    norm: norm.prediction
+    mode: deductive
+    context: justification
+  - id: abduction
+    family: ampliative-inference
+    inputs:
+      - phenomenon
+    output: hypothesis
+    norm: norm.abduction
+    mode: abductive
+    context: discovery
+  - id: induction
+    family: ampliative-inference
+    inputs:
+      - data
+    output: hypothesis
+    norm: norm.induction
+    mode: inductive
+    context: discovery
+  - id: analogical-inference
+    family: ampliative-inference
+    inputs:
+      - {type: model, role: source}
+      - phenomenon
+    output: hypothesis
+    norm: norm.analogical-inference
+    mode: analogical
+    context: discovery
+  - id: causal-inference
+    family: ampliative-inference
+    inputs:
+      - data
+      - model
+    output: hypothesis
+    norm: norm.causal-inference
+    mode: inductive
+    context: both
+  - id: testing
+    family: evaluation
+    inputs:
+      - hypothesis
+      - consequence
+      - data
+    output: verdict
+    norm: norm.testing
+    mode: deductive
+    context: justification
+  - id: confirmation
+    family: evaluation
+    inputs:
+      - hypothesis
+      - data
+    output: credence
+    norm: norm.confirmation
+    mode: inductive
+    context: justification
+  - id: validation
+    family: evaluation
+    inputs:
+      - model
+      - question
+    output: verdict
+    norm: norm.validation
+    mode: non-inferential
+    context: justification
+  - id: model-selection
+    family: evaluation
+    inputs:
+      - {type: model, several: true}
+      - data
+    output: ranking
+    norm: norm.model-selection
+    mode: inductive
+    context: justification
+  - id: inference-to-the-best-explanation
+    family: evaluation
+    inputs:
+      - {type: hypothesis, several: true}
+      - data
+    output: verdict
+    norm: norm.inference-to-the-best-explanation
+    mode: abductive
+    context: justification
+  - id: critique
+    family: evaluation
+    inputs:
+      - {types: [hypothesis, model]}
+    output: verdict
+    norm: norm.critique
+    mode: non-inferential
+    context: justification
+  - id: explanation
+    family: explanation-and-integration
+    inputs:
+      - phenomenon
+      - model
+      - question
+    output: explanation
+    norm: norm.explanation
+    mode: deductive
+    context: justification
+  - id: unification
+    family: explanation-and-integration
+    inputs:
+      - {type: explanation, several: true}
+    output: inter-theory-relation
+    norm: norm.unification
+    mode: deductive
+    context: both
+  - id: reduction
+    family: explanation-and-integration
+    inputs:
+      - {type: model, count: 2, role: theories}
+    output: inter-theory-relation
+    norm: norm.reduction
+    mode: deductive
+    context: justification
+  - id: integration
+    family: explanation-and-integration
+    inputs:
+      - {type: model, several: true, role: fields or levels}
+    output: inter-theory-relation
+    norm: norm.integration
+    mode: non-inferential
+    context: both
+  - id: belief-revision
+    family: revision
+    inputs:
+      - {types: [verdict, credence, ranking]}
+    output: knowledge-state-change
+    norm: norm.belief-revision
+    mode: deductive
+    context: justification
+  - id: theory-change
+    family: revision
+    inputs:
+      - {type: verdict, several: true}
+    output: knowledge-state-change
+    norm: norm.theory-change
+    mode: non-inferential
+    context: justification
+  - id: framework-revision
+    family: revision
+    inputs:
+      - {type: verdict, several: true}
+    output: knowledge-state-change
+    norm: norm.framework-revision
+    mode: non-inferential
+    context: both

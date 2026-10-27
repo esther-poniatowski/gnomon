@@ -2,10 +2,19 @@ title: "Three-dimensional incompressible Navier–Stokes flows"
 id: system.turbulence-incompressible-navier-stokes
 type: target-system
 status: provisional
+commitment: specified
 target_type: no-external-target
+
+identification:
+  description: "statistically stationary flows governed by the three-dimensional incompressible Navier–Stokes equations, under the admitted forcing and boundary families"
+  pointers:
+    - "buaria2026: https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/turbulence-intermittency-and-velocity-gradients/83110A5131F55CF9B890415703AA7770"
 
 reference_class:
   name: "Three-dimensional incompressible Navier–Stokes flows"
+  projectibility:
+    status: assumed
+    evidence: "The record assumes that the statistics of the small-scale increments do not depend on the forcing family or on the boundary family. The question itself tests which parts of those statistics hold across the class."
   selection_criteria: []
 
 constituents: []                 # an Eulerian field decomposes into no unit
@@ -93,46 +102,10 @@ parameters:
     values: "regions(vectors(reals, 3))"
     expression: null
 
-laws:
-  - name: "incompressible momentum balance"
-    symbol: momentum
-    signature: [x]
-    role: evolution
-    expression: "diff(u, t) + dot(u, grad(u)) = - grad(pr) + nu * lap(u) + f"
-    reading: "The velocity changes under its own advection, the pressure gradient, viscous diffusion, and the applied force."
-    warrant: posited
-    rests_on: "The law rests on the definition of the model class."
-  - name: "incompressibility constraint"
-    symbol: incompressible
-    signature: [x]
-    role: state-constraint
-    expression: "div(u) = 0"
-    reading: "The flow neither compresses nor expands any element of fluid."
-    warrant: posited
-    rests_on: "The law rests on the definition of the model class."
-  - name: "pressure gauge"
-    symbol: gauge
-    signature: []
-    role: state-constraint
-    expression: "mean_{x}( pr ) = 0"
-    reading: "The pressure is fixed only up to a constant, so its spatial mean is set to zero."
-    warrant: posited
-    rests_on: "The law rests on a gauge choice that fixes the pressure only up to a constant."
-  - name: "boundary constraint"
-    symbol: boundary_law
-    signature: [x]
-    role: state-constraint
-    expression: "restrict(u, boundary(Om)) = b"
-    reading: "The velocity on the boundary of the domain equals the prescribed data."
-    warrant: posited
-    rests_on: "The law rests on the boundary data that the environment supplies."
-
-closure: complete                # the equations and the admitted inputs define the formal system
-
 external_systems:
   - name: "formal forcing process"
     symbol: forcing
-    class: open                  # only the constraint on the mean injection rate narrows the admitted forcing processes
+    class:                       # only the constraint on the mean injection rate narrows the admitted forcing processes
     shares: [f]
     constrains:
       - name: "mean injection of energy"
@@ -143,7 +116,7 @@ external_systems:
     reading: "The force sustains the flow at a fixed mean injection rate. The inertial range carries this rate down the cascade."
   - name: "formal environment at the boundary"
     symbol: boundaryenv
-    class: open                  # no boundary geometry declared to range over
+    class:                       # no boundary geometry declared to range over
     shares: [b]
     constrains: []               # none beyond the declared values of Om and b
     reading: "The boundary values are imposed from outside, so external data close the domain."

@@ -1,7 +1,8 @@
 # The closed vocabularies of the inquiry records, keyed by the block that encloses each field
 # and the field itself. A key opening with a dot names a field of the record itself.
 #
-# Source of truth for the checkers. Every closed field also accepts `open`, which is not listed.
+# Source of truth for the checkers. A closed field holds one of its listed values, or stays empty
+# while it is not filled. The requirement registry decides whether an empty field is a gap.
 # A key repeats across blocks only where it carries the same vocabulary. The template comments
 # document these vocabularies and are checked against this file, so no check reads a document.
 
@@ -10,15 +11,18 @@ type: vocabulary-registry
 vocabularies:
   answer:
     .status:
-    - value: preliminary
+    - value: entertained
     - value: hypothesized
-    - value: informally-backed
-    - value: formally-proven
     - value: accepted
     - value: retracted
+    .support:
+    - value: unsupported
+    - value: informal
+    - value: formally-proven
+    - value: empirically-supported
     laws.warrant:
     - value: derived
-      name: from the laws of the system
+      name: from the admitted background laws
     - value: derived-in-a-limit
     - value: posited
     - value: fitted
@@ -30,6 +34,12 @@ vocabularies:
       name: it removes a factor judged irrelevant
     - value: limit
       name: it exposes the behavior of a limit system
+    idealizations.removable:
+    - value: controlled
+      name: a correction to the idealized result is known
+    - value: ineliminable
+      name: the model cannot be stated without it
+    - value: unknown
     explanans.factor:
     - value: condition
     - value: structural-property
@@ -55,10 +65,24 @@ vocabularies:
     variables.determined:
     - value: within
     - value: outside
+    variables.scale:
+    - value: nominal
+    - value: ordinal
+    - value: interval
+    - value: ratio
+    - value: absolute
+    - value: not-applicable
     variables.selects:
     - value: unique
     - value: any
     - value: all
+    parameters.scale:
+    - value: nominal
+    - value: ordinal
+    - value: interval
+    - value: ratio
+    - value: absolute
+    - value: not-applicable
     parameters.selects:
     - value: unique
     - value: any
@@ -86,15 +110,32 @@ vocabularies:
     - value: provisional
     - value: stabilized
     - value: retracted
+    .commitment:
+    - value: identified
+      name: a definite description and pointers fix the referent
+    - value: specified
+      name: the record writes its observables and manifestations, and their symbols resolve
     .category:
-    - value: particular-event
+    - value: particular-occurrence
     - value: regularity
     - value: capacity
     - value: structural-property
+    .occurrence:
+    - value: state
+    - value: process
+    - value: event
+    - value: not-applicable
     index_sets.structure:
     - value: continuum
     - value: discrete-set
     - value: interval
+    explanandum_variables.scale:
+    - value: nominal
+    - value: ordinal
+    - value: interval
+    - value: ratio
+    - value: absolute
+    - value: not-applicable
     explanandum_variables.selects:
     - value: unique
     - value: any
@@ -137,6 +178,16 @@ vocabularies:
     - value: refined
     - value: answered
     - value: abandoned
+    links.relation:
+    - value: subquestion-of
+    - value: explanans-from
+    - value: presupposes
+    subject.placeholder:
+    - value: system
+    - value: phenomenon
+    - value: observable
+    - value: contrast
+    - value: condition
     subject.locus:
     - value: other-outcome
     - value: other-system
@@ -168,6 +219,9 @@ vocabularies:
     - value: statistical
     - value: mathematical
     - value: not-applicable
+    task.function_sense:
+    - value: causal-role
+    - value: etiological
     task.modal_strength:
     - value: actual
     - value: possible
@@ -198,12 +252,21 @@ vocabularies:
     - value: provisional
     - value: stabilized
     - value: retracted
+    .commitment:
+    - value: identified
+      name: a definite description and pointers fix the referent
+    - value: specified
+      name: the record writes its declarations, and their symbols resolve
     .target_type:
     - value: particular
     - value: actual-systems
     - value: possible-systems
     - value: hypothetical
     - value: no-external-target
+    reference_class.status:
+    - value: assumed
+    - value: tested
+    - value: not-claimed
     index_sets.structure:
     - value: continuum
     - value: discrete-set
@@ -211,10 +274,24 @@ vocabularies:
     variables.determined:
     - value: within
     - value: outside
+    variables.scale:
+    - value: nominal
+    - value: ordinal
+    - value: interval
+    - value: ratio
+    - value: absolute
+    - value: not-applicable
     variables.selects:
     - value: unique
     - value: any
     - value: all
+    parameters.scale:
+    - value: nominal
+    - value: ordinal
+    - value: interval
+    - value: ratio
+    - value: absolute
+    - value: not-applicable
     parameters.selects:
     - value: unique
     - value: any
@@ -232,13 +309,11 @@ vocabularies:
       name: the law of a random quantity
     - value: admissibility
       name: a restriction on the parameters or the forms a member may take
-    laws.warrant:
-    - value: derived
-      name: from other laws of the system
-    - value: derived-in-a-limit
-    - value: posited
-    - value: fitted
-    - value: measured
+  background:
+    .status:
+    - value: provisional
+    - value: stabilized
+    - value: retracted
     laws.role:
     - value: evolution
       name: how the state changes along the course
@@ -252,8 +327,43 @@ vocabularies:
       name: the law of a random quantity
     - value: admissibility
       name: a restriction on the parameters or the forms a member may take
+    laws.warrant:
+    - value: derived
+      name: from other admitted laws
+    - value: derived-in-a-limit
+    - value: posited
+    - value: fitted
+    - value: measured
     .closure:
     - value: complete
       name: 'formal target: the laws define the system'
     - value: partial
       name: empirical target
+  problem:
+    .status:
+    - value: posed
+    - value: refined
+    - value: solved
+    - value: dissolved
+    - value: abandoned
+    .kind:
+    - value: empirical
+      name: the problem concerns the objects of a domain
+    - value: conceptual
+      name: the problem concerns the consistency of a theory or its fit with other theories
+  plan:
+    .status:
+    - value: planned
+    - value: in-progress
+    - value: completed
+    - value: abandoned
+    steps.verdict:
+    - value: pass
+    - value: fail
+    - value: pending
+    steps.mode:
+    - value: deductive
+    - value: inductive
+    - value: abductive
+    - value: analogical
+    - value: non-inferential

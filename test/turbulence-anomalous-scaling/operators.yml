@@ -21,7 +21,7 @@ operators:
     notation: '\operatorname{Reg}( #1 )'
     for_any: [S]
     signature: [S]
-    values: open
+    values:
   - name: "the boundary of a spatial domain"
     symbol: boundary
     notation: '\partial #1'

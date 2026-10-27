@@ -1,0 +1,57 @@
+title: "Admitted laws of the forward computation and of the training"
+id: bg.delayed_generalization_networks.training-specification
+type: background
+status: provisional
+describes: system.delayed_generalization_networks
+
+laws:
+  - name: "forward computation"
+    symbol: forward
+    signature: []
+    role: input-output
+    expression: "pred = Arch(theta, data)"
+    reading: "The architecture maps the current parameters and the inputs to predictions."
+    warrant: posited
+    rests_on: "The class fixes the architecture."
+  - name: "initialization draw"
+    symbol: init_draw
+    signature: []
+    role: distribution
+    expression: "drawn_from(theta0, p0)"
+    reading: "The full parameter vector at step zero is sampled from the declared initialization law."
+    warrant: posited
+    rests_on: "The class fixes the initialization scheme."
+  - name: "initial state of the parameters"
+    symbol: initial_state
+    signature: [coord]
+    role: state-constraint
+    expression: "theta(coord, 0) = theta0"
+    reading: "The training trajectory begins at the sampled initial parameter vector."
+    warrant: posited
+    rests_on: "The law follows from the initialization draw."
+  - name: "gradient-based update"
+    symbol: update
+    signature: [coord]
+    role: evolution
+    expression: "diff(theta, step) = opt(grad(Ltrain), z)"
+    reading: "The optimizer moves the parameters along the gradient of the training loss, using its own auxiliary state."
+    warrant: posited
+    rests_on: "The class fixes the optimizer."
+  - name: "update of the optimizer state"
+    symbol: update_state
+    signature: []
+    role: evolution
+    expression: "diff(z, step) = opt_state(grad(Ltrain), z)"
+    reading: "The optimizer updates its auxiliary state together with the trainable parameters."
+    warrant: posited
+    rests_on: "The class fixes the optimizer."
+  - name: "initial state of the optimizer"
+    symbol: initial_optimizer_state
+    signature: []
+    role: state-constraint
+    expression: "z(0) = z0"
+    reading: "The auxiliary state begins at the value fixed by the optimizer specification."
+    warrant: posited
+    rests_on: "The class fixes the optimizer."
+
+closure: complete

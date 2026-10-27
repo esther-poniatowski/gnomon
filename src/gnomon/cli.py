@@ -10,13 +10,17 @@ init : Scaffold research workspace structure into a target directory.
 validate : Validate registry files against schemas.
 status : Report inferential position in the research workspace.
 vocabulary : Collect the symbols and operators of one problem into a table.
+plan : Check every plan of one problem against the activity and artifact-type registries.
 """
 
 from pathlib import Path
+from typing import Any, Mapping
 
 import typer
+import yaml
 
 from . import info as pkg_info, __version__
+from .plans import plan_problems
 from .vocabulary import load_problem, render_markdown, render_yaml
 
 app = typer.Typer(add_completion=False, no_args_is_help=True)
@@ -90,6 +94,28 @@ def cli_vocabulary(
         f"{len(problem.local)} operators of the problem, "
         f"{len(repeated)} symbols reused across records"
     )
+
+
+@app.command("plan")
+def cli_plan(
+    directory: str = typer.Argument(..., help="Directory holding the filled records of one problem."),
+) -> None:
+    """Check every plan of one problem against the registries and the records it names."""
+    source = Path(directory)
+    if not source.is_dir():
+        typer.echo(f"no such directory: {source}", err=True)
+        raise typer.Exit(code=1)
+    loaded = [yaml.safe_load(path.read_text(encoding="utf-8")) for path in sorted(source.glob("*.yml"))]
+    records: dict[str, Mapping[str, Any]] = {
+        str(record["id"]): record for record in loaded if isinstance(record, Mapping) and "id" in record
+    }
+    plans = [record for record in records.values() if record.get("type") == "plan"]
+    problems = [f"{plan['id']}: {problem}" for plan in plans for problem in plan_problems(plan, records)]
+    for line in problems:
+        typer.echo(line)
+    typer.echo(f"{len(plans)} plans checked, {len(problems)} problems found")
+    if problems:
+        raise typer.Exit(code=1)
 
 
 @app.callback()

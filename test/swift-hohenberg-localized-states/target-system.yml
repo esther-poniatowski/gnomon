@@ -2,10 +2,18 @@ title: "One-dimensional generalized Swift-Hohenberg equation"
 id: system.swift-hohenberg-localized-states
 type: target-system
 status: provisional
+commitment: specified
 target_type: no-external-target  # the equation is itself the target
+
+identification:
+  description: "the one-dimensional generalized Swift-Hohenberg equation with quadratic and cubic nonlinearities on the real line"
+  pointers:
+    - "burke2006: https://doi.org/10.1103/PhysRevE.73.056211"
 
 reference_class:
   name: "one-dimensional generalized Swift-Hohenberg equations with quadratic and cubic nonlinearities and localized boundary conditions"
+  projectibility:
+    status: not-claimed
   selection_criteria: []
 
 constituents: []                 # the scalar field decomposes into no units
@@ -40,26 +48,6 @@ parameters:
     signature: []
     values: reals
     expression: null
-
-laws:
-  - name: "Swift-Hohenberg evolution with quadratic and cubic nonlinearities"
-    symbol: evolve
-    signature: [x]
-    role: evolution
-    expression: "diff(u, t) = r * u - u - 2 * diff(diff(u, x), x) - diff(diff(diff(diff(u, x), x), x), x) + b * u * u - u * u * u"
-    reading: "The field forms patterns under the standard dynamics with quadratic and cubic nonlinearities."
-    warrant: posited
-    rests_on: "The law rests on the definition of the model class."
-  - name: "localized boundary condition in the far field"
-    symbol: localized
-    signature: []
-    role: state-constraint
-    expression: "far_field(u) = 0"
-    reading: "The field approaches the homogeneous state at both spatial infinities."
-    warrant: posited
-    rests_on: "The law rests on the boundary condition that individuates a localized state."
-
-closure: complete
 
 external_systems: []
 

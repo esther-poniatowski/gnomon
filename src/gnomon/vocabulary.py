@@ -33,7 +33,9 @@ DATA = Path(__file__).parent / "data"
 #: The registry declaring the operators the framework supplies.
 OPERATOR_REGISTRY = DATA / "operators.yml"
 
-#: Blocks whose entries declare a symbol, per record kind.
+
+#: Blocks whose entries declare a symbol, per record kind. A background record declares its laws
+#: and relations over the quantities of the target system that it describes.
 DECLARING: Mapping[str, tuple[str, ...]] = {
     "target-system": (
         "variants",
@@ -41,16 +43,24 @@ DECLARING: Mapping[str, tuple[str, ...]] = {
         "index_sets",
         "variables",
         "parameters",
-        "laws",
-        "organization",
         "external_systems",
     ),
+    "background": ("laws", "organization"),
     "phenomenon": ("index_sets", "explanandum_variables", "manifestations", "scope_over_instances"),
 }
 
 #: The record kinds the checkers read. A kind declaring no symbol still carries expressions, so
 #: this set is wider than the keys of :data:`DECLARING`.
-RECORD_KINDS: frozenset[str] = frozenset({"target-system", "phenomenon", "operators", "question"})
+RECORD_KINDS: frozenset[str] = frozenset(
+    {"target-system", "background", "phenomenon", "operators", "question"}
+)
+
+#: The field through which a record of each kind names the target system it is stated against.
+UPSTREAM_FIELD: Mapping[str, str] = {
+    "background": "describes",
+    "phenomenon": "target_system",
+    "operators": "target_system",
+}
 
 #: Fields holding an expression, as (block, key).
 FORMULA: tuple[tuple[str, str], ...] = (
@@ -59,6 +69,7 @@ FORMULA: tuple[tuple[str, str], ...] = (
     ("parameters", "expression"),
     ("parameters", "condition"),
     ("laws", "expression"),
+    ("laws", "range"),
     ("explanandum_variables", "expression"),
     ("explanandum_variables", "condition"),
     ("manifestations", "expression"),
@@ -72,6 +83,7 @@ FORMULA: tuple[tuple[str, str], ...] = (
     ("organization", "relates"),
     ("realizations", "by"),
     ("explanans", "holds"),
+    ("explanans", "under"),
     ("proof_obligations", "antecedent"),
     ("proof_obligations", "consequent"),
     ("parameters", "values"),
@@ -115,10 +127,17 @@ PATH_FORMULA: tuple[str, ...] = (
     "subject.domain.restrictions[].values",
     "subject.domain.restrictions[].expression",
     "subject.domain.limit.expression",
+    "course.grain",
     "task.required_accuracy.outputs_to_match[].tolerance.metric",
     "task.required_accuracy.outputs_to_match[].tolerance.bound",
     "task.proof_obligations[].antecedent[]",
     "task.proof_obligations[].consequent[]",
+)
+
+#: Reference fields named by a dotted path, as :data:`PATH_FORMULA` names expressions.
+PATH_REFERENCE: tuple[str, ...] = (
+    "course.index",
+    "course.varies[]",
 )
 
 #: Names a tolerance may use where every other field names a declared symbol: the candidate's
@@ -462,13 +481,13 @@ def formulas(record: Mapping[str, Any]) -> list[tuple[str, str, frozenset[str]]]
         (where, text, generic(entry))
         for where, entry, key in checked
         for text in (lambda v: v if isinstance(v, list) else [v])(entry.get(key))
-        if isinstance(text, str) and text != "open"
+        if isinstance(text, str) and text.strip()
     ]
     reached += [
         (path, text, frozenset())
         for path in PATH_FORMULA
         for text in along(record, path)
-        if text != "open"
+        if text.strip()
     ]
     return reached
 
@@ -568,6 +587,10 @@ def unresolved(
                 for name in value if isinstance(value, list) else [value]:
                     if isinstance(name, str) and "#" not in name and name not in known:
                         problems.append(f"{outer}.{inner}.{key} -> {name}")
+    for path in PATH_REFERENCE:
+        for name in along(record, path):
+            if name.strip() and "#" not in name and name not in known:
+                problems.append(f"{path} -> {name}")
     for where, text, variables in formulas(record):
         reachable = known | bound(text) | available | variables
         if where.startswith("task.required_accuracy.outputs_to_match[].tolerance"):
@@ -621,7 +644,9 @@ def variant_symbols(record: Mapping[str, Any]) -> dict[str, str]:
             if isinstance(symbol, str) and isinstance(variant, str):
                 found[symbol] = variant
     return found
-def overreaching_declarations(record: Mapping[str, Any]) -> list[str]:
+def overreaching_declarations(
+    record: Mapping[str, Any], upstream: Mapping[str, Any] | None = None
+) -> list[str]:
     """Return every entry of the target asserting of all members what only some of them can bear.
 
     An entry left unmarked asserts something of every member of the reference class. When it names
@@ -629,9 +654,10 @@ def overreaching_declarations(record: Mapping[str, Any]) -> list[str]:
     for them: the quantity it governs does not exist there. A law names its quantities in its
     expression, a relation of the organization names the parts it runs between and the laws that
     realize it, and an external system names what it shares, so each reaches the class the same
-    way.
+    way. A background record states laws over the quantities of its target, so the variants of
+    that target, passed as ``upstream``, mark the symbols its entries may name.
     """
-    variants = variant_symbols(record)
+    variants = {**variant_symbols(upstream or {}), **variant_symbols(record)}
     found = []
     for block, keys in (
         ("laws", ("expression",)),
@@ -680,7 +706,9 @@ def misattributed_appeals(record: Mapping[str, Any], systems: Iterable[str]) -> 
     ]
 
 
-def unborne_variants(record: Mapping[str, Any]) -> list[str]:
+def unborne_variants(
+    record: Mapping[str, Any], carriers: Iterable[Mapping[str, Any]] = ()
+) -> list[str]:
     """Return every variant the record declares and no declaration or law carries.
 
     A variant is one shape a member may take, written as a partition of the record's own
@@ -691,13 +719,16 @@ def unborne_variants(record: Mapping[str, Any]) -> list[str]:
 
     The count is structural rather than lexical. The name of a variant recurs in its own prose
     and in the marker admitting it, so counting occurrences would find an empty variant reached.
+    The laws and relations that carry a variant stand in the background records describing the
+    target, passed as ``carriers``, so their marks count as the marks of the target do.
     """
     borne: dict[str, int] = {}
-    for block in DECLARING.get(str(record.get("type", "")), ()):
-        for entry in entries(record, block):
-            carried = entry.get("variant")
-            if isinstance(carried, str):
-                borne[carried] = borne.get(carried, 0) + 1
+    for source in (record, *carriers):
+        for block in DECLARING.get(str(source.get("type", "")), ()):
+            for entry in entries(source, block):
+                carried = entry.get("variant")
+                if isinstance(carried, str):
+                    borne[carried] = borne.get(carried, 0) + 1
     admitted = record.get("maturity") or {}
     found = []
     for variant in entries(record, "variants"):
@@ -779,7 +810,9 @@ def overreaching_entries(record: Mapping[str, Any], marked: Mapping[str, str]) -
     return found
 
 
-def interaction_graph(record: Mapping[str, Any]) -> list[dict[str, Any]]:
+def interaction_graph(
+    record: Mapping[str, Any], upstream: Mapping[str, Any] | None = None
+) -> list[dict[str, Any]]:
     """Return the directed interaction graph the record states, one entry per relation.
 
     An edge is an entry of the organization: the ordered tuples the relation runs along, the reach
@@ -792,15 +825,19 @@ def interaction_graph(record: Mapping[str, Any]) -> list[dict[str, Any]]:
     is fixed by a parameter of a member model, which the record does not value, so the relation says
     where the edges of one member are to be read from.
 
-    >>> record = {"type": "target-system",
-    ...           "variables": [{"symbol": "u", "signature": ["sub", "sub", "t"]}],
-    ...           "laws": [{"symbol": "transmit", "expression": "u = emit(z)"}],
-    ...           "organization": [{"symbol": "coupling", "relates": "prod(sub, sub)",
-    ...                             "realized_by": ["transmit"]}]}
-    >>> interaction_graph(record)
+    The relations and their laws stand in a background record, whereas the quantities that carry
+    them are declared by the target system it describes, passed as ``upstream``.
+
+    >>> target = {"type": "target-system",
+    ...           "variables": [{"symbol": "u", "signature": ["sub", "sub", "t"]}]}
+    >>> background = {"type": "background",
+    ...               "laws": [{"symbol": "transmit", "expression": "u = emit(z)"}],
+    ...               "organization": [{"symbol": "coupling", "relates": "prod(sub, sub)",
+    ...                                 "realized_by": ["transmit"]}]}
+    >>> interaction_graph(background, target)
     [{'edge': 'coupling', 'sources': ['sub'], 'reach': 'sub', 'through': ['u'], 'tuples': 'prod(sub, sub)'}]
     """
-    signatures = {d.symbol: d.signature for d in declarations(record)}
+    signatures = {d.symbol: d.signature for d in declarations(upstream or {}) + declarations(record)}
     stated = {
         str(law.get("symbol")): law.get("expression")
         for law in entries(record, "laws")
@@ -844,16 +881,20 @@ def influence_places(influence: str) -> list[str]:
     return places if len(places) > 1 and all(re.fullmatch(r"[A-Za-z_]\w*", p) for p in places) else []
 
 
-def unordered_interactions(record: Mapping[str, Any]) -> list[str]:
+def unordered_interactions(
+    record: Mapping[str, Any], upstream: Mapping[str, Any] | None = None
+) -> list[str]:
     """Return every influence that names no ordered product of declared kinds.
 
     The direction of an influence is the order of the tuples it runs along, so a tuple set that
-    is not a product of two or more declared kinds leaves the edge without a reach.
+    is not a product of two or more declared kinds leaves the edge without a reach. The kinds are
+    declared by the target system, passed as ``upstream`` when the relation stands elsewhere.
     """
     kinds = {
         entry.get("symbol")
+        for source in (record, upstream or {})
         for block in ("constituents", "index_sets")
-        for entry in entries(record, block)
+        for entry in entries(source, block)
     }
     found = []
     for relation in entries(record, "organization"):
@@ -911,7 +952,9 @@ def joins(signature: list[str], endpoints: Sequence[Any]) -> bool:
             return False
         remaining.remove(endpoint)
     return True
-def misrouted_interactions(record: Mapping[str, Any]) -> list[str]:
+def misrouted_interactions(
+    record: Mapping[str, Any], upstream: Mapping[str, Any] | None = None
+) -> list[str]:
     """Return every interaction whose law names no quantity indexed by both its endpoints.
 
     An influence from one part to another is carried by something the ordered pair shares, so the
@@ -921,7 +964,7 @@ def misrouted_interactions(record: Mapping[str, Any]) -> list[str]:
     return [
         f"organization.{edge['edge']}: the laws stating it name no quantity indexed by"
         f" every one of {edge['sources'] + [edge['reach']]}"
-        for edge in interaction_graph(record)
+        for edge in interaction_graph(record, upstream)
         if not edge["through"]
     ]
 #: Blocks whose declarations exist to be reached by another field. A manifestation, a source of
@@ -949,16 +992,27 @@ def unused_declarations(directory: Path, registry: Path | None = None) -> list[s
         if len(re.findall(rf"(?<![\w.]){symbol}(?![\w])", text)) <= 1:
             found.append(f"{declaration.block}.{declaration.symbol}: declared and never used")
     return found
+def upstream_of(record: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]) -> Mapping[str, Any]:
+    """Return the target system that ``record`` is stated against, or an empty mapping.
+
+    >>> upstream_of({"type": "background", "describes": "system.a"}, {"system.a": {"id": "system.a"}})
+    {'id': 'system.a'}
+    """
+    field_name = UPSTREAM_FIELD.get(str(record.get("type", "")))
+    identifier = record.get(field_name) if field_name else None
+    return records.get(identifier, {}) if isinstance(identifier, str) else {}
+
+
 def load_problem(directory: Path, registry: Path | None = None) -> Problem:
     """Collect the vocabulary of the problem whose records fill ``directory``."""
     problem = Problem(name=directory.name, canonical=canonical_operators(registry))
-    for path in sorted(directory.glob("*.yml")):
-        record = yaml.safe_load(path.read_text(encoding="utf-8"))
-        if not isinstance(record, Mapping):
-            continue
+    loaded = [yaml.safe_load(path.read_text(encoding="utf-8")) for path in sorted(directory.glob("*.yml"))]
+    records = [record for record in loaded if isinstance(record, Mapping)]
+    by_id = {str(record["id"]): record for record in records if "id" in record}
+    for record in records:
         problem.declarations.extend(declarations(record))
         problem.local.update(local_operators(record))
-        problem.interactions.extend(interaction_graph(record))
+        problem.interactions.extend(interaction_graph(record, upstream_of(record, by_id)))
     return problem
 def as_data(problem: Problem) -> dict[str, Any]:
     """Return the vocabulary of a problem in the record form it is stored in."""

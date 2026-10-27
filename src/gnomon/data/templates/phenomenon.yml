@@ -1,17 +1,30 @@
 # method: `docs/epistemology/phenomenon.md`; one file per phenomenon of one target system
 # symbols and expressions: `docs/epistemology/symbols-and-expressions.md`
-# replace every UPPERCASE placeholder; any closed field accepts `open`
+# replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # specifications follow the order of the method note
-# exploratory question: leave the statement, the category and the manifestation form open; fill the candidate observables, the varied indices and the detection criterion
+# exploratory question: leave the statement, the category, the occurrence and the evidential status empty, since the inquiry produces them; fill the candidate observables, the varied indices and the detection criterion
 
 title: "SHORT NAME OF THE PHENOMENON"
 statement: "THE PHENOMENON IN WORDS: THE BEARER AND ITS BEHAVIOR" # a reading only: the signatures fix the bearer, the manifestations fix the behavior
 id: phen.TOPIC.NAME
 type: phenomenon
 status: provisional              # provisional | stabilized | retracted
+commitment:                      # identified (a definite description and pointers fix the referent) | specified (the record writes its observables and manifestations, and their symbols resolve)
 target_system: system.TOPIC
 
-category: open                   # particular-event | regularity | capacity | structural-property
+identification:                  # fixes the referent before any observable is declared
+  description: "A DEFINITE DESCRIPTION THAT PICKS OUT THE BEHAVIOR"
+  pointers:
+    - "POINTER TO A DATA SET, A RESULT OR A PUBLICATION THAT FIXES THE REFERENT"
+
+category:                        # particular-occurrence | regularity | capacity | structural-property
+
+course:                          # the ordered index along which the behavior unfolds
+  index: SYMBOL                  # an index set of the target or of this record: time, a training step or an input parameter
+  grain: "EXPRESSION OVER DECLARED SYMBOLS"   # shortest length of a segment of the course; a predicate of the behavior is evaluated only on segments at least this long
+  varies: [SYMBOL]               # parameters of the target that change along this course; empty when none does
+
+occurrence:                      # state | process | event | not-applicable; `not-applicable` for a capacity
 
 index_sets:                      # only sets the observables introduce beyond those the target declares
   - name: "NAME OF THE SET"
@@ -28,6 +41,7 @@ explanandum_variables:           # observables restating the behavior in terms o
     variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
     signature: [SYMBOL]          # indices the observable still takes; empty for a scalar
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived observable
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
     selects:                     # unique | any | all; required with a condition
@@ -94,7 +108,7 @@ conditions_and_byproducts:       # put a factor the question varies among the in
       expression: "EXPRESSION OVER DECLARED SYMBOLS"
       justification: "WHY THE BYPRODUCT FALLS OUTSIDE THE PHENOMENON"   # only content beyond the expression
 
-evidential_status: open          # established | reported | predicted | derived
+evidential_status:               # established | reported | predicted | derived
 
 detection_criterion:             # conditions a candidate pattern must satisfy to count as established
   - name: "NAME OF THE TEST"

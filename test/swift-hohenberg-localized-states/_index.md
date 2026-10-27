@@ -11,6 +11,7 @@ This case checks whether the framework can specify a description whose features 
 
 - [Research problem](description.md): to understand what the case demands of the framework before reading its records.
 - [Target system](target-system.yml): to know which equation and which family of coefficients the description covers.
+- [Background laws](background.yml): to know which laws of the target the question admits, and on what warrant.
 - [Phenomenon](phenomenon.yml): to know which states the description concerns.
 - [Question](question.yml): to know which features a description must cover.
 - [Candidate answer](answer.yml): to examine a candidate description built from established numerical results.

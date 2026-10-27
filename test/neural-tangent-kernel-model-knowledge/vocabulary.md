@@ -11,6 +11,10 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 
 | Symbol | Declared in | Block | Signature | Gloss |
 | --- | --- | --- | --- | --- |
+| `flow` | bg.ntk-gradient-flow.gradient-flow | laws | t | gradient flow of the parameters |
+| `init_draw` | bg.ntk-gradient-flow.gradient-flow | laws | — | initialization draw |
+| `init_state` | bg.ntk-gradient-flow.gradient-flow | laws | — | initialization of the parameters |
+| `shared_init` | bg.ntk-gradient-flow.gradient-flow | laws | a | shared initial outputs |
 | `Edrift` | phen.ntk.linearized-dynamics | explanandum variables | m, t | drift of the empirical kernel |
 | `Elimit` | phen.ntk.linearized-dynamics | explanandum variables | m | discrepancy from the limiting kernel at initialization |
 | `Eout` | phen.ntk.linearized-dynamics | explanandum variables | m, t | discrepancy between output trajectories |
@@ -29,10 +33,6 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `spec` | phen.ntk.linearized-dynamics | scope over instances | — | specification of the network and its training, indexed by width |
 | `a` | system.ntk-gradient-flow | index sets | — | index of training examples |
 | `t` | system.ntk-gradient-flow | index sets | — | training time |
-| `flow` | system.ntk-gradient-flow | laws | t | gradient flow of the parameters |
-| `init_draw` | system.ntk-gradient-flow | laws | — | initialization draw |
-| `init_state` | system.ntk-gradient-flow | laws | — | initialization of the parameters |
-| `shared_init` | system.ntk-gradient-flow | laws | a | shared initial outputs |
 | `K0` | system.ntk-gradient-flow | parameters | a, a | empirical neural tangent kernel at initialization |
 | `Kinf` | system.ntk-gradient-flow | parameters | a, a | deterministic neural tangent kernel at infinite width |
 | `L` | system.ntk-gradient-flow | parameters | — | number of hidden layers |
@@ -53,7 +53,7 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 
 ## Symbols reused across records
 
-- `init_draw` denotes a distinct quantity in phen.ntk.linearized-dynamics, system.ntk-gradient-flow.
+- `init_draw` denotes a distinct quantity in bg.ntk-gradient-flow.gradient-flow, phen.ntk.linearized-dynamics.
 
 ## Operators
 

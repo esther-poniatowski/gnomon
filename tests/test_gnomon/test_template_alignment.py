@@ -122,7 +122,9 @@ def documented_keys(note: str, header: str, paths: Sequence[str], prefix: str) -
 
 # (label, note, table header, template, scope of the reverse check, prefix, keys documented elsewhere)
 PAIRS = [
+    ("problem", "problem.md", "| Specification", "problem.yml", None, "", {}),
     ("target-system", "target-system.md", "| Specification", "target-system.yml", None, "", ELSEWHERE_MATURITY),
+    ("background", "background.md", "| Specification", "background.yml", None, "", ELSEWHERE_MATURITY),
     ("phenomenon", "phenomenon.md", "| Specification", "phenomenon.yml", None, "", ELSEWHERE_MATURITY),
     (
         "operators",
@@ -133,6 +135,7 @@ PAIRS = [
         "",
         ELSEWHERE_MATURITY,
     ),
+    ("question-links", "inquiry-specification.md", "| Field", "question.yml", "links", "", {}),
     ("subject-of-inquiry", "subject-of-inquiry.md", "| Component", "question.yml", "subject", "subject", {}),
     ("contrast", "contrast.md", "| Specification", "question.yml", "subject.contrast", "subject.contrast", {}),
     ("domain", "domain.md", "| Specification", "question.yml", "subject.domain", "subject.domain", {}),
@@ -164,6 +167,7 @@ PAIRS = [
         "",
         {**ELSEWHERE_MATURITY, "answer": "satisfaction-conditions.md", "question": "satisfaction-conditions.md"},
     ),
+    ("plan", "plan.md", "| Specification", "plan.yml", None, "", {}),
 ]
 
 IDS = [pair[0] for pair in PAIRS]
@@ -235,29 +239,59 @@ def test_the_aim_note_lists_the_requirement_registry() -> None:
         )
     declared = yaml.safe_load((REGISTRY / "requirements.yml").read_text())["by_aim"]
     assert set(documented) == set(declared), f"aims differ: {set(documented) ^ set(declared)}"
-    for aim, (required, relaxed) in documented.items():
+    for aim, (required, produced) in documented.items():
         entry = declared[aim]
         assert required == [e["path"] for e in entry.get("required") or []], f"{aim}: required differs"
-        assert relaxed == list(entry.get("open") or []), f"{aim}: relaxed differs"
+        assert produced == list(entry.get("to_produce") or []), f"{aim}: produced differs"
 
 
-@pytest.mark.parametrize("kind,note", [("target-system", "target-system.md"), ("phenomenon", "phenomenon.md")])
-def test_the_always_rows_of_a_note_are_the_registry_entries(kind: str, note: str) -> None:
-    """A specification the note marks required always is one the registry lists."""
+#: The cell openings of the column "When it is required" that state a registered requirement.
+REQUIREMENT_CELLS = {"always": "always", "from `identified`": "identified", "from `specified`": "specified"}
+
+
+@pytest.mark.parametrize(
+    "kind,note",
+    [
+        ("target-system", "target-system.md"),
+        ("phenomenon", "phenomenon.md"),
+        ("background", "background.md"),
+        ("problem", "problem.md"),
+        ("plan", "plan.md"),
+    ],
+)
+def test_the_requirement_rows_of_a_note_are_the_registry_entries(kind: str, note: str) -> None:
+    """A row marked required always, or from a level of commitment, is one the registry lists there."""
     lines = (DOCS / note).read_text(encoding="utf-8").splitlines()
     start = next(i for i, line in enumerate(lines) if line.startswith("| Specification"))
-    documented = []
+    documented: dict[str, list[str]] = {section: [] for section in REQUIREMENT_CELLS.values()}
     for line in lines[start + 2:]:
         if not line.startswith("|"):
             break
         cells = [c.strip() for c in line.strip("|").split("|")]
-        if len(cells) > 1 and cells[1].lower().startswith("always"):
-            documented.append(".".join(slug(part) for part in cells[0].split(" — ")[0].split(": ")))
-    declared = yaml.safe_load((REGISTRY / "requirements.yml").read_text())["always"][kind]
+        for opening, section in REQUIREMENT_CELLS.items():
+            if len(cells) > 1 and cells[1].lower().startswith(opening):
+                documented[section].append(".".join(slug(part) for part in cells[0].split(" — ")[0].split(": ")))
+    registry = yaml.safe_load((REGISTRY / "requirements.yml").read_text())
+    declared = {
+        "always": registry["always"].get(kind, []),
+        **{level: (registry["by_commitment"].get(level) or {}).get(kind, []) for level in ("identified", "specified")},
+    }
     assert documented == declared, f"{note}: {documented} against {declared}"
 
 
-@pytest.mark.parametrize("name", ["target-system.yml", "phenomenon.yml", "question.yml", "answer.yml", "assessment.yml"])
+@pytest.mark.parametrize(
+    "name",
+    [
+        "problem.yml",
+        "target-system.yml",
+        "background.yml",
+        "phenomenon.yml",
+        "question.yml",
+        "answer.yml",
+        "assessment.yml",
+        "plan.yml",
+    ],
+)
 def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
     """The registry is the source; a template comment documents it and must not drift from it."""
     vocab = re.compile(r"#\s*([a-z][a-z-]*(?: \([^)]*\))?(?: \| [a-z][a-z-]*(?: \([^)]*\))?)+)")
@@ -313,3 +347,16 @@ def test_every_template_parses_and_declares_its_kind() -> None:
     for path in files:
         record = template(path.name)
         assert "id" in record and "type" in record, f"{path.name} declares no identifier or kind"
+
+
+def test_the_occurrence_table_of_the_phenomenon_note_is_the_registry() -> None:
+    """The note documents which occurrence classes each category admits; the registry decides."""
+    note = (DOCS / "phenomenon.md").read_text(encoding="utf-8")
+    section = re.search(r"\| Category \| Admitted occurrence \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)", note)
+    assert section is not None, "the note carries no table of occurrence classes"
+    documented = {}
+    for row in section.group(1).splitlines():
+        cells = [c.strip() for c in row.strip("|").split("|")]
+        documented[cells[0].strip("`")] = re.findall(r"`([a-z-]+)`", cells[1])
+    declared = yaml.safe_load((REGISTRY / "requirements.yml").read_text())["occurrence_by_category"]
+    assert documented == declared

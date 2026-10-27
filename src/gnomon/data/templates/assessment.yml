@@ -1,5 +1,5 @@
 # method: `docs/epistemology/satisfaction-conditions.md`; one file per assessed candidate answer
-# replace every UPPERCASE placeholder
+# replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # give `not-applicable` to a test whose specification is empty in the question
 # fill the appraisal for one answer at a time; name another candidate only when one exists
 
@@ -38,6 +38,10 @@ appraisal:                       # one entry per `preferred` virtue of the quest
   - virtue:                      # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability
     assessment: "THE RESULT OF THE OPERATIONAL QUESTION OF THAT VIRTUE FOR THIS ANSWER"
     preferred_over: "THE CANDIDATES THAT THIS ANSWER OUTRANKS ON THAT VIRTUE"   # fill when other candidates have been assessed
+
+credence:                        # optional; the degree of belief that the assessor places in the answer
+  value: "NUMBER IN THE INTERVAL FROM 0 TO 1"
+  basis: "THE EVIDENCE AND THE PRIOR THAT FIX THE VALUE"
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
   FIELD.PATH: open

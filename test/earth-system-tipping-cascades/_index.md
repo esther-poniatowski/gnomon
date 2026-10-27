@@ -11,6 +11,7 @@ This case checks whether the framework can specify a prediction about a partiall
 
 - [Research problem](description.md): to understand what the case demands of the framework before reading its records.
 - [Target system](target-system.yml): to know which subsystems the prediction covers.
+- [Background laws](background.yml): to know which laws of the target the question admits, and on what warrant.
 - [Phenomenon](phenomenon.yml): to know which outcome the prediction concerns.
 - [Question](question.yml): to know which predictions an answer must deliver, and with what accuracy.
 - [Candidate answer](answer.yml): to examine a candidate drawn from a published model result.

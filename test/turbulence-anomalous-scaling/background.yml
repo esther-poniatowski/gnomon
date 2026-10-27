@@ -1,0 +1,41 @@
+title: "The incompressible Navier–Stokes equations and their admitted inputs"
+id: bg.turbulence-incompressible-navier-stokes.navier-stokes
+type: background
+status: provisional
+describes: system.turbulence-incompressible-navier-stokes
+
+laws:
+  - name: "incompressible momentum balance"
+    symbol: momentum
+    signature: [x]
+    role: evolution
+    expression: "diff(u, t) + dot(u, grad(u)) = - grad(pr) + nu * lap(u) + f"
+    reading: "The velocity changes under its own advection, the pressure gradient, viscous diffusion, and the applied force."
+    warrant: posited
+    rests_on: "The law rests on the definition of the model class."
+  - name: "incompressibility constraint"
+    symbol: incompressible
+    signature: [x]
+    role: state-constraint
+    expression: "div(u) = 0"
+    reading: "The flow neither compresses nor expands any element of fluid."
+    warrant: posited
+    rests_on: "The law rests on the definition of the model class."
+  - name: "pressure gauge"
+    symbol: gauge
+    signature: []
+    role: state-constraint
+    expression: "mean_{x}( pr ) = 0"
+    reading: "The pressure is fixed only up to a constant, so its spatial mean is set to zero."
+    warrant: posited
+    rests_on: "The law rests on a gauge choice that fixes the pressure only up to a constant."
+  - name: "boundary constraint"
+    symbol: boundary_law
+    signature: [x]
+    role: state-constraint
+    expression: "restrict(u, boundary(Om)) = b"
+    reading: "The velocity on the boundary of the domain equals the prescribed data."
+    warrant: posited
+    rests_on: "The law rests on the boundary data that the environment supplies."
+
+closure: complete                # the equations and the admitted inputs define the formal system

@@ -24,7 +24,7 @@ The modal strength is the third dimension of the [epistemic task](epistemic-task
 	
 - **Constraints move an answer along the continuum from how-possibly to how-actually.** A how-possibly model conjectures components and activities without showing that they occur in the target. Empirical constraints, once added, move the model towards a how-actually answer [craver2006].
 	
-- **The laws of the system fix which possibility is at stake.** A possibility claim states that the explanans is compatible with the [laws of the target system](target-system.md#^constituents) and with the [conditions the question holds fixed](domain.md). Without those laws and conditions, "possible" has no determinate content.
+- **The laws of the system fix which possibility is at stake.** A possibility claim states that the explanans is compatible with the [laws admitted about the target system](background.md#^laws) and with the [conditions the question holds fixed](domain.md). Without those laws and conditions, "possible" has no determinate content.
 	
 - **The target type bounds the modal strength** (proposal). A hypothetical target, or a class of merely possible systems, supports no claim of *actual* strength about an existing system. A question that pairs such a [target type](target-system.md) with the actual strength is therefore inconsistent.
 	

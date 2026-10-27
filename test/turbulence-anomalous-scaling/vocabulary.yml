@@ -5,6 +5,29 @@ type: vocabulary
 problem: turbulence-anomalous-scaling
 generated_by: gnomon vocabulary
 symbols:
+- symbol: boundary_law
+  declared_in: bg.turbulence-incompressible-navier-stokes.navier-stokes
+  block: laws
+  signature:
+  - x
+  name: boundary constraint
+- symbol: gauge
+  declared_in: bg.turbulence-incompressible-navier-stokes.navier-stokes
+  block: laws
+  signature: []
+  name: pressure gauge
+- symbol: incompressible
+  declared_in: bg.turbulence-incompressible-navier-stokes.navier-stokes
+  block: laws
+  signature:
+  - x
+  name: incompressibility constraint
+- symbol: momentum
+  declared_in: bg.turbulence-incompressible-navier-stokes.navier-stokes
+  block: laws
+  signature:
+  - x
+  name: incompressible momentum balance
 - symbol: P
   declared_in: phen.turbulence.velocity-increment-distributions
   block: explanandum_variables
@@ -125,29 +148,6 @@ symbols:
   block: index_sets
   signature: []
   name: spatial location in the flow domain
-- symbol: boundary_law
-  declared_in: system.turbulence-incompressible-navier-stokes
-  block: laws
-  signature:
-  - x
-  name: boundary constraint
-- symbol: gauge
-  declared_in: system.turbulence-incompressible-navier-stokes
-  block: laws
-  signature: []
-  name: pressure gauge
-- symbol: incompressible
-  declared_in: system.turbulence-incompressible-navier-stokes
-  block: laws
-  signature:
-  - x
-  name: incompressibility constraint
-- symbol: momentum
-  declared_in: system.turbulence-incompressible-navier-stokes
-  block: laws
-  signature:
-  - x
-  name: incompressible momentum balance
 - symbol: Lc
   declared_in: system.turbulence-incompressible-navier-stokes
   block: parameters

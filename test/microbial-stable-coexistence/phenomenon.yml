@@ -3,16 +3,29 @@ statement: "The microbial populations of a member model can possess an equilibri
 id: phen.microbial.stable-coexistence
 type: phenomenon
 status: provisional
+commitment: specified
 target_system: system.microbial-formal-population-models
 
+identification:
+  description: "the existence, in a member model, of a feasible equilibrium to which the populations return after small perturbations"
+  pointers:
+    - "butler2018: https://www.nature.com/articles/s41467-018-05308-z"
+
 category: capacity
+
+course:
+  index: t
+  grain:
+  varies: []
+
+occurrence: not-applicable
 
 explanandum_variables:           # restate feasibility and local stability separately
   - name: "complete equilibrium state"
     symbol: Xstar
     notation: 'X^{*}'
     signature: []
-    values: open
+    values:
     condition: "equilibrium(theta, Xstar)"
     selects: any
     reading: "For a member with direct interactions, the selected equilibrium contains population abundances alone. For a member whose resources are explicit, the equilibrium also contains their concentrations."
@@ -26,7 +39,7 @@ explanandum_variables:           # restate feasibility and local stability separ
   - name: "Jacobian of the community at the equilibrium"
     symbol: J
     signature: []
-    values: open
+    values:
     expression: "community_jacobian(theta, Xstar)"
     reading: "The Jacobian linearizes every dynamical variable of the member model about the selected equilibrium."
   - name: "minimum population abundance at equilibrium"
@@ -63,14 +76,14 @@ scope_over_instances:            # every member of the admitted class
     symbol: member
     over: [theta]
     source: class-member
-    quantification: open
+    quantification:
     conditional_on: []
   - name: "admitted nonnegative vectors of resource supply"
     symbol: supply
     variant: resource_explicit
     over: [rho]
     source: random-parameters
-    quantification: open
+    quantification:
     conditional_on: []
 
 conditions_and_byproducts:       # resource supply declared as a source of variation, not a condition of known effect

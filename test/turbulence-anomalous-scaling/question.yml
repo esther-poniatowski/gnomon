@@ -5,6 +5,7 @@ type: question
 status: posed
 subject:
   target_system: system.turbulence-incompressible-navier-stokes
+  background: [bg.turbulence-incompressible-navier-stokes.navier-stokes]
   phenomenon: phen.turbulence.velocity-increment-distributions
   contrast:
     locus: other-outcome
@@ -43,12 +44,12 @@ task:
       - target: phen.turbulence.velocity-increment-distributions#zetaL
         tolerance:
           metric: "abs(answer - target)"
-          bound: open            # reported uncertainty interval differs with the order p
+          bound:                 # reported uncertainty interval differs with the order p
         justification: "The departure of the longitudinal exponents from the self-similar line is part of the content of intermittency, and its size at each order separates competing accounts."
       - target: phen.turbulence.velocity-increment-distributions#zetaT
         tolerance:
           metric: "abs(answer - target)"
-          bound: open            # reported uncertainty interval differs with the order p
+          bound:                 # reported uncertainty interval differs with the order p
         justification: "The transverse exponents and their difference from the longitudinal ones are needed to test whether an account explains both sectors."
     structures_to_match:
       - target: phen.turbulence.velocity-increment-distributions#P

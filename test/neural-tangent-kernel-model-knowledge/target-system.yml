@@ -2,10 +2,19 @@ title: "Wide neural networks trained by gradient flow"
 id: system.ntk-gradient-flow
 type: target-system
 status: provisional
+commitment: specified
 target_type: no-external-target  # the formal network class is itself the target
+
+identification:
+  description: "fully connected networks with scalar output under neural tangent parameterization, trained by continuous gradient flow on a fixed finite data set with squared loss"
+  pointers:
+    - "jacot2018: https://papers.nips.cc/paper/2018/hash/5a4be1fa34e62bb8a6ec6b91d2462f5a-Abstract.html"
+    - "lee2019: https://papers.nips.cc/paper_files/paper/2019/hash/0d1a9651497a38d8b1c3871c84528bd4-Abstract.html"
 
 reference_class:
   name: "fully connected networks with scalar output under neural tangent parameterization, trained by gradient flow with squared loss"
+  projectibility:
+    status: not-claimed
   selection_criteria: []
 
 constituents: []                 # a parameter vector represents the network; no unit kind
@@ -135,42 +144,6 @@ parameters:
     expression: "limiting_ntk(X, L, sigma)"
     reading: "The architecture, the activation, and the training inputs fix the deterministic limiting kernel."
     shared: false
-
-laws:
-  - name: "gradient flow of the parameters"
-    symbol: flow
-    signature: [t]
-    role: evolution
-    expression: "diff(theta, t) = -eta * grad_parameter(risk(f, y), theta)"
-    reading: "The parameters follow continuous gradient flow for squared empirical risk."
-    warrant: posited
-    rests_on: "The law rests on the training scheme that the class fixes."
-  - name: "initialization of the parameters"
-    symbol: init_state
-    signature: []
-    role: state-constraint
-    expression: "at_zero(theta) = theta0"
-    reading: "The trainable trajectory begins at the sampled initial parameter vector."
-    warrant: posited
-    rests_on: "The law rests on the initialization scheme that the class fixes."
-  - name: "initialization draw"
-    symbol: init_draw
-    signature: []
-    role: distribution
-    expression: "drawn_from(theta0, rho0)"
-    reading: "The initial parameter vector is drawn from the declared distribution `rho0`."
-    warrant: posited
-    rests_on: "The law rests on the initialization distribution that the class fixes."
-  - name: "shared initial outputs"
-    symbol: shared_init
-    signature: [a]
-    role: state-constraint
-    expression: "at_zero(flin) = at_zero(f)"
-    reading: "The nonlinear and linearized trajectories begin with the same outputs."
-    warrant: derived
-    rests_on: "The law rests on the definition of the linearized model at the initial parameters."
-
-closure: complete
 
 external_systems: []
 

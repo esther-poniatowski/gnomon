@@ -1,7 +1,7 @@
 # method: `docs/epistemology/symbols-and-expressions.md`; one file per problem
 # declare only operators beyond the framework's canonical set that the problem's records use
 # type each operator over sets declared by any record of the problem; declarations are read against every record
-# replace every UPPERCASE placeholder
+# replace every UPPERCASE placeholder; leave a field empty while it is not filled
 
 title: "SHORT NAME OF THE PROBLEM THAT THE OPERATORS SERVE"
 id: ops.TOPIC

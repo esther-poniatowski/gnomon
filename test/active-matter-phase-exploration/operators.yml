@@ -10,13 +10,13 @@ operators:
     notation: '\operatorname{Reg}_{#3}( #1, #2 )'
     for_any: [S, B]
     signature: [S, "pos(reals)", B]
-    values: open
+    values:
   - name: "the sites of a finite lattice of a given dimension, size and boundary geometry"
     symbol: sites
     notation: '\operatorname{Sites}_{#3}( #1, #2 )'
     for_any: [B]
     signature: ["pos(ints)", "pos(reals)", B]
-    values: open
+    values:
   - name: "the discrete Laplacian on the declared lattice"
     symbol: lattice_lap
     notation: '\Delta_{\mathrm{lat}} #1'

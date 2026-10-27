@@ -11,6 +11,7 @@ This case checks whether the framework can specify a search whose possible pheno
 
 - [Research problem](description.md): to understand what the case demands of the framework before reading its records.
 - [Target system](target-system.yml): to know which systems the exploration covers.
+- [Background laws](background.yml): to know which laws of the target the question admits, and on what warrant.
 - [Phenomenon](phenomenon.yml): to know what the exploration must detect, without a catalogue of phases fixed in advance.
 - [Question](question.yml): to know which results the exploration must deliver.
 - [Candidate answer](answer.yml): to examine a deliberately narrow candidate answer.

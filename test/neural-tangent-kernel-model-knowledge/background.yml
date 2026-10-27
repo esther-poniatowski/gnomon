@@ -1,0 +1,41 @@
+title: "Admitted laws of the initialization and of the gradient flow"
+id: bg.ntk-gradient-flow.gradient-flow
+type: background
+status: provisional
+describes: system.ntk-gradient-flow
+
+laws:
+  - name: "gradient flow of the parameters"
+    symbol: flow
+    signature: [t]
+    role: evolution
+    expression: "diff(theta, t) = -eta * grad_parameter(risk(f, y), theta)"
+    reading: "The parameters follow continuous gradient flow for squared empirical risk."
+    warrant: posited
+    rests_on: "The law rests on the training scheme that the class fixes."
+  - name: "initialization of the parameters"
+    symbol: init_state
+    signature: []
+    role: state-constraint
+    expression: "at_zero(theta) = theta0"
+    reading: "The trainable trajectory begins at the sampled initial parameter vector."
+    warrant: posited
+    rests_on: "The law rests on the initialization scheme that the class fixes."
+  - name: "initialization draw"
+    symbol: init_draw
+    signature: []
+    role: distribution
+    expression: "drawn_from(theta0, rho0)"
+    reading: "The initial parameter vector is drawn from the declared distribution `rho0`."
+    warrant: posited
+    rests_on: "The law rests on the initialization distribution that the class fixes."
+  - name: "shared initial outputs"
+    symbol: shared_init
+    signature: [a]
+    role: state-constraint
+    expression: "at_zero(flin) = at_zero(f)"
+    reading: "The nonlinear and linearized trajectories begin with the same outputs."
+    warrant: derived
+    rests_on: "The law rests on the definition of the linearized model at the initial parameters."
+
+closure: complete

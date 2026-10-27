@@ -1,0 +1,108 @@
+title: "Plan of the inquiry into delayed generalization"
+id: plan.grokking.explain-delay
+type: plan
+status: in-progress
+addresses: prob.grokking.delayed-generalization
+
+steps:
+  - id: pose
+    activity: problematization
+    inputs:
+      - type: source
+        ref: "liu2022: https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
+    output:
+      type: problem
+      ref: prob.grokking.delayed-generalization
+    norm:
+      test: norm.problematization
+      verdict: pass
+    mode: non-inferential
+  - id: formulate
+    activity: question-formulation
+    inputs:
+      - type: problem
+        ref: pose
+    output:
+      type: question-schema       # the schema was raised to the question quest.grokking.explain_delay, so no record holds it now
+    norm:
+      test: norm.question-formulation
+      verdict: pass
+    mode: non-inferential
+  - id: identify
+    activity: subject-identification
+    inputs:
+      - type: question-schema
+        ref: formulate
+    output:
+      type: identified-subject
+      ref: phen.grokking.delayed_generalization
+    norm:
+      test: norm.subject-identification
+      verdict: pass
+    mode: non-inferential
+  - id: delimit
+    activity: delimitation
+    inputs:
+      - type: question
+        ref: quest.grokking.explain_delay
+      - type: identified-subject
+        ref: identify
+    output:
+      type: target-specification
+      ref: system.delayed_generalization_networks
+    norm:
+      test: norm.delimitation
+      verdict: pending
+    mode: non-inferential
+  - id: admit
+    activity: background-appraisal
+    inputs:
+      - type: source
+        ref: "the definition of the class of trained networks"
+    output:
+      type: background-model
+      ref: bg.delayed_generalization_networks.training-specification
+    norm:
+      test: norm.background-appraisal
+      verdict: fail             # no admitted law states its origin or its range yet
+    mode: inductive
+  - id: propose
+    activity: abduction
+    inputs:
+      - type: phenomenon
+        ref: phen.grokking.delayed_generalization
+    output:
+      type: hypothesis
+      ref: ans.grokking.slow-structured-representation
+    norm:
+      test: norm.abduction
+      verdict: pass
+    mode: abductive
+  - id: derive
+    activity: derivation
+    inputs:
+      - type: model
+        ref: ans.grokking.slow-structured-representation
+    output:
+      type: consequence
+      ref: ans.grokking.slow-structured-representation
+    norm:
+      test: norm.derivation
+      verdict: pending
+    mode: deductive
+  - id: test
+    activity: testing
+    inputs:
+      - type: hypothesis
+        ref: propose
+      - type: consequence
+        ref: derive
+      - type: data
+        ref: phen.grokking.delayed_generalization
+    output:
+      type: verdict
+      ref: assess.grokking.slow-structured-representation
+    norm:
+      test: norm.testing
+      verdict: pending
+    mode: deductive

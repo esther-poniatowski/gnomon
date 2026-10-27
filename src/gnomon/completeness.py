@@ -1,13 +1,18 @@
 """
 What a filled inquiry must carry, read from the registry that declares it.
 
-Two kinds of requirement govern a record, and both are declared in ``data/requirements.yml``
-rather than restated here:
+The requirements that govern a record are declared in two registries rather than restated here:
 
-- the values a closed field admits, listed per record kind under ``vocabularies``;
-- the general ones, listed per record kind under ``always``;
-- the ones an epistemic aim adds, and the general ones it relaxes, under ``by_aim``. An inquiry
-  that produces a phenomenon cannot be asked to state that phenomenon in advance.
+- the values a closed field admits, listed per record kind in ``data/vocabularies.yml``;
+- the general ones, listed per record kind under ``always`` in ``data/requirements.yml``;
+- the ones a level of commitment imposes on a target system or a phenomenon, under
+  ``by_commitment``;
+- the ones an epistemic aim adds, and the general ones the inquiry produces, under ``by_aim``. An
+  inquiry that produces a phenomenon cannot be asked to state that phenomenon in advance, so
+  those paths may stay empty.
+
+An empty value means that a field is not filled. Whether an empty field is a gap or a value that
+the inquiry will produce is read from the registry, never from the record.
 
 A third kind is neither: a consistency between fields, such as an accuracy marked inapplicable
 while outputs are listed for matching. No aim decides those, so each is its own check.
@@ -23,7 +28,7 @@ data/requirements.yml : the registry these functions read.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Iterable, Mapping
 
 import yaml
 
@@ -35,13 +40,37 @@ REQUIREMENT_REGISTRY = DATA / "requirements.yml"
 #: The registry declaring the values each closed field admits.
 VOCABULARY_REGISTRY = DATA / "vocabularies.yml"
 
+#: The levels of commitment of a target system or a phenomenon, weakest first.
+COMMITMENT_LEVELS: tuple[str, ...] = ("identified", "specified")
+
+#: The subject slots of a question, each with the record kind its identifier names.
+SUBJECT_SLOTS: Mapping[str, str] = {"target_system": "target-system", "phenomenon": "phenomenon"}
+
+#: The subject slots of a question, each with the one placeholder type it admits.
+SLOT_PLACEHOLDERS: Mapping[str, str] = {"target_system": "system", "phenomenon": "phenomenon"}
+
+def is_empty(value: Any) -> bool:
+    """Return whether ``value`` leaves its field unfilled: absent, null, or an empty string.
+
+    An empty list or mapping is a value: it states that the block holds no entry.
+
+    >>> [is_empty(v) for v in (None, "", "  ", [], "open")]
+    [True, True, True, False, False]
+    """
+    return value is None or (isinstance(value, str) and not value.strip())
+
+
+def is_unfilled(value: Any) -> bool:
+    """Return whether a required specification is unfilled: empty, or an empty list or mapping."""
+    return is_empty(value) or value in ([], {})
+
 
 def _registry(source: Path | None) -> dict[str, Any]:
     return yaml.safe_load((source or REQUIREMENT_REGISTRY).read_text(encoding="utf-8")) or {}
 
 
 def requirements_by_aim(source: Path | None = None) -> dict[str, dict[str, list]]:
-    """Return, per epistemic aim, the paths its inquiry fixes and the ones it may leave open.
+    """Return, per epistemic aim, the paths its inquiry fixes and the ones it produces.
 
     Raises
     ------
@@ -54,7 +83,7 @@ def requirements_by_aim(source: Path | None = None) -> dict[str, dict[str, list]
     return {
         aim: {
             "required": [e["path"] for e in (entry.get("required") or [])],
-            "open": list(entry.get("open") or []),
+            "to_produce": list(entry.get("to_produce") or []),
         }
         for aim, entry in by_aim.items()
     }
@@ -68,6 +97,39 @@ def always_required(kind: str, source: Path | None = None) -> list[str]:
 def record_kinds(source: Path | None = None) -> list[str]:
     """Return every record kind the registry states a general requirement for."""
     return sorted((_registry(source).get("always") or {}))
+
+
+def requirements_by_commitment(source: Path | None = None) -> dict[str, dict[str, list[str]]]:
+    """Return, per level of commitment, the specifications each record kind carries at that level.
+
+    Raises
+    ------
+    ValueError
+        If the registry names a level outside :data:`COMMITMENT_LEVELS`.
+    """
+    table = _registry(source).get("by_commitment") or {}
+    unknown = set(table) - set(COMMITMENT_LEVELS)
+    if unknown:
+        raise ValueError(f"unknown levels of commitment: {sorted(unknown)}")
+    return {level: {kind: list(paths or []) for kind, paths in (table.get(level) or {}).items()}
+            for level in COMMITMENT_LEVELS}
+
+
+def commitment_requirements(
+    kind: str, level: str, table: Mapping[str, Mapping[str, list[str]]]
+) -> list[str]:
+    """Return what a record of ``kind`` carries at ``level``, the weaker levels included.
+
+    >>> table = {"identified": {"phenomenon": ["statement"]}, "specified": {"phenomenon": ["course"]}}
+    >>> commitment_requirements("phenomenon", "specified", table)
+    ['statement', 'course']
+    """
+    if level not in COMMITMENT_LEVELS:
+        return []
+    paths: list[str] = []
+    for weaker in COMMITMENT_LEVELS[: COMMITMENT_LEVELS.index(level) + 1]:
+        paths += list((table.get(weaker) or {}).get(kind) or [])
+    return paths
 
 
 def at(record: Mapping[str, Any], path: str) -> Any:
@@ -93,20 +155,196 @@ def at(record: Mapping[str, Any], path: str) -> Any:
 
 
 def unmet_general(
-    record: Mapping[str, Any], paths: list[str], relaxed: frozenset[str] | set[str] = frozenset()
+    record: Mapping[str, Any],
+    paths: list[str],
+    produced: frozenset[str] | set[str] = frozenset(),
+    label: str = "always required",
 ) -> list[str]:
-    """Return every always-required specification the record leaves open without licence.
+    """Return every required specification the record leaves unfilled.
 
-    An aim may admit open a specification that the registry requires always, so the caller
-    passes the paths that aim relaxes.
+    A specification is unfilled when it is absent, null, an empty string, or an empty list or
+    mapping. The aim of the inquiry may produce a required specification, so the caller passes the
+    paths that aim produces: those may stay unfilled, since the inquiry supplies their values.
     """
-    missing = []
-    for path in paths:
-        if path in relaxed:
+    return [
+        f"{label}: {path}"
+        for path in paths
+        if path not in produced and is_unfilled(at(record, path))
+    ]
+
+
+def unmet_commitment(
+    record: Mapping[str, Any],
+    table: Mapping[str, Mapping[str, list[str]]],
+    produced: frozenset[str] | set[str] = frozenset(),
+) -> list[str]:
+    """Return every specification that the level of commitment of the record requires and it lacks.
+
+    A record at ``identified`` fixes its referent; a record at ``specified`` also writes the
+    declarations that make it checkable. A record stating no admitted level is reported by the
+    general requirement on ``commitment`` and by the vocabulary, so it is not reported here.
+    """
+    level = record.get("commitment")
+    paths = commitment_requirements(str(record.get("type")), str(level), table)
+    return unmet_general(record, paths, produced, label=f"commitment {level} requires")
+
+
+def occurrence_by_category(source: Path | None = None) -> dict[str, list[str]]:
+    """Return, per phenomenon category, the occurrence classes that the category admits."""
+    table = _registry(source).get("occurrence_by_category") or {}
+    return {str(category): list(classes or []) for category, classes in table.items()}
+
+
+def mismatched_occurrence(
+    phenomenon: Mapping[str, Any], table: Mapping[str, list[str]]
+) -> list[str]:
+    """Return the occurrence class that the category of the phenomenon does not admit.
+
+    A particular occurrence is one token of a state, a process or an event. A structural property
+    holds at each point of the course, as a state does. A regularity relates occurrences without
+    being one, and a capacity is a disposition, so neither takes an occurrence class. An empty
+    field leaves the pair unfilled, and nothing is reported.
+
+    >>> table = {"regularity": ["not-applicable"], "particular-occurrence": ["state", "process", "event"]}
+    >>> mismatched_occurrence({"category": "regularity", "occurrence": "event"}, table)
+    ['occurrence: event is no occurrence class of a regularity, which admits not-applicable']
+    """
+    category, occurrence = phenomenon.get("category"), phenomenon.get("occurrence")
+    if not isinstance(category, str) or not isinstance(occurrence, str):
+        return []
+    if is_empty(category) or is_empty(occurrence) or category not in table:
+        return []
+    admitted = table[category]
+    if occurrence in admitted:
+        return []
+    return [f"occurrence: {occurrence} is no occurrence class of a {category}, which admits {' or '.join(admitted)}"]
+
+
+def placeholder_types(source: Path | None = None) -> frozenset[str]:
+    """Return the types a placeholder of a question slot may take, as the vocabulary lists them."""
+    return admitted_values("question", source).get("subject.placeholder", frozenset())
+
+
+def unresolved_slots(
+    question: Mapping[str, Any],
+    records: Mapping[str, Mapping[str, Any]],
+    types: Iterable[str],
+) -> list[str]:
+    """Return every subject slot that holds neither an identified record nor a typed placeholder.
+
+    A slot of a question schema awaits an item of a type from a closed list, described in words,
+    and the type fits the slot: the target-system slot awaits a system, and the phenomenon slot a
+    phenomenon. A slot of a question names a record that fixes its referent, so the record exists, has the kind
+    the slot expects, and carries an identification. Both checks are decidable, and the stronger
+    level, a record whose declarations resolve, is checked by the resolution of its symbols.
+
+    Parameters
+    ----------
+    question : mapping
+        One filled question record.
+    records : mapping
+        The records of the problem, keyed by identifier.
+    types : iterable of str
+        The types a placeholder may take.
+    """
+    admitted = set(types)
+    subject = question.get("subject") or {}
+    found = []
+    for slot, kind in SUBJECT_SLOTS.items():
+        value, where = subject.get(slot), f"subject.{slot}"
+        if isinstance(value, Mapping):
+            awaited = value.get("placeholder")
+            if awaited not in admitted:
+                found.append(f"{where}: the placeholder type {awaited!r} is not admitted")
+            elif awaited != SLOT_PLACEHOLDERS[slot]:
+                found.append(f"{where}: the placeholder type {awaited!r} does not fit the slot, which awaits {SLOT_PLACEHOLDERS[slot]!r}")
+            if not value.get("description"):
+                found.append(f"{where}: the placeholder carries no description")
             continue
-        if at(record, path) in (None, [], {}, "open"):
-            missing.append(f"always required: {path}")
-    return missing
+        if not isinstance(value, str) or is_empty(value):
+            found.append(f"{where}: holds neither a record identifier nor a placeholder")
+            continue
+        record = records.get(value)
+        if record is None:
+            found.append(f"{where}: no record carries the identifier {value}")
+        elif record.get("type") != kind:
+            found.append(f"{where}: {value} is a {record.get('type')} record, not a {kind} record")
+        elif not (record.get("identification") or {}).get("description"):
+            found.append(f"{where}: {value} carries no identification, so its referent is not fixed")
+    return found
+
+
+def unresolved_question_references(
+    question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[str]:
+    """Return every problem, linked question and background that a question names and that is missing.
+
+    A question names the problem it serves, the questions it is linked to with the shared record
+    carrying the link, and the background records whose laws it admits. Each name resolves to a
+    record of the expected kind, and an admitted background describes the target of the question,
+    since its laws are stated over the quantities of that target.
+    """
+    def kind_of(identifier: Any) -> Any:
+        return (records.get(identifier) or {}).get("type") if isinstance(identifier, str) else None
+
+    found = []
+    addressed = question.get("addresses")
+    if addressed is not None and kind_of(addressed) != "problem":
+        found.append(f"addresses: {addressed} is no problem record")
+    for index, link in enumerate(question.get("links") or []):
+        if not isinstance(link, Mapping):
+            continue
+        other, via = link.get("question"), link.get("via")
+        if kind_of(other) != "question":
+            found.append(f"links[{index}]: {other} is no question record")
+        elif other == question.get("id"):
+            found.append(f"links[{index}]: a question is linked to itself")
+        if via is not None and kind_of(via) is None:
+            found.append(f"links[{index}]: no record carries the identifier {via}")
+    subject = question.get("subject") or {}
+    target = subject.get("target_system")
+    for name in subject.get("background") or []:
+        if kind_of(name) != "background":
+            found.append(f"subject.background: {name} is no background record")
+        elif isinstance(target, str) and records[name].get("describes") != target:
+            found.append(f"subject.background: {name} describes another target than {target}")
+    return found
+
+
+def unstated_function_sense(question: Mapping[str, Any]) -> list[str]:
+    """Return the functional question that does not say which sense of function it requests.
+
+    A function in the causal-role sense is the contribution of a part to a capacity of the system
+    that contains it; a function in the etiological sense is the effect for which the part was
+    selected. The two call for different answers, a functional analysis or a selection history, so
+    a question requesting a functional relation states which one it requests.
+    """
+    task = question.get("task") or {}
+    if task.get("requested_relation") != "functional":
+        return []
+    if task.get("function_sense") in ("causal-role", "etiological"):
+        return []
+    return ["task.function_sense: a functional relation is requested without its sense of function"]
+
+
+def malformed_credence(assessment: Mapping[str, Any]) -> list[str]:
+    """Return the credence that is no degree of belief, or that states no basis.
+
+    A credence is a number between zero and one; a value outside that interval is no probability,
+    and a value without its basis cannot be revised when the evidence changes.
+    """
+    credence = assessment.get("credence")
+    if credence is None:
+        return []
+    if not isinstance(credence, Mapping):
+        return ["credence: holds neither a value nor a basis"]
+    found = []
+    value = credence.get("value")
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 1:
+        found.append(f"credence.value: {value!r} is no number between 0 and 1")
+    if not credence.get("basis"):
+        found.append("credence.basis: the value states no basis")
+    return found
 
 
 def unmet_by_aim(
@@ -136,7 +374,7 @@ def unmet_by_aim(
     missing = []
     for path in (required.get(str(aim)) or {}).get("required", []):
         prefix, _, rest = path.partition(".")
-        if at(records.get(prefix, {}), rest) in (None, [], {}, "open"):
+        if is_unfilled(at(records.get(prefix, {}), rest)):
             missing.append(f"{aim} requires {path}")
     return missing
 
@@ -261,17 +499,17 @@ def undecided_boundaries(record: Mapping[str, Any]) -> list[str]:
     """Return every external system whose constraint is neither written nor declared absent.
 
     An external system either imposes something on the variables it shares, written as
-    expressions, or imposes nothing beyond their declared value sets, written as an empty list.
-    ``open`` says neither. A boundary that was never written then reads exactly like one that
-    imposes nothing, so the quantities a constraint would have named are never missed: an
+    expressions, or imposes nothing beyond their declared value sets, written as an empty list
+    ``[]``. An empty value says neither. A boundary that was never written then reads exactly like
+    one that imposes nothing, so the quantities a constraint would have named are never missed: an
     overshoot diagnostic, a measurement coverage. Where a constraint is a genuine scientific
-    unknown, the record says so with a ``maturity`` entry rather than by leaving the field open.
+    unknown, the record says so with a ``maturity`` entry rather than by leaving the field empty.
     """
     return [
-        f"external_systems.{entry.get('symbol')}: constrains is open, so the boundary is named"
+        f"external_systems.{entry.get('symbol')}: constrains is empty, so the boundary is named"
         " without being decided"
         for entry in record.get("external_systems") or []
-        if isinstance(entry, Mapping) and entry.get("constrains") == "open"
+        if isinstance(entry, Mapping) and is_empty(entry.get("constrains"))
     ]
 
 
@@ -279,13 +517,13 @@ def admitted_values(kind: str, source: Path | None = None) -> dict[str, frozense
     """Return, per field of ``kind``, the values it admits.
 
     A key names the block enclosing the field and the field itself, so ``terms.type`` is the
-    type of a term and ``.status`` is the status of the record. Every closed field also admits
-    ``open``, absent from the registry.
+    type of a term and ``.status`` is the status of the record. An empty field holds no value, so
+    no vocabulary bears on it.
     """
     registry = yaml.safe_load((source or VOCABULARY_REGISTRY).read_text(encoding="utf-8")) or {}
     fields = (registry.get("vocabularies") or {}).get(kind) or {}
     return {
-        name: frozenset({entry["value"] for entry in values} | {"open"})
+        name: frozenset(entry["value"] for entry in values)
         for name, values in fields.items()
     }
 

@@ -5,6 +5,31 @@ type: vocabulary
 problem: earth-system-tipping-cascades
 generated_by: gnomon vocabulary
 symbols:
+- symbol: detect_law
+  declared_in: bg.earth-tipping-subsystems.subsystem-dynamics
+  block: laws
+  signature:
+  - sub
+  name: detection of regimes and events
+- symbol: evolve
+  declared_in: bg.earth-tipping-subsystems.subsystem-dynamics
+  block: laws
+  signature:
+  - sub
+  name: evolution of a subsystem
+- symbol: transmit
+  declared_in: bg.earth-tipping-subsystems.subsystem-dynamics
+  block: laws
+  signature:
+  - sub
+  - sub
+  - t
+  name: directed interaction between subsystems
+- symbol: coupling
+  declared_in: bg.earth-tipping-subsystems.subsystem-dynamics
+  block: organization
+  signature: []
+  name: directed coupling between subsystems
 - symbol: Fi
   declared_in: phen.earth-tipping-subsystems.transition-sequences
   block: explanandum_variables
@@ -91,31 +116,6 @@ symbols:
   block: index_sets
   signature: []
   name: time
-- symbol: detect_law
-  declared_in: system.earth-tipping-subsystems
-  block: laws
-  signature:
-  - sub
-  name: detection of regimes and events
-- symbol: evolve
-  declared_in: system.earth-tipping-subsystems
-  block: laws
-  signature:
-  - sub
-  name: evolution of a subsystem
-- symbol: transmit
-  declared_in: system.earth-tipping-subsystems
-  block: laws
-  signature:
-  - sub
-  - sub
-  - t
-  name: directed interaction between subsystems
-- symbol: coupling
-  declared_in: system.earth-tipping-subsystems
-  block: organization
-  signature: []
-  name: directed coupling between subsystems
 - symbol: Aij
   declared_in: system.earth-tipping-subsystems
   block: parameters

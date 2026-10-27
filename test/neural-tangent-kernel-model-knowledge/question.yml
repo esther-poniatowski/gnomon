@@ -5,6 +5,7 @@ type: question
 status: posed
 subject:
   target_system: system.ntk-gradient-flow
+  background: [bg.ntk-gradient-flow.gradient-flow]
   phenomenon: phen.ntk.linearized-dynamics
   contrast:
     locus: none
@@ -32,15 +33,15 @@ task:
   proof_obligations:
     - name: "nonlinear path approaches its linearization"
       reading: "The assumptions must imply a bound at finite width on the discrepancy between output paths. The bound must hold over an explicit training horizon and vanish as width grows, in a stated mode of convergence."
-      antecedent: [open]
+      antecedent:
       consequent: ["max_{t <= Tout}(Eout(m, t)) <= Bout(m)", "limit_{m}(Bout(m)) = 0"]
     - name: "empirical kernel remains near its initial value"
       reading: "The assumptions must imply a bound at finite width on the drift of the kernel. The bound must hold over an explicit training horizon and vanish as width grows, in a stated mode of convergence."
-      antecedent: [open]
+      antecedent:
       consequent: ["max_{t <= Tdrift}(Edrift(m, t)) <= Bdrift(m)", "limit_{m}(Bdrift(m)) = 0"]
     - name: "initial empirical kernel approaches its deterministic limit"
       reading: "The assumptions must imply a bound at finite width on the distance between the initial kernel and its deterministic limit. The bound must vanish in the stated convergence mode."
-      antecedent: [open]
+      antecedent:
       consequent: ["Elimit(m) <= Binit(m)", "limit_{m}(Binit(m)) = 0"]
 
 virtues: []

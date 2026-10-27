@@ -5,6 +5,17 @@ type: vocabulary
 problem: swift-hohenberg-localized-states
 generated_by: gnomon vocabulary
 symbols:
+- symbol: evolve
+  declared_in: bg.swift-hohenberg-localized-states.equation
+  block: laws
+  signature:
+  - x
+  name: Swift-Hohenberg evolution with quadratic and cubic nonlinearities
+- symbol: localized
+  declared_in: bg.swift-hohenberg-localized-states.equation
+  block: laws
+  signature: []
+  name: localized boundary condition in the far field
 - symbol: Uloc
   declared_in: phen.swift-hohenberg.localized-states
   block: explanandum_variables
@@ -42,17 +53,6 @@ symbols:
   block: index_sets
   signature: []
   name: spatial position
-- symbol: evolve
-  declared_in: system.swift-hohenberg-localized-states
-  block: laws
-  signature:
-  - x
-  name: Swift-Hohenberg evolution with quadratic and cubic nonlinearities
-- symbol: localized
-  declared_in: system.swift-hohenberg-localized-states
-  block: laws
-  signature: []
-  name: localized boundary condition in the far field
 - symbol: b
   declared_in: system.swift-hohenberg-localized-states
   block: parameters

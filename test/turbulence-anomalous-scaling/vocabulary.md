@@ -11,6 +11,10 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 
 | Symbol | Declared in | Block | Signature | Gloss |
 | --- | --- | --- | --- | --- |
+| `boundary_law` | bg.turbulence-incompressible-navier-stokes.navier-stokes | laws | x | boundary constraint |
+| `gauge` | bg.turbulence-incompressible-navier-stokes.navier-stokes | laws | — | pressure gauge |
+| `incompressible` | bg.turbulence-incompressible-navier-stokes.navier-stokes | laws | x | incompressibility constraint |
+| `momentum` | bg.turbulence-incompressible-navier-stokes.navier-stokes | laws | x | incompressible momentum balance |
 | `P` | phen.turbulence.velocity-increment-distributions | explanandum variables | rmag, rdir | joint distribution of the increments |
 | `S` | phen.turbulence.velocity-increment-distributions | explanandum variables | p, rmag, rdir | longitudinal structure function |
 | `ST` | phen.turbulence.velocity-increment-distributions | explanandum variables | p, rmag, rdir | transverse structure function |
@@ -31,10 +35,6 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `forcing` | system.turbulence-incompressible-navier-stokes | external systems | — | formal forcing process |
 | `t` | system.turbulence-incompressible-navier-stokes | index sets | — | time |
 | `x` | system.turbulence-incompressible-navier-stokes | index sets | — | spatial location in the flow domain |
-| `boundary_law` | system.turbulence-incompressible-navier-stokes | laws | x | boundary constraint |
-| `gauge` | system.turbulence-incompressible-navier-stokes | laws | — | pressure gauge |
-| `incompressible` | system.turbulence-incompressible-navier-stokes | laws | x | incompressibility constraint |
-| `momentum` | system.turbulence-incompressible-navier-stokes | laws | x | incompressible momentum balance |
 | `Lc` | system.turbulence-incompressible-navier-stokes | parameters | — | characteristic length scale |
 | `Om` | system.turbulence-incompressible-navier-stokes | parameters | — | flow domain |
 | `Re` | system.turbulence-incompressible-navier-stokes | parameters | — | Reynolds number |

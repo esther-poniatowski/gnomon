@@ -5,6 +5,60 @@ type: vocabulary
 problem: active-matter-phase-exploration
 generated_by: gnomon vocabulary
 symbols:
+- symbol: evolve
+  declared_in: bg.nonreciprocal-active-matter.local-dynamics
+  block: laws
+  signature:
+  - sp
+  - x
+  - t
+  name: local stochastic evolution
+- symbol: evolve_lattice
+  declared_in: bg.nonreciprocal-active-matter.local-dynamics
+  block: laws
+  signature:
+  - sp
+  - q
+  - t
+  name: local stochastic evolution on the lattice
+- symbol: noiselaw
+  declared_in: bg.nonreciprocal-active-matter.local-dynamics
+  block: laws
+  signature:
+  - sp
+  - x
+  name: distribution of the local noise
+- symbol: noiselaw_lattice
+  declared_in: bg.nonreciprocal-active-matter.local-dynamics
+  block: laws
+  signature:
+  - sp
+  - q
+  name: distribution of the local noise on the lattice
+- symbol: nonrecip
+  declared_in: bg.nonreciprocal-active-matter.local-dynamics
+  block: laws
+  signature:
+  - sp
+  - sp
+  name: nonreciprocity of the cross-coupling
+- symbol: nonrecip_lattice
+  declared_in: bg.nonreciprocal-active-matter.local-dynamics
+  block: laws
+  signature:
+  - sp
+  - sp
+  name: nonreciprocity of the lattice cross-coupling
+- symbol: crosscoupling
+  declared_in: bg.nonreciprocal-active-matter.local-dynamics
+  block: organization
+  signature: []
+  name: nonreciprocal cross-coupling
+- symbol: crosscoupling_lattice
+  declared_in: bg.nonreciprocal-active-matter.local-dynamics
+  block: organization
+  signature: []
+  name: nonreciprocal cross-coupling on the lattice
 - symbol: C
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: explanandum_variables
@@ -167,60 +221,6 @@ symbols:
   block: index_sets
   signature: []
   name: spatial position
-- symbol: evolve
-  declared_in: system.nonreciprocal-active-matter
-  block: laws
-  signature:
-  - sp
-  - x
-  - t
-  name: local stochastic evolution
-- symbol: evolve_lattice
-  declared_in: system.nonreciprocal-active-matter
-  block: laws
-  signature:
-  - sp
-  - q
-  - t
-  name: local stochastic evolution on the lattice
-- symbol: noiselaw
-  declared_in: system.nonreciprocal-active-matter
-  block: laws
-  signature:
-  - sp
-  - x
-  name: distribution of the local noise
-- symbol: noiselaw_lattice
-  declared_in: system.nonreciprocal-active-matter
-  block: laws
-  signature:
-  - sp
-  - q
-  name: distribution of the local noise on the lattice
-- symbol: nonrecip
-  declared_in: system.nonreciprocal-active-matter
-  block: laws
-  signature:
-  - sp
-  - sp
-  name: nonreciprocity of the cross-coupling
-- symbol: nonrecip_lattice
-  declared_in: system.nonreciprocal-active-matter
-  block: laws
-  signature:
-  - sp
-  - sp
-  name: nonreciprocity of the lattice cross-coupling
-- symbol: crosscoupling
-  declared_in: system.nonreciprocal-active-matter
-  block: organization
-  signature: []
-  name: nonreciprocal cross-coupling
-- symbol: crosscoupling_lattice
-  declared_in: system.nonreciprocal-active-matter
-  block: organization
-  signature: []
-  name: nonreciprocal cross-coupling on the lattice
 - symbol: D
   declared_in: system.nonreciprocal-active-matter
   block: parameters

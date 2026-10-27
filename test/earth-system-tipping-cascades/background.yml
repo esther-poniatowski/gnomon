@@ -1,0 +1,40 @@
+title: "Admitted dynamics of the tipping elements and of their coupling"
+id: bg.earth-tipping-subsystems.subsystem-dynamics
+type: background
+status: provisional
+describes: system.earth-tipping-subsystems
+
+laws:
+  - name: "evolution of a subsystem"
+    symbol: evolve
+    signature: [sub]
+    role: evolution
+    expression: "diff(z, t) = intern(z, Theta, tau, DGMT) + s(u) + eta"
+    reading: "Each subsystem changes under its internal feedbacks, under the signals that it receives, and under unresolved variability."
+    warrant: posited
+    rests_on: "The law rests on the conceptual model of interacting tipping elements."
+  - name: "directed interaction between subsystems"
+    symbol: transmit
+    signature: [sub, sub, t]
+    role: input-output
+    expression: "u = emit(z, Aij)"
+    reading: "A subsystem transmits a signal along each present interaction according to its own state."
+    warrant: posited
+    rests_on: "The law rests on the conceptual model of interacting tipping elements."
+  - name: "detection of regimes and events"
+    symbol: detect_law
+    signature: [sub]
+    role: measurement
+    expression: "r = detect(ind)"
+    reading: "The regime of a subsystem is assigned from its observed indicators."
+    warrant: fitted
+    rests_on: "The law rests on the calibration that relates instruments and paleoclimate proxies to subsystem regimes."
+
+closure: partial
+
+organization:
+  - name: "directed coupling between subsystems"
+    symbol: coupling
+    reading: "One subsystem changes the state of another by transmitting a physical signal. A cascade is a *sequence* of such transmissions between subsystems. A joint response of the subsystems to the common forcing does not count as a cascade."
+    relates: "subset(prod(sub, sub), Aij)"
+    realized_by: [transmit, evolve]

@@ -5,6 +5,28 @@ type: vocabulary
 problem: neural-tangent-kernel-model-knowledge
 generated_by: gnomon vocabulary
 symbols:
+- symbol: flow
+  declared_in: bg.ntk-gradient-flow.gradient-flow
+  block: laws
+  signature:
+  - t
+  name: gradient flow of the parameters
+- symbol: init_draw
+  declared_in: bg.ntk-gradient-flow.gradient-flow
+  block: laws
+  signature: []
+  name: initialization draw
+- symbol: init_state
+  declared_in: bg.ntk-gradient-flow.gradient-flow
+  block: laws
+  signature: []
+  name: initialization of the parameters
+- symbol: shared_init
+  declared_in: bg.ntk-gradient-flow.gradient-flow
+  block: laws
+  signature:
+  - a
+  name: shared initial outputs
 - symbol: Edrift
   declared_in: phen.ntk.linearized-dynamics
   block: explanandum_variables
@@ -100,28 +122,6 @@ symbols:
   block: index_sets
   signature: []
   name: training time
-- symbol: flow
-  declared_in: system.ntk-gradient-flow
-  block: laws
-  signature:
-  - t
-  name: gradient flow of the parameters
-- symbol: init_draw
-  declared_in: system.ntk-gradient-flow
-  block: laws
-  signature: []
-  name: initialization draw
-- symbol: init_state
-  declared_in: system.ntk-gradient-flow
-  block: laws
-  signature: []
-  name: initialization of the parameters
-- symbol: shared_init
-  declared_in: system.ntk-gradient-flow
-  block: laws
-  signature:
-  - a
-  name: shared initial outputs
 - symbol: K0
   declared_in: system.ntk-gradient-flow
   block: parameters
@@ -223,8 +223,8 @@ symbols:
   name: trainable parameter vector
 reused_across_records:
   init_draw:
+  - bg.ntk-gradient-flow.gradient-flow
   - phen.ntk.linearized-dynamics
-  - system.ntk-gradient-flow
 operators:
   canonical:
   - abs

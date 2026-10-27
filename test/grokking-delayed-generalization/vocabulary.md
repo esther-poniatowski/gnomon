@@ -11,6 +11,12 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 
 | Symbol | Declared in | Block | Signature | Gloss |
 | --- | --- | --- | --- | --- |
+| `forward` | bg.delayed_generalization_networks.training-specification | laws | — | forward computation |
+| `init_draw` | bg.delayed_generalization_networks.training-specification | laws | — | initialization draw |
+| `initial_optimizer_state` | bg.delayed_generalization_networks.training-specification | laws | — | initial state of the optimizer |
+| `initial_state` | bg.delayed_generalization_networks.training-specification | laws | coord | initial state of the parameters |
+| `update` | bg.delayed_generalization_networks.training-specification | laws | coord | gradient-based update |
+| `update_state` | bg.delayed_generalization_networks.training-specification | laws | — | update of the optimizer state |
 | `Pdelay` | phen.grokking.delayed_generalization | explanandum variables | — | distribution of the delay across initialization draws |
 | `delay` | phen.grokking.delayed_generalization | explanandum variables | — | duration of the delay |
 | `tfit` | phen.grokking.delayed_generalization | explanandum variables | — | first crossing time of the training criterion |
@@ -26,12 +32,6 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `step` | system.delayed_generalization_networks | index sets | — | training step |
 | `test` | system.delayed_generalization_networks | index sets | — | held-out sample |
 | `train` | system.delayed_generalization_networks | index sets | — | training sample |
-| `forward` | system.delayed_generalization_networks | laws | — | forward computation |
-| `init_draw` | system.delayed_generalization_networks | laws | — | initialization draw |
-| `initial_optimizer_state` | system.delayed_generalization_networks | laws | — | initial state of the optimizer |
-| `initial_state` | system.delayed_generalization_networks | laws | coord | initial state of the parameters |
-| `update` | system.delayed_generalization_networks | laws | coord | gradient-based update |
-| `update_state` | system.delayed_generalization_networks | laws | — | update of the optimizer state |
 | `Arch` | system.delayed_generalization_networks | parameters | — | specification of the architecture: a finite computation graph with activation functions and a task readout |
 | `Nu` | system.delayed_generalization_networks | parameters | — | number of computational units |
 | `P` | system.delayed_generalization_networks | parameters | — | number of coordinates of the trainable parameters |

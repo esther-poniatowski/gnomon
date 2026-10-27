@@ -1,0 +1,21 @@
+title: "Delay between fitting and generalization"
+statement: "Overparameterized networks trained on algorithmic tasks fit their training data long before their test loss falls. No account yet states what produces this delay, what fixes its duration, and why the duration varies across random initializations."
+id: prob.grokking.delayed-generalization
+type: problem
+status: posed
+kind: empirical
+demand: "A solution names the determinants of the delay, derives its duration from them, and covers its variation across random initializations."
+constraints:
+  - name: "consistency with the training laws"
+    statement: "A solution derives the delay from the admitted laws of the forward computation and of the training, or names each law added to them."
+    source: "bg.delayed_generalization_networks.training-specification"
+  - name: "two foils"
+    statement: "A solution separates delayed generalization from immediate generalization and from persistent memorization."
+    source: "liu2022: https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
+explicanda:
+  - term: "generalization"
+    pointer: phen.grokking.delayed_generalization#tgen
+sources:
+  - "liu2022: https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
+  - "humayun2024: https://proceedings.mlr.press/v235/humayun24a.html"
+significance: "A determinant of the delay would tell whether the time to generalize can be predicted from the early training. The same determinant would also tell whether a network that only memorizes can still be expected to generalize."

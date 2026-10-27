@@ -2,8 +2,14 @@
 # these requirements and are checked against this file.
 #
 # `always` lists the specifications every record of a kind carries, whatever the inquiry.
-# `by_aim` adds requirements an epistemic aim imposes, and relaxes general ones the aim cannot
-# ask for: an inquiry that produces a phenomenon cannot state that phenomenon in advance.
+# `by_commitment` lists the specifications that a target system or a phenomenon carries at each
+# level of commitment. The levels are cumulative: a record at `specified` also carries the
+# specifications of `identified`.
+# `by_aim` adds the requirements that an epistemic aim imposes. Under `to_produce`, it lists the
+# general requirements that the inquiry itself produces: an inquiry that produces a phenomenon
+# cannot state that phenomenon in advance.
+# An empty value means that a field is not filled. A required path left empty is a gap. A path
+# listed under `to_produce` for the aim of the inquiry may stay empty.
 # A requirement names a field path. An aim fixes what an answer must deliver, never which value
 # a field takes, so no entry constrains a value.
 
@@ -12,35 +18,56 @@ type: requirement-registry
 
 always:
   operators: [operators]
-  target-system: [target_type, reference_class, variables, laws, closure]
-  phenomenon: [statement, category, manifestations, evidential_status]
+  target-system: [commitment]
+  phenomenon: [commitment]
+  background: [describes, laws, closure]
+  problem: [statement, kind, demand]
+  plan: [addresses, steps]
+
+by_commitment:
+  identified:
+    target-system: [target_type, identification, reference_class]
+    phenomenon: [statement, identification]
+  specified:
+    target-system: [variables]
+    phenomenon: [category, course, occurrence, manifestations, evidential_status]
+
+# The occurrence classes admitted by each category of phenomenon. A particular occurrence takes
+# the class of its one token. A structural property holds at each point of the course, so it takes
+# `state`. A regularity and a capacity take no occurrence class.
+occurrence_by_category:
+  particular-occurrence: [state, process, event]
+  regularity: [not-applicable]
+  capacity: [not-applicable]
+  structural-property: [state]
 
 by_aim:
   description:
     required: []
-    open: []
+    to_produce: []
   exploration:
     required:
       - path: phenomenon.detection_criterion
-    open:
+    to_produce:
       - phenomenon.statement
       - phenomenon.category
+      - phenomenon.occurrence
       - phenomenon.evidential_status
   prediction:
     required:
       - path: phenomenon.manifestations
       - path: question.task.required_accuracy.outputs_to_match
-    open: []
+    to_produce: []
   explanation:
     required:
       - path: question.subject.contrast.foil_set
       - path: question.task.requested_relation
-    open: []
+    to_produce: []
   modal-knowledge:
     required:
       - path: question.task.modal_strength
       - path: question.task.proof_obligations
-    open: []
+    to_produce: []
   model-knowledge:
     required: []
-    open: []
+    to_produce: []

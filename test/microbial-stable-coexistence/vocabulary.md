@@ -11,6 +11,24 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 
 | Symbol | Declared in | Block | Signature | Gloss |
 | --- | --- | --- | --- | --- |
+| `abundance_nonneg` | bg.microbial-formal-population-models.population-dynamics | laws | — | invariance of the nonnegative state space |
+| `consume` | bg.microbial-formal-population-models.population-dynamics | laws | res, pop | resource consumption |
+| `grow_direct` | bg.microbial-formal-population-models.population-dynamics | laws | pop | evolution of the populations under direct interaction |
+| `grow_resource` | bg.microbial-formal-population-models.population-dynamics | laws | pop | evolution of the populations under competition for resources |
+| `higher_order` | bg.microbial-formal-population-models.population-dynamics | laws | pop, pop, pop | higher-order influence |
+| `mediate` | bg.microbial-formal-population-models.population-dynamics | laws | pop, res | growth mediated by resources |
+| `mortality_direct` | bg.microbial-formal-population-models.population-dynamics | laws | pop | mortality in the growth law with direct interactions |
+| `mortality_resource` | bg.microbial-formal-population-models.population-dynamics | laws | pop | mortality in the growth law with explicit resources |
+| `pairwise` | bg.microbial-formal-population-models.population-dynamics | laws | pop, pop | direct pairwise influence |
+| `pools_nonneg` | bg.microbial-formal-population-models.population-dynamics | laws | res | invariance of nonnegative resources |
+| `produce` | bg.microbial-formal-population-models.population-dynamics | laws | res, pop | resource production |
+| `size_bound` | bg.microbial-formal-population-models.population-dynamics | laws | — | community size |
+| `turnover` | bg.microbial-formal-population-models.population-dynamics | laws | res | evolution of the resources |
+| `drawdown` | bg.microbial-formal-population-models.population-dynamics | organization | — | resource drawdown |
+| `feeding` | bg.microbial-formal-population-models.population-dynamics | organization | — | cross-feeding |
+| `mediation` | bg.microbial-formal-population-models.population-dynamics | organization | — | coupling mediated by resources |
+| `pairing` | bg.microbial-formal-population-models.population-dynamics | organization | — | direct pairwise coupling |
+| `triplet` | bg.microbial-formal-population-models.population-dynamics | organization | — | higher-order coupling |
 | `J` | phen.microbial.stable-coexistence | explanandum variables | — | Jacobian of the community at the equilibrium |
 | `Nstar` | phen.microbial.stable-coexistence | explanandum variables | pop | abundance of each population at equilibrium |
 | `Xstar` | phen.microbial.stable-coexistence | explanandum variables | — | complete equilibrium state |
@@ -24,24 +42,6 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `res` | system.microbial-formal-population-models | constituents | — | abiotic resource pool |
 | `supply` | system.microbial-formal-population-models | external systems | — | formal environment that supplies the resources |
 | `t` | system.microbial-formal-population-models | index sets | — | time |
-| `abundance_nonneg` | system.microbial-formal-population-models | laws | — | invariance of the nonnegative state space |
-| `consume` | system.microbial-formal-population-models | laws | res, pop | resource consumption |
-| `grow_direct` | system.microbial-formal-population-models | laws | pop | evolution of the populations under direct interaction |
-| `grow_resource` | system.microbial-formal-population-models | laws | pop | evolution of the populations under competition for resources |
-| `higher_order` | system.microbial-formal-population-models | laws | pop, pop, pop | higher-order influence |
-| `mediate` | system.microbial-formal-population-models | laws | pop, res | growth mediated by resources |
-| `mortality_direct` | system.microbial-formal-population-models | laws | pop | mortality in the growth law with direct interactions |
-| `mortality_resource` | system.microbial-formal-population-models | laws | pop | mortality in the growth law with explicit resources |
-| `pairwise` | system.microbial-formal-population-models | laws | pop, pop | direct pairwise influence |
-| `pools_nonneg` | system.microbial-formal-population-models | laws | res | invariance of nonnegative resources |
-| `produce` | system.microbial-formal-population-models | laws | res, pop | resource production |
-| `size_bound` | system.microbial-formal-population-models | laws | — | community size |
-| `turnover` | system.microbial-formal-population-models | laws | res | evolution of the resources |
-| `drawdown` | system.microbial-formal-population-models | organization | — | resource drawdown |
-| `feeding` | system.microbial-formal-population-models | organization | — | cross-feeding |
-| `mediation` | system.microbial-formal-population-models | organization | — | coupling mediated by resources |
-| `pairing` | system.microbial-formal-population-models | organization | — | direct pairwise coupling |
-| `triplet` | system.microbial-formal-population-models | organization | — | higher-order coupling |
 | `A` | system.microbial-formal-population-models | parameters | pop, pop | coefficient of pairwise interaction |
 | `B` | system.microbial-formal-population-models | parameters | pop, pop, pop | coefficient of higher-order interaction |
 | `C` | system.microbial-formal-population-models | parameters | res, pop | coefficient of resource consumption |

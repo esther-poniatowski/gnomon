@@ -5,6 +5,7 @@ type: question
 status: posed
 subject:
   target_system: system.nonreciprocal-active-matter
+  background: [bg.nonreciprocal-active-matter.local-dynamics]
   phenomenon: phen.nonreciprocal-active-matter.collective-phases
   contrast:
     locus: none

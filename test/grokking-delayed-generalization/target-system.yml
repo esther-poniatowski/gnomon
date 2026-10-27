@@ -2,10 +2,20 @@ title: "Finite neural networks and their training"
 id: system.delayed_generalization_networks
 type: target-system
 status: provisional
+commitment: specified
 target_type: no-external-target
+
+identification:
+  description: "finite neural networks trained by gradient-based optimizers on algorithmic supervised tasks, the class in which delayed generalization is reported"
+  pointers:
+    - "liu2022: https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
+    - "humayun2024: https://proceedings.mlr.press/v235/humayun24a.html"
 
 reference_class:
   name: "systems that train finite neural networks"
+  projectibility:
+    status: assumed
+    evidence: "Delayed generalization is reported across several architectures and tasks [humayun2024]. The record therefore treats the trained networks of the class as one kind for this phenomenon. No study cited here tests whether one mechanism holds across the class."
   selection_criteria: []         # membership not conditioned on an outcome; the inquiry restricts the domain to overparameterized networks instead
 
 constituents:
@@ -43,7 +53,7 @@ variables:
     symbol: z
     determined: within
     signature: [step]
-    values: open
+    values:
     expression: null
     shared: false
   - name: "prediction of the network, in the prediction space of the task readout"
@@ -86,17 +96,17 @@ parameters:
   - name: "predicate selecting the admitted algorithmic supervised tasks"
     symbol: algorithmic
     signature: []
-    values: open
+    values:
     expression: null
   - name: "specification of the architecture: a finite computation graph with activation functions and a task readout"
     symbol: Arch
     signature: []
-    values: open
+    values:
     expression: null
   - name: "specification of the gradient-based optimizer with its hyperparameters"
     symbol: opt
     signature: []
-    values: open
+    values:
     expression: null
   - name: "task loss"
     symbol: ell
@@ -123,7 +133,7 @@ parameters:
   - name: "evaluation protocol fixing when the losses are read and how a crossing time is classified before the horizon"
     symbol: proto
     signature: []
-    values: open
+    values:
     expression: null
   - name: "near-zero threshold on the training loss"
     symbol: eps_fit
@@ -141,7 +151,7 @@ parameters:
     symbol: data
     of: source
     signature: []
-    values: open
+    values:
     expression: null
   - name: "realized training set"
     symbol: train_set
@@ -158,65 +168,13 @@ parameters:
   - name: "update rule for the auxiliary state of the optimizer"
     symbol: opt_state
     signature: []
-    values: open
+    values:
     expression: null
   - name: "initial auxiliary state of the optimizer"
     symbol: z0
     signature: []
-    values: open
+    values:
     expression: null
-
-laws:
-  - name: "forward computation"
-    symbol: forward
-    signature: []
-    role: input-output
-    expression: "pred = Arch(theta, data)"
-    reading: "The architecture maps the current parameters and the inputs to predictions."
-    warrant: posited
-    rests_on: "The class fixes the architecture."
-  - name: "initialization draw"
-    symbol: init_draw
-    signature: []
-    role: distribution
-    expression: "drawn_from(theta0, p0)"
-    reading: "The full parameter vector at step zero is sampled from the declared initialization law."
-    warrant: posited
-    rests_on: "The class fixes the initialization scheme."
-  - name: "initial state of the parameters"
-    symbol: initial_state
-    signature: [coord]
-    role: state-constraint
-    expression: "theta(coord, 0) = theta0"
-    reading: "The training trajectory begins at the sampled initial parameter vector."
-    warrant: posited
-    rests_on: "The law follows from the initialization draw."
-  - name: "gradient-based update"
-    symbol: update
-    signature: [coord]
-    role: evolution
-    expression: "diff(theta, step) = opt(grad(Ltrain), z)"
-    reading: "The optimizer moves the parameters along the gradient of the training loss, using its own auxiliary state."
-    warrant: posited
-    rests_on: "The class fixes the optimizer."
-  - name: "update of the optimizer state"
-    symbol: update_state
-    signature: []
-    role: evolution
-    expression: "diff(z, step) = opt_state(grad(Ltrain), z)"
-    reading: "The optimizer updates its auxiliary state together with the trainable parameters."
-    warrant: posited
-    rests_on: "The class fixes the optimizer."
-  - name: "initial state of the optimizer"
-    symbol: initial_optimizer_state
-    signature: []
-    role: state-constraint
-    expression: "z(0) = z0"
-    reading: "The auxiliary state begins at the value fixed by the optimizer specification."
-    warrant: posited
-    rests_on: "The class fixes the optimizer."
-
-closure: complete
 
 external_systems:
   - name: "process that generates the task data"

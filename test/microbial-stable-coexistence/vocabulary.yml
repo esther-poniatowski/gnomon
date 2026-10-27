@@ -5,6 +5,113 @@ type: vocabulary
 problem: microbial-stable-coexistence
 generated_by: gnomon vocabulary
 symbols:
+- symbol: abundance_nonneg
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature: []
+  name: invariance of the nonnegative state space
+- symbol: consume
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature:
+  - res
+  - pop
+  name: resource consumption
+- symbol: grow_direct
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature:
+  - pop
+  name: evolution of the populations under direct interaction
+- symbol: grow_resource
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature:
+  - pop
+  name: evolution of the populations under competition for resources
+- symbol: higher_order
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature:
+  - pop
+  - pop
+  - pop
+  name: higher-order influence
+- symbol: mediate
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature:
+  - pop
+  - res
+  name: growth mediated by resources
+- symbol: mortality_direct
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature:
+  - pop
+  name: mortality in the growth law with direct interactions
+- symbol: mortality_resource
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature:
+  - pop
+  name: mortality in the growth law with explicit resources
+- symbol: pairwise
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature:
+  - pop
+  - pop
+  name: direct pairwise influence
+- symbol: pools_nonneg
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature:
+  - res
+  name: invariance of nonnegative resources
+- symbol: produce
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature:
+  - res
+  - pop
+  name: resource production
+- symbol: size_bound
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature: []
+  name: community size
+- symbol: turnover
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature:
+  - res
+  name: evolution of the resources
+- symbol: drawdown
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: organization
+  signature: []
+  name: resource drawdown
+- symbol: feeding
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: organization
+  signature: []
+  name: cross-feeding
+- symbol: mediation
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: organization
+  signature: []
+  name: coupling mediated by resources
+- symbol: pairing
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: organization
+  signature: []
+  name: direct pairwise coupling
+- symbol: triplet
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: organization
+  signature: []
+  name: higher-order coupling
 - symbol: J
   declared_in: phen.microbial.stable-coexistence
   block: explanandum_variables
@@ -71,113 +178,6 @@ symbols:
   block: index_sets
   signature: []
   name: time
-- symbol: abundance_nonneg
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature: []
-  name: invariance of the nonnegative state space
-- symbol: consume
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature:
-  - res
-  - pop
-  name: resource consumption
-- symbol: grow_direct
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature:
-  - pop
-  name: evolution of the populations under direct interaction
-- symbol: grow_resource
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature:
-  - pop
-  name: evolution of the populations under competition for resources
-- symbol: higher_order
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature:
-  - pop
-  - pop
-  - pop
-  name: higher-order influence
-- symbol: mediate
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature:
-  - pop
-  - res
-  name: growth mediated by resources
-- symbol: mortality_direct
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature:
-  - pop
-  name: mortality in the growth law with direct interactions
-- symbol: mortality_resource
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature:
-  - pop
-  name: mortality in the growth law with explicit resources
-- symbol: pairwise
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature:
-  - pop
-  - pop
-  name: direct pairwise influence
-- symbol: pools_nonneg
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature:
-  - res
-  name: invariance of nonnegative resources
-- symbol: produce
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature:
-  - res
-  - pop
-  name: resource production
-- symbol: size_bound
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature: []
-  name: community size
-- symbol: turnover
-  declared_in: system.microbial-formal-population-models
-  block: laws
-  signature:
-  - res
-  name: evolution of the resources
-- symbol: drawdown
-  declared_in: system.microbial-formal-population-models
-  block: organization
-  signature: []
-  name: resource drawdown
-- symbol: feeding
-  declared_in: system.microbial-formal-population-models
-  block: organization
-  signature: []
-  name: cross-feeding
-- symbol: mediation
-  declared_in: system.microbial-formal-population-models
-  block: organization
-  signature: []
-  name: coupling mediated by resources
-- symbol: pairing
-  declared_in: system.microbial-formal-population-models
-  block: organization
-  signature: []
-  name: direct pairwise coupling
-- symbol: triplet
-  declared_in: system.microbial-formal-population-models
-  block: organization
-  signature: []
-  name: higher-order coupling
 - symbol: A
   declared_in: system.microbial-formal-population-models
   block: parameters

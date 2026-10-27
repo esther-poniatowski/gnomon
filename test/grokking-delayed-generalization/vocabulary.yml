@@ -5,6 +5,38 @@ type: vocabulary
 problem: grokking-delayed-generalization
 generated_by: gnomon vocabulary
 symbols:
+- symbol: forward
+  declared_in: bg.delayed_generalization_networks.training-specification
+  block: laws
+  signature: []
+  name: forward computation
+- symbol: init_draw
+  declared_in: bg.delayed_generalization_networks.training-specification
+  block: laws
+  signature: []
+  name: initialization draw
+- symbol: initial_optimizer_state
+  declared_in: bg.delayed_generalization_networks.training-specification
+  block: laws
+  signature: []
+  name: initial state of the optimizer
+- symbol: initial_state
+  declared_in: bg.delayed_generalization_networks.training-specification
+  block: laws
+  signature:
+  - coord
+  name: initial state of the parameters
+- symbol: update
+  declared_in: bg.delayed_generalization_networks.training-specification
+  block: laws
+  signature:
+  - coord
+  name: gradient-based update
+- symbol: update_state
+  declared_in: bg.delayed_generalization_networks.training-specification
+  block: laws
+  signature: []
+  name: update of the optimizer state
 - symbol: Pdelay
   declared_in: phen.grokking.delayed_generalization
   block: explanandum_variables
@@ -80,38 +112,6 @@ symbols:
   block: index_sets
   signature: []
   name: training sample
-- symbol: forward
-  declared_in: system.delayed_generalization_networks
-  block: laws
-  signature: []
-  name: forward computation
-- symbol: init_draw
-  declared_in: system.delayed_generalization_networks
-  block: laws
-  signature: []
-  name: initialization draw
-- symbol: initial_optimizer_state
-  declared_in: system.delayed_generalization_networks
-  block: laws
-  signature: []
-  name: initial state of the optimizer
-- symbol: initial_state
-  declared_in: system.delayed_generalization_networks
-  block: laws
-  signature:
-  - coord
-  name: initial state of the parameters
-- symbol: update
-  declared_in: system.delayed_generalization_networks
-  block: laws
-  signature:
-  - coord
-  name: gradient-based update
-- symbol: update_state
-  declared_in: system.delayed_generalization_networks
-  block: laws
-  signature: []
-  name: update of the optimizer state
 - symbol: Arch
   declared_in: system.delayed_generalization_networks
   block: parameters

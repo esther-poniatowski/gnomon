@@ -1,13 +1,15 @@
 # method: `docs/epistemology/answer-form.md`; one file per candidate answer
-# declare the model's constituents, indices, variables, parameters and laws in target-system form; only reference a quantity the target already declares
-# answer-only elements: the warrant of each law, the idealizations, the explanans factors
+# declare the model's constituents, indices, variables and parameters in target-system form, and its laws and organization in background form
+# reference a quantity already declared by the target instead of declaring it again
+# answer-only elements: the abstractions, the idealizations, the explanans factors
 # record test verdicts in an assessment file
 
 title: "SHORT NAME OF THE CANDIDATE ANSWER"
 statement: "THE ANSWER IN WORDS" # restate the specifications from which `gnomon render` composes the same answer
 id: ans.TOPIC.NAME
 type: answer
-status: preliminary              # preliminary | hypothesized | informally-backed | formally-proven | accepted | retracted
+status: entertained              # entertained | hypothesized | accepted | retracted; the attitude taken toward the answer
+support: unsupported             # unsupported | informal | formally-proven | empirically-supported; independent of the status; each law keeps its own `warrant`
 answers: quest.TOPIC.NAME
 variant: SYMBOL                  # symbol of the target variant this answer accounts for; omit when the answer covers every member of the class
 
@@ -36,6 +38,7 @@ variables:                       # part of V: quantities that vary in the model
     determined:                  # within (its value is fixed inside the model) | outside (its value varies but is set beyond the model)
     signature: [SYMBOL]          # one constituent kind or index set per place; empty for the model as a whole
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give when a map builds the quantity from declared symbols
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
     selects:                     # unique | any | all; required with a condition
@@ -50,6 +53,7 @@ parameters:                      # part of V: quantities the model holds fixed
     variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
     signature: [SYMBOL]
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived parameter
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
     selects:                     # unique | any | all; required with a condition
@@ -64,8 +68,8 @@ laws:                            # L: dependences linking the quantities to the 
     role:                        # evolution | input-output | measurement | state-constraint | distribution | admissibility
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
     reading: "THE LAW IN WORDS"
-    warrant:                     # derived (from the laws of the system) | derived-in-a-limit | posited | fitted | measured
-    rests_on: "THE LAWS, THE IDEALIZATION OR THE DATA THAT THE WARRANT REFERS TO"
+    warrant:                     # derived (from the admitted background laws) | derived-in-a-limit | posited | fitted | measured
+    rests_on: "THE LAWS, THE IDEALIZATION OR THE DATA THAT THE WARRANT REFERS TO"   # may name laws of an admitted background record
 
 organization:                    # O: relations among parts and laws whose arrangement produces the behavior
   - name: "NAME OF THE RELATION"
@@ -84,17 +88,23 @@ realizations:                    # fill when the question asks for a link: how s
     realizes: SYMBOL             # a substrate-independent quantity or law
     by: "EXPRESSION OVER THE SYMBOLS SPECIFIC TO THE SUBSTRATE"   # realizes the quantity or law named in `realizes`
 
-idealizations:                   # I: distortions the analysis introduces
+idealizations:                   # I: distortions the analysis introduces, including an omission that the answer reads as complete
   - assumption: "ASSUMPTION OF THE ANALYSIS"
     motive:                      # tractability (the undistorted system resists analysis) | isolation (it removes a factor judged irrelevant) | limit (it exposes the behavior of a limit system)
     buys: "THE GAIN FOR THE ANSWER"   # a derivation the idealization makes possible, or a factor it exposes
     holds_for: "RANGE OVER WHICH THE ASSUMPTION HOLDS"
+    removable:                   # controlled (a correction to the idealized result is known) | ineliminable (the model cannot be stated without it) | unknown
+
+abstractions:                    # factors of the target omitted by the answer; no claim of the answer bears on them
+  - factor: "THE FACTOR LEFT OUT"
+    reason: "WHY THE ANSWER CAN STAY SILENT ABOUT IT"
 
 explanans:                       # E: factors the answer needs to produce the phenomenon
   - name: "NAME OF THE FACTOR"
     variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
     factor:                      # condition (on a quantity) | structural-property (of a structure, such as sparsity or low rank) | law-property (of a law, such as invariance, additivity or factorization) | organization (of the arrangement, such as a feedback loop or a modular composition)
-    holds: "EXPRESSION OVER DECLARED SYMBOLS THAT STATES THE CLAIM OF THE FACTOR"   # `open` while the claim is unformalized, with a caveat naming the gap
+    holds: "EXPRESSION OVER DECLARED SYMBOLS THAT STATES THE CLAIM OF THE FACTOR"   # empty while the claim is unformalized, with a caveat naming the gap
+    under: "SET EXPRESSION OVER DECLARED SYMBOLS"   # the transformation group of an invariance stated by `holds`; omit for any other claim
     bears_on: [SYMBOL]           # elements the factor applies to as a property or condition; one entry per element, so a family spans several entries
     through: [SYMBOL]            # laws and relations carrying the effect from `bears_on` to the explanandum
     produces: SYMBOL             # explanandum variable or manifestation the factor accounts for
