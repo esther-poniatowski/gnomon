@@ -129,7 +129,7 @@ operators:
 - symbol: diff
   kind: map
   name: the derivative of a quantity along the index given
-  notation: '\\partial_{#2} #1'
+  notation: '\partial_{#2} #1'
   for_any: [A, S]
   signature: ["maps(A, S)", A]
   values: "maps(A, S)"

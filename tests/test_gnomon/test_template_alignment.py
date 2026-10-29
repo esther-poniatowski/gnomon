@@ -251,6 +251,13 @@ def test_the_operator_note_lists_the_registry():
     assert documented == declared, f"note and registry differ: {documented ^ declared}"
 
 
+def test_no_operator_notation_doubles_a_backslash() -> None:
+    """A single-quoted YAML scalar keeps every backslash, so a doubled one reaches LaTeX as a line break."""
+    operators = yaml.safe_load((REGISTRY / "operators.yml").read_text())["operators"]
+    doubled = [e["symbol"] for e in operators if re.search(r"\\\\[A-Za-z]", e.get("notation") or "")]
+    assert not doubled, f"notations that double a backslash before a command: {doubled}"
+
+
 def test_the_aim_note_lists_the_requirement_registry() -> None:
     """Each row of the aim table states what the registry declares for that aim."""
     note = (DOCS / "epistemic-aim.md").read_text(encoding="utf-8")

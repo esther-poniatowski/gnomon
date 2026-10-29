@@ -7,7 +7,7 @@ aliases:
 ---
 # Fleeting ideas
 
-Staging area for new ideas pending triage. Items move out to their final destination once classified. The triage policy in the [main handoff](_handoff.md) governs decisions: each idea feeds an existing TODO, a Tier-2 open decision, a Tier-3 stub, or none.
+Staging area for new ideas pending triage. Items move out to their final destination once classified. Each idea is triaged to one destination: a goal of the [project goals](../../TODO.md), a Tier-2 open decision, a Tier-3 stub, or none.
 
 This document is organised by **bearing decision** — the open question or criterion each candidate feeds — not by the review that surfaced it. Provenance is recorded in the [triage log](#^fleeting-triage-log) at the end. A candidate may bear on more than one decision; it is filed under its primary bearing and cross-linked from the others.
 
