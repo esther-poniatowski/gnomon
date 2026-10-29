@@ -61,4 +61,23 @@ This list holds the goals of `gnomon` that span several parts of the project. Th
 	- [ ] Make the problem typologies of the [question-hierarchy framework](docs/methods-reasoning/question-hierarchy-framework.md) and of the design layer point to the types of problem, and decide which one is the single source.
 	- [ ] Stop calling the epistemic task, and the question $Q$, "the epistemic problem" in the [epistemic task](docs/epistemology/epistemic-task.md) and in the [epistemic and pragmatic virtues](docs/epistemology/epistemic-pragmatic-virtues.md).
 
+## Integration of the Geonexus pilot
 
+The Mixture pilot of `geonexus` corrected several parts of the framework while specifying research and exposition records. Its generic decisions belong to `gnomon`, and `geonexus` keeps only its bindings and the application to the pilot. The decisions are listed in the pilot handoff, `/Users/eresther/Documents/research/geonexus/projects/mixture-input-encoding/HANDOFF.md`, and drafted in the decision notes `argument-architecture-records.md`, `research-pilot-profile.md` and `exposition-pilot-profile.md` of `/Users/eresther/Documents/research/geonexus/docs/_decisions/`.
+
+- [ ] Integrate the generic decisions of the Mixture pilot, for research records and for exposition records. 🆔 pilot-integration
+	- [ ] Rename the plan record to the itinerary and the artifact types to product types, following the [decision on the itinerary and the product types](docs/adr/itinerary-and-product-types.md). Name the product types that each epistemic aim admits. 🆔 itinerary-products
+	- [ ] Replace the reference form `system.TOPIC#SYMBOL` by the uniform identifier of the [decision on dotted identifiers](docs/adr/dotted-identifiers.md), in the notes, the templates, the checkers and the fixtures. 🆔 dotted-identifiers
+	- [ ] Specify each record type by a JSON Schema compatible with Ekphrasis, and derive the templates from the schemas, following the [decision on record schemas](docs/adr/record-schemas.md). 🆔 record-schemas
+	- [ ] Specify the exposition family as projections of research records that add no content, following the [decision on expositions as projections](docs/adr/expositions-as-projections.md): a registry of rhetorical moves with the product type that each requires, the levels of an exposition, transitions, announcements and syntheses, and traces to research units. 🆔 exposition-family
+	- [ ] Merge the relation vocabulary of `geonexus` and the semantic relations of `gnomon` into one registry, resolving the conflicts on `rebuts`, `contrasts`, `motivated-by` and supersession; give each relation a warrant kind and admit a warrant sentence. 🆔 relation-registry
+	- [ ] Specify the assembly of a level: the status `core` or `elaboration` of each component, the output parts that it supplies, typed citations between components, elaboration across levels, views that expand chosen components, and the checks of the core route. 🆔 assembly-schema
+	- [ ] Apply the research corrections of the pilot: 🆔 research-corrections
+		- [ ] identifiers on idealizations, abstractions and explanans factors, and a key listing the idealizations that a law requires;
+		- [ ] typed output parts of an answer, and typed premises in place of the free string `rests_on`;
+		- [ ] the warrant `numerical`, the grade of an idealization, supersession of a retracted law, and the open parts of gaps excluded by a question;
+		- [ ] the verdicts `partial` and `unsupported`, identifiers on obligations, and verdicts per law that reference the step supplying their evidence;
+		- [ ] a rationale on each itinerary step, naming the question served and the way the step acts on it, with the eight conditions of the [choice of the next act](docs/epistemology/next-act.md);
+		- [ ] a record kind for designs, and the activities of the pilot absent from the registry, beside the gaps listed under `inquiry-records-round-2`: comparing a derived law with a simulation;
+		- [ ] the checks of produced content, of the rationale and of revisions.
+	- [ ] Repair the indexes of `src/gnomon/data/contracts/`, `schemas/`, `specs/` and `workflow/`, which point to the missing `docs/design/methods/`.
