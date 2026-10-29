@@ -115,7 +115,6 @@ The order is fixed, so that a divergence shows up in a diff.
 | Tag                | Kind of note                                      |
 |--------------------|---------------------------------------------------|
 | `index`            | Folder entry point                                |
-| `overview`         | Statement of what the project is for              |
 | `tasks`            | Open work of the project                          |
 | `guide`            | Operation of the installed tool                   |
 | `gaps`             | Structures or decisions that a method still lacks |

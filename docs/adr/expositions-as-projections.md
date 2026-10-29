@@ -37,7 +37,7 @@ Every statement of an exposition that carries content presents a research unit. 
 
 ## Consequences
 
-- The [project overview](../project-overview.md) adds the projection of research into expositions to the aims of `gnomon`.
+- The [motivation of the README](../../README.md#motivation) adds the projection of research into expositions to the aims of `gnomon`.
 - The exposition family declares the parts and blocks of an exposition, its moves with the kind of output that each move requires, its connectors, its announcements and syntheses, and its traces to research units.
 - A correction goes to the research records, and the exposition is rendered again, since a rendered view is never edited.
 - The view specifications of `gnomon` declare the audience profile. A consumer keeps its audience records, conforming to that profile, together with its rendering conventions and its artifacts.

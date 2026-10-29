@@ -27,7 +27,7 @@ The registry that gathers the relation types of every family of records, with th
 
 - **A relation read by a tool needs a grammar.** A relation whose type is stated in prose conforms to no grammar, so the [decision on grammatical fields](grammatical-fields-and-readings.md#^grammar-for-read-fields) excludes it from every query.
 - **The types of the ends fix the sense of a relation.** The retired design notes (commit 9e138e2) record that one phrase, "is a stronger version of", names an implication between two theorems and a specialization between two concepts. A relation type that declares its ends keeps one sense.
-- **Dependence must be found without reading prose.** A researcher facing a new question must find the records that bear on it, which the [project overview](../project-overview.md) names as the first failure of an organization built on documents. Typed nodes linked by typed relations are the structure of issue-based information systems [kunz1970].
+- **Dependence must be found without reading prose.** A researcher facing a new question must find the records that bear on it, which the [motivation of the README](../../README.md#motivation) names as the first failure of an organization built on documents. Typed nodes linked by typed relations are the structure of issue-based information systems [kunz1970].
 
 ## Options weighed
 

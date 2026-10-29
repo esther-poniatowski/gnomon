@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/python-%E2%89%A53.12-blue)](https://www.python.org/)
 [![License: GPL](https://img.shields.io/badge/License-GPL--3.0-yellow.svg)](https://opensource.org/licenses/GPL-3.0)
 
-Organizes a rigorous research project, by fixing the concerns that specify a research problem and by supplying a language for stating their content.
+Specifies a research inquiry as typed records, from the problem that it addresses to the assessment of its answers, checks those records against the method that they follow, and projects them into expositions for declared audiences.
 
 ---
 
@@ -22,56 +22,70 @@ Organizes a rigorous research project, by fixing the concerns that specify a res
 
 ### Motivation
 
-A theoretical research project typically holds many definitions, derivations and arguments, linked by dependencies. Two limitations are commonly observed as such a project grows. First, retrieving the results that bear on a question requires reading the prose again. Second, checking a candidate answer against the demands of its question relies on the memory of the reader. Both limitations belong to five failure modes of a [document-centric organization](docs/project-overview.md), each answered by one architectural response.
+A theoretical research project typically holds many definitions, derivations and arguments, linked by dependencies. When such a project is kept in prose documents, five failures appear as it grows, and each aggravates the others:
+
+- **Hidden dependencies.** The results that bear on a new question can be found only by reading the prose again.
+- **Diluted argument.** Each restatement across notes, summaries and drafts is locally reasonable, and together they bury the main argument.
+- **Drift toward side questions.** Without a record of the questions that the target requires, the work expands while the target does not advance.
+- **Mixed epistemic roles.** A note blends a definition, a result, an assumption, a motivation, a proof sketch and an example, so the work cannot be read as a graph of distinct contributions.
+- **Content held only in exposition.** The text written for a reader becomes the only form of the content, so revising the content requires rewriting the text.
+
+These failures follow from one organization: prose serves both to store the content and to access it, and dependencies, roles and revisions stay implicit in the writing. Therefore, `gnomon` aims to:
+
+- represent the state of knowledge of an inquiry, each result with its maturity;
+- record the logic of the inquiry, that is, the dependencies through which results compose into answers;
+- guide the inquiry, by naming the next act that the current state and the target question call for;
+- project the inquiry into expositions for an audience, which add only announcements, connectors and syntheses.
 
 ### Advantages
 
-For specifying a research problem, `gnomon` supplies a framework and a language.
+`gnomon` replaces the documents by **records**. Each record holds one concern of an inquiry, under a stable identifier, and the records are linked by relations of closed and typed kinds. Expositions are generated from the records and never edited, so the records stay the only source of the content. Three principles govern this design, each stated in an architecture decision:
 
-The **framework** separates that specification into four concerns, settled in this order:
+- [separation of concerns](docs/adr/expositions-as-projections.md) between research content and its exposition;
+- [one source](docs/adr/one-source-per-unit.md) for each unit of content;
+- [explicit dependencies](docs/adr/closed-typed-relations.md), through typed relations that form a graph.
 
-- the system under study, and its observed behavior;
-- the question asked about that behavior;
-- the answer proposed;
-- the assessment of that answer.
+The **method** specifies an inquiry in [ordered stages](docs/epistemology/specification-order.md), from the problem to the questions that serve it, their subject, and the candidate answers, each a typed claim resting on models bound to the phenomenon. An assessment tests each answer against conditions of satisfaction fixed before the answer is evaluated, and an itinerary records each act of the inquiry. The stages, the tests and the choice of the next act rest on results from the philosophy of science, collected in the [epistemology of inquiry](docs/epistemology/_index.md).
 
-The order is a rule of the framework: a concern is settled only in terms that the preceding concerns have fixed. Therefore, an answer cannot be stated before the question that it answers. The specifications of each concern rest on results from the philosophy of science, collected in the [epistemology of inquiry](docs/epistemology/_index.md).
+The **vocabulary records** of a project separate the meaning of a term from its names, as the [decision on concepts, glossaries and notations](docs/adr/concepts-glossaries-notations.md) states. A concept record holds the meaning of a concept, which stays the same across projects. A glossary holds the names of the concepts of a project, with the forms forbidden for given audiences. A notation composes each symbol from declared bases, modifiers and index sets. An audience specification records the knowledge and the register of a readership, and a project specification binds one glossary, one notation and the audiences of a project to its inquiry, as the [decision on terminology, audience and project specifications](docs/adr/terminology-audience-project-specifications.md) states.
 
-The **language** states the content of each concern. Every declared quantity carries a symbol, and each formula uses symbols that its own record declares. Two consequences follow. A researcher writing a law must name quantities that the record already declares. A reader can find every declaration in one table.
+**Expositions** form a second family of records, beside the research records. An exposition selects research units, orders them for an audience, and adds only announcements, connectors and syntheses, so that every statement carrying content traces to a research record, as the [decision on expositions](docs/adr/expositions-as-projections.md) states. The terms of an exposition are checked against its glossary and against the audiences that its design brief cites.
 
-The vocabulary of the framework is declared in **registries**, written by hand and stored in package data:
+The **language** states the content of each record. Every declared quantity carries a symbol, and each record declares its symbols in one table. A formula names only declared symbols, those of its own record or, by reference, those of another record of the same problem. Two consequences follow. A researcher writing a law must name quantities that a record already declares. A reader can find every declaration in one table.
 
-- the admitted values of each closed field;
-- the requirements of each level of commitment and of each epistemic aim;
-- the canonical operators;
-- the epistemic activities, with the types of product that each takes and produces.
+The vocabulary of the method is declared in [registries](src/gnomon/data/_index.md), written by hand and stored in package data, and each declaration is documented in a method note.
 
-Each declaration is documented in the method notes.
-
-The language and the registries together serve one design goal: a record is **machine-checkable**. Three classes of defect are reported:
+The language and the registries together serve one design goal: a record is **machine-checkable**. Four classes of defect are reported:
 
 - a reference resolving to no declaration;
 - a field left empty although the epistemic aim requires a value;
-- a claim ranging beyond the members bearing it.
+- a claim ranging beyond the members bearing it;
+- a step of an itinerary whose inputs or output do not match its activity.
 
-The framework has been validated against seven real research problems, each filled as a complete specification.
+Seven worked inquiries, from as many domains, exercise the method, and each records the limits of the method that it exposed.
 
 ---
 
 ## Features
 
-- [x] Supplies a documented template for each concern of a research problem.
+- [x] Supplies a documented template for each record of an inquiry.
 - [x] Resolves every symbol, reference and formula of a research problem, and reports each identifier that resolves to no declaration.
 - [x] Checks each filled record against the requirements of its epistemic aim, and each closed field against its registry.
 - [x] Collects the symbols and the operators of a research problem into one table.
 - [x] Checks each step of an itinerary of inquiry against the registry of epistemic activities.
+- [x] Formalizes the decomposition of a question into subquestions.
 - [ ] Scaffolds a research workspace from a standard template.
 - [ ] Validates each record against the schema of its type.
-- [ ] Reports the inferential position of a workspace: established results, open questions, blocked entries.
+- [ ] Reports the open conditions of each question, and the acts ready to perform.
+- [ ] Computes the comparison of a model with the data through its binding.
+- [ ] Records each concept of a project with one meaning, and its names in a glossary.
+- [ ] Composes the symbols of a notation from declared bases, modifiers and index sets, and generates the LaTeX macros of an exposition.
+- [ ] Specifies the audiences of a project, and the project specification that binds its glossary, its notation and its audiences.
+- [ ] Specifies expositions that select and order research units for an audience, and renders them without adding content.
+- [ ] Checks the terms of an exposition against its glossary and the forms forbidden for its audiences.
 - [ ] Formalizes a definition.
-- [x] Formalizes the decomposition of a question into subquestions.
 - [ ] Formalizes the derivation yielding an answer.
-- [ ] Names the atomic research actions of a workspace.
+- [ ] Derives the epistemic activities from a smaller set of primitive actions.
 
 The capabilities not yet available are recorded in the [project goals](TODO.md).
 
@@ -79,7 +93,7 @@ The capabilities not yet available are recorded in the [project goals](TODO.md).
 
 ## Quick start
 
-To specify a research problem, a researcher fills one record per concern, in a directory of its own. The fields to fill are stated in the [record templates](src/gnomon/data/templates/_index.md), each with its admitted values. Completed records can be consulted in the seven [worked examples](examples/_index.md).
+To specify a research problem, a researcher fills one record per concern, in a directory of its own. The fields to fill are stated in the [record templates](src/gnomon/data/templates/_index.md), each with its admitted values. Completed records can be consulted in the seven [worked inquiries](examples/_index.md).
 
 Once the records declare their quantities, the symbols and the operators of the research problem are collected automatically, by running the following command:
 
@@ -93,13 +107,21 @@ The table is written beside the records. Three counts are reported:
 - the operators that the research problem declares;
 - the symbols shared across its records.
 
+Once the directory holds an itinerary, each of its steps is checked against the registry of epistemic activities and against the records that the step names, by running the following command:
+
+```sh
+gnomon itinerary ./my-problem
+```
+
+Each defect is reported with the identifier of its itinerary and the step at fault. Every command is specified in the [CLI reference](docs/guide/cli-reference.md).
+
 ---
 
 ## Documentation
 
-To start using the framework, consult three parts of the documentation:
+To start using the method, consult three parts of the documentation:
 
-- [Epistemology](docs/epistemology/_index.md): to reach the specifications that each concern fixes, and their grounds in the philosophy of science.
+- [Epistemology](docs/epistemology/_index.md): to reach the specifications that each stage fixes, and their grounds in the philosophy of science.
 - [Record templates](src/gnomon/data/templates/_index.md): to fill each record, field by field.
 - [Architecture decisions](docs/adr/_index.md): to find the constraint behind a settled decision, and the change of constraint reopening the question.
 

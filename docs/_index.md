@@ -10,7 +10,6 @@ Each entry answers one class of question about `gnomon`, so a reader consults on
 
 | Entry | Content |
 | --- | --- |
-| [Project overview](project-overview.md) | Why the framework exists: the failure modes that compound as a theoretical framework grows, and the architectural stance that answers them. |
 | [User guide](guide/_index.md) | How the installed tool is operated, from the Python version it requires to each command of its entry point. |
 | [Methods for reasoning](methods-reasoning/_index.md) | How reasoning is conducted and formalized outside `gnomon`, from what a discipline demands of a valid argument to the formal domains that model an epistemic state and its transitions. |
 | [Methods for taxonomies](methods-taxonomies/_index.md) | Which criteria warrant a classification, and the procedure that applies them to build a taxonomy. No algorithm yields a universally correct partition, so each classification must declare the function it serves. |
