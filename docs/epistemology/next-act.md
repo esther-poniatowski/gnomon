@@ -1,13 +1,12 @@
 ---
-role: definition
-status: revision
+tags:
+  - method
+  - revision
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Choosing the next act
   - Next research act
   - Open condition
-tags: []
-source:
 ---
 # Choosing the next act
 

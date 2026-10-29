@@ -1,14 +1,13 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Bearers and systems](docs/epistemology/definitions/systems/_index.md)"
 aliases:
   - Things and constructs
   - Ontological and representational layers
   - Relational status
   - Target and target specification
-tags: []
-source:
 ---
 # Things and constructs
 
@@ -77,7 +76,7 @@ Each term of the [vocabulary of inquiry](../_index.md) takes one status. A term 
 | [History](../change/process-event-history.md), as an occurrent | ontological | the sequence of changes undergone by one thing |
 | [State, process and event](../change/process-event-history.md), as classes of predicates | representational | predicates on the segments of a chosen course, at a chosen grain |
 | [Course and grain](../change/process-event-history.md) | representational | a chosen index set and a chosen resolution |
-| [Activity](../change/mechanistic-activity.md), in the mechanistic sense | ontological | a producer of change in the world |
+| [Mechanistic activity](../change/mechanistic-activity.md) | ontological | a producer of change in the world |
 | [Activity](../change/mechanistic-activity.md), as a state variable | representational | a variable of a chosen model |
 | [Epistemic activity](../activities/epistemic-activities.md) | ontological | an act of inquirers, occurring whether or not a record describes it |
 | [Dynamic](../change/dynamic.md) | representational | an evolution map over a chosen state space |

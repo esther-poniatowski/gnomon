@@ -1,12 +1,10 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying the phenomenon
   - Phenomenon (subject of inquiry)
-tags: []
-source:
 ---
 # Specifying the phenomenon
 
@@ -77,6 +75,8 @@ The phenomenon is stated once in words and once formally, by the observables and
 | `regularity` | `not-applicable` |
 | `capacity` | `not-applicable` |
 | `structural-property` | `state` |
+
+- **A phenomenon of category `capacity` states its conditional and its criterion in its manifestations.** The manifestations name the class of inputs, the class of outputs and the criterion of performance, as the [definition of a capacity](definitions/regularities/capacity-and-disposition.md) requires. ^capacity-manifestations
 
 - **The category narrows the [requested relation](requested-relation.md) $R$.** *Examples*: in psychology, capacities are explained by functional analysis. Effects, by contrast, are regularities that themselves require explanation [cummins2000].
 

@@ -1,11 +1,9 @@
 ---
-role: decision
-status: accepted
+tags:
+  - decision
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Expression syntax
-tags: []
-source:
 ---
 # Surface syntax and parseable core for expressions
 
@@ -23,7 +21,7 @@ A grammar defines the infix surface that authors write over an S-expression core
 
 ## Constraints that decide the syntax
 
-- **Operands must resolve.** Each of the 273 checks of the framework assumes that the `u` in a law resolves to the `u` that a record declares. A syntax that cannot be scanned for identifiers leaves operands unresolved, so the framework loses the guarantee that it exists to give.
+- **Operands must resolve.** Every check of the framework assumes that the `u` in a law resolves to the `u` that a record declares. A syntax that cannot be scanned for identifiers leaves operands unresolved, so the framework loses the guarantee that it exists to give.
 - **A problem must extend the operator set.** For instance, the turbulence problem declares `restrict` and `regions`, and the microbial problem `community_jacobian`. No fixed external vocabulary admits these names, so the syntax must treat an operator as a declared symbol rather than as a reserved word.
 - **The author writes mathematics.** The corpus is read by researchers who write infix notation and LaTeX, so a surface syntax that differs from both raises the cost of writing each record.
 

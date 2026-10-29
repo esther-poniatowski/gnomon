@@ -1,12 +1,10 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying the admissible explanans
   - Admissible explanans
-tags: []
-source:
 ---
 # Specifying the admissible explanans
 

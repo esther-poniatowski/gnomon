@@ -88,4 +88,18 @@ gnomon vocabulary <directory> --markdown
 | `--markdown`, `-m` | off              | Also write the Markdown table, named after the record.                     |
 | `--root`, `-r`     | `.`              | Workspace root from which the table links the index of the problem folder. |
 
-**Output:** one line with the number of symbols, the number of operators that the problem declares, and the number of symbols reused across its records. The command exits with an error, before writing any file, when the problem folder lies outside the workspace root.
+**Output:** one line with the number of symbols, the number of operators that the problem declares, and the number of symbols reused across its records. The command exits with an error, before writing any file, when the problem folder does not exist or lies outside the workspace root.
+
+## `itinerary`
+
+An author who has filled the itineraries of a problem needs to know whether each step takes the products that its activity requires. The `itinerary` command checks every itinerary record of one problem folder against the registries of activities and of product types, and against the records that its steps name. The conditions of the check are stated in the [itinerary check](../epistemology/definitions/activities/epistemic-activities.md#^itinerary-check).
+
+```sh
+gnomon itinerary <directory>
+```
+
+| Argument      | Description                                       |
+| ------------- | ------------------------------------------------- |
+| `<directory>` | Folder holding the filled records of one problem. |
+
+**Output:** one line per defect, prefixed with the identifier of its itinerary, then one line with the number of itineraries checked and the number of defects found. The command exits with code 1 when it finds a defect, or when the folder does not exist.

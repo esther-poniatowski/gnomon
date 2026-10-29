@@ -1,14 +1,13 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Quantities and states](docs/epistemology/definitions/quantities/_index.md)"
 aliases:
   - Invariant and symmetry
   - Invariant
   - Symmetry
   - Invariance
-tags: []
-source:
 ---
 # Invariant and symmetry
 

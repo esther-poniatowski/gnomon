@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Quantities and states](docs/epistemology/definitions/quantities/_index.md)"
 aliases:
   - Scale and level
@@ -9,8 +10,6 @@ aliases:
   - Scale of measurement
   - Level of organization
   - Level of description
-tags: []
-source:
 ---
 # Scale and level
 
@@ -52,7 +51,7 @@ In its second sense, the **scale** of a description is its extent and its resolu
 
 ## Consequences for a record
 
-- **The value set of a variable must state its scale type when a claim depends on the scale type.** An ordered enumeration supports dependence claims that an unordered enumeration does not support, as the [specification of the phenomenon](../../phenomenon.md) states for explanandum variables. When a claim holds on one scale type and fails under the admissible transformations of that type, the claim is an artefact of the representation.
+- **A claim that depends on the scale type of a variable requires a value set that states the scale type.** The [specification of the phenomenon](../../phenomenon.md) states the rule for explanandum variables. When a claim holds on one scale type and fails under the admissible transformations of that type, the claim is an artefact of the representation.
 - **The descriptive scale of a phenomenon sets the default grain of its explanans.** The [proportionality requirement](../../phenomenon.md#^resolution-proportionality) uses scale in the descriptive sense.
 - **The admissible explanans is bounded by levels of organization.** The compositional level of the [admissible explanans](../../admissible-explanans.md) restricts the parts that may appear in an answer, so it uses level in the sense of organization.
 

@@ -1,11 +1,9 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying an inquity
-tags: []
-source:
 ---
 # Specifying an inquiry
 
@@ -58,8 +56,6 @@ A question rarely stands alone. A question typically serves a research problem. 
 | Links: question | with every link | the identifier of the other question record | the question that describes the representation geometry of a network |
 | Links: relation | with every link | subquestion-of · explanans-from · presupposes · enables | `explanans-from`, for a question that explains a readout capacity by that geometry |
 | Links: via | when the two questions share a record | the identifier of the shared record, such as a phenomenon | the phenomenon record of the geometry |
-
-- **One object can be the explanandum of one question and the explanans of another.** *Example*: a first question describes the representation geometry of a class of networks, so the geometry is its phenomenon. A second question explains how well a linear readout separates classes of inputs, and its answer rests on that geometry as a factor. The second question links to the first with `explanans-from`, through the phenomenon record of the geometry. Therefore, neither question restates the content fixed by the other. ^explanandum-and-explanans
 
 - **The steps that answer a question are recorded in an itinerary.** An [itinerary](itinerary.md) lists the activities that lead from a problem to its questions, and from a question to its answers and their assessments. The itinerary check verifies that each step takes the types of product required by its activity.
 

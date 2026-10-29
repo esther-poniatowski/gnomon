@@ -1,11 +1,9 @@
 ---
-role: decision
-status: accepted
+tags:
+  - decision
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Flat symbol table
-tags: []
-source:
 ---
 # Flat symbol table per record
 

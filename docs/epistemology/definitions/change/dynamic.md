@@ -1,14 +1,13 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Change](docs/epistemology/definitions/change/_index.md)"
 aliases:
   - Dynamic
   - Dynamics
   - Evolution map
   - Law of evolution
-tags: []
-source:
 ---
 # Dynamic
 
@@ -46,7 +45,7 @@ Four terms are often used for one another. The four terms differ in their type a
 
 ## Consequences for a record
 
-- **A dynamic is a law with the role *evolution*.** The laws of a [background record](../../background.md) and of a [candidate answer](../../answer-form.md) name six roles, and only the role *evolution* generates trajectories. The other five roles hold laws that are not dynamics.
+- **A dynamic is a law with the role *evolution*.** Among the roles of a law, which the [background record](../../background.md#^laws) lists, only the role *evolution* generates trajectories.
 - **A causal answer may state no law of evolution.** A [causal structure](#^causal-structure) need not be a dynamic, so a record may state how the explanandum depends on interventions, without any law with the role *evolution*.
 
 ---

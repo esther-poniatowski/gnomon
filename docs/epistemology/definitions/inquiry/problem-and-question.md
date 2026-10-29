@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Problems and questions](docs/epistemology/definitions/inquiry/_index.md)"
 aliases:
   - Problem and question
@@ -8,14 +9,12 @@ aliases:
   - Question schema
   - Level of commitment
   - Linked questions
-tags: []
-source:
 ---
 # Problem and question
 
 > [!QUESTION] Goal: what is a question, how far can each slot of a question stay uncommitted, and how do two questions depend on each other?
 
-A **question** is a request whose possible answers form a definite set [hamblin1958]. A question serves the [epistemic problem](epistemic-problem.md) that motivates it: one problem motivates one or several questions, and each question states the answers that would meet part of its demand.
+A **question** is a request whose possible answers form a definite set [hamblin1958].
 
 ## Senses
 
@@ -59,12 +58,14 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 
 | Relation | This question … |
 | --- | --- |
-| `subquestion-of` | is answered by a part of an answer to the linked question |
+| `subquestion-of` | is answered by a part of an answer to the linked question; each of its answers, with the available premises, narrows the answers of the linked question, which is erotetic implication [wisniewski2013] |
 | `explanans-from` | has an explanans factor that is the explanandum of the linked question |
 | `presupposes` | has a true answer only if the linked question has a true answer |
 | `enables` | has an answer that establishes a condition of answerability of the linked question, without narrowing its answers |
 
-*Example*: a first question describes the [representation geometry](../representations/representation-and-encoding.md) of the benchmark networks. A second question explains a capacity of readout by that geometry. The second question links to the first with `explanans-from`, through the phenomenon record of the geometry.
+*Example*: a first question describes the [representation geometry](../representations/representation-and-encoding.md) of the benchmark networks. A second question explains a capacity of readout by that geometry. The second question links to the first with `explanans-from`, through the phenomenon record of the geometry. Therefore, neither question restates the content fixed by the other.
+
+*Example*: the question "how is the dimension of the population activity estimated from finite samples?" links to the question "does the dimension grow with the complexity of the mixture?" with `enables`.
 
 ## Distinctions
 
@@ -74,8 +75,8 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 
 ## Consequences for a record
 
-- **A problem is recorded in its own record.** The [problem record](../../problem.md) states the demand of a problem and the constraints on its solution, each with its source. Each question names its problem in the field `addresses`.
-- **The slots of a question admit a placeholder.** The target-system slot and the phenomenon slot of a question accept a record identifier or a placeholder with its type and description. Each record of a target or of a phenomenon declares its own commitment, `identified` or `specified`.
+- **A problem is recorded in its own record.** Its fields, and the field by which a question names its problem, are specified in the [problem record](../../problem.md).
+- **The slots of a question admit a placeholder.** The rule is stated under [placeholders before records](../../subject-of-inquiry.md#^placeholder-slots).
 
 ---
 ## Sources
@@ -88,3 +89,4 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [hamblin1973] ◐ Hamblin, "Questions in Montague English", *Foundations of Language* 10(1), 41–53, 1973; a question denotes the set of its possible answers, checked through secondary sources
 - [kripke1980] ◐ Kripke, *Naming and Necessity*, Harvard University Press, 1980, pp. 54–57; reference fixing by a description, checked through secondary sources
 - [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, the why-question as a triple
+- [wisniewski2013] ○ Wiśniewski, *Questions, Inferences, and Scenarios*, College Publications, 2013; erotetic implication

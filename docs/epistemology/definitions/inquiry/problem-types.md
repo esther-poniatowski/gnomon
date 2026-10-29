@@ -1,13 +1,12 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Problems and questions](docs/epistemology/definitions/inquiry/_index.md)"
 aliases:
   - Types of problem
   - Obstacle of a problem
   - Demand of a problem
-tags: []
-source:
 ---
 # Types of epistemic problem
 

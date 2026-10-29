@@ -1,13 +1,12 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Representations](docs/epistemology/definitions/representations/_index.md)"
 aliases:
   - Model
   - Model system
   - Representation (model and target)
-tags: []
-source:
 ---
 # Model
 

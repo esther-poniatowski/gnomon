@@ -67,7 +67,7 @@ An undefined term enters as a typed placeholder, not as a bare token. The positi
 
 A placeholder is shared, so resolving it once resolves it in every statement that uses it. A statement may also assert a usage norm, that is, how a named community uses a term, such as "in neuroscience, 'represented' often means recoverable from activity". A usage norm is a claim with a source and a truth value, and differs from the concept that the project fixes for the term.
 
-As a record kind, the definition passes the five conditions of the [admission of a record kind](../adr/record-kind-admission.md#^five-conditions). Its alternative home is the aim block of an answer of explication, which the goal `problem-record` decides together with the question whether explication becomes an aim.
+As a record kind, the definition passes the first five of the seven conditions of the [admission of a record kind](../adr/record-kind-admission.md#^five-conditions). Non-distortion and unitary epistemic role remain to be checked. Its alternative home is the aim block of an answer of explication, which the goal `problem-record` decides together with the question whether explication becomes an aim.
 
 **Literature.** Carnap's explication; implicit definition by a theory, after Hilbert and Carnap; and the holism of Quine and Putnam, which denies that a finite set of definitional claims exhausts a theoretical concept. The retired notes also name frame semantics, typed feature structures and Abstract Meaning Representation as precedents of the normalization.
 

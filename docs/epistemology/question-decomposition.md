@@ -1,13 +1,12 @@
 ---
-role: definition
-status: wip
+tags:
+  - method
+  - wip
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Question decomposition
   - Decomposition of a question
   - Serving question
-tags: []
-source:
 ---
 # Question decomposition
 
@@ -25,14 +24,9 @@ The method applies to a question already posed. In the exploratory phase of rese
 
 ## The decomposition graph
 
-A decomposition is a graph whose nodes are questions. Each edge is one of the [links between questions](definitions/inquiry/problem-and-question.md#^linked-questions), and one of its two questions *serves* the other. For `subquestion-of` and `enables`, the question that carries the link serves the linked question; for `presupposes` and `explanans-from`, the linked question serves the question that carries the link. This sense of serving is broader than the service of a problem, which requires erotetic implication, as the note on the [epistemic problem](definitions/inquiry/epistemic-problem.md#^problem-vs-question) states. The four links are the following: ^decomposition-graph
+A decomposition is a graph whose nodes are questions. Each edge is one of the [links between questions](definitions/inquiry/problem-and-question.md#^linked-questions), and one of its two questions *serves* the other. For `subquestion-of` and `enables`, the question that carries the link serves the linked question; for `presupposes` and `explanans-from`, the linked question serves the question that carries the link. This sense of serving is broader than the service of a problem, which requires erotetic implication, as the note on the [epistemic problem](definitions/inquiry/epistemic-problem.md#^problem-vs-question) states. ^decomposition-graph
 
-- `subquestion-of`, when the answer of the serving question is a part of an answer to the served question. Erotetic implication holds: each answer of the serving question, with the available premises, narrows the answers of the served question [wisniewski2013]. A demand that is a conjunction is decomposed in this way, one serving question per conjunct.
-- `enables`, when the answer of the serving question establishes a [condition of answerability](definitions/inquiry/conditions-of-answerability.md) of the served question without narrowing its answers. *Example*: "how is the dimension of the population activity estimated from finite samples?" enables "does the dimension grow with the complexity of the mixture?".
-- `presupposes`, when the served question has a true answer only if the serving question has one, so that the soundness of the first depends on the soundness of the second.
-- `explanans-from`, when an explanans factor of the served question is the explanandum of the serving question.
-
-A presupposition posed as a question is linked by `enables`, not by `presupposes`. The question whether the presupposition holds always has a true answer, so `presupposes` would make soundness depend on a question that is trivially sound.
+A demand that is a conjunction is decomposed by `subquestion-of`, one serving question per conjunct. A presupposition posed as a question is linked by `enables`, not by `presupposes`. The question whether the presupposition holds always has a true answer, so `presupposes` would make soundness depend on a question that is trivially sound.
 
 The serving questions of one question stand in one of three relations. Serving questions are *conjunctive* when all are needed, *disjunctive* when any one suffices, such as an analytic derivation and a simulation that both give access to a quantity, and *sequential* when the answer of one fixes the form of another. Disjunctive serving questions require a choice among routes, made by the [ranking of acts](next-act.md#^ranking-criteria).
 

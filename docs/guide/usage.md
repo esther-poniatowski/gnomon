@@ -7,7 +7,7 @@ aliases:
 ---
 # Usage
 
-Gnomon organizes mathematical research into a traceable graph of results, dependencies, and open questions.
+The purpose of `gnomon` is stated in the [overview of the README](../../README.md#overview). This page shows the commands of the installed tool on the records of one problem. Their arguments and options are listed in the [command reference](cli-reference.md).
 
 ## Diagnostics
 
@@ -27,6 +27,22 @@ The `--version` / `-v` flag prints only the version string:
 
 ```sh
 gnomon --version
+```
+
+## Checks on the records of a problem
+
+Two commands read the filled records of one problem folder.
+
+The `vocabulary` command collects the symbols and the operators that the records declare, so that an author can choose the symbol of a new quantity. The command writes a vocabulary record into the folder, and a Markdown table beside it with the option `--markdown`:
+
+```sh
+gnomon vocabulary ./my-research/my-problem --markdown
+```
+
+The `itinerary` command checks every itinerary of the problem against the registries of activities and of product types, and against the records that its steps name. The command prints one line per defect and a summary line, and it exits with an error when it finds a defect:
+
+```sh
+gnomon itinerary ./my-research/my-problem
 ```
 
 ## Planned Commands

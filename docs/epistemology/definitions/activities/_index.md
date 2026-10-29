@@ -1,16 +1,14 @@
 ---
-role: index
-status: wip
+tags:
+  - index
+  - wip
 index: "[Definitions](docs/epistemology/definitions/_index.md)"
 aliases:
   - Epistemic activities (index)
-tags:
-  - index
-source:
 ---
 # Epistemic activities
 
-> [!QUESTION] Goal: which operation of an inquiry produces which epistemic object, and by which norm is that operation judged?
+Types each operation of an inquiry by the epistemic object that it produces and by the norm that judges it.
 
 > [!IMPORTANT] Activity, aim and method
 > The notes of this folder type the operations of an inquiry. The [epistemic aim](../../epistemic-aim.md) fixes the achievement served by those operations. The [overview of the taxonomy](epistemic-activities.md) separates an activity from an aim, a mode of inference and a method.

@@ -1,18 +1,17 @@
 ---
-role: definition
-status: wip
+tags:
+  - method
+  - wip
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying the problem
   - Problem record
-tags: []
-source:
 ---
 # Specifying the problem
 
 > [!QUESTION] Goal: what must be fixed about a research problem before any question is posed to serve it?
 
-The problem record states a research problem: a demand that a result be found, with the constraints that a result must satisfy to count as a solution [nickles1981]. A problem fixes no set of answers, so it is not yet a question. The distinction between the two is defined in the note on the [epistemic problem](definitions/inquiry/epistemic-problem.md#^problem-vs-question), and the levels of commitment of a question in the note on [problems and questions](definitions/inquiry/problem-and-question.md#^commitment-levels). When a problem record exists, the questions serving the problem name it in their field `addresses`. One problem can motivate several questions.
+The problem record states one [epistemic problem](definitions/inquiry/epistemic-problem.md): a demand that a result be found, with the constraints that a result must satisfy to count as a solution [nickles1981]. The difference between a problem and a question is defined under [problem and question](definitions/inquiry/epistemic-problem.md#^problem-vs-question). When a problem record exists, the questions serving the problem name it in their field `addresses`.
 
 | Specification | When it is required | Options or frame | Examples | Source |
 | ------------- | ------------------- | ---------------- | -------- | ------ |
@@ -28,7 +27,7 @@ The problem record states a research problem: a demand that a result be found, w
 
 - **An explicandum names a term still to be made exact by the inquiry.** A problem is often stated in terms whose sense is fixed only by their use, such as "generalization" or "representation". The record keeps the term with a pointer to that use. A later record replaces the explicandum by an exact concept, as an explication replaces an explicandum by an explicatum [carnap1950_logical]. *Example*: the explicandum "representation geometry" is replaced by a kernel over the inputs, declared in a phenomenon at commitment `specified`. ^explicanda
 
-- **A problem ends in one of three ways.** A problem is `solved` when an accepted answer to its questions meets the demand under the constraints. A problem is `dissolved` when a revision shows that its demand rests on a false presupposition, so no solution is needed. A problem is `abandoned` when the inquiry stops without either outcome.
+- **The status of a problem records how it ends.** The field `status` of the problem record ends at `solved`, `dissolved` or `abandoned`, the three outcomes defined under [how a problem ends](definitions/inquiry/epistemic-problem.md#^problem-outcomes).
 
 *Example*: the [problem of delayed generalization](../../examples/grokking-delayed-generalization/problem.yml) is an empirical problem, with two constraints and one explicandum, and its question names the problem in its field `addresses`.
 

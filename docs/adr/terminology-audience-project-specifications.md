@@ -1,11 +1,9 @@
 ---
-role: decision
-status: accepted
+tags:
+  - decision
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Terminology, audience and project specifications
-tags: []
-source:
 ---
 # Terminology, audience and project specifications
 
@@ -49,5 +47,5 @@ The design brief of an exposition cites its audiences, and the exposition family
 ## Consequences
 
 - The schemas `gnomon:project`, `gnomon:notation`, `gnomon:glossary` and `gnomon:audience` replace the schemas of the consumers, and the checks of imports, references, conflicts, aliases and cycles move with them.
-- The decisions of `geonexus` on [notations separate from glossaries](/Users/eresther/Documents/research/geonexus/docs/_decisions/notations-separate-from-glossaries.md), [namespaced imports](/Users/eresther/Documents/research/geonexus/docs/_decisions/namespaced-imports.md), [consumer-side glossary binding](/Users/eresther/Documents/research/geonexus/docs/_decisions/consumer-side-glossary-binding.md), [context-dependent usage](/Users/eresther/Documents/research/geonexus/docs/_decisions/context-dependent-usage.md), [audience-agnostic glossaries](/Users/eresther/Documents/research/geonexus/docs/_decisions/audience-agnostic-glossaries.md), [audience knowledge by reference](/Users/eresther/Documents/research/geonexus/docs/_decisions/audience-knowledge-by-reference.md), [audience subtypes](/Users/eresther/Documents/research/geonexus/docs/_decisions/audience-subtypes.md) and [project specifications](/Users/eresther/Documents/research/geonexus/docs/_decisions/project-specifications.md) supply the first statement of these mechanisms. Their resolution of module-local terminology settles the tension recorded on canonical terminology.
+- The decisions of `geonexus` on [notations separate from glossaries](https://github.com/esther-poniatowski/geonexus/blob/42d8a238991105b3c1640a69d5bfe27c8db703e0/docs/_decisions/notations-separate-from-glossaries.md), [namespaced imports](https://github.com/esther-poniatowski/geonexus/blob/42d8a238991105b3c1640a69d5bfe27c8db703e0/docs/_decisions/namespaced-imports.md), [consumer-side glossary binding](https://github.com/esther-poniatowski/geonexus/blob/42d8a238991105b3c1640a69d5bfe27c8db703e0/docs/_decisions/consumer-side-glossary-binding.md), [context-dependent usage](https://github.com/esther-poniatowski/geonexus/blob/42d8a238991105b3c1640a69d5bfe27c8db703e0/docs/_decisions/context-dependent-usage.md), [audience-agnostic glossaries](https://github.com/esther-poniatowski/geonexus/blob/42d8a238991105b3c1640a69d5bfe27c8db703e0/docs/_decisions/audience-agnostic-glossaries.md), [audience knowledge by reference](https://github.com/esther-poniatowski/geonexus/blob/42d8a238991105b3c1640a69d5bfe27c8db703e0/docs/_decisions/audience-knowledge-by-reference.md), [audience subtypes](https://github.com/esther-poniatowski/geonexus/blob/42d8a238991105b3c1640a69d5bfe27c8db703e0/docs/_decisions/audience-subtypes.md) and [project specifications](https://github.com/esther-poniatowski/geonexus/blob/42d8a238991105b3c1640a69d5bfe27c8db703e0/docs/_decisions/project-specifications.md) supply the first statement of these mechanisms. Their resolution of module-local terminology settles the tension recorded on canonical terminology.
 - Whether a glossary entry is the lexical face of a concept record, the product of an explicit definition, remains to be decided.

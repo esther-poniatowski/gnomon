@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
 aliases:
   - Model analysis
@@ -8,8 +9,6 @@ aliases:
   - Simulation
   - Robustness analysis
   - Prediction (activity)
-tags: []
-source:
 ---
 # Model analysis
 

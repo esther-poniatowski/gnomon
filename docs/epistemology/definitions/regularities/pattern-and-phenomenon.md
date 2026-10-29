@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Regularities and explananda](docs/epistemology/definitions/regularities/_index.md)"
 aliases:
   - Pattern and phenomenon
@@ -8,8 +9,6 @@ aliases:
   - Regularity
   - Phenomenon (term)
   - Appearance
-tags: []
-source:
 ---
 # Pattern and phenomenon
 

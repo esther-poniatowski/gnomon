@@ -1,11 +1,9 @@
 ---
-role: decision
-status: accepted
+tags:
+  - decision
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Shared field grounds
-tags: []
-source:
 ---
 # Grounds for a shared field
 

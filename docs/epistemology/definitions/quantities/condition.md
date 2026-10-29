@@ -1,20 +1,19 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Quantities and states](docs/epistemology/definitions/quantities/_index.md)"
 aliases:
   - Condition
   - Initial condition
   - Boundary condition
   - Ceteris paribus clause
-tags: []
-source:
 ---
 # Condition
 
 > [!QUESTION] Goal: which sense of "condition" does a statement use, and where does each condition of an inquiry belong in a record?
 
-"**Condition**" carries six senses across logic, physics and the philosophy of science, and none of them is primary for a record. A record classifies the conditions of an inquiry by their **place** alone, as the [places of a condition](#^condition-places) list them.
+"**Condition**" carries six senses across logic, physics and the philosophy of science, and none of them is primary for a record. A record classifies the conditions of an inquiry by their **place** alone, as the [places of a condition](../../domain.md#^condition-places) list them.
 
 ## Senses
 
@@ -37,17 +36,8 @@ The first five senses name a constraint fixed from outside the derivation: a fac
 
 ## Consequences for a record
 
-The conditions of an inquiry fall in four places of a record, each owned by another note: ^condition-places
-
-| Condition | Place in the record |
-| --- | --- |
-| A restriction imposed by the question on admitted values, including clamped, initial or stationary states | the [domain of conditions](../../domain.md) $D$ |
-| A precipitating, inhibiting or modulating condition of the behavior, or a nonstandard circumstance | the [conditions of the phenomenon](../../phenomenon.md#^conditions-byproducts) |
-| A constraint on the states that may hold together, including at the start and at the boundary | a law with the role *state-constraint*, in a [background record](../../background.md) or in an answer |
-| An assumption introduced by the analysis, such as a mean-field limit | not a condition: the [idealizations of the answer](../../answer-form.md#^idealizations), unless the question is asked of the limit system itself, as the [rule for limits](../representations/idealization-and-abstraction.md#^limit-rule) decides |
-
-- **A restriction of the domain narrows the value set of a declared quantity.** The target declares the quantity once, for every role that the [role test](variable-value-observable.md#^role-test) gives it in a phenomenon, and the question narrows its value set in $D$.
-- **A condition of the phenomenon belongs to the explanandum.** Its relation to the behavior belongs to the characterization of the phenomenon, so such a condition is not an input of the derivation.
+- **Each condition of an inquiry takes one of four places in the records.** The places are listed under the [places of a condition](../../domain.md#^condition-places).
+- **A restriction of the domain narrows the value set of a declared quantity.** The rule is stated under the [restrictions of the domain](../../domain.md#^domain-restrictions).
 
 ---
 ## Sources

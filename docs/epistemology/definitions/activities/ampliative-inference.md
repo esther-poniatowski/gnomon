@@ -1,14 +1,13 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
 aliases:
   - Ampliative inference
   - Abduction
   - Induction
   - Causal inference
-tags: []
-source:
 ---
 # Ampliative inference
 

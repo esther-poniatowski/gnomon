@@ -1,12 +1,10 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Notation of the inquiry specification
   - Notation
-tags: []
-source:
 ---
 # Notation of the inquiry specification
 

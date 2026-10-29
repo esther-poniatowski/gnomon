@@ -1,13 +1,12 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Regularities and explananda](docs/epistemology/definitions/regularities/_index.md)"
 aliases:
   - Law
   - Law of nature
   - Law statement
-tags: []
-source:
 ---
 # Law
 
@@ -49,9 +48,9 @@ A law statement is accordingly a [claim](../representations/claim-and-hypothesis
 
 ## Consequences for a record
 
-- **Every law of a record is a law statement.** The laws of a [background record](../../background.md) and of a [candidate answer](../../answer-form.md) carry an expression, a role and a warrant, so each is a construct that can be false of the target.
-- **The warrant of a law and its criterion of lawhood answer different questions.** The warrant of a law states how the record obtained the law: `derived`, `derived-in-a-limit`, `posited`, `fitted` or `measured`. A criterion of lawhood states why a true generalization counts as a law. Therefore, a fitted law can be a law in the sense of invariance, once the range of interventions over which it holds is known.
-- **The range of invariance of a law is stated in the record.** A law of a background record states its `range`: the conditions over which the law is established. The [domain of conditions](../../domain.md) of a question and the idealizations of an answer bound, in turn, the range of a claim built on the law. When a law is stated without a range, it claims invariance over the whole reference class.
+- **Every law of a record is a law statement.** A [law of a background record](../../background.md#^laws) or of a candidate answer is a construct that can be false of the target.
+- **The warrant of a law and its criterion of lawhood answer different questions.** The [warrant of a law](../../background.md#^law-warrant) states how the record obtained the law. A criterion of lawhood states why a true generalization counts as a law. Therefore, a fitted law can be a law in the sense of invariance, once the range of interventions over which it holds is known.
+- **The range of invariance of a law is stated in the record.** The field is specified under the [range of a law](../../background.md#^law-range). When a law is stated without a range, it claims invariance over the whole reference class.
 
 ---
 ## Sources

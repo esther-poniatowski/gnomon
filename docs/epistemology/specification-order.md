@@ -1,12 +1,11 @@
 ---
-role: definition
-status: wip
+tags:
+  - method
+  - wip
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Order of specification
   - Controlled iteration
-tags: []
-source:
 ---
 # Order of specification
 

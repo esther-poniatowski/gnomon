@@ -1,42 +1,63 @@
 ---
-role: index
-status: stable
+tags:
+  - index
 index: "[gnomon documentation](docs/_index.md)"
 aliases:
   - Epistemology
-tags:
-  - index
-source:
 ---
 # Epistemology
 
-> [!QUESTION] Goal: What must a researcher fix to specify an inquiry, and which results of the philosophy of science support each choice?
+Fixes the content that a researcher must specify in each [record](../../src/gnomon/data/templates/_index.md) of an inquiry, and the results of the philosophy of science that support each choice.
 
-These notes introduce a method to specify a research inquiry, based on results from the philosophy of models, of explanation and of questions. A research project applies the method by filling one [template](../../src/gnomon/data/templates/_index.md) per record of an inquiry (problem, target system, body of admitted laws, phenomenon, question, candidate answer, model, binding, key, assessment, itinerary).
+> [!WARNING] Notes with neighboring scopes
+> - [Notation](notation.md) registers the symbols of the method notes themselves, whereas [symbols and expressions](symbols-and-expressions.md) fixes how a record declares its own symbols and refers to them in formulas.
+> - [Specifying an inquiry](inquiry-specification.md) states the layers into which the decisions of an inquiry fall. [Order of specification](specification-order.md) orders the filling of those layers and the revision of an earlier choice. [Question decomposition](question-decomposition.md) builds the questions that serve one question. [Choosing the next act](next-act.md) selects the act of research to perform once a problem is stated.
 
-- [Specifying an inquiry](inquiry-specification.md): to locate each decision of a research project in the layer of the specification that holds it.
-- [Order of specification](specification-order.md): to decide what to specify first, and to revise an earlier choice without circularity.
-- [Question decomposition](question-decomposition.md): to decompose a question into the questions that serve it, and to keep the decomposition valid as the inquiry proceeds.
-- [Choosing the next act](next-act.md): to decide which act of research to perform next, once a problem is stated.
-- [Problem](problem.md): to state the demand and the constraints served by the questions of an inquiry.
-- [Subject of inquiry](subject-of-inquiry.md): to fix what a research question is about, before deciding what kind of answer to seek.
-    - [Target system](target-system.md): to delimit the system that a question concerns, so that every later record can refer to its quantities.
-    - [Background](background.md): to state the laws admitted about a target system before any answer is sought.
-    - [Phenomenon](phenomenon.md): to state which behavior of the system a question addresses.
-    - [Contrast](contrast.md): to choose the alternatives against which a phenomenon is questioned.
-    - [Domain of conditions](domain.md): to record the conditions that a question holds fixed.
-- [Epistemic task](epistemic-task.md): to decide what kind of knowledge an answer must deliver.
-    - [Epistemic aim](epistemic-aim.md): to choose the cognitive achievement that an inquiry seeks.
-    - [Requested relation](requested-relation.md): to choose the kind of dependence that an answer must establish.
-    - [Modal strength](modal-strength.md): to decide whether an answer must show what holds, what could hold, or what must hold.
-    - [Admissible explanans](admissible-explanans.md): to decide which variables an answer may appeal to.
-- [Epistemic and pragmatic virtues](epistemic-pragmatic-virtues.md): to select the qualities by which admissible answers are compared.
-- [Answer form](answer-form.md): to state a candidate answer in the terms that the question has already fixed.
-    - [Model and binding](model-and-binding.md): to state the model on which an answer rests and its binding to the phenomenon, so that the values of the model can be compared with the data.
-- [Conditions of satisfaction](satisfaction-conditions.md): to fix, before any answer is evaluated, the tests that decide whether it succeeds.
-- [Itinerary](itinerary.md): to record the steps of an inquiry as epistemic activities, and to check that each step takes the products required by its activity.
-- [Mechanism](mechanism.md): to state an answer as a mechanism when the question requests a mechanistic relation.
-- [Notation](notation.md): to check which letter a quantity already uses before introducing a symbol.
-- [Symbols and expressions](symbols-and-expressions.md): to write formulas that refer to declared quantities and that the checks can resolve.
-- [Definitions](definitions/_index.md): to choose the term and the sense that name an element of an inquiry, and to tell that term apart from a neighboring term.
+## Overview and order
 
+- [Specifying an inquiry](inquiry-specification.md): locates each decision of a research project in the layer of the specification that holds it
+- [Order of specification](specification-order.md): decides what to specify first, and how an earlier choice is revised without circularity
+
+## Problem and question
+
+- [Problem](problem.md): specifies the demand and the constraints served by the questions of an inquiry
+- [Question decomposition](question-decomposition.md): guides the decomposition of a question into the questions that serve it, as the inquiry proceeds
+
+## Subject of inquiry
+
+- [Subject of inquiry](subject-of-inquiry.md): fixes the objects that a research question studies, before the kind of answer is chosen
+- [Target system](target-system.md): delimits the system that a question concerns
+- [Background](background.md): specifies the laws admitted about a target system before any answer is sought
+- [Phenomenon](phenomenon.md): specifies the behavior of the system that a question addresses
+- [Contrast](contrast.md): guides the choice of the alternatives against which a phenomenon is questioned
+- [Domain of conditions](domain.md): specifies the conditions that a question holds fixed
+
+## Epistemic task
+
+- [Epistemic task](epistemic-task.md): decides the kind of knowledge that an answer must deliver
+- [Epistemic aim](epistemic-aim.md): classifies the cognitive achievements that an inquiry can seek
+- [Requested relation](requested-relation.md): classifies the kinds of dependence that an answer may be asked to establish
+- [Modal strength](modal-strength.md): decides whether the claim of an answer must hold actually, possibly or necessarily
+- [Admissible explanans](admissible-explanans.md): decides which variables an answer may appeal to
+- [Epistemic and pragmatic virtues](epistemic-pragmatic-virtues.md): lists the qualities by which admissible answers are compared
+
+## Answer and assessment
+
+- [Answer form](answer-form.md): specifies a candidate answer in the terms that the question has already fixed
+- [Model and binding](model-and-binding.md): specifies the model on which an answer rests and its binding to the phenomenon
+- [Mechanism](mechanism.md): specifies the answer to a question that requests a mechanistic relation
+- [Conditions of satisfaction](satisfaction-conditions.md): fixes, before any answer is evaluated, the tests that decide whether it succeeds
+
+## Inquiry procedures
+
+- [Choosing the next act](next-act.md): decides which act of research to perform next, once a problem is stated
+- [Itinerary](itinerary.md): specifies the record of the steps of an inquiry, and the check of each step against the products that its activity requires
+
+## Record language
+
+- [Notation](notation.md): registers the symbol of each quantity named in the method notes
+- [Symbols and expressions](symbols-and-expressions.md): fixes how a record declares its quantities and refers to them in formulas that the checks can resolve
+
+## Definitions
+
+- [Definitions](definitions/_index.md): fixes the term and the sense that name an element of an inquiry, and tells the term apart from its neighbors

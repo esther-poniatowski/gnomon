@@ -1,11 +1,9 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying epistemic and pragmatic virtues
-tags: []
-source:
 ---
 # Specifying epistemic and pragmatic virtues
 

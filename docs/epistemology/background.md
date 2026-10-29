@@ -1,12 +1,11 @@
 ---
-role: definition
-status: wip
+tags:
+  - method
+  - wip
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying the background
   - Background record
-tags: []
-source:
 ---
 # Specifying the background
 

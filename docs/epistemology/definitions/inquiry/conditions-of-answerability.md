@@ -1,13 +1,12 @@
 ---
-role: definition
-status: revision
+tags:
+  - definition
+  - revision
 index: "[Problems and questions](docs/epistemology/definitions/inquiry/_index.md)"
 aliases:
   - Conditions of answerability
   - Answerability
   - Route to an answer
-tags: []
-source:
 ---
 # Conditions of answerability
 

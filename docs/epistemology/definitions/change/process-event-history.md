@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Change](docs/epistemology/definitions/change/_index.md)"
 aliases:
   - Process, event and history
@@ -9,8 +10,6 @@ aliases:
   - History
   - Course and grain
   - Occurrence class
-tags: []
-source:
 ---
 # Process, event and history
 
@@ -80,19 +79,9 @@ A predicate in none of the three classes is restated as an **observable over a d
 
 ## Consequences for a record
 
-- **A phenomenon declares its course and its occurrence class.** The [record of a phenomenon](../../phenomenon.md) states its `course` in three fields. The `index` is a symbol of the index set along which the behavior unfolds, the `grain` is $\delta$, and `varies` lists the target parameters that change along this course. The record also states its `occurrence`, one of `state | process | event | not-applicable`.
-- **A parameter of the target can change along the course of one phenomenon.** *Example*: the weights $W$ of a network are parameters of the target, and they change along the course of training, so a phenomenon of training lists $W$ in `course.varies`. The [role test of a quantity](../quantities/variable-value-observable.md#^role-test) places such a quantity.
-- **The category of a phenomenon reads as follows in the occurrence classes:**
-
-| `phenomenon.category` | Reading in the occurrence classes | `occurrence` |
-| --- | --- | --- |
-| `particular-occurrence` | one token of a state, a process or an event, at a stated segment of the course | `state`, `process` or `event`, the class of the token |
-| `regularity` | a dependence among occurrences, each of which carries its own class | `not-applicable` |
-| `capacity` | a [disposition](../regularities/capacity-and-disposition.md), held whether or not it is exercised | `not-applicable` |
-| `structural-property` | a property of states or of a map, holding pointwise along the course | `state` |
-
-- **A predicate in none of the classes enters a phenomenon through an observable.** The [observable over a window](#^window-observable) is declared among the explanandum variables of the [phenomenon](../../phenomenon.md), and its manifestation constrains the value of that observable.
-- **A process stated over a field requires an index set for space.** The bearer of "raining" is a region, so the record declares a spatial index set in the [target specification](../../target-system.md), and the rate variable takes that index in its signature.
+- **A phenomenon declares its course and its occurrence class.** The fields are specified under [course and occurrence](../../phenomenon.md#^course-and-occurrence), and the occurrence classes admitted by each category of phenomenon under [occurrence by category](../../phenomenon.md#^occurrence-by-category).
+- **A parameter of the target can change along the course of one phenomenon.** The [role test of a quantity](../quantities/variable-value-observable.md#^role-test) places such a parameter.
+- **A process stated over a field requires an index set for space.** The bearer of "raining" is a region, so the index set is declared in the [target specification](../../target-system.md).
 
 ---
 ## Sources

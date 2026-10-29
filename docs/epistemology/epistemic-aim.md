@@ -1,12 +1,10 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying the epistemic aim
   - Epistemic aim
-tags: []
-source:
 ---
 # Specifying the epistemic aim
 

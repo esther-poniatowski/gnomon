@@ -1,11 +1,9 @@
 ---
-role: decision
-status: accepted
+tags:
+  - decision
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Registries as source
-tags: []
-source:
 ---
 # Registries for vocabularies and requirements
 

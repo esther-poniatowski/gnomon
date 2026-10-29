@@ -6,19 +6,24 @@ aliases:
 ---
 # gnomon documentation
 
-Each entry answers one class of question about `gnomon`, so a reader consults one rather than several.
+Directs a reader of `gnomon` to the folder that answers a class of question about the tool, its method or its decisions.
 
-| Entry | Content |
-| --- | --- |
-| [User guide](guide/_index.md) | How the installed tool is operated, from the Python version it requires to each command of its entry point. |
-| [References](references/_index.md) | Which external frameworks and literature, stated on their own terms, the decisions and the goals of `gnomon` draw on, from what a discipline demands of a valid argument to the formal domains that model an epistemic state and its transitions. |
-| [Classification](classification/_index.md) | How the activity `classification` is performed, from the principles that warrant a classification to the procedure that builds one. |
-| [Epistemology](epistemology/_index.md) | What a researcher must fix to specify an inquiry, from what the question is about to the form of the answer it seeks. Each choice rests on results from the philosophy of models, of explanation and of questions. |
-| [Worked inquiries](../examples/_index.md) | How completed inquiry records look, each inquiry testing one capacity of the framework, and which research statements test the records against formalization. |
-| [Proposals](proposals/_index.md) | Which candidate designs await a decision for an open goal of the project, each set of alternatives kept until an architecture decision records the choice. |
-| [Architecture decisions](adr/_index.md) | Which design constraint each substantive choice answers, the options weighed against it, and what the choice costs. |
-| [gnomon audits](audits/_index.md) | Which assessments a decision rests on while its open resolutions await ratification. |
+> [!IMPORTANT] Note conventions
+> The frontmatter keys, the tag vocabulary and the form of a cross-reference are fixed in the [contributor guidelines](../CONTRIBUTING.md#writing-documentation).
 
-## Note conventions
+## Tool
 
-Every note declares a frontmatter block and is registered in the index of its folder. The [keys each note declares, the tag vocabulary, and the form a cross-reference takes](../CONTRIBUTING.md#writing-documentation) are fixed once, in the contributor guidelines.
+- [User guide](guide/_index.md): guides the installation and the operation of the tool, command by command
+
+## Method
+
+- [Epistemology](epistemology/_index.md): specifies an inquiry record by record, with the results of the philosophy of science that support each choice
+- [Classification](classification/_index.md): guides the performance of the activity `classification`
+- [Worked inquiries](../examples/_index.md): tests the framework on completed inquiry records and on adversarial research statements
+
+## Decisions and their grounds
+
+- [Architecture decisions](adr/_index.md): records the design choices that later work must respect
+- [Proposals](proposals/_index.md): compares the candidate designs of each open goal before a decision
+- [gnomon audits](audits/_index.md): keeps the assessments on which a decision rests until its resolutions are ratified
+- [References](references/_index.md): states on their own terms the external frameworks and literature that the decisions and the goals draw on

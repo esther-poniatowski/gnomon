@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Representations](docs/epistemology/definitions/representations/_index.md)"
 aliases:
   - Claim and hypothesis
@@ -8,8 +9,6 @@ aliases:
   - Hypothesis
   - Prediction (product)
   - Explanation (product)
-tags: []
-source:
 ---
 # Claim and hypothesis
 
@@ -58,8 +57,8 @@ The attitude and the support of a claim take values in two closed lists: ^attitu
 
 ## Consequences for a record
 
-- **A candidate answer records the attitude and the support of its claim.** A candidate answer holds one typed claim with its grounds, and the [answer form](../../answer-form.md) states the attitude in the field `status` and the support in the field `support`, with the values of the [two lists](#^attitude-support). Therefore, when the `status` of an answer is `hypothesized`, the answer is a hypothesis.
-- **The laws on which a candidate answer rests are claims, each with a warrant of its own.** A law belongs to a [background record](../../background.md#^law-warrant) or to a [model record](../../model-and-binding.md#^model-elements), and the answer cites it among its grounds with the role `warrant`. The `warrant` of a law states how that law was obtained: `derived`, `derived-in-a-limit`, `posited`, `fitted` or `measured`. This law-level list differs from the support of the claim of an answer, and it traces each law to its origin.
+- **A candidate answer records the attitude and the support of its claim.** The fields are specified under the [status and support of an answer](../../answer-form.md#^status-and-support), with the values of the [two lists](#^attitude-support). Therefore, an answer whose attitude is `hypothesized` is a hypothesis.
+- **The laws on which a candidate answer rests are claims, each with a warrant of its own.** The [warrant of a law](../../background.md#^law-warrant) traces the law to its origin, so it differs from the support of the claim of an answer.
 - **The conditions of satisfaction fix the tests of the claims before evaluation.** Before any answer is assessed, the [conditions of satisfaction](../../satisfaction-conditions.md) state the tests deciding whether its claims hold.
 
 ---

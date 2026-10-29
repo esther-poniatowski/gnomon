@@ -1,13 +1,12 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Regularities and explananda](docs/epistemology/definitions/regularities/_index.md)"
 aliases:
   - Mechanism and mechanistic model
   - Mechanism (term)
   - Mechanistic model
-tags: []
-source:
 ---
 # Mechanism and mechanistic model
 
@@ -39,7 +38,7 @@ The first four definitions agree that a mechanism is **organized** and that it i
 ## Consequences for a record
 
 - **A mechanistic model is written in the fields of a model record.** The [notation of the method](../../notation.md) maps the components of a mechanism onto the constituents $C$ of the [model](../../model-and-binding.md#^model-elements), its activities onto the laws $L$, and its organization onto $O$. A mechanistic answer rests on such a model.
-- **The explanatory mapping reads the declarations of the constituents of the model.** Each constituent of the model is declared in the model record, under the [perspective of the model](../../model-and-binding.md#^perspective): either as a unit defined by a stated map from the declared constituents of the target, or as a unit of the model alone. When the map of a component reaches neither a declared constituent nor an admissible part, the component fails the [explanatory mapping](#^mechanistic-model-test). A unit of the model alone states no map, so it passes the explanatory mapping only through a binding that pairs it, by a [pair of type `component`](../../model-and-binding.md#^component-pairs), with a declared constituent or an admissible part of the target. The localization that the pair asserts can be false, so the pair is argued from evidence and versioned with its binding.
+- **The explanatory mapping reads the declarations of the constituents of the model.** A component fails the [explanatory mapping](#^mechanistic-model-test) when its map, declared under the [perspective of the model](../../model-and-binding.md#^perspective), reaches neither a declared constituent nor an admissible part of the target. A unit of the model alone states no map, so it passes only through a [pair of type `component`](../../model-and-binding.md#^component-pairs).
 - **The modal strength decides whether a how-possibly model suffices.** When the [modal strength](../../modal-strength.md) of the question requests an actual explanation, the model on which the answer rests must pass the explanatory mapping for its activities as well as for its components. Otherwise, the mechanistic form suffices.
 
 ---

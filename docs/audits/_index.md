@@ -7,7 +7,7 @@ aliases:
 ---
 # gnomon audits
 
-Holds the assessments on which an architecture decision rests, until that decision absorbs their open resolutions
+Holds the assessments on which an architecture decision rests, until that decision absorbs their open resolutions.
 
 ## Model design
 

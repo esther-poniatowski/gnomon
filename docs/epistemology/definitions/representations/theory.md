@@ -1,13 +1,12 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Representations](docs/epistemology/definitions/representations/_index.md)"
 aliases:
   - Theory
   - Scientific theory
   - Theory-element
-tags: []
-source:
 ---
 # Theory
 

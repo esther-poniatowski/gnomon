@@ -3,7 +3,7 @@ tags:
   - examples
 index: "[Localized Swift-Hohenberg states](examples/swift-hohenberg-localized-states/_index.md)"
 aliases:
-  - Swift-Hohenberg description test
+  - Swift-Hohenberg localized-states test description
 ---
 # Localized states in the generalized Swift-Hohenberg equation
 

@@ -1,14 +1,13 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
 aliases:
   - Revision activities
   - Belief revision (activity)
   - Theory change
   - Framework revision
-tags: []
-source:
 ---
 # Revision
 

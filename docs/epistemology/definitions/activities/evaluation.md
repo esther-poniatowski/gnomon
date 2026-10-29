@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
 aliases:
   - Evaluative activities
@@ -9,8 +10,6 @@ aliases:
   - Model selection
   - Inference to the best explanation
   - Critique (activity)
-tags: []
-source:
 ---
 # Evaluation
 

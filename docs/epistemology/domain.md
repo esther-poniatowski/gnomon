@@ -1,12 +1,10 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying the domain of conditions
   - Domain of conditions
-tags: []
-source:
 ---
 # Specifying the domain of conditions
 
@@ -37,6 +35,15 @@ By this test, a background factor moves from the domain $D$ into the conditions 
 - **A clamped state variable is removed from the dynamics.** When the question clamps a variable, the rule that determines it is replaced by a fixed value. In a causal model, an intervention likewise replaces the structural equation of the targeted variable by a constant [pearl2009]. For the question, the clamped variable therefore acts as an input. *Example*: a voltage clamp turns the membrane potential into an exogenous variable.
 	
 - **A limit belongs to $D$ only when the question concerns the limit system.** A limit system counts as a system of its own, because it can have properties that no finite system has [norton2012]. *Example*: a question about the kernel regime of infinitely wide networks concerns such a limit system. When a limit only simplifies the analysis of finite systems, the answer records the limit among its grounds, as one of the [analysis assumptions](#^analysis-assumptions). That assumption is an idealization with the motive `limit`, as the [rule on limits](answer-form.md#^limit-rule) states.
+
+- **The conditions of an inquiry take four places in the records.** A record classifies a [condition](definitions/quantities/condition.md) by its place alone, among the following four: ^condition-places
+
+| Condition | Place in the records |
+| --- | --- |
+| A restriction imposed by the question on admitted values, including clamped, initial or stationary states | the domain $D$ |
+| A precipitating, inhibiting or modulating condition of the behavior, or a nonstandard circumstance | the [conditions of the phenomenon](phenomenon.md#^conditions-byproducts) |
+| A constraint on the states that may hold together, including at the start and at the boundary | a law with the role *state-constraint*, in a [background record](background.md) or in an answer |
+| An assumption introduced by the analysis, such as a mean-field limit | not a condition: the [idealizations of the answer](answer-form.md#^idealizations), unless the question is asked of the limit system itself, as the [rule on limits](answer-form.md#^limit-rule) decides |
 
 ---
 ## Sources

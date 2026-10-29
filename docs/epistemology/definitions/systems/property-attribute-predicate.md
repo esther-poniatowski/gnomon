@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Bearers and systems](docs/epistemology/definitions/systems/_index.md)"
 aliases:
   - Property, attribute, predicate and relation
@@ -8,8 +9,6 @@ aliases:
   - Attribute
   - Predicate
   - Relation
-tags: []
-source:
 ---
 # Property, attribute, predicate and relation
 

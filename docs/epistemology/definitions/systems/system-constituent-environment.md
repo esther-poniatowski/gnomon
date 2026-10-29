@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Bearers and systems](docs/epistemology/definitions/systems/_index.md)"
 aliases:
   - System, constituent and environment
@@ -8,8 +9,6 @@ aliases:
   - Constituent
   - Environment
   - Structure and organization
-tags: []
-source:
 ---
 # System, constituent and environment
 

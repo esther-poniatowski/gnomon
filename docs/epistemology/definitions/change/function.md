@@ -1,13 +1,12 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Change](docs/epistemology/definitions/change/_index.md)"
 aliases:
   - Function (of a component)
   - Causal-role function
   - Etiological function
-tags: []
-source:
 ---
 # Function
 
@@ -30,7 +29,7 @@ The **function** of a component is the contribution of its activity to an object
 ## Consequences for a record
 
 - **A functional answer is one value of the requested relation.** The [requested relation](../../requested-relation.md) lists function among the relations that an answer may be asked to establish. The choice between the two senses fixes the evidence required of the answer: an analysis of a capacity, or a selective history.
-- **A causal-role function requires the capacity to be named.** When a record ascribes a causal-role function, it must state the capacity of the system to which the component contributes. The requirement follows from the relativity of functions to capacities.
+- **A causal-role function requires the capacity to be named.** The requirement follows from the relativity of functions to capacities, and the [functional question](../../requested-relation.md#^function-sense) states it for an answer.
 
 ---
 ## Sources

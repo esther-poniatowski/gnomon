@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
 aliases:
   - Epistemic activities
@@ -8,8 +9,6 @@ aliases:
   - Activity record
   - Product types
   - Itinerary check
-tags: []
-source:
 ---
 # Epistemic activities
 

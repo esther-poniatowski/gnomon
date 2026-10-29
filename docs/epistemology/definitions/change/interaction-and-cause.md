@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Change](docs/epistemology/definitions/change/_index.md)"
 aliases:
   - Interaction and cause
@@ -8,8 +9,6 @@ aliases:
   - Cause
   - Causal interaction
   - Statistical interaction
-tags: []
-source:
 ---
 # Interaction and cause
 
@@ -40,7 +39,7 @@ source:
 
 ## Consequences for a record
 
-- **A relation of an organization need not be an interaction.** The organization of a [background record](../../background.md) holds directed and joint relations. A directed relation is an action. A reciprocal pair of directed relations is a causal interaction. A relation with three or more components can encode a joint effect carried by no pair.
+- **A relation of an organization need not be an interaction.** The [organization](../../background.md#^organization) of a background record holds directed and joint relations. A directed relation is an action. A reciprocal pair of directed relations is a causal interaction. A relation with three or more components can encode a joint effect carried by no pair.
 - **A requested relation of the causal kind presupposes the interventionist notion of cause.** The [requested relation](../../requested-relation.md) uses interventions to state causal dependence, so a claim of causal interaction in an answer must survive the corresponding intervention test.
 
 ---

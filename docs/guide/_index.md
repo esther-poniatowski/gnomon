@@ -7,8 +7,8 @@ aliases:
 ---
 # User guide
 
-The tool is installed first, then used, and each of its commands is specified individually.
+Guides the installation and the operation of the `gnomon` tool, command by command.
 
-- [Installation](installation.md): the Python version required, and the two routes that install the package.
-- [Usage](usage.md): what the tool maintains — a traceable graph of results, dependencies, and open questions — and which commands already work.
-- [CLI reference](cli-reference.md): every option and command of the `gnomon` entry point, with its arguments.
+- [Installation](installation.md): guides the installation of the package and states the Python version that it requires
+- [Usage](usage.md): starts the use of the installed tool on the records of an inquiry
+- [CLI reference](cli-reference.md): looks up the arguments and the options of each command of the `gnomon` entry point

@@ -1,12 +1,10 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying the conditions of satisfaction
   - Conditions of satisfaction
-tags: []
-source:
 ---
 # Specifying the conditions of satisfaction
 

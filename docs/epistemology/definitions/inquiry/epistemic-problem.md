@@ -1,13 +1,12 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Problems and questions](docs/epistemology/definitions/inquiry/_index.md)"
 aliases:
   - Epistemic problem
   - Problem
   - Minimal problem
-tags: []
-source:
 ---
 # Epistemic problem
 
@@ -101,6 +100,7 @@ A problem ends in one of three ways, and the [problem record](../../problem.md) 
 
 - **Solved**: a candidate of the demanded type meets the constraints and the request, and its assessment has moved it from $H$ into $K$.
 - **Dissolved**: the revised background yields the negation of a presupposition of $Q_\pi$, its existence presupposition or its topic presupposition. No result of the demanded kind exists, so no solution is needed. *Example*: the delay appears only in a thresholded accuracy, while the test loss falls from the start of training. In that case, no delay of learning exists, and the problem of explaining it dissolves.
+- **Abandoned**: the inquiry stops before the problem is solved or dissolved. No formal condition defines this outcome, which records a decision of the researcher.
 
 ## Every inquiring question presupposes a problem
 

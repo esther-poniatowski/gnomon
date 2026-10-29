@@ -1,52 +1,33 @@
 ---
-role: decision
-status: accepted
+tags:
+  - decision
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Answers, models and bindings
-tags: []
-source:
 ---
 # Answers, models and bindings
 
 > [!QUESTION] Goal: which records hold a candidate answer, the model on which it rests, and the relation of that model to the phenomenon, so that each answer has the form that its question requires and its values can be compared with the target?
 
-The [audits of the model design](../audits/_index.md) and the trials run on the test records exposed three defects. Every answer must state an explanans, even when its aim is not explanation. The values that an answer derives are bound to no output of the phenomenon, so the tests of fidelity and of required accuracy cannot be computed. A stylized model enters the quantities of its target by `reference`, which asserts an identity that a model never has with its target. An analysis of the answer forms per aim and of the binding to the target, followed by an adversarial review of its foundations, settled the design below. Both analyses reasoned from the literature, without reading the records of `gnomon`. A review of the method notes that implement the decision refined it on six points, amended in place below: the declared use, the erotetic relation, idealizations, the estimates of a phenomenon, the discrepancy, and the calibration treatments.
+The [audits of the model design](../audits/_index.md) and the trials run on the test records exposed three defects. Every answer must state an explanans, even when its aim is not explanation. The values that an answer derives are bound to no output of the phenomenon, so the tests of fidelity and of required accuracy cannot be computed. A stylized model enters the quantities of its target by `reference`, which asserts an identity that a model never has with its target. An analysis of the answer forms per aim and of the binding to the target, followed by an adversarial review of its foundations, settled the design below. Both analyses reasoned from the literature, without reading the records of `gnomon`. A review of the method notes that implement the decision refined it in place on six points: the declared use, the erotetic relation, idealizations, the estimates of a phenomenon, the discrepancy, and the calibration treatments. The method notes now own the details of these points and the fields of every record, so the decision below states only the structure.
 
 ## Decision
 
 **Questions.** The full atomic question, its aim together with its parameters, fixes the type of its direct answers. A research question is a graph of atomic questions, linked by the [links between questions](../epistemology/definitions/inquiry/problem-and-question.md#^linked-questions). A question may stay *open*, with no answer type yet, while its answer space is not formed.
 
-**Aims.** The aims form an open registry, and each entry states its answer conditions: what counts as a direct answer, when that answer is conclusive, and what it presupposes. The registry classifies each aim as answer content, conceptual work or mode of inquiry; an exploration is conceptual work when its question marks the equivalence criterion as an output, and answer content when the criterion is an input. Only answer content and conceptual work generate an aim block. A change of accepted claims is not an aim: it is the effect of accepting an answer, a revision of a belief base on a named corpus with a named owner. Understanding is not an aim either: it is a dimension of assessment, or a declared use of an answer.
+**Aims.** The aims form an open [registry](../epistemology/epistemic-aim.md#^aim-registry), in which each entry states its [answer conditions](../epistemology/epistemic-aim.md#^answer-conditions). Only the aims of answer content and of conceptual work generate an aim block. A change of accepted claims is not an aim, since it is the effect of accepting an answer. Understanding is not an aim either, since it is a dimension of assessment or a declared use of an answer.
 
-**Answers.** An answer is one typed claim with its grounds. A model that serves two aims grounds two answers. Each answer holds a core and one aim block:
+**Answers.** An answer is one typed claim with its grounds, so a model that serves two aims grounds two answers. Each answer holds a core, whose elements every aim requires, and one aim block, which holds the elements that the aim of its question requires. Answers are linked to one another by typed relations. The elements of the core, the erotetic relation, the aim blocks, the target status of an explanatory factor, the declared use and the relations between answers are specified in the [answer form](../epistemology/answer-form.md#^core-and-block).
 
-- the core holds the claim; the grounds, each with a typed role (assumption, idealization, condition, datum, warrant, criterion); the dependence of the claim on its grounds, as minimal sets of grounds or as results of sensitivity and robustness; the route (derivation, proof, simulation, estimation, measurement); the domain, derived from the hypotheses when the route is deductive; the status and the uncertainty; and the erotetic relation of the answer to its question: complete, partial, corrective or reformulating. The erotetic relation routes the assessment rather than being tested: only a complete or a partial answer holds an aim block, a corrective answer refutes the soundness of its question, and a reformulating answer is assessed against the revised question that it names. An idealization is a ground of the answer: the model declares the assumptions that its laws require, and the answer classifies each of them as an idealization of its target, with its range;
-- the aim block holds what the aim requires. The block of an explanation holds the contrastive explanandum, the claim that named dependences are explanatory, and the type of relation. How-actually or how-possibly follows from the modal strength of the question. Each explanatory factor carries a target status: *denoting* a target quantity, *coarse-graining* a target feature at a stated level, a *limit construct* placed by an argument, recorded as a ground, that the target lies in its universality class, or a *structural constraint* that the target is claimed to satisfy. The block of an exploration admits its space and its equivalence criterion as inputs or as outputs. An explanatory proof is a node of model knowledge linked to a node of explanation.
+**Models.** A model is a record of its own, which several answers can ground. A family of models can ground one answer, each model with its own binding, and the family is then assessed as a whole. The fields are specified in the [model record](../epistemology/model-and-binding.md#^model-record).
 
-Answers are linked to one another by typed relations: `supports`, `presupposes`, `tests`, `defeats`, and `revises` for the lineage of an answer over time.
+**Bindings.** A binding is a record of its own, which relates a model in use to a phenomenon or to its data, and which records the surrogative inferences that its asserter licenses from the model to the target. A claim of actual strength about an empirical target, and any prediction or description of a target, requires a binding. An answer whose claim bears only on a model or on a formal class declares its use instead. The fields are specified in the [binding record](../epistemology/model-and-binding.md#^binding-record).
 
-**Models.** A model is a record of its own, which several answers can ground. A family of models can ground one answer, each model with its own binding, and the family is then assessed as a whole.
+**Keys.** Observation operators, maps of units and of aggregation, and qualitative abstractions are shared, versioned records, which several bindings reference. The fields are specified in the [key record](../epistemology/model-and-binding.md#^key-record).
 
-**Bindings.** A binding relates a model in use to a phenomenon, or to its data, and records the surrogative inferences that its asserter licenses from model to target. The binding names that asserter and holds:
+**Phenomena.** A phenomenon owns the [estimator of its explanandum variables](../epistemology/phenomenon.md#^phenomenon-owns-estimation), and it [declares the facts on which its data depend](../epistemology/phenomenon.md#^data-model-declarations).
 
-- the denotation of the phenomenon and the target level: the phenomenon, or the data;
-- pairs of an exemplified feature of the model and an imputed feature of the target, each feature typed as a quantity, a pattern, a qualitative regime, an invariance or universality class, a modal profile, or a component, which pairs a unit of the model alone with the part of the target that it denotes;
-- pairs of model conditions and target conditions, with the calibration parameters marked;
-- a key for each pair, referenced from the shared keys;
-- the domain of the comparison, with interpolation and extrapolation marked;
-- the structural discrepancy model;
-- the calibration provenance: which data fitted which parameters, and whether the parameters are identifiable under the discrepancy model;
-- the grain, quantitative or qualitative;
-- a version and the time of its commitment.
-
-An answer whose claim bears only on a model or on a formal class declares its use instead, such as a tool, a proof of principle, a conceptual exploration or understanding, with the property that the model must have for that use. A warrant test of adequacy to that use replaces fidelity for such an answer. A claim of actual strength about an empirical target, and any prediction or description of a target, requires a binding.
-
-**Keys.** Observation operators, maps of units and of aggregation, and qualitative abstractions are shared, versioned components, which several bindings reference.
-
-**Phenomena.** A phenomenon owns the estimator of its explanandum variables, with the version of the data and the uncertainty; the estimates are computed, as comparisons are, and a descriptive answer cites them. The phenomenon also declares the models that its data model uses (instrument model, simulation of background, assimilation model, reconstruction), its observation error, the selection of its pattern with the question that motivated it, and the purposes for which its data model is adequate.
-
-**Comparisons.** A comparison is computed, not recorded, from a binding, a version of the data, and the metric and tolerance of the question. The comparison reports whether the binding was committed before the version of the data, how it treated the data already used for calibration (excluded, cross-validated, Bayesian or reused, of which only cross-validated and Bayesian data count toward fidelity), and an overlap between the models declared by the phenomenon and the grounds of the answer or the keys of the binding, as a flag of circularity. The comparison judges each computed pair against the tolerance of the question once the observation error is accounted for, and a declared structural discrepancy wider than that tolerance fails the pair; a discrepancy model fitted to the compared data counts as calibration on those data. A revised binding is a new version and leaves earlier comparisons unchanged.
+**Comparisons.** A comparison is computed, not recorded, from a binding, a version of the data, and the metric and the tolerance of the question. A revised binding is a new version and leaves earlier comparisons unchanged. The facts that a comparison reports are specified with the [computed comparison](../epistemology/model-and-binding.md#^comparison-reports), and the tests that read them in the [conditions of satisfaction](../epistemology/satisfaction-conditions.md#^fidelity-reads-reports).
 
 ## Constraints that decide the design
 
@@ -56,7 +37,7 @@ An answer whose claim bears only on a model or on a formal class declares its us
 - **Explanatory factors need not exist in the target.** Minimal models, holistic distortions and explanations by constraint explain without a correspondence of factors [battermanrice2014] [rice2021] [lange2017].
 - **Representation need not be a mapping of quantities.** The binding records the inferences that it licenses, which keeps it neutral between theories of representation [suarez2004] [friggnguyen2020]. Similarity holds in respects and degrees fixed by a purpose [giere2004] [weisberg2013], and adequacy is relative to a purpose [parker2020].
 - **Phenomena depend on models.** Data models can contain the models under test, and they are adequate for a purpose [bokulichparker2021]. A comparison that ignores the overlap can be circular.
-- **Discrepancy has three owners.** The structural discrepancy belongs to the binding, the observation error to the data, and the tolerance to the question [kennedyohagan2001] [brynjarsdottir2014]. Using calibration data for confirmation is legitimate or not depending on the method [steelewerndl2013], so the comparison must report its treatment.
+- **Discrepancy has three owners**, which the [binding note](../epistemology/model-and-binding.md#^discrepancy-owners) assigns [kennedyohagan2001] [brynjarsdottir2014]. Using calibration data for confirmation is legitimate or not depending on the method [steelewerndl2013], so the comparison must report its treatment.
 
 ## Options weighed
 
@@ -71,7 +52,7 @@ An answer whose claim bears only on a model or on a formal class declares its us
 ## Consequences
 
 - The explanans is no longer required of every answer. Its premises become the grounds of the core, and its relevance becomes the block of an explanation.
-- The answer template is restructured into a core and aim blocks, and three record kinds are added: the model, the binding and the key. The phenomenon and the assessment gain the declarations above, and the comparison is computed.
+- The answer template is restructured into a core and aim blocks, and three record kinds are added: the model, the binding and the key. The phenomenon and the assessment gain the declarations that their method notes specify, and the comparison is computed.
 - The decision of 2026-09-24 (commit 08cc32d), which declared the model of an answer with the blocks of the target, is superseded: the model has a record of its own.
 - The use of `reference` for a stylized constituent ends: a model relates to its target through a binding.
 - The method notes that describe the answer, the phenomenon and the assessment remain to be revised, and the registry of aims gains its answer conditions.

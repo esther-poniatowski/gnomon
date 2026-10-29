@@ -1,12 +1,11 @@
 ---
-role: definition
-status: wip
+tags:
+  - method
+  - wip
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying the itinerary
   - Itinerary record
-tags: []
-source:
 ---
 # Specifying the itinerary
 

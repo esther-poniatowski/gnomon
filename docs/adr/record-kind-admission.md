@@ -1,29 +1,33 @@
 ---
-role: decision
-status: accepted
+tags:
+  - decision
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Admission of a record kind
-tags: []
-source:
 ---
 # Admission of a record kind
 
 > [!QUESTION] Goal: when does a proposed construct become a record kind of its own, rather than a unit of an existing record?
 
-The method fixes one record kind per concern of an inquiry. Other constructs arise while records are filled. The model, the binding and the key became records of their own under the [decision on answers, models and bindings](answers-models-bindings.md), and the concept under the [decision on concepts, glossaries and notations](concepts-glossaries-notations.md). The [synthesis of the model audits](../audits/model-design-synth.md#^div-placement) kept a transformation between models inside its destination model. Those choices applied a test that no decision of `gnomon` stated.
+The method fixes one record kind per concern of an inquiry. Other constructs arise while records are filled. The model, the binding and the key became records of their own under the [decision on answers, models and bindings](answers-models-bindings.md), and the concept under the [decision on concepts, glossaries and notations](concepts-glossaries-notations.md). The [synthesis of the model audits](../audits/model-design-synth.md#^div-placement) kept a transformation between models inside its destination model. Those choices applied a test that no decision of `gnomon` stated. The test was amended in place with two conditions, non-distortion and unitary epistemic role, drawn from the retired design notes.
 
 ## Decision
 
-A construct becomes a record kind of its own only if it meets five conditions: ^five-conditions
+A construct becomes a record kind of its own only if it meets seven conditions: ^five-conditions
 
 - **independent identity**: the construct is meaningful without the record that would otherwise contain it;
 - **reuse**: several records can cite one instance of the construct;
 - **local validity**: a check can judge its content without reading the records that cite it;
 - **independent editing**: an author can revise it without rewriting the records that cite it;
-- **irreducibility**: no tool can generate it from other records.
+- **irreducibility**: no tool can generate it from other records;
+- **non-distortion**: the construct cannot be stated through an existing kind, field, value, relation or unit without erasing its structure, merging heterogeneous objects, or moving its content into prose;
+- **unitary epistemic role**: the instances of the kind license the same reasoning operations.
+
+Irreducibility tests whether a tool can generate the construct, whereas non-distortion tests whether an existing kind can encode it, so an example or an analogy mapping that an existing kind already states now fails the test.
 
 A construct that fails one condition is stated as a field, a value of a closed vocabulary, a relation, a unit of an existing record with an identifier of its own, or a generated view. ^failing-construct
+
+*Examples*: the retired design notes (commit 9e138e2, `docs/design/_backup/object-types-ontology/taxo-criteria-ontology.md`) worked three cases, and each fails non-distortion. A motivation is a field of the object that it motivates. A dependency is a typed relation between two records. A limitation is an attribute of the object that it limits, such as the domain of an answer or the idealizations of a model. An example fails in the same way, since it is a relation [`exemplifies`](../proposals/exposition-family.md), from an existing record to a concept or an answer.
 
 The record kinds of the concerns of an inquiry are fixed by the method, and the test governs every other construct. ^scope-of-admission
 
@@ -41,10 +45,10 @@ The record kinds of the concerns of an inquiry are fixed by the method, and the 
 | Admit a kind whenever one case, or the literature, names a construct | Each construct has a home of its own | The set grows with each case, as a field admitted for one case would, which the [grounds for a shared field](shared-field-grounds.md) exclude at the grain of a field |
 | Keep every construct inside the record of its concern | No kind is added | A model that grounds several answers would be repeated in each of them |
 | Let a classifier infer the kind of a record from its properties | No author assigns a kind | The kind of a record is authored, as the [decision against inference at run time](no-run-time-inference.md#^excluded-inference) requires |
-| Five conditions, all required | Each kind has a stated warrant, and the set grows only by constructs that several records cite and that an author edits apart | A construct that only one record cites stays inside that record, and its author edits it there |
+| Seven conditions, all required | Each kind has a stated warrant, and the set grows only by constructs that several records cite and that an author edits apart | A construct that only one record cites stays inside that record, and its author edits it there |
 
 ## Consequences
 
-- The model passes the five conditions, and the transformation fails independent identity, since it has no identity apart from its destination model.
+- The model passes the seven conditions. Stated through the blocks of its target, a stylized model asserted an identity that a model never has with its target, as the [decision on answers, models and bindings](answers-models-bindings.md) found, and every model licenses the same reasoning operations: a derivation or a simulation runs on it, and a binding, when one exists, carries its results to a target. The transformation fails independent identity, since it has no identity apart from its destination model.
 - A decision that admits a record kind states how the kind meets each condition. The new kind also declares the segments of its identifier and its [record schema](record-schemas.md).
 - A relation reified as a record of its own passes the same test, under the goal `relation-registry`.

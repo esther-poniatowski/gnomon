@@ -1,12 +1,10 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying the modal strength
   - Modal strength
-tags: []
-source:
 ---
 # Specifying the modal strength
 

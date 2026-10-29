@@ -37,7 +37,7 @@ Contributions to the codebase should be developed in a local clone of the reposi
 
    ```sh
    conda activate gnomon
-   pip install -e /src/gnomon
+   pip install -e .
    ```
 
 ### Using the commit message template
@@ -106,7 +106,7 @@ aliases:
 ---
 ```
 
-- `tags` names the kind of the note, drawn from the vocabulary below.
+- `tags` names the kind of the note, and its state when the note is not stable, drawn from the two vocabularies below. The kind comes first.
 - `index` links the entry point of the folder holding the note, as a Markdown link whose path starts at the repository root. An `_index.md` points one level up instead, at the index of its parent folder; the documentation root has no parent and omits the key.
 - `aliases` fixes the name under which the note is cited. Each alias is unique across `docs/`.
 
@@ -123,12 +123,24 @@ The order is fixed, so that a divergence shows up in a diff.
 | `reference`        | External work, stated on its own terms            |
 | `audit`            | Assessment on which a decision rests              |
 | `generated`        | View built by a tool from the records             |
+| `method`           | Method note of the epistemology                   |
+| `definition`       | Definition note of the epistemology               |
+| `decision`         | Architecture decision record                      |
+
+| Tag        | State of the note                                 |
+|------------|---------------------------------------------------|
+| `wip`      | Note still being drafted                          |
+| `revision` | Note under revision, whose content may change     |
+
+A stable note, or an accepted decision, carries no state tag.
 
 ### Registering a note
 
-Each folder carries an `_index.md` registering every file it holds, images included. Register a new file in the same edit that creates it: a later pass answers a different concern and leaves orphans behind.
+Each folder carries an `_index.md` registering every file that it holds, images included. Register a new file in the same edit that creates it: a later pass answers a different concern and leaves orphans behind.
 
-An entry names the note and states what a reader obtains from it, so that a reader chooses one file rather than opening several.
+An entry gives the title of the note as link text, followed by one clause stating why a reader opens the note, so that a reader chooses one file rather than opening several. The clause opens on a verb in the present tense, whose implicit subject is the note, and it closes without a period, as in the entries of the [epistemology index](docs/epistemology/_index.md). The clause states the goal of the reader, never a summary of the content, which drifts when the note changes.
+
+An index holds only four kinds of unit: its own goal, stated in one clause of the same form; group headings, each with an optional one-sentence description; the entries; and callouts `[!IMPORTANT]` for its conventions and `[!WARNING]` for its warnings, each under a short title. When two notes have neighboring scopes, the index of their folder tells them apart, and the notes do not.
 
 ### Cross-references
 

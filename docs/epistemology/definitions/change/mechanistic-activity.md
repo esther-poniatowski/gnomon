@@ -1,12 +1,11 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Change](docs/epistemology/definitions/change/_index.md)"
 aliases:
   - Mechanistic activity
   - Activities (mechanistic)
-tags: []
-source:
 ---
 # Mechanistic activity
 

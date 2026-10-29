@@ -1,11 +1,9 @@
 ---
-role: decision
-status: accepted
+tags:
+  - decision
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Itinerary and product types
-tags: []
-source:
 ---
 # Itinerary and product types
 

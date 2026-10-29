@@ -1,11 +1,9 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying an epistemic task
-tags: []
-source:
 ---
 # Specifying an epistemic task
 

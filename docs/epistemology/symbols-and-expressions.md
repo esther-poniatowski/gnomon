@@ -1,12 +1,10 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Symbols and expressions
   - Symbols of an inquiry record
-tags: []
-source:
 ---
 # Symbols and expressions of an inquiry record
 

@@ -1,14 +1,13 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Representations](docs/epistemology/definitions/representations/_index.md)"
 aliases:
   - Representation and encoding
   - Encoding
   - Readout
   - Representation geometry
-tags: []
-source:
 ---
 # Representation and encoding
 
@@ -39,7 +38,7 @@ which fixes the Euclidean distances between the images of two inputs, $\|e(u)-e(
 
 ## Consequences for a record
 
-- **One geometry can be the explanandum of one question and the explanans of another.** A first question describes the geometry, and a second question explains a capacity of readout by that geometry. The two questions are [linked questions](../inquiry/problem-and-question.md#^linked-questions), and the second links to the first with the relation `explanans-from`.
+- **One geometry can be the explanandum of one question and the explanans of another.** The example of the [linked questions](../inquiry/problem-and-question.md#^linked-questions) states the link between the two questions.
 - **Each representational item of the benchmark takes one place in the records.** The benchmark targets networks in their most abstract form, a [class of possible systems](model.md), so no item below is a claim about cortex. ^decision-table
 
 | Item | `phenomenon.category` | `explanans.factor` | Law `role` | Reading |

@@ -1,14 +1,13 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Bearers and systems](docs/epistemology/definitions/systems/_index.md)"
 aliases:
   - Entity, object and thing
   - Entity
   - Object
   - Thing
-tags: []
-source:
 ---
 # Entity, object and thing
 

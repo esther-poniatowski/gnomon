@@ -1,12 +1,11 @@
 ---
-role: definition
-status: wip
+tags:
+  - method
+  - wip
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Specifying the model and its binding
   - Model and binding
-tags: []
-source:
 ---
 # Specifying the model and its binding
 

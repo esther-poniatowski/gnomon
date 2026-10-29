@@ -1,16 +1,15 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
 aliases:
   - Problem-posing activities
   - Problematization
   - Question formulation
   - Subject identification
-  - Question decomposition
+  - Question decomposition (activity)
   - Question selection
-tags: []
-source:
 ---
 # Problem-posing
 

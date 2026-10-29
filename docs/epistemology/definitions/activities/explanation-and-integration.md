@@ -1,6 +1,7 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
 aliases:
   - Explanatory and integrative activities
@@ -8,8 +9,6 @@ aliases:
   - Unification
   - Reduction
   - Integration of theories
-tags: []
-source:
 ---
 # Explanation and integration
 

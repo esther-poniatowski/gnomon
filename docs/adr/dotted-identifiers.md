@@ -1,11 +1,9 @@
 ---
-role: decision
-status: accepted
+tags:
+  - decision
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Dotted identifiers
-tags: []
-source:
 ---
 # Dotted identifiers
 

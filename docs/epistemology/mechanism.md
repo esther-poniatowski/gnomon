@@ -1,12 +1,10 @@
 ---
-role: definition
-status: stable
+tags:
+  - method
 index: "[Epistemology](docs/epistemology/_index.md)"
 aliases:
   - Mechanism
   - Specifying a mechanistic answer
-tags: []
-source:
 ---
 
 # Specifying a mechanistic answer

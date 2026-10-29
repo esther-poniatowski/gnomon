@@ -1,14 +1,13 @@
 ---
-role: definition
-status: wip
+tags:
+  - definition
+  - wip
 index: "[Quantities and states](docs/epistemology/definitions/quantities/_index.md)"
 aliases:
   - State, state space and configuration
   - State
   - State space
   - Configuration
-tags: []
-source:
 ---
 # State, state space and configuration
 
