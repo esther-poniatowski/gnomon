@@ -42,7 +42,7 @@ Two independent axes supply the options for the level $\lambda$. In addition, a 
 	
     A question that links two levels of analysis takes the option `mapping`: the answer gives both descriptions and maps one onto the other. A further level, learning, has been added for trained systems [poggio2012]. A question about learning needs no value on the substrate axis, because its phenomenon is the acquisition itself (for instance, "training produces this algorithm").
 
-- **The level bounds the terms of the answer without selecting any.** The terms $V$ of the proposed model belong to the [elements of a candidate answer](answer-form.md#^answer-elements). The level $\lambda$ only delimits the set from which these terms are drawn.
+- **The level bounds the terms of the answer without selecting any.** The terms $V$ of the proposed model belong to the [elements of the model on which a candidate answer rests](model-and-binding.md#^model-elements). The level $\lambda$ only delimits the set from which these terms are drawn.
 
 - **The level is fixed by the epistemic task, not by the [subject of inquiry](subject-of-inquiry.md).** The level restricts the admissible answers without naming an object of the question. Beyond its topic and its contrast, a why-question constrains its answers only through the relevance relation [vanfraassen1980]. The level $\lambda$ therefore qualifies the relation $R$.
 

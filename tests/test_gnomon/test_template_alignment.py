@@ -8,6 +8,7 @@ template key is left undocumented.
 The association is lexical, so that the notes stay readable without the templates: the name of
 a row is the name of its key, or begins with it ("Domain of conditions" for ``domain``), and a
 nested specification is written "Parent: child" ("Tests: admissibility" for ``tests.admissibility``).
+A note holding two tables under the same header names each by the block anchor that precedes it.
 """
 
 from __future__ import annotations
@@ -77,12 +78,9 @@ def resolve(slugs: Sequence[str], paths: Sequence[str], prefix: str) -> str | No
                         children.append(path)
                 elif path.startswith(base + ".") and path.count(".") == base.count(".") + 1:
                     children.append(path.split(".")[-1])
-        hit = next(
-            (
-                key
-                for key in dict.fromkeys(children)
-                if name == key or name.startswith(key + "_") or key.startswith(name + "_")
-            ),
+        candidates = list(dict.fromkeys(children))
+        hit = name if name in candidates else next(  # an exact name wins over a prefix: "data_model" over "data"
+            (key for key in candidates if name.startswith(key + "_") or key.startswith(name + "_")),
             None,
         )
         if hit is None:
@@ -96,22 +94,37 @@ def resolve(slugs: Sequence[str], paths: Sequence[str], prefix: str) -> str | No
     return parent
 
 
-def table_rows(note: str, header: str) -> list[str]:
-    """Return the first cell of every row of the table opened by ``header``."""
+#: A table header, or a pair of a block anchor and a header: the first table opened by the header
+#: after the line that declares the anchor.
+Header = str | tuple[str, str]
+
+
+def table_lines(note: str, header: Header) -> list[str]:
+    """Return the body rows of the table opened by ``header``, as lines of the note."""
     lines = (DOCS / note).read_text(encoding="utf-8").splitlines()
-    start = next((i for i, line in enumerate(lines) if line.startswith(header)), None)
-    assert start is not None, f"no table opening with {header!r} in {note}"
+    anchor, opening = header if isinstance(header, tuple) else ("", header)
+    after = 0
+    if anchor:
+        after = next((i for i, line in enumerate(lines) if line.rstrip().endswith(f"^{anchor}")), -1)
+        assert after >= 0, f"no block anchor ^{anchor} in {note}"
+    start = next((i for i, line in enumerate(lines) if i >= after and line.startswith(opening)), None)
+    assert start is not None, f"no table opening with {opening!r} in {note}"
     end = start
     while end + 1 < len(lines) and lines[end + 1].startswith("|"):
         end += 1
-    return [line.lstrip("|").split("|")[0].strip() for line in lines[start + 2 : end + 1]]
+    return lines[start + 2 : end + 1]
+
+
+def table_rows(note: str, header: Header) -> list[str]:
+    """Return the first cell of every row of the table opened by ``header``."""
+    return [line.lstrip("|").split("|")[0].strip() for line in table_lines(note, header)]
 
 
 def template(name: str) -> dict[str, Any]:
     return yaml.safe_load((TEMPLATES / name).read_text(encoding="utf-8"))
 
 
-def documented_keys(note: str, header: str, paths: Sequence[str], prefix: str) -> list[str]:
+def documented_keys(note: str, header: Header, paths: Sequence[str], prefix: str) -> list[str]:
     keys = []
     for row in table_rows(note, header):
         key = resolve(row_slugs(row), paths, prefix)
@@ -149,23 +162,36 @@ PAIRS = [
         "task.admissible_explanans",
         {},
     ),
+    ("answer-core", "answer-form.md", "| Element", "answer.yml", None, "", ELSEWHERE_MATURITY),
+    ("answer-aim-blocks", "answer-form.md", "| Aim |", "answer.yml", "aim_block", "aim_block", {}),
     (
-        "answer-form",
+        "answer-explanation-block",
         "answer-form.md",
-        "| Element",
+        "| Specification",
         "answer.yml",
+        "aim_block.explanation",
+        "aim_block.explanation",
+        {},
+    ),
+    ("model", "model-and-binding.md", "| Element", "model.yml", None, "", ELSEWHERE_MATURITY),
+    (
+        "binding",
+        "model-and-binding.md",
+        ("binding-record", "| Specification"),
+        "binding.yml",
         None,
         "",
-        {**ELSEWHERE_MATURITY, "answer_statement": "answer-form.md"},
+        ELSEWHERE_MATURITY,
     ),
+    ("key", "model-and-binding.md", ("key-record", "| Specification"), "key.yml", None, "", ELSEWHERE_MATURITY),
     (
         "assessment",
         "satisfaction-conditions.md",
-        "| Specification",
+        ("assessment-record", "| Specification"),
         "assessment.yml",
         None,
         "",
-        {**ELSEWHERE_MATURITY, "answer": "satisfaction-conditions.md", "question": "satisfaction-conditions.md"},
+        ELSEWHERE_MATURITY,
     ),
     ("itinerary", "itinerary.md", "| Specification", "itinerary.yml", None, "", {}),
 ]
@@ -248,34 +274,54 @@ def test_the_aim_note_lists_the_requirement_registry() -> None:
 #: The cell openings of the column "When it is required" that state a registered requirement.
 REQUIREMENT_CELLS = {"always": "always", "from `identified`": "identified", "from `specified`": "specified"}
 
+# (registry entry, note, table header, template, prefix): a record kind is read under `always` and
+# `by_commitment`, and the path of an aim block under `by_block`.
+REQUIREMENT_TABLES = [
+    ("target-system", "target-system.md", "| Specification", "target-system.yml", ""),
+    ("phenomenon", "phenomenon.md", "| Specification", "phenomenon.yml", ""),
+    ("background", "background.md", "| Specification", "background.yml", ""),
+    ("problem", "problem.md", "| Specification", "problem.yml", ""),
+    ("itinerary", "itinerary.md", "| Specification", "itinerary.yml", ""),
+    ("answer", "answer-form.md", "| Element", "answer.yml", ""),
+    ("aim_block.explanation", "answer-form.md", "| Specification", "answer.yml", "aim_block.explanation"),
+    ("model", "model-and-binding.md", "| Element", "model.yml", ""),
+    ("binding", "model-and-binding.md", ("binding-record", "| Specification"), "binding.yml", ""),
+    ("key", "model-and-binding.md", ("key-record", "| Specification"), "key.yml", ""),
+    ("assessment", "satisfaction-conditions.md", ("assessment-record", "| Specification"), "assessment.yml", ""),
+]
+
 
 @pytest.mark.parametrize(
-    "kind,note",
-    [
-        ("target-system", "target-system.md"),
-        ("phenomenon", "phenomenon.md"),
-        ("background", "background.md"),
-        ("problem", "problem.md"),
-        ("itinerary", "itinerary.md"),
-    ],
+    "entry,note,header,tpl,prefix", REQUIREMENT_TABLES, ids=[table[0] for table in REQUIREMENT_TABLES]
 )
-def test_the_requirement_rows_of_a_note_are_the_registry_entries(kind: str, note: str) -> None:
-    """A row marked required always, or from a level of commitment, is one the registry lists there."""
-    lines = (DOCS / note).read_text(encoding="utf-8").splitlines()
-    start = next(i for i, line in enumerate(lines) if line.startswith("| Specification"))
+def test_the_requirement_rows_of_a_note_are_the_registry_entries(
+    entry: str, note: str, header: Header, tpl: str, prefix: str
+) -> None:
+    """A row marked required always, or from a level of commitment, is one the registry lists there.
+
+    Each row resolves to the key path of its template, so a list traversed on the way is written
+    ``[]``, as the registry writes it; a path inside an aim block is relative to that block.
+    """
+    paths = flatten(template(tpl))
     documented: dict[str, list[str]] = {section: [] for section in REQUIREMENT_CELLS.values()}
-    for line in lines[start + 2:]:
-        if not line.startswith("|"):
-            break
+    for line in table_lines(note, header):
         cells = [c.strip() for c in line.strip("|").split("|")]
         for opening, section in REQUIREMENT_CELLS.items():
             if len(cells) > 1 and cells[1].lower().startswith(opening):
-                documented[section].append(".".join(slug(part) for part in cells[0].split(" — ")[0].split(": ")))
+                key = resolve(row_slugs(cells[0]), paths, prefix)
+                assert key is not None, f"{note}: no key of {tpl} answers to the row {cells[0]!r}"
+                documented[section].append(key[len(prefix) + 1 :] if prefix else key)
     registry = yaml.safe_load((REGISTRY / "requirements.yml").read_text())
-    declared = {
-        "always": registry["always"].get(kind, []),
-        **{level: (registry["by_commitment"].get(level) or {}).get(kind, []) for level in ("identified", "specified")},
-    }
+    if entry in (registry.get("by_block") or {}):
+        declared = {"always": registry["by_block"][entry], "identified": [], "specified": []}
+    else:
+        declared = {
+            "always": registry["always"].get(entry, []),
+            **{
+                level: (registry["by_commitment"].get(level) or {}).get(entry, [])
+                for level in ("identified", "specified")
+            },
+        }
     assert documented == declared, f"{note}: {documented} against {declared}"
 
 
@@ -290,6 +336,9 @@ def test_the_requirement_rows_of_a_note_are_the_registry_entries(kind: str, note
         "answer.yml",
         "assessment.yml",
         "itinerary.yml",
+        "model.yml",
+        "binding.yml",
+        "key.yml",
     ],
 )
 def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
@@ -330,15 +379,27 @@ def test_the_virtues_of_the_note_are_the_options_of_the_question() -> None:
     assert names == [opt.strip() for opt in options.group(1).split("|")]
 
 
-@pytest.mark.parametrize("tier", ["admissibility", "warrant"])
+def criteria(header: Header, column: int) -> list[str]:
+    """Return the criteria of a table of tests, as the assessment template writes them."""
+    return [
+        line.strip("|").split("|")[column].strip().lower().replace(" ", "-")
+        for line in table_lines("satisfaction-conditions.md", header)
+    ]
+
+
+#: The tables of tests of each tier: the tests of the core and of each aim block for admissibility,
+#: and the table of the warrant level. The column holds the name of the criterion.
+TIERS = {
+    "admissibility": [(("admissibility-per-block", "| Criterion"), 0), ("| Aim block |", 1)],
+    "warrant": [(("warrant-through-binding", "| Criterion"), 0)],
+}
+
+
+@pytest.mark.parametrize("tier", sorted(TIERS))
 def test_the_criteria_of_the_note_are_the_tests_of_the_assessment(tier: str) -> None:
-    note = (DOCS / "satisfaction-conditions.md").read_text(encoding="utf-8")
-    stop = "\n## Warrant" if tier == "admissibility" else r"\n\*Example\*"
-    section = re.search(rf"## {tier.capitalize()}\n(.*?){stop}", note, re.S)
-    assert section is not None, f"no {tier} table in the note"
-    rows = [line for line in section.group(1).splitlines() if line.startswith("|")][2:]
-    criteria = [row.split("|")[1].strip().lower().replace(" ", "-") for row in rows]
-    assert criteria == list(template("assessment.yml")["tests"][tier])
+    """Each criterion of the tables of a tier is one test of the template, in the order of the note."""
+    documented = [name for header, column in TIERS[tier] for name in criteria(header, column)]
+    assert documented == list(template("assessment.yml")["tests"][tier])
 
 
 def test_every_template_parses_and_declares_its_kind() -> None:
@@ -362,9 +423,41 @@ def test_the_occurrence_table_of_the_phenomenon_note_is_the_registry() -> None:
     assert documented == declared
 
 
-def test_the_laws_of_an_answer_take_the_keys_of_the_laws_of_a_background() -> None:
-    """An answer states its laws in background form, so its law entries carry every key of a background law."""
-    answer_keys = set(template("answer.yml")["laws"][0])
+def test_the_laws_of_a_model_take_the_keys_of_the_laws_of_a_background() -> None:
+    """A model states its laws in background form, so its law entries carry every key of a background law."""
+    model_keys = set(template("model.yml")["laws"][0])
     background_keys = set(template("background.yml")["laws"][0])
-    assert background_keys <= answer_keys, sorted(background_keys - answer_keys)
+    assert background_keys <= model_keys, sorted(background_keys - model_keys)
+
+
+def test_the_aim_categories_of_the_note_are_the_registry() -> None:
+    """The Category column of the registry of aims states the category that the registry declares.
+
+    An exploration takes its category from the origin of its equivalence criterion, so its cell
+    names one category per origin.
+    """
+    names = {"answer content": "answer-content", "conceptual work": "conceptual-work", "mode of inquiry": "mode-of-inquiry"}
+    documented: dict[str, Any] = {}
+    for line in table_lines("epistemic-aim.md", "| Epistemic aim | Category"):
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        aim = re.search(r"\(`([a-z-]+)`\)", cells[0])
+        assert aim is not None, f"no aim value in {cells[0]!r}"
+        by_origin = re.findall(r"(answer content|conceptual work|mode of inquiry), when (?:its|the) (?:equivalence )?criterion is an (input|output)", cells[1])
+        documented[aim.group(1)] = {o: names[c] for c, o in by_origin} if by_origin else names[cells[1]]
+    aims = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"]["question"]["task.epistemic_aim"]
+    assert documented == {entry["value"]: entry.get("category") for entry in aims}
+
+
+def test_the_answer_conditions_of_the_note_are_the_registry() -> None:
+    """Each row of the table of answer conditions states the three conditions that the registry declares."""
+    def plain(cell: str) -> str:
+        return re.sub(r"\s*\[[a-z0-9_]+\]", "", cell).strip()
+
+    documented = {}
+    for line in table_lines("epistemic-aim.md", "| Aim | Direct answer |"):
+        cells = [plain(c) for c in line.strip("|").split("|")]
+        documented[cells[0].strip("`")] = tuple(cells[1:4])
+    aims = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"]["question"]["task.epistemic_aim"]
+    declared = {e["value"]: (e.get("direct_answer"), e.get("conclusive_when"), e.get("presupposes")) for e in aims}
+    assert documented == declared
 

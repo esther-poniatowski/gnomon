@@ -1,0 +1,91 @@
+# method: `docs/epistemology/model-and-binding.md`; one file per model, which several answers can ground
+# symbols and expressions: `docs/epistemology/symbols-and-expressions.md`
+# declare the constituents, index sets, variables and parameters in target-system form, and the laws and organization in background form
+# no entry refers to one question, and no quantity enters by reference to a target quantity: a binding relates the model to its target
+# name a symbol of the target by source identifier and symbol: `system.TOPIC#SYMBOL`
+# replace every UPPERCASE placeholder; leave a field empty while it is not filled
+# specifications follow the order of the method note
+
+title: "SHORT NAME OF THE MODEL"
+id: mod.TOPIC.NAME
+type: model
+status: provisional              # provisional | stabilized | retracted
+
+background: bg.TOPIC.NAME        # fill when a law of the model carries the warrant `derived` or `derived-in-a-limit`
+
+constituents:                    # C: the units that the model treats as bearers
+  - name: "KIND OF UNIT"
+    symbol: SYMBOL
+    notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
+    variant: SYMBOL              # symbol of the target variant that the entry models; omit when the model stands for every member of the class
+    extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    map: "EXPRESSION OVER THE CONSTITUENTS DECLARED FOR THE TARGET"   # give for a unit defined from the target, such as a coarse-graining, a mode decomposition, an aggregation or a quotient by a symmetry; omit for a unit of the model alone
+
+index_sets:                      # only sets that the target does not declare
+  - name: "NAME OF THE SET"
+    symbol: SYMBOL
+    notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
+    variant: SYMBOL              # symbol of the target variant that the entry models; omit when the model stands for every member of the class
+    extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    structure:                   # continuum | discrete-set | interval
+
+variables:                       # part of V: quantities that vary in the model
+  - name: "NAME OF THE VARIABLE"
+    symbol: SYMBOL
+    notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
+    variant: SYMBOL              # symbol of the target variant that the entry models; omit when the model stands for every member of the class
+    determined:                  # within (its value is fixed inside the model) | outside (its value varies but is set beyond the model)
+    signature: [SYMBOL]          # one constituent kind or index set per place; empty for the model as a whole
+    values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"   # an expression over the symbols of the model, or a map other than the identity from quantities of the target
+    condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
+    selects:                     # unique | any | all; required with a condition
+    reading: "THE EXPRESSION IN WORDS"
+    shared: false                # true when one value holds for every tuple of the signature
+
+parameters:                      # part of V: quantities that the model holds fixed while the phenomenon unfolds; a binding marks those it calibrates
+  - name: "NAME OF THE PARAMETER"
+    symbol: SYMBOL
+    notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
+    variant: SYMBOL              # symbol of the target variant that the entry models; omit when the model stands for every member of the class
+    signature: [SYMBOL]
+    values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived parameter
+    condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
+    selects:                     # unique | any | all; required with a condition
+    reading: "THE EXPRESSION IN WORDS"
+    shared: false                # true when one value holds for every tuple of the signature
+
+laws:                            # L: dependences linking the terms of the model, in background form
+  - name: "NAME OF THE LAW"
+    symbol: SYMBOL
+    variant: SYMBOL              # symbol of the target variant that the entry models; omit when the model stands for every member of the class
+    signature: [SYMBOL]          # places the claim ranges over; empty for a claim about the model as a whole
+    role:                        # evolution | input-output | measurement | state-constraint | distribution | admissibility
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"
+    reading: "THE LAW IN WORDS"
+    warrant:                     # derived (from the laws of the background) | derived-in-a-limit | posited | fitted | measured
+    rests_on: "THE LAWS, THE ASSUMPTION OR THE DATA THAT THE WARRANT REFERS TO"   # a law derived in a limit names the assumption that the limit introduces
+    origin: "POINTER TO THE SOURCE OF THE LAW: A PUBLICATION, A DATA SET OR A DERIVATION"
+    range: "EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE LAW IS ESTABLISHED"   # omit when the law is established across the whole model
+
+organization:                    # O: relations among parts and laws whose arrangement produces the behavior, in background form
+  - name: "NAME OF THE RELATION"
+    symbol: SYMBOL
+    variant: SYMBOL              # symbol of the target variant that the entry models; omit when the model stands for every member of the class
+    reading: "THE ARRANGEMENT IN WORDS"   # only content beyond the relation and the laws
+    relates: "prod(SOURCE, REACH), or subset(prod(SOURCE, REACH), ADJACENCY)"   # for a relation among parts: the connected tuples, reach last
+    among: [SYMBOL]              # for a relation among laws: the laws, reach last; fill exactly one of `relates` and `among`
+    realized_by: [SYMBOL]        # laws stating a relation among parts; the parts are read from their expressions
+
+assumptions:                     # only the assumptions that the laws require, such as a limit; each answer that rests on the model classifies them relative to its target
+  - id: ASSUMPTION
+    assumption: "THE ASSUMPTION IN WORDS"
+    motive:                      # tractability (the undistorted system admits no analysis) | isolation (it removes a factor judged irrelevant) | limit (it exposes the behavior of a limit system)
+    gain: "THE DERIVATION THAT THE ASSUMPTION MAKES POSSIBLE, OR THE FACTOR THAT IT EXPOSES"
+    removable:                   # controlled (a correction to the result is known) | ineliminable (the model cannot be stated without it) | unknown
+
+maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
+  FIELD.PATH: open

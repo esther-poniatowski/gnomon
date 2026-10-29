@@ -1,5 +1,7 @@
 # method: `docs/epistemology/satisfaction-conditions.md`; one file per assessed candidate answer
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
+# admissibility: keep the tests of the core and the tests of the block of the aim of the question; delete the tests of the other blocks
+# the erotetic relation of the answer routes the tests: a corrective answer holds no aim block, so its product test and the tests of its block are `not-applicable`
 # give `not-applicable` to a test whose specification is empty in the question
 # fill the appraisal for one answer at a time; name another candidate only when one exists
 
@@ -9,26 +11,40 @@ type: assessment
 status: provisional              # provisional | stabilized | retracted
 answer: ans.TOPIC.NAME
 
-question: quest.TOPIC.NAME
+question: quest.TOPIC.NAME       # for a reformulating answer, the revised question that the answer names
 
 tests:                           # verdict: pending | pass | fail | not-applicable
-  admissibility:
-    scope: {verdict: pending, evidence: "DERIVATION, SIMULATION, MEASUREMENT OR COMPARISON THAT SETTLES THE TEST"}
+  admissibility:                 # the tests of the core, then the tests of each aim block
+    product: {verdict: pending, evidence: "DERIVATION, SIMULATION, MEASUREMENT OR COMPARISON THAT SETTLES THE TEST"}
+    scope: {verdict: pending, evidence: ""}
     grain: {verdict: pending, evidence: ""}
-    contrast: {verdict: pending, evidence: ""}
-    relation: {verdict: pending, evidence: ""}
     individuation: {verdict: pending, evidence: ""}
     admissible-explanans: {verdict: pending, evidence: ""}
+    binding: {verdict: pending, evidence: ""}
     modal-strength: {verdict: pending, evidence: ""}
-    product: {verdict: pending, evidence: ""}
+    values: {verdict: pending, evidence: ""}             # block of a description
+    space: {verdict: pending, evidence: ""}              # block of an exploration
+    outputs: {verdict: pending, evidence: ""}            # block of a prediction
+    contrast: {verdict: pending, evidence: ""}           # block of an explanation
+    relation: {verdict: pending, evidence: ""}           # block of an explanation
+    target-status: {verdict: pending, evidence: ""}      # block of an explanation
+    witness-or-proof: {verdict: pending, evidence: ""}   # block of modal knowledge
+    consequence: {verdict: pending, evidence: ""}        # block of model knowledge
   warrant:
     phenomenon-established: {verdict: pending, evidence: ""}
     foil-evidence: {verdict: pending, evidence: ""}
     law-warrant: {verdict: pending, evidence: ""}
     closure: {verdict: pending, evidence: ""}
-    fidelity: {verdict: pending, evidence: ""}
+    fidelity: {verdict: pending, evidence: ""}           # name the comparisons that the verdict reads, and how each of their three reports bears on it
+    adequacy-to-use: {verdict: pending, evidence: ""}    # replaces fidelity for an answer that declares its use
     robustness: {verdict: pending, evidence: ""}
     selection: {verdict: pending, evidence: ""}
+
+comparisons:                     # one entry per comparison that a verdict of fidelity reads; the metric and the tolerance are read from the question
+  - id: COMPARISON
+    binding: bind.TOPIC.NAME
+    version: VERSION             # the version of the binding
+    data_version: VERSION        # the version of the data
 
 obligations:                     # one entry per proof obligation of the question, in the same order
   - verdict: pending             # pending | pass | fail | not-applicable

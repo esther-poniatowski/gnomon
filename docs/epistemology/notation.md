@@ -38,16 +38,17 @@ A single registry assigns every symbol of the method. One letter denotes one obj
 | $\omega$                   | the proof obligations                                      | [epistemic task](epistemic-task.md)                  |
 | $Q$                        | the question, $Q=\langle\Sigma,T\rangle$                   | [inquiry specification](inquiry-specification.md)    |
 | $\Gamma$                   | the circumstances under which adequacy is judged           | [virtues](epistemic-pragmatic-virtues.md)            |
-| $M$                        | a candidate answer, $M=\langle C,V,L,O,I,E\rangle$         | [answer form](answer-form.md)                        |
-| $C$                        | the constituents: the units that the answer treats as bearers (in a mechanism, its components) | [answer form](answer-form.md); [mechanism](mechanism.md) |
-| $V$                        | the terms: quantities, structures and properties           | [answer form](answer-form.md)                        |
-| $L$                        | the laws and structural relations (in a mechanism, its activities and interaction rules) | [answer form](answer-form.md); [mechanism](mechanism.md) |
-| $O$                        | the organization                                           | [answer form](answer-form.md); [mechanism](mechanism.md) |
-| $I$                        | the idealizations of the analysis                          | [answer form](answer-form.md)                        |
-| $E$                        | the explanans                                              | [answer form](answer-form.md)                        |
+| $h$                        | a candidate answer, a member of the set $H$ of proposed candidates | [epistemic problem](definitions/epistemic-problem.md#^candidates) |
+| $M$                        | a model, $M=\langle C,V,L,O\rangle$, which grounds the answers whose route runs on it | [model and binding](model-and-binding.md#^model-elements) |
+| $C$                        | the constituents: the units that the model treats as bearers (in a mechanism, its components) | [model and binding](model-and-binding.md#^model-elements); [mechanism](mechanism.md) |
+| $V$                        | the terms of the model: its variables and parameters       | [model and binding](model-and-binding.md#^model-elements) |
+| $L$                        | the laws and structural relations of the model (in a mechanism, its activities and interaction rules) | [model and binding](model-and-binding.md#^model-elements); [mechanism](mechanism.md) |
+| $O$                        | the organization of the model                              | [model and binding](model-and-binding.md#^model-elements); [mechanism](mechanism.md) |
+| $I$                        | the idealizations among the grounds of an answer, each relative to the target of the answer | [answer form](answer-form.md#^idealizations)         |
+| $E$                        | the explanans: the factors of the block of an explanation  | [answer form](answer-form.md#^explanation-block)     |
 | $i$, $k$, $t$              | the index families of parts, of instances, and of the course, each admitting several indices | [phenomenon](phenomenon.md)                          |
 
-- **A mechanism is written with the symbols of an answer.** A mechanism fills the fields of the answer form: its components are the constituents $C$, its activities and interaction rules are the laws $L$, and its organization is $O$. The [constituents of a mechanism](mechanism.md) therefore receive no private symbols. The [mapping onto the answer form](answer-form.md) states which aspect of a mechanism fills which field.
+- **A mechanism is written with the symbols of a model.** A mechanistic model fills the fields of the [model record](model-and-binding.md#^model-elements): its components are the constituents $C$, its activities and interaction rules are the laws $L$, and its organization is $O$. The [constituents of a mechanism](mechanism.md) therefore receive no private symbols. The [mapping onto the answer form](answer-form.md) states which aspect of a mechanism fills which field.
 
 - **Subscripted letters, calligraphic letters and names set in sans-serif stay free of the registry.** Such a symbol serves as an index, or names a mathematical object local to one note. The formula that introduces the symbol also fixes its meaning. *Examples*:
     - the state space $\mathcal{X}_i$ of a component, and its neighborhood $\mathcal{N}_i$;

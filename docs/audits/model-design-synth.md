@@ -36,7 +36,7 @@ The inquiry records commit to a model of the system under study at two points: t
 
 Both audits agree on eleven points, the diagnosis first. The recommended design builds on these points without reopening them.
 
-- **One commitment behind the shared blocks.** Both records declare a model, as the [answer form](../epistemology/answer-form.md#^answer-is-a-model) already states.
+- **One commitment behind the shared blocks.** Both records declare a model, as the [model record](../epistemology/model-and-binding.md#^model-record) now states.
 - **A missing relation.** No field states how the model of an answer relates to the model of the target. The fixtures state that relation in three places: derived expressions, warrants, and idealizations written in prose.
 - **Three defects repaired by the relation.** Once explicit, the relation repairs three of the five [trial defects](../../test/answer-assessment-template-issues.md) (claim domain, explanatory semantics, binding of values). Therefore, the direct repair of the answer template should pause.
 - **Chains of models.** A model can derive from a derived model, as each level of a tower of effective models does in theoretical physics.
@@ -79,7 +79,7 @@ Both audits agree on eleven points, the diagnosis first. The recommended design 
 | Each epistemic aim specializes the relation between a model result and the phenomenon. For prediction, the result predicts a value. For modal knowledge, the result entails or excludes. | Not adopted as a field, as resolved for the [account of the phenomenon](#^div-account). The [epistemic aim](../epistemology/epistemic-aim.md) table already names the product of each aim. |
 | An account entry states its scope, its modal strength and its accuracy. | Not adopted, as resolved for the [account of the phenomenon](#^div-account). The entry states only the value reached. |
 | `through` splits into inferential dependencies, mechanistic paths and correspondence mappings. | Adopted. The account entry lists its inferential dependencies, the factor keeps its path, and the key carries the correspondence. |
-| The [answer form](../epistemology/answer-form.md#^answer-is-a-model) reserves the warrant of a law to the answer, whereas the [target template](../../src/gnomon/data/templates/target-system.yml) and the [target system](../epistemology/target-system.md#^law-warrant) note give every target law a warrant. | Confirmed: a header comment of the [answer template](../../src/gnomon/data/templates/answer.yml) also reserves the warrant to the answer. The inconsistency is corrected when the answer form and its template are rewritten. |
+| The [answer form](../epistemology/answer-form.md) reserved the warrant of a law to the answer, whereas the [target template](../../src/gnomon/data/templates/target-system.yml) and the [background](../epistemology/background.md#^law-warrant) note give every admitted law a warrant. | Confirmed: a header comment of the [answer template](../../src/gnomon/data/templates/answer.yml) also reserves the warrant to the answer. The inconsistency is corrected when the answer form and its template are rewritten. |
 | A phenomenon model reuses generic components, but not the schema of a system model. | Adopted. |
 | The design is piloted on three contrasting fixtures, and becomes a strong candidate for ratification when no compulsory block stays unused. Composition, reversibility, loss of information and propagated scope are tested before any migration. | Adopted, with the tipping fixture added to the [pilot](#^pilot). |
 | The target-system record can stay intact at first, for compatibility. | Adopted for identifiers, as resolved for the [migration](#^div-migration). |
@@ -266,7 +266,7 @@ key:                             # one entry per imputed correspondence; an iden
 
 ### Operation vocabulary ^vocabulary
 
-The initial registry holds seven kinds. Six occur in the corpus. The seventh, `change-coordinates`, is admitted on design grounds: the [answer form](../epistemology/answer-form.md#^answer-elements) already names a mode decomposition among the maps defining new bearers.
+The initial registry holds seven kinds. Six occur in the corpus. The seventh, `change-coordinates`, is admitted on design grounds: the [model record](../epistemology/model-and-binding.md#^model-elements) names a mode decomposition among the maps defining new bearers.
 
 | Kind | Acts on | Truth | Information | Error | Instance in the corpus |
 | --- | --- | --- | --- | --- | --- |

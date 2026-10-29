@@ -45,7 +45,7 @@ The activities of this family output a concept, a measurement procedure that app
 
 ## Consequences for a record
 
-- **A derived term of an answer is introduced by an explicit definition.** The [derived terms of an answer](../../answer-form.md#^derived-terms) can be eliminated by substituting their definitions, so the norm of explicit definition applies to them.
+- **A derived term of an answer is introduced by an explicit definition.** The [derived terms of a model](../../model-and-binding.md#^derived-terms) can be eliminated by substituting their definitions, so the norm of explicit definition applies to them.
 - **An explanandum variable operationalizes a phenomenon.** The [specification of the phenomenon](../../phenomenon.md) restates a behavior through observables, each on a stated scale. A phenomenon first stated by a qualitative label may be operationalized later, when its manifestation gains features that parametrize it. For a phenomenon of category *capacity*, the operationalization is the [criterion of performance](../capacity-and-disposition.md) that tests the conditional of the capacity.
 - **The reference class of a target records a classification.** The [specification of the target system](../../target-system.md) states the class of admissible systems, and records whether its projectibility is assumed, tested or not claimed.
 

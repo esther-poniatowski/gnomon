@@ -12,7 +12,7 @@ source:
 
 > [!QUESTION] Goal: what must be fixed to specify the phenomenon that an inquiry is about?
 
-The phenomenon is the second component of the [subject of inquiry](subject-of-inquiry.md): the behavior of the target system that the question concerns.
+The phenomenon is the second component of the [subject of inquiry](subject-of-inquiry.md): the behavior of the target system that the question concerns. The record also owns the estimator of its explanandum variables, from which their estimates are computed, and declares what its data depend on, so that a model can be compared with it through a [binding](model-and-binding.md#^binding-record).
 
 > [!WARNING] Phenomena are features inferred from data, but they are distinct from the data [bogen1988].
 
@@ -41,6 +41,7 @@ The phenomenon is stated once in words and once formally, by the observables and
 | Explanandum variables: scale | when the values of the observable are measured | nominal · ordinal · interval · ratio · absolute · not-applicable | a regime label (nominal); a delay counted in training steps (ratio) | levels of measurement [stevens1946] |
 | Explanandum variables: expression | when the observable is derived from the state variables | "[expression over declared symbols]", whose binders consume the indices that it aggregates | the mean of the constituent rates; the minimum abundance $\min_i N_i$; the delay $t_{gen}-t_{fit}$ | — |
 | Explanandum variables: event | when the observable is the time of an event | the origin from which the clock starts, the horizon at which observation stops, and the censoring (right · left · interval · none) for an event whose time is unknown | a generalization event observed up to a finite training horizon, right-censored when the criterion is never met | survival analysis, censoring [ich2019] |
+| Explanandum variables: estimator | when the values of the observable are estimated from data | the estimator that computes the values from the data, the version of the data on which it runs, and the uncertainty that it reports; the estimates themselves are computed from these entries, not recorded | the peak of the power spectrum, estimated by Welch's method on version 3 of the recordings, with a bootstrap interval | the [estimation owned by the phenomenon](#^phenomenon-owns-estimation) |
 | Manifestations | from `specified` | per form, "[expression over the explanandum variables]" with its form: value · dependence · functional form · scaling · relation | $Y$ is "synchronous" (value); gamma power increases with contrast (dependence); $m(t)=A\sin(2\pi f t+\varphi)$ (functional form); $S_p(r)\sim r^{\zeta_p}$ (scaling); feasibility implies local stability (relation) | [hempel1948]; [woodward2003] |
 | Manifestations: features | when the form carries quantities that characterize the behavior | per feature, "[symbol] ∈ [set expression]" with the value observed within that set | the amplitude, the frequency and the phase of an oscillation; the exponents of a scaling law | [craver2013] |
 | Scope over instances (index $k$) — an instance is a member of the reference class of $S$, or one realization of a system (a trial, a random initialization, a disorder sample) | when the question ranges over a reference class or over repeated realizations | per source of variation, the declared quantities that it varies and the other sources held fixed meanwhile. Each entry also records its source: class member · realization · parameter draw · structure draw · scenario. It records its quantification as well: single instance · typical instance · ensemble summary · ensemble distribution · universal, meaning every member of the admitted class | the initialization draw, conditional on a fixed training specification (ensemble distribution); every model of the admitted class (universal) | [lundberg2021]; [ich2019] |
@@ -51,7 +52,11 @@ The phenomenon is stated once in words and once formally, by the observables and
 | Conditions and byproducts: byproducts | when the behavior has further effects outside the phenomenon | per byproduct, an expression over declared symbols with a justification that gives the reason for excluding it from the phenomenon | the metabolic cost of the sustained spiking | [craver2013] |
 | Evidential status | from `specified` | established across data sets or methods · reported · predicted · derived within a model | gamma oscillations in V1, recorded across laboratories (established); a transition to chaos in mean-field theory (predicted); the stationary rate of a balanced network (derived) | [bogen1988]; [colaco2018] |
 | Detection criterion | when the phenomenon is the product of the inquiry, or its status is weaker than established | per test, the condition that a candidate pattern must satisfy to count as established. The test also names the sources of variation across which the pattern must hold, and the external systems of the target that bound its conclusions | a pattern counts as established when it recurs across instances and across recording methods | [bogen1988]; [exploratory questions](#^exploratory-phenomenon) |
-| Data | when the status rests on recorded or derived material | per entry, "[pointer to a data set, a recording or a derivation]" that establishes the phenomenon | a recording session; a published figure; the derivation of a stationary rate | [bogen1988]; [colaco2018] |
+| Data | when the status rests on recorded or derived material | per entry, "[pointer to a data set, a recording or a derivation]" that establishes the phenomenon, with its version | a recording session, version 3; a published figure; the derivation of a stationary rate | [bogen1988]; [colaco2018] |
+| Data model — the models through which the data are produced or processed before they establish the phenomenon | when a model intervenes between the raw records and the data | per model, its kind: instrument model · background simulation · assimilation model · reconstruction, and the model record or the publication that states it | the forward model of the electrodes (instrument model); the reanalysis that fills the gaps of a temperature record (assimilation model) | [bokulichparker2021]; [parker2017] |
+| Observation error | when the values of the explanandum variables are compared with an answer | per explanandum variable or per data set, an error model: a distribution or a bound | a Gaussian error of 2 Hz on the peak frequency | [kennedyohagan2001] |
+| Pattern selection — how the pattern stated by the manifestations was selected from the data | when the data admit other patterns than the one stated | the selection procedure, the patterns set aside, and the question that motivated the selection | the gamma band selected among the bands of the spectrum, for the question of synchrony | [bokulichparker2021] |
+| Adequacy — the purposes for which the data model is adequate | when the record declares a data model | per purpose, the question or the kind of use for which the data model is adequate, with its grounds | adequate for the peak frequency, not for the phase of single neurons | [bokulichparker2021] |
 
 - **The explanandum variables restate the behavior in terms of the system's state.** Their possible values matter because an explanation answers counterfactual ("what-if-things-had-been-different") questions. Such a question asks for the changes that would have given $Y$ another value [woodward2003]. The same values also supply the default foils of the contrast $X$.
 
@@ -104,6 +109,16 @@ The phenomenon is stated once in words and once formally, by the observables and
 
 - **An object of research may admit several phenomena** when the [epistemic aim is a description](epistemic-aim.md). Experimental work often targets an "object of research", such as a memory system. Several phenomena then serve both as components of that object and as evidence for it [feest2017].
 
+- **A phenomenon owns the estimator of its explanandum variables.** The values of an explanandum variable are inferred from the data, and a measurement outcome is itself inferred through a model [tal2013]. The phenomenon therefore states the estimator, the version of the data and the uncertainty of each estimated variable. The estimates are computed from these entries, as a [comparison](model-and-binding.md#^comparison-recomputed) is, and never recorded by hand. A descriptive answer whose route is an estimation on the target cites the computed estimate as its claim, with the estimator and the version of the data among its grounds. A [comparison](model-and-binding.md#^comparison) of a model with the phenomenon reads these estimates when its binding targets the phenomenon. When the binding targets the data instead, the comparison reads the version of the data through an observation operator. In both cases, no answer estimates the explanandum variables a second time. In an exploratory inquiry, the phenomenon record holds the candidate observables and their estimator, as for any phenomenon, and the answer holds the content that the estimates do not fix: the partition of the explored space into classes, and the pattern of each class. ^phenomenon-owns-estimation
+
+- **A phenomenon declares what its data depend on.** Data models can contain the models under test, and a data model is adequate for some purposes and not for others [bokulichparker2021]. The phenomenon therefore declares four facts about its data, so that a comparison can detect circularity and the warrant test of [phenomenon established](satisfaction-conditions.md) can read the adequacy of the data: ^data-model-declarations
+    - the models of its data model, each with its kind: instrument model, background simulation, assimilation model or reconstruction [parker2017];
+    - its observation error, which the data own, whereas the structural discrepancy belongs to the binding and the tolerance to the question, as the [owners of the discrepancy](model-and-binding.md#^discrepancy-owners) state;
+    - the selection of its pattern, with the question that motivated the selection, since a pattern selected for one question can be uninformative for another;
+    - the purposes for which its data model is adequate.
+
+    A comparison raises its flag of circularity when a declared model of the data model overlaps with the model or the grounds of the answer compared.
+
 - **An exploratory question fixes a search space, and the inquiry produces the phenomenon.** Exploratory experimentation varies parameters systematically to find regularities and to form concepts, when no theory yet delimits the phenomenon [steinle1997]. This search is supported by instruments that measure many variables at once [franklin2005]. An exploratory question has the same fields as any other question, but each of them takes a different status:
 
     - empty, since they form the answer: the statement, the category, the occurrence class and the evidential status;
@@ -120,6 +135,7 @@ The phenomenon is stated once in words and once formally, by the observables and
 Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
 
 - [bogen1988] ○ Bogen & Woodward, "Saving the phenomena", _Philosophical Review_ 97(3), 1988
+- [bokulichparker2021] ◐ Bokulich & Parker, "Data models, representation and adequacy-for-purpose", *European Journal for Philosophy of Science* 11, 31, 2021
 - [colaco2018] ◐ [Colaço, "Rip it up and start again", _SHPS A_ 72, 2018](https://www.sciencedirect.com/science/article/abs/pii/S003936811730211X)
 - [craver2007] ◐ [Craver, _Explaining the Brain_, OUP, 2007](https://philpapers.org/rec/CRAETB-2)
 - [craver2013] ◐ [Craver & Darden, _In Search of Mechanisms_, U. Chicago Press, 2013](https://press.uchicago.edu/ucp/books/book/chicago/I/bo16123713.html)
@@ -129,13 +145,16 @@ Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks)
 - [hempel1948] ○ Hempel & Oppenheim, "Studies in the logic of explanation", _Philosophy of Science_ 15(2), 1948
 - [ich2019] ◐ [ICH E9(R1) Addendum on Estimands](https://en.wikipedia.org/wiki/ICH_E9\(R1\)_Addendum_On_Estimands_and_Sensitivity_Analyses_in_Clinical_Trials)
 - [kaiser2017] ◐ [Kaiser & Krickel, "The metaphysics of constitutive mechanistic phenomena", _BJPS_ 68(3), 2017](https://academic.oup.com/bjps/article/68/3/745/2669661)
+- [kennedyohagan2001] ◐ Kennedy & O'Hagan, "Bayesian calibration of computer models", *Journal of the Royal Statistical Society B* 63(3), 425–464, 2001
 - [kripke1980] ◐ Kripke, _Naming and Necessity_, Harvard University Press, 1980, pp. 54–57; reference fixing by a description, checked through secondary sources
 - [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)
 - [mezard1987] ◐ Mézard, Parisi & Virasoro, _Spin Glass Theory and Beyond_, World Scientific, 1987, quenched versus annealed averages
 - [mourelatos1978] ◐ Mourelatos, "Events, processes, and states", _Linguistics and Philosophy_ 2(3), 415–434, 1978; the three classes of situations, checked through secondary sources
+- [parker2017] ◐ Parker, "Computer simulation, measurement, and data assimilation", *British Journal for the Philosophy of Science* 68(1), 273–304, 2017
 - [robinson1950] ◐ [Robinson, "Ecological correlations and the behavior of individuals", _American Sociological Review_ 15(3), 1950](https://en.wikipedia.org/wiki/Ecological_correlation)
 - [steinle1997] ◐ [Steinle, "Entering new fields: exploratory uses of experimentation", _Philosophy of Science_ 64, S65–S74, 1997](https://philpapers.org/rec/STEENF)
 - [stevens1946] ◐ Stevens, "On the theory of scales of measurement", _Science_ 103, 1946, via [Wikipedia, Level of measurement](https://en.wikipedia.org/wiki/Level_of_measurement)
+- [tal2013] ◐ Tal, "Old and new problems in philosophy of measurement", *Philosophy Compass* 8(12), 1159–1173, 2013
 - [vanfraassen1980] ✓ van Fraassen, _The Scientific Image_, ch. 5, with [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
 - [woodward2003] ○ [Woodward, _Making Things Happen_, OUP, 2003](https://academic.oup.com/book/4324)
 - [woodward2010] ◐ [Woodward, "Causation in biology…", _Biology & Philosophy_ 25, 2010](https://link.springer.com/article/10.1007/s10539-010-9200-z)

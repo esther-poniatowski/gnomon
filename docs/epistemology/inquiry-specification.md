@@ -22,7 +22,7 @@ A research objective is specified in four layers, each with a **distinct logical
 | **1. [Subject of inquiry](subject-of-inquiry.md)**                       | What objects is the inquiry about?                                         | target system $S$, phenomenon/explanandum $P$, contrast class $X$, domain of conditions $D$                                                                                                                |
 | **2. [Epistemic task](epistemic-task.md)**                               | What *kind* of knowledge or *achievement* is sought?                       | epistemic aim $A$ (description vs prediction vs explanation vs exploration)<br>relevance relations $R$ (causal vs mechanistic vs mathematical)<br>modal status $\mu$ (how-actually vs how-possibly)<br>admissible explanans $\lambda$<br>required accuracy $\tau$ |
 | **3. [Epistemic and pragmatic virtues](epistemic-pragmatic-virtues.md)** | What must the answer accomplish to be practically or cognitively *useful*? | unification, economy, pragmatic use, robustness, intelligibility / qualitative grasp, tractability, etc                                                                                                    |
-| **4. [Answer form](answer-form.md) and [conditions of satisfaction](satisfaction-conditions.md)** | What form must the answer take, and which tests must it pass?      | constituents $C$, terms $V$, laws or structural relations $L$, organization $O$, idealizations $I$, explanans $E$<br>admissibility, warrant and appraisal                                                                     |
+| **4. [Answer form](answer-form.md) and [conditions of satisfaction](satisfaction-conditions.md)** | What form must the answer take, and which tests must it pass?      | claim, grounds and their roles, route, domain, status, erotetic relation<br>aim block, with the factors $E$ for an explanation<br>model, binding and computed comparison, when the route runs on a model<br>admissibility, warrant and appraisal |
 
 The components of each layer are denoted by letters, each with one meaning fixed across the notes by a shared [notation registry](notation.md).
 
@@ -40,7 +40,7 @@ Three results of the literature support separating the subject from the task:
 
 - In erotetic logic, a question divides into a *subject*, presenting the alternatives, and a *request*, specifying which of them the answer must select [belnap1976].
 - A why-question separates its topic, namely its *explanandum* and its *contrast class*, from the sort of information that it requests. The context of the question fixes that sort of information through a *relevance relation* [vanfraassen1980].
-- More broadly, an epistemic achievement, such as explanation or understanding, is distinguished from the objects that it bears on.
+- More broadly, an epistemic achievement, such as explanation or understanding, is distinguished from the objects that it bears on. Understanding, however, is not an [aim](epistemic-aim.md#^understanding) of the task, since it bears on a product of the inquiry without fixing the type of its answers.
 
 **Task (2) versus Answer form and conditions of satisfaction (4)**. Two results of the literature support separating the task from the tests of an answer:
 

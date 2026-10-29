@@ -112,13 +112,15 @@ The product types form a closed list. Each type classifies the epistemic objects
 | `phenomenon` | a stable feature of a target, detected from data, as defined in the note on [phenomena](../pattern-and-phenomenon.md) | `phenomenon` | exists |
 | `target-specification` | the declared constituents and quantities of a [target](../things-and-constructs.md) | `target-system` at commitment `specified` | exists |
 | `background-model` | the laws admitted about a target, with their closure and organization | [`background`](../../background.md) | exists |
-| `model` | a candidate [model](../model.md) of the target | `answer`, its model blocks | exists |
-| `consequence` | a statement true of a model, possibly false of the target | `answer.laws` with warrant `derived`, and `assessment.obligations` | partial |
+| `model` | a candidate [model](../model.md) of the target | [`model`](../../model-and-binding.md#^model-record) | exists |
+| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | [`binding`](../../model-and-binding.md#^binding-record) | exists |
+| `key` | a shared, versioned map between the side of a model and the side of its target | [`key`](../../model-and-binding.md#^key-record) | exists |
+| `consequence` | a statement true of a model, possibly false of the target | the block of model knowledge of an `answer`, and `assessment.obligations` | partial |
 | `hypothesis` | a [claim](../claim-and-hypothesis.md) with the attitude `hypothesized` | `answer` with status `hypothesized` | exists |
 | `verdict` | the outcome of a test of a claim or of a model | `assessment.tests` | exists |
 | `credence` | a degree of belief in a claim | `assessment.credence` | exists |
 | `ranking` | an order over rival candidates | `assessment.appraisal.preferred_over` | exists |
-| `explanation` | the claim that an explanans explains a phenomenon under the requested relation | `answer`, its explanans with the requested relation | exists |
+| `explanation` | the claim that an explanans explains a phenomenon under the requested relation | the block of an explanation of an `answer` | exists |
 | `inter-theory-relation` | a relation of unification, reduction or integration between [theories](../theory.md) | `to-create` | to-create |
 | `knowledge-state-change` | a change of the attitude or of the status of existing records | changes of the record `status`; a revision log is to create | partial |
 

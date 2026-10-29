@@ -340,6 +340,7 @@ activities:
     family: evaluation
     inputs:
       - model
+      - binding
       - question
     output: verdict
     norm: norm.validation

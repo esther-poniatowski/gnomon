@@ -74,14 +74,19 @@ product_types:
     record: [background]
     status: exists
   - id: model
-    record: [answer]
-    field_path: "constituents, index_sets, variables, parameters, laws, organization"
+    record: [model]
+    status: exists
+  - id: binding
+    record: [binding]
+    status: exists
+  - id: key
+    record: [key]
     status: exists
   - id: consequence
     record: [answer, assessment]
-    field_path: "answer: laws[] with warrant `derived`; assessment: obligations"
+    field_path: "answer: aim_block.model_knowledge; assessment: obligations"
     status: partial
-    condition: "A derived law of an answer, or a settled proof obligation. A consequence has a record only when an answer states it as a law or an assessment settles it as an obligation."
+    condition: "The consequence or the counterexample that the block of model knowledge of an answer states, or a settled proof obligation. A consequence derived on the way to another result, and stated by no answer, has no record."
   - id: hypothesis
     record: [answer]
     when: {status: [hypothesized]}
@@ -100,14 +105,14 @@ product_types:
     status: exists
   - id: explanation
     record: [answer]
-    field_path: explanans
+    field_path: aim_block.explanation
     status: exists
-    condition: "An answer whose explanans bears the requested relation to the explanandum."
+    condition: "An answer whose block of an explanation reads named dependences of its core as explanatory, by the requested relation."
   - id: inter-theory-relation
     record: to-create
     status: to-create
   - id: knowledge-state-change
-    record: [problem, question, answer, assessment, target-system, phenomenon, background]
+    record: [problem, question, answer, assessment, target-system, phenomenon, background, model, binding, key]
     field_path: status
     status: partial
     condition: "A change of the status of a record. A log of the revisions, with their grounds, is still to be created."

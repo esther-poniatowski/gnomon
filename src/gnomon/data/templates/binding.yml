@@ -1,0 +1,61 @@
+# method: `docs/epistemology/model-and-binding.md`; one file per binding of one model to one phenomenon
+# a binding records the inferences from the model to the target that its asserter licenses; the answers that rest on the model cite it
+# the maps that carry one side onto the other: `key.yml`, referenced by identifier and version
+# a change of a pair, a key, the domain or the discrepancy commits a new version; earlier versions and their comparisons stay unchanged
+# replace every UPPERCASE placeholder; leave a field empty while it is not filled
+# specifications follow the order of the method note
+
+title: "SHORT NAME OF THE BINDING"
+id: bind.TOPIC.NAME
+type: binding
+status: provisional              # provisional | stabilized | retracted
+
+model: mod.TOPIC.NAME            # the model in use
+
+target:
+  phenomenon: phen.TOPIC.NAME    # the phenomenon that the binding denotes
+  level:                         # phenomenon (compared with the explanandum variables that the phenomenon estimates) | data (compared with a version of the data through an observation operator)
+
+asserter: "THE PERSON, THE GROUP OR THE PUBLICATION THAT LICENSES THE INFERENCES"
+
+feature_pairs:                   # one entry per feature that the model exemplifies and that is imputed to the target
+  - id: PAIR
+    type:                        # quantity | pattern | regime | invariance-class | modal-profile | component
+    mode:                        # computed (a key maps the feature onto what the data determine) | argued (no data determine it; the answer cites the argument as a ground with the role `warrant`)
+    exemplified: "EXPRESSION OVER THE SYMBOLS OF THE MODEL"
+    imputed: phen.TOPIC.NAME#SYMBOL   # the feature of the target, by the symbol that the phenomenon declares; for a component pair, the constituent that the target system declares or the part that the admissible explanans admits
+    key: key.TOPIC.NAME          # computed pairs only
+    key_version: VERSION
+
+condition_pairs:                 # fill when a condition of the model stands for a condition of the target; one entry per pair
+  - id: PAIR
+    model_condition: "EXPRESSION OVER THE SYMBOLS OF THE MODEL"
+    target_condition: "EXPRESSION OVER THE SYMBOLS OF THE TARGET"
+    key: key.TOPIC.NAME
+    key_version: VERSION
+    calibration: false           # true for a parameter of the model fitted to the data
+
+domain:                          # the conditions of the target over which the pairs are asserted; one entry per region
+  - region: "EXPRESSION OVER DECLARED SYMBOLS"
+    kind:                        # interpolation (within the range of the calibration data) | extrapolation (outside it)
+
+structural_discrepancy:          # fill at quantitative grain; one entry per discrepancy model or bound
+  - pairs: [PAIR]                # the feature pairs that the discrepancy concerns
+    form:                        # model | bound
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"
+    reading: "THE SYSTEMATIC DIFFERENCE BETWEEN THE MODEL AT ITS BEST PARAMETERS AND THE TARGET"   # a discrepancy model fitted to data counts as calibration on those data
+
+calibration_provenance:          # fill when a pair carries a calibration parameter; one entry per calibration parameter
+  - parameter: SYMBOL            # a parameter of the model
+    data_version: VERSION        # the version of the data that fitted the parameter
+    method: "THE METHOD OF FITTING"
+    identifiable: false          # true when the data identify the parameter apart from the structural discrepancy
+
+grain:                           # quantitative (the pairs are compared by a metric) | qualitative (the pairs are compared by a match of patterns or regimes)
+
+version:
+  label: VERSION                 # a version identifier
+  committed: "TIME AT WHICH THIS VERSION WAS COMMITTED"
+
+maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
+  FIELD.PATH: open

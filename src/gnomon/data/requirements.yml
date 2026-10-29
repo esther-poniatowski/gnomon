@@ -2,6 +2,8 @@
 # these requirements and are checked against this file.
 #
 # `always` lists the specifications every record of a kind carries, whatever the inquiry.
+# `by_block` lists the specifications that an aim block of an answer carries whenever the answer
+# holds that block, keyed by the path of the block; its paths are relative to the block.
 # `by_commitment` lists the specifications that a target system or a phenomenon carries at each
 # level of commitment. The levels are cumulative: a record at `specified` also carries the
 # specifications of `identified`.
@@ -23,6 +25,19 @@ always:
   background: [describes, laws, closure]
   problem: [statement, kind, demand]
   itinerary: [addresses, steps]
+  answer: [claim, grounds, dependence, route, domain, status, support, modal_strength, erotetic_relation]
+  model: [constituents, variables, laws]
+  binding: [model, target, asserter, feature_pairs, domain, grain, version]
+  key: [kind, domain_and_codomain, expression, version]
+  assessment: [answer, question, tests.admissibility, tests.warrant]
+
+by_block:
+  aim_block.explanation:
+    - contrastive_explanandum
+    - explanatory_claim
+    - relation
+    - factors
+    - factors[].target_status
 
 by_commitment:
   identified:

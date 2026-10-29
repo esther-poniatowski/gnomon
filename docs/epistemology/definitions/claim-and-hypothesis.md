@@ -51,15 +51,15 @@ The attitude and the support of a claim take values in two closed lists: ^attitu
 | Attitude | the stance of the inquiry toward the claim | `entertained`, `hypothesized`, `accepted`, `retracted` |
 | Support | the grounds of the claim, independent of the attitude | `unsupported`, `informal`, `formally-proven`, `empirically-supported` |
 
-- **A hypothesis and an accepted claim differ by attitude only.** Their content can be identical: the same proposition is hypothesized while it is tested, and accepted once the test succeeds.
+- **A hypothesis and an accepted claim differ by attitude only.** Their content can be identical: the same proposition is hypothesized while it is tested, and accepted once a revision of the belief base admits it, as the [acceptance of an answer](../epistemic-aim.md#^acceptance) states.
 - **The attitude and the support vary independently.** *Examples*: a claim can be hypothesized with informal support, or accepted with no more than informal support. A formally proven claim can be retracted when its assumptions turn out to be false of the target.
 - **An explanation, as a product, is a claim.** Its content is that the explanans $E$ explains the phenomenon $P$ under the requested relation $R$. Therefore, the explanation carries an attitude and a support, as any claim does. The activity of explaining is typed in the [taxonomy of epistemic activities](activities/epistemic-activities.md).
 - **A prediction and an explanation can share their logical form.** In the deductive-nomological model, both derive the explanandum from laws and conditions. The two differ in the epistemic status of the explanandum, already known or not yet known [hempel1948]. Accounts that require a causal relation separate the two, since a prediction may rest on a symptom that does not cause the predicted event [salmon1984].
 
 ## Consequences for a record
 
-- **A candidate answer records the attitude and the support of its whole claim.** The [answer form](../answer-form.md) states the attitude in the field `status` and the support in the field `support`, with the values of the [two lists](#^attitude-support). Therefore, when the `status` of an answer is `hypothesized`, the answer is a hypothesis.
-- **The laws of a candidate answer are claims, each with a warrant of its own.** The `warrant` of a law states how the answer obtained that law: `derived`, `derived-in-a-limit`, `posited`, `fitted` or `measured`. This law-level list differs from the support of a whole claim, and it traces each law to its origin.
+- **A candidate answer records the attitude and the support of its claim.** A candidate answer holds one typed claim with its grounds, and the [answer form](../answer-form.md) states the attitude in the field `status` and the support in the field `support`, with the values of the [two lists](#^attitude-support). Therefore, when the `status` of an answer is `hypothesized`, the answer is a hypothesis.
+- **The laws on which a candidate answer rests are claims, each with a warrant of its own.** A law belongs to a [background record](../background.md#^law-warrant) or to a [model record](../model-and-binding.md#^model-elements), and the answer cites it among its grounds with the role `warrant`. The `warrant` of a law states how that law was obtained: `derived`, `derived-in-a-limit`, `posited`, `fitted` or `measured`. This law-level list differs from the support of the claim of an answer, and it traces each law to its origin.
 - **The conditions of satisfaction fix the tests of the claims before evaluation.** Before any answer is assessed, the [conditions of satisfaction](../satisfaction-conditions.md) state the tests deciding whether its claims hold.
 
 ---

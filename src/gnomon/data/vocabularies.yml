@@ -5,11 +5,55 @@
 # while it is not filled. The requirement registry decides whether an empty field is a gap.
 # A key repeats across blocks only where it carries the same vocabulary. The template comments
 # document these vocabularies and are checked against this file, so no check reads a document.
+#
+# Each epistemic aim of a question also states its category and its three answer conditions,
+# documented by the registry of aims (`docs/epistemology/epistemic-aim.md`). The category of an
+# exploration depends on the origin of its equivalence criterion, so it is keyed by that origin.
+# The kind `comparison` has no template: a comparison is computed from a binding, and its
+# vocabulary lists the values of the calibration treatment that the computation reports.
 
 id: registry.vocabularies
 type: vocabulary-registry
 vocabularies:
   answer:
+    grounds.role:
+    - value: assumption
+    - value: idealization
+    - value: condition
+    - value: datum
+    - value: warrant
+    - value: criterion
+    grounds.motive:
+    - value: tractability
+      name: the undistorted system admits no analysis
+    - value: isolation
+      name: it removes a factor judged irrelevant
+    - value: limit
+      name: it exposes the behavior of a limit system
+    grounds.removable:
+    - value: controlled
+      name: a correction to the idealized result is known
+    - value: ineliminable
+      name: the model cannot be stated without it
+    - value: unknown
+    dependence.kind:
+    - value: minimal-set
+      name: grounds that suffice for the claim
+    - value: sensitivity
+      name: an analysis over one ground
+    - value: robustness
+      name: an analysis across models that share the claimed structure
+    route.kind:
+    - value: derivation
+    - value: proof
+    - value: simulation
+    - value: estimation
+    - value: measurement
+    route.family_fidelity:
+    - value: per-member
+      name: one comparison per member, each of which must pass
+    - value: ensemble
+      name: one comparison of the ensemble of the family
     .status:
     - value: entertained
     - value: hypothesized
@@ -20,77 +64,71 @@ vocabularies:
     - value: informal
     - value: formally-proven
     - value: empirically-supported
+    uncertainty.form:
+    - value: interval
+    - value: distribution
+    - value: bound
     .modal_strength:
     - value: actual
     - value: possible
     - value: necessary
-    laws.warrant:
-    - value: derived
-      name: from the admitted background laws
-    - value: derived-in-a-limit
-    - value: posited
-    - value: fitted
-    - value: measured
-    idealizations.motive:
-    - value: tractability
-      name: the undistorted system resists analysis
-    - value: isolation
-      name: an omission read as complete, whose omitted factors make no difference to the phenomenon
-    - value: limit
-      name: it exposes the behavior of a limit system
-    idealizations.removable:
-    - value: controlled
-      name: a correction to the idealized result is known
-    - value: ineliminable
-      name: the model cannot be stated without it
-    - value: unknown
-    explanans.factor:
+    erotetic_relation.value:
+    - value: complete
+    - value: partial
+    - value: corrective
+    - value: reformulating
+    use.value:
+    - value: tool
+    - value: proof-of-principle
+    - value: conceptual-exploration
+    - value: understanding
+    aim_block.origin:
+    - value: input
+      name: fixed by the question
+    - value: output
+      name: produced by the answer
+    aim_block.detection:
+    - value: pass
+    - value: fail
+    - value: pending
+    aim_block.relation:
+    - value: causal-intervention
+    - value: causal-mechanistic
+    - value: constitutive
+    - value: functional
+    - value: nomological
+    - value: statistical
+    - value: mathematical
+    aim_block.factor:
     - value: condition
+      name: on a quantity
     - value: structural-property
+      name: of a structure, such as sparsity or low rank
     - value: law-property
+      name: of a law, such as invariance, additivity or factorization
     - value: organization
-    index_sets.structure:
-    - value: continuum
-    - value: discrete-set
-    - value: interval
-    laws.role:
-    - value: evolution
-      name: how the state changes along the course
-    - value: input-output
-      name: how one quantity is determined by others at the same point
-    - value: measurement
-      name: how an instrument registers the state
-    - value: state-constraint
-      name: which states may hold together, including at the start and at the boundary
-    - value: distribution
-      name: the law of a random quantity
-    - value: admissibility
-      name: a restriction on the parameters or the forms a member may take
-    variables.determined:
-    - value: within
-    - value: outside
-    variables.scale:
-    - value: nominal
-    - value: ordinal
-    - value: interval
-    - value: ratio
-    - value: absolute
-    - value: not-applicable
-    variables.selects:
-    - value: unique
-    - value: any
-    - value: all
-    parameters.scale:
-    - value: nominal
-    - value: ordinal
-    - value: interval
-    - value: ratio
-    - value: absolute
-    - value: not-applicable
-    parameters.selects:
-    - value: unique
-    - value: any
-    - value: all
+      name: of the arrangement, such as a feedback loop or a modular composition
+    aim_block.target_status:
+    - value: denoting
+    - value: coarse-graining
+    - value: limit-construct
+    - value: structural-constraint
+    aim_block.modality:
+    - value: possible
+    - value: impossible
+    - value: necessary
+    aim_block.form:
+    - value: derived-law
+    - value: regime
+    - value: limit
+    - value: structural-property
+    - value: counterexample
+    relations.relation:
+    - value: supports
+    - value: presupposes
+    - value: tests
+    - value: defeats
+    - value: revises
   assessment:
     .status:
     - value: provisional
@@ -176,6 +214,14 @@ vocabularies:
     - value: reported
     - value: predicted
     - value: derived
+    data_model.kind:
+    - value: instrument-model
+    - value: background-simulation
+    - value: assimilation-model
+    - value: reconstruction
+    observation_error.form:
+    - value: distribution
+    - value: bound
   question:
     .status:
     - value: posed
@@ -210,11 +256,37 @@ vocabularies:
     - value: without-event
     task.epistemic_aim:
     - value: description
+      category: answer-content
+      direct_answer: an assignment of values to the explanandum variables or the features of the named phenomenon, at the grain of the question, with the quantification over instances that its scope fixes
+      conclusive_when: every variable and every feature that the request covers has a value, with its uncertainty
+      presupposes: the phenomenon is identified, and its explanandum variables are definable at the grain
     - value: exploration
+      category:
+        input: answer-content
+        output: conceptual-work
+      direct_answer: a partition of the declared space into classes under an equivalence criterion, each class with the pattern that characterizes it
+      conclusive_when: the partition covers the declared space at the resolution that the request fixes, and each class reported meets the detection criterion
+      presupposes: the observables and the varied factors can be recorded over their ranges; no phenomenon is presupposed
     - value: prediction
+      category: answer-content
+      direct_answer: a value or a distribution of a declared output of the target under a stated condition, with its uncertainty
+      conclusive_when: the output is among the outputs to match, and the uncertainty lies within the required accuracy
+      presupposes: the stated condition is a condition of the target within the domain of the question
     - value: explanation
+      category: answer-content
+      direct_answer: a claim that named factors make the difference between the fact and each foil, by a relation of the requested kind
+      conclusive_when: every foil of the contrast is ruled out by some factor, the relation has the requested kind, and the modal strength is the requested one
+      presupposes: 'the topic holds: the fact obtains, and each foil does not'
     - value: modal-knowledge
+      category: answer-content
+      direct_answer: a claim that a property is possible, impossible or necessary, relative to the admitted laws and the domain
+      conclusive_when: a possibility is witnessed by an instance; an impossibility or a necessity is proved, or established by an exhaustive exclusion over the space of alternatives
+      presupposes: the admitted laws and the domain fix the space of alternatives
     - value: model-knowledge
+      category: answer-content
+      direct_answer: a consequence of the laws of a model (a derived law, a regime, a limit, a structural property), or a counterexample
+      conclusive_when: a checked derivation settles the property that the request names, and discharges each proof obligation that the task states
+      presupposes: the laws of the model are stated, so that its consequences are fixed
     task.requested_relation:
     - value: causal-intervention
     - value: causal-mechanistic
@@ -372,3 +444,118 @@ vocabularies:
     - value: abductive
     - value: analogical
     - value: non-inferential
+  model:
+    .status:
+    - value: provisional
+    - value: stabilized
+    - value: retracted
+    index_sets.structure:
+    - value: continuum
+    - value: discrete-set
+    - value: interval
+    variables.determined:
+    - value: within
+    - value: outside
+    variables.scale:
+    - value: nominal
+    - value: ordinal
+    - value: interval
+    - value: ratio
+    - value: absolute
+    - value: not-applicable
+    variables.selects:
+    - value: unique
+    - value: any
+    - value: all
+    parameters.scale:
+    - value: nominal
+    - value: ordinal
+    - value: interval
+    - value: ratio
+    - value: absolute
+    - value: not-applicable
+    parameters.selects:
+    - value: unique
+    - value: any
+    - value: all
+    laws.role:
+    - value: evolution
+    - value: input-output
+    - value: measurement
+    - value: state-constraint
+    - value: distribution
+    - value: admissibility
+    laws.warrant:
+    - value: derived
+      name: from the laws of the background
+    - value: derived-in-a-limit
+    - value: posited
+    - value: fitted
+    - value: measured
+    assumptions.motive:
+    - value: tractability
+      name: the undistorted system admits no analysis
+    - value: isolation
+      name: it removes a factor judged irrelevant
+    - value: limit
+      name: it exposes the behavior of a limit system
+    assumptions.removable:
+    - value: controlled
+      name: a correction to the result is known
+    - value: ineliminable
+      name: the model cannot be stated without it
+    - value: unknown
+  binding:
+    .status:
+    - value: provisional
+    - value: stabilized
+    - value: retracted
+    target.level:
+    - value: phenomenon
+      name: compared with the explanandum variables that the phenomenon estimates
+    - value: data
+      name: compared with a version of the data through an observation operator
+    feature_pairs.type:
+    - value: quantity
+    - value: pattern
+    - value: regime
+    - value: invariance-class
+    - value: modal-profile
+    - value: component
+      name: a unit of the model alone and the part of the target that it denotes
+    feature_pairs.mode:
+    - value: computed
+      name: a key maps the feature onto what the data determine
+    - value: argued
+      name: no data determine it, and the answer cites the argument as a ground
+    domain.kind:
+    - value: interpolation
+      name: within the range of the calibration data
+    - value: extrapolation
+      name: outside the range of the calibration data
+    structural_discrepancy.form:
+    - value: model
+    - value: bound
+    .grain:
+    - value: quantitative
+      name: the pairs are compared by a metric
+    - value: qualitative
+      name: the pairs are compared by a match of patterns or regimes
+  key:
+    .status:
+    - value: provisional
+    - value: stabilized
+    - value: retracted
+    .kind:
+    - value: observation-operator
+    - value: unit-map
+    - value: aggregation-map
+    - value: qualitative-abstraction
+  comparison:
+    .calibration_treatment:
+    - value: excluded
+      name: the data used for calibration contribute nothing to the verdict
+    - value: cross-validated
+    - value: bayesian
+    - value: reused
+      name: the data used for calibration are compared again without any correction

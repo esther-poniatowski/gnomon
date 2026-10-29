@@ -51,6 +51,10 @@ explanandum_variables:           # observables restating the behavior in terms o
       horizon: "EXPRESSION FIXING THE END OF OBSERVATION"
       censoring:                 # right | left | interval | none
       reading: "THE EVENT IN WORDS, AND THE VALUE RECORDED WHEN IT IS NOT OBSERVED"
+    estimator:                   # fill when the values are estimated from data; the estimates are computed from these entries, never recorded
+      method: "THE ESTIMATOR THAT COMPUTES THE VALUES FROM THE DATA"
+      data_version: VERSION      # the version of the data on which the estimator runs
+      uncertainty: "THE UNCERTAINTY THAT THE ESTIMATOR REPORTS"
 
 manifestations:                  # one entry per form of the observables' behavior
   - name: "NAME OF THE MANIFESTATION"
@@ -118,8 +122,29 @@ detection_criterion:             # conditions a candidate pattern must satisfy t
     procedure: "HOW THE TEST IS CARRIED OUT"   # only content beyond the name of the test
     limited_by: [SYMBOL]         # external systems of the target whose reach bounds what the test can establish
 
-data:
-  - "POINTER TO A DATA SET, A RECORDING OR A DERIVATION"
+data:                            # material that establishes the phenomenon
+  - pointer: "POINTER TO A DATA SET, A RECORDING OR A DERIVATION"
+    version: VERSION
+
+data_model:                      # fill when a model intervenes between the raw records and the data; one entry per model
+  - kind:                        # instrument-model | background-simulation | assimilation-model | reconstruction
+    source: RECORD               # the model record, or a pointer to the publication that states the model
+    reading: "WHAT THE MODEL DOES TO THE DATA"
+
+observation_error:               # fill when the values of the explanandum variables are compared with an answer; one entry per explanandum variable or per data set
+  - of: SYMBOL                   # an explanandum variable, or the pointer of a data set
+    form:                        # distribution | bound
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"
+
+pattern_selection:               # fill when the data admit other patterns than the one stated; one entry per selected pattern
+  - manifestation: SYMBOL        # the manifestation whose pattern was selected
+    procedure: "HOW THE PATTERN WAS SELECTED FROM THE DATA"
+    set_aside: "THE PATTERNS SET ASIDE"
+    motivated_by: quest.TOPIC.NAME   # the question that motivated the selection
+
+adequacy:                        # fill when the record declares a data model; one entry per purpose
+  - purpose: "THE QUESTION OR THE KIND OF USE FOR WHICH THE DATA MODEL IS ADEQUATE"
+    grounds: "THE EVIDENCE OR THE ARGUMENT FOR THE ADEQUACY"
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
   FIELD.PATH: open

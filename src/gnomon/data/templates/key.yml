@@ -1,0 +1,23 @@
+# method: `docs/epistemology/model-and-binding.md`; one file per map shared by bindings
+# a key carries one side of a binding onto the other; the bindings that use it reference it by identifier and version
+# a map that also defines a bearer of a model is stated once, in the model, and the key references that definition
+# replace every UPPERCASE placeholder; leave a field empty while it is not filled
+# specifications follow the order of the method note
+
+title: "SHORT NAME OF THE KEY"
+id: key.TOPIC.NAME
+type: key
+status: provisional              # provisional | stabilized | retracted
+
+kind:                            # observation-operator | unit-map | aggregation-map | qualitative-abstraction
+
+domain_and_codomain:             # the two sides that the key connects, each as a set expression or a type
+  domain: "SET EXPRESSION OR TYPE"   # the side of the model
+  codomain: "SET EXPRESSION OR TYPE"   # the side of the target
+
+expression: "EXPRESSION OVER THE SYMBOLS OF THE DOMAIN, OR A POINTER TO THE PROCEDURE THAT COMPUTES THE MAP"
+
+version: VERSION                 # a version identifier; a revised map is a new version
+
+maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
+  FIELD.PATH: open

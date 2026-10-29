@@ -4,18 +4,23 @@ These templates specify an inquiry: a research project copies and fills them, fo
 
 The templates are filled in this order:
 
-1. `problem.yml`, once per research problem: to state the demand and the constraints that the questions serve.
-2. `target-system.yml`, once per system studied: to delimit the system that every later record refers to, and to declare its quantities.
-3. `background.yml`, once per body of admitted laws about one target system: to state the laws, their closure and the organization that the questions may admit.
-4. `phenomenon.yml`, once per phenomenon: to state the behavior of that system that questions address.
-5. `question.yml`, once per research question: to fix the question before any candidate answer is evaluated.
-6. `answer.yml`, once per candidate: to state one proposed answer in the terms that the question has fixed.
-7. `assessment.yml`, once per candidate assessed: to record whether the candidate passes the tests of the question. The assessment stays apart from the answer, so that a candidate can be restated without altering its verdicts.
+1. [Problem](problem.yml): states one research problem, with the demand and the constraints that its questions serve
+2. [Target system](target-system.yml): delimits one system studied, which every later record refers to, and declares its quantities
+3. [Background](background.yml): states one body of laws admitted about a target system, with their closure and their organization
+4. [Phenomenon](phenomenon.yml): states one behavior of the target system that questions address, with what its data depend on
+5. [Question](question.yml): fixes one research question before any candidate answer is evaluated
+6. [Model](model.yml): declares one system that stands in for the target, which several answers can ground
+7. [Key](key.yml): states one versioned map from the side of a model to the side of the target, which several bindings share
+8. [Binding](binding.yml): relates one model to one phenomenon through the inferences that its asserter licenses
+9. [Answer](answer.yml): states one candidate answer to an atomic question, as a typed claim with its grounds and the block of its aim
+10. [Assessment](assessment.yml): records whether one candidate passes the tests of its question
+
+A model is filled only when the route of an answer runs on a model other than the target, and a binding with its keys only when the claim of that answer also bears on the target. The assessment stays apart from the answer, so that a candidate can be restated without altering its verdicts.
 
 Two templates stand outside this order:
 
-- `operators.yml`, filled once per problem as soon as a formula requires an operator beyond the canonical set. It declares every such operator that the records of the problem need.
-- `itinerary.yml`, filled once per itinerary of inquiry and revised as the inquiry proceeds. It records each step as an instance of a registered epistemic activity, and `gnomon itinerary` checks the steps against the registries.
+- [Operators](operators.yml): declares, once per problem, every operator beyond the canonical set that a formula of the problem requires
+- [Itinerary](itinerary.yml): records each step of one itinerary of inquiry as an instance of a registered epistemic activity, for `gnomon itinerary` to check against the registries
 
 A target system and a phenomenon can be recorded at commitment `identified`, with a definite description and pointers, before their quantities are declared. A question can name a placeholder in place of either record.
 
@@ -29,7 +34,7 @@ Each template follows ten conventions of format:
 - each value that holds prose consists of complete sentences, with an initial capital and a final period;
 - each filled `name` value is a short lowercase label without a final period, capitalized only for a proper noun;
 - each filled `description` of an identification is a definite description: a noun phrase, lowercase unless it opens on a proper noun, without a final period;
-- the slots follow the rows of their method note, and each row names the key of its slot, so that a template can be checked mechanically against its note;
+- the slots follow the rows of their method note, and each row names the key of its slot, so that a template can be checked mechanically against its note; the [alignment tests](../../../../tests/test_gnomon/test_template_alignment.py) pair each table of specifications of a method note with its template;
 - within one entry, the keys run from designation to construction: name, symbol and notation, type, defining expression, then a prose field stating it in words.
 
 Pure YAML departs from the format rule of `docs/design/2-architecture/data-formats.md`. That rule excludes sources written only in YAML for any framework note carrying prose, proofs and rendered math. The rule does not reach the templates: they hold records, not notes. The architecture note, however, does not yet state this distinction between records and notes.

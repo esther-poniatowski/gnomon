@@ -24,7 +24,7 @@ The activities of this family output a **verdict**, a **credence** or a **rankin
 | --- | --- | --- | --- | --- |
 | `testing` | `hypothesis`, `consequence`, `data` | `verdict` | deductive | justification |
 | `confirmation` | `hypothesis`, `data` | `credence` | inductive | justification |
-| `validation` | `model`, `question` | `verdict` | non-inferential | justification |
+| `validation` | `model`, `binding`, `question` | `verdict` | non-inferential | justification |
 | `model-selection` | `model` (several), `data` | `ranking` | inductive | justification |
 | `inference-to-the-best-explanation` | `hypothesis` (several), `data` | `verdict` | abductive | justification |
 | `critique` | `hypothesis \| model` | `verdict` | non-inferential | justification |

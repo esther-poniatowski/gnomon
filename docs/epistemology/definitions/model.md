@@ -46,7 +46,7 @@ Strict isomorphism is rarely met by an empirical target. Accounts of scientific 
 
 ## Consequences for a record
 
-- **A candidate answer declares a model in the representational sense.** The [answer form](../answer-form.md#^answer-is-a-model) declares that model with the blocks of a [target specification](../target-system.md). The required accuracy of the task states the respects and degrees of similarity demanded by the question.
+- **A candidate answer whose route runs on a model rests on a model in the representational sense.** The [model record](../model-and-binding.md#^model-record) declares that model with the blocks of a [target specification](../target-system.md), and a [binding](../model-and-binding.md#^binding-record) relates it to the phenomenon. The feature pairs of the binding state the respects of similarity, and the tolerance that the [required accuracy](../epistemic-task.md) of the question fixes states the degrees.
 - **The target of the benchmark is a class of possible systems.** The benchmark project studies networks in their most abstract form, a class that encompasses artificial and biological networks. Therefore, its target specification states `target_type: possible-systems`. A network model of that class represents members of the class, and it is not a model of cortex. A claim about cortex requires cortex as a second target, and a relation of representation between the class and cortex.
 
 ---

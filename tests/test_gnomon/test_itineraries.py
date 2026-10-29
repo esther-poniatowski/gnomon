@@ -123,6 +123,7 @@ RECORDS: dict[str, dict[str, Any]] = {
     "system.networks": {"type": "target-system"},
     "phen.readout": {"type": "phenomenon"},
     "ans.kernel": {"type": "answer"},
+    "mod.kernel": {"type": "model"},
 }
 ITINERARY: dict[str, Any] = {
     "type": "itinerary",
@@ -133,11 +134,11 @@ ITINERARY: dict[str, Any] = {
          "output": {"type": "problem", "ref": "prob.geometry"},
          "norm": {"test": "norm.problematization", "verdict": "pass"}, "mode": "non-inferential"},
         {"id": "derive", "activity": "derivation",
-         "inputs": [{"type": "model", "ref": "ans.kernel"}],
+         "inputs": [{"type": "model", "ref": "mod.kernel"}],
          "output": {"type": "consequence"},
          "norm": {"test": "norm.derivation", "verdict": "pending"}, "mode": "deductive"},
         {"id": "design", "activity": "experimental-design",
-         "inputs": [{"type": "question", "ref": "quest.geometry"}, {"type": "model", "ref": "ans.kernel"}],
+         "inputs": [{"type": "question", "ref": "quest.geometry"}, {"type": "model", "ref": "mod.kernel"}],
          "output": {"type": "design"},
          "norm": {"test": "norm.experimental-design", "verdict": "pending"}},
         {"id": "observe", "activity": "observation",
@@ -176,7 +177,7 @@ def test_input_types_that_do_not_fill_the_activity_are_reported() -> None:
 
 def test_a_slot_taking_several_inputs_counts_them() -> None:
     step = {"id": "select", "activity": "model-selection",
-            "inputs": [{"type": "model", "ref": "ans.kernel"}, {"type": "data", "ref": "phen.readout"}],
+            "inputs": [{"type": "model", "ref": "mod.kernel"}, {"type": "data", "ref": "phen.readout"}],
             "output": {"type": "ranking"}, "norm": {"test": "norm.model-selection", "verdict": "pending"}}
     itinerary = copy.deepcopy(ITINERARY)
     itinerary["steps"].append(step)
@@ -198,8 +199,12 @@ def test_an_input_reference_of_the_wrong_kind_or_to_nothing_is_reported() -> Non
     assert itinerary_problems(wrong, RECORDS) == [
         "steps.derive: phen.readout holds data or phenomenon or knowledge-state-change, not model"
     ]
-    absent = planted(derive={"inputs": [{"type": "model", "ref": "ans.missing"}]})
-    assert itinerary_problems(absent, RECORDS) == ["steps.derive: ans.missing is neither a step nor a record"]
+    absent = planted(derive={"inputs": [{"type": "model", "ref": "mod.missing"}]})
+    assert itinerary_problems(absent, RECORDS) == ["steps.derive: mod.missing is neither a step nor a record"]
+    answer = planted(derive={"inputs": [{"type": "model", "ref": "ans.kernel"}]})
+    assert itinerary_problems(answer, RECORDS) == [
+        "steps.derive: ans.kernel holds consequence or explanation or knowledge-state-change, not model"
+    ]
 
 
 def test_a_type_that_no_record_holds_is_reached_only_through_a_step() -> None:
@@ -227,7 +232,7 @@ def test_a_norm_verdict_or_mode_outside_the_registries_is_reported() -> None:
 
 def test_a_cycle_among_the_steps_is_reported() -> None:
     itinerary = planted(design={"inputs": [{"type": "question", "ref": "quest.geometry"},
-                                      {"type": "model", "ref": "ans.kernel"},
+                                      {"type": "model", "ref": "mod.kernel"},
                                       {"type": "data", "ref": "observe"}]})
     found = itinerary_problems(itinerary, RECORDS)
     assert "steps: design -> observe -> design forms a cycle" in found
@@ -248,8 +253,25 @@ def fixture_itineraries() -> list[Path]:
     return sorted(FIXTURES.glob("*/itinerary.yml")) if FIXTURES.is_dir() else []
 
 
+#: The fixtures whose itinerary still takes an answer record as a model, as the earlier design did.
+EARLIER_ANSWER_DESIGN = {"grokking-delayed-generalization"}
+
+
+def itinerary_cases() -> list[Any]:
+    return [
+        pytest.param(
+            path,
+            id=path.parent.name,
+            marks=[pytest.mark.xfail(strict=True, reason="fixture follows the earlier answer design until the pilot migrates it (TODO model-design)")]
+            if path.parent.name in EARLIER_ANSWER_DESIGN
+            else [],
+        )
+        for path in fixture_itineraries()
+    ]
+
+
 @pytest.mark.skipif(not fixture_itineraries(), reason="no fixture carries an itinerary")
-@pytest.mark.parametrize("path", fixture_itineraries(), ids=[p.parent.name for p in fixture_itineraries()] or ["none"])
+@pytest.mark.parametrize("path", itinerary_cases() or [Path("none")])
 def test_every_itinerary_of_the_fixtures_passes(path: Path) -> None:
     records = {}
     for source in sorted(path.parent.glob("*.yml")):
@@ -267,6 +289,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
                                                          "phenomenon": {"placeholder": "observable"}}},
         "system.a": {"type": "target-system", "commitment": "identified"},
         "ans.a": {"type": "answer", "status": "entertained"},
+        "mod.a": {"type": "model"},
         "prob.a": {"type": "problem"},
     }
     itinerary = {
@@ -276,7 +299,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
              "inputs": [{"type": "question", "ref": "quest.schema"}], "output": {"type": "question"},
              "norm": {"test": "norm.question-decomposition", "verdict": "pending"}},
             {"id": "predict", "activity": "prediction",
-             "inputs": [{"type": "model", "ref": "ans.a"}, {"type": "target-specification", "ref": "system.a"}],
+             "inputs": [{"type": "model", "ref": "mod.a"}, {"type": "target-specification", "ref": "system.a"}],
              "output": {"type": "consequence"}, "norm": {"test": "norm.prediction", "verdict": "pending"}},
             {"id": "judge", "activity": "testing",
              "inputs": [{"type": "hypothesis", "ref": "ans.a"}, {"type": "consequence", "ref": "predict"},
@@ -288,7 +311,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
         "steps.select: quest.schema holds question-schema or knowledge-state-change, not question",
         "steps.predict: system.a holds identified-subject or classification or measurement-procedure"
         " or knowledge-state-change, not target-specification",
-        "steps.judge: ans.a holds model or consequence or explanation or knowledge-state-change, not hypothesis",
+        "steps.judge: ans.a holds consequence or explanation or knowledge-state-change, not hypothesis",
         "steps.judge: phen.none is neither a step nor a record",
     ]
     records["quest.schema"]["subject"]["phenomenon"] = "phen.b"

@@ -187,10 +187,10 @@ def test_every_closed_field_of_every_record_kind_holds_an_admitted_value(
 def test_an_answer_status_outside_the_attitudes_is_reported() -> None:
     """The former status `informally-backed` mixed an attitude with a support, and is now refused."""
     record = {"type": "answer", "status": "informally-backed", "support": "informal",
-              "idealizations": [{"removable": "partly"}]}
+              "grounds": [{"role": "idealization", "removable": "partly"}]}
     assert inadmissible_values(record, admitted_values("answer")) == [
         "record.status: informally-backed is not admitted",
-        "idealizations.removable: partly is not admitted",
+        "grounds.removable: partly is not admitted",
     ]
 
 
@@ -237,4 +237,15 @@ def test_the_dispositions_of_the_fixture_assessments() -> None:
         found[path.parent.name] = disposition(yaml.safe_load(path.read_text(encoding="utf-8")))
     assert set(found.values()) <= {"satisfied", "not-satisfied", "withheld"}
     assert found["grokking-delayed-generalization"] == "not-satisfied"
+
+
+def test_a_corrective_answer_that_passes_its_tests_is_corrective_rather_than_satisfied() -> None:
+    """A corrective answer shows that its question has no true direct answer, so it cannot satisfy it."""
+    passing = {"tests": {"admissibility": {"product": {"verdict": "not-applicable"}},
+                         "warrant": {"closure": {"verdict": "pass"}}}}
+    assert disposition(passing) == "satisfied"
+    assert disposition(passing, "partial") == "satisfied"
+    assert disposition(passing, "corrective") == "corrective"
+    failing = {"tests": {"warrant": {"closure": {"verdict": "fail"}}}}
+    assert disposition(failing, "corrective") == "not-satisfied"
 

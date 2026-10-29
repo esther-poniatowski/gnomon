@@ -29,7 +29,7 @@ $$T=\langle A,R,\mu,\lambda,\tau,\omega\rangle $$
 | **[Modal strength](modal-strength.md) $\mu$** | always | How tightly must the answer bind the phenomenon? | actual, possible, necessary | _how-possibly_ vs _how-actually_ [verreaultjulien2019] |
 | **[Admissible explanans](admissible-explanans.md) $\lambda$** | only to bound the explanans further, because proportionality with the phenomenon selects the level when $\lambda$ is left unset | Which kinds of variables may enter the explanans? | compositional level; substrate dependence | levels of mechanisms [craver2007]; universality [batterman2000] |
 | **Required accuracy $\tau$** | always, and `not-applicable` when the answer is matched against no measurement | Which observables of the target must the answer reproduce, which of its structures must correspond, and to what accuracy? | qualitative agreement; order of magnitude; a stated numeric bound; structural correspondence only. Within a tolerance, `answer` names the candidate's value and `target` the observable that it reproduces. Each output and each structure carries a justification stating why the question demands that particular correspondence. | fidelity criteria [weisberg2013]; adequacy for purpose [parker2020] |
-| **Proof obligations $\omega$** | when the answer must derive a statement rather than match a measurement | Which implication must the answer establish, and in which direction? | Per obligation: the antecedent and the consequent, each as expressions over the declared observables. A converse counts as a separate obligation. | explanation by mathematical proof [lange2016] |
+| **Proof obligations $\omega$** | when the answer must derive a statement rather than match a measurement | Which implication must the answer establish, and in which direction? | Per obligation: the antecedent and the consequent, each as expressions over the declared observables. A converse counts as a separate obligation. | explanation by mathematical proof [lange2017] |
 
 > [!HINT] Practical use
 > Once a candidate exists, it is checked against the required accuracy by the [fidelity test](satisfaction-conditions.md).
@@ -44,7 +44,7 @@ Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks)
 
 - [batterman2000] ◐ [Batterman, "Multiple realizability and universality", *British Journal for the Philosophy of Science* 51(1), 2000](https://philpapers.org/rec/BATMRA)
 - [craver2007] ◐ [Craver, *Explaining the Brain*, OUP, 2007](https://philpapers.org/rec/CRAETB-2)
-- [lange2016] ◐ [Lange, _Because Without Cause: Non-Causal Explanations in Science and Mathematics_, OUP, 2016](https://global.oup.com/academic/product/because-without-cause-9780190269487), part I on explanations by constraint
+- [lange2017] ◐ [Lange, _Because Without Cause: Non-Causal Explanations in Science and Mathematics_, OUP, 2017](https://global.oup.com/academic/product/because-without-cause-9780190269487), part I on explanations by constraint
 - [parker2020] ◐ [Parker, "Model evaluation: an adequacy-for-purpose view", _Philosophy of Science_ 87(3), 457–477, 2020](https://doi.org/10.1086/708691)
 - [vanfraassen1980] ✓ van Fraassen, *The Scientific Image*, ch. 5; [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
 - [verreaultjulien2019] ◐ [Verreault-Julien, "How could models possibly provide how-possibly explanations?", _Studies in History and Philosophy of Science Part A_ 73, 2019](https://philpapers.org/rec/VERHCM)

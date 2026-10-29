@@ -347,11 +347,21 @@ def malformed_credence(assessment: Mapping[str, Any]) -> list[str]:
     return found
 
 
-def disposition(assessment: Mapping[str, Any]) -> str:
+def disposition(assessment: Mapping[str, Any], erotetic_relation: str | None = None) -> str:
     """Return the disposition of an assessment, read from its admissibility and warrant verdicts.
 
     An answer satisfies its question only when it is admissible and warranted, so one failed test
-    decides the disposition. Without a failure, a pending verdict withholds it.
+    decides the disposition. Without a failure, a pending verdict withholds it. A corrective answer
+    shows that a presupposition of its question is false, so it cannot satisfy that question: the
+    disposition that would be ``satisfied`` is ``corrective`` instead.
+
+    Parameters
+    ----------
+    assessment : mapping
+        One filled assessment record.
+    erotetic_relation : str, optional
+        The value of the erotetic relation of the assessed answer, read from its field
+        ``erotetic_relation.value``. When omitted, the answer is not treated as corrective.
 
     Examples
     --------
@@ -362,6 +372,10 @@ def disposition(assessment: Mapping[str, Any]) -> str:
     'withheld'
     >>> disposition({"tests": {"warrant": {"selection": {"verdict": "not-applicable"}}}})
     'satisfied'
+    >>> disposition({"tests": {"warrant": {"closure": {"verdict": "pass"}}}}, "corrective")
+    'corrective'
+    >>> disposition({"tests": {"warrant": {"closure": {"verdict": "pending"}}}}, "corrective")
+    'withheld'
     """
     tests = assessment.get("tests") or {}
     verdicts = [
@@ -373,7 +387,7 @@ def disposition(assessment: Mapping[str, Any]) -> str:
         return "not-satisfied"
     if any(verdict not in ("pass", "not-applicable") for verdict in verdicts):
         return "withheld"
-    return "satisfied"
+    return "corrective" if erotetic_relation == "corrective" else "satisfied"
 
 
 def unmet_by_aim(

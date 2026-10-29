@@ -64,8 +64,8 @@ The activities of this family output a target specification, a background model 
 
 - **Delimitation fills the target-system record at commitment `specified`.** The [specification of the target system](../../target-system.md) holds the declared constituents and quantities.
 - **Background appraisal and transfer fill the background record.** The [specification of the background](../../background.md) states the origin and the range of each admitted law beside its warrant.
-- **Abstraction and idealization are recorded in the answer.** The [answer form](../../answer-form.md#^idealizations) records each idealization with its motive and its removability, and each abstraction in a block of its own.
-- **Decomposition states the map of each component.** Each constituent of a [mechanistic answer](../../mechanism.md) states its map from the declared constituents of the target, as the [perspective of an answer](../../answer-form.md#^perspective) requires.
+- **Abstraction and idealization are recorded in the model and in the answer that it grounds.** The [model record](../../model-and-binding.md#^model-elements) declares each assumption that its laws require, such as a limit, within the warrant `derived-in-a-limit` of those laws, with its motive, its gain and its removability. An [answer](../../answer-form.md#^idealizations) that the model grounds classifies such an assumption as an idealization of the target of its binding, states its range, and records it among its grounds with the role `idealization`. Each abstraction is recorded with the claim, in the element Abstractions of the answer.
+- **Decomposition states the map of each component.** Each constituent of a [mechanistic model](../../mechanism.md) states its map from the declared constituents of the target, as the [perspective of a model](../../model-and-binding.md#^perspective) requires.
 
 ---
 ## Sources

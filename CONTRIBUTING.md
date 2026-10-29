@@ -73,7 +73,7 @@ Contributions to the codebase should be developed in a local clone of the reposi
 
 A change is verified by the narrowest checks that exercise it. A change to a shared template reaches every dependent fixture and every downstream template, so those fixtures and templates are checked in the same pass.
 
-- **Alignment of notes and templates:** each row of a method table resolves to one key, in the same order, and every key of a template is documented.
+- **Alignment of notes and templates:** each row of a method table resolves to one key, in the same order, and every key of a template is documented. The option lists of each template, and the requirement column of each method table, agree with the registries of vocabularies and of requirements.
 - **Symbol resolution:** each symbol is unique within its record, and every reference and every identifier of a formula resolves to a declaration. Each rule carries a planted negative case that fails for the intended reason.
 - **YAML integrity:** every template and every fixture parses, keeps its `id` and its `type`, and holds no uppercase placeholder.
 - **Reference integrity:** each identifier pointing to another record, and each Markdown link, resolves to one existing target.

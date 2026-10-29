@@ -12,7 +12,7 @@ source:
 
 > [!QUESTION] Goal: What must a researcher fix to specify an inquiry, and which results of the philosophy of science support each choice?
 
-These notes introduce a method to specify a research inquiry, based on results from the philosophy of models, of explanation and of questions. A research project applies the method by filling one [template](../../src/gnomon/data/templates/_index.md) per record of an inquiry (problem, target system, body of admitted laws, phenomenon, question, candidate answer, assessment, itinerary).
+These notes introduce a method to specify a research inquiry, based on results from the philosophy of models, of explanation and of questions. A research project applies the method by filling one [template](../../src/gnomon/data/templates/_index.md) per record of an inquiry (problem, target system, body of admitted laws, phenomenon, question, candidate answer, model, binding, key, assessment, itinerary).
 
 - [Specifying an inquiry](inquiry-specification.md): to locate each decision of a research project in the layer of the specification that holds it.
 - [Order of specification](specification-order.md): to decide what to specify first, and to revise an earlier choice without circularity.
@@ -32,6 +32,7 @@ These notes introduce a method to specify a research inquiry, based on results f
     - [Admissible explanans](admissible-explanans.md): to decide which variables an answer may appeal to.
 - [Epistemic and pragmatic virtues](epistemic-pragmatic-virtues.md): to select the qualities by which admissible answers are compared.
 - [Answer form](answer-form.md): to state a candidate answer in the terms that the question has already fixed.
+    - [Model and binding](model-and-binding.md): to state the model on which an answer rests and its binding to the phenomenon, so that the values of the model can be compared with the data.
 - [Conditions of satisfaction](satisfaction-conditions.md): to fix, before any answer is evaluated, the tests that decide whether it succeeds.
 - [Itinerary](itinerary.md): to record the steps of an inquiry as epistemic activities, and to check that each step takes the products required by its activity.
 - [Mechanism](mechanism.md): to state an answer as a mechanism when the question requests a mechanistic relation.

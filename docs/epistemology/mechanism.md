@@ -19,9 +19,11 @@ source:
 
 The senses of mechanism and the test of a mechanistic model are stated in the [vocabulary of mechanism](definitions/mechanism-and-mechanistic-model.md). Each aspect of a mechanistic answer is defined in the note named in the column *Defined in*. For each aspect, this note fixes the content required of a mechanistic answer and the formalism of that content.
 
+A mechanistic answer is an [explanation](answer-form.md#^explanation-block) whose [requested relation](requested-relation.md) is causal-mechanistic or constitutive. Its components, activities and organization are those of the [model](model-and-binding.md#^model-elements) on which the answer rests, and the components, activities and organization that make the difference to the phenomenon are the factors $E$ of its explanatory block, by the mapping onto a mechanism that the [answer form](answer-form.md) states.
+
 ## Aspects of a mechanistic answer
 
-A mechanistic answer states four aspects [machamer2000] [bechtel2005]:
+A mechanistic answer and the model on which it rests state four aspects [machamer2000] [bechtel2005]:
 
 | Canonical aspect | Common synonyms          | Question                                                                                                   | Defined in |
 | ---------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------- | ---------- |
@@ -32,10 +34,10 @@ A mechanistic answer states four aspects [machamer2000] [bechtel2005]:
 
 ## Requirements on the answer
 
-- **The answer has mechanistic form, and passes the explanatory mapping when the question requests an actual explanation.** Both tests are stated for a [mechanistic model](definitions/mechanism-and-mechanistic-model.md#^mechanistic-model-test). Therefore, each component states its map from the declared constituents.
+- **The model on which the answer rests has mechanistic form, and passes the explanatory mapping when the question requests an actual explanation.** Both tests are stated for a [mechanistic model](definitions/mechanism-and-mechanistic-model.md#^mechanistic-model-test). Therefore, the explanatory mapping reads, for each component, the map from the declared constituents that the [model record](model-and-binding.md#^perspective) states, or, for a unit of the model alone, the [pair of type `component`](model-and-binding.md#^component-pairs) of the binding.
 - **Each activity is stated as an action or as an interaction.** The statement "$c_1$ inhibits $c_2$" states an *action* of $c_1$ on $c_2$. The same pair forms an *interaction* only when $c_2$ also acts on $c_1$, by the [distinction between action and interaction](definitions/interaction-and-cause.md#^action-interaction).
 - **The organization is stated apart from the activities.** The statement "$c_1$ inhibits $c_2$ after $c_2$ activates $c_1$, forming a delayed negative-feedback loop" states an organization, because it arranges two activities relative to each other. Each of the two activities is local, whereas the loop is a property of their arrangement, as the [vocabulary of activity](definitions/activity.md) separates them.
-- **The answer may state its causal structure without a law of evolution.** A causal structure [need not be a dynamic](definitions/dynamic.md#^causal-structure), so the laws $L$ that state the activities of a mechanistic answer may be dependencies that support interventions.
+- **The model may state its causal structure without a law of evolution.** A causal structure [need not be a dynamic](definitions/dynamic.md#^causal-structure), so the laws $L$ of the model that state the activities may be dependencies that support interventions.
 
 ## Formalism (proposed)
 
