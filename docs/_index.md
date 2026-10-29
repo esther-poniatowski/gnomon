@@ -15,6 +15,7 @@ Each entry answers one class of question about `gnomon`, so a reader consults on
 | [Classification](classification/_index.md) | How the activity `classification` is performed, from the principles that warrant a classification to the procedure that builds one. |
 | [Epistemology](epistemology/_index.md) | What a researcher must fix to specify an inquiry, from what the question is about to the form of the answer it seeks. Each choice rests on results from the philosophy of models, of explanation and of questions. |
 | [Worked inquiries](../examples/_index.md) | How completed inquiry records look, each inquiry testing one capacity of the framework, and which research statements test the records against formalization. |
+| [Proposals](proposals/_index.md) | Which candidate designs await a decision for an open goal of the project, each set of alternatives kept until an architecture decision records the choice. |
 | [Architecture decisions](adr/_index.md) | Which design constraint each substantive choice answers, the options weighed against it, and what the choice costs. |
 | [gnomon audits](audits/_index.md) | Which assessments a decision rests on while its open resolutions await ratification. |
 

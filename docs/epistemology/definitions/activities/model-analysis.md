@@ -39,10 +39,10 @@ The activities of this family output a **consequence**: a statement true of a mo
 
 ## Distinctions
 
-- **Verification belongs to simulation, and validation to evaluation.** Verification compares two [levels of a computation](../computation.md), the algorithm of the code and the function fixed by the model, without reference to the target. Therefore, verification stays within this family. [Validation](evaluation.md) asks whether the model is adequate to its target for a purpose.
+- **Verification belongs to simulation, and validation to evaluation.** Verification compares two [levels of a computation](../change/computation.md), the algorithm of the code and the function fixed by the model, without reference to the target. Therefore, verification stays within this family. [Validation](evaluation.md) asks whether the model is adequate to its target for a purpose.
 - **The norm of a thought experiment is contested.** On the argument view adopted here, a thought experiment can be reconstructed as an argument from the premises of its scenario [norton1996]. On a rival account, some scenarios give access to a law without such an argument [brown1991].
 - **Prediction as an activity differs from prediction as an aim.** The activity derives expected values from a model. The activity serves inquiries of every aim, for instance to test an explanation. The [aim of prediction](../../epistemic-aim.md) makes a warranted expectation the product required of the whole inquiry.
-- **Every output of this family holds of the model only.** A consequence becomes a claim about the target only through a [theoretical hypothesis](../claim-and-hypothesis.md) that links model and target.
+- **Every output of this family holds of the model only.** A consequence becomes a claim about the target only through a [theoretical hypothesis](../representations/claim-and-hypothesis.md) that links model and target.
 
 ## Consequences for a record
 

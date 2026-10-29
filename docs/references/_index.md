@@ -31,7 +31,3 @@ Gathers the inventory of external frameworks and literature, each stated on its 
 ## Knowledge interchange formats
 
 - [Open Knowledge Format](open-knowledge-format.md): compares an interchange format for linked Markdown knowledge with the records of `gnomon`
-
-## Candidates (to relocate)
-
-- [Formalism candidates](formalism-candidates.md): supplies the candidate formalisms to weigh when an open goal of the project is resolved

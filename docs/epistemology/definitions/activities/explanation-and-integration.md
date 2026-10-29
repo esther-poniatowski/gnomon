@@ -40,12 +40,12 @@ The activities of this family output an explanation or a relation between theori
 - **Abduction and explanation are separate activities.** [Abduction](ampliative-inference.md) proposes a candidate hypothesis and licenses its pursuit. Explanation works inside the answer schema of a question, and judges whether an explanans bears the requested relation to the phenomenon.
 - **Reduction outputs a relation, and the derivation is its evidence.** The output of reduction is the relation between the reduced and the reducing theory, and the derivation with bridge laws shows that the relation holds between the two theories [nagel1961].
 - **Reduction and integration differ in the theories kept.** Reduction derives one theory from another, so the reduced theory becomes dispensable in principle. Integration keeps both theories and relates them, as an interfield theory relates genetics and cytology [darden1977].
-- **A theory enters this family as a model.** The input type of reduction and integration is `model`, read as a class of models, as the semantic view of [theories](../theory.md) defines a theory.
+- **A theory enters this family as a model.** The input type of reduction and integration is `model`, read as a class of models, as the semantic view of [theories](../representations/theory.md) defines a theory.
 
 ## Consequences for a record
 
 - **The requested relation of a question fixes the norm of explanation.** The [requested relation](../../requested-relation.md) of the epistemic task selects one of the candidate relations between an explanans and the phenomenon, so the test `norm.explanation` reads that field.
-- **An explanans factor can be the explanandum of a linked question.** A question that explains a capacity of readout by the [representation geometry](../representation-and-encoding.md) links to the question describing that geometry, with the relation `explanans-from` of [linked questions](../problem-and-question.md#^linked-questions).
+- **An explanans factor can be the explanandum of a linked question.** A question that explains a capacity of readout by the [representation geometry](../representations/representation-and-encoding.md) links to the question describing that geometry, with the relation `explanans-from` of [linked questions](../inquiry/problem-and-question.md#^linked-questions).
 - **An empirical bridge law of reduction is recorded as a law with the role *measurement*.** When a bridge law identifies a separately measured quantity with an aggregate, it states a factual hypothesis. Therefore, the [specification of the target system](../../target-system.md) places such a law among the laws of the [background record](../../background.md).
 
 ---

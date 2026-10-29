@@ -20,7 +20,7 @@ The record of the acts of an inquiry is the **itinerary**, of type `itinerary` a
 ## Constraints that decide the names
 
 - **The record is built progressively.** An author adds a step once an act is chosen, and records its verdict once its norm is judged. A failed verdict sends the author back to an earlier state of the record. A name for that record must admit pending and performed steps alike.
-- **A name must not collide with a term of `gnomon` or of its consumer.** The phenomenon record already uses `course`, the ontology uses process and history for categories of phenomena, and the [note on dynamics](../epistemology/definitions/dynamic.md) uses trajectory. The workspaces use log for task records and decision logs.
+- **A name must not collide with a term of `gnomon` or of its consumer.** The phenomenon record already uses `course`, the ontology uses process and history for categories of phenomena, and the [note on dynamics](../epistemology/definitions/change/dynamic.md) uses trajectory. The workspaces use log for task records and decision logs.
 - **The word "output" is a field.** A step carries a field `output`, so a type named "output type" would name a field and its type with one word.
 - **One name serves one notion.** The table of epistemic aims already names an epistemic product for each aim, so a second notion of product would collide with it unless the two are one.
 

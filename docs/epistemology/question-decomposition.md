@@ -25,10 +25,10 @@ The method applies to a question already posed. In the exploratory phase of rese
 
 ## The decomposition graph
 
-A decomposition is a graph whose nodes are questions. Each edge is one of the [links between questions](definitions/problem-and-question.md#^linked-questions), and one of its two questions *serves* the other. For `subquestion-of` and `enables`, the question that carries the link serves the linked question; for `presupposes` and `explanans-from`, the linked question serves the question that carries the link. This sense of serving is broader than the service of a problem, which requires erotetic implication, as the note on the [epistemic problem](definitions/epistemic-problem.md#^problem-vs-question) states. The four links are the following: ^decomposition-graph
+A decomposition is a graph whose nodes are questions. Each edge is one of the [links between questions](definitions/inquiry/problem-and-question.md#^linked-questions), and one of its two questions *serves* the other. For `subquestion-of` and `enables`, the question that carries the link serves the linked question; for `presupposes` and `explanans-from`, the linked question serves the question that carries the link. This sense of serving is broader than the service of a problem, which requires erotetic implication, as the note on the [epistemic problem](definitions/inquiry/epistemic-problem.md#^problem-vs-question) states. The four links are the following: ^decomposition-graph
 
 - `subquestion-of`, when the answer of the serving question is a part of an answer to the served question. Erotetic implication holds: each answer of the serving question, with the available premises, narrows the answers of the served question [wisniewski2013]. A demand that is a conjunction is decomposed in this way, one serving question per conjunct.
-- `enables`, when the answer of the serving question establishes a [condition of answerability](definitions/conditions-of-answerability.md) of the served question without narrowing its answers. *Example*: "how is the dimension of the population activity estimated from finite samples?" enables "does the dimension grow with the complexity of the mixture?".
+- `enables`, when the answer of the serving question establishes a [condition of answerability](definitions/inquiry/conditions-of-answerability.md) of the served question without narrowing its answers. *Example*: "how is the dimension of the population activity estimated from finite samples?" enables "does the dimension grow with the complexity of the mixture?".
 - `presupposes`, when the served question has a true answer only if the serving question has one, so that the soundness of the first depends on the soundness of the second.
 - `explanans-from`, when an explanans factor of the served question is the explanandum of the serving question.
 
@@ -44,7 +44,7 @@ Serving questions arise from four sources. ^serving-sources
 
 1. **Fix the form.** State the interrogative type, the subject and the set of admissible answers, as Hamblin and Belnap and Steel model a question [hamblin1958] [belnap1976]. For a why-question, the form also requires a contrast and a relevance relation [vanfraassen1980].
 2. **Extract the presuppositions.** Every proposition entailed by all the admissible answers is a presupposition. "Why does the network learn disentangled features?" presupposes that the network learns them.
-3. **State what the answer must reach.** The [answer type](definitions/conditions-of-answerability.md#^eight-conditions) fixes the resolution of the answer, and the [epistemic task](epistemic-task.md) fixes its required accuracy and its proof obligations. Hintikka calls the epistemic state to be reached the *desideratum* of the question [hintikka2007].
+3. **State what the answer must reach.** The [answer type](definitions/inquiry/conditions-of-answerability.md#^eight-conditions) fixes the resolution of the answer, and the [epistemic task](epistemic-task.md) fixes its required accuracy and its proof obligations. Hintikka calls the epistemic state to be reached the *desideratum* of the question [hintikka2007].
 4. **Work backward.** For each admissible answer, ask what must be known to select it over its rivals. Each item missing from the present records is an unmet condition.
 
 An unmet condition becomes a serving question, linked by `enables`, when the researcher chooses to pose it, as the [choice of the next act](next-act.md#^condition-to-question) states.
@@ -117,7 +117,7 @@ When a hypothesis $H_R$ is refuted, every question conditioned on it is invalida
 
 ## Terminal questions and synthesis
 
-A serving question is **terminal** when some procedure has all its inputs available and yields an admissible answer that meets the answer type, its proof obligations and its required accuracy included. Terminality holds relative to the means of a given researcher at a given time, as the [states of a condition](definitions/conditions-of-answerability.md#^condition-states) state. Terminal acts are classified by the source of the warrant that they deliver, since that source fixes what the answer can be trusted for: ^terminal-acts
+A serving question is **terminal** when some procedure has all its inputs available and yields an admissible answer that meets the answer type, its proof obligations and its required accuracy included. Terminality holds relative to the means of a given researcher at a given time, as the [states of a condition](definitions/inquiry/conditions-of-answerability.md#^condition-states) state. Terminal acts are classified by the source of the warrant that they deliver, since that source fixes what the answer can be trusted for: ^terminal-acts
 
 | Source of warrant | Act | Serving questions typically closed |
 | --- | --- | --- |
@@ -131,7 +131,7 @@ A serving question is **terminal** when some procedure has all its inputs availa
 
 Acts of generation add candidates or tools and justify no answer, and acts of decision fix a commitment and establish no fact. An answer obtained by either is therefore recorded as a revisable assumption, and these assumptions are the first to re-examine when the served answer fails.
 
-**Analysis is followed by synthesis.** Working backward identifies necessary conditions, and the steps of analysis cannot always be reversed. A combination step therefore composes the answers of the serving questions into an answer to the served question, and a check confirms that the combination is valid, as the [necessity and joint sufficiency of the conditions](definitions/conditions-of-answerability.md#^sufficiency) require. When the conditions hold and no answer follows, a condition is missing, most often a bridging assumption. ^synthesis
+**Analysis is followed by synthesis.** Working backward identifies necessary conditions, and the steps of analysis cannot always be reversed. A combination step therefore composes the answers of the serving questions into an answer to the served question, and a check confirms that the combination is valid, as the [necessity and joint sufficiency of the conditions](definitions/inquiry/conditions-of-answerability.md#^sufficiency) require. When the conditions hold and no answer follows, a condition is missing, most often a bridging assumption. ^synthesis
 
 ## Revision during the inquiry
 
@@ -157,7 +157,7 @@ A local revision follows five steps:
 
 **Global revision.** A global reorganization is needed only when the served question itself is malformed. Three revisions turn a question $Q$ into a refined question $Q'$: a *disambiguation*, when $Q$ conflated two questions; a *restriction of scope*, when the conditions of answerability hold only on a narrower domain; and a *replacement of a concept*, when constructive work supplies a more precise notion. The relation between $Q$ and $Q'$ is stated, and the earlier serving questions are reassessed under $Q'$. The main question is re-examined at intervals for these three revisions. ^global-revision
 
-**Cycles between questions.** A condition of one question can depend on the answer to another, and two such dependencies in opposite directions form a cycle. Further decomposition cannot resolve the cycle, so it is resolved by iteration, under the conditions of [controlled iteration](specification-order.md#^controlled-iteration), as the [dependencies between conditions](definitions/conditions-of-answerability.md#^condition-dependencies) state. ^cycles
+**Cycles between questions.** A condition of one question can depend on the answer to another, and two such dependencies in opposite directions form a cycle. Further decomposition cannot resolve the cycle, so it is resolved by iteration, under the conditions of [controlled iteration](specification-order.md#^controlled-iteration), as the [dependencies between conditions](definitions/inquiry/conditions-of-answerability.md#^condition-dependencies) state. ^cycles
 
 ## Failure modes
 

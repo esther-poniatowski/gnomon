@@ -14,7 +14,7 @@ source:
 
 > [!QUESTION] Goal: which inferences reach a hypothesis beyond their premises, and by which norm is each judged?
 
-The activities of this family output a [hypothesis](../claim-and-hypothesis.md): a claim whose content exceeds that of the premises, held for testing. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a [hypothesis](../representations/claim-and-hypothesis.md): a claim whose content exceeds that of the premises, held for testing. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 

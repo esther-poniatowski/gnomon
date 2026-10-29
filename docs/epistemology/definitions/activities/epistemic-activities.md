@@ -100,28 +100,28 @@ The product types form a closed list. Each type classifies the epistemic objects
 | Type | Epistemic object | Record | Status |
 | --- | --- | --- | --- |
 | `source` | a document, a dataset or a result external to the inquiry | external pointer, held by the `sources` of a problem and the `pointers` of an identification | exists |
-| `problem` | a demand for a solution under constraints, defined in the note on the [epistemic problem](../epistemic-problem.md) | `problem` | exists |
-| `question-schema` | a [question schema](../problem-and-question.md#^question-schema), whose slots are typed placeholders | `question`, with placeholder slots | exists |
-| `identified-subject` | the system and the phenomenon of a question, at the [level of commitment](../problem-and-question.md#^commitment-levels) `identified` or above | `target-system` and `phenomenon` at commitment `identified` or above | exists |
+| `problem` | a demand for a solution under constraints, defined in the note on the [epistemic problem](../inquiry/epistemic-problem.md) | `problem` | exists |
+| `question-schema` | a [question schema](../inquiry/problem-and-question.md#^question-schema), whose slots are typed placeholders | `question`, with placeholder slots | exists |
+| `identified-subject` | the system and the phenomenon of a question, at the [level of commitment](../inquiry/problem-and-question.md#^commitment-levels) `identified` or above | `target-system` and `phenomenon` at commitment `identified` or above | exists |
 | `question` | a question whose slots refer to records | `question`, with every slot at commitment `identified` or above | exists |
 | `concept` | a term with its definition or its explication | `to-create` | to-create |
-| `measurement-procedure` | a procedure that assigns values to a quantity on a stated [scale](../scale-and-level.md) | `variables[].scale` and `variables[].expression` | partial |
-| `classification` | a partition of systems into [classes](../kind-class-population.md) | `target-system.reference_class` | exists |
+| `measurement-procedure` | a procedure that assigns values to a quantity on a stated [scale](../quantities/scale-and-level.md) | `variables[].scale` and `variables[].expression` | partial |
+| `classification` | a partition of systems into [classes](../systems/kind-class-population.md) | `target-system.reference_class` | exists |
 | `design` | a plan of observations, interventions or simulation runs, with their conditions | `to-create` | to-create |
-| `data` | the recorded [values](../variable-value-observable.md) of observables | `phenomenon.data` | partial |
-| `phenomenon` | a stable feature of a target, detected from data, as defined in the note on [phenomena](../pattern-and-phenomenon.md) | `phenomenon` | exists |
-| `target-specification` | the declared constituents and quantities of a [target](../things-and-constructs.md) | `target-system` at commitment `specified` | exists |
+| `data` | the recorded [values](../quantities/variable-value-observable.md) of observables | `phenomenon.data` | partial |
+| `phenomenon` | a stable feature of a target, detected from data, as defined in the note on [phenomena](../regularities/pattern-and-phenomenon.md) | `phenomenon` | exists |
+| `target-specification` | the declared constituents and quantities of a [target](../systems/things-and-constructs.md) | `target-system` at commitment `specified` | exists |
 | `background-model` | the laws admitted about a target, with their closure and organization | [`background`](../../background.md) | exists |
-| `model` | a candidate [model](../model.md) of the target | [`model`](../../model-and-binding.md#^model-record) | exists |
+| `model` | a candidate [model](../representations/model.md) of the target | [`model`](../../model-and-binding.md#^model-record) | exists |
 | `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | [`binding`](../../model-and-binding.md#^binding-record) | exists |
 | `key` | a shared, versioned map between the side of a model and the side of its target | [`key`](../../model-and-binding.md#^key-record) | exists |
 | `consequence` | a statement true of a model, possibly false of the target | the block of model knowledge of an `answer`, and `assessment.obligations` | partial |
-| `hypothesis` | a [claim](../claim-and-hypothesis.md) with the attitude `hypothesized` | `answer` with status `hypothesized` | exists |
+| `hypothesis` | a [claim](../representations/claim-and-hypothesis.md) with the attitude `hypothesized` | `answer` with status `hypothesized` | exists |
 | `verdict` | the outcome of a test of a claim or of a model | `assessment.tests` | exists |
 | `credence` | a degree of belief in a claim | `assessment.credence` | exists |
 | `ranking` | an order over rival candidates | `assessment.appraisal.preferred_over` | exists |
 | `explanation` | the claim that an explanans explains a phenomenon under the requested relation | the block of an explanation of an `answer` | exists |
-| `inter-theory-relation` | a relation of unification, reduction or integration between [theories](../theory.md) | `to-create` | to-create |
+| `inter-theory-relation` | a relation of unification, reduction or integration between [theories](../representations/theory.md) | `to-create` | to-create |
 | `knowledge-state-change` | a change of the attitude or of the status of existing records | changes of the record `status`; a revision log is to create | partial |
 
 A theory enters an activity as a `model`, read as a class of models. A framework changes only through the verdicts that motivate the change, so no product type names a framework.
@@ -140,7 +140,7 @@ Four terms describing an inquiry are often used for one another:
 The word *explanation* names three objects, each owned by one note: ^explanation-senses
 
 - the **activity** of explanation shows that an explanans bears the requested relation to a phenomenon, as typed in the note on [explanation and integration](explanation-and-integration.md);
-- the **product** is a claim, defined in the note on [claims](../claim-and-hypothesis.md) and held by the product type `explanation`;
+- the **product** is a claim, defined in the note on [claims](../representations/claim-and-hypothesis.md) and held by the product type `explanation`;
 - the **aim** of explanation is the achievement sought by an inquiry that asks why or how, fixed by the [epistemic aim](../../epistemic-aim.md).
 
 ## Relations among activities

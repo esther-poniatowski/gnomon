@@ -15,7 +15,7 @@ The [audits of the model design](../audits/_index.md) and the trials run on the 
 
 ## Decision
 
-**Questions.** The full atomic question, its aim together with its parameters, fixes the type of its direct answers. A research question is a graph of atomic questions, linked by the [links between questions](../epistemology/definitions/problem-and-question.md#^linked-questions). A question may stay *open*, with no answer type yet, while its answer space is not formed.
+**Questions.** The full atomic question, its aim together with its parameters, fixes the type of its direct answers. A research question is a graph of atomic questions, linked by the [links between questions](../epistemology/definitions/inquiry/problem-and-question.md#^linked-questions). A question may stay *open*, with no answer type yet, while its answer space is not formed.
 
 **Aims.** The aims form an open registry, and each entry states its answer conditions: what counts as a direct answer, when that answer is conclusive, and what it presupposes. The registry classifies each aim as answer content, conceptual work or mode of inquiry; an exploration is conceptual work when its question marks the equivalence criterion as an output, and answer content when the criterion is an input. Only answer content and conceptual work generate an aim block. A change of accepted claims is not an aim: it is the effect of accepting an answer, a revision of a belief base on a named corpus with a named owner. Understanding is not an aim either: it is a dimension of assessment, or a declared use of an answer.
 

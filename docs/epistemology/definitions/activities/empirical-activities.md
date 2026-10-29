@@ -15,7 +15,7 @@ source:
 
 > [!QUESTION] Goal: which activities design an inquiry into a target and obtain data and phenomena from it, and by which norm is each judged?
 
-The activities of this family output a design of inquiry, [data](../variable-value-observable.md) or a [phenomenon](../pattern-and-phenomenon.md). Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a design of inquiry, [data](../quantities/variable-value-observable.md) or a [phenomenon](../regularities/pattern-and-phenomenon.md). Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 
@@ -40,7 +40,7 @@ The activities of this family output a design of inquiry, [data](../variable-val
 ## Distinctions
 
 - **Design and execution differ in their output.** Experimental design outputs a design, judged before any datum exists by its possible outcomes. Observation, measurement and intervention execute a design, and output data.
-- **Observation and measurement differ in their requirements.** Observation produces records of features. Such records may be categorical, with no numerical representation. Measurement requires a [scale](../scale-and-level.md), and on the model-based account also a model of the measuring process [tal2020].
+- **Observation and measurement differ in their requirements.** Observation produces records of features. Such records may be categorical, with no numerical representation. Measurement requires a [scale](../quantities/scale-and-level.md), and on the model-based account also a model of the measuring process [tal2020].
 - **Observation and intervention differ by manipulation.** An intervention sets a variable, whereas observation records the target as it is [hacking1983]. Therefore, an intervention can support a causal claim under fewer assumptions about confounders than observation requires [woodward2003].
 - **Phenomenon detection is an inference.** The data of one procedure carry its idiosyncrasies, so a phenomenon is typically detected by comparing data across procedures [bogen1988].
 

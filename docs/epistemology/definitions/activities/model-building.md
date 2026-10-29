@@ -18,7 +18,7 @@ source:
 
 > [!QUESTION] Goal: which activities specify a target, admit its background laws and construct a model of it, and by which norm is each judged?
 
-The activities of this family output a target specification, a background model or a [model](../model.md). Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a target specification, a background model or a [model](../representations/model.md). Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 
@@ -39,13 +39,13 @@ The activities of this family output a target specification, a background model 
 
 | Activity | Operation | The test `norm.<activity-id>` passes when |
 | --- | --- | --- |
-| `delimitation` | declare the [constituents, environment and structure](../system-constituent-environment.md) of the system that a question concerns | every declared constituent and every shared variable occurs in at least one admissible answer type of the question, a member of the answer set over its typed slots [hamblin1958] |
+| `delimitation` | declare the [constituents, environment and structure](../systems/system-constituent-environment.md) of the system that a question concerns | every declared constituent and every shared variable occurs in at least one admissible answer type of the question, a member of the answer set over its typed slots [hamblin1958] |
 | `background-appraisal` | admit laws about the target from sources | each admitted law carries a warrant, an origin and a range |
 | `transfer` | carry laws established for another class of systems over to the target | structural similarity licenses the extrapolation: the mechanism that supports each law in the source class operates in the target, undisrupted at the stages where the two classes may differ [steel2008] |
 | `abstraction` | omit factors of the target from the model | the omitted factors are named, and no claim of the answer bears on them [jones2005] [cartwright1989] |
 | `idealization` | introduce a deliberate distortion into the model | the motive is stated, and the condition of its kind holds: a Galilean idealization can be removed; a minimalist idealization omits only factors that make no difference to the phenomenon [mcmullin1985] [weisberg2007] |
 | `de-idealization` | remove an idealization from the model, or correct for it | a correction to the idealized result is known, so the idealization is `controlled`, and each conclusion is shown to be stable under that correction or is corrected [mcmullin1985] [knuuttila2019] |
-| `decomposition-localization` | divide the behavior of the target into activities, and assign each activity to a part | each component of the model maps onto a constituent of the target or onto a declared admissible part, as the [explanatory mapping](../mechanism-and-mechanistic-model.md#^mechanistic-model-test) requires [bechtel1993] [craver2006] |
+| `decomposition-localization` | divide the behavior of the target into activities, and assign each activity to a part | each component of the model maps onto a constituent of the target or onto a declared admissible part, as the [explanatory mapping](../regularities/mechanism-and-mechanistic-model.md#^mechanistic-model-test) requires [bechtel1993] [craver2006] |
 | `model-analogy` | carry the structure of a source model over to the domain of the target | the mapping preserves the relations relevant to the phenomenon, and no known difference defeats the transfer [hesse1966] [bartha2010] |
 | `formalization` | state each term and relation of a verbal model as a quantity, a set or an equation | every symbol resolves to a declaration, under the [expression language](../../symbols-and-expressions.md) |
 | `fitting` | estimate the parameters of a model from data | the estimator and the uncertainty of each estimate are stated, and each fitted parameter carries the warrant `fitted` [kennedy2001] |
@@ -54,7 +54,7 @@ The activities of this family output a target specification, a background model 
 
 - **The norm of delimitation ranges over answer types.** Candidate answers are produced after delimitation, so a norm stated over them cannot be checked when the target is specified. The answer types of a question exist as soon as its slots are typed.
 - **Background appraisal and transfer share their output and differ in their norm.** Appraisal admits laws established for the class of the target, each with its warrant. Transfer admits laws established for another class, and its norm requires evidence that the supporting mechanism is shared [steel2008].
-- **Abstraction and idealization differ by the truth of their products.** The [truth test](../idealization-and-abstraction.md#^truth-test) decides between them.
+- **Abstraction and idealization differ by the truth of their products.** The [truth test](../representations/idealization-and-abstraction.md#^truth-test) decides between them.
 - **De-idealization outputs a model, so it belongs to this family.** A revision changes the attitude toward existing records, whereas de-idealization builds a new model. Removing an idealization often reformulates the model, instead of simply reversing the earlier distortion [knuuttila2019].
 - **Decomposition and localization build a model, and explanation judges it.** Decomposition outputs a model, and its norm checks that each component corresponds to a part of the target. The norm of [explanation](explanation-and-integration.md) judges whether that model explains the phenomenon.
 - **Decomposition of a system differs from decomposition of a question.** Decomposition and localization divide a behavior among the parts of a system [bechtel1993]. The decomposition of a question in [problem-posing](problem-posing.md) divides a question into subquestions, under the norm of erotetic implication.

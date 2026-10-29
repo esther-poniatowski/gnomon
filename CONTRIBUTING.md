@@ -135,13 +135,13 @@ An entry names the note and states what a reader obtains from it, so that a read
 A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both in an editor and on the repository page. The examples below are written from a note of `docs/epistemology/`:
 
 ```markdown
-the [types of problem](definitions/problem-types.md)
+the [types of problem](definitions/inquiry/problem-types.md)
 ```
 
 A finer reference appends a block anchor, declared at the end of the target line:
 
 ```markdown
-[links between questions](definitions/problem-and-question.md#^linked-questions)
+[links between questions](definitions/inquiry/problem-and-question.md#^linked-questions)
 ```
 
 Link text names the result, the object, or the message found at the target, never the file name and never a bare category word.
