@@ -1,13 +1,13 @@
 ---
 tags:
   - examples
-index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
+index: "[Worked inquiries](examples/_index.md)"
 aliases:
   - Adversarial statements
 ---
 # Adversarial statements
 
-These statements form a test set for the expressivity of three parts of `gnomon`: the concept record of the goal `vocabulary-records`, the framework of the goal `derivation-framework`, and the pilot of the goal `model-design`, all listed in the [project goals](../../TODO.md). A part passes a statement when its records can state the statement without losing any feature that the table of the statement lists.
+These statements form a test set for the expressivity of three parts of `gnomon`: the concept record of the goal `vocabulary-records`, the framework of the goal `derivation-framework`, and the pilot of the goal `model-design`, all listed in the [project goals](../TODO.md). A part passes a statement when its records can state the statement without losing any feature that the table of the statement lists.
 
 Each statement is a free-form sentence about neural representations or their interpretation. The statements were written to resist normalization into a simple definition, support, contrast or citation relation. Each table names the features that make its statement hard to formalize. The resolutions of these statements in the vocabulary of the retired design documentation, with their verdicts, remain in the git history at commit 9e138e2.
 

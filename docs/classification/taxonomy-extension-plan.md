@@ -1,7 +1,7 @@
 ---
 tags:
   - gaps
-index: "[Methods for taxonomies](docs/methods-taxonomies/_index.md)"
+index: "[Classification](docs/classification/_index.md)"
 aliases:
   - Taxonomy extension plan
 ---

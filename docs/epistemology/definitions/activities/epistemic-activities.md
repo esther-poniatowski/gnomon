@@ -168,7 +168,7 @@ The itinerary record adds checks of its own fields, such as unique step identifi
 
 The type of a referenced record follows from its state, as the [record column of the product types](#^product-types) states. For a question record, the state is the commitment of its slots. With a placeholder slot, the record has type `question-schema`. With every slot at commitment `identified` or above, the record has type `question`. Therefore, a schema becomes a question when [subject identification](problem-posing.md) raises its slots, and no activity of its own is needed.
 
-The check matches types only, so an itinerary that passes it is well formed. The success of each step is decided separately, by the verdict of its norm. Each step has the form of an action schema in [classical planning](../../../methods-reasoning/ai-planning-pddl.md): the input types play the part of preconditions, and the output type plays the part of an effect. A step can decompose into sub-steps, as a compound task does in [hierarchical task network planning](../../../methods-reasoning/hierarchical-task-network-planning.md).
+The check matches types only, so an itinerary that passes it is well formed. The success of each step is decided separately, by the verdict of its norm. Each step has the form of an action schema in [classical planning](../../../references/ai-planning-pddl.md): the input types play the part of preconditions, and the output type plays the part of an effect. A step can decompose into sub-steps, as a compound task does in [hierarchical task network planning](../../../references/hierarchical-task-network-planning.md).
 
 ---
 ## Sources

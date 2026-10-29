@@ -1,19 +1,13 @@
 ---
 tags:
   - reference
-index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
+index: "[References](docs/references/_index.md)"
 aliases:
   - Open Knowledge Format
 ---
 # Open Knowledge Format
 
-The Open Knowledge Format (OKF) is an open specification for packaging knowledge as linked Markdown files with YAML frontmatter, readable by language-model agents without a vendor platform [mcveety2026]. This note assesses whether `gnomon` can use the format in one of three roles:
-
-- as the source format of its records;
-- as a derived export;
-- as a source of field designs.
-
-> [!QUESTION] Should `gnomon` store its records in the Open Knowledge Format, emit bundles in it, or borrow some of its fields?
+The Open Knowledge Format (OKF) is an open specification for packaging knowledge as linked Markdown files with YAML frontmatter, readable by language-model agents without a vendor platform [mcveety2026]. This note states the specification and compares its commitments with those of `gnomon`. The role of the format in `gnomon` is fixed by the [decision on the knowledge interchange format](../adr/knowledge-interchange-format.md).
 
 ## Specification
 
@@ -73,31 +67,6 @@ Both formats store plain text files suited to version control with git, and both
 | Formal content | None beyond the code of an `Attested Computation`. | Declared symbols, and [formulas](../epistemology/symbols-and-expressions.md) over them. |
 | Status | Lifecycle of a document: `draft`, `stable`, `deprecated`. | Epistemic state of an inquiry, for instance a question `posed`, `refined`, `answered` or `abandoned`. |
 | Authorship and verification | `generated`, `verified`, and the actor convention. | No field. |
-
-## Assessment
-
-Each of the three roles is decided by one constraint of the `gnomon` design.
-
-### Source format
-
-The OKF cannot serve as the storage format of `gnomon` records. The decisive constraint is the [rule on grammatical fields](../adr/grammatical-fields-and-readings.md#^grammar-for-read-fields): a tool interprets the value of a field only when a grammar declares that value. An OKF link leaves its relation type to prose. Consequently, a relation stored in OKF form conforms to no grammar. Without that grammar, the build step cannot derive the dependency graph from OKF links. The conformance rules raise a second conflict: an OKF consumer must accept unknown types and broken links, whereas `gnomon` reports both as defects.
-
-Moreover, OKF conformance adds no check to those of `gnomon`. A `gnomon` Markdown file meets the conformance rules once its frontmatter carries a `type` key, since the OKF admits every other key. An OKF consumer then reads `type`, `title` and the links, and leaves uninterpreted every field checked by `gnomon`. The current records are YAML files, so none of them counts as a concept document.
-
-### Export view
-
-An OKF bundle is admissible as an export, because [derived artifacts](../adr/one-source-per-unit.md#^generated-copies-only) are compiled from the canonical objects and never edited. The mapping from canonical objects to concept documents preserves kinds and titles: each object becomes one concept document, its kind fills `type`, and its title fills `title`. The same mapping loses the relation types. Each typed edge becomes a link whose type is stated in prose. A typed copy of the edge can be kept under an extra key. OKF consumers should preserve that key, without interpreting its value.
-
-The export gains value only for a consumer reading OKF bundles and unable to read the `gnomon` sources. One product was announced as ingesting OKF bundles: Google Cloud Knowledge Catalog [mcveety2026]. By contrast, a language-model agent can read the `gnomon` Markdown and YAML sources directly. Therefore, the export should be deferred until a named consumer requires it, such as a catalog or an agent framework loading OKF bundles.
-
-### Trust fields
-
-The v0.2 trust fields address a gap present in `gnomon`. When language-model agents draft records and a researcher reviews them, no `gnomon` field records the actor that produced a record or the actor that confirmed the record. Together with the `human:` prefix, the pair `generated.by` and `verified[].by` separates agent-produced content from human-reviewed content by syntax alone. Consequently, a checker can compute the trust tier of each record. The fields bear on [revision accountability](../adr/revision-accountability.md#^traceable-revision): each revision must be traceable to its origin. The actor producing a revision is one component of that origin. Therefore, the trust fields can be adopted into the record templates, once a design decision ratifies them.
-
-Two other elements of version 0.2 do not transfer to `gnomon`:
-
-- `stale_after` expires content at a fixed instant. A `gnomon` object becomes stale when any object upstream of it is revised, and the [propagation of a revision](../adr/revision-accountability.md#^propagated-revision) surfaces that state.
-- `Attested Computation` presupposes a runtime executing a sanctioned computation, and `gnomon` executes none.
 
 ## Sources
 

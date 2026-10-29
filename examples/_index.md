@@ -7,10 +7,10 @@ aliases:
 ---
 # Worked inquiries
 
-Shows completed inquiry records, which a researcher consults before filling the [record templates](../src/gnomon/data/templates/_index.md).
+Shows the cases against which the records of `gnomon` are tested: completed inquiries, which a researcher consults before filling the [record templates](../src/gnomon/data/templates/_index.md), and single research statements that resist formalization.
 
 > [!IMPORTANT] Read by the test suite
-> The tests parametrize over the folders of this directory. Their location and the expected folders are fixed in the [paths of the test suite](../tests/test_gnomon/paths.py), so a new or renamed folder is registered there as well.
+> The tests parametrize over the folders of this directory. Their location and the expected folders are fixed in the [paths of the test suite](../tests/test_gnomon/paths.py), so a new or renamed folder is registered there as well. A test set kept as one file at this level, rather than as a folder, stays outside the parametrization.
 
 ## Inquiries
 
@@ -21,3 +21,7 @@ Shows completed inquiry records, which a researcher consults before filling the 
 - [Stable microbial coexistence](microbial-stable-coexistence/_index.md): tests whether necessary and sufficient conditions stay distinct across model variants
 - [Localized Swift-Hohenberg states](swift-hohenberg-localized-states/_index.md): tests whether a description can name the features it seeks without supplying their values
 - [Neural tangent dynamics](neural-tangent-kernel-model-knowledge/_index.md): tests whether an inquiry can specify the knowledge it seeks about a formal class of models
+
+## Statements
+
+- [Adversarial statements](adversarial-statements.md): tests whether the records of `gnomon` can state research statements that resist formalization

@@ -100,7 +100,7 @@ Three keys open every note, in this order:
 ---
 tags:
   - reference
-index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
+index: "[References](docs/references/_index.md)"
 aliases:
   - Argumentation theory
 ---

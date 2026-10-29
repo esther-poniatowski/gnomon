@@ -1,13 +1,15 @@
 ---
 tags:
   - reference
-index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
+index: "[References](docs/references/_index.md)"
 aliases:
   - Belief revision and dynamic epistemic logic
 ---
+# Belief revision and dynamic epistemic logic
+
 ## Domain VI — Belief Revision and Dynamic Epistemic Logic
 
-These two frameworks address **how epistemic states change** — the component most absent from the proposed architecture's current form.
+These two frameworks address **how epistemic states change**.
 
 ### VI — AGM Belief Revision
 
@@ -25,7 +27,7 @@ The **AGM postulates** (Alchourrón, Gärdenfors, Makinson 1985) axiomatize rati
 
 **Grove sphere semantics**: belief sets are represented as nested spheres of possible worlds ordered by "closeness" to the current epistemic state. Revision with $\phi$ selects the closest $\phi$-world(s).
 
-**State evolution**: the three operations define how a belief set transforms upon receiving new information. This is the formalism for representing **epistemic gain** as a state transition — exactly what the proposed framework lacks.
+**State evolution**: the three operations define how a belief set transforms upon receiving new information. This is the formalism for representing **epistemic gain** as a state transition.
 
 ### VI — Dynamic Epistemic Logic (DEL)
 
@@ -50,4 +52,4 @@ $$\mathcal{M} | \phi = \langle W^\phi, \sim_i^\phi, V^\phi \rangle$$
 
 where $W^\phi = {w \in W \mid \mathcal{M}, w \models \phi}$ — worlds inconsistent with $\phi$ are eliminated. This models **learning** as possible-world elimination.
 
-**Step selection**: DEL models _how_ epistemic states change under communicative and observational events. It does not model strategic selection of what to investigate next — but it provides the formal semantics for what it means to **gain knowledge** at each step, which is precisely the epistemic gain representation the proposed framework requires.
+**Step selection**: DEL models _how_ epistemic states change under communicative and observational events. It does not model strategic selection of what to investigate next — but it provides the formal semantics for what it means to **gain knowledge** at each step.

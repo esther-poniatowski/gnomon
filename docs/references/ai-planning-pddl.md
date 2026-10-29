@@ -1,10 +1,12 @@
 ---
 tags:
   - reference
-index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
+index: "[References](docs/references/_index.md)"
 aliases:
   - Classical AI planning
 ---
+# Classical AI planning
+
 ## Domain III — Classical AI Planning (STRIPS / PDDL)
 
 ### III — Knowledge Model
@@ -59,4 +61,4 @@ Plan synthesis is a **search problem** over the state space or plan space:
 
 **Backward search** (regression): from $\mathcal{G}$, regress through action preconditions. Applicable when $\text{add}(a) \cap \mathcal{G} \neq \emptyset$; regression yields new subgoal $(\mathcal{G} \setminus \text{add}(a)) \cup \text{pre}(a)$.
 
-**The critical structure**: in planning, **why** an action is selected is encoded in the **causal link** of the plan — action $a_i$ achieves precondition $p$ of $a_j$, expressed as $a_i \xrightarrow{p} a_j$. This causal structure is the planning-theoretic analogue of the "why" the proposed framework seeks, but it operates exclusively over propositional state changes — not over epistemic content or understanding.
+**The critical structure**: in planning, **why** an action is selected is encoded in the **causal link** of the plan — action $a_i$ achieves precondition $p$ of $a_j$, expressed as $a_i \xrightarrow{p} a_j$. This causal structure operates exclusively over propositional state changes — not over epistemic content or understanding.

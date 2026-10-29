@@ -1,10 +1,12 @@
 ---
 tags:
   - reference
-index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
+index: "[References](docs/references/_index.md)"
 aliases:
   - Argumentation theory
 ---
+# Argumentation theory
+
 ## Domain V — Argumentation Theory
 
 ### V — Knowledge Model
@@ -59,7 +61,7 @@ In **dialogue-based argumentation** (Walton's dialogue types: persuasion, inquir
 - The dialogue terminates when no new arguments are available or a resolution condition is met
 - The **burden of proof** governs which party must provide arguments at each stage
 
-This is the argumentation-theoretic representation of **reasoning dynamics** — the temporal unfolding of argument construction and revision under adversarial or collaborative dialogue. For the proposed framework, this models the evolution of _justificatory support_ for schema selections over the course of reasoning.
+This is the argumentation-theoretic representation of **reasoning dynamics** — the temporal unfolding of argument construction and revision under adversarial or collaborative dialogue.
 
 ### V — Step Selection
 
@@ -69,4 +71,4 @@ In formal argumentation, "step selection" corresponds to the choice of which arg
 - **Strategic reasoning** (Dung/Riveret/Bench-Capon): selecting arguments that maximize the probability of achieving a winning position — an explicit model of _argumentative strategy_
 - **Relevance**: a new argument must attack or support an argument already in play (prevents arbitrary insertion)
 
-The **critical point for the framework**: argumentation theory provides a formal model of **why a particular justificatory move is selected** — it must respond to an existing attack or advance a defensive position. This is the closest existing formal model to the "why is this step introduced" requirement of R1.
+Argumentation theory therefore provides a formal model of **why a particular justificatory move is selected**: the move must respond to an existing attack or advance a defensive position.

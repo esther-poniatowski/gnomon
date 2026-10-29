@@ -1,13 +1,13 @@
 ---
 tags:
   - reference
-index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
+index: "[References](docs/references/_index.md)"
 aliases:
   - Hierarchical task network planning
 ---
-## Domain IV — Hierarchical Task Network Planning (HTN)
+# Hierarchical task network planning
 
-HTN planning is the planning substrate most directly relevant to the proposed framework's goal decomposition layer, and merits separate treatment.
+## Domain IV — Hierarchical Task Network Planning (HTN)
 
 ### IV — Knowledge Model
 
@@ -44,4 +44,4 @@ Step selection involves two interleaved choices:
 1. **Method selection**: which method to apply to decompose a compound task — governed by precondition satisfaction and heuristic preferences among applicable methods
 2. **Task selection**: which task in the network to execute or decompose next — governed by ordering constraints and conflict detection
 
-The **decomposition tree** records the full hierarchical structure of the plan. This is structurally isomorphic to the proposed framework's Goal → Subgoal graph. However, in HTN, the decomposition is driven by **syntactic pattern matching** (does the compound task name match the method's task name?) with **semantic filtering** (are the preconditions satisfied?). The framework's planning schemas correspond precisely to HTN methods — but the proposed framework lacks the notion of **task/method typing** (the compound task name that triggers method selection), which is what makes HTN decomposition non-arbitrary.
+The **decomposition tree** records the full hierarchical structure of the plan. In HTN, the decomposition is driven by **syntactic pattern matching** (does the compound task name match the method's task name?) with **semantic filtering** (are the preconditions satisfied?). The **task/method typing**, by which the compound task name triggers method selection, is what makes HTN decomposition non-arbitrary.

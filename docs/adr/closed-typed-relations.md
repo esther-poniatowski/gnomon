@@ -33,7 +33,7 @@ The registry that gathers the relation types of every family of records, with th
 
 | Option | Benefit | Reason it is not taken alone |
 | ------ | ------- | ---------------------------- |
-| Untyped links, with the type stated in prose | Any relation is recorded at once | No query reads the type, as the [assessment of the Open Knowledge Format](../methods-reasoning/open-knowledge-format.md) finds for its links |
+| Untyped links, with the type stated in prose | Any relation is recorded at once | No query reads the type, as the [decision on the knowledge interchange format](knowledge-interchange-format.md#^no-okf-source) finds for the links of the Open Knowledge Format |
 | Free linking phrases that harden into types as the inquiry matures, as in concept maps | A relation is recorded before its type exists | One field holds values of two kinds. A relation without a declared type is stated in a reading until the registry admits its type, so the progression runs through the registry |
 | A vocabulary that each problem extends with relations of its own | Each problem names the relations that it needs | Two problems name one relation differently, so a query across problems misses one of them |
 | A store of relations outside the records, such as relational tables or a triple store | A standard query language over an indexed store | The store holds a second copy of each relation, which the [decision on the inputs of checks](checks-read-records.md#^records-are-source) excludes |

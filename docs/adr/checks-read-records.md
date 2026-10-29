@@ -40,4 +40,4 @@ A verdict on a record is produced by a checker run on that record. No field of a
 
 - A generated file placed beside the records, such as the table `vocabulary.yml` of a problem, is excluded from the inputs of every check. The count of unused declarations in `src/gnomon/vocabulary.py` already excludes that table.
 - A check that needs a derived structure, such as the graph of the [relations between records](closed-typed-relations.md#^relation-graph), builds that structure from the records at each run.
-- The decision excludes a field that certifies conformance to the checks. A field that names the agent who drafted or reviewed the content of a record is a separate question: the [assessment of the Open Knowledge Format](../methods-reasoning/open-knowledge-format.md) leaves its trust fields to a later decision.
+- The decision excludes a field that certifies conformance to the checks. A field that names the agent who drafted or reviewed the content of a record is a separate question: the [decision on the knowledge interchange format](knowledge-interchange-format.md#^trust-fields-open) leaves the trust fields of the Open Knowledge Format to a later decision.

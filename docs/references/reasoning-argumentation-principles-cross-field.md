@@ -1,10 +1,11 @@
 ---
 tags:
   - reference
-index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
+index: "[References](docs/references/_index.md)"
 aliases:
   - Reasoning principles across fields
 ---
+# Reasoning principles across fields
 
 ## Objective
 
@@ -49,7 +50,7 @@ Relevance has several distinct meanings:
 - **explanatory relevance**: the factor makes a difference to the phenomenon
 - **dialectical relevance**: the move contributes to resolving the dispute
 
-Relevance can be assessed at distinct granularity levels in a reasoning:
+Relevance can be assessed at distinct granularity levels in a reasoning, each governed by one of the [decision rules held by hermeneia](https://github.com/esther-poniatowski/hermeneia/blob/main/docs/rule-sources/decision-rules.md):
 
 - **Scope admissibility** is project-level and external to the note.
 - **Objective unity** governs whether a note answers one inferential objective or several.

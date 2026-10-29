@@ -37,13 +37,13 @@ The mechanism that realizes these requirements remains open. The goal `status-pr
 | Record each episode of revision as a record of its own, and move retired records to an archive, as the retired design notes (commit 9e138e2) proposed | One record gathers the reason, the priority and the progress of an episode | Deferred to the goal `status-propagation`, which first decides which changes mark the dependents. An archive of earlier records must not become the store of past versions that the [decision on versions](versions-and-history.md#^git-keeps-history) excludes |
 | Write the provenance of each revision in the data model of W3C PROV [moreau2013] | A standard model separates the revised entity, the activity and the agent, and names a revision `wasRevisionOf` | A second record of provenance would restate the steps of the itinerary and the relation `revises`, which the [rule of one source](one-source-per-unit.md#^one-source) excludes. PROV serves as a reference model for the mechanism, not as its format |
 | Type each revision by the operations of belief revision: expansion, contraction and revision [agm1985] | Each revision carries a kind with a defined effect | The postulates assume a theory closed under logical consequence, which the records never form, since no tool infers. The operations stay candidate kinds of revision under the goal `status-propagation` |
-| Expire a unit at a fixed date | Staleness requires no relation | A unit becomes stale when a unit upstream of it is revised, as the [assessment of the Open Knowledge Format](../methods-reasoning/open-knowledge-format.md) states for its field `stale_after` |
+| Expire a unit at a fixed date | Staleness requires no relation | A unit becomes stale when a unit upstream of it is revised, as the [decision on the knowledge interchange format](knowledge-interchange-format.md#^not-transferred) states for the field `stale_after` of the Open Knowledge Format |
 | Traceability and flagged propagation, as requirements on a mechanism decided later | Each later mechanism meets fixed requirements | Until the mechanism exists, the requirements hold for answers and for bindings only |
 
 ## Consequences
 
 - The relation `revises` and the versions of a binding meet the requirement of traceability for answers and bindings.
-- The agent that produced a revision belongs to its origin. The trust fields assessed in the note on the Open Knowledge Format await a decision.
+- The agent that produced a revision belongs to its origin. The trust fields of the Open Knowledge Format await a decision, as the [decision on the knowledge interchange format](knowledge-interchange-format.md#^trust-fields-open) states.
 - A lookup of the records resting on a unit reads the [graph of relations](closed-typed-relations.md#^relation-graph), and its result is a report.
 
 ---

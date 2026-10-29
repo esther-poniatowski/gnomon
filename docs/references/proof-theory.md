@@ -1,10 +1,12 @@
 ---
 tags:
   - reference
-index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
+index: "[References](docs/references/_index.md)"
 aliases:
   - Proof theory
 ---
+# Proof theory
+
 ## Domain I — Proof Theory (Natural Deduction and Sequent Calculus)
 
 ### I — Knowledge Model

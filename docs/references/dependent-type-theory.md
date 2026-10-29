@@ -1,10 +1,12 @@
 ---
 tags:
   - reference
-index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
+index: "[References](docs/references/_index.md)"
 aliases:
   - Dependent type theory
 ---
+# Dependent type theory
+
 ## Domain II — Dependent Type Theory (Martin-Löf)
 
 ### II — Knowledge Model
@@ -32,7 +34,7 @@ Under the **propositions-as-types** correspondence:
 |**Identity type** $\text{Id}_A(a, b)$|Proposition that $a$ and $b$ are equal in $A$; its inhabitants are proofs of equality|
 |**$\Sigma$-type** $\sum_{x:A} B(x)$|Existential / dependent pair: "there exists $x:A$ such that $B(x)$"|
 
-This allows **definition**, **theorem**, **proof**, and **construction** to be uniformly represented as typed terms — the unification claim in the framework's novelty claim 1 is partially realized here.
+This allows **definition**, **theorem**, **proof**, and **construction** to be uniformly represented as typed terms.
 
 ### II — State Evolution
 
@@ -53,4 +55,4 @@ Proof construction in DTT proceeds by **goal-directed refinement** (as in Coq's 
     - `exact t` when $t : A$: closes the goal
 3. Tactics are selected by the human prover or by **proof search algorithms** (e.g., `auto`, `eauto` in Coq) that perform bounded backward chaining
 
-The critical point: **tactic selection is the locus of mathematical understanding**. A skilled mathematician selects tactics based on structural recognition (this goal has the shape of a standard construction), analogy (this resembles a proof I know), and strategy (it is more efficient to work backwards from the goal). This is exactly what the proposed framework aims to represent explicitly — and DTT does not.
+The critical point: **tactic selection is the locus of mathematical understanding**. A skilled mathematician selects tactics based on structural recognition (this goal has the shape of a standard construction), analogy (this resembles a proof I know), and strategy (it is more efficient to work backwards from the goal). DTT does not represent this selection.
