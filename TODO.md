@@ -78,7 +78,10 @@ The Mixture pilot of `geonexus` corrected several parts of the framework while s
 		- [ ] port the checks of imports, references, conflicts, aliases and cycles from the glossary checker of `geonexus`;
 		- [ ] reference the problem and question records from the scope of a project specification, instead of restating its questions;
 		- [ ] keep in a notation only its conventions and the symbols reused across records, and generate the LaTeX macros of an exposition from the symbols;
-		- [ ] decide whether a glossary entry is the lexical face of a concept record;
+		- [ ] define the concept record of the research family, with its optional link to a full definition object, following the [decision on concepts, glossaries and notations](docs/adr/concepts-glossaries-notations.md);
+		- [ ] reduce the glossary to the names of concepts, with forbidden forms scoped by audience and shared exceptions tested by their examples;
+		- [ ] specify the compositional notation, with its bases, modifiers, index sets and conventions, and parse every written expression against it;
+		- [ ] reject every declared check that the checker does not run, and give each rule a planted case;
 		- [ ] check the terms of an exposition against the audiences cited by its design brief.
 	- [ ] Apply the research corrections of the pilot: 🆔 research-corrections
 		- [ ] identifiers on idealizations, abstractions and explanans factors, and a key listing the idealizations that a law requires;

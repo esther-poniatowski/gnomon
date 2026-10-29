@@ -25,4 +25,5 @@ The records:
 - [Record schemas](record-schemas.md): to reach the file that declares the shape of a record, for validation and for rendering in Ekphrasis.
 - [Expositions as projections](expositions-as-projections.md): to know what an exposition may add to the research that it presents, and which tool specifies it.
 - [Terminology, audience and project specifications](terminology-audience-project-specifications.md): to place the mechanism of a notation, a glossary, an audience or a project specification, apart from its instances.
+- [Concepts, glossaries and notations](concepts-glossaries-notations.md): to separate the meaning of a concept from its names, and to compose the symbols of a notation.
 - [Answers, models and bindings](answers-models-bindings.md): to know which records hold a candidate answer, its model and the relation of that model to the phenomenon.
