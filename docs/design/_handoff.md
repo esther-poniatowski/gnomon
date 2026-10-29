@@ -10,7 +10,6 @@ aliases:
 This file gives the project-level state for a new agent. Read this file first, then read the focused handoff for the work you are about to do:
 
 - [Refactor handoff](_handoff-refactor.md) — Step A through Step D for the design-folder refactor, and the current refactor state.
-- [Cleanup handoff](_handoff-cleanup.md) — Step A.4 source-file cleanup only.
 - [Design index](_index.md) — current folder layout and tier scheme.
 
 Do not use the backup proposals as live design state unless an active file or the [classification table](_classification-table.md) points to a specific backup passage.
@@ -32,7 +31,7 @@ A criterion about framework objects does not automatically decide a content taxo
 
 ## Current work
 
-The design-folder refactor is mid-flight. The [refactor handoff](_handoff-refactor.md) owns the per-step status and the next action; the [cleanup handoff](_handoff-cleanup.md) owns the Step A.4 file mechanics. Read those for the current task — the immediate work is the Step A.4 backup-source cleanup, and parts of Steps C and D have been brought forward under user ratification.
+The design-folder refactor is mid-flight. The [refactor handoff](_handoff-refactor.md) owns the per-step status and the next action. Read it for the current task: Step A.4 is complete, the Step A.5 residue comes next, and parts of Steps C and D have been brought forward under user ratification.
 
 Open Tier-2 decisions can proceed in parallel only if they do not invalidate [classification-table](_classification-table.md) targets without updating the table before Step B.
 
@@ -43,7 +42,7 @@ Open Tier-2 decisions can proceed in parallel only if they do not invalidate [cl
 - Read the current files before acting. The handoffs point to state; they do not replace the source files.
 - Preserve anchors until a step explicitly redirects or removes them — unless the user directs an extended action that redirects them earlier (see *Opportunistic scope* below).
 - Use Obsidian block-anchor links, such as `#^anchor-name`. MD051 warnings on those links are expected false positives.
-- Ratify substantive design changes with the user before applying them. Source cleanup has its own stricter approval rule in the [cleanup handoff](_handoff-cleanup.md).
+- Ratify substantive design changes with the user before applying them. Never delete substantive content that no tier file integrates without the user's explicit approval.
 - Replace duplicate recalls with links to the owning source. Do not keep parallel prose that says the same thing in different words.
 - Frame rejected routes by the active constraint that excludes them, not by the history of who wrote them or when.
 
@@ -68,7 +67,7 @@ An extended action moves the project ahead of the step sequence, so three artefa
 
 Future agents must keep the handoffs small and current.
 
-- Separate concerns between handoffs: project-level orientation belongs to the main handoff, Step A-D state belongs in the [refactor handoff](_handoff-refactor.md), and Step A.4 mechanics belong in the [cleanup handoff](_handoff-cleanup.md).
+- Separate concerns between handoffs: project-level orientation belongs to the main handoff, and Step A-D state belongs in the [refactor handoff](_handoff-refactor.md).
 - Delete completed task details once the next agent no longer needs them. Keep the current state, relevant result if any, the next dependency, and any warning that prevents reproducing past errors.
 - Do not restate file contents that a new agent can recover by reading the file itself. Link to the file and state why it matters.
 - Do not duplicate the same instruction across handoffs. Put it in the narrowest handoff that needs it, and link from the broader handoff.

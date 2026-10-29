@@ -27,7 +27,7 @@ The later test must require the framework to:
 
 ## Scope boundary
 
-The case does not assume a phase catalogue or a privileged order parameter.
+The case does not assume a phase catalogue or a privileged order parameter. Its candidate answer, a narrow catalogue of exceptional transitions, is included to test whether the assessment refuses to count a partial catalogue as the completed search that the question declares.
 
 ## Scientific basis
 

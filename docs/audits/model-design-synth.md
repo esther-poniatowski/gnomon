@@ -1,7 +1,7 @@
 ---
 tags:
   - audit
-index: "[gnomon audits](_index.md)"
+index: "[gnomon audits](docs/audits/_index.md)"
 aliases:
   - Audit - Model design (Synth)
 ---
@@ -22,7 +22,7 @@ The inquiry records commit to a model of the system under study at two points: t
 > - Points raised by one audit: the contribution of each audit absent from the other, with its assessment.
 > - Corpus evidence: three findings from the fixtures, absent from both audits or stated there in part.
 > - Divergences: for each conflict, the deciding constraint and the resolution.
-> - Recommended implementation: the records, the blocks, the checks and the steps of the pilot.
+> - Recommended implementation: the records, the blocks and the checks, with a pointer to the pilot.
 
 ## Verdict
 
@@ -38,7 +38,7 @@ Both audits agree on eleven points, the diagnosis first. The recommended design 
 
 - **One commitment behind the shared blocks.** Both records declare a model, as the [model record](../epistemology/model-and-binding.md#^model-record) now states.
 - **A missing relation.** No field states how the model of an answer relates to the model of the target. The fixtures state that relation in three places: derived expressions, warrants, and idealizations written in prose.
-- **Three defects repaired by the relation.** Once explicit, the relation repairs three of the five [trial defects](../../test/answer-assessment-template-issues.md) (claim domain, explanatory semantics, binding of values). Therefore, the direct repair of the answer template should pause.
+- **Three defects repaired by the relation.** Once explicit, the relation repairs three of the five trial defects (`test/answer-assessment-template-issues.md` at commit a4fb1b4: claim domain, explanatory semantics, binding of values). Therefore, the direct repair of the answer template should pause.
 - **Chains of models.** A model can derive from a derived model, as each level of a tower of effective models does in theoretical physics.
 - **Change of perspective as several operations.** An exact change of coordinates is invertible, so it loses no information and proves no new claim. A mean-field reduction, by contrast, typically projects many states onto one and then closes the dynamics with a posited or derived law.
 - **Consistency of a lossy map.** A coarse model must agree with the fine model on the interventions represented at both levels [rubenstein2017]. The [individuation test](../epistemology/satisfaction-conditions.md) already states this requirement.
@@ -334,34 +334,7 @@ The route values are those named by the [closure test](../epistemology/satisfact
 
 ### Validation and migration ^pilot
 
-- [ ] Ratify or amend the eleven resolutions of the divergences.
-- [ ] Record the graph of models in a decision record, and amend the decision on the [flat symbol table](../adr/flat-symbol-table.md).
-- [ ] Extend the checker to load models and answers, follow `derives_from` and compute visible tables. This step closes trial defect 1 for answer records.
-- [ ] Pilot the design on four fixtures:
-	- neural tangent kernel: account entries binding the features of the phenomenon, with no derived model;
-	- active matter: `approximate` and `idealize` operations under an exploratory aim;
-	- grokking: `restrict`, `limit`, `aggregate` and `extend` operations, with an explanans annotating the account entries;
-	- tipping cascades: a correspondence model with its key.
-- [ ] Accept the design when four conditions hold:
-	- each of the seven idealizations is assigned exactly one owner;
-	- no compulsory block stays empty;
-	- the four scope verdicts follow from the computed claim domains;
-	- the tipping individuation verdict is derived again from the key.
-- [ ] Migrate the microbial and Swift–Hohenberg fixtures, then rename the kind and the template in one editorial commit.
-- [ ] Rewrite the method notes and their templates:
-	- the [answer form](../epistemology/answer-form.md);
-	- the [target system](../epistemology/target-system.md);
-	- the [domain of conditions](../epistemology/domain.md);
-	- the [phenomenon](../epistemology/phenomenon.md);
-	- the [conditions of satisfaction](../epistemology/satisfaction-conditions.md).
-
-### Consequences for the handoff
-
-The [framework corrections handoff](../../test/framework-corrections-handoff.md) changes in three places:
-
-- the stage on the answer and assessment templates pauses for defects 2 to 4, while defects 1 and 5 proceed;
-- the ownership rule declines the candidate on moving the domain beside the selection criteria;
-- the decision of 2026-09-24 is superseded: the answer references a model record and no longer declares its model with the blocks of the target.
+The pilot, the ratification of these resolutions and the migration of the fixtures are tracked in the [project goals](../../TODO.md), under the goal `model-design`.
 
 ### Costs and open decisions
 

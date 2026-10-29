@@ -27,7 +27,7 @@ The later test must require the framework to:
 
 ## Scope boundary
 
-The case does not presuppose that one proposed mechanism explains every instance of delayed generalization. Likewise, an answer that predicts one benchmark is not complete by itself.
+The case does not presuppose that one proposed mechanism explains every instance of delayed generalization. Likewise, an answer that predicts one benchmark is not complete by itself. Its candidate answer, an account through structured representations, is included to test whether the assessment refuses to accept a transparent toy mechanism as an explanation across the class, or as a distribution of delays.
 
 ## Scientific basis
 

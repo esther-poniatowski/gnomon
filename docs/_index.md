@@ -18,6 +18,7 @@ Each entry answers one class of question about `gnomon`, so a reader consults on
 | [Epistemology](epistemology/_index.md) | What a researcher must fix to specify an inquiry, from what the question is about to the form of the answer it seeks. Each choice rests on results from the philosophy of models, of explanation and of questions. |
 | [Worked inquiries](../examples/_index.md) | How completed inquiry records look, each inquiry testing one capacity of the framework. |
 | [Architecture decisions](adr/_index.md) | Which design constraint each substantive choice answers, the options weighed against it, and what the choice costs. |
+| [gnomon audits](audits/_index.md) | Which assessments a decision rests on while its open resolutions await ratification. |
 | [Design TODO](TODO.md) | Where the design currently stands, and which steps remain open. |
 
 ## Note conventions

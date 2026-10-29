@@ -24,6 +24,10 @@ The return type of each domain constructor in the [operators](operators.yml) tha
 
 Every field reserved for the discovered phase is filled only by the exploration. The open values are therefore required. Although the discovered phase stays open, the detection procedures already require that each candidate recur, separate from others in control space, and persist in finite systems.
 
+## Local decisions still required
+
+A concrete study must fix the region of control space that the exploration samples, and the system sizes over which finite-size scaling runs. Both are choices of the inquiry, not results of the exploration.
+
 ## Answer and assessment trial
 
 The [candidate catalogue](answer.yml) intentionally imports a published continuum result without treating it as the completed exploration. The catalogue correctly fails six tests of its [assessment](assessment.yml):
@@ -33,4 +37,4 @@ The [candidate catalogue](answer.yml) intentionally imports a published continuu
 
 The admissibility failures follow from incomplete coverage of the target and from missing persistence tests. The warrant failures follow from the derivation of the candidate laws: the generic target laws do not select the ordered state or the normal form from which they are derived, and the answer relaxes neither its noiseless idealization nor its reduction to weak amplitude.
 
-The trial also exposes a defect of the answer form shared across cases: an exploratory product has no explanans, yet the form requires an `explanans` block. The candidate must therefore represent its classification rule as an explanans that “produces” the catalogue. The rule, however, identifies phases and does not explain an antecedently fixed phenomenon. The defect is recorded once, together with the other [template flaws](../../test/answer-assessment-template-issues.md) that the answer and the assessment share.
+The trial also exposes a defect of the answer form shared across cases: an exploratory product has no explanans, yet the form requires an `explanans` block. The candidate must therefore represent its classification rule as an explanans that “produces” the catalogue. The rule, however, identifies phases and does not explain an antecedently fixed phenomenon. The defect is shared across cases, and the [decision on answers, models and bindings](../../docs/adr/answers-models-bindings.md) resolves it: an answer no longer requires an explanans, and holds the block of its aim instead.

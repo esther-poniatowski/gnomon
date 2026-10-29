@@ -5,6 +5,9 @@
 # while it is not filled. The requirement registry decides whether an empty field is a gap.
 # A key repeats across blocks only where it carries the same vocabulary. The template comments
 # document these vocabularies and are checked against this file, so no check reads a document.
+# A value is admitted for a distinction that the assertions of the records draw, not for the
+# needs of the first cases: a value that absorbs most entries draws no distinction, and hides
+# the claims of the entries that it labels.
 #
 # Each epistemic aim of a question also states its category and its three answer conditions,
 # documented by the registry of aims (`docs/epistemology/epistemic-aim.md`). The category of an

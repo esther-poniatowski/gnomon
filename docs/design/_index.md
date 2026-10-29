@@ -61,7 +61,6 @@ Each tier is developed its own sub-folder with an index file that organizes the 
 | --- | --- |
 | [Design handoff](_handoff.md) | Project-level state for a new agent, and which focused handoff governs the work about to start. |
 | [Design refactor handoff](_handoff-refactor.md) | State of the Step A–D refactor sequence. |
-| [Source-file cleanup handoff](_handoff-cleanup.md) | State of Step A.4 alone: removing source bodies whose Tier-1 content has already moved into the framework criteria. |
 | [Design classification table](_classification-table.md) | Each source entry under its current class tags, with the final state each tag produces. |
 | [Migration table](_migration-table.md) | Where each migrated entry came from and where it now lives, with the anchor on each side. |
 | [Terminology alias table](_alias-table.md) | Eight clusters of labels that denote one referent, each with the term retained for forward use. |

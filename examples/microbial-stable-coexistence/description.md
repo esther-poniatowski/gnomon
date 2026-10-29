@@ -27,7 +27,7 @@ The later test must require the framework to:
 
 ## Scope boundary
 
-The case does not assume that pairwise competition or one resource geometry supplies the answer. Empirical parameter estimates may constrain the model class without replacing the theoretical question.
+The case does not assume that pairwise competition or one resource geometry supplies the answer. Empirical parameter estimates may constrain the model class without replacing the theoretical question. Its candidate answer, a theorem that feasibility implies stability, is included to test whether the assessment keeps sufficiency for one subclass distinct from necessity over the full class.
 
 ## Scientific basis
 

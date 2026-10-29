@@ -1,7 +1,7 @@
 ---
 tags:
   - audit
-index: "[gnomon audits](_index.md)"
+index: "[gnomon audits](docs/audits/_index.md)"
 aliases:
   - Audit - Model design (S)
 ---
@@ -9,7 +9,7 @@ aliases:
 
 ## Verdict
 
-The proposed refactor is directionally correct. The duplicated fields express a genuine invariant: both the inquiry and its answer use models of the system. The current [candidate-answer form (line 25)](/Users/eresther/Documents/projects/gnomon/docs/epistemology/answer-form.md:25) already recognizes that invariant.
+The proposed refactor is directionally correct. The duplicated fields express a genuine invariant: both the inquiry and its answer use models of the system. The current candidate-answer form (`docs/epistemology/answer-form.md`, line 25, at commit c9179ed) already recognizes that invariant.
 
 The optimal architecture should therefore make models reusable and model transformations explicit. However, it should not make an answer model a simple extension of the initial target-system record. The stronger design is a **provenance graph of models connected by typed transformations**.
 
@@ -23,11 +23,11 @@ Three qualifications are essential:
 
 The proposed refactor explains several existing defects.
 
-First, six blocks occur in both system and answer records: constituents, index sets, variables, parameters, laws, and organization. The duplication is structural, as shown by the [system template (line 25)](/Users/eresther/Documents/projects/gnomon/src/gnomon/data/templates/target-system.yml:25) and [answer template (line 14)](/Users/eresther/Documents/projects/gnomon/src/gnomon/data/templates/answer.yml:14).
+First, six blocks occur in both system and answer records: constituents, index sets, variables, parameters, laws, and organization. The duplication is structural, as shown by the system template (`src/gnomon/data/templates/target-system.yml`, line 25, at commit c9179ed) and answer template (`src/gnomon/data/templates/answer.yml`, line 14, at commit c9179ed).
 
-Second, the current documentation already treats the answer as a model derived under constraints. Derived terms, changed bearers, and reduced models appear in the [answer-model rules (line 46)](/Users/eresther/Documents/projects/gnomon/docs/epistemology/answer-form.md:46). What remains implicit is the transformation connecting the two model specifications.
+Second, the current documentation already treats the answer as a model derived under constraints. Derived terms, changed bearers, and reduced models appear in the answer-model rules (`docs/epistemology/answer-form.md`, line 46, at commit c9179ed). What remains implicit is the transformation connecting the two model specifications.
 
-Third, the phenomenon record already contains a model-like representation. Its observables map system states into explanandum variables, while manifestations state claims about those variables. Scope, evidence, and detection criteria complete the characterization. These functions appear in the [phenomenon template (line 23)](/Users/eresther/Documents/projects/gnomon/src/gnomon/data/templates/phenomenon.yml:23).
+Third, the phenomenon record already contains a model-like representation. Its observables map system states into explanandum variables, while manifestations state claims about those variables. Scope, evidence, and detection criteria complete the characterization. These functions appear in the phenomenon template (`src/gnomon/data/templates/phenomenon.yml`, line 23, at commit c9179ed).
 
 Fourth, the active diagnosis identifies three defects that the refactor can solve directly:
 
@@ -35,9 +35,9 @@ Fourth, the active diagnosis identifies three defects that the refactor can solv
 - nonexplanatory aims are forced into `explanans.produces`;
 - candidate values are not structurally bound to phenomenon outputs.
 
-These defects are recorded in the [answer-trial findings (line 27)](/Users/eresther/Documents/projects/gnomon/test/answer-assessment-template-issues.md:27). The proposed refactor therefore has priority over a local repair of the current answer template.
+These defects are recorded in the answer-trial findings (`test/answer-assessment-template-issues.md`, line 27, at commit a4fb1b4). The proposed refactor therefore has priority over a local repair of the current answer template.
 
-One inconsistency also confirms that the current boundary has become unstable. The answer documentation says that law warrants belong only to answers, but the target template and target documentation now assign warrants to target laws. Compare the [answer claim (line 56)](/Users/eresther/Documents/projects/gnomon/docs/epistemology/answer-form.md:56) with the [target-law fields (line 69)](/Users/eresther/Documents/projects/gnomon/src/gnomon/data/templates/target-system.yml:69).
+One inconsistency also confirms that the current boundary has become unstable. The answer documentation says that law warrants belong only to answers, but the target template and target documentation now assign warrants to target laws. Compare the answer claim (`docs/epistemology/answer-form.md`, line 56, at commit c9179ed) with the target-law fields (`src/gnomon/data/templates/target-system.yml`, line 69, at commit c9179ed).
 
 ## Recommended architecture
 
@@ -95,7 +95,7 @@ This taxonomy matters in theoretical physics. A full eigendecomposition is norma
 
 Likewise, Kadanoff’s block-spin construction replaces microscopic spins with collective variables [Kadanoff 1966](https://doi.org/10.1103/PhysicsPhysiqueFizika.2.263). Such an operation loses information and requires a regime-specific justification. It cannot be represented adequately as an untyped “change of perspective.”
 
-Causal models impose a stronger obligation. A microscopic-to-macroscopic map must preserve the interventions represented at both levels [causal consistency](https://is.mpg.de/ei/publications/rubensteinetal17). The current [individuation test (line 40)](/Users/eresther/Documents/projects/gnomon/docs/epistemology/satisfaction-conditions.md:40) already anticipates this requirement.
+Causal models impose a stronger obligation. A microscopic-to-macroscopic map must preserve the interventions represented at both levels [causal consistency](https://is.mpg.de/ei/publications/rubensteinetal17). The current individuation test (`docs/epistemology/satisfaction-conditions.md`, line 40, at commit c9179ed) already anticipates this requirement.
 
 ## Assumptions require several homes
 
@@ -111,7 +111,7 @@ The framework should separate:
 - **approximations**, which describe the same target inexactly;
 - **correspondence assumptions**, which connect model quantities with target or phenomenon quantities.
 
-This distinction follows a standard epistemological boundary. An approximation is an inexact description, whereas an idealization introduces another system that supplies such a description [Norton’s analysis](https://sites.pitt.edu/~jdnorton/homepage/research/Ideal_Approx.html). The current framework correctly distinguishes domain restrictions from analysis idealizations in the [domain specification (line 31)](/Users/eresther/Documents/projects/gnomon/docs/epistemology/domain.md:31); the refactor should preserve that result.
+This distinction follows a standard epistemological boundary. An approximation is an inexact description, whereas an idealization introduces another system that supplies such a description [Norton’s analysis](https://sites.pitt.edu/~jdnorton/homepage/research/Ideal_Approx.html). The current framework correctly distinguishes domain restrictions from analysis idealizations in the domain specification (`docs/epistemology/domain.md`, line 31, at commit c9179ed); the refactor should preserve that result.
 
 ## Phenomenon models
 

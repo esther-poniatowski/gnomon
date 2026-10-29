@@ -21,7 +21,7 @@ The local `powerset` constructor also has an open return type. Its uses state th
 
 ## Deliberately open science and design
 
-The mathematical explanans and its admissible level are research products. The research must also determine how the delay distribution depends on the training specification. A concrete study must fix the task family and the evaluation protocol more narrowly. The question record marks each open element without selecting in advance any proposed mechanism of grokking.
+The mathematical explanans and its admissible level are research products. The research must also determine how the delay distribution depends on the training specification. A concrete study must fix the task family, the admissible training class and the evaluation protocol more narrowly. The question record marks each open element without selecting in advance any proposed mechanism of grokking.
 
 ## Answer and assessment trial
 
@@ -33,4 +33,4 @@ The [answer built on structured representations](answer.yml) supplies one propos
 - fidelity;
 - robustness.
 
-The preferred virtue exposes a separate defect of the assessment form. Under the satisfaction conditions, a virtue may be appraised only after admissibility and warrant pass. The template, however, requests one entry for every preferred virtue and provides no `withheld` state. The assessment therefore keeps the entry and states that the virtue was not appraised. The conflict is recorded once for all cases among the [template defects](../../test/answer-assessment-template-issues.md) that the answer and the assessment share.
+The preferred virtue exposes a separate defect of the assessment form. Under the satisfaction conditions, a virtue may be appraised only after admissibility and warrant pass. The template, however, requests one entry for every preferred virtue and provides no `withheld` state. The assessment therefore keeps the entry and states that the virtue was not appraised. For all cases, the [disposition of an assessment](../../docs/epistemology/satisfaction-conditions.md#^disposition) now makes this gate explicit: it is read from the verdicts, and takes the value `withheld` when no test fails and one is pending.

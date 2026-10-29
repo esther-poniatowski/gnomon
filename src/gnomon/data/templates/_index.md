@@ -37,4 +37,9 @@ Each template follows ten conventions of format:
 - the slots follow the rows of their method note, and each row names the key of its slot, so that a template can be checked mechanically against its note; the [alignment tests](../../../../tests/test_gnomon/test_template_alignment.py) pair each table of specifications of a method note with its template;
 - within one entry, the keys run from designation to construction: name, symbol and notation, type, defining expression, then a prose field stating it in words.
 
+Two conventions govern the names of fields:
+
+- each field is named after the distinction that it decides, so two fields of one record that decide different distinctions never share a name;
+- `status` names the lifecycle of a record in every record kind, and only its admissible states depend on the kind.
+
 Pure YAML departs from the format rule of `docs/design/2-architecture/data-formats.md`. That rule excludes sources written only in YAML for any framework note carrying prose, proofs and rendered math. The rule does not reach the templates: they hold records, not notes. The architecture note, however, does not yet state this distinction between records and notes.

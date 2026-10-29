@@ -21,9 +21,3 @@ Shows completed inquiry records, which a researcher consults before filling the 
 - [Stable microbial coexistence](microbial-stable-coexistence/_index.md): tests whether necessary and sufficient conditions stay distinct across model variants
 - [Localized Swift-Hohenberg states](swift-hohenberg-localized-states/_index.md): tests whether a description can name the features it seeks without supplying their values
 - [Neural tangent dynamics](neural-tangent-kernel-model-knowledge/_index.md): tests whether an inquiry can specify the knowledge it seeks about a formal class of models
-
-## Framework trials
-
-- [Framework issue synthesis](../test/framework-issues-synthesis.md): separates the framework changes that the cases support from local edits
-- [Handoff — framework corrections](../test/framework-corrections-handoff.md): assigns each correction that the cases call for an owner and an approval control
-- [Issues exposed by the answer and assessment trials](../test/answer-assessment-template-issues.md): separates defects of the shared templates from failures of individual candidates

@@ -7,7 +7,7 @@ aliases:
 ---
 # Refactor handoff — design folder
 
-This handoff owns the Step A-D refactor state. It does not repeat the project brief in [main handoff](_handoff.md) or the Step A.4 file-by-file mechanics in [cleanup handoff](_handoff-cleanup.md).
+This handoff owns the Step A-D refactor state. It does not repeat the project brief in [main handoff](_handoff.md).
 
 The Step A–D sequence and the batch order within Step C are the **default** order, not a hard barrier. Under explicit user direction, any step may bring forward work the sequence assigns to a later step — see [Opportunistic scope](_handoff.md#^opportunistic-scope) in the main handoff. The "Brought-forward C/D work" callout below is the standing record of what has already been brought forward; whoever extends scope further adds to it and records the [deferred synchronization debt](_handoff.md#^deferred-synchronization-debt).
 
@@ -15,8 +15,7 @@ The Step A–D sequence and the batch order within Step C are the **default** or
 
 ## Status
 
-- **Step A.1–A.3 complete.** [The classification table](_classification-table.md) records active criteria and decisions; selected backup decisions are integrated. The canonical Tier-1 criteria are the [per-theme framework files](1-framework/_index.md).
-- **Step A.4 nearly done.** The framework tier, the former architectural-constraints file, [data formats](2-architecture/data-formats.md), the former criteria-framework backup, the former tooling-validation backup, and the former registries-indexes backup are cleaned. The constraints file, the criteria-framework backup, the tooling-validation backup, and the registries-indexes backup have since been **deleted** — their inbound references were swept to the live anchors (a Step-C action brought forward, with user ratification). One backup source remains — a named-passage check, no migrated bodies to strip; see the [cleanup handoff](_handoff-cleanup.md).
+- **Step A.1–A.4 complete.** [The classification table](_classification-table.md) records active criteria and decisions; selected backup decisions are integrated. The canonical Tier-1 criteria are the [per-theme framework files](1-framework/_index.md).
 - **Step A.5 largely done.** See the [residue](#^step-a5) below for the open items.
 - **Step B blocked.** [The migration table](_migration-table.md) is only a header; Step A.5's residue should settle first.
 - **Step C blocked on Step B** — but partly brought forward, see "Brought-forward C/D work" below.
@@ -60,14 +59,6 @@ The Step A–D sequence and the batch order within Step C are the **default** or
 > - **Other Tier-3 audits.** [ontology.md](3-aspect-specific/ontology.md), [rendering-views.md](3-aspect-specific/rendering-views.md), [arguments-reasoning.md](3-aspect-specific/arguments-reasoning.md), [revision-vocabulary.md](3-aspect-specific/revision-vocabulary.md) all reference prose; each citation needs the same retained-residue-vs-removed-claim audit as the Tier-1 sweep.
 
 The rest of Tier 2 and all of Tier 3 still use the flat layout. Do not reorganize those files until Step D.
-
----
-
-## Step A.4 boundary
-
-Step A.4 only removes duplicate Tier-1 source bodies that have already moved into a canonical criterion in its [framework theme file](1-framework/_index.md). It does not migrate Tier-2 or Tier-3 decisions, does not redirect references, and does not retire files wholesale except where the [cleanup handoff](_handoff-cleanup.md) says a file becomes a stub.
-
-The cleanup must preserve anchors so inbound links keep resolving until Step C — except where the cleanup handoff records that a file's redirect sweep was already brought forward.
 
 ---
 

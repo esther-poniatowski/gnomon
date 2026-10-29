@@ -1,7 +1,7 @@
 ---
 tags:
   - audit
-index: "[gnomon audits](_index.md)"
+index: "[gnomon audits](docs/audits/_index.md)"
 aliases:
   - Audit - Model design (F)
 ---
@@ -25,7 +25,7 @@ The recommended form has four parts:
 
 ## Diagnosis: a shared schema, and a missing relation
 
-The answer template shares six declaration blocks with the target template by decision. The decision of 2026-09-24, recorded in the [framework corrections handoff](../../test/framework-corrections-handoff.md), declares the model of an answer with the blocks of the target, and every reused quantity enters by reference. In the six filled answers, the shared blocks hold references and new declarations, and no law is restated. The single-source rule admits a shared schema. However, the records do not state the *operation* that produced each new declaration from the parent. The fixtures carry that operation in three scattered places:
+The answer template shares six declaration blocks with the target template by decision. The decision of 2026-09-24, recorded in the framework corrections handoff (`test/framework-corrections-handoff.md` at commit a4fb1b4), declares the model of an answer with the blocks of the target, and every reused quantity enters by reference. In the six filled answers, the shared blocks hold references and new declarations, and no law is restated. The single-source rule admits a shared schema. However, the records do not state the *operation* that produced each new declaration from the parent. The fixtures carry that operation in three scattered places:
 
 - an expression on a derived quantity;
 - a warrant of derivation in a limit on a law;
@@ -44,7 +44,7 @@ The six answers relate their model to the target as follows:
 | Grokking account | a re-individuation into a representation, with a posited effective law |
 | Tipping forecast | a stylized network of four elements standing in for the actual system |
 
-Therefore, the relation recurs across the corpus and changes the admissible answers. These two properties are the grounds that the [shared field grounds](../adr/shared-field-grounds.md) decision requires of a new field. Of the five template defects recorded in the [answer and assessment template issues](../../test/answer-assessment-template-issues.md), three follow from the missing relation:
+Therefore, the relation recurs across the corpus and changes the admissible answers. These two properties are the grounds that the [shared field grounds](../adr/shared-field-grounds.md) decision requires of a new field. Of the five template defects recorded in the answer and assessment template issues (`test/answer-assessment-template-issues.md` at commit a4fb1b4), three follow from the missing relation:
 
 - an answer cannot state its claim domain;
 - nonexplanatory aims are forced into explanatory semantics;

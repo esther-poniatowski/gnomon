@@ -29,7 +29,7 @@ The [phenomenon template](../../src/gnomon/data/templates/phenomenon.yml) admits
 
 ## Scope boundary
 
-The case does not assume that every proposed tipping element belongs in one model. The case also withholds a preferred coupling architecture and a fixed warming scenario.
+The case does not assume that every proposed tipping element belongs in one model. The case also withholds a preferred coupling architecture and a fixed warming scenario. Its candidate answer, an overshoot forecast from a stylized model of four elements, is included to test whether the assessment refuses to treat the forecast of that model as calibrated for the actual Earth system.
 
 ## Scientific basis
 

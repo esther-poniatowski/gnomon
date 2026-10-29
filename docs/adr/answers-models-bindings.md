@@ -72,7 +72,7 @@ An answer whose claim bears only on a model or on a formal class declares its us
 
 - The explanans is no longer required of every answer. Its premises become the grounds of the core, and its relevance becomes the block of an explanation.
 - The answer template is restructured into a core and aim blocks, and three record kinds are added: the model, the binding and the key. The phenomenon and the assessment gain the declarations above, and the comparison is computed.
-- The decision of 2026-09-24 in the [handoff of the framework corrections](../../test/framework-corrections-handoff.md), which declared the model of an answer with the blocks of the target, is superseded: the model has a record of its own.
+- The decision of 2026-09-24 (commit 08cc32d), which declared the model of an answer with the blocks of the target, is superseded: the model has a record of its own.
 - The use of `reference` for a stylized constituent ends: a model relates to its target through a binding.
 - The method notes that describe the answer, the phenomenon and the assessment remain to be revised, and the registry of aims gains its answer conditions.
 - A pilot on contrasting test cases precedes any migration of the records, as both audits require, and the [project goals](../../TODO.md) track it.
