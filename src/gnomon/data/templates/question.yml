@@ -10,9 +10,9 @@ id: quest.TOPIC.NAME
 type: question
 status: posed                     # posed | refined | answered | abandoned
 addresses: prob.TOPIC.NAME        # the problem that the question serves; omit when no problem record exists
-links:                            # questions linked to this question by one of three relations; empty when none
+links:                            # questions linked to this question by one of four relations; empty when none
   - question: quest.TOPIC.NAME
-    relation:                     # subquestion-of | explanans-from | presupposes
+    relation:                     # subquestion-of | explanans-from | presupposes | enables
     via: phen.TOPIC.NAME          # the record shared by both questions, such as a phenomenon; omit when they share none
 subject:
   target_system: system.TOPIC     # a record identifier; in a question schema, a placeholder written as for `phenomenon`

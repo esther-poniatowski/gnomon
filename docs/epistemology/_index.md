@@ -16,6 +16,7 @@ These notes introduce a method to specify a research inquiry, based on results f
 
 - [Specifying an inquiry](inquiry-specification.md): to locate each decision of a research project in the layer of the specification that holds it.
 - [Order of specification](specification-order.md): to decide what to specify first, and to revise an earlier choice without circularity.
+- [Question decomposition](question-decomposition.md): to decompose a question into the questions that serve it, and to keep the decomposition valid as the inquiry proceeds.
 - [Choosing the next act](next-act.md): to decide which act of research to perform next, once a problem is stated.
 - [Problem](problem.md): to state the demand and the constraints served by the questions of an inquiry.
 - [Subject of inquiry](subject-of-inquiry.md): to fix what a research question is about, before deciding what kind of answer to seek.

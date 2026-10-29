@@ -28,6 +28,7 @@ The activities of this family output a **verdict**, a **credence** or a **rankin
 | `model-selection` | `model` (several), `data` | `ranking` | inductive | justification |
 | `inference-to-the-best-explanation` | `hypothesis` (several), `data` | `verdict` | abductive | justification |
 | `critique` | `hypothesis \| model` | `verdict` | non-inferential | justification |
+| `admissibility-check` | `hypothesis \| model`, `question` | `verdict` | non-inferential | justification |
 
 ## Norms
 
@@ -39,11 +40,13 @@ The activities of this family output a **verdict**, a **credence** or a **rankin
 | `model-selection` | rank models by their expected accuracy in predicting new data | the ranking follows predictive accuracy, penalized for complexity [forster1994] |
 | `inference-to-the-best-explanation` | accept the hypothesis that would, if true, best explain the data | the best of the rival explanations is also good enough, so that it is not merely the best of a bad lot [harman1965] [lipton2004] |
 | `critique` | expose a hypothesis or a model to criticism from other perspectives | each objection is named with its ground [longino1990] |
+| `admissibility-check` | apply the admissibility tests of the [conditions of satisfaction](../../satisfaction-conditions.md) to a candidate, mostly before any evidence is weighed | each admissibility test is applied to the declared specifications, with its evidence |
 
 A test never bears on a hypothesis alone: the prediction follows from the hypothesis together with auxiliary assumptions. Consequently, a failed prediction refutes the conjunction without locating the error, a difficulty known as the Duhem–Quine problem.
 
 ## Distinctions
 
+- **Admissibility and testing differ in their norm.** An admissibility check asks whether a candidate is an answer of the kind that the question requests, by its form and its declarations. Testing asks whether a hypothesis is true of its target, under a severe test. The first check is meant to precede the second, since an answer that is not admissible cannot satisfy the question, whatever its warrant.
 - **Testing and validation differ in their object.** Testing asks whether a hypothesis is true of its target. Validation asks whether a model is adequate for a purpose, and a model known to be false can be adequate [parker2020].
 - **Testing and confirmation differ in their output.** Testing returns a verdict. Confirmation returns a degree of credence. Evidence changes that degree whenever its probability differs under the hypothesis and under its negation [howson2006].
 - **Testing and inference to the best explanation both return a verdict, under different norms.** Testing judges one hypothesis by the severity of the test. Inference to the best explanation compares rival hypotheses by how well each would explain the data, if true [lipton2004].

@@ -73,6 +73,8 @@ activities:
      norm: "each deductive step is valid"}
   - {id: critique, condition: candidates, reason: it names objections to a candidate,
      norm: "each objection is named with its ground"}
+  - {id: admissibility-check, condition: candidates, reason: it applies the admissibility tests that make up the condition,
+     norm: "each admissibility test is applied to the declared specifications, with its evidence"}
   - {id: experimental-design, condition: discrimination, reason: its outcomes must discriminate the rivals,
      norm: "the possible outcomes discriminate the rival answers to the question: each rival predicts a different outcome"}
   - {id: derivation, condition: discrimination, reason: it gives the consequences of one candidate,

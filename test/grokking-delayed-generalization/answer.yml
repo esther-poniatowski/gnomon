@@ -6,6 +6,7 @@ id: ans.grokking.slow-structured-representation
 type: answer
 status: hypothesized
 support: informal
+modal_strength: actual
 answers: quest.grokking.explain_delay
 
 constituents:

@@ -29,7 +29,7 @@ tests:
       evidence: "The question deliberately admits every declared part of the formal model as a source of its consequences."
     modal-strength:
       verdict: pass
-      evidence: "Conditional on the assumptions of the theorem, the bounds follow necessarily from the model laws with probability tending to one over the declared initialization distribution."
+      evidence: "The answer claims the necessary strength that the question requests: under the assumptions of the theorem, the bounds hold with probability tending to one over the declared initialization distribution. Whether the claim holds is decided by the warrant tests of closure and law warrant."
     product:
       verdict: pass
       evidence: "The answer supplies a validity domain and three bounds at finite width. The record also supplies their convergence modes and full training horizons. Together, these fields deliver the requested consequences of the model."

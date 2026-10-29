@@ -25,12 +25,14 @@ The method applies to a question already posed. In the exploratory phase of rese
 
 ## The decomposition graph
 
-A decomposition is a graph whose nodes are questions. Each edge is one of the [links between questions](definitions/problem-and-question.md#^linked-questions), and the question at its source *serves* the question at its target. This sense of serving is broader than the service of a problem, which requires erotetic implication, as the note on the [epistemic problem](definitions/epistemic-problem.md#^problem-vs-question) states. The four links are the following: ^decomposition-graph
+A decomposition is a graph whose nodes are questions. Each edge is one of the [links between questions](definitions/problem-and-question.md#^linked-questions), and one of its two questions *serves* the other. For `subquestion-of` and `enables`, the question that carries the link serves the linked question; for `presupposes` and `explanans-from`, the linked question serves the question that carries the link. This sense of serving is broader than the service of a problem, which requires erotetic implication, as the note on the [epistemic problem](definitions/epistemic-problem.md#^problem-vs-question) states. The four links are the following: ^decomposition-graph
 
 - `subquestion-of`, when the answer of the serving question is a part of an answer to the served question. Erotetic implication holds: each answer of the serving question, with the available premises, narrows the answers of the served question [wisniewski2013]. A demand that is a conjunction is decomposed in this way, one serving question per conjunct.
 - `enables`, when the answer of the serving question establishes a [condition of answerability](definitions/conditions-of-answerability.md) of the served question without narrowing its answers. *Example*: "how is the dimension of the population activity estimated from finite samples?" enables "does the dimension grow with the complexity of the mixture?".
 - `presupposes`, when the served question has a true answer only if the serving question has one, so that the soundness of the first depends on the soundness of the second.
 - `explanans-from`, when an explanans factor of the served question is the explanandum of the serving question.
+
+A presupposition posed as a question is linked by `enables`, not by `presupposes`. The question whether the presupposition holds always has a true answer, so `presupposes` would make soundness depend on a question that is trivially sound.
 
 The serving questions of one question stand in one of three relations. Serving questions are *conjunctive* when all are needed, *disjunctive* when any one suffices, such as an analytic derivation and a simulation that both give access to a quantity, and *sequential* when the answer of one fixes the form of another. Disjunctive serving questions require a choice among routes, made by the [ranking of acts](next-act.md#^ranking-criteria).
 
@@ -105,7 +107,7 @@ The serving questions of an inquiry are recorded in a register: ^register
 | --- | --- |
 | Question | the serving question |
 | Type | analytic, abductive or constructive |
-| Link | the served question and the relation of the link |
+| Link | the linked question and the relation of the link |
 | Depends on | the questions that must be answered before this one is meaningful, tractable or interpretable |
 | Effect | what its resolution changes in the served question |
 | Status | open, answered, abandoned |
@@ -129,7 +131,7 @@ A serving question is **terminal** when some procedure has all its inputs availa
 
 Acts of generation add candidates or tools and justify no answer, and acts of decision fix a commitment and establish no fact. An answer obtained by either is therefore recorded as a revisable assumption, and these assumptions are the first to re-examine when the served answer fails.
 
-**Analysis is followed by synthesis.** Working backward identifies necessary conditions, and the steps of analysis cannot always be reversed. A combination step therefore composes the answers of the serving questions into an answer to the served question, and a check confirms that the combination is valid, as the [necessity and joint sufficiency of the conditions](definitions/conditions-of-answerability.md) require. When the conditions hold and no justified answer follows, a condition is missing, most often a bridging assumption. ^synthesis
+**Analysis is followed by synthesis.** Working backward identifies necessary conditions, and the steps of analysis cannot always be reversed. A combination step therefore composes the answers of the serving questions into an answer to the served question, and a check confirms that the combination is valid, as the [necessity and joint sufficiency of the conditions](definitions/conditions-of-answerability.md#^sufficiency) require. When the conditions hold and no answer follows, a condition is missing, most often a bridging assumption. ^synthesis
 
 ## Revision during the inquiry
 

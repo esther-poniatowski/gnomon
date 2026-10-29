@@ -29,7 +29,7 @@ tests:
       evidence: "The answer uses thresholds and timescales specific to each subsystem. The candidate also uses directed links and the prescribed trajectory. Each of these factors remains at the compositional level and on the specific substrate that the question fixes."
     modal-strength:
       verdict: fail
-      evidence: "The distribution that a stylized network generates is not thereby an actual forecast for the four empirical Earth subsystems."
+      evidence: "The answer claims a possible strength: it states what a stylized ensemble of four interacting tipping elements generates, and it disclaims the joint sequence law of the actual Earth system. The question requests the actual strength. Whether a model distribution holds of the Earth system would be decided by the warrant tests."
     product:
       verdict: fail
       evidence: "The answer does not deliver the requested full sequence and timing distributions. Its network is inspectable, so the constitutive virtue of structural transparency is not the reason for failure."

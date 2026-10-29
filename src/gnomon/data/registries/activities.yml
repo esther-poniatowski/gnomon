@@ -371,6 +371,15 @@ activities:
     norm: norm.critique
     mode: non-inferential
     context: justification
+  - id: admissibility-check
+    family: evaluation
+    inputs:
+      - {types: [hypothesis, model]}
+      - question
+    output: verdict
+    norm: norm.admissibility-check
+    mode: non-inferential
+    context: justification
   - id: explanation
     family: explanation-and-integration
     inputs:

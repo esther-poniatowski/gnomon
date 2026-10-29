@@ -6,6 +6,7 @@ id: ans.swift-hohenberg.snakes-ladders-catalogue
 type: answer
 status: hypothesized
 support: informal
+modal_strength: actual
 answers: quest.swift-hohenberg.localized-states-description
 
 constituents: []

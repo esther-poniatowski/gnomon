@@ -6,6 +6,7 @@ id: ans.ntk.uniform-linearization-theorem
 type: answer
 status: accepted
 support: formally-proven
+modal_strength: necessary
 answers: quest.ntk.linearized-dynamics-validity
 
 constituents: []

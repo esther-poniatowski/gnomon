@@ -28,8 +28,8 @@ tests:
       verdict: pending
       evidence: "The question deliberately leaves the admissible level open. The candidate supplies an account at the level of the representation, but no prior bound determines whether that choice is admissible."
     modal-strength:
-      verdict: fail
-      evidence: "The effective theory and selected experiments do not establish that the proposed relation holds across the actual target class."
+      verdict: pass
+      evidence: "The candidate claims actual strength, as the question requests. Whether the relation holds across the actual target class is decided by the warrant tests of closure, law warrant and fidelity: closure and fidelity fail, and law warrant passes."
     product:
       verdict: fail
       evidence: "The mechanism is structurally transparent in the toy setting, but it does not explain the distribution of durations or the phenomenon across the declared class."

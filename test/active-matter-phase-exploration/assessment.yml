@@ -29,7 +29,7 @@ tests:
       evidence: "The exploratory question requests no explanans. The admissibility bound therefore has nothing to restrict."
     modal-strength:
       verdict: fail
-      evidence: "The requested strength is actual for the admitted stochastic models. The answer establishes only possible phases of a deterministic reduced subfamily."
+      evidence: "The question requests the actual strength for the admitted stochastic models. Relative to these models, the answer claims at most a possible strength: it derives the regimes in a noise-free reduction without claiming that they occur in the stochastic models."
     product:
       verdict: fail
       evidence: "An exploration must return the detected catalogue and persistence classification over the declared search space. The candidate omits the lattice search and every persistence result."

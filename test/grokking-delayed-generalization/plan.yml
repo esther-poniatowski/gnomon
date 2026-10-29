@@ -90,6 +90,20 @@ steps:
       test: norm.derivation
       verdict: pending
     mode: deductive
+  - id: check
+    activity: admissibility-check
+    inputs:
+      - type: hypothesis
+        ref: propose
+      - type: question
+        ref: quest.grokking.explain_delay
+    output:
+      type: verdict
+      ref: assess.grokking.slow-structured-representation
+    norm:
+      test: norm.admissibility-check
+      verdict: pending
+    mode: non-inferential
   - id: test
     activity: testing
     inputs:

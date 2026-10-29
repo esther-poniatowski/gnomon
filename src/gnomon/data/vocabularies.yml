@@ -20,6 +20,10 @@ vocabularies:
     - value: informal
     - value: formally-proven
     - value: empirically-supported
+    .modal_strength:
+    - value: actual
+    - value: possible
+    - value: necessary
     laws.warrant:
     - value: derived
       name: from the admitted background laws
@@ -182,6 +186,7 @@ vocabularies:
     - value: subquestion-of
     - value: explanans-from
     - value: presupposes
+    - value: enables
     subject.placeholder:
     - value: system
     - value: phenomenon

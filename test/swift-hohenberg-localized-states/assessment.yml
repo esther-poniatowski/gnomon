@@ -29,7 +29,7 @@ tests:
       evidence: "The descriptive aim requests no explanans. The question therefore deliberately places no bound on the explanans."
     modal-strength:
       verdict: pass
-      evidence: "At the coefficient values explored by continuation, the reported branches are actual stationary solutions of the formal equation."
+      evidence: "The answer claims the actual strength that the question requests: at the coefficient values explored by continuation, the reported branches are stationary solutions of the formal equation. Whether the claim holds is decided by the warrant tests of closure and law warrant."
     product:
       verdict: fail
       evidence: "The answer names all requested feature kinds but omits their values across the admitted domain. The catalogue is therefore only partial."

@@ -10,6 +10,7 @@ id: ans.TOPIC.NAME
 type: answer
 status: entertained              # entertained | hypothesized | accepted | retracted; the attitude taken toward the answer
 support: unsupported             # unsupported | informal | formally-proven | empirically-supported; independent of the status; each law keeps its own `warrant`
+modal_strength:                  # actual | possible | necessary; the strength that the answer claims, compared with the strength the question requests
 answers: quest.TOPIC.NAME
 variant: SYMBOL                  # symbol of the target variant this answer accounts for; omit when the answer covers every member of the class
 

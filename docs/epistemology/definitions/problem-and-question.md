@@ -62,6 +62,7 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 | `subquestion-of` | is answered by a part of an answer to the linked question |
 | `explanans-from` | has an explanans factor that is the explanandum of the linked question |
 | `presupposes` | has a true answer only if the linked question has a true answer |
+| `enables` | has an answer that establishes a condition of answerability of the linked question, without narrowing its answers |
 
 *Example*: a first question describes the [representation geometry](representation-and-encoding.md) of the benchmark networks. A second question explains a capacity of readout by that geometry. The second question links to the first with `explanans-from`, through the phenomenon record of the geometry.
 

@@ -6,6 +6,7 @@ id: ans.microbial.feasibility-implies-stability
 type: answer
 status: accepted
 support: formally-proven
+modal_strength: necessary
 answers: quest.microbial.stable-coexistence-constraints
 variant: resource_explicit
 

@@ -38,7 +38,7 @@ Each component answers one question about the problem: relative to which knowled
 
 ### The background $K$
 
-$K$ is the **background**: the finite set of accepted claims relative to which the problem is posed. A finite set of this kind is a *belief base*, as opposed to a set closed under logical consequence [hansson1999]. The corpus of accepted knowledge plays the same role in the epistemology of inquiry [levi1980].
+$K$ is the **background**: the finite set of accepted claims relative to which the problem is posed. In a research project, $K$ holds the accepted records of the project and the claims of the publications that these records cite. A conflict with a publication that no record cites is asserted with a pointer to it, which brings that publication into the scope of $K$. A finite set of this kind is a *belief base*, as opposed to a set closed under logical consequence [hansson1999]. The corpus of accepted knowledge plays the same role in the epistemology of inquiry [levi1980].
 
 The background is paired with the **available means** $\mathcal{M}$: the methods, data, instruments and proof techniques that can be applied. The expression $K\vdash_{\mathcal{M}} s$ reads: *the claim $s$ has been obtained from $K$ by applying means of $\mathcal{M}$, and an assessment has accepted it*. The reading is actual, not dispositional: a claim that the means could yield, but have not yet yielded, is not obtained. A claim obtained but not yet accepted, such as a derived result that awaits its assessment, is a proposed candidate, a member of $H$.
 
@@ -47,7 +47,7 @@ The background is paired with the **available means** $\mathcal{M}$: the methods
 
 ### The proposed candidates $H$
 
-Beside the background, the inquiry holds a set $H$ of **proposed candidates**: answers put forward and not yet accepted, such as two rival accounts of the delay. A candidate enters $K$ only when its assessment accepts it. ^candidates
+Beside the background, the inquiry holds a set $H$ of **proposed candidates**: answers put forward and not yet accepted, such as two rival accounts of the delay. A candidate enters $K$ only when its assessment accepts it. A claim without support enters $K$ only by a recorded decision of the researcher, as a working assumption under the warrant `posited`. ^candidates
 
 ### The demand $d$
 

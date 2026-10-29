@@ -6,6 +6,7 @@ id: ans.earth-tipping-subsystems.four-element-overshoot-network
 type: answer
 status: hypothesized
 support: informal
+modal_strength: possible
 answers: quest.earth-tipping-subsystems.overshoot-sequence-forecast
 
 constituents:

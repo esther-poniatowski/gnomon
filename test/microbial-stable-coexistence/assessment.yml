@@ -28,8 +28,8 @@ tests:
       verdict: pass
       evidence: "The conditions concern the numbers of populations and of resource pools, together with the consumption and production coefficients. The conditions also concern the supply, described at the level that the question fixes without reference to any particular substrate."
     modal-strength:
-      verdict: fail
-      evidence: "The theorem establishes sufficiency within one subclass but not necessity across the full class."
+      verdict: pass
+      evidence: "The theorem claims the necessary strength that the question requests: under the laws of its subclass, no feasible equilibrium is unstable when the resource pools are at least as numerous as the populations. The restriction to that subclass fails the test of scope, and the absence of a necessary constraint fails the test of product."
     product:
       verdict: fail
       evidence: "The question asks for necessary and sufficient constraints across both variants. The candidate supplies only one sufficient theorem for a restricted subclass with explicit resources."

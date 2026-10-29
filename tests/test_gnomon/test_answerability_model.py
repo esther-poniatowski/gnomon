@@ -5,6 +5,8 @@ note of its activity, that the dependency table of the conditions note states th
 route by route, that the activity map of the procedure note lists the model's activities, and that the
 dependencies are acyclic in the stated order. A last test checks the facts of the records that the
 worked example of the procedure cites; it reads the records, not the prose of the example.
+The dependency test reads the bold condition names of each route segment of a cell; qualifiers inside a
+segment, such as the topic and existence parts of soundness, are not checked.
 """
 
 from __future__ import annotations
@@ -137,10 +139,26 @@ def test_dependency_table_of_the_conditions_note_matches_the_model(route: str) -
 def test_record_facts_cited_by_the_example() -> None:
     plan = yaml.safe_load((CASE / "plan.yml").read_text(encoding="utf-8"))
     verdicts = {step["id"]: step["norm"]["verdict"] for step in plan["steps"]}
-    assert {k: verdicts[k] for k in ("identify", "propose", "derive", "admit", "test")} == {
-        "identify": "pass", "propose": "pass", "derive": "pending", "admit": "fail", "test": "pending"
+    cited = ("pose", "formulate", "identify", "propose", "derive", "admit", "check", "test")
+    assert {k: verdicts[k] for k in cited} == {
+        "pose": "pass", "formulate": "pass", "identify": "pass", "propose": "pass",
+        "derive": "pending", "admit": "fail", "check": "pending", "test": "pending",
     }
+    phenomenon = yaml.safe_load((CASE / "phenomenon.yml").read_text(encoding="utf-8"))
+    assert phenomenon["evidential_status"] == "established"
+    question = yaml.safe_load((CASE / "question.yml").read_text(encoding="utf-8"))
+    assert question["maturity"]["task.admissible_explanans"] == "open"
     tests = yaml.safe_load((CASE / "assessment.yml").read_text(encoding="utf-8"))["tests"]
+    assert tests["admissibility"]["modal-strength"]["verdict"] == "pass"
     failed = {level: {k for k, v in t.items() if v["verdict"] == "fail"} for level, t in tests.items()}
-    assert failed == {"admissibility": {"scope", "grain", "modal-strength", "product"},
+    assert failed == {"admissibility": {"scope", "grain", "product"},
                       "warrant": {"closure", "fidelity", "robustness"}}
+
+
+def test_route_column_of_the_conditions_note_matches_the_model() -> None:
+    rows = table_rows(read("conditions"), "| Condition | Holds when | Route |")
+    for row in rows:
+        condition = re.sub(r" of a term$", "", row[0].lower())
+        route = row[2]
+        assert applies(condition, "selection")
+        assert route.startswith("both") == applies(condition, "construction"), condition
