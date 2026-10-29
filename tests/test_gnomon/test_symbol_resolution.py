@@ -76,17 +76,17 @@ from gnomon.vocabulary import (
     upstream_of,
 )
 
-ROOT = Path(__file__).resolve().parents[2]
-FIXTURES = ROOT / "test"
+from .paths import EXAMPLES, ROOT
+
 CANONICAL = canonical_operators()
 
 
 def records() -> list[tuple[str, Mapping[str, Any]]]:
     """Return every instantiated case record, by its path relative to the repository."""
-    if not FIXTURES.is_dir():
+    if not EXAMPLES.is_dir():
         return []
     found = []
-    for path in sorted(FIXTURES.glob("*/*.yml")):
+    for path in sorted(EXAMPLES.glob("*/*.yml")):
         loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
         if isinstance(loaded, Mapping) and loaded.get("type") in RECORD_KINDS:
             found.append((str(path.relative_to(ROOT)), loaded))
@@ -121,7 +121,7 @@ PROBLEM_SYMBOLS: dict[str, list[str]] = {}
 for _name, _record in CASES:
     PROBLEM_OPERATORS.setdefault(problem_of(_name), set()).update(local_operators(_record))
     PROBLEM_SYMBOLS.setdefault(problem_of(_name), []).extend(symbols_of(_record))
-PROBLEMS = sorted(p for p in FIXTURES.glob("*/") if p.is_dir()) if FIXTURES.is_dir() else []
+PROBLEMS = sorted(p for p in EXAMPLES.glob("*/") if p.is_dir()) if EXAMPLES.is_dir() else []
 
 
 @pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
@@ -170,9 +170,9 @@ def test_every_reference_and_formula_identifier_resolves(case: tuple[str, Mappin
 def external_references() -> list[tuple[str, str]]:
     """Return every ``record-id#symbol`` reference of the fixture tree, with the file making it."""
     found: list[tuple[str, str]] = []
-    if not FIXTURES.is_dir():
+    if not EXAMPLES.is_dir():
         return found
-    for path in sorted(FIXTURES.glob("*/*.yml")):
+    for path in sorted(EXAMPLES.glob("*/*.yml")):
         for text in re.findall(r"[A-Za-z][\w.-]*#\w+", path.read_text(encoding="utf-8")):
             found.append((str(path.relative_to(ROOT)), text))
     return sorted(set(found))
@@ -538,7 +538,7 @@ def test_a_condition_without_a_selection_rule_is_reported() -> None:
 
 
 REQUIRED = requirements_by_aim()
-QUESTIONS = sorted(FIXTURES.glob("*/question.yml")) if FIXTURES.is_dir() else []
+QUESTIONS = sorted(EXAMPLES.glob("*/question.yml")) if EXAMPLES.is_dir() else []
 
 
 REQUIRED_BY_COMMITMENT = requirements_by_commitment()

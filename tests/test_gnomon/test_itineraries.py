@@ -25,9 +25,9 @@ from gnomon.itineraries import (
     itinerary_problems,
 )
 
-ROOT = Path(__file__).resolve().parents[2]
+from .paths import EXAMPLES, ROOT
+
 ACTIVITY_NOTES = ROOT / "docs" / "epistemology" / "definitions" / "activities"
-FIXTURES = ROOT / "test"
 VOCABULARY = yaml.safe_load((ROOT / "src" / "gnomon" / "data" / "vocabularies.yml").read_text())
 ACTS = activities()
 TYPES = product_types()
@@ -250,7 +250,7 @@ def test_a_itinerary_addressing_no_problem_or_question_and_a_repeated_step_are_r
 
 
 def fixture_itineraries() -> list[Path]:
-    return sorted(FIXTURES.glob("*/itinerary.yml")) if FIXTURES.is_dir() else []
+    return sorted(EXAMPLES.glob("*/itinerary.yml")) if EXAMPLES.is_dir() else []
 
 
 #: The fixtures whose itinerary still takes an answer record as a model, as the earlier design did.

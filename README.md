@@ -79,7 +79,7 @@ The capabilities not yet available are recorded in the [project goals](TODO.md).
 
 ## Quick start
 
-To specify a research problem, a researcher fills one record per concern, in a directory of its own. The fields to fill are stated in the [record templates](src/gnomon/data/templates/_index.md), each with its admitted values. Completed records can be consulted in the seven [worked examples](test/_index.md).
+To specify a research problem, a researcher fills one record per concern, in a directory of its own. The fields to fill are stated in the [record templates](src/gnomon/data/templates/_index.md), each with its admitted values. Completed records can be consulted in the seven [worked examples](examples/_index.md).
 
 Once the records declare their quantities, the symbols and the operators of the research problem are collected automatically, by running the following command:
 

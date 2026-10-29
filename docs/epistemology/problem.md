@@ -30,7 +30,7 @@ The problem record states a research problem: a demand that a result be found, w
 
 - **A problem ends in one of three ways.** A problem is `solved` when an accepted answer to its questions meets the demand under the constraints. A problem is `dissolved` when a revision shows that its demand rests on a false presupposition, so no solution is needed. A problem is `abandoned` when the inquiry stops without either outcome.
 
-*Example*: the [problem of delayed generalization](../../test/grokking-delayed-generalization/problem.yml) is an empirical problem, with two constraints and one explicandum, and its question names the problem in its field `addresses`.
+*Example*: the [problem of delayed generalization](../../examples/grokking-delayed-generalization/problem.yml) is an empirical problem, with two constraints and one explicandum, and its question names the problem in its field `addresses`.
 
 ---
 ## Sources

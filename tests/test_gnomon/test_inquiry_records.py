@@ -28,9 +28,9 @@ from gnomon.completeness import (
     unstated_function_sense,
 )
 
-ROOT = Path(__file__).resolve().parents[2]
-FIXTURES = ROOT / "test"
-PROBLEMS = sorted(p for p in FIXTURES.glob("*/") if p.is_dir()) if FIXTURES.is_dir() else []
+from .paths import EXAMPLES, ROOT
+
+PROBLEMS = sorted(p for p in EXAMPLES.glob("*/") if p.is_dir()) if EXAMPLES.is_dir() else []
 TYPES = placeholder_types()
 
 
@@ -163,7 +163,7 @@ def test_a_credence_outside_the_unit_interval_or_without_basis_is_reported() -> 
 
 def every_record() -> list[tuple[str, Mapping[str, Any]]]:
     found = []
-    for path in sorted(FIXTURES.glob("*/*.yml")) if FIXTURES.is_dir() else []:
+    for path in sorted(EXAMPLES.glob("*/*.yml")) if EXAMPLES.is_dir() else []:
         record = yaml.safe_load(path.read_text(encoding="utf-8"))
         if isinstance(record, Mapping) and admitted_values(str(record.get("type"))):
             found.append((str(path.relative_to(ROOT)), record))
@@ -231,7 +231,7 @@ def test_a_placeholder_whose_type_does_not_fit_its_slot_is_reported() -> None:
 
 def test_the_dispositions_of_the_fixture_assessments() -> None:
     """Each fixture assessment has a determinate disposition, and the cases with a failed test are not satisfied."""
-    root = Path(__file__).resolve().parents[2] / "test"
+    root = EXAMPLES
     found = {}
     for path in sorted(root.glob("*/assessment.yml")):
         found[path.parent.name] = disposition(yaml.safe_load(path.read_text(encoding="utf-8")))

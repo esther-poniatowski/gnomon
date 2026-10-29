@@ -18,9 +18,10 @@ from typing import Any, Mapping
 import pytest
 import yaml
 
-ROOT = Path(__file__).resolve().parents[2]
+from .paths import EXAMPLES, ROOT
+
 MODEL = yaml.safe_load((Path(__file__).with_name("answerability_model.yml")).read_text(encoding="utf-8"))
-CASE = ROOT / "test" / "grokking-delayed-generalization"
+CASE = EXAMPLES / "grokking-delayed-generalization"
 CONDITIONS: list[str] = MODEL["conditions"]
 ROUTES = ("selection", "construction")
 
