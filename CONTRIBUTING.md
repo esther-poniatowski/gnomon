@@ -99,10 +99,10 @@ Three keys open every note, in this order:
 ```yaml
 ---
 tags:
-  - criteria
-index: "[Framework-level criteria](docs/design/1-framework/_index.md)"
+  - reference
+index: "[Methods for reasoning](docs/methods-reasoning/_index.md)"
 aliases:
-  - Cost and Ergonomics (criteria)
+  - Argumentation theory
 ---
 ```
 
@@ -116,20 +116,14 @@ The order is fixed, so that a divergence shows up in a diff.
 |--------------------|---------------------------------------------------|
 | `index`            | Folder entry point                                |
 | `overview`         | Statement of what the project is for              |
-| `tasks`            | Open work on the design                           |
+| `tasks`            | Open work of the project                          |
 | `guide`            | Operation of the installed tool                   |
-| `criteria`         | Framework-level criteria (Tier 1)                 |
-| `tensions`         | Tensions holding between framework criteria       |
-| `architecture`     | Architectural commitment (Tier 2)                 |
-| `gaps`             | Architectural gaps not yet operationalized        |
-| `aspect`           | Aspect-specific decisions (Tier 3)                |
-| `handoff`          | State a new contributor resumes from              |
-| `table`            | Registry consulted during a migration             |
-| `examples`         | Expressivity test cases and their resolutions     |
+| `gaps`             | Structures or decisions that a method still lacks |
+| `examples`         | Expressivity test cases of the framework          |
 | `ideas`            | Material awaiting triage                          |
 | `reference`        | External work, stated on its own terms            |
-| `backup`           | Superseded proposal, carried alongside a kind tag |
-| `object-candidate` | One candidate object kind                         |
+| `audit`            | Assessment on which a decision rests              |
+| `generated`        | View built by a tool from the records             |
 
 ### Registering a note
 
@@ -139,16 +133,16 @@ An entry names the note and states what a reader obtains from it, so that a read
 
 ### Cross-references
 
-A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both in an editor and on the repository page:
+A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both in an editor and on the repository page. The examples below are written from a note of `docs/epistemology/`:
 
 ```markdown
-the [conditions on a canonical object](../2-architecture/object-kinds.md)
+the [types of problem](definitions/problem-types.md)
 ```
 
 A finer reference appends a block anchor, declared at the end of the target line:
 
 ```markdown
-[object-kind set smallness](../2-architecture/object-kinds.md#^t2-ontology-small)
+[links between questions](definitions/problem-and-question.md#^linked-questions)
 ```
 
 Link text names the result, the object, or the message found at the target, never the file name and never a bare category word.

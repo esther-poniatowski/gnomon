@@ -33,6 +33,8 @@ The external work grounding the design of `gnomon` is recorded on its own terms,
 - [Decision rules](decision-rules.md): the epistemic, argumentative, and stylistic rules governing note production, stratified by the aspect each one governs and weighted by note type and workflow stage.
 - [Formal reasoning language principles](formal-language-principles.md): what a fully formal research-reasoning language must satisfy, from its ontological commitments through its operation taxonomy to the semantics under which those operations execute.
 - [Incremental construction plan](construction-plan-incremental.md): the minimal viable trace as the unit of progress, and the phases that grow the formalism one reconstructed research episode at a time.
+- [Formalism candidates](formalism-candidates.md): supplies the candidate formalisms to weigh when an open goal of the project is resolved
+- [Adversarial statements](adversarial-statements.md): tests whether the records of `gnomon` can state research statements that resist formalization
 
 ## Knowledge interchange formats
 

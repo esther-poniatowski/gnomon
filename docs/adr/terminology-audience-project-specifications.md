@@ -14,8 +14,8 @@ source:
 A research project names its quantities in a notation, its concepts in a glossary, and itself in a project specification. Each exposition of the project calibrates its claims, its terminology and its level of technicity against the audiences cited by its design brief. `geonexus`, a consumer of `gnomon`, declares these four kinds of record with schemas of its own and checks them with a checker of its own. Their mechanisms overlap with `gnomon`:
 
 - each symbol declared by an inquiry record carries its LaTeX form, and `gnomon vocabulary` generates the symbols and operators of a problem;
-- the design ratifies a canonical terminology, and records an open tension on whether canonicity holds globally or within a module;
-- the view specifications of the [layering](../design/2-architecture/layering.md) declare audience profiles;
+- `gnomon` ratifies a canonical terminology, and the [decision on concepts, glossaries and notations](concepts-glossaries-notations.md) settles its scope: a concept keeps one meaning across projects, whereas its names vary with the audience and the context;
+- the view specifications of `gnomon` declare audience profiles, as the [decision on expositions](expositions-as-projections.md) states;
 - the questions of a project specification restate the question records of `gnomon`.
 
 ## Decision

@@ -8,7 +8,7 @@ aliases:
 # Decision rules
 
 > [!TIP] Single source of truth
-> This section specifies the **authoritative definition** of each decision rule at the moment of note generation in the rendering layer. Other locations (contract templates, audit checklists) **instantiate** or **verify** these rules but must not redefine them (all downstream instantiations reference it via anchors).
+> This note holds the **authoritative definition** of each decision rule that governs the production of a note. A note contract, which specifies a note before it is drafted, and an audit checklist **instantiate** or **verify** these rules by their anchors, and never redefine them.
 
 ## Overview
 
@@ -33,14 +33,14 @@ Post-hoc routing protocols are external to the rule system and belong to procedu
 
 **Failure prevented.** Content is individually correct but lies outside the project's declared scope — because each extension appears as a natural next step.
 
-**Scope.** Notes, sections, and derivations against the project scope declarations in `governance/project_scope.md`.
+**Scope.** Notes, sections, and derivations against the scope that the project declares.
 
 **Normative constraint.** Every note, section, or derivation must serve an established contractual need, operate within the project's declared domains and generality ceilings, and avoid forbidden or deferred content. The argument that a development is "natural", "illuminating", or "closely related" is not an admissibility criterion.
 
 **Checks.** All the following must hold:
 
 1. Is it required to establish a result in an active contract?
-2. Does the result lie on a directed path to the main thesis in `reasoning_graph.yaml`, with the contract naming the immediate downstream node?
+2. Does the result lie on a directed path to the main thesis in the dependency graph of the project, with the contract naming the immediate downstream node?
 3. Is its mathematical domain admissible (or exception-authorized by the contract)?
 4. Is its generality within the declared ceiling (or exception-authorized)?
 5. Is it free of forbidden or deferred objects?
@@ -485,7 +485,7 @@ A transition need not answer all three with dedicated sentences — a well-const
 
 - **Notational stability:**
   - **Intra-note**: Does any object silently acquire multiple symbols? If a symbol change is necessary, is the reassignment explicit?
-  - **Inter-note**: Does notation align across notes within the module, or is a justified local override declared? The authoritative source is `registry/terminology.yaml`.
+  - **Inter-note**: Does notation align across notes within the module, or is a justified local override declared? The authoritative source is the notation of the project, under the [decision on terminology, audience and project specifications](../adr/terminology-audience-project-specifications.md).
   - **Disambiguation**: When a symbol is overloaded, is the intended sense marked at the point of use?
   - **Semantic lineage**: Do related objects (e.g., a matrix and its entries) use related symbols?
 

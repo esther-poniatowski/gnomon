@@ -11,7 +11,7 @@ source:
 
 > [!QUESTION] Goal: which tool specifies the records of an exposition, and what may an exposition add to the research that it presents?
 
-An exposition, such as a brief, a talk or an article, selects results of an inquiry and orders them for an audience. The exposition also tells the reader how each part serves the argument. The [layering](../design/2-architecture/layering.md) of `gnomon` already derives expository views from canonical records, forbids edits to a rendered view, and keeps epistemic content out of view specifications. The records that specify an exposition had no owner, so a consumer specified them in its own workspace, apart from the research records that they present.
+An exposition, such as a brief, a talk or an article, selects results of an inquiry and orders them for an audience. The exposition also tells the reader how each part serves the argument. `gnomon` already admits a copy of a unit only when a tool [generates it from its source](one-source-per-unit.md#^generated-copies-only), so an expository view is derived from the records and never edited. The records that specify an exposition had no owner, so a consumer specified them in its own workspace, apart from the research records that they present.
 
 ## Decision
 
@@ -24,7 +24,7 @@ Every statement of an exposition that carries content presents a research unit. 
 - **An exposition is a projection of research.** Each statement traces to its presented research unit, so the projection depends on the definitions of the research records. The tool defining those records is therefore the coherent owner of the projection.
 - **Content has one source.** A motivation or an example stated only in an exposition would be content without a canonical record. The single source of truth of `gnomon` excludes such content.
 - **The research family records acts, the exposition family records rhetoric.** A research record adds the epistemic acts that produce each content. An exposition record adds the moves, connectors, announcements and syntheses that deliver it.
-- **A name already in use keeps its meaning.** "Operation" names an operation schema. "Profile" names an audience profile, and the partial-formalization profile left open by the [granularity](../design/2-architecture/granularity.md) design. Neither names a notion of the exposition family. "Move" already names an epistemic move of reasoning, so the key `move` of an exposition always reads as a rhetorical move.
+- **A name already in use keeps its meaning.** "Operation" names an operation schema. "Profile" names an audience profile. Neither names a notion of the exposition family. "Move" already names an epistemic move of reasoning, so the key `move` of an exposition always reads as a rhetorical move.
 
 ## Options weighed
 

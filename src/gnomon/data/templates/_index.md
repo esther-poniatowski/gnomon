@@ -41,5 +41,3 @@ Two conventions govern the names of fields:
 
 - each field is named after the distinction that it decides, so two fields of one record that decide different distinctions never share a name;
 - `status` names the lifecycle of a record in every record kind, and only its admissible states depend on the kind.
-
-Pure YAML departs from the format rule of `docs/design/2-architecture/data-formats.md`. That rule excludes sources written only in YAML for any framework note carrying prose, proofs and rendered math. The rule does not reach the templates: they hold records, not notes. The architecture note, however, does not yet state this distinction between records and notes.

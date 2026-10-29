@@ -60,7 +60,7 @@ Both audits agree on eleven points, the diagnosis first. The recommended design 
 | A surrogate model represents its target through a key that maps features of the model onto features imputed to the target [frigg2018]. Universality or matching warrants the key. | Adopted as a [relation of its own](#^div-representation), outside the vocabulary of derivation. |
 | The record that imposes an operation holds it. The rule settles the pending candidate on moving the domain beside the selection criteria. | Adopted. The candidate is declined: the domain and the criteria share an entry shape and differ in owner. |
 | The explanans annotates a derivation with its difference-makers, and an idealization marks a factor shown to make no difference [strevens2008]. | Adopted for the structure of the answer, under the name resolved for the [account of the phenomenon](#^div-account). |
-| A model passes the five conditions of [object-kind admission](../design/2-architecture/object-kinds.md#^t2-object-kind-admission). The target is already a model [elliottgraves2020], so no kind is added. | Adopted, within the limit stated for the [target record](#^div-target). |
+| A model passes the five conditions of [admission of a record kind](../adr/record-kind-admission.md#^five-conditions). The target is already a model [elliottgraves2020], so no kind is added. | Adopted, within the limit stated for the [target record](#^div-target). |
 | The design makes four checks possible beyond the individuation test (origin of each new symbol, claim domain along the chain, propagated warrants, robustness restricted to uncontrolled operations). | Adopted. |
 | A derived law is a consequence of the model, recorded with the derivation, and no extension of the model. | Adopted, with a criterion separating a [defining law from a consequence](#^div-laws). |
 | A derived phenomenon must reference a derived system model, for the grain test. | Adopted in a weaker form: the phenomenon references the model, root or derived, that declares the quantities of its observables. |
@@ -142,7 +142,7 @@ The [neural tangent phenomenon](../../examples/neural-tangent-kernel-model-knowl
 
 **Positions.** Audit F declares a derived model in the blocks of the target, with entries pointing to the symbols that realize each operation. Audit S writes the operations alone and lets an evaluator materialize the complete model.
 
-**Deciding constraints.** The framework admits [no run-time inference](../design/1-framework/framework-foundations.md#^t1-no-runtime-inference): its tooling records and validates authored reasoning. The expression check is lexical, and no parser exists yet. Hence no tool can compute a linearization, and no tool can ever compute a posited closure.
+**Deciding constraints.** The framework admits [no run-time inference](../adr/no-run-time-inference.md#^no-inference): its tooling records and validates authored reasoning. The expression check is lexical, and no parser exists yet. Hence no tool can compute a linearization, and no tool can ever compute a posited closure.
 
 **Resolution.** The model is declarative, as in audit F. The evaluator of audit S reduces to a set operation over declarations. The visible symbols of a derived model $M$ are $\mathrm{vis}(M)=\big(\bigcup_i \mathrm{vis}(P_i)\setminus R\big)\cup D$, where $P_i$ are its parents, $R$ its retired symbols and $D$ its own declarations. A reference still names the record that declares the symbol. Therefore, the [flat symbol table](../adr/flat-symbol-table.md) decision needs one amendment: the scope of a derived record extends over the symbols visible in its parents. The constraints of that decision still hold, because no block opens a nested scope and every reference keeps the form `record#symbol`.
 
@@ -150,7 +150,7 @@ The [neural tangent phenomenon](../../examples/neural-tangent-kernel-model-knowl
 
 **Positions.** Audit S records each transformation as a record of its own. Audit F places the operations in a block of the derived model.
 
-**Deciding constraints.** An instance of a transformation has no identity apart from its destination model and serves no other model, so it fails [object-kind admission](../design/2-architecture/object-kinds.md#^t2-object-kind-admission). A separate record also requires a check holding it one-to-one with its destination. That shape of duplication is retired by [single field per fact](../adr/single-field-per-fact.md).
+**Deciding constraints.** An instance of a transformation has no identity apart from its destination model and serves no other model, so it fails the [admission of a record kind](../adr/record-kind-admission.md#^five-conditions). A separate record also requires a check holding it one-to-one with its destination. That shape of duplication is retired by [single field per fact](../adr/single-field-per-fact.md).
 
 **Resolution.** A block in the derived model, as in audit F. The kinds of operation are listed in a registry.
 
