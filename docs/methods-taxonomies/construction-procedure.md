@@ -5,15 +5,30 @@ index: "[Methods for taxonomies](docs/methods-taxonomies/_index.md)"
 aliases:
   - Taxonomic construction procedure
 ---
-# Taxonomic construction procedure
+# Qualitative feature-system construction procedure
 
-> [!QUESTION] Goal: designing a systematic methodology to construct taxonomies, regardless of the domain.
+> [!QUESTION] Goal: How can a finite, crisp object–attribute table yield a reduced qualitative feature system with explicit preservation guarantees and dependencies?
 
-Specifically, a qualitative taxonomy of a set of objects is adequate when it delivers a set of attributes ("conceptual dimensions") that satisfy the following requirements:
+The procedure constructs a **qualitative feature system** over a finite object universe. The feature system contains operational attributes with value sets. Typed dependency statements record relations supported by the analyzed table. The feature-system output stops before the taxonomic layer. The [planned extension from feature systems to taxonomies](taxonomy-extension-plan.md) specifies that layer and compares routes for constructing it. ^scope-output-boundary
 
-- every pair of objects that must be distinguished differs on at least one attribute,
-- no retained attribute is determined by the others,
-- the dependencies among the retained attributes are stated explicitly.
+==FIX: [scope-output · implemented-review] The current output now stops at a qualitative feature system. Review the linked extension plan before adding the taxonomic layer to this procedure.==
+
+A feature system is adequate relative to its declared purpose and preservation target when it satisfies the following requirements:
+
+- every required pair of objects differs on at least one retained attribute;
+- the retained vocabulary satisfies the preservation criterion of its declared reduction route;
+- each reported dependency is typed as either a functional dependency in the many-valued table or a positive Horn implication in the scaled formal context.
+
+> [!WARNING] Applicability of the formal guarantees
+> The guarantees in this procedure apply to a finite universe and a finite attribute set. The analyzed table must be crisp: each cell has exactly one value. Source data may contain missing observations only when a documented policy converts them into such a table. The policy must select and record one treatment:
+>
+> - exclude incomplete cases;
+> - impute values;
+> - represent an unknown value as an explicit category.
+>
+> Every guarantee is relative to the resulting table. A guarantee does not establish the correctness of excluded or constructed values. Methods using non-crisp values or relations remain outside the present scope. ^applicability-guarantees
+
+==FIX: [scope-applicability · implemented-review] Formal guarantees are now restricted to finite, crisp analyzed tables, with an explicit missing-observation policy.==
 
 ## Operationalizing the problem
 
@@ -21,7 +36,7 @@ Specifically, a qualitative taxonomy of a set of objects is adequate when it del
 
 To apply systematic methods, the verbal description of the domain must first take a formal shape:
 
-- the **objects** that the taxonomy must distinguish are collected into a **universe** $U$ (e.g. species of birds);
+- the **objects** that the feature system must distinguish are collected into a **universe** $U$ (e.g. species of birds);
 - the **attributes** describing these objects are collected into a set $A$ (e.g. plumage color and beak shape);
 - the available **values** for each attribute $a$ are collected in a set $V_a$ (e.g. "red", "blue", "green" for plumage color).
 
@@ -43,17 +58,33 @@ An attribute can be either:
 - **many-valued**, when its value set holds more than two values (e.g. the color of a bird ranges over a set of colors), 
 - **one-valued** when it either holds of an object or does not (e.g. the attribute "being red" is boolean).
 
-A description with *many-valued attributes* is an **information system**, written as the pair of the universe and the attribute set: ^def-information-system
-$$\mathcal{A} = (U, A)$$
+A description with *many-valued attributes* is an **information system**, written with its attribute functions and value sets: ^def-information-system
+$$\mathcal{A} = \left(U, A, \{V_a\}_{a\in A}, \{a:U\to V_a\}_{a\in A}\right)$$
 
 A description with *one-valued attributes* is a **formal context**, written as a triple: ^def-formal-context
-$$\mathbb{K} = (U, A, I)$$
-The the incidence $I \subseteq U \times A$ is the set of pairs $(x,a)$ such that object $x$ has attribute $a$.
+$$\mathbb{K} = (U, M, I)$$
+The binary attributes form the set $M$. The incidence $I \subseteq U \times M$ contains each pair $(x,m)$ for which object $x$ has binary attribute $m$.
 
 > [!NOTE] Differences between both structures
 > The two structures differ in how they carry the values: 
 > - an attribute of an information system returns a value from its set $V_a$, 
 > - the incidence of a context records only the pairs on which the attribute holds.
+
+### Two dependency languages
+
+The many-valued information system and the scaled formal context support different dependency relations. The representation must therefore be named whenever a dependency is stated. ^def-dependency-languages
+
+A **functional dependency** belongs to the many-valued table. For raw attributes $B\subseteq A$ and $a\in A$, write $B\Rightarrow_{\mathrm{fun}}a$ exactly when agreement on every attribute in $B$ entails agreement on $a$:
+$$B\Rightarrow_{\mathrm{fun}}a\quad\Longleftrightarrow\quad \forall x,y\in U,\ \left[\left(\forall b\in B,\ b(x)=b(y)\right)\Rightarrow a(x)=a(y)\right].$$
+The functional dependency states that the values on $B$ determine the recorded value of $a$ within the analyzed table. The dependency does not provide a value-prediction rule for objects whose $B$-profile was absent from that table.
+
+A **positive Horn implication** belongs to the scaled formal context. For binary attribute sets $P,Q\subseteq M$, write $P\to Q$ exactly when every object carrying all attributes in $P$ also carries all attributes in $Q$:
+$$P\to Q\quad\Longleftrightarrow\quad \forall x\in U,\ \left[\left(\forall p\in P,\ (x,p)\in I\right)\Rightarrow\left(\forall q\in Q,\ (x,q)\in I\right)\right].$$
+The implication expresses a monotone consequence between positive predicates. A negative condition is available only when the chosen scale introduces a corresponding binary predicate.
+
+Functional dependencies and positive Horn implications are not interchangeable. A functional dependency compares pairs of many-valued rows, while a Horn implication tests the presence of a conjunction within one binary row. The documented scaling map must justify any transfer between the two relations.
+
+==FIX: [dependency-language · implemented-review] The raw table now carries functional dependencies, while the scaled context carries positive Horn implications. Claims that move between these representations require an explicit scaling or recovery map.==
 
 ### Tabulating the attributes
 
@@ -61,9 +92,9 @@ The reduction methods operate on an **object × attribute matrix**: ^def-object-
 
 - its *rows* are the *objects*, 
 - its *columns* are the *attributes*, 
-- each cell the value that the attribute assigns to that object, carried by the attribute function itself.
+- each cell records the value that the attribute assigns to that object.
 
-For an [information system](#^def-information-system), each cell holds a value drawn from the set $V_a$. For a [formal context](#^def-formal-context), each cell states records only whether the object carries the attribute, so the matrix is **binary**.
+For an [information system](#^def-information-system), each cell holds a value drawn from the set $V_a$. For a [formal context](#^def-formal-context), each cell records only whether the object carries the attribute, so the matrix is **binary**.
 
 *Example*: four species of birds described by three many-valued attributes give the following *information system* table:
 
@@ -75,26 +106,28 @@ For an [information system](#^def-information-system), each cell holds a value d
 | $s_4$   | shallow    | blue          | nectar  |
 
 > [!TIP] Conversion
-> The table of an [information system](#^def-information-system) can be turned into the table of a a [formal context](#^def-formal-context) by [scaling the many-valued attributes](#^conceptual-scaling), i.e. replacing each column with binary ones.
+> The table of an [information system](#^def-information-system) can be turned into the table of a [formal context](#^def-formal-context) by [scaling the many-valued attributes](#^conceptual-scaling), i.e. replacing each column with binary ones.
 
 ## Division of labour
 
-### Domain-dependent vs. -independent steps
+### Domain judgments and mechanical calculations
 
 The methodology is **hybrid**: ^hybrid-methodology
 
-- The initial and terminal stages *depend on the domain*. They demand knowledge of which differences between the objects matter for the purpose the taxonomy serves:
+- The initial and terminal stages *depend on the domain*. They demand knowledge of which differences between the objects matter for the purpose the feature system serves:
 
 	- which candidate attributes to consider in the first place, since the objects alone and their arbitrary verbal descriptions provably do not determine them;
 	- which set of attributes to retain, since several sets are typically admissible (by different methods, and by one method).
 	
-- The intermediate phases are *independent* of the domain and proceed mechanically. Rigorous algorithmic procedures settle the questions of:
+- Once the representation choices and missing-observation policy are fixed, the intermediate phases proceed mechanically relative to the analyzed table. Rigorous algorithms compute:
 
 	- which attributes actually discriminate the objects;
 	- which attributes are redundant;
 	- which minimal subsets of attributes preserve the distinctions the full set induces;
-	- which dependencies hold between attributes;
-	- how a discarded attribute is derived from the retained ones, where the dependency is logically supported.
+	- which functional dependencies hold in the many-valued table;
+	- which positive Horn implications hold in the scaled context.
+
+The algorithms remain conditional on the representation chosen through domain judgment. They also depend on the declared preservation target and treatment of missing observations.
 
 > [!IMPORTANT] Need of external criteria
 > The domain enters irreducibly at one point: deciding **which distinctions count as meaningful**, since the [two reduction methods](#^two-reduction-routes) together provide *multiple candidate sets of attributes*.
@@ -115,24 +148,24 @@ So, each method provides at least one set of candidate attributes. Selecting the
 ## Pipeline
 
 > [!NOTE] Hybrid methodology
-> The phases follow the [division of labour](#^hybrid-methodology): eliciting the distinctions and selecting the final vocabulary demand domain judgment, whereas formalizing the description and reducing it proceed mechanically.
+> The phases follow the [division of labour](#^hybrid-methodology): eliciting distinctions and selecting the final vocabulary demand domain judgment. Once the representation and missing-observation policy are fixed, formalization and reduction proceed mechanically relative to the analyzed table.
 
 ### Designing the description
 
-1. **Define the universe $U$.** Specify which objects the taxonomy must distinguish and for what purpose.
+1. **Define the universe $U$.** Specify which objects the feature system must distinguish and for what purpose.
 2. **Elicit candidate distinctions.** Compare maximally diverse objects and name the property that carries each relevant difference (*method*: [Kelly's triadic elicitation](#^kelly-triadic-elicitation)).
 3. **Structure the descriptive space.** Declare the design of the description as a whole as a template sentence, from the objects, the attributes, and the values (*method*: [Guttman's mapping sentence](#^guttman-mapping-sentence)). Determine all the admissible profiles by the Cartesian product of the template sentence.
 
 ### Formalizing the description
 
 4. **Operationalize attributes.** Turn each attribute into a rule that assigns a value to any object, the admissible values being Boolean, categorical, or ordinal. 
-5. **Construct the [object × attribute matrix](#^def-object-attribute-matrix).** Evaluate every attribute on every object. The table is the [information system](#^def-information-system) on which every later reduction operates.
+5. **Construct the [object × attribute matrix](#^def-object-attribute-matrix).** Evaluate every attribute on every object and record exactly one value per analyzed cell. Apply and document the [missing-observation treatment](#^applicability-guarantees). The resulting table is the [information system](#^def-information-system) on which every later reduction operates.
 6. **Test coverage.** Check that every pair of objects to distinguish differs on at least one attribute. When a pair does not differ, the vocabulary is incomplete, and the procedure must return to eliciting distinctions.
 
 ### Reducing and deriving dependencies
 
 > [!NOTE] Two reduction routes
-> At this stage, the pipeline divides in [two routes that answer distinct questions](#^two-reduction-routes): a taxonomy that needs only a small vocabulary takes the Rough Sets route, whereas one that needs only the dependency structure takes the FCA route.
+> At this stage, the pipeline divides into [two routes that answer distinct questions](#^two-reduction-routes): a feature system that needs a small vocabulary takes the Rough Sets route, while one that needs the binary concept structure takes the FCA route.
 > Both routes rejoin when a single vocabulary must be selected among the candidate sets.
 
 **By preserving discernibility**:
@@ -143,7 +176,7 @@ So, each method provides at least one set of candidate attributes. Selecting the
 
 8. **Scale the many-valued attributes.** Obtain the [one-valued formal context](#^def-formal-context) by replacing each attribute carrying more than two values by the binary columns of a scale (*method*: [conceptual scaling](#^conceptual-scaling)).
 9. **Clarify and reduce the context.** First merge the duplicate rows and columns of the cross-table of the context, then delete every attribute whose extent (i.e. set of objects carrying it), is an intersection of other extents (*method*: [Formal Concept Analysis](#^formal-concept-analysis)). The surviving attributes are the *meet-irreducible* ones, and the reduced context is unique up to isomorphism.
-10. **Compute the canonical basis of implications.** An implication is a dependency between two sets of attributes, that holds when every object carrying all attributes of one set also carries those of the other. Construct the [canonical "basis" of implications](#^duquenne-guigues-canonical-basis), that generates every implication valid in the context (*method*:  [Ganter's Next-Closure algorithm](#^next-closure)).
+10. **Compute the canonical basis of positive Horn implications.** In the scaled context, $P\to Q$ holds when every object carrying all binary attributes in $P$ also carries every binary attribute in $Q$. Construct the [canonical basis of implications](#^duquenne-guigues-canonical-basis). The basis entails every positive Horn implication valid in the context (*method*: [Ganter's Next-Closure algorithm](#^next-closure)).
 
 > [!NOTE] Multiple candidate solutions
 > The reduction leaves several attribute sets with equal discriminatory power, and the canonical basis fixes the dependencies without ranking those sets. 
@@ -152,12 +185,12 @@ So, each method provides at least one set of candidate attributes. Selecting the
 
 11. **Select one [reduct](#^def-reduct).** Define a criterion that the vocabulary itself cannot supply, and score each candidate set. For instance, measure [accuracy on new objects](#^crit-predictive-accuracy), or [count the total length of the description](#^crit-minimum-description-length).
 12. **Validate the vocabulary.** Add to the universe new objects that were not used in the construction — in particular the pairs that the retained attributes are most likely to conflate — and check that those attributes still discriminate them. If discrimination fails, then the procedure must return to eliciting distinctions.
-13. **Validate dependencies.** If the objects collected so far form a *sample* rather than the whole domain, check whether the implication basis computed on those objects is complete, or enlarge the context with new objects and update the basis (*method*: [Attribute Exploration](#^attribute-exploration)).
+13. **Validate Horn implications.** If the objects collected so far form a *sample* rather than the whole domain, submit the scaled context's candidate implications to an expert, or enlarge the context with counterexample objects and update the basis (*method*: [Attribute Exploration](#^attribute-exploration)).
 
 > [!NOTE]
 > The two validation tests differ in what they test:
 > - the first test confronts the declared *vocabulary* with new objects and repairs the *vocabulary* (selection of attributes);
-> - the second test ("Attribute Exploration") submits an *implication* to an expert and repairs the *dependencies*.
+> - the second test ("Attribute Exploration") submits a *positive Horn implication* to an expert and repairs the scaled context's *dependency theory*.
 
 ### Explaining a designated outcome
 
@@ -171,9 +204,9 @@ Each step of the pipeline draws on one formal framework:
 - [Facet theory (mapping sentence)](#^guttman-mapping-sentence) declares the objects, the attributes and the values, and determines the admissible profiles.
 - [Conceptual scaling](#^conceptual-scaling) replaces each many-valued attribute with binary columns, producing the one-valued context.
 - [Rough sets](#^rough-set-theory) return the "minimal" attribute subsets that discriminate the objects as the full vocabulary does.
-- [Formal Concept Analysis](#^formal-concept-analysis) exposes the logical dependencies among attributes and the derivations that recover the discarded ones.
+- [Formal Concept Analysis](#^formal-concept-analysis) derives the positive Horn implication theory of the scaled context and reduces that context while preserving its concept lattice.
 - [Minimum description length](#^crit-minimum-description-length) ranks the competing reducts by the length of the description each of them yields.
-- [Attribute exploration](#^attribute-exploration) completes a universe of objects that holds no counterexample to a false law.
+- [Attribute exploration](#^attribute-exploration) tests positive Horn implications against a domain expert and incorporates supplied counterexamples into the context.
 - [Quine–McCluskey minimization](#^quine-mccluskey-qca) returns the minimal conjunctions of conditions sufficient for a designated outcome.
 
 ### Eliciting initial attributes
@@ -208,7 +241,7 @@ Each slot of the template sentence is a **facet**, a set whose elements are the 
 - the **content facets** fix the *attributes* — the respects in which each object is described;
 - the **range facet** fixes the *values* an observation may take, together with the unit and the resolution recorded.
 
-*Example*: For a taxonomy of finch species, one template reads:
+*Example*: For a feature system describing finch species, one template reads:
 
 > Species (*x*) of the Galápagos finches has a beak of depth {shallow / intermediate / deep} and plumage of color {red / blue / green}, and feeds mainly on {seeds / insects / nectar}.
 
@@ -358,25 +391,25 @@ This reduction method aims to preserve the concept lattice $\underline{\mathfrak
 
 The theory introduces two **derivation operators** that read the incidence in opposite directions:
 
-- The **extent** of a set of *attributes* $B \subseteq A$ is the set of *objects* that share all attributes in $B$: 
+- The **extent** of a set of *binary attributes* $B \subseteq M$ is the set of *objects* that share all attributes in $B$:
 $$B' = \{x \in U : \forall a \in B,\ (x,a) \in I\}$$
 	For a single attribute $a$, the extent $\{a\}'$ is its *column* in the [cross-table](#^def-object-attribute-matrix).
 	
 - The **intent** of a set of *objects* $X \subseteq U$ is the set of *attributes* shared by all objects in $X$:
-$$X' = \{a \in A : \forall x \in X,\ (x,a) \in I\}$$
+$$X' = \{m \in M : \forall x \in X,\ (x,m) \in I\}$$
 
 These operators define the constructs that reduction manipulates:
 
 - The **concept lattice** is the family of extents, that is, the sets of objects of the form $B'$ for some set of attributes $B$, ordered by inclusion. The family is a lattice because any two extents have a greatest extent below both, their intersection, and a least extent above both, the smallest extent containing them.
 	
-- The composites $X \mapsto X''$ and $B \mapsto B''$ are **closure operators**: each sends a set to its smallest closed superset. Applied to a set, the word names the result: $B''$ is *the closure of* $B$, which contains every attribute carried by all the objects that carry $B$. 
+- The composites $X \mapsto X''$ and $B \mapsto B''$ are **closure operators**: each sends a set to its smallest closed superset. Applied to $B$, the result $B''$ is *the closure of* $B$. The closure contains every attribute carried by all objects that carry $B$.
 	
 - A set is **closed** when it equals its own closure, $B = B''$: every further attribute would drop an object from its extent. A set is **unclosed** when its closure exceeds it, $B \neq B''$: the closure holds an attribute outside $B$ that every object carrying $B$ carries anyway, so adding it leaves the extent unchanged.
 
-Two sets of attributes $B, C \subseteq A$ are related by an **attribute implication** $B\rightarrow C$ whenever every object possessing all attributes in $B$ also possesses those in $C$. The implication is determined by the closure $B''$ of $B$:
+Two sets of binary attributes $B, C \subseteq M$ are related by a **positive Horn implication** $B\rightarrow C$ whenever every object possessing all attributes in $B$ also possesses those in $C$. The Horn implication is the [dependency relation of the scaled context](#^def-dependency-languages), and the closure $B''$ determines it:
 $$B \to C \iff C \subseteq B''$$
 
-An attribute $a$ is **reducible** when *some* set of other attributes has the same extent: the reducible attribute can be *defined* from the others, and its column carries no distinction that the columns of these other attributes do not already carry jointly. Formally,  $a$ is reducible iff there exists a set $B \subseteq A \setminus \{a\}$ such that:
+An attribute $a$ is **reducible** when *some* set of other binary attributes has the same extent: the reducible attribute can be *defined* from the others, and its column carries no distinction that the columns of these other attributes do not already carry jointly. Formally, $a$ is reducible iff there exists a set $B \subseteq M \setminus \{a\}$ such that:
 $$\{a\}' = \bigcap_{b \in B} \{b\}' = B'$$
 The intersection is the set of objects that carry every attribute in $B$. Since $a$ and $B$ have the same extent, both implications $B \to a$ and $a \to B$ are valid (mutual implication).
 
@@ -451,7 +484,7 @@ This procedure operates on the [cross-table](#^def-object-attribute-matrix) of a
 > [!CHECK] Canonicity
 > The result is *unique* up to isomorphism for finite context $\mathbb{K}$: no other reduced context carries the same lattice.
 > Deleting any retained attribute changes the lattice, so the retained set is minimal for *set inclusion*, not for cardinality. 
-> *Warning*: minimality by inclusion holds for the *lattice* rather than the indiscernibility relation for the [reducts](#^def-reduct). The retained set is therefore not the smallest a taxonomy could use, since [a reduct is generally smaller](#^reduced-set-versus-reduct).
+> *Warning*: minimality by inclusion holds for the *lattice* rather than the indiscernibility relation for the [reducts](#^def-reduct). The retained set is therefore not the smallest feature vocabulary, since [a reduct is generally smaller](#^reduced-set-versus-reduct).
 
 **Computing the implication basis** (Ganter's **Next-Closure** algorithm): ^next-closure
 
@@ -499,13 +532,17 @@ Order the attributes *shallow* $<$ *deep* $<$ *red* $<$ *blue* $<$ *insects* $<$
 
 The 6 implications recorded are those given with the [definition of the basis](#^duquenne-guigues-canonical-basis). Four of them concern the two columns that the reduction removes, so the same run on the reduced context therefore returns two implications only.
 
-**Expressing the dependencies between attributes**:
+**Interpreting retained and discarded attributes**:
 
-Write $B$ for the set of attributes retained, that is, the [irreducible ones](#^def-irreducible-attribute) after [context reduction](#^context-reduction), or the [reduct](#^def-reduct) that the [Rough Sets route](#^rough-set-theory) selects.
+Context reduction and Rough Set reduction support different statements about discarded attributes.
 
-The derivation $B \to B''$ then accounts for the discarded attributes, and for any attribute proposed later: when an attribute lies in the closure $B''$ of the retained set $B$, then every object carrying $B$ carries that attribute too, so the implication recovers it. In other words, $B''$ holds the attributes that $B$ forces. So, an attribute in $B''$ is entailed by the retained ones and needs no column of its own: it can be deleted without loss.
+- In a scaled context, a reducible binary attribute can be removed when an intersection of retained extents reproduces its extent. The associated positive Horn implications describe co-occurrence in that context.
+- In a many-valued table, a Rough Set reduct $R$ preserves $\operatorname{IND}(A)$. Therefore, each discarded raw attribute $a$ satisfies the table-relative functional dependency $R\Rightarrow_{\mathrm{fun}}a$.
+- Neither relation supplies a value for a raw profile absent from the analyzed table. Such reconstruction requires an explicit recovery map and a declared rule for unseen profiles.
 
-*Example*: with *shallow*, *deep*, *red* and *blue* retained, the closure of $\{\text{shallow}, \text{red}\}$ contains *insects*, and the closure of $\{\text{shallow}, \text{blue}\}$ contains *nectar*. Both discarded columns are recovered by an implication, and neither is stored.
+*Example*: retain the binary predicates for beak depth and color in the scaled context. The closure of $\{\text{shallow}, \text{red}\}$ contains *insects*, and the closure of $\{\text{shallow}, \text{blue}\}$ contains *nectar*. The two Horn implications reproduce the corresponding binary extents within the analyzed context. They do not reconstruct the original many-valued *diet* attribute for an unseen beak-depth and color profile.
+
+==FIX: [dependency-recovery · implemented-review] The earlier claim that one closure derivation recovers discarded attributes from either reduction route has been separated into table-relative functional dependence and context-relative Horn implication. A later phase must define any executable recovery map.==
 
 > [!WARNING] Complexity
 > Each individual closure $B \mapsto B''$ runs in time **polynomial** in the size of the context $\mathbb{K}$. 
@@ -533,12 +570,12 @@ This criterion retains is the candidate that compresses the description best. Th
 
 - *the corpus encoded with that set* — every object written as its values on the retained attributes. With $|V_a|$ values available for the attribute $a$, one value costs $\log_2 |V_a|$ bits, so an object costs the sum of those over the retained attributes, and the corpus costs that sum across objects.
 - *the definitions of its attributes* — the rule that operationalizes each retained attribute, written in the description language fixed beforehand, and its length is the length of that rule. The term forbids an attribute encoding the identity of each object: such an attribute does not shorten the corpus, and its own definition then costs as much as the corpus it spares.
-- *the implications recovering the attributes it discards* — one implication $R \to a$ per discarded attribute, each costing the attributes that the premise and the conclusion name. When no implication recovers a discarded attribute, its column is stored instead, at the price of the corpus term.
+- *the recovery specification for each discarded attribute* — for a raw attribute $a$, the recovery term must encode a map supported by $R\Rightarrow_{\mathrm{fun}}a$, including its behavior on unseen $R$-profiles. A Horn implication in the scaled context can encode a binary co-occurrence rule, but it cannot be counted as a raw value-recovery map without a documented translation.
 
 > [!NOTE] Requirements
-> That last term (implications) needs the closure of the candidate attribute set, computed in time polynomial in the size of the context.
-> It does *not* require the canonical basis from [Formal Concept Analysis](#^formal-concept-analysis): that basis is only a *convenient* way of supplying these derivations.
-> However, closures are computed in the [one-valued context](#^def-formal-context), whereas the reducts being scored come from the [many-valued information system](#^def-information-system). So computing the description length requires the scaled context. 
+> The recovery term cannot be computed from context closure alone. Raw functional dependence establishes that a table-relative map exists, but the code length requires the map itself and a coding convention. Scaled context closure supplies positive Horn consequences only.
+
+==FIX: [mdl-recovery · implemented-review] The MDL criterion now records the missing recovery-map specification instead of treating a Horn implication as a many-valued decoder. The full coding scheme remains a later-phase task.==
 
 ### Exploring attributes
 
@@ -546,7 +583,7 @@ This criterion retains is the candidate that compresses the description best. Th
 
 If the universe is taken as complete, the basis is computed directly and is complete. However, when the objects already collected form an *unrepresentative sample of the domain*, then the basis computed on them might incorrectly elevate a locally valid implication as a law of the domain.
 
-*Example*: The implication "no bird with a deep beak feeds on nectar" may be a law of the domain, or it may hold only because no deep-beaked nectar feeder was ever collected. 
+*Example*: The positive implication "every bird with a deep beak feeds on seeds" may hold throughout the target domain, or it may hold only because the sample contains no counterexample.
 
 **Domain expert**: ^def-domain-expert
 
@@ -560,7 +597,7 @@ This algorithm progresses iteratively, starting from the [canonical basis](#^duq
 2. The expert either validates it or supplies a counterexample.
 3. Each counterexample adds an object to the context, after which the basis is recomputed on the enlarged context.
 
-For a finite attribute set, the process *provably terminates* with a context whose implication theory is complete for the domain.
+For a finite binary attribute set and a sound, consistent expert for a fixed target domain, the process terminates with a basis complete relative to that expert's domain theory. The guarantee is conditional on the expert assumptions; the finite sample alone does not establish a domain law.
 
 > [!NOTE]
 > The initial basis is a function of a *fixed* context, obtained by enumerating the pseudo-closed sets of that context. The exploration instead *builds* the context whose basis is sought.
@@ -643,10 +680,10 @@ This departure is due to the distinct constraints of the methods:
 - Formal Concept Analysis retains the three attributes, since all are irreducible: no intersection of $\{g_2,g_3\}$ and $\{g_1,g_2,g_3\}$ gives $\{g_1,g_2\}$, none of $\{g_1,g_2\}$ and $\{g_1,g_2,g_3\}$ gives $\{g_2,g_3\}$, and none of $\{g_1,g_2\}$ and $\{g_2,g_3\}$ gives $\{g_1,g_2,g_3\}$.
 - Rough Set reduction retains two attributes, since the only reduct is the pair $\{a,b\}$: the rows restricted to $a$ and $b$ read $\{a\}$, $\{a,b\}$, $\{b\}$ and the empty set, four distinct rows in all; dropping $a$ merges $g_1$ with $g_2$, and dropping $b$ merges $g_2$ with $g_3$.
 
-Therefore, deleting the attribute $c$ does not costs to discrimination, since no two objects are merged, whereas it changes the lattice, since the extent $\{g_1,g_2,g_3\}$ disappears.
+Therefore, deleting the attribute $c$ does not cost discrimination, since no two objects are merged, whereas it changes the lattice, since the extent $\{g_1,g_2,g_3\}$ disappears.
 
 > [!WARNING]
-> "Canonicity" is therefore a property of the reduction, and evidence neither that the surviving attributes are the fewest a taxonomy needs, nor that they are the ones its purpose requires.
+> "Canonicity" is therefore a property of the reduction, and evidence neither that the surviving attributes form the smallest feature vocabulary nor that they serve the declared purpose.
 
 ## Comparison with linear algebra
 
@@ -672,7 +709,7 @@ Dimensions are treated in the theory of conceptual spaces as respects in which o
 
 The concept lattice is the qualitative counterpart of the linear span:
 
-- The closed attribute sets are stable under intersection, and the whole set $A$ is one of them, so they form a **closure system** (also called a *Moore family*): every set of attributes has a smallest closed superset, its closure.
+- The closed binary-attribute sets are stable under intersection, and the whole set $M$ is one of them, so they form a **closure system** (also called a *Moore family*): every set of attributes has a smallest closed superset, its closure.
 - The linear subspaces of a vector space form a closure system of the same kind, with the span as closure operator. 
 
 However, the invariant cardinality of a linear basis rests on a lattice property that a closure system does not inherit:

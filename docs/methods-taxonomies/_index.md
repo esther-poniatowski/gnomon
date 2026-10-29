@@ -20,4 +20,6 @@ The synthesis proceeds by traversing the major traditions and extracting from ea
 
 - [Construction principles — variant C](taxonomic-construction-principles-c.md): principles consolidated from those traditions, from declaring the function of a taxonomy to tolerating plural classifications of one domain.
 - [Construction principles — variant G](taxonomic-construction-principles-g.md): principles for classifying a body of literature, each tied to the philosophical source that supports it.
-- [Construction procedure](construction-procedure.md): the division of labour between the domain-dependent elicitation of candidate distinctions and the domain-independent reduction that operates on them, and the pipeline chaining the two.
+- [Qualitative feature-system construction procedure](construction-procedure.md): constructs and reduces a finite crisp object–attribute description while keeping every guarantee relative to its representation and analyzed table.
+- [Extension from a feature system to a taxonomy](taxonomy-extension-plan.md): separates descriptive features from the taxonomic layer, then compares four routes for constructing that layer.
+- [Construction procedure revision](construction-procedure-revision.md): records the active correction phase, governing decisions and review dependencies.
