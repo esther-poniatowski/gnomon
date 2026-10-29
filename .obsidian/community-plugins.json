@@ -1,3 +1,16 @@
 [
-  "yaml-editor"
+  "yaml-editor",
+  "frontmatter-markdown-links",
+  "obsidian-front-matter-title-plugin",
+  "advanced-rename-and-delete-handler",
+  "nested-properties",
+  "file-title-updater",
+  "vault-inspector",
+  "obsidian-account-linker",
+  "fileclass",
+  "wikilink-types",
+  "embed-metadata",
+  "entity-notes",
+  "markdown-mindmap",
+  "gantt-this"
 ]
