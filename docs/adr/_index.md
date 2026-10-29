@@ -20,3 +20,7 @@ The records:
 - [Single field per fact](single-field-per-fact.md): to tell a field that carries a fact from a field that restates that fact.
 - [Grounds for a shared field](shared-field-grounds.md): to decide whether a proposed field belongs in every record or in the case that raised it.
 - [Registries for vocabularies and requirements](registries-as-source.md): to reach the file that declares an admitted value, before extending a vocabulary.
+- [Itinerary and product types](itinerary-and-product-types.md): to name the record of the acts of an inquiry and the types of their products.
+- [Dotted identifiers](dotted-identifiers.md): to write a reference to a record or to a unit nested inside it.
+- [Record schemas](record-schemas.md): to reach the file that declares the shape of a record, which a program validates and Ekphrasis renders.
+- [Expositions as projections](expositions-as-projections.md): to know what an exposition may add to the research that it presents, and which tool specifies it.

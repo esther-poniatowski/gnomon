@@ -19,7 +19,8 @@ Such research projects combine a large body of interrelated definitions, derivat
 
 - represent the **state of knowledge** — the epistemic contents with their maturity;
 - record the **logic of inquiry** — the dependencies that determine how arguments articulate various epistemic contents to answer a question, and how they compose into larger arguments;
-- **guide the inquiry** — the next questions to ask, the next objects to define, and the next arguments to construct, given the current state of knowledge and the target question.
+- **guide the inquiry** — the next questions to ask, the next objects to define, and the next arguments to construct, given the current state of knowledge and the target question;
+- **project the inquiry into expositions** — selections and orderings of the epistemic contents for an audience, which add rhetorical devices and no content.
 
 ---
 
