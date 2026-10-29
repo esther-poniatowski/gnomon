@@ -73,6 +73,13 @@ The Mixture pilot of `geonexus` corrected several parts of the framework while s
 	- [ ] Specify the exposition family as projections of research records that add no content, following the [decision on expositions as projections](docs/adr/expositions-as-projections.md): a registry of rhetorical moves with the kind of output that each requires, the parts and blocks of an exposition, connectors, announcements and syntheses, and traces to research units. An exposition, or one of its sections, may declare an order strategy, `claim-first` or `support-first` and `general-first` or `specific-first`, checked against the order of its parts, as the retired construction indexes of `geonexus` did for notes. 🆔 exposition-family
 	- [ ] Declare the relations between research units, and between exposition units and research units, in one registry of `gnomon`, independent of the citation vocabularies of its consumers. Resolve the senses of `rebuts`, `contrasts`, `motivated-by` and supersession met in the pilot, and give each relation a warrant kind with an optional warrant sentence. 🆔 relation-registry
 	- [ ] Specify the assembly of a level: the status `core` or `elaboration` of each component, the output parts that it supplies, typed citations between components, elaboration across levels, views that expand chosen components, and the checks of the core route. 🆔 assembly-schema
+	- [ ] Provide the mechanisms of the notation, the glossary, the audience and the project specification, following the [decision on terminology, audience and project specifications](docs/adr/terminology-audience-project-specifications.md): 🆔 vocabulary-records
+		- [ ] write the four schemas and generate their templates, starting from the schemas and the decisions of `geonexus`;
+		- [ ] port the checks of imports, references, conflicts, aliases and cycles from the glossary checker of `geonexus`;
+		- [ ] reference the problem and question records from the scope of a project specification, instead of restating its questions;
+		- [ ] keep in a notation only its conventions and the symbols reused across records, and generate the LaTeX macros of an exposition from the symbols;
+		- [ ] decide whether a glossary entry is the lexical face of a concept record;
+		- [ ] check the terms of an exposition against the audiences cited by its design brief.
 	- [ ] Apply the research corrections of the pilot: 🆔 research-corrections
 		- [ ] identifiers on idealizations, abstractions and explanans factors, and a key listing the idealizations that a law requires;
 		- [ ] typed output parts of an answer, and typed premises in place of the free string `rests_on`;

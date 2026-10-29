@@ -24,3 +24,4 @@ The records:
 - [Dotted identifiers](dotted-identifiers.md): to write a reference to a record or to a unit nested inside it.
 - [Record schemas](record-schemas.md): to reach the file that declares the shape of a record, for validation and for rendering in Ekphrasis.
 - [Expositions as projections](expositions-as-projections.md): to know what an exposition may add to the research that it presents, and which tool specifies it.
+- [Terminology, audience and project specifications](terminology-audience-project-specifications.md): to place the mechanism of a notation, a glossary, an audience or a project specification, apart from its instances.
