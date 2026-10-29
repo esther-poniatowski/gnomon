@@ -7,7 +7,7 @@ aliases:
 ---
 # Methods for reasoning
 
-The external work grounding the design of `gnomon` is recorded on its own terms, before `gnomon` applies that work. Each of the four groups collects the material that plays one role.
+The external work grounding the design of `gnomon` is recorded on its own terms, before `gnomon` applies that work. Each of the five groups collects the material that plays one role.
 
 ## Reasoning principles
 
@@ -16,7 +16,7 @@ The external work grounding the design of `gnomon` is recorded on its own terms,
 
 ## Problem decomposition
 
-- [Question hierarchy framework](question-hierarchy-framework.md): the criterion admitting a sub-question — its resolution must change the status of the target question — and the protocol that generates, filters, and ranks candidates.
+- [Question hierarchy framework](question-hierarchy-framework.md): the criterion admitting a sub-question — its resolution must change the status of the target question — and the guidance that generates, filters and revises sub-questions during inquiry.
 - [Research gap against research problem](research-problems-vs-gap.jpg): an external figure separating what is missing in the literature from the issue that makes an investigation necessary.
 
 ## Reference formal reasoning domains
@@ -34,3 +34,7 @@ The external work grounding the design of `gnomon` is recorded on its own terms,
 - [Decision rules](decision-rules.md): the epistemic, argumentative, and stylistic rules governing note production, stratified by the aspect each one governs and weighted by note type and workflow stage.
 - [Formal reasoning language principles](formal-language-principles.md): what a fully formal research-reasoning language must satisfy, from its ontological commitments through its operation taxonomy to the semantics under which those operations execute.
 - [Incremental construction plan](construction-plan-incremental.md): the minimal viable trace as the unit of progress, and the phases that grow the formalism one reconstructed research episode at a time.
+
+## Knowledge interchange formats
+
+- [Open Knowledge Format](open-knowledge-format.md): to decide whether `gnomon` should store its records in this format, emit bundles in it, or borrow its trust fields.

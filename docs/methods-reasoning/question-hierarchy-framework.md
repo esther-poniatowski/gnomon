@@ -35,17 +35,8 @@ This framework distinguishes two moments:
 
 ## Operational protocol
 
-| Operation                                                                                                                           | Output                                |
-| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| Fix the target question: <br>- specify the answer-form<br>- specify the scope<br>- identify the missing conditions of answerability | A precise research target             |
-| Identify the current blockage and classify its type                                                                                 | A statement of what prevents progress |
-| Convert each missing condition into one or more candidate sub-questions that remove that blockage                                   | Candidate next steps                  |
-| Classify each candidate as necessary, useful, or decorative                                                                         | Filtered next steps                   |
-| Rank the retained sub-questions by diagnostic power, feasibility, and structural centrality                                         | Chosen next sub-question              |
-| Record dependencies                                                                                                                 |                                       |
-| Work on the highest-priority available sub-question                                                                                 | New result, failure, or clarification |
-| When resistance appears, generate an abductive or constructive sub-question and revise locally (invalidate conditioned nodes)       | Updated register                      |
-| Periodically verify whether the main question itself requires disambiguation, restriction, or conceptual replacement                | Stable inquiry direction              |
+> [!IMPORTANT] Canonical procedure
+> The procedure that chooses the next act of an inquiry is stated in [choosing the next act](../epistemology/next-act.md). The detailed steps below keep the practical guidance of this framework: the generation of sub-questions from blockages, their functional types, the dependency register, and the local and global revisions.
 
 ## Detailed steps
 
@@ -85,14 +76,21 @@ Determine the domain in which the question is posed:
 
 Which of these conditions are currently missing? Each missing condition yields one or more candidate sub-questions.
 
-| Condition type       | What must hold                                                              |
-| -------------------- | --------------------------------------------------------------------------- |
-| **Conceptual**       | The central notions must be precise enough for the intended use             |
-| **Formal**           | The problem objects and relations must be represented in a usable framework |
-| **Evidential**       | Relevant consequences can be observed, derived, or computed                 |
-| **Identifiability**  | Distinct candidate answers can in principle be distinguished                |
-| **Feasibility**      | The required analysis or derivation can actually be carried out             |
-| **Interpretability** | The result can be read back in terms of the original question               |
+> [!IMPORTANT] Canonical statement
+> The conditions of answerability are stated in the [conditions of answerability](../epistemology/definitions/conditions-of-answerability.md). Its table maps onto them the six condition types of this framework:
+> - *conceptual*: the central notions are precise enough for the intended use;
+> - *formal*: the objects and relations of the problem are represented in a usable framework;
+> - *evidential*: relevant consequences can be observed, derived or computed;
+> - *identifiability*: distinct candidate answers can in principle be distinguished;
+> - *feasibility*: the required analysis or derivation can be carried out, possibly in a simplified setting;
+> - *interpretability*: the result can be read back in terms of the original question.
+>
+> The rows of the table of obstacles below map row by row:
+> - a conceptual obstacle onto definiteness;
+> - a formal obstacle without a usable representation onto the answer type, and a formal obstacle without a measurable criterion onto discrimination;
+> - a discriminative obstacle of incompatible interpretations onto definiteness, and a discriminative obstacle of equally compatible explanations onto discrimination;
+> - a tractability obstacle onto access, or onto scope when a reduced setting is studied;
+> - an interpretive obstacle onto bridging.
 
 ---
 
@@ -156,26 +154,9 @@ Each candidate sub-question must be assigned one of three statuses:
 
 If the answer is materially empty, the sub-question is decorative and should be removed.
 
-#### Prioritize by diagnostic power, feasibility, and structural centrality
+#### Prioritize the retained sub-questions
 
- For each candidate sub-question, evaluate three aspects:
-
-| Criterion                 | Guiding question                                                                                                                                                       |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Diagnostic power**      | If resolved, how sharply would it constrain the admissible answers to the main question (i.e. eliminate possibilities, falsify assumptions, or force a reformulation)? |
-| **Feasibility**           | Can progress be made on it now with available tools, background knowledge, or simplified settings?                                                                     |
-| **Structural centrality** | Does it concern a load-bearing assumption, concept, or mechanism — one whose falsification restructures the problem?                                                   |
-
-**Priority rule**:
-
-1. Prefer the available sub-question that is both highly constraining and reasonably tractable.
-2. (more adversarial formulation) Prefer the sub-question whose least favorable plausible answer would still eliminate a substantial portion of the currently live possibilities.
-
-Confirmatory evidence accumulates slowly; a single decisive negative result eliminates a structural hypothesis entirely. Sub-questions should be designed as potential falsifiers of assumptions, not as collectors of supporting evidence.
-
-> [!NOTE]
-> This qualitative prioritization is sufficient to retains the practical value of structural falsification without requiring heavy formal apparatus.
-> This criterion corresponds to the notion of _strong tests_ in Popperian methodology and to _expected information gain_ in Bayesian terms.
+The criteria of priority, among them diagnostic power, feasibility, structural centrality and the rule of the least favorable outcome, are stated with the other [ranking criteria](../epistemology/next-act.md#^ranking-criteria).
 
 ---
 
