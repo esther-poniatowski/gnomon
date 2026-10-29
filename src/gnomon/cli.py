@@ -7,7 +7,7 @@ Commands
 --------
 info : Display diagnostic information.
 init : Scaffold research workspace structure into a target directory.
-validate : Validate registry files against schemas.
+validate : Validate each record against the schema of its type.
 status : Report inferential position in the research workspace.
 vocabulary : Collect the symbols and operators of one problem into a table.
 itinerary : Check every itinerary of one problem against the activity and product-type registries.
@@ -43,10 +43,10 @@ def cli_init(
 
 @app.command("validate")
 def cli_validate(
-    paths: list[str] = typer.Argument(..., help="Registry files or directories to validate."),
+    paths: list[str] = typer.Argument(..., help="Record files or directories to validate."),
 ) -> None:
-    """Validate registry files against schemas."""
-    typer.echo("Registry validation is not yet implemented.")
+    """Validate each record against the schema of its type."""
+    typer.echo("Record validation is not yet implemented.")
     raise typer.Exit(code=0)
 
 

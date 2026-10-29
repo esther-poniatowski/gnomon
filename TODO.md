@@ -94,7 +94,6 @@ The Mixture pilot of `geonexus` corrected several parts of the framework while s
 		- [ ] a rationale on each itinerary step, naming the question served and what the step acts on: one of the eight [conditions of answerability](docs/epistemology/definitions/conditions-of-answerability.md) for obtaining an answer (definiteness, answer type, soundness, candidates, discrimination, access, bridging, representation), the acts that obtain the answer, or the evaluation of an obtained answer, as the [choice of the next act](docs/epistemology/next-act.md) orders them;
 		- [ ] a record kind for designs, and the activities of the pilot absent from the registry, beside the gaps listed under `inquiry-records-round-2`: comparing a derived law with a simulation;
 		- [ ] the checks of produced content, of the rationale and of revisions.
-	- [ ] Repair the indexes of `src/gnomon/data/contracts/`, `schemas/`, `specs/` and `workflow/`, which point to the missing `docs/design/methods/`. 🆔 data-indexes
 
 ## Open issues of the model-design audits
 

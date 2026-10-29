@@ -1,10 +1,12 @@
-# Registry Schemas
+---
+tags:
+  - index
+aliases:
+  - Record schema files
+---
+# Record schemas
 
-JSON schemas for validating machine-readable project state:
+The schemas of this folder declare the shape of each record type, so that a program validates a record and Ekphrasis renders it as a form, as the [decision on record schemas](../../../../docs/adr/record-schemas.md) states.
 
-- `reasoning_graph.schema.json` — inferential architecture
-- `open_questions.schema.json` — frontier of open questions
-- `dependencies.schema.json` — provenance and usage tracking
-- `terminology.schema.json` — terminology registry
-
-See `docs/design/methods/registries.md` for the full registry framework.
+> [!IMPORTANT] One entry per schema
+> Each entry gives the logical identifier `gnomon:<type>@<version>` of its schema, and is added in the edit that writes the schema.

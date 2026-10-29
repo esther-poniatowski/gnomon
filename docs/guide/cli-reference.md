@@ -44,9 +44,9 @@ gnomon init --target <dir>
 
 ## `validate`
 
-> Stub — prints "Registry validation is not yet implemented."
+> Stub — prints "Record validation is not yet implemented."
 
-Validate registry files against their JSON schemas.
+Validate each record against the JSON Schema of its type.
 
 ```sh
 gnomon validate <paths...>
@@ -54,7 +54,7 @@ gnomon validate <paths...>
 
 | Argument   | Description                                  |
 | ---------- | -------------------------------------------- |
-| `<paths>`  | One or more registry files or directories.   |
+| `<paths>`  | One or more record files or directories.     |
 
 ## `status`
 

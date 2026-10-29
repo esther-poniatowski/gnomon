@@ -37,6 +37,6 @@ A rule on one record is stated in standard keywords or under `x-rules`. A rule a
 
 ## Consequences
 
-- The record schemas share `src/gnomon/data/schemas/` with the registry schemas. The index of that folder lists each record schema with its logical identifier, and its entries without a file are repaired under the task that repairs the broken indexes.
+- The record schemas live in `src/gnomon/data/schemas/`, whose index gives the logical identifier of each schema.
 - The schemas are exported as files of a Git revision. A consumer materializes them from an exact commit, and resolves `gnomon:<type>@<version>` through its own generated registry.
 - A check reports a schema whose vocabularies differ from the registries, and a template that differs from its generated form. Such a check compares a generated copy with its source, unlike a check holding two authored copies equal, and it replaces the check of template comments of the decision on registries.

@@ -41,13 +41,13 @@ gnomon init --target ./my-research
 
 Intended behavior: create a structured workspace directory from the standard template, mirroring the hierarchical organization of projects and modules.
 
-### `validate` — Validate Registry Files
+### `validate` — Validate Records
 
 ```sh
-gnomon validate registries/
+gnomon validate ./my-research
 ```
 
-Intended behavior: check YAML registry files against their JSON schemas (reasoning graph, open questions, dependencies, terminology).
+Intended behavior: check each record against the schema of its type.
 
 ### `status` — Report Inferential Position
 
@@ -59,12 +59,10 @@ Intended behavior: summarize established results, open questions, in-progress no
 
 ## Data Templates
 
-The package ships template files under `src/gnomon/data/`, accessible at runtime via `gnomon.data_path()`. Five subdirectories provide starter content for consuming projects:
+The package ships its data under `src/gnomon/data/`, accessible at runtime via `gnomon.data_path()`. The subdirectories below hold the content that consuming projects use:
 
-| Directory      | Contents                                                    |
-| -------------- | ----------------------------------------------------------- |
-| `contracts/`   | Per-note-type contract templates (pre-draft and post-draft) |
-| `registries/`  | YAML templates for reasoning graphs, questions, terms, deps |
-| `schemas/`     | JSON schemas for validating registry files                  |
-| `specs/`       | Note type specifications (sections, strategies, scope)      |
-| `workflow/`    | Staged pipeline definitions and the audit protocol          |
+| Directory      | Contents                                                          |
+| -------------- | ----------------------------------------------------------------- |
+| `registries/`  | Registries of the epistemic activities and of the product types   |
+| `schemas/`     | JSON Schemas of the record types, planned under `record-schemas`  |
+| `templates/`   | Record templates, one per concern of an inquiry                   |

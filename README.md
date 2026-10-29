@@ -66,7 +66,7 @@ The framework has been validated against seven real research problems, each fill
 - [x] Collects the symbols and the operators of a research problem into one table.
 - [x] Checks each step of an itinerary of inquiry against the registry of epistemic activities.
 - [ ] Scaffolds a research workspace from a standard template.
-- [ ] Validates registry files against schemas.
+- [ ] Validates each record against the schema of its type.
 - [ ] Reports the inferential position of a workspace: established results, open questions, blocked entries.
 - [ ] Formalizes a definition.
 - [x] Formalizes the decomposition of a question into subquestions.

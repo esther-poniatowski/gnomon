@@ -2,9 +2,9 @@
 Initialization logic and public interface for the `gnomon` package.
 
 Gnomon is a formal epistemic framework for organizing mathematical research.
-It defines the objects, contracts, and registries that make a research workspace
+It defines the records, vocabularies and registries that make a research workspace
 explicit and machine-verifiable: what has been established, what is in progress,
-what is blocked, and where each claim fits in the inferential architecture.
+what is blocked, and which results each claim rests on.
 
 Variables
 ---------
