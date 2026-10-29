@@ -34,20 +34,20 @@ The obstacle is not a fourth component of the problem. The obstacle is *diagnose
 | Unsound presupposition | $K$ yields the negation of the presupposition of $Q_\pi$ | the result sought does not exist | an account of the delay of generalization, once the delay is shown to exist only in a thresholded accuracy | [wisniewski1995] |
 
 - **The values are not exclusive.** *Example*: "characterize the geometry of the fixed points as the input mixture varies" carries an open gap and ill-defined terms, until "geometry" has a criterion.
-- **An unsound presupposition ends the problem.** The problem is dissolved, as the [outcomes of a problem](epistemic-problem.md#^problem-outcomes) state.
+- **An unsound presupposition ends the problem.** The problem is dissolved, as the [outcomes of a problem](epistemic-problem.md#^problem-outcomes) state. The value requires an outright refutation, in which the background yields the negation of the presupposition. A presupposition that the means considered have failed to establish is not unsound: it stays to be established, and the problem stands.
 - **Laudan's anomaly is comparative.** An anomalous problem, in Laudan's sense, is an empirical problem that a theory has not solved and that a rival theory has solved [laudan1977]. A mismatch between a model and data is a conflict, and the mismatch becomes an anomaly only when a rival account removes it.
 
 ### Axis B: the unmet conditions of answerability
 
-The second axis records which condition of answerability fails. The [conditions of answerability](conditions-of-answerability.md) are defined, with their dependencies, in their own note, and they divide between the two axes:
+The second axis records which condition for obtaining an answer fails. The [conditions of answerability](conditions-of-answerability.md) are defined, with their dependencies, in their own note, and they divide between the two axes:
 
-- soundness and definiteness are recorded on axis A, as an unsound presupposition and ill-defined terms; axis A also records whether the set $H$ of proposed candidates is empty, or holds candidates of which none is accepted, which is the occupancy of $H$ and not the condition of candidates;
-- axis B records the other conditions in the state refuted: definiteness without an adequate criterion, an answer type that no answer can meet, and discrimination, access, bridging and scope.
+- axis A records soundness refuted, as an unsound presupposition, and definiteness not established for an explicandum of the demand, as ill-defined terms; axis A also records whether the set $H$ of proposed candidates is empty, or holds candidates of which none is accepted, which is the occupancy of $H$ and not the condition of candidates;
+- axis B records conditions in the state refuted: definiteness without an adequate criterion, an answer type that no answer can meet, and discrimination, access, bridging and representation. The condition of candidates is not refuted on its own, as the conditions of answerability state.
 
-Each condition of axis B can be refuted under any value of axis A, with two exceptions. An unsound presupposition ends the problem, so no condition of answerability applies to it. Under selection, discrimination, access, bridging and scope all [depend](conditions-of-answerability.md#^condition-dependencies) on proposed candidates. Therefore, under an open gap, these conditions can be refuted only along the route of construction.
+Each condition of axis B can be refuted under any value of axis A, with two exceptions. An unsound presupposition ends the problem, so no condition of answerability applies to it. Under selection, discrimination, access, bridging and representation all [depend](conditions-of-answerability.md#^condition-dependencies), directly or through other conditions, on admissible candidates. Therefore, when no admissible candidate exists, none of them can be refuted along selection, and only access, bridging and representation can be refuted, along the route of construction.
 
 - **Axis B records refuted conditions only.** A condition not yet established is not an obstacle on axis B: discrimination is not established for any problem whose candidates have just been proposed. The states of a condition, and the two kinds of refutation, outright and for lack of means, are defined with the [conditions of answerability](conditions-of-answerability.md#^condition-states).
-- **A lack of means falls on axis B.** When every means considered fails to meet a condition, that condition is refuted for lack of means. Access fails when no instrument, data set, algorithm or proof technique considered yields the quantity. Discrimination fails when no quantity considered separates the candidates. Bridging and scope fail in the same way, when no auxiliary hypothesis or no transfer argument considered holds.
+- **A lack of means falls on axis B.** When every means considered fails to meet a condition, that condition is refuted for lack of means. Access fails when no instrument, data set, algorithm or proof technique considered yields the quantity. Discrimination fails when no quantity considered separates the candidates. Bridging and representation fail in the same way, when no auxiliary hypothesis considered holds, or when no model considered represents the target to the required accuracy.
 - *Example*: the number of fixed points is an open gap. Suppose, in addition, that no algorithm enumerates the fixed points of a network of a thousand units within the available computing time. In that case, the condition of access fails as well.
 
 ## Classification by demand
@@ -98,7 +98,7 @@ The demand of a problem, its request included, is a given of the problem, and th
 
 ## Consequences for a record
 
-- **Most values of axis A can be read from the records.** Over the records of an inquiry, an open gap is the absence of any accepted record and of any proposed answer of the demanded type. Unassessed candidates are proposed answers with none accepted. An unwarranted claim is an accepted answer whose support is weaker than the demand. Ill-defined terms are explicanda without a specified record.
+- **Most values of axis A can be read from the records.** Over the records of an inquiry, an open gap is the absence of any accepted record and of any proposed answer of the demanded type. Unassessed candidates are proposed answers with none accepted. An unwarranted claim is an accepted answer whose support is weaker than the demand. Ill-defined terms are explicanda whose definiteness is not established; a specified record of the term is necessary for its definiteness, not sufficient.
 - **A conflict with a publication must be asserted.** No checker reads the literature, so a conflict between a record and a publication is stated with pointers to both.
 - **The type of the demand bounds the aim of each question.** A question that serves a problem takes one of the aims that the demand table admits for the type of result, and a checker can test that bound.
 

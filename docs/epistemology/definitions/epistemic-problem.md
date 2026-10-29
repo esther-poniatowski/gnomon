@@ -78,9 +78,16 @@ Each problem defines an **associated question**: the question that asks for the 
 
 $$Q_\pi = \text{which } s \text{ of type } \mathsf{type} \text{ satisfies } \Phi_1,\ \text{under the request } \mathsf{req}\ ?$$
 
-In words: the associated question asks for results of the demanded type that meet the conditions on each candidate. The request fixes how many results an answer must give, and how complete they must be. The **presupposition** of the question is that at least one such result exists. A whether-question is a which-question over two alternatives, so this form covers it [belnap1976].
+In words: the associated question asks for results of the demanded type that meet the conditions on each candidate. The request fixes how many results an answer must give, and how complete they must be. A whether-question is a which-question over two alternatives, so this form covers it [belnap1976]. ^presuppositions
 
-The problem exists when its background **evokes** this question: ^gap
+The associated question carries two kinds of presupposition:
+
+- its **existence presupposition**: at least one result of the demanded type meets the conditions on each candidate;
+- its **topic presupposition**, when the demand concerns a fact, such as an explanation of a phenomenon: the fact holds, as a why-question presupposes that its topic is true [vanfraassen1980].
+
+The problem **exists** while its demand is unmet: no direct answer of $Q_\pi$ has been obtained and accepted, so that $K\nvdash_{\mathcal{M}} a$ for every direct answer $a$. ^problem-existence
+
+The problem has an **epistemic gap** when, in addition, its background establishes the existence presupposition, so that the background **evokes** the question: ^gap
 
 $$K\vdash_{\mathcal{M}} \exists s\,\big(\mathsf{type}(s)\wedge\Phi_1(s)\big)\qquad\text{and}\qquad K\nvdash_{\mathcal{M}} a\ \text{ for every direct answer } a \text{ of } Q_\pi .$$
 
@@ -93,19 +100,19 @@ In words: the accepted knowledge establishes that a result of the demanded type 
 A problem ends in one of three ways, and the [problem record](../problem.md) fixes their record values. Two of the three ways have a formal condition: ^problem-outcomes
 
 - **Solved**: a candidate of the demanded type meets the constraints and the request, and its assessment has moved it from $H$ into $K$.
-- **Dissolved**: the revised background yields the negation of the presupposition of $Q_\pi$. No result of the demanded kind exists, so no solution is needed. *Example*: the delay appears only in a thresholded accuracy, while the test loss falls from the start of training. In that case, no delay of learning exists, and the problem of explaining it dissolves.
+- **Dissolved**: the revised background yields the negation of a presupposition of $Q_\pi$, its existence presupposition or its topic presupposition. No result of the demanded kind exists, so no solution is needed. *Example*: the delay appears only in a thresholded accuracy, while the test loss falls from the start of training. In that case, no delay of learning exists, and the problem of explaining it dissolves.
 
 ## Every inquiring question presupposes a problem
 
 A question asked in order to learn its answer presupposes that its asker lacks that answer. Epistemic analyses of questions build this lack into the meaning of a question: they read a question as the request "bring it about that I know …" [aqvist1965] [hintikka1976]. Attitudes directed at a question, such as inquiring into it, are incompatible with knowing its answer [friedman2013]. ^question-presupposes-problem
 
-The question also presupposes that it has an answer. In the interrogative model of inquiry, a question may be *asked*, that is, put to a source, only once its presupposition is established [hintikka2007]. A question can be *posed* before that point. Its presupposition then remains to be established, which is the condition of soundness among the [conditions of answerability](conditions-of-answerability.md). Once the presupposition is established, the background evokes the question.
+The question also presupposes that it has an answer. In the interrogative model of inquiry, a question may be *asked*, that is, put to a source, only once its presupposition is established [hintikka2007]. A question can be *posed* before that point, and its presuppositions then remain to be established, which is the condition of soundness among the [conditions of answerability](conditions-of-answerability.md). Once the background establishes its existence presupposition, the background evokes the question.
 
 Therefore, every inquiring question $Q$ carries a **minimal problem**: ^minimal-problem
 
-$$\pi_Q=\langle K,\ d_Q,\ \varnothing\rangle .$$
+$$\pi_Q=\langle K,\ d_Q,\ \Phi_Q\rangle .$$
 
-The demand $d_Q$ takes the type and the request of $Q$, and its explicanda are the terms of $Q$ not yet specified. The associated question of $\pi_Q$ is $Q$ itself. In words: the minimal problem of a question states that the answer is lacking. The minimal problem has an epistemic gap once the presupposition of $Q$ is established, and until then the first act that it calls for establishes that presupposition.
+The demand $d_Q$ takes the type of result and the request of $Q$. Its explicanda $\Xi_Q$ are the terms of $Q$ that enter by their anchored use rather than as typed slots. The constraints $\Phi_Q$ carry the remaining specifications of $Q$ as conditions on each candidate: its subject, its contrast and its [epistemic task](../epistemic-task.md). The associated question of $\pi_Q$ is therefore $Q$ itself. In words: the minimal problem of a question states that its answer is lacking, so it exists for every inquiring question. The minimal problem has an epistemic gap once the background establishes the existence presupposition of $Q$.
 
 > [!NOTE] Questions outside inquiry
 > The asker of an examination question or of a rhetorical question already holds the answer. Such a question carries no minimal problem and serves no inquiry.
@@ -137,7 +144,7 @@ Reduction can be conjunctive: $\pi_1$ reduces to $\pi_2$ and $\pi_3$ together wh
 
 ## Distinctions
 
-- **A gap is not a problem.** The gap is the lack stated by the evocation condition. The problem adds the demand and its constraints, and these fix the result that would fill the gap.
+- **A gap is not a problem, and a problem need not have a gap.** A problem exists while its demand is unmet, and it has a gap when its background also establishes the existence presupposition. The gap states a lack, whereas the problem adds the demand and its constraints, which fix the result that would fill the gap.
 - **The explicanda of a problem and the placeholders of a question fix a term along two different dimensions.** An explicandum of a problem is *anchored*: a pointer fixes its use, and no type is given. A [placeholder](problem-and-question.md#^question-schema) is *typed*: its kind is fixed, and no referent is given. The level `identified` of a slot fixes both the type and the referent.
 - **The request is not the aim.** The request fixes how many results, and how complete, the demand asks for. The [epistemic aim](../epistemic-aim.md) fixes the kind of knowledge that a question seeks.
 - **"Epistemic problem" names the problem defined here.** The [epistemic task](../epistemic-task.md) of a question fixes the kind of knowledge that its answer must deliver. The task belongs to the question, not to the problem.
@@ -145,7 +152,7 @@ Reduction can be conjunctive: $\pi_1$ reduces to $\pi_2$ and $\pi_3$ together wh
 ## Consequences for a record
 
 - **A problem record states its demand, its constraints and its explicanda.** The fields are specified in the [problem record](../problem.md).
-- **A typed demand makes the second condition of the gap checkable over the records.** Over the accepted records of an inquiry, the condition holds when no accepted record of the demanded type gives a direct answer of $Q_\pi$.
+- **A typed demand makes the existence of a problem checkable over the records.** Over the accepted records of an inquiry, the problem exists when no accepted record of the demanded type gives a direct answer of $Q_\pi$. This condition is also the second condition of the gap.
 
 ---
 ## Sources
@@ -167,5 +174,6 @@ Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-mar
 - [medvedev1955] ◐ Medvedev, "Degrees of difficulty of mass problems", *Doklady Akademii Nauk SSSR* 104, 501–504, 1955; uniform reducibility of problems, checked through the Encyclopedia of Mathematics entry ["Finitary problem"](https://encyclopediaofmath.org/wiki/Finitary_problem)
 - [nickles1981] ◐ [Nickles, "What is a problem that we may solve it?", *Synthese* 47(1), 85–118, 1981](https://doi.org/10.1007/BF01064267); a problem as a demand together with constraints, checked through a scanned copy of poor quality
 - [polya1945] ○ Pólya, *How to Solve It*, Princeton University Press, 1945; the unknown, the data and the condition, and problems to find against problems to prove
+- [vanfraassen1980] ✓ van Fraassen, *The Scientific Image*, Clarendon Press, 1980, ch. 5; the topic of a why-question presupposed true; [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
 - [wisniewski1995] ◐ [Wiśniewski, *The Posing of Questions: Logical Foundations of Erotetic Inferences*, Kluwer, 1995](https://doi.org/10.1007/978-94-015-8406-7), ch. 5 on the evocation of questions; both definitions, evocation and erotetic implication, checked through [Wiśniewski, "Erotetic logic and explanation by abnormic hypotheses"](https://www.bu.edu/wcp/Papers/Logi/LogiWisn.htm)
 - [zhang2017] ○ Zhang, Bengio, Hardt, Recht & Vinyals, "Understanding deep learning requires rethinking generalization", *International Conference on Learning Representations*, 2017

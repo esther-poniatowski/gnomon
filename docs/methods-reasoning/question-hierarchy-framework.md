@@ -87,9 +87,9 @@ Which of these conditions are currently missing? Each missing condition yields o
 >
 > The rows of the table of obstacles below map row by row:
 > - a conceptual obstacle onto definiteness;
-> - a formal obstacle without a usable representation onto the answer type, and a formal obstacle without a measurable criterion onto discrimination;
+> - a formal obstacle without a usable representation onto the answer type, and a formal obstacle without a measurable criterion onto definiteness;
 > - a discriminative obstacle of incompatible interpretations onto definiteness, and a discriminative obstacle of equally compatible explanations onto discrimination;
-> - a tractability obstacle onto access, or onto scope when a reduced setting is studied;
+> - a tractability obstacle onto access, or onto representation when a reduced setting is studied;
 > - an interpretive obstacle onto bridging.
 
 ---

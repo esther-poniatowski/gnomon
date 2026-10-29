@@ -1,164 +1,107 @@
 # Data of the model behind `docs/epistemology/definitions/conditions-of-answerability.md` and
-# `docs/epistemology/next-act.md`. Every quotation is a fragment of the note named in `sources`, and
-# `test_answerability_model.py` checks that each fragment occurs there, so the model cannot drift from
-# the vault. Each assignment carries the reason that justifies it.
+# `docs/epistemology/next-act.md`. `test_answerability_model.py` checks three things: that each quoted
+# norm occurs in the note of its activity, that the dependency table of the conditions note states the
+# dependencies below route by route, and that the activity map of the procedure note lists the activities
+# below. The reasons are not checked; they justify each entry for a reader.
 
 sources:
-  tests: docs/epistemology/satisfaction-conditions.md
   norms: docs/epistemology/definitions/activities
-  task: docs/epistemology/epistemic-task.md
   conditions: docs/epistemology/definitions/conditions-of-answerability.md
   procedure: docs/epistemology/next-act.md
 
-# The order is topological: each condition depends only on conditions listed before it.
-conditions: [definiteness, soundness, answer type, candidates, discrimination, access, bridging, scope]
+# The conditions for obtaining an answer. The order is topological: each condition depends only on
+# conditions listed before it.
+conditions: [definiteness, answer type, soundness, candidates, discrimination, access, bridging, representation]
 
+# Keys: `both` holds on the two routes; `selection` and `construction` add the dependencies of one route.
+# A condition without a key for a route does not apply on that route.
 dependencies:
   definiteness: {both: []}
-  soundness: {both: [definiteness]}
   answer type: {both: [definiteness]}
-  candidates: {selection: [answer type, definiteness]}
+  soundness: {both: [definiteness, answer type]}
+  candidates: {selection: [answer type]}
   discrimination: {selection: [candidates]}
   access: {selection: [discrimination], construction: [answer type, definiteness]}
-  bridging: {selection: [access, answer type, discrimination], construction: [access, answer type]}
-  scope: {both: [access, answer type]}
+  bridging: {both: [access, answer type], selection: [discrimination]}
+  representation: {both: [access, answer type]}
 
-# Components of the epistemic task that the answer type fixes, named as the task note names them.
-task_components: [Epistemic aim, Requested relation, Modal strength, Admissible explanans, Required accuracy, Proof obligations]
-
-# One entry per clause of each test; the clauses of a test cover its whole text.
-tests:
-  - {test: Scope, level: admissibility, condition: answer type, reason: extent of the claim,
-     quote: "the claim ranges over the reference class of the system S, restricted by the domain D, with the quantification that each declared source of variation across instances carries"}
-  - {test: Scope, level: admissibility, condition: answer type, reason: extent of the laws,
-     quote: "laws stated over derived units hold across the whole domain D"}
-  - {test: Grain, level: admissibility, condition: answer type, reason: resolution of the answer,
-     quote: "the answer specifies the explanandum variable at the stated grain: its value set, the indices that its signature retains, and the expression or condition that fixes it"}
-  - {test: Grain, level: admissibility, condition: definiteness, reason: a term defined over the units of the answer,
-     quote: "the explanandum variable stays definable over the units that the answer uses"}
-  - {test: Contrast, level: admissibility, condition: answer type, reason: contrastive form requested,
-     quote: "the explanans favors the fact over each foil. For each foil that the question names, some factor separates the two, by citing a condition present for the fact and absent for that foil"}
-  - {test: Relation, level: admissibility, condition: answer type, reason: kind of relation requested,
-     quote: "the link between the explanans and the explanandum has the requested kind (e.g. invariance under interventions if causal, mutual manipulability if constitutive, a proof if mathematical)"}
-  - {test: Relation, level: admissibility, condition: candidates, reason: internal completeness of the candidate,
-     quote: "each factor reaches the effect that it produces through the laws and relations that it names"}
-  - {test: Individuation, level: admissibility, condition: definiteness, reason: each bearer declared or expressed,
-     quote: "every constituent that the answer treats as a bearer either references a constituent that the system declares or carries its own expression"}
-  - {test: Individuation, level: admissibility, condition: candidates, reason: consistency of the candidate with the declared system,
-     quote: "the re-individuated model agrees with the declared one on the interventions that both represent, for a causal, mechanistic or constitutive relation, and on the derivations, for a formal target"}
-  - {test: Admissible explanans, level: admissibility, condition: definiteness, reason: each quantity declared or expressed,
-     quote: "every variable and parameter of the answer either references a quantity that the system declares or carries its own expression"}
-  - {test: Admissible explanans, level: admissibility, condition: answer type, reason: bound of the task,
-     quote: "lies within the admissible explanans"}
-  - {test: Admissible explanans, level: admissibility, condition: definiteness, reason: an aggregate with a defined effect,
-     quote: "Every intervention on an aggregate also has an unambiguous effect"}
-  - {test: Modal strength, level: admissibility, condition: answer type, reason: strength claimed,
-     quote: "the answer claims the requested modal strength: realized in S (actual), consistent with the laws of S within D (possible), or excluding every foil under those laws (necessary)"}
-  - {test: Modal strength, level: admissibility, condition: scope, reason: realization in the target,
-     quote: "Whether a claim of actual strength is realized in S is decided by the warrant tests of fidelity, robustness and selection"}
-  - {test: Product, level: admissibility, condition: answer type, reason: product of the aim,
-     quote: "the answer delivers the product of the epistemic aim"}
-  - {test: Product, level: admissibility, condition: answer type, reason: specifications that the aim requires,
-     quote: "the inquiry fixes every specification that aim requires"}
-  - {test: Product, level: admissibility, condition: answer type, reason: constitutive virtues,
-     quote: "the answer holds every virtue that the question marks constitutive"}
-  - {test: Phenomenon established, level: warrant, condition: soundness, reason: presupposed phenomenon,
-     quote: "the phenomenon is established before it is explained (depending on the evidential status)"}
-  - {test: Foil evidence, level: warrant, condition: access, reason: data obtained for the foil,
-     quote: "the evidence for the contrast comes from the case of the foil (foil status)"}
-  - {test: Law warrant, level: warrant, condition: bridging, reason: warrant of the inference,
-     quote: "each law of the answer holds on the warrant that it claims"}
-  - {test: Law warrant, level: warrant, condition: bridging, reason: derived laws,
-     quote: "A law marked derived is derivable from the laws on which it rests"}
-  - {test: Law warrant, level: warrant, condition: bridging, reason: fitted and measured laws,
-     quote: "A law marked fitted or measured names its source data"}
-  - {test: Closure, level: warrant, condition: bridging, reason: inference from the admitted laws,
-     quote: "the derivation or the test matches the closure of the laws admitted about the system"}
-  - {test: Fidelity, level: warrant, condition: scope, reason: match with the target,
-     quote: "the model matches the target system within stated tolerances. The tolerances name the outputs that must match each observable, the required accuracy, and the structures that must correspond"}
-  - {test: Robustness, level: warrant, condition: scope, reason: survival of the idealizations,
-     quote: "the conclusion survives the idealizations I of the analysis"}
-  - {test: Selection, level: warrant, condition: scope, reason: extension to the class,
-     quote: "a claim about a subset of members extends to the full class only after a check for selection bias. That bias can arise exactly where the class is selected on an outcome"}
-
-# An activity establishes a condition when its output supplies the object of the condition and its
-# norm, once passed, guarantees that the condition holds; it contributes otherwise.
+# The activities that act on each condition, with the norm that the activity note states.
 activities:
-  - {id: explication, condition: definiteness, role: establishes, reason: the norm requires exactness,
+  - {id: explication, condition: definiteness, reason: it yields an exact concept,
      norm: "the explicatum is similar to the explicandum, exact, fruitful and simple"}
-  - {id: explicit-definition, condition: definiteness, role: establishes, reason: an eliminable definition is a criterion,
+  - {id: explicit-definition, condition: definiteness, reason: it yields an eliminable definition,
      norm: "eliminability: the new term can be replaced by its definition in every formula"}
-  - {id: operationalization, condition: definiteness, role: establishes, reason: an operational criterion,
+  - {id: operationalization, condition: definiteness, reason: it yields an operational criterion,
      norm: "the procedure assigns values on a stated scale"}
-  - {id: concept-revision, condition: definiteness, role: contributes, reason: the norm does not require exactness,
+  - {id: concept-revision, condition: definiteness, reason: it revises a concept,
      norm: "the revised concept covers the anomalous phenomenon and keeps the prior successes of the concept"}
-  - {id: delimitation, condition: definiteness, role: contributes, reason: formal declarations are necessary only,
+  - {id: delimitation, condition: definiteness, reason: it writes the formal declarations of the target,
      norm: "every declared constituent and every shared variable occurs in at least one admissible answer type of the question"}
-  - {id: formalization, condition: definiteness, role: contributes, reason: resolved symbols are necessary only,
+  - {id: formalization, condition: definiteness, reason: it resolves the symbols of a model,
      norm: "every symbol resolves to a declaration"}
-  - {id: phenomenon-detection, condition: soundness, role: establishes, reason: the presupposed effect is shown stable,
-     norm: "the feature is stable across independent procedures, replications included, and confounders and artefacts are controlled"}
-  - {id: derivation, condition: soundness, role: establishes, reason: a valid derivation of a formal presupposition,
-     norm: "each deductive step is valid"}
-  - {id: question-formulation, condition: answer type, role: contributes, reason: grain and extent need the specified subject,
+  - {id: question-formulation, condition: answer type, reason: it types the answer space,
      norm: "the answer space is typed, and the presuppositions of the question are stated"}
-  - {id: delimitation, condition: answer type, role: contributes, reason: it fixes the extent through the target,
+  - {id: delimitation, condition: answer type, reason: it fixes the extent through the target,
      norm: "every declared constituent and every shared variable occurs in at least one admissible answer type of the question"}
-  - {id: abduction, condition: candidates, role: contributes, reason: it proposes; admissibility is not checked,
+  - {id: phenomenon-detection, condition: soundness, reason: it shows the topic presupposition,
+     norm: "the feature is stable across independent procedures, replications included, and confounders and artefacts are controlled"}
+  - {id: derivation, condition: soundness, reason: it derives an existence presupposition,
+     norm: "each deductive step is valid"}
+  - {id: abduction, condition: candidates, reason: it proposes a candidate,
      norm: "the hypothesis is worth pursuing: it deserves testing, and its truth is not claimed"}
-  - {id: induction, condition: candidates, role: contributes, reason: it proposes,
+  - {id: induction, condition: candidates, reason: it proposes a candidate,
      norm: "the predicates of the generalization are projectible"}
-  - {id: analogical-inference, condition: candidates, role: contributes, reason: it proposes,
+  - {id: analogical-inference, condition: candidates, reason: it proposes a candidate,
      norm: "the similarities are relevant to the transferred property, and the known differences are not"}
-  - {id: causal-inference, condition: candidates, role: contributes, reason: it proposes,
+  - {id: causal-inference, condition: candidates, reason: it proposes a candidate,
      norm: "the effect is identifiable: the stated assumptions and the data determine the target quantity uniquely"}
-  - {id: decomposition-localization, condition: candidates, role: contributes, reason: it proposes,
+  - {id: decomposition-localization, condition: candidates, reason: it proposes a candidate,
      norm: "each component of the model maps onto a constituent of the target or onto a declared admissible part"}
-  - {id: model-analogy, condition: candidates, role: contributes, reason: it proposes,
+  - {id: model-analogy, condition: candidates, reason: it proposes or extends a candidate from a source model,
      norm: "the mapping preserves the relations relevant to the phenomenon, and no known difference defeats the transfer"}
-  - {id: de-idealization, condition: candidates, role: contributes, reason: it revises a candidate,
+  - {id: de-idealization, condition: candidates, reason: it corrects an idealized candidate,
      norm: "a correction to the idealized result is known"}
-  - {id: idealization, condition: candidates, role: contributes, reason: it revises a candidate,
+  - {id: idealization, condition: candidates, reason: it revises a candidate,
      norm: "the motive is stated, and the condition of its kind holds"}
-  - {id: abstraction, condition: candidates, role: contributes, reason: it revises a candidate,
+  - {id: abstraction, condition: candidates, reason: it revises a candidate,
      norm: "the omitted factors are named, and no claim of the answer bears on them"}
-  - {id: formalization, condition: candidates, role: contributes, reason: it revises a candidate,
+  - {id: formalization, condition: candidates, reason: it states a candidate in declared symbols,
      norm: "every symbol resolves to a declaration"}
-  - {id: fitting, condition: candidates, role: contributes, reason: it revises a candidate,
+  - {id: fitting, condition: candidates, reason: it fixes the parameters of a candidate,
      norm: "the estimator and the uncertainty of each estimate are stated"}
-  - {id: derivation, condition: candidates, role: contributes, reason: a derived law enters a candidate,
+  - {id: derivation, condition: candidates, reason: a derived law enters a candidate,
      norm: "each deductive step is valid"}
-  - {id: critique, condition: candidates, role: contributes, reason: objections, not an admissibility check,
+  - {id: critique, condition: candidates, reason: it names objections to a candidate,
      norm: "each objection is named with its ground"}
-  - {id: experimental-design, condition: discrimination, role: establishes, reason: the norm requires that the outcomes discriminate the rivals,
+  - {id: experimental-design, condition: discrimination, reason: its outcomes must discriminate the rivals,
      norm: "the possible outcomes discriminate the rival answers to the question: each rival predicts a different outcome"}
-  - {id: derivation, condition: discrimination, role: contributes, reason: consequences of one candidate,
+  - {id: derivation, condition: discrimination, reason: it gives the consequences of one candidate,
      norm: "each deductive step is valid"}
-  - {id: simulation, condition: discrimination, role: contributes, reason: consequences of one candidate,
+  - {id: simulation, condition: discrimination, reason: it gives the consequences of one candidate,
      norm: "verification holds: the code solves the equations of the model"}
-  - {id: prediction, condition: discrimination, role: contributes, reason: consequences of one candidate,
+  - {id: prediction, condition: discrimination, reason: it gives the consequences of one candidate,
      norm: "the values are derived from the model under the stated conditions of the target"}
-  - {id: thought-experiment, condition: discrimination, role: contributes, reason: consequences of one candidate,
+  - {id: thought-experiment, condition: discrimination, reason: it gives the consequences of one candidate,
      norm: "the conclusion follows by an argument from the premises of the scenario"}
-  - {id: experimental-design, condition: access, role: establishes, reason: the protocol is the procedure,
+  - {id: experimental-design, condition: access, reason: its output, a design, fixes the procedure that obtains the quantity,
      norm: "the possible outcomes discriminate the rival answers to the question"}
-  - {id: operationalization, condition: access, role: establishes, reason: the procedure obtains the values,
+  - {id: operationalization, condition: access, reason: it states the procedure that obtains values,
      norm: "the procedure assigns values on a stated scale"}
-  - {id: derivation, condition: bridging, role: establishes, reason: a valid linking lemma,
+  - {id: derivation, condition: bridging, reason: it derives a linking lemma,
      norm: "each deductive step is valid"}
-  - {id: background-appraisal, condition: bridging, role: establishes, reason: an auxiliary law admitted with its warrant,
+  - {id: background-appraisal, condition: bridging, reason: it admits an auxiliary law,
      norm: "each admitted law carries a warrant, an origin and a range"}
-  - {id: operationalization, condition: bridging, role: contributes, reason: a scale, not a validated measurement model,
+  - {id: operationalization, condition: bridging, reason: it states a scale, which a measurement model then validates,
      norm: "the procedure assigns values on a stated scale"}
-  - {id: testing, condition: scope, role: establishes, reason: a severe test of a prediction for the target,
-     norm: "the test is severe: it would probably have detected an error, had the hypothesis been false"}
-  - {id: robustness-analysis, condition: scope, role: contributes, reason: stability across models, not truth of the target,
-     norm: "the result holds across models whose auxiliary assumptions are independent"}
-  - {id: de-idealization, condition: scope, role: contributes, reason: stability under one correction,
-     norm: "each conclusion is shown to be stable under that correction or is corrected"}
-  - {id: transfer, condition: scope, role: contributes, reason: it outputs admitted laws, not the answer,
-     norm: "structural similarity licenses the extrapolation"}
-  - {id: validation, condition: scope, role: contributes, reason: adequacy for a purpose, not truth,
+  - {id: validation, condition: representation, reason: it judges the adequacy of a model for the purpose of the question,
      norm: "the model is adequate for that purpose"}
-  - {id: prediction, condition: scope, role: contributes, reason: values to be tested,
+  - {id: robustness-analysis, condition: representation, reason: it checks a result across models,
+     norm: "the result holds across models whose auxiliary assumptions are independent"}
+  - {id: de-idealization, condition: representation, reason: it checks stability under a known correction,
+     norm: "each conclusion is shown to be stable under that correction or is corrected"}
+  - {id: transfer, condition: representation, reason: it licenses an extrapolation between classes,
+     norm: "structural similarity licenses the extrapolation"}
+  - {id: prediction, condition: representation, reason: it gives values of the model for the target,
      norm: "the values are derived from the model under the stated conditions of the target"}
+  - {id: testing, condition: representation, reason: it tests a prediction of the model against the target,
+     norm: "the test is severe: it would probably have detected an error, had the hypothesis been false"}

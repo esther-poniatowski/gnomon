@@ -57,7 +57,7 @@ The resulting conditions must pass two tests:
 ## Types of conditions and subquestions
 
 > [!IMPORTANT] Canonical statement
-> This framework counts seven conditions: soundness, conceptual definiteness, answer space, discrimination, access, bridging and scope. They are stated, with their two routes, their states and their dependencies, in the [conditions of answerability](../epistemology/definitions/conditions-of-answerability.md), which splits the answer space into the answer type and the admissible candidates.
+> This framework counts seven conditions: soundness, conceptual definiteness, answer space, discrimination, access, bridging and scope. The conditions are stated, with their two routes, their states and their dependencies, in the [conditions of answerability](../epistemology/definitions/conditions-of-answerability.md). That note splits the answer space into the answer type and the admissible candidates, keeps only the advance part of scope under the name representation, and leaves the rest of scope to the evaluation of an obtained answer.
 
 Two further distinctions apply across all the conditions. First, sibling subquestions stand in one of three logical relations:
 
