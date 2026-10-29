@@ -16,7 +16,6 @@ The external work grounding the design of `gnomon` is recorded on its own terms,
 
 ## Problem decomposition
 
-- [Question hierarchy framework](question-hierarchy-framework.md): the criterion admitting a sub-question — its resolution must change the status of the target question — and the guidance that generates, filters and revises sub-questions during inquiry.
 - [Research gap against research problem](research-problems-vs-gap.jpg): an external figure separating what is missing in the literature from the issue that makes an investigation necessary.
 
 ## Reference formal reasoning domains
