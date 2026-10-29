@@ -109,10 +109,12 @@ idealizations:
     motive: tractability
     buys: "The idealization supplies an explicit observable of representation quality and an effective loss over embedding geometry."
     holds_for: "The idealization holds only for the toy addition architecture and for closely matched experiments. The idealization does not extend to arbitrary algorithmic tasks or architectures."
+    removable: unknown
   - assumption: "In the effective theory, the step of the decoder is infinitesimal relative to representation learning."
-    motive: isolation
+    motive: limit
     buys: "The idealization supplies a closed linear relaxation law for the normalized representation."
     holds_for: "The idealization holds in the timescale regime in which decoder motion does not alter the effective representation Hessian."
+    removable: unknown
 
 explanans:
   - name: "slow but positive relaxation of the representation"

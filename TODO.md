@@ -82,3 +82,26 @@ The Mixture pilot of `geonexus` corrected several parts of the framework while s
 		- [ ] a record kind for designs, and the activities of the pilot absent from the registry, beside the gaps listed under `inquiry-records-round-2`: comparing a derived law with a simulation;
 		- [ ] the checks of produced content, of the rationale and of revisions.
 	- [ ] Repair the indexes of `src/gnomon/data/contracts/`, `schemas/`, `specs/` and `workflow/`, which point to the missing `docs/design/methods/`.
+
+## Open issues of the model-design audits
+
+The [audits of the model design](docs/audits/_index.md) and their [synthesis](docs/audits/model-design-synth.md) left most of their issues open. The synthesis predates the [background records](docs/epistemology/background.md) and the product types, which moved the design away from its premise that the target record is the root model, so its resolution must be re-decided before it is implemented.
+
+- [ ] Repair the inconsistencies that the audits expose under the current rules, without changing the model design. 🆔 audit-local-repairs
+	- [x] Re-type the idealizations of the test cases under the current table of [idealizations and abstractions](docs/epistemology/definitions/idealization-and-abstraction.md): the infinitesimal decoder step of `grokking-delayed-generalization` is a limit, not an isolation, and each other entry takes the motive that its kind requires.
+	- [x] Align the gloss of the motive `isolation` in the answer template with the minimalist idealization that the table defines, and move to `abstractions` the omissions that the answer does not read as complete.
+	- [x] Give the laws of an answer the keys `origin` and `range` of the laws of a background, or state why they differ, and check that the two blocks keep the same keys.
+	- [ ] Resolve the symbols of answer records in the vocabulary check. A first attempt, which read an answer against the symbols of its whole problem, failed 19 tests in five answers. Two causes need a decision on the scope of an answer: `explanans.separates` names the foils of the contrast of the question, and the relations of `organization` range over index sets that the target declares. The others are defects to repair: `and` written as an operator, `jacobian` called with one argument instead of three, variables marked shared without a signature, and the variable `Nu` of `swift-hohenberg-localized-states` declared and never used.
+	- [x] Give the assessment an overall disposition, with a value for a verdict withheld, since the gates of the tests stay implicit: the [disposition](docs/epistemology/satisfaction-conditions.md#^disposition) is read from the verdicts.
+	- [x] Update the [handoff of the framework corrections](test/framework-corrections-handoff.md): pause the repairs of the templates that both audits advise against, decline the candidate that puts the domain beside the selection criteria, and point to this group.
+	- [x] Close the issues made obsolete: renaming the record kind `target-system` to `model`, against the present separation of a target specification from a model, and keeping the identifiers `system.TOPIC`, which the [dotted identifiers](docs/adr/dotted-identifiers.md) replace.
+- [ ] Revise the model design, starting from a re-decision of the resolution of the synthesis against the background records and the product types. 🆔 model-design
+	- [ ] Decide which record holds the model of a target: the target record with its admitted backgrounds, or a model record that represents the target, consistently with the [definition of a model](docs/epistemology/definitions/model.md); record the decision in an ADR.
+	- [ ] Record how a derived model relates to its parents: several parents, chains of models, and operations typed on the axes of the synthesis rather than by motive, with approximation as a category that states its regime and its class of error, and singular limits with their order.
+	- [ ] Relate a surrogate model to its target by a key of correspondence, and stop using `reference` for a stylized constituent, as in `earth-system-tipping-cascades`.
+	- [ ] Separate the model of an answer from its results, so that a derived law is a consequence and not a part of the model, with one derivation record per answer; the goal `derivation-framework` holds the record of derivations.
+	- [ ] Make the form of an answer depend on its aim, so that an explanans is required only for an explanation, and bind the values of a candidate to the outputs of the phenomenon.
+	- [ ] Record a refined phenomenon as a derived phenomenon that references the model declaring its observables, leaving the original intact.
+	- [ ] Give an answer the domain of its claim, and check that domain along the chain of models, with the origin of each symbol and the propagation of warrants.
+	- [ ] Pilot the design on contrasting test cases before any migration, ratify the resolutions of the synthesis, and amend the [flat symbol table](docs/adr/flat-symbol-table.md) for the symbols visible across parents.
+

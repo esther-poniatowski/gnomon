@@ -24,6 +24,8 @@ The first two levels *filter* the answers that *satisfy* the research question:
 $$\mathrm{Sat}(M\mid Q)=\mathrm{Admissible}(M\mid Q)\wedge\mathrm{Warranted}(M\mid Q)$$
 The third level, by contrast, *appraises* only the answers that already pass, one at a time.
 
+The **disposition** of an assessment follows from its verdicts at the first two levels. The disposition is `not-satisfied` when one test fails, `withheld` when no test fails and one is pending, and `satisfied` when every test passes or does not apply. The disposition is read from the verdicts, not recorded beside them, so the two cannot disagree. ^disposition
+
 Each test derives from a filled specification, so an empty specification removes its test, whose verdict is then `not-applicable`. A specification left open on purpose, with the maturity `open`, differs from an empty one: it is still to be fixed, so its test stays `pending` until the specification is narrowed.
 
 > [!WARNING] Redundancy

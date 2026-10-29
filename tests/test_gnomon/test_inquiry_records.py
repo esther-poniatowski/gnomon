@@ -18,6 +18,7 @@ import yaml
 from gnomon.completeness import (
     admitted_values,
     inadmissible_values,
+    disposition,
     malformed_credence,
     mismatched_occurrence,
     occurrence_by_category,
@@ -226,3 +227,14 @@ def test_a_placeholder_whose_type_does_not_fit_its_slot_is_reported() -> None:
     question["subject"] = {"target_system": {"placeholder": "system", "description": "networks of the benchmark"},
                            "phenomenon": {"placeholder": "phenomenon", "description": "their geometry"}}
     assert unresolved_slots(question, {}, TYPES) == []
+
+
+def test_the_dispositions_of_the_fixture_assessments() -> None:
+    """Each fixture assessment has a determinate disposition, and the cases with a failed test are not satisfied."""
+    root = Path(__file__).resolve().parents[2] / "test"
+    found = {}
+    for path in sorted(root.glob("*/assessment.yml")):
+        found[path.parent.name] = disposition(yaml.safe_load(path.read_text(encoding="utf-8")))
+    assert set(found.values()) <= {"satisfied", "not-satisfied", "withheld"}
+    assert found["grokking-delayed-generalization"] == "not-satisfied"
+

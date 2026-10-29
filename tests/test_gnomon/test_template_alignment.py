@@ -360,3 +360,11 @@ def test_the_occurrence_table_of_the_phenomenon_note_is_the_registry() -> None:
         documented[cells[0].strip("`")] = re.findall(r"`([a-z-]+)`", cells[1])
     declared = yaml.safe_load((REGISTRY / "requirements.yml").read_text())["occurrence_by_category"]
     assert documented == declared
+
+
+def test_the_laws_of_an_answer_take_the_keys_of_the_laws_of_a_background() -> None:
+    """An answer states its laws in background form, so its law entries carry every key of a background law."""
+    answer_keys = set(template("answer.yml")["laws"][0])
+    background_keys = set(template("background.yml")["laws"][0])
+    assert background_keys <= answer_keys, sorted(background_keys - answer_keys)
+

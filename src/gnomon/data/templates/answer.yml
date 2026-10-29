@@ -71,6 +71,8 @@ laws:                            # L: dependences linking the quantities to the 
     reading: "THE LAW IN WORDS"
     warrant:                     # derived (from the admitted background laws) | derived-in-a-limit | posited | fitted | measured
     rests_on: "THE LAWS, THE IDEALIZATION OR THE DATA THAT THE WARRANT REFERS TO"   # may name laws of an admitted background record
+    origin: "POINTER TO THE SOURCE OF THE LAW: A PUBLICATION, A DATA SET OR A DERIVATION"
+    range: "EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE LAW IS ESTABLISHED"   # omit when the law is established across the whole reference class
 
 organization:                    # O: relations among parts and laws whose arrangement produces the behavior
   - name: "NAME OF THE RELATION"
@@ -91,7 +93,7 @@ realizations:                    # fill when the question asks for a link: how s
 
 idealizations:                   # I: distortions the analysis introduces, including an omission that the answer reads as complete
   - assumption: "ASSUMPTION OF THE ANALYSIS"
-    motive:                      # tractability (the undistorted system resists analysis) | isolation (it removes a factor judged irrelevant) | limit (it exposes the behavior of a limit system)
+    motive:                      # tractability (the undistorted system resists analysis) | isolation (an omission read as complete: the omitted factors make no difference to the phenomenon) | limit (it exposes the behavior of a limit system)
     buys: "THE GAIN FOR THE ANSWER"   # a derivation the idealization makes possible, or a factor it exposes
     holds_for: "RANGE OVER WHICH THE ASSUMPTION HOLDS"
     removable:                   # controlled (a correction to the idealized result is known) | ineliminable (the model cannot be stated without it) | unknown

@@ -79,6 +79,7 @@ idealizations:
     motive: tractability
     buys: "The idealization makes possible the numerical continuation of localized profiles and of their temporal eigenvalues."
     holds_for: "The idealization holds for profiles whose tails decay before the numerical boundary. The branches of these profiles must also stay unchanged when the domain is enlarged."
+    removable: unknown
 
 explanans:
   - name: "classification of the connectivity of branches by continuation"

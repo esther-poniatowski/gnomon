@@ -35,7 +35,7 @@ vocabularies:
     - value: tractability
       name: the undistorted system resists analysis
     - value: isolation
-      name: it removes a factor judged irrelevant
+      name: an omission read as complete, whose omitted factors make no difference to the phenomenon
     - value: limit
       name: it exposes the behavior of a limit system
     idealizations.removable:

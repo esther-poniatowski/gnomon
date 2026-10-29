@@ -10,7 +10,7 @@ aliases:
 The inquiry records form a small modeling language: each declared quantity carries a symbol, and every formula is an expression over those symbols. Two ratified stages brought the records there, and both are complete across the seven filled problems. The [expression language](../docs/epistemology/symbols-and-expressions.md) owns their contract. ^stages
 
 > [!TIP] Next action
-> Repair the answer and assessment templates, closing the [validation and representation gaps](answer-assessment-template-issues.md) that the six trials exposed.
+> Hold the repair of the answer and assessment templates. Both [audits of the model design](../docs/audits/_index.md) advise against repairing the [validation and representation gaps](answer-assessment-template-issues.md) locally before the model design is revised. The local repairs and the revision are tracked in the [project goals](../TODO.md), under the open issues of the model-design audits.
 
 ## Task state
 
@@ -18,7 +18,7 @@ Seven theoretical inquiries each fill the three inquiry records, and six of them
 
 | State | Stage | Action | Approval gate |
 | --- | --- | --- | --- |
-| `pending` | **Answer and assessment templates** | Repair the validation and representation gaps that the six trials exposed. | Every gap is closed, or the designer declines it on the record. |
+| `paused` | **Answer and assessment templates** | Repair the validation and representation gaps that the six trials exposed. | The revision of the model design settles the gaps that depend on it, and the designer closes or declines the others on the record. |
 | `pending` | **Remaining candidates** | Review the candidates that the classification record still holds as pending. | Each carries one review state and one owner. |
 
 ## Classification record
@@ -29,7 +29,6 @@ Each candidate carries one review state, assigned by the designer. The candidate
 | --- | --- | --- | --- |
 | Scoped virtues | Shared schema | `pending` | Reduced: a virtue can now name a symbol and a scope entry, both declared. |
 | Provenance | Shared schema | `pending` | Not addressed. |
-| Domain moved beside the selection criteria | Shared schema | `pending` | Proposed: the domain restricts the same specification that the criteria select on, so both belong to the target. |
 | Contrast moved into the phenomenon | Shared schema | `pending` | Proposed: the foils are values of an explanandum variable that the phenomenon declares. |
 | Option cells of the notes checked against the registry | Shared schema | `pending` | Still blocked: a note cell carries a gloss and the template writes a token, so `class of actual systems` and `class-actual` compare only once the note cells carry both. |
 | The five choices local to the cases | Local case | `pending` | Unchanged. Each requires a decision from the designer. |
@@ -112,6 +111,7 @@ Decisions that later work must respect are recorded apart, in the [architecture 
 | 2026-09-24 | Keep the vocabulary of factors, and let each bear on several elements. | The earlier reading that the vocabulary restates `bears_on` was mistaken. A `law-property` is a property of a law, such as invariance, additivity or factorization. No record names a law property before an answer uncovers one. Each kind names the object that carries the factor, and a property of a family bears on each of its members. |
 | 2026-09-24 | Check the warrant that a law claims, beyond recording it in a field. | The decision that a warrant propagates to every result resting on it has no force unless a check confirms that each law marked derived follows from its premises. Without that check, the field would record only an intention. |
 | 2026-09-25 | Rename the opaque option values and the reference keys of an assessment. | Each value now names what it selects: `class-actual` and `class-possible` became `actual-systems` and `possible-systems`, `parameter-draw` and `structure-draw` became `random-parameters` and `random-structure`, `link` became `mapping`, and `function` became `functional`, the only noun among the adjectives of the requested relation. The keys `assesses` and `against` became `answer` and `question`, like the reference keys of the other records. |
+| 2026-10-29 | Decline moving the domain beside the selection criteria. | The record that imposes a restriction holds it: the criteria select the reference class of the target, whereas the domain restricts the claim of a question. The two share an entry shape and differ in owner, as the [synthesis of the model-design audits](../docs/audits/model-design-synth.md) concludes. |
 
 ## Synchronization debt
 

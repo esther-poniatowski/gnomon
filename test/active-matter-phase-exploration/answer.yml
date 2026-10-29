@@ -71,13 +71,15 @@ realizations: []
 
 idealizations:
   - assumption: "The stochastic increments are neglected in the classification near onset."
-    motive: isolation
+    motive: tractability
     buys: "The idealization yields a deterministic bifurcation problem whose stationary and oscillatory instabilities can be separated spectrally."
     holds_for: "The idealization holds in regimes in which fluctuations do not destroy or reorder the deterministic phases."
+    removable: unknown
   - assumption: "The dynamics are reduced to weak amplitudes about a homogeneous ordered state."
-    motive: tractability
+    motive: limit
     buys: "The idealization yields a finite-dimensional normal form and a phase catalogue near the instability."
     holds_for: "The idealization holds for the continuum subfamily sufficiently close to the bifurcation studied in the cited analysis."
+    removable: unknown
 
 explanans:
   - name: "nonreciprocal spectral instability"

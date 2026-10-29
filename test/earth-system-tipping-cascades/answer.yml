@@ -80,10 +80,12 @@ idealizations:
     motive: tractability
     buys: "The idealization makes possible an ensemble forecast over the uncertainty in thresholds, timescales, and couplings."
     holds_for: "The idealization holds for the qualitative propagation of risk in the stylized network of four elements. The idealization does not cover calibrated dynamics of the actual subsystems."
+    removable: unknown
   - assumption: "The prescribed trajectory of global temperature receives no feedback from the modelled subsystem transitions."
-    motive: isolation
+    motive: tractability
     buys: "The idealization makes possible paired simulations, with and without overshoot, in which the forcing is held fixed from outside."
     holds_for: "The idealization holds for scenario comparisons that neglect the feedback of the transitions on global mean temperature."
+    removable: unknown
 
 explanans:
   - name: "time spent above the convergence temperature"
