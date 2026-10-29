@@ -66,7 +66,7 @@ Two devices limit the revisions that an iteration requires:
 - **Least commitment.** A choice is deferred until a condition requires it, so fewer choices need revision [weld1994]. A placeholder kept in a question schema is a deferred choice.
 - **Recorded dependencies.** Each record keeps pointers to the versions from which it was derived. When a version is withdrawn, only the records that depend on it are marked for review. A truth-maintenance system revises beliefs in this way [doyle1979], and dependency-directed backtracking revises assumptions in the same way [stallman1977]. These pointers complement the trigger of condition 2: the trigger states why a revision occurred, and the pointers state which records the revision reaches. The [register of serving questions](question-decomposition.md#^register) records such dependencies, by the hypothesis on which each serving question is conditioned.
 
-The records of gnomon do not keep versions yet. In particular, a plan step cannot reference a record at the state that the record had when the step ran, and the [project goals](../../TODO.md) list this missing reference as `as_of`.
+The records of gnomon do not keep versions yet. In particular, an itinerary step cannot reference a record at the state that the record had when the step ran, and the [project goals](../../TODO.md) list this missing reference as `as_of`.
 
 ## Restarting from existing results
 

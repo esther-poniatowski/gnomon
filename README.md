@@ -44,7 +44,7 @@ The vocabulary of the framework is declared in **registries**, written by hand a
 - the admitted values of each closed field;
 - the requirements of each level of commitment and of each epistemic aim;
 - the canonical operators;
-- the epistemic activities, with the types of artifact that each takes and produces.
+- the epistemic activities, with the types of product that each takes and produces.
 
 Each declaration is documented in the method notes.
 
@@ -64,7 +64,7 @@ The framework has been validated against seven real research problems, each fill
 - [x] Resolves every symbol, reference and formula of a research problem, and reports each identifier that resolves to no declaration.
 - [x] Checks each filled record against the requirements of its epistemic aim, and each closed field against its registry.
 - [x] Collects the symbols and the operators of a research problem into one table.
-- [x] Checks each step of a plan of inquiry against the registry of epistemic activities.
+- [x] Checks each step of an itinerary of inquiry against the registry of epistemic activities.
 - [ ] Scaffolds a research workspace from a standard template.
 - [ ] Validates registry files against schemas.
 - [ ] Reports the inferential position of a workspace: established results, open questions, blocked entries.

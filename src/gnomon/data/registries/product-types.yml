@@ -1,29 +1,29 @@
-# Registry of the types of epistemic artifact: the closed list of the inputs and the outputs of
-# the epistemic activities. The plan check reads this registry, and the overview of the activity
+# Registry of the types of epistemic product: the closed list of the inputs and the outputs of
+# the epistemic activities. The itinerary check reads this registry, and the overview of the activity
 # taxonomy documents the list (`docs/epistemology/definitions/activities/epistemic-activities.md`).
 #
 # The list derives from the taxonomy, not from the records of the framework. When no record kind
 # holds a type yet, the type stays in the list, marked `to-create`, so that the records are
 # extended to match it.
 #
-# Each entry names the record kinds that hold an artifact of the type, and the field that holds it
+# Each entry names the record kinds that hold a product of the type, and the field that holds it
 # when only a part of a record does. Its status states how far the records cover the type:
 #   - `exists`: a record kind holds the type in full;
 #   - `partial`: a record holds part of the type, and the condition names the missing part;
-#   - `to-create`: no record kind holds the type, so a plan reaches it only as the output of a step.
+#   - `to-create`: no record kind holds the type, so an itinerary reaches it only as the output of a step.
 # `record: external pointer` marks a type held outside the records and reached by a pointer.
 # A `when` mapping states the state in which a record of a listed kind holds the type:
 #   - `commitment`: the admitted levels of commitment of the record;
 #   - `slots`: `placeholder` when some subject slot of a question holds a placeholder, `identified`
 #     when every slot names a record;
 #   - `status`: the admitted statuses of the record.
-# The plan check computes the type of a referenced record from its kind and its state. A
+# The itinerary check computes the type of a referenced record from its kind and its state. A
 # `condition` states in words the part of the type that the fields of a record hold.
 
-id: registry.artifact-types
-type: artifact-type-registry
+id: registry.product-types
+type: product-type-registry
 
-artifact_types:
+product_types:
   - id: source
     record: external pointer
     status: exists

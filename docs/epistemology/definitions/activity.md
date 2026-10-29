@@ -17,7 +17,7 @@ source:
 - a producer of change in a mechanism;
 - an aspectual class of predicates;
 - in neuroscience, a state variable;
-- in a plan of inquiry, an epistemic act.
+- in an itinerary of inquiry, an epistemic act.
 
 Only the first sense is specific to mechanistic explanation. This note fixes the relations of that sense to the neighboring terms.
 

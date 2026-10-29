@@ -55,7 +55,7 @@ The demand states the result sought:
 
 $$d=\langle\mathsf{type},\ \mathsf{req},\ \Xi\rangle .$$
 
-- $\mathsf{type}$, the **type of result**: one of the [artifact types](activities/epistemic-activities.md#^artifact-types), such as a phenomenon, a model, a consequence, an explanation or a concept.
+- $\mathsf{type}$, the **type of result**: one of the [product types](activities/epistemic-activities.md#^product-types), such as a phenomenon, a model, a consequence, an explanation or a concept.
 - $\mathsf{req}$, the **request**: how many results, and of which completeness, the demand asks for. The request takes one of four values:
   - `one`: one result suffices (find one network that implements a given input–output map);
   - `all`: every result is required (characterize all the fixed points of a network);

@@ -167,7 +167,7 @@ PAIRS = [
         "",
         {**ELSEWHERE_MATURITY, "answer": "satisfaction-conditions.md", "question": "satisfaction-conditions.md"},
     ),
-    ("plan", "plan.md", "| Specification", "plan.yml", None, "", {}),
+    ("itinerary", "itinerary.md", "| Specification", "itinerary.yml", None, "", {}),
 ]
 
 IDS = [pair[0] for pair in PAIRS]
@@ -256,7 +256,7 @@ REQUIREMENT_CELLS = {"always": "always", "from `identified`": "identified", "fro
         ("phenomenon", "phenomenon.md"),
         ("background", "background.md"),
         ("problem", "problem.md"),
-        ("plan", "plan.md"),
+        ("itinerary", "itinerary.md"),
     ],
 )
 def test_the_requirement_rows_of_a_note_are_the_registry_entries(kind: str, note: str) -> None:
@@ -289,7 +289,7 @@ def test_the_requirement_rows_of_a_note_are_the_registry_entries(kind: str, note
         "question.yml",
         "answer.yml",
         "assessment.yml",
-        "plan.yml",
+        "itinerary.yml",
     ],
 )
 def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:

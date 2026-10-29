@@ -1,5 +1,5 @@
 # Registry of the epistemic activities, one entry per activity of the taxonomy.
-# The plan check reads this registry. The notes of `docs/epistemology/definitions/activities/`
+# The itinerary check reads this registry. The notes of `docs/epistemology/definitions/activities/`
 # state each activity with its norm, and this registry transcribes their identifiers, their types
 # and their attributes.
 #
@@ -7,13 +7,13 @@
 # bears on what is asked, known or warranted. Each activity has exactly one output type, and that
 # type fixes the family of the activity. Activities of one family differ by their norm.
 #
-# Each input names an artifact type of `artifact-types.yml`, written as the family notes write it.
+# Each input names a product type of `product-types.yml`, written as the family notes write it.
 # A bare type takes one record of that type. A mapping adds qualifiers:
 #   - `several: true` (two or more records of the type) or `count` (an exact number of records);
 #   - `role`: the part played by the record, stated in the note of the family;
 #   - `types`: alternative types, written `a | b` in the notes, of which the step takes one record.
-# `norm` names the test that judges an instance of the activity, and a plan records its verdict.
-# `mode` names the inference that the activity performs, from the modes listed under `plan` in
+# `norm` names the test that judges an instance of the activity, and an itinerary records its verdict.
+# `mode` names the inference that the activity performs, from the modes listed under `itinerary` in
 # `../vocabularies.yml`. `context` states whether the activity serves discovery, justification,
 # or both.
 

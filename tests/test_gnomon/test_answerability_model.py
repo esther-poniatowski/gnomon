@@ -137,8 +137,8 @@ def test_dependency_table_of_the_conditions_note_matches_the_model(route: str) -
 
 
 def test_record_facts_cited_by_the_example() -> None:
-    plan = yaml.safe_load((CASE / "plan.yml").read_text(encoding="utf-8"))
-    verdicts = {step["id"]: step["norm"]["verdict"] for step in plan["steps"]}
+    itinerary = yaml.safe_load((CASE / "itinerary.yml").read_text(encoding="utf-8"))
+    verdicts = {step["id"]: step["norm"]["verdict"] for step in itinerary["steps"]}
     cited = ("pose", "formulate", "identify", "propose", "derive", "admit", "check", "test")
     assert {k: verdicts[k] for k in cited} == {
         "pose": "pass", "formulate": "pass", "identify": "pass", "propose": "pass",

@@ -15,7 +15,7 @@ The templates are filled in this order:
 Two templates stand outside this order:
 
 - `operators.yml`, filled once per problem as soon as a formula requires an operator beyond the canonical set. It declares every such operator that the records of the problem need.
-- `plan.yml`, filled once per plan of inquiry and revised as the inquiry proceeds. It records each step as an instance of a registered epistemic activity, and `gnomon plan` checks the steps against the registries.
+- `itinerary.yml`, filled once per itinerary of inquiry and revised as the inquiry proceeds. It records each step as an instance of a registered epistemic activity, and `gnomon itinerary` checks the steps against the registries.
 
 A target system and a phenomenon can be recorded at commitment `identified`, with a definite description and pointers, before their quantities are declared. A question can name a placeholder in place of either record.
 

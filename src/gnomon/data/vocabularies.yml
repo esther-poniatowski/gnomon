@@ -356,7 +356,7 @@ vocabularies:
       name: the problem concerns the objects of a domain
     - value: conceptual
       name: the problem concerns the consistency of a theory or its fit with other theories
-  plan:
+  itinerary:
     .status:
     - value: planned
     - value: in-progress

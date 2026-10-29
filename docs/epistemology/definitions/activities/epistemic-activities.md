@@ -6,25 +6,25 @@ aliases:
   - Epistemic activities
   - Taxonomy of epistemic activities
   - Activity record
-  - Artifact types
-  - Plan check
+  - Product types
+  - Itinerary check
 tags: []
 source:
 ---
 # Epistemic activities
 
-> [!QUESTION] Goal: which operations of an inquiry count as epistemic, and how is each typed so that a research plan can be checked as a composition of typed steps?
+> [!QUESTION] Goal: which operations of an inquiry count as epistemic, and how is each typed so that a research itinerary can be checked as a composition of typed steps?
 
-Each **epistemic activity** of an inquiry is typed by its inputs, its output and its norm. These types serve one purpose: a research plan can be checked step by step.
+Each **epistemic activity** of an inquiry is typed by its inputs, its output and its norm. These types serve one purpose: a research itinerary can be checked step by step.
 
 > [!IMPORTANT] Notes and registries
-> The taxonomy is a synthesis proposed by this method. Each family note cites the sources of its activities one by one. The notes are the source of the content: the [registry of activities](../../../../src/gnomon/data/registries/activities.yml) and the [registry of artifact types](../../../../src/gnomon/data/registries/artifact-types.yml) transcribe them. Therefore, a change must start in the notes.
+> The taxonomy is a synthesis proposed by this method. Each family note cites the sources of its activities one by one. The notes are the source of the content: the [registry of activities](../../../../src/gnomon/data/registries/activities.yml) and the [registry of product types](../../../../src/gnomon/data/registries/product-types.yml) transcribe them. Therefore, a change must start in the notes.
 
 ## Criterion of an epistemic activity
 
 An operation of an inquiry counts as epistemic when its output is an **epistemic object**: a representation whose content bears on the questions, the knowledge or the warrants of an inquiry. ^epistemic-criterion
 
-The [artifact types](#^artifact-types) enumerate these objects, from the problem that opens an inquiry to the change of attitude that closes one of its cycles. The criterion tests only the output of an activity, not the record kinds available today. Therefore, when the output of an activity has no record kind yet, the activity is still epistemic, and its output type is marked as a gap.
+The [product types](#^product-types) enumerate these objects, from the problem that opens an inquiry to the change of attitude that closes one of its cycles. The criterion tests only the output of an activity, not the record kinds available today. Therefore, when the output of an activity has no record kind yet, the activity is still epistemic, and its output type is marked as a gap.
 
 Three borderline operations receive no activity type of their own:
 
@@ -36,7 +36,7 @@ Three borderline operations receive no activity type of their own:
 
 An activity type is specified by its **signature**: ^activity-criterion
 
-- the types of its **inputs**, drawn from the [artifact types](#^artifact-types);
+- the types of its **inputs**, drawn from the [product types](#^product-types);
 - the type of its **output**, exactly one, drawn from the same list;
 - the **operation** that turns the inputs into the output;
 - the **norm**, a named test stating when the output is correct or adequate;
@@ -55,11 +55,11 @@ Three attributes take their values from closed lists: ^attribute-vocabularies
 
 | Attribute | Values | Assigned to |
 | --- | --- | --- |
-| Verdict of the norm | `pass`, `fail`, `pending` | each step of a plan |
+| Verdict of the norm | `pass`, `fail`, `pending` | each step of an itinerary |
 | Mode | `deductive`, `inductive`, `abductive`, `analogical`, `non-inferential` | each activity type |
 | Context | `discovery`, `justification`, `both` | each activity type |
 
-- **The norm is a named test.** The test of an activity takes the id `norm.<activity-id>`, such as `norm.fitting`. Each step of a plan records the verdict of that test: `pending` before the test runs, then `pass` or `fail`.
+- **The norm is a named test.** The test of an activity takes the id `norm.<activity-id>`, such as `norm.fitting`. Each step of an itinerary records the verdict of that test: `pending` before the test runs, then `pass` or `fail`.
 - **The mode `non-inferential` covers operations that draw no inference.** Observation and formalization are examples.
 - **The context is assigned to each activity type.** A family does not fix it: model-building holds activities of discovery, such as idealization, and of justification, such as fitting. An activity of discovery outputs a candidate, and an activity of justification judges or warrants one [reichenbach1938]. The division is contested: the reasoning that generates hypotheses follows patterns that can be analyzed [hanson1958] [simon1973]. The value `both` marks an activity whose norm serves either context, such as classification.
 
@@ -75,7 +75,7 @@ Three candidate taxonomies were compared on one requirement: every activity of a
 
 ## Families
 
-Each family groups the activities whose output types belong to one class of artifact types. Each artifact type is the output of one family only, so the output type of an activity fixes its family. Within one family, when two activities share an output type, they differ by their norm. ^families
+Each family groups the activities whose output types belong to one class of product types. Each product type is the output of one family only, so the output type of an activity fixes its family. Within one family, when two activities share an output type, they differ by their norm. ^families
 
 | Family | Output types |
 | --- | --- |
@@ -93,9 +93,9 @@ The type `source` is the output of no activity, since a source enters an inquiry
 
 The partition by output type has two consequences for borderline activities. First, when the output of an activity is a model, the activity belongs to model-building, regardless of its mode and its context. Second, revision outputs only changes of attitude or of status across existing records, so a new model is never the output of a revision.
 
-## Artifact types
+## Product types
 
-The artifact types form a closed list. Each type classifies the epistemic objects taken or produced by activities. Each type also maps onto the record kind of gnomon that holds its objects. When no record kind holds a type, the type is a gap marked `to-create`. In that case, the records must be extended to match the taxonomy. ^artifact-types
+The product types form a closed list. Each type classifies the epistemic objects taken or produced by activities. Each type also maps onto the record kind of gnomon that holds its objects. When no record kind holds a type, the type is a gap marked `to-create`. In that case, the records must be extended to match the taxonomy. ^product-types
 
 | Type | Epistemic object | Record | Status |
 | --- | --- | --- | --- |
@@ -122,7 +122,7 @@ The artifact types form a closed list. Each type classifies the epistemic object
 | `inter-theory-relation` | a relation of unification, reduction or integration between [theories](../theory.md) | `to-create` | to-create |
 | `knowledge-state-change` | a change of the attitude or of the status of existing records | changes of the record `status`; a revision log is to create | partial |
 
-A theory enters an activity as a `model`, read as a class of models. A framework changes only through the verdicts that motivate the change, so no artifact type names a framework.
+A theory enters an activity as a `model`, read as a class of models. A framework changes only through the verdicts that motivate the change, so no product type names a framework.
 
 ## Distinctions
 
@@ -138,7 +138,7 @@ Four terms describing an inquiry are often used for one another:
 The word *explanation* names three objects, each owned by one note: ^explanation-senses
 
 - the **activity** of explanation shows that an explanans bears the requested relation to a phenomenon, as typed in the note on [explanation and integration](explanation-and-integration.md);
-- the **product** is a claim, defined in the note on [claims](../claim-and-hypothesis.md) and held by the artifact type `explanation`;
+- the **product** is a claim, defined in the note on [claims](../claim-and-hypothesis.md) and held by the product type `explanation`;
 - the **aim** of explanation is the achievement sought by an inquiry that asks why or how, fixed by the [epistemic aim](../../epistemic-aim.md).
 
 ## Relations among activities
@@ -148,13 +148,13 @@ Two relations hold among activities across the families:
 - **Inverse pairs**: several activities undo or mirror one another. On one theory of learning, four pairs of inverse operations organize learning as a search through a space of knowledge: generalization and specialization, abstraction and concretion, explanation and prediction, similization and dissimilization [michalski1993]. Two further pairs concern the activities of this folder: decomposition and composition, and the expansion and contraction of a belief state [alchourron1985].
 - **Iteration**: an activity, or a cycle of activities, may take its own earlier output as input. For example, successive standards of temperature were each used to refine the next, so that the iteration improved a measurement without a fixed foundation [chang2004]. The discovery of mechanisms likewise cycles through characterizing the phenomenon, constructing a schema, evaluating it and revising it [craver2013].
 
-## Activity record and plan check
+## Activity record and itinerary check
 
-> [!NOTE] The activity record and the plan check are proposals of this method
+> [!NOTE] The activity record and the itinerary check are proposals of this method
 
-A step of a research plan instantiates one activity type. The [plan record](../../plan.md) states each step by its activity and its signature, with the verdict of its norm.
+A step of a research itinerary instantiates one activity type. The [itinerary record](../../itinerary.md) states each step by its activity and its signature, with the verdict of its norm.
 
-A plan passes the **plan check** when five conditions hold: ^plan-check
+An itinerary passes the **itinerary check** when five conditions hold: ^itinerary-check
 
 - every step names an activity listed in the registry of activities;
 - the input types and the output type of each step equal those of its activity;
@@ -162,11 +162,11 @@ A plan passes the **plan check** when five conditions hold: ^plan-check
 - the steps, linked by their input references, form a directed acyclic graph;
 - every verdict is `pass`, `fail` or `pending`.
 
-The plan record adds checks of its own fields, such as unique step identifiers, stated with the [record checks of a plan](../../plan.md#^record-checks).
+The itinerary record adds checks of its own fields, such as unique step identifiers, stated with the [record checks of an itinerary](../../itinerary.md#^record-checks).
 
-The type of a referenced record follows from its state, as the [record column of the artifact types](#^artifact-types) states. For a question record, the state is the commitment of its slots. With a placeholder slot, the record has type `question-schema`. With every slot at commitment `identified` or above, the record has type `question`. Therefore, a schema becomes a question when [subject identification](problem-posing.md) raises its slots, and no activity of its own is needed.
+The type of a referenced record follows from its state, as the [record column of the product types](#^product-types) states. For a question record, the state is the commitment of its slots. With a placeholder slot, the record has type `question-schema`. With every slot at commitment `identified` or above, the record has type `question`. Therefore, a schema becomes a question when [subject identification](problem-posing.md) raises its slots, and no activity of its own is needed.
 
-The check matches types only, so a plan that passes it is well formed. The success of each step is decided separately, by the verdict of its norm. Each step has the form of an action schema in [classical planning](../../../methods-reasoning/ai-planning-pddl.md): the input types play the part of preconditions, and the output type plays the part of an effect. A step can decompose into sub-steps, as a compound task does in [hierarchical task network planning](../../../methods-reasoning/hierarchical-task-network-planning.md).
+The check matches types only, so an itinerary that passes it is well formed. The success of each step is decided separately, by the verdict of its norm. Each step has the form of an action schema in [classical planning](../../../methods-reasoning/ai-planning-pddl.md): the input types play the part of preconditions, and the output type plays the part of an effect. A step can decompose into sub-steps, as a compound task does in [hierarchical task network planning](../../../methods-reasoning/hierarchical-task-network-planning.md).
 
 ---
 ## Sources

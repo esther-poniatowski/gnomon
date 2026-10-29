@@ -551,7 +551,7 @@ def records_of(directory: Path) -> dict[str, Any]:
         "target-system": "target-system.yml",
         "background": "background.yml",
         "problem": "problem.yml",
-        "plan": "plan.yml",
+        "itinerary": "itinerary.yml",
     }
     return {
         prefix: yaml.safe_load((directory / name).read_text(encoding="utf-8"))

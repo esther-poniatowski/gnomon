@@ -22,7 +22,7 @@ always:
   phenomenon: [commitment]
   background: [describes, laws, closure]
   problem: [statement, kind, demand]
-  plan: [addresses, steps]
+  itinerary: [addresses, steps]
 
 by_commitment:
   identified:

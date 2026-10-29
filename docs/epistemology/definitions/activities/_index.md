@@ -17,7 +17,7 @@ source:
 
 ## Criterion and design
 
-- [Epistemic activities](epistemic-activities.md): decides whether an operation is epistemic, and types it so that a research plan can be checked
+- [Epistemic activities](epistemic-activities.md): decides whether an operation is epistemic, and types it so that a research itinerary can be checked
 
 ## Families
 

@@ -1,14 +1,14 @@
 """
-Plans of inquiry, checked against the registries of epistemic activities and artifact types.
+Itineraries of inquiry, checked against the registries of epistemic activities and product types.
 
-A plan lists activity instances, its steps. Each step names a registered activity, the artifacts
-that it takes and the artifact that it produces, each typed by the registry of artifact types, and
+An itinerary lists activity instances, its steps. Each step names a registered activity, the products
+that it takes and the product that it produces, each typed by the registry of product types, and
 the verdict of the norm that judges it. Two registries in package data declare what a step may
 state, so no check here reads a document:
 
 - ``registries/activities.yml``: per activity, its family, its input and output types, its norm,
   its mode and its context;
-- ``registries/artifact-types.yml``: per artifact type, the record kinds that hold it, and the
+- ``registries/product-types.yml``: per product type, the record kinds that hold it, and the
   state in which a record of such a kind holds it.
 
 The check is decidable. It compares types and identifiers, and never judges whether a norm is met:
@@ -17,7 +17,7 @@ the verdict records that judgement.
 See Also
 --------
 data/registries/activities.yml : the activities a step may instantiate.
-data/registries/artifact-types.yml : the types its inputs and output take.
+data/registries/product-types.yml : the types its inputs and output take.
 """
 
 from __future__ import annotations
@@ -34,8 +34,8 @@ DATA = Path(__file__).parent / "data"
 #: The registry declaring the epistemic activities.
 ACTIVITY_REGISTRY = DATA / "registries" / "activities.yml"
 
-#: The registry declaring the types of epistemic artifact.
-ARTIFACT_TYPE_REGISTRY = DATA / "registries" / "artifact-types.yml"
+#: The registry declaring the types of epistemic product.
+PRODUCT_TYPE_REGISTRY = DATA / "registries" / "product-types.yml"
 
 #: The registry declaring the values each closed field admits, including the verdicts and modes.
 VOCABULARY_REGISTRY = DATA / "vocabularies.yml"
@@ -54,7 +54,7 @@ class Slot:
     Attributes
     ----------
     types : frozenset of str
-        The artifact types the input may take; more than one when the activity admits any of them.
+        The product types the input may take; more than one when the activity admits any of them.
     least : int
         The fewest inputs that fill the slot.
     most : int or None
@@ -139,10 +139,10 @@ def activities(source: Path | None = None) -> dict[str, Activity]:
     return found
 
 
-def artifact_types(source: Path | None = None) -> dict[str, Mapping[str, Any]]:
-    """Return every artifact type with its entry: the record kinds that hold it and their state."""
-    registry = _load(source or ARTIFACT_TYPE_REGISTRY)
-    return {str(entry["id"]): entry for entry in registry.get("artifact_types") or []}
+def product_types(source: Path | None = None) -> dict[str, Mapping[str, Any]]:
+    """Return every product type with its entry: the record kinds that hold it and their state."""
+    registry = _load(source or PRODUCT_TYPE_REGISTRY)
+    return {str(entry["id"]): entry for entry in registry.get("product_types") or []}
 
 
 def has_placeholder(question: Mapping[str, Any]) -> bool:
@@ -152,7 +152,7 @@ def has_placeholder(question: Mapping[str, Any]) -> bool:
 
 
 def holds(record: Mapping[str, Any], entry: Mapping[str, Any]) -> bool:
-    """Return whether ``record``, in its present state, holds an artifact of the type of ``entry``.
+    """Return whether ``record``, in its present state, holds a product of the type of ``entry``.
 
     The kind of the record must be listed, and its state must satisfy the ``when`` mapping: the
     level of commitment, the slots of a question, or the status.
@@ -178,13 +178,13 @@ def holds(record: Mapping[str, Any], entry: Mapping[str, Any]) -> bool:
 
 
 def record_types(record: Mapping[str, Any], types: Mapping[str, Mapping[str, Any]]) -> list[str]:
-    """Return every artifact type that ``record`` holds in its present state, in registry order."""
+    """Return every product type that ``record`` holds in its present state, in registry order."""
     return [name for name, entry in types.items() if holds(record, entry)]
 
 
 def _closed(field: str, source: Path | None = None) -> frozenset[str]:
-    plan = (_load(source or VOCABULARY_REGISTRY).get("vocabularies") or {}).get("plan") or {}
-    return frozenset(entry["value"] for entry in plan.get(field) or [])
+    itinerary = (_load(source or VOCABULARY_REGISTRY).get("vocabularies") or {}).get("itinerary") or {}
+    return frozenset(entry["value"] for entry in itinerary.get(field) or [])
 
 
 def malformed_registry(
@@ -192,8 +192,8 @@ def malformed_registry(
 ) -> list[str]:
     """Return every activity that names a type, a mode or a norm the registries do not admit.
 
-    The plan check trusts the activity registry, so the registry is itself checked: every input
-    and output names an artifact type, every mode is admitted, and every norm is the named test
+    The itinerary check trusts the activity registry, so the registry is itself checked: every input
+    and output names a product type, every mode is admitted, and every norm is the named test
     of its own activity.
     """
     admitted = set(modes)
@@ -201,7 +201,7 @@ def malformed_registry(
     for act in acts.values():
         for named in [t for s in act.inputs for t in s.types] + [act.output]:
             if named not in types:
-                found.append(f"{act.id}: {named} is no artifact type")
+                found.append(f"{act.id}: {named} is no product type")
         if act.mode not in admitted:
             found.append(f"{act.id}: {act.mode} is no admitted mode")
         if act.norm != f"norm.{act.id}":
@@ -209,15 +209,15 @@ def malformed_registry(
     return found
 
 
-def plan_problems(
-    plan: Mapping[str, Any],
+def itinerary_problems(
+    itinerary: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],
     acts: Mapping[str, Activity] | None = None,
     types: Mapping[str, Any] | None = None,
 ) -> list[str]:
-    """Return every step of the plan that the registries or the records contradict.
+    """Return every step of the itinerary that the registries or the records contradict.
 
-    The five conditions of the plan check, stated in the overview of the activity taxonomy, apply:
+    The five conditions of the itinerary check, stated in the overview of the activity taxonomy, apply:
 
     - every step names a registered activity;
     - the input types of a step fill the inputs of its activity, in number as well as in type, and
@@ -227,27 +227,27 @@ def plan_problems(
     - the references between steps form an acyclic graph;
     - every verdict is admitted.
 
-    Four checks of the record fields complete them: the plan addresses a problem or a question; no
+    Four checks of the record fields complete them: the itinerary addresses a problem or a question; no
     two steps share an identifier; an output reference, once given, names a record that holds the
     output type; the norm of a step is the test of its activity, and a stated mode is its mode.
 
     Parameters
     ----------
-    plan : mapping
-        One filled plan record.
+    itinerary : mapping
+        One filled itinerary record.
     records : mapping
         The records of the problem, keyed by identifier.
     acts, types : mapping, optional
         The two registries, read from package data when omitted.
     """
     acts = activities() if acts is None else acts
-    types = artifact_types() if types is None else types
+    types = product_types() if types is None else types
     verdicts, modes = _closed("steps.verdict"), _closed("steps.mode")
-    steps = [step for step in plan.get("steps") or [] if isinstance(step, Mapping)]
+    steps = [step for step in itinerary.get("steps") or [] if isinstance(step, Mapping)]
     by_id = {str(step.get("id")): step for step in steps}
     found: list[str] = []
 
-    target = plan.get("addresses")
+    target = itinerary.get("addresses")
     if (records.get(target) or {}).get("type") not in ("problem", "question"):
         found.append(f"addresses: {target} is no problem or question record")
 
@@ -318,7 +318,7 @@ def plan_problems(
 
 def _held(record: Mapping[str, Any], types: Mapping[str, Mapping[str, Any]]) -> str:
     """Name the types that a record holds in its present state, for a message."""
-    return " or ".join(record_types(record, types)) or f"no artifact type, as a {record.get('type')} record"
+    return " or ".join(record_types(record, types)) or f"no product type, as a {record.get('type')} record"
 
 
 def _describe(held: Slot) -> str:

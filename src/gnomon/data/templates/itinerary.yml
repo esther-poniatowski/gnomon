@@ -1,11 +1,11 @@
-# method: `docs/epistemology/plan.md`; one file per plan of inquiry
-# activities: `src/gnomon/data/registries/activities.yml`; artifact types: `src/gnomon/data/registries/artifact-types.yml`
+# method: `docs/epistemology/itinerary.md`; one file per itinerary of inquiry
+# activities: `src/gnomon/data/registries/activities.yml`; product types: `src/gnomon/data/registries/product-types.yml`
 # each step instantiates one registered activity; its inputs and its output take the types fixed by the activity
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 
-title: "SHORT NAME OF THE PLAN"
-id: plan.TOPIC.NAME
-type: plan
+title: "SHORT NAME OF THE ITINERARY"
+id: itin.TOPIC.NAME
+type: itinerary
 status: planned                  # planned | in-progress | completed | abandoned
 addresses: prob.TOPIC.NAME       # a problem, or a question `quest.TOPIC.NAME`
 
@@ -13,10 +13,10 @@ steps:                           # one entry per activity instance; the steps ma
   - id: STEP
     activity: ACTIVITY           # an identifier of the activity registry
     inputs:                      # one entry per input of the activity
-      - type: ARTIFACT-TYPE      # an identifier of the artifact-type registry
+      - type: PRODUCT-TYPE      # an identifier of the product-type registry
         ref: RECORD-OR-STEP      # a record identifier, the identifier of the step that produces the input, or a pointer for a `source`
     output:
-      type: ARTIFACT-TYPE
+      type: PRODUCT-TYPE
       ref: RECORD                # the record that holds the product; omit until that record exists
     norm:
       test: norm.ACTIVITY        # the test named by the activity registry for this activity

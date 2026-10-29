@@ -53,7 +53,7 @@ Each condition of axis B can be refuted under any value of axis A, with two exce
 
 ## Classification by demand
 
-The type of result of the demand fixes the admissible [aims](../epistemic-aim.md), the interrogative form of the questions that serve the problem, and the form of their answers. Each row names an [artifact type](activities/epistemic-activities.md#^artifact-types). The request of the demand fixes the number and the completeness of the answers.
+The type of result of the demand fixes the admissible [aims](../epistemic-aim.md), the interrogative form of the questions that serve the problem, and the form of their answers. Each row names an [product type](activities/epistemic-activities.md#^product-types). The request of the demand fixes the number and the completeness of the answers.
 
 | Type of result | Admissible aims | Question form (request) | Answer form | Example |
 | --- | --- | --- | --- | --- |

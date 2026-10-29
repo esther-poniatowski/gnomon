@@ -1,8 +1,8 @@
-"""Plans of inquiry, checked against the registries of activities and artifact types.
+"""Itineraries of inquiry, checked against the registries of activities and product types.
 
 The registries transcribe the taxonomy of epistemic activities, whose notes are the source of the
 content, so the first tests check the registries against those notes. The remaining tests plant
-one defect per check of :func:`gnomon.plans.plan_problems` in a plan that passes, and confirm
+one defect per check of :func:`gnomon.itineraries.itinerary_problems` in an itinerary that passes, and confirm
 that the check reports it for the intended reason.
 """
 
@@ -16,13 +16,13 @@ from typing import Any
 import pytest
 import yaml
 
-from gnomon.plans import (
+from gnomon.itineraries import (
     activities,
     record_types,
-    artifact_types,
+    product_types,
     cycles,
     malformed_registry,
-    plan_problems,
+    itinerary_problems,
 )
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -30,11 +30,11 @@ ACTIVITY_NOTES = ROOT / "docs" / "epistemology" / "definitions" / "activities"
 FIXTURES = ROOT / "test"
 VOCABULARY = yaml.safe_load((ROOT / "src" / "gnomon" / "data" / "vocabularies.yml").read_text())
 ACTS = activities()
-TYPES = artifact_types()
+TYPES = product_types()
 
 
 def test_the_registries_are_consistent() -> None:
-    modes = [entry["value"] for entry in VOCABULARY["vocabularies"]["plan"]["steps.mode"]]
+    modes = [entry["value"] for entry in VOCABULARY["vocabularies"]["itinerary"]["steps.mode"]]
     assert malformed_registry(ACTS, TYPES, modes) == []
 
 
@@ -43,7 +43,7 @@ def test_a_registry_naming_an_unknown_type_mode_or_norm_is_reported() -> None:
     broken = {"derivation": type(act)(**{**act.__dict__, "output": "theorem", "mode": "intuitive",
                                          "norm": "norm.proof"})}
     assert malformed_registry(broken, TYPES, ["deductive"]) == [
-        "derivation: theorem is no artifact type",
+        "derivation: theorem is no product type",
         "derivation: intuitive is no admitted mode",
         "derivation: its norm norm.proof is not the test norm.derivation",
     ]
@@ -94,7 +94,7 @@ def test_each_activity_has_the_signature_its_note_states(identifier: str) -> Non
     assert (act.mode, act.context) == (mode, context)
 
 
-def artifact_rows() -> dict[str, str]:
+def product_rows() -> dict[str, str]:
     note = ACTIVITY_NOTES / "epistemic-activities.md"
     if not note.is_file():
         return {}
@@ -106,17 +106,17 @@ def artifact_rows() -> dict[str, str]:
     return found
 
 
-ARTIFACT_ROWS = artifact_rows()
+PRODUCT_ROWS = product_rows()
 
 
-@pytest.mark.skipif(not ARTIFACT_ROWS, reason="the overview of the taxonomy carries no table of artifact types")
-def test_the_registry_lists_the_artifact_types_of_the_overview() -> None:
-    registry = yaml.safe_load((ROOT / "src/gnomon/data/registries/artifact-types.yml").read_text())
-    declared = {entry["id"]: entry["status"] for entry in registry["artifact_types"]}
-    assert declared == ARTIFACT_ROWS
+@pytest.mark.skipif(not PRODUCT_ROWS, reason="the overview of the taxonomy carries no table of product types")
+def test_the_registry_lists_the_product_types_of_the_overview() -> None:
+    registry = yaml.safe_load((ROOT / "src/gnomon/data/registries/product-types.yml").read_text())
+    declared = {entry["id"]: entry["status"] for entry in registry["product_types"]}
+    assert declared == PRODUCT_ROWS
 
 
-# A plan that passes every check, over records that the planted cases modify one at a time.
+# An itinerary that passes every check, over records that the planted cases modify one at a time.
 RECORDS: dict[str, dict[str, Any]] = {
     "prob.geometry": {"type": "problem"},
     "quest.geometry": {"type": "question"},
@@ -124,8 +124,8 @@ RECORDS: dict[str, dict[str, Any]] = {
     "phen.readout": {"type": "phenomenon"},
     "ans.kernel": {"type": "answer"},
 }
-PLAN: dict[str, Any] = {
-    "type": "plan",
+ITINERARY: dict[str, Any] = {
+    "type": "itinerary",
     "addresses": "prob.geometry",
     "steps": [
         {"id": "pose", "activity": "problematization",
@@ -149,26 +149,26 @@ PLAN: dict[str, Any] = {
 
 
 def planted(**changes: Any) -> dict[str, Any]:
-    """Return a copy of the passing plan with the steps named in ``changes`` updated."""
-    plan = copy.deepcopy(PLAN)
-    for step in plan["steps"]:
+    """Return a copy of the passing itinerary with the steps named in ``changes`` updated."""
+    itinerary = copy.deepcopy(ITINERARY)
+    for step in itinerary["steps"]:
         step.update(changes.get(step["id"], {}))
-    return plan
+    return itinerary
 
 
-def test_a_well_formed_plan_passes() -> None:
-    assert plan_problems(PLAN, RECORDS) == []
+def test_a_well_formed_itinerary_passes() -> None:
+    assert itinerary_problems(ITINERARY, RECORDS) == []
 
 
 def test_an_unregistered_activity_is_reported() -> None:
-    assert plan_problems(planted(derive={"activity": "intuition"}), RECORDS) == [
+    assert itinerary_problems(planted(derive={"activity": "intuition"}), RECORDS) == [
         "steps.derive: intuition is no registered activity"
     ]
 
 
 def test_input_types_that_do_not_fill_the_activity_are_reported() -> None:
-    plan = planted(derive={"inputs": [{"type": "data", "ref": "phen.readout"}]})
-    assert plan_problems(plan, RECORDS) == [
+    itinerary = planted(derive={"inputs": [{"type": "data", "ref": "phen.readout"}]})
+    assert itinerary_problems(itinerary, RECORDS) == [
         "steps.derive: derivation takes one input of background-model or model, and the step gives 0",
         "steps.derive: derivation takes no input of type data",
     ]
@@ -178,47 +178,47 @@ def test_a_slot_taking_several_inputs_counts_them() -> None:
     step = {"id": "select", "activity": "model-selection",
             "inputs": [{"type": "model", "ref": "ans.kernel"}, {"type": "data", "ref": "phen.readout"}],
             "output": {"type": "ranking"}, "norm": {"test": "norm.model-selection", "verdict": "pending"}}
-    plan = copy.deepcopy(PLAN)
-    plan["steps"].append(step)
-    assert plan_problems(plan, RECORDS) == [
+    itinerary = copy.deepcopy(ITINERARY)
+    itinerary["steps"].append(step)
+    assert itinerary_problems(itinerary, RECORDS) == [
         "steps.select: model-selection takes 2 or more inputs of model, and the step gives 1"
     ]
     step["inputs"].append({"type": "model", "ref": "derive"})
-    assert plan_problems(plan, RECORDS) == ["steps.select: the step derive produces consequence, not model"]
+    assert itinerary_problems(itinerary, RECORDS) == ["steps.select: the step derive produces consequence, not model"]
 
 
 def test_an_output_type_other_than_the_activity_output_is_reported() -> None:
-    assert plan_problems(planted(derive={"output": {"type": "verdict"}}), RECORDS) == [
+    assert itinerary_problems(planted(derive={"output": {"type": "verdict"}}), RECORDS) == [
         "steps.derive: derivation produces consequence, and the step states verdict"
     ]
 
 
 def test_an_input_reference_of_the_wrong_kind_or_to_nothing_is_reported() -> None:
     wrong = planted(derive={"inputs": [{"type": "model", "ref": "phen.readout"}]})
-    assert plan_problems(wrong, RECORDS) == [
+    assert itinerary_problems(wrong, RECORDS) == [
         "steps.derive: phen.readout holds data or phenomenon or knowledge-state-change, not model"
     ]
     absent = planted(derive={"inputs": [{"type": "model", "ref": "ans.missing"}]})
-    assert plan_problems(absent, RECORDS) == ["steps.derive: ans.missing is neither a step nor a record"]
+    assert itinerary_problems(absent, RECORDS) == ["steps.derive: ans.missing is neither a step nor a record"]
 
 
 def test_a_type_that_no_record_holds_is_reached_only_through_a_step() -> None:
-    plan = planted(observe={"inputs": [{"type": "design", "ref": "quest.geometry"}]})
-    assert plan_problems(plan, RECORDS) == [
+    itinerary = planted(observe={"inputs": [{"type": "design", "ref": "quest.geometry"}]})
+    assert itinerary_problems(itinerary, RECORDS) == [
         "steps.observe: no record holds a design, so its input names a step, and quest.geometry is none"
     ]
 
 
 def test_an_output_reference_of_the_wrong_kind_is_reported() -> None:
-    plan = planted(pose={"output": {"type": "problem", "ref": "quest.geometry"}})
-    assert plan_problems(plan, RECORDS) == [
+    itinerary = planted(pose={"output": {"type": "problem", "ref": "quest.geometry"}})
+    assert itinerary_problems(itinerary, RECORDS) == [
         "steps.pose: quest.geometry holds question or knowledge-state-change, not problem"
     ]
 
 
 def test_a_norm_verdict_or_mode_outside_the_registries_is_reported() -> None:
-    plan = planted(derive={"norm": {"test": "norm.simulation", "verdict": "likely"}, "mode": "inductive"})
-    assert plan_problems(plan, RECORDS) == [
+    itinerary = planted(derive={"norm": {"test": "norm.simulation", "verdict": "likely"}, "mode": "inductive"})
+    assert itinerary_problems(itinerary, RECORDS) == [
         "steps.derive: the norm of derivation is norm.derivation, and the step names norm.simulation",
         "steps.derive: 'likely' is no verdict",
         "steps.derive: derivation proceeds by deductive inference, and the step states inductive",
@@ -226,38 +226,38 @@ def test_a_norm_verdict_or_mode_outside_the_registries_is_reported() -> None:
 
 
 def test_a_cycle_among_the_steps_is_reported() -> None:
-    plan = planted(design={"inputs": [{"type": "question", "ref": "quest.geometry"},
+    itinerary = planted(design={"inputs": [{"type": "question", "ref": "quest.geometry"},
                                       {"type": "model", "ref": "ans.kernel"},
                                       {"type": "data", "ref": "observe"}]})
-    found = plan_problems(plan, RECORDS)
+    found = itinerary_problems(itinerary, RECORDS)
     assert "steps: design -> observe -> design forms a cycle" in found
     assert cycles({"a": {"a"}}) == [["a", "a"]]
 
 
-def test_a_plan_addressing_no_problem_or_question_and_a_repeated_step_are_reported() -> None:
-    plan = copy.deepcopy(PLAN)
-    plan["addresses"] = "phen.readout"
-    plan["steps"].append(copy.deepcopy(plan["steps"][0]))
-    assert plan_problems(plan, RECORDS)[:2] == [
+def test_a_itinerary_addressing_no_problem_or_question_and_a_repeated_step_are_reported() -> None:
+    itinerary = copy.deepcopy(ITINERARY)
+    itinerary["addresses"] = "phen.readout"
+    itinerary["steps"].append(copy.deepcopy(itinerary["steps"][0]))
+    assert itinerary_problems(itinerary, RECORDS)[:2] == [
         "addresses: phen.readout is no problem or question record",
         "steps: the identifier pose names several steps",
     ]
 
 
-def fixture_plans() -> list[Path]:
-    return sorted(FIXTURES.glob("*/plan.yml")) if FIXTURES.is_dir() else []
+def fixture_itineraries() -> list[Path]:
+    return sorted(FIXTURES.glob("*/itinerary.yml")) if FIXTURES.is_dir() else []
 
 
-@pytest.mark.skipif(not fixture_plans(), reason="no fixture carries a plan")
-@pytest.mark.parametrize("path", fixture_plans(), ids=[p.parent.name for p in fixture_plans()] or ["none"])
-def test_every_plan_of_the_fixtures_passes(path: Path) -> None:
+@pytest.mark.skipif(not fixture_itineraries(), reason="no fixture carries an itinerary")
+@pytest.mark.parametrize("path", fixture_itineraries(), ids=[p.parent.name for p in fixture_itineraries()] or ["none"])
+def test_every_itinerary_of_the_fixtures_passes(path: Path) -> None:
     records = {}
     for source in sorted(path.parent.glob("*.yml")):
         record = yaml.safe_load(source.read_text(encoding="utf-8"))
         if isinstance(record, dict) and "id" in record:
             records[str(record["id"])] = record
-    plan = yaml.safe_load(path.read_text(encoding="utf-8"))
-    assert plan_problems(plan, records) == []
+    itinerary = yaml.safe_load(path.read_text(encoding="utf-8"))
+    assert itinerary_problems(itinerary, records) == []
 
 
 def test_the_type_of_a_record_follows_from_its_state() -> None:
@@ -269,7 +269,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
         "ans.a": {"type": "answer", "status": "entertained"},
         "prob.a": {"type": "problem"},
     }
-    plan = {
+    itinerary = {
         "addresses": "prob.a",
         "steps": [
             {"id": "select", "activity": "question-decomposition",
@@ -284,7 +284,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
              "output": {"type": "verdict"}, "norm": {"test": "norm.testing", "verdict": "pending"}},
         ],
     }
-    assert plan_problems(plan, records) == [
+    assert itinerary_problems(itinerary, records) == [
         "steps.select: quest.schema holds question-schema or knowledge-state-change, not question",
         "steps.predict: system.a holds identified-subject or classification or measurement-procedure"
         " or knowledge-state-change, not target-specification",
@@ -294,8 +294,8 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
     records["quest.schema"]["subject"]["phenomenon"] = "phen.b"
     records["system.a"]["commitment"] = "specified"
     records["ans.a"]["status"] = "hypothesized"
-    plan["steps"][2]["inputs"][2]["ref"] = "predict"
-    assert plan_problems(plan, records) == ["steps.judge: the step predict produces consequence, not data"]
+    itinerary["steps"][2]["inputs"][2]["ref"] = "predict"
+    assert itinerary_problems(itinerary, records) == ["steps.judge: the step predict produces consequence, not data"]
 
 
 def test_a_specified_record_still_holds_an_identified_subject() -> None:
