@@ -8,7 +8,7 @@ aliases:
 # Semantic relations
 
 > [!INFO] Tier and source
-> **Tier 3 (per aspect).** Stub file. Holds criteria that constrain the typed relation vocabulary between epistemic objects. Traces to [object-kind role purity](../2-architecture/object-kinds.md#^t2-ontology-role-pure), [non-redundancy](../1-framework/modular-content-organization.md#^t1-non-redundancy), [relational graph representation](../2-architecture/relations-graph.md#^t2-relational-graph-representation), [closed typed relations](../2-architecture/relations-graph.md#^t2-typed-relation-vocabulary), and [relation storage locus](../2-architecture/relations-graph.md#^t2-relation-storage-locus) (objects author edges). The actual relation vocabulary is deferred to [the project TODO](../../TODO.md).
+> **Tier 3 (per aspect).** Stub file. Holds criteria that constrain the typed relation vocabulary between epistemic objects. Traces to [object-kind role purity](../2-architecture/object-kinds.md#^t2-ontology-role-pure), [non-redundancy](../1-framework/modular-content-organization.md#^t1-non-redundancy), [relational graph representation](../2-architecture/relations-graph.md#^t2-relational-graph-representation), [closed typed relations](../2-architecture/relations-graph.md#^t2-typed-relation-vocabulary), and [relation storage locus](../2-architecture/relations-graph.md#^t2-relation-storage-locus) (objects author edges). The actual relation vocabulary is deferred to the goal `relation-registry` of the [project goals](../../../TODO.md).
 
 ---
 
@@ -34,10 +34,10 @@ The relation vocabulary distinguishes semantic dependence (what an object's cont
 
 ## Decisions
 
-*To be drafted at the relation-vocabulary work in [the project TODO](../../TODO.md).*
+*To be drafted under the goal `relation-registry` of the [project goals](../../../TODO.md).*
 
 ---
 
 ## Open questions
 
-*To be drafted at the relation-vocabulary work in [the project TODO](../../TODO.md).*
+*To be drafted under the goal `relation-registry` of the [project goals](../../../TODO.md).*

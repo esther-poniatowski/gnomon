@@ -69,7 +69,7 @@ The framework has been validated against seven real research problems, each fill
 - [ ] Validates registry files against schemas.
 - [ ] Reports the inferential position of a workspace: established results, open questions, blocked entries.
 - [ ] Formalizes a definition.
-- [ ] Formalizes the decomposition of a question into subquestions.
+- [x] Formalizes the decomposition of a question into subquestions.
 - [ ] Formalizes the derivation yielding an answer.
 - [ ] Names the atomic research actions of a workspace.
 
@@ -107,7 +107,7 @@ The remaining parts are registered in the [documentation index](docs/_index.md).
 
 Writing-quality rules are maintained in [hermeneia](https://github.com/esther-poniatowski/hermeneia).
 
-Open design decisions are recorded in the [design task list](docs/TODO.md).
+Open goals, the open design decisions included, are recorded in the [project goals](TODO.md).
 
 ---
 

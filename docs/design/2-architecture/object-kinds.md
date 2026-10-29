@@ -40,7 +40,7 @@ This is a **meta-schema rule**: it binds every theme that introduces fields — 
 
 > [!QUESTION] What rule decides whether a candidate concept becomes a canonical object kind, a field, a status, a relation, a note, a record local to a target, or a view specification?
 
-The architecture does not fix the object taxonomy, which is deferred to [the project TODO](../../TODO.md), but it fixes the admission rule. A candidate becomes a canonical object kind only if it satisfies all five conditions:
+The architecture does not fix the object taxonomy, which is deferred to the goal `design-reconciliation` of the [project goals](../../../TODO.md), but it fixes the admission rule. A candidate becomes a canonical object kind only if it satisfies all five conditions:
 
 - **Independent identity** — meaningful without reference to any inquiry that uses it.
 - **Reuse across inquiries** — the same object can be cited from many inquiries.

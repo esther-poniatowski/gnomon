@@ -22,7 +22,7 @@ aliases:
 
 The relation vocabulary is **closed and typed**:
 
-- **Closed vocabulary.** The admissible relation labels (e.g. `supports`, `depends_on`, `answers`, `refines`, `uses`, `contrasts_with`, ...) are declared by the schema. The exact list is deferred to [the project TODO](../../TODO.md). No relation may exist outside the declared vocabulary.
+- **Closed vocabulary.** The admissible relation labels (e.g. `supports`, `depends_on`, `answers`, `refines`, `uses`, `contrasts_with`, ...) are declared by the schema. The exact list is deferred to the goal `relation-registry` of the [project goals](../../../TODO.md). No relation may exist outside the declared vocabulary.
 - **Typed edges.** Every relation carries a type drawn from the vocabulary, with declared source and target types.
 
 Queryability and addressability of the resulting graph are enforced by [relational queryability](../1-framework/modular-content-organization.md#^t1-relational-queryability).

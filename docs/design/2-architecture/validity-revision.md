@@ -133,7 +133,7 @@ The propagation rule decomposes into three parameters per dependent.
 Transmission and sensitivity examples, and the provisional combination rule for priority: see [Revision vocabulary](../3-aspect-specific/revision-vocabulary.md).
 
 > [!missing] Open subsidiary questions
-> - **Transmitting relation set** — which exact relation kinds transmit revision? Deferred to the relation-vocabulary decision in [the project TODO](../../TODO.md).
+> - **Transmitting relation set** — which exact relation kinds transmit revision? Deferred to the goal `relation-registry` of the [project goals](../../../TODO.md).
 > - **Combination rule for priority** — exact rule combining `revision_kind` priority with `warrant_kind` sensitivity into the per-dependent priority; provisional formulation in [Revision vocabulary](../3-aspect-specific/revision-vocabulary.md).
 
 ---

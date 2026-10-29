@@ -8,7 +8,7 @@ aliases:
 # Ontology of object kinds
 
 > [!INFO] Tier and source
-> **Tier 3 (aspect-specific).** Stub file. Holds criteria that constrain the ontology decision (which object kinds the canonical store admits). Traces to [object-kind set smallness](../2-architecture/object-kinds.md#^t2-ontology-small), [object-kind role purity](../2-architecture/object-kinds.md#^t2-ontology-role-pure), [t1-activity-coverage](../1-framework/expressive-depth.md#^t1-activity-coverage), and the [object-kind admission test](../2-architecture/object-kinds.md#^t2-object-kind-admission). The actual taxonomy is deferred to [the project TODO](../../TODO.md).
+> **Tier 3 (aspect-specific).** Stub file. Holds criteria that constrain the ontology decision (which object kinds the canonical store admits). Traces to [object-kind set smallness](../2-architecture/object-kinds.md#^t2-ontology-small), [object-kind role purity](../2-architecture/object-kinds.md#^t2-ontology-role-pure), [t1-activity-coverage](../1-framework/expressive-depth.md#^t1-activity-coverage), and the [object-kind admission test](../2-architecture/object-kinds.md#^t2-object-kind-admission). The actual taxonomy is deferred to the goal `design-reconciliation` of the [project goals](../../../TODO.md).
 
 ---
 
@@ -38,7 +38,7 @@ The ontology begins small, allows subtypes gradually under the [subtype discipli
 
 ## Decisions
 
-*To be drafted at the ontology work in [the project TODO](../../TODO.md).*
+*To be drafted under the goal `design-reconciliation` of the [project goals](../../../TODO.md).*
 
 ---
 

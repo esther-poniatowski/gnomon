@@ -19,7 +19,6 @@ Each entry answers one class of question about `gnomon`, so a reader consults on
 | [Worked inquiries](../examples/_index.md) | How completed inquiry records look, each inquiry testing one capacity of the framework. |
 | [Architecture decisions](adr/_index.md) | Which design constraint each substantive choice answers, the options weighed against it, and what the choice costs. |
 | [gnomon audits](audits/_index.md) | Which assessments a decision rests on while its open resolutions await ratification. |
-| [Design TODO](TODO.md) | Where the design currently stands, and which steps remain open. |
 
 ## Note conventions
 

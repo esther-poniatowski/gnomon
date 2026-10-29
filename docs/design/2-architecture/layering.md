@@ -34,7 +34,7 @@ A layer that duplicates another's content cannot be replaced cleanly, so this cr
 
 > [!QUESTION] Where is the primary epistemic content stored, and what guarantees its primacy?
 
-**In a canonical layer of stable, addressable epistemic objects.** The exact taxonomy is deferred to [the project TODO](../../TODO.md). Each canonical object carries a stable identifier; no content lives only in a rendered artifact; no artifact may be edited as a substitute for editing its canonical source. Object kinds are admitted under [t2-object-kind-admission](object-kinds.md#^t2-object-kind-admission).
+**In a canonical layer of stable, addressable epistemic objects.** The exact taxonomy is deferred to the goal `design-reconciliation` of the [project goals](../../../TODO.md). Each canonical object carries a stable identifier; no content lives only in a rendered artifact; no artifact may be edited as a substitute for editing its canonical source. Object kinds are admitted under [t2-object-kind-admission](object-kinds.md#^t2-object-kind-admission).
 
 ### Object-centric, not document-centric ^t2-object-centric
 

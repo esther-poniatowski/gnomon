@@ -90,7 +90,7 @@ Similarly, when a revision object flips to `resolved`, the author moves it to `a
 
 > [!QUESTION] Which relation kinds transmit revision; which warrant kinds determine sensitivity; how do priority components combine? ([upstream-change propagation](../2-architecture/validity-revision.md#^t2-propagation))
 
-The examples below draw on the relation vocabulary deferred to [the project TODO](../../TODO.md) and the [warrant-kind enum](warrant-vocabulary.md). They illustrate how the three propagation parameters combine; the relation vocabulary work settles the actual transmission set and combination rule.
+The examples below draw on the relation vocabulary deferred to the goal `relation-registry` of the [project goals](../../../TODO.md) and the [warrant-kind enum](warrant-vocabulary.md). They illustrate how the three propagation parameters combine; the relation vocabulary work settles the actual transmission set and combination rule.
 
 - **Transmission examples.** `depends_on`, `supports`, `uses` transmit revision; `contrasts_with`, `exemplifies` (in some readings) do not.
 - **Sensitivity examples.** Monotonic warrants (deductive) are sensitive only to retraction of premises or invalidation of the inference rule (e.g., `retraction`, `taxonomic_restructure`, `correction`). Defeasible warrants (empirical, abductive, analogical, heuristic) are additionally sensitive to qualifying or counter-evidence introduced upstream (e.g., `scope_narrowing`, `scope_generalization`, `reorientation`).
@@ -104,7 +104,7 @@ The examples below draw on the relation vocabulary deferred to [the project TODO
 
 > [!QUESTION] Which exact relation kinds transmit revision?
 
-Deferred to the relation-vocabulary decision in [the project TODO](../../TODO.md); see also [upstream-change propagation](../2-architecture/validity-revision.md#^t2-propagation).
+Deferred to the goal `relation-registry` of the [project goals](../../../TODO.md); see also [upstream-change propagation](../2-architecture/validity-revision.md#^t2-propagation).
 
 ### Combination rule for priority ^t3-priority-combination-rule
 
