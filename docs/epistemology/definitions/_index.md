@@ -21,6 +21,7 @@ source:
 > - [Pattern and phenomenon](pattern-and-phenomenon.md) fixes the senses of the terms, whereas the [specification of the phenomenon](../phenomenon.md) fixes the fields required of a record of a phenomenon.
 > - [Model](model.md) separates a model system from its target, whereas the [specification of the target system](../target-system.md) fixes the fields of the target specification, the record that delimits the target.
 > - [Condition](condition.md) fixes the senses of the term, whereas the [domain of conditions](../domain.md) is one of the places of a record that hold conditions.
+> - [Conditions of answerability](conditions-of-answerability.md) states the conditions of an answer and their dependencies, whereas [choosing the next act](../next-act.md) states the procedure that acts on them.
 
 ## Framing
 
@@ -28,7 +29,10 @@ source:
 
 ## Problems and questions
 
-- [Problem and question](problem-and-question.md): to tell a problem from a question, to fix how far each slot of a question commits to a referent, and to link two questions.
+- [Epistemic problem](epistemic-problem.md): to decide when a situation of inquiry is a problem, to state the problem so that its solution can be checked, and to tell it from a question.
+- [Types of epistemic problem](problem-types.md): to diagnose why the demand of a problem is unmet, and to read off the aims, question forms and answer forms that the demand admits.
+- [Conditions of answerability](conditions-of-answerability.md): to decide which conditions an answer to a question needs, and which of them can be established first.
+- [Problem and question](problem-and-question.md): to fix how far each slot of a question commits to a referent, and to link two questions.
 
 ## Bearers and systems
 

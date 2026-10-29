@@ -106,7 +106,8 @@ Each term of the [vocabulary of inquiry](_index.md) takes one status. A term wit
 | [Theory](theory.md) | representational | a set of claims, or a class of models |
 | [Framework and formalism](framework.md) | representational | a chosen vocabulary, set of elements, or calculus |
 | [Claim and hypothesis](claim-and-hypothesis.md) | representational | a proposition put forward for evaluation |
-| [Problem and question](problem-and-question.md) | representational | a demand, or a request with a set of answers |
+| [Epistemic problem](epistemic-problem.md) | representational | a demand stated relative to a background of accepted claims |
+| [Question](problem-and-question.md) | representational | a request with a set of answers |
 | [Level of commitment](problem-and-question.md#^commitment-levels) | representational | the extent to which a record fixes the referent of a slot |
 
 Two groups of terms invite a confusion of statuses: the terms that take two rows, and the relational terms. For each term with two senses, the note defining it fixes a name for each sense.

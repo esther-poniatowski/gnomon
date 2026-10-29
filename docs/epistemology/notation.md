@@ -16,6 +16,12 @@ A single registry assigns every symbol of the method. One letter denotes one obj
 
 | Symbol                     | Denotes                                                    | Declared in                                          |
 | -------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
+| $\pi$                      | an epistemic problem, $\pi=\langle K,d,\Phi\rangle$         | [epistemic problem](definitions/epistemic-problem.md) |
+| $K$                        | the background of a problem: the accepted claims relative to which it is posed | [epistemic problem](definitions/epistemic-problem.md) |
+| $H$                        | the proposed candidates, not yet accepted                  | [epistemic problem](definitions/epistemic-problem.md) |
+| $d$                        | the demand of a problem, $d=\langle\mathsf{type},\mathsf{req},\Xi\rangle$ | [epistemic problem](definitions/epistemic-problem.md) |
+| $\Xi$                      | the explicanda of a demand                                 | [epistemic problem](definitions/epistemic-problem.md) |
+| $\Phi$                     | the constraints of a problem, $\Phi_1$ on each candidate and $\Phi^*$ on the set of results | [epistemic problem](definitions/epistemic-problem.md) |
 | $\Sigma$                   | the subject of inquiry, $\Sigma=\langle S,P,X,D\rangle$    | [subject of inquiry](subject-of-inquiry.md)          |
 | $S$                        | the target: the system, or the class of systems, that the inquiry is about | [target system](target-system.md)                    |
 | $N$                        | the number of units of a kind in $S$                       | [target system](target-system.md)                    |

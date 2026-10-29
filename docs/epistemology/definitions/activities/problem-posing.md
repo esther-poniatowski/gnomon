@@ -16,7 +16,7 @@ source:
 
 > [!QUESTION] Goal: which activities turn a source into a problem and a problem into a question, and by which norm is each judged?
 
-The activities of this family output the objects that open an inquiry: a problem, a question schema, an identified subject or a question. These objects are defined in the note on [problems and questions](../problem-and-question.md), together with the [levels of commitment](../problem-and-question.md#^commitment-levels) of a slot. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output the objects that open an inquiry: a problem, a question schema, an identified subject or a question. These objects are defined in the notes on the [epistemic problem](../epistemic-problem.md) and on [problems and questions](../problem-and-question.md), together with the [levels of commitment](../problem-and-question.md#^commitment-levels) of a slot. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 

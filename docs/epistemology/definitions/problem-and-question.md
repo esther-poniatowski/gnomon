@@ -4,7 +4,6 @@ status: wip
 index: "[Definitions](docs/epistemology/definitions/_index.md)"
 aliases:
   - Problem and question
-  - Problem
   - Question (term)
   - Question schema
   - Level of commitment
@@ -14,17 +13,14 @@ source:
 ---
 # Problem and question
 
-> [!QUESTION] Goal: what separates a problem from a question, how far can each slot of a question stay uncommitted, and how do two questions depend on each other?
+> [!QUESTION] Goal: what is a question, how far can each slot of a question stay uncommitted, and how do two questions depend on each other?
 
-A **problem** is a demand that a result be found, together with the constraints that a result must satisfy to count as a solution [nickles1981]. A **question** is a request whose possible answers form a definite set [hamblin1958]. A problem motivates one or several questions, and each question states the answers that would meet part of its demand.
+A **question** is a request whose possible answers form a definite set [hamblin1958]. A question serves the [epistemic problem](epistemic-problem.md) that motivates it: one problem motivates one or several questions, and each question states the answers that would meet part of its demand.
 
 ## Senses
 
 | Term | Community | Definition | Source |
 | --- | --- | --- | --- |
-| Problem | pragmatism | an indeterminate situation, instituted as problematic by the inquiry that addresses it | [dewey1938] |
-| Empirical and conceptual problems | philosophy of science | an empirical problem concerns the objects of a domain; a conceptual problem concerns a theory, such as an inconsistency within it or a tension with other accepted theories | [laudan1977] |
-| Problem | philosophy of science | a demand that a solution be found, together with the constraints that the solution must satisfy | [nickles1981] |
 | Question | logic of questions | a request fixed by its possible answers: to know the question is to know the statements that count as its answers; in a formal semantics, a question denotes the set of its possible answers | [hamblin1958]; [hamblin1973] |
 | Question | erotetic logic | a subject, presenting the range of alternatives, and a request, fixing how many alternatives an answer must select and how completely | [belnap1976] |
 | Why-question | pragmatics of explanation | a triple of a topic, a contrast class and a relevance relation | [vanfraassen1980] |
@@ -71,9 +67,9 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 
 ## Distinctions
 
-- **A problem leaves the set of its answers unstated.** A problem states a demand and its constraints, whereas a question fixes a set of possible answers. A question can also be posed without any problem record.
+- **A problem is not a question, and every inquiring question presupposes a problem.** The difference between the two is stated in the note on the [epistemic problem](epistemic-problem.md#^problem-vs-question). A question asked to learn its answer carries at least a [minimal problem](epistemic-problem.md#^minimal-problem), and a problem record makes that problem explicit.
 - **The type of a question record follows the commitment of its slots.** When any slot holds a placeholder, the record is a `question-schema`. When every slot is `identified` or `specified`, the record is a `question`. The two take the same fields.
-- **An empirical problem and a conceptual problem lead to different questions.** An empirical problem asks for a phenomenon or for its explanation. A conceptual problem asks to revise a concept or a theory, as the [conceptual activities](activities/conceptual-activities.md) type it.
+- **The type of a problem bounds the aims of its questions.** The [types of problem](problem-types.md) map each type of result demanded onto the aims, the question forms and the answer forms that it admits.
 
 ## Consequences for a record
 
@@ -87,10 +83,7 @@ Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-mar
 
 - [belnap1976] ○ Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976; the entry was confirmed through library catalogues, and the division of a question into subject and request was not checked
 - [carnap1950_logical] ◐ Carnap, *Logical Foundations of Probability*, University of Chicago Press, 1950, ch. 1; explicandum, explicatum and the four requirements on an explication, checked through the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/carnap/)
-- [dewey1938] ◐ Dewey, *Logic: The Theory of Inquiry*, Henry Holt, 1938, ch. 6, "The pattern of inquiry"; checked through secondary sources
 - [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211); the postulate that knowing what counts as an answer is knowing the question, checked through secondary sources
 - [hamblin1973] ◐ Hamblin, "Questions in Montague English", *Foundations of Language* 10(1), 41–53, 1973; a question denotes the set of its possible answers, checked through secondary sources
 - [kripke1980] ◐ Kripke, *Naming and Necessity*, Harvard University Press, 1980, pp. 54–57; reference fixing by a description, checked through secondary sources
-- [laudan1977] ◐ [Laudan, *Progress and Its Problems: Towards a Theory of Scientific Growth*, University of California Press, 1977](https://www.ucpress.edu/books/progress-and-its-problems/paper); the distinction between empirical and conceptual problems, checked through secondary sources
-- [nickles1981] ◐ [Nickles, "What is a problem that we may solve it?", *Synthese* 47(1), 85–118, 1981](https://doi.org/10.1007/BF01064267); pp. 109–112, a problem as constraints together with a demand, checked through a scanned copy of poor quality
 - [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, the why-question as a triple

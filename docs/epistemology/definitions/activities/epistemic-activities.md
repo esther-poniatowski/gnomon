@@ -100,7 +100,7 @@ The artifact types form a closed list. Each type classifies the epistemic object
 | Type | Epistemic object | Record | Status |
 | --- | --- | --- | --- |
 | `source` | a document, a dataset or a result external to the inquiry | external pointer, held by the `sources` of a problem and the `pointers` of an identification | exists |
-| `problem` | a demand for a solution under constraints, defined in the note on [problems and questions](../problem-and-question.md) | `problem` | exists |
+| `problem` | a demand for a solution under constraints, defined in the note on the [epistemic problem](../epistemic-problem.md) | `problem` | exists |
 | `question-schema` | a [question schema](../problem-and-question.md#^question-schema), whose slots are typed placeholders | `question`, with placeholder slots | exists |
 | `identified-subject` | the system and the phenomenon of a question, at the [level of commitment](../problem-and-question.md#^commitment-levels) `identified` or above | `target-system` and `phenomenon` at commitment `identified` or above | exists |
 | `question` | a question whose slots refer to records | `question`, with every slot at commitment `identified` or above | exists |

@@ -15,6 +15,8 @@ source:
 These notes introduce a method to specify a research inquiry, based on results from the philosophy of models, of explanation and of questions. A research project applies the method by filling one [template](../../src/gnomon/data/templates/_index.md) per record of an inquiry (problem, target system, body of admitted laws, phenomenon, question, candidate answer, assessment, plan).
 
 - [Specifying an inquiry](inquiry-specification.md): to locate each decision of a research project in the layer of the specification that holds it.
+- [Order of specification](specification-order.md): to decide what to specify first, and to revise an earlier choice without circularity.
+- [Choosing the next act](next-act.md): to decide which act of research to perform next, once a problem is stated.
 - [Problem](problem.md): to state the demand and the constraints served by the questions of an inquiry.
 - [Subject of inquiry](subject-of-inquiry.md): to fix what a research question is about, before deciding what kind of answer to seek.
     - [Target system](target-system.md): to delimit the system that a question concerns, so that every later record can refer to its quantities.
@@ -35,4 +37,4 @@ These notes introduce a method to specify a research inquiry, based on results f
 - [Notation](notation.md): to check which letter a quantity already uses before introducing a symbol.
 - [Symbols and expressions](symbols-and-expressions.md): to write formulas that refer to declared quantities and that the checks can resolve.
 - [Definitions](definitions/_index.md): to choose the term and the sense that name an element of an inquiry, and to tell that term apart from a neighboring term.
-- [Note template](-template.md): to start a new note of this folder with the required frontmatter.
+
