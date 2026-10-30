@@ -14,12 +14,12 @@ A single registry assigns every symbol of the method. One letter denotes one obj
 
 | Symbol                     | Denotes                                                    | Declared in                                          |
 | -------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
-| $\pi$                      | an epistemic problem, $\pi=\langle K,d,\Phi\rangle$         | [epistemic problem](../definitions/inquiry/epistemic-problem.md) |
-| $K$                        | the background of a problem: the accepted claims relative to which it is posed | [epistemic problem](../definitions/inquiry/epistemic-problem.md) |
-| $H$                        | the proposed candidates, not yet accepted                  | [epistemic problem](../definitions/inquiry/epistemic-problem.md) |
-| $d$                        | the demand of a problem, $d=\langle\mathsf{type},\mathsf{req},\Xi\rangle$ | [epistemic problem](../definitions/inquiry/epistemic-problem.md) |
-| $\Xi$                      | the explicanda of a demand                                 | [epistemic problem](../definitions/inquiry/epistemic-problem.md) |
-| $\Phi$                     | the constraints of a problem, $\Phi_1$ on each candidate and $\Phi^*$ on the set of results | [epistemic problem](../definitions/inquiry/epistemic-problem.md) |
+| $\pi$                      | an epistemic problem, $\pi=\langle K,d,\Phi\rangle$         | [epistemic problem](../inquiry/epistemic-problem.md) |
+| $K$                        | the background of a problem: the accepted claims relative to which it is posed | [epistemic problem](../inquiry/epistemic-problem.md) |
+| $H$                        | the proposed candidates, not yet accepted                  | [epistemic problem](../inquiry/epistemic-problem.md) |
+| $d$                        | the demand of a problem, $d=\langle\mathsf{type},\mathsf{req},\Xi\rangle$ | [epistemic problem](../inquiry/epistemic-problem.md) |
+| $\Xi$                      | the explicanda of a demand                                 | [epistemic problem](../inquiry/epistemic-problem.md) |
+| $\Phi$                     | the constraints of a problem, $\Phi_1$ on each candidate and $\Phi^*$ on the set of results | [epistemic problem](../inquiry/epistemic-problem.md) |
 | $\Sigma$                   | the subject of inquiry, $\Sigma=\langle S,P,X,D\rangle$    | [subject of inquiry](../subject/subject-of-inquiry.md)          |
 | $S$                        | the target: the system, or the class of systems, that the inquiry is about | [target system](../subject/target-system.md)                    |
 | $N$                        | the number of units of a kind in $S$                       | [target system](../subject/target-system.md)                    |
@@ -36,7 +36,7 @@ A single registry assigns every symbol of the method. One letter denotes one obj
 | $\omega$                   | the proof obligations                                      | [epistemic task](../epistemic-task/epistemic-task.md)                  |
 | $Q$                        | the question, $Q=\langle\Sigma,T\rangle$                   | [inquiry specification](../inquiry/inquiry-specification.md)    |
 | $\Gamma$                   | the circumstances under which adequacy is judged           | [virtues](../epistemic-task/epistemic-pragmatic-virtues.md)            |
-| $h$                        | a candidate answer, a member of the set $H$ of proposed candidates | [epistemic problem](../definitions/inquiry/epistemic-problem.md#^candidates) |
+| $h$                        | a candidate answer, a member of the set $H$ of proposed candidates | [epistemic problem](../inquiry/epistemic-problem.md#^candidates) |
 | $M$                        | a model, $M=\langle C,V,L,O\rangle$, which grounds the answers whose route runs on it | [model and binding](../answer/model-and-binding.md#^model-elements) |
 | $C$                        | the constituents: the units that the model treats as bearers (in a mechanism, its components) | [model and binding](../answer/model-and-binding.md#^model-elements); [mechanism](../answer/mechanism.md) |
 | $V$                        | the terms of the model: its variables and parameters       | [model and binding](../answer/model-and-binding.md#^model-elements) |

@@ -1,6 +1,6 @@
 ---
 tags:
-  - examples
+  - audit
 index: "[Stable microbial coexistence](examples/microbial-stable-coexistence/_index.md)"
 aliases:
   - Microbial stable-coexistence specification issues

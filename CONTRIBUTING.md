@@ -117,14 +117,14 @@ The order is fixed, so that a divergence shows up in a diff.
 | `index`            | Folder entry point                                |
 | `tasks`            | Open work of the project                          |
 | `guide`            | Operation of the installed tool                   |
-| `gaps`             | Structures or decisions that a method still lacks |
 | `examples`         | Expressivity test cases of the framework          |
-| `ideas`            | Material awaiting triage                          |
+| `proposal`         | Candidate designs for one open goal               |
 | `reference`        | External work, stated on its own terms            |
 | `audit`            | Assessment on which a decision rests              |
 | `generated`        | View built by a tool from the records             |
 | `method`           | Method note of the epistemology                   |
 | `definition`       | Definition note of the epistemology               |
+| `procedure`        | Method of performing one activity                 |
 | `decision`         | Architecture decision record                      |
 
 | Tag        | State of the note                                 |
@@ -150,16 +150,16 @@ An index holds only four kinds of unit: its own goal, stated in one clause of th
 
 ### Cross-references
 
-A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both in an editor and on the repository page. The examples below are written from a note of `docs/epistemology/inquiry/`:
+A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both in an editor and on the repository page. The examples below are written from a note of `docs/epistemology/subject/`:
 
 ```markdown
-the [types of problem](../definitions/inquiry/problem-types.md)
+the [types of problem](../inquiry/problem-types.md)
 ```
 
 A finer reference appends a block anchor, declared at the end of the target line:
 
 ```markdown
-[links between questions](../definitions/inquiry/problem-and-question.md#^linked-questions)
+[links between questions](../inquiry/question.md#^linked-questions)
 ```
 
 Link text names the result, the object, or the message found at the target, never the file name and never a bare category word.

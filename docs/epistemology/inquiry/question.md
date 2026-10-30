@@ -1,16 +1,16 @@
 ---
 tags:
-  - definition
+  - method
   - wip
-index: "[Problems and questions](docs/epistemology/definitions/inquiry/_index.md)"
+index: "[Inquiry](docs/epistemology/inquiry/_index.md)"
 aliases:
-  - Problem and question
+  - Question
   - Question (term)
   - Question schema
   - Level of commitment
   - Linked questions
 ---
-# Problem and question
+# Question
 
 > [!QUESTION] Goal: what is a question, how far can each slot of a question stay uncommitted, and how do two questions depend on each other?
 
@@ -24,7 +24,7 @@ A **question** is a request whose possible answers form a definite set [hamblin1
 | Question | erotetic logic | a subject, presenting the range of alternatives, and a request, fixing how many alternatives an answer must select and how completely | [belnap1976] |
 | Why-question | pragmatics of explanation | a triple of a topic, a contrast class and a relevance relation | [vanfraassen1980] |
 
-The why-question of the pragmatic account corresponds to three components of a question of this method. Its topic is the phenomenon $P$, its [contrast class](../../subject/contrast.md) is $X$, and its relevance relation is the [requested relation](../../epistemic-task/requested-relation.md) $R$.
+The why-question of the pragmatic account corresponds to three components of a question of this method. Its topic is the phenomenon $P$, its [contrast class](../subject/contrast.md) is $X$, and its relevance relation is the [requested relation](../epistemic-task/requested-relation.md) $R$.
 
 ## Question schema and levels of commitment
 
@@ -45,12 +45,12 @@ Commitment is kept apart from three other attributes of records and of their fie
 | Attribute | Content | Values |
 | --- | --- | --- |
 | Commitment | how far a slot fixes its referent | `placeholder`, `identified`, `specified` |
-| Maturity | how far one specification has been revised, graded by its [maturity marker](../../subject/subject-of-inquiry.md) | `open`, `provisional`, `stabilized` |
+| Maturity | how far one specification has been revised, graded by its [maturity marker](../subject/subject-of-inquiry.md) | `open`, `provisional`, `stabilized` |
 | Record status | the attitude taken toward the whole record | one vocabulary per kind of record, such as `entertained` or `accepted` for an answer |
 | Empty value | the state of an unfilled field | a gap when the field is required, and a product of the inquiry when the aim lists the field as produced |
 
 - **Commitment and maturity vary independently.** A slot can be identified and stabilized, when the referent is settled and no formal declaration is sought. A slot can also be specified and provisional, when the declarations are written and still under revision.
-- **An empty field is a gap unless the inquiry produces it.** *Example*: an exploratory question leaves the statement and the category of its phenomenon empty, because finding them is the aim of the inquiry. The [epistemic aim](../../epistemic-task/epistemic-aim.md) lists the paths produced by the inquiry.
+- **An empty field is a gap unless the inquiry produces it.** *Example*: an exploratory question leaves the statement and the category of its phenomenon empty, because finding them is the aim of the inquiry. The [epistemic aim](../epistemic-task/epistemic-aim.md) lists the paths produced by the inquiry.
 
 ## Linked questions
 
@@ -63,7 +63,7 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 | `presupposes` | has a true answer only if the linked question has a true answer |
 | `enables` | has an answer that establishes a condition of answerability of the linked question, without narrowing its answers |
 
-*Example*: a first question describes the [representation geometry](../representations/representation-and-encoding.md) of the benchmark networks. A second question explains a capacity of readout by that geometry. The second question links to the first with `explanans-from`, through the phenomenon record of the geometry. Therefore, neither question restates the content fixed by the other.
+*Example*: a first question describes the [representation geometry](../definitions/representations/representation-and-encoding.md) of the benchmark networks. A second question explains a capacity of readout by that geometry. The second question links to the first with `explanans-from`, through the phenomenon record of the geometry. Therefore, neither question restates the content fixed by the other.
 
 *Example*: the question "how is the dimension of the population activity estimated from finite samples?" links to the question "does the dimension grow with the complexity of the mixture?" with `enables`.
 
@@ -75,13 +75,13 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 
 ## Consequences for a record
 
-- **A problem is recorded in its own record.** Its fields, and the field by which a question names its problem, are specified in the [problem record](../../inquiry/problem.md).
-- **The slots of a question admit a placeholder.** The rule is stated under [placeholders before records](../../subject/subject-of-inquiry.md#^placeholder-slots).
+- **A problem is recorded in its own record.** Its fields, and the field by which a question names its problem, are specified in the [problem record](problem.md).
+- **The slots of a question admit a placeholder.** The rule is stated under [placeholders before records](../subject/subject-of-inquiry.md#^placeholder-slots).
 
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [belnap1976] ○ Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976; the entry was confirmed through library catalogues, and the division of a question into subject and request was not checked
 - [carnap1950_logical] ◐ Carnap, *Logical Foundations of Probability*, University of Chicago Press, 1950, ch. 1; explicandum, explicatum and the four requirements on an explication, checked through the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/carnap/)

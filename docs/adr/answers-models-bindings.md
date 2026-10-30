@@ -16,7 +16,7 @@ The [audits of the model design](../audits/_index.md) and the trials run on the 
 
 ## Decision
 
-**Questions.** The full atomic question, its aim together with its parameters, fixes the type of its direct answers. A research question is a graph of atomic questions, linked by the [links between questions](../epistemology/definitions/inquiry/problem-and-question.md#^linked-questions). A question may stay *open*, with no answer type yet, while its answer space is not formed.
+**Questions.** The full atomic question, its aim together with its parameters, fixes the type of its direct answers. A research question is a graph of atomic questions, linked by the [links between questions](../epistemology/inquiry/question.md#^linked-questions). A question may stay *open*, with no answer type yet, while its answer space is not formed.
 
 **Aims.** The aims form an open [registry](../epistemology/epistemic-task/epistemic-aim.md#^aim-registry), in which each entry states its [answer conditions](../epistemology/epistemic-task/epistemic-aim.md#^answer-conditions). Only the aims of answer content and of conceptual work generate an aim block. A change of accepted claims is not an aim, since it is the effect of accepting an answer. Understanding is not an aim either, since it is a dimension of assessment or a declared use of an answer.
 

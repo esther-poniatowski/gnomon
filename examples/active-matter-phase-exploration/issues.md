@@ -1,6 +1,6 @@
 ---
 tags:
-  - examples
+  - audit
 index: "[Active-matter phase exploration](examples/active-matter-phase-exploration/_index.md)"
 aliases:
   - Active-matter phase exploration issues

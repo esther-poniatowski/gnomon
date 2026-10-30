@@ -1,8 +1,8 @@
 ---
 tags:
-  - definition
+  - method
   - wip
-index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
+index: "[Epistemic activities](docs/epistemology/activities/_index.md)"
 aliases:
   - Model analysis
   - Derivational activities
@@ -38,20 +38,20 @@ The activities of this family output a **consequence**: a statement true of a mo
 
 ## Distinctions
 
-- **Verification belongs to simulation, and validation to evaluation.** Verification compares two [levels of a computation](../change/computation.md), the algorithm of the code and the function fixed by the model, without reference to the target. Therefore, verification stays within this family. [Validation](evaluation.md) asks whether the model is adequate to its target for a purpose.
+- **Verification belongs to simulation, and validation to evaluation.** Verification compares two [levels of a computation](../definitions/change/computation.md), the algorithm of the code and the function fixed by the model, without reference to the target. Therefore, verification stays within this family. [Validation](evaluation.md) asks whether the model is adequate to its target for a purpose.
 - **The norm of a thought experiment is contested.** On the argument view adopted here, a thought experiment can be reconstructed as an argument from the premises of its scenario [norton1996]. On a rival account, some scenarios give access to a law without such an argument [brown1991].
-- **Prediction as an activity differs from prediction as an aim.** The activity derives expected values from a model. The activity serves inquiries of every aim, for instance to test an explanation. The [aim of prediction](../../epistemic-task/epistemic-aim.md) makes a warranted expectation the product required of the whole inquiry.
-- **Every output of this family holds of the model only.** A consequence becomes a claim about the target only through a [theoretical hypothesis](../representations/claim-and-hypothesis.md) that links model and target.
+- **Prediction as an activity differs from prediction as an aim.** The activity derives expected values from a model. The activity serves inquiries of every aim, for instance to test an explanation. The [aim of prediction](../epistemic-task/epistemic-aim.md) makes a warranted expectation the product required of the whole inquiry.
+- **Every output of this family holds of the model only.** A consequence becomes a claim about the target only through a [theoretical hypothesis](../definitions/representations/claim-and-hypothesis.md) that links model and target.
 
 ## Consequences for a record
 
-- **Derivation discharges the proof obligations of a question.** The proof obligations $\omega$ of the [epistemic task](../../epistemic-task/epistemic-task.md) state the implications to be derived by an answer.
-- **Robustness analysis runs the robustness test of satisfaction.** The robustness test of the [conditions of satisfaction](../../answer/satisfaction-conditions.md) checks whether a conclusion survives the idealizations of the answer.
+- **Derivation discharges the proof obligations of a question.** The proof obligations $\omega$ of the [epistemic task](../epistemic-task/epistemic-task.md) state the implications to be derived by an answer.
+- **Robustness analysis runs the robustness test of satisfaction.** The robustness test of the [conditions of satisfaction](../answer/satisfaction-conditions.md) checks whether a conclusion survives the idealizations of the answer.
 
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [brown1991] ◐ [Brown, *The Laboratory of the Mind: Thought Experiments in the Natural Sciences*, Routledge, 1991](https://www.cambridge.org/core/journals/philosophy-of-science/article/abs/james-robert-brown-the-laboratory-of-the-mind-thought-experiments-in-the-natural-sciences-new-york-routledge-1991-xi-175-pp-4995-cloth/0A84321B5BCDAE346E84A3B9B27B57D6); checked through a published review
 - [levins1966] ◐ [Levins, "The strategy of model building in population biology", *American Scientist* 54(4), 421–431, 1966](https://www.zoology.ubc.ca/let/pdfs/Levins1966.pdf); robust theorems, p. 423

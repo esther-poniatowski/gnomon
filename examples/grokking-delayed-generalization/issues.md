@@ -1,6 +1,6 @@
 ---
 tags:
-  - examples
+  - audit
 index: "[Delayed generalization](examples/grokking-delayed-generalization/_index.md)"
 aliases:
   - Delayed-generalization specification issues

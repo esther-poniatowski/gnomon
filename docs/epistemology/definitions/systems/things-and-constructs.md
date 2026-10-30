@@ -78,7 +78,7 @@ Each term of the [vocabulary of inquiry](../_index.md) takes one status. A term 
 | [Course and grain](../change/process-event-history.md) | representational | a chosen index set and a chosen resolution |
 | [Mechanistic activity](../change/mechanistic-activity.md) | ontological | a producer of change in the world |
 | [Activity](../change/mechanistic-activity.md), as a state variable | representational | a variable of a chosen model |
-| [Epistemic activity](../activities/epistemic-activities.md) | ontological | an act of inquirers, occurring whether or not a record describes it |
+| [Epistemic activity](../../activities/epistemic-activities.md) | ontological | an act of inquirers, occurring whether or not a record describes it |
 | [Dynamic](../change/dynamic.md) | representational | an evolution map over a chosen state space |
 | [Action and interaction](../change/interaction-and-cause.md) | ontological | one thing changes the history of another |
 | [Statistical interaction](../change/interaction-and-cause.md) | representational | a property of a model of effects, relative to a chosen scale |
@@ -105,9 +105,9 @@ Each term of the [vocabulary of inquiry](../_index.md) takes one status. A term 
 | [Theory](../representations/theory.md) | representational | a set of claims, or a class of models |
 | [Framework and formalism](../representations/framework.md) | representational | a chosen vocabulary, set of elements, or calculus |
 | [Claim and hypothesis](../representations/claim-and-hypothesis.md) | representational | a proposition put forward for evaluation |
-| [Epistemic problem](../inquiry/epistemic-problem.md) | representational | a demand stated relative to a background of accepted claims |
-| [Question](../inquiry/problem-and-question.md) | representational | a request with a set of answers |
-| [Level of commitment](../inquiry/problem-and-question.md#^commitment-levels) | representational | the extent to which a record fixes the referent of a slot |
+| [Epistemic problem](../../inquiry/epistemic-problem.md) | representational | a demand stated relative to a background of accepted claims |
+| [Question](../../inquiry/question.md) | representational | a request with a set of answers |
+| [Level of commitment](../../inquiry/question.md#^commitment-levels) | representational | the extent to which a record fixes the referent of a slot |
 
 Two groups of terms invite a confusion of statuses: the terms that take two rows, and the relational terms. For each term with two senses, the note defining it fixes a name for each sense.
 

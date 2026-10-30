@@ -1,6 +1,6 @@
 ---
 tags:
-  - examples
+  - audit
 index: "[Earth-system tipping cascades](examples/earth-system-tipping-cascades/_index.md)"
 aliases:
   - Earth-system tipping-cascade issues

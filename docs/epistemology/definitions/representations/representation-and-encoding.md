@@ -38,7 +38,7 @@ which fixes the Euclidean distances between the images of two inputs, $\|e(u)-e(
 
 ## Consequences for a record
 
-- **One geometry can be the explanandum of one question and the explanans of another.** The example of the [linked questions](../inquiry/problem-and-question.md#^linked-questions) states the link between the two questions.
+- **One geometry can be the explanandum of one question and the explanans of another.** The example of the [linked questions](../../inquiry/question.md#^linked-questions) states the link between the two questions.
 - **Each representational item of the benchmark takes one place in the records.** The benchmark targets networks in their most abstract form, a [class of possible systems](model.md), so no item below is a claim about cortex. ^decision-table
 
 | Item | `phenomenon.category` | `explanans.factor` | Law `role` | Reading |

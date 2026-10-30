@@ -18,7 +18,7 @@ A candidate answer is evaluated at three levels: ^conditions-satisfaction
 2. **warrant**: is the answer established by the *route* that the specification implies?
 3. **appraisal** (adequacy): how well does an answer that passed serve the virtues that the question selected, and which of several such answers is then preferred?
 
-The first two levels *filter* the answers that *satisfy* the research question. For a candidate answer $h$ to a question $Q$, a member of the set $H$ of [proposed candidates](../definitions/inquiry/epistemic-problem.md#^candidates):
+The first two levels *filter* the answers that *satisfy* the research question. For a candidate answer $h$ to a question $Q$, a member of the set $H$ of [proposed candidates](../inquiry/epistemic-problem.md#^candidates):
 $$\mathrm{Sat}(h\mid Q)=\mathrm{Admissible}(h\mid Q)\wedge\mathrm{Warranted}(h\mid Q)$$
 The third level, by contrast, *appraises* only the answers that already pass, one at a time.
 
@@ -129,7 +129,7 @@ The verdicts of the tests and the appraisal are kept outside the answer, in one 
 
 - **A verdict of `not-applicable` is a *result*.** The record marks a test removed by an empty specification as `not-applicable`, instead of leaving it pending. A reader can then tell an untested candidate from a fully assessed one.
 
-- **An assessment ends at its verdicts.** Accepting an answer is a further act: a revision of the [background](../definitions/inquiry/epistemic-problem.md#^candidates), which moves the answer into the accepted claims, as the [acceptance of an answer](../epistemic-task/epistemic-aim.md#^acceptance) states.
+- **An assessment ends at its verdicts.** Accepting an answer is a further act: a revision of the [background](../inquiry/epistemic-problem.md#^candidates), which moves the answer into the accepted claims, as the [acceptance of an answer](../epistemic-task/epistemic-aim.md#^acceptance) states.
 
 ---
 ## Sources

@@ -1,8 +1,8 @@
 ---
 tags:
-  - definition
+  - method
   - wip
-index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
+index: "[Epistemic activities](docs/epistemology/activities/_index.md)"
 aliases:
   - Conceptual activities
   - Definition and explication
@@ -32,8 +32,8 @@ The activities of this family output a concept, a measurement procedure that app
 | --- | --- | --- |
 | `explicit-definition` | state necessary and sufficient conditions for a new term in terms already available | eliminability: the new term can be replaced by its definition in every formula; non-creativity: the definition yields no new theorem stated in the old terms [suppes1957] |
 | `explication` | replace a concept of ordinary or prescientific use by a precise concept | the explicatum is similar to the explicandum, exact, fruitful and simple [carnap1950_logical] |
-| `operationalization` | tie a concept to the operations that apply it, possibly under test conditions only | the procedure assigns values on a stated [scale](../quantities/scale-and-level.md) [bridgman1927] [carnap1936] [hempel1952] |
-| `classification` | group systems or observations by shared attributes into classes, following the [method of classification](../../../classification/_index.md) | the criterion of the partition is stated, and the projectibility of the classes is claimed or tested [goodman1955] [boyd1991] |
+| `operationalization` | tie a concept to the operations that apply it, possibly under test conditions only | the procedure assigns values on a stated [scale](../definitions/quantities/scale-and-level.md) [bridgman1927] [carnap1936] [hempel1952] |
+| `classification` | group systems or observations by shared attributes into classes, following the [method of classification](../../procedures/classification/_index.md) | the criterion of the partition is stated, and the projectibility of the classes is claimed or tested [goodman1955] [boyd1991] |
 | `concept-revision` | restructure a concept that fails to cover a phenomenon, through models and analogies | the revised concept covers the anomalous phenomenon and keeps the prior successes of the concept [nersessian2008] [thagard1992] |
 
 ## Distinctions
@@ -44,14 +44,14 @@ The activities of this family output a concept, a measurement procedure that app
 
 ## Consequences for a record
 
-- **A derived term of an answer is introduced by an explicit definition.** The [derived terms of a model](../../answer/model-and-binding.md#^derived-terms) can be eliminated by substituting their definitions, so the norm of explicit definition applies to them.
-- **An explanandum variable operationalizes a phenomenon.** The [specification of the phenomenon](../../subject/phenomenon.md) restates a behavior through observables, each on a stated scale. A phenomenon first stated by a qualitative label may be operationalized later, when its manifestation gains features that parametrize it. For a phenomenon of category *capacity*, the operationalization is the [criterion of performance](../regularities/capacity-and-disposition.md) that tests the conditional of the capacity.
-- **The reference class of a target records a classification.** The [specification of the target system](../../subject/target-system.md) states the class of admissible systems, and records whether its projectibility is assumed, tested or not claimed.
+- **A derived term of an answer is introduced by an explicit definition.** The [derived terms of a model](../answer/model-and-binding.md#^derived-terms) can be eliminated by substituting their definitions, so the norm of explicit definition applies to them.
+- **An explanandum variable operationalizes a phenomenon.** The [specification of the phenomenon](../subject/phenomenon.md) restates a behavior through observables, each on a stated scale. A phenomenon first stated by a qualitative label may be operationalized later, when its manifestation gains features that parametrize it. For a phenomenon of category *capacity*, the operationalization is the [criterion of performance](../definitions/regularities/capacity-and-disposition.md) that tests the conditional of the capacity.
+- **The reference class of a target records a classification.** The [specification of the target system](../subject/target-system.md) states the class of admissible systems, and records whether its projectibility is assumed, tested or not claimed.
 
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [boyd1991] ◐ [Boyd, "Realism, anti-foundationalism and the enthusiasm for natural kinds", *Philosophical Studies* 61(1–2), 127–148, 1991](https://doi.org/10.1007/BF00385837); defends homeostatic property cluster kinds, introduced in earlier papers of the author
 - [bridgman1927] ◐ [Bridgman, *The Logic of Modern Physics*, Macmillan, 1927](https://www.gutenberg.org/ebooks/70620)

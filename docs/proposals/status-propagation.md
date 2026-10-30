@@ -1,6 +1,6 @@
 ---
 tags:
-  - ideas
+  - proposal
 index: "[Proposals](docs/proposals/_index.md)"
 aliases:
   - Proposals for status propagation
@@ -11,7 +11,7 @@ The goal [`status-propagation`](../../TODO.md) decides which changes of the atti
 
 ## Revision operations
 
-Belief revision names five operations on an epistemic state: expansion adds a claim without resolving a conflict, revision adds a claim while preserving consistency, contraction removes a commitment, consolidation restores consistency after a contradiction, and merge combines two epistemic states. The [note on revision](../epistemology/definitions/activities/revision.md) already adopts expansion, contraction and revision, under the AGM postulates, as the activity `belief-revision`. The candidate adds consolidation and merge, and offers the five operations as the classes of change that the goal sorts: the goal can state, for each operation, whether it marks the records resting on the changed claim for review.
+Belief revision names five operations on an epistemic state: expansion adds a claim without resolving a conflict, revision adds a claim while preserving consistency, contraction removes a commitment, consolidation restores consistency after a contradiction, and merge combines two epistemic states. The [note on revision](../epistemology/activities/revision.md) already adopts expansion, contraction and revision, under the AGM postulates, as the activity `belief-revision`. The candidate adds consolidation and merge, and offers the five operations as the classes of change that the goal sorts: the goal can state, for each operation, whether it marks the records resting on the changed claim for review.
 
 **Literature.** The AGM theory of belief revision, as stated in [belief revision and dynamic epistemic logic](../references/belief-revision-dynamic-epistemic-logic.md).
 

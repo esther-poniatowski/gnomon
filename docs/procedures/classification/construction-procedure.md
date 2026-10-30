@@ -1,7 +1,7 @@
 ---
 tags:
-  - reference
-index: "[Classification](docs/classification/_index.md)"
+  - procedure
+index: "[Classification](docs/procedures/classification/_index.md)"
 aliases:
   - Taxonomic construction procedure
 ---
@@ -9,7 +9,7 @@ aliases:
 
 > [!QUESTION] Goal: How can a finite, crisp object–attribute table yield a reduced qualitative feature system with explicit preservation guarantees and dependencies?
 
-The procedure constructs a **qualitative feature system** over a finite object universe. The feature system contains operational attributes with value sets. Typed dependency statements record relations supported by the analyzed table. The feature-system output stops before the taxonomic layer. The [planned extension from feature systems to taxonomies](taxonomy-extension-plan.md) specifies that layer and compares routes for constructing it. ^scope-output-boundary
+The procedure constructs a **qualitative feature system** over a finite object universe. The feature system contains operational attributes with value sets. Typed dependency statements record relations supported by the analyzed table. The feature-system output stops before the taxonomic layer. The [planned extension from feature systems to taxonomies](../../proposals/classification-method.md) specifies that layer and compares routes for constructing it. ^scope-output-boundary
 
 ==FIX: [scope-output · implemented-review] The current output now stops at a qualitative feature system. Review the linked extension plan before adding the taxonomic layer to this procedure.==
 

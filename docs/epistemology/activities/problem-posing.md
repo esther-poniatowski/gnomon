@@ -1,8 +1,8 @@
 ---
 tags:
-  - definition
+  - method
   - wip
-index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
+index: "[Epistemic activities](docs/epistemology/activities/_index.md)"
 aliases:
   - Problem-posing activities
   - Problematization
@@ -15,7 +15,7 @@ aliases:
 
 > [!QUESTION] Goal: which activities turn a source into a problem and a problem into a question, and by which norm is each judged?
 
-The activities of this family output the objects that open an inquiry: a problem, a question schema, an identified subject or a question. These objects are defined in the notes on the [epistemic problem](../inquiry/epistemic-problem.md) and on [problems and questions](../inquiry/problem-and-question.md), together with the [levels of commitment](../inquiry/problem-and-question.md#^commitment-levels) of a slot. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output the objects that open an inquiry: a problem, a question schema, an identified subject or a question. These objects are defined in the notes on the [epistemic problem](../inquiry/epistemic-problem.md) and on [problems and questions](../inquiry/question.md), together with the [levels of commitment](../inquiry/question.md#^commitment-levels) of a slot. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 
@@ -47,14 +47,14 @@ The activities of this family output the objects that open an inquiry: a problem
 
 ## Consequences for a record
 
-- **Problematization fills the problem record.** The [specification of the problem](../../inquiry/problem.md) holds the demand, the constraints with their sources, and the explicanda with their pointers.
-- **Question formulation and subject identification fill the subject of a question in two passes.** The [statement frame of a question](../../subject/subject-of-inquiry.md#^question-statement) first receives a placeholder in each slot, then a record id at commitment `identified`. As a result, the record changes type from `question-schema` to `question`, as the [itinerary check](epistemic-activities.md#^itinerary-check) reads it.
-- **Decomposition links a subquestion to its question.** The subquestion carries a link with the relation `subquestion-of`. The [governing criterion of a decomposition](../../inquiry/question-decomposition.md#^governing-criterion) admits a serving question only when resolving it changes the status of the question that it serves.
+- **Problematization fills the problem record.** The [specification of the problem](../inquiry/problem.md) holds the demand, the constraints with their sources, and the explicanda with their pointers.
+- **Question formulation and subject identification fill the subject of a question in two passes.** The [statement frame of a question](../subject/subject-of-inquiry.md#^question-statement) first receives a placeholder in each slot, then a record id at commitment `identified`. As a result, the record changes type from `question-schema` to `question`, as the [itinerary check](epistemic-activities.md#^itinerary-check) reads it.
+- **Decomposition links a subquestion to its question.** The subquestion carries a link with the relation `subquestion-of`. The [governing criterion of a decomposition](../inquiry/question-decomposition.md#^governing-criterion) admits a serving question only when resolving it changes the status of the question that it serves.
 
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [belnap1976] ◐ [Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976](https://search.worldcat.org/search?q=bn:0300019629); checked through library records and published reviews
 - [dewey1938] ◐ [Dewey, *Logic: The Theory of Inquiry*, Henry Holt, 1938](https://search.worldcat.org/oclc/229987); ch. 6, "The pattern of inquiry": a problem is formulated from an indeterminate situation, checked through secondary summaries

@@ -1,8 +1,8 @@
 ---
 tags:
-  - definition
+  - method
   - wip
-index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
+index: "[Epistemic activities](docs/epistemology/activities/_index.md)"
 aliases:
   - Epistemic activities
   - Taxonomy of epistemic activities
@@ -17,7 +17,7 @@ aliases:
 Each **epistemic activity** of an inquiry is typed by its inputs, its output and its norm. These types serve one purpose: a research itinerary can be checked step by step.
 
 > [!IMPORTANT] Notes and registries
-> The taxonomy is a synthesis proposed by this method. Each family note cites the sources of its activities one by one. The notes are the source of the content: the [registry of activities](../../../../src/gnomon/data/registries/activities.yml) and the [registry of product types](../../../../src/gnomon/data/registries/product-types.yml) transcribe them. Therefore, a change must start in the notes.
+> The taxonomy is a synthesis proposed by this method. Each family note cites the sources of its activities one by one. The notes are the source of the content: the [registry of activities](../../../src/gnomon/data/registries/activities.yml) and the [registry of product types](../../../src/gnomon/data/registries/product-types.yml) transcribe them. Therefore, a change must start in the notes.
 
 ## Criterion of an epistemic activity
 
@@ -100,27 +100,27 @@ The product types form a closed list. Each type classifies the epistemic objects
 | --- | --- | --- | --- |
 | `source` | a document, a dataset or a result external to the inquiry | external pointer, held by the `sources` of a problem and the `pointers` of an identification | exists |
 | `problem` | a demand for a solution under constraints, defined in the note on the [epistemic problem](../inquiry/epistemic-problem.md) | `problem` | exists |
-| `question-schema` | a [question schema](../inquiry/problem-and-question.md#^question-schema), whose slots are typed placeholders | `question`, with placeholder slots | exists |
-| `identified-subject` | the system and the phenomenon of a question, at the [level of commitment](../inquiry/problem-and-question.md#^commitment-levels) `identified` or above | `target-system` and `phenomenon` at commitment `identified` or above | exists |
+| `question-schema` | a [question schema](../inquiry/question.md#^question-schema), whose slots are typed placeholders | `question`, with placeholder slots | exists |
+| `identified-subject` | the system and the phenomenon of a question, at the [level of commitment](../inquiry/question.md#^commitment-levels) `identified` or above | `target-system` and `phenomenon` at commitment `identified` or above | exists |
 | `question` | a question whose slots refer to records | `question`, with every slot at commitment `identified` or above | exists |
 | `concept` | a term with its definition or its explication | `to-create` | to-create |
-| `measurement-procedure` | a procedure that assigns values to a quantity on a stated [scale](../quantities/scale-and-level.md) | `variables[].scale` and `variables[].expression` | partial |
-| `classification` | a partition of systems into [classes](../systems/kind-class-population.md) | `target-system.reference_class` | exists |
+| `measurement-procedure` | a procedure that assigns values to a quantity on a stated [scale](../definitions/quantities/scale-and-level.md) | `variables[].scale` and `variables[].expression` | partial |
+| `classification` | a partition of systems into [classes](../definitions/systems/kind-class-population.md) | `target-system.reference_class` | exists |
 | `design` | a plan of observations, interventions or simulation runs, with their conditions | `to-create` | to-create |
-| `data` | the recorded [values](../quantities/variable-value-observable.md) of observables | `phenomenon.data` | partial |
-| `phenomenon` | a stable feature of a target, detected from data, as defined in the note on [phenomena](../regularities/pattern-and-phenomenon.md) | `phenomenon` | exists |
-| `target-specification` | the declared constituents and quantities of a [target](../systems/things-and-constructs.md) | `target-system` at commitment `specified` | exists |
-| `background-model` | the laws admitted about a target, with their closure and organization | [`background`](../../subject/background.md) | exists |
-| `model` | a candidate [model](../representations/model.md) of the target | [`model`](../../answer/model-and-binding.md#^model-record) | exists |
-| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | [`binding`](../../answer/model-and-binding.md#^binding-record) | exists |
-| `key` | a shared, versioned map between the side of a model and the side of its target | [`key`](../../answer/model-and-binding.md#^key-record) | exists |
+| `data` | the recorded [values](../definitions/quantities/variable-value-observable.md) of observables | `phenomenon.data` | partial |
+| `phenomenon` | a stable feature of a target, detected from data, as defined in the note on [phenomena](../definitions/regularities/pattern-and-phenomenon.md) | `phenomenon` | exists |
+| `target-specification` | the declared constituents and quantities of a [target](../definitions/systems/things-and-constructs.md) | `target-system` at commitment `specified` | exists |
+| `background-model` | the laws admitted about a target, with their closure and organization | [`background`](../subject/background.md) | exists |
+| `model` | a candidate [model](../definitions/representations/model.md) of the target | [`model`](../answer/model-and-binding.md#^model-record) | exists |
+| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | [`binding`](../answer/model-and-binding.md#^binding-record) | exists |
+| `key` | a shared, versioned map between the side of a model and the side of its target | [`key`](../answer/model-and-binding.md#^key-record) | exists |
 | `consequence` | a statement true of a model, possibly false of the target | the block of model knowledge of an `answer`, and `assessment.obligations` | partial |
-| `hypothesis` | a [claim](../representations/claim-and-hypothesis.md) with the attitude `hypothesized` | `answer` with status `hypothesized` | exists |
+| `hypothesis` | a [claim](../definitions/representations/claim-and-hypothesis.md) with the attitude `hypothesized` | `answer` with status `hypothesized` | exists |
 | `verdict` | the outcome of a test of a claim or of a model | `assessment.tests` | exists |
 | `credence` | a degree of belief in a claim | `assessment.credence` | exists |
 | `ranking` | an order over rival candidates | `assessment.appraisal.preferred_over` | exists |
 | `explanation` | the claim that an explanans explains a phenomenon under the requested relation | the block of an explanation of an `answer` | exists |
-| `inter-theory-relation` | a relation of unification, reduction or integration between [theories](../representations/theory.md) | `to-create` | to-create |
+| `inter-theory-relation` | a relation of unification, reduction or integration between [theories](../definitions/representations/theory.md) | `to-create` | to-create |
 | `knowledge-state-change` | a change of the attitude or of the status of existing records | changes of the record `status`; a revision log is to create | partial |
 
 A theory enters an activity as a `model`, read as a class of models. A framework changes only through the verdicts that motivate the change, so no product type names a framework.
@@ -131,7 +131,7 @@ Four terms describing an inquiry are often used for one another:
 
 | Term | Definition | Question that the term answers | Example | Owning note |
 | --- | --- | --- | --- | --- |
-| Aim | the cognitive achievement sought by an inquiry | which knowledge is sought? | explanation of a gamma oscillation | [epistemic aim](../../epistemic-task/epistemic-aim.md) |
+| Aim | the cognitive achievement sought by an inquiry | which knowledge is sought? | explanation of a gamma oscillation | [epistemic aim](../epistemic-task/epistemic-aim.md) |
 | Activity | a typed operation, specified by its [signature](#^activity-criterion) | which object is produced from which objects, under which norm? | model selection | this folder |
 | Mode of inference | the type of inference performed by an activity | by which type of inference? | induction | this note |
 | Method | a concrete procedure that implements an activity | by which procedure? | Markov chain Monte Carlo, implementing confirmation; the Akaike information criterion, implementing model selection | this note |
@@ -139,8 +139,8 @@ Four terms describing an inquiry are often used for one another:
 The word *explanation* names three objects, each owned by one note: ^explanation-senses
 
 - the **activity** of explanation shows that an explanans bears the requested relation to a phenomenon, as typed in the note on [explanation and integration](explanation-and-integration.md);
-- the **product** is a claim, defined in the note on [claims](../representations/claim-and-hypothesis.md) and held by the product type `explanation`;
-- the **aim** of explanation is the achievement sought by an inquiry that asks why or how, fixed by the [epistemic aim](../../epistemic-task/epistemic-aim.md).
+- the **product** is a claim, defined in the note on [claims](../definitions/representations/claim-and-hypothesis.md) and held by the product type `explanation`;
+- the **aim** of explanation is the achievement sought by an inquiry that asks why or how, fixed by the [epistemic aim](../epistemic-task/epistemic-aim.md).
 
 ## Relations among activities
 
@@ -153,7 +153,7 @@ Two relations hold among activities across the families:
 
 > [!NOTE] The activity record and the itinerary check are proposals of this method
 
-A step of a research itinerary instantiates one activity type. The [itinerary record](../../inquiry/itinerary.md) states each step by its activity and its signature, with the verdict of its norm.
+A step of a research itinerary instantiates one activity type. The [itinerary record](../inquiry/itinerary.md) states each step by its activity and its signature, with the verdict of its norm.
 
 An itinerary passes the **itinerary check** when five conditions hold: ^itinerary-check
 
@@ -163,16 +163,16 @@ An itinerary passes the **itinerary check** when five conditions hold: ^itinerar
 - the steps, linked by their input references, form a directed acyclic graph;
 - every verdict is `pass`, `fail` or `pending`.
 
-The itinerary record adds checks of its own fields, such as unique step identifiers, stated with the [record checks of an itinerary](../../inquiry/itinerary.md#^record-checks).
+The itinerary record adds checks of its own fields, such as unique step identifiers, stated with the [record checks of an itinerary](../inquiry/itinerary.md#^record-checks).
 
 The type of a referenced record follows from its state, as the [record column of the product types](#^product-types) states. For a question record, the state is the commitment of its slots. With a placeholder slot, the record has type `question-schema`. With every slot at commitment `identified` or above, the record has type `question`. Therefore, a schema becomes a question when [subject identification](problem-posing.md) raises its slots, and no activity of its own is needed.
 
-The check matches types only, so an itinerary that passes it is well formed. The success of each step is decided separately, by the verdict of its norm. Each step has the form of an action schema in [classical planning](../../../references/ai-planning-pddl.md): the input types play the part of preconditions, and the output type plays the part of an effect. A step can decompose into sub-steps, as a compound task does in [hierarchical task network planning](../../../references/hierarchical-task-network-planning.md).
+The check matches types only, so an itinerary that passes it is well formed. The success of each step is decided separately, by the verdict of its norm. Each step has the form of an action schema in [classical planning](../../references/ai-planning-pddl.md): the input types play the part of preconditions, and the output type plays the part of an effect. A step can decompose into sub-steps, as a compound task does in [hierarchical task network planning](../../references/hierarchical-task-network-planning.md).
 
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [alchourron1985] ◐ [Alchourrón, Gärdenfors & Makinson, "On the logic of theory change: partial meet contraction and revision functions", *Journal of Symbolic Logic* 50(2), 510–530, 1985](https://doi.org/10.2307/2274239)
 - [chang2004] ◐ [Chang, *Inventing Temperature: Measurement and Scientific Progress*, Oxford University Press, 2004](https://doi.org/10.1093/0195171276.001.0001)

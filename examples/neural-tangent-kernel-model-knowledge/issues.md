@@ -1,6 +1,6 @@
 ---
 tags:
-  - examples
+  - audit
 index: "[Neural tangent dynamics](examples/neural-tangent-kernel-model-knowledge/_index.md)"
 aliases:
   - Neural tangent kernel model-knowledge issues

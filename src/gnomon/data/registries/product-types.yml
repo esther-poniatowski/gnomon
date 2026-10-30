@@ -1,6 +1,6 @@
 # Registry of the types of epistemic product: the closed list of the inputs and the outputs of
 # the epistemic activities. The itinerary check reads this registry, and the overview of the activity
-# taxonomy documents the list (`docs/epistemology/definitions/activities/epistemic-activities.md`).
+# taxonomy documents the list (`docs/epistemology/activities/epistemic-activities.md`).
 #
 # The list derives from the taxonomy, not from the records of the framework. When no record kind
 # holds a type yet, the type stays in the list, marked `to-create`, so that the records are

@@ -1,6 +1,6 @@
 ---
 tags:
-  - ideas
+  - proposal
 index: "[Proposals](docs/proposals/_index.md)"
 aliases:
   - Proposals for the vocabulary records

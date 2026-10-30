@@ -1,15 +1,18 @@
 ---
 tags:
-  - gaps
-index: "[Classification](docs/classification/_index.md)"
+  - proposal
+index: "[Proposals](docs/proposals/_index.md)"
 aliases:
+  - Proposals for the classification method
   - Taxonomy extension plan
 ---
-# Extending the feature system into a taxonomy
+# Proposals for the classification method
 
 > [!QUESTION] Goal: Which additional structures and decisions turn the current qualitative feature system into an explicit taxonomy?
 
-The [current construction procedure](construction-procedure.md) produces a feature system. Its output records the analyzed objects and their operational feature profiles. The output also states dependencies supported by the analyzed table. A taxonomy requires a further representational layer:
+The goal [`classification-method`](../../TODO.md) completes the method of the activity `classification`, whose [procedures](../procedures/classification/_index.md) stop at the feature system.
+
+The [current construction procedure](../procedures/classification/construction-procedure.md) produces a feature system. Its output records the analyzed objects and their operational feature profiles. The output also states dependencies supported by the analyzed table. A taxonomy requires a further representational layer:
 
 - a set of **taxa** $T$;
 - a **membership relation** $\mu\subseteq U\times T$, or a single-valued assignment $c:U\to T$ when the taxa form a partition;

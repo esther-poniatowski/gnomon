@@ -1,6 +1,6 @@
 ---
 tags:
-  - examples
+  - audit
 index: "[Turbulence anomalous scaling](examples/turbulence-anomalous-scaling/_index.md)"
 aliases:
   - Turbulence anomalous-scaling specification issues

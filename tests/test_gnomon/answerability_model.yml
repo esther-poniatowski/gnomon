@@ -1,12 +1,12 @@
-# Data of the model behind `docs/epistemology/definitions/inquiry/conditions-of-answerability.md` and
+# Data of the model behind `docs/epistemology/inquiry/conditions-of-answerability.md` and
 # `docs/epistemology/inquiry/next-act.md`. `test_answerability_model.py` checks three things: that each quoted
 # norm occurs in the note of its activity, that the dependency table of the conditions note states the
 # dependencies below route by route, and that the activity map of the procedure note lists the activities
 # below. The reasons are not checked; they justify each entry for a reader.
 
 sources:
-  norms: docs/epistemology/definitions/activities
-  conditions: docs/epistemology/definitions/inquiry/conditions-of-answerability.md
+  norms: docs/epistemology/activities
+  conditions: docs/epistemology/inquiry/conditions-of-answerability.md
   procedure: docs/epistemology/inquiry/next-act.md
 
 # The conditions for obtaining an answer. The order is topological: each condition depends only on

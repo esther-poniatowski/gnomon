@@ -27,7 +27,7 @@ Only the first sense is specific to mechanistic explanation. This note fixes the
 | Mechanistic | new mechanistic philosophy | "Activities are the producers of change"; "Entities are the things that engage in activities", and an activity usually requires that its entities have properties of specific types | pushing, binding, opening, diffusing | [machamer2000] |
 | Aspectual | philosophy of language, ancient philosophy | an atelic predicate, with the subinterval property; a Vendler activity, a process in the sense of Mourelatos, an *energeia* as opposed to a *kinēsis* | running, raining, computing | [vendler1957]; [mourelatos1978]; [aristotle_metaphysics]; [kenny1963] |
 | State variable | neuroscience | the level of firing or of another signal of a neural population, such as the rate $r$ in $\dot r=-r+\phi(Wr+u)$, with an external input $u$ | "neural activity", "population activity" | — |
-| Epistemic | philosophy of science, this method | an act of inquiry, typed by its inputs, its output and its norm in the [taxonomy of epistemic activities](../activities/epistemic-activities.md) | formulating a question, fitting a model, testing a hypothesis | — |
+| Epistemic | philosophy of science, this method | an act of inquiry, typed by its inputs, its output and its norm in the [taxonomy of epistemic activities](../../activities/epistemic-activities.md) | formulating a question, fitting a model, testing a hypothesis | — |
 
 A mechanistic activity carries four features [machamer2000] [machamer2004]:
 

@@ -1,8 +1,8 @@
 ---
 tags:
-  - definition
+  - method
   - wip
-index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
+index: "[Epistemic activities](docs/epistemology/activities/_index.md)"
 aliases:
   - Empirical activities
   - Experimental design
@@ -14,7 +14,7 @@ aliases:
 
 > [!QUESTION] Goal: which activities design an inquiry into a target and obtain data and phenomena from it, and by which norm is each judged?
 
-The activities of this family output a design of inquiry, [data](../quantities/variable-value-observable.md) or a [phenomenon](../regularities/pattern-and-phenomenon.md). Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a design of inquiry, [data](../definitions/quantities/variable-value-observable.md) or a [phenomenon](../definitions/regularities/pattern-and-phenomenon.md). Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 
@@ -39,20 +39,20 @@ The activities of this family output a design of inquiry, [data](../quantities/v
 ## Distinctions
 
 - **Design and execution differ in their output.** Experimental design outputs a design, judged before any datum exists by its possible outcomes. Observation, measurement and intervention execute a design, and output data.
-- **Observation and measurement differ in their requirements.** Observation produces records of features. Such records may be categorical, with no numerical representation. Measurement requires a [scale](../quantities/scale-and-level.md), and on the model-based account also a model of the measuring process [tal2020].
+- **Observation and measurement differ in their requirements.** Observation produces records of features. Such records may be categorical, with no numerical representation. Measurement requires a [scale](../definitions/quantities/scale-and-level.md), and on the model-based account also a model of the measuring process [tal2020].
 - **Observation and intervention differ by manipulation.** An intervention sets a variable, whereas observation records the target as it is [hacking1983]. Therefore, an intervention can support a causal claim under fewer assumptions about confounders than observation requires [woodward2003].
 - **Phenomenon detection is an inference.** The data of one procedure carry its idiosyncrasies, so a phenomenon is typically detected by comparing data across procedures [bogen1988].
 
 ## Consequences for a record
 
-- **The evidential status of a phenomenon records the outcome of detection.** The [specification of the phenomenon](../../subject/phenomenon.md) grades that status, and its detection criterion states the norm for a candidate pattern.
-- **A law with the role *measurement* states the observation map of an instrument.** The [background record](../../subject/background.md) admits laws in that role, so the model of the measuring process required by the model-based account has a place in the records.
-- **A clamped variable in the domain records an intervention.** A [clamped state variable](../../subject/domain.md) is removed from the dynamics and treated as an input, just as an intervention replaces the equation of its target variable.
+- **The evidential status of a phenomenon records the outcome of detection.** The [specification of the phenomenon](../subject/phenomenon.md) grades that status, and its detection criterion states the norm for a candidate pattern.
+- **A law with the role *measurement* states the observation map of an instrument.** The [background record](../subject/background.md) admits laws in that role, so the model of the measuring process required by the model-based account has a place in the records.
+- **A clamped variable in the domain records an intervention.** A [clamped state variable](../subject/domain.md) is removed from the dynamics and treated as an input, just as an intervention replaces the equation of its target variable.
 
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [bogen1988] ◐ [Bogen & Woodward, "Saving the phenomena", *Philosophical Review* 97(3), 303–352, 1988](https://doi.org/10.2307/2185445)
 - [fisher1935] ◐ [Fisher, *The Design of Experiments*, Oliver and Boyd, 1935](https://en.wikipedia.org/wiki/The_Design_of_Experiments); randomization, replication and blocking as principles of design, checked through secondary summaries

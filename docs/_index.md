@@ -18,7 +18,7 @@ Directs a reader of `gnomon` to the folder that answers a class of question abou
 ## Method
 
 - [Epistemology](epistemology/_index.md): specifies an inquiry record by record, with the results of the philosophy of science that support each choice
-- [Classification](classification/_index.md): guides the performance of the activity `classification`
+- [Procedures](procedures/_index.md): guides the performance of an epistemic activity
 - [Worked inquiries](../examples/_index.md): tests the framework on completed inquiry records and on adversarial research statements
 
 ## Decisions and their grounds

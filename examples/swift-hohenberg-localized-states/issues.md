@@ -1,6 +1,6 @@
 ---
 tags:
-  - examples
+  - audit
 index: "[Localized Swift-Hohenberg states](examples/swift-hohenberg-localized-states/_index.md)"
 aliases:
   - Swift-Hohenberg description issues

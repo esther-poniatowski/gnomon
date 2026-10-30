@@ -1,8 +1,8 @@
 ---
 tags:
-  - definition
+  - method
   - wip
-index: "[Problems and questions](docs/epistemology/definitions/inquiry/_index.md)"
+index: "[Inquiry](docs/epistemology/inquiry/_index.md)"
 aliases:
   - Epistemic problem
   - Problem
@@ -33,7 +33,7 @@ A problem is the triple ^problem-triple
 
 $$\pi=\langle K,\ d,\ \Phi\rangle .$$
 
-Each component answers one question about the problem: relative to which knowledge, for which result, and under which conditions. The symbols are registered in the [notation](../../language/notation.md).
+Each component answers one question about the problem: relative to which knowledge, for which result, and under which conditions. The symbols are registered in the [notation](../language/notation.md).
 
 ### The background $K$
 
@@ -96,7 +96,7 @@ In words: the accepted knowledge establishes that a result of the demanded type 
 
 ## How a problem ends
 
-A problem ends in one of three ways, and the [problem record](../../inquiry/problem.md) fixes their record values. Two of the three ways have a formal condition: ^problem-outcomes
+A problem ends in one of three ways, and the [problem record](problem.md) fixes their record values. Two of the three ways have a formal condition: ^problem-outcomes
 
 - **Solved**: a candidate of the demanded type meets the constraints and the request, and its assessment has moved it from $H$ into $K$.
 - **Dissolved**: the revised background yields the negation of a presupposition of $Q_\pi$, its existence presupposition or its topic presupposition. No result of the demanded kind exists, so no solution is needed. *Example*: the delay appears only in a thresholded accuracy, while the test loss falls from the start of training. In that case, no delay of learning exists, and the problem of explaining it dissolves.
@@ -112,7 +112,7 @@ Therefore, every inquiring question $Q$ carries a **minimal problem**: ^minimal-
 
 $$\pi_Q=\langle K,\ d_Q,\ \Phi_Q\rangle .$$
 
-The demand $d_Q$ takes the type of result and the request of $Q$. Its explicanda $\Xi_Q$ are the terms of $Q$ that enter by their anchored use rather than as typed slots. The constraints $\Phi_Q$ carry the remaining specifications of $Q$ as conditions on each candidate: its subject, its contrast and its [epistemic task](../../epistemic-task/epistemic-task.md). The associated question of $\pi_Q$ is therefore $Q$ itself. In words: the minimal problem of a question states that its answer is lacking, so it exists for every inquiring question. The minimal problem has an epistemic gap once the background establishes the existence presupposition of $Q$.
+The demand $d_Q$ takes the type of result and the request of $Q$. Its explicanda $\Xi_Q$ are the terms of $Q$ that enter by their anchored use rather than as typed slots. The constraints $\Phi_Q$ carry the remaining specifications of $Q$ as conditions on each candidate: its subject, its contrast and its [epistemic task](../epistemic-task/epistemic-task.md). The associated question of $\pi_Q$ is therefore $Q$ itself. In words: the minimal problem of a question states that its answer is lacking, so it exists for every inquiring question. The minimal problem has an epistemic gap once the background establishes the existence presupposition of $Q$.
 
 > [!NOTE] Questions outside inquiry
 > The asker of an examination question or of a rhetorical question already holds the answer. Such a question carries no minimal problem and serves no inquiry.
@@ -145,19 +145,19 @@ Reduction can be conjunctive: $\pi_1$ reduces to $\pi_2$ and $\pi_3$ together wh
 ## Distinctions
 
 - **A gap is not a problem, and a problem need not have a gap.** A problem exists while its demand is unmet, and it has a gap when its background also establishes the existence presupposition. The gap states a lack, whereas the problem adds the demand and its constraints, which fix the result that would fill the gap.
-- **The explicanda of a problem and the placeholders of a question fix a term along two different dimensions.** An explicandum of a problem is *anchored*: a pointer fixes its use, and no type is given. A [placeholder](problem-and-question.md#^question-schema) is *typed*: its kind is fixed, and no referent is given. The level `identified` of a slot fixes both the type and the referent.
-- **The request is not the aim.** The request fixes how many results, and how complete, the demand asks for. The [epistemic aim](../../epistemic-task/epistemic-aim.md) fixes the kind of knowledge that a question seeks.
-- **"Epistemic problem" names the problem defined here.** The [epistemic task](../../epistemic-task/epistemic-task.md) of a question fixes the kind of knowledge that its answer must deliver. The task belongs to the question, not to the problem.
+- **The explicanda of a problem and the placeholders of a question fix a term along two different dimensions.** An explicandum of a problem is *anchored*: a pointer fixes its use, and no type is given. A [placeholder](question.md#^question-schema) is *typed*: its kind is fixed, and no referent is given. The level `identified` of a slot fixes both the type and the referent.
+- **The request is not the aim.** The request fixes how many results, and how complete, the demand asks for. The [epistemic aim](../epistemic-task/epistemic-aim.md) fixes the kind of knowledge that a question seeks.
+- **"Epistemic problem" names the problem defined here.** The [epistemic task](../epistemic-task/epistemic-task.md) of a question fixes the kind of knowledge that its answer must deliver. The task belongs to the question, not to the problem.
 
 ## Consequences for a record
 
-- **A problem record states its demand, its constraints and its explicanda.** The fields are specified in the [problem record](../../inquiry/problem.md).
+- **A problem record states its demand, its constraints and its explicanda.** The fields are specified in the [problem record](problem.md).
 - **A typed demand makes the existence of a problem checkable over the records.** Over the accepted records of an inquiry, the problem exists when no accepted record of the demanded type gives a direct answer of $Q_\pi$. This condition is also the second condition of the gap.
 
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [aqvist1965] ○ Åqvist, *A New Approach to the Logical Theory of Interrogatives*, Filosofiska Studier, Uppsala, 1965; a question as the imperative "let it be the case that I know …"
 - [belnap1976] ○ Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976; the subject of a question and its request, fixing the number and the completeness of the answers selected

@@ -10,7 +10,7 @@ aliases:
 Fixes the senses of the terms that name a change in a described system and the producers of that change, and the criteria that separate those terms.
 
 > [!WARNING] Notes with neighboring names
-> [Mechanistic activity](mechanistic-activity.md) fixes the sense of an activity as a producer of change in a mechanism, whereas the [epistemic activities](../activities/_index.md) type the operations of an inquiry.
+> [Mechanistic activity](mechanistic-activity.md) fixes the sense of an activity as a producer of change in a mechanism, whereas the [epistemic activities](../../activities/_index.md) type the operations of an inquiry.
 
 - [Process, event and history](process-event-history.md): classifies a predicate on a declared course as a state, a process or an event
 - [Mechanistic activity](mechanistic-activity.md): tells a mechanistic activity from a process, an interaction, an event, a function and a dynamic

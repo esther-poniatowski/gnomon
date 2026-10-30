@@ -1,7 +1,7 @@
 ---
 tags:
-  - reference
-index: "[Classification](docs/classification/_index.md)"
+  - procedure
+index: "[Classification](docs/procedures/classification/_index.md)"
 aliases:
   - Taxonomic construction principles
 ---
@@ -50,7 +50,7 @@ The traditions bear on three questions about a classification:
 
 ## Sources
 
-Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks). The works of Bailey, Boyd, Carnap, Dupré, Hacking and Mill, and the encyclopedia articles, are carried over from the two earlier variants of this note; the bibliographic data of the other works are completed from standard knowledge. No entry was checked anew, so each carries ○.
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks). The works of Bailey, Boyd, Carnap, Dupré, Hacking and Mill, and the encyclopedia articles, are carried over from the two earlier variants of this note; the bibliographic data of the other works are completed from standard knowledge. No entry was checked anew, so each carries ○.
 
 - [bailey1994] ○ Bailey, *Typologies and Taxonomies: An Introduction to Classification Techniques*, Sage, 1994
 - [bowker1999] ○ [Bowker & Star, *Sorting Things Out: Classification and Its Consequences*, MIT Press, 1999](https://museumofdata.org/wp-content/uploads/2019/03/Bowker_and_Star_-_Sorting_Things_Out_Intro.pdf)

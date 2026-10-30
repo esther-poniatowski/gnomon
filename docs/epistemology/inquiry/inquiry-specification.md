@@ -47,7 +47,7 @@ Three results of the literature support separating the subject from the task:
 
 ## Problems and linked questions
 
-A question rarely stands alone. A question typically serves a research problem. Its answer may supply the explanans of another question or presuppose the answer of a third. Therefore, the question record names the [problem](problem.md) that it addresses and the questions to which it is linked. The relations of a link are defined with the [linked questions](../definitions/inquiry/problem-and-question.md#^linked-questions).
+A question rarely stands alone. A question typically serves a research problem. Its answer may supply the explanans of another question or presuppose the answer of a third. Therefore, the question record names the [problem](problem.md) that it addresses and the questions to which it is linked. The relations of a link are defined with the [linked questions](question.md#^linked-questions).
 
 | Field | When it is required | Content | Example |
 | ----- | ------------------- | ------- | ------- |

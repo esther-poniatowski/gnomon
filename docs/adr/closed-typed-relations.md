@@ -12,7 +12,7 @@ aliases:
 
 > [!QUESTION] Goal: which relations may link two records, what does each relation declare, and how are the relations queried?
 
-Records of `gnomon` are linked in three ways. An answer carries `relations` to other answers, whose types the [decision on answers, models and bindings](answers-models-bindings.md) fixes. A question carries `links` to other questions, typed by the [links between questions](../epistemology/definitions/inquiry/problem-and-question.md#^linked-questions). Several fields name a record by identifier, such as the target system of a phenomenon. The types of relations and links are closed vocabularies of the [registry of vocabularies](../../src/gnomon/data/vocabularies.yml), under the [decision on registries](registries-as-source.md). Three questions had no decision: whether a relation may fall outside every vocabulary, which properties a relation type declares, and how a reader finds the units that depend on a unit.
+Records of `gnomon` are linked in three ways. An answer carries `relations` to other answers, whose types the [decision on answers, models and bindings](answers-models-bindings.md) fixes. A question carries `links` to other questions, typed by the [links between questions](../epistemology/inquiry/question.md#^linked-questions). Several fields name a record by identifier, such as the target system of a phenomenon. The types of relations and links are closed vocabularies of the [registry of vocabularies](../../src/gnomon/data/vocabularies.yml), under the [decision on registries](registries-as-source.md). Three questions had no decision: whether a relation may fall outside every vocabulary, which properties a relation type declares, and how a reader finds the units that depend on a unit.
 
 ## Decision
 

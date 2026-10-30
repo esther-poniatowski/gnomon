@@ -1,8 +1,8 @@
 ---
 tags:
-  - definition
+  - method
   - wip
-index: "[Epistemic activities](docs/epistemology/definitions/activities/_index.md)"
+index: "[Epistemic activities](docs/epistemology/activities/_index.md)"
 aliases:
   - Ampliative inference
   - Abduction
@@ -13,7 +13,7 @@ aliases:
 
 > [!QUESTION] Goal: which inferences reach a hypothesis beyond their premises, and by which norm is each judged?
 
-The activities of this family output a [hypothesis](../representations/claim-and-hypothesis.md): a claim whose content exceeds that of the premises, held for testing. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a [hypothesis](../definitions/representations/claim-and-hypothesis.md): a claim whose content exceeds that of the premises, held for testing. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 
@@ -42,13 +42,13 @@ On the account of its originator, abduction is the only logical operation that i
 
 ## Consequences for a record
 
-- **A hypothesis enters the records as a candidate answer.** The [answer form](../../answer/answer-form.md) holds a candidate with the attitude `hypothesized` before any test. The [conditions of satisfaction](../../answer/satisfaction-conditions.md) state the tests required to accept it.
+- **A hypothesis enters the records as a candidate answer.** The [answer form](../answer/answer-form.md) holds a candidate with the attitude `hypothesized` before any test. The [conditions of satisfaction](../answer/satisfaction-conditions.md) state the tests required to accept it.
 - **Causal inference must state its assumptions as part of the answer.** The identifiability of a causal effect depends on assumptions untested by the data, so these assumptions belong to the answer, beside its idealizations.
 
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [bartha2010] ◐ [Bartha, *By Parallel Reasoning: The Construction and Evaluation of Analogical Arguments*, Oxford University Press, 2010](https://doi.org/10.1093/acprof:oso/9780195325539.001.0001)
 - [goodman1955] ◐ [Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955](https://plato.stanford.edu/entries/goodman/)
