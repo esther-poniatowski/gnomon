@@ -134,6 +134,12 @@ The order is fixed, so that a divergence shows up in a diff.
 
 A stable note, or an accepted decision, carries no state tag.
 
+A decision record adds three keys between `tags` and `index`, and states its state in `status` instead of a state tag:
+
+- `status` places the decision in its life cycle: `proposed`, `accepted`, `deprecated` or `superseded`. A superseded record stays in place and names the record that replaces it, so that an old reference still leads to the current decision.
+- `created` gives the date on which the record entered `docs/adr/`.
+- `revised` gives the date of the last change to the decision or to its grounds. A change limited to links or metadata leaves this date unchanged.
+
 ### Registering a note
 
 Each folder carries an `_index.md` registering every file that it holds, images included. Register a new file in the same edit that creates it: a later pass answers a different concern and leaves orphans behind.

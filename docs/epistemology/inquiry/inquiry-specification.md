@@ -3,7 +3,7 @@ tags:
   - method
 index: "[Inquiry](docs/epistemology/inquiry/_index.md)"
 aliases:
-  - Specifying an inquity
+  - Specifying an inquiry
 ---
 # Specifying an inquiry
 

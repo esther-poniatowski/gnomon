@@ -1,6 +1,9 @@
 ---
 tags:
   - decision
+status: accepted
+created: 2026-10-29
+revised: 2026-10-30
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - No inference at run time
@@ -39,7 +42,7 @@ A tool never adds a claim, a relation or a record kind that no record states. A 
 ## Consequences
 
 - A traversal of authored relations, such as a lookup of the records resting on a unit, is a computation fixed by a rule. Its result is reported and never stored as a relation that a record asserts.
-- The visible symbols of a derived model are a [set operation over declarations](../audits/model-design-synth.md#^div-content), so a tool may compute them.
+- The visible symbols of a derived model are a set operation over declarations: the symbols visible in its parents, minus the symbols that it retires, together with its own declarations. A tool may therefore compute them.
 - The command `gnomon status` is to list the open conditions computed from the recorded states of the conditions, never from a state that it infers.
 - An inference engine stays outside `gnomon`, as a separate tool reading the records. Its outputs enter the records only as authored content, with their origin.
 

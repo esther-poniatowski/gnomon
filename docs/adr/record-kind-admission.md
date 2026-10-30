@@ -1,6 +1,9 @@
 ---
 tags:
   - decision
+status: accepted
+created: 2026-10-29
+revised: 2026-10-30
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Admission of a record kind
@@ -9,7 +12,7 @@ aliases:
 
 > [!QUESTION] Goal: when does a proposed construct become a record kind of its own, rather than a unit of an existing record?
 
-The method fixes one record kind per concern of an inquiry. Other constructs arise while records are filled. The model, the binding and the key became records of their own under the [decision on answers, models and bindings](answers-models-bindings.md), and the concept under the [decision on concepts, glossaries and notations](concepts-glossaries-notations.md). The [synthesis of the model audits](../audits/model-design-synth.md#^div-placement) kept a transformation between models inside its destination model. Those choices applied a test that no decision of `gnomon` stated. The test was amended in place with two conditions, non-distortion and unitary epistemic role, drawn from the retired design notes.
+The method fixes one record kind per concern of an inquiry. Other constructs arise while records are filled. The model, the binding and the key became records of their own under the [decision on answers, models and bindings](answers-models-bindings.md), and the concept under the [decision on concepts, glossaries and notations](concepts-glossaries-notations.md). A transformation between models stays a block of its destination model, since it has no identity apart from that model and serves no other. Those choices applied a test that no decision of `gnomon` stated. The test was amended in place with two conditions, non-distortion and unitary epistemic role, drawn from the retired design notes.
 
 ## Decision
 

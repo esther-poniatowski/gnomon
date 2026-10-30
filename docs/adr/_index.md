@@ -10,7 +10,7 @@ aliases:
 Records the decisions that later work on `gnomon` must respect, so that a reader can judge whether a changed constraint reopens one of them.
 
 > [!IMPORTANT] Form of a decision record
-> Each record states the constraint that forced the choice, the options weighed against that constraint, and the cost of the choice.
+> Each record states the constraint that forced the choice, the options weighed against that constraint, and the cost of the choice. Its frontmatter states its status and its dates, under the [rules of the frontmatter block](../../CONTRIBUTING.md#frontmatter-block).
 
 ## Record language
 

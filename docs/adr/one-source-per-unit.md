@@ -1,6 +1,9 @@
 ---
 tags:
   - decision
+status: accepted
+created: 2026-10-29
+revised: 2026-10-29
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - One source per unit

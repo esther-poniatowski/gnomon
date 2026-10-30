@@ -1,6 +1,9 @@
 ---
 tags:
   - decision
+status: accepted
+created: 2026-09-25
+revised: 2026-10-27
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Registries as source
