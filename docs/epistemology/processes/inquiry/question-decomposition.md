@@ -93,21 +93,11 @@ Each candidate serving question receives one of three statuses: ^relevance
 
 The status is found by three questions: what would become impossible if the serving question were resolved negatively, what would become supported if it were resolved positively, and what would become newly distinguishable. When all three answers are empty, the serving question is decorative and is removed. The [choice of the next act](choice-of-act.md#^ranking-criteria) applies the same test to acts.
 
-## The register of serving questions
+## Conditioned questions
 
-The serving questions of an inquiry are recorded in a register: ^register
+A serving question generated under a resistance hypothesis $\eta$ is conditioned on that hypothesis. When a resistance hypothesis $\eta$ is refuted, every question conditioned on it is invalidated and reconsidered. This cascade applies to serving questions the [recorded dependencies](specification-order.md#^iteration-circularity) of controlled iteration. The dependencies of a register often show three levels: foundational questions on definitions, assumptions, formalization and criteria of success; structural questions on mechanisms, derived properties, invariants and tractable regimes; and validation questions on tests, simulations, comparisons, robustness and generalization.
 
-| Column | Content |
-| --- | --- |
-| Question | the serving question |
-| Type | analytic, abductive or constructive |
-| Link | the linked question and the relation of the link |
-| Depends on | the questions that must be answered before this one is meaningful, tractable or interpretable |
-| Effect | what its resolution changes in the served question |
-| Status | open, answered, abandoned |
-| Conditioned on | for an abductive question, the resistance hypothesis $\eta$ under which it was generated; for a constructive question, the marker *vocabulary-expanding* |
-
-When a resistance hypothesis $\eta$ is refuted, every question conditioned on it is invalidated and reconsidered. This cascade applies to serving questions the [recorded dependencies](specification-order.md#^iteration-circularity) of controlled iteration. The dependencies of a register often show three levels: foundational questions on definitions, assumptions, formalization and criteria of success; structural questions on mechanisms, derived properties, invariants and tractable regimes; and validation questions on tests, simulations, comparisons, robustness and generalization.
+The register in which serving questions are kept is stated in the [procedure of decomposition](../../../procedures/inquiry/decomposing-a-question.md#^register).
 
 ## Terminal questions and synthesis
 
@@ -141,32 +131,11 @@ Acts of generation add candidates or tools and justify no answer, and acts of de
 | Interpretive ambiguity | a result is obtained but cannot be interpreted |
 | Counter-example | the formulation is too general or misses a constraint |
 
-A local revision follows five steps:
-
-1. Record the resistance in one sentence.
-2. State what it suggests is missing, false or misaligned.
-3. Formulate one serving question that repairs, discriminates or reconstructs. For a false local explanatory structure, abduce the simplest resistance hypothesis $\eta$ consistent with the resistance and the accepted knowledge $K$, and add an abductive question conditioned on $\eta$. For an insufficient vocabulary, add a constructive question.
-4. Invalidate every question conditioned on a hypothesis that the resistance refutes.
-5. Remove or postpone the older questions that the revision makes secondary.
+The steps of a local revision are stated in the [procedure of decomposition](../../../procedures/inquiry/decomposing-a-question.md#^local-revision-steps).
 
 **Global revision.** A global reorganization is needed only when the served question itself is malformed. Three revisions turn a question $Q$ into a refined question $Q'$: a *disambiguation*, when $Q$ conflated two questions; a *restriction of scope*, when the conditions of answerability hold only under narrower conditions held fixed; and a *replacement of a concept*, when constructive work supplies a more precise notion. The relation between $Q$ and $Q'$ is stated, and the earlier serving questions are reassessed under $Q'$. The main question is re-examined at intervals for these three revisions. ^global-revision
 
 **Cycles between questions.** A condition of one question can depend on the answer to another, and two such dependencies in opposite directions form a cycle. Further decomposition cannot resolve the cycle, so it is resolved by iteration, under the conditions of [controlled iteration](specification-order.md#^controlled-iteration), as the [dependencies between conditions](conditions-of-answerability.md#^condition-dependencies) state. ^cycles
-
-## Failure modes
-
-| Failure | Description |
-| --- | --- |
-| Decomposing by related themes | the serving questions mirror the literature or the topic, not the structure of the problem |
-| Decomposing by workflow | the inquiry is split into stages, such as review, data, experiment and interpretation, not into epistemic obstacles |
-| Decomposing by available tools | questions are chosen because a method is available, not because they are needed |
-| Decorative branching | time goes to adjacent questions that do not affect the answer |
-| Treating all serving questions as independent | no dependency structure is recorded |
-| Validating prematurely | validation precedes the clarification of concepts and criteria, and yields correct but uninterpretable results |
-| Vocabulary inertia | the vocabulary is kept although it cannot express the distinctions needed |
-| No falsifying leverage | no serving question can eliminate a central assumption, so no resolution changes the admissible answers |
-| Revising the register globally | a new obstacle triggers a complete reorganization when a local revision suffices |
-| Unrecorded resistance hypotheses | questions induced by a failure carry no resistance hypothesis $\eta$, so its refutation propagates invisibly |
 
 ---
 ## Sources

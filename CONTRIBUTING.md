@@ -101,6 +101,8 @@ A content about the records of an inquiry belongs to one of two tiers, decided b
 
 A paragraph that mixes the two is split: its theory claim stays in the epistemology, and its field rule moves to the specification and links that claim.
 
+A content of the epistemology is also tested against the [procedures](docs/procedures/_index.md). A content that states what holds, such as a concept, a condition, a criterion or its grounds, stays in the epistemology. A content that prescribes the actions of a researcher, in order, such as the steps of a task, a register to keep or a warning against a practical failure, belongs to a procedure, which links the theory that it applies.
+
 ### Frontmatter block
 
 Three keys open every note, in this order:

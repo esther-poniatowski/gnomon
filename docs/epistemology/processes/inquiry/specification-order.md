@@ -81,20 +81,11 @@ These four conditions are a proposal of this method, built from the sources abov
 Two devices limit the revisions that an iteration requires:
 
 - **Least commitment.** A choice is deferred until a condition requires it [weld1994], so fewer choices need revision. A placeholder kept in a question schema is a deferred choice, and a slot that enters stage 4 on demand is another.
-- **Recorded dependencies.** Each record keeps pointers to the versions from which it was derived. When a version is withdrawn, only the records that depend on it are marked for review. A truth-maintenance system tracks dependencies in the same way, and relabels the dependent beliefs automatically [doyle1979]. Dependency-directed backtracking uses recorded dependencies to retract only the assumptions behind a contradiction [stallman1977]. These pointers complement the trigger of condition 2: the trigger states why a revision occurred, and the pointers state which records the revision reaches. The [register of serving questions](question-decomposition.md#^register) records such dependencies, by the hypothesis on which each serving question is conditioned.
+- **Recorded dependencies.** Each record keeps pointers to the versions from which it was derived. When a version is withdrawn, only the records that depend on it are marked for review. A truth-maintenance system tracks dependencies in the same way, and relabels the dependent beliefs automatically [doyle1979]. Dependency-directed backtracking uses recorded dependencies to retract only the assumptions behind a contradiction [stallman1977]. These pointers complement the trigger of condition 2: the trigger states why a revision occurred, and the pointers state which records the revision reaches. The [register of serving questions](../../../procedures/inquiry/decomposing-a-question.md#^register) records such dependencies, by the hypothesis on which each serving question is conditioned.
 
 Versions and recorded dependencies presuppose records that keep successive versions. Whether the records keep them is stated with the [itinerary record](../../../specification/itinerary.md#^record-versions).
 
-## Restarting from existing results
-
-A project can hold many results before any explicit question, when its work has followed topics rather than a problem. The specification of such a project combines two sources, in four steps:
-
-1. **State the problem independently of the results.** The problem statement must be justified without the results, otherwise the reconstruction in step 2 only relabels the existing topics.
-2. **Reconstruct the question that each result answers.** This step reconstructs a question from its answer, in the manner of a rational reconstruction of research [lakatos1971]. The reconstructed questions are grouped under candidate *principal questions*, as their *operative questions* [hintikka2007].
-3. **Select the principal question.** The candidates retained are the principal questions that serve the problem, each with its coverage: the share of reconstructed questions that it groups. The researcher chooses one of them, by the [selection of questions](../activities/problem-posing.md). The coverage informs that choice and does not decide it.
-4. **Identify the subject.** Each placeholder is raised to the level `identified`, under the inclusion criterion.
-
-A result that answers no operative question of the chosen principal question is set aside, not deleted. The share of results set aside measures how far the project has drifted from its problem.
+The specification of a project that already holds many results before any explicit question is stated in the [procedure of restarting from existing results](../../../procedures/inquiry/restarting-from-results.md).
 
 ---
 ## Sources
@@ -113,8 +104,6 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [glymour1983] ◐ [Glymour, "Revisions of bootstrap testing", *Philosophy of Science* 50(4), 626–629, 1983](https://doi.org/10.1086/289143)
 - [goodman1955] ◐ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955; first edition Athlone Press, 1954; the mutual adjustment of rules and inferences; checked through the [SEP entry on Goodman](https://plato.stanford.edu/entries/goodman/)
 - [hacking1983] ◐ [Hacking, *Representing and Intervening: Introductory Topics in the Philosophy of Natural Science*, Cambridge University Press, 1983](https://doi.org/10.1017/CBO9780511814563)
-- [hintikka2007] ◐ [Hintikka, *Socratic Epistemology: Explorations of Knowledge-Seeking by Questioning*, Cambridge University Press, 2007](https://doi.org/10.1017/CBO9780511619298); principal and operative questions
-- [lakatos1971] ◐ [Lakatos, "History of science and its rational reconstructions", in Buck & Cohen (eds.), *PSA 1970*, Boston Studies in the Philosophy of Science 8, Reidel, 91–136, 1971](https://doi.org/10.1007/978-94-010-3142-4_7)
 - [nickles1981] ◐ [Nickles, "What is a problem that we may solve it?", *Synthese* 47(1), 85–118, 1981](https://doi.org/10.1007/BF01064267); checked through a scanned copy of poor quality
 - [stallman1977] ◐ [Stallman & Sussman, "Forward reasoning and dependency-directed backtracking in a system for computer-aided circuit analysis", *Artificial Intelligence* 9(2), 135–196, 1977](https://doi.org/10.1016/0004-3702(77)90029-7)
 - [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, read in its abridged reprint, "The pragmatic theory of explanation", in Pitt (ed.), *Theories of Explanation*, Oxford University Press, 1988, 136–155 ([PDF](https://www.fitelson.org/290/vanfraassen_pte.pdf))

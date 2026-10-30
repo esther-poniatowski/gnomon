@@ -112,7 +112,7 @@ The criteria above either return a determinate result or present alternatives. T
 
 ## Dependencies between acts
 
-The dependencies between acts form cycles among types: a concept serves a question, the question selects a model, and the model can revise the concept. These cycles are resolved by iteration, under the conditions of [controlled iteration](specification-order.md#^controlled-iteration). An iteration starts in three places: a refuted condition triggers a revision, a withdrawn record removes the warrant of the acts that used it, and a provisional answer to another question is later revised. The [register of serving questions](question-decomposition.md#^register) tracks withdrawn records by marking each serving question with the resistance hypothesis $\eta$ on which it is conditioned, so that a refuted hypothesis invalidates the serving questions that rest on it.
+The dependencies between acts form cycles among types: a concept serves a question, the question selects a model, and the model can revise the concept. These cycles are resolved by iteration, under the conditions of [controlled iteration](specification-order.md#^controlled-iteration). An iteration starts in three places: a refuted condition triggers a revision, a withdrawn record removes the warrant of the acts that used it, and a provisional answer to another question is later revised. The [register of serving questions](../../../procedures/inquiry/decomposing-a-question.md#^register) tracks withdrawn records by marking each serving question with the resistance hypothesis $\eta$ on which it is conditioned, so that a refuted hypothesis invalidates the serving questions that rest on it.
 
 ---
 ## Sources
