@@ -235,7 +235,7 @@ def canonical_operators(source: Path | None = None) -> frozenset[str]:
     """Return the operator vocabulary the framework supplies.
 
     The registry beside this module owns the vocabulary, so extending the framework means editing
-    one data file. The method note documents the same set and is checked against it, and no
+    one data file. The specification note documents the same set and is checked against it, and no
     check reads that note.
 
     Raises

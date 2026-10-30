@@ -1,6 +1,6 @@
 ---
 tags:
-  - method
+  - theory
   - wip
 index: "[Epistemic activities](docs/epistemology/activities/_index.md)"
 aliases:
@@ -46,7 +46,7 @@ The activities of this family output a target specification, a background model 
 | `de-idealization` | remove an idealization from the model, or correct for it | a correction to the idealized result is known, so the idealization is `controlled`, and each conclusion is shown to be stable under that correction or is corrected [mcmullin1985] [knuuttila2019] |
 | `decomposition-localization` | divide the behavior of the target into activities, and assign each activity to a part | each component of the model maps onto a constituent of the target or onto a declared admissible part, as the [explanatory mapping](../definitions/regularities/mechanism-and-mechanistic-model.md#^mechanistic-model-test) requires [bechtel1993] [craver2006] |
 | `model-analogy` | carry the structure of a source model over to the domain of the target | the mapping preserves the relations relevant to the phenomenon, and no known difference defeats the transfer [hesse1966] [bartha2010] |
-| `formalization` | state each term and relation of a verbal model as a quantity, a set or an equation | every symbol resolves to a declaration, under the [expression language](../language/symbols-and-expressions.md) |
+| `formalization` | state each term and relation of a verbal model as a quantity, a set or an equation | every symbol resolves to a declaration, under the [expression language](../../specification/expressions.md) |
 | `fitting` | estimate the parameters of a model from data | the estimator and the uncertainty of each estimate are stated, and each fitted parameter carries the warrant `fitted` [kennedy2001] |
 
 ## Distinctions
@@ -63,7 +63,7 @@ The activities of this family output a target specification, a background model 
 
 - **Delimitation fills the target-system record at commitment `specified`.** The [specification of the target system](../subject/target-system.md) holds the declared constituents and quantities.
 - **Background appraisal and transfer fill the background record.** The [specification of the background](../subject/background.md) states the origin and the range of each admitted law beside its warrant.
-- **Abstraction and idealization are recorded in the model and in the answer that it grounds.** The [model record](../answer/model-and-binding.md#^model-elements) declares each assumption that its laws require, such as a limit, within the warrant `derived-in-a-limit` of those laws, with its motive, its gain and its removability. An [answer](../answer/answer-form.md#^idealizations) that the model grounds classifies such an assumption as an idealization of the target of its binding, states its range, and records it among its grounds with the role `idealization`. Each abstraction is recorded with the claim, in the element Abstractions of the answer.
+- **Abstraction and idealization are recorded in the model and in the answer that it grounds.** The [model record](../../specification/model.md#^model-elements) declares each assumption that its laws require, such as a limit, within the warrant `derived-in-a-limit` of those laws, with its motive, its gain and its removability. An [answer](../answer/answer-form.md#^idealizations) that the model grounds classifies such an assumption as an idealization of the target of its binding, states its range, and records it among its grounds with the role `idealization`. Each abstraction is recorded with the claim, in the element Abstractions of the answer.
 - **Decomposition states the map of each component.** Each constituent of a [mechanistic model](../answer/mechanism.md) states its map from the declared constituents of the target, as the [perspective of a model](../answer/model-and-binding.md#^perspective) requires.
 
 ---

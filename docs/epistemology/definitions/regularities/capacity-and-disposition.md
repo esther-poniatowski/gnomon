@@ -32,7 +32,7 @@ The simple conditional analysis fails on finks and masks [choi2018]. A fink remo
 
 ## Consequences for a record
 
-- **A capacity is recorded with its conditional and its criterion.** The fields are fixed by the [manifestations of a capacity](../../subject/phenomenon.md#^capacity-manifestations). *Example*: for every labeling of the mixture classes in a stated family, a linear readout separates the encoded mixtures. The criterion is linear separability. The count of separable labelings bounds this criterion. For $n$ encoded points in general position in $d$ dimensions, a hyperplane through the origin separates every labeling only when $n\leq d$, and exactly half of the labelings when $n=2d$ [cover1965].
+- **A capacity is recorded with its conditional and its criterion.** The fields are fixed by the [manifestations of a capacity](../../../specification/phenomenon.md#^capacity-manifestations). *Example*: for every labeling of the mixture classes in a stated family, a linear readout separates the encoded mixtures. The criterion is linear separability. The count of separable labelings bounds this criterion. For $n$ encoded points in general position in $d$ dimensions, a hyperplane through the origin separates every labeling only when $n\leq d$, and exactly half of the labelings when $n=2d$ [cover1965].
 - **A capacity can be the explanandum of a question whose explanans is a representation geometry.** The performance of a readout is a capacity among the [representational items of the benchmark](../representations/representation-and-encoding.md#^decision-table).
 
 ---

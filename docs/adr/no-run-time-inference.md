@@ -18,13 +18,13 @@ The tools of `gnomon` read records and compute: they resolve symbols, collect th
 
 The tools of `gnomon` record and validate authored reasoning, and never infer. ^no-inference
 
-A tool may compute a value that a declared rule fixes from authored records. The rule is declared in package data or in a method note, two runs on the same records return the same value, and the value is reported or written to a generated output, never into an authored record. ^admitted-computation
+A tool may compute a value that a declared rule fixes from authored records. The rule is declared in package data or in a note of the documentation, two runs on the same records return the same value, and the value is reported or written to a generated output, never into an authored record. ^admitted-computation
 
 A tool never adds a claim, a relation or a record kind that no record states. A tool never evaluates whether a warrant holds, and never decides whether an answer is accepted. The verdict of a warrant test, the state of a condition and the acceptance of an answer are authored, with pointers to the records that support them. A tool may check that an authored verdict respects a declared rule, such as the [rules on the reports of a comparison](../epistemology/answer/satisfaction-conditions.md#^fidelity-reads-reports). ^excluded-inference
 
 ## Constraints that decide the boundary
 
-- **A verdict on a warrant depends on content that no grammar fixes.** Whether a test was severe, or a definition eliminable, is judged by the researcher, so the [itinerary](../epistemology/inquiry/itinerary.md) records the verdict of each norm and its check reads only whether the verdict is admitted.
+- **A verdict on a warrant depends on content that no grammar fixes.** Whether a test was severe, or a definition eliminable, is judged by the researcher, so the [itinerary](../specification/itinerary.md) records the verdict of each norm and its check reads only whether the verdict is admitted.
 - **A derived claim needs an author.** A claim produced by an engine changes the claims that the records warrant without any edit to them, so no [revision](revision-accountability.md#^traceable-revision) traces the change.
 - **A computed value must be reproducible from the records.** A comparison is [recomputed, never edited](../epistemology/answer/model-and-binding.md#^comparison-recomputed), so its rule and its inputs fix its output.
 

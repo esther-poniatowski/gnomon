@@ -1,6 +1,6 @@
 ---
 tags:
-  - method
+  - theory
   - wip
 index: "[Epistemic activities](docs/epistemology/activities/_index.md)"
 aliases:
@@ -111,9 +111,9 @@ The product types form a closed list. Each type classifies the epistemic objects
 | `phenomenon` | a stable feature of a target, detected from data, as defined in the note on [phenomena](../definitions/regularities/pattern-and-phenomenon.md) | `phenomenon` | exists |
 | `target-specification` | the declared constituents and quantities of a [target](../definitions/systems/things-and-constructs.md) | `target-system` at commitment `specified` | exists |
 | `background-model` | the laws admitted about a target, with their closure and organization | [`background`](../subject/background.md) | exists |
-| `model` | a candidate [model](../definitions/representations/model.md) of the target | [`model`](../answer/model-and-binding.md#^model-record) | exists |
-| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | [`binding`](../answer/model-and-binding.md#^binding-record) | exists |
-| `key` | a shared, versioned map between the side of a model and the side of its target | [`key`](../answer/model-and-binding.md#^key-record) | exists |
+| `model` | a candidate [model](../definitions/representations/model.md) of the target | [`model`](../../specification/model.md#^model-record) | exists |
+| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | [`binding`](../../specification/binding.md#^binding-record) | exists |
+| `key` | a shared, versioned map between the side of a model and the side of its target | [`key`](../../specification/key.md#^key-record) | exists |
 | `consequence` | a statement true of a model, possibly false of the target | the block of model knowledge of an `answer`, and `assessment.obligations` | partial |
 | `hypothesis` | a [claim](../definitions/representations/claim-and-hypothesis.md) with the attitude `hypothesized` | `answer` with status `hypothesized` | exists |
 | `verdict` | the outcome of a test of a claim or of a model | `assessment.tests` | exists |
@@ -153,7 +153,7 @@ Two relations hold among activities across the families:
 
 > [!NOTE] The activity record and the itinerary check are proposals of this method
 
-A step of a research itinerary instantiates one activity type. The [itinerary record](../inquiry/itinerary.md) states each step by its activity and its signature, with the verdict of its norm.
+A step of a research itinerary instantiates one activity type. The [itinerary record](../../specification/itinerary.md) states each step by its activity and its signature, with the verdict of its norm.
 
 An itinerary passes the **itinerary check** when five conditions hold: ^itinerary-check
 
@@ -163,7 +163,7 @@ An itinerary passes the **itinerary check** when five conditions hold: ^itinerar
 - the steps, linked by their input references, form a directed acyclic graph;
 - every verdict is `pass`, `fail` or `pending`.
 
-The itinerary record adds checks of its own fields, such as unique step identifiers, stated with the [record checks of an itinerary](../inquiry/itinerary.md#^record-checks).
+The itinerary record adds checks of its own fields, such as unique step identifiers, stated with the [record checks of an itinerary](../../specification/itinerary.md#^record-checks).
 
 The type of a referenced record follows from its state, as the [record column of the product types](#^product-types) states. For a question record, the state is the commitment of its slots. With a placeholder slot, the record has type `question-schema`. With every slot at commitment `identified` or above, the record has type `question`. Therefore, a schema becomes a question when [subject identification](problem-posing.md) raises its slots, and no activity of its own is needed.
 

@@ -1,9 +1,9 @@
-# method: `docs/epistemology/answer/model-and-binding.md`; one file per binding of one model to one phenomenon
+# specification: `docs/specification/binding.md`; one file per binding of one model to one phenomenon
 # a binding records the inferences from the model to the target that its asserter licenses; the answers that rest on the model cite it
 # the maps that carry one side onto the other: `key.yml`, referenced by identifier and version
 # a change of a pair, a key, the domain or the discrepancy commits a new version; earlier versions and their comparisons stay unchanged
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
-# specifications follow the order of the method note
+# specifications follow the order of the specification note
 
 title: "SHORT NAME OF THE BINDING"
 id: bind.TOPIC.NAME

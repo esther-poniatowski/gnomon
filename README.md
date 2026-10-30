@@ -53,7 +53,7 @@ The **vocabulary records** of a project separate the meaning of a term from its 
 
 The **language** states the content of each record. Every declared quantity carries a symbol, and each record declares its symbols in one table. A formula names only declared symbols, those of its own record or, by reference, those of another record of the same problem. Two consequences follow. A researcher writing a law must name quantities that a record already declares. A reader can find every declaration in one table.
 
-The vocabulary of the method is declared in [registries](src/gnomon/data/_index.md), written by hand and stored in package data, and each declaration is documented in a method note.
+The vocabulary of the method is declared in [registries](src/gnomon/data/_index.md), written by hand and stored in package data, and each declaration is documented in a specification note.
 
 The language and the registries together serve one design goal: a record is **machine-checkable**. Four classes of defect are reported:
 
@@ -108,10 +108,11 @@ Every command is specified in the [CLI reference](docs/guide/cli-reference.md).
 
 ## Documentation
 
-Four parts of the documentation serve the first tasks of a reader:
+Five parts of the documentation serve the first tasks of a reader:
 
 - [Filling the records of an inquiry](docs/guide/filling-records.md): leads a researcher from a research problem to a folder of records that the checks accept
-- [Epistemology](docs/epistemology/_index.md): states the specification of each record, and its grounds in the philosophy of science
+- [Specification](docs/specification/_index.md): documents the fields of each record, when each is required and the values that it admits
+- [Epistemology](docs/epistemology/_index.md): states the theory of inquiry behind the records, and its grounds in the philosophy of science
 - [User guide](docs/guide/_index.md): installs the tool and looks up its commands
 - [Architecture decisions](docs/adr/_index.md): finds the constraint behind a settled decision, and the change of constraint that would reopen it
 

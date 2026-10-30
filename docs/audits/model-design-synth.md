@@ -36,7 +36,7 @@ The inquiry records commit to a model of the system under study at two points: t
 
 Both audits agree on eleven points, the diagnosis first. The recommended design builds on these points without reopening them.
 
-- **One commitment behind the shared blocks.** Both records declare a model, as the [model record](../epistemology/answer/model-and-binding.md#^model-record) now states.
+- **One commitment behind the shared blocks.** Both records declare a model, as the [model record](../specification/model.md#^model-record) now states.
 - **A missing relation.** No field states how the model of an answer relates to the model of the target. The fixtures state that relation in three places: derived expressions, warrants, and idealizations written in prose.
 - **Three defects repaired by the relation.** Once explicit, the relation repairs three of the five trial defects (`test/answer-assessment-template-issues.md` at commit a4fb1b4: claim domain, explanatory semantics, binding of values). Therefore, the direct repair of the answer template should pause.
 - **Chains of models.** A model can derive from a derived model, as each level of a tower of effective models does in theoretical physics.
@@ -266,7 +266,7 @@ key:                             # one entry per imputed correspondence; an iden
 
 ### Operation vocabulary ^vocabulary
 
-The initial registry holds seven kinds. Six occur in the corpus. The seventh, `change-coordinates`, is admitted on design grounds: the [model record](../epistemology/answer/model-and-binding.md#^model-elements) names a mode decomposition among the maps defining new bearers.
+The initial registry holds seven kinds. Six occur in the corpus. The seventh, `change-coordinates`, is admitted on design grounds: the [model record](../specification/model.md#^model-elements) names a mode decomposition among the maps defining new bearers.
 
 | Kind | Acts on | Truth | Information | Error | Instance in the corpus |
 | --- | --- | --- | --- | --- | --- |

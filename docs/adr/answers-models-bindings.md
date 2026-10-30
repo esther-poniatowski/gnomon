@@ -12,7 +12,7 @@ aliases:
 
 > [!QUESTION] Goal: which records hold a candidate answer, the model on which it rests, and the relation of that model to the phenomenon, so that each answer has the form that its question requires and its values can be compared with the target?
 
-The [audits of the model design](../audits/_index.md) and the trials run on the test records exposed three defects. Every answer must state an explanans, even when its aim is not explanation. The values that an answer derives are bound to no output of the phenomenon, so the tests of fidelity and of required accuracy cannot be computed. A stylized model enters the quantities of its target by `reference`, which asserts an identity that a model never has with its target. An analysis of the answer forms per aim and of the binding to the target, followed by an adversarial review of its foundations, settled the design below. Both analyses reasoned from the literature, without reading the records of `gnomon`. A review of the method notes that implement the decision refined it in place on six points: the declared use, the erotetic relation, idealizations, the estimates of a phenomenon, the discrepancy, and the calibration treatments. The method notes now own the details of these points and the fields of every record, so the decision below states only the structure.
+The [audits of the model design](../audits/_index.md) and the trials run on the test records exposed three defects. Every answer must state an explanans, even when its aim is not explanation. The values that an answer derives are bound to no output of the phenomenon, so the tests of fidelity and of required accuracy cannot be computed. A stylized model enters the quantities of its target by `reference`, which asserts an identity that a model never has with its target. An analysis of the answer forms per aim and of the binding to the target, followed by an adversarial review of its foundations, settled the design below. Both analyses reasoned from the literature, without reading the records of `gnomon`. A review of the notes that implement the decision refined it in place on six points: the declared use, the erotetic relation, idealizations, the estimates of a phenomenon, the discrepancy, and the calibration treatments. The notes of the epistemology and of the specification now own the details of these points and the fields of every record, so the decision below states only the structure.
 
 ## Decision
 
@@ -22,11 +22,11 @@ The [audits of the model design](../audits/_index.md) and the trials run on the 
 
 **Answers.** An answer is one typed claim with its grounds, so a model that serves two aims grounds two answers. Each answer holds a core, whose elements every aim requires, and one aim block, which holds the elements that the aim of its question requires. Answers are linked to one another by typed relations. The elements of the core, the erotetic relation, the aim blocks, the target status of an explanatory factor, the declared use and the relations between answers are specified in the [answer form](../epistemology/answer/answer-form.md#^core-and-block).
 
-**Models.** A model is a record of its own, which several answers can ground. A family of models can ground one answer, each model with its own binding, and the family is then assessed as a whole. The fields are specified in the [model record](../epistemology/answer/model-and-binding.md#^model-record).
+**Models.** A model is a record of its own, which several answers can ground. A family of models can ground one answer, each model with its own binding, and the family is then assessed as a whole. The fields are specified in the [model record](../specification/model.md#^model-record).
 
-**Bindings.** A binding is a record of its own, which relates a model in use to a phenomenon or to its data, and which records the surrogative inferences that its asserter licenses from the model to the target. A claim of actual strength about an empirical target, and any prediction or description of a target, requires a binding. An answer whose claim bears only on a model or on a formal class declares its use instead. The fields are specified in the [binding record](../epistemology/answer/model-and-binding.md#^binding-record).
+**Bindings.** A binding is a record of its own, which relates a model in use to a phenomenon or to its data, and which records the surrogative inferences that its asserter licenses from the model to the target. A claim of actual strength about an empirical target, and any prediction or description of a target, requires a binding. An answer whose claim bears only on a model or on a formal class declares its use instead. The fields are specified in the [binding record](../specification/binding.md#^binding-record).
 
-**Keys.** Observation operators, maps of units and of aggregation, and qualitative abstractions are shared, versioned records, which several bindings reference. The fields are specified in the [key record](../epistemology/answer/model-and-binding.md#^key-record).
+**Keys.** Observation operators, maps of units and of aggregation, and qualitative abstractions are shared, versioned records, which several bindings reference. The fields are specified in the [key record](../specification/key.md#^key-record).
 
 **Phenomena.** A phenomenon owns the [estimator of its explanandum variables](../epistemology/subject/phenomenon.md#^phenomenon-owns-estimation), and it [declares the facts on which its data depend](../epistemology/subject/phenomenon.md#^data-model-declarations).
 
@@ -55,10 +55,10 @@ The [audits of the model design](../audits/_index.md) and the trials run on the 
 ## Consequences
 
 - The explanans is no longer required of every answer. Its premises become the grounds of the core, and its relevance becomes the block of an explanation.
-- The answer template is restructured into a core and aim blocks, and three record kinds are added: the model, the binding and the key. The phenomenon and the assessment gain the declarations that their method notes specify, and the comparison is computed.
+- The answer template is restructured into a core and aim blocks, and three record kinds are added: the model, the binding and the key. The phenomenon and the assessment gain the declarations that their specification notes document, and the comparison is computed.
 - The decision of 2026-09-24 (commit 08cc32d), which declared the model of an answer with the blocks of the target, is superseded: the model has a record of its own.
 - The use of `reference` for a stylized constituent ends: a model relates to its target through a binding.
-- The method notes that describe the answer, the phenomenon and the assessment remain to be revised, and the registry of aims gains its answer conditions.
+- The notes that describe the answer, the phenomenon and the assessment remain to be revised, and the registry of aims gains its answer conditions.
 - A pilot on contrasting test cases precedes any migration of the records, as both audits require, and the [project goals](../../TODO.md) track it.
 
 ---

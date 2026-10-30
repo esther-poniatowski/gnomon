@@ -1,6 +1,6 @@
 ---
 tags:
-  - method
+  - theory
   - wip
 index: "[Epistemic activities](docs/epistemology/activities/_index.md)"
 aliases:

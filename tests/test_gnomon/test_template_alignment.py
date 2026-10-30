@@ -1,6 +1,6 @@
-"""Alignment between the method notes and the templates they specify.
+"""Alignment between the specification notes and the templates they document.
 
-A method note in ``docs/epistemology`` states one specification per table row; a template
+A specification note in ``docs/specification`` states one specification per table row; a template
 in ``src/gnomon/data/templates`` holds one key per specification. These tests check that the
 two agree: every documented specification exists in its template, in the same order, and no
 template key is left undocumented.
@@ -21,7 +21,7 @@ import pytest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
-DOCS = ROOT / "docs" / "epistemology"
+DOCS = ROOT / "docs"
 TEMPLATES = ROOT / "src" / "gnomon" / "data" / "templates"
 REGISTRY = ROOT / "src" / "gnomon" / "data"
 
@@ -31,7 +31,7 @@ RECORD_FIELDS = frozenset(
 )
 
 # Keys documented in another note than the one under test, with the note that documents them.
-ELSEWHERE_MATURITY = {"maturity": "subject/subject-of-inquiry.md"}
+ELSEWHERE_MATURITY = {"maturity": "specification/maturity.md"}
 
 
 def flatten(node: Any, prefix: str = "") -> list[str]:
@@ -135,65 +135,65 @@ def documented_keys(note: str, header: Header, paths: Sequence[str], prefix: str
 
 # (label, note, table header, template, scope of the reverse check, prefix, keys documented elsewhere)
 PAIRS = [
-    ("problem", "inquiry/problem.md", "| Specification", "problem.yml", None, "", {}),
-    ("target-system", "subject/target-system.md", "| Specification", "target-system.yml", None, "", ELSEWHERE_MATURITY),
-    ("background", "subject/background.md", "| Specification", "background.yml", None, "", ELSEWHERE_MATURITY),
-    ("phenomenon", "subject/phenomenon.md", "| Specification", "phenomenon.yml", None, "", ELSEWHERE_MATURITY),
+    ("problem", "specification/problem.md", "| Specification", "problem.yml", None, "", {}),
+    ("target-system", "specification/target-system.md", "| Specification", "target-system.yml", None, "", ELSEWHERE_MATURITY),
+    ("background", "specification/background.md", "| Specification", "background.yml", None, "", ELSEWHERE_MATURITY),
+    ("phenomenon", "specification/phenomenon.md", "| Specification", "phenomenon.yml", None, "", ELSEWHERE_MATURITY),
     (
         "operators",
-        "language/symbols-and-expressions.md",
+        "specification/operators.md",
         "| Specification",
         "operators.yml",
         None,
         "",
         ELSEWHERE_MATURITY,
     ),
-    ("question-links", "inquiry/inquiry-specification.md", "| Field", "question.yml", "links", "", {}),
-    ("subject-of-inquiry", "subject/subject-of-inquiry.md", "| Component", "question.yml", "subject", "subject", {}),
-    ("contrast", "subject/contrast.md", "| Specification", "question.yml", "subject.contrast", "subject.contrast", {}),
-    ("domain", "subject/domain.md", "| Specification", "question.yml", "subject.domain", "subject.domain", {}),
-    ("epistemic-task", "epistemic-task/epistemic-task.md", "| Dimension", "question.yml", "task", "task", {}),
+    ("question-links", "specification/question.md", "| Field", "question.yml", "links", "", {}),
+    ("subject-of-inquiry", "specification/question-subject.md", "| Component", "question.yml", "subject", "subject", {}),
+    ("contrast", "specification/question-subject.md", ("contrast-fields", "| Specification"), "question.yml", "subject.contrast", "subject.contrast", {}),
+    ("domain", "specification/question-subject.md", ("domain-fields", "| Specification"), "question.yml", "subject.domain", "subject.domain", {}),
+    ("epistemic-task", "specification/question-task.md", "| Dimension", "question.yml", "task", "task", {}),
     (
         "admissible-explanans",
-        "epistemic-task/admissible-explanans.md",
-        "| Specification",
+        "specification/question-task.md",
+        ("level-axes", "| Specification"),
         "question.yml",
         "task.admissible_explanans",
         "task.admissible_explanans",
         {},
     ),
-    ("answer-core", "answer/answer-form.md", "| Element", "answer.yml", None, "", ELSEWHERE_MATURITY),
-    ("answer-aim-blocks", "answer/answer-form.md", "| Aim |", "answer.yml", "aim_block", "aim_block", {}),
+    ("answer-core", "specification/answer.md", "| Element", "answer.yml", None, "", ELSEWHERE_MATURITY),
+    ("answer-aim-blocks", "specification/answer.md", "| Aim |", "answer.yml", "aim_block", "aim_block", {}),
     (
         "answer-explanation-block",
-        "answer/answer-form.md",
+        "specification/answer.md",
         "| Specification",
         "answer.yml",
         "aim_block.explanation",
         "aim_block.explanation",
         {},
     ),
-    ("model", "answer/model-and-binding.md", "| Element", "model.yml", None, "", ELSEWHERE_MATURITY),
+    ("model", "specification/model.md", "| Element", "model.yml", None, "", ELSEWHERE_MATURITY),
     (
         "binding",
-        "answer/model-and-binding.md",
+        "specification/binding.md",
         ("binding-record", "| Specification"),
         "binding.yml",
         None,
         "",
         ELSEWHERE_MATURITY,
     ),
-    ("key", "answer/model-and-binding.md", ("key-record", "| Specification"), "key.yml", None, "", ELSEWHERE_MATURITY),
+    ("key", "specification/key.md", ("key-record", "| Specification"), "key.yml", None, "", ELSEWHERE_MATURITY),
     (
         "assessment",
-        "answer/satisfaction-conditions.md",
+        "specification/assessment.md",
         ("assessment-record", "| Specification"),
         "assessment.yml",
         None,
         "",
         ELSEWHERE_MATURITY,
     ),
-    ("itinerary", "inquiry/itinerary.md", "| Specification", "itinerary.yml", None, "", {}),
+    ("itinerary", "specification/itinerary.md", "| Specification", "itinerary.yml", None, "", {}),
 ]
 
 IDS = [pair[0] for pair in PAIRS]
@@ -243,7 +243,7 @@ def test_no_key_of_the_template_is_undocumented(pair: tuple) -> None:
 
 def test_the_operator_note_lists_the_registry(): 
     """The registry is the source; the note documents it and must not drift from it."""
-    note = (DOCS / "language/symbols-and-expressions.md").read_text(encoding="utf-8")
+    note = (DOCS / "specification/expressions.md").read_text(encoding="utf-8")
     bullet = re.search(r"- \*\*The canonical operators.*?\^operator-groups", note, re.S)
     assert bullet is not None, "the note declares no canonical operators"
     documented = set(re.findall(r"`([A-Za-z_][A-Za-z_0-9]*)`", bullet.group(0)))
@@ -260,7 +260,7 @@ def test_no_operator_notation_doubles_a_backslash() -> None:
 
 def test_the_aim_note_lists_the_requirement_registry() -> None:
     """Each row of the aim table states what the registry declares for that aim."""
-    note = (DOCS / "epistemic-task/epistemic-aim.md").read_text(encoding="utf-8")
+    note = (DOCS / "specification/question-task.md").read_text(encoding="utf-8")
     section = re.search(r"\| Aim \| Additionally required \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)", note)
     assert section is not None, "the note carries no requirement table"
     documented = {}
@@ -284,17 +284,17 @@ REQUIREMENT_CELLS = {"always": "always", "from `identified`": "identified", "fro
 # (registry entry, note, table header, template, prefix): a record kind is read under `always` and
 # `by_commitment`, and the path of an aim block under `by_block`.
 REQUIREMENT_TABLES = [
-    ("target-system", "subject/target-system.md", "| Specification", "target-system.yml", ""),
-    ("phenomenon", "subject/phenomenon.md", "| Specification", "phenomenon.yml", ""),
-    ("background", "subject/background.md", "| Specification", "background.yml", ""),
-    ("problem", "inquiry/problem.md", "| Specification", "problem.yml", ""),
-    ("itinerary", "inquiry/itinerary.md", "| Specification", "itinerary.yml", ""),
-    ("answer", "answer/answer-form.md", "| Element", "answer.yml", ""),
-    ("aim_block.explanation", "answer/answer-form.md", "| Specification", "answer.yml", "aim_block.explanation"),
-    ("model", "answer/model-and-binding.md", "| Element", "model.yml", ""),
-    ("binding", "answer/model-and-binding.md", ("binding-record", "| Specification"), "binding.yml", ""),
-    ("key", "answer/model-and-binding.md", ("key-record", "| Specification"), "key.yml", ""),
-    ("assessment", "answer/satisfaction-conditions.md", ("assessment-record", "| Specification"), "assessment.yml", ""),
+    ("target-system", "specification/target-system.md", "| Specification", "target-system.yml", ""),
+    ("phenomenon", "specification/phenomenon.md", "| Specification", "phenomenon.yml", ""),
+    ("background", "specification/background.md", "| Specification", "background.yml", ""),
+    ("problem", "specification/problem.md", "| Specification", "problem.yml", ""),
+    ("itinerary", "specification/itinerary.md", "| Specification", "itinerary.yml", ""),
+    ("answer", "specification/answer.md", "| Element", "answer.yml", ""),
+    ("aim_block.explanation", "specification/answer.md", "| Specification", "answer.yml", "aim_block.explanation"),
+    ("model", "specification/model.md", "| Element", "model.yml", ""),
+    ("binding", "specification/binding.md", ("binding-record", "| Specification"), "binding.yml", ""),
+    ("key", "specification/key.md", ("key-record", "| Specification"), "key.yml", ""),
+    ("assessment", "specification/assessment.md", ("assessment-record", "| Specification"), "assessment.yml", ""),
 ]
 
 
@@ -373,7 +373,7 @@ def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
 
 
 def test_the_virtues_of_the_note_are_the_options_of_the_question() -> None:
-    note = (DOCS / "epistemic-task/epistemic-pragmatic-virtues.md").read_text(encoding="utf-8")
+    note = (DOCS / "epistemology/epistemic-task/epistemic-pragmatic-virtues.md").read_text(encoding="utf-8")
     table = re.search(r"\| Virtue.*?\n\n", note, re.S)
     assert table is not None, "no virtue table in the note"
     names = [
@@ -390,7 +390,7 @@ def criteria(header: Header, column: int) -> list[str]:
     """Return the criteria of a table of tests, as the assessment template writes them."""
     return [
         line.strip("|").split("|")[column].strip().lower().replace(" ", "-")
-        for line in table_lines("answer/satisfaction-conditions.md", header)
+        for line in table_lines("epistemology/answer/satisfaction-conditions.md", header)
     ]
 
 
@@ -419,7 +419,7 @@ def test_every_template_parses_and_declares_its_kind() -> None:
 
 def test_the_occurrence_table_of_the_phenomenon_note_is_the_registry() -> None:
     """The note documents which occurrence classes each category admits; the registry decides."""
-    note = (DOCS / "subject/phenomenon.md").read_text(encoding="utf-8")
+    note = (DOCS / "specification/phenomenon.md").read_text(encoding="utf-8")
     section = re.search(r"\| Category \| Admitted occurrence \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)", note)
     assert section is not None, "the note carries no table of occurrence classes"
     documented = {}
@@ -445,7 +445,7 @@ def test_the_aim_categories_of_the_note_are_the_registry() -> None:
     """
     names = {"answer content": "answer-content", "conceptual work": "conceptual-work", "mode of inquiry": "mode-of-inquiry"}
     documented: dict[str, Any] = {}
-    for line in table_lines("epistemic-task/epistemic-aim.md", "| Epistemic aim | Category"):
+    for line in table_lines("epistemology/epistemic-task/epistemic-aim.md", "| Epistemic aim | Category"):
         cells = [c.strip() for c in line.strip("|").split("|")]
         aim = re.search(r"\(`([a-z-]+)`\)", cells[0])
         assert aim is not None, f"no aim value in {cells[0]!r}"
@@ -461,7 +461,7 @@ def test_the_answer_conditions_of_the_note_are_the_registry() -> None:
         return re.sub(r"\s*\[[a-z0-9_]+\]", "", cell).strip()
 
     documented = {}
-    for line in table_lines("epistemic-task/epistemic-aim.md", "| Aim | Direct answer |"):
+    for line in table_lines("epistemology/epistemic-task/epistemic-aim.md", "| Aim | Direct answer |"):
         cells = [plain(c) for c in line.strip("|").split("|")]
         documented[cells[0].strip("`")] = tuple(cells[1:4])
     aims = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"]["question"]["task.epistemic_aim"]

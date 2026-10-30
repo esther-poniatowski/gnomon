@@ -22,7 +22,7 @@ A record carries a version only if a reference must fix the state of that record
 
 Three references fix a state of their target: ^pinned-references
 
-- a reference to a binding or to a key, which names its [version](../epistemology/answer/model-and-binding.md#^binding-version);
+- a reference to a binding or to a key, which names its [version](../specification/binding.md#^binding-version);
 - the root property `_schema` of a record, which names its schema at a version;
 - a step of an itinerary, which is planned to name the state of each record that it used, by `as_of`, under the goal `inquiry-records-round-2` of the [project goals](../../TODO.md). The goal also decides the form of `as_of`: a version of the record, or a revision of the repository.
 

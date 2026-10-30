@@ -1,6 +1,6 @@
 ---
 tags:
-  - method
+  - theory
 index: "[Inquiry](docs/epistemology/inquiry/_index.md)"
 aliases:
   - Specifying an inquiry
@@ -22,7 +22,7 @@ A research objective is specified in four layers, each with a **distinct logical
 | **3. [Epistemic and pragmatic virtues](../epistemic-task/epistemic-pragmatic-virtues.md)** | What must the answer accomplish to be practically or cognitively *useful*? | unification, economy, pragmatic use, robustness, intelligibility / qualitative grasp, tractability, etc                                                                                                    |
 | **4. [Answer form](../answer/answer-form.md) and [conditions of satisfaction](../answer/satisfaction-conditions.md)** | What form must the answer take, and which tests must it pass?      | claim, grounds and their roles, route, domain, status, erotetic relation<br>aim block, with the factors $E$ for an explanation<br>model, binding and computed comparison, when the route runs on a model<br>admissibility, warrant and appraisal |
 
-The components of each layer are denoted by letters, each with one meaning fixed across the notes by a shared [notation registry](../language/notation.md).
+The components of each layer are denoted by letters, each with one meaning fixed across the notes by a shared [notation registry](../notation/notation.md).
 
 **Subject (1) versus Task (2)**. A research question combines the [subject of inquiry](../subject/subject-of-inquiry.md) $\Sigma$ with an [epistemic task](../epistemic-task/epistemic-task.md) $T$: 
 $$Q=\langle \Sigma,T\rangle$$
@@ -47,17 +47,9 @@ Three results of the literature support separating the subject from the task:
 
 ## Problems and linked questions
 
-A question rarely stands alone. A question typically serves a research problem. Its answer may supply the explanans of another question or presuppose the answer of a third. Therefore, the question record names the [problem](problem.md) that it addresses and the questions to which it is linked. The relations of a link are defined with the [linked questions](question.md#^linked-questions).
+A question rarely stands alone. A question typically serves a research problem. Its answer may supply the explanans of another question or presuppose the answer of a third.
 
-| Field | When it is required | Content | Example |
-| ----- | ------------------- | ------- | ------- |
-| Addresses | when a problem record states the problem that the question serves | the identifier of one problem record | the problem of the delay before generalization |
-| Links | when the answer to another question bears on this one | per link, the other question, the relation, and the record shared by the two questions | — |
-| Links: question | with every link | the identifier of the other question record | the question that describes the representation geometry of a network |
-| Links: relation | with every link | subquestion-of · explanans-from · presupposes · enables | `explanans-from`, for a question that explains a readout capacity by that geometry |
-| Links: via | when the two questions share a record | the identifier of the shared record, such as a phenomenon | the phenomenon record of the geometry |
-
-- **The steps that answer a question are recorded in an itinerary.** An [itinerary](itinerary.md) lists the activities that lead from a problem to its questions, and from a question to its answers and their assessments. The itinerary check verifies that each step takes the types of product required by its activity.
+The fields by which a question names its problem and its linked questions are documented in the [question record](../../specification/question.md).
 
 ## Goals of the specification
 

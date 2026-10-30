@@ -37,7 +37,7 @@ The first four definitions agree that a mechanism is **organized** and that it i
 
 ## Consequences for a record
 
-- **A mechanistic model is written in the fields of a model record.** The [notation of the method](../../language/notation.md) maps the components of a mechanism onto the constituents $C$ of the [model](../../answer/model-and-binding.md#^model-elements), its activities onto the laws $L$, and its organization onto $O$. A mechanistic answer rests on such a model.
+- **A mechanistic model is written in the fields of a model record.** The [notation of the method](../../notation/notation.md) maps the components of a mechanism onto the constituents $C$ of the [model](../../../specification/model.md#^model-elements), its activities onto the laws $L$, and its organization onto $O$. A mechanistic answer rests on such a model.
 - **The explanatory mapping reads the declarations of the constituents of the model.** A component fails the [explanatory mapping](#^mechanistic-model-test) when its map, declared under the [perspective of the model](../../answer/model-and-binding.md#^perspective), reaches neither a declared constituent nor an admissible part of the target. A unit of the model alone states no map, so it passes only through a [pair of type `component`](../../answer/model-and-binding.md#^component-pairs).
 - **The modal strength decides whether a how-possibly model suffices.** When the [modal strength](../../epistemic-task/modal-strength.md) of the question requests an actual explanation, the model on which the answer rests must pass the explanatory mapping for its activities as well as for its components. Otherwise, the mechanistic form suffices.
 

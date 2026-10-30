@@ -14,7 +14,8 @@ Directs a reader of `gnomon` to the folder that serves one task: specifying and 
 ## Specify and check an inquiry
 
 - [User guide](guide/_index.md): leads a researcher through the filling of the records, and states the commands that check them
-- [Epistemology](epistemology/_index.md): specifies an inquiry record by record, with the results of the philosophy of science that support each choice
+- [Specification](specification/_index.md): documents the fields of each record of an inquiry, when each is required and the values that it admits
+- [Epistemology](epistemology/_index.md): states the theory of inquiry behind the records, with the results of the philosophy of science that support each choice
 - [Procedures](procedures/_index.md): guides the performance of an epistemic activity
 - [Worked inquiries](../examples/_index.md): tests the framework on completed inquiry records and on adversarial research statements
 

@@ -1,4 +1,4 @@
-# method: `docs/epistemology/inquiry/itinerary.md`; one file per itinerary of inquiry
+# specification: `docs/specification/itinerary.md`; one file per itinerary of inquiry
 # activities: `src/gnomon/data/registries/activities.yml`; product types: `src/gnomon/data/registries/product-types.yml`
 # each step instantiates one registered activity; its inputs and its output take the types fixed by the activity
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled

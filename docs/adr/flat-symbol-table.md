@@ -38,6 +38,6 @@ Each record carries one flat table of symbols, and each symbol is unique within 
 
 ## Consequences
 
-- A reference resolves by naming a record and a symbol, in the form that [symbols and expressions](../epistemology/language/symbols-and-expressions.md) fixes.
+- A reference resolves by naming a record and a symbol, in the form that [symbols and expressions](../specification/expressions.md) fixes.
 - A claim left unmarked asserts a property of every member of the reference class, so the checks report a law, a relation or an external system that names a symbol that only some members carry.
 - One symbol table is generated per problem, reversing an earlier decision to collect none. The earlier decision followed from the absence of scope across the corpus. An author fills and consults the records of one problem together, so one table per problem serves the author.

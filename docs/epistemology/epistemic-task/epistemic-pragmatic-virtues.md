@@ -1,11 +1,11 @@
 ---
 tags:
-  - method
+  - theory
 index: "[Epistemic task](docs/epistemology/epistemic-task/_index.md)"
 aliases:
   - Specifying epistemic and pragmatic virtues
 ---
-# Specifying epistemic and pragmatic virtues
+# Epistemic and pragmatic virtues
 
 > [!QUESTION] Goal: what must be fixed to specify the epistemic and pragmatic virtues of an answer or model?
 
@@ -13,7 +13,7 @@ The virtues form a [layer of the inquiry specification](../inquiry/inquiry-speci
 
 Adequacy is **relational and evaluative**:
 $$\operatorname{Adequate}(M\mid Q,\Gamma)$$
-where $Q$ is the specified epistemic problem and $\Gamma$ contains *relevant methodological and pragmatic circumstances*. Both symbols follow the [notation registry](../language/notation.md) shared across the framework.
+where $Q$ is the specified epistemic problem and $\Gamma$ contains *relevant methodological and pragmatic circumstances*. Both symbols follow the [notation registry](../notation/notation.md) shared across the framework.
 
 The virtues constrain an adequate answer beyond its admissibility: some bear on the range of its claims, and the others on the *form* in which it presents them (e.g. the types of variables, the nature of equations). These constraints are needed because several answers or models may provide equally admissible explanations and still differ in their practical and cognitive effects.
 
@@ -26,6 +26,8 @@ The virtues constrain an adequate answer beyond its admissibility: some bear on 
 - a dynamical equation may fail to reveal qualitative regimes, and so impose computationally extensive simulations;
 - an expression may be exact but uncomputable in practice;
 - a mechanism may be stated for a narrow setting, although relaxing a few assumptions would widen its scope.
+
+Each virtue below is stated with the operational question that tests it, and the fields by which a question weighs it are documented in the [virtues of a question](../../specification/question-virtues.md).
 
 | Virtue                                  | Operational question                                                                          | Main epistemic benefit                                              | Representative account                                                                |
 | --------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
@@ -53,9 +55,9 @@ The virtues constrain an adequate answer beyond its admissibility: some bear on 
 Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [deregt2005] ◐ [de Regt & Dieks, "A contextual approach to scientific understanding", _Synthese_ 144, 2005](https://link.springer.com/article/10.1007/s11229-005-5000-4); criterion for intelligibility checked through secondary summaries
+- [friedman1974] ◐ [Friedman, "Explanation and scientific understanding", _The Journal of Philosophy_ 71(1), 5–19, 1974](https://philpapers.org/rec/FRIEAS)
+- [grimm2010] ◐ [Grimm, "The goal of explanation", _Studies in History and Philosophy of Science_ 41(4), 337–344, 2010](https://philpapers.org/rec/GRITGO-12)
+- [kitcher1981] ◐ [Kitcher, "Explanatory unification", _Philosophy of Science_ 48(4), 507–531, 1981](https://philpapers.org/rec/KITEU)
+- [kvanvig2003] ◐ [Kvanvig, *The Value of Knowledge and the Pursuit of Understanding*, Cambridge UP, 2003](https://philpapers.org/rec/KVATVO-8)
 - [parker2020] ◐ [Parker, "Model evaluation: an adequacy-for-purpose view", _Philosophy of Science_ 87(3), 457–477, 2020](https://doi.org/10.1086/708691)
 - [weisberg2006] ◐ [Weisberg, "Robustness analysis", _Philosophy of Science_ 73(5), 2006](https://philpapers.org/rec/MICRA)
-- [friedman1974] ◐ [Friedman, "Explanation and scientific understanding", _The Journal of Philosophy_ 71(1), 5–19, 1974](https://philpapers.org/rec/FRIEAS)
-- [kitcher1981] ◐ [Kitcher, "Explanatory unification", _Philosophy of Science_ 48(4), 507–531, 1981](https://philpapers.org/rec/KITEU)
-- [grimm2010] ◐ [Grimm, "The goal of explanation", _Studies in History and Philosophy of Science_ 41(4), 337–344, 2010](https://philpapers.org/rec/GRITGO-12)
-- [kvanvig2003] ◐ [Kvanvig, *The Value of Knowledge and the Pursuit of Understanding*, Cambridge UP, 2003](https://philpapers.org/rec/KVATVO-8)

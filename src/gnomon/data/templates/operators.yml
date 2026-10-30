@@ -1,4 +1,4 @@
-# method: `docs/epistemology/language/symbols-and-expressions.md`; one file per problem
+# specification: `docs/specification/operators.md`; one file per problem
 # declare only operators beyond the framework's canonical set that the problem's records use
 # type each operator over sets declared by any record of the problem; declarations are read against every record
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled

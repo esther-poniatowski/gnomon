@@ -1,12 +1,12 @@
 ---
 tags:
-  - method
+  - theory
 index: "[Epistemic task](docs/epistemology/epistemic-task/_index.md)"
 aliases:
   - Specifying the epistemic aim
   - Epistemic aim
 ---
-# Specifying the epistemic aim
+# Epistemic aim
 
 > [!QUESTION] Goal: what must be fixed to specify the kind of knowledge an inquiry seeks?
 
@@ -37,7 +37,7 @@ The registry classifies each aim in one of three categories, by what a direct an
 - **Conceptual work.** A direct answer forms the terms in which a domain is described: a criterion that partitions a space into classes, or a phenomenon not yet stated. Such an answer is judged by its adequacy rather than by its truth, as an explication is [carnap1950_logical]. Exploration falls in this category when its question marks the equivalence criterion as an output, so that the answer forms the classes and the phenomena of the explored space [steinle1997]. When the question fixes the criterion as an input, the partition under that criterion is true or false of the system, and the exploration is answer content. The product type `classification` follows the same division: it is answer content under description and under an exploration whose criterion is an input, and conceptual work only under an exploration whose criterion is an output. An explication, which also delivers a concept, answers no question of a registered aim: it acts on the [definiteness](../inquiry/conditions-of-answerability.md#^eight-conditions) of a term, and its product `concept` is admitted by no aim, as the [product types](#^aim-product-types) state.
 - **Mode of inquiry.** An entry names how an inquiry proceeds rather than what its answer contains, such as an inquiry that tests a claim fixed in advance. No such entry is registered today.
 
-Only answer content and conceptual work generate an [aim block](../answer/answer-form.md#^aim-blocks). An entry of the category mode of inquiry qualifies the itinerary of an inquiry, and its questions take the aim whose content they seek.
+Only answer content and conceptual work generate an [aim block](../../specification/answer.md#^aim-blocks). An entry of the category mode of inquiry qualifies the itinerary of an inquiry, and its questions take the aim whose content they seek.
 
 ## Answer conditions
 
@@ -61,23 +61,6 @@ Each aim states three answer conditions: what counts as a direct answer, when th
 - **A change of accepted claims is not an aim.** A change of accepted claims is the effect of accepting an answer: a revision of the belief base $K$ of an inquiry, a finite set of accepted claims on a named corpus [hansson1999] [levi1980]. The revision also has a named owner, the researcher or the group that accepts. Its record names the corpus revised, the owner, the answer accepted or withdrawn, and the verdict, credence or ranking on which the revision rests. The activities of the revision family perform it, `belief-revision` for one answer, and the [proposed candidates](../inquiry/epistemic-problem.md#^candidates) enter the background only through them. A demand to withdraw one of two clashing claims, which a conflict generates among the [questions of each obstacle](../inquiry/problem-types.md#^obstacle-questions), therefore takes no aim: its result is the revision itself, and the verdicts on the clashing claims are its inputs. ^acceptance
 
 - **Understanding is not an aim.** Contemporary epistemology treats understanding as an achievement beyond possessing a correct explanation. The further element is *grasping* explanatory, structural or modal relations. The object of that grasp is disputed. One account names explanatory and coherence relations [kvanvig2003], another modal dependencies [grimm2010]. A third account identifies understanding with knowledge of an explanation (Khalifa, Strevens). The dispute can stay unsettled, because the ground for excluding understanding from the registry holds under every account. First, understanding always bears *on* a product of the inquiry and never takes its place. That product may be a prediction, the behavior of a model or a modal result as readily as an explanation. Second, understanding constrains the *form* of an answer, whereas each aim of the registry fixes the type of its direct answers. Understanding therefore enters an inquiry in one of two places. First, understanding is a dimension of [appraisal](../answer/satisfaction-conditions.md#^understanding-appraised), through the virtues of intelligibility and structural transparency, which the question marks preferred or [constitutive](epistemic-pragmatic-virtues.md#^virtue-standing). Second, understanding can be the [declared use](../answer/answer-form.md#^declared-use) of an answer built on a model bound to no target. ^understanding
-
-## Specifications each aim requires
-
-Because an aim fixes the product that an answer must deliver, the aim also determines the specifications that the inquiry cannot leave empty. Each aim adds specifications to those every inquiry fixes. Under some aims, the inquiry itself produces some general specifications: an aim that produces a phenomenon cannot require the question to state it in advance. Therefore, the third column lists the specifications that a note marks as required in general but that the inquiry itself produces. On those paths alone, an empty field is admitted. A dash marks an aim that neither adds nor produces a specification. Each dash is attested by a filled inquiry that pursues the aim and fixes nothing beyond the general requirements. Each entry names a field path. Each row documents the entry for one aim in the registry of [required fields](../../../src/gnomon/data/requirements.yml), the authoritative source of the table. ^required-by-aim
-
-| Aim | Additionally required | Produced by the inquiry, although required in general |
-| --- | --- | --- |
-| `description` | — | — |
-| `exploration` | `phenomenon.detection_criterion` | `phenomenon.statement`, `phenomenon.category`, `phenomenon.occurrence`, `phenomenon.evidential_status` |
-| `prediction` | `phenomenon.manifestations`, `question.task.required_accuracy.outputs_to_match` | — |
-| `explanation` | `question.subject.contrast.foil_set`, `question.task.requested_relation` | — |
-| `modal-knowledge` | `question.task.modal_strength`, `question.task.proof_obligations` | — |
-| `model-knowledge` | — | — |
-
-- **An exploratory inquiry fixes no phenomenon in advance, so it must fix the criterion that would establish one.** The exploratory inquiry produces the statement, the category, the occurrence class and the evidential status, although every other aim fixes these four specifications. In their place, the detection criterion states the test that a candidate pattern must pass. Exploration illustrates a general division: a general requirement lists the fields of a complete record, and an aim marks the fields that the inquiry itself fills.
-
-- **Only prediction compares an output against a measurement in every inquiry**, so the field `outputs_to_match` is required for this aim alone. An aim that seeks a proof, by contrast, requires no output to match, so an absent accuracy is *correct* for that aim.
 
 ---
 ## Sources

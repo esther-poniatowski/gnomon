@@ -1,6 +1,6 @@
 ---
 tags:
-  - method
+  - theory
   - revision
 index: "[Inquiry](docs/epistemology/inquiry/_index.md)"
 aliases:
@@ -57,7 +57,7 @@ The conditions of a question are diagnosed on each of its routes. The route of s
 
 - **The diagnosis does not stall on the order.** Within one question, the dependencies have no cycle. Therefore, when no condition of a route is refuted, either all its conditions are established or at least one is open. Across questions, a condition can wait on another question, which step 1 then lists among the questions to diagnose. A cycle of such waits is broken by adopting a provisional answer. In particular, the condition of candidates is open as soon as the answer type is established, even when no candidate has been proposed.
 - **A condition can be asserted.** When the records hold no field for a condition, the researcher can state the condition as established or as refuted, with pointers to the records or the publications that show it. The [types of problem](problem-types.md) treat a conflict with a publication in the same way.
-- **Representation is established through a binding.** When access is exercised on a model other than the target and other than a [model that grounds the answer](conditions-of-answerability.md#^eight-conditions), the records show representation by a [binding](../answer/model-and-binding.md#^binding-record) of that model to the phenomenon, whose computed comparison meets the required accuracy over the reference class, read under the [rules on the reports of a comparison](../answer/satisfaction-conditions.md#^fidelity-reads-reports) that the warrant test of fidelity applies. When access is exercised on the target itself, representation holds trivially, and no binding is needed.
+- **Representation is established through a binding.** When access is exercised on a model other than the target and other than a [model that grounds the answer](conditions-of-answerability.md#^eight-conditions), the records show representation by a [binding](../../specification/binding.md#^binding-record) of that model to the phenomenon, whose computed comparison meets the required accuracy over the reference class, read under the [rules on the reports of a comparison](../answer/satisfaction-conditions.md#^fidelity-reads-reports) that the warrant test of fidelity applies. When access is exercised on the target itself, representation holds trivially, and no binding is needed.
 - **Once every condition of a route is established, the acts that obtain the answer become ready.** The acts that exercise access obtain the quantity, a combination step composes the answer through the bridging inference, and the evaluation judges the obtained answer. When the answer rests on a model, the evaluation reads the comparison computed from the binding of that model, as the [model and its binding](../answer/model-and-binding.md#^comparison) specify. That binding is the one through which access was exercised only when access ran on the model that grounds the answer. An interrogative act that obtains the answer to the question requires the soundness of that question, as the [rule on interrogative moves](conditions-of-answerability.md#^condition-dependencies) states.
 
 ## Step 3: act on each condition
@@ -107,7 +107,7 @@ A refuted condition calls for a revision, and the researcher chooses among the r
 | Discrimination | the contrast or the domain of the question is narrowed; its resolution is coarsened so that the inseparable candidates form one answer; or the development of a new quantity or instrument becomes a question |
 | Access | the other route is taken, or the development of a procedure becomes a question |
 | Bridging | another quantity is chosen, or the missing auxiliary hypothesis becomes a question |
-| Representation | the reference class or the domain of the question is restricted; access is moved to a model that represents the target, or to the target itself; or a new version of the binding is committed, under the [rule on revised bindings](../answer/model-and-binding.md#^binding-version) |
+| Representation | the reference class or the domain of the question is restricted; access is moved to a model that represents the target, or to the target itself; or a new version of the binding is committed, under the [rule on revised bindings](../../specification/binding.md#^binding-version) |
 
 The condition of candidates has no row. When all candidates fail the admissibility tests or are eliminated, the condition is not established, and its acts are those of an open condition. When the question presupposed that its candidates were complete, the elimination of all of them refutes that presupposition, and the row of soundness applies.
 

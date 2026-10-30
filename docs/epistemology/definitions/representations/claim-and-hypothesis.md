@@ -57,7 +57,7 @@ The attitude and the support of a claim take values in two closed lists: ^attitu
 
 ## Consequences for a record
 
-- **A candidate answer records the attitude and the support of its claim.** The fields are specified under the [status and support of an answer](../../answer/answer-form.md#^status-and-support), with the values of the [two lists](#^attitude-support). Therefore, an answer whose attitude is `hypothesized` is a hypothesis.
+- **A candidate answer records the attitude and the support of its claim.** The fields are specified under the [status and support of an answer](../../../specification/answer.md#^status-and-support), with the values of the [two lists](#^attitude-support). Therefore, an answer whose attitude is `hypothesized` is a hypothesis.
 - **The laws on which a candidate answer rests are claims, each with a warrant of its own.** The [warrant of a law](../../subject/background.md#^law-warrant) traces the law to its origin, so it differs from the support of the claim of an answer.
 - **The conditions of satisfaction fix the tests of the claims before evaluation.** Before any answer is assessed, the [conditions of satisfaction](../../answer/satisfaction-conditions.md) state the tests deciding whether its claims hold.
 

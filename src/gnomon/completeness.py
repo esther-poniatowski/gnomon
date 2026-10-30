@@ -17,7 +17,7 @@ the inquiry will produce is read from the registry, never from the record.
 A third kind is neither: a consistency between fields, such as an accuracy marked inapplicable
 while outputs are listed for matching. No aim decides those, so each is its own check.
 
-The method notes document the same requirements and are checked against the registry, so no
+The specification notes document the same requirements and are checked against the registry, so no
 check here reads a document.
 
 See Also

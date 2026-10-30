@@ -1,8 +1,8 @@
-# method: `docs/epistemology/subject/target-system.md`; one file per target system
-# symbols and expressions: `docs/epistemology/language/symbols-and-expressions.md`
+# specification: `docs/specification/target-system.md`; one file per target system
+# symbols and expressions: `docs/specification/expressions.md`
 # the admitted laws, their closure and the organization: `background.yml`, one or more records per target
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
-# specifications follow the order of the method note
+# specifications follow the order of the specification note
 
 title: "NAME OF THE SYSTEM"
 id: system.TOPIC

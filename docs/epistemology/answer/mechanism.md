@@ -1,13 +1,13 @@
 ---
 tags:
-  - method
+  - theory
 index: "[Answer and assessment](docs/epistemology/answer/_index.md)"
 aliases:
   - Mechanism
   - Specifying a mechanistic answer
 ---
 
-# Specifying a mechanistic answer
+# Mechanistic answer
 
 > [!QUESTION] Goal: which aspects must a mechanistic answer state, and in which formalism?
 
@@ -17,7 +17,7 @@ aliases:
 
 The senses of mechanism and the test of a mechanistic model are stated in the [vocabulary of mechanism](../definitions/regularities/mechanism-and-mechanistic-model.md). Each aspect of a mechanistic answer is defined in the note named in the column *Defined in*. For each aspect, this note fixes the content required of a mechanistic answer and the formalism of that content.
 
-A mechanistic answer is an [explanation](answer-form.md#^explanation-block) whose [requested relation](../epistemic-task/requested-relation.md) is causal-mechanistic or constitutive. Its components, activities and organization are those of the [model](model-and-binding.md#^model-elements) on which the answer rests, and the components, activities and organization that make the difference to the phenomenon are the factors $E$ of its explanatory block, by the mapping onto a mechanism that the [answer form](answer-form.md) states.
+A mechanistic answer is an [explanation](answer-form.md#^explanation-block) whose [requested relation](../epistemic-task/requested-relation.md) is causal-mechanistic or constitutive. Its components, activities and organization are those of the [model](../../specification/model.md#^model-elements) on which the answer rests, and the components, activities and organization that make the difference to the phenomenon are the factors $E$ of its explanatory block, by the mapping onto a mechanism that the [answer form](answer-form.md) states.
 
 ## Aspects of a mechanistic answer
 
@@ -39,7 +39,7 @@ A mechanistic answer and the model on which it rests state four aspects [machame
 
 ## Formalism (proposed)
 
-> [!WARNING] No canonical mathematical notation exists in the philosophical literature. Therefore, the formalism takes its notation from the [registry shared across the framework](../language/notation.md), as does the [form of an answer](answer-form.md).
+> [!WARNING] No canonical mathematical notation exists in the philosophical literature. Therefore, the formalism takes its notation from the [registry shared across the framework](../notation/notation.md), as does the [form of an answer](answer-form.md).
 
 **Mechanism**. A generic mechanistic schema is a triple
 $$\langle C,L,O\rangle$$

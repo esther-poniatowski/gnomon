@@ -1,12 +1,11 @@
 ---
 tags:
-  - method
+  - theory
 index: "[Subject of inquiry](docs/epistemology/subject/_index.md)"
 aliases:
-  - Specifying the subject of inquiry
   - Subject of inquiry
 ---
-# Specifying the subject of inquiry
+# Subject of inquiry
 
 > [!QUESTION] Goal: what must be fixed to specify the objects that an inquiry studies?
 
@@ -17,13 +16,7 @@ The subject of inquiry is one of the four [layers of specification](../inquiry/i
 The subject of inquiry is written as a quadruple of components:
 $$\Sigma=\langle S,P,X,D\rangle $$
 
-| Component | When it is required | Role | Example | Canonical tradition |
-| --------- | ------------------- | ---- | ------- | ------------------- |
-| **[Target system](target-system.md) $S$** | always | System or portion of reality about which knowledge is sought, and which the model represents | neuron | Philosophy of scientific models |
-| **[Background](background.md)** of $S$ | when the question rests on laws of $S$ admitted *a priori* | Bodies of laws about $S$ admitted by the question; they qualify $S$ and add no fifth component to $\Sigma$ | the leaky integration of each neuron, admitted with the network | laws of succession and coexistence [winther2020] |
-| **[Phenomenon](phenomenon.md) $P$** ("explanandum") | always, except for an exploratory question, where a search space replaces it | Aspect of $S$ to be explained (e.g. a fact, event, pattern, property, behavior) | firing rate | covering-law explanation [hempel1948] |
-| **[Contrast class](contrast.md) $X$** | for a contrastive why-question, and implicit as the comparator in a question about a causal effect | Alternative(s) relative to which $P$ is puzzling — "why $P$ rather than $P'$?" | why spike rather than inactivity? | contrastive why-questions [vanfraassen1980] |
-| **[Domain of conditions](domain.md) $D$** | when the question holds a condition fixed | Background conditions under which the system is studied (e.g. regime, limit, parameter range) | in vitro slice, injected current between 0 and 500 pA | "causal field" [mackie1974], "background conditions" [woodward2010], and "domain of validity" in physics |
+The components are documented, field by field, in the [subject of a question](../../specification/question-subject.md).
 
 The four components fill a statement frame. The [epistemic aim](../epistemic-task/epistemic-aim.md) selects the interrogative word of that frame: ^question-statement
 
@@ -54,8 +47,7 @@ Each admitted specification divides into two parts:
     - the contrast $X$, for contrastive why-questions;
     - the explanandum variable, whenever the contrast takes its foils from the possible values of $Y$;
     - the conditions and byproducts, only once they are known.
-- **Placeholders before records.** The target-system slot and the phenomenon slot of a question accept a record identifier or a typed placeholder. The type of a placeholder fits its slot: the target-system slot awaits a `system`, and the phenomenon slot a `phenomenon`. A question whose slots hold placeholders is a [question schema](../inquiry/question.md#^question-schema). A slot that names a record requires the record to reach at least the commitment `identified`, as the [levels of commitment](../inquiry/question.md#^commitment-levels) define it. Each record of a target or of a phenomenon declares its own commitment, `identified` or `specified`. ^placeholder-slots
-- **Empty values with a maturity marker.** Every specification may stay empty while it is not filled. Whether an empty specification is a gap or a product of the inquiry is read from the [requirements of the epistemic aim](../epistemic-task/epistemic-aim.md#^required-by-aim), never from the record. Each specification may also carry its own maturity marker (open, provisional, or stabilized), beside the marker that applies to the inquiry as a whole. Empty values are admitted because characterizing the phenomenon is itself a discovery task [craver2013], and because the descriptions that this task yields are revised or rejected [colaco2018].
+- **Empty values with a maturity marker.** Every specification may stay empty while it is not filled. Whether an empty specification is a gap or a product of the inquiry is read from the [requirements of the epistemic aim](../../specification/question-task.md#^required-by-aim), never from the record. The marker of each specification is documented under the [maturity of a field](../../specification/maturity.md). Empty values are admitted because characterizing the phenomenon is itself a discovery task [craver2013], and because the descriptions that this task yields are revised or rejected [colaco2018].
 - **Filling order.** The system $S$ and the phenomenon $P$ are specified together, since the partition of variables depends on $P$. The contrast $X$ is then specified from the value space of $P$. The domain $D$ bounds all three.
 
 ## Precedent in quantitative methodology
@@ -99,10 +91,5 @@ Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-mar
 - [colaco2018] ◐ [Colaço, "Rip it up and start again", _SHPS A_ 72, 2018](https://www.sciencedirect.com/science/article/abs/pii/S003936811730211X)
 - [craver2013] ◐ [Craver & Darden, _In Search of Mechanisms_, U. Chicago Press, 2013](https://press.uchicago.edu/ucp/books/book/chicago/I/bo16123713.html)
 - [hamblin1958] ◐ [Hamblin, "Questions", _Australasian Journal of Philosophy_ 36(3), 1958](https://www.tandfonline.com/doi/abs/10.1080/00048405885200211)
-- [hempel1948] ○ Hempel & Oppenheim, "Studies in the logic of explanation", _Philosophy of Science_ 15(2), 1948
 - [ich2019] ◐ [ICH E9(R1) Addendum on Estimands](https://en.wikipedia.org/wiki/ICH_E9\(R1\)_Addendum_On_Estimands_and_Sensitivity_Analyses_in_Clinical_Trials)
 - [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)
-- [mackie1974] ◐ Mackie, _The Cement of the Universe_, OUP, 1974, "causal field", via [PhilPapers](https://philpapers.org/rec/MACTCO-17)
-- [vanfraassen1980] ✓ van Fraassen, _The Scientific Image_, ch. 5, read in [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
-- [winther2020] ◐ [Winther, "The structure of scientific theories", _SEP_, revised 2020](https://plato.stanford.edu/entries/structure-scientific-theories/), §3.1.1 on the state-space approach
-- [woodward2010] ◐ [Woodward, "Causation in biology…", _Biology & Philosophy_ 25, 2010](https://link.springer.com/article/10.1007/s10539-010-9200-z)

@@ -12,7 +12,7 @@ aliases:
 
 > [!QUESTION] Goal: which files may a check of `gnomon` read, and which process produces the verdict that a record conforms?
 
-Three kinds of file surround an inquiry: the records that authors write, the package data that declares vocabularies and schemas, and the outputs that tools generate, such as the symbol table of a problem and the record templates. The [decision on registries](registries-as-source.md) already excludes the method notes from the inputs of a check. Two questions remained open. The first asks whether a check may read a generated output, or a state that a tool holds apart from the files. The second asks whether an author, or a field of a record, may certify that the record conforms.
+Three kinds of file surround an inquiry: the records that authors write, the package data that declares vocabularies and schemas, and the outputs that tools generate, such as the symbol table of a problem and the record templates. The [decision on registries](registries-as-source.md) already excludes the notes of the documentation from the inputs of a check. Two questions remained open. The first asks whether a check may read a generated output, or a state that a tool holds apart from the files. The second asks whether an author, or a field of a record, may certify that the record conforms.
 
 ## Decision
 

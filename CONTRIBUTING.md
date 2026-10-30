@@ -73,7 +73,7 @@ Contributions to the codebase should be developed in a local clone of the reposi
 
 A change is verified by the narrowest checks that exercise it. A change to a shared template reaches every dependent fixture and every downstream template, so those fixtures and templates are checked in the same pass.
 
-- **Alignment of notes and templates:** each row of a method table resolves to one key, in the same order, and every key of a template is documented. The option lists of each template, and the requirement column of each method table, agree with the registries of vocabularies and of requirements.
+- **Alignment of notes and templates:** each row of a specification table resolves to one key, in the same order, and every key of a template is documented. The option lists of each template, and the requirement column of each specification table, agree with the registries of vocabularies and of requirements.
 - **Symbol resolution:** each symbol is unique within its record, and every reference and every identifier of a formula resolves to a declaration. Each rule carries a planted negative case that fails for the intended reason.
 - **YAML integrity:** every template and every fixture parses, keeps its `id` and its `type`, and holds no uppercase placeholder.
 - **Reference integrity:** each identifier pointing to another record, and each Markdown link, resolves to one existing target.
@@ -83,10 +83,10 @@ A change is verified by the narrowest checks that exercise it. A change to a sha
 
 Each contract of the framework has one owning file. A contributor reads that file before editing any file that depends on the contract.
 
-- The [expression language](docs/epistemology/language/symbols-and-expressions.md) fixes the syntax of symbols, expressions and signatures.
-- The [specification method](docs/epistemology/_index.md) fixes the meaning of every inquiry field and the options that the field admits.
+- The [expression language](docs/specification/expressions.md) fixes the syntax of symbols, expressions and signatures.
+- The [specification](docs/specification/_index.md) fixes the meaning of every inquiry field and the options that the field admits, and the [epistemology](docs/epistemology/_index.md) states the concepts and the grounds behind them.
 - The [record templates](src/gnomon/data/templates/_index.md) fix the machine-readable shape of each record and the order of its keys.
-- The tests of [template alignment](tests/test_gnomon/test_template_alignment.py) and of [symbol resolution](tests/test_gnomon/test_symbol_resolution.py) enforce that each method table aligns with its template, and that every symbol and every reference resolves.
+- The tests of [template alignment](tests/test_gnomon/test_template_alignment.py) and of [symbol resolution](tests/test_gnomon/test_symbol_resolution.py) enforce that each specification table aligns with its template, and that every symbol and every reference resolves.
 
 ## Writing documentation
 
@@ -122,7 +122,8 @@ The order is fixed, so that a divergence shows up in a diff.
 | `reference`        | External work, stated on its own terms            |
 | `audit`            | Assessment on which a decision rests              |
 | `generated`        | View built by a tool from the records             |
-| `method`           | Method note of the epistemology                   |
+| `theory`           | Theory note of the epistemology                   |
+| `specification`    | Documentation of the fields of a record           |
 | `definition`       | Definition note of the epistemology               |
 | `procedure`        | Method of performing one activity                 |
 | `decision`         | Architecture decision record                      |

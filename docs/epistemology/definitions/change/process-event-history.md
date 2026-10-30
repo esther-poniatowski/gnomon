@@ -79,7 +79,7 @@ A predicate in none of the three classes is restated as an **observable over a d
 
 ## Consequences for a record
 
-- **A phenomenon declares its course and its occurrence class.** The fields are specified under [course and occurrence](../../subject/phenomenon.md#^course-and-occurrence), and the occurrence classes admitted by each category of phenomenon under [occurrence by category](../../subject/phenomenon.md#^occurrence-by-category).
+- **A phenomenon declares its course and its occurrence class.** The fields are specified under [course and occurrence](../../subject/phenomenon.md#^course-and-occurrence), and the occurrence classes admitted by each category of phenomenon under [occurrence by category](../../../specification/phenomenon.md#^occurrence-by-category).
 - **A parameter of the target can change along the course of one phenomenon.** The [role test of a quantity](../quantities/variable-value-observable.md#^role-test) places such a parameter.
 - **A process stated over a field requires an index set for space.** The bearer of "raining" is a region, so the index set is declared in the [target specification](../../subject/target-system.md).
 

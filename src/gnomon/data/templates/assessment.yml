@@ -1,4 +1,4 @@
-# method: `docs/epistemology/answer/satisfaction-conditions.md`; one file per assessed candidate answer
+# specification: `docs/specification/assessment.md`; one file per assessed candidate answer
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # admissibility: keep the tests of the core and the tests of the block of the aim of the question; delete the tests of the other blocks
 # the erotetic relation of the answer routes the tests: a corrective answer holds no aim block, so its product test and the tests of its block are `not-applicable`

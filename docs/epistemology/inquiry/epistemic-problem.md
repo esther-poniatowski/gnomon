@@ -1,6 +1,6 @@
 ---
 tags:
-  - method
+  - theory
   - wip
 index: "[Inquiry](docs/epistemology/inquiry/_index.md)"
 aliases:
@@ -33,7 +33,7 @@ A problem is the triple ^problem-triple
 
 $$\pi=\langle K,\ d,\ \Phi\rangle .$$
 
-Each component answers one question about the problem: relative to which knowledge, for which result, and under which conditions. The symbols are registered in the [notation](../language/notation.md).
+Each component answers one question about the problem: relative to which knowledge, for which result, and under which conditions. The symbols are registered in the [notation](../notation/notation.md).
 
 ### The background $K$
 
@@ -96,7 +96,7 @@ In words: the accepted knowledge establishes that a result of the demanded type 
 
 ## How a problem ends
 
-A problem ends in one of three ways, and the [problem record](problem.md) fixes their record values. Two of the three ways have a formal condition: ^problem-outcomes
+A problem ends in one of three ways, and the [problem record](../../specification/problem.md) fixes their record values. Two of the three ways have a formal condition: ^problem-outcomes
 
 - **Solved**: a candidate of the demanded type meets the constraints and the request, and its assessment has moved it from $H$ into $K$.
 - **Dissolved**: the revised background yields the negation of a presupposition of $Q_\pi$, its existence presupposition or its topic presupposition. No result of the demanded kind exists, so no solution is needed. *Example*: the delay appears only in a thresholded accuracy, while the test loss falls from the start of training. In that case, no delay of learning exists, and the problem of explaining it dissolves.
@@ -151,7 +151,7 @@ Reduction can be conjunctive: $\pi_1$ reduces to $\pi_2$ and $\pi_3$ together wh
 
 ## Consequences for a record
 
-- **A problem record states its demand, its constraints and its explicanda.** The fields are specified in the [problem record](problem.md).
+- **A problem record states its demand, its constraints and its explicanda.** The fields are specified in the [problem record](../../specification/problem.md).
 - **A typed demand makes the existence of a problem checkable over the records.** Over the accepted records of an inquiry, the problem exists when no accepted record of the demanded type gives a direct answer of $Q_\pi$. This condition is also the second condition of the gap.
 
 ---

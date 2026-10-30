@@ -1,16 +1,15 @@
 ---
 tags:
-  - method
-index: "[Record language](docs/epistemology/language/_index.md)"
+  - specification
+index: "[Specification](docs/specification/_index.md)"
 aliases:
   - Symbols and expressions
-  - Symbols of an inquiry record
 ---
-# Symbols and expressions of an inquiry record
+# Symbols and expressions
 
 > [!QUESTION] Goal: how does a record name its quantities, so that a formula in one field reaches an entry of another field?
 
-Within an inquiry record, each declared quantity carries a symbol that no other entry shares. Through that symbol, one field reaches a quantity that another field declares: a reference names it directly, and a formula combines it with others into an expression. The same rule governs the symbols of the method itself: one letter carries one meaning across the notes, under the [notation registry](notation.md).
+Within an inquiry record, each declared quantity carries a symbol that no other entry shares. Through that symbol, one field reaches a quantity that another field declares: a reference names it directly, and a formula combines it with others into an expression. The same rule governs the symbols of the method itself: one letter carries one meaning across the notes, under the [notation registry](../epistemology/notation/notation.md).
 
 A prose name cannot replace the symbol, because such a name resolves to no entry. For example, a name written as "velocity field u(x,t)" holds a symbol, a name and a signature at once. A second field then reaches the quantity only by repeating the whole string, and a formula can name a symbol that no entry declares.
 
@@ -31,7 +30,7 @@ A prose name cannot replace the symbol, because such a name resolves to no entry
 
 - **A symbol is unique only *within* its record.** For example, two targets may each declare `L`. A reference from another record therefore prefixes the identifier of the declaring record, and the resulting identifier is unique across the corpus. Within one record, two entries declaring the same symbol are a defect. One entry declaring two quantities is the converse defect: "cross-coupling operators G_AB and G_BA" must become two entries.
 
-- **A record stated against one target names the quantities of that target by the symbol alone.** A phenomenon names its target in the field `target_system`, and a [background record](../subject/background.md) in the field `describes`. Therefore, a bare symbol in one of their formulas resolves against the declarations of the record and those of its target together. A reference to any other record keeps the prefix. ^target-scope
+- **A record stated against one target names the quantities of that target by the symbol alone.** A phenomenon names its target in the field `target_system`, and a [background record](../epistemology/subject/background.md) in the field `describes`. Therefore, a bare symbol in one of their formulas resolves against the declarations of the record and those of its target together. A reference to any other record keeps the prefix. ^target-scope
 
 - **Only a compound value is quoted: a bare symbol and a vocabulary token stay unquoted.** Inside a bracketed list, the quotes change the parsed value: unquoted, `[maps(prod(a, b), reals)]` splits on its commas, so the record holds one expression cut into three plausible fragments. Outside a list, the serializer parses a compound value the same way in either form. The rule then serves the reader: quotation marks signal that the enclosed string holds more than one identifier. ^quote-compound-values
 
@@ -59,25 +58,7 @@ A prose name cannot replace the symbol, because such a name resolves to no entry
 
 - **An index set is declared only when no constituent kind, and no parameter of one, supplies the set.** For example, units carrying positions on a lattice need no index set, because the units are the constituents and each coordinate is a parameter defined over a unit. A quantity said to vary "by position" therefore takes the unit as its index. A continuum field, by contrast, has no units, so position is the index and the constituents are empty. A field over a lattice may be modelled either way, and the record states which way it chose. ^index-set-admission
 
-- **The canonical operators follow from the semantics of the framework.** The set has one source, the [registry declaring every canonical operator](../../../src/gnomon/data/operators.yml), and falls into the following groups. Binders realize the signature rule and the limits that the domain may take: `mean`, `sum`, `min`, `max`, `dist`, `limit`, `norm`. Relations realize the forms that a manifestation may take and the distributional law that a record may state: `implies`, `depends_on`, `increasing`, `decreasing`, `drawn_from`. The transform `ft` is also a binder, because it consumes the indices that it binds. Set constructors build value sets and extents, name the most frequent shapes, and relate two sets. The set constructors are `reals`, `ints`, `bools`, `complex`, `pos`, `nonneg`, `vectors`, `matrices`, `prod`, `enum`, `range`, `interval`, `maps`, `measures`, `card`, `subset`, `intersect`, `union`, `empty`. Every problem may use two maps: `diff`, the derivative of a quantity along one of its indices, and `abs`, the magnitude of its argument. The same holds for the operations of general mathematics that no problem owns: `dot`, `adjoint`, `re`, `spectrum`, `jacobian`, `grad`, `div`, `lap`. One constant is admitted: `infinity`, the value to which a limit of the domain runs. ^operator-groups
-
-- **One operator vocabulary serves one problem.** Every record of a problem reads the same operator file. A phenomenon, its target and its questions therefore draw on one set, and no record redeclares an operator that a sibling declares. An operator is typed over sets that any record of the problem may declare. The operator file is therefore read against the *whole problem*. ^one-operator-file
-
-- **A problem declares the mathematics that it adds.** Each problem lists in its `operators.yml` the operators that its records use beyond the canonical set. These local operators resolve only within that problem. The restriction of a field to a region, or the Jacobian of a community at equilibrium, belongs to the *problem* that uses it. The canonical set therefore holds only the operators that every inquiry can assume. ^local-operators
-
-## Operator record
-
-One file per problem holds the operators that its records declare, filled from `src/gnomon/data/templates/operators.yml`. The file names the target system of the problem, so a reader reaches the sets over which the operators are typed.
-
-| Specification | When it is required | Form | Examples |
-| ------------- | ------------------- | ---- | -------- |
-| Operators | when a formula of any record of the problem uses an operator beyond the canonical set | one entry per operator | the restriction of a field to a region; the Jacobian of a community at equilibrium; the empirical neural tangent kernel |
-| Operators: name | with every operator | the result that the operator computes, in words and with no symbol or formula | "the restriction of a field to a region" |
-| Operators: symbol | with every operator | an identifier, unique across the problem and distinct from every declared quantity | `restrict`, `community_jacobian`, `ntk` |
-| Operators: notation | when the operator prints as more than its symbol | a LaTeX template in single quotes, `#0` for the indices that a binder consumes and `#1`, `#2` for its arguments | `'\nabla \cdot #1'`; `'\operatorname{spec}( #1 )'` |
-| Operators: for any (type variables of the operator) | when the operator is general over the sets on which it acts | the type variables that its signature and values may name, so that a general operator is typed once for all its call sites | `[S]` for an adjoint, typed `maps(S, S)` to `maps(S, S)`; `[S, n]` for an inner product of two vectors |
-| Operators: signature | with every operator | the set expression of each argument, in order | `["maps(Om, pow(reals, 3))"]` |
-| Operators: values | with every operator | the set expression in which its result lies | `"maps(Om, reals)"`; `reals` |
+- **The canonical operators follow from the semantics of the framework.** The set has one source, the [registry declaring every canonical operator](../../src/gnomon/data/operators.yml), and falls into the following groups. Binders realize the signature rule and the limits that the domain may take: `mean`, `sum`, `min`, `max`, `dist`, `limit`, `norm`. Relations realize the forms that a manifestation may take and the distributional law that a record may state: `implies`, `depends_on`, `increasing`, `decreasing`, `drawn_from`. The transform `ft` is also a binder, because it consumes the indices that it binds. Set constructors build value sets and extents, name the most frequent shapes, and relate two sets. The set constructors are `reals`, `ints`, `bools`, `complex`, `pos`, `nonneg`, `vectors`, `matrices`, `prod`, `enum`, `range`, `interval`, `maps`, `measures`, `card`, `subset`, `intersect`, `union`, `empty`. Every problem may use two maps: `diff`, the derivative of a quantity along one of its indices, and `abs`, the magnitude of its argument. The same holds for the operations of general mathematics that no problem owns: `dot`, `adjoint`, `re`, `spectrum`, `jacobian`, `grad`, `div`, `lap`. One constant is admitted: `infinity`, the value to which a limit of the domain runs. ^operator-groups
 
 - **Each problem gathers its symbols in one table of its own.** A problem fills several records that reference one another, so its author consults one table generated from the whole set. No table spans a corpus, because the scoping rule lets one letter denote a different quantity in each problem. ^one-table-per-problem
 

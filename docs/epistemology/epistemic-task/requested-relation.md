@@ -1,12 +1,12 @@
 ---
 tags:
-  - method
+  - theory
 index: "[Epistemic task](docs/epistemology/epistemic-task/_index.md)"
 aliases:
   - Specifying the requested relation
   - Requested relation
 ---
-# Specifying the requested relation
+# Requested relation
 
 > [!QUESTION] Goal: what must be fixed to specify the relation that an explanans must bear to the explanandum?
 

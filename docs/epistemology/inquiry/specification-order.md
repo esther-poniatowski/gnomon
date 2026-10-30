@@ -1,6 +1,6 @@
 ---
 tags:
-  - method
+  - theory
   - wip
 index: "[Inquiry](docs/epistemology/inquiry/_index.md)"
 aliases:
@@ -19,7 +19,7 @@ An inquiry is specified in five stages. Each stage takes the products of the ear
 
 | Stage | Product | Level of commitment | Record |
 | --- | --- | --- | --- |
-| 1. Problem | the demand, its constraints and its explicanda | terms anchored by pointers | [problem](problem.md) |
+| 1. Problem | the demand, its constraints and its explicanda | terms anchored by pointers | [problem](../../specification/problem.md) |
 | 2. Question schema | the questions that serve the problem, with typed placeholders, an aim and a contrast | slots typed | [question](question.md) |
 | 3. Identified subject | the system and the phenomenon, each fixed by a definite description and pointers | slots `identified` | [target system](../subject/target-system.md), [phenomenon](../subject/phenomenon.md) |
 | 4. Background and specified subject | the admitted laws, and the formal declarations of the system and the phenomenon | slots `specified` | [background](../subject/background.md) |
@@ -31,7 +31,7 @@ The levels of commitment are defined in the note on [questions](question.md#^com
 
 **First, a question needs its terms identified, not specified.** A question can name the system and the phenomenon once their referents are fixed, before any model states their properties. The level `identified` fixes a referent by a definite description, as the [levels of commitment](question.md#^commitment-levels) state.
 
-**Second, the model belongs to the background or to a model record, not to the subject.** Laws admitted in advance belong to the background. Constituents, laws and organizations proposed during the inquiry belong to a [model record](../answer/model-and-binding.md#^model-record), which every answer that rests on it cites. A phenomenon can be identified without the theory that explains it [bogen1988] [hacking1983]. The study of mechanisms accordingly characterizes the phenomenon before it builds any schema of a mechanism [craver2013].
+**Second, the model belongs to the background or to a model record, not to the subject.** Laws admitted in advance belong to the background. Constituents, laws and organizations proposed during the inquiry belong to a [model record](../../specification/model.md#^model-record), which every answer that rests on it cites. A phenomenon can be identified without the theory that explains it [bogen1988] [hacking1983]. The study of mechanisms accordingly characterizes the phenomenon before it builds any schema of a mechanism [craver2013].
 
 **Third, an inquiry starts from a problem, not from a question** [dewey1938]. The first object of an inquiry is a [problem](epistemic-problem.md): a demand that the accepted knowledge does not yet meet [nickles1981]. The questions are products of the second stage, derived from the problem, and they are typed before their terms are identified.
 

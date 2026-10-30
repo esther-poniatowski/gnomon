@@ -34,7 +34,7 @@ Each template follows ten conventions of format:
 - each value that holds prose consists of complete sentences, with an initial capital and a final period;
 - each filled `name` value is a short lowercase label without a final period, capitalized only for a proper noun;
 - each filled `description` of an identification is a definite description: a noun phrase, lowercase unless it opens on a proper noun, without a final period;
-- the slots follow the rows of their method note, and each row names the key of its slot, so that a template can be checked mechanically against its note; the [alignment tests](../../../../tests/test_gnomon/test_template_alignment.py) pair each table of specifications of a method note with its template;
+- the slots follow the rows of their specification note, and each row names the key of its slot, so that a template can be checked mechanically against its note; the [alignment tests](../../../../tests/test_gnomon/test_template_alignment.py) pair each table of specifications of a specification note with its template;
 - within one entry, the keys run from designation to construction: name, symbol and notation, type, defining expression, then a prose field stating it in words.
 
 Two conventions govern the names of fields:

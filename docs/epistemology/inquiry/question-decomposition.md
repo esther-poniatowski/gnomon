@@ -1,6 +1,6 @@
 ---
 tags:
-  - method
+  - theory
   - wip
 index: "[Inquiry](docs/epistemology/inquiry/_index.md)"
 aliases:

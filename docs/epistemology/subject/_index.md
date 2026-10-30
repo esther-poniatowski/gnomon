@@ -7,11 +7,11 @@ aliases:
 ---
 # Subject of inquiry
 
-Fixes the objects that a research question is about, the first layer of its specification.
+Defines the objects that a research question is about, the first layer of the specification of a question.
 
-- [Subject of inquiry](subject-of-inquiry.md): fixes the objects that a research question studies, before the kind of answer is chosen
+- [Subject of inquiry](subject-of-inquiry.md): defines the objects that a research question studies, before the kind of answer is chosen
 - [Target system](target-system.md): delimits the system that a question concerns
-- [Background](background.md): specifies the laws admitted about a target system before any answer is sought
-- [Phenomenon](phenomenon.md): specifies the behavior of the system that a question addresses
+- [Background](background.md): defines the laws admitted about a target system before any answer is sought
+- [Phenomenon](phenomenon.md): defines the behavior of the system that a question addresses
 - [Contrast](contrast.md): guides the choice of the alternatives against which a phenomenon is questioned
-- [Domain of conditions](domain.md): specifies the conditions that a question holds fixed
+- [Domain of conditions](domain.md): defines the conditions that a question holds fixed

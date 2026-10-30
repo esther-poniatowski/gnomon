@@ -36,7 +36,7 @@ The record kinds of the concerns of an inquiry are fixed by the method, and the 
 
 ## Constraints that decide the test
 
-- **Each record kind costs every author.** A kind adds a template, a schema, a check and a method note, which each author learns, so the set of kinds stays small.
+- **Each record kind costs every author.** A kind adds a template, a schema, a check and a specification note, which each author learns, so the set of kinds stays small.
 - **A unit of a record is already addressable.** The [dotted identifiers](dotted-identifiers.md) name a unit inside a record, so a construct that is cited, but fails another condition, stays a unit.
 - **A generated record has a source.** A record that a tool can generate from others would be a copy, which the [rule of one source](one-source-per-unit.md#^generated-copies-only) admits only as a generated output.
 

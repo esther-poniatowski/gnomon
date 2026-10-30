@@ -28,7 +28,7 @@ The cost of writing a grammatical value is paid in full, never lowered by admitt
 
 ## Constraints that decide the partition
 
-- **A check that reads prose depends on its wording.** The decision on registries excludes the method notes from the checks for that reason, and the reason holds for a prose field inside a record.
+- **A check that reads prose depends on its wording.** The decision on registries excludes the notes of the documentation from the checks for that reason, and the reason holds for a prose field inside a record.
 - **An inquiry starts before its grammatical fields can be filled.** A phenomenon at the commitment `identified` is fixed by a definite description and by pointers, before any observable is declared, so a prose field is required at that commitment.
 - **A field read by a tool must hold one kind of value.** A field that admits either a sentence or a grammatical value obliges every tool that reads it to test which kind it holds, and a sentence in it yields no verdict.
 - **A grammatical value costs more to write than a sentence.** The retired design notes (commit 9e138e2) record this tension between formal expression and authoring cost, for rationales and explanatory gains in particular.

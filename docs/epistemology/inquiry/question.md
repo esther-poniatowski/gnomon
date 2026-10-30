@@ -1,6 +1,6 @@
 ---
 tags:
-  - method
+  - theory
   - wip
 index: "[Inquiry](docs/epistemology/inquiry/_index.md)"
 aliases:
@@ -15,6 +15,8 @@ aliases:
 > [!QUESTION] Goal: what is a question, how far can each slot of a question stay uncommitted, and how do two questions depend on each other?
 
 A **question** is a request whose possible answers form a definite set [hamblin1958].
+
+The fields of a question, and the rules that bind them, are documented in the [question record](../../specification/question.md).
 
 ## Senses
 
@@ -70,13 +72,7 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 ## Distinctions
 
 - **A problem is not a question, and every inquiring question presupposes a problem.** The difference between the two is stated in the note on the [epistemic problem](epistemic-problem.md#^problem-vs-question). A question asked to learn its answer carries at least a [minimal problem](epistemic-problem.md#^minimal-problem), and a problem record makes that problem explicit.
-- **The type of a question record follows the commitment of its slots.** When any slot holds a placeholder, the record is a `question-schema`. When every slot is `identified` or `specified`, the record is a `question`. The two take the same fields.
 - **The type of a problem bounds the aims of its questions.** The [types of problem](problem-types.md) map each type of result demanded onto the aims, the question forms and the answer forms that it admits.
-
-## Consequences for a record
-
-- **A problem is recorded in its own record.** Its fields, and the field by which a question names its problem, are specified in the [problem record](problem.md).
-- **The slots of a question admit a placeholder.** The rule is stated under [placeholders before records](../subject/subject-of-inquiry.md#^placeholder-slots).
 
 ---
 ## Sources
