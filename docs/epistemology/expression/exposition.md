@@ -1,7 +1,7 @@
 ---
 tags:
   - theory
-index: "[Expression](docs/epistemology/objects/expression/_index.md)"
+index: "[Expression](docs/epistemology/expression/_index.md)"
 aliases:
   - Exposition
   - Exposition as a projection
@@ -13,7 +13,7 @@ aliases:
 
 An **exposition**, such as a brief, a talk or an article, is a projection of the research units of an inquiry to a declared audience. An exposition selects research units, orders them for that audience, and adds only sentences that carry no content: announcements, connectors, and syntheses that restate a relation already held by the research records. Every statement of an exposition that carries content presents a research unit. ^exposition
 
-The [decision on expositions](../../../adr/expositions-as-projections.md) gives the exposition records to `gnomon` and fixes their parts. This note states the concept of a projection and its grounds.
+The [decision on expositions](../../adr/expositions-as-projections.md) gives the exposition records to `gnomon` and fixes their parts. This note states the concept of a projection and its grounds.
 
 ## An exposition adds no content
 
@@ -21,15 +21,15 @@ A statement **carries content** when it states a claim, a definition, a datum, a
 
 Three grounds support the rule that an exposition adds no content:
 
-- **Communication is not an epistemic activity.** A paper, a talk or a figure carries the content of existing epistemic objects into another medium, so it adds no content to the questions, the knowledge or the warrants of the inquiry, as the [criterion of an epistemic activity](../../processes/activities/epistemic-activities.md#^epistemic-criterion) states. An exposition is the product of such communication.
-- **Content has one source.** A motivation or an example stated only in an exposition would be content without a canonical record, against the [rule of one source](../../../adr/one-source-per-unit.md#^one-source). Every example, motivation or illustration is therefore first recorded as a research unit.
+- **Communication is not an epistemic activity.** A paper, a talk or a figure carries the content of existing epistemic objects into another medium, so it adds no content to the questions, the knowledge or the warrants of the inquiry, as the [criterion of an epistemic activity](../processes/activities/epistemic-activities.md#^epistemic-criterion) states. An exposition is the product of such communication.
+- **Content has one source.** A motivation or an example stated only in an exposition would be content without a canonical record, against the [rule of one source](../../adr/one-source-per-unit.md#^one-source). Every example, motivation or illustration is therefore first recorded as a research unit.
 - **Several views over one store keep the store unchanged.** In the architecture of database systems, each group of users reads its own external schema, a view derived from one conceptual schema, and no view stores data of its own [tsichritzis1978]. Literate programming draws a document for human readers and a program for the machine from one source [knuth1984]. An exposition stands to the research records as such a view stands to its store, and a correction therefore goes to the records, after which the exposition is rendered again.
 
 The connectors of an exposition fall under the same rule. Rhetorical Structure Theory separates two kinds of relation between spans of a text [mann1988]. A subject-matter relation, such as cause or elaboration, states a relation between the contents of the spans. A presentational relation, such as motivation or background, aims to change the inclination of the reader. Under a proposal of this method, a connector that states a subject-matter relation restates a relation recorded between the two research units, such as `supports` or `tests`, and a presentational connector adds no content.
 
 ## The audience
 
-The **audience** of an exposition is a readership described by its knowledge, its skills and its register, as an audience specification records them under the decision on [terminology, audience and project specifications](../../../adr/terminology-audience-project-specifications.md). The design brief of an exposition cites its audiences. ^audience
+The **audience** of an exposition is a readership described by its knowledge, its skills and its register, as an audience specification records them under the decision on [terminology, audience and project specifications](../../adr/terminology-audience-project-specifications.md). The design brief of an exposition cites its audiences. ^audience
 
 Argumentation is relative to the audience that it addresses: it seeks the adherence of that audience, and starts from premises that the audience grants [perelman1958]. The audience therefore changes four properties of an exposition:
 
@@ -59,7 +59,7 @@ The audience changes neither the content nor the warrant of a unit. The warrant 
 > 	- the restatement of a recorded relation by each connector that states a subject-matter relation;
 > 	- the four properties of an exposition that its audience changes, and the departure from the new rhetoric.
 
-Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [knuth1984] ○ Knuth, "Literate programming", *The Computer Journal* 27(2), 97–111, 1984
 - [mann1988] ○ Mann & Thompson, "Rhetorical Structure Theory: toward a functional theory of text organization", *Text* 8(3), 243–281, 1988; subject-matter and presentational relations

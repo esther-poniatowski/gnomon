@@ -145,3 +145,18 @@ The trials of the [worked inquiries](examples/_index.md) left candidate changes 
 	- [ ] Give `gnomon.cli` a `__main__` guard, or state in the [command reference](docs/guide/cli-reference.md) that the module form of the command is `python -m gnomon`. Invoked as `python -m gnomon.cli`, the command imports the module, exits 0 and performs no action.
 	- [ ] Exercise in the worked inquiries the fields that no case fills: the `realizations` of an answer, and the inhibiting conditions, nonstandard circumstances and byproducts of a phenomenon. These instances need quantities that no case declares yet, such as a dissipation rate for the turbulent anomaly or an intervention scale for a nonstandard preparation.
 
+## Alignment of the code with the theory
+
+The revision of the theory tier fixed senses and norms that the registries, the templates and the checks do not yet follow. Each change below renames or extends a value that code reads, so it updates the registry, the templates, the checks, the tests and the worked inquiries in one change.
+
+- [ ] Align the registries, the templates and the checks with the revised theory. 🆔 theory-code-alignment
+	- [ ] Rename the product type `hypothesis`, which the [product types](docs/epistemology/processes/activities/epistemic-activities.md#^hypothesis-type) now restrict to a claim about the target, for instance to `target-claim`, and the product type `background-model`, whose instances are admitted laws rather than models, for instance to `admitted-laws`.
+	- [ ] Add a product type for an answer claim held under any attitude, since the attitude of a claim is an attribute and not a type, as the [product types](docs/epistemology/processes/activities/epistemic-activities.md#^hypothesis-type) state.
+	- [ ] Mark the input `model` of the activity `explanation` as optional in the [registry of activities](src/gnomon/data/registries/activities.yml), and let the itinerary check accept an explanation whose route runs on the target description, as the [explanation activities](docs/epistemology/processes/activities/explanation-and-integration.md) admit.
+	- [ ] Add an error-statistical mode to the closed list of modes in the [vocabulary registry](src/gnomon/data/vocabularies.yml), so that the mode of `testing` names its norm of severity rather than only its deductive part, as the [evaluation activities](docs/epistemology/processes/activities/evaluation.md) state.
+	- [ ] Register the activities that output a `binding` and a `key`, which the [product types](docs/epistemology/processes/activities/epistemic-activities.md#^product-types) declare as gaps.
+	- [ ] Decide whether the template key `explanandum_variables` becomes `observables`, since a phenomenon is an explanandum only under the aim explanation, and whether the key `signature` of an observable becomes `index_signature`, apart from the signature of an activity.
+	- [ ] Decide whether the field Domain of an answer, and the domain of comparison of a binding, are renamed to a range, apart from the conditions held fixed $D$ of a question.
+	- [ ] Decide whether the answer relation `presupposes` is renamed, apart from the link `presupposes` between questions, which the [note on questions](docs/epistemology/objects/question/question.md) tells apart.
+	- [ ] Read the record coverage of each product type from the registry or from the [itinerary record](docs/specification/itinerary.md) in `tests/test_gnomon/test_itineraries.py`, instead of the Status column of the theory note on the product types.
+

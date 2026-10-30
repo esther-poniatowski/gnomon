@@ -69,7 +69,7 @@ The method fixes the role of a unit by the kind of object that holds it and by t
 | --- | --- | --- |
 | Problem | a demand with its constraints, relative to $K$ | [epistemic problem](../objects/problem/epistemic-problem.md) |
 | Question | a request whose possible answers form a definite set | [question](../objects/question/question.md) |
-| Definition | a concept with its gloss, or a declaration of a quantity, which is assessed for its adequacy rather than its truth | [concepts and names](../objects/expression/concepts-and-names.md); [adequacy of a declaration](things-and-constructs.md#^layer-test) |
+| Definition | a concept with its gloss, or a declaration of a quantity, which is assessed for its adequacy rather than its truth | [concepts and names](../expression/concepts-and-names.md); [adequacy of a declaration](things-and-constructs.md#^layer-test) |
 | Assumption | a ground of an answer with the role `assumption` or `idealization`, or a law admitted in a background | [grounds and dependence](../objects/knowledge/grounds-and-dependence.md#^ground-roles) |
 | Datum | a phenomenon, or a ground with the role `datum` | [phenomenon](../objects/subject/phenomenon.md) |
 | Candidate | an answer whose attitude is `entertained` or `hypothesized` | [claim and hypothesis](../vocabulary/representations/claim-and-hypothesis.md#^attitude-support) |

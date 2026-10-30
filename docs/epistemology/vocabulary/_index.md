@@ -14,7 +14,7 @@ Fixes the term and the sense that name each element of an inquiry, and the crite
 > A note of this folder fixes the senses of a term and the criteria that separate it from neighboring terms. The notes on [objects](../objects/_index.md) and [processes](../processes/_index.md) state the theory that uses these terms, and the [specification](../../specification/_index.md) documents the fields of the records. To choose between two terms or two senses, a reader opens a note of this folder.
 
 > [!WARNING] Terms of the theory and concepts of a project
-> A note of this folder fixes a term in which the theory of `gnomon` is written, such as "model" or "law". A concept that belongs to the research of one project, with its names for each audience, is treated in the note on [concepts and names](../objects/expression/concepts-and-names.md).
+> A note of this folder fixes a term in which the theory of `gnomon` is written, such as "model" or "law". A concept that belongs to the research of one project, with its names for each audience, is treated in the note on [concepts and names](../expression/concepts-and-names.md).
 
 - [Bearers and systems](systems/_index.md): names the bearer of a description and assigns it a role relative to a boundary
 - [Quantities and states](quantities/_index.md): identifies the formal object introduced by a declaration of a quantity, a state or a condition

@@ -36,7 +36,7 @@ An inquiry states the following objects. The first item frames the others, and e
 9. **Model system and binding.** When the route of an answer runs on a stand-in, the answer rests on a [model system](../objects/answer/model-and-binding.md), and a binding relates that model to the phenomenon.
 10. **Assessment.** An [assessment](../objects/answer/satisfaction-conditions.md) tests an answer for admissibility, warrant and appraisal, against conditions fixed before the answer is evaluated.
 11. **Itinerary.** An itinerary records each act of the inquiry as a step typed by its [epistemic activity](../processes/activities/epistemic-activities.md#^itinerary-check), so that its inputs and its output can be checked.
-12. **Concept and exposition.** A [concept](../objects/expression/concepts-and-names.md) keeps one meaning apart from its names and symbols, and an [exposition](../objects/expression/exposition.md) projects research units to an audience without adding content.
+12. **Concept.** A [concept](../expression/concepts-and-names.md) is a unit of meaning, kept apart from the names and symbols that express it.
 
 ## Epistemic processes
 
@@ -51,7 +51,10 @@ An inquiry advances by the following processes, which the method performs or rec
 7. **Accepting.** [Accepting](inquiry-and-state.md#^acceptance-act) an answer into $K$ is an act of the researcher, informed by the assessment and never computed from it.
 8. **Revising.** The [revision](../processes/activities/revision.md) activities change the attitude toward existing claims or the frameworks that pose them, and every revision is [reported to the claims that depend on it](../objects/knowledge/grounds-and-dependence.md#^propagation).
 9. **Choosing the next act.** The [choice of the next act](../processes/inquiry/choice-of-act.md) addresses an open or a refuted condition with an act that is ready, and ranks the ready acts. The [procedure of the next act](../../procedures/inquiry/next-act.md) applies these criteria to a state, outside the theory tier.
-10. **Projecting into expositions.** An [exposition](../objects/expression/exposition.md#^exposition) selects and orders research units for an audience.
+
+## Expression
+
+The content that the objects state and the processes advance is expressed for a reader without being changed. The [concepts and names](../expression/concepts-and-names.md) keep a meaning apart from the names and symbols that express it, and an [exposition](../expression/exposition.md) selects and orders research units for an audience, adding no content. Projecting into an exposition is therefore not an epistemic process: it changes how the content is presented, never what the inquiry has established.
 
 ## Commitments
 
@@ -90,7 +93,7 @@ Several words of the theory name different objects in different notes. The table
 | explanandum | **explanandum**: the role of the phenomenon when the aim is explanation | [pattern and phenomenon](../vocabulary/regularities/pattern-and-phenomenon.md) |
 | adequacy | **adequacy for purpose**: a model serves the purpose of a question | [model and binding](../objects/answer/model-and-binding.md#^adequacy-for-purpose) |
 | adequacy | **adequacy to use**: a model has the property that its declared use requires | [warrant through the binding](../objects/answer/satisfaction-conditions.md#^warrant-through-binding) |
-| adequacy | **adequacy of an explication**: an explicatum meets the requirements on replacing its explicandum | [concepts and names](../objects/expression/concepts-and-names.md#^concept) |
+| adequacy | **adequacy of an explication**: an explicatum meets the requirements on replacing its explicandum | [concepts and names](../expression/concepts-and-names.md#^concept) |
 | adequacy | **adequacy of a declaration**: a declared quantity represents a property of the target | [things and constructs](things-and-constructs.md#^declaration-adequacy) |
 | appraisal | **appraisal**: the tier of an assessment that compares admissible answers by the virtues, never called adequacy | [conditions of satisfaction](../objects/answer/satisfaction-conditions.md#^conditions-satisfaction) |
 | warrant | **warrant tier**: the tier of an assessment that tests the evidence for an answer | [conditions of satisfaction](../objects/answer/satisfaction-conditions.md#^warrant-through-binding) |
@@ -119,6 +122,6 @@ The notes are read in the following order, in which each note uses only terms de
 6. **Admitted background.** The [background](../objects/knowledge/background.md).
 7. **Task and virtues.** The notes of the [epistemic task](../objects/task/_index.md), in the order of their index.
 8. **Answer and assessment.** The notes of the [answer and its assessment](../objects/answer/_index.md), in the order of their index, then [grounds and dependence](../objects/knowledge/grounds-and-dependence.md).
-9. **Expression.** [Concepts and names](../objects/expression/concepts-and-names.md), then [exposition](../objects/expression/exposition.md).
+9. **Expression.** [Concepts and names](../expression/concepts-and-names.md), then [exposition](../expression/exposition.md).
 10. **Activities.** The [epistemic activities](../processes/activities/epistemic-activities.md), then their families in the order of their [index](../processes/activities/_index.md).
 11. **Course of an inquiry.** The [order of specification](../processes/inquiry/specification-order.md), the [conditions of answerability](../processes/inquiry/conditions-of-answerability.md) the [decomposition of a question](../processes/inquiry/question-decomposition.md) and the [choice of the next act](../processes/inquiry/choice-of-act.md), then the procedure of the [next act](../../procedures/inquiry/next-act.md).
