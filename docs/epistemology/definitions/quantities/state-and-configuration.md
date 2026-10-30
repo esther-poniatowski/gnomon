@@ -36,9 +36,8 @@ The senses share one relativity: **a state is a state relative to chosen variabl
 - **A state fixes no measured value in quantum mechanics.** The quantum state fixes the distributions of the outcomes, so a state and a measured value are distinct objects. In classical mechanics, by contrast, an ideal measurement reads a value of the state directly.
 - **A configuration differs from a pattern by the number of instances.** The criterion is stated in the [vocabulary of patterns](../regularities/pattern-and-phenomenon.md).
 
-## Consequences for a record
+## Relations to the method
 
-- **The state space of a record is the product of the value sets of its internal variables.** The [specification of the target system](../../subject/target-system.md) excludes aggregates from that product, since an aggregate is a function on the state space.
 - **The [completeness test](#^completeness-test) checks a declared state space against the laws.** A law with the role *evolution* can be written as a first-order rule on the declared variables only when the state passes the test. When the state fails the test, the record lacks a variable, such as a momentum, a delay line or a synaptic trace, or the evolution law must carry memory.
 - **A macrostate is admissible only when interventions on it have unambiguous effects.** A phenomenon stated over aggregate variables groups many microstates. The [admissibility of aggregates](../../subject/target-system.md#^aggregate-admissibility) requires that each intervention on the aggregate correspond to interventions on those microstates.
 

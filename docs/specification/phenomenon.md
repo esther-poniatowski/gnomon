@@ -69,6 +69,8 @@ The phenomenon is stated once in words and once formally, by the observables and
 
 - **An entry of a phenomenon holds of the members that carry its symbols.** When the members of a target system differ in their declarations, the record states [variants](target-system.md#^variants), each marking the entries carried by part of the class. A phenomenon declares no variants of its own: the members carrying a symbol are read from the record of its target system. Some entries of a phenomenon name a symbol carried by one variant only (e.g. an observable, a manifestation, a source of variation, a detection test or a condition). Such an entry names that variant and holds of it only. An entry left unmarked, by contrast, ranges over the whole class, including members for which its claim cannot be read. *Example*: the competitive-exclusion bound cannot be read of a community with direct interactions, because no resource pool limits its species. ^entries-hold-of-members
 
+- **A claim that depends on the scale type of a variable requires the field `scale` of that variable.**
+
 - An exploratory question has the same fields as any other question, but each of them takes a different status:
 
     - empty, since they form the answer: the statement, the category, the occurrence class and the evidential status;

@@ -27,6 +27,8 @@ The dimensions that these fields fix, and the grounds of each dimension, are sta
 > [!NOTE]
 > Each dimension is developed in its own note, linked from its row. The required accuracy and the proof obligations have no note yet, because each row holds its whole specification.
 
+- **The demand of a problem bounds the aim of each question that serves it.** A question that serves a problem takes one of the aims that the [demand table](../epistemology/inquiry/problem-types.md) admits for the type of result, and a checker can test that bound once the demand of the problem carries its type.
+
 ## Specifications each aim requires
 
 Because an aim fixes the product that an answer must deliver, the aim also determines the specifications that the inquiry cannot leave empty. Each aim adds specifications to those every inquiry fixes. Under some aims, the inquiry itself produces some general specifications: an aim that produces a phenomenon cannot require the question to state it in advance. Therefore, the third column lists the specifications that a note marks as required in general but that the inquiry itself produces. On those paths alone, an empty field is admitted. A dash marks an aim that neither adds nor produces a specification. Each dash is attested by a filled inquiry that pursues the aim and fixes nothing beyond the general requirements. Each entry names a field path. Each row documents the entry for one aim in the registry of [required fields](../../src/gnomon/data/requirements.yml), the authoritative source of the table. ^required-by-aim

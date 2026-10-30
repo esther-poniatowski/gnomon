@@ -30,6 +30,8 @@ The grounds of these fields are stated in the note on the [background](../episte
 
 - **A law is appraised before it is admitted.** Each admitted law carries a warrant and an origin, and a range when it is established over part of the reference class only. The origin points to the source of the law, so a reader can check the law against that source. The range states the conditions under which the law is established. The range belongs to the law, because every question admitting the background inherits the same law. A bound written into the [domain](../epistemology/subject/domain.md) of one question would leave the other questions unbounded. ^law-range
 
+- **The range of invariance of a law is stated in the record.** When a law is stated without a range, it claims invariance over the whole reference class.
+
 - **A law or a relation carried by only some members names its variant.** The target declares the [variants](target-system.md#^variants) of its class. An unmarked entry of the background holds of every member, so it may name only the symbols carried by every member. The check for unborne variants counts the marks of the background records as well: a variant marked by a background law is carried, even when no declaration of the target carries it.
 
 ---

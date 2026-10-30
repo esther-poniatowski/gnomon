@@ -55,11 +55,13 @@ The attitude and the support of a claim take values in two closed lists: ^attitu
 - **An explanation, as a product, is a claim.** Its content is that the explanans $E$ explains the phenomenon $P$ under the requested relation $R$. Therefore, the explanation carries an attitude and a support, as any claim does. The activity of explaining is typed in the [taxonomy of epistemic activities](../../activities/epistemic-activities.md).
 - **A prediction and an explanation can share their logical form.** In the deductive-nomological model, both derive the explanandum from laws and conditions. The two differ in the epistemic status of the explanandum, already known or not yet known [hempel1948]. Accounts that require a causal relation separate the two, since a prediction may rest on a symptom that does not cause the predicted event [salmon1984].
 
-## Consequences for a record
+## Relations to the method
 
-- **A candidate answer records the attitude and the support of its claim.** The fields are specified under the [status and support of an answer](../../../specification/answer.md#^status-and-support), with the values of the [two lists](#^attitude-support). Therefore, an answer whose attitude is `hypothesized` is a hypothesis.
+- An answer whose attitude is `hypothesized` is a hypothesis.
 - **The laws on which a candidate answer rests are claims, each with a warrant of its own.** The [warrant of a law](../../subject/background.md#^law-warrant) traces the law to its origin, so it differs from the support of the claim of an answer.
 - **The conditions of satisfaction fix the tests of the claims before evaluation.** Before any answer is assessed, the [conditions of satisfaction](../../answer/satisfaction-conditions.md) state the tests deciding whether its claims hold.
+
+The fields that bear on the attitude and the support of a claim are documented in the [answer record](../../../specification/answer.md#^status-and-support).
 
 ---
 ## Sources

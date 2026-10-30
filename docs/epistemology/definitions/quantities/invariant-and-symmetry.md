@@ -32,7 +32,7 @@ The criterion of invariance recurs in several notes of this folder, each time wi
 - **Invariance under interventions differs from symmetry under a group.** A set of interventions is in general not a group, since an intervention that sets a variable has no inverse in the set. Invariance under interventions is also graded: a law can hold over a narrower or a wider range of interventions [woodward2003]. Symmetry under a group, by contrast, holds for every element of the group or fails.
 - **An invariant of the record differs from an invariant of the target.** When a statement holds in one representation and fails under an admissible change of representation, the statement is an artefact of that representation. The meaningfulness criterion of scales shows this consequence [suppes1963].
 
-## Consequences for a record
+## Relations to the method
 
 - **A claim of invariance must name its set of transformations.** "The frequency is invariant" is incomplete until the claim states its set of transformations, such as the instances, the interventions on a parameter, or the admissible changes of units.
 - **The scope over instances of a phenomenon states one invariance claim.** A claim quantified as *universal* over the reference class, in the [scope over instances](../../subject/phenomenon.md), asserts that a feature is preserved across every member.

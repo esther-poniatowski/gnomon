@@ -59,12 +59,11 @@ The activities of this family output a target specification, a background model 
 - **Decomposition of a system differs from decomposition of a question.** Decomposition and localization divide a behavior among the parts of a system [bechtel1993]. The decomposition of a question in [problem-posing](problem-posing.md) divides a question into subquestions, under the norm of erotetic implication.
 - **Analogy as model-building differs from analogical inference.** Model-building by analogy produces a candidate model. [Analogical inference](ampliative-inference.md) concludes that the target has a property, so its output is a hypothesis, judged by the relevance of the similarities.
 
-## Consequences for a record
+## Relations to the method
 
-- **Delimitation fills the target-system record at commitment `specified`.** The [specification of the target system](../subject/target-system.md) holds the declared constituents and quantities.
-- **Background appraisal and transfer fill the background record.** The [specification of the background](../subject/background.md) states the origin and the range of each admitted law beside its warrant.
-- **Abstraction and idealization are recorded in the model and in the answer that it grounds.** The [model record](../../specification/model.md#^model-elements) declares each assumption that its laws require, such as a limit, within the warrant `derived-in-a-limit` of those laws, with its motive, its gain and its removability. An [answer](../answer/answer-form.md#^idealizations) that the model grounds classifies such an assumption as an idealization of the target of its binding, states its range, and records it among its grounds with the role `idealization`. Each abstraction is recorded with the claim, in the element Abstractions of the answer.
 - **Decomposition states the map of each component.** Each constituent of a [mechanistic model](../answer/mechanism.md) states its map from the declared constituents of the target, as the [perspective of a model](../answer/model-and-binding.md#^perspective) requires.
+
+The fields filled by delimitation, by background appraisal and transfer, and by abstraction and idealization are documented in the [target-system record](../../specification/target-system.md), in the [background record](../../specification/background.md), in the [model record](../../specification/model.md) and in the [answer record](../../specification/answer.md).
 
 ---
 ## Sources

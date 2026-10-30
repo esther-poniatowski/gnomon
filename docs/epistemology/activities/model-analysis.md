@@ -43,7 +43,7 @@ The activities of this family output a **consequence**: a statement true of a mo
 - **Prediction as an activity differs from prediction as an aim.** The activity derives expected values from a model. The activity serves inquiries of every aim, for instance to test an explanation. The [aim of prediction](../epistemic-task/epistemic-aim.md) makes a warranted expectation the product required of the whole inquiry.
 - **Every output of this family holds of the model only.** A consequence becomes a claim about the target only through a [theoretical hypothesis](../definitions/representations/claim-and-hypothesis.md) that links model and target.
 
-## Consequences for a record
+## Relations to the method
 
 - **Derivation discharges the proof obligations of a question.** The proof obligations $\omega$ of the [epistemic task](../epistemic-task/epistemic-task.md) state the implications to be derived by an answer.
 - **Robustness analysis runs the robustness test of satisfaction.** The robustness test of the [conditions of satisfaction](../answer/satisfaction-conditions.md) checks whether a conclusion survives the idealizations of the answer.

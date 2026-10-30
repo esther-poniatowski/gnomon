@@ -11,7 +11,7 @@ aliases:
 ---
 # Entity, object and thing
 
-> [!QUESTION] Goal: which bearer does a record name when it names an entity, an object or a thing?
+> [!QUESTION] Goal: which bearer does a statement name when it names an entity, an object or a thing?
 
 The three terms name the bearer of a description, at three degrees of generality:
 
@@ -37,7 +37,7 @@ The terms are near-synonyms in some communities only. Under the criterion of ont
 - **Entity, object and thing are separated by two tests.** First, when a candidate is not a particular, such as a property or a kind, it is an entity and not an object. Second, when a particular cannot change state, such as a number or an element of a formal structure, it is an object and not a thing. The second test matters most for an inquiry: *can the candidate change state?* ^change-test
 - **The logical sense of object carries no ontology.** Every element of the domain of a structure is an object, including a number or a set. Therefore, a model of an empirical system contains objects that stand for things, and objects that stand for nothing.
 
-## Consequences for a record
+## Relations to the method
 
 - **A constituent declared in a record is an object in the logical sense.** The constituent ranges over an index set of the record. When the [target type](../../subject/target-system.md) is an empirical system, each such object stands for a thing. When the target type is the model class itself, the constituents are objects of a structure and stand for no thing.
 - **The [change test](#^change-test) decides whether a constituent can carry a state variable.** Only a thing has a state that evolves. When a quantity is attached to a constituent that cannot change, such as a fixed site of a lattice, the quantity is not a state variable. The [role test of a quantity](../quantities/variable-value-observable.md#^role-test) gives it one of the other roles. The change test applies to constituents only: a quantity indexed by an index set alone, such as a field variable over a spatial domain, names no bearer. Such a quantity takes its role from the role test alone, so a field that the system sets and that varies along the course is a state variable.

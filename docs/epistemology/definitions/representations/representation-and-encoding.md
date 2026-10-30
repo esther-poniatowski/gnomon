@@ -11,7 +11,7 @@ aliases:
 ---
 # Representation and encoding
 
-> [!QUESTION] Goal: what does a statement about the representation of a network, or about its geometry, fix, and in which field of a record does each representational item belong?
+> [!QUESTION] Goal: what does a statement about the representation of a network, or about its geometry, fix, and under which concept of the method does each representational item fall?
 
 An **encoding** is a map $e:\mathcal{U}\to\mathcal{X}$ from an input space $\mathcal{U}$ to the state space $\mathcal{X}$ of a system. *Example*: the map $u\mapsto x^*(u)$ sends each input $u$ to the fixed point $x^*(u)$ of $\dot x=-x+\phi(Wx+u)$. A **readout** is a map $r:\mathcal{X}\to\mathcal{Y}$ from the state space to an output space. A **representation** is an encoding together with the readouts that use it [decharms2000] [shea2018]. The **representation geometry** is a property of the encoding map alone.
 
@@ -36,10 +36,10 @@ which fixes the Euclidean distances between the images of two inputs, $\|e(u)-e(
 - **A representation geometry is not one state.** One state $e(u)$ is one point of $\mathcal{X}$, whereas the geometry is a relation among all the points $e(u)$.
 - **An encoding becomes a representation once a readout uses it.** One encoding supports several readouts, so a claim about the content represented by a network names its readout. *Example*: the mixtures of two inputs are represented for a linear readout only when the classes of mixtures are linearly separable in the state space $\mathcal{X}$. The ability of a linear readout to sort the mixtures is a [capacity](../regularities/capacity-and-disposition.md) of the network, and linear separability is the criterion of that capacity.
 
-## Consequences for a record
+## Relations to the method
 
 - **One geometry can be the explanandum of one question and the explanans of another.** The example of the [linked questions](../../inquiry/question.md#^linked-questions) states the link between the two questions.
-- **Each representational item of the benchmark takes one place in the records.** The benchmark targets networks in their most abstract form, a [class of possible systems](model.md), so no item below is a claim about cortex. ^decision-table
+- *Example*: **Each representational item of the benchmark takes one place in the records.** The benchmark targets networks in their most abstract form, a [class of possible systems](model.md), so no item below is a claim about cortex. ^decision-table
 
 | Item | `phenomenon.category` | `explanans.factor` | Law `role` | Reading |
 | --- | --- | --- | --- | --- |

@@ -28,6 +28,15 @@ The problem record states one [epistemic problem](../epistemology/inquiry/episte
 
 - **The status of a problem records how it ends.** The field `status` of the problem record ends at `solved`, `dissolved` or `abandoned`, the three outcomes defined under [how a problem ends](../epistemology/inquiry/epistemic-problem.md#^problem-outcomes).
 
+- **A typed demand makes [the existence of a problem](../epistemology/inquiry/epistemic-problem.md#^problem-existence) checkable over the records.** Over the accepted records of an inquiry, the problem exists when no accepted record of the demanded type gives a direct answer of $Q_\pi$. This condition is also the second condition of [the gap](../epistemology/inquiry/epistemic-problem.md#^gap).
+
+- **Most values of [axis A](../epistemology/inquiry/problem-types.md) can be read from the records.** Over the records of an inquiry, an open gap is the absence of any accepted record and of any proposed answer of the demanded type. Unassessed candidates are proposed answers with none accepted. An unwarranted claim is an accepted answer whose support is weaker than the demand. Ill-defined terms are explicanda whose definiteness is not established; a specified record of the term is necessary for its definiteness, not sufficient.
+
+- **A conflict with a publication must be asserted.** No checker reads the literature, so a conflict between a record and a publication is stated with pointers to both.
+
+> [!WARNING] Untyped demand
+> The field `demand` holds a reading in words, so the checks of the existence of a problem and of axis A, which read the demanded type, wait on the typed demand that the goal `problem-record` of the [project goals](../../TODO.md) adds.
+
 *Example*: the [problem of delayed generalization](../../examples/grokking-delayed-generalization/problem.yml) is an empirical problem, with two constraints and one explicandum, and its question names the problem in its field `addresses`.
 
 ---

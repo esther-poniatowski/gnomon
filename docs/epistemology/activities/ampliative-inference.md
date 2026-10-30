@@ -40,10 +40,12 @@ On the account of its originator, abduction is the only logical operation that i
 - **Abduction outputs a candidate, and inference to the best explanation outputs a verdict.** Abduction generates a hypothesis and licenses its pursuit. [Inference to the best explanation](evaluation.md) selects among rival hypotheses and licenses acceptance, so it belongs to evaluation.
 - **Induction and causal inference differ in their assumptions.** Induction extends a regularity. Causal inference also requires assumptions about the causal structure, such as the assumption that no hidden common cause exists. Only under these assumptions does a causal conclusion follow from correlations [pearl2009] [spirtes2000].
 
-## Consequences for a record
+## Relations to the method
 
-- **A hypothesis enters the records as a candidate answer.** The [answer form](../answer/answer-form.md) holds a candidate with the attitude `hypothesized` before any test. The [conditions of satisfaction](../answer/satisfaction-conditions.md) state the tests required to accept it.
+- **A hypothesis enters the records as a candidate answer.** The [conditions of satisfaction](../answer/satisfaction-conditions.md) state the tests required to accept it.
 - **Causal inference must state its assumptions as part of the answer.** The identifiability of a causal effect depends on assumptions untested by the data, so these assumptions belong to the answer, beside its idealizations.
+
+The field that records the attitude of a candidate answer is documented in the [answer record](../../specification/answer.md).
 
 ---
 ## Sources

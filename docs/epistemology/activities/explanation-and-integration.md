@@ -41,11 +41,13 @@ The activities of this family output an explanation or a relation between theori
 - **Reduction and integration differ in the theories kept.** Reduction derives one theory from another, so the reduced theory becomes dispensable in principle. Integration keeps both theories and relates them, as an interfield theory relates genetics and cytology [darden1977].
 - **A theory enters this family as a model.** The input type of reduction and integration is `model`, read as a class of models, as the semantic view of [theories](../definitions/representations/theory.md) defines a theory.
 
-## Consequences for a record
+## Relations to the method
 
-- **The requested relation of a question fixes the norm of explanation.** The [requested relation](../epistemic-task/requested-relation.md) of the epistemic task selects one of the candidate relations between an explanans and the phenomenon, so the test `norm.explanation` reads that field.
-- **An explanans factor can be the explanandum of a linked question.** A question that explains a capacity of readout by the [representation geometry](../definitions/representations/representation-and-encoding.md) links to the question describing that geometry, with the relation `explanans-from` of [linked questions](../inquiry/question.md#^linked-questions).
-- **An empirical bridge law of reduction is recorded as a law with the role *measurement*.** When a bridge law identifies a separately measured quantity with an aggregate, it states a factual hypothesis. Therefore, the [specification of the target system](../subject/target-system.md) places such a law among the laws of the [background record](../subject/background.md).
+- **The requested relation of a question fixes the norm of explanation.**
+- **An explanans factor can be the explanandum of a linked question.** *Example*: a question that explains a capacity of readout by the [representation geometry](../definitions/representations/representation-and-encoding.md) links to the question describing that geometry, with the relation `explanans-from` of [linked questions](../inquiry/question.md#^linked-questions).
+- When a bridge law identifies a separately measured quantity with an aggregate, it states a factual hypothesis.
+
+The fields that record the norm of a step, the links between questions and the admitted laws are documented in the [itinerary record](../../specification/itinerary.md), in the [question record](../../specification/question.md) and in the [background record](../../specification/background.md).
 
 ---
 ## Sources

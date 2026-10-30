@@ -38,7 +38,7 @@ The three senses of phenomenon differ in their requirements. The first requires 
 - **Data are not phenomena.** Data are records specific to one procedure, whereas a phenomenon is the feature detectable by several procedures [bogen1988] [woodward1989]. Data record appearances, in the empiricist reading. *Example*: the recorded voltage traces of one session are data, and the gamma oscillation inferred from sessions recorded across laboratories is a phenomenon.
 - **A regularity or a pattern becomes a phenomenon when it is selected as explanandum, and a regularity must also be established as stable.** Selection and stability are two separate conditions. When a regularity is found by exploration and not yet tested for stability, it is a candidate phenomenon. However, only a phenomenon of the category *regularity* must be stable. The [specification of the phenomenon](../../subject/phenomenon.md) also admits particular occurrences, capacities and structural properties as explananda. A phenomenon can also occur only once [craver2024].
 
-## Consequences for a record
+## Relations to the method
 
 - **The evidential status of a phenomenon records how far its stability is established.** The [specification of the phenomenon](../../subject/phenomenon.md) grades the status from *established* to *derived within a model*, and the detection criterion states the test required of a candidate regularity.
 - **A phenomenon of an exploratory inquiry is a regularity not yet selected.** The [exploratory question](../../subject/phenomenon.md#^exploratory-phenomenon) leaves the phenomenon open and fixes the search space in which regularities are sought.

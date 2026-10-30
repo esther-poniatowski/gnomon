@@ -32,6 +32,8 @@ The itinerary record lists the steps of an inquiry. Each step instantiates one [
 
 - **A verdict records a judgment outside the reach of the check.** Whether a norm is met depends on the content of the products: whether a test was severe, whether a definition is eliminable. The itinerary records that judgment as `pass`, `fail` or `pending`, whereas the check reads only whether the verdict is admitted.
 
+- The [requested relation](../epistemology/epistemic-task/requested-relation.md) of the epistemic task selects one of the candidate relations between an explanans and the phenomenon, so the test `norm.explanation` reads that field.
+
 - **A product of a type without a record kind is reached through a step.** The product types are derived from the taxonomy of activities, so some types have no record kind yet, such as a design of experiments or a concept. An itinerary can take such a product as an input only as the output of one of its own steps. A `source`, by contrast, stays outside the records, so its reference is a pointer, left unresolved by the check.
 
 - **A step references a product by the identifier of its step.** A product often has no record when the itinerary is written. Therefore, a later step names the step that produces it, and the check compares the declared output type of that step with the type expected by the later step. A record may also leave the state in which a step produced it, as a schema becomes a question once its slots are identified. Then, the step states its output type without a reference.

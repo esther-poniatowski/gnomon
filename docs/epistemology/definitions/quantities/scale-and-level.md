@@ -49,11 +49,13 @@ In its second sense, the **scale** of a description is its extent and its resolu
 - **The two senses of scale are told apart by their object.** A scale in the measurement sense maps a structure onto numbers, so it has a type and admissible transformations. A scale in the descriptive sense is a range and a grain, so it has neither.
 - **The two senses of level are told apart by the item that changes when the level is lowered.** Lowering a level of organization replaces the system by its parts. Lowering a level of description keeps the system and replaces the vocabulary. *Example*: the implementational level describes the visual system itself in physical terms [marr1982], whereas the level of ion channels describes components of a neuron [craver2007].
 
-## Consequences for a record
+## Relations to the method
 
-- **A claim that depends on the scale type of a variable requires a value set that states the scale type.** The [specification of the phenomenon](../../subject/phenomenon.md) states the rule for explanandum variables. When a claim holds on one scale type and fails under the admissible transformations of that type, the claim is an artefact of the representation.
+- When a claim holds on one scale type and fails under the admissible transformations of that type, the claim is an artefact of the representation.
 - **The descriptive scale of a phenomenon sets the default grain of its explanans.** The [proportionality requirement](../../subject/phenomenon.md#^resolution-proportionality) uses scale in the descriptive sense.
 - **The admissible explanans is bounded by levels of organization.** The compositional level of the [admissible explanans](../../epistemic-task/admissible-explanans.md) restricts the parts that may appear in an answer, so it uses level in the sense of organization.
+
+The fields that bear on the scale of a quantity are documented in the [target-system record](../../../specification/target-system.md) and the [phenomenon record](../../../specification/phenomenon.md).
 
 ---
 ## Sources

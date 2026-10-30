@@ -43,11 +43,13 @@ The activities of this family output a design of inquiry, [data](../definitions/
 - **Observation and intervention differ by manipulation.** An intervention sets a variable, whereas observation records the target as it is [hacking1983]. Therefore, an intervention can support a causal claim under fewer assumptions about confounders than observation requires [woodward2003].
 - **Phenomenon detection is an inference.** The data of one procedure carry its idiosyncrasies, so a phenomenon is typically detected by comparing data across procedures [bogen1988].
 
-## Consequences for a record
+## Relations to the method
 
-- **The evidential status of a phenomenon records the outcome of detection.** The [specification of the phenomenon](../subject/phenomenon.md) grades that status, and its detection criterion states the norm for a candidate pattern.
-- **A law with the role *measurement* states the observation map of an instrument.** The [background record](../subject/background.md) admits laws in that role, so the model of the measuring process required by the model-based account has a place in the records.
+- **The evidential status of a phenomenon records the outcome of detection.**
+- **A law with the role *measurement* states the observation map of an instrument.**
 - **A clamped variable in the domain records an intervention.** A [clamped state variable](../subject/domain.md) is removed from the dynamics and treated as an input, just as an intervention replaces the equation of its target variable.
+
+The fields that record the outcome of detection and the observation map of an instrument are documented in the [phenomenon record](../../specification/phenomenon.md) and in the [background record](../../specification/background.md).
 
 ---
 ## Sources

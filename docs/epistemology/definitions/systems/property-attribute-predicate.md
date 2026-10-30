@@ -12,7 +12,7 @@ aliases:
 ---
 # Property, attribute, predicate and relation
 
-> [!QUESTION] Goal: when a record describes a feature of a bearer, does it name a feature of the world, a concept of it, or an expression?
+> [!QUESTION] Goal: when a statement describes a feature of a bearer, does it name a feature of the world, a concept of it, or an expression?
 
 The four terms describe the features of a bearer and the ways in which bearers stand to one another. Property, attribute and predicate differ in the layer holding them:
 
@@ -47,7 +47,7 @@ The pairs of terms are synonyms only in some communities:
 - **A relation need not be causal.** "Taller than", "adjacent to" and "has the same value as" are relations, yet none of them transmits a change. The criterion separating a relation from an interaction is stated in the [vocabulary of interaction](../change/interaction-and-cause.md).
 - **A predicate has no truth value.** A predicate becomes true or false only once its places are filled and the result is asserted. A predicate is separated from a claim and from a law statement in the [vocabulary of claims](../representations/claim-and-hypothesis.md).
 
-## Consequences for a record
+## Relations to the method
 
 - **A declared quantity carries all three layers.** Its reading names the property in words. Its symbol, its signature and its value set make the attribute a [variable](../quantities/variable-value-observable.md). The expressions of the record using the symbol are predicates of the expression language.
 - **A well-formed declaration does not guarantee that a property is represented.** The checks of a record resolve symbols and value sets, so a quantity in the manner of "grue" passes them. One test of the method bears on this question: the [admissibility of an aggregate](../../subject/target-system.md#^aggregate-admissibility) rejects an aggregate whose interventions have ambiguous effects.

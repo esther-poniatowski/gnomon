@@ -42,11 +42,13 @@ The activities of this family output a concept, a measurement procedure that app
 - **The strict and the partial form of operationalization fix a meaning to different extents.** The strict form identifies a concept with one set of operations, so two procedures define two concepts [bridgman1927]. The partial form fixes how the concept applies under test conditions only, and leaves its meaning open elsewhere [carnap1936].
 - **Operationalization outputs a procedure, and measurement outputs data.** Operationalization is judged before any value is recorded, by the scale stated by its procedure. [Measurement](empirical-activities.md) executes that procedure on a target.
 
-## Consequences for a record
+## Relations to the method
 
 - **A derived term of an answer is introduced by an explicit definition.** The [derived terms of a model](../answer/model-and-binding.md#^derived-terms) can be eliminated by substituting their definitions, so the norm of explicit definition applies to them.
-- **An explanandum variable operationalizes a phenomenon.** The [specification of the phenomenon](../subject/phenomenon.md) restates a behavior through observables, each on a stated scale. A phenomenon first stated by a qualitative label may be operationalized later, when its manifestation gains features that parametrize it. For a phenomenon of category *capacity*, the operationalization is the [criterion of performance](../definitions/regularities/capacity-and-disposition.md) that tests the conditional of the capacity.
-- **The reference class of a target records a classification.** The [specification of the target system](../subject/target-system.md) states the class of admissible systems, and records whether its projectibility is assumed, tested or not claimed.
+- **An explanandum variable operationalizes a phenomenon.** A phenomenon first stated by a qualitative label may be operationalized later, when its manifestation gains features that parametrize it. For a phenomenon of category *capacity*, the operationalization is the [criterion of performance](../definitions/regularities/capacity-and-disposition.md) that tests the conditional of the capacity.
+- **The reference class of a target records a classification.**
+
+The fields that record an operationalization and a classification are documented in the [phenomenon record](../../specification/phenomenon.md) and in the [target-system record](../../specification/target-system.md).
 
 ---
 ## Sources

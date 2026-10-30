@@ -26,7 +26,7 @@ The **function** of a component is the contribution of its activity to an object
 - **The two senses are told apart by the source of the function.** A causal-role function is fixed by a capacity chosen by the inquirer, so it is relative to an analysis. An etiological function is fixed by a past history, so a component can retain a function no longer performed.
 - **A function and an activity differ by relativity.** The criterion is stated in the [vocabulary of activity](mechanistic-activity.md).
 
-## Consequences for a record
+## Relations to the method
 
 - **A functional answer is one value of the requested relation.** The [requested relation](../../epistemic-task/requested-relation.md) lists function among the relations that an answer may be asked to establish. The choice between the two senses fixes the evidence required of the answer: an analysis of a capacity, or a selective history.
 - **A causal-role function requires the capacity to be named.** The requirement follows from the relativity of functions to capacities, and the [functional question](../../epistemic-task/requested-relation.md#^function-sense) states it for an answer.

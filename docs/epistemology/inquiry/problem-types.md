@@ -96,11 +96,11 @@ The demand of a problem, its request included, is a given of the problem, and th
 - **Several obstacles generate several questions.** The values of axis A are not exclusive, so a problem can carry several obstacles, and each obstacle adds its own questions. *Example*: an open gap together with ill-defined terms generates one question of explication beside $Q_\pi$.
 - **A problem can carry such a demand from the start.** A problem whose demand is a verdict, or a concept, states that demand in its own record, and its associated question is then the question of the table.
 
-## Consequences for a record
+## Relations to the method
 
-- **Most values of axis A can be read from the records.** Over the records of an inquiry, an open gap is the absence of any accepted record and of any proposed answer of the demanded type. Unassessed candidates are proposed answers with none accepted. An unwarranted claim is an accepted answer whose support is weaker than the demand. Ill-defined terms are explicanda whose definiteness is not established; a specified record of the term is necessary for its definiteness, not sufficient.
-- **A conflict with a publication must be asserted.** No checker reads the literature, so a conflict between a record and a publication is stated with pointers to both.
-- **The type of the demand bounds the aim of each question.** A question that serves a problem takes one of the aims that the demand table admits for the type of result, and a checker can test that bound.
+- **The type of the demand bounds the aim of each question.**
+
+The fields by which a record states a problem, and the aim of a question that serves it, are documented in the [problem record](../../specification/problem.md) and in the [epistemic task of a question](../../specification/question-task.md).
 
 ---
 ## Sources

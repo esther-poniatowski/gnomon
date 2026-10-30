@@ -48,10 +48,9 @@ Three cognate notions overlap the analytic sense. Each notion adds commitments l
 - **A formalism asserts no law until it is bound to a target.** The consequences of a formalism hold of the model class fixed by its assumptions, such as infinite width or random connectivity. Binding the formalism to a target, such as a finite network trained on a task, turns those consequences into claims that can be false of the target. *Example*: the neural tangent kernel predicts a training trajectory for every network of its class. The kernel makes no claim about one finite network until a record claims that this network lies close to the limit.
 - **An internal question presupposes the framework, whereas an external question is about it.** "Is there a prime number greater than 100?" is internal to the framework of numbers. "Are there numbers?" is external, and it reduces to the practical choice of adopting the framework [carnap1950_empiricism].
 
-## Consequences for a record
+## Relations to the method
 
 - **The inquiry specification of this method is a framework for inquiries, not a framework of a domain.** An analytic framework names the elements of one domain, such as the actors and the rules of an institution [ostrom2005]. The inquiry specification names the elements of an *inquiry*: the target, the phenomenon, the question and its answers. A domain enters the specification only as the subject of an inquiry, so the specification is a meta-level framework. Therefore, the [generality order](#^generality-order) does not place the theories and models of a research problem below the specification. The records of an inquiry hold them, in background records and in candidate answers.
-- **A formalism enters a record once it is bound to the target.** A law derived within a formalism that holds in a limit, such as the neural tangent kernel, carries the [warrant](../../subject/background.md#^law-warrant) `derived-in-a-limit`, and the [rule on limits](../../../specification/answer.md#^limit-rule) places the limit that binds the formalism to the target.
 - **A question about the vocabulary of a record is external.** The usefulness of a declaration decides whether a record should declare a new kind of entity. The record itself cannot settle that question.
 
 ---

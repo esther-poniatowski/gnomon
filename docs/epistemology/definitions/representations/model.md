@@ -43,10 +43,10 @@ Strict isomorphism is rarely met by an empirical target. Accounts of scientific 
 - **A model and a theory are separated by the [vocabulary of theories](theory.md).** That note states the relation under each view of theories.
 - **A model and a mechanism belong to different layers.** A mechanism is separated from a mechanistic model in the [vocabulary of mechanism](../regularities/mechanism-and-mechanistic-model.md).
 
-## Consequences for a record
+## Relations to the method
 
-- **A candidate answer whose route runs on a model rests on a model in the representational sense.** The [model record](../../../specification/model.md#^model-record) declares that model with the blocks of a [target specification](../../subject/target-system.md), and a [binding](../../../specification/binding.md#^binding-record) relates it to the phenomenon. The feature pairs of the binding state the respects of similarity, and the tolerance that the [required accuracy](../../epistemic-task/epistemic-task.md) of the question fixes states the degrees.
-- **The target of the benchmark is a class of possible systems.** The benchmark project studies networks in their most abstract form, a class that encompasses artificial and biological networks. Therefore, its target specification states `target_type: possible-systems`. A network model of that class represents members of the class, and it is not a model of cortex. A claim about cortex requires cortex as a second target, and a relation of representation between the class and cortex.
+- **A candidate answer whose route runs on a model rests on a model in the representational sense.**
+- *Example*: **The target of the benchmark is a class of possible systems.** The benchmark project studies networks in their most abstract form, a class that encompasses artificial and biological networks. Therefore, its target specification states `target_type: possible-systems`. A network model of that class represents members of the class, and it is not a model of cortex. A claim about cortex requires cortex as a second target, and a relation of representation between the class and cortex.
 
 ---
 ## Sources

@@ -11,7 +11,7 @@ aliases:
 ---
 # Condition
 
-> [!QUESTION] Goal: which sense of "condition" does a statement use, and where does each condition of an inquiry belong in a record?
+> [!QUESTION] Goal: which sense of "condition" does a statement use, and where does each condition of an inquiry belong among the concepts of the method?
 
 "**Condition**" carries six senses across logic, physics and the philosophy of science, and none of them is primary for a record. A record classifies the conditions of an inquiry by their **place** alone, as the [places of a condition](../../subject/domain.md#^condition-places) list them.
 
@@ -34,7 +34,7 @@ The first five senses name a constraint fixed from outside the derivation: a fac
 - **One quantity can change role between descriptions.** The temperature of a heat bath is a parameter of the system surrounded by the bath, and a boundary condition of the bath itself.
 - **The logical sense of condition is told apart from the other five by derivability.** The other five senses name constraints admitted without derivation. A necessary or sufficient condition is a claim about a dependence, and an inquiry can establish such a claim.
 
-## Consequences for a record
+## Relations to the method
 
 - **Each condition of an inquiry takes one of four places in the records.** The places are listed under the [places of a condition](../../subject/domain.md#^condition-places).
 - **A restriction of the domain narrows the value set of a declared quantity.** The rule is stated under the [restrictions of the domain](../../subject/domain.md#^domain-restrictions).

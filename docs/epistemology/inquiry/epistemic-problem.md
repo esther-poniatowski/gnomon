@@ -149,10 +149,7 @@ Reduction can be conjunctive: $\pi_1$ reduces to $\pi_2$ and $\pi_3$ together wh
 - **The request is not the aim.** The request fixes how many results, and how complete, the demand asks for. The [epistemic aim](../epistemic-task/epistemic-aim.md) fixes the kind of knowledge that a question seeks.
 - **"Epistemic problem" names the problem defined here.** The [epistemic task](../epistemic-task/epistemic-task.md) of a question fixes the kind of knowledge that its answer must deliver. The task belongs to the question, not to the problem.
 
-## Consequences for a record
-
-- **A problem record states its demand, its constraints and its explicanda.** The fields are specified in the [problem record](../../specification/problem.md).
-- **A typed demand makes the existence of a problem checkable over the records.** Over the accepted records of an inquiry, the problem exists when no accepted record of the demanded type gives a direct answer of $Q_\pi$. This condition is also the second condition of the gap.
+The fields by which a record states a problem are documented in the [problem record](../../specification/problem.md).
 
 ---
 ## Sources

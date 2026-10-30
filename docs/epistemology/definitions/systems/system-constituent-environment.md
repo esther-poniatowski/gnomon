@@ -41,7 +41,7 @@ Constituent, component and part are synonyms only relative to one system. Mereol
 - **Organization is the part of the structure on which a behavior depends.** The structure lists every relation among the constituents, including relations that change no behavior of interest. *Example*: a matrix of correlations among neurons describes part of the structure before any causal reading of it is supplied. The organization keeps the relations that make a behavior of the whole non-aggregative [craver2007]. The test is an intervention: rearranging the constituents changes the behavior only when the rearranged relations belong to the organization. Organization takes the form of a typed relational structure in the [specification of a mechanism](../../answer/mechanism.md).
 - **A configuration is not a structure.** The structure holds the relations that persist while the system evolves. A configuration is the arrangement of the constituents at one instant, as defined in the [vocabulary of state](../quantities/state-and-configuration.md).
 
-## Consequences for a record
+## Relations to the method
 
 The items of the system description correspond to blocks of two records, the [target specification](../../subject/target-system.md) and its [background](../../subject/background.md):
 

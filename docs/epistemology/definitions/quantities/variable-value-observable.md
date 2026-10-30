@@ -13,7 +13,7 @@ aliases:
 ---
 # Variable, value, observable, parameter and data
 
-> [!QUESTION] Goal: which formal object does a record declare when it declares a variable, an observable or a parameter, and what do its data record?
+> [!QUESTION] Goal: which formal object does a statement declare when it declares a variable, an observable or a parameter, and what do its data record?
 
 A **variable** is an [attribute](../systems/property-attribute-predicate.md) formalized as a function with a domain and a codomain. The other four terms specialize that function or its outputs:
 
@@ -51,22 +51,25 @@ The three senses of *observable* answer different questions. The empiricist sens
 
 Three questions about one phenomenon decide the role of a declared quantity. The first asks whether its value varies along the [course](../change/process-event-history.md#^course) of the phenomenon. The second asks, for a quantity constant along the course, whether its value varies across the instances compared by the phenomenon. The third asks, for a quantity that varies along the course, whether the system or its environment sets that value. ^role-test
 
-| Along the course | Across the instances | Value set by | Role | Place in the records |
-| --- | --- | --- | --- | --- |
-| varies | — | the system | state variable | a variable of the target, with `determined: within`; for a parameter of the target, an entry of `course.varies` |
-| varies | — | outside the system | exogenous variable | a variable of the target, with `determined: outside`; for a parameter of the target, an entry of `course.varies` |
-| constant | varies | the question | index of an observable, when the claim is a function of the values; source of variation, when the claim is a distribution over draws | a parameter of the target, or the initial value of a variable, named by the phenomenon among its indices or its sources of variation |
-| constant | constant | — | parameter | a parameter of the target, named by neither |
+| Along the course | Across the instances | Value set by | Role |
+| --- | --- | --- | --- |
+| varies | — | the system | state variable |
+| varies | — | outside the system | exogenous variable |
+| constant | varies | the question | index of an observable, when the claim is a function of the values; source of variation, when the claim is a distribution over draws |
+| constant | constant | — | parameter |
 
-- **The target declares a quantity by the course of its laws of evolution.** The target record declares a quantity as a parameter when the quantity stays constant along the course of the background laws with the role *evolution*, and as a variable otherwise. A phenomenon whose course makes a declared parameter vary lists that parameter in `phenomenon.course.varies`. *Example*: the weights $W$ of a network are parameters of the target, since its law of evolution keeps them fixed while the network relaxes to a fixed point. Training changes $W$, so the phenomenon of training lists $W$ in `course.varies`, where $W$ takes the role of a variable. ^declaration-rule
+The places of each role in the records are documented in the [target-system record](../../../specification/target-system.md#^quantity-roles).
+
 - **The role test is relative to a phenomenon, whereas the declaration belongs to the target.** One quantity can take two roles in two phenomena of the same target. The target declares it once, and each phenomenon states the role of the quantity within that phenomenon.
 
-## Consequences for a record
+## Relations to the method
 
-- **A declared variable is a state function.** Its signature fixes the domain $\mathcal{D}$, as a product of constituent kinds and index sets, and its value set fixes the codomain $\mathcal{V}$. This signature is stated by the [places of a quantity](../../../specification/target-system.md#^places).
+- **A declared variable is a state function.** Its signature fixes the domain $\mathcal{D}$, as a product of constituent kinds and index sets, and its value set fixes the codomain $\mathcal{V}$.
 - **The explanandum variables of a phenomenon are observables in the physical sense.** Each explanandum variable is a function of the state variables of the target, as the [specification of the phenomenon](../../subject/phenomenon.md) requires.
 - **The control sense of observable corresponds to a law with the role *measurement*.** Such a law states how an instrument registers the state, so it plays the part of the observation function $h$. The empiricist sense has no field in a record.
 - **A parameter of the target is fixed along every course, except the courses that list it among their varying parameters.** The [course of a phenomenon](../../subject/phenomenon.md#^course-and-occurrence) lists those parameters, and the [target specification](../../subject/target-system.md) applies the [role test](#^role-test) with this reading. The criterion coincides with the statistical sense of parameter when one run of the system counts as one model of the family.
+
+The fields that bear on a variable, an observable or a parameter are documented in the [target-system record](../../../specification/target-system.md) and the [phenomenon record](../../../specification/phenomenon.md).
 
 ---
 ## Sources

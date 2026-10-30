@@ -46,11 +46,12 @@ A law statement is accordingly a [claim](../representations/claim-and-hypothesis
 - **A law is not always a dynamic.** A law of evolution is separated from other laws in the [vocabulary of dynamics](../change/dynamic.md). The test separating a law from a mechanism is stated there as well.
 - **A law statement and an accidental generalization differ in counterfactual support.** "Every coin in this pocket is silver" supports no counterfactual about a coin put into the pocket. A law statement, by contrast, supports the corresponding counterfactual about its instances [goodman1955]. Likewise, an accidental regularity is not a law₁, since this method restricts law₁ to the regularities that pass a [criterion of lawhood](#^lawhood).
 
-## Consequences for a record
+## Relations to the method
 
 - **Every law of a record is a law statement.** A [law of a background record](../../subject/background.md#^laws) or of a candidate answer is a construct that can be false of the target.
 - **The warrant of a law and its criterion of lawhood answer different questions.** The [warrant of a law](../../subject/background.md#^law-warrant) states how the record obtained the law. A criterion of lawhood states why a true generalization counts as a law. Therefore, a fitted law can be a law in the sense of invariance, once the range of interventions over which it holds is known.
-- **The range of invariance of a law is stated in the record.** The field is specified under the [range of a law](../../../specification/background.md#^law-range). When a law is stated without a range, it claims invariance over the whole reference class.
+
+The fields that bear on a law are documented in the [background record](../../../specification/background.md) and the [model record](../../../specification/model.md).
 
 ---
 ## Sources

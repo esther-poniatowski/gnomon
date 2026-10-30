@@ -13,7 +13,7 @@ aliases:
 ---
 # Process, event and history
 
-> [!QUESTION] Goal: how are a state, a process and an event told apart, so that a record can state each one over a declared course?
+> [!QUESTION] Goal: how are a state, a process and an event told apart, so that a claim can state each one over a declared course?
 
 A **history** is the trajectory of a system along a declared course, such as time. A **state**, a **process** and an **event** are three classes of predicates on the segments of that course [mourelatos1978]. The classes are told apart by one operation: a segment that satisfies the predicate is restricted to its parts. The definitions of this note reach this form by revising a standard definition until it covers "raining".
 
@@ -77,11 +77,12 @@ A predicate in none of the three classes is restated as an **observable over a d
 > [!WARNING] Open question
 > The metaphysical status of processes remains disputed: one account treats them as occurrents, unfolding in time, and another as continuants, persisting and changing [seibt2022] [rescher1996] [stout1997] [steward2013]. The occurrent definition of this note is an operational choice for modeling, and it does not settle the metaphysical question.
 
-## Consequences for a record
+## Relations to the method
 
-- **A phenomenon declares its course and its occurrence class.** The fields are specified under [course and occurrence](../../subject/phenomenon.md#^course-and-occurrence), and the occurrence classes admitted by each category of phenomenon under [occurrence by category](../../../specification/phenomenon.md#^occurrence-by-category).
 - **A parameter of the target can change along the course of one phenomenon.** The [role test of a quantity](../quantities/variable-value-observable.md#^role-test) places such a parameter.
 - **A process stated over a field requires an index set for space.** The bearer of "raining" is a region, so the index set is declared in the [target specification](../../subject/target-system.md).
+
+The fields that bear on the course and the occurrence class of a phenomenon are documented in the [phenomenon record](../../../specification/phenomenon.md), which also lists the [occurrence classes admitted by each category](../../../specification/phenomenon.md#^occurrence-by-category).
 
 ---
 ## Sources

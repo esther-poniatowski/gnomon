@@ -37,11 +37,13 @@ The activities of this family output a **change of knowledge state**: a change o
 - **The norm of theory change is contested.** The norm adopted here requires corroborated novel predictions [lakatos1970]. On a rival account, the successor must resolve some recognized anomaly and preserve much of the problem-solving ability of its predecessor [kuhn1962]. On another, the new conceptual system must have greater explanatory coherence than the old one [thagard1992].
 - **Theory change and framework revision differ in the question settled.** A theory changes inside a framework, under the standards of that framework. A framework changes by a decision about which framework to adopt, a question external to every framework [carnap1950_empiricism].
 
-## Consequences for a record
+## Relations to the method
 
-- **A revision changes the attitude of an answer.** The [answer form](../answer/answer-form.md) records the attitude of each candidate, and a revision moves it, for instance from `hypothesized` to `accepted` or to `retracted`.
+- **A revision changes the attitude of an answer.**
 - **The warrant of a law fixes the order of revision.** When new evidence arrives, posited, fitted or measured laws are revised first, as the [warrant of a background law](../subject/background.md#^law-warrant) states.
 - **Formal models of epistemic change are surveyed in this method.** The [formal models of belief change](../../references/belief-revision-dynamic-epistemic-logic.md) state how an epistemic state changes under new information.
+
+The field that records the attitude of an answer is documented in the [answer record](../../specification/answer.md).
 
 ---
 ## Sources

@@ -51,7 +51,7 @@ A test never bears on a hypothesis alone: the prediction follows from the hypoth
 - **Testing and inference to the best explanation both return a verdict, under different norms.** Testing judges one hypothesis by the severity of the test. Inference to the best explanation compares rival hypotheses by how well each would explain the data, if true [lipton2004].
 - **The norm of critique checks the trace of a social process.** Criticism is transformative only when the community meets social conditions, such as public venues, shared standards and a tempered equality of intellectual authority [longino1990]. A record can hold only the trace of that process: each objection with its ground.
 
-## Consequences for a record
+## Relations to the method
 
 - **The conditions of satisfaction fix the evaluation before it runs.** The [conditions of satisfaction](../answer/satisfaction-conditions.md) state the tests that decide whether a candidate succeeds. The required accuracy of the [epistemic task](../epistemic-task/epistemic-task.md) states the purpose to be served by a validated model.
 - **Model selection uses the virtues of the method.** The [epistemic and pragmatic virtues](../epistemic-task/epistemic-pragmatic-virtues.md) state the qualities used to compare admissible answers. Penalized accuracy is one instance of these qualities.

@@ -46,7 +46,7 @@ With these requirements, "computing" is a [process](process-event-history.md#^pr
 - **A canonical computation is realized by several mechanisms.** Divisive normalization computes $y_j=\gamma\, a_j^n/(s^n+\sum_k a_k^n)$, where $a_j$ is the drive of unit $j$, $s$ a semisaturation constant, and $\gamma$ and $n$ positive constants [carandini2012]. Different circuits compute this function in different systems [carandini2012]. Therefore, a claim about the function computed does not fix a mechanism, and a [mechanistic model](../regularities/mechanism-and-mechanistic-model.md) of one circuit does not, by itself, explain the same computation in another circuit.
 - **The three levels of a computation are levels of description.** Each level describes the same system in its own vocabulary, so each level is a *level of description* in the [vocabulary of levels](../quantities/scale-and-level.md). None of the three is a level of organization, since no level of a computation is a part of another level.
 
-## Consequences for a record
+## Relations to the method
 
 - **The normalization map is a law, and the relaxation that realizes it is a process.** The place of each item in the records is listed among the [representational items of the benchmark](../representations/representation-and-encoding.md#^decision-table).
 - **A computation stated at an abstract level requires its implementation map.** Each abstract variable is an [aggregate](../../subject/target-system.md#^aggregate-variables) whose defining map is $\pi$, so the abstract variables are functions on the physical state space.

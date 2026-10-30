@@ -45,11 +45,11 @@ The activities of this family output the objects that open an inquiry: a problem
 - **Question formulation and subject identification differ in commitment.** Formulation types each slot of the question by a placeholder. Identification fixes the referent of each slot. The quantities of each referent are declared later, by [delimitation](model-building.md).
 - **Decomposition and selection both output a question, under different norms.** The norm of decomposition is a logical relation between a question and its subquestions. The norm of selection compares candidate questions on pragmatic grounds, since problems differ in importance [laudan1977].
 
-## Consequences for a record
+## Relations to the method
 
-- **Problematization fills the problem record.** The [specification of the problem](../../specification/problem.md) holds the demand, the constraints with their sources, and the explicanda with their pointers.
-- **Question formulation and subject identification fill the subject of a question in two passes.** The [statement frame of a question](../subject/subject-of-inquiry.md#^question-statement) first receives a placeholder in each slot, then a record id at commitment `identified`. As a result, the record changes type from `question-schema` to `question`, as the [itinerary check](epistemic-activities.md#^itinerary-check) reads it.
-- **Decomposition links a subquestion to its question.** The subquestion carries a link with the relation `subquestion-of`. The [governing criterion of a decomposition](../inquiry/question-decomposition.md#^governing-criterion) admits a serving question only when resolving it changes the status of the question that it serves.
+- **Decomposition links a subquestion to its question.** The [governing criterion of a decomposition](../inquiry/question-decomposition.md#^governing-criterion) admits a serving question only when resolving it changes the status of the question that it serves.
+
+The fields filled by these activities are documented in the [problem record](../../specification/problem.md), in the [question record](../../specification/question.md) and in the [subject of a question](../../specification/question-subject.md).
 
 ---
 ## Sources

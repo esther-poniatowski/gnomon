@@ -73,7 +73,7 @@ Each neighboring term differs from a mechanistic activity by one criterion:
 | Organization, in the [vocabulary of systems](../systems/system-constituent-environment.md) | an organization arranges several activities relative to one another | an activity is one local change; an organization is a property of an arrangement, such as a delayed feedback loop formed by two activities |
 | [Mechanism](../regularities/mechanism-and-mechanistic-model.md) | a mechanism is a set of entities and activities organized to produce a phenomenon | a single activity produces a change; a mechanism produces a phenomenon through organization |
 
-## Consequences for a record
+## Relations to the method
 
 > [!NOTE] Proposal of this method
 > The criterion of this section is a proposal of this method. This criterion does not state a standard of the literature.

@@ -43,7 +43,7 @@ Four terms are often used for one another. The four terms differ in their type a
 - **A dynamic is global, and an activity is local.** Each term of an additive decomposition of the dynamic is read as a candidate activity in the [vocabulary of activity](mechanistic-activity.md#^activity-term).
 - **A causal structure need not be a dynamic.** A causal structure states which variables change under an intervention on a given variable [woodward2003]. Such dependencies need not form a rule of change in time, and some mechanistic descriptions admit no representation by local differential equations. Therefore, a dynamic is one realization of a causal structure. ^causal-structure
 
-## Consequences for a record
+## Relations to the method
 
 - **A dynamic is a law with the role *evolution*.** Among the roles of a law, which the [background record](../../subject/background.md#^laws) lists, only the role *evolution* generates trajectories.
 - **A causal answer may state no law of evolution.** A [causal structure](#^causal-structure) need not be a dynamic, so a record may state how the explanandum depends on interventions, without any law with the role *evolution*.

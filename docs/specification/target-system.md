@@ -52,6 +52,17 @@ The grounds of these fields are stated in the note on the [target system](../epi
 
 - **A constraint of an external system is a claim, and is recorded with the fields of a law.** The constraint can be false of the system and its environment together. The constraint nevertheless stays with the external system imposing it, not among the laws of a [background record](../epistemology/subject/background.md), for two reasons. First, the block of external systems exists to state the boundary. Second, each admitted law bears on the target alone. ^external-constraint-shape
 
+- **The role of a quantity fixes the field that declares it.** The [role test](../epistemology/definitions/quantities/variable-value-observable.md#^role-test) decides the role of a declared quantity within one phenomenon, and the role fixes its place in the records: ^quantity-roles
+
+| Role | Place in the records |
+| --- | --- |
+| state variable | a variable of the target, with `determined: within`; for a parameter of the target, an entry of `course.varies` |
+| exogenous variable | a variable of the target, with `determined: outside`; for a parameter of the target, an entry of `course.varies` |
+| index of an observable, when the claim is a function of the values; source of variation, when the claim is a distribution over draws | a parameter of the target, or the initial value of a variable, named by the phenomenon among its indices or its sources of variation |
+| parameter | a parameter of the target, named by neither |
+
+- **The target declares a quantity by the course of its laws of evolution.** The target record declares a quantity as a parameter when the quantity stays constant along the course of the background laws with the role *evolution*, and as a variable otherwise. A phenomenon whose course makes a declared parameter vary lists that parameter in `phenomenon.course.varies`. *Example*: the weights $W$ of a network are parameters of the target, since its law of evolution keeps them fixed while the network relaxes to a fixed point. Training changes $W$, so the phenomenon of training lists $W$ in `course.varies`, where $W$ takes the role of a variable. ^declaration-rule
+
 ---
 ## Sources
 

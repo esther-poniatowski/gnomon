@@ -39,6 +39,8 @@ An answer is one typed claim with its grounds. Each answer holds a **core**, who
 
 - **An answer names the members that it accounts for.** A class may hold members that declare different elements. An answer resting on a quantity that only some members carry accounts *only* for that subset. Such an answer names the variant that it accounts for. Each of its parts with a narrower scope names its own variant as well. A target system [declares its variants](target-system.md#^variants) by the same rule, as does [each entry of a phenomenon](phenomenon.md#^entries-hold-of-members). An answer naming no variant accounts for every member, so it may rest only on quantities that all of them carry. ^answer-names-its-members
 
+- **A candidate answer records its abstractions apart from its idealizations.** The element Abstractions of an [answer](#^answer-elements) makes the [truth test](../epistemology/definitions/representations/idealization-and-abstraction.md#^truth-test) operative: the answer asserts nothing about a factor listed among its abstractions, whereas an omission read as complete is a distortion and belongs to the idealizations.
+
 ## Aim blocks
 
 Each aim of the [registry of aims](../epistemology/epistemic-task/epistemic-aim.md#^aim-registry) whose category generates a block has one block. The answer holds the block of the aim of its question, and the block holds what the [answer conditions](../epistemology/epistemic-task/epistemic-aim.md#^answer-conditions) of that aim require of a direct answer. ^aim-blocks
