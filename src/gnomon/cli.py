@@ -8,7 +8,7 @@ Commands
 info : Display diagnostic information.
 init : Scaffold research workspace structure into a target directory.
 validate : Validate each record against the schema of its type.
-status : Report inferential position in the research workspace.
+status : List the open conditions of the questions of a workspace.
 vocabulary : Collect the symbols and operators of one problem into a table.
 itinerary : Check every itinerary of one problem against the activity and product-type registries.
 """
@@ -54,7 +54,7 @@ def cli_validate(
 def cli_status(
     target: str = typer.Option(".", "--target", "-t", help="Research workspace directory."),
 ) -> None:
-    """Report inferential position: established results, open questions, in-progress notes, blocked entries."""
+    """List the open conditions of answerability of each question, and the acts that address them."""
     typer.echo("Workspace status reporting is not yet implemented.")
     raise typer.Exit(code=0)
 

@@ -26,7 +26,7 @@ gnomon info
 
 **Arguments:** none.
 
-**Output:** one line containing the package name, version, operating system, and Python version.
+**Output:** one line containing the package name, version, operating system, and Python version, such as `gnomon 0.0.0 | Platform: Darwin Python 3.12.4`.
 
 ## `init`
 
@@ -60,7 +60,7 @@ gnomon validate <paths...>
 
 > Stub — prints "Workspace status reporting is not yet implemented."
 
-Report the inferential position of a research workspace: established results, open questions, in-progress notes, and blocked entries.
+List the open conditions of answerability of each question of a research workspace, and the acts that address them.
 
 ```sh
 gnomon status --target <dir>

@@ -20,12 +20,12 @@ An inquiry is specified in five stages. Each stage takes the products of the ear
 | Stage | Product | Level of commitment | Record |
 | --- | --- | --- | --- |
 | 1. Problem | the demand, its constraints and its explicanda | terms anchored by pointers | [problem](problem.md) |
-| 2. Question schema | the questions that serve the problem, with typed placeholders, an aim and a contrast | slots typed | [question](../subject/subject-of-inquiry.md) |
+| 2. Question schema | the questions that serve the problem, with typed placeholders, an aim and a contrast | slots typed | [question](question.md) |
 | 3. Identified subject | the system and the phenomenon, each fixed by a definite description and pointers | slots `identified` | [target system](../subject/target-system.md), [phenomenon](../subject/phenomenon.md) |
 | 4. Background and specified subject | the admitted laws, and the formal declarations of the system and the phenomenon | slots `specified` | [background](../subject/background.md) |
 | 5. Candidate answers | the answers proposed to each question, and the models and bindings on which they rest | — | [answer form](../answer/answer-form.md), [model and binding](../answer/model-and-binding.md) |
 
-The levels of commitment are defined in the note on [problems and questions](question.md#^commitment-levels). A change to an earlier stage, made after a later stage, is a revision. The [revision activities](../activities/revision.md) type that change.
+The levels of commitment are defined in the note on [questions](question.md#^commitment-levels). A change to an earlier stage, made after a later stage, is a revision. The [revision activities](../activities/revision.md) type that change.
 
 ## Three distinctions that remove the circularity
 

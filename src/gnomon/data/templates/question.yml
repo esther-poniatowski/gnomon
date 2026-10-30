@@ -1,4 +1,5 @@
-# method: `docs/epistemology/subject/subject-of-inquiry.md`, `contrast.md`, `domain.md`, `epistemic-task.md`, `modal-strength.md`, `admissible-explanans.md`, `epistemic-pragmatic-virtues.md`
+# method: `docs/epistemology/subject/subject-of-inquiry.md`, `docs/epistemology/subject/contrast.md`, `docs/epistemology/subject/domain.md`, `docs/epistemology/epistemic-task/epistemic-task.md`, `docs/epistemology/epistemic-task/modal-strength.md`, `docs/epistemology/epistemic-task/admissible-explanans.md`, `docs/epistemology/epistemic-task/epistemic-pragmatic-virtues.md`; one file per question
+# commitment of the slots: `docs/epistemology/inquiry/question.md`; `addresses` and `links`: `docs/epistemology/inquiry/inquiry-specification.md`
 # symbols and expressions: `docs/epistemology/language/symbols-and-expressions.md`
 # name a quantity of another record by source identifier and symbol: `system.TOPIC#SYMBOL`
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled

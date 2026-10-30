@@ -93,37 +93,27 @@ The capabilities not yet available are recorded in the [project goals](TODO.md).
 
 ## Quick start
 
-To specify a research problem, a researcher fills one record per concern, in a directory of its own. The fields to fill are stated in the [record templates](src/gnomon/data/templates/_index.md), each with its admitted values. Completed records can be consulted in the seven [worked inquiries](examples/_index.md).
+To specify a research problem, a researcher fills one record per concern in a folder of its own, from the [record templates](src/gnomon/data/templates/_index.md). The [guide to filling the records of an inquiry](docs/guide/filling-records.md) leads through the records in order, and completed records can be consulted in the [worked inquiries](examples/_index.md).
 
-Once the records declare their quantities, the symbols and the operators of the research problem are collected automatically, by running the following command:
+The two commands below check a filled folder. The first collects the symbols and the operators that its records declare, and the second checks each step of its itineraries against the registry of epistemic activities:
 
 ```sh
 gnomon vocabulary ./my-problem --markdown
-```
-
-The table is written beside the records. Three counts are reported:
-
-- the symbols collected;
-- the operators that the research problem declares;
-- the symbols shared across its records.
-
-Once the directory holds an itinerary, each of its steps is checked against the registry of epistemic activities and against the records that the step names, by running the following command:
-
-```sh
 gnomon itinerary ./my-problem
 ```
 
-Each defect is reported with the identifier of its itinerary and the step at fault. Every command is specified in the [CLI reference](docs/guide/cli-reference.md).
+Every command is specified in the [CLI reference](docs/guide/cli-reference.md).
 
 ---
 
 ## Documentation
 
-To start using the method, consult three parts of the documentation:
+Four parts of the documentation serve the first tasks of a reader:
 
-- [Epistemology](docs/epistemology/_index.md): to reach the specifications that each stage fixes, and their grounds in the philosophy of science.
-- [Record templates](src/gnomon/data/templates/_index.md): to fill each record, field by field.
-- [Architecture decisions](docs/adr/_index.md): to find the constraint behind a settled decision, and the change of constraint reopening the question.
+- [Filling the records of an inquiry](docs/guide/filling-records.md): leads a researcher from a research problem to a folder of records that the checks accept
+- [Epistemology](docs/epistemology/_index.md): states the specification of each record, and its grounds in the philosophy of science
+- [User guide](docs/guide/_index.md): installs the tool and looks up its commands
+- [Architecture decisions](docs/adr/_index.md): finds the constraint behind a settled decision, and the change of constraint that would reopen it
 
 The remaining parts are registered in the [documentation index](docs/_index.md).
 
