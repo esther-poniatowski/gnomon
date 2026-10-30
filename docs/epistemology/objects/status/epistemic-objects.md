@@ -39,7 +39,7 @@ The method fixes the role of a unit by the kind of object that holds it and by t
 | Verdict | the outcome of a test of an answer, or of the norm of an act | [conditions of satisfaction](../answer/satisfaction-conditions.md) |
 | Motivation | a field, or a unit with an identifier of its own, of the record that it motivates; never a record of its own | [admission of a record kind](../../../adr/record-kind-admission.md#^failing-construct) |
 
-A role belongs to an authored unit, so a computed object bears no role of its own: a comparison or a disposition informs the verdict that cites it. An example and a proof have no settled place yet. The decision on record kinds treats an example as a relation from a record to a concept or an answer, and the formalization of a derivation is an open goal of the [README](../../../../README.md#features).
+A role belongs to an authored unit, so a computed object bears no role of its own: a comparison or a disposition informs the verdict that cites it. An example has a settled place: the decision on record kinds treats an example as a relation from a record to a concept or an answer, so an example needs no record kind of its own. A proof has no settled place yet, since the formalization of a derivation is an open goal of the [README](../../../../README.md#features).
 
 ## Inventory
 
