@@ -7,7 +7,7 @@ aliases:
 ---
 # Phenomenon
 
-> [!QUESTION] Goal: what must be fixed to specify the phenomenon that an inquiry is about?
+> [!QUESTION] Goal: how is the behavior that a question addresses stated over the state of its system, and which forms can that behavior take?
 
 The phenomenon is the second component of the [subject of inquiry](subject-of-inquiry.md): the behavior of the target system that the question concerns. The record also owns the estimator of its explanandum variables, from which their estimates are computed, and declares what its data depend on, so that a model can be compared with it through a [binding](../../specification/binding.md#^binding-record).
 

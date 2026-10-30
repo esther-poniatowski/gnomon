@@ -8,7 +8,7 @@ aliases:
 ---
 # Admissible explanans
 
-> [!QUESTION] Goal: what must be fixed to specify which variables an answer may use?
+> [!QUESTION] Goal: which variables may an explanans contain, and along which axes is that bound set?
 
 The level $\lambda$ fixes which **variables an admissible explanans may contain**. The level forms the fourth dimension of the [epistemic task](epistemic-task.md), the layer that sets the kind of knowledge sought.
 

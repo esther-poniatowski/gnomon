@@ -6,7 +6,7 @@ aliases:
   - Reasoning principles by field
 ---
 
-# Principles of reasoning and argumentation - By field
+# Reasoning principles by field
 
 ## Objective
 

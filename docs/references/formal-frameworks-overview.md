@@ -6,7 +6,7 @@ aliases:
   - Formal reasoning domains overview
 ---
 
-# Internal Workings of Formal Reasoning Domains
+# Formal reasoning domains overview
 
 ## Organizational Schema
 

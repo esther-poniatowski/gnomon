@@ -7,7 +7,7 @@ aliases:
 ---
 # Epistemic task
 
-> [!QUESTION] Goal: what must be fixed to specify an epistemic task?
+> [!QUESTION] Goal: along which dimensions does the knowledge that an inquiry seeks vary?
 
 The epistemic task is the layer of an [inquiry specification](../inquiry/inquiry-specification.md) that fixes the kind of knowledge sought. The task states the **epistemic problem** before any candidate answer is evaluated. Through its aim, the task also constrains a candidate model, because each epistemic aim imposes its own evidential requirements.
 

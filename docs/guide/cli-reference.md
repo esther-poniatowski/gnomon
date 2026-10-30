@@ -5,7 +5,7 @@ index: "[User guide](docs/guide/_index.md)"
 aliases:
   - CLI reference
 ---
-# CLI Reference
+# CLI reference
 
 All commands are invoked through the `gnomon` entry point.
 

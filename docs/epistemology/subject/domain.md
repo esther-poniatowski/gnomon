@@ -7,7 +7,7 @@ aliases:
 ---
 # Domain of conditions
 
-> [!QUESTION] Goal: what must be fixed to specify the background conditions of an inquiry?
+> [!QUESTION] Goal: which conditions does a question hold fixed, and how do they differ from the assumptions of an analysis?
 
 The domain of conditions is the fourth component of the [subject of inquiry](subject-of-inquiry.md).
 

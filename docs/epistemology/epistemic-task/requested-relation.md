@@ -8,7 +8,7 @@ aliases:
 ---
 # Requested relation
 
-> [!QUESTION] Goal: what must be fixed to specify the relation that an explanans must bear to the explanandum?
+> [!QUESTION] Goal: which kinds of dependence between an explanans and an explanandum can count as an answer?
 
 The requested relation is the second dimension of the [epistemic task](epistemic-task.md), the layer that sets the kind of knowledge sought. The requested relation acts as a relevance relation: it fixes the **kind of dependence between the explanans and the explanandum** that counts as the answer. The relation is specified separately because two questions can share the explanandum and the modal status yet demand different explanatory information. Only a question whose aim is explanation requests a relation, since only the [block of an explanation](../answer/answer-form.md#^explanation-block) holds an explanans: its factors $E$, together with the type of their relation. An answer under any other aim, such as a prediction, a description, a modal claim or a consequence of a model, holds no explanans, so its question requests no relation.
 

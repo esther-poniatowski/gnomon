@@ -9,7 +9,7 @@ aliases:
 ---
 # Model and binding
 
-> [!QUESTION] Goal: which records state the model on which an answer rests, relate that model to the phenomenon, and compute the comparison of its values with the data?
+> [!QUESTION] Goal: how does a model stand in for its target, and how is a value of the model carried to a value of the target?
 
 A [candidate answer](answer-form.md) is one typed claim with its grounds. When the route of the answer runs on a model, the model and its relation to the target are stated in records of their own, so that several answers can share them. Four records divide the work:
 

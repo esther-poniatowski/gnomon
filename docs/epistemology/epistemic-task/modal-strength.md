@@ -8,7 +8,7 @@ aliases:
 ---
 # Modal strength
 
-> [!QUESTION] Goal: what must be fixed to specify how tightly an answer must bind the phenomenon?
+> [!QUESTION] Goal: how strongly must the claim of an answer bind the phenomenon: as actual, as possible or as necessary?
 
 The modal strength is the third dimension of the [epistemic task](epistemic-task.md), the layer that fixes the kind of knowledge that an answer delivers. This dimension fixes the strength of the claim that a candidate answer must establish. Three strengths are admitted: the claim holds of the system, it could hold, or no alternative could hold. Every answer states its modal strength in its core, whatever its aim, as the [form of the answer](../../specification/answer.md#^answer-elements) requires, and the block of an explanation reads how-actually or how-possibly from that strength.
 

@@ -3,12 +3,12 @@ tags:
   - theory
 index: "[Notation](docs/epistemology/notation/_index.md)"
 aliases:
-  - Notation of the inquiry specification
+  - Notation of the theory
   - Notation
 ---
-# Notation of the inquiry specification
+# Notation
 
-> [!QUESTION] Goal: which symbol denotes which quantity, across the notes of this method?
+> [!QUESTION] Goal: which symbol denotes which quantity, across the theory notes?
 
 A single registry assigns every symbol of the method. One letter denotes one object, so that a formula reads the same in every note. ^registry
 

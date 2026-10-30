@@ -7,7 +7,7 @@ aliases:
 ---
 # Contrast
 
-> [!QUESTION] Goal: what must be fixed to specify the alternatives against which a phenomenon is questioned?
+> [!QUESTION] Goal: against which alternatives can a phenomenon be questioned, and how does the choice of foil change the admissible answers?
 
 The contrast is the third component of the [subject of inquiry](subject-of-inquiry.md): the foils relative to which the phenomenon is questioned.
 

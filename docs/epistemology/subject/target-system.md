@@ -7,7 +7,7 @@ aliases:
 ---
 # Target system
 
-> [!QUESTION] Goal: what must be fixed to specify the system that an inquiry is about?
+> [!QUESTION] Goal: what is the target of an inquiry, and over which class of systems does a claim about it generalize?
 
 The target system is the first component of the [subject of inquiry](subject-of-inquiry.md). The target-system record is a *target specification*: it delimits the target, the system or the class of possible systems that an inquiry is about. The [vocabulary of things and constructs](../definitions/systems/things-and-constructs.md) separates the target from its specification. The record fixes the referent of the target and declares its quantities. The laws admitted about those quantities are claims, so they are stated in separate [background records](background.md).
 

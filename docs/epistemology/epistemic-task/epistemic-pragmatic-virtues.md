@@ -7,7 +7,7 @@ aliases:
 ---
 # Epistemic and pragmatic virtues
 
-> [!QUESTION] Goal: what must be fixed to specify the epistemic and pragmatic virtues of an answer or model?
+> [!QUESTION] Goal: which qualities beyond adequacy make an answer or a model useful, and how does each bear on the comparison of answers?
 
 The virtues form a [layer of the inquiry specification](../inquiry/inquiry-specification.md): they name properties that increase the **value** of an answer once it already satisfies the epistemic task. These properties typically bear on practical and cognitive effects that are not already *constitutive* of the specified epistemic task. Such effects make an admissible answer more useful, more intelligible, or more reusable.
 

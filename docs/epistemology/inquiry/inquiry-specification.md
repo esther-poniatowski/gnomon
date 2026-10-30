@@ -7,7 +7,7 @@ aliases:
 ---
 # Specifying an inquiry
 
-> [!QUESTION] Goal: what must be fixed to specify a research objective?
+> [!QUESTION] Goal: into which layers do the decisions of a research objective fall, and what does each layer decide?
 
 > [!DANGER] Philosophy of science offers no single canonical decomposition of an inquiry: the layers of specification combine several traditions.
 

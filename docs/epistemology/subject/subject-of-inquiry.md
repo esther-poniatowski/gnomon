@@ -7,7 +7,7 @@ aliases:
 ---
 # Subject of inquiry
 
-> [!QUESTION] Goal: what must be fixed to specify the objects that an inquiry studies?
+> [!QUESTION] Goal: which objects does a research question study, and which of them change its admissible answers?
 
 The subject of inquiry is one of the four [layers of specification](../inquiry/inquiry-specification.md) of a research objective. The layer covers the *subject* of a research question: the objects under study.
 

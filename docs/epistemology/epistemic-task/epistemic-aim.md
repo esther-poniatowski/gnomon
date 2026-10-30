@@ -8,7 +8,7 @@ aliases:
 ---
 # Epistemic aim
 
-> [!QUESTION] Goal: what must be fixed to specify the kind of knowledge an inquiry seeks?
+> [!QUESTION] Goal: which cognitive achievements can an inquiry seek, and what counts as a direct answer for each?
 
 The epistemic aim specifies the kind of direct answer that a question seeks. The aim is the first dimension of the [epistemic task](epistemic-task.md), the layer that fixes the kind of knowledge that an answer carries. The aim also selects the interrogative word of the research question. Together with the other parameters of the question, the aim fixes the type of the direct answers, as the [answer form](../answer/answer-form.md#^question-fixes-type) states.
 
