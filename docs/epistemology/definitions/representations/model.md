@@ -40,13 +40,15 @@ Strict isomorphism is rarely met by an empirical target. Accounts of scientific 
 ## Distinctions
 
 - **A model is itself a system, studied as a stand-in.** The test is the use of the object: a system counts as a model when it is studied to learn about a target other than itself. A cell culture is the target of one inquiry and a model system of a brain region in another.
+- **The description of a target is a model of that target.** A target specification with its background represents the target, so it is a model in the representational sense. The method calls *model record* only the record of a system other than the target, studied in its place. The two differ by their role, the description of the target against a stand-in, and both are representations, as the [note on existence and access](existence-and-access.md#^method-stance) states. ^target-description-is-a-model
+- **A model is classified by its role and by its form, independently.** Its role is the description of a target or a stand-in for it. Its form is, for instance, mechanistic, phenomenological or statistical. A *mechanistic model* is a model of mechanistic form in either role, as the [test of a mechanistic model](../regularities/mechanism-and-mechanistic-model.md#^mechanistic-model-test) decides, so the word qualifies the form of a model, never its role.
 - **A model and a theory are separated by the [vocabulary of theories](theory.md).** That note states the relation under each view of theories.
 - **A model and a mechanism belong to different layers.** A mechanism is separated from a mechanistic model in the [vocabulary of mechanism](../regularities/mechanism-and-mechanistic-model.md).
 
 ## Relations to the method
 
-- **A candidate answer whose route runs on a model rests on a model in the representational sense.**
-- *Example*: **The target of the benchmark is a class of possible systems.** The benchmark project studies networks in their most abstract form, a class that encompasses artificial and biological networks. Therefore, its target specification states `target_type: possible-systems`. A network model of that class represents members of the class, and it is not a model of cortex. A claim about cortex requires cortex as a second target, and a relation of representation between the class and cortex.
+- **Every candidate answer rests on a model in the representational sense.** When the route runs on the target itself, the model is the description of the target; when the route runs on a stand-in, the model is a model system. The object on which the route runs decides which records the answer needs, as the [records of a model and a binding](../../answer/model-and-binding.md#^when-a-binding) state.
+- *Example*: a study of networks in their most abstract form, a class that encompasses artificial and biological networks, takes a class of possible systems as its target. A network model of that class represents members of the class, and it is not a model of cortex. A claim about cortex requires cortex as a second target, and a relation of representation between the class and cortex.
 
 ---
 ## Sources

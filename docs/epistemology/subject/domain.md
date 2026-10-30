@@ -32,9 +32,9 @@ The fields of the domain are documented in the [subject of a question](../../spe
 	
 - **A limit belongs to $D$ only when the question concerns the limit system.** A limit system counts as a system of its own, because it can have properties that no finite system has [norton2012]. *Example*: a question about the kernel regime of infinitely wide networks concerns such a limit system. When a limit only simplifies the analysis of finite systems, the answer records the limit among its grounds, as one of the [analysis assumptions](#^analysis-assumptions). That assumption is an idealization with the motive `limit`, as the [rule on limits](../../specification/answer.md#^limit-rule) states.
 
-- **The conditions of an inquiry take four places in the records.** A record classifies a [condition](../definitions/quantities/condition.md) by its place alone, among the following four: ^condition-places
+- **The conditions of an inquiry take four places among its components.** The method classifies a [condition](../definitions/quantities/condition.md) by its place alone, among the following four: ^condition-places
 
-| Condition | Place in the records |
+| Condition | Place in the inquiry |
 | --- | --- |
 | A restriction imposed by the question on admitted values, including clamped, initial or stationary states | the domain $D$ |
 | A precipitating, inhibiting or modulating condition of the behavior, or a nonstandard circumstance | the [conditions of the phenomenon](phenomenon.md#^conditions-byproducts) |

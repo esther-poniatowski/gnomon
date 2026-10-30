@@ -33,7 +33,7 @@ The simple conditional analysis fails on finks and masks [choi2018]. A fink remo
 ## Relations to the method
 
 - *Example*: for every labeling of the mixture classes in a stated family, a linear readout separates the encoded mixtures. The criterion is linear separability. The count of separable labelings bounds this criterion. For $n$ encoded points in general position in $d$ dimensions, a hyperplane through the origin separates every labeling only when $n\leq d$, and exactly half of the labelings when $n=2d$ [cover1965].
-- **A capacity can be the explanandum of a question whose explanans is a representation geometry.** The performance of a readout is a capacity among the [representational items of the benchmark](../representations/representation-and-encoding.md#^decision-table).
+- **A capacity can be the explanandum of a question whose explanans is a representation geometry.** The performance of a readout is a capacity among the [representational items and their concepts](../representations/representation-and-encoding.md#^decision-table).
 
 The fields that bear on a capacity are documented in the [phenomenon record](../../../specification/phenomenon.md), under the [manifestations of a capacity](../../../specification/phenomenon.md#^capacity-manifestations).
 

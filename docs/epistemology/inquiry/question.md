@@ -40,7 +40,7 @@ Each slot of a question carries one of three **levels of commitment**: ^commitme
 | `identified` | a record whose referent is fixed by a definite description and by pointers to data, results or literature | the record exists and states its identification |
 | `specified` | a record whose formal declarations are written | the required fields are filled, and every symbol resolves |
 
-The level `identified` fixes a referent without stating its formal properties. A definite description can fix the referent of a term without giving its meaning [kripke1980]. *Example*: "the geometry of the fixed points reached by the networks of this benchmark" fixes one object before any kernel is written. The description of an identified slot serves as an *explicandum*, an inexact concept already in use. At the level `specified`, an exact *explicatum* replaces that explicandum [carnap1950_logical].
+The level `identified` fixes a referent without stating its formal properties. A definite description can fix the referent of a term without giving its meaning [kripke1980]. *Example*: "the geometry of the fixed points reached by the networks of a stated class" fixes one object before any kernel is written. The description of an identified slot serves as an *explicandum*, an inexact concept already in use. At the level `specified`, an exact *explicatum* replaces that explicandum [carnap1950_logical].
 
 Commitment is kept apart from three other attributes of records and of their fields:
 
@@ -65,7 +65,7 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 | `presupposes` | has a true answer only if the linked question has a true answer |
 | `enables` | has an answer that establishes a condition of answerability of the linked question, without narrowing its answers |
 
-*Example*: a first question describes the [representation geometry](../definitions/representations/representation-and-encoding.md) of the benchmark networks. A second question explains a capacity of readout by that geometry. The second question links to the first with `explanans-from`, through the phenomenon record of the geometry. Therefore, neither question restates the content fixed by the other.
+*Example*: a first question describes the [representation geometry](../definitions/representations/representation-and-encoding.md) of a class of networks. A second question explains a capacity of readout by that geometry. The second question links to the first with `explanans-from`, through the phenomenon record of the geometry. Therefore, neither question restates the content fixed by the other.
 
 *Example*: the question "how is the dimension of the population activity estimated from finite samples?" links to the question "does the dimension grow with the complexity of the mixture?" with `enables`.
 

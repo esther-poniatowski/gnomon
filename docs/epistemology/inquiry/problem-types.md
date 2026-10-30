@@ -98,7 +98,7 @@ The demand of a problem, its request included, is a given of the problem, and th
 
 ## Relations to the method
 
-- **The type of the demand bounds the aim of each question.**
+- **The type of the demand bounds the aim of each question.** The table of the types of result admits, for each type, the aims whose direct answers can supply that result, so a question that serves the problem takes one of those aims.
 
 The fields by which a record states a problem, and the aim of a question that serves it, are documented in the [problem record](../../specification/problem.md) and in the [epistemic task of a question](../../specification/question-task.md).
 

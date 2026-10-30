@@ -21,7 +21,7 @@ The terms of an inquiry fall under three statuses. Two of them come from realist
 A third status, **relational**, holds of a term whose relata belong to the world while its role is fixed by a chosen boundary or a chosen behavior. A neuron, for instance, is a thing, whereas its being a *constituent* depends on the circuit chosen as the system.
 
 > [!IMPORTANT] Reading aid for the notes
-> The frame of this note helps a reader of the notes to keep the senses of a term apart. The records stay neutral between realism and empiricism: no field of a record states the status of an item, and an empiricist reading of every record stays admissible.
+> The frame of this note helps a reader of the notes to keep the senses of a term apart. The records stay neutral between realism and empiricism, as the [decision on the neutrality of the records](../../../adr/neutral-records-on-existence.md) fixes: no field of a record states the status of an item, and an empiricist reading of every record stays admissible.
 
 ## Status test
 
@@ -113,10 +113,11 @@ Two groups of terms invite a confusion of statuses: the terms that take two rows
 
 ## Status of the frame
 
-The frame is realist, and it is **not forced**. An empiricist reading keeps the representational status alone. In that reading, a theory aims at empirical adequacy, and its claims about unobservable things are not believed [vanfraassen1980]. The same reading turns property, law₁ and mechanism into features of representations, and it reads a relational term as a role within a representation. The definitions of this folder state the realist sense first, because the existing notes of the method use it, for instance in the [constitutive requested relation](../../epistemic-task/requested-relation.md). Each definition keeps its representational sense explicit, so that an empiricist reader can drop the other senses without losing the vocabulary.
+The frame is realist, and it is **not forced**: the [note on existence and access](../representations/existence-and-access.md) states the positions that read the records otherwise. An empiricist reading keeps the representational status alone. The empiricist reading turns property, law₁ and mechanism into features of representations, and it reads a relational term as a role within a representation. The definitions of this folder state the realist sense first, because the existing notes of the method use it, for instance in the [constitutive requested relation](../../epistemic-task/requested-relation.md). Each definition keeps its representational sense explicit, so that an empiricist reader can drop the other senses without losing the vocabulary.
 
 ## Distinctions
 
+- **A target specification is a model of its target.** The target specification, with its background, represents the target, so it is a model in the representational sense, as the [note on models](../representations/model.md#^target-description-is-a-model) states. The target and the target specification therefore separate an object from its description, never a reality known directly from a representation of it.
 - **Every field of a record holds a construct.** A record is a representation, so the [status test](#^layer-test) places all its contents among the constructs. The ontological and relational terms name the *subject* of those contents. *Example*: the reading of a declared variable names the property in words, whereas its symbol and its value set form the attribute.
 - **A declaration of a quantity has no truth value, and it can still be inadequate.** A declaration introduces a quantity, and an aggregation map defines one, so neither makes a claim. Each declaration nevertheless presupposes that the quantity represents a property of the target, or an admissible aggregate of properties. That presupposition can fail. A quantity defined in the manner of "grue" is well formed, yet it supports no projection [goodman1955]. Such a quantity represents no [property](property-attribute-predicate.md) of the target. Therefore, a declaration is assessed for its adequacy, whereas a claim is assessed for its truth. The [admissibility of an aggregate](../../subject/target-system.md#^aggregate-admissibility) tests that presupposition for aggregates.
 - **A construct can be false only when it makes a claim.** A law statement, for instance, asserts a relation among quantities and can be false of the target. The [aggregation maps and bridge laws](../../subject/target-system.md) of a target specification follow this division: the map defines a quantity, and the bridge law asserts an identity that can fail.
@@ -128,4 +129,3 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 
 - [bunge1977] ◐ [Bunge, *Treatise on Basic Philosophy*, vol. 3, *Ontology I: The Furniture of the World*, Reidel, 1977](https://doi.org/10.1007/978-94-010-9924-0)
 - [goodman1955] ◐ [Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955](https://plato.stanford.edu/entries/goodman/); "grue" in ch. III, §4
-- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001)

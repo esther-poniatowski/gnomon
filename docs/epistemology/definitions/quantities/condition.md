@@ -13,7 +13,7 @@ aliases:
 
 > [!QUESTION] Goal: which sense of "condition" does a statement use, and where does each condition of an inquiry belong among the concepts of the method?
 
-"**Condition**" carries six senses across logic, physics and the philosophy of science, and none of them is primary for a record. A record classifies the conditions of an inquiry by their **place** alone, as the [places of a condition](../../subject/domain.md#^condition-places) list them.
+"**Condition**" carries six senses across logic, physics and the philosophy of science, and none of them is primary for a record. The method classifies the conditions of an inquiry by their **place** alone, among the components of the inquiry that the [places of a condition](../../subject/domain.md#^condition-places) list.
 
 ## Senses
 
@@ -36,7 +36,6 @@ The first five senses name a constraint fixed from outside the derivation: a fac
 
 ## Relations to the method
 
-- **Each condition of an inquiry takes one of four places in the records.** The places are listed under the [places of a condition](../../subject/domain.md#^condition-places).
 - **A restriction of the domain narrows the value set of a declared quantity.** The rule is stated under the [restrictions of the domain](../../subject/domain.md#^domain-restrictions).
 
 ---

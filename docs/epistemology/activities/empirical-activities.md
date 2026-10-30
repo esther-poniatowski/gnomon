@@ -45,8 +45,8 @@ The activities of this family output a design of inquiry, [data](../definitions/
 
 ## Relations to the method
 
-- **The evidential status of a phenomenon records the outcome of detection.**
-- **A law with the role *measurement* states the observation map of an instrument.**
+- **The evidential status of a phenomenon records the outcome of detection.** A phenomenon may be established across data sets or methods, reported once, predicted, or derived within a model, so the status separates a phenomenon that detection has reached from one that a theory only predicts, independently of any account that explains it.
+- **A law with the role *measurement* states the observation map of an instrument.** The law relates the reading of the instrument to a quantity of the target, so a measurement outcome is inferred through that law, as the model-based account of measurement among the distinctions of this note holds.
 - **A clamped variable in the domain records an intervention.** A [clamped state variable](../subject/domain.md) is removed from the dynamics and treated as an input, just as an intervention replaces the equation of its target variable.
 
 The fields that record the outcome of detection and the observation map of an instrument are documented in the [phenomenon record](../../specification/phenomenon.md) and in the [background record](../../specification/background.md).

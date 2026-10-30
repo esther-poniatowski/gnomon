@@ -39,7 +39,7 @@ The activities of this family output a **change of knowledge state**: a change o
 
 ## Relations to the method
 
-- **A revision changes the attitude of an answer.**
+- **A revision changes the attitude of an answer.** The content of the answer stays fixed, whereas the attitude of the inquiry toward it moves among entertaining, hypothesizing, accepting and retracting it.
 - **The warrant of a law fixes the order of revision.** When new evidence arrives, posited, fitted or measured laws are revised first, as the [warrant of a background law](../subject/background.md#^law-warrant) states.
 - **Formal models of epistemic change are surveyed in this method.** The [formal models of belief change](../../references/belief-revision-dynamic-epistemic-logic.md) state how an epistemic state changes under new information.
 

@@ -43,9 +43,9 @@ The activities of this family output an explanation or a relation between theori
 
 ## Relations to the method
 
-- **The requested relation of a question fixes the norm of explanation.**
+- **The requested relation of a question fixes the norm of explanation.** A causal, a mechanistic and a mathematical explanation succeed under different conditions, so the norm that judges an explanation follows from the [relation that the question requests](../epistemic-task/requested-relation.md).
 - **An explanans factor can be the explanandum of a linked question.** *Example*: a question that explains a capacity of readout by the [representation geometry](../definitions/representations/representation-and-encoding.md) links to the question describing that geometry, with the relation `explanans-from` of [linked questions](../inquiry/question.md#^linked-questions).
-- When a bridge law identifies a separately measured quantity with an aggregate, it states a factual hypothesis.
+- **A bridge law that identifies two quantities can be false.** When a bridge law identifies a separately measured quantity with an aggregate, it states a factual hypothesis.
 
 The fields that record the norm of a step, the links between questions and the admitted laws are documented in the [itinerary record](../../specification/itinerary.md), in the [question record](../../specification/question.md) and in the [background record](../../specification/background.md).
 

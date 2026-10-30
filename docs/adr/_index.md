@@ -20,6 +20,7 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 - [Grammatical fields and prose readings](grammatical-fields-and-readings.md): separates the fields that a tool interprets from the prose written for a reader
 - [Single field per fact](single-field-per-fact.md): tells a field that carries a fact from a field that restates that fact
 - [Grounds for a shared field](shared-field-grounds.md): decides whether a proposed field belongs in every record or in the case that raised it
+- [Records neutral on existence](neutral-records-on-existence.md): bounds the presuppositions that a record may hold about the existence of the objects that it describes
 
 ## Sources and checks
 

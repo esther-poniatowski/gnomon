@@ -61,7 +61,7 @@ The activities of this family output a target specification, a background model 
 
 ## Relations to the method
 
-- **Decomposition states the map of each component.** Each constituent of a [mechanistic model](../answer/mechanism.md) states its map from the declared constituents of the target, as the [perspective of a model](../answer/model-and-binding.md#^perspective) requires.
+- **Decomposition relates each component to the target.** A component of a [mechanistic model](../definitions/regularities/mechanism-and-mechanistic-model.md) is either defined by a map from the declared constituents of the target, as the [perspective of a model](../answer/model-and-binding.md#^perspective) requires, or kept as a unit of the model alone, related to the target only through a [pair of type `component`](../answer/model-and-binding.md#^component-pairs) of a binding.
 
 The fields filled by delimitation, by background appraisal and transfer, and by abstraction and idealization are documented in the [target-system record](../../specification/target-system.md), in the [background record](../../specification/background.md), in the [model record](../../specification/model.md) and in the [answer record](../../specification/answer.md).
 

@@ -46,7 +46,7 @@ The activities of this family output a concept, a measurement procedure that app
 
 - **A derived term of an answer is introduced by an explicit definition.** The [derived terms of a model](../answer/model-and-binding.md#^derived-terms) can be eliminated by substituting their definitions, so the norm of explicit definition applies to them.
 - **An explanandum variable operationalizes a phenomenon.** A phenomenon first stated by a qualitative label may be operationalized later, when its manifestation gains features that parametrize it. For a phenomenon of category *capacity*, the operationalization is the [criterion of performance](../definitions/regularities/capacity-and-disposition.md) that tests the conditional of the capacity.
-- **The reference class of a target records a classification.**
+- **The reference class of a target records a classification.** A reference class is a [class](../definitions/systems/kind-class-population.md), fixed by a chosen membership condition, so delimiting a target sorts systems into members and non-members. Whether that class is also a kind, whose members support projection, is a claim to be tested.
 
 The fields that record an operationalization and a classification are documented in the [phenomenon record](../../specification/phenomenon.md) and in the [target-system record](../../specification/target-system.md).
 
