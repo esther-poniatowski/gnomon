@@ -52,5 +52,5 @@ A tool never adds a claim, a relation or a record kind that no record states. A 
 Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks). A mark ◐ records a check of the bibliographic record.
 
 - [baader2003] ◐ Baader, Calvanese, McGuinness, Nardi & Patel-Schneider (eds.), *The Description Logic Handbook: Theory, Implementation, and Applications*, Cambridge University Press, 2003
-- [dung1995] ◐ Dung, "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games", *Artificial Intelligence* 77(2), 321–357, 1995
+- [dung1995] ◐ [Dung, "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games", *Artificial Intelligence* 77(2), 321–357, 1995](https://doi.org/10.1016/0004-3702(94)00041-X)
 - [kowalski1974] ◐ Kowalski, "Predicate logic as programming language", in *Proceedings of the IFIP Congress 74*, North-Holland, 569–574, 1974

@@ -67,25 +67,25 @@ The [audits of the model design](../audits/_index.md) and the trials run on the 
 Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks). The sources were checked by the two analyses, through searches of their bibliographic records; a mark ◐ records such a check, and a mark ○ a source cited from memory.
 
 - [battermanrice2014] ◐ Batterman & Rice, "Minimal model explanations", *Philosophy of Science* 81(3), 349–376, 2014
-- [belnap1976] ○ Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976
+- [belnap1976] ◐ [Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976](https://catalogue.bnf.fr/ark:/12148/cb353871722)
 - [bokulichparker2021] ◐ Bokulich & Parker, "Data models, representation and adequacy-for-purpose", *European Journal for Philosophy of Science* 11, 31, 2021
 - [brynjarsdottir2014] ◐ Brynjarsdóttir & O'Hagan, "Learning about physical parameters: the importance of model discrepancy", *Inverse Problems* 30, 114007, 2014
-- [friggnguyen2020] ◐ Frigg & Nguyen, *Modelling Nature: An Opinionated Introduction to Scientific Representation*, Springer, 2020; denotation, exemplification, key and imputation
+- [friggnguyen2020] ◐ [Frigg & Nguyen, *Modelling Nature: An Opinionated Introduction to Scientific Representation*, Synthese Library 427, Springer, 2020](https://doi.org/10.1007/978-3-030-45153-0); denotation, exemplification, key and imputation
 - [giere2004] ◐ Giere, "How models are used to represent reality", *Philosophy of Science* 71(5), 742–752, 2004
-- [hamblin1958] ○ Hamblin, "Questions", *Australasian Journal of Philosophy* 36, 1958
-- [kennedyohagan2001] ◐ Kennedy & O'Hagan, "Bayesian calibration of computer models", *Journal of the Royal Statistical Society B* 63(3), 425–464, 2001
+- [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211)
+- [kennedyohagan2001] ◐ [Kennedy & O'Hagan, "Bayesian calibration of computer models", *Journal of the Royal Statistical Society, Series B* 63(3), 425–464, 2001](https://doi.org/10.1111/1467-9868.00294)
 - [lange2017] ◐ Lange, *Because Without Cause: Non-Causal Explanations in Science and Mathematics*, Oxford University Press, 2017
 - [parker2017] ◐ Parker, "Computer simulation, measurement, and data assimilation", *British Journal for the Philosophy of Science* 68(1), 273–304, 2017
-- [parker2020] ◐ Parker, "Model evaluation: an adequacy-for-purpose view", *Philosophy of Science* 87(3), 457–477, 2020
+- [parker2020] ◐ [Parker, "Model evaluation: an adequacy-for-purpose view", *Philosophy of Science* 87(3), 457–477, 2020](https://doi.org/10.1086/708691)
 - [rice2021] ◐ Rice, *Leveraging Distortions: Explanation, Idealization, and Universality in Science*, MIT Press, 2021
-- [saltelli2008] ○ Saltelli et al., *Global Sensitivity Analysis: The Primer*, Wiley, 2008
-- [shmueli2010] ○ Shmueli, "To explain or to predict?", *Statistical Science* 25(3), 2010
+- [saltelli2008] ◐ [Saltelli, Ratto, Andres, Campolongo, Cariboni, Gatelli, Saisana & Tarantola, *Global Sensitivity Analysis: The Primer*, Wiley, 2008](https://doi.org/10.1002/9780470725184)
+- [shmueli2010] ◐ [Shmueli, "To explain or to predict?", *Statistical Science* 25(3), 289–310, 2010](https://doi.org/10.1214/10-STS330)
 - [steelewerndl2013] ◐ Steele & Werndl, "Climate models, calibration, and confirmation", *British Journal for the Philosophy of Science* 64(3), 609–635, 2013
 - [steiner1978] ◐ Steiner, "Mathematical explanation", *Philosophical Studies* 34, 1978
-- [strevens2008] ○ Strevens, *Depth: An Account of Scientific Explanation*, Harvard University Press, 2008
+- [strevens2008] ◐ Strevens, *Depth: An Account of Scientific Explanation*, Harvard University Press, 2008
 - [suarez2004] ◐ Suárez, "An inferential conception of scientific representation", *Philosophy of Science* 71(5), 767–779, 2004
-- [tal2013] ◐ Tal, "Old and new problems in philosophy of measurement", *Philosophy Compass* 8(12), 1159–1173, 2013
-- [vanfraassen1980] ✓ van Fraassen, *The Scientific Image*, Clarendon Press, 1980, ch. 5; [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
-- [weisberg2006] ◐ Weisberg, "Robustness analysis", *Philosophy of Science* 73(5), 730–742, 2006
-- [weisberg2013] ◐ Weisberg, *Simulation and Similarity: Using Models to Understand the World*, Oxford University Press, 2013
-- [woodward2003] ○ Woodward, *Making Things Happen: A Theory of Causal Explanation*, Oxford University Press, 2003
+- [tal2013] ◐ [Tal, "Old and new problems in philosophy of measurement", *Philosophy Compass* 8(12), 1159–1173, 2013](https://doi.org/10.1111/phc3.12089)
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5; [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
+- [weisberg2006] ◐ [Weisberg, "Robustness analysis", *Philosophy of Science* 73(5), 730–742, 2006](https://doi.org/10.1086/518628)
+- [weisberg2013] ◐ [Weisberg, *Simulation and Similarity: Using Models to Understand the World*, Oxford University Press, 2013](https://doi.org/10.1093/acprof:oso/9780199933662.001.0001)
+- [woodward2003] ◐ [Woodward, *Making Things Happen: A Theory of Causal Explanation*, Oxford University Press, 2003](https://doi.org/10.1093/0195155270.001.0001)

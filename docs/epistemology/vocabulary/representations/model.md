@@ -69,5 +69,5 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [mccullagh2002] ◐ [McCullagh, "What is a statistical model?", *Annals of Statistics* 30(5), 1225–1310, 2002](https://doi.org/10.1214/aos/1035844977)
 - [morgan1999] ◐ [Morgan & Morrison (eds.), *Models as Mediators: Perspectives on Natural and Social Science*, Cambridge University Press, 1999](https://doi.org/10.1017/CBO9780511660108)
 - [suppes1960] ◐ [Suppes, "A comparison of the meaning and uses of models in mathematics and the empirical sciences", *Synthese* 12(2–3), 287–301, 1960](https://doi.org/10.1007/BF00485107)
-- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001)
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); a theory presented by a family of models, ch. 3, p. 64, checked through the [SEP entry on constructive empiricism](https://plato.stanford.edu/entries/constructive-empiricism/)
 - [weisberg2013] ◐ [Weisberg, *Simulation and Similarity: Using Models to Understand the World*, Oxford University Press, 2013](https://doi.org/10.1093/acprof:oso/9780199933662.001.0001)

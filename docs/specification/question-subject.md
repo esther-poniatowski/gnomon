@@ -53,13 +53,13 @@ The grounds of the domain fields are stated in the note on the [domain of condit
 
 Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
 
-- [hempel1948] ○ Hempel & Oppenheim, "Studies in the logic of explanation", _Philosophy of Science_ 15(2), 1948
+- [hempel1948] ◐ [Hempel & Oppenheim, "Studies in the logic of explanation", *Philosophy of Science* 15(2), 135–175, 1948](https://doi.org/10.1086/286983)
 - [ich2019] ◐ [ICH E9(R1) Addendum on Estimands](https://en.wikipedia.org/wiki/ICH_E9\(R1\)_Addendum_On_Estimands_and_Sensitivity_Analyses_in_Clinical_Trials)
-- [lipton2004] ◐ Lipton, _Inference to the Best Explanation_, 2nd ed., ch. 3; [Lipton, "Making a difference"](https://www.hps.cam.ac.uk/files/lipton-making-difference.pdf)
+- [lipton2004] ◐ [Lipton, *Inference to the Best Explanation*, 2nd ed., Routledge, 2004](https://doi.org/10.4324/9780203470855); ch. 3; the separate paper "Making a difference", *Philosophica* 51, 1993, restates the difference condition
 - [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)
 - [mackie1974] ◐ Mackie, _The Cement of the Universe_, OUP, 1974, "causal field", via [PhilPapers](https://philpapers.org/rec/MACTCO-17)
 - [norton2012] ◐ [Norton, "Approximation and idealization: why the difference matters", _Philosophy of Science_ 79(2), 2012](https://philpapers.org/rec/NORAAI)
-- [vanfraassen1980] ✓ van Fraassen, _The Scientific Image_, ch. 5, read in [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, checked through its abridged reprint in Pitt (ed.), *Theories of Explanation*, Oxford University Press, 1988, pp. 136–155
 - [winther2020] ◐ [Winther, "The structure of scientific theories", _SEP_, revised 2020](https://plato.stanford.edu/entries/structure-scientific-theories/), §3.1.1 on the state-space approach
-- [woodward2003] ○ [Woodward, _Making Things Happen_, OUP, 2003](https://academic.oup.com/book/4324)
-- [woodward2010] ◐ [Woodward, "Causation in biology…", _Biology & Philosophy_ 25, 2010](https://link.springer.com/article/10.1007/s10539-010-9200-z)
+- [woodward2003] ◐ [Woodward, *Making Things Happen: A Theory of Causal Explanation*, Oxford University Press, 2003](https://doi.org/10.1093/0195155270.001.0001)
+- [woodward2010] ◐ [Woodward, "Causation in biology: stability, specificity, and the choice of levels of explanation", *Biology & Philosophy* 25(3), 287–318, 2010](https://doi.org/10.1007/s10539-010-9200-z)

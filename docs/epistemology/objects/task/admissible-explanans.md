@@ -44,8 +44,8 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 
 - [batterman2000] ◐ [Batterman, "Multiple realizability and universality", *British Journal for the Philosophy of Science* 51(1), 2000](https://philpapers.org/rec/BATMRA)
 - [bechtel2015] ◐ [Bechtel & Shagrir, "The non-redundant contributions of Marr's three levels of analysis for explaining information-processing mechanisms", *Topics in Cognitive Science* 7(2), 2015](https://onlinelibrary.wiley.com/doi/10.1111/tops.12141)
-- [craver2007] ◐ [Craver, *Explaining the Brain*, OUP, 2007](https://philpapers.org/rec/CRAETB-2)
-- [marr1982] ○ Marr, *Vision*, Freeman, 1982
+- [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Oxford University Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001)
+- [marr1982] ◐ [Marr, *Vision: A Computational Investigation into the Human Representation and Processing of Visual Information*, W. H. Freeman, 1982; reissued MIT Press, 2010](https://doi.org/10.7551/mitpress/9780262514620.001.0001)
 - [poggio2012] ◐ [Poggio, "The levels of understanding framework, revised", *Perception* 41, 2012](https://journals.sagepub.com/doi/10.1068/p7299)
-- [vanfraassen1980] ✓ van Fraassen, *The Scientific Image*, ch. 5, read in [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
-- [woodward2010] ◐ [Woodward, "Causation in biology…", *Biology & Philosophy* 25, 2010](https://link.springer.com/article/10.1007/s10539-010-9200-z)
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, read in its abridged reprint, "The pragmatic theory of explanation", in Pitt (ed.), *Theories of Explanation*, Oxford University Press, 1988, 136–155 ([PDF](https://www.fitelson.org/290/vanfraassen_pte.pdf))
+- [woodward2010] ◐ [Woodward, "Causation in biology: stability, specificity, and the choice of levels of explanation", *Biology & Philosophy* 25(3), 287–318, 2010](https://doi.org/10.1007/s10539-010-9200-z)

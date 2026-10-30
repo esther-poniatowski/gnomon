@@ -32,5 +32,5 @@ The modal strength is the third dimension of the [epistemic task](epistemic-task
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [craver2006] ◐ [Craver, "When mechanistic models explain", _Synthese_ 153(3), 2006](https://link.springer.com/article/10.1007/s11229-006-9097-x)
+- [craver2006] ◐ [Craver, "When mechanistic models explain", *Synthese* 153(3), 355–376, 2006](https://doi.org/10.1007/s11229-006-9097-x)
 - [verreaultjulien2019] ◐ [Verreault-Julien, "How could models possibly provide how-possibly explanations?", _Studies in History and Philosophy of Science Part A_ 73, 2019](https://philpapers.org/rec/VERHCM)

@@ -118,7 +118,7 @@ $$\langle C\sqcup Z,L,O\rangle\models P, \qquad e\prec e_P \ \text{ for every } 
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [bechtel2005] ◐ [Bechtel & Abrahamsen, "Explanation: a mechanist alternative", _Studies in History and Philosophy of Biological and Biomedical Sciences_ 36(2), 421–441, 2005](https://doi.org/10.1016/j.shpsc.2005.03.010); a mechanism is a structure that performs a function through its component parts, their operations, and their organization
-- [craver2007] ◐ [Craver, *Explaining the Brain*, OUP, 2007](https://philpapers.org/rec/CRAETB-2)
-- [machamer2000] ◐ [Machamer, Darden & Craver, "Thinking about mechanisms", _Philosophy of Science_ 67(1), 1–25, 2000](https://doi.org/10.1086/392759)
-- [salmon1984] ◐ Salmon, *Scientific Explanation and the Causal Structure of the World*, Princeton UP, 1984, etiological versus constitutive explanation, via [SEP, Mechanisms in Science](https://plato.stanford.edu/entries/science-mechanisms/)
+- [bechtel2005] ◐ [Bechtel & Abrahamsen, "Explanation: a mechanist alternative", *Studies in History and Philosophy of Biological and Biomedical Sciences* 36(2), 421–441, 2005](https://doi.org/10.1016/j.shpsc.2005.03.010); a mechanism is a structure that performs a function through its component parts, their operations, and their organization
+- [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Oxford University Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001)
+- [machamer2000] ◐ [Machamer, Darden & Craver, "Thinking about mechanisms", *Philosophy of Science* 67(1), 1–25, 2000](https://doi.org/10.1086/392759)
+- [salmon1984] ◐ [Salmon, *Scientific Explanation and the Causal Structure of the World*, Princeton University Press, 1984](https://press.princeton.edu/books/paperback/9780691101705/scientific-explanation-and-the-causal-structure-of-the-world); etiological versus constitutive explanation, checked through the [SEP entry on mechanisms in science](https://plato.stanford.edu/entries/science-mechanisms/)

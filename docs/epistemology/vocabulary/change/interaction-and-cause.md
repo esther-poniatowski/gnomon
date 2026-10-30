@@ -25,7 +25,7 @@ aliases:
 | Causal interaction | mechanistic philosophy | an interaction of parts characterized by direct, invariant, change-relating generalizations | [glennan2002] |
 | Statistical interaction | statistics | non-additivity: the effect of one factor on a response depends on the level of another factor | [cox1984] |
 | Cause | interventionism | a variable $U$ causes a variable $W$ when some intervention on $U$ would change $W$, other variables being held fixed appropriately | [woodward2003] |
-| Cause | structural causal models | $U$ is a cause of $W$ when $U$ enters the structural equation of $W$, directly or through a chain of equations | [pearl2009] |
+| Cause | structural causal models | $U$ can be a cause of $W$ only when $U$ enters the structural equation of $W$, directly or through a chain of equations; it is a cause when an intervention on $U$ changes $W$ | [pearl2009] |
 
 ## Distinctions
 

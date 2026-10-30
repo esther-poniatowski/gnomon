@@ -58,6 +58,6 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 
 - [carandini2012] ◐ [Carandini & Heeger, "Normalization as a canonical neural computation", *Nature Reviews Neuroscience* 13(1), 51–62, 2012](https://doi.org/10.1038/nrn3136); the normalization equation in Box 1, and the claim that the computation, not the biophysical mechanism, is common across systems, checked through passages of the full text
 - [chalmers1996] ◐ [Chalmers, "Does a rock implement every finite-state automaton?", *Synthese* 108(3), 309–333, 1996](https://doi.org/10.1007/BF00413692)
-- [marr1982] ◐ [Marr, *Vision: A Computational Investigation into the Human Representation and Processing of Visual Information*, W. H. Freeman, 1982](https://discovery.nypl.org/research/research-catalog/bib/b10771196)
+- [marr1982] ◐ [Marr, *Vision: A Computational Investigation into the Human Representation and Processing of Visual Information*, W. H. Freeman, 1982; reissued MIT Press, 2010](https://doi.org/10.7551/mitpress/9780262514620.001.0001)
 - [piccinini2015] ◐ [Piccinini, *Physical Computation: A Mechanistic Account*, Oxford University Press, 2015](https://doi.org/10.1093/acprof:oso/9780199658855.001.0001)
 - [putnam1988] ◐ [Putnam, *Representation and Reality*, MIT Press, 1988](https://mitpress.mit.edu/9780262660747/representation-and-reality/); appendix, pp. 121–125: "every ordinary open system is a realization of every abstract finite automaton"

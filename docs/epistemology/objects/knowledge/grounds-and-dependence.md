@@ -105,9 +105,9 @@ Cycles are treated differently in the three graphs. A cycle between questions is
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [doyle1979] ○ Doyle, "A truth maintenance system", *Artificial Intelligence* 12(3), 231–272, 1979
-- [dung1995] ◐ Dung, "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games", *Artificial Intelligence* 77(2), 321–357, 1995
-- [pollock1987] ○ Pollock, "Defeasible reasoning", *Cognitive Science* 11(4), 481–518, 1987; rebutting and undercutting defeaters
-- [pollock2001] ◐ [Pollock, "Defeasible reasoning with variable degrees of justification", *Artificial Intelligence* 133(1–2), 233–282, 2001](https://doi.org/10.1016/S0004-3702%2801%2900145-X); the weakest-link principle, checked through the [revised version on the author's site](https://www.johnpollock.us/ftp/OSCAR-web-page/Degrees.pdf)
-- [prakken2010] ◐ [Prakken, "An abstract framework for argumentation with structured arguments", *Argument & Computation* 1(2), 93–124, 2010](https://webspace.science.uu.nl/~prakk101/pubs/aspicAF.pdf); undermining, rebutting and undercutting, checked through the abstract and secondary summaries
-- [toulmin1958] ○ Toulmin, *The Uses of Argument*, Cambridge University Press, 1958; data, warrant, backing, qualifier and rebuttal
+- [doyle1979] ◐ [Doyle, "A truth maintenance system", *Artificial Intelligence* 12(3), 231–272, 1979](https://doi.org/10.1016/0004-3702(79)90008-0)
+- [dung1995] ◐ [Dung, "On the acceptability of arguments and its fundamental role in nonmonotonic reasoning, logic programming and n-person games", *Artificial Intelligence* 77(2), 321–357, 1995](https://doi.org/10.1016/0004-3702(94)00041-X)
+- [pollock1987] ◐ [Pollock, "Defeasible reasoning", *Cognitive Science* 11(4), 481–518, 1987](https://doi.org/10.1207/s15516709cog1104_4); rebutting and undercutting defeaters
+- [pollock2001] ◐ [Pollock, "Defeasible reasoning with variable degrees of justification", *Artificial Intelligence* 133(1–2), 233–282, 2001](https://doi.org/10.1016/S0004-3702(01)00145-X); the weakest-link principle, checked through the [revised version on the author's site](https://www.johnpollock.us/ftp/OSCAR-web-page/Degrees.pdf)
+- [prakken2010] ◐ [Prakken, "An abstract framework for argumentation with structured arguments", *Argument & Computation* 1(2), 93–124, 2010](https://doi.org/10.1080/19462160903564592); undermining, rebutting and undercutting, read in the abstract of the [author's preprint](https://webspace.science.uu.nl/~prakk101/pubs/aspicAF.pdf)
+- [toulmin1958] ◐ Toulmin, *The Uses of Argument*, Cambridge University Press, 1958; data, warrant, backing, qualifier and rebuttal

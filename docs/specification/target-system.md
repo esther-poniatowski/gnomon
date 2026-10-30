@@ -68,17 +68,17 @@ The grounds of these fields are stated in the note on the [target system](../epi
 
 Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
 
-- [craver2007] ◐ [Craver, _Explaining the Brain_, OUP, 2007](https://philpapers.org/rec/CRAETB-2)
-- [elliottgraves2020] ◐ [Elliott-Graves, "What is a target system?", _Biology & Philosophy_ 35:28, 2020](https://link.springer.com/article/10.1007/s10539-020-09745-3)
+- [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Oxford University Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001)
+- [elliottgraves2020] ◐ [Elliott-Graves, "What is a target system?", *Biology & Philosophy* 35(2), article 28, 2020](https://doi.org/10.1007/s10539-020-09745-3)
 - [goldt2020] ◐ [Goldt, Mézard, Krzakala & Zdeborová, "Modeling the influence of data structure on learning in neural networks: the hidden manifold model", _Physical Review X_ 10, 041044, 2020](https://link.aps.org/doi/10.1103/PhysRevX.10.041044)
-- [goodman1955] ○ Goodman, _Fact, Fiction, and Forecast_, Harvard University Press, 1955, projectible predicates
+- [goodman1955] ◐ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955; first edition Athlone Press, 1954; projectible predicates; checked through the [SEP entry on Goodman](https://plato.stanford.edu/entries/goodman/)
 - [hernan2004] ◐ [Hernán, Hernández-Díaz & Robins, "A structural approach to selection bias", _Epidemiology_ 15(5), 2004](https://pubmed.ncbi.nlm.nih.gov/15308962/)
 - [ich2019] ◐ [ICH E9(R1) Addendum on Estimands](https://en.wikipedia.org/wiki/ICH_E9\(R1\)_Addendum_On_Estimands_and_Sensitivity_Analyses_in_Clinical_Trials)
-- [kripke1980] ◐ Kripke, _Naming and Necessity_, Harvard University Press, 1980, pp. 54–57; reference fixing by a description, checked through secondary sources
+- [kripke1980] ◐ Kripke, *Naming and Necessity*, Harvard University Press, 1980; pp. 54–57; reference fixing by a description, checked through secondary sources
 - [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)
 - [matthewson2009] ◐ [Matthewson & Weisberg, "The structure of tradeoffs in model building", _Synthese_ 170, 2009](https://link.springer.com/article/10.1007/s11229-008-9366-y)
-- [pearl2009] ○ Pearl, _Causality_, 2nd ed., CUP, 2009, exogenous versus endogenous variables
-- [stevens1946] ◐ Stevens, "On the theory of scales of measurement", _Science_ 103, 1946, via [Wikipedia, Level of measurement](https://en.wikipedia.org/wiki/Level_of_measurement)
-- [weisberg2013] ◐ [Weisberg, _Simulation and Similarity_, OUP, 2013](https://academic.oup.com/book/3141/chapter/143989335)
+- [pearl2009] ◐ [Pearl, *Causality: Models, Reasoning, and Inference*, 2nd ed., Cambridge University Press, 2009](https://doi.org/10.1017/CBO9780511803161); exogenous versus endogenous variables
+- [stevens1946] ◐ [Stevens, "On the theory of scales of measurement", *Science* 103(2684), 677–680, 1946](https://doi.org/10.1126/science.103.2684.677); via [Wikipedia, Level of measurement](https://en.wikipedia.org/wiki/Level_of_measurement)
+- [weisberg2013] ◐ [Weisberg, *Simulation and Similarity: Using Models to Understand the World*, Oxford University Press, 2013](https://doi.org/10.1093/acprof:oso/9780199933662.001.0001)
 - [willems2007] ◐ [Willems, "The behavioral approach to open and interconnected systems", _IEEE Control Systems Magazine_ 27(6), 2007](https://homes.esat.kuleuven.be/~sistawww/smc/jwillems/Articles/JournalArticles/2007.1.pdf)
 - [winther2020] ◐ [Winther, "The structure of scientific theories", _SEP_, revised 2020](https://plato.stanford.edu/entries/structure-scientific-theories/), §3.1.1 on the state-space approach

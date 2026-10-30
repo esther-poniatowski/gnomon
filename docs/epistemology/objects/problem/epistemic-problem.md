@@ -77,7 +77,7 @@ Each problem defines an **associated question**: the question that asks for the 
 
 $$Q_\pi = \text{which } s \text{ of type } \mathsf{type} \text{ satisfies } \Phi_1,\ \text{under the request } \mathsf{req}\ ?$$
 
-In words: the associated question asks for results of the demanded type that meet the conditions on each candidate. The request fixes how many results an answer must give, and how complete they must be. A whether-question is a which-question over two alternatives, so this form covers it [belnap1976]. ^presuppositions
+In words: the associated question asks for results of the demanded type that meet the conditions on each candidate. The request fixes how many results an answer must give, and how complete they must be. Whether-questions and which-questions are both elementary questions, with the same subject and request, so this form covers both [belnap1976]. ^presuppositions
 
 The associated question carries two kinds of presupposition:
 
@@ -156,21 +156,21 @@ The fields by which a record states a problem are documented in the [problem rec
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [aqvist1965] ○ Åqvist, *A New Approach to the Logical Theory of Interrogatives*, Filosofiska Studier, Uppsala, 1965; a question as the imperative "let it be the case that I know …"
-- [belnap1976] ○ Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976; the subject of a question and its request, fixing the number and the completeness of the answers selected
+- [aqvist1965] ◐ Åqvist, *A New Approach to the Logical Theory of Interrogatives. Part I: Analysis*, Filosofiska föreningen i Uppsala, 1965; a question as a command to bring it about that the speaker knows the answer, checked through [Harrah's review](https://doi.org/10.2307/2270810) and the [SEP entry on questions](https://plato.stanford.edu/entries/questions/)
+- [belnap1976] ◐ [Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976](https://catalogue.bnf.fr/ark:/12148/cb353871722); the subject of a question and its request, fixing the number and the completeness of the answers selected
 - [carnap1950_logical] ◐ Carnap, *Logical Foundations of Probability*, University of Chicago Press, 1950, ch. 1; explicandum and explicatum, checked through the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/carnap/)
-- [dewey1938] ◐ Dewey, *Logic: The Theory of Inquiry*, Henry Holt, 1938, ch. 6; checked through secondary sources
+- [dewey1938] ◐ [Dewey, *Logic: The Theory of Inquiry*, Henry Holt, 1938](https://search.worldcat.org/oclc/229987); ch. 6; checked through secondary sources
 - [friedman2013] ◐ [Friedman, "Question-directed attitudes", *Philosophical Perspectives* 27, 145–174, 2013](https://doi.org/10.1111/phpe.12026); attitudes directed at a question are incompatible with knowing its answer, checked through secondary sources
 - [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211); checked through secondary sources
-- [hansson1999] ○ Hansson, *A Textbook of Belief Dynamics*, Kluwer, 1999; belief bases, as opposed to belief sets closed under consequence
-- [hintikka1976] ○ Hintikka, *The Semantics of Questions and the Questions of Semantics*, Acta Philosophica Fennica 28(4), 1976; the desideratum of a question, "bring it about that I know …"
+- [hansson1999] ◐ [Hansson, *A Textbook of Belief Dynamics: Theory Change and Database Updating*, Kluwer, 1999](https://doi.org/10.1007/978-94-007-0814-3); belief bases, as opposed to belief sets closed under consequence
+- [hintikka1976] ◐ Hintikka, *The Semantics of Questions and the Questions of Semantics: Case Studies in the Interrelations of Logic, Semantics, and Syntax*, Acta Philosophica Fennica 28(4), North-Holland, 1976; the desideratum of a question, "bring it about that I know …"
 - [hintikka2007] ◐ [Hintikka, *Socratic Epistemology: Explorations of Knowledge-Seeking by Questioning*, Cambridge University Press, 2007](https://doi.org/10.1017/CBO9780511619298); a question may be asked only once its presupposition is established
 - [kolmogorov1932] ◐ Kolmogorov, "Zur Deutung der intuitionistischen Logik", *Mathematische Zeitschrift* 35, 58–65, 1932; problems, solutions and reducibility, checked through [Rodin's review of the calculus of problems](https://arxiv.org/abs/2307.09202)
-- [laudan1977] ◐ [Laudan, *Progress and Its Problems*, University of California Press, 1977](https://www.ucpress.edu/books/progress-and-its-problems/paper); empirical and conceptual problems, checked through secondary sources
-- [levi1980] ○ Levi, *The Enterprise of Knowledge*, MIT Press, 1980; the corpus of knowledge relative to which inquiry proceeds
+- [laudan1977] ◐ [Laudan, *Progress and Its Problems: Towards a Theory of Scientific Growth*, University of California Press, 1977](https://www.ucpress.edu/books/progress-and-its-problems/paper); empirical and conceptual problems, checked through secondary sources
+- [levi1980] ◐ Levi, *The Enterprise of Knowledge: An Essay on Knowledge, Credal Probability, and Chance*, MIT Press, 1980; the corpus of knowledge relative to which inquiry proceeds
 - [medvedev1955] ◐ Medvedev, "Degrees of difficulty of mass problems", *Doklady Akademii Nauk SSSR* 104, 501–504, 1955; uniform reducibility of problems, checked through the Encyclopedia of Mathematics entry ["Finitary problem"](https://encyclopediaofmath.org/wiki/Finitary_problem)
 - [nickles1981] ◐ [Nickles, "What is a problem that we may solve it?", *Synthese* 47(1), 85–118, 1981](https://doi.org/10.1007/BF01064267); a problem as a demand together with constraints, checked through a scanned copy of poor quality
-- [polya1945] ○ Pólya, *How to Solve It*, Princeton University Press, 1945; the unknown, the data and the condition, and problems to find against problems to prove
-- [vanfraassen1980] ✓ van Fraassen, *The Scientific Image*, Clarendon Press, 1980, ch. 5; the topic of a why-question presupposed true; [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
+- [polya1945] ◐ Pólya, *How to Solve It: A New Aspect of Mathematical Method*, Princeton University Press, 1945; the unknown, the data and the condition, and problems to find against problems to prove
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); the topic of a why-question presupposed true; ch. 5, read in its abridged reprint, "The pragmatic theory of explanation", in Pitt (ed.), *Theories of Explanation*, Oxford University Press, 1988, 136–155 ([PDF](https://www.fitelson.org/290/vanfraassen_pte.pdf))
 - [wisniewski1995] ◐ [Wiśniewski, *The Posing of Questions: Logical Foundations of Erotetic Inferences*, Kluwer, 1995](https://doi.org/10.1007/978-94-015-8406-7), ch. 5 on the evocation of questions; both definitions, evocation and erotetic implication, checked through [Wiśniewski, "Erotetic logic and explanation by abnormic hypotheses"](https://www.bu.edu/wcp/Papers/Logi/LogiWisn.htm)
-- [zhang2017] ○ Zhang, Bengio, Hardt, Recht & Vinyals, "Understanding deep learning requires rethinking generalization", *International Conference on Learning Representations*, 2017
+- [zhang2017] ◐ [Zhang, Bengio, Hardt, Recht & Vinyals, "Understanding deep learning requires rethinking generalization", *International Conference on Learning Representations*, 2017](https://arxiv.org/abs/1611.03530)

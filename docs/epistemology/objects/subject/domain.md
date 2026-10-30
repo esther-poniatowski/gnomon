@@ -46,7 +46,7 @@ The fields of the domain are documented in the [subject of a question](../../../
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [lipton2004] ◐ Lipton, _Inference to the Best Explanation_, 2nd ed., ch. 3; [Lipton, "Making a difference"](https://www.hps.cam.ac.uk/files/lipton-making-difference.pdf)
+- [lipton2004] ◐ [Lipton, *Inference to the Best Explanation*, 2nd ed., Routledge, 2004](https://doi.org/10.4324/9780203470855); ch. 3, "The causal model", checked through [Lipton, "Making a difference", *Philosophica* 51, 39–54, 1993](https://www.hps.cam.ac.uk/files/lipton-making-difference.pdf)
 - [mackie1974] ◐ Mackie, _The Cement of the Universe_, OUP, 1974, "causal field", via [PhilPapers](https://philpapers.org/rec/MACTCO-17)
 - [norton2012] ◐ [Norton, "Approximation and idealization: why the difference matters", _Philosophy of Science_ 79(2), 2012](https://philpapers.org/rec/NORAAI)
-- [pearl2009] ○ Pearl, _Causality_, 2nd ed., CUP, 2009, exogenous versus endogenous variables
+- [pearl2009] ◐ [Pearl, *Causality: Models, Reasoning, and Inference*, 2nd ed., Cambridge University Press, 2009](https://doi.org/10.1017/CBO9780511803161); exogenous versus endogenous variables

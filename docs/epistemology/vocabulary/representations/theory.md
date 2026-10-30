@@ -53,5 +53,5 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [giere1988] ◐ [Giere, *Explaining Science: A Cognitive Approach*, University of Chicago Press, 1988](https://press.uchicago.edu/ucp/books/book/chicago/E/bo3622319.html)
 - [suppe1977] ◐ [Suppe (ed.), *The Structure of Scientific Theories*, 2nd ed., University of Illinois Press, 1977](https://www.press.uillinois.edu/books/?id=p006340)
 - [suppes1960] ◐ [Suppes, "A comparison of the meaning and uses of models in mathematics and the empirical sciences", *Synthese* 12(2–3), 287–301, 1960](https://doi.org/10.1007/BF00485107)
-- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001)
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); a theory presented by a family of models, ch. 3, p. 64, checked through the [SEP entry on constructive empiricism](https://plato.stanford.edu/entries/constructive-empiricism/)
 - [winther2020] ◐ [Winther, "The structure of scientific theories", *Stanford Encyclopedia of Philosophy*, substantive revision 29 December 2020](https://plato.stanford.edu/entries/structure-scientific-theories/)

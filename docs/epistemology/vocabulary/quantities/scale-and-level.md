@@ -62,8 +62,8 @@ The fields that bear on the scale of a quantity are documented in the [target-sy
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Clarendon Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001)
+- [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Oxford University Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001)
 - [krantz1971] ◐ [Krantz, Luce, Suppes & Tversky, *Foundations of Measurement*, vol. I, *Additive and Polynomial Representations*, Academic Press, 1971](https://shop.elsevier.com/books/additive-and-polynomial-representations/krantz/978-0-12-425401-5)
-- [marr1982] ◐ [Marr, *Vision: A Computational Investigation into the Human Representation and Processing of Visual Information*, W. H. Freeman, 1982](https://discovery.nypl.org/research/research-catalog/bib/b10771196)
+- [marr1982] ◐ [Marr, *Vision: A Computational Investigation into the Human Representation and Processing of Visual Information*, W. H. Freeman, 1982; reissued MIT Press, 2010](https://doi.org/10.7551/mitpress/9780262514620.001.0001)
 - [stevens1946] ◐ [Stevens, "On the theory of scales of measurement", *Science* 103(2684), 677–680, 1946](https://doi.org/10.1126/science.103.2684.677)
 - [suppes1963] ◐ [Suppes & Zinnes, "Basic measurement theory", in Luce, Bush & Galanter (eds.), *Handbook of Mathematical Psychology*, vol. I, Wiley, 1–76, 1963](https://suppescorpus.stanford.edu/sites/g/files/sbiybj32751/files/media/file/basic_measurement_theory_43.pdf); §5.1, Definition 33, p. 66

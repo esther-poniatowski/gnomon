@@ -37,7 +37,7 @@ A relation is the counterpart of a property for several bearers, and it has the 
 The pairs of terms are synonyms only in some communities:
 
 - *property and attribute* coincide in ordinary and data-science usage, whereas realist ontology keeps them apart [bunge1977];
-- *attribute and predicate* coincide in realist ontology [bunge1977], whereas logic separates an expression from its content [frege1892];
+- *attribute and predicate* coincide in realist ontology [bunge1977], whereas logic separates an expression from its content [frege1892b];
 - *property and relation* coincide in model theory, where a property is a relation with one place [hodges1993].
 
 ## Distinctions
@@ -58,9 +58,9 @@ The pairs of terms are synonyms only in some communities:
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
 - [bunge1977] ◐ [Bunge, *Treatise on Basic Philosophy*, vol. 3, *Ontology I: The Furniture of the World*, Reidel, 1977](https://doi.org/10.1007/978-94-010-9924-0); ch. 2, "Form", opens with the section "Property and Attribute"
-- [frege1891] ◐ [Frege, *Function und Begriff*, Hermann Pohle, Jena, 1891](https://plato.stanford.edu/entries/frege/)
-- [frege1892] ◐ [Frege, "Ueber Begriff und Gegenstand", *Vierteljahrsschrift für wissenschaftliche Philosophie* 16(2), 192–205, 1892](https://commons.wikimedia.org/wiki/File:Gottlob_Frege,_Ueber_Begriff_und_Gegenstand,_1892.pdf)
-- [goodman1955] ◐ [Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955](https://plato.stanford.edu/entries/goodman/); first edition Athlone Press, London, 1954; "grue" in ch. III, §4
+- [frege1891] ◐ [Frege, *Function und Begriff*, Hermann Pohle, Jena, 1891](https://archive.org/details/functionundbegr00freggoog)
+- [frege1892b] ◐ [Frege, "Ueber Begriff und Gegenstand", *Vierteljahrsschrift für wissenschaftliche Philosophie* 16(2), 192–205, 1892](https://commons.wikimedia.org/wiki/File:Gottlob_Frege,_Ueber_Begriff_und_Gegenstand,_1892.pdf)
+- [goodman1955] ◐ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955; first edition Athlone Press, 1954; "grue" in ch. III, §4; checked through the [SEP entry on Goodman](https://plato.stanford.edu/entries/goodman/)
 - [hodges1993] ◐ [Hodges, *Model Theory*, Cambridge University Press, 1993](https://doi.org/10.1017/CBO9780511551574)
 - [suppes1957] ◐ [Suppes, *Introduction to Logic*, Van Nostrand, 1957](https://archive.org/details/introductiontolo0000supp); ch. 12, "Set-Theoretical Foundations of the Axiomatic Method", §12.2
 - [suppes2002] ◐ [Suppes, *Representation and Invariance of Scientific Structures*, CSLI Publications, 2002](https://web.stanford.edu/group/cslipublications/cslipublications/site/1575863332.shtml)

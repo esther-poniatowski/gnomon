@@ -74,5 +74,5 @@ The fields below hold the elements that make the dependences of the core explana
 Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
 
 - [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)
-- [saltelli2008] ○ Saltelli et al., *Global Sensitivity Analysis: The Primer*, Wiley, 2008
-- [weisberg2006] ◐ [Weisberg, "Robustness analysis", _Philosophy of Science_ 73(5), 2006](https://philpapers.org/rec/MICRA)
+- [saltelli2008] ◐ [Saltelli, Ratto, Andres, Campolongo, Cariboni, Gatelli, Saisana & Tarantola, *Global Sensitivity Analysis: The Primer*, Wiley, 2008](https://doi.org/10.1002/9780470725184)
+- [weisberg2006] ◐ [Weisberg, "Robustness analysis", *Philosophy of Science* 73(5), 730–742, 2006](https://doi.org/10.1086/518628)

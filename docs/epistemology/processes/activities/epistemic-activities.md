@@ -185,6 +185,6 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [dewey1938] ◐ [Dewey, *Logic: The Theory of Inquiry*, Henry Holt, 1938](https://search.worldcat.org/oclc/229987)
 - [hanson1958] ◐ [Hanson, *Patterns of Discovery: An Inquiry into the Conceptual Foundations of Science*, Cambridge University Press, 1958](https://ci.nii.ac.jp/ncid/BA0361033X)
 - [michalski1993] ◐ [Michalski, "Inferential theory of learning as a conceptual basis for multistrategy learning", *Machine Learning* 11(2–3), 111–151, 1993](https://doi.org/10.1007/BF00993074); the four pairs of transmutations are listed in the abstract
-- [peirce1934] ◐ [Peirce, *Collected Papers of Charles Sanders Peirce*, vol. 5, *Pragmatism and Pragmaticism*, Hartshorne & Weiss (eds.), Harvard University Press, 1934](https://plato.stanford.edu/entries/abduction/peirce.html)
+- [peirce1934] ◐ Peirce, *Collected Papers of Charles Sanders Peirce*, vol. 5, *Pragmatism and Pragmaticism*, Hartshorne & Weiss (eds.), Harvard University Press, 1934; checked through the [SEP supplement on Peirce on abduction](https://plato.stanford.edu/entries/abduction/peirce.html)
 - [reichenbach1938] ◐ [Reichenbach, *Experience and Prediction: An Analysis of the Foundations and the Structure of Knowledge*, University of Chicago Press, 1938](https://catalogo.biblio.unc.edu.ar/Record/ffyh.39329)
 - [simon1973] ◐ [Simon, "Does scientific discovery have a logic?", *Philosophy of Science* 40(4), 471–480, 1973](https://doi.org/10.1086/288559)

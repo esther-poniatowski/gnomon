@@ -121,4 +121,4 @@ A check can perform the determinate parts of steps 1 to 4 only when the records 
 Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [carnap1950_logical] ◐ Carnap, *Logical Foundations of Probability*, University of Chicago Press, 1950, ch. 1; the four requirements on an explication, checked through the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/carnap/)
-- [cohen1992] ○ Cohen, *An Essay on Belief and Acceptance*, Clarendon Press, 1992; acceptance as the adoption of a claim as a premise, distinct from belief
+- [cohen1992] ◐ Cohen, *An Essay on Belief and Acceptance*, Clarendon Press, 1992; acceptance as the adoption of a claim as a premise, distinct from belief

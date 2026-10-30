@@ -26,11 +26,11 @@ The three terms name the bearer of a description, at three degrees of generality
 | Entity | ontology | the most general category: objects, properties, relations, events and processes all count as entities | [lowe2006] |
 | Entity | logic of ontological commitment | every item over which a theory quantifies: "To be assumed as an entity is, purely and simply, to be reckoned as the value of a variable." | [quine1948] |
 | Entity | mechanistic philosophy | a part that engages in activities, by virtue of its properties | [machamer2000] |
-| Object | logic, model theory | the referent of a saturated expression, such as a proper name, opposed to a concept, the referent of an unsaturated expression; in a structure, an element of its domain | [frege1891]; [frege1892]; [hodges1993] |
+| Object | logic, model theory | the referent of a saturated expression, such as a proper name, opposed to a concept, the referent of an unsaturated expression; in a structure, an element of its domain | [frege1891]; [frege1892b]; [hodges1993] |
 | Object | ontology | a particular that bears properties and persists through change; one of four categories of entity, beside kinds, attributes and modes | [lowe2006] |
 | Thing | realist ontology | a concrete object: an object that has states and changes them | [bunge1977] |
 
-The terms are near-synonyms in some communities only. Under the criterion of ontological commitment, entity and object coincide, since both mean a value of a bound variable [quine1948]. Ontology of categories and logic keep them apart: an ontology of categories counts objects as one category of entity [lowe2006], and the logical sense opposes objects to concepts [frege1892].
+The terms are near-synonyms in some communities only. Under the criterion of ontological commitment, entity and object coincide, since both mean a value of a bound variable [quine1948]. Ontology of categories and logic keep them apart: an ontology of categories counts objects as one category of entity [lowe2006], and the logical sense opposes objects to concepts [frege1892b].
 
 ## Distinctions
 
@@ -49,8 +49,8 @@ The terms are near-synonyms in some communities only. Under the criterion of ont
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
 - [bunge1977] ◐ [Bunge, *Treatise on Basic Philosophy*, vol. 3, *Ontology I: The Furniture of the World*, Reidel, 1977](https://doi.org/10.1007/978-94-010-9924-0); ch. 3, "Thing"
-- [frege1891] ◐ [Frege, *Function und Begriff*, Hermann Pohle, Jena, 1891](https://plato.stanford.edu/entries/frege/); lecture of 9 January 1891, original spelling "Function"
-- [frege1892] ◐ [Frege, "Ueber Begriff und Gegenstand", *Vierteljahrsschrift für wissenschaftliche Philosophie* 16(2), 192–205, 1892](https://commons.wikimedia.org/wiki/File:Gottlob_Frege,_Ueber_Begriff_und_Gegenstand,_1892.pdf)
+- [frege1891] ◐ [Frege, *Function und Begriff*, Hermann Pohle, Jena, 1891](https://archive.org/details/functionundbegr00freggoog); lecture of 9 January 1891, original spelling "Function"
+- [frege1892b] ◐ [Frege, "Ueber Begriff und Gegenstand", *Vierteljahrsschrift für wissenschaftliche Philosophie* 16(2), 192–205, 1892](https://commons.wikimedia.org/wiki/File:Gottlob_Frege,_Ueber_Begriff_und_Gegenstand,_1892.pdf)
 - [hodges1993] ◐ [Hodges, *Model Theory*, Cambridge University Press, 1993](https://doi.org/10.1017/CBO9780511551574)
 - [lowe2006] ◐ [Lowe, *The Four-Category Ontology: A Metaphysical Foundation for Natural Science*, Clarendon Press, 2006](https://doi.org/10.1093/0199254397.001.0001)
 - [machamer2000] ◐ [Machamer, Darden & Craver, "Thinking about mechanisms", *Philosophy of Science* 67(1), 1–25, 2000](https://doi.org/10.1086/392759)

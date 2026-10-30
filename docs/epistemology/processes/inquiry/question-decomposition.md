@@ -173,11 +173,11 @@ A local revision follows five steps:
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [belnap1976] ○ Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976; a question modeled by its admissible answers
+- [belnap1976] ◐ [Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976](https://catalogue.bnf.fr/ark:/12148/cb353871722); a question modeled by its admissible answers
 - [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211); checked through secondary sources
-- [hintikka1999] ○ Hintikka, *Inquiry as Inquiry: A Logic of Scientific Discovery*, Kluwer, 1999; the interrogative model of inquiry
+- [hintikka1999] ◐ [Hintikka, *Inquiry as Inquiry: A Logic of Scientific Discovery*, Jaakko Hintikka Selected Papers 5, Kluwer, 1999](https://doi.org/10.1007/978-94-015-9313-7); the interrogative model of inquiry
 - [hintikka2007] ◐ [Hintikka, *Socratic Epistemology: Explorations of Knowledge-Seeking by Questioning*, Cambridge University Press, 2007](https://doi.org/10.1017/CBO9780511619298); the desideratum of a question
-- [newell1972] ○ Newell & Simon, *Human Problem Solving*, Prentice-Hall, 1972; means–ends analysis
-- [polya1945] ○ Pólya, *How to Solve It*, Princeton University Press, 1945; working backward
-- [vanfraassen1980] ✓ van Fraassen, *The Scientific Image*, Clarendon Press, 1980, ch. 5; [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
-- [wisniewski2013] ○ Wiśniewski, *Questions, Inferences, and Scenarios*, College Publications, 2013; erotetic implication and erotetic search scenarios
+- [newell1972] ◐ Newell & Simon, *Human Problem Solving*, Prentice-Hall, 1972; means–ends analysis
+- [polya1945] ◐ Pólya, *How to Solve It: A New Aspect of Mathematical Method*, Princeton University Press, 1945; working backward
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, read in its abridged reprint, "The pragmatic theory of explanation", in Pitt (ed.), *Theories of Explanation*, Oxford University Press, 1988, 136–155 ([PDF](https://www.fitelson.org/290/vanfraassen_pte.pdf))
+- [wisniewski2013] ◐ [Wiśniewski, *Questions, Inferences, and Scenarios*, Studies in Logic 46, College Publications, 2013](https://philpapers.org/rec/WINQIA); erotetic implication and erotetic search scenarios

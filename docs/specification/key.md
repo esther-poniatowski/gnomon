@@ -24,4 +24,4 @@ A key states one map between the two sides of a binding: an observation operator
 Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
 
 - [parker2017] ◐ Parker, "Computer simulation, measurement, and data assimilation", *British Journal for the Philosophy of Science* 68(1), 273–304, 2017
-- [tal2013] ◐ Tal, "Old and new problems in philosophy of measurement", *Philosophy Compass* 8(12), 1159–1173, 2013
+- [tal2013] ◐ [Tal, "Old and new problems in philosophy of measurement", *Philosophy Compass* 8(12), 1159–1173, 2013](https://doi.org/10.1111/phc3.12089)

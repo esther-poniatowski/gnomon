@@ -46,5 +46,5 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 
 - [balzer1987] ◐ [Balzer, Moulines & Sneed, *An Architectonic for Science: The Structuralist Program*, Reidel, 1987](https://doi.org/10.1007/978-94-009-3765-9)
 - [boyd1991] ◐ [Boyd, "Realism, anti-foundationalism and the enthusiasm for natural kinds", *Philosophical Studies* 61(1–2), 127–148, 1991](https://doi.org/10.1007/BF00385837); defends homeostatic property cluster kinds, introduced in earlier papers of the author
-- [goodman1955] ◐ [Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955](https://plato.stanford.edu/entries/goodman/)
+- [goodman1955] ◐ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955; first edition Athlone Press, 1954; checked through the [SEP entry on Goodman](https://plato.stanford.edu/entries/goodman/)
 - [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)

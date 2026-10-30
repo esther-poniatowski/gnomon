@@ -141,11 +141,11 @@ Withdrawing an answer from $K$ is an act of the same kind, performed by the [rev
 
 Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
-- [chang2004] ○ Chang, *Inventing Temperature: Measurement and Scientific Progress*, Oxford University Press, 2004; epistemic iteration from an initially affirmed system
+- [chang2004] ◐ [Chang, *Inventing Temperature: Measurement and Scientific Progress*, Oxford University Press, 2004](https://doi.org/10.1093/0195171276.001.0001); epistemic iteration from an initially affirmed system
 - [cohen1992] ◐ Cohen, *An Essay on Belief and Acceptance*, Clarendon Press, 1992; acceptance as premising, distinct from belief, checked through secondary sources
-- [dewey1938] ◐ Dewey, *Logic: The Theory of Inquiry*, Henry Holt, 1938, ch. 6; checked through secondary sources
-- [hansson1999] ○ Hansson, *A Textbook of Belief Dynamics*, Kluwer, 1999; belief bases, as opposed to belief sets closed under consequence
+- [dewey1938] ◐ [Dewey, *Logic: The Theory of Inquiry*, Henry Holt, 1938](https://search.worldcat.org/oclc/229987); ch. 6; checked through secondary sources
+- [hansson1999] ◐ [Hansson, *A Textbook of Belief Dynamics: Theory Change and Database Updating*, Kluwer, 1999](https://doi.org/10.1007/978-94-007-0814-3); belief bases, as opposed to belief sets closed under consequence
 - [hintikka2007] ◐ [Hintikka, *Socratic Epistemology: Explorations of Knowledge-Seeking by Questioning*, Cambridge University Press, 2007](https://doi.org/10.1017/CBO9780511619298); interrogative and deductive moves
-- [kyburg1961] ○ Kyburg, *Probability and the Logic of Rational Belief*, Wesleyan University Press, 1961; the lottery paradox
-- [levi1980] ○ Levi, *The Enterprise of Knowledge*, MIT Press, 1980; the corpus of knowledge, revised by expansion and contraction
+- [kyburg1961] ◐ Kyburg, *Probability and the Logic of Rational Belief*, Wesleyan University Press, 1961; the lottery paradox
+- [levi1980] ◐ Levi, *The Enterprise of Knowledge: An Essay on Knowledge, Credal Probability, and Chance*, MIT Press, 1980; the corpus of knowledge, revised by expansion and contraction
 - [rudner1953] ◐ [Rudner, "The scientist qua scientist makes value judgments", *Philosophy of Science* 20(1), 1–6, 1953](https://doi.org/10.1086/287231); checked through secondary summaries

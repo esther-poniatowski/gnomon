@@ -30,7 +30,7 @@ A **variable** is an [attribute](../systems/property-attribute-predicate.md) for
 | Variable | probability | a random variable: a measurable function $F:\Omega\to\mathbb{R}$ on a probability space | [kolmogorov1933] |
 | Variable | logic | a placeholder that ranges over a domain and is bound by a quantifier | [quine1948] |
 | Value | all | an element $w\in\mathcal{W}$ of the codomain; the output $F(a)$ of the variable at one argument $a\in\mathcal{D}$ | — |
-| Observable | empiricist philosophy of science | an entity detectable by the unaided senses, opposed to a theoretical entity | [vanfraassen1980] |
+| Observable | empiricist philosophy of science | an entity that could be observed by the unaided senses under suitable circumstances, opposed to an unobservable entity | [vanfraassen1980] |
 | Observable | classical and quantum physics | a measurable function on the phase space (classical); a self-adjoint operator on the state space (quantum) | — |
 | Observable | control theory | the output $y=g(x)$ of an observation function $g$; a system is *observable* when its state can be reconstructed from its outputs over time | [kalman1960] |
 | Latent variable | statistics | a variable of a model, read directly by no observation function, whose values are inferred | — |
@@ -82,4 +82,4 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [kolmogorov1933] ◐ [Kolmogoroff, *Grundbegriffe der Wahrscheinlichkeitsrechnung*, Springer, 1933](https://doi.org/10.1007/978-3-642-49888-6)
 - [mccullagh2002] ◐ [McCullagh, "What is a statistical model?", *Annals of Statistics* 30(5), 1225–1310, 2002](https://doi.org/10.1214/aos/1035844977)
 - [quine1948] ◐ [Quine, "On what there is", *Review of Metaphysics* 2(5), 21–38, 1948](https://en.wikisource.org/wiki/On_What_There_Is)
-- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001)
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); observability, ch. 2, p. 16, checked through the [SEP entry on constructive empiricism](https://plato.stanford.edu/entries/constructive-empiricism/)

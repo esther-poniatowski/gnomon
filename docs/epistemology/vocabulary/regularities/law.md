@@ -64,6 +64,6 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [bunge1961_laws] ◐ [Bunge, "Laws of physical laws", *American Journal of Physics* 29(8), 518–529, 1961](https://doi.org/10.1119/1.1937824); source of the term "metanomological statement", checked through secondary sources
 - [bunge1977] ◐ [Bunge, *Treatise on Basic Philosophy*, vol. 3, *Ontology I: The Furniture of the World*, Reidel, 1977](https://doi.org/10.1007/978-94-010-9924-0); the numbering of the senses beyond law₁ and law₂ was not confirmed in this volume
 - [cartwright1983] ◐ [Cartwright, *How the Laws of Physics Lie*, Clarendon Press, 1983](https://doi.org/10.1093/0198247044.001.0001)
-- [goodman1955] ◐ [Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955](https://plato.stanford.edu/entries/goodman/); ch. I on counterfactual conditionals
+- [goodman1955] ◐ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955; first edition Athlone Press, 1954; ch. I on counterfactual conditionals; checked through the [SEP entry on Goodman](https://plato.stanford.edu/entries/goodman/)
 - [lewis1973] ◐ [Lewis, *Counterfactuals*, Blackwell, 1973](https://www.wiley.com/en-us/Counterfactuals-p-9780631224952); §3.3, pp. 73–74
 - [woodward2003] ◐ [Woodward, *Making Things Happen: A Theory of Causal Explanation*, Oxford University Press, 2003](https://doi.org/10.1093/0195155270.001.0001)

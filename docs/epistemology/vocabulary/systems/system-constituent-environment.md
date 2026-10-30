@@ -31,14 +31,14 @@ A later version of this description adds a fourth item, the mechanism $\mathsf{M
 | Constituent | a member of $\mathsf{Comp}(\sigma)$: an object that stands in the part–whole relation to the system | component, part | [simons1987]; [bunge1979] |
 | Environment | the set $\mathsf{Env}(\sigma)$ of things outside the composition that act on constituents or are acted on by them | surroundings | [bunge1979] |
 | Structure | the set $\mathsf{Str}(\sigma)$ of relations among the constituents, regardless of their relevance to a behavior | — | [bunge1979] |
-| Organization | the relations among parts and activities on which a behavior of the whole depends, so that the behavior is not the sum of the behaviors of the parts | arrangement | [craver2007] |
+| Organization | the relations among parts and activities on which a behavior of the whole depends, so that the behavior is not the sum of the behaviors of the parts | arrangement | [craver2007]; [wimsatt1997] |
 
 Constituent, component and part are synonyms only relative to one system. Mereology treats "part" as an absolute relation between two objects [simons1987], whereas "constituent" always refers to a containing system.
 
 ## Distinctions
 
 - **System, constituent and environment are *roles*.** No object is a system, a constituent or an environment by its kind: a neuron is a constituent of a circuit and a system of ion channels. The role of an object is fixed by the choice of a boundary. Given that boundary, each object $o$ of a description falls in exactly one of three classes: $o\in\mathsf{Comp}(\sigma)$, $o\in\mathsf{Env}(\sigma)$, or neither. The third class holds when $o$ neither belongs to the system nor acts on it. ^system-role-test
-- **Organization is the part of the structure on which a behavior depends.** The structure lists every relation among the constituents, including relations that change no behavior of interest. *Example*: a matrix of correlations among neurons describes part of the structure before any causal reading of it is supplied. The organization keeps the relations that make a behavior of the whole non-aggregative [craver2007]. The test is an intervention: rearranging the constituents changes the behavior only when the rearranged relations belong to the organization. Organization takes the form of a typed relational structure in the formalism of a [mechanistic answer](../../objects/answer/mechanism.md).
+- **Organization is the part of the structure on which a behavior depends.** The structure lists every relation among the constituents, including relations that change no behavior of interest. *Example*: a matrix of correlations among neurons describes part of the structure before any causal reading of it is supplied. The organization keeps the relations that make a behavior of the whole non-aggregative [craver2007] [wimsatt1997]. The test is an intervention: rearranging the constituents changes the behavior only when the rearranged relations belong to the organization. Organization takes the form of a typed relational structure in the formalism of a [mechanistic answer](../../objects/answer/mechanism.md).
 - **A configuration is not a structure.** The structure holds the relations that persist while the system evolves. A configuration is the arrangement of the constituents at one instant, as defined in the [vocabulary of state](../quantities/state-and-configuration.md).
 
 ## Relations to the method
@@ -62,5 +62,6 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 
 - [bunge1979] ◐ [Bunge, *Treatise on Basic Philosophy*, vol. 4, *Ontology II: A World of Systems*, Reidel, 1979](https://doi.org/10.1007/978-94-009-9392-1); the triple of composition, environment and structure is confirmed through secondary sources only
 - [bunge2004] ◐ [Bunge, "How does it work? The search for explanatory mechanisms", *Philosophy of the Social Sciences* 34(2), 182–210, 2004](https://doi.org/10.1177/0048393103262550); section "The CESM model"
-- [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Clarendon Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001)
+- [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Oxford University Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001); the non-aggregative character of organization not confirmed in this book
 - [simons1987] ◐ [Simons, *Parts: A Study in Ontology*, Clarendon Press, 1987](https://doi.org/10.1093/acprof:oso/9780199241460.001.0001)
+- [wimsatt1997] ◐ [Wimsatt, "Aggregativity: reductive heuristics for finding emergence", *Philosophy of Science* 64(S4), S372–S384, 1997](https://doi.org/10.1086/392615); organization as non-aggregative arrangement, checked through the [SEP entry on mechanisms in science](https://plato.stanford.edu/entries/science-mechanisms/)

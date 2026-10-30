@@ -37,13 +37,13 @@ A **glossary** holds the names of the concepts of one project: for each concept,
 
 The Simple Knowledge Organization System separates a concept from its lexical labels in the same way, with a preferred label and alternative labels, and relates two concepts by a broader concept [skos2009]. The glossary differs on one point. The lexical labels of that system belong to the concept itself, whereas a glossary belongs to one project, so two projects can name one concept differently without changing it.
 
-**Two names designate one concept only when they carry the same meaning.** Two names of one referent can differ in sense, as "the morning star" and "the evening star" do [frege1892]. Under a proposal of this method, a glossary admits two forms for one concept only when they carry the same meaning in the contexts listed. A name that carries a different meaning designates a different concept, which receives its own record, with a confusion entry that states the distinction.
+**Two names designate one concept only when they carry the same meaning.** Two names of one referent can differ in sense, as "the morning star" and "the evening star" do [frege1892a]. Under a proposal of this method, a glossary admits two forms for one concept only when they carry the same meaning in the contexts listed. A name that carries a different meaning designates a different concept, which receives its own record, with a confusion entry that states the distinction.
 
 ## Symbols: the notation
 
 A **notation** composes the symbols of a project from declared parts: bases, each with its meaning; modifiers, such as a label, a superscript or an accent, each with its meaning and its admitted positions; index sets, which bind the letters that range over them; and conventions of typography. The meaning of a compound symbol is composed from the meanings of its parts. A compound whose meaning does not follow from its parts is declared explicitly. ^notation
 
-- **Composition follows the principle of compositionality.** The meaning of a complex expression is determined by the meanings of its parts and by the way in which they are combined [szabo2022]. A compound declared explicitly is the counterpart of an idiom, whose meaning the rule of composition does not yield.
+- **Composition follows the principle of compositionality.** The meaning of a complex expression is determined by the meanings of its parts and by the way in which they are combined [szabo2020]. A compound declared explicitly is the counterpart of an idiom, whose meaning the rule of composition does not yield.
 - **A symbol of a declared quantity has one declaration.** Once a record of the inquiry declares a quantity, the notation refers to that record for its symbol and does not restate it, as the decision on [terminology, audience and project specifications](../../adr/terminology-audience-project-specifications.md) states.
 
 ## Distinctions
@@ -63,8 +63,8 @@ A **notation** composes the symbols of a project from declared parts: bases, eac
 Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [carnap1950_logical] ◐ Carnap, *Logical Foundations of Probability*, University of Chicago Press, 1950, ch. 1; explicandum, explicatum and the four requirements on an explication, checked through the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/carnap/)
-- [frege1892] ○ Frege, "Über Sinn und Bedeutung", *Zeitschrift für Philosophie und philosophische Kritik* 100, 25–50, 1892; sense and reference
+- [frege1892a] ◐ Frege, "Über Sinn und Bedeutung", *Zeitschrift für Philosophie und philosophische Kritik* (N.F.) 100(1), 25–50, 1892; sense and reference
 - [iso704] ◐ International Organization for Standardization, *ISO 704:2022 Terminology work — Principles and methods*, 2022; the links between objects, concepts, definitions and designations, checked through the catalogue entry of the standard
-- [ogden1923] ○ Ogden & Richards, *The Meaning of Meaning*, Kegan Paul, 1923; the triangle of symbol, thought or reference, and referent
+- [ogden1923] ◐ Ogden & Richards, *The Meaning of Meaning: A Study of the Influence of Language upon Thought and of the Science of Symbolism*, Kegan Paul, Trench, Trubner & Co., 1923; the triangle of symbol, thought or reference, and referent, pp. 10–12 of the 8th edition (1946), checked through a quotation
 - [skos2009] ◐ [Miles & Bechhofer (eds.), *SKOS Simple Knowledge Organization System Reference*, W3C Recommendation, 18 August 2009](https://www.w3.org/TR/skos-reference/); preferred and alternative labels, and the relation `broader`, checked through the namespace document
-- [szabo2022] ○ Szabó, "Compositionality", *Stanford Encyclopedia of Philosophy*, 2022 revision
+- [szabo2020] ◐ [Szabó, "Compositionality", *Stanford Encyclopedia of Philosophy*, substantive revision 17 August 2020](https://plato.stanford.edu/archives/fall2022/entries/compositionality/); principle (C), §1

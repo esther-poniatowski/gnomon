@@ -89,7 +89,7 @@ Each neighboring term differs from a mechanistic activity by one criterion:
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
 - [aristotle_metaphysics] ◐ [Aristotle, *Metaphysics* Θ6, 1048b18–35](https://plato.stanford.edu/entries/aristotle-metaphysics/); authenticity of the passage disputed (Burnyeat, *Oxford Studies in Ancient Philosophy* 34, 2008)
-- [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Clarendon Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001)
+- [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Oxford University Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001)
 - [cummins1975] ◐ [Cummins, "Functional analysis", *Journal of Philosophy* 72(20), 741–765, 1975](https://doi.org/10.2307/2024640)
 - [glennan2002] ◐ [Glennan, "Rethinking mechanistic explanation", *Philosophy of Science* 69(S3), S342–S353, 2002](https://doi.org/10.1086/341857)
 - [glennan2017] ◐ [Glennan, *The New Mechanical Philosophy*, Oxford University Press, 2017](https://doi.org/10.1093/oso/9780198779711.001.0001)

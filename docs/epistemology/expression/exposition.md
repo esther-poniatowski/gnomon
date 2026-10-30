@@ -46,7 +46,7 @@ The audience changes neither the content nor the warrant of a unit. The warrant 
 ## Distinctions
 
 - **The order of an exposition is free relative to the itinerary.** The itinerary records the order in which the acts of the inquiry ran. An exposition orders its units for its audience, for instance a claim before its support, so its order need not follow the itinerary.
-- **A rhetorical move differs from an epistemic act.** A move is a unit of a text that performs one communicative function [swales1990]. An epistemic act produces an epistemic object and is judged by the norm of its activity. A move is judged by whether it delivers its unit to its audience.
+- **A rhetorical move differs from an epistemic act.** A move is a unit of a text that performs one communicative function [swales1990] [swales2004]. An epistemic act produces an epistemic object and is judged by the norm of its activity. A move is judged by whether it delivers its unit to its audience.
 
 ---
 ## Sources
@@ -61,8 +61,9 @@ The audience changes neither the content nor the warrant of a unit. The warrant 
 
 Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
-- [knuth1984] ○ Knuth, "Literate programming", *The Computer Journal* 27(2), 97–111, 1984
-- [mann1988] ○ Mann & Thompson, "Rhetorical Structure Theory: toward a functional theory of text organization", *Text* 8(3), 243–281, 1988; subject-matter and presentational relations
-- [perelman1958] ◐ Perelman & Olbrechts-Tyteca, *La nouvelle rhétorique : traité de l'argumentation*, Presses Universitaires de France, 1958; English translation *The New Rhetoric: A Treatise on Argumentation*, University of Notre Dame Press, 1969; argumentation relative to its audience, checked through the publisher description
+- [knuth1984] ◐ [Knuth, "Literate programming", *The Computer Journal* 27(2), 97–111, 1984](https://doi.org/10.1093/comjnl/27.2.97)
+- [mann1988] ◐ [Mann & Thompson, "Rhetorical Structure Theory: toward a functional theory of text organization", *Text* 8(3), 243–281, 1988](https://doi.org/10.1515/text.1.1988.8.3.243); subject-matter and presentational relations
+- [perelman1958] ◐ Perelman & Olbrechts-Tyteca, *La nouvelle rhétorique : traité de l'argumentation*, Presses Universitaires de France, 1958; translated by Wilkinson & Weaver as *The New Rhetoric: A Treatise on Argumentation*, University of Notre Dame Press, 1969; argumentation relative to its audience, §§1–4 and Part Two, checked through [Hitchcock's discussion notes](https://humanities.mcmaster.ca/~hitchckd/perelmandiscussion.htm)
 - [swales1990] ○ Swales, *Genre Analysis: English in Academic and Research Settings*, Cambridge University Press, 1990; the rhetorical move
-- [tsichritzis1978] ○ Tsichritzis & Klug (eds.), "The ANSI/X3/SPARC DBMS framework", *Information Systems* 3(3), 173–191, 1978; external, conceptual and internal schemas
+- [swales2004] ◐ [Swales, *Research Genres: Explorations and Applications*, Cambridge University Press, 2004](https://doi.org/10.1017/CBO9781139524827); pp. 228–229, the definition of a move, checked through secondary quotations
+- [tsichritzis1978] ◐ [Tsichritzis & Klug (eds.), "The ANSI/X3/SPARC DBMS framework report of the study group on database management systems", *Information Systems* 3(3), 173–191, 1978](https://doi.org/10.1016/0306-4379(78)90001-7); external, conceptual and internal schemas

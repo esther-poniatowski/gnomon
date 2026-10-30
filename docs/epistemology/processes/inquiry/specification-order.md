@@ -51,7 +51,7 @@ Stage 1 belongs to no layer: the problem supplies the demand from which the ques
 
 **Second, the model belongs to the background or to a model record, not to the subject.** Laws admitted in advance belong to the background. Constituents, laws and organizations proposed during the inquiry belong to a [model record](../../../specification/model.md#^model-record), which every answer that rests on it cites. A phenomenon can be identified without the theory that explains it [bogen1988] [hacking1983]. The study of mechanisms accordingly characterizes the phenomenon before it builds any schema of a mechanism [craver2013].
 
-**Third, an inquiry starts from a problem, not from a question** [dewey1938]. The first object of an inquiry is a [problem](../../objects/problem/epistemic-problem.md): a demand that the accepted knowledge does not yet meet [nickles1981]. The questions are products of the second stage, derived from the problem, and they are typed before their terms are identified.
+**Third, an inquiry starts from a problem, not from a question.** Dewey describes inquiry as starting from an indeterminate situation, which it first formulates as a problem [dewey1938]. The first object of an inquiry is a [problem](../../objects/problem/epistemic-problem.md): a demand that the accepted knowledge does not yet meet [nickles1981]. The questions are products of the second stage, derived from the problem, and they are typed before their terms are identified.
 
 ## The remaining dependency
 
@@ -80,8 +80,8 @@ These four conditions are a proposal of this method, built from the sources abov
 
 Two devices limit the revisions that an iteration requires:
 
-- **Least commitment.** A choice is deferred until a condition requires it, so fewer choices need revision [weld1994]. A placeholder kept in a question schema is a deferred choice, and a slot that enters stage 4 on demand is another.
-- **Recorded dependencies.** Each record keeps pointers to the versions from which it was derived. When a version is withdrawn, only the records that depend on it are marked for review. A truth-maintenance system revises beliefs in this way [doyle1979], and dependency-directed backtracking revises assumptions in the same way [stallman1977]. These pointers complement the trigger of condition 2: the trigger states why a revision occurred, and the pointers state which records the revision reaches. The [register of serving questions](question-decomposition.md#^register) records such dependencies, by the hypothesis on which each serving question is conditioned.
+- **Least commitment.** A choice is deferred until a condition requires it [weld1994], so fewer choices need revision. A placeholder kept in a question schema is a deferred choice, and a slot that enters stage 4 on demand is another.
+- **Recorded dependencies.** Each record keeps pointers to the versions from which it was derived. When a version is withdrawn, only the records that depend on it are marked for review. A truth-maintenance system tracks dependencies in the same way, and relabels the dependent beliefs automatically [doyle1979]. Dependency-directed backtracking uses recorded dependencies to retract only the assumptions behind a contradiction [stallman1977]. These pointers complement the trigger of condition 2: the trigger states why a revision occurred, and the pointers state which records the revision reaches. The [register of serving questions](question-decomposition.md#^register) records such dependencies, by the hypothesis on which each serving question is conditioned.
 
 Versions and recorded dependencies presuppose records that keep successive versions. Whether the records keep them is stated with the [itinerary record](../../../specification/itinerary.md#^record-versions).
 
@@ -90,7 +90,7 @@ Versions and recorded dependencies presuppose records that keep successive versi
 A project can hold many results before any explicit question, when its work has followed topics rather than a problem. The specification of such a project combines two sources, in four steps:
 
 1. **State the problem independently of the results.** The problem statement must be justified without the results, otherwise the reconstruction in step 2 only relabels the existing topics.
-2. **Reconstruct the question that each result answers.** This step reconstructs a question from its answer, as a rational reconstruction of research [lakatos1971]. The reconstructed questions are grouped under candidate *principal questions*, as their *operative questions* [hintikka2007].
+2. **Reconstruct the question that each result answers.** This step reconstructs a question from its answer, in the manner of a rational reconstruction of research [lakatos1971]. The reconstructed questions are grouped under candidate *principal questions*, as their *operative questions* [hintikka2007].
 3. **Select the principal question.** The candidates retained are the principal questions that serve the problem, each with its coverage: the share of reconstructed questions that it groups. The researcher chooses one of them, by the [selection of questions](../activities/problem-posing.md). The coverage informs that choice and does not decide it.
 4. **Identify the subject.** Each placeholder is raised to the level `identified`, under the inclusion criterion.
 
@@ -101,21 +101,21 @@ A result that answers no operative question of the chosen principal question is 
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [bogen1988] ○ Bogen & Woodward, "Saving the phenomena", *Philosophical Review* 97(3), 303–352, 1988
+- [bogen1988] ◐ [Bogen & Woodward, "Saving the phenomena", *Philosophical Review* 97(3), 303–352, 1988](https://doi.org/10.2307/2185445)
 - [chang2004] ◐ [Chang, *Inventing Temperature: Measurement and Scientific Progress*, Oxford University Press, 2004](https://doi.org/10.1093/0195171276.001.0001); epistemic iteration and the principle of respect
-- [christensen1983] ○ Christensen, "Glymour on evidential relevance", *Philosophy of Science* 50(3), 471–481, 1983; the confirmation of hypotheses irrelevant to the evidence by the 1980 formulation of bootstrap testing
-- [craver2007] ◐ [Craver, *Explaining the Brain*, Oxford University Press, 2007](https://philpapers.org/rec/CRAETB-2); constitutive relevance relative to a phenomenon
-- [craver2013] ◐ [Craver & Darden, *In Search of Mechanisms*, University of Chicago Press, 2013](https://press.uchicago.edu/ucp/books/book/chicago/I/bo16123713.html); characterizing the phenomenon before building a schema
-- [dewey1938] ◐ Dewey, *Logic: The Theory of Inquiry*, Henry Holt, 1938, ch. 6; checked through secondary sources
-- [doyle1979] ○ Doyle, "A truth maintenance system", *Artificial Intelligence* 12(3), 231–272, 1979
-- [elliottgraves2020] ◐ [Elliott-Graves, "What is a target system?", *Biology & Philosophy* 35:28, 2020](https://link.springer.com/article/10.1007/s10539-020-09745-3)
-- [glymour1980] ○ Glymour, *Theory and Evidence*, Princeton University Press, 1980; bootstrap testing, which requires that a test could have yielded a negative instance
-- [glymour1983] ○ Glymour, "Revisions of bootstrap testing", *Philosophy of Science* 50(4), 626–629, 1983
-- [goodman1955] ○ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955 (first edition Athlone, 1954); the mutual adjustment of rules and inferences
-- [hacking1983] ◐ [Hacking, *Representing and Intervening*, Cambridge University Press, 1983](https://doi.org/10.1017/CBO9780511814563)
+- [christensen1983] ◐ [Christensen, "Glymour on evidential relevance", *Philosophy of Science* 50(3), 471–481, 1983](https://doi.org/10.1086/289130); the confirmation of hypotheses irrelevant to the evidence by the 1980 formulation of bootstrap testing
+- [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Oxford University Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001); constitutive relevance relative to a phenomenon
+- [craver2013] ◐ [Craver & Darden, *In Search of Mechanisms: Discoveries across the Life Sciences*, University of Chicago Press, 2013](https://press.uchicago.edu/ucp/books/book/chicago/I/bo16123713.html); characterizing the phenomenon before building a schema
+- [dewey1938] ◐ [Dewey, *Logic: The Theory of Inquiry*, Henry Holt, 1938](https://search.worldcat.org/oclc/229987); ch. 6; checked through secondary sources
+- [doyle1979] ◐ [Doyle, "A truth maintenance system", *Artificial Intelligence* 12(3), 231–272, 1979](https://doi.org/10.1016/0004-3702(79)90008-0)
+- [elliottgraves2020] ◐ [Elliott-Graves, "What is a target system?", *Biology & Philosophy* 35(2), article 28, 2020](https://doi.org/10.1007/s10539-020-09745-3)
+- [glymour1980] ◐ Glymour, *Theory and Evidence*, Princeton University Press, 1980; bootstrap testing, which requires that a test could have yielded a negative instance
+- [glymour1983] ◐ [Glymour, "Revisions of bootstrap testing", *Philosophy of Science* 50(4), 626–629, 1983](https://doi.org/10.1086/289143)
+- [goodman1955] ◐ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955; first edition Athlone Press, 1954; the mutual adjustment of rules and inferences; checked through the [SEP entry on Goodman](https://plato.stanford.edu/entries/goodman/)
+- [hacking1983] ◐ [Hacking, *Representing and Intervening: Introductory Topics in the Philosophy of Natural Science*, Cambridge University Press, 1983](https://doi.org/10.1017/CBO9780511814563)
 - [hintikka2007] ◐ [Hintikka, *Socratic Epistemology: Explorations of Knowledge-Seeking by Questioning*, Cambridge University Press, 2007](https://doi.org/10.1017/CBO9780511619298); principal and operative questions
-- [lakatos1971] ○ Lakatos, "History of science and its rational reconstructions", *PSA 1970*, Boston Studies in the Philosophy of Science 8, 91–136, 1971
+- [lakatos1971] ◐ [Lakatos, "History of science and its rational reconstructions", in Buck & Cohen (eds.), *PSA 1970*, Boston Studies in the Philosophy of Science 8, Reidel, 91–136, 1971](https://doi.org/10.1007/978-94-010-3142-4_7)
 - [nickles1981] ◐ [Nickles, "What is a problem that we may solve it?", *Synthese* 47(1), 85–118, 1981](https://doi.org/10.1007/BF01064267); checked through a scanned copy of poor quality
-- [stallman1977] ○ Stallman & Sussman, "Forward reasoning and dependency-directed backtracking in a system for computer-aided circuit analysis", *Artificial Intelligence* 9(2), 135–196, 1977
-- [vanfraassen1980] ✓ van Fraassen, *The Scientific Image*, Clarendon Press, 1980, ch. 5; [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
-- [weld1994] ○ Weld, "An introduction to least commitment planning", *AI Magazine* 15(4), 27–61, 1994
+- [stallman1977] ◐ [Stallman & Sussman, "Forward reasoning and dependency-directed backtracking in a system for computer-aided circuit analysis", *Artificial Intelligence* 9(2), 135–196, 1977](https://doi.org/10.1016/0004-3702(77)90029-7)
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, read in its abridged reprint, "The pragmatic theory of explanation", in Pitt (ed.), *Theories of Explanation*, Oxford University Press, 1988, 136–155 ([PDF](https://www.fitelson.org/290/vanfraassen_pte.pdf))
+- [weld1994] ◐ [Weld, "An introduction to least commitment planning", *AI Magazine* 15(4), 27–61, 1994](https://www.cs.uky.edu/~sgware/reading/papers/weld1994introduction.pdf); deferring decisions, p. 34

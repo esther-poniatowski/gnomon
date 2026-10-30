@@ -34,7 +34,7 @@ The fields of the record are documented in the [phenomenon record](../../../spec
 
 - **A qualitative phenomenon may later become a quantitative one.** A manifestation of the form *value*, whose value is a label such as "synchronous", serves as long as the phenomenon has been neither operationalized nor characterized in detail. Once more data are gathered or the analysis is refined, the manifestation may gain *features* that parametrize it. These features then provide new variables to relate quantitatively to the conditions. *Example*: "oscillations" may first serve as a qualitative label, and later be parametrized by a phase, an amplitude and other features.
 
-- **Conditions and byproducts form a closed list of five standard kinds** [craver2013]. A factor of the domain $D$ that the question varies leaves $D$, because the [domain test](domain.md#^domain-test) holds every quantity in $D$ equal between fact and foil. The place of such a factor in the record then depends on how the question varies it and on the form of the claim. A factor that the question sweeps becomes an index of an observable when the claim is a function of the swept values. The same factor becomes a source of variation across instances when the claim is a distribution over its draws. A factor whose two values the question opposes becomes a foil of the contrast $X$. A factor enters the record as a modulating condition only once its effect has been shown. ^conditions-byproducts
+- **Conditions and byproducts form five standard kinds** [craver2013]. A factor of the domain $D$ that the question varies leaves $D$, because the [domain test](domain.md#^domain-test) holds every quantity in $D$ equal between fact and foil. The place of such a factor in the record then depends on how the question varies it and on the form of the claim. A factor that the question sweeps becomes an index of an observable when the claim is a function of the swept values. The same factor becomes a source of variation across instances when the claim is a distribution over its draws. A factor whose two values the question opposes becomes a foil of the contrast $X$. A factor enters the record as a modulating condition only once its effect has been shown. ^conditions-byproducts
 
 - **Granularity must be specified as a property of the phenomenon.** Proportionality requires cause and effect to be described without irrelevant detail [woodward2010]. The grain at which a phenomenon is described therefore sets the grain at which a matching explanans is sought by default. ^resolution-proportionality
 
@@ -76,10 +76,10 @@ The fields of the record are documented in the [phenomenon record](../../../spec
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [bogen1988] ○ Bogen & Woodward, "Saving the phenomena", _Philosophical Review_ 97(3), 1988
+- [bogen1988] ◐ [Bogen & Woodward, "Saving the phenomena", *Philosophical Review* 97(3), 303–352, 1988](https://doi.org/10.2307/2185445)
 - [bokulichparker2021] ◐ Bokulich & Parker, "Data models, representation and adequacy-for-purpose", *European Journal for Philosophy of Science* 11, 31, 2021
 - [colaco2018] ◐ [Colaço, "Rip it up and start again", _SHPS A_ 72, 2018](https://www.sciencedirect.com/science/article/abs/pii/S003936811730211X)
-- [craver2013] ◐ [Craver & Darden, _In Search of Mechanisms_, U. Chicago Press, 2013](https://press.uchicago.edu/ucp/books/book/chicago/I/bo16123713.html)
+- [craver2013] ◐ [Craver & Darden, *In Search of Mechanisms: Discoveries across the Life Sciences*, University of Chicago Press, 2013](https://press.uchicago.edu/ucp/books/book/chicago/I/bo16123713.html); the features of a manifestation and the five kinds of conditions and byproducts cited from standard knowledge
 - [cummins2000] ✓ [Cummins, "How does it work?" versus "What are the laws?", in _Explanation and Cognition_, MIT Press, 2000](https://direct.mit.edu/books/edited-volume/4894/chapter/623167/How-Does-It-Work-versus-What-Are-the-Laws-Two)
 - [feest2017] ◐ [Feest, "Phenomena and objects of research…", _Philosophy of Science_ 84(5), 2017](https://philarchive.org/rec/FEEPAO)
 - [franklin2005] ◐ [Franklin, "Exploratory experiments", _Philosophy of Science_ 72(5), 2005](https://philpapers.org/rec/FRAEE)
@@ -87,9 +87,9 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [mezard1987] ◐ Mézard, Parisi & Virasoro, _Spin Glass Theory and Beyond_, World Scientific, 1987, quenched versus annealed averages
 - [parker2017] ◐ Parker, "Computer simulation, measurement, and data assimilation", *British Journal for the Philosophy of Science* 68(1), 273–304, 2017
 - [robinson1950] ◐ [Robinson, "Ecological correlations and the behavior of individuals", _American Sociological Review_ 15(3), 1950](https://en.wikipedia.org/wiki/Ecological_correlation)
-- [steinle1997] ◐ [Steinle, "Entering new fields: exploratory uses of experimentation", _Philosophy of Science_ 64, S65–S74, 1997](https://philpapers.org/rec/STEENF)
-- [stevens1946] ◐ Stevens, "On the theory of scales of measurement", _Science_ 103, 1946, via [Wikipedia, Level of measurement](https://en.wikipedia.org/wiki/Level_of_measurement)
-- [tal2013] ◐ Tal, "Old and new problems in philosophy of measurement", *Philosophy Compass* 8(12), 1159–1173, 2013
-- [vanfraassen1980] ✓ van Fraassen, _The Scientific Image_, ch. 5, with [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
-- [woodward2003] ○ [Woodward, _Making Things Happen_, OUP, 2003](https://academic.oup.com/book/4324)
-- [woodward2010] ◐ [Woodward, "Causation in biology…", _Biology & Philosophy_ 25, 2010](https://link.springer.com/article/10.1007/s10539-010-9200-z)
+- [steinle1997] ◐ [Steinle, "Entering new fields: exploratory uses of experimentation", *Philosophy of Science* 64(S4), S65–S74, 1997](https://doi.org/10.1086/392587)
+- [stevens1946] ◐ [Stevens, "On the theory of scales of measurement", *Science* 103(2684), 677–680, 1946](https://doi.org/10.1126/science.103.2684.677); checked through [Wikipedia, Level of measurement](https://en.wikipedia.org/wiki/Level_of_measurement)
+- [tal2013] ◐ [Tal, "Old and new problems in philosophy of measurement", *Philosophy Compass* 8(12), 1159–1173, 2013](https://doi.org/10.1111/phc3.12089)
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, read in its abridged reprint, "The pragmatic theory of explanation", in Pitt (ed.), *Theories of Explanation*, Oxford University Press, 1988, 136–155 ([PDF](https://www.fitelson.org/290/vanfraassen_pte.pdf))
+- [woodward2003] ◐ [Woodward, *Making Things Happen: A Theory of Causal Explanation*, Oxford University Press, 2003](https://doi.org/10.1093/0195155270.001.0001); the what-if-things-had-been-different questions cited from standard knowledge
+- [woodward2010] ◐ [Woodward, "Causation in biology: stability, specificity, and the choice of levels of explanation", *Biology & Philosophy* 25(3), 287–318, 2010](https://doi.org/10.1007/s10539-010-9200-z)

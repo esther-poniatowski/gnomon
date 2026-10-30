@@ -131,22 +131,22 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 
 - [battermanrice2014] ◐ Batterman & Rice, "Minimal model explanations", *Philosophy of Science* 81(3), 349–376, 2014
 - [bechtel2015] ◐ [Bechtel & Shagrir, "The non-redundant contributions of Marr's three levels of analysis for explaining information-processing mechanisms", *Topics in Cognitive Science* 7(2), 2015](https://onlinelibrary.wiley.com/doi/10.1111/tops.12141)
-- [belnap1976] ○ Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976; questions fixed by their answers, and corrective answers, which deny a presupposition
+- [belnap1976] ◐ [Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976](https://catalogue.bnf.fr/ark:/12148/cb353871722); questions fixed by their answers, and corrective answers, which deny a presupposition
 - [butterfield2011] ◐ [Butterfield, "Less is different: emergence and reduction reconciled", _Foundations of Physics_ 41, 2011](https://philpapers.org/rec/BUTLID)
 - [deregt2005] ◐ [de Regt & Dieks, "A contextual approach to scientific understanding", _Synthese_ 144, 2005](https://link.springer.com/article/10.1007/s11229-005-5000-4); criterion for intelligibility checked through secondary summaries
-- [hamblin1958] ○ Hamblin, "Questions", *Australasian Journal of Philosophy* 36, 1958
-- [hempel1948] ○ Hempel & Oppenheim, "Studies in the logic of explanation", _Philosophy of Science_ 15(2), 1948
+- [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211)
+- [hempel1948] ◐ [Hempel & Oppenheim, "Studies in the logic of explanation", *Philosophy of Science* 15(2), 135–175, 1948](https://doi.org/10.1086/286983)
 - [lange2017] ◐ [Lange, _Because Without Cause: Non-Causal Explanations in Science and Mathematics_, OUP, 2017](https://global.oup.com/academic/product/because-without-cause-9780190269487), part I on explanations by constraint
-- [marr1982] ○ Marr, *Vision*, Freeman, 1982
+- [marr1982] ◐ [Marr, *Vision: A Computational Investigation into the Human Representation and Processing of Visual Information*, W. H. Freeman, 1982; reissued MIT Press, 2010](https://doi.org/10.7551/mitpress/9780262514620.001.0001)
 - [nosek2018] ◐ [Nosek, Ebersole, DeHaven & Mellor, "The preregistration revolution", _PNAS_ 115(11), 2018](https://www.pnas.org/doi/10.1073/pnas.1708274114)
-- [parker2020] ◐ Parker, "Model evaluation: an adequacy-for-purpose view", *Philosophy of Science* 87(3), 457–477, 2020
+- [parker2020] ◐ [Parker, "Model evaluation: an adequacy-for-purpose view", *Philosophy of Science* 87(3), 457–477, 2020](https://doi.org/10.1086/708691)
 - [rice2021] ◐ Rice, *Leveraging Distortions: Explanation, Idealization, and Universality in Science*, MIT Press, 2021
-- [saltelli2008] ○ Saltelli et al., *Global Sensitivity Analysis: The Primer*, Wiley, 2008
-- [shmueli2010] ○ Shmueli, "To explain or to predict?", *Statistical Science* 25(3), 2010
+- [saltelli2008] ◐ [Saltelli, Ratto, Andres, Campolongo, Cariboni, Gatelli, Saisana & Tarantola, *Global Sensitivity Analysis: The Primer*, Wiley, 2008](https://doi.org/10.1002/9780470725184)
+- [shmueli2010] ◐ [Shmueli, "To explain or to predict?", *Statistical Science* 25(3), 289–310, 2010](https://doi.org/10.1214/10-STS330)
 - [steiner1978] ◐ Steiner, "Mathematical explanation", *Philosophical Studies* 34, 1978
-- [strevens2008] ○ Strevens, *Depth: An Account of Scientific Explanation*, Harvard University Press, 2008
-- [vanfraassen1980] ✓ van Fraassen, _The Scientific Image_, ch. 5; [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
+- [strevens2008] ◐ Strevens, *Depth: An Account of Scientific Explanation*, Harvard University Press, 2008; difference-making checked through the [review in *Notre Dame Philosophical Reviews*](https://ndpr.nd.edu/news/depth-an-account-of-scientific-explanation/); the relativity to a contrast not confirmed
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, read in its abridged reprint, "The pragmatic theory of explanation", in Pitt (ed.), *Theories of Explanation*, Oxford University Press, 1988, 136–155 ([PDF](https://www.fitelson.org/290/vanfraassen_pte.pdf))
 - [vyas2020] ◐ [Vyas, Golub, Sussillo & Shenoy, "Computation through neural population dynamics", _Annual Review of Neuroscience_ 43, 2020](https://www.annualreviews.org/content/journals/10.1146/annurev-neuro-092619-094115)
-- [weisberg2006] ◐ [Weisberg, "Robustness analysis", _Philosophy of Science_ 73(5), 2006](https://philpapers.org/rec/MICRA)
-- [weisberg2007] ◐ [Weisberg, "Three kinds of idealization", _Journal of Philosophy_ 104(12), 2007](https://www.pdcnet.org/jphil/content/jphil_2007_0104_0012_0639_0659); de-idealization and ineliminable idealizations checked through [SEP, "Models in science"](https://plato.stanford.edu/entries/models-science/)
-- [woodward2003] ○ [Woodward, _Making Things Happen_, OUP, 2003](https://academic.oup.com/book/4324)
+- [weisberg2006] ◐ [Weisberg, "Robustness analysis", *Philosophy of Science* 73(5), 730–742, 2006](https://doi.org/10.1086/518628)
+- [weisberg2007] ◐ [Weisberg, "Three kinds of idealization", *Journal of Philosophy* 104(12), 639–659, 2007](https://doi.org/10.5840/jphil20071041240); de-idealization and ineliminable idealizations checked through [SEP, "Models in science"](https://plato.stanford.edu/entries/models-science/)
+- [woodward2003] ◐ [Woodward, *Making Things Happen: A Theory of Causal Explanation*, Oxford University Press, 2003](https://doi.org/10.1093/0195155270.001.0001); difference-making relative to a contrast, cited from standard knowledge

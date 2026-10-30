@@ -37,7 +37,7 @@ The [model record](../../../specification/model.md), the [binding record](../../
 
 ## The binding
 
-A binding relates a model in use to a phenomenon, or to its data, and records the surrogative inferences from the model to the target that its asserter licenses [suarez2004]. These inferences are the theoretical hypotheses that relate a model to a real system [giere1988], so a consequence of the model becomes a claim about the target through the binding that licenses it. To state a binding, the method adopts the vocabulary of one account of representation [friggnguyen2020]: the binding denotes the phenomenon, pairs a feature that the model exemplifies with a feature imputed to the target, and states the key that carries the one onto the other. That vocabulary is a choice of the method, not a settled result of the literature. A binding records the inferences that it licenses, not the grounds that make them sound, so it stays neutral among the accounts of the relation that makes a model represent its target.
+A binding relates a model in use to a phenomenon, or to its data, and records the surrogative inferences from the model to the target that its asserter licenses [suarez2004]. These inferences play the role of the theoretical hypotheses that, for Giere, relate a model to a real system [giere1988], so a consequence of the model becomes a claim about the target through the binding that licenses it. To state a binding, the method adopts the vocabulary of one account of representation [friggnguyen2020]: the binding denotes the phenomenon, pairs a feature that the model exemplifies with a feature imputed to the target, and states the key that carries the one onto the other. That vocabulary is a choice of the method, not a settled result of the literature. A binding records the inferences that it licenses, not the grounds that make them sound, so it stays neutral among the accounts of the relation that makes a model represent its target.
 
 - **A feature pair is computed or argued.** A pair is *computed* when a key maps the feature of the model onto a value or a label that the data of the target determine, as for a quantity, a pattern or a regime. A pair is *argued* when no data determine it, as for the membership of the target in a universality class, argued from its symmetries and its dimension, or for a modal profile. An argued pair cites its argument as a ground of the answer with the role `warrant`, and the law-warrant test judges that ground. The comparison reports an argued pair without computing it. ^pair-modes
 
@@ -80,18 +80,18 @@ Each comparison also reports three facts about its own conditions: ^comparison-r
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [bechtel1993] ◐ [Bechtel & Richardson, _Discovering Complexity: Decomposition and Localization as Strategies in Scientific Research_, Princeton UP 1993; MIT Press 2010](https://direct.mit.edu/books/monograph/2860/Discovering-ComplexityDecomposition-and)
+- [bechtel1993] ◐ [Bechtel & Richardson, *Discovering Complexity: Decomposition and Localization as Strategies in Scientific Research*, Princeton University Press, 1993; reissued MIT Press, 2010](https://doi.org/10.7551/mitpress/8328.001.0001)
 - [bokulichparker2021] ◐ Bokulich & Parker, "Data models, representation and adequacy-for-purpose", *European Journal for Philosophy of Science* 11, 31, 2021
 - [brynjarsdottir2014] ◐ Brynjarsdóttir & O'Hagan, "Learning about physical parameters: the importance of model discrepancy", *Inverse Problems* 30, 114007, 2014
-- [craver2007] ◐ [Craver, *Explaining the Brain*, OUP, 2007](https://philpapers.org/rec/CRAETB-2)
-- [friggnguyen2020] ◐ Frigg & Nguyen, *Modelling Nature: An Opinionated Introduction to Scientific Representation*, Springer, 2020; denotation, exemplification, key and imputation
+- [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Oxford University Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001)
+- [friggnguyen2020] ◐ [Frigg & Nguyen, *Modelling Nature: An Opinionated Introduction to Scientific Representation*, Synthese Library 427, Springer, 2020](https://doi.org/10.1007/978-3-030-45153-0); denotation, exemplification, key and imputation
 - [giere1988] ◐ [Giere, *Explaining Science: A Cognitive Approach*, University of Chicago Press, 1988](https://press.uchicago.edu/ucp/books/book/chicago/E/bo3622319.html); the theoretical hypothesis, which asserts a relation between a model and a real system, checked through secondary sources
 - [gupta2023] ✓ [Gupta & Mackereth, "Definitions", _SEP_, revised 2023](https://plato.stanford.edu/entries/definitions/), §2.3 on conservativeness and eliminability
 - [kaplan2011] ◐ [Kaplan & Craver, "The explanatory force of dynamical and mathematical models in neuroscience: a mechanistic perspective", *Philosophy of Science* 78(4), 601–627, 2011](https://doi.org/10.1086/661755); the model-to-mechanism-mapping requirement, checked through the abstract
-- [kennedyohagan2001] ◐ Kennedy & O'Hagan, "Bayesian calibration of computer models", *Journal of the Royal Statistical Society B* 63(3), 425–464, 2001
-- [massimi2022] ◐ [Massimi, _Perspectival Realism_, OUP, 2022](https://academic.oup.com/book/43074)
-- [parker2020] ◐ Parker, "Model evaluation: an adequacy-for-purpose view", *Philosophy of Science* 87(3), 457–477, 2020
+- [kennedyohagan2001] ◐ [Kennedy & O'Hagan, "Bayesian calibration of computer models", *Journal of the Royal Statistical Society, Series B* 63(3), 425–464, 2001](https://doi.org/10.1111/1467-9868.00294); the model discrepancy separated from the observation error; the tolerance set by a question has no counterpart in the paper
+- [massimi2022] ◐ [Massimi, *Perspectival Realism*, Oxford University Press, 2022](https://doi.org/10.1093/oso/9780197555620.001.0001)
+- [parker2020] ◐ [Parker, "Model evaluation: an adequacy-for-purpose view", *Philosophy of Science* 87(3), 457–477, 2020](https://doi.org/10.1086/708691)
 - [steelewerndl2013] ◐ Steele & Werndl, "Climate models, calibration, and confirmation", *British Journal for the Philosophy of Science* 64(3), 609–635, 2013
 - [suarez2004] ◐ Suárez, "An inferential conception of scientific representation", *Philosophy of Science* 71(5), 767–779, 2004
-- [weisberg2006] ◐ [Weisberg, "Robustness analysis", _Philosophy of Science_ 73(5), 2006](https://philpapers.org/rec/MICRA)
+- [weisberg2006] ◐ [Weisberg, "Robustness analysis", *Philosophy of Science* 73(5), 730–742, 2006](https://doi.org/10.1086/518628)
 - [wimsatt1994] ◐ [Wimsatt, "The ontology of complex systems: levels of organization, perspectives, and causal thickets", _Canadian Journal of Philosophy_ 24(sup1), 1994](https://www.tandfonline.com/doi/abs/10.1080/00455091.1994.10717400)

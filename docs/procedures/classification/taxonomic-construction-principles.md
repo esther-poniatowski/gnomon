@@ -56,12 +56,12 @@ Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-mar
 - [bowker1999] ○ [Bowker & Star, *Sorting Things Out: Classification and Its Consequences*, MIT Press, 1999](https://museumofdata.org/wp-content/uploads/2019/03/Bowker_and_Star_-_Sorting_Things_Out_Intro.pdf)
 - [boyd1999] ○ Boyd, "Homeostasis, species, and higher taxa", in Wilson (ed.), *Species: New Interdisciplinary Essays*, MIT Press, 1999
 - [carnap1950] ○ Carnap, *Logical Foundations of Probability*, University of Chicago Press, 1950, ch. 1
-- [chang2004] ○ Chang, *Inventing Temperature: Measurement and Scientific Progress*, Oxford University Press, 2004
+- [chang2004] ◐ [Chang, *Inventing Temperature: Measurement and Scientific Progress*, Oxford University Press, 2004](https://doi.org/10.1093/0195171276.001.0001)
 - [dupre1993] ○ Dupré, *The Disorder of Things*, Harvard University Press, 1993
-- [goodman1955] ○ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955
+- [goodman1955] ◐ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955; first edition Athlone Press, 1954; checked through the [SEP entry on Goodman](https://plato.stanford.edu/entries/goodman/)
 - [hacking1999] ○ Hacking, *The Social Construction of What?*, Harvard University Press, 1999
 - [hacking2007] ○ [Hacking, "Kinds of people: moving targets", *Proceedings of the British Academy* 151, 285–318, 2007](https://www.thebritishacademy.ac.uk/documents/2043/pba151p285.pdf)
-- [hempel1952] ○ Hempel, *Fundamentals of Concept Formation in Empirical Science*, University of Chicago Press, 1952
+- [hempel1952] ◐ [Hempel, *Fundamentals of Concept Formation in Empirical Science*, International Encyclopedia of Unified Science II.7, University of Chicago Press, 1952](https://openlibrary.org/works/OL85621W)
 - [hennig1966] ○ Hennig, *Phylogenetic Systematics*, University of Illinois Press, 1966
 - [iep_classification] ○ [Internet Encyclopedia of Philosophy, *Classification in Science*](https://iep.utm.edu/classification-in-science/); Kant's rules of logical division and Apostel's criteria
 - [jevons1874] ○ Jevons, *The Principles of Science*, Macmillan, 1874
@@ -72,6 +72,6 @@ Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-mar
 - [sep_carnap_methodology] ○ [Stanford Encyclopedia of Philosophy, *Rudolf Carnap*, supplement "Methodology"](https://plato.stanford.edu/archives/fall2023/entries/carnap/methodology.html)
 - [sep_natural_kinds] ○ [Stanford Encyclopedia of Philosophy, *Natural Kinds*](https://plato.stanford.edu/entries/natural-kinds/)
 - [sokal1963] ○ Sokal & Sneath, *Principles of Numerical Taxonomy*, Freeman, 1963
-- [suppes1960] ○ Suppes, "A comparison of the meaning and uses of models in mathematics and the empirical sciences", *Synthese* 12, 287–301, 1960
-- [vanfraassen1980] ○ van Fraassen, *The Scientific Image*, Clarendon Press, 1980
+- [suppes1960] ◐ [Suppes, "A comparison of the meaning and uses of models in mathematics and the empirical sciences", *Synthese* 12(2–3), 287–301, 1960](https://doi.org/10.1007/BF00485107)
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001)
 - [wittgenstein1953] ○ Wittgenstein, *Philosophical Investigations*, Blackwell, 1953, §66–67

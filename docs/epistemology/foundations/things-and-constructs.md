@@ -131,4 +131,4 @@ The frame is realist, and it is **not forced**: the [note on existence and acces
 Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [bunge1977] ◐ [Bunge, *Treatise on Basic Philosophy*, vol. 3, *Ontology I: The Furniture of the World*, Reidel, 1977](https://doi.org/10.1007/978-94-010-9924-0)
-- [goodman1955] ◐ [Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955](https://plato.stanford.edu/entries/goodman/); "grue" in ch. III, §4
+- [goodman1955] ◐ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955; first edition Athlone Press, 1954; "grue" in ch. III, §4; checked through the [SEP entry on Goodman](https://plato.stanford.edu/entries/goodman/)

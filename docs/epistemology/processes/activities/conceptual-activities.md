@@ -59,7 +59,7 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [bridgman1927] ◐ [Bridgman, *The Logic of Modern Physics*, Macmillan, 1927](https://www.gutenberg.org/ebooks/70620)
 - [carnap1936] ◐ [Carnap, "Testability and meaning", *Philosophy of Science* 3(4), 419–471, 1936](https://doi.org/10.1086/286432), continued in [*Philosophy of Science* 4(1), 1–40, 1937](https://doi.org/10.1086/286443)
 - [carnap1950_logical] ◐ [Carnap, *Logical Foundations of Probability*, University of Chicago Press, 1950](https://archive.org/details/logicalfoundatio00carn_0); ch. I, §3, "Requirements for an Explicatum"
-- [goodman1955] ◐ [Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955](https://plato.stanford.edu/entries/goodman/)
+- [goodman1955] ◐ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955; first edition Athlone Press, 1954; checked through the [SEP entry on Goodman](https://plato.stanford.edu/entries/goodman/)
 - [hempel1952] ◐ [Hempel, *Fundamentals of Concept Formation in Empirical Science*, International Encyclopedia of Unified Science II.7, University of Chicago Press, 1952](https://openlibrary.org/works/OL85621W)
 - [nersessian2008] ◐ [Nersessian, *Creating Scientific Concepts*, MIT Press, 2008](https://philpapers.org/rec/NERCSC)
 - [suppes1957] ◐ [Suppes, *Introduction to Logic*, Van Nostrand, 1957](https://archive.org/details/introductiontolo0000supp); ch. 8, "Theory of Definition"; the criteria of eliminability and non-creativity are named from the general literature on definition, not confirmed at the page

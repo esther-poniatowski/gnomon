@@ -20,7 +20,7 @@ An object of study is reached through a description of its constituents, its pro
 Most current positions answer the question of access in the same way: an object is known only through a description, and the description is itself a representation. Three results of the philosophy of science support that answer. ^mediated-access
 
 - **Phenomena are inferred from data.** Data are records of one procedure, whereas a phenomenon is inferred from many such records [bogen1988]. Bogen and Woodward require a phenomenon to be stable and repeatable. The method requires stability only of a phenomenon of the category regularity, as the [senses of phenomenon](../vocabulary/regularities/pattern-and-phenomenon.md) state.
-- **A measurement outcome is inferred through a model.** A model of the instrument and of its interaction with the object fixes which quantity a reading measures [tal2013].
+- **A measurement outcome is inferred through a model.** An outcome is inferred from a reading through a model of the instrument and of its interaction with the object [tal2013].
 - **A target is specified by the modeller.** A target system is picked out of the world by choices of boundary, of grain and of the features retained, and the specification of a target is a step of modelling on its own [weisberg2013] [elliottgraves2020].
 
 A description can nevertheless fix its object without describing it correctly. A definite description fixes the referent of a term, and the referent stays fixed while later descriptions revise the properties ascribed to it [kripke1980]. Therefore, a mediated access is compatible with an object that the inquiry has misdescribed.
@@ -65,13 +65,13 @@ Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-mar
 
 - [bogen1988] ◐ [Bogen & Woodward, "Saving the phenomena", *Philosophical Review* 97(3), 303–352, 1988](https://doi.org/10.2307/2185445)
 - [chakravartty2017] ◐ [Chakravartty, "Scientific realism", *Stanford Encyclopedia of Philosophy*, substantive revision 12 June 2017](https://plato.stanford.edu/entries/scientific-realism/); the three commitments of realism, instrumentalism, and the no-miracles argument of Putnam (1975)
-- [elliottgraves2020] ◐ Elliott-Graves, "What is a target system?", *Biology & Philosophy* 35, 2020; checked through the abstract
-- [kripke1980] ◐ Kripke, *Naming and Necessity*, Harvard University Press, 1980, pp. 54–57; reference fixing by a description, checked through secondary sources
+- [elliottgraves2020] ◐ [Elliott-Graves, "What is a target system?", *Biology & Philosophy* 35(2), article 28, 2020](https://doi.org/10.1007/s10539-020-09745-3); checked through the abstract
+- [kripke1980] ◐ Kripke, *Naming and Necessity*, Harvard University Press, 1980; pp. 54–56 and 135 for reference fixing by a description, and Lecture II, the Gödel–Schmidt example, for a reference that survives a false description; checked through the [SEP entry on rigid designators](https://plato.stanford.edu/entries/rigid-designators/)
 - [ladyman2023] ◐ [Ladyman, "Structural realism", *Stanford Encyclopedia of Philosophy*, substantive revision 18 May 2023](https://plato.stanford.edu/entries/structural-realism/); epistemic structural realism (Worrall 1989) and ontic structural realism (Ladyman 1998)
-- [massimi2022] ◐ [Massimi, *Perspectival Realism*, Oxford University Press, 2022](https://academic.oup.com/book/43074); realism about modally robust phenomena and models as inferential blueprints, checked through the [review in *Notre Dame Philosophical Reviews*](https://ndpr.nd.edu/reviews/perspectival-realism/)
+- [massimi2022] ◐ [Massimi, *Perspectival Realism*, Oxford University Press, 2022](https://doi.org/10.1093/oso/9780197555620.001.0001); realism about modally robust phenomena and models as inferential blueprints, checked through the [review in *Notre Dame Philosophical Reviews*](https://ndpr.nd.edu/reviews/perspectival-realism/)
 - [mohler2025] ◐ [Mohler & Monton, "Constructive empiricism", *Stanford Encyclopedia of Philosophy*, substantive revision 30 July 2025](https://plato.stanford.edu/entries/constructive-empiricism/); empirical adequacy and the embedding of phenomena in empirical substructures
-- [putnam1981] ◐ Putnam, *Reason, Truth and History*, Cambridge University Press, 1981; internal realism and truth as idealized rational acceptability, checked through secondary summaries
-- [tal2013] ◐ Tal, "Old and new problems in philosophy of measurement", *Philosophy Compass* 8(12), 1159–1173, 2013
-- [vanfraassen1980] ✓ van Fraassen, *The Scientific Image*, Clarendon Press, 1980, ch. 5; [the chapter text](https://www.fitelson.org/290/vanfraassen_pte.pdf)
-- [vanfraassen2008] ○ van Fraassen, *Scientific Representation: Paradoxes of Perspective*, Oxford University Press, 2008
-- [weisberg2013] ◐ Weisberg, *Simulation and Similarity: Using Models to Understand the World*, Oxford University Press, 2013
+- [putnam1981] ◐ [Putnam, *Reason, Truth and History*, Cambridge University Press, 1981](https://doi.org/10.1017/CBO9780511625398); internal realism and truth as idealized rational acceptability, checked through secondary summaries
+- [tal2013] ◐ [Tal, "Old and new problems in philosophy of measurement", *Philosophy Compass* 8(12), 1159–1173, 2013](https://doi.org/10.1111/phc3.12089)
+- [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); constructive empiricism and empirical adequacy, ch. 2, p. 12, and ch. 3, p. 64, checked through the [SEP entry on constructive empiricism](https://plato.stanford.edu/entries/constructive-empiricism/)
+- [vanfraassen2008] ◐ [van Fraassen, *Scientific Representation: Paradoxes of Perspective*, Oxford University Press, 2008](https://doi.org/10.1093/acprof:oso/9780199278220.001.0001)
+- [weisberg2013] ◐ [Weisberg, *Simulation and Similarity: Using Models to Understand the World*, Oxford University Press, 2013](https://doi.org/10.1093/acprof:oso/9780199933662.001.0001)

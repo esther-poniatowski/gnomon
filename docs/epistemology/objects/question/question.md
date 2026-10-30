@@ -62,7 +62,7 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 
 | Relation | This question … |
 | --- | --- |
-| `subquestion-of` | is answered by a part of an answer to the linked question; each of its answers, with the available premises, narrows the answers of the linked question, which is erotetic implication [wisniewski2013] |
+| `subquestion-of` | is answered by a part of an answer to the linked question; each of its answers, with the available premises, narrows the answers of the linked question, which is the second clause of erotetic implication [wisniewski2013] |
 | `explanans-from` | has an explanans factor that is the phenomenon of the linked question |
 | `presupposes` | has a true answer only if the linked question has a true answer |
 | `enables` | has an answer that establishes a condition of answerability of the linked question, without narrowing its answers |
@@ -82,10 +82,10 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [belnap1976] ○ Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976; the entry was confirmed through library catalogues, and the division of a question into subject and request was not checked
+- [belnap1976] ◐ [Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976](https://catalogue.bnf.fr/ark:/12148/cb353871722); the division of a question into subject and request, checked through Wiśniewski's summaries of the book
 - [carnap1950_logical] ◐ Carnap, *Logical Foundations of Probability*, University of Chicago Press, 1950, ch. 1; explicandum, explicatum and the four requirements on an explication, checked through the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/carnap/)
 - [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211); the postulate that knowing what counts as an answer is knowing the question, checked through secondary sources
 - [hamblin1973] ◐ Hamblin, "Questions in Montague English", *Foundations of Language* 10(1), 41–53, 1973; a question denotes the set of its possible answers, checked through secondary sources
-- [kripke1980] ◐ Kripke, *Naming and Necessity*, Harvard University Press, 1980, pp. 54–57; reference fixing by a description, checked through secondary sources
+- [kripke1980] ◐ Kripke, *Naming and Necessity*, Harvard University Press, 1980; pp. 54–56 and 135; reference fixing by a description, checked through the [SEP entry on rigid designators](https://plato.stanford.edu/entries/rigid-designators/)
 - [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, the why-question as a triple
-- [wisniewski2013] ○ Wiśniewski, *Questions, Inferences, and Scenarios*, College Publications, 2013; erotetic implication
+- [wisniewski2013] ◐ [Wiśniewski, *Questions, Inferences, and Scenarios*, Studies in Logic 46, College Publications, 2013](https://philpapers.org/rec/WINQIA); erotetic implication
