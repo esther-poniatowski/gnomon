@@ -7,20 +7,20 @@ aliases:
 ---
 # Domain of conditions
 
-> [!QUESTION] Goal: which conditions does a question hold fixed, and how do they differ from the assumptions of an analysis?
+> [!QUESTION] Goal: which restrictions does a question impose on admitted values, and how do they differ from the assumptions of an analysis?
 
 The domain of conditions is the fourth component of the [subject of inquiry](subject-of-inquiry.md).
 
-The domain $D$ records the restrictions that the question imposes on the a priori specification of the system, possibly before any phenomenon is named. ^domain-restrictions
+The domain $D$ records the restrictions that the question imposes on the values that the target record and the background records admit, possibly before any phenomenon is named. ^domain-restrictions
 
 > [!NOTE] Conditions versus domain
-> The domain $D$ fixes the *background* under which the system is studied [mackie1974]. The [conditions of the phenomenon](phenomenon.md#^conditions-byproducts) are instead circumstances whose relation to the behavior belongs to the characterization.
+> The domain $D$ holds the conditions held fixed, in the sense of a *causal field*: the circumstances that a causal question treats as fixed [mackie1974]. A condition is held fixed when the fact and its foils share it, as the operational test below states, and a quantity restricted by $D$ may still range over several values. The [conditions of the phenomenon](phenomenon.md#^conditions-byproducts) are instead circumstances whose relation to the behavior belongs to the characterization.
 
 **Operational test**:
 
 > Fact and foil share the domain $D$, so no factor in $D$ can distinguish the fact from the foil [lipton2004]. ^domain-test
 
-By this test, a background factor moves from the domain $D$ into the conditions of $P$, or into the contrast $X$, once the question compares two of its values.
+By this test, a factor moves from the domain $D$ into the conditions of $P$, or into the contrast $X$, once the question compares two of its values.
 
 The fields of the domain are documented in the [subject of a question](../../../specification/question-subject.md).
 

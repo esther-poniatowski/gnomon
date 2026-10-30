@@ -53,7 +53,7 @@ In its second sense, the **scale** of a description is its extent and its resolu
 
 - When a claim holds on one scale type and fails under the admissible transformations of that type, the claim is an artefact of the representation.
 - **The descriptive scale of a phenomenon sets the default grain of its explanans.** The [proportionality requirement](../../objects/subject/phenomenon.md#^resolution-proportionality) uses scale in the descriptive sense.
-- **The admissible explanans is bounded by levels of organization.** The compositional level of the [admissible explanans](../../objects/task/admissible-explanans.md) restricts the parts that may appear in an answer, so it uses level in the sense of organization.
+- **The bound on the explanans uses levels of organization on one of its two axes.** The compositional axis of the [bound on the explanans](../../objects/task/admissible-explanans.md) $\lambda$ restricts the parts that may appear in an answer, so it uses level in the sense of organization. The bound itself is not a level, since its second axis, substrate dependence, orders no parts.
 
 The fields that bear on the scale of a quantity are documented in the [target-system record](../../../specification/target-system.md) and the [phenomenon record](../../../specification/phenomenon.md).
 

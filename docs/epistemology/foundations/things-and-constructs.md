@@ -1,7 +1,6 @@
 ---
 tags:
-  - definition
-  - wip
+  - theory
 index: "[Foundations](docs/epistemology/foundations/_index.md)"
 aliases:
   - Things and constructs
@@ -34,7 +33,7 @@ The status of a term is decided by one test. A term is *ontological* when its in
 - the **target** is the system, or the class of systems, that an inquiry is about. The target can be a class of merely possible systems. Its members belong to the world or to the space of possible systems, and the inquiry chooses which systems form the target, so the target is relational;
 - the **target specification** is the record of kind `target-system` that delimits the target, through its identification and its declared quantities. The target specification is a construct.
 
-The [specification of the target system](../objects/subject/target-system.md) fixes the fields of the target specification. An error in delimiting the target lies in the target specification, and revising the record can correct the error.
+The symbol $S$ of the [notation](../vocabulary/notation/notation.md) denotes the target, never its specification. The note on the [target system](../objects/subject/target-system.md) states what a target specification delimits, and the [target-system record](../../specification/target-system.md) documents its fields. An error in delimiting the target lies in the target specification, and revising the record can correct the error.
 
 ## Assignment of the terms
 
@@ -90,7 +89,7 @@ Each term of the [vocabulary of inquiry](../vocabulary/_index.md) takes one stat
 | [Law₁](../vocabulary/regularities/law.md) | ontological | a lawlike regularity among the states of things |
 | [Law statement](../vocabulary/regularities/law.md) | representational | a general claim in a chosen vocabulary |
 | [Regularity, spatial or temporal pattern](../vocabulary/regularities/pattern-and-phenomenon.md) | ontological | an invariant across instances, or one structured configuration |
-| [Phenomenon](../vocabulary/regularities/pattern-and-phenomenon.md) | relational | a feature of the world, whose role as explanandum a chosen question fixes |
+| [Phenomenon](../vocabulary/regularities/pattern-and-phenomenon.md) | relational | a behavior of the target in the world, which a chosen question takes as its concern, and as its explanandum only under the aim explanation |
 | [Appearance](../vocabulary/regularities/pattern-and-phenomenon.md) | representational | the content of an observation or the outcome of a measurement |
 | [Mechanism](../vocabulary/regularities/mechanism-and-mechanistic-model.md) | relational | entities and activities in the world, individuated by the phenomenon chosen |
 | [Mechanistic model](../vocabulary/regularities/mechanism-and-mechanistic-model.md) | representational | a representation of a mechanism |
@@ -105,9 +104,13 @@ Each term of the [vocabulary of inquiry](../vocabulary/_index.md) takes one stat
 | [Theory](../vocabulary/representations/theory.md) | representational | a set of claims, or a class of models |
 | [Framework and formalism](../vocabulary/representations/framework.md) | representational | a chosen vocabulary, set of elements, or calculus |
 | [Claim and hypothesis](../vocabulary/representations/claim-and-hypothesis.md) | representational | a proposition put forward for evaluation |
-| [Epistemic problem](../objects/problem/epistemic-problem.md) | representational | a demand stated relative to a background of accepted claims |
+| [Inquiry](inquiry-and-state.md#^inquiry) | ontological | a course of acts of inquirers, occurring whether or not a record describes it |
+| [Accepted knowledge](inquiry-and-state.md#^state) | representational | a finite set of claims accepted by an inquiry |
+| [Epistemic problem](../objects/problem/epistemic-problem.md) | representational | a demand stated relative to the accepted knowledge |
 | [Question](../objects/question/question.md) | representational | a request with a set of answers |
 | [Level of commitment](../objects/question/question.md#^commitment-levels) | representational | the extent to which a record fixes the referent of a slot |
+| [Concept](../objects/expression/concepts-and-names.md#^concept) | representational | a unit of meaning that a project uses, apart from its names |
+| [Exposition](../objects/expression/exposition.md#^exposition) | representational | a projection of research units to a chosen audience |
 
 Two groups of terms invite a confusion of statuses: the terms that take two rows, and the relational terms. For each term with two senses, the note defining it fixes a name for each sense.
 
@@ -117,9 +120,9 @@ The frame is realist, and it is **not forced**: the [note on existence and acces
 
 ## Distinctions
 
-- **A target specification is a model of its target.** The target specification, with its background, represents the target, so it is a model in the representational sense, as the [note on models](../vocabulary/representations/model.md#^target-description-is-a-model) states. The target and the target specification therefore separate an object from its description, never a reality known directly from a representation of it.
+- **A target specification is a model of its target.** The target description, which is the target specification with its background, represents the target, so it is a model in the representational sense, as the [note on models](../vocabulary/representations/model.md#^target-description-is-a-model) states. The target and the target specification therefore separate an object from its description, never a reality known directly from a representation of it.
 - **Every field of a record holds a construct.** A record is a representation, so the [status test](#^layer-test) places all its contents among the constructs. The ontological and relational terms name the *subject* of those contents. *Example*: the reading of a declared variable names the property in words, whereas its symbol and its value set form the attribute.
-- **A declaration of a quantity has no truth value, and it can still be inadequate.** A declaration introduces a quantity, and an aggregation map defines one, so neither makes a claim. Each declaration nevertheless presupposes that the quantity represents a property of the target, or an admissible aggregate of properties. That presupposition can fail. A quantity defined in the manner of "grue" is well formed, yet it supports no projection [goodman1955]. Such a quantity represents no [property](../vocabulary/systems/property-attribute-predicate.md) of the target. Therefore, a declaration is assessed for its adequacy, whereas a claim is assessed for its truth. The [admissibility of an aggregate](../objects/subject/target-system.md#^aggregate-admissibility) tests that presupposition for aggregates.
+- **A declaration of a quantity has no truth value, and it can still be inadequate.** A declaration introduces a quantity, and an aggregation map defines one, so neither makes a claim. Each declaration nevertheless presupposes that the quantity represents a property of the target, or an admissible aggregate of properties. That presupposition can fail. A quantity defined in the manner of "grue", a predicate whose extension switches at an arbitrary time, is well formed, yet it supports no projection [goodman1955]. Such a quantity represents no [property](../vocabulary/systems/property-attribute-predicate.md) of the target. Therefore, a declaration is assessed for its adequacy, in the sense of the *adequacy of a declaration*, whereas a claim is assessed for its truth. The [admissibility of an aggregate](../objects/subject/target-system.md#^aggregate-admissibility) tests that presupposition for aggregates. ^declaration-adequacy
 - **A construct can be false only when it makes a claim.** A law statement, for instance, asserts a relation among quantities and can be false of the target. The [aggregation maps and bridge laws](../objects/subject/target-system.md) of a target specification follow this division: the map defines a quantity, and the bridge law asserts an identity that can fail.
 
 ---

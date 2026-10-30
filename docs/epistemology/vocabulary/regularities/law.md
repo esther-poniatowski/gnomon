@@ -2,7 +2,7 @@
 tags:
   - definition
   - wip
-index: "[Regularities and explananda](docs/epistemology/vocabulary/regularities/_index.md)"
+index: "[Regularities and phenomena](docs/epistemology/vocabulary/regularities/_index.md)"
 aliases:
   - Law
   - Law of nature
@@ -12,7 +12,7 @@ aliases:
 
 > [!QUESTION] Goal: which sense of "law" does a statement use, and what distinguishes a law statement from any other general claim?
 
-"Law" names either a lawlike regularity among the states of things or a statement of that regularity. The two senses have different statuses in the [frame of things and constructs](../../foundations/things-and-constructs.md), and a record holds law statements only.
+"Law" names either a lawlike regularity among the states of things or a statement of that regularity. The two senses have different statuses in the [frame of things and constructs](../../foundations/things-and-constructs.md). A record holds statements only, and it calls *law* a broader class of statements than the law statements of the lawhood sense.
 
 ## Senses
 
@@ -21,6 +21,7 @@ aliases:
 | Law₁ | a [regularity](pattern-and-phenomenon.md) among the states or changes of things, existing whether or not it is stated, and satisfying a [criterion of lawhood](#^lawhood) | the dependence of the period of a pendulum on its length | [bunge1977] |
 | Law₂, law statement | a general claim that represents a law₁ | the period equals $2\pi\sqrt{\ell/g}$ for small oscillations | [bunge1977]; [bunge1961_kinds] |
 | Metanomological statement | a statement about law statements, such as a requirement of covariance binding every law of a theory | "every law of mechanics is invariant under Galilean transformations" | [bunge1961_laws] |
+| Law of a record | any general claim about declared quantities that a record admits, together with its role: evolution, state constraint, input–output, measurement, initial distribution, or another | the posited initial distribution of the weights of a network; an energy function of a spin system | — |
 
 Law statements form a heterogeneous class. Classificatory laws and some statistical laws fail the requirements of strict universality and of counterfactual force [bunge1961_kinds]. A further division separates *phenomenological* laws from *fundamental* laws. Phenomenological laws describe observed regularities [cartwright1983]. Fundamental laws explain those regularities and hold only under idealized conditions [cartwright1983].
 
@@ -48,7 +49,7 @@ A law statement is accordingly a [claim](../representations/claim-and-hypothesis
 
 ## Relations to the method
 
-- **Every law of a record is a law statement.** A [law of a background record](../../objects/knowledge/background.md#^laws) or of a candidate answer is a construct that can be false of the target.
+- **A law of a record need not be a law statement.** A [law of a background record](../../objects/knowledge/background.md#^laws) or of a candidate answer is an admitted general claim, a construct that can be false of the target. The three properties of a law statement apply only to a law that the record claims to be a law in the lawhood sense. *Example*: an initial distribution, or a working assumption admitted under the warrant `posited`, supports no counterfactual, and it is still a law of the record. ^law-of-a-record
 - **The warrant of a law and its criterion of lawhood answer different questions.** The [warrant of a law](../../objects/knowledge/background.md#^law-warrant) states how the record obtained the law. A criterion of lawhood states why a true generalization counts as a law. Therefore, a fitted law can be a law in the sense of invariance, once the range of interventions over which it holds is known.
 
 The fields that bear on a law are documented in the [background record](../../../specification/background.md) and the [model record](../../../specification/model.md).

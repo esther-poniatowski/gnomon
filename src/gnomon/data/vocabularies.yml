@@ -260,9 +260,9 @@ vocabularies:
     task.epistemic_aim:
     - value: description
       category: answer-content
-      direct_answer: an assignment of values to the explanandum variables or the features of the named phenomenon, at the grain of the question, with the quantification over instances that its scope fixes
+      direct_answer: an assignment of values to the observables or the features of the named phenomenon, at the grain of the question, with the quantification over instances that its scope fixes
       conclusive_when: every variable and every feature that the request covers has a value, with its uncertainty
-      presupposes: the phenomenon is identified, and its explanandum variables are definable at the grain
+      presupposes: the phenomenon is identified, and its observables are definable at the grain
     - value: exploration
       category:
         input: answer-content
@@ -277,13 +277,13 @@ vocabularies:
       presupposes: the stated condition is a condition of the target within the domain of the question
     - value: explanation
       category: answer-content
-      direct_answer: a claim that named factors make the difference between the fact and each foil, by a relation of the requested kind
-      conclusive_when: every foil of the contrast is ruled out by some factor, the relation has the requested kind, and the modal strength is the requested one
-      presupposes: 'the topic holds: the fact obtains, and each foil does not'
+      direct_answer: a claim that named factors determine the phenomenon by a relation of the requested kind, and, when the question names foils, that they rule out each foil
+      conclusive_when: the factors determine the phenomenon by a relation of the requested kind, every named foil is ruled out by some factor, and the modal strength is the requested one
+      presupposes: 'the topic holds: the fact obtains, and each named foil does not'
     - value: modal-knowledge
       category: answer-content
       direct_answer: a claim that a property is possible, impossible or necessary, relative to the admitted laws and the domain
-      conclusive_when: a possibility is witnessed by an instance; an impossibility or a necessity is proved, or established by an exhaustive exclusion over the space of alternatives
+      conclusive_when: a possibility is witnessed by an instance; an impossibility or a necessity is proved, or shown by an exhaustive exclusion over the space of alternatives
       presupposes: the admitted laws and the domain fix the space of alternatives
     - value: model-knowledge
       category: answer-content

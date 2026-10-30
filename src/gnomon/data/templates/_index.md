@@ -1,4 +1,4 @@
-# Inquiry specification templates
+# Record templates
 
 These templates specify an inquiry: a research project copies and fills them, following the method of `docs/epistemology/objects/question/question-specification.md`. Each object of the inquiry takes a separate file, because one target system can support several phenomena, and each phenomenon can be the subject of more than one question. A file therefore references each object that it depends on by its identifier.
 

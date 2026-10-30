@@ -8,53 +8,99 @@ aliases:
 ---
 # Notation
 
-> [!QUESTION] Goal: which symbol denotes which quantity, across the theory notes?
+> [!QUESTION] Goal: which symbol denotes which object, across the theory notes?
 
-A single registry assigns every symbol of the method. One letter denotes one object, so that a formula reads the same in every note. ^registry
+A single registry assigns every symbol that a note may use without defining it: the symbols of the objects of the method, and of the objects of the vocabulary that several notes share. One registered letter denotes one object, so that a formula reads the same in every note. Each row names the theory note that declares the symbol and defines its object. A specification note may use a registered symbol, and it never declares one. ^registry
 
-| Symbol                     | Denotes                                                    | Declared in                                          |
-| -------------------------- | ---------------------------------------------------------- | ---------------------------------------------------- |
-| $\pi$                      | an epistemic problem, $\pi=\langle K,d,\Phi\rangle$         | [epistemic problem](../../objects/problem/epistemic-problem.md) |
-| $K$                        | the background of a problem: the accepted claims relative to which it is posed | [epistemic problem](../../objects/problem/epistemic-problem.md) |
-| $H$                        | the proposed candidates, not yet accepted                  | [epistemic problem](../../objects/problem/epistemic-problem.md) |
-| $d$                        | the demand of a problem, $d=\langle\mathsf{type},\mathsf{req},\Xi\rangle$ | [epistemic problem](../../objects/problem/epistemic-problem.md) |
-| $\Xi$                      | the explicanda of a demand                                 | [epistemic problem](../../objects/problem/epistemic-problem.md) |
-| $\Phi$                     | the constraints of a problem, $\Phi_1$ on each candidate and $\Phi^*$ on the set of results | [epistemic problem](../../objects/problem/epistemic-problem.md) |
-| $\Sigma$                   | the subject of inquiry, $\Sigma=\langle S,P,X,D\rangle$    | [subject of inquiry](../../objects/subject/subject-of-inquiry.md)          |
-| $S$                        | the target: the system, or the class of systems, that the inquiry is about | [target system](../../objects/subject/target-system.md)                    |
-| $N$                        | the number of units of a kind in $S$                       | [target system](../../objects/subject/target-system.md)                    |
-| $P$                        | the phenomenon, identified with the explanandum            | [phenomenon](../../objects/subject/phenomenon.md)                          |
-| $Y$                        | an explanandum variable that expresses $P$                 | [phenomenon](../../objects/subject/phenomenon.md)                          |
-| $X$                        | the contrast class, whose members are the foils            | [contrast](../../objects/subject/contrast.md)                              |
-| $D$                        | the domain of conditions held fixed                        | [domain of conditions](../../objects/subject/domain.md)                    |
-| $T$                        | the epistemic task, $T=\langle A,R,\mu,\lambda,\tau,\omega\rangle$ | [epistemic task](../../objects/task/epistemic-task.md)                  |
-| $A$                        | the epistemic aim                                          | [epistemic aim](../../objects/task/epistemic-aim.md)                    |
-| $R$                        | the requested relation                                     | [requested relation](../../objects/task/requested-relation.md)          |
-| $\mu$                      | the modal strength                                         | [modal strength](../../objects/task/modal-strength.md)                  |
-| $\lambda$                  | the admissible explanans                                 | [admissible explanans](../../objects/task/admissible-explanans.md)         |
-| $\tau$                     | the required accuracy                                      | [epistemic task](../../objects/task/epistemic-task.md)                  |
-| $\omega$                   | the proof obligations                                      | [epistemic task](../../objects/task/epistemic-task.md)                  |
-| $Q$                        | the question, $Q=\langle\Sigma,T\rangle$                   | [inquiry specification](../../objects/question/question-specification.md)    |
-| $\Gamma$                   | the circumstances under which adequacy is judged           | [virtues](../../objects/task/epistemic-pragmatic-virtues.md)            |
-| $h$                        | a candidate answer, a member of the set $H$ of proposed candidates | [epistemic problem](../../objects/problem/epistemic-problem.md#^candidates) |
-| $M$                        | a model, $M=\langle C,V,L,O\rangle$, which grounds the answers whose route runs on it | [model and binding](../../../specification/model.md#^model-elements) |
-| $C$                        | the constituents: the units that the model treats as bearers (in a mechanism, its components) | [model and binding](../../../specification/model.md#^model-elements); [mechanism](../../objects/answer/mechanism.md) |
-| $V$                        | the terms of the model: its variables and parameters       | [model and binding](../../../specification/model.md#^model-elements) |
-| $L$                        | the laws and structural relations of the model (in a mechanism, its activities and interaction rules) | [model and binding](../../../specification/model.md#^model-elements); [mechanism](../../objects/answer/mechanism.md) |
-| $O$                        | the organization of the model                              | [model and binding](../../../specification/model.md#^model-elements); [mechanism](../../objects/answer/mechanism.md) |
-| $I$                        | the idealizations among the grounds of an answer, each relative to the target of the answer | [answer form](../../objects/answer/answer-form.md#^idealizations)         |
-| $E$                        | the explanans: the factors of the block of an explanation  | [answer form](../../objects/answer/answer-form.md#^explanation-block)     |
-| $i$, $k$, $t$              | the index families of parts, of instances, and of the course, each admitting several indices | [phenomenon](../../objects/subject/phenomenon.md)                          |
+## Problem and state of an inquiry
 
-- **A mechanism is written with the symbols of a model.** A mechanistic model fills the fields of the [model record](../../../specification/model.md#^model-elements): its components are the constituents $C$, its activities and interaction rules are the laws $L$, and its organization is $O$. The [constituents of a mechanism](../../objects/answer/mechanism.md) therefore receive no private symbols. The [mapping onto the answer form](../../objects/answer/answer-form.md) states which aspect of a mechanism fills which field.
+| Symbol | Denotes | Declared in |
+| --- | --- | --- |
+| $\pi$ | an epistemic problem, $\pi=\langle K,d,\Phi\rangle$; several problems are written $\pi_1,\pi_2,\ldots$ | [epistemic problem](../../objects/problem/epistemic-problem.md#^problem-triple) |
+| $K$ | the accepted knowledge: the finite set of accepted claims relative to which a problem is posed, a belief base not closed under consequence | [epistemic problem](../../objects/problem/epistemic-problem.md) |
+| $H$ | the proposed candidates: answers put forward and not yet accepted | [epistemic problem](../../objects/problem/epistemic-problem.md#^candidates) |
+| $h$ | a candidate answer, a member of $H$ | [epistemic problem](../../objects/problem/epistemic-problem.md#^candidates) |
+| $\mathcal{M}$ | the available means: the methods, data, instruments and proof techniques that can be applied | [epistemic problem](../../objects/problem/epistemic-problem.md) |
+| $\vdash_{\mathcal{M}}$ | $K\vdash_{\mathcal{M}} s$: the claim $s$ has been obtained from $K$ by means of $\mathcal{M}$, and the researcher has accepted it; $\nvdash_{\mathcal{M}}$ denies this | [epistemic problem](../../objects/problem/epistemic-problem.md) |
+| $d$ | the demand of a problem, $d=\langle\mathsf{type},\mathsf{req},\Xi\rangle$, with the type of result $\mathsf{type}$ and the request $\mathsf{req}$ | [epistemic problem](../../objects/problem/epistemic-problem.md) |
+| $\Xi$ | the explicanda of a demand | [epistemic problem](../../objects/problem/epistemic-problem.md) |
+| $\Phi$ | the constraints of a problem, $\Phi_1$ on each candidate and $\Phi^*$ on the set of results | [epistemic problem](../../objects/problem/epistemic-problem.md) |
+| $Q_\pi$ | the question associated with the problem $\pi$: the question that asks for the demanded results, and only for them | [epistemic problem](../../objects/problem/epistemic-problem.md#^associated-question) |
+| $\pi_Q$ | the minimal problem of the question $Q$, $\pi_Q=\langle K,d_Q,\Phi_Q\rangle$, whose demand $d_Q$ has the explicanda $\Xi_Q$ | [epistemic problem](../../objects/problem/epistemic-problem.md#^minimal-problem) |
 
-- **Subscripted letters, calligraphic letters and names set in sans-serif stay free of the registry.** Such a symbol serves as an index, or names a mathematical object local to one note. The formula that introduces the symbol also fixes its meaning. *Examples*:
-    - the state space $\mathcal{X}_i$ of a component, and its neighborhood $\mathcal{N}_i$;
-    - a typed relation $\rho_k$ of an organization;
-    - the composition $\mathsf{Comp}(\sigma)$ of a system $\sigma$.
+## Question
+
+| Symbol | Denotes | Declared in |
+| --- | --- | --- |
+| $Q$ | a question: a request whose possible answers form a definite set; $Q$ is specified by $\langle\Sigma,T,\mathcal{V}\rangle$, which fixes that set | [question](../../objects/question/question.md); [specification of a question](../../objects/question/question-specification.md#^three-layers) |
+| $\Sigma$ | the subject of inquiry, $\Sigma=\langle S,P,X,D\rangle$ | [subject of inquiry](../../objects/subject/subject-of-inquiry.md) |
+| $S$ | the target: the system, or the class of systems, that the inquiry is about; the target is relational, and a target-system record specifies it | [target system](../../objects/subject/target-system.md); [two senses of target](../../foundations/things-and-constructs.md#^target-senses) |
+| $N$ | the number of units of a kind in $S$ | [target system](../../objects/subject/target-system.md) |
+| $P$ | the phenomenon: the behavior of the target that the question concerns; it is an explanandum only when the aim is explanation | [phenomenon](../../objects/subject/phenomenon.md) |
+| $f_P$ | the input–output map of a phenomenon, from a space of inputs to a space of outputs | [mechanistic answer](../../objects/answer/mechanism.md) |
+| $Y$ | an observable that expresses $P$; an explanandum variable when the aim is explanation | [phenomenon](../../objects/subject/phenomenon.md) |
+| $X$ | the contrast class, whose members are the foils | [contrast](../../objects/subject/contrast.md) |
+| $D$ | the conditions held fixed: the restrictions that the question imposes on admitted values, which Mackie calls the causal field | [domain of conditions](../../objects/subject/domain.md) |
+| $i$, $k$, $t$ | the index families of parts, of instances, and of the course, each admitting several indices | [phenomenon](../../objects/subject/phenomenon.md) |
+| $T$ | the epistemic task, $T=\langle A,R,\mu,\lambda,\tau,\omega\rangle$ | [epistemic task](../../objects/task/epistemic-task.md) |
+| $A$ | the epistemic aim | [epistemic aim](../../objects/task/epistemic-aim.md) |
+| $R$ | the requested relation | [requested relation](../../objects/task/requested-relation.md) |
+| $\mu$ | the modal strength | [modal strength](../../objects/task/modal-strength.md) |
+| $\lambda$ | the bound on the explanans: the set of variables from which an explanans may be drawn, bounded along two axes | [admissible explanans](../../objects/task/admissible-explanans.md) |
+| $\tau$ | the required accuracy: the metric and the tolerance within which a value of the answer must match the target | [epistemic task](../../objects/task/epistemic-task.md) |
+| $\omega$ | the proof obligations: the statements that the answer must derive | [epistemic task](../../objects/task/epistemic-task.md) |
+| $\mathcal{V}$ | the virtues weighed by a question, each marked constitutive or preferred | [virtues](../../objects/task/epistemic-pragmatic-virtues.md) |
+
+## Answer, assessment and model
+
+| Symbol | Denotes | Declared in |
+| --- | --- | --- |
+| $\mathrm{Sat}$, $\mathrm{Admissible}$, $\mathrm{Warranted}$ | $\mathrm{Sat}(h\mid Q)$: the candidate $h$ satisfies the question $Q$, that is, it passes the tests of admissibility, $\mathrm{Admissible}(h\mid Q)$, and of warrant, $\mathrm{Warranted}(h\mid Q)$ | [conditions of satisfaction](../../objects/answer/satisfaction-conditions.md#^conditions-satisfaction) |
+| $\mathrm{Adequate}$ | $\mathrm{Adequate}(M\mid Q,\Gamma)$: the model $M$ is adequate for the purpose that $Q$ sets, under the circumstances $\Gamma$ | [virtues](../../objects/task/epistemic-pragmatic-virtues.md) |
+| $\Gamma$ | the circumstances, such as resources, use and audience, under which the adequacy of a model for a purpose is judged | [virtues](../../objects/task/epistemic-pragmatic-virtues.md) |
+| $E$ | the explanans: the factors of the block of an explanation | [answer form](../../objects/answer/answer-form.md#^explanation-block) |
+| $I$ | the idealizations among the grounds of an answer, each relative to the target of the answer | [answer form](../../objects/answer/answer-form.md#^idealizations) |
+| $M$ | a model in the representational sense, $M=\langle C,V,L,O\rangle$, which grounds the answers whose route runs on it | [model](../representations/model.md#^model-elements) |
+| $C$ | the constituents: the units that the model treats as bearers, $C=\{c_1,\ldots,c_n\}$; in a mechanism, its components | [model](../representations/model.md#^model-elements); [mechanistic answer](../../objects/answer/mechanism.md) |
+| $V$ | the terms of the model: its variables and parameters | [model](../representations/model.md#^model-elements) |
+| $L$ | the laws and structural relations of the model; in a mechanism, its activities and interaction rules | [model](../representations/model.md#^model-elements); [mechanistic answer](../../objects/answer/mechanism.md) |
+| $O$ | the organization of the model | [model](../representations/model.md#^model-elements); [mechanistic answer](../../objects/answer/mechanism.md) |
+| $f_j$, $J$ | the terms $f_j$ of an additive decomposition of a dynamic, indexed by $j\in J$, each a candidate activity | [criterion of an activity](../change/mechanistic-activity.md#^activity-term); [mechanistic answer](../../objects/answer/mechanism.md) |
+| $\mathcal{R}$ | the realization map of a mechanism: the map from its components, activities and organization to the behavior that they produce | [mechanistic answer](../../objects/answer/mechanism.md) |
+| $Z$ | the external entities of a causal-mechanistic production, outside and before the phenomenon that they produce | [requested relation](../../objects/task/requested-relation.md) |
+| $\eta$ | the resistance hypothesis: the structural hypothesis that explains a resistance met by an inquiry, on which an abductive serving question is conditioned | [decomposition of a question](../../processes/inquiry/question-decomposition.md#^functional-types) |
+
+## Systems, states and change
+
+| Symbol | Denotes | Declared in |
+| --- | --- | --- |
+| $\sigma$ | a system, described by its composition $\mathsf{Comp}(\sigma)$, its environment $\mathsf{Env}(\sigma)$, its structure $\mathsf{Str}(\sigma)$, and in one version its mechanism $\mathsf{Mech}(\sigma)$ | [system, constituent and environment](../systems/system-constituent-environment.md) |
+| $\rho$ | a relation, as the set of tuples that satisfy it | [property, attribute, predicate and relation](../systems/property-attribute-predicate.md) |
+| $\mathcal{X}$ | a state space; $\mathcal{X}_i$ is the state space of the component $c_i$ | [state and configuration](../quantities/state-and-configuration.md) |
+| $x$ | a state, a point of $\mathcal{X}$; $x_i(t)$ is the state of the component $c_i$ at the point $t$ of the course | [state and configuration](../quantities/state-and-configuration.md) |
+| $x_0$ | the initial state: the state at the first point of the course | [condition](../quantities/condition.md) |
+| $\mathbb{T}$ | the course: the ordered index set along which a behavior unfolds, such as time, the steps of training or a swept parameter | [process, event and history](../change/process-event-history.md#^course) |
+| $\theta$ | a parameter, or the vector of the parameters of a model | [variable, value, observable, parameter and data](../quantities/variable-value-observable.md) |
+| $\mathcal{D}$, $\mathcal{W}$ | the domain and the codomain of a variable $F:\mathcal{D}\to\mathcal{W}$; the codomain is the value set of the variable | [variable, value, observable, parameter and data](../quantities/variable-value-observable.md) |
+| $\kappa_1,\ldots,\kappa_m$ | the antecedent conditions of a deductive-nomological explanation: particular facts that, together with laws, entail the explanandum | [condition](../quantities/condition.md) |
+| $\mathsf{K}$, $\mathsf{I}$ | the core $\mathsf{K}=\langle\mathsf{M}_p,\mathsf{M},\mathsf{M}_{pp},\mathsf{GC},\mathsf{GL}\rangle$ and the intended applications $\mathsf{I}$ of a structuralist theory-element | [theory](../representations/theory.md) |
+
+## Rules of the registry
+
+- **A registered letter keeps one meaning in every note.** A subscript or an index distinguishes the members of one object, as $\pi_1$ and $\pi_2$, or $c_i\in C$, and it introduces no other object. Upper and lower case are distinct letters: $\Sigma$ is the subject and $\sigma$ a system.
+
+- **A mechanism is written with the symbols of a model.** A mechanistic model fills the [elements of a model](../representations/model.md#^model-elements): its components are the constituents $C$, its activities and interaction rules are the laws $L$, and its organization is $O$. The [constituents of a mechanism](../../objects/answer/mechanism.md) therefore receive no private symbols. The [mapping onto the answer form](../../objects/answer/answer-form.md) states which aspect of a mechanism fills which element.
+
+- **A local symbol stays free of the registry.** A symbol is local when the note that uses it defines it in the formula or the sentence in which it first appears. A local symbol never takes a registered letter, and two notes may give one free letter two local meanings, each defined in its own note. *Examples*:
+    - the evolution map $\varphi$ of a [dynamic](../change/dynamic.md), and the encoding $e$ and the readout $r$ of a [representation](../representations/representation-and-encoding.md);
+    - the neighborhood $\mathcal{N}_i$ of a component;
+    - the predicate $\Pi$ on the segments of a course;
+    - the letter $F$, which names a variable in the [vocabulary of variables](../quantities/variable-value-observable.md) and the vector field of a flow in the [vocabulary of dynamics](../change/dynamic.md).
+
+- **Two constructions keep a registered letter outside its registered meaning.** *Exception*:
+    - a mathematical constant, such as the number $\pi$ in the period $2\pi\sqrt{\ell/g}$ of a pendulum;
+    - a symbol of a record, quoted as the record declares it. The records carry their own symbols, registered nowhere here: a [symbol of an inquiry](../../../specification/expressions.md) names a quantity of one studied system and is unique only within its record. A target system declaring $L$ for a length therefore collides with no entry of the registry.
 
 - **Bold letters are not used.** A structure or a class of structures is named in sans-serif, as the classes of models $\mathsf{M}_p$ and $\mathsf{M}$ of a [structuralist theory](../representations/theory.md).
 
-- **The records carry their own symbols, registered nowhere here.** A letter of the registry denotes a component of the method. By contrast, a [symbol of an inquiry](../../../specification/expressions.md) names a quantity of one studied system and is unique only within its record. A target system declaring $L$ for a length therefore collides with no entry of the registry.
-
-- **The registry is a constraint on new notes.** A note that needs a symbol for a new quantity first adds a row to the registry, so that no letter denotes two quantities.
+- **The registry is a constraint on new notes.** A note that needs a symbol for a new object of the method, or a symbol that it will use without defining it, first adds a row to the registry and declares the symbol in a theory note, so that no registered letter denotes two objects.

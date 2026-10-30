@@ -13,6 +13,9 @@ Types each operation of an inquiry by the epistemic object that it produces and 
 > [!IMPORTANT] Activity, aim and method
 > The notes of this folder type the operations of an inquiry. The [epistemic aim](../../objects/task/epistemic-aim.md) fixes the achievement served by those operations. The [overview of the taxonomy](epistemic-activities.md) separates an activity from an aim, a mode of inference and a method.
 
+> [!WARNING] Epistemic and mechanistic activity
+> The notes of this folder type *epistemic* activities: operations of an inquiry, each of which outputs an epistemic object. A *mechanistic* activity is what a component of a target does, such as a neuron firing, and the note on [mechanistic activity](../../vocabulary/change/mechanistic-activity.md) defines it.
+
 ## Criterion and design
 
 - [Epistemic activities](epistemic-activities.md): decides whether an operation is epistemic, and types it so that a research itinerary can be checked

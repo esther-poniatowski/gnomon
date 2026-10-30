@@ -50,7 +50,7 @@ Three cognate notions overlap the analytic sense. Each notion adds commitments l
 
 ## Relations to the method
 
-- **The inquiry specification of this method is a framework for inquiries, not a framework of a domain.** An analytic framework names the elements of one domain, such as the actors and the rules of an institution [ostrom2005]. The inquiry specification names the elements of an *inquiry*: the target, the phenomenon, the question and its answers. A domain enters the specification only as the subject of an inquiry, so the specification is a meta-level framework. Therefore, the [generality order](#^generality-order) does not place the theories and models of a research problem below the specification. The records of an inquiry hold them, in background records and in candidate answers.
+- **The vocabulary of this method is a framework for inquiries, not a framework of a domain.** An analytic framework names the elements of one domain, such as the actors and the rules of an institution [ostrom2005]. The vocabulary of this method names the elements of an *inquiry*: the target, the phenomenon, the question and its answers. A domain enters an inquiry only as its subject, so the vocabulary is a meta-level framework. Therefore, the [generality order](#^generality-order) does not place the theories and models of a research problem below the [specification of a question](../../objects/question/question-specification.md). The records of an inquiry hold them, in background records and in candidate answers.
 - **A question about the vocabulary of a record is external.** The usefulness of a declaration decides whether a record should declare a new kind of entity. The record itself cannot settle that question.
 
 ---

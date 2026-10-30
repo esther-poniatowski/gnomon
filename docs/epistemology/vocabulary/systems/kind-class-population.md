@@ -30,7 +30,7 @@ Laws, models and claims generalize over a collection of systems. The three terms
 
 ## Distinctions
 
-- **A kind is a class that supports projection.** Every collection is a class, whereas only some classes support generalizations from observed members to unobserved members. The class of things that are "grue" is a class and not a kind, since generalizations over it are not projectible [goodman1955].
+- **A kind is a class that supports projection.** Every collection is a class, whereas only some classes support generalizations from observed members to unobserved members. The class of things that are "grue" is a class and not a kind, since generalizations over it are not projectible [goodman1955]. "Grue" applies to a thing examined before an arbitrary time when the thing is green, and to any other thing when it is blue, so its extension switches color at that time, as the [vocabulary of properties](property-attribute-predicate.md) states.
 - **A population differs from a kind by the quantity defined over the population.** A population is chosen so that a summary, such as a mean effect, is defined over its units. A population need not be a kind: the patients enrolled in a trial form a population without sharing a mechanism.
 
 ## Relations to the method

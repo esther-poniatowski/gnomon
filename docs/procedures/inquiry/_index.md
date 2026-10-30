@@ -9,4 +9,4 @@ aliases:
 
 Guides the conduct of an inquiry as a whole, once its questions and their conditions of answerability are stated.
 
-- [Choosing the next act](next-act.md): decides which act of research to perform next, once a problem is stated
+- [Choosing the next act](next-act.md): finds the next act of research from the records of an inquiry, once a problem is stated

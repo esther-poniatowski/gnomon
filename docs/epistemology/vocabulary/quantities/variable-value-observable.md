@@ -26,15 +26,15 @@ A **variable** is an [attribute](../systems/property-attribute-predicate.md) for
 
 | Term | Community | Definition | Source |
 | --- | --- | --- | --- |
-| Variable | realist ontology | a state function $F:\mathcal{D}\to\mathcal{V}$ that assigns to each thing, at each time, a value in a codomain $\mathcal{V}$ | [bunge1977] |
+| Variable | realist ontology | a state function $F:\mathcal{D}\to\mathcal{W}$ that assigns to each thing, at each time, a value in a codomain $\mathcal{W}$ | [bunge1977] |
 | Variable | probability | a random variable: a measurable function $F:\Omega\to\mathbb{R}$ on a probability space | [kolmogorov1933] |
 | Variable | logic | a placeholder that ranges over a domain and is bound by a quantifier | [quine1948] |
-| Value | all | an element $v\in\mathcal{V}$ of the codomain; the output $F(d)$ of the variable at one argument | — |
+| Value | all | an element $w\in\mathcal{W}$ of the codomain; the output $F(a)$ of the variable at one argument $a\in\mathcal{D}$ | — |
 | Observable | empiricist philosophy of science | an entity detectable by the unaided senses, opposed to a theoretical entity | [vanfraassen1980] |
 | Observable | classical and quantum physics | a measurable function on the phase space (classical); a self-adjoint operator on the state space (quantum) | — |
-| Observable | control theory | the output $y=h(x)$ of an observation function; a system is *observable* when its state can be reconstructed from its outputs over time | [kalman1960] |
+| Observable | control theory | the output $y=g(x)$ of an observation function $g$; a system is *observable* when its state can be reconstructed from its outputs over time | [kalman1960] |
 | Latent variable | statistics | a variable of a model, read directly by no observation function, whose values are inferred | — |
-| Parameter | statistics | an index $\theta$ of a family of distributions $\{P_\theta\}$: fixed within one model of the family, varied across its models | [mccullagh2002] |
+| Parameter | statistics | an index $\theta$ of a family of distributions $\{\mathbb{P}_\theta\}$: fixed within one model of the family, varied across its models | [mccullagh2002] |
 | Data | philosophy of science | records of values produced by one experimental procedure and carrying the idiosyncrasies of that procedure | [bogen1988] |
 
 The three senses of *observable* answer different questions. The empiricist sense classifies entities by human perception. The physical sense names a quantity defined on the state. The control sense names a map from the state to the outputs, and adds a property of the whole system.
@@ -64,9 +64,9 @@ The places of each role in the records are documented in the [target-system reco
 
 ## Relations to the method
 
-- **A declared variable is a state function.** Its signature fixes the domain $\mathcal{D}$, as a product of constituent kinds and index sets, and its value set fixes the codomain $\mathcal{V}$.
-- **The explanandum variables of a phenomenon are observables in the physical sense.** Each explanandum variable is a function of the state variables of the target, as the [specification of the phenomenon](../../objects/subject/phenomenon.md) requires.
-- **The control sense of observable corresponds to a law with the role *measurement*.** Such a law states how an instrument registers the state, so it plays the part of the observation function $h$. The empiricist sense has no field in a record.
+- **A declared variable is a state function.** Its signature, the list of the constituent kinds and index sets on which its value depends, fixes the domain $\mathcal{D}$ as their product, and its value set fixes the codomain $\mathcal{W}$. This signature of a variable is unrelated to the [signature of an epistemic activity](../../processes/activities/epistemic-activities.md#^activity-criterion), which lists its inputs, its output and its norm.
+- **The observables of a phenomenon are observables in the physical sense.** Each observable that expresses a phenomenon is a function of the state variables of the target, as the note on the [phenomenon of a question](../../objects/subject/phenomenon.md) requires. Under the aim explanation, these observables are the explanandum variables.
+- **The control sense of observable corresponds to a law with the role *measurement*.** Such a law states how an instrument registers the state, so it plays the part of the observation function $g$. The empiricist sense has no field in a record.
 - **A parameter of the target is fixed along every course, except the courses that list it among their varying parameters.** The [course of a phenomenon](../../objects/subject/phenomenon.md#^course-and-occurrence) lists those parameters, and the [target specification](../../objects/subject/target-system.md) applies the [role test](#^role-test) with this reading. The criterion coincides with the statistical sense of parameter when one run of the system counts as one model of the family.
 
 The fields that bear on a variable, an observable or a parameter are documented in the [target-system record](../../../specification/target-system.md) and the [phenomenon record](../../../specification/phenomenon.md).

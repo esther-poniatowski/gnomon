@@ -3,7 +3,7 @@ tags:
   - index
 index: "[Vocabulary](docs/epistemology/vocabulary/_index.md)"
 aliases:
-  - Definitions of change
+  - Vocabulary of change
 ---
 # Change
 

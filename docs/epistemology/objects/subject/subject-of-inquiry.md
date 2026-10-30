@@ -9,7 +9,7 @@ aliases:
 
 > [!QUESTION] Goal: which objects does a research question study, and which of them change its admissible answers?
 
-The subject of inquiry is one of the four [layers of specification](../question/question-specification.md) of a research objective. The layer covers the *subject* of a research question: the objects under study.
+The subject of inquiry is the first of the three [layers of specification](../question/question-specification.md#^three-layers) of a question. The layer covers the *subject* of a research question: the objects under study.
 
 ## Components of the subject
 
@@ -22,7 +22,7 @@ The four components fill a statement frame. The [epistemic aim](../task/epistemi
 
 > In [$S$] under [$D$], [interrogative word] [$P$] rather than [$X$]?
 
-> [!WARNING] The domain $D$ holds only [restrictions](domain.md#^domain-restrictions) of the a priori specification.
+> [!WARNING] The domain $D$ holds only [restrictions](domain.md#^domain-restrictions) of the values that the target record and the background records admit about $S$.
 
 ## Selecting the specifications
 
@@ -45,22 +45,22 @@ Each admitted specification divides into two parts:
 - **Type versus content.** Closed lists restrict only the types, so the content remains free text inside a frame.
 - **Conditional requirements.** The [epistemic aim](../task/epistemic-aim.md) $A$ and the form of the question determine which specifications are mandatory:
     - the contrast $X$, for contrastive why-questions;
-    - the explanandum variable, whenever the contrast takes its foils from the possible values of $Y$;
+    - the observable $Y$ of the phenomenon, whenever the contrast takes its foils from the possible values of $Y$;
     - the conditions and byproducts, only once they are known.
 - **Empty values with a maturity marker.** Every specification may stay empty while it is not filled. Whether an empty specification is a gap or a product of the inquiry is read from the [requirements of the epistemic aim](../../../specification/question-task.md#^required-by-aim), never from the record. The marker of each specification is documented under the [maturity of a field](../../../specification/maturity.md). Empty values are admitted because characterizing the phenomenon is itself a discovery task [craver2013], and because the descriptions that this task yields are revised or rejected [colaco2018].
-- **Filling order.** The system $S$ and the phenomenon $P$ are specified together, since the partition of variables depends on $P$. The contrast $X$ is then specified from the value space of $P$. The domain $D$ bounds all three.
+- **Filling order.** The system $S$ and the phenomenon $P$ are specified together, since the partition of variables depends on $P$. The contrast $X$ is filled in two steps. Its locus can be typed as soon as the question schema is posed, as the [order of specification](../../processes/inquiry/specification-order.md) states, whereas its foils are specified afterwards, from the value space of $P$. The domain $D$ bounds all three.
 
 ## Precedent in quantitative methodology
 
 Quantitative methodology already specifies questions through fixed slots. For example, a "theoretical estimand", the quantity that a study aims to learn, is stated outside any statistical model. It consists of a quantity defined for each unit and a target population [lundberg2021]. Clinical trials likewise define an estimand by five attributes [ich2019]. Each attribute maps onto a component of the subject of inquiry:
 
 - population → reference class of the system $S$;
-- endpoint → explanandum variable of the phenomenon $P$;
+- endpoint → observable of the phenomenon $P$;
 - treatment versus comparator → condition contrast in $X$;
 - population-level summary → scope over instances in $P$;
 - intercurrent events → state restrictions in the domain $D$.
 
-Both frameworks keep the question separate from any model. The [inquiry specification](../question/question-specification.md) separates its subject from the answer layer in the same way. Both frameworks, however, cover only questions about causal effects. The two frameworks therefore support the design of the slots, but not the option lists for capacities, mechanisms, and mathematical explanation.
+Both frameworks keep the question separate from any model. The [specification of a question](../question/question-specification.md) keeps its subject apart from its answers in the same way. Both frameworks, however, cover only questions about causal effects. The two frameworks therefore support the design of the slots, but not the option lists for capacities, mechanisms, and mathematical explanation.
 
 ---
 ## Sources
@@ -81,7 +81,7 @@ Both frameworks keep the question separate from any model. The [inquiry specific
 > 	- the search space of exploratory questions;
 > 	- the variation test that separates the domain $D$ from the conditions of $P$;
 > 	- the consistency conditions between specifications (target type with $\mu$, phenomenon category with $R$, foil status with the source of evidence);
-> 	- the split of the a priori specification into a target record, which delimits $S$, and background records, which admit laws about it;
+> 	- the split of the specifications that a question admits about its target into a target record, which delimits $S$, and background records, which admit laws about it;
 > 	- typed placeholders in the slots of a question, and the levels of commitment of the records that fill them.
 > - **Absent from the literature:** a complete form for research questions.
 

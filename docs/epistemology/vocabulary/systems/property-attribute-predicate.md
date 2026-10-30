@@ -49,7 +49,7 @@ The pairs of terms are synonyms only in some communities:
 
 ## Relations to the method
 
-- **A declared quantity carries all three layers.** Its reading names the property in words. Its symbol, its signature and its value set make the attribute a [variable](../quantities/variable-value-observable.md). The expressions of the record using the symbol are predicates of the expression language.
+- **A declared quantity carries all three layers.** Its reading names the property in words. Its symbol, its signature, which lists the constituent kinds and index sets on which its value depends, and its value set make the attribute a [variable](../quantities/variable-value-observable.md). The expressions of the record using the symbol are predicates of the expression language.
 - **A well-formed declaration does not guarantee that a property is represented.** The checks of a record resolve symbols and value sets, so a quantity in the manner of "grue" passes them. One test of the method bears on this question: the [admissibility of an aggregate](../../objects/subject/target-system.md#^aggregate-admissibility) rejects an aggregate whose interventions have ambiguous effects.
 
 ---

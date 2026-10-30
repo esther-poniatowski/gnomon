@@ -14,12 +14,12 @@ aliases:
 
 An [epistemic problem](epistemic-problem.md) $\pi=\langle K,d,\Phi\rangle$ is classified in two ways:
 
-- by its **obstacle**: the reason why the background $K$ does not yet meet the demand;
+- by its **obstacle**: the reason why the accepted knowledge $K$ does not yet meet the demand;
 - by its **demand**: the type of result sought; this type fixes the admissible aims, question forms and answer forms.
 
 ## Diagnosis of the obstacle
 
-The obstacle is not a fourth component of the problem. The obstacle is *diagnosed* from the background $K$, from the [proposed candidates](epistemic-problem.md#^candidates) $H$, and from the [associated question](epistemic-problem.md#^associated-question) $Q_\pi$. A problem can carry several obstacles at once, so the diagnosis is a set of values, each with pointers to the records or publications that establish it. The diagnosis runs along two axes. The two axes record different facts, so their values combine, within the exceptions stated under axis B.
+The obstacle is not a fourth component of the problem. The obstacle is *diagnosed* from the accepted knowledge $K$, from the [proposed candidates](epistemic-problem.md#^candidates) $H$, and from the [associated question](epistemic-problem.md#^associated-question) $Q_\pi$. A problem can carry several obstacles at once, so the diagnosis is a set of values, each with pointers to the records or publications that establish it. The diagnosis runs along two axes. The two axes record different facts, so their values combine, within the exceptions stated under axis B.
 
 ### Axis A: the state of the knowledge about the associated question
 
@@ -34,7 +34,7 @@ The obstacle is not a fourth component of the problem. The obstacle is *diagnose
 
 - **Evocation is recorded apart.** The values *open gap* and *unassessed candidates* require only that the [problem exists](epistemic-problem.md#^problem-existence). Whether $K$ also evokes $Q_\pi$, so that the problem has an [epistemic gap](epistemic-problem.md#^gap), is the existence part of soundness among the [conditions of answerability](../../processes/inquiry/conditions-of-answerability.md), recorded with its own state. The value named *open gap* therefore does not imply an epistemic gap.
 - **The values are not exclusive.** *Example*: "characterize the geometry of the fixed points as the input mixture varies" carries an open gap and ill-defined terms, until "geometry" has a criterion.
-- **An unsound presupposition ends the problem.** The problem is dissolved, as the [outcomes of a problem](epistemic-problem.md#^problem-outcomes) state. The value requires an outright refutation, in which the background yields the negation of a presupposition of $Q_\pi$. A presupposition that the means considered have failed to establish is not unsound: it stays to be established, and the problem stands.
+- **An unsound presupposition ends the problem.** The problem is dissolved, as the [outcomes of a problem](epistemic-problem.md#^problem-outcomes) state. The value requires an outright refutation, in which $K$ yields the negation of a presupposition of $Q_\pi$. A presupposition that the means considered have failed to establish is not unsound: it stays to be established, and the problem stands.
 - **Laudan's anomaly is comparative.** An anomalous problem, in Laudan's sense, is an empirical problem that a theory has not solved and that a rival theory has solved [laudan1977]. A mismatch between a model and data is a conflict, and the mismatch becomes an anomaly only when a rival account removes it.
 
 ### Axis B: the unmet conditions of answerability
@@ -52,14 +52,14 @@ Each condition of axis B can be refuted under any value of axis A, with two exce
 
 ## Classification by demand
 
-The type of result of the demand fixes the admissible [aims](../task/epistemic-aim.md), the interrogative form of the questions that serve the problem, and the form of their answers. Each row names an [product type](../../processes/activities/epistemic-activities.md#^product-types). The request of the demand fixes the number and the completeness of the answers.
+The type of result of the demand fixes the admissible [aims](../task/epistemic-aim.md), the interrogative form of the questions that serve the problem, and the form of their answers. Each row names a [product type](../../processes/activities/epistemic-activities.md#^product-types). The request of the demand fixes the number and the completeness of the answers.
 
 | Type of result | Admissible aims | Question form (request) | Answer form | Example |
 | --- | --- | --- | --- | --- |
 | `phenomenon`, not yet stated | exploration | which patterns appear as the conditions vary (`over-a-parameter`) | a phenomenon record with its detection criterion | which collective states appear as the noise level varies |
-| `phenomenon`, already named | description | which features does the phenomenon have (`all`, `over-a-parameter`) | the values of its explanandum variables | the dimension of the population activity during a task |
-| `consequence` | model knowledge; modal knowledge, when the background of the target is closed | whether a statement holds of a model (to prove); which object satisfies a condition (to find); whether a property can or must hold | a derived law, a proof, a proof of existence, a counterexample, or a proof of impossibility | whether the fixed point of a rate network is unique below a critical gain |
-| `hypothesis` | prediction; modal knowledge, when the background of the target is not closed | which outcome occurs in the target when a condition changes; whether a property can or must hold in the target | a predicted value with its uncertainty, compared with the observed outputs; an instance of the target that exhibits the property | the change of the firing rate when the input contrast doubles; whether a network without inhibitory neurons can oscillate at gamma frequency |
+| `phenomenon`, already named | description | which features does the phenomenon have (`all`, `over-a-parameter`) | the values of its observables | the dimension of the population activity during a task |
+| `consequence` | model knowledge; modal knowledge, when the background of the target is closed (its admitted laws define the system completely, so every truth about it follows from them) | whether a statement holds of a model (to prove); which object satisfies a condition (to find); whether a property can or must hold | a derived law, a proof, a proof of existence, a counterexample, or a proof of impossibility | whether the fixed point of a rate network is unique below a critical gain |
+| `hypothesis`: a claim about the target, as opposed to a consequence, which holds of a model | prediction; modal knowledge, when the background of the target is not closed | which outcome occurs in the target when a condition changes; whether a property can or must hold in the target | a predicted value with its uncertainty, compared with the observed outputs; an instance of the target that exhibits the property | the change of the firing rate when the input contrast doubles; whether a network without inhibitory neurons can oscillate at gamma frequency |
 | `model` | description; explanation, at modal strength `possible` | which model of a class reproduces the phenomenon (`one`) | a model record | which rate model reproduces the measured tuning curves |
 | `explanation` | explanation | why the phenomenon holds rather than its contrast; how the system produces it | an answer that holds the [block of an explanation](../answer/answer-form.md#^explanation-block), resting on a model when its route runs on one | why the network oscillates rather than stays asynchronous |
 | `classification` | exploration; description | which kinds or regimes exist (`all`) | a partition with its criteria | which dynamical regimes divide the parameter space of a network |

@@ -17,15 +17,15 @@ The dimensions that these fields fix, and the grounds of each dimension, are sta
 | **[Requested relation](../epistemology/objects/task/requested-relation.md) $R$** | whenever the answer must relate an explanans to the explanandum | What kind of relation must the explanans bear to the explanandum to answer the question? | causal, mechanistic, constitutive, functional, statistical, nomological, mathematical | relevance / dependence relation [vanfraassen1980] |
 | **Function sense** | when the requested relation is functional | Which sense of function must the answer establish? | causal role (the contribution of a part to a capacity of the system); etiological (the effects for which the part was selected) | [senses of function](../epistemology/objects/task/requested-relation.md#^function-sense) |
 | **[Modal strength](../epistemology/objects/task/modal-strength.md) $\mu$** | always | How tightly must the answer bind the phenomenon? | actual, possible, necessary | _how-possibly_ vs _how-actually_ [verreaultjulien2019] |
-| **[Admissible explanans](../epistemology/objects/task/admissible-explanans.md) $\lambda$** | only to bound the explanans further, because proportionality with the phenomenon selects the level when $\lambda$ is left unset | Which kinds of variables may enter the explanans? | compositional level; substrate dependence | levels of mechanisms [craver2007]; universality [batterman2000] |
-| **Required accuracy $\tau$** | always, and `not-applicable` when the answer is matched against no measurement | Which observables of the target must the answer reproduce, which of its structures must correspond, and to what accuracy? | qualitative agreement; order of magnitude; a stated numeric bound; structural correspondence only. Within a tolerance, `answer` names the candidate's value and `target` the observable that it reproduces. Each output and each structure carries a justification stating why the question demands that particular correspondence. | fidelity criteria [weisberg2013]; adequacy for purpose [parker2020] |
-| **Proof obligations $\omega$** | when the answer must derive a statement rather than match a measurement | Which implication must the answer establish, and in which direction? | Per obligation: the antecedent and the consequent, each as expressions over the declared observables. A converse counts as a separate obligation. | explanation by mathematical proof [lange2017] |
+| **[Admissible explanans](../epistemology/objects/task/admissible-explanans.md) $\lambda$** | only to bound the explanans further, because proportionality with the phenomenon selects the bound when $\lambda$ is left unset | Which kinds of variables may enter the explanans? | compositional level; substrate dependence | levels of mechanisms [craver2007]; universality [batterman2000] |
+| **[Required accuracy](../epistemology/objects/task/epistemic-task.md#^required-accuracy) $\tau$** | always, and `not-applicable` when the answer is matched against no measurement | Which observables of the target must the answer reproduce, which of its structures must correspond, and to what accuracy? | qualitative agreement; order of magnitude; a stated numeric bound; structural correspondence only. Within a tolerance, `answer` names the candidate's value and `target` the observable that it reproduces. Each output and each structure carries a justification stating why the question demands that particular correspondence. | fidelity criteria [weisberg2013]; adequacy for purpose [parker2020] |
+| **[Proof obligations](../epistemology/objects/task/epistemic-task.md#^proof-obligations) $\omega$** | when the answer must derive a statement rather than match a measurement | Which implication must the answer establish, and in which direction? | Per obligation: the antecedent and the consequent, each as expressions over the declared observables. A converse counts as a separate obligation. | explanation by mathematical proof [lange2017] |
 
 > [!HINT] Practical use
 > Once a candidate exists, it is checked against the required accuracy by the [fidelity test](../epistemology/objects/answer/satisfaction-conditions.md).
 
 > [!NOTE]
-> Each dimension is developed in its own note, linked from its row. The required accuracy and the proof obligations have no note yet, because each row holds its whole specification.
+> Each dimension is developed in the theory, linked from its row: the first four in notes of their own, and the required accuracy and the proof obligations in the note on the epistemic task.
 
 - **The demand of a problem bounds the aim of each question that serves it.** A question that serves a problem takes one of the aims that the [demand table](../epistemology/objects/problem/problem-types.md) admits for the type of result, and a checker can test that bound once the demand of the problem carries its type.
 
@@ -48,7 +48,7 @@ Because an aim fixes the product that an answer must deliver, the aim also deter
 
 ## Admissible explanans
 
-Two independent axes supply the options for the level $\lambda$. In addition, a justification records why the answer is bound to the options chosen: ^level-axes
+Two independent axes supply the options for the bound on the explanans $\lambda$. In addition, a justification records why the answer is bound to the options chosen: ^level-axes
 
 | Specification | When it is required | Varied feature | Options | Examples | Source |
 | ------------- | ------------------- | -------------- | ------- | -------- | ------ |

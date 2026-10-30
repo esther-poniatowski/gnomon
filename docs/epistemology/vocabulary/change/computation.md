@@ -34,22 +34,22 @@ A **computation** is described at three levels [marr1982]:
 
 The term "computing" sets three requirements on the [definitions of process and event](process-event-history.md).
 
-- **The state space can be abstract.** A computation is defined over the states of an automaton. The abstract states are related to the physical states by an *implementation map* $\pi$ that commutes with the dynamics: $\pi\circ\varphi_{\mathrm{phys}}=\varphi_{\mathrm{abs}}\circ\pi$. ^implementation-map
-- **The implementation map must be constrained.** Without further constraints on $\pi$, every open system implements every finite automaton [putnam1988]. Counterfactual and causal constraints on $\pi$ block this result [chalmers1996], and so does a mechanistic account of computation [piccinini2015].
+- **The state space can be abstract.** A computation is defined over the states of an automaton. The abstract states are related to the physical states by an *implementation map* $\psi$ that commutes with the dynamics: $\psi\circ\varphi_{\mathrm{phys}}=\varphi_{\mathrm{abs}}\circ\psi$. ^implementation-map
+- **The implementation map must be constrained.** Without further constraints on $\psi$, every open system implements every finite automaton [putnam1988]. Counterfactual and causal constraints on $\psi$ block this result [chalmers1996], and so does a mechanistic account of computation [piccinini2015].
 - **A process type can be individuated by its function.** At the computational level, a computation is identified by its input–output function. At the algorithmic level, it is identified by its sequence of abstract states [marr1982].
 
-With these requirements, "computing" is a [process](process-event-history.md#^process) type at the algorithmic level: an equivalence class of physical histories under $\pi$. "Computing $f(3)$" is an [event](process-event-history.md#^event), since it culminates in the output. Computing is also an [activity](mechanistic-activity.md) in the mechanistic sense, since it has bearers and produces changes.
+With these requirements, "computing" is a [process](process-event-history.md#^process) type at the algorithmic level: an equivalence class of physical histories under $\psi$. "Computing $f(3)$" is an [event](process-event-history.md#^event), since it culminates in the output. Computing is also an [activity](mechanistic-activity.md) in the mechanistic sense, since it has bearers and produces changes.
 
 ## Distinctions
 
 - **Computing is a process, and the function computed is a static map.** The term "computation" names both objects. Computing unfolds along a course and falls in the process class. The function computed has no course: a record states it as a law with the role *input–output*.
-- **A canonical computation is realized by several mechanisms.** Divisive normalization computes $y_j=\gamma\, a_j^n/(s^n+\sum_k a_k^n)$, where $a_j$ is the drive of unit $j$, $s$ a semisaturation constant, and $\gamma$ and $n$ positive constants [carandini2012]. Different circuits compute this function in different systems [carandini2012]. Therefore, a claim about the function computed does not fix a mechanism, and a [mechanistic model](../regularities/mechanism-and-mechanistic-model.md) of one circuit does not, by itself, explain the same computation in another circuit.
+- **A canonical computation is realized by several mechanisms.** Divisive normalization computes $y_i=\gamma\, a_i^n/(s^n+\sum_{i'} a_{i'}^n)$, where $a_i$ is the drive of unit $i$, $s$ a semisaturation constant, and $\gamma$ and $n$ positive constants [carandini2012]. Different circuits compute this function in different systems [carandini2012]. Therefore, a claim about the function computed does not fix a mechanism, and a [mechanistic model](../regularities/mechanism-and-mechanistic-model.md) of one circuit does not, by itself, explain the same computation in another circuit.
 - **The three levels of a computation are levels of description.** Each level describes the same system in its own vocabulary, so each level is a *level of description* in the [vocabulary of levels](../quantities/scale-and-level.md). None of the three is a level of organization, since no level of a computation is a part of another level.
 
 ## Relations to the method
 
 - **The normalization map is a law, and the relaxation that realizes it is a process.** The concept under which each item falls is listed among the [representational items and their concepts](../representations/representation-and-encoding.md#^decision-table).
-- **A computation stated at an abstract level requires its implementation map.** Each abstract variable is an [aggregate](../../objects/subject/target-system.md#^aggregate-variables) whose defining map is $\pi$, so the abstract variables are functions on the physical state space.
+- **A computation stated at an abstract level requires its implementation map.** Each abstract variable is an [aggregate](../../objects/subject/target-system.md#^aggregate-variables) whose defining map is $\psi$, so the abstract variables are functions on the physical state space.
 
 ---
 ## Sources

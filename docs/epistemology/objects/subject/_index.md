@@ -13,4 +13,4 @@ Defines the objects that a research question is about, the first layer of the sp
 - [Target system](target-system.md): delimits the system that a question concerns
 - [Phenomenon](phenomenon.md): defines the behavior of the system that a question addresses
 - [Contrast](contrast.md): guides the choice of the alternatives against which a phenomenon is questioned
-- [Domain of conditions](domain.md): defines the conditions that a question holds fixed
+- [Domain of conditions](domain.md): defines the restrictions that a question imposes on the values admitted about its system

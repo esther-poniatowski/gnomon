@@ -35,7 +35,7 @@ A **history** is the trajectory of a system along a declared course, such as tim
 
 The definition of a process as a trajectory of one thing fails on "raining" in three respects.
 
-- **"Raining" has no single bearer.** "It is raining" places a feature without naming a particular that bears it [strawson1959]. Choosing the atmosphere as the system restores a bearer. However, this choice reverses the order of definition: the process defines the system. A field formalization avoids the reversal. The precipitation rate $r(x,t)$ is defined at each point $x$, and the region where it rains is the set where $r>0$.
+- **"Raining" has no single bearer.** "It is raining" places a feature without naming a particular that bears it [strawson1959]. Choosing the atmosphere as the system restores a bearer. However, this choice reverses the order of definition: the process defines the system. A field formalization avoids the reversal. The precipitation rate $r(z,t)$ is defined at each point $z$ of space, and the region where it rains is the set where $r>0$.
 - **A trajectory cannot mark the difference between a process and an event.** Every trajectory is bounded by its two end times. The distinction lies in the behavior of the predicate that describes the trajectory when the segment is restricted [vendler1957] [mourelatos1978].
 - **A process can itself change.** "The rain is getting heavier" attributes a change to the process. One account concludes that processes are continuants [stout1997], and that conclusion is opposed [steward2013]. A formal reply keeps the occurrent view: raining is the accumulation of precipitation at a sustained non-zero rate $r$, and "getting heavier" is the process $\dot r>0$ on that rate.
 
@@ -43,7 +43,7 @@ A second test case, "computing", requires an abstract state space and an impleme
 
 ## Revised definitions
 
-The definitions are stated relative to a **level of description**. The level fixes a state space $\mathcal{X}$. When the level is abstract, $\mathcal{X}$ is the codomain of the [implementation map](computation.md#^implementation-map) $\pi$.
+The definitions are stated relative to a **level of description**. The level fixes a state space $\mathcal{X}$. When the level is abstract, $\mathcal{X}$ is the codomain of the [implementation map](computation.md#^implementation-map) $\psi$.
 
 The predicates range over the segments of a declared course, at a declared grain:
 

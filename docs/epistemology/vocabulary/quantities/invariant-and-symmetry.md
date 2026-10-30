@@ -25,7 +25,7 @@ The criterion of invariance recurs in several notes of this folder, each time wi
 | [Law](../regularities/law.md) in the interventionist sense | interventions on the variables of the law, over some range | the truth of the law statement | [woodward2003] |
 | Symmetry of a law | a group of transformations of the state space, such as translations in time | the form of the dynamic | [suppes2002] |
 | [Pattern](../regularities/pattern-and-phenomenon.md) | the passage from one instance of a set to another | the feature shared by the instances | — |
-| [Implementation of a computation](../change/computation.md#^implementation-map) | the map $\pi$ from physical to abstract states | the abstract dynamic, commuting with $\pi$ | — |
+| [Implementation of a computation](../change/computation.md#^implementation-map) | the map $\psi$ from physical to abstract states | the abstract dynamic, commuting with $\psi$ | — |
 
 ## Distinctions
 

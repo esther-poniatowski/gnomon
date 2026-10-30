@@ -3,30 +3,29 @@ tags:
   - theory
 index: "[Question](docs/epistemology/objects/question/_index.md)"
 aliases:
-  - Specifying an inquiry
+  - Specification of a question
 ---
-# Specifying an inquiry
+# Specification of a question
 
-> [!QUESTION] Goal: into which layers do the decisions of a research objective fall, and what does each layer decide?
+> [!QUESTION] Goal: which layers of decision specify a question, what does each layer decide, and what follows from those decisions for the answers of the question?
 
-> [!DANGER] Philosophy of science offers no single canonical decomposition of an inquiry: the layers of specification combine several traditions.
+> [!DANGER] Philosophy of science offers no single canonical decomposition of a question: the layers of specification combine several traditions.
 
 ## Layers of specification
 
-A research objective is specified in four layers, each with a **distinct logical role**:
+A [question](question.md) $Q$ is specified by three layers, each with a **distinct logical role**: ^three-layers
 
-| Layer of specification                                                   | Question                                                                   | Typical concepts                                                                                                                                                                                           |
-| ------------------------------------------------------------------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1. [Subject of inquiry](../subject/subject-of-inquiry.md)**                       | What objects is the inquiry about?                                         | target system $S$, phenomenon/explanandum $P$, contrast class $X$, domain of conditions $D$                                                                                                                |
-| **2. [Epistemic task](../task/epistemic-task.md)**                               | What *kind* of knowledge or *achievement* is sought?                       | epistemic aim $A$ (description vs prediction vs explanation vs exploration)<br>relevance relations $R$ (causal vs mechanistic vs mathematical)<br>modal status $\mu$ (how-actually vs how-possibly)<br>admissible explanans $\lambda$<br>required accuracy $\tau$ |
-| **3. [Epistemic and pragmatic virtues](../task/epistemic-pragmatic-virtues.md)** | What must the answer accomplish to be practically or cognitively *useful*? | unification, economy, pragmatic use, robustness, intelligibility / qualitative grasp, tractability, etc                                                                                                    |
-| **4. [Answer form](../answer/answer-form.md) and [conditions of satisfaction](../answer/satisfaction-conditions.md)** | What form must the answer take, and which tests must it pass?      | claim, grounds and their roles, route, domain, status, erotetic relation<br>aim block, with the factors $E$ for an explanation<br>model, binding and computed comparison, when the route runs on a model<br>admissibility, warrant and appraisal |
+$$Q\ \text{specified by}\ \langle\Sigma,\ T,\ \mathcal{V}\rangle .$$
 
-The components of each layer are denoted by letters, each with one meaning fixed across the notes by a shared [notation registry](../../vocabulary/notation/notation.md).
+| Layer of specification | Question that the layer answers | Components |
+| --- | --- | --- |
+| **1. [Subject of inquiry](../subject/subject-of-inquiry.md)** $\Sigma$ | Which objects does the question concern? | target system $S$, phenomenon $P$, contrast $X$, domain of conditions $D$ |
+| **2. [Epistemic task](../task/epistemic-task.md)** $T$ | Which *kind* of knowledge does the question seek? | [epistemic aim](../task/epistemic-aim.md) $A$, such as description, exploration, prediction, explanation, modal knowledge or model knowledge<br>[requested relation](../task/requested-relation.md) $R$, one of seven, from causal dependence under interventions to mathematical derivation<br>[modal strength](../task/modal-strength.md) $\mu$: actual, possible or necessary<br>[bound on the explanans](../task/admissible-explanans.md) $\lambda$<br>required accuracy $\tau$: the metric and the tolerance within which a value of the answer must match the target<br>proof obligations $\omega$: the statements that the answer must derive |
+| **3. [Epistemic and pragmatic virtues](../task/epistemic-pragmatic-virtues.md)** $\mathcal{V}$ | Which qualities does the question weigh among its answers? | the virtues weighed, such as unification, robustness, intelligibility or tractability, each with its [standing](../task/epistemic-pragmatic-virtues.md#^virtue-standing): constitutive or preferred |
 
-**Subject (1) versus Task (2)**. A research question combines the [subject of inquiry](../subject/subject-of-inquiry.md) $\Sigma$ with an [epistemic task](../task/epistemic-task.md) $T$: 
-$$Q=\langle \Sigma,T\rangle$$
-The task is fixed separately because the same subject can admit several types of answer. In particular, the epistemic aim selects the interrogative word.
+The symbols of the layers, each with one meaning across the notes, are registered in the [notation](../../vocabulary/notation/notation.md).
+
+**Subject (1) versus task (2).** A question combines its subject $\Sigma$ with an epistemic task $T$. The task is fixed separately because the same subject can admit several types of answer. In particular, the epistemic aim selects the interrogative word.
 
 *Example.* One subject yields a different question under each epistemic aim:
 
@@ -37,10 +36,21 @@ The task is fixed separately because the same subject can admit several types of
 Three results of the literature support separating the subject from the task:
 
 - In erotetic logic, a question divides into a *subject*, presenting the alternatives, and a *request*, specifying which of them the answer must select [belnap1976].
-- A why-question separates its topic, namely its *explanandum* and its *contrast class*, from the sort of information that it requests. The context of the question fixes that sort of information through a *relevance relation* [vanfraassen1980].
+- A why-question separates its topic, namely its *explanandum* and its *contrast class*, from the sort of information that it requests. The context of the question fixes that sort of information through a *relevance relation*, which corresponds to the requested relation of this method [vanfraassen1980].
 - More broadly, an epistemic achievement, such as explanation or understanding, is distinguished from the objects that it bears on. Understanding, however, is not an [aim](../task/epistemic-aim.md#^understanding) of the task, since it bears on a product of the inquiry without fixing the type of its answers.
 
-**Task (2) versus Answer form and conditions of satisfaction (4)**. Two results of the literature support separating the task from the tests of an answer:
+**Task (2) versus virtues (3).** The task fixes which answers the question admits, whereas the virtues weigh qualities that the task does not demand. A virtue marked constitutive adds a condition of admissibility. A virtue marked preferred ranks only the answers that are already admissible.
+
+## What follows from the layers
+
+Two properties of the answers follow from the three layers, so neither is a fourth layer of decision: ^layer-consequences
+
+- **The answer type.** The aim, together with the other components of the task and with the subject, fixes the type of the direct answers, as the [answer form](../answer/answer-form.md#^question-fixes-type) states.
+- **The conditions of satisfaction.** The tests that a candidate answer must pass are derived from the layers: admissibility and warrant from the subject and the task, together with the constitutive virtues, and appraisal from the preferred virtues. The [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction) state these tests.
+
+The candidate answer, by contrast, is a **product** of the inquiry: its claim is sought, not specified. The specification fixes the type that the answer must take and the tests that it must pass, and the inquiry then produces candidates of that type.
+
+Two results of the literature support separating the specification of a question from the assessment of its answers:
 
 - A model is evaluated for a purpose in two steps. First, the purpose and its criterion of success are fixed. Second, the model is assessed for its reliability in meeting that criterion [parker2020].
 - An explanatory question is specified separately from the rules that evaluate its candidate answers [vanfraassen1980].
@@ -53,13 +63,13 @@ The fields by which a question names its problem and its linked questions are do
 
 ## Goals of the specification
 
-The specification of an inquiry serves four goals. ^specification-goals
+The specification of a question serves four goals. ^specification-goals
 
 | Goal                           | Effect of the specification                                                                                                                                  | Support                                                                                                                                |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | **Transparency**               | The inquiry commits to explicit objectives, so that its claims can be checked and its analyses reproduced.                                                   | predictions stated before data collection separate tests from post hoc accounts [nosek2018]                                                 |
 | **Operationalization**         | Once the system is specified, it can be partly formalized as a repertoire of variables and relations that later analyses use.                                         | a formal model forces the modeler to specify intuitions that otherwise stay unexamined [guest2021]                                          |
-| **Success conditions**         | The specification fixes the [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction): the tests that each candidate answer must pass. These tests decide which candidates are admissible and which are adequate. | a question is determined by the set of its possible answers [hamblin1958], and a model is evaluated by its adequacy for a purpose [parker2020] |
+| **Success conditions**         | The layers fix the [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction): the tests that each candidate answer must pass. These tests decide which candidates satisfy the question, and how the answers that satisfy it are appraised. | a question is determined by the set of its possible answers [hamblin1958], and a model is evaluated by its adequacy for a purpose [parker2020] |
 | **Guidance towards an answer** | Once analyzed, the question yields the research actions that answer it and serve the other goals.                                                  | a question can be answered through the auxiliary questions that it generates [wisniewski2013]                                               |
 
 ---

@@ -3,7 +3,6 @@ tags:
   - theory
 index: "[Epistemic task](docs/epistemology/objects/task/_index.md)"
 aliases:
-  - Specifying the modal strength
   - Modal strength
 ---
 # Modal strength
@@ -14,11 +13,11 @@ The modal strength is the third dimension of the [epistemic task](epistemic-task
 
 | Modal strength              | Claim the answer must establish                                                                          | Evidence route                                                                                     | Source                                                               |
 | --------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| **actual** (how-actually)   | the claim *holds* of the target system; for an explanation, its factors are *realized* there and *actually* produce the phenomenon | measuring or intervening on the system, or, for a formal target, deriving the claim from its laws | [craver2006]; [verreaultjulien2019]                                  |
+| **actual** (how-actually)   | the claim *holds* of the target system; for an explanation, its factors are *realized* there and *actually* produce the phenomenon | measuring or intervening on the system, or, for a formal target, whose admitted laws define the system completely, deriving the claim from those laws | [craver2006]; [verreaultjulien2019]                                  |
 | **possible** (how-possibly) | the claim is *consistent* with the laws of the system and the domain; for an explanation, its factors *would* produce the phenomenon | exhibiting a model that satisfies those laws and yields the phenomenon                       | [craver2006]; [verreaultjulien2019]                                  |
 | **necessary**               | *no alternative* consistent with those laws produces a foil                                      | impossibility proof, or exhaustive exclusion over the class of alternatives that those laws admit                               | [mathematical derivation](requested-relation.md), as a requested relation |
 
-- **How-possibly and how-actually differ by the *claim* that a model supports.** A model provides evidence for a claim, either a possible explanation or an actual one [verreaultjulien2019]. One model supports either claim, depending on the part of its content established for the target.
+- **How-possibly and how-actually differ by the *claim* that a model supports.** A model provides evidence for a claim, either a possible explanation or an actual one [verreaultjulien2019]. One model supports either claim, depending on the part of its content shown to hold of the target.
 	
 - **Constraints move an answer along the continuum from how-possibly to how-actually.** A how-possibly model conjectures components and activities without showing that they occur in the target. Empirical constraints, once added, move the model towards a how-actually answer [craver2006].
 	

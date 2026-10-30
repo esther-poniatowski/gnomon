@@ -3,14 +3,13 @@ tags:
   - theory
 index: "[Epistemic task](docs/epistemology/objects/task/_index.md)"
 aliases:
-  - Specifying the admissible explanans
   - Admissible explanans
 ---
 # Admissible explanans
 
 > [!QUESTION] Goal: which variables may an explanans contain, and along which axes is that bound set?
 
-The level $\lambda$ fixes which **variables an admissible explanans may contain**. The level forms the fourth dimension of the [epistemic task](epistemic-task.md), the layer that sets the kind of knowledge sought.
+The bound on the explanans $\lambda$ fixes which **variables an admissible explanans may contain**: it is the set of variables from which an explanans may be drawn. The bound forms the fourth dimension of the [epistemic task](epistemic-task.md), the layer that sets the kind of knowledge sought.
 
 *Example.* One gamma oscillation admits explanantia at three levels:
 
@@ -18,9 +17,9 @@ The level $\lambda$ fixes which **variables an admissible explanans may contain*
 - spike timing in an excitatory–inhibitory loop;
 - a mean-field equation for population rates.
 
-The options of the level $\lambda$ along its two axes, compositional level and substrate dependence, are listed in the [epistemic task of a question](../../../specification/question-task.md#^level-axes).
+The options of the bound $\lambda$ along its two axes, compositional level and substrate dependence, are listed in the [epistemic task of a question](../../../specification/question-task.md#^level-axes).
 
-- **The level is optional.** An unstated level *defaults* to the [grain of the phenomenon](../subject/phenomenon.md#^resolution-proportionality) by proportionality. Proportionality requires the explanans variables to covary with the explanandum, and to carry no irrelevant detail [woodward2010]. A stated level, by contrast, records a *stipulation* of the research program, for instance that only explanations in terms of circuits count.
+- **The bound is optional.** An unstated bound *defaults* to the [grain of the phenomenon](../subject/phenomenon.md#^resolution-proportionality) by proportionality. Proportionality requires the explanans variables to covary with the explanandum, and to carry no irrelevant detail [woodward2010]. A stated bound, by contrast, records a *stipulation* of the research program, for instance that only explanations in terms of circuits count.
 
 - **Compositional levels are local.** Compositional levels are internal to one mechanism: they order into a part–whole hierarchy the parts that are constitutively relevant to its behavior [craver2007]. The options therefore derive from the constituents declared for the target system.
 	
@@ -34,9 +33,9 @@ The options of the level $\lambda$ along its two axes, compositional level and s
 	
     A question that links two levels of analysis takes the option `mapping`: the answer gives both descriptions and maps one onto the other. A further level, learning, has been added for trained systems [poggio2012]. A question about learning needs no value on the substrate axis, because its phenomenon is the acquisition itself (for instance, "training produces this algorithm").
 
-- **The level bounds the terms of the answer without selecting any.** The terms $V$ of the proposed model belong to the [elements of the model on which a candidate answer rests](../../../specification/model.md#^model-elements). The level $\lambda$ only delimits the set from which these terms are drawn.
+- **The bound delimits the terms of the answer without selecting any.** The terms $V$ of the proposed model belong to the [elements of the model on which a candidate answer rests](../../../specification/model.md#^model-elements). The bound $\lambda$ only delimits the set from which these terms are drawn.
 
-- **The level is fixed by the epistemic task, not by the [subject of inquiry](../subject/subject-of-inquiry.md).** The level restricts the admissible answers without naming an object of the question. Beyond its topic and its contrast, a why-question constrains its answers only through the relevance relation [vanfraassen1980]. The level $\lambda$ therefore qualifies the relation $R$.
+- **The bound is fixed by the epistemic task, not by the [subject of inquiry](../subject/subject-of-inquiry.md).** The bound restricts the admissible answers without naming an object of the question. Beyond its topic and its contrast, a why-question constrains its answers only through the kind of information that it requests [vanfraassen1980], which the [requested relation](requested-relation.md) $R$ fixes. The bound $\lambda$ therefore qualifies the relation $R$.
 
 ---
 ## Sources

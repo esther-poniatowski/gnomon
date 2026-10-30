@@ -4,26 +4,25 @@ tags:
   - wip
 index: "[Answer and assessment](docs/epistemology/objects/answer/_index.md)"
 aliases:
-  - Specifying the model and its binding
   - Model and binding
 ---
 # Model and binding
 
 > [!QUESTION] Goal: how does a model stand in for its target, and how is a value of the model carried to a value of the target?
 
-A [candidate answer](answer-form.md) is one typed claim with its grounds. When the route of the answer runs on a model, the model and its relation to the target are stated in records of their own, so that several answers can share them. Four records divide the work:
+A [candidate answer](answer-form.md) is one typed claim with its grounds. When the route of the answer runs on a model, the model and its relation to the target are stated in records of their own, so that several answers can share them. Three records and one computed object divide the work:
 
 - the **model** declares the units, the quantities and the laws of a system that stands in for the target;
 - the **binding** states which inferences from the model to the target its asserter licenses;
 - the **key** states one shared, versioned map between the two sides of a binding;
 - the **comparison** is computed from a binding, a version of the data and the tolerance of the question, and is never recorded by hand.
 
-The [model record](../../../specification/model.md), the [binding record](../../../specification/binding.md) and the [key record](../../../specification/key.md) document the fields of the first three records.
+The [model record](../../../specification/model.md), the [binding record](../../../specification/binding.md) and the [key record](../../../specification/key.md) document the fields of the three records.
 
 > [!IMPORTANT] When an answer needs a model and a binding
 > The object on which the route of an answer runs decides which records the answer needs. ^when-a-binding
-> - **The route runs on the target itself.** A measurement or an estimation runs on the data of the [phenomenon](../subject/phenomenon.md), and a derivation from the [laws admitted in the background](../knowledge/background.md#^laws) of a formal target runs on the declarations of the target. The claim is then stated over the symbols of the target and of the phenomenon, and the answer needs neither a model record nor a binding.
-> - **The route runs on a model other than the target.** The claim is stated over the symbols of the model, and a binding of that model to the phenomenon carries the claim to the target. The warrant test of [fidelity](satisfaction-conditions.md) is computed through that binding.
+> - **The route runs on the target description.** The target description is the target specification with its background, and no model stands in for it. A measurement or an estimation runs on the data of the [phenomenon](../subject/phenomenon.md), and a derivation from the [laws admitted in the background](../knowledge/background.md#^laws) of a formal target runs on the declarations of the target. The claim is then stated over the symbols of the target and of the phenomenon, and the answer needs neither a model record nor a binding.
+> - **The route runs on a model that stands in for the target.** The claim is stated over the symbols of the model, and a binding of that model to the phenomenon carries the claim to the target. The warrant test of [fidelity](satisfaction-conditions.md) is computed through that binding.
 > - **The route runs on a model, and the claim bears only on that model or on a formal class.** The answer then [declares its use](answer-form.md#^declared-use) instead of a binding. A claim of actual strength about an empirical target, a prediction or a description of a target never takes this route.
 
 ## The model
@@ -38,7 +37,7 @@ The [model record](../../../specification/model.md), the [binding record](../../
 
 ## The binding
 
-A binding relates a model in use to a phenomenon, or to its data, and records the surrogative inferences from the model to the target that its asserter licenses [suarez2004]. The binding denotes the phenomenon, pairs a feature that the model exemplifies with a feature imputed to the target, and states the key that carries the one onto the other [friggnguyen2020]. Each binding therefore records the inferences that it licenses, and stays neutral between the theories of what makes a model represent.
+A binding relates a model in use to a phenomenon, or to its data, and records the surrogative inferences from the model to the target that its asserter licenses [suarez2004]. These inferences are the theoretical hypotheses that relate a model to a real system [giere1988], so a consequence of the model becomes a claim about the target through the binding that licenses it. To state a binding, the method adopts the vocabulary of one account of representation [friggnguyen2020]: the binding denotes the phenomenon, pairs a feature that the model exemplifies with a feature imputed to the target, and states the key that carries the one onto the other. That vocabulary is a choice of the method, not a settled result of the literature. A binding records the inferences that it licenses, not the grounds that make them sound, so it stays neutral among the accounts of the relation that makes a model represent its target.
 
 - **A feature pair is computed or argued.** A pair is *computed* when a key maps the feature of the model onto a value or a label that the data of the target determine, as for a quantity, a pattern or a regime. A pair is *argued* when no data determine it, as for the membership of the target in a universality class, argued from its symmetries and its dimension, or for a modal profile. An argued pair cites its argument as a ground of the answer with the role `warrant`, and the law-warrant test judges that ground. The comparison reports an argued pair without computing it. ^pair-modes
 
@@ -54,19 +53,20 @@ Each comparison also reports three facts about its own conditions: ^comparison-r
 
 - **commitment**: whether the binding was committed before the version of the data;
 - **calibration treatment**: how the comparison treated the data already used to fit a calibration parameter: `excluded`, `cross-validated`, `bayesian`, or `reused` when the data are compared again without any correction. Using calibration data for confirmation is legitimate or not depending on the method [steelewerndl2013], so the treatment is reported rather than assumed, and the [rules on the reports](satisfaction-conditions.md#^fidelity-reads-reports) state which treatments count;
-- **circularity**: a flag raised when a model declared by the [data model of the phenomenon](../subject/phenomenon.md#^data-model-declarations) overlaps with the model or the grounds of the answer, or with a key of the binding, since an observation operator can contain the model under test. Data models can contain the models under test [bokulichparker2021], and a comparison that ignores the overlap can be circular.
+- **circularity**: a flag raised when a model declared by the [data model of the phenomenon](../subject/phenomenon.md#^data-model-declarations) overlaps with the model or the grounds of the answer, or with a key of the binding, since an observation operator, the map from the state of a model to the quantities that the data record, can contain the model under test. Data models can contain the models under test [bokulichparker2021], and a comparison that ignores the overlap can be circular.
 
 - **The comparison is recomputed, never edited.** The inputs of a comparison fix its output, so an assessment that cites a comparison records only those inputs, and any reader recomputes the same output. A revised binding or a new version of the data yields a new comparison, and the earlier comparisons stay as they were. ^comparison-recomputed
 
-- **Adequacy is relative to a purpose.** A comparison judges the model for the purpose that the question states through its feature pairs and its tolerance, not in general [parker2020]. A model adequate for one question can therefore fail for another question about the same phenomenon. ^adequacy-for-purpose
+- **Adequacy for purpose is judged per question.** A comparison judges the model for the purpose that the question states through its feature pairs and its tolerance, not in general [parker2020]. A model adequate for one question can therefore fail for another question about the same phenomenon. ^adequacy-for-purpose
 
 ---
 ## Sources
 
 > [!NOTE] Status of the claims
-> - **Established:** the inferential view of representation, the vocabulary of denotation, exemplification, key and imputation, the separation of structural discrepancy from observation error, and the dependence of data on models, as cited.
+> - **Established:** the surrogative character of inferences from a model to its target, the theoretical hypothesis that relates a model to a real system, the vocabulary of denotation, exemplification, key and imputation within its own account, the separation of structural discrepancy from observation error, and the dependence of data on models, as cited.
 > - **Proposals:**
-> 	- the division into four records, with the model, the binding and the key shared by several answers;
+> 	- the division into three records and one computed object, with the model, the binding and the key shared by several answers;
+> 	- the adoption of the vocabulary of denotation, exemplification, key and imputation to state a binding, which stays neutral among the accounts of representation;
 > 	- the rule that decides, from the object on which the route runs, whether an answer needs a binding;
 > 	- the distinction between a map that defines a term of the model and a binding that asserts a match with the target;
 > 	- the types of a feature pair, and its two modes, computed or argued;
@@ -85,6 +85,7 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [brynjarsdottir2014] ◐ Brynjarsdóttir & O'Hagan, "Learning about physical parameters: the importance of model discrepancy", *Inverse Problems* 30, 114007, 2014
 - [craver2007] ◐ [Craver, *Explaining the Brain*, OUP, 2007](https://philpapers.org/rec/CRAETB-2)
 - [friggnguyen2020] ◐ Frigg & Nguyen, *Modelling Nature: An Opinionated Introduction to Scientific Representation*, Springer, 2020; denotation, exemplification, key and imputation
+- [giere1988] ◐ [Giere, *Explaining Science: A Cognitive Approach*, University of Chicago Press, 1988](https://press.uchicago.edu/ucp/books/book/chicago/E/bo3622319.html); the theoretical hypothesis, which asserts a relation between a model and a real system, checked through secondary sources
 - [gupta2023] ✓ [Gupta & Mackereth, "Definitions", _SEP_, revised 2023](https://plato.stanford.edu/entries/definitions/), §2.3 on conservativeness and eliminability
 - [kaplan2011] ◐ [Kaplan & Craver, "The explanatory force of dynamical and mathematical models in neuroscience: a mechanistic perspective", *Philosophy of Science* 78(4), 601–627, 2011](https://doi.org/10.1086/661755); the model-to-mechanism-mapping requirement, checked through the abstract
 - [kennedyohagan2001] ◐ Kennedy & O'Hagan, "Bayesian calibration of computer models", *Journal of the Royal Statistical Society B* 63(3), 425–464, 2001

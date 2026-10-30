@@ -3,14 +3,11 @@ tags:
   - index
 index: "[Vocabulary](docs/epistemology/vocabulary/_index.md)"
 aliases:
-  - Definitions of bearers and systems
+  - Vocabulary of bearers and systems
 ---
 # Bearers and systems
 
 Fixes the senses of the terms that name the bearer of a description and its role relative to a boundary, and the criteria that separate those terms.
-
-## Framing
-
 
 ## Bearers
 

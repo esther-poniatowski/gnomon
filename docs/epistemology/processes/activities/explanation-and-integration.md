@@ -20,7 +20,7 @@ The activities of this family output an explanation or a relation between theori
 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
-| `explanation` | `phenomenon`, `model`, `question` | `explanation` | deductive | justification |
+| `explanation` | `phenomenon`, `model` (optional), `question` | `explanation` | deductive | justification |
 | `unification` | `explanation` (several) | `inter-theory-relation` | deductive | both |
 | `reduction` | `model` (two theories) | `inter-theory-relation` | deductive | justification |
 | `integration` | `model` (several fields or levels) | `inter-theory-relation` | non-inferential | both |
@@ -29,13 +29,14 @@ The activities of this family output an explanation or a relation between theori
 
 | Activity | Operation | The test `norm.<activity-id>` passes when |
 | --- | --- | --- |
-| `explanation` | show that the explanans of the model bears to the phenomenon the relation requested by the question | the requested relation holds between the explanans and the explanandum (e.g. deductive subsumption, causal production, invariant dependence) [hempel1948] [salmon1984] [woodward2003] |
+| `explanation` | show that the explanans, drawn from a model or from the target description, bears to the phenomenon the relation requested by the question | the requested relation holds between the explanans and the explanandum (e.g. deductive subsumption, causal production, invariant dependence) [hempel1948] [salmon1984] [woodward2003] |
 | `unification` | derive many explananda from a small set of argument patterns | the explanations are derived from fewer argument patterns than before [kitcher1989] |
 | `reduction` | derive the laws of one theory from the laws of another, with bridge laws that connect their terms | the derivation is valid, and the bridge laws are true or stipulated [nagel1961] |
 | `integration` | connect theories of different fields or levels by relations such as part–whole, structure–function or cause–effect, without reducing one to the other | interfield consistency holds: the stated relations agree with the accepted results of each field [darden1977] [mitchell2003] |
 
 ## Distinctions
 
+- **An explanation needs a model only when its route runs on one.** When the route of the answer runs on the target description, with no stand-in, the explanans is drawn from the admitted laws and the declarations of the target, and no model enters the step. The input `model` of explanation is therefore optional.
 - **Abduction and explanation are separate activities.** [Abduction](ampliative-inference.md) proposes a candidate hypothesis and licenses its pursuit. Explanation works inside the answer schema of a question, and judges whether an explanans bears the requested relation to the phenomenon.
 - **Reduction outputs a relation, and the derivation is its evidence.** The output of reduction is the relation between the reduced and the reducing theory, and the derivation with bridge laws shows that the relation holds between the two theories [nagel1961].
 - **Reduction and integration differ in the theories kept.** Reduction derives one theory from another, so the reduced theory becomes dispensable in principle. Integration keeps both theories and relates them, as an interfield theory relates genetics and cytology [darden1977].

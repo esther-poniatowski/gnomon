@@ -25,13 +25,16 @@ A **claim** is a proposition put forward for evaluation. A claim carries two att
 | Term | Community | Definition | Source |
 | --- | --- | --- | --- |
 | Claim | logic, epistemology | a proposition put forward for evaluation, supportable or refutable by evidence or by proof | — |
-| Hypothesis | general usage | a claim held provisionally, while it is tested | — |
+| Hypothesis, as an attitude | general usage, this method | a claim held provisionally, while it is tested; in a record, a claim held under the attitude `hypothesized` | — |
+| Hypothesis, as an ampliative product | logic of inference | a claim whose content exceeds that of the premises from which an ampliative inference reaches it | — |
+| Hypothesis, as a target claim | this method | a claim about the target, as opposed to a consequence, which holds of a model and may fail of the target | — |
+| Resistance hypothesis | this method | the hypothesis $\eta$ that explains why the formulation of a question resists the inquiry, by a hidden assumption, a missing property or an inadequate formalism | — |
 | Theoretical hypothesis | semantic view of theories | the claim that a model is similar to a target system in specified respects and to specified degrees | [giere1988] |
 | Empirical claim | structuralist view of theories | the claim that the intended applications of a theory-element can be completed into its actual models | [balzer1987] |
 | Prediction | philosophy of science | a claim about the values of observables not yet observed, derived from a model and conditions | [hempel1948] |
 | Explanation | philosophy of science | a pair of an explanans and an explanandum, in which the explanans bears to the explanandum a relation that counts as explanatory: deductive subsumption, causal production, or another | [hempel1948]; [salmon1984] |
 
-The relations that count as explanatory are compared in the [specification of the requested relation](../../objects/task/requested-relation.md). This note does not restate that comparison.
+The relations that count as explanatory are compared in the note on the [requested relation](../../objects/task/requested-relation.md). This note does not restate that comparison.
 
 ## Distinctions
 
@@ -39,9 +42,11 @@ Three kinds of expression are often confused. Each kind adds properties to the k
 
 | Expression | Has a truth value? | General? | Supports counterfactuals and holds over a range of interventions? | Example |
 | --- | --- | --- | --- | --- |
-| [Predicate](../systems/property-attribute-predicate.md) | no | — | — | "$x$ oscillates at frequency $f$" |
+| [Predicate](../systems/property-attribute-predicate.md) | no | — | — | "$a$ oscillates at frequency $f$" |
 | Claim | yes | not necessarily | not necessarily | "this network oscillates at 40 Hz" |
 | [Law statement](../regularities/law.md) | yes | yes | yes | "the frequency of the oscillation is inversely proportional to the inhibitory time constant" |
+
+The law statement of this table is a law in the lawhood sense. A [law of a record](../regularities/law.md#^law-of-a-record) is a general claim that need not support counterfactuals.
 
 The attitude and the support of a claim take values in two closed lists: ^attitude-support
 
@@ -50,7 +55,10 @@ The attitude and the support of a claim take values in two closed lists: ^attitu
 | Attitude | the stance of the inquiry toward the claim | `entertained`, `hypothesized`, `accepted`, `retracted` |
 | Support | the grounds of the claim, independent of the attitude | `unsupported`, `informal`, `formally-proven`, `empirically-supported` |
 
-- **A hypothesis and an accepted claim differ by attitude only.** Their content can be identical: the same proposition is hypothesized while it is tested, and accepted once a revision of the belief base admits it, as the [acceptance of an answer](../../objects/task/epistemic-aim.md#^acceptance) states.
+The other statuses of an inquiry, such as the warrant of a law or the evidential status of a phenomenon, qualify other bearers along other axes, as the [table of statuses](../../foundations/inquiry-and-state.md#^status-axes) places them.
+
+- **The senses of hypothesis are told apart by the claim that each sense opposes to a hypothesis.** The attitude opposes it to an entertained or an accepted claim. The ampliative product opposes it to the premises of the inference that reaches it. The target claim opposes it to a consequence, which holds of a model. The resistance hypothesis $\eta$ bears on the formulation of a question, not on its target. The theoretical hypothesis is a target claim of one form: it states that a model resembles its target. Several senses can hold of one claim: an abduction reaches a claim about the target, and the inquiry holds that claim under the attitude `hypothesized`. The product type `hypothesis` of the epistemic activities takes one combination of these senses, as the [product types](../../processes/activities/epistemic-activities.md#^product-types) state.
+- **A hypothesis and an accepted claim differ by attitude only.** Their content can be identical: the same proposition is hypothesized while it is tested, and accepted once the researcher accepts it into the accepted knowledge $K$. The verdicts of its assessment inform that act without computing it, as the [proposed candidates](../../objects/problem/epistemic-problem.md#^candidates) state.
 - **The attitude and the support vary independently.** *Examples*: a claim can be hypothesized with informal support, or accepted with no more than informal support. A formally proven claim can be retracted when its assumptions turn out to be false of the target.
 - **An explanation, as a product, is a claim.** Its content is that the explanans $E$ explains the phenomenon $P$ under the requested relation $R$. Therefore, the explanation carries an attitude and a support, as any claim does. The activity of explaining is typed in the [taxonomy of epistemic activities](../../processes/activities/epistemic-activities.md).
 - **A prediction and an explanation can share their logical form.** In the deductive-nomological model, both derive the explanandum from laws and conditions. The two differ in the epistemic status of the explanandum, already known or not yet known [hempel1948]. Accounts that require a causal relation separate the two, since a prediction may rest on a symptom that does not cause the predicted event [salmon1984].

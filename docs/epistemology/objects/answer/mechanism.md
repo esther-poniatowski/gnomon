@@ -4,7 +4,7 @@ tags:
 index: "[Answer and assessment](docs/epistemology/objects/answer/_index.md)"
 aliases:
   - Mechanism
-  - Specifying a mechanistic answer
+  - Mechanistic answer
 ---
 
 # Mechanistic answer
@@ -17,7 +17,7 @@ aliases:
 
 The senses of mechanism and the test of a mechanistic model are stated in the [vocabulary of mechanism](../../vocabulary/regularities/mechanism-and-mechanistic-model.md). Each aspect of a mechanistic answer is defined in the note named in the column *Defined in*. For each aspect, this note fixes the content required of a mechanistic answer and the formalism of that content.
 
-A mechanistic answer is an [explanation](answer-form.md#^explanation-block) whose [requested relation](../task/requested-relation.md) is causal-mechanistic or constitutive. Its components, activities and organization are those of the [model](../../../specification/model.md#^model-elements) on which the answer rests, and the components, activities and organization that make the difference to the phenomenon are the factors $E$ of its explanatory block, by the mapping onto a mechanism that the [answer form](answer-form.md) states.
+A mechanistic answer is an [explanation](answer-form.md#^explanation-block) whose [requested relation](../task/requested-relation.md) is causal-mechanistic production or constitutive organization. Its components, activities and organization are those of the [model](../../../specification/model.md#^model-elements) on which the answer rests, and the components, activities and organization that make the difference to the phenomenon are the factors $E$ of its explanatory block, by the mapping onto a mechanism that the [answer form](answer-form.md) states.
 
 ## Aspects of a mechanistic answer
 
@@ -35,17 +35,18 @@ A mechanistic answer and the model on which it rests state four aspects [machame
 - **The model on which the answer rests has mechanistic form, and passes the explanatory mapping when the question requests an actual explanation.** Both tests are stated for a [mechanistic model](../../vocabulary/regularities/mechanism-and-mechanistic-model.md#^mechanistic-model-test). Therefore, the explanatory mapping reads, for each component, the map from the declared constituents that the [model record](model-and-binding.md#^perspective) states, or, for a unit of the model alone, the [pair of type `component`](model-and-binding.md#^component-pairs) of the binding.
 - **Each activity is stated as an action or as an interaction.** The statement "$c_1$ inhibits $c_2$" states an *action* of $c_1$ on $c_2$. The same pair forms an *interaction* only when $c_2$ also acts on $c_1$, by the [distinction between action and interaction](../../vocabulary/change/interaction-and-cause.md#^action-interaction).
 - **The organization is stated apart from the activities.** The statement "$c_1$ inhibits $c_2$ after $c_2$ activates $c_1$, forming a delayed negative-feedback loop" states an organization, because it arranges two activities relative to each other. Each of the two activities is local, whereas the loop is a property of their arrangement, as the [vocabulary of activity](../../vocabulary/change/mechanistic-activity.md) separates them.
+- **Production and constitution relate a mechanism to its phenomenon in two ways.** In a *production*, the phenomenon is an event, and the mechanism gives its causal history, as an etiological explanation does: the entities that act include external entities $Z$, outside the target system, and their activities occur before the phenomenon [salmon1984]. These external entities are the counterparts, in the model, of the [external systems](answer-form.md#^explanans-appeals) on which the explanation draws. In a *constitution*, the phenomenon is a behavior or a capacity of the whole system, and the mechanism consists of the parts of that system, active during the phenomenon. A part is then relevant when intervening on it changes the whole and intervening on the whole changes it [craver2007]. The formalism below states a constitution first, and then the changes that a production requires. ^production-constitution
 - **The model may state its causal structure without a law of evolution.** A causal structure [need not be a dynamic](../../vocabulary/change/dynamic.md#^causal-structure), so the laws $L$ of the model that state the activities may be dependencies that support interventions.
 
 ## Formalism (proposed)
 
-> [!WARNING] No canonical mathematical notation exists in the philosophical literature. Therefore, the formalism takes its notation from the [registry shared across the framework](../../vocabulary/notation/notation.md), as does the [form of an answer](answer-form.md).
+> [!WARNING] No canonical mathematical notation exists in the philosophical literature. Therefore, the formalism takes its notation from the [registry shared across the method](../../vocabulary/notation/notation.md), as does the [form of an answer](answer-form.md).
 
 **Mechanism**. A generic mechanistic schema is a triple
 $$\langle C,L,O\rangle$$
 where:
 - $C$: components, also called entities or parts;
-- $L$: activities, each an action or an interaction;
+- $L=\{a_1,\dots,a_m\}$: activities, each an action or an interaction;
 - $O$: organization of those components and activities.
 
 **Components**: a set of objects
@@ -54,17 +55,17 @@ where each component $c_i$ has a state space $\mathcal{X}_i$, parameters $\theta
 $$x_i(t)\in \mathcal{X}_i$$
 
 **Activity**: often one term of a dynamical rule. The rule of a component $c_i$ fixes how its state changes in response to the states of the others. This rule sums the activities that change the state of $c_i$:
-$$\frac{dx_i}{dt} = F_i \left( x_i, \{x_j:j\in \mathcal{N}_i\}, \theta \right) = \sum_{\ell\in L_i} f_\ell \left( x_i, \{x_j:j\in \mathcal{N}_i\}, \theta \right)$$
+$$\frac{dx_i}{dt} = F_i \left( x_i, \{x_k:k\in \mathcal{N}_i\}, \theta \right) = \sum_{j\in J_i} f_j \left( x_i, \{x_k:k\in \mathcal{N}_i\}, \theta \right)$$
 where:
 - $x_i$ is the state of the component;
 - $\mathcal{N}_i$ collects the components that act on $c_i$ (read from the structure);
 - $F_i$ is the rule of the component;
-- $L_i\subseteq L$ collects the activities that change the state of $c_i$;
-- each term $f_\ell$ is one activity, in the sense of the [criterion of an activity term](../../vocabulary/change/mechanistic-activity.md#^activity-term), and specifies one local operation or interaction rule.
+- $J_i$ indexes the activities $a_j\in L$ that change the state of $c_i$;
+- each term $f_j$ states how the activity $a_j$ changes that state, in the sense of the [criterion of an activity term](../../vocabulary/change/mechanistic-activity.md#^activity-term), and specifies one local operation or interaction rule.
 
 **Organization**: a structure over components and activities, written as a family of typed relations:
 $$O=\{\rho_1,\ldots,\rho_m\}, \qquad \rho_k\subseteq U^{n_k}, \qquad U = C \sqcup L$$
-where each relation $\rho_k$ encodes an organizational constraint.
+where $U$ is the set of all components and all activities, kept distinct, $n_k$ is the number of terms of the relation $\rho_k$, and each relation encodes an organizational constraint.
 *Example*: the relations
 $$\rho_{\mathrm{part}}\subseteq C\times L,\qquad \rho_{\mathrm{temp}}\subseteq L\times L,\qquad \rho_{\mathrm{causal}}\subseteq L\times L$$
 may respectively encode:
@@ -75,28 +76,25 @@ may respectively encode:
 
 A typed relational structure is required because an ordinary graph with binary edges does not in general represent an organization. An organization is a non-aggregative property of several components and activities, and some of its relations have three or more terms. *Example*: two neural systems can share one graph topology and still have different dynamics, because their synaptic signs, transfer functions or intrinsic neuronal properties differ.
 
-**Relation**: a family of subsets indexed by arity, in which the member $\rho^{(a)}$ selects $a$-tuples of components:
-$$\rho=\{\rho^{(a)}\}_{a\ge1}, \qquad \rho^{(a)}\subseteq C^a$$
-*Example*: a binary relation may be written:
-$$r_{ij} = (c_i,c_j)\in \rho^{(2)} \qquad \text{or} \qquad r_{ij}=(i,j,w_{ij},\delta_{ij},\ldots)$$
-where the second form represents richer relations that include additional properties (e.g. weight, delay).
+**Relation among components**: a relation of the same family whose terms are all components, $\rho_k\subseteq C^{n_k}\subseteq U^{n_k}$. *Example*: a binary relation among components may be written:
+$$r_{ij} = (c_i,c_j)\in \rho_k \qquad \text{or} \qquad r_{ij}=(i,j,w_{ij},\delta_{ij},\ldots)$$
+where the second form attaches properties to the pair (e.g. weight, delay).
 
 *Examples*: relations can encode productive constraints (e.g. spatial adjacency, temporal precedence, causal dependence, participation of a component in an activity, hierarchical containment):
 
-- $c_i\prec c_j$ may encode temporal precedence;
-- $d(c_i,c_j)<\varepsilon$ may encode a spatial constraint;
-- $\ell_i\rightarrow \ell_j$ may encode a causal ordering, where $L=\{\ell_1,\dots,\ell_m\}$.
+- $a_i\prec a_j$ may encode the temporal precedence of one activity over another;
+- $d(c_i,c_j)<\varepsilon$ may encode a spatial constraint between two components;
+- $a_i\rightarrow a_j$ may encode a causal ordering between two activities.
 
 **Phenomenon**. A phenomenon is often represented as a predicate on the trajectories of the system, classified by the occurrence classes of the [vocabulary of process](../../vocabulary/change/process-event-history.md):
 $$P[x(\cdot)]$$
-or as an input–output behavior, a [function computed](../../vocabulary/change/computation.md) by the system:
-$$P:\mathcal{X}_{\mathrm{in}}\rightarrow \mathcal{X}_{\mathrm{out}}$$
+or as an input–output behavior, a [function computed](../../vocabulary/change/computation.md) by the system, written as the input–output map of the phenomenon:
+$$f_P:\mathcal{X}_{\mathrm{in}}\rightarrow \mathcal{X}_{\mathrm{out}}$$
 *Example*: a population oscillation can be characterized by a property of the trajectory $y(t)$ of the aggregate activity.
 
-**Mechanism**. A mechanism produces a phenomenon $P$:
-$$\langle C,L,O\rangle\models P$$
-or, more explicitly, with a realization map:
-$$\Phi(C,L,O)=P$$
+**Realization**. The realization map, written $\mathcal{R}$, takes a mechanism to the behavior that it generates: a trajectory $x(\cdot)$, or an input–output map. The mechanism realizes the phenomenon $P$ when that behavior satisfies $P$:
+$$\langle C,L,O\rangle\models P \quad\Longleftrightarrow\quad P\left[\mathcal{R}(C,L,O)\right], \qquad\text{or}\qquad \mathcal{R}(C,L,O)=f_P \text{ for an input–output behavior}$$
+In the constitutive case, the components are parts of the target system, and the behavior that $\mathcal{R}$ generates is the behavior of the whole system during the phenomenon.
 *Example*: in a neural mechanism,
 
 - the phenomenon is a population oscillation;
@@ -105,6 +103,15 @@ $$\Phi(C,L,O)=P$$
 - the structure is the complete directed synaptic connectivity (e.g. signs, weights, delays, geometry);
 - the organization identifies a mechanistically salient pattern, possibly already encoded in the detailed connectivity and dynamics (e.g. $\text{E}\rightarrow\text{I}\dashv\text{E}$ may be described organizationally as a negative-feedback loop between excitation and inhibition).
 
+**Production**. A production changes three elements of the schema, as the [two relations of a mechanism to its phenomenon](#^production-constitution) require:
+
+- the entities form the set $C\sqcup Z$, with the external entities in $Z$. The external entities lie outside the target system, and each of them has a state space, as a component does;
+- the organization is stated over events: an event $(a,t)$ is the occurrence of an activity $a\in L$ at a time $t$, the set $\mathsf{Ev}$ collects the events of the mechanism, and the relations of $O$ range over $U=C\sqcup Z\sqcup \mathsf{Ev}$, among them the temporal order $\prec$ of the events;
+- the phenomenon is an event $e_P$, the occurrence of $P$, and every event of the mechanism precedes it:
+$$\langle C\sqcup Z,L,O\rangle\models P, \qquad e\prec e_P \ \text{ for every } e\in\mathsf{Ev}$$
+
+*Example*: a neuron fires at time $t$. The external entities are the presynaptic neurons. The events, in temporal order, are the presynaptic spikes, the release of glutamate, and the depolarization of the membrane past threshold, and each of them precedes the spike at $t$. The constitutive account of the same spike, by contrast, names the sodium and potassium channels of the neuron itself, active during the spike.
+
 ---
 
 ## Sources
@@ -112,4 +119,6 @@ $$\Phi(C,L,O)=P$$
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
 - [bechtel2005] ◐ [Bechtel & Abrahamsen, "Explanation: a mechanist alternative", _Studies in History and Philosophy of Biological and Biomedical Sciences_ 36(2), 421–441, 2005](https://doi.org/10.1016/j.shpsc.2005.03.010); a mechanism is a structure that performs a function through its component parts, their operations, and their organization
+- [craver2007] ◐ [Craver, *Explaining the Brain*, OUP, 2007](https://philpapers.org/rec/CRAETB-2)
 - [machamer2000] ◐ [Machamer, Darden & Craver, "Thinking about mechanisms", _Philosophy of Science_ 67(1), 1–25, 2000](https://doi.org/10.1086/392759)
+- [salmon1984] ◐ Salmon, *Scientific Explanation and the Causal Structure of the World*, Princeton UP, 1984, etiological versus constitutive explanation, via [SEP, Mechanisms in Science](https://plato.stanford.edu/entries/science-mechanisms/)

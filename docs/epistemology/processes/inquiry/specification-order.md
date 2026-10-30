@@ -20,12 +20,30 @@ An inquiry is specified in five stages. Each stage takes the products of the ear
 | Stage | Product | Level of commitment | Record |
 | --- | --- | --- | --- |
 | 1. Problem | the demand, its constraints and its explicanda | terms anchored by pointers | [problem](../../../specification/problem.md) |
-| 2. Question schema | the questions that serve the problem, with typed placeholders, an aim and a contrast | slots typed | [question](../../objects/question/question.md) |
-| 3. Identified subject | the system and the phenomenon, each fixed by a definite description and pointers | slots `identified` | [target system](../../objects/subject/target-system.md), [phenomenon](../../objects/subject/phenomenon.md) |
-| 4. Background and specified subject | the admitted laws, and the formal declarations of the system and the phenomenon | slots `specified` | [background](../../objects/knowledge/background.md) |
-| 5. Candidate answers | the answers proposed to each question, and the models and bindings on which they rest | — | [answer form](../../objects/answer/answer-form.md), [model and binding](../../objects/answer/model-and-binding.md) |
+| 2. Question schema | the questions that serve the problem, with typed placeholders, the epistemic task as far as it is fixed, and the locus of each contrast | slots typed | [question](../../../specification/question.md) |
+| 3. Identified subject | the system and the phenomenon, each fixed by a definite description and pointers | slots `identified` | [target system](../../../specification/target-system.md), [phenomenon](../../../specification/phenomenon.md) |
+| 4. Background and specified subject | the admitted laws, and the formal declarations of the system, the phenomenon and the foils of the contrast, each written when a condition requires it | slots `specified`, on demand | [background](../../../specification/background.md) |
+| 5. Candidate answers | the answers proposed to each question, and the models and bindings on which they rest, as products of the inquiry | — | [answer](../../../specification/answer.md), [model](../../../specification/model.md), [binding](../../../specification/binding.md) |
 
 The levels of commitment are defined in the note on [questions](../../objects/question/question.md#^commitment-levels). A change to an earlier stage, made after a later stage, is a revision. The [revision activities](../activities/revision.md) type that change.
+
+Two stages are read with a qualification:
+
+- **Stage 2 types the contrast.** A schema states where the foils differ from the fact, in the outcome, in the system or in the conditions, which is the locus of the contrast. The foils themselves are specified later, from the value space of the phenomenon, as the [filling order of the subject](../../objects/subject/subject-of-inquiry.md) states.
+- **Stage 4 is entered on demand.** A slot is raised to the level `specified` only when an open condition needs the definiteness of its term, as the [choice of the next act](choice-of-act.md#^specified-on-demand) states. Each slot therefore enters stage 4 when a condition first requires it, and a question does not pass through stage 4 as a whole.
+
+## Stages and layers
+
+A question is specified by three layers: its subject $\Sigma$, its epistemic task $T$ and the virtues $\mathcal{V}$ that it weighs, as the [specification of a question](../../objects/question/question-specification.md) states. The stages order the work of an inquiry, and the layers sort the decisions that specify one question. The table places each layer in the stages. ^stages-and-layers
+
+| Layer | Stages at which it is fixed |
+| --- | --- |
+| Subject $\Sigma$: the target system $S$, the phenomenon $P$ and the conditions held fixed $D$ | typed as slots at stage 2, identified at stage 3, specified at stage 4 on demand |
+| Subject $\Sigma$: the contrast $X$ | its locus typed at stage 2; its foils specified at stage 4, from the value space of $P$ once $P$ is specified |
+| Epistemic task $T$ | its aim fixed at stage 2, since the aim selects the interrogative word; its other components fixed at stage 2 or left open on purpose, and narrowed later by a recorded revision |
+| Virtues $\mathcal{V}$ | chosen with the question at stage 2 or later, and fixed before any candidate of stage 5 is assessed, since a [constitutive virtue](../../objects/task/epistemic-pragmatic-virtues.md#^virtue-standing) enters the admissibility tests |
+
+Stage 1 belongs to no layer: the problem supplies the demand from which the questions of stage 2 derive. The answer type and the conditions of satisfaction are not a layer either: they follow from the three layers, so they are fixed component by component as the layers are, before any candidate of stage 5 is assessed. The candidate answers of stage 5 are products of the inquiry, and no layer of the specification contains them.
 
 ## Three distinctions that remove the circularity
 
@@ -53,7 +71,7 @@ The method imposes four conditions under which such an iteration is not circular
 
 1. **A starting point fixed independently of the outcome.** The first problem statement is written before any result is reconstructed, and it serves as the initially affirmed system from which corrections start.
 2. **Provisional objects, with recorded revisions.** Every object carries a maturity, and every revision records its trigger.
-3. **Tests that can fail.** A test that uses a provisional claim supports that claim only when the test could have returned a result against it [glymour1980].
+3. **Tests that can fail.** A test that uses a provisional claim supports that claim only when the test could have returned a result against it [glymour1980]. Glymour states this requirement within bootstrap testing, which tests a hypothesis with evidence interpreted through other parts of the same theory.
 4. **A convergence criterion.** The iteration stops when one full pass through the stages triggers no revision. The criterion detects that the iteration has stopped, and it does not guarantee that the iteration stops.
 
 These four conditions are a proposal of this method, built from the sources above; no source states them in this form.
@@ -62,10 +80,10 @@ These four conditions are a proposal of this method, built from the sources abov
 
 Two devices limit the revisions that an iteration requires:
 
-- **Least commitment.** A choice is deferred until a condition requires it, so fewer choices need revision [weld1994]. A placeholder kept in a question schema is a deferred choice.
+- **Least commitment.** A choice is deferred until a condition requires it, so fewer choices need revision [weld1994]. A placeholder kept in a question schema is a deferred choice, and a slot that enters stage 4 on demand is another.
 - **Recorded dependencies.** Each record keeps pointers to the versions from which it was derived. When a version is withdrawn, only the records that depend on it are marked for review. A truth-maintenance system revises beliefs in this way [doyle1979], and dependency-directed backtracking revises assumptions in the same way [stallman1977]. These pointers complement the trigger of condition 2: the trigger states why a revision occurred, and the pointers state which records the revision reaches. The [register of serving questions](question-decomposition.md#^register) records such dependencies, by the hypothesis on which each serving question is conditioned.
 
-The records of gnomon do not keep versions yet. In particular, an itinerary step cannot reference a record at the state that the record had when the step ran, and the [project goals](../../../../TODO.md) list this missing reference as `as_of`.
+Versions and recorded dependencies presuppose records that keep successive versions. Whether the records keep them is stated with the [itinerary record](../../../specification/itinerary.md#^record-versions).
 
 ## Restarting from existing results
 

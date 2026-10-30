@@ -47,7 +47,7 @@ Two activity types are distinct when they differ in their output type or in thei
 The family notes write the inputs of an activity in three forms:
 
 - a type alone, such as `data`, takes one record of that type;
-- a type followed by a qualifier, such as `model` (source) or `verdict` (several), states the role or the number of its records, and leaves the type unchanged;
+- a type followed by a qualifier, such as `model` (source), `verdict` (several) or `model` (optional), states the role, the number or the optionality of its records, and leaves the type unchanged;
 - types joined by `|`, such as `hypothesis | model`, take one record of either type.
 
 Three attributes take their values from closed lists: ^attribute-vocabularies
@@ -59,6 +59,7 @@ Three attributes take their values from closed lists: ^attribute-vocabularies
 | Context | `discovery`, `justification`, `both` | each activity type |
 
 - **The norm is a named test.** The test of an activity takes the id `norm.<activity-id>`, such as `norm.fitting`. Each step of an itinerary records the verdict of that test: `pending` before the test runs, then `pass` or `fail`.
+- **The verdict of a norm differs from the product type `verdict`.** The verdict of a norm judges one step of an itinerary. The product type `verdict` is the output of an evaluation activity: the outcome of a test of a claim or of a model, which an assessment records as the verdict of a test. The [axes of the statuses](../../foundations/inquiry-and-state.md#^status-axes) place each verdict on its bearer.
 - **The mode `non-inferential` covers operations that draw no inference.** Observation and formalization are examples.
 - **The context is assigned to each activity type.** A family does not fix it: model-building holds activities of discovery, such as idealization, and of justification, such as fitting. An activity of discovery outputs a candidate, and an activity of justification judges or warrants one [reichenbach1938]. The division is contested: the reasoning that generates hypotheses follows patterns that can be analyzed [hanson1958] [simon1973]. The value `both` marks an activity whose norm serves either context, such as classification.
 
@@ -74,7 +75,7 @@ Three candidate taxonomies were compared on one requirement: every activity of a
 
 ## Families
 
-Each family groups the activities whose output types belong to one class of product types. Each product type is the output of one family only, so the output type of an activity fixes its family. Within one family, when two activities share an output type, they differ by their norm. ^families
+Each family groups the activities whose output types belong to one class of product types. Each product type is the output of at most one family, so the output type of an activity fixes its family. Within one family, when two activities share an output type, they differ by their norm. ^families
 
 | Family | Output types |
 | --- | --- |
@@ -88,40 +89,44 @@ Each family groups the activities whose output types belong to one class of prod
 | [Explanation and integration](explanation-and-integration.md) | `explanation`, `inter-theory-relation` |
 | [Revision](revision.md) | `knowledge-state-change` |
 
-The type `source` is the output of no activity, since a source enters an inquiry from outside it. Conversely, a type may be the input of no activity. Such a type is a final product of an inquiry (e.g. `classification`, `inter-theory-relation`).
+Three types are the output of no activity. The type `source` is an exception by design, since a source enters an inquiry from outside it. The types `binding` and `key` are gaps of the taxonomy: a binding and a key are written during an inquiry, yet no activity types the act of writing them. Conversely, a type may be the input of no activity. Such a type is a final product of an inquiry (e.g. `classification`, `inter-theory-relation`).
 
 The partition by output type has two consequences for borderline activities. First, when the output of an activity is a model, the activity belongs to model-building, regardless of its mode and its context. Second, revision outputs only changes of attitude or of status across existing records, so a new model is never the output of a revision.
 
 ## Product types
 
-The product types form a closed list. Each type classifies the epistemic objects taken or produced by activities. Each type also maps onto the record kind of gnomon that holds its objects. When no record kind holds a type, the type is a gap marked `to-create`. In that case, the records must be extended to match the taxonomy. ^product-types
+The product types form a closed list. Each type classifies the epistemic objects taken or produced by activities. The column *Output of* names the family whose activities produce the type. The column *Status* states how far the records cover the type: `exists`, `partial`, or `to-create` for a type that no record kind holds yet. A type marked `to-create` is a gap of the records, which must be extended to match the taxonomy. The record kinds that hold each type are listed in the [registry of product types](../../../../src/gnomon/data/registries/product-types.yml), which the [itinerary record](../../../specification/itinerary.md) documents. ^product-types
 
-| Type | Epistemic object | Record | Status |
+| Type | Epistemic object | Output of | Status |
 | --- | --- | --- | --- |
-| `source` | a document, a dataset or a result external to the inquiry | external pointer, held by the `sources` of a problem and the `pointers` of an identification | exists |
-| `problem` | a demand for a solution under constraints, defined in the note on the [epistemic problem](../../objects/problem/epistemic-problem.md) | `problem` | exists |
-| `question-schema` | a [question schema](../../objects/question/question.md#^question-schema), whose slots are typed placeholders | `question`, with placeholder slots | exists |
-| `identified-subject` | the system and the phenomenon of a question, at the [level of commitment](../../objects/question/question.md#^commitment-levels) `identified` or above | `target-system` and `phenomenon` at commitment `identified` or above | exists |
-| `question` | a question whose slots refer to records | `question`, with every slot at commitment `identified` or above | exists |
-| `concept` | a term with its definition or its explication | `to-create` | to-create |
-| `measurement-procedure` | a procedure that assigns values to a quantity on a stated [scale](../../vocabulary/quantities/scale-and-level.md) | `variables[].scale` and `variables[].expression` | partial |
-| `classification` | a partition of systems into [classes](../../vocabulary/systems/kind-class-population.md) | `target-system.reference_class` | exists |
-| `design` | a plan of observations, interventions or simulation runs, with their conditions | `to-create` | to-create |
-| `data` | the recorded [values](../../vocabulary/quantities/variable-value-observable.md) of observables | `phenomenon.data` | partial |
-| `phenomenon` | a stable feature of a target, detected from data, as defined in the note on [phenomena](../../vocabulary/regularities/pattern-and-phenomenon.md) | `phenomenon` | exists |
-| `target-specification` | the declared constituents and quantities of a [target](../../foundations/things-and-constructs.md) | `target-system` at commitment `specified` | exists |
-| `background-model` | the laws admitted about a target, with their closure and organization | [`background`](../../objects/knowledge/background.md) | exists |
-| `model` | a candidate [model](../../vocabulary/representations/model.md) of the target | [`model`](../../../specification/model.md#^model-record) | exists |
-| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | [`binding`](../../../specification/binding.md#^binding-record) | exists |
-| `key` | a shared, versioned map between the side of a model and the side of its target | [`key`](../../../specification/key.md#^key-record) | exists |
-| `consequence` | a statement true of a model, possibly false of the target | the block of model knowledge of an `answer`, and `assessment.obligations` | partial |
-| `hypothesis` | a [claim](../../vocabulary/representations/claim-and-hypothesis.md) with the attitude `hypothesized` | `answer` with status `hypothesized` | exists |
-| `verdict` | the outcome of a test of a claim or of a model | `assessment.tests` | exists |
-| `credence` | a degree of belief in a claim | `assessment.credence` | exists |
-| `ranking` | an order over rival candidates | `assessment.appraisal.preferred_over` | exists |
-| `explanation` | the claim that an explanans explains a phenomenon under the requested relation | the block of an explanation of an `answer` | exists |
-| `inter-theory-relation` | a relation of unification, reduction or integration between [theories](../../vocabulary/representations/theory.md) | `to-create` | to-create |
-| `knowledge-state-change` | a change of the attitude or of the status of existing records | changes of the record `status`; a revision log is to create | partial |
+| `source` | a document, a dataset or a result external to the inquiry | no activity, by design | exists |
+| `problem` | a demand for a solution under constraints, defined in the note on the [epistemic problem](../../objects/problem/epistemic-problem.md) | problem-posing | exists |
+| `question-schema` | a [question schema](../../objects/question/question.md#^question-schema): a question form whose slots are typed placeholders, not yet a question | problem-posing | exists |
+| `identified-subject` | the system and the phenomenon of a question, at the [level of commitment](../../objects/question/question.md#^commitment-levels) `identified` or above | problem-posing | exists |
+| `question` | a question, each of whose slots names its referent at the level `identified` or above | problem-posing | exists |
+| `concept` | a term with its definition or its explication | conceptual activities | to-create |
+| `measurement-procedure` | a procedure that assigns values to a quantity on a stated [scale](../../vocabulary/quantities/scale-and-level.md) | conceptual activities | partial |
+| `classification` | a partition of systems into [classes](../../vocabulary/systems/kind-class-population.md) | conceptual activities | exists |
+| `design` | a plan of observations, interventions or simulation runs, with their conditions | empirical activities | to-create |
+| `data` | the recorded [values](../../vocabulary/quantities/variable-value-observable.md) of observables | empirical activities | partial |
+| `phenomenon` | the behavior of a target that a question concerns, detected from data; only a phenomenon of the category *regularity* must be stable, as the note on [phenomena](../../vocabulary/regularities/pattern-and-phenomenon.md) states | empirical activities | exists |
+| `target-specification` | the declared constituents and quantities of a [target](../../foundations/things-and-constructs.md) | model-building | exists |
+| `background-model` | the laws admitted about a target, with their closure and organization, as the [background](../../objects/knowledge/background.md) states them | model-building | exists |
+| `model` | a candidate [model](../../vocabulary/representations/model.md) of the target | model-building | exists |
+| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | no activity yet: a gap | exists |
+| `key` | a shared, versioned map between the side of a model and the side of its target | no activity yet: a gap | exists |
+| `consequence` | a statement derived from a model, or from the admitted laws of a target; it holds of the target only through a binding, or when the admitted laws define the target completely | model analysis | partial |
+| `hypothesis` | a [claim](../../vocabulary/representations/claim-and-hypothesis.md) about the target, held with the attitude `hypothesized` | ampliative inference | exists |
+| `verdict` | the outcome of a test of a claim or of a model | evaluation | exists |
+| `credence` | a degree of belief in a claim | evaluation | exists |
+| `ranking` | an order over rival candidates | evaluation | exists |
+| `explanation` | the claim that an explanans explains a phenomenon under the requested relation | explanation and integration | exists |
+| `inter-theory-relation` | a relation of unification, reduction or integration between [theories](../../vocabulary/representations/theory.md) | explanation and integration | to-create |
+| `knowledge-state-change` | a change of the attitude or of the status of existing records | revision | partial |
+
+The word *hypothesis* has several senses, which the note on [claims and hypotheses](../../vocabulary/representations/claim-and-hypothesis.md) separates. The product type `hypothesis` combines two of them: a claim about the target, as opposed to a consequence that holds of a model, held under the attitude `hypothesized`. The excess of content over the premises is a property of the ampliative inference that produces a hypothesis, not of the type. Two consequences follow. ^hypothesis-type
+
+First, an answer whose attitude is `entertained`, `accepted` or `retracted` has no product type of its own, since the attitude of a claim is an attribute of the claim, not a type: a type for an answer claim with any attitude is a gap of the list. Second, a statement that holds of a model is a `consequence`, so the activity of prediction outputs a `consequence`, whereas an inquiry with the aim of prediction requires a `hypothesis` about the target.
 
 A theory enters an activity as a `model`, read as a class of models. A framework changes only through the verdicts that motivate the change, so no product type names a framework.
 
@@ -165,7 +170,7 @@ An itinerary passes the **itinerary check** when five conditions hold: ^itinerar
 
 The itinerary record adds checks of its own fields, such as unique step identifiers, stated with the [record checks of an itinerary](../../../specification/itinerary.md#^record-checks).
 
-The type of a referenced record follows from its state, as the [record column of the product types](#^product-types) states. For a question record, the state is the commitment of its slots. With a placeholder slot, the record has type `question-schema`. With every slot at commitment `identified` or above, the record has type `question`. Therefore, a schema becomes a question when [subject identification](problem-posing.md) raises its slots, and no activity of its own is needed.
+The type of a referenced record follows from its state, as the [record checks of an itinerary](../../../specification/itinerary.md#^record-checks) state: a question record with a placeholder slot holds a `question-schema`. A schema therefore becomes a question when [subject identification](problem-posing.md) raises its slots to the level `identified`, and no activity of its own is needed.
 
 The check matches types only, so an itinerary that passes it is well formed. The success of each step is decided separately, by the verdict of its norm. Each step has the form of an action schema in [classical planning](../../../references/ai-planning-pddl.md): the input types play the part of preconditions, and the output type plays the part of an effect. A step can decompose into sub-steps, as a compound task does in [hierarchical task network planning](../../../references/hierarchical-task-network-planning.md).
 

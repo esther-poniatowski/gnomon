@@ -21,7 +21,7 @@ aliases:
 | Logical | logic, model theory | a structure that satisfies a set of sentences, under an interpretation of their non-logical symbols | [hodges1993] |
 | Semantic view | philosophy of science | a set-theoretical structure that satisfies the predicate defining a theory; in this view, a theory is identified with a class of such structures | [suppes1960]; [vanfraassen1980] |
 | Representational | philosophy of science | an object, concrete, mathematical or computational, used to represent a target system | [giere1988]; [giere2004]; [morgan1999]; [weisberg2013] |
-| Statistical | statistics | a family $\{P_\theta:\theta\in\Theta\}$ of probability distributions on a sample space, indexed by a parameter | [mccullagh2002] |
+| Statistical | statistics | a family $\{\mathbb{P}_\theta:\theta\in\Theta\}$ of probability distributions on a sample space, indexed by a parameter | [mccullagh2002] |
 
 The senses are related but not interchangeable. A mathematical model in the representational sense is often a structure in the semantic sense, but the representational sense adds a target and a relation to that target. A statistical model is a representational model whose objects are distributions. The relation of a statistical model to its target is the claim that the data were drawn from one member of the family.
 
@@ -47,7 +47,14 @@ Strict isomorphism is rarely met by an empirical target. Accounts of scientific 
 
 ## Relations to the method
 
-- **Every candidate answer rests on a model in the representational sense.** When the route runs on the target itself, the model is the description of the target; when the route runs on a stand-in, the model is a model system. The object on which the route runs decides which records the answer needs, as the [records of a model and a binding](../../objects/answer/model-and-binding.md#^when-a-binding) state.
+- **A model in the representational sense has four elements.** The method writes a model as $M=\langle C,V,L,O\rangle$, with the symbols of the [notation](../notation/notation.md): ^model-elements
+    - the constituents $C$: the units that the model treats as bearers: the constituents declared for the target, units defined from them by a stated map, or units of the model alone;
+    - the terms $V$: the variables and the parameters that the constituents bear;
+    - the laws $L$: the laws and structural relations that link the terms;
+    - the organization $O$: the relations among constituents and laws on which the behavior of the model depends.
+
+  The description of a target has the same four elements, filled by the target specification and its background. The fields that record each element are documented in the [model record](../../../specification/model.md#^model-elements).
+- **Every candidate answer rests on a model in the representational sense.** When the route runs on the target description, with no stand-in, the model is that description; when the route runs on a stand-in, the model is a model system. The object on which the route runs decides which records the answer needs, as the [records of a model and a binding](../../objects/answer/model-and-binding.md#^when-a-binding) state.
 - *Example*: a study of networks in their most abstract form, a class that encompasses artificial and biological networks, takes a class of possible systems as its target. A network model of that class represents members of the class, and it is not a model of cortex. A claim about cortex requires cortex as a second target, and a relation of representation between the class and cortex.
 
 ---

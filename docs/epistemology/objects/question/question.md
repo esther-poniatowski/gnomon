@@ -12,9 +12,11 @@ aliases:
 ---
 # Question
 
-> [!QUESTION] Goal: what is a question, how far can each slot of a question stay uncommitted, and how do two questions depend on each other?
+> [!QUESTION] Goal: what is a question, how far can each slot of a question form stay uncommitted, and how do two questions depend on each other?
 
-A **question** is a request whose possible answers form a definite set [hamblin1958].
+A **question** is a request whose possible answers form a definite set [hamblin1958]. The [specification of a question](question-specification.md) fixes that set by three layers: the subject $\Sigma$ of the question, its epistemic task $T$, and the virtues $\mathcal{V}$ that it weighs.
+
+A research question is usually composed of several atomic questions, joined by the [links between questions](#^linked-questions). That composition is the [decomposition](../../processes/inquiry/question-decomposition.md#^decomposition-graph) of the research question, not its definition: each atomic question is a question in the sense above, and each candidate answer answers one atomic question.
 
 The fields of a question, and the rules that bind them, are documented in the [question record](../../../specification/question.md).
 
@@ -30,9 +32,9 @@ The why-question of the pragmatic account corresponds to three components of a q
 
 ## Question schema and levels of commitment
 
-A **question schema** is a question in which at least one slot holds a typed placeholder. The type of each slot comes from a closed list: `system | phenomenon | observable | contrast | condition`. Thus, a schema fixes the *type* of each slot before any record fixes its referent. ^question-schema
+A **question schema** is a question form, not yet a question: at least one of its slots holds a typed placeholder instead of a referent. The type of each slot comes from a closed list: `system | phenomenon | observable | contrast | condition`. Thus, a schema fixes the *type* of each slot before any record fixes its referent. A schema becomes a question once each of its slots reaches the level `identified`, because only then do its possible answers form a definite set. ^question-schema
 
-Each slot of a question carries one of three **levels of commitment**: ^commitment-levels
+Each slot of a question or of a question schema carries one of three **levels of commitment**: ^commitment-levels
 
 | Level | The slot holds | Decidable check |
 | --- | --- | --- |
@@ -61,7 +63,7 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 | Relation | This question … |
 | --- | --- |
 | `subquestion-of` | is answered by a part of an answer to the linked question; each of its answers, with the available premises, narrows the answers of the linked question, which is erotetic implication [wisniewski2013] |
-| `explanans-from` | has an explanans factor that is the explanandum of the linked question |
+| `explanans-from` | has an explanans factor that is the phenomenon of the linked question |
 | `presupposes` | has a true answer only if the linked question has a true answer |
 | `enables` | has an answer that establishes a condition of answerability of the linked question, without narrowing its answers |
 
@@ -72,6 +74,7 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 ## Distinctions
 
 - **A problem is not a question, and every inquiring question presupposes a problem.** The difference between the two is stated in the note on the [epistemic problem](../problem/epistemic-problem.md#^problem-vs-question). A question asked to learn its answer carries at least a [minimal problem](../problem/epistemic-problem.md#^minimal-problem), and a problem record makes that problem explicit.
+- **The link `presupposes` between questions is not the relation of the same name between answers.** Between two questions, the link states that one question has a true answer only if the other has one. Between two [answers](../answer/answer-form.md#^answer-relations), the relation states that one answer is admissible only if the other answer is true.
 - **The type of a problem bounds the aims of its questions.** The [types of problem](../problem/problem-types.md) map each type of result demanded onto the aims, the question forms and the answer forms that it admits.
 
 ---

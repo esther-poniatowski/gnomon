@@ -2,7 +2,7 @@
 tags:
   - definition
   - wip
-index: "[Regularities and explananda](docs/epistemology/vocabulary/regularities/_index.md)"
+index: "[Regularities and phenomena](docs/epistemology/vocabulary/regularities/_index.md)"
 aliases:
   - Pattern and phenomenon
   - Pattern
@@ -14,7 +14,7 @@ aliases:
 
 > [!QUESTION] Goal: does a statement name a regularity across instances or one structured pattern, and when does either count as a phenomenon?
 
-"Pattern" covers two objects of different types. A **regularity** is an invariant across a set of instances: configurations, states, histories or data. A **spatial or temporal pattern** is one structured configuration or trajectory, such as stripes or an oscillation. A **phenomenon** is a feature of the world that an inquiry takes as its explanandum, detected through data. The requirements of a record on a phenomenon are stated in the [specification of the phenomenon](../../objects/subject/phenomenon.md). This note fixes the senses of the terms.
+"Pattern" covers two objects of different types. A **regularity** is an invariant across a set of instances: configurations, states, histories or data. A **spatial or temporal pattern** is one structured configuration or trajectory, such as stripes or an oscillation. In this method, the **phenomenon** of a question is the behavior of the target that the question concerns, detected through data. The phenomenon is an explanandum only when the aim of the question is explanation. The forms that this behavior can take are stated in the note on the [phenomenon of a question](../../objects/subject/phenomenon.md). This note fixes the senses of the terms.
 
 ## Senses
 
@@ -28,7 +28,7 @@ aliases:
 | Appearance | empiricist philosophy of science | the content of an observation, or the outcome of a measurement | [vanfraassen2008] |
 | Phenomenon | realist ontology | a fact as it appears to an observer | [bunge1977] |
 
-The three senses of phenomenon differ in their requirements. The first requires stability and leaves observability open, since a phenomenon may be detected only through instruments and statistics [bogen1988]. The second requires observability. The third requires only an observer.
+The three senses of phenomenon differ in their requirements. The first requires stability and leaves observability open, since a phenomenon may be detected only through instruments and statistics [bogen1988]. The second requires observability. The third requires only an observer. The phenomenon of a question takes the first sense and relaxes its requirement of stability, which binds a regularity only.
 
 ## Distinctions
 
@@ -36,12 +36,12 @@ The three senses of phenomenon differ in their requirements. The first requires 
 - **A regularity is a law₁ only when it satisfies a criterion of lawhood.** The [criteria of lawhood](law.md#^lawhood) include invariance under interventions, and a regularity that satisfies one of them is a law₁. An accidental regularity, such as the silver coins of one pocket, is not a law₁.
 - **A phenomenon differs from its appearances.** In the empiricist sense, a phenomenon is an observable entity, and an appearance is the content of an observation of that entity, or the outcome of a measurement of it [vanfraassen2008]. One phenomenon has many appearances, one per observation or per measurement.
 - **Data are not phenomena.** Data are records specific to one procedure, whereas a phenomenon is the feature detectable by several procedures [bogen1988] [woodward1989]. Data record appearances, in the empiricist reading. *Example*: the recorded voltage traces of one session are data, and the gamma oscillation inferred from sessions recorded across laboratories is a phenomenon.
-- **A regularity or a pattern becomes a phenomenon when it is selected as explanandum, and a regularity must also be established as stable.** Selection and stability are two separate conditions. When a regularity is found by exploration and not yet tested for stability, it is a candidate phenomenon. However, only a phenomenon of the category *regularity* must be stable. The [specification of the phenomenon](../../objects/subject/phenomenon.md) also admits particular occurrences, capacities and structural properties as explananda. A phenomenon can also occur only once [craver2024].
+- **A regularity or a pattern becomes a phenomenon when a question selects it, and only a regularity must also be established as stable.** Selection and stability are two separate conditions. A question selects the behavior that it concerns under any aim, so the selected behavior is an explanandum only under the aim explanation. Stability binds only a phenomenon of the category *regularity*, one of the four categories of behavior: a particular occurrence, a regularity, a capacity or a structural property. When a regularity is found by exploration and not yet tested for stability, it is a candidate phenomenon. A phenomenon of another category may occur once [craver2024].
 
 ## Relations to the method
 
-- **The evidential status of a phenomenon records how far its stability is established.** The [specification of the phenomenon](../../objects/subject/phenomenon.md) grades the status from *established* to *derived within a model*, and the detection criterion states the test required of a candidate regularity.
-- **A phenomenon of an exploratory inquiry is a regularity not yet selected.** The [exploratory question](../../objects/subject/phenomenon.md#^exploratory-phenomenon) leaves the phenomenon open and fixes the search space in which regularities are sought.
+- **The evidential status of a regularity records how far its stability is established.** The evidential status ranges from `established`, across data sets or methods, to `derived` within a model. The [phenomenon record](../../../specification/phenomenon.md) grades it, and its detection criterion states the test required of a candidate regularity.
+- **An exploratory question leaves its phenomenon open.** The [exploratory question](../../objects/subject/phenomenon.md#^exploratory-phenomenon) fixes the search space in which regularities are sought, and a regularity found there is a candidate phenomenon.
 - **A spatial or temporal pattern enters a record as one occurrence or through an observable.** One pattern, such as the oscillation of one run, is a phenomenon of category *particular-occurrence*. The features of the pattern, such as its frequency, are observables over a [declared window](../change/process-event-history.md#^window-observable).
 
 ---

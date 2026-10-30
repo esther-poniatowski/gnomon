@@ -14,7 +14,7 @@ aliases:
 
 > [!QUESTION] Goal: which activities draw consequences from a model, and by which norm is each judged?
 
-The activities of this family output a **consequence**: a statement true of a model. A consequence may be false of the target. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a **consequence**: a statement derived from a model, or from the admitted laws of a target. A consequence derived from a model holds of that model, and it may be false of the target. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 
@@ -40,8 +40,8 @@ The activities of this family output a **consequence**: a statement true of a mo
 
 - **Verification belongs to simulation, and validation to evaluation.** Verification compares two [levels of a computation](../../vocabulary/change/computation.md), the algorithm of the code and the function fixed by the model, without reference to the target. Therefore, verification stays within this family. [Validation](evaluation.md) asks whether the model is adequate to its target for a purpose.
 - **The norm of a thought experiment is contested.** On the argument view adopted here, a thought experiment can be reconstructed as an argument from the premises of its scenario [norton1996]. On a rival account, some scenarios give access to a law without such an argument [brown1991].
-- **Prediction as an activity differs from prediction as an aim.** The activity derives expected values from a model. The activity serves inquiries of every aim, for instance to test an explanation. The [aim of prediction](../../objects/task/epistemic-aim.md) makes a warranted expectation the product required of the whole inquiry.
-- **Every output of this family holds of the model only.** A consequence becomes a claim about the target only through a [theoretical hypothesis](../../vocabulary/representations/claim-and-hypothesis.md) that links model and target.
+- **Prediction as an activity differs from prediction as an aim.** The activity derives expected values from a model. The activity serves inquiries of every aim, for instance to test an explanation. The [aim of prediction](../../objects/task/epistemic-aim.md) makes a warranted expectation the product required of the whole inquiry. The two differ in their product type: the activity outputs a `consequence`, which holds of the model, whereas the aim requires a `hypothesis` about the target, as the [product type `hypothesis`](epistemic-activities.md#^hypothesis-type) states.
+- **A consequence holds of the target only through a binding or through admitted laws that define the target.** A consequence derived from a model becomes a claim about the target only through a [theoretical hypothesis](../../vocabulary/representations/claim-and-hypothesis.md) that links model and target [giere1988]. A binding records the theoretical hypotheses that its asserter licenses, so a binding is the record in which such a hypothesis is stated. A derivation that runs on the target description, with no stand-in, draws its consequence from admitted laws. When these laws define the target completely, so that every truth about it follows from them, the consequence is a claim about the target, as the note on the [model and its binding](../../objects/answer/model-and-binding.md#^when-a-binding) states.
 
 ## Relations to the method
 
@@ -54,6 +54,7 @@ The activities of this family output a **consequence**: a statement true of a mo
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
 - [brown1991] ◐ [Brown, *The Laboratory of the Mind: Thought Experiments in the Natural Sciences*, Routledge, 1991](https://www.cambridge.org/core/journals/philosophy-of-science/article/abs/james-robert-brown-the-laboratory-of-the-mind-thought-experiments-in-the-natural-sciences-new-york-routledge-1991-xi-175-pp-4995-cloth/0A84321B5BCDAE346E84A3B9B27B57D6); checked through a published review
+- [giere1988] ◐ [Giere, *Explaining Science: A Cognitive Approach*, University of Chicago Press, 1988](https://press.uchicago.edu/ucp/books/book/chicago/E/bo3622319.html); theoretical hypotheses assert a similarity between a model and a real system
 - [levins1966] ◐ [Levins, "The strategy of model building in population biology", *American Scientist* 54(4), 421–431, 1966](https://www.zoology.ubc.ca/let/pdfs/Levins1966.pdf); robust theorems, p. 423
 - [norton1996] ◐ [Norton, "Are thought experiments just what you thought?", *Canadian Journal of Philosophy* 26(3), 333–366, 1996](https://doi.org/10.1080/00455091.1996.10717457)
 - [weisberg2006] ◐ [Weisberg, "Robustness analysis", *Philosophy of Science* 73(5), 730–742, 2006](https://doi.org/10.1086/518628)

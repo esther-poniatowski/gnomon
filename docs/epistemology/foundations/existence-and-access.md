@@ -1,6 +1,6 @@
 ---
 tags:
-  - definition
+  - theory
 index: "[Foundations](docs/epistemology/foundations/_index.md)"
 aliases:
   - Existence and access
@@ -19,7 +19,7 @@ An object of study is reached through a description of its constituents, its pro
 
 Most current positions answer the question of access in the same way: an object is known only through a description, and the description is itself a representation. Three results of the philosophy of science support that answer. ^mediated-access
 
-- **Phenomena are inferred from data.** Data are records of one procedure, whereas a phenomenon is a stable feature of the world inferred from many such records [bogen1988].
+- **Phenomena are inferred from data.** Data are records of one procedure, whereas a phenomenon is inferred from many such records [bogen1988]. Bogen and Woodward require a phenomenon to be stable and repeatable. The method requires stability only of a phenomenon of the category regularity, as the [senses of phenomenon](../vocabulary/regularities/pattern-and-phenomenon.md) state.
 - **A measurement outcome is inferred through a model.** A model of the instrument and of its interaction with the object fixes which quantity a reading measures [tal2013].
 - **A target is specified by the modeller.** A target system is picked out of the world by choices of boundary, of grain and of the features retained, and the specification of a target is a step of modelling on its own [weisberg2013] [elliottgraves2020].
 
@@ -47,7 +47,7 @@ The positions differ on existence and on the achievement of a successful descrip
 The method of `gnomon` is committed on access and on the semantics of claims, and neutral on existence. The decision on the [neutrality of the records](../../adr/neutral-records-on-existence.md) fixes that stance for the records. ^method-stance
 
 - **Every content of a record is a representation.** A record holds constructs only, as the [statuses of a term](things-and-constructs.md#^layer-test) place them. The target specification is a construct that delimits the target, and an error in it is corrected by revising the record.
-- **The description of a target is a model of that target.** A target specification with its background represents the target, so it is a model in the [representational sense](../vocabulary/representations/model.md#^target-description-is-a-model). The method reserves the model record for a system other than the target, studied in its place.
+- **The description of a target is a model of that target.** The target description, which is the target specification with its background, represents the target, so it is a model in the [representational sense](../vocabulary/representations/model.md#^target-description-is-a-model). The method reserves the model record for a system other than the target, studied in its place.
 - **A claim is read literally, and it can be false.** A law statement, a bridge law or a binding asserts a relation that can fail of the target, whereas a declaration makes no claim and is assessed only for its adequacy. The method therefore shares the semantic commitment of realism, and it excludes instrumentalism, which denies a literal meaning to claims about unobservables.
 - **No record states whether its object exists independently.** A realist reads a claim as true or false of a world that exists independently. An empiricist reads the same claim as accepted for its empirical adequacy. Both readings use the same records, the same checks and the same tests of warrant, since each test compares a claim with recorded data or with admitted laws.
 - **Several models of one target can adopt several perspectives.** The [perspective of a model](../objects/answer/model-and-binding.md#^perspective) is its choice of bearers. Several perspectives on one system are admitted together, as perspectival realism describes, without making the records perspectival in their stance on existence.
@@ -56,7 +56,7 @@ The method of `gnomon` is committed on access and on the semantics of claims, an
 
 - **A neutral stance on existence differs from instrumentalism.** Instrumentalism denies that a claim about unobservables is true or false. The method keeps that claim true or false, and it declines only to state whether accepting the claim commits to the existence of the objects that it describes.
 - **Two steps of representation answer two needs.** The description of the target fixes the vocabulary and the admitted laws of the inquiry. A model system is a second object, studied because it is simpler, better known or computable, and a [binding](../objects/answer/model-and-binding.md#^map-versus-binding) carries its results to the target. Both are representations: the distinction separates a description of the target from a description of a stand-in, never a representation from reality.
-- **Adequacy and truth apply to different contents.** A declaration of a quantity is adequate or inadequate, as a vocabulary is. A claim stated in that vocabulary is true or false of the target in a realist reading, and empirically adequate or not in an empiricist reading.
+- **Adequacy and truth apply to different contents.** A declaration of a quantity is adequate or inadequate, as a vocabulary is: this is the [adequacy of a declaration](things-and-constructs.md#^declaration-adequacy). A claim stated in that vocabulary is true or false of the target in a realist reading, and empirically adequate or not in an empiricist reading. Empirical adequacy is the criterion of constructive empiricism, not a test of the method.
 
 ---
 ## Sources

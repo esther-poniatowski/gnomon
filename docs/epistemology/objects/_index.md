@@ -7,7 +7,7 @@ aliases:
 ---
 # Objects of inquiry
 
-Defines the epistemic objects that an inquiry states, from the problem that opens it to the assessment of its answers.
+Defines the epistemic objects that an inquiry states, from the problem that opens it to the assessment of its answers and the expression of its content.
 
 - [Problem](problem/_index.md): defines the problem that opens an inquiry, and the obstacles that keep its demand unmet
 - [Question](question/_index.md): defines a question and the specification that fixes its admissible answers
@@ -15,3 +15,4 @@ Defines the epistemic objects that an inquiry states, from the problem that open
 - [Knowledge](knowledge/_index.md): defines the knowledge that an inquiry takes as given, and the dependence of its claims on one another
 - [Epistemic task](task/_index.md): defines the kind of knowledge that an answer must deliver, and the qualities by which admissible answers are compared
 - [Answer and assessment](answer/_index.md): defines a candidate answer and the tests that decide whether it succeeds
+- [Expression](expression/_index.md): separates the content of an inquiry from the names, symbols and texts that express it for a reader
