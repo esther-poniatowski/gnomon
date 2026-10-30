@@ -10,7 +10,7 @@ aliases:
 Fixes the senses of the terms that name a representation of a target and the claims made with it, and the criteria that separate those terms.
 
 > [!WARNING] Notes with neighboring names
-> [Model](model.md) separates a model system from its target, whereas the [specification of the target system](../../target-system.md) fixes the fields of the target specification, the record that delimits the target.
+> [Model](model.md) separates a model system from its target, whereas the [specification of the target system](../../subject/target-system.md) fixes the fields of the target specification, the record that delimits the target.
 
 - [Model](model.md): fixes the sense of "model" and the relation between a model system and its target
 - [Representation and encoding](representation-and-encoding.md): places an encoding, a readout and a representation geometry in the fields of a record

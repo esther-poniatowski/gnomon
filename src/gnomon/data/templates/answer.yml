@@ -1,4 +1,4 @@
-# method: `docs/epistemology/answer-form.md`; one file per candidate answer to one atomic question
+# method: `docs/epistemology/answer/answer-form.md`; one file per candidate answer to one atomic question
 # the model on which the route runs: `model.yml`; its relation to the phenomenon: `binding.yml`
 # the core holds what every aim requires; `aim_block` holds the block of the aim of the question only
 # name a symbol of another record by source identifier and symbol: `mod.TOPIC.NAME#SYMBOL`

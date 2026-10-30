@@ -64,7 +64,7 @@ Both formats store plain text files suited to version control with git, and both
 | Unresolved reference | Must be tolerated. | Reported as a defect. |
 | Identity | File path, optionally a `resource` URI. | Stable [dotted identifier](../adr/dotted-identifiers.md) such as `quest.TOPIC.NAME`, declared in the authored record. |
 | Unit per file | One concept per Markdown file. | In the current records, one YAML record per concern, declaring many symbols. |
-| Formal content | None beyond the code of an `Attested Computation`. | Declared symbols, and [formulas](../epistemology/symbols-and-expressions.md) over them. |
+| Formal content | None beyond the code of an `Attested Computation`. | Declared symbols, and [formulas](../epistemology/language/symbols-and-expressions.md) over them. |
 | Status | Lifecycle of a document: `draft`, `stable`, `deprecated`. | Epistemic state of an inquiry, for instance a question `posed`, `refined`, `answered` or `abandoned`. |
 | Authorship and verification | `generated`, `verified`, and the actor convention. | No field. |
 

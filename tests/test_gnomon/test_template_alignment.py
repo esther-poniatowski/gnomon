@@ -31,7 +31,7 @@ RECORD_FIELDS = frozenset(
 )
 
 # Keys documented in another note than the one under test, with the note that documents them.
-ELSEWHERE_MATURITY = {"maturity": "subject-of-inquiry.md"}
+ELSEWHERE_MATURITY = {"maturity": "subject/subject-of-inquiry.md"}
 
 
 def flatten(node: Any, prefix: str = "") -> list[str]:
@@ -135,65 +135,65 @@ def documented_keys(note: str, header: Header, paths: Sequence[str], prefix: str
 
 # (label, note, table header, template, scope of the reverse check, prefix, keys documented elsewhere)
 PAIRS = [
-    ("problem", "problem.md", "| Specification", "problem.yml", None, "", {}),
-    ("target-system", "target-system.md", "| Specification", "target-system.yml", None, "", ELSEWHERE_MATURITY),
-    ("background", "background.md", "| Specification", "background.yml", None, "", ELSEWHERE_MATURITY),
-    ("phenomenon", "phenomenon.md", "| Specification", "phenomenon.yml", None, "", ELSEWHERE_MATURITY),
+    ("problem", "inquiry/problem.md", "| Specification", "problem.yml", None, "", {}),
+    ("target-system", "subject/target-system.md", "| Specification", "target-system.yml", None, "", ELSEWHERE_MATURITY),
+    ("background", "subject/background.md", "| Specification", "background.yml", None, "", ELSEWHERE_MATURITY),
+    ("phenomenon", "subject/phenomenon.md", "| Specification", "phenomenon.yml", None, "", ELSEWHERE_MATURITY),
     (
         "operators",
-        "symbols-and-expressions.md",
+        "language/symbols-and-expressions.md",
         "| Specification",
         "operators.yml",
         None,
         "",
         ELSEWHERE_MATURITY,
     ),
-    ("question-links", "inquiry-specification.md", "| Field", "question.yml", "links", "", {}),
-    ("subject-of-inquiry", "subject-of-inquiry.md", "| Component", "question.yml", "subject", "subject", {}),
-    ("contrast", "contrast.md", "| Specification", "question.yml", "subject.contrast", "subject.contrast", {}),
-    ("domain", "domain.md", "| Specification", "question.yml", "subject.domain", "subject.domain", {}),
-    ("epistemic-task", "epistemic-task.md", "| Dimension", "question.yml", "task", "task", {}),
+    ("question-links", "inquiry/inquiry-specification.md", "| Field", "question.yml", "links", "", {}),
+    ("subject-of-inquiry", "subject/subject-of-inquiry.md", "| Component", "question.yml", "subject", "subject", {}),
+    ("contrast", "subject/contrast.md", "| Specification", "question.yml", "subject.contrast", "subject.contrast", {}),
+    ("domain", "subject/domain.md", "| Specification", "question.yml", "subject.domain", "subject.domain", {}),
+    ("epistemic-task", "epistemic-task/epistemic-task.md", "| Dimension", "question.yml", "task", "task", {}),
     (
         "admissible-explanans",
-        "admissible-explanans.md",
+        "epistemic-task/admissible-explanans.md",
         "| Specification",
         "question.yml",
         "task.admissible_explanans",
         "task.admissible_explanans",
         {},
     ),
-    ("answer-core", "answer-form.md", "| Element", "answer.yml", None, "", ELSEWHERE_MATURITY),
-    ("answer-aim-blocks", "answer-form.md", "| Aim |", "answer.yml", "aim_block", "aim_block", {}),
+    ("answer-core", "answer/answer-form.md", "| Element", "answer.yml", None, "", ELSEWHERE_MATURITY),
+    ("answer-aim-blocks", "answer/answer-form.md", "| Aim |", "answer.yml", "aim_block", "aim_block", {}),
     (
         "answer-explanation-block",
-        "answer-form.md",
+        "answer/answer-form.md",
         "| Specification",
         "answer.yml",
         "aim_block.explanation",
         "aim_block.explanation",
         {},
     ),
-    ("model", "model-and-binding.md", "| Element", "model.yml", None, "", ELSEWHERE_MATURITY),
+    ("model", "answer/model-and-binding.md", "| Element", "model.yml", None, "", ELSEWHERE_MATURITY),
     (
         "binding",
-        "model-and-binding.md",
+        "answer/model-and-binding.md",
         ("binding-record", "| Specification"),
         "binding.yml",
         None,
         "",
         ELSEWHERE_MATURITY,
     ),
-    ("key", "model-and-binding.md", ("key-record", "| Specification"), "key.yml", None, "", ELSEWHERE_MATURITY),
+    ("key", "answer/model-and-binding.md", ("key-record", "| Specification"), "key.yml", None, "", ELSEWHERE_MATURITY),
     (
         "assessment",
-        "satisfaction-conditions.md",
+        "answer/satisfaction-conditions.md",
         ("assessment-record", "| Specification"),
         "assessment.yml",
         None,
         "",
         ELSEWHERE_MATURITY,
     ),
-    ("itinerary", "itinerary.md", "| Specification", "itinerary.yml", None, "", {}),
+    ("itinerary", "inquiry/itinerary.md", "| Specification", "itinerary.yml", None, "", {}),
 ]
 
 IDS = [pair[0] for pair in PAIRS]
@@ -243,7 +243,7 @@ def test_no_key_of_the_template_is_undocumented(pair: tuple) -> None:
 
 def test_the_operator_note_lists_the_registry(): 
     """The registry is the source; the note documents it and must not drift from it."""
-    note = (DOCS / "symbols-and-expressions.md").read_text(encoding="utf-8")
+    note = (DOCS / "language/symbols-and-expressions.md").read_text(encoding="utf-8")
     bullet = re.search(r"- \*\*The canonical operators.*?\^operator-groups", note, re.S)
     assert bullet is not None, "the note declares no canonical operators"
     documented = set(re.findall(r"`([A-Za-z_][A-Za-z_0-9]*)`", bullet.group(0)))
@@ -260,7 +260,7 @@ def test_no_operator_notation_doubles_a_backslash() -> None:
 
 def test_the_aim_note_lists_the_requirement_registry() -> None:
     """Each row of the aim table states what the registry declares for that aim."""
-    note = (DOCS / "epistemic-aim.md").read_text(encoding="utf-8")
+    note = (DOCS / "epistemic-task/epistemic-aim.md").read_text(encoding="utf-8")
     section = re.search(r"\| Aim \| Additionally required \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)", note)
     assert section is not None, "the note carries no requirement table"
     documented = {}
@@ -284,17 +284,17 @@ REQUIREMENT_CELLS = {"always": "always", "from `identified`": "identified", "fro
 # (registry entry, note, table header, template, prefix): a record kind is read under `always` and
 # `by_commitment`, and the path of an aim block under `by_block`.
 REQUIREMENT_TABLES = [
-    ("target-system", "target-system.md", "| Specification", "target-system.yml", ""),
-    ("phenomenon", "phenomenon.md", "| Specification", "phenomenon.yml", ""),
-    ("background", "background.md", "| Specification", "background.yml", ""),
-    ("problem", "problem.md", "| Specification", "problem.yml", ""),
-    ("itinerary", "itinerary.md", "| Specification", "itinerary.yml", ""),
-    ("answer", "answer-form.md", "| Element", "answer.yml", ""),
-    ("aim_block.explanation", "answer-form.md", "| Specification", "answer.yml", "aim_block.explanation"),
-    ("model", "model-and-binding.md", "| Element", "model.yml", ""),
-    ("binding", "model-and-binding.md", ("binding-record", "| Specification"), "binding.yml", ""),
-    ("key", "model-and-binding.md", ("key-record", "| Specification"), "key.yml", ""),
-    ("assessment", "satisfaction-conditions.md", ("assessment-record", "| Specification"), "assessment.yml", ""),
+    ("target-system", "subject/target-system.md", "| Specification", "target-system.yml", ""),
+    ("phenomenon", "subject/phenomenon.md", "| Specification", "phenomenon.yml", ""),
+    ("background", "subject/background.md", "| Specification", "background.yml", ""),
+    ("problem", "inquiry/problem.md", "| Specification", "problem.yml", ""),
+    ("itinerary", "inquiry/itinerary.md", "| Specification", "itinerary.yml", ""),
+    ("answer", "answer/answer-form.md", "| Element", "answer.yml", ""),
+    ("aim_block.explanation", "answer/answer-form.md", "| Specification", "answer.yml", "aim_block.explanation"),
+    ("model", "answer/model-and-binding.md", "| Element", "model.yml", ""),
+    ("binding", "answer/model-and-binding.md", ("binding-record", "| Specification"), "binding.yml", ""),
+    ("key", "answer/model-and-binding.md", ("key-record", "| Specification"), "key.yml", ""),
+    ("assessment", "answer/satisfaction-conditions.md", ("assessment-record", "| Specification"), "assessment.yml", ""),
 ]
 
 
@@ -373,7 +373,7 @@ def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
 
 
 def test_the_virtues_of_the_note_are_the_options_of_the_question() -> None:
-    note = (DOCS / "epistemic-pragmatic-virtues.md").read_text(encoding="utf-8")
+    note = (DOCS / "epistemic-task/epistemic-pragmatic-virtues.md").read_text(encoding="utf-8")
     table = re.search(r"\| Virtue.*?\n\n", note, re.S)
     assert table is not None, "no virtue table in the note"
     names = [
@@ -390,7 +390,7 @@ def criteria(header: Header, column: int) -> list[str]:
     """Return the criteria of a table of tests, as the assessment template writes them."""
     return [
         line.strip("|").split("|")[column].strip().lower().replace(" ", "-")
-        for line in table_lines("satisfaction-conditions.md", header)
+        for line in table_lines("answer/satisfaction-conditions.md", header)
     ]
 
 
@@ -419,7 +419,7 @@ def test_every_template_parses_and_declares_its_kind() -> None:
 
 def test_the_occurrence_table_of_the_phenomenon_note_is_the_registry() -> None:
     """The note documents which occurrence classes each category admits; the registry decides."""
-    note = (DOCS / "phenomenon.md").read_text(encoding="utf-8")
+    note = (DOCS / "subject/phenomenon.md").read_text(encoding="utf-8")
     section = re.search(r"\| Category \| Admitted occurrence \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)", note)
     assert section is not None, "the note carries no table of occurrence classes"
     documented = {}
@@ -445,7 +445,7 @@ def test_the_aim_categories_of_the_note_are_the_registry() -> None:
     """
     names = {"answer content": "answer-content", "conceptual work": "conceptual-work", "mode of inquiry": "mode-of-inquiry"}
     documented: dict[str, Any] = {}
-    for line in table_lines("epistemic-aim.md", "| Epistemic aim | Category"):
+    for line in table_lines("epistemic-task/epistemic-aim.md", "| Epistemic aim | Category"):
         cells = [c.strip() for c in line.strip("|").split("|")]
         aim = re.search(r"\(`([a-z-]+)`\)", cells[0])
         assert aim is not None, f"no aim value in {cells[0]!r}"
@@ -461,7 +461,7 @@ def test_the_answer_conditions_of_the_note_are_the_registry() -> None:
         return re.sub(r"\s*\[[a-z0-9_]+\]", "", cell).strip()
 
     documented = {}
-    for line in table_lines("epistemic-aim.md", "| Aim | Direct answer |"):
+    for line in table_lines("epistemic-task/epistemic-aim.md", "| Aim | Direct answer |"):
         cells = [plain(c) for c in line.strip("|").split("|")]
         documented[cells[0].strip("`")] = tuple(cells[1:4])
     aims = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"]["question"]["task.epistemic_aim"]

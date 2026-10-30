@@ -83,7 +83,7 @@ A change is verified by the narrowest checks that exercise it. A change to a sha
 
 Each contract of the framework has one owning file. A contributor reads that file before editing any file that depends on the contract.
 
-- The [expression language](docs/epistemology/symbols-and-expressions.md) fixes the syntax of symbols, expressions and signatures.
+- The [expression language](docs/epistemology/language/symbols-and-expressions.md) fixes the syntax of symbols, expressions and signatures.
 - The [specification method](docs/epistemology/_index.md) fixes the meaning of every inquiry field and the options that the field admits.
 - The [record templates](src/gnomon/data/templates/_index.md) fix the machine-readable shape of each record and the order of its keys.
 - The tests of [template alignment](tests/test_gnomon/test_template_alignment.py) and of [symbol resolution](tests/test_gnomon/test_symbol_resolution.py) enforce that each method table aligns with its template, and that every symbol and every reference resolves.
@@ -144,16 +144,16 @@ An index holds only four kinds of unit: its own goal, stated in one clause of th
 
 ### Cross-references
 
-A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both in an editor and on the repository page. The examples below are written from a note of `docs/epistemology/`:
+A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both in an editor and on the repository page. The examples below are written from a note of `docs/epistemology/inquiry/`:
 
 ```markdown
-the [types of problem](definitions/inquiry/problem-types.md)
+the [types of problem](../definitions/inquiry/problem-types.md)
 ```
 
 A finer reference appends a block anchor, declared at the end of the target line:
 
 ```markdown
-[links between questions](definitions/inquiry/problem-and-question.md#^linked-questions)
+[links between questions](../definitions/inquiry/problem-and-question.md#^linked-questions)
 ```
 
 Link text names the result, the object, or the message found at the target, never the file name and never a bare category word.

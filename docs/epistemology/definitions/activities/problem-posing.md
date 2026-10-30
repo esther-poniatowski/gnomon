@@ -47,9 +47,9 @@ The activities of this family output the objects that open an inquiry: a problem
 
 ## Consequences for a record
 
-- **Problematization fills the problem record.** The [specification of the problem](../../problem.md) holds the demand, the constraints with their sources, and the explicanda with their pointers.
-- **Question formulation and subject identification fill the subject of a question in two passes.** The [statement frame of a question](../../subject-of-inquiry.md#^question-statement) first receives a placeholder in each slot, then a record id at commitment `identified`. As a result, the record changes type from `question-schema` to `question`, as the [itinerary check](epistemic-activities.md#^itinerary-check) reads it.
-- **Decomposition links a subquestion to its question.** The subquestion carries a link with the relation `subquestion-of`. The [governing criterion of a decomposition](../../question-decomposition.md#^governing-criterion) admits a serving question only when resolving it changes the status of the question that it serves.
+- **Problematization fills the problem record.** The [specification of the problem](../../inquiry/problem.md) holds the demand, the constraints with their sources, and the explicanda with their pointers.
+- **Question formulation and subject identification fill the subject of a question in two passes.** The [statement frame of a question](../../subject/subject-of-inquiry.md#^question-statement) first receives a placeholder in each slot, then a record id at commitment `identified`. As a result, the record changes type from `question-schema` to `question`, as the [itinerary check](epistemic-activities.md#^itinerary-check) reads it.
+- **Decomposition links a subquestion to its question.** The subquestion carries a link with the relation `subquestion-of`. The [governing criterion of a decomposition](../../inquiry/question-decomposition.md#^governing-criterion) admits a serving question only when resolving it changes the status of the question that it serves.
 
 ---
 ## Sources

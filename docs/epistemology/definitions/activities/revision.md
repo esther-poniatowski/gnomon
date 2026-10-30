@@ -39,8 +39,8 @@ The activities of this family output a **change of knowledge state**: a change o
 
 ## Consequences for a record
 
-- **A revision changes the attitude of an answer.** The [answer form](../../answer-form.md) records the attitude of each candidate, and a revision moves it, for instance from `hypothesized` to `accepted` or to `retracted`.
-- **The warrant of a law fixes the order of revision.** When new evidence arrives, posited, fitted or measured laws are revised first, as the [warrant of a background law](../../background.md#^law-warrant) states.
+- **A revision changes the attitude of an answer.** The [answer form](../../answer/answer-form.md) records the attitude of each candidate, and a revision moves it, for instance from `hypothesized` to `accepted` or to `retracted`.
+- **The warrant of a law fixes the order of revision.** When new evidence arrives, posited, fitted or measured laws are revised first, as the [warrant of a background law](../../subject/background.md#^law-warrant) states.
 - **Formal models of epistemic change are surveyed in this method.** The [formal models of belief change](../../../references/belief-revision-dynamic-epistemic-logic.md) state how an epistemic state changes under new information.
 
 ---

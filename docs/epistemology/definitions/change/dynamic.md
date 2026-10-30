@@ -45,7 +45,7 @@ Four terms are often used for one another. The four terms differ in their type a
 
 ## Consequences for a record
 
-- **A dynamic is a law with the role *evolution*.** Among the roles of a law, which the [background record](../../background.md#^laws) lists, only the role *evolution* generates trajectories.
+- **A dynamic is a law with the role *evolution*.** Among the roles of a law, which the [background record](../../subject/background.md#^laws) lists, only the role *evolution* generates trajectories.
 - **A causal answer may state no law of evolution.** A [causal structure](#^causal-structure) need not be a dynamic, so a record may state how the explanandum depends on interventions, without any law with the role *evolution*.
 
 ---

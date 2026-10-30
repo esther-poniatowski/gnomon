@@ -31,7 +31,7 @@ A **claim** is a proposition put forward for evaluation. A claim carries two att
 | Prediction | philosophy of science | a claim about the values of observables not yet observed, derived from a model and conditions | [hempel1948] |
 | Explanation | philosophy of science | a pair of an explanans and an explanandum, in which the explanans bears to the explanandum a relation that counts as explanatory: deductive subsumption, causal production, or another | [hempel1948]; [salmon1984] |
 
-The relations that count as explanatory are compared in the [specification of the requested relation](../../requested-relation.md). This note does not restate that comparison.
+The relations that count as explanatory are compared in the [specification of the requested relation](../../epistemic-task/requested-relation.md). This note does not restate that comparison.
 
 ## Distinctions
 
@@ -50,16 +50,16 @@ The attitude and the support of a claim take values in two closed lists: ^attitu
 | Attitude | the stance of the inquiry toward the claim | `entertained`, `hypothesized`, `accepted`, `retracted` |
 | Support | the grounds of the claim, independent of the attitude | `unsupported`, `informal`, `formally-proven`, `empirically-supported` |
 
-- **A hypothesis and an accepted claim differ by attitude only.** Their content can be identical: the same proposition is hypothesized while it is tested, and accepted once a revision of the belief base admits it, as the [acceptance of an answer](../../epistemic-aim.md#^acceptance) states.
+- **A hypothesis and an accepted claim differ by attitude only.** Their content can be identical: the same proposition is hypothesized while it is tested, and accepted once a revision of the belief base admits it, as the [acceptance of an answer](../../epistemic-task/epistemic-aim.md#^acceptance) states.
 - **The attitude and the support vary independently.** *Examples*: a claim can be hypothesized with informal support, or accepted with no more than informal support. A formally proven claim can be retracted when its assumptions turn out to be false of the target.
 - **An explanation, as a product, is a claim.** Its content is that the explanans $E$ explains the phenomenon $P$ under the requested relation $R$. Therefore, the explanation carries an attitude and a support, as any claim does. The activity of explaining is typed in the [taxonomy of epistemic activities](../activities/epistemic-activities.md).
 - **A prediction and an explanation can share their logical form.** In the deductive-nomological model, both derive the explanandum from laws and conditions. The two differ in the epistemic status of the explanandum, already known or not yet known [hempel1948]. Accounts that require a causal relation separate the two, since a prediction may rest on a symptom that does not cause the predicted event [salmon1984].
 
 ## Consequences for a record
 
-- **A candidate answer records the attitude and the support of its claim.** The fields are specified under the [status and support of an answer](../../answer-form.md#^status-and-support), with the values of the [two lists](#^attitude-support). Therefore, an answer whose attitude is `hypothesized` is a hypothesis.
-- **The laws on which a candidate answer rests are claims, each with a warrant of its own.** The [warrant of a law](../../background.md#^law-warrant) traces the law to its origin, so it differs from the support of the claim of an answer.
-- **The conditions of satisfaction fix the tests of the claims before evaluation.** Before any answer is assessed, the [conditions of satisfaction](../../satisfaction-conditions.md) state the tests deciding whether its claims hold.
+- **A candidate answer records the attitude and the support of its claim.** The fields are specified under the [status and support of an answer](../../answer/answer-form.md#^status-and-support), with the values of the [two lists](#^attitude-support). Therefore, an answer whose attitude is `hypothesized` is a hypothesis.
+- **The laws on which a candidate answer rests are claims, each with a warrant of its own.** The [warrant of a law](../../subject/background.md#^law-warrant) traces the law to its origin, so it differs from the support of the claim of an answer.
+- **The conditions of satisfaction fix the tests of the claims before evaluation.** Before any answer is assessed, the [conditions of satisfaction](../../answer/satisfaction-conditions.md) state the tests deciding whether its claims hold.
 
 ---
 ## Sources

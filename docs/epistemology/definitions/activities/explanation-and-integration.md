@@ -43,9 +43,9 @@ The activities of this family output an explanation or a relation between theori
 
 ## Consequences for a record
 
-- **The requested relation of a question fixes the norm of explanation.** The [requested relation](../../requested-relation.md) of the epistemic task selects one of the candidate relations between an explanans and the phenomenon, so the test `norm.explanation` reads that field.
+- **The requested relation of a question fixes the norm of explanation.** The [requested relation](../../epistemic-task/requested-relation.md) of the epistemic task selects one of the candidate relations between an explanans and the phenomenon, so the test `norm.explanation` reads that field.
 - **An explanans factor can be the explanandum of a linked question.** A question that explains a capacity of readout by the [representation geometry](../representations/representation-and-encoding.md) links to the question describing that geometry, with the relation `explanans-from` of [linked questions](../inquiry/problem-and-question.md#^linked-questions).
-- **An empirical bridge law of reduction is recorded as a law with the role *measurement*.** When a bridge law identifies a separately measured quantity with an aggregate, it states a factual hypothesis. Therefore, the [specification of the target system](../../target-system.md) places such a law among the laws of the [background record](../../background.md).
+- **An empirical bridge law of reduction is recorded as a law with the role *measurement*.** When a bridge law identifies a separately measured quantity with an aggregate, it states a factual hypothesis. Therefore, the [specification of the target system](../../subject/target-system.md) places such a law among the laws of the [background record](../../subject/background.md).
 
 ---
 ## Sources

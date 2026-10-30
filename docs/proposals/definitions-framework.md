@@ -16,7 +16,7 @@ Two structures look circular without being vicious cycles of justification:
 - **Co-definition.** Two definitions can depend on each other. "Task variable" cannot be fixed independently of "task", because what counts as a variable depends on which distinctions the task makes relevant ([example 29](../../examples/adversarial-statements.md#^example-conceptual-dependence-between-two-definitions)). Such definitions are admitted together, as a cluster that records its mutual constraint as legitimate.
 - **Co-determination.** Two objects can each explain an aspect of the other. The task explains the geometry, and the geometry explains which aspects of the task are treated as relevant ([example 32](../../examples/adversarial-statements.md#^example-ambiguous-explanatory-priority)). A directed relation `explains` cannot state this. A distinction, here between the task and the effective task, often removes the apparent circle, because it separates the endpoints of the two relations.
 
-The note on the [order of specification](../epistemology/specification-order.md#^iteration-circularity) already separates circularity in the order of execution from circularity in warrant, and admits cycles between questions resolved by iteration. The candidate draws the same distinction for definitions and for explanatory relations.
+The note on the [order of specification](../epistemology/inquiry/specification-order.md#^iteration-circularity) already separates circularity in the order of execution from circularity in warrant, and admits cycles between questions resolved by iteration. The candidate draws the same distinction for definitions and for explanatory relations.
 
 **Literature.** None cited; the candidate derives from the statements of the test set.
 

@@ -19,7 +19,7 @@ A record carries a version only if a reference must fix the state of that record
 
 Three references fix a state of their target: ^pinned-references
 
-- a reference to a binding or to a key, which names its [version](../epistemology/model-and-binding.md#^binding-version);
+- a reference to a binding or to a key, which names its [version](../epistemology/answer/model-and-binding.md#^binding-version);
 - the root property `_schema` of a record, which names its schema at a version;
 - a step of an itinerary, which is planned to name the state of each record that it used, by `as_of`, under the goal `inquiry-records-round-2` of the [project goals](../../TODO.md). The goal also decides the form of `as_of`: a version of the record, or a revision of the repository.
 
@@ -28,7 +28,7 @@ Every other reference names its target at its current state. ^current-by-default
 ## Constraints that decide the versions
 
 - **Git already records every state.** A store of past versions inside the records would restate that history, which the [rule of one source](one-source-per-unit.md#^one-source) excludes.
-- **A computed result must stay reproducible.** A comparison is [recomputed from a binding at one version](../epistemology/model-and-binding.md#^comparison-recomputed), so a binding without versions would change the result of every earlier comparison once revised.
+- **A computed result must stay reproducible.** A comparison is [recomputed from a binding at one version](../epistemology/answer/model-and-binding.md#^comparison-recomputed), so a binding without versions would change the result of every earlier comparison once revised.
 - **A step stays valid once it has run.** A step that names a record at its current state becomes invalid at the next revision of that record, although the step ran correctly.
 - **A version on every reference fragments the records.** Each revision would require an update of every referring record, or would leave the records spread over past states.
 

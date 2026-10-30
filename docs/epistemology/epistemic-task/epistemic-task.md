@@ -1,7 +1,7 @@
 ---
 tags:
   - method
-index: "[Epistemology](docs/epistemology/_index.md)"
+index: "[Epistemic task](docs/epistemology/epistemic-task/_index.md)"
 aliases:
   - Specifying an epistemic task
 ---
@@ -9,7 +9,7 @@ aliases:
 
 > [!QUESTION] Goal: what must be fixed to specify an epistemic task?
 
-The epistemic task is the layer of an [inquiry specification](inquiry-specification.md) that fixes the kind of knowledge sought. The task states the **epistemic problem** before any candidate answer is evaluated. Through its aim, the task also constrains a candidate model, because each epistemic aim imposes its own evidential requirements.
+The epistemic task is the layer of an [inquiry specification](../inquiry/inquiry-specification.md) that fixes the kind of knowledge sought. The task states the **epistemic problem** before any candidate answer is evaluated. Through its aim, the task also constrains a candidate model, because each epistemic aim imposes its own evidential requirements.
 
 ## Sub-layers of specification
 
@@ -30,7 +30,7 @@ $$T=\langle A,R,\mu,\lambda,\tau,\omega\rangle $$
 | **Proof obligations $\omega$** | when the answer must derive a statement rather than match a measurement | Which implication must the answer establish, and in which direction? | Per obligation: the antecedent and the consequent, each as expressions over the declared observables. A converse counts as a separate obligation. | explanation by mathematical proof [lange2017] |
 
 > [!HINT] Practical use
-> Once a candidate exists, it is checked against the required accuracy by the [fidelity test](satisfaction-conditions.md).
+> Once a candidate exists, it is checked against the required accuracy by the [fidelity test](../answer/satisfaction-conditions.md).
 
 > [!NOTE]
 > Each dimension is developed in its own note, linked from its row. The required accuracy and the proof obligations have no note yet, because each row holds its whole specification.
@@ -38,7 +38,7 @@ $$T=\langle A,R,\mu,\lambda,\tau,\omega\rangle $$
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [batterman2000] ◐ [Batterman, "Multiple realizability and universality", *British Journal for the Philosophy of Science* 51(1), 2000](https://philpapers.org/rec/BATMRA)
 - [craver2007] ◐ [Craver, *Explaining the Brain*, OUP, 2007](https://philpapers.org/rec/CRAETB-2)

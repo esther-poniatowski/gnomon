@@ -1,4 +1,4 @@
-# method: `docs/epistemology/model-and-binding.md`; one file per map shared by bindings
+# method: `docs/epistemology/answer/model-and-binding.md`; one file per map shared by bindings
 # a key carries one side of a binding onto the other; the bindings that use it reference it by identifier and version
 # a map that also defines a bearer of a model is stated once, in the model, and the key references that definition
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled

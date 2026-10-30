@@ -52,7 +52,7 @@ Each condition of axis B can be refuted under any value of axis A, with two exce
 
 ## Classification by demand
 
-The type of result of the demand fixes the admissible [aims](../../epistemic-aim.md), the interrogative form of the questions that serve the problem, and the form of their answers. Each row names an [product type](../activities/epistemic-activities.md#^product-types). The request of the demand fixes the number and the completeness of the answers.
+The type of result of the demand fixes the admissible [aims](../../epistemic-task/epistemic-aim.md), the interrogative form of the questions that serve the problem, and the form of their answers. Each row names an [product type](../activities/epistemic-activities.md#^product-types). The request of the demand fixes the number and the completeness of the answers.
 
 | Type of result | Admissible aims | Question form (request) | Answer form | Example |
 | --- | --- | --- | --- | --- |
@@ -61,7 +61,7 @@ The type of result of the demand fixes the admissible [aims](../../epistemic-aim
 | `consequence` | model knowledge; modal knowledge, when the background of the target is closed | whether a statement holds of a model (to prove); which object satisfies a condition (to find); whether a property can or must hold | a derived law, a proof, a proof of existence, a counterexample, or a proof of impossibility | whether the fixed point of a rate network is unique below a critical gain |
 | `hypothesis` | prediction; modal knowledge, when the background of the target is not closed | which outcome occurs in the target when a condition changes; whether a property can or must hold in the target | a predicted value with its uncertainty, compared with the observed outputs; an instance of the target that exhibits the property | the change of the firing rate when the input contrast doubles; whether a network without inhibitory neurons can oscillate at gamma frequency |
 | `model` | description; explanation, at modal strength `possible` | which model of a class reproduces the phenomenon (`one`) | a model record | which rate model reproduces the measured tuning curves |
-| `explanation` | explanation | why the phenomenon holds rather than its contrast; how the system produces it | an answer that holds the [block of an explanation](../../answer-form.md#^explanation-block), resting on a model when its route runs on one | why the network oscillates rather than stays asynchronous |
+| `explanation` | explanation | why the phenomenon holds rather than its contrast; how the system produces it | an answer that holds the [block of an explanation](../../answer/answer-form.md#^explanation-block), resting on a model when its route runs on one | why the network oscillates rather than stays asynchronous |
 | `classification` | exploration; description | which kinds or regimes exist (`all`) | a partition with its criteria | which dynamical regimes divide the parameter space of a network |
 | `concept` or `measurement-procedure` | none: an explication | which criterion should define the explicandum | an explicatum with its criteria of adequacy | the criterion of a compositional representation |
 | `knowledge-state-change` | none: a revision | which accepted claim to withdraw | the revised status of the records concerned | which of two clashing claims to withdraw |
@@ -72,13 +72,13 @@ The type of result of the demand fixes the admissible [aims](../../epistemic-aim
 - **An explicatum is not judged true or false.** An explication is judged by its similarity to the explicandum, its exactness, its fruitfulness and its simplicity [carnap1950_logical]. Therefore, a demand for a concept calls for criteria of adequacy, not for a test of truth.
 - **A verdict is a request, not the type of result of a demand.** A demand with the request `verdict` asks for a decision on candidates already proposed. The type of result stays the type of those candidates, and each question that serves the demand keeps the aim of that type. The [evaluation activities](../activities/evaluation.md) produce the decision.
 - **Not every why-question asks for an explanation.** A why-question can ask for the reasons to believe a claim [hempel1965]. Such an answer is a justification, and a justification falls under the request `verdict`.
-- **How-possibly and how-actually are modal strengths, not question forms.** A how-question takes either strength, as the [modal strength](../../modal-strength.md) of the task states. A how-question can also ask for a prediction ("how does the rate change when the contrast doubles?").
+- **How-possibly and how-actually are modal strengths, not question forms.** A how-question takes either strength, as the [modal strength](../../epistemic-task/modal-strength.md) of the task states. A how-question can also ask for a prediction ("how does the rate change when the contrast doubles?").
 - **A prediction concerns the target, and a consequence concerns a model.** A consequence holds of a model, and it may fail of the target. A prediction claims an outcome of the target, so it is compared with observed outputs.
 - **One question can fall under several types.** *Example*: "does the fixed point of a rate network remain unique when the gain exceeds one?" can ask for two types of result:
   - a consequence: a proof for a formally defined class of networks;
   - a hypothesis: a prediction for a given network of the target.
 
-  The [closure of the admitted laws](../../background.md#^laws) selects between the two types. When the laws define the system, the target is a formal class, and a formal class admits a consequence. A candidate answer already proposed changes the request to `verdict`.
+  The [closure of the admitted laws](../../subject/background.md#^laws) selects between the two types. When the laws define the system, the target is a formal class, and a formal class admits a consequence. A candidate answer already proposed changes the request to `verdict`.
 
 ## Questions generated by each obstacle
 

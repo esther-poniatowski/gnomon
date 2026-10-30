@@ -34,7 +34,7 @@ The decision amends only the reference form of the flat symbol table. Each recor
 
 ## Consequences
 
-- The notes on [symbols and expressions](../epistemology/symbols-and-expressions.md) and the flat symbol table state the dotted reference form, and the templates, checkers and fixtures follow.
+- The notes on [symbols and expressions](../epistemology/language/symbols-and-expressions.md) and the flat symbol table state the dotted reference form, and the templates, checkers and fixtures follow.
 - Idealizations, abstractions and explanans factors gain an `id`, under the task `research-corrections`.
 - The itinerary check resolves each step by its full identifier, and the references between steps take the full form.
 - A new record type declares the number of segments of its identifier with its prefix.

@@ -10,7 +10,7 @@ aliases:
 Fixes the senses of the terms that name the quantities, the states and the given constraints of a described system, and the criteria that separate those terms.
 
 > [!WARNING] Notes with neighboring names
-> [Condition](condition.md) fixes the senses of the term, whereas the [domain of conditions](../../domain.md) lists the places of the records that hold conditions.
+> [Condition](condition.md) fixes the senses of the term, whereas the [domain of conditions](../../subject/domain.md) lists the places of the records that hold conditions.
 
 - [Variable, value, observable, parameter and data](variable-value-observable.md): identifies the formal object introduced by a declaration of a quantity
 - [Scale and level](scale-and-level.md): decides which statements about values are meaningful, and which sense of scale or level a statement uses

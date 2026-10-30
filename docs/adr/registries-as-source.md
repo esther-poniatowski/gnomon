@@ -15,7 +15,7 @@ A filled inquiry draws on three vocabularies, and each vocabulary has a single a
 | ---------- | ------ | ----- | -------------------- |
 | Fields and their option lists | Designer | Every problem | Package data, documented by the method notes and the templates |
 | Symbols of one problem | Author of that problem | The records of that problem | The records themselves, collected into one generated table per problem |
-| Operators | Designer for the canonical set, author for the rest | The canonical set in every problem, the rest in one problem | Package data for the canonical set, and one file per problem for its [local operators](../epistemology/symbols-and-expressions.md#^local-operators) |
+| Operators | Designer for the canonical set, author for the rest | The canonical set in every problem, the rest in one problem | Package data for the canonical set, and one file per problem for its [local operators](../epistemology/language/symbols-and-expressions.md#^local-operators) |
 
 ## Decision
 

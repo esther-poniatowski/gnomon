@@ -45,9 +45,9 @@ The activities of this family output a design of inquiry, [data](../quantities/v
 
 ## Consequences for a record
 
-- **The evidential status of a phenomenon records the outcome of detection.** The [specification of the phenomenon](../../phenomenon.md) grades that status, and its detection criterion states the norm for a candidate pattern.
-- **A law with the role *measurement* states the observation map of an instrument.** The [background record](../../background.md) admits laws in that role, so the model of the measuring process required by the model-based account has a place in the records.
-- **A clamped variable in the domain records an intervention.** A [clamped state variable](../../domain.md) is removed from the dynamics and treated as an input, just as an intervention replaces the equation of its target variable.
+- **The evidential status of a phenomenon records the outcome of detection.** The [specification of the phenomenon](../../subject/phenomenon.md) grades that status, and its detection criterion states the norm for a candidate pattern.
+- **A law with the role *measurement* states the observation map of an instrument.** The [background record](../../subject/background.md) admits laws in that role, so the model of the measuring process required by the model-based account has a place in the records.
+- **A clamped variable in the domain records an intervention.** A [clamped state variable](../../subject/domain.md) is removed from the dynamics and treated as an input, just as an intervention replaces the equation of its target variable.
 
 ---
 ## Sources

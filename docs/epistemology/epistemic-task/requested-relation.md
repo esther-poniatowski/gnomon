@@ -1,7 +1,7 @@
 ---
 tags:
   - method
-index: "[Epistemology](docs/epistemology/_index.md)"
+index: "[Epistemic task](docs/epistemology/epistemic-task/_index.md)"
 aliases:
   - Specifying the requested relation
   - Requested relation
@@ -10,7 +10,7 @@ aliases:
 
 > [!QUESTION] Goal: what must be fixed to specify the relation that an explanans must bear to the explanandum?
 
-The requested relation is the second dimension of the [epistemic task](epistemic-task.md), the layer that sets the kind of knowledge sought. The requested relation acts as a relevance relation: it fixes the **kind of dependence between the explanans and the explanandum** that counts as the answer. The relation is specified separately because two questions can share the explanandum and the modal status yet demand different explanatory information. Only a question whose aim is explanation requests a relation, since only the [block of an explanation](answer-form.md#^explanation-block) holds an explanans: its factors $E$, together with the type of their relation. An answer under any other aim, such as a prediction, a description, a modal claim or a consequence of a model, holds no explanans, so its question requests no relation.
+The requested relation is the second dimension of the [epistemic task](epistemic-task.md), the layer that sets the kind of knowledge sought. The requested relation acts as a relevance relation: it fixes the **kind of dependence between the explanans and the explanandum** that counts as the answer. The relation is specified separately because two questions can share the explanandum and the modal status yet demand different explanatory information. Only a question whose aim is explanation requests a relation, since only the [block of an explanation](../answer/answer-form.md#^explanation-block) holds an explanans: its factors $E$, together with the type of their relation. An answer under any other aim, such as a prediction, a description, a modal claim or a consequence of a model, holds no explanans, so its question requests no relation.
 
 | Requested relation                                  | Content the explanans must provide                                                                                                                                       | Example                                                                                                                                                                                                             | Canonical source                                                           |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
@@ -22,7 +22,7 @@ The requested relation is the second dimension of the [epistemic task](epistemic
 | **Statistical dependence**                          | a probabilistic regularity under which the explanandum falls                                                                                                           | _Why did this gas expand?_ The statistical variant of the answer explains the expansion by a statistical law.                                                                                                                             | statistical-relevance model [salmon1971]                                 |
 | **Mathematical derivation / Structural constraint** | a mathematical fact that proves that the explanandum obtains or that alternatives are impossible: structural constraint, symmetry, topology, optimization result, etc. | _Why can no route traverse each Königsberg bridge exactly once?_ The graph has more than two vertices of odd degree, so no Eulerian path exists.                                                                              | non-causal and mathematical explanation [lange2017]                         |
 
-- **A functional question names its sense of function.** The two senses of [function](definitions/change/function.md) call for different answers. In the causal-role sense, the answer analyzes a capacity of the system into the capacities of its parts, and names the contribution of one part. In the etiological sense, the answer gives the history of selection that explains why the part is present. Therefore, the question states the sense in its field `function_sense`, whenever the requested relation is functional. ^function-sense
+- **A functional question names its sense of function.** The two senses of [function](../definitions/change/function.md) call for different answers. In the causal-role sense, the answer analyzes a capacity of the system into the capacities of its parts, and names the contribution of one part. In the etiological sense, the answer gives the history of selection that explains why the part is present. Therefore, the question states the sense in its field `function_sense`, whenever the requested relation is functional. ^function-sense
 
 > [!NOTE] Close approaches
 > - The **causal family** includes two approaches: *interventionist dependence* and *causal-mechanistic production*. *Causal-mechanistic production* usually supplies more information than interventionist dependence alone.
@@ -35,7 +35,7 @@ The requested relation is the second dimension of the [epistemic task](epistemic
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [craver2007] ◐ [Craver, *Explaining the Brain*, OUP, 2007](https://philpapers.org/rec/CRAETB-2)
 - [friedman1974] ◐ [Friedman, "Explanation and scientific understanding", _The Journal of Philosophy_ 71(1), 5–19, 1974](https://philpapers.org/rec/FRIEAS)

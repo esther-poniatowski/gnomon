@@ -110,10 +110,10 @@ The product types form a closed list. Each type classifies the epistemic objects
 | `data` | the recorded [values](../quantities/variable-value-observable.md) of observables | `phenomenon.data` | partial |
 | `phenomenon` | a stable feature of a target, detected from data, as defined in the note on [phenomena](../regularities/pattern-and-phenomenon.md) | `phenomenon` | exists |
 | `target-specification` | the declared constituents and quantities of a [target](../systems/things-and-constructs.md) | `target-system` at commitment `specified` | exists |
-| `background-model` | the laws admitted about a target, with their closure and organization | [`background`](../../background.md) | exists |
-| `model` | a candidate [model](../representations/model.md) of the target | [`model`](../../model-and-binding.md#^model-record) | exists |
-| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | [`binding`](../../model-and-binding.md#^binding-record) | exists |
-| `key` | a shared, versioned map between the side of a model and the side of its target | [`key`](../../model-and-binding.md#^key-record) | exists |
+| `background-model` | the laws admitted about a target, with their closure and organization | [`background`](../../subject/background.md) | exists |
+| `model` | a candidate [model](../representations/model.md) of the target | [`model`](../../answer/model-and-binding.md#^model-record) | exists |
+| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | [`binding`](../../answer/model-and-binding.md#^binding-record) | exists |
+| `key` | a shared, versioned map between the side of a model and the side of its target | [`key`](../../answer/model-and-binding.md#^key-record) | exists |
 | `consequence` | a statement true of a model, possibly false of the target | the block of model knowledge of an `answer`, and `assessment.obligations` | partial |
 | `hypothesis` | a [claim](../representations/claim-and-hypothesis.md) with the attitude `hypothesized` | `answer` with status `hypothesized` | exists |
 | `verdict` | the outcome of a test of a claim or of a model | `assessment.tests` | exists |
@@ -131,7 +131,7 @@ Four terms describing an inquiry are often used for one another:
 
 | Term | Definition | Question that the term answers | Example | Owning note |
 | --- | --- | --- | --- | --- |
-| Aim | the cognitive achievement sought by an inquiry | which knowledge is sought? | explanation of a gamma oscillation | [epistemic aim](../../epistemic-aim.md) |
+| Aim | the cognitive achievement sought by an inquiry | which knowledge is sought? | explanation of a gamma oscillation | [epistemic aim](../../epistemic-task/epistemic-aim.md) |
 | Activity | a typed operation, specified by its [signature](#^activity-criterion) | which object is produced from which objects, under which norm? | model selection | this folder |
 | Mode of inference | the type of inference performed by an activity | by which type of inference? | induction | this note |
 | Method | a concrete procedure that implements an activity | by which procedure? | Markov chain Monte Carlo, implementing confirmation; the Akaike information criterion, implementing model selection | this note |
@@ -140,7 +140,7 @@ The word *explanation* names three objects, each owned by one note: ^explanation
 
 - the **activity** of explanation shows that an explanans bears the requested relation to a phenomenon, as typed in the note on [explanation and integration](explanation-and-integration.md);
 - the **product** is a claim, defined in the note on [claims](../representations/claim-and-hypothesis.md) and held by the product type `explanation`;
-- the **aim** of explanation is the achievement sought by an inquiry that asks why or how, fixed by the [epistemic aim](../../epistemic-aim.md).
+- the **aim** of explanation is the achievement sought by an inquiry that asks why or how, fixed by the [epistemic aim](../../epistemic-task/epistemic-aim.md).
 
 ## Relations among activities
 
@@ -153,7 +153,7 @@ Two relations hold among activities across the families:
 
 > [!NOTE] The activity record and the itinerary check are proposals of this method
 
-A step of a research itinerary instantiates one activity type. The [itinerary record](../../itinerary.md) states each step by its activity and its signature, with the verdict of its norm.
+A step of a research itinerary instantiates one activity type. The [itinerary record](../../inquiry/itinerary.md) states each step by its activity and its signature, with the verdict of its norm.
 
 An itinerary passes the **itinerary check** when five conditions hold: ^itinerary-check
 
@@ -163,7 +163,7 @@ An itinerary passes the **itinerary check** when five conditions hold: ^itinerar
 - the steps, linked by their input references, form a directed acyclic graph;
 - every verdict is `pass`, `fail` or `pending`.
 
-The itinerary record adds checks of its own fields, such as unique step identifiers, stated with the [record checks of an itinerary](../../itinerary.md#^record-checks).
+The itinerary record adds checks of its own fields, such as unique step identifiers, stated with the [record checks of an itinerary](../../inquiry/itinerary.md#^record-checks).
 
 The type of a referenced record follows from its state, as the [record column of the product types](#^product-types) states. For a question record, the state is the commitment of its slots. With a placeholder slot, the record has type `question-schema`. With every slot at commitment `identified` or above, the record has type `question`. Therefore, a schema becomes a question when [subject identification](problem-posing.md) raises its slots, and no activity of its own is needed.
 

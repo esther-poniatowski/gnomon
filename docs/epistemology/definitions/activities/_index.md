@@ -11,7 +11,7 @@ aliases:
 Types each operation of an inquiry by the epistemic object that it produces and by the norm that judges it.
 
 > [!IMPORTANT] Activity, aim and method
-> The notes of this folder type the operations of an inquiry. The [epistemic aim](../../epistemic-aim.md) fixes the achievement served by those operations. The [overview of the taxonomy](epistemic-activities.md) separates an activity from an aim, a mode of inference and a method.
+> The notes of this folder type the operations of an inquiry. The [epistemic aim](../../epistemic-task/epistemic-aim.md) fixes the achievement served by those operations. The [overview of the taxonomy](epistemic-activities.md) separates an activity from an aim, a mode of inference and a method.
 
 ## Criterion and design
 

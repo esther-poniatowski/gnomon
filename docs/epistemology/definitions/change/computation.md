@@ -49,7 +49,7 @@ With these requirements, "computing" is a [process](process-event-history.md#^pr
 ## Consequences for a record
 
 - **The normalization map is a law, and the relaxation that realizes it is a process.** The place of each item in the records is listed among the [representational items of the benchmark](../representations/representation-and-encoding.md#^decision-table).
-- **A computation stated at an abstract level requires its implementation map.** Each abstract variable is an [aggregate](../../target-system.md#^aggregate-variables) whose defining map is $\pi$, so the abstract variables are functions on the physical state space.
+- **A computation stated at an abstract level requires its implementation map.** Each abstract variable is an [aggregate](../../subject/target-system.md#^aggregate-variables) whose defining map is $\pi$, so the abstract variables are functions on the physical state space.
 
 ---
 ## Sources

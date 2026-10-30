@@ -38,12 +38,12 @@ Constituent, component and part are synonyms only relative to one system. Mereol
 ## Distinctions
 
 - **System, constituent and environment are *roles*.** No object is a system, a constituent or an environment by its kind: a neuron is a constituent of a circuit and a system of ion channels. The role of an object is fixed by the choice of a boundary. Given that boundary, each object $x$ of a description falls in exactly one of three classes: $x\in\mathsf{Comp}(\sigma)$, $x\in\mathsf{Env}(\sigma)$, or neither. The third class holds when $x$ neither belongs to the system nor acts on it. ^system-role-test
-- **Organization is the part of the structure on which a behavior depends.** The structure lists every relation among the constituents, including relations that change no behavior of interest. *Example*: a matrix of correlations among neurons describes part of the structure before any causal reading of it is supplied. The organization keeps the relations that make a behavior of the whole non-aggregative [craver2007]. The test is an intervention: rearranging the constituents changes the behavior only when the rearranged relations belong to the organization. Organization takes the form of a typed relational structure in the [specification of a mechanism](../../mechanism.md).
+- **Organization is the part of the structure on which a behavior depends.** The structure lists every relation among the constituents, including relations that change no behavior of interest. *Example*: a matrix of correlations among neurons describes part of the structure before any causal reading of it is supplied. The organization keeps the relations that make a behavior of the whole non-aggregative [craver2007]. The test is an intervention: rearranging the constituents changes the behavior only when the rearranged relations belong to the organization. Organization takes the form of a typed relational structure in the [specification of a mechanism](../../answer/mechanism.md).
 - **A configuration is not a structure.** The structure holds the relations that persist while the system evolves. A configuration is the arrangement of the constituents at one instant, as defined in the [vocabulary of state](../quantities/state-and-configuration.md).
 
 ## Consequences for a record
 
-The items of the system description correspond to blocks of two records, the [target specification](../../target-system.md) and its [background](../../background.md):
+The items of the system description correspond to blocks of two records, the [target specification](../../subject/target-system.md) and its [background](../../subject/background.md):
 
 | Item | Block of a record |
 | --- | --- |
@@ -52,7 +52,7 @@ The items of the system description correspond to blocks of two records, the [ta
 | Structure $\mathsf{Str}(\sigma)$ | parameters of the target specification indexed by several constituents, such as a connectivity weight |
 | Organization | the organization of a background record, keeping only the relations on which the behavior depends |
 
-- **The environment of a record is narrower than the environment of a system.** An external system enters the record only through the variables shared with the target. Therefore, when a thing acts on the target through no declared variable, the record omits that thing. That restriction is a modelling decision, and the inquiry may revise it by [moving a variable across the boundary](../../target-system.md).
+- **The environment of a record is narrower than the environment of a system.** An external system enters the record only through the variables shared with the target. Therefore, when a thing acts on the target through no declared variable, the record omits that thing. That restriction is a modelling decision, and the inquiry may revise it by [moving a variable across the boundary](../../subject/target-system.md).
 - **The [role test of a system](#^system-role-test) runs on the declarations.** A constituent kind places its members in $\mathsf{Comp}(\sigma)$, an external system places its members in $\mathsf{Env}(\sigma)$, and an object declared nowhere falls in neither class.
 
 ---

@@ -1,6 +1,6 @@
 # The operator vocabulary the framework supplies. A problem declares in its own records the
 # mathematics it brings beyond this set. Source of truth for the checkers; the method note
-# docs/epistemology/symbols-and-expressions.md documents it and is checked against it.
+# docs/epistemology/language/symbols-and-expressions.md documents it and is checked against it.
 #
 # `notation` renders the operator in LaTeX. `#0` stands for the indices a binder consumes and
 # `#1`, `#2` for its arguments, so a renderer composes the form without parsing the operator.

@@ -38,5 +38,5 @@ The record of the acts of an inquiry is the **itinerary**, of type `itinerary` a
 - The template `plan.yml` becomes `itinerary.yml`, the record type `plan` becomes `itinerary`, and the prefix `plan` becomes `itin`.
 - The block `plan` of `vocabularies.yml` becomes `itinerary`, the module `plans.py` becomes `itineraries.py`, and the command `gnomon plan` becomes `gnomon itinerary`. The method note on the plan, its anchor `plan-check`, the fixtures and the tests follow.
 - The registry `artifact-types.yml` becomes `product-types.yml`, with the identifier `registry.product-types`, the type `product-type-registry` and the key `product_types`. The comments of `activities.yml`, the placeholder `ARTIFACT-TYPE` of the template and the notes that read "artifact type" follow.
-- The column of epistemic products in the table of [epistemic aims](../epistemology/epistemic-aim.md) names, for each aim, the product types admitted by the aim.
+- The column of epistemic products in the table of [epistemic aims](../epistemology/epistemic-task/epistemic-aim.md) names, for each aim, the product types admitted by the aim.
 - The word "planning" keeps its sense of choosing the next act.

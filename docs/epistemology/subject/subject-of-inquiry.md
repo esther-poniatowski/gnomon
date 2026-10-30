@@ -1,7 +1,7 @@
 ---
 tags:
   - method
-index: "[Epistemology](docs/epistemology/_index.md)"
+index: "[Subject of inquiry](docs/epistemology/subject/_index.md)"
 aliases:
   - Specifying the subject of inquiry
   - Subject of inquiry
@@ -10,7 +10,7 @@ aliases:
 
 > [!QUESTION] Goal: what must be fixed to specify the objects that an inquiry studies?
 
-The subject of inquiry is one of the four [layers of specification](inquiry-specification.md) of a research objective. The layer covers the *subject* of a research question: the objects under study.
+The subject of inquiry is one of the four [layers of specification](../inquiry/inquiry-specification.md) of a research objective. The layer covers the *subject* of a research question: the objects under study.
 
 ## Components of the subject
 
@@ -25,7 +25,7 @@ $$\Sigma=\langle S,P,X,D\rangle $$
 | **[Contrast class](contrast.md) $X$** | for a contrastive why-question, and implicit as the comparator in a question about a causal effect | Alternative(s) relative to which $P$ is puzzling — "why $P$ rather than $P'$?" | why spike rather than inactivity? | contrastive why-questions [vanfraassen1980] |
 | **[Domain of conditions](domain.md) $D$** | when the question holds a condition fixed | Background conditions under which the system is studied (e.g. regime, limit, parameter range) | in vitro slice, injected current between 0 and 500 pA | "causal field" [mackie1974], "background conditions" [woodward2010], and "domain of validity" in physics |
 
-The four components fill a statement frame. The [epistemic aim](epistemic-aim.md) selects the interrogative word of that frame: ^question-statement
+The four components fill a statement frame. The [epistemic aim](../epistemic-task/epistemic-aim.md) selects the interrogative word of that frame: ^question-statement
 
 > In [$S$] under [$D$], [interrogative word] [$P$] rather than [$X$]?
 
@@ -50,12 +50,12 @@ Each admitted specification divides into two parts:
 ## Safeguards against rigidity
 
 - **Type versus content.** Closed lists restrict only the types, so the content remains free text inside a frame.
-- **Conditional requirements.** The [epistemic aim](epistemic-aim.md) $A$ and the form of the question determine which specifications are mandatory:
+- **Conditional requirements.** The [epistemic aim](../epistemic-task/epistemic-aim.md) $A$ and the form of the question determine which specifications are mandatory:
     - the contrast $X$, for contrastive why-questions;
     - the explanandum variable, whenever the contrast takes its foils from the possible values of $Y$;
     - the conditions and byproducts, only once they are known.
-- **Placeholders before records.** The target-system slot and the phenomenon slot of a question accept a record identifier or a typed placeholder. The type of a placeholder fits its slot: the target-system slot awaits a `system`, and the phenomenon slot a `phenomenon`. A question whose slots hold placeholders is a *question schema*: it fixes the types of its possible answers before any record fixes the referents of its slots. A slot that names a record requires the record to reach at least the commitment `identified`, as the [levels of commitment](definitions/inquiry/problem-and-question.md#^commitment-levels) define it. Each record of a target or of a phenomenon declares its own commitment, `identified` or `specified`. ^placeholder-slots
-- **Empty values with a maturity marker.** Every specification may stay empty while it is not filled. Whether an empty specification is a gap or a product of the inquiry is read from the [requirements of the epistemic aim](epistemic-aim.md#^required-by-aim), never from the record. Each specification may also carry its own maturity marker (open, provisional, or stabilized), beside the marker that applies to the inquiry as a whole. Empty values are admitted because characterizing the phenomenon is itself a discovery task [craver2013], and because the descriptions that this task yields are revised or rejected [colaco2018].
+- **Placeholders before records.** The target-system slot and the phenomenon slot of a question accept a record identifier or a typed placeholder. The type of a placeholder fits its slot: the target-system slot awaits a `system`, and the phenomenon slot a `phenomenon`. A question whose slots hold placeholders is a *question schema*: it fixes the types of its possible answers before any record fixes the referents of its slots. A slot that names a record requires the record to reach at least the commitment `identified`, as the [levels of commitment](../definitions/inquiry/problem-and-question.md#^commitment-levels) define it. Each record of a target or of a phenomenon declares its own commitment, `identified` or `specified`. ^placeholder-slots
+- **Empty values with a maturity marker.** Every specification may stay empty while it is not filled. Whether an empty specification is a gap or a product of the inquiry is read from the [requirements of the epistemic aim](../epistemic-task/epistemic-aim.md#^required-by-aim), never from the record. Each specification may also carry its own maturity marker (open, provisional, or stabilized), beside the marker that applies to the inquiry as a whole. Empty values are admitted because characterizing the phenomenon is itself a discovery task [craver2013], and because the descriptions that this task yields are revised or rejected [colaco2018].
 - **Filling order.** The system $S$ and the phenomenon $P$ are specified together, since the partition of variables depends on $P$. The contrast $X$ is then specified from the value space of $P$. The domain $D$ bounds all three.
 
 ## Precedent in quantitative methodology
@@ -68,7 +68,7 @@ Quantitative methodology already specifies questions through fixed slots. For ex
 - population-level summary → scope over instances in $P$;
 - intercurrent events → state restrictions in the domain $D$.
 
-Both frameworks keep the question separate from any model. The [inquiry specification](inquiry-specification.md) separates its subject from the answer layer in the same way. Both frameworks, however, cover only questions about causal effects. The two frameworks therefore support the design of the slots, but not the option lists for capacities, mechanisms, and mathematical explanation.
+Both frameworks keep the question separate from any model. The [inquiry specification](../inquiry/inquiry-specification.md) separates its subject from the answer layer in the same way. Both frameworks, however, cover only questions about causal effects. The two frameworks therefore support the design of the slots, but not the option lists for capacities, mechanisms, and mathematical explanation.
 
 ---
 ## Sources
@@ -93,7 +93,7 @@ Both frameworks keep the question separate from any model. The [inquiry specific
 > 	- typed placeholders in the slots of a question, and the levels of commitment of the records that fill them.
 > - **Absent from the literature:** a complete form for research questions.
 
-Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [belnap1976] ◐ Belnap & Steel, _The Logic of Questions and Answers_, Yale UP, 1976, via [SEP, Questions](https://plato.stanford.edu/entries/questions/). The subject/request distinction was checked only through a summary returned by a search engine.
 - [colaco2018] ◐ [Colaço, "Rip it up and start again", _SHPS A_ 72, 2018](https://www.sciencedirect.com/science/article/abs/pii/S003936811730211X)

@@ -51,7 +51,7 @@ Three cognate notions overlap the analytic sense. Each notion adds commitments l
 ## Consequences for a record
 
 - **The inquiry specification of this method is a framework for inquiries, not a framework of a domain.** An analytic framework names the elements of one domain, such as the actors and the rules of an institution [ostrom2005]. The inquiry specification names the elements of an *inquiry*: the target, the phenomenon, the question and its answers. A domain enters the specification only as the subject of an inquiry, so the specification is a meta-level framework. Therefore, the [generality order](#^generality-order) does not place the theories and models of a research problem below the specification. The records of an inquiry hold them, in background records and in candidate answers.
-- **A formalism enters a record once it is bound to the target.** A law derived within a formalism that holds in a limit, such as the neural tangent kernel, carries the [warrant](../../background.md#^law-warrant) `derived-in-a-limit`, and the [rule on limits](../../answer-form.md#^limit-rule) places the limit that binds the formalism to the target.
+- **A formalism enters a record once it is bound to the target.** A law derived within a formalism that holds in a limit, such as the neural tangent kernel, carries the [warrant](../../subject/background.md#^law-warrant) `derived-in-a-limit`, and the [rule on limits](../../answer/answer-form.md#^limit-rule) places the limit that binds the formalism to the target.
 - **A question about the vocabulary of a record is external.** The usefulness of a declaration decides whether a record should declare a new kind of entity. The record itself cannot settle that question.
 
 ---

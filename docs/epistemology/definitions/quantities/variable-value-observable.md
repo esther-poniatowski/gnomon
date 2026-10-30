@@ -63,10 +63,10 @@ Three questions about one phenomenon decide the role of a declared quantity. The
 
 ## Consequences for a record
 
-- **A declared variable is a state function.** Its signature fixes the domain $\mathcal{D}$, as a product of constituent kinds and index sets, and its value set fixes the codomain $\mathcal{V}$. This signature is stated by the [places of a quantity](../../target-system.md#^places).
-- **The explanandum variables of a phenomenon are observables in the physical sense.** Each explanandum variable is a function of the state variables of the target, as the [specification of the phenomenon](../../phenomenon.md) requires.
+- **A declared variable is a state function.** Its signature fixes the domain $\mathcal{D}$, as a product of constituent kinds and index sets, and its value set fixes the codomain $\mathcal{V}$. This signature is stated by the [places of a quantity](../../subject/target-system.md#^places).
+- **The explanandum variables of a phenomenon are observables in the physical sense.** Each explanandum variable is a function of the state variables of the target, as the [specification of the phenomenon](../../subject/phenomenon.md) requires.
 - **The control sense of observable corresponds to a law with the role *measurement*.** Such a law states how an instrument registers the state, so it plays the part of the observation function $h$. The empiricist sense has no field in a record.
-- **A parameter of the target is fixed along every course, except the courses that list it among their varying parameters.** The [course of a phenomenon](../../phenomenon.md#^course-and-occurrence) lists those parameters, and the [target specification](../../target-system.md) applies the [role test](#^role-test) with this reading. The criterion coincides with the statistical sense of parameter when one run of the system counts as one model of the family.
+- **A parameter of the target is fixed along every course, except the courses that list it among their varying parameters.** The [course of a phenomenon](../../subject/phenomenon.md#^course-and-occurrence) lists those parameters, and the [target specification](../../subject/target-system.md) applies the [role test](#^role-test) with this reading. The criterion coincides with the statistical sense of parameter when one run of the system counts as one model of the family.
 
 ---
 ## Sources

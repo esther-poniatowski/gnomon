@@ -1,5 +1,5 @@
-# method: `docs/epistemology/phenomenon.md`; one file per phenomenon of one target system
-# symbols and expressions: `docs/epistemology/symbols-and-expressions.md`
+# method: `docs/epistemology/subject/phenomenon.md`; one file per phenomenon of one target system
+# symbols and expressions: `docs/epistemology/language/symbols-and-expressions.md`
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # specifications follow the order of the method note
 # exploratory question: leave the statement, the category, the occurrence and the evidential status empty, since the inquiry produces them; fill the candidate observables, the varied indices and the detection criterion

@@ -1,5 +1,5 @@
-# method: `docs/epistemology/model-and-binding.md`; one file per model, which several answers can ground
-# symbols and expressions: `docs/epistemology/symbols-and-expressions.md`
+# method: `docs/epistemology/answer/model-and-binding.md`; one file per model, which several answers can ground
+# symbols and expressions: `docs/epistemology/language/symbols-and-expressions.md`
 # declare the constituents, index sets, variables and parameters in target-system form, and the laws and organization in background form
 # no entry refers to one question, and no quantity enters by reference to a target quantity: a binding relates the model to its target
 # name a symbol of the target by source identifier and symbol: `system.TOPIC#SYMBOL`

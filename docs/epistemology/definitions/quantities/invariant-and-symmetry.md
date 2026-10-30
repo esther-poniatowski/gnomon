@@ -35,7 +35,7 @@ The criterion of invariance recurs in several notes of this folder, each time wi
 ## Consequences for a record
 
 - **A claim of invariance must name its set of transformations.** "The frequency is invariant" is incomplete until the claim states its set of transformations, such as the instances, the interventions on a parameter, or the admissible changes of units.
-- **The scope over instances of a phenomenon states one invariance claim.** A claim quantified as *universal* over the reference class, in the [scope over instances](../../phenomenon.md), asserts that a feature is preserved across every member.
+- **The scope over instances of a phenomenon states one invariance claim.** A claim quantified as *universal* over the reference class, in the [scope over instances](../../subject/phenomenon.md), asserts that a feature is preserved across every member.
 
 ---
 ## Sources

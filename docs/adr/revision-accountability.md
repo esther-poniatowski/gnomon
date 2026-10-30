@@ -9,7 +9,7 @@ aliases:
 
 > [!QUESTION] Goal: which requirements must any mechanism meet when a record of an inquiry is revised?
 
-An inquiry revises records already written: a refuted condition, a failed verdict or a corrective answer sends the researcher back to them. Two mechanisms exist. An answer names an earlier answer by the relation `revises`, under the [decision on answers, models and bindings](answers-models-bindings.md). A revised binding becomes a [new version](../epistemology/model-and-binding.md#^binding-version), and the comparisons computed from earlier versions stay unchanged. No decision stated the aim that these mechanisms serve, nor the limits within which a general mechanism may serve it.
+An inquiry revises records already written: a refuted condition, a failed verdict or a corrective answer sends the researcher back to them. Two mechanisms exist. An answer names an earlier answer by the relation `revises`, under the [decision on answers, models and bindings](answers-models-bindings.md). A revised binding becomes a [new version](../epistemology/answer/model-and-binding.md#^binding-version), and the comparisons computed from earlier versions stay unchanged. No decision stated the aim that these mechanisms serve, nor the limits within which a general mechanism may serve it.
 
 ## Decision
 

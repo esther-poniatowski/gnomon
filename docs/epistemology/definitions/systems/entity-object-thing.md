@@ -39,7 +39,7 @@ The terms are near-synonyms in some communities only. Under the criterion of ont
 
 ## Consequences for a record
 
-- **A constituent declared in a record is an object in the logical sense.** The constituent ranges over an index set of the record. When the [target type](../../target-system.md) is an empirical system, each such object stands for a thing. When the target type is the model class itself, the constituents are objects of a structure and stand for no thing.
+- **A constituent declared in a record is an object in the logical sense.** The constituent ranges over an index set of the record. When the [target type](../../subject/target-system.md) is an empirical system, each such object stands for a thing. When the target type is the model class itself, the constituents are objects of a structure and stand for no thing.
 - **The [change test](#^change-test) decides whether a constituent can carry a state variable.** Only a thing has a state that evolves. When a quantity is attached to a constituent that cannot change, such as a fixed site of a lattice, the quantity is not a state variable. The [role test of a quantity](../quantities/variable-value-observable.md#^role-test) gives it one of the other roles. The change test applies to constituents only: a quantity indexed by an index set alone, such as a field variable over a spatial domain, names no bearer. Such a quantity takes its role from the role test alone, so a field that the system sets and that varies along the course is a state variable.
 - **The role of a bearer within a system is named by another term.** Constituent, component and part name a role relative to a system, and the [system vocabulary](system-constituent-environment.md) defines them.
 

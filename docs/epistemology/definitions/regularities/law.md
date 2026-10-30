@@ -48,9 +48,9 @@ A law statement is accordingly a [claim](../representations/claim-and-hypothesis
 
 ## Consequences for a record
 
-- **Every law of a record is a law statement.** A [law of a background record](../../background.md#^laws) or of a candidate answer is a construct that can be false of the target.
-- **The warrant of a law and its criterion of lawhood answer different questions.** The [warrant of a law](../../background.md#^law-warrant) states how the record obtained the law. A criterion of lawhood states why a true generalization counts as a law. Therefore, a fitted law can be a law in the sense of invariance, once the range of interventions over which it holds is known.
-- **The range of invariance of a law is stated in the record.** The field is specified under the [range of a law](../../background.md#^law-range). When a law is stated without a range, it claims invariance over the whole reference class.
+- **Every law of a record is a law statement.** A [law of a background record](../../subject/background.md#^laws) or of a candidate answer is a construct that can be false of the target.
+- **The warrant of a law and its criterion of lawhood answer different questions.** The [warrant of a law](../../subject/background.md#^law-warrant) states how the record obtained the law. A criterion of lawhood states why a true generalization counts as a law. Therefore, a fitted law can be a law in the sense of invariance, once the range of interventions over which it holds is known.
+- **The range of invariance of a law is stated in the record.** The field is specified under the [range of a law](../../subject/background.md#^law-range). When a law is stated without a range, it claims invariance over the whole reference class.
 
 ---
 ## Sources

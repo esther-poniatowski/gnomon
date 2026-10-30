@@ -1,5 +1,5 @@
-# method: `docs/epistemology/background.md`; one file per body of admitted laws about one target system
-# symbols and expressions: `docs/epistemology/symbols-and-expressions.md`
+# method: `docs/epistemology/subject/background.md`; one file per body of admitted laws about one target system
+# symbols and expressions: `docs/epistemology/language/symbols-and-expressions.md`
 # name only the quantities declared by the described target system; several background records may describe one target
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # specifications follow the order of the method note

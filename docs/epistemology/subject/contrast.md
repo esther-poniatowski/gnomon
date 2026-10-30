@@ -1,7 +1,7 @@
 ---
 tags:
   - method
-index: "[Epistemology](docs/epistemology/_index.md)"
+index: "[Subject of inquiry](docs/epistemology/subject/_index.md)"
 aliases:
   - Specifying the contrast
   - Contrast class
@@ -38,7 +38,7 @@ The contrast passes the [inclusion test](subject-of-inquiry.md#^inclusion-test) 
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [lipton2004] ◐ Lipton, _Inference to the Best Explanation_, 2nd ed., ch. 3; [Lipton, "Making a difference"](https://www.hps.cam.ac.uk/files/lipton-making-difference.pdf)
 - [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)

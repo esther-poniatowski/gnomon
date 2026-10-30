@@ -1,7 +1,7 @@
 ---
 tags:
   - method
-index: "[Epistemology](docs/epistemology/_index.md)"
+index: "[Inquiry](docs/epistemology/inquiry/_index.md)"
 aliases:
   - Specifying an inquity
 ---
@@ -17,14 +17,14 @@ A research objective is specified in four layers, each with a **distinct logical
 
 | Layer of specification                                                   | Question                                                                   | Typical concepts                                                                                                                                                                                           |
 | ------------------------------------------------------------------------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1. [Subject of inquiry](subject-of-inquiry.md)**                       | What objects is the inquiry about?                                         | target system $S$, phenomenon/explanandum $P$, contrast class $X$, domain of conditions $D$                                                                                                                |
-| **2. [Epistemic task](epistemic-task.md)**                               | What *kind* of knowledge or *achievement* is sought?                       | epistemic aim $A$ (description vs prediction vs explanation vs exploration)<br>relevance relations $R$ (causal vs mechanistic vs mathematical)<br>modal status $\mu$ (how-actually vs how-possibly)<br>admissible explanans $\lambda$<br>required accuracy $\tau$ |
-| **3. [Epistemic and pragmatic virtues](epistemic-pragmatic-virtues.md)** | What must the answer accomplish to be practically or cognitively *useful*? | unification, economy, pragmatic use, robustness, intelligibility / qualitative grasp, tractability, etc                                                                                                    |
-| **4. [Answer form](answer-form.md) and [conditions of satisfaction](satisfaction-conditions.md)** | What form must the answer take, and which tests must it pass?      | claim, grounds and their roles, route, domain, status, erotetic relation<br>aim block, with the factors $E$ for an explanation<br>model, binding and computed comparison, when the route runs on a model<br>admissibility, warrant and appraisal |
+| **1. [Subject of inquiry](../subject/subject-of-inquiry.md)**                       | What objects is the inquiry about?                                         | target system $S$, phenomenon/explanandum $P$, contrast class $X$, domain of conditions $D$                                                                                                                |
+| **2. [Epistemic task](../epistemic-task/epistemic-task.md)**                               | What *kind* of knowledge or *achievement* is sought?                       | epistemic aim $A$ (description vs prediction vs explanation vs exploration)<br>relevance relations $R$ (causal vs mechanistic vs mathematical)<br>modal status $\mu$ (how-actually vs how-possibly)<br>admissible explanans $\lambda$<br>required accuracy $\tau$ |
+| **3. [Epistemic and pragmatic virtues](../epistemic-task/epistemic-pragmatic-virtues.md)** | What must the answer accomplish to be practically or cognitively *useful*? | unification, economy, pragmatic use, robustness, intelligibility / qualitative grasp, tractability, etc                                                                                                    |
+| **4. [Answer form](../answer/answer-form.md) and [conditions of satisfaction](../answer/satisfaction-conditions.md)** | What form must the answer take, and which tests must it pass?      | claim, grounds and their roles, route, domain, status, erotetic relation<br>aim block, with the factors $E$ for an explanation<br>model, binding and computed comparison, when the route runs on a model<br>admissibility, warrant and appraisal |
 
-The components of each layer are denoted by letters, each with one meaning fixed across the notes by a shared [notation registry](notation.md).
+The components of each layer are denoted by letters, each with one meaning fixed across the notes by a shared [notation registry](../language/notation.md).
 
-**Subject (1) versus Task (2)**. A research question combines the [subject of inquiry](subject-of-inquiry.md) $\Sigma$ with an [epistemic task](epistemic-task.md) $T$: 
+**Subject (1) versus Task (2)**. A research question combines the [subject of inquiry](../subject/subject-of-inquiry.md) $\Sigma$ with an [epistemic task](../epistemic-task/epistemic-task.md) $T$: 
 $$Q=\langle \Sigma,T\rangle$$
 The task is fixed separately because the same subject can admit several types of answer. In particular, the epistemic aim selects the interrogative word.
 
@@ -38,7 +38,7 @@ Three results of the literature support separating the subject from the task:
 
 - In erotetic logic, a question divides into a *subject*, presenting the alternatives, and a *request*, specifying which of them the answer must select [belnap1976].
 - A why-question separates its topic, namely its *explanandum* and its *contrast class*, from the sort of information that it requests. The context of the question fixes that sort of information through a *relevance relation* [vanfraassen1980].
-- More broadly, an epistemic achievement, such as explanation or understanding, is distinguished from the objects that it bears on. Understanding, however, is not an [aim](epistemic-aim.md#^understanding) of the task, since it bears on a product of the inquiry without fixing the type of its answers.
+- More broadly, an epistemic achievement, such as explanation or understanding, is distinguished from the objects that it bears on. Understanding, however, is not an [aim](../epistemic-task/epistemic-aim.md#^understanding) of the task, since it bears on a product of the inquiry without fixing the type of its answers.
 
 **Task (2) versus Answer form and conditions of satisfaction (4)**. Two results of the literature support separating the task from the tests of an answer:
 
@@ -47,7 +47,7 @@ Three results of the literature support separating the subject from the task:
 
 ## Problems and linked questions
 
-A question rarely stands alone. A question typically serves a research problem. Its answer may supply the explanans of another question or presuppose the answer of a third. Therefore, the question record names the [problem](problem.md) that it addresses and the questions to which it is linked. The relations of a link are defined with the [linked questions](definitions/inquiry/problem-and-question.md#^linked-questions).
+A question rarely stands alone. A question typically serves a research problem. Its answer may supply the explanans of another question or presuppose the answer of a third. Therefore, the question record names the [problem](problem.md) that it addresses and the questions to which it is linked. The relations of a link are defined with the [linked questions](../definitions/inquiry/problem-and-question.md#^linked-questions).
 
 | Field | When it is required | Content | Example |
 | ----- | ------------------- | ------- | ------- |
@@ -67,14 +67,14 @@ The specification of an inquiry serves four goals. ^specification-goals
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | **Transparency**               | The inquiry commits to explicit objectives, so that its claims can be checked and its analyses reproduced.                                                   | predictions stated before data collection separate tests from post hoc accounts [nosek2018]                                                 |
 | **Operationalization**         | Once the system is specified, it can be partly formalized as a repertoire of variables and relations that later analyses use.                                         | a formal model forces the modeler to specify intuitions that otherwise stay unexamined [guest2021]                                          |
-| **Success conditions**         | The specification fixes the [conditions of satisfaction](satisfaction-conditions.md#^conditions-satisfaction): the tests that each candidate answer must pass. These tests decide which candidates are admissible and which are adequate. | a question is determined by the set of its possible answers [hamblin1958], and a model is evaluated by its adequacy for a purpose [parker2020] |
+| **Success conditions**         | The specification fixes the [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction): the tests that each candidate answer must pass. These tests decide which candidates are admissible and which are adequate. | a question is determined by the set of its possible answers [hamblin1958], and a model is evaluated by its adequacy for a purpose [parker2020] |
 | **Guidance towards an answer** | Once analyzed, the question yields the research actions that answer it and serve the other goals.                                                  | a question can be answered through the auxiliary questions that it generates [wisniewski2013]                                               |
 
 ---
 
 ## Sources
 
-Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [belnap1976] ◐ Belnap & Steel, _The Logic of Questions and Answers_, Yale UP, 1976, via [SEP, Questions](https://plato.stanford.edu/entries/questions/). The subject/request distinction was checked only through a summary returned by a search engine.
 - [guest2021] ◐ [Guest & Martin, "How computational modeling can force theory building in psychological science", _Perspectives on Psychological Science_ 16(4), 789–802, 2021](https://journals.sagepub.com/doi/abs/10.1177/1745691620970585)

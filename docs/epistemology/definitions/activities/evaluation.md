@@ -39,7 +39,7 @@ The activities of this family output a **verdict**, a **credence** or a **rankin
 | `model-selection` | rank models by their expected accuracy in predicting new data | the ranking follows predictive accuracy, penalized for complexity [forster1994] |
 | `inference-to-the-best-explanation` | accept the hypothesis that would, if true, best explain the data | the best of the rival explanations is also good enough, so that it is not merely the best of a bad lot [harman1965] [lipton2004] |
 | `critique` | expose a hypothesis or a model to criticism from other perspectives | each objection is named with its ground [longino1990] |
-| `admissibility-check` | apply the admissibility tests of the [conditions of satisfaction](../../satisfaction-conditions.md) to a candidate, mostly before any evidence is weighed | each admissibility test is applied to the declared specifications, with its evidence |
+| `admissibility-check` | apply the admissibility tests of the [conditions of satisfaction](../../answer/satisfaction-conditions.md) to a candidate, mostly before any evidence is weighed | each admissibility test is applied to the declared specifications, with its evidence |
 
 A test never bears on a hypothesis alone: the prediction follows from the hypothesis together with auxiliary assumptions. Consequently, a failed prediction refutes the conjunction without locating the error, a difficulty known as the Duhem–Quine problem.
 
@@ -53,8 +53,8 @@ A test never bears on a hypothesis alone: the prediction follows from the hypoth
 
 ## Consequences for a record
 
-- **The conditions of satisfaction fix the evaluation before it runs.** The [conditions of satisfaction](../../satisfaction-conditions.md) state the tests that decide whether a candidate succeeds. The required accuracy of the [epistemic task](../../epistemic-task.md) states the purpose to be served by a validated model.
-- **Model selection uses the virtues of the method.** The [epistemic and pragmatic virtues](../../epistemic-pragmatic-virtues.md) state the qualities used to compare admissible answers. Penalized accuracy is one instance of these qualities.
+- **The conditions of satisfaction fix the evaluation before it runs.** The [conditions of satisfaction](../../answer/satisfaction-conditions.md) state the tests that decide whether a candidate succeeds. The required accuracy of the [epistemic task](../../epistemic-task/epistemic-task.md) states the purpose to be served by a validated model.
+- **Model selection uses the virtues of the method.** The [epistemic and pragmatic virtues](../../epistemic-task/epistemic-pragmatic-virtues.md) state the qualities used to compare admissible answers. Penalized accuracy is one instance of these qualities.
 
 ---
 ## Sources

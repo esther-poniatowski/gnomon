@@ -38,9 +38,9 @@ The senses share one relativity: **a state is a state relative to chosen variabl
 
 ## Consequences for a record
 
-- **The state space of a record is the product of the value sets of its internal variables.** The [specification of the target system](../../target-system.md) excludes aggregates from that product, since an aggregate is a function on the state space.
+- **The state space of a record is the product of the value sets of its internal variables.** The [specification of the target system](../../subject/target-system.md) excludes aggregates from that product, since an aggregate is a function on the state space.
 - **The [completeness test](#^completeness-test) checks a declared state space against the laws.** A law with the role *evolution* can be written as a first-order rule on the declared variables only when the state passes the test. When the state fails the test, the record lacks a variable, such as a momentum, a delay line or a synaptic trace, or the evolution law must carry memory.
-- **A macrostate is admissible only when interventions on it have unambiguous effects.** A phenomenon stated over aggregate variables groups many microstates. The [admissibility of aggregates](../../target-system.md#^aggregate-admissibility) requires that each intervention on the aggregate correspond to interventions on those microstates.
+- **A macrostate is admissible only when interventions on it have unambiguous effects.** A phenomenon stated over aggregate variables groups many microstates. The [admissibility of aggregates](../../subject/target-system.md#^aggregate-admissibility) requires that each intervention on the aggregate correspond to interventions on those microstates.
 
 ---
 ## Sources

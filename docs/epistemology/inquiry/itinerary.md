@@ -2,7 +2,7 @@
 tags:
   - method
   - wip
-index: "[Epistemology](docs/epistemology/_index.md)"
+index: "[Inquiry](docs/epistemology/inquiry/_index.md)"
 aliases:
   - Specifying the itinerary
   - Itinerary record
@@ -11,12 +11,12 @@ aliases:
 
 > [!QUESTION] Goal: how are the steps of an inquiry recorded so that a check can tell whether each step takes what it needs and produces what the next step uses?
 
-The itinerary record lists the steps of an inquiry. Each step instantiates one [epistemic activity](definitions/activities/epistemic-activities.md): it names the activity, its input products, its output product, and the verdict of the norm that judges it. Two registries fix the content of a step. The [activity registry](../../src/gnomon/data/registries/activities.yml) gives each activity its input and output types, its norm, its mode and its context. The [product-type registry](../../src/gnomon/data/registries/product-types.yml) gives each type the record kinds that hold it. An itinerary addresses a [problem](problem.md) or a question.
+The itinerary record lists the steps of an inquiry. Each step instantiates one [epistemic activity](../definitions/activities/epistemic-activities.md): it names the activity, its input products, its output product, and the verdict of the norm that judges it. Two registries fix the content of a step. The [activity registry](../../../src/gnomon/data/registries/activities.yml) gives each activity its input and output types, its norm, its mode and its context. The [product-type registry](../../../src/gnomon/data/registries/product-types.yml) gives each type the record kinds that hold it. An itinerary addresses a [problem](problem.md) or a question.
 
 | Specification | When it is required | Options or frame | Examples | Source |
 | ------------- | ------------------- | ---------------- | -------- | ------ |
 | Addresses | always | the identifier of one problem record or of one question record | the problem of the delay before generalization | — |
-| Steps | always | one entry per activity instance, listed in any order | posing the problem, formulating the question, testing the candidate answer | [activity taxonomy](definitions/activities/epistemic-activities.md) |
+| Steps | always | one entry per activity instance, listed in any order | posing the problem, formulating the question, testing the candidate answer | [activity taxonomy](../definitions/activities/epistemic-activities.md) |
 | Steps: id | with every step | a name unique within the itinerary, by which a later step refers to the output of this one | `pose`; `test` | — |
 | Steps: activity | with every step | the identifier of one activity of the registry | `abduction`; `testing` | — |
 | Steps: inputs | with every step | per input, its product type and a reference: a record identifier, the identifier of the step that produces the input, or a pointer for a `source` | a `hypothesis` produced by the step `propose`; the `data` of a phenomenon record | — |
@@ -24,7 +24,7 @@ The itinerary record lists the steps of an inquiry. Each step instantiates one [
 | Steps: norm | with every step | the test named by the registry for the activity, written `norm.<activity>`, and its verdict: pass · fail · pending | `norm.testing`, pending until the assessment is stabilized | — |
 | Steps: mode | when the step states its inference | deductive · inductive · abductive · analogical · non-inferential, equal to the mode of the activity | `abductive` for the step that proposes a candidate answer | — |
 
-- **The command `gnomon itinerary` checks the steps and the fields of an itinerary.** An itinerary must pass the [itinerary check](definitions/activities/epistemic-activities.md#^itinerary-check), whose five conditions compare types and identifiers only, so the check is decidable. The type of a referenced record follows from its present state: a question with a placeholder slot holds a `question-schema`. A target system at commitment `specified` holds a `target-specification`, and also an `identified-subject`. The command also checks four fields of the record: ^record-checks
+- **The command `gnomon itinerary` checks the steps and the fields of an itinerary.** An itinerary must pass the [itinerary check](../definitions/activities/epistemic-activities.md#^itinerary-check), whose five conditions compare types and identifiers only, so the check is decidable. The type of a referenced record follows from its present state: a question with a placeholder slot holds a `question-schema`. A target system at commitment `specified` holds a `target-specification`, and also an `identified-subject`. The command also checks four fields of the record: ^record-checks
 
     - the itinerary addresses a problem record or a question record;
     - no two steps share an identifier;
@@ -37,4 +37,4 @@ The itinerary record lists the steps of an inquiry. Each step instantiates one [
 
 - **A step references a product by the identifier of its step.** A product often has no record when the itinerary is written. Therefore, a later step names the step that produces it, and the check compares the declared output type of that step with the type expected by the later step. A record may also leave the state in which a step produced it, as a schema becomes a question once its slots are identified. Then, the step states its output type without a reference.
 
-*Example*: the [itinerary of the inquiry into delayed generalization](../../examples/grokking-delayed-generalization/itinerary.yml) holds eight steps, from posing the problem to testing the candidate answer. Its step of background appraisal records the verdict `fail`, since no admitted law of that case yet states its origin.
+*Example*: the [itinerary of the inquiry into delayed generalization](../../../examples/grokking-delayed-generalization/itinerary.yml) holds eight steps, from posing the problem to testing the candidate answer. Its step of background appraisal records the verdict `fail`, since no admitted law of that case yet states its origin.

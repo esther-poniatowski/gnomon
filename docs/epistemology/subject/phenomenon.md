@@ -1,7 +1,7 @@
 ---
 tags:
   - method
-index: "[Epistemology](docs/epistemology/_index.md)"
+index: "[Subject of inquiry](docs/epistemology/subject/_index.md)"
 aliases:
   - Specifying the phenomenon
   - Phenomenon (subject of inquiry)
@@ -10,7 +10,7 @@ aliases:
 
 > [!QUESTION] Goal: what must be fixed to specify the phenomenon that an inquiry is about?
 
-The phenomenon is the second component of the [subject of inquiry](subject-of-inquiry.md): the behavior of the target system that the question concerns. The record also owns the estimator of its explanandum variables, from which their estimates are computed, and declares what its data depend on, so that a model can be compared with it through a [binding](model-and-binding.md#^binding-record).
+The phenomenon is the second component of the [subject of inquiry](subject-of-inquiry.md): the behavior of the target system that the question concerns. The record also owns the estimator of its explanandum variables, from which their estimates are computed, and declares what its data depend on, so that a model can be compared with it through a [binding](../answer/model-and-binding.md#^binding-record).
 
 > [!WARNING] Phenomena are features inferred from data, but they are distinct from the data [bogen1988].
 
@@ -23,15 +23,15 @@ The phenomenon is stated once in words and once formally, by the observables and
 | Specification | When it is required | Options or frame | Examples | Source |
 | ------------- | ------------------- | ---------------- | -------- | ------ |
 | Statement | from `identified` | "[bearer of the phenomenon] [its behavior]", as a reading | "the excitatory population oscillates at gamma frequency" | [kaiser2017], "object-involving occurrent"; [craver2007], "$S$'s $\psi$-ing" |
-| Commitment — how far the record fixes the phenomenon | always | `identified`: a definite description and pointers fix the referent · `specified`: the observables and the manifestations are written, and their symbols resolve | the geometry of the fixed points of the benchmark networks, named before any kernel is written (identified); the same geometry stated by a kernel over the inputs (specified) | [levels of commitment](definitions/inquiry/problem-and-question.md#^commitment-levels) |
+| Commitment — how far the record fixes the phenomenon | always | `identified`: a definite description and pointers fix the referent · `specified`: the observables and the manifestations are written, and their symbols resolve | the geometry of the fixed points of the benchmark networks, named before any kernel is written (identified); the same geometry stated by a kernel over the inputs (specified) | [levels of commitment](../definitions/inquiry/problem-and-question.md#^commitment-levels) |
 | Identification — what fixes the referent before any observable is declared | from `identified` | a definite description of the behavior, with pointers to the data, the results or the publications that report it | the delay between fitting and generalization reported for networks trained on algorithmic tasks | reference fixing [kripke1980] |
 | Identification: description | with the identification | a noun phrase that picks out one behavior of the target | the stationary localized states of the equation, with the branches that organize them | [kripke1980] |
 | Identification: pointers | with the identification | per pointer, a data set, a result or a publication | the article that reports the phenomenon; a figure of a simulation study | — |
 | Category | from `specified` | particular occurrence · regularity (effect) · capacity · structural property | the burst recorded at $t=12$ s (particular occurrence); gamma power increases with stimulus contrast (regularity); gating inputs by context (capacity); a low-dimensional representation (structural property) | [hempel1948]; [cummins2000] |
-| Course — the ordered index along which the behavior unfolds | from `specified` | an index, a grain and the parameters of the target that vary along the course | the training steps of a network; the time of a flow; a stimulus parameter swept by the question | [course of a history](definitions/change/process-event-history.md#^course) |
-| Course: index | with the course | the symbol of an index set of the target or of this record: time, a training step, or an input parameter | the training step; the time | [course of a history](definitions/change/process-event-history.md#^course) |
-| Course: grain | with the course | an expression giving the shortest segment on which a predicate of the behavior is evaluated | one training step; one turnover time of the largest eddies | [process predicates](definitions/change/process-event-history.md#^process) |
-| Course: varies | when a parameter of the target changes along this course | the symbols of those parameters | the weights of a network along training | [role test](definitions/quantities/variable-value-observable.md#^role-test) |
+| Course — the ordered index along which the behavior unfolds | from `specified` | an index, a grain and the parameters of the target that vary along the course | the training steps of a network; the time of a flow; a stimulus parameter swept by the question | [course of a history](../definitions/change/process-event-history.md#^course) |
+| Course: index | with the course | the symbol of an index set of the target or of this record: time, a training step, or an input parameter | the training step; the time | [course of a history](../definitions/change/process-event-history.md#^course) |
+| Course: grain | with the course | an expression giving the shortest segment on which a predicate of the behavior is evaluated | one training step; one turnover time of the largest eddies | [process predicates](../definitions/change/process-event-history.md#^process) |
+| Course: varies | when a parameter of the target changes along this course | the symbols of those parameters | the weights of a network along training | [role test](../definitions/quantities/variable-value-observable.md#^role-test) |
 | Occurrence — the class of the occurrences that the phenomenon concerns | from `specified` | state · process · event · not-applicable, for a capacity | the network sits at its fixed point (state); the turbulent flow (process); the first crossing of a loss threshold (event) | [mourelatos1978] |
 | Index sets | when an observable is indexed by a set that the target system does not declare | "[symbol]", with the set expression that it collects and its structure: continuum · discrete set · interval | the separation and the lag of a correlation; the order of a structure function; a prediction horizon | — |
 | Explanandum variables | whenever the contrast takes its foils from the values of the variable, or the answer must be tested against measurements | a reference to a quantity that the target declares, or "[symbol] ∈ [set expression]" with a reading naming it in words | $Y$ = the regime of the population activity, with values "asynchronous" and "synchronous" | [woodward2003] |
@@ -65,9 +65,9 @@ The phenomenon is stated once in words and once formally, by the observables and
 
 - **A record at commitment `identified` names a behavior before stating it formally.** The identification fixes which behavior the record is about, so a question can refer to it while its observables are still unwritten. The record reaches `specified` once its category, its course, its occurrence class, its manifestations and its evidential status are filled and its symbols resolve. ^phenomenon-commitment
 
-- **The course and the occurrence class state how the behavior unfolds.** The three [occurrence classes](definitions/change/process-event-history.md#^state-class) differ in the segments on which they hold. A state holds at every point of a segment. A process holds on every sub-segment longer than the grain. An event holds of a segment and of none of its parts. A predicate in none of the three classes, such as "the mean rate over the window exceeds 5 Hz", enters the record as an [observable over a declared window](definitions/change/process-event-history.md#^window-observable). ^course-and-occurrence
+- **The course and the occurrence class state how the behavior unfolds.** The three [occurrence classes](../definitions/change/process-event-history.md#^state-class) differ in the segments on which they hold. A state holds at every point of a segment. A process holds on every sub-segment longer than the grain. An event holds of a segment and of none of its parts. A predicate in none of the three classes, such as "the mean rate over the window exceeds 5 Hz", enters the record as an [observable over a declared window](../definitions/change/process-event-history.md#^window-observable). ^course-and-occurrence
 
-- **The category fixes the admitted occurrence classes of a phenomenon.** A particular occurrence is one token of a state, a process or an event. A regularity relates occurrences without being one, and a capacity is a [disposition](definitions/regularities/capacity-and-disposition.md), so neither takes an occurrence class. A structural property holds at each point of the course, as a state does. The checker reads the admitted classes from the [registry of requirements](../../src/gnomon/data/requirements.yml): ^occurrence-by-category
+- **The category fixes the admitted occurrence classes of a phenomenon.** A particular occurrence is one token of a state, a process or an event. A regularity relates occurrences without being one, and a capacity is a [disposition](../definitions/regularities/capacity-and-disposition.md), so neither takes an occurrence class. A structural property holds at each point of the course, as a state does. The checker reads the admitted classes from the [registry of requirements](../../../src/gnomon/data/requirements.yml): ^occurrence-by-category
 
 | Category | Admitted occurrence |
 | --- | --- |
@@ -76,9 +76,9 @@ The phenomenon is stated once in words and once formally, by the observables and
 | `capacity` | `not-applicable` |
 | `structural-property` | `state` |
 
-- **A phenomenon of category `capacity` states its conditional and its criterion in its manifestations.** The manifestations name the class of inputs, the class of outputs and the criterion of performance, as the [definition of a capacity](definitions/regularities/capacity-and-disposition.md) requires. ^capacity-manifestations
+- **A phenomenon of category `capacity` states its conditional and its criterion in its manifestations.** The manifestations name the class of inputs, the class of outputs and the criterion of performance, as the [definition of a capacity](../definitions/regularities/capacity-and-disposition.md) requires. ^capacity-manifestations
 
-- **The category narrows the [requested relation](requested-relation.md) $R$.** *Examples*: in psychology, capacities are explained by functional analysis. Effects, by contrast, are regularities that themselves require explanation [cummins2000].
+- **The category narrows the [requested relation](../epistemic-task/requested-relation.md) $R$.** *Examples*: in psychology, capacities are explained by functional analysis. Effects, by contrast, are regularities that themselves require explanation [cummins2000].
 
 - **The option "Structural property" is not standard.** An account of phenomena as occurrents excludes structural properties, unless each is restated as the outcome of a process [kaiser2017]. *Example*: the "low dimensionality of a learned representation" is a structural property. Restated as the outcome of a process, the phenomenon reads "training produces a low-dimensional representation". The restatement matters because this version admits mechanistic and dynamical answers.
 
@@ -105,15 +105,15 @@ The phenomenon is stated once in words and once formally, by the observables and
 
 - **A censored event is not a large value.** Within a finite observation window, either the event occurs and its time is recorded, or only the horizon is known. A single number pooling an event time with a horizon represents neither. The record therefore states the horizon and the censoring beside the observable, not inside its value. ^censoring-is-not-a-value
 
-- **The evidential status carries the presupposition of a question.** The reason is that a why-question presupposes that its topic is true [vanfraassen1980]. If a phenomenon is only predicted, then either the question is conditional or the [epistemic aim is detection](epistemic-aim.md). For instance, the question of characterizing "memory transfer" was abandoned once the phenomenon was rejected [colaco2018].
+- **The evidential status carries the presupposition of a question.** The reason is that a why-question presupposes that its topic is true [vanfraassen1980]. If a phenomenon is only predicted, then either the question is conditional or the [epistemic aim is detection](../epistemic-task/epistemic-aim.md). For instance, the question of characterizing "memory transfer" was abandoned once the phenomenon was rejected [colaco2018].
 
-- **An object of research may admit several phenomena** when the [epistemic aim is a description](epistemic-aim.md). Experimental work often targets an "object of research", such as a memory system. Several phenomena then serve both as components of that object and as evidence for it [feest2017].
+- **An object of research may admit several phenomena** when the [epistemic aim is a description](../epistemic-task/epistemic-aim.md). Experimental work often targets an "object of research", such as a memory system. Several phenomena then serve both as components of that object and as evidence for it [feest2017].
 
-- **A phenomenon owns the estimator of its explanandum variables.** The values of an explanandum variable are inferred from the data, and a measurement outcome is itself inferred through a model [tal2013]. The phenomenon therefore states the estimator, the version of the data and the uncertainty of each estimated variable. The estimates are computed from these entries, as a [comparison](model-and-binding.md#^comparison-recomputed) is, and never recorded by hand. A descriptive answer whose route is an estimation on the target cites the computed estimate as its claim, with the estimator and the version of the data among its grounds. A [comparison](model-and-binding.md#^comparison) of a model with the phenomenon reads these estimates when its binding targets the phenomenon. When the binding targets the data instead, the comparison reads the version of the data through an observation operator. In both cases, no answer estimates the explanandum variables a second time. In an exploratory inquiry, the phenomenon record holds the candidate observables and their estimator, as for any phenomenon, and the answer holds the content that the estimates do not fix: the partition of the explored space into classes, and the pattern of each class. ^phenomenon-owns-estimation
+- **A phenomenon owns the estimator of its explanandum variables.** The values of an explanandum variable are inferred from the data, and a measurement outcome is itself inferred through a model [tal2013]. The phenomenon therefore states the estimator, the version of the data and the uncertainty of each estimated variable. The estimates are computed from these entries, as a [comparison](../answer/model-and-binding.md#^comparison-recomputed) is, and never recorded by hand. A descriptive answer whose route is an estimation on the target cites the computed estimate as its claim, with the estimator and the version of the data among its grounds. A [comparison](../answer/model-and-binding.md#^comparison) of a model with the phenomenon reads these estimates when its binding targets the phenomenon. When the binding targets the data instead, the comparison reads the version of the data through an observation operator. In both cases, no answer estimates the explanandum variables a second time. In an exploratory inquiry, the phenomenon record holds the candidate observables and their estimator, as for any phenomenon, and the answer holds the content that the estimates do not fix: the partition of the explored space into classes, and the pattern of each class. ^phenomenon-owns-estimation
 
-- **A phenomenon declares what its data depend on.** Data models can contain the models under test, and a data model is adequate for some purposes and not for others [bokulichparker2021]. The phenomenon therefore declares four facts about its data, so that a comparison can detect circularity and the warrant test of [phenomenon established](satisfaction-conditions.md) can read the adequacy of the data: ^data-model-declarations
+- **A phenomenon declares what its data depend on.** Data models can contain the models under test, and a data model is adequate for some purposes and not for others [bokulichparker2021]. The phenomenon therefore declares four facts about its data, so that a comparison can detect circularity and the warrant test of [phenomenon established](../answer/satisfaction-conditions.md) can read the adequacy of the data: ^data-model-declarations
     - the models of its data model, each with its kind: instrument model, background simulation, assimilation model or reconstruction [parker2017];
-    - its observation error, which the data own, whereas the structural discrepancy belongs to the binding and the tolerance to the question, as the [owners of the discrepancy](model-and-binding.md#^discrepancy-owners) state;
+    - its observation error, which the data own, whereas the structural discrepancy belongs to the binding and the tolerance to the question, as the [owners of the discrepancy](../answer/model-and-binding.md#^discrepancy-owners) state;
     - the selection of its pattern, with the question that motivated the selection, since a pattern selected for one question can be uninformative for another;
     - the purposes for which its data model is adequate.
 
@@ -132,7 +132,7 @@ The phenomenon is stated once in words and once formally, by the observables and
 ---
 ## Sources
 
-Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks).
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
 - [bogen1988] ○ Bogen & Woodward, "Saving the phenomena", _Philosophical Review_ 97(3), 1988
 - [bokulichparker2021] ◐ Bokulich & Parker, "Data models, representation and adequacy-for-purpose", *European Journal for Philosophy of Science* 11, 31, 2021
