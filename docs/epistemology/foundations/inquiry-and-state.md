@@ -32,7 +32,7 @@ The **state** of an inquiry at a given time holds four components: ^state
 
 - the **accepted knowledge** $K$: the finite set of claims accepted by the inquiry, together with the claims of the publications that its records cite, as the [formal statement of a problem](../objects/problem/epistemic-problem.md#^problem-triple) delimits it;
 - the **proposed candidates** $H$: the answers put forward and not yet accepted, as the note on the [epistemic problem](../objects/problem/epistemic-problem.md#^candidates) defines them;
-- the **open questions**: the questions posed whose problems still exist, each with the state of its [conditions of answerability](../processes/inquiry/conditions-of-answerability.md#^condition-states);
+- the **open questions**: the questions posed whose problems still exist, each with the state of its [conditions of answerability](../objects/question/conditions-of-answerability.md#^condition-states);
 - the **admitted background** of each target: the laws admitted about that target before any answer is sought, as the note on the [background](../objects/knowledge/background.md) states.
 
 Each item of these components carries the statuses placed in the [table of statuses](#^status-axes). The itinerary is not a component of the state. The itinerary records the acts through which each item entered the state, and the [readiness of an act](../processes/inquiry/choice-of-act.md#^ready-act) reads it.
@@ -54,7 +54,7 @@ Two relations hold between a claim and an inquiry, and they vary independently: 
 | an accepted claim of a cited publication, used by no answer | no | yes |
 | a candidate of $H$, neither adopted nor accepted | no | no |
 
-The second row comes from the rule on [provisional answers](../processes/inquiry/conditions-of-answerability.md#^condition-dependencies): a result that rests on an adopted answer stays conditional on it. Every result that rests on an admitted claim that is not accepted stays conditional on that claim in the same way, as the note on [grounds and dependence](../objects/knowledge/grounds-and-dependence.md#^propagation) states.
+The second row comes from the rule on [provisional answers](../objects/question/conditions-of-answerability.md#^condition-dependencies): a result that rests on an adopted answer stays conditional on it. Every result that rests on an admitted claim that is not accepted stays conditional on that claim in the same way, as the note on [grounds and dependence](../objects/knowledge/grounds-and-dependence.md#^propagation) states.
 
 > [!WARNING] Two uses of "acceptance" in the literature
 > Cohen defines the acceptance of a proposition as a voluntary policy of taking it as a premise, distinct from believing it [cohen1992]. That sense corresponds to *admitted* in this method. The acceptance into a corpus, in the sense of Levi [levi1980], corresponds to *accepted*.
@@ -69,7 +69,7 @@ The method fixes the role of a unit by the kind of object that holds it and by t
 | --- | --- | --- |
 | Problem | a demand with its constraints, relative to $K$ | [epistemic problem](../objects/problem/epistemic-problem.md) |
 | Question | a request whose possible answers form a definite set | [question](../objects/question/question.md) |
-| Definition | a concept with its gloss, or a declaration of a quantity, which is assessed for its adequacy rather than its truth | [concepts and names](../expression/concepts-and-names.md); [adequacy of a declaration](things-and-constructs.md#^layer-test) |
+| Definition | a concept with its gloss, or a declaration of a quantity, which is assessed for its adequacy rather than its truth | [concepts and names](../expression/names-and-symbols.md); [adequacy of a declaration](things-and-constructs.md#^layer-test) |
 | Assumption | a ground of an answer with the role `assumption` or `idealization`, or a law admitted in a background | [grounds and dependence](../objects/knowledge/grounds-and-dependence.md#^ground-roles) |
 | Datum | a phenomenon, or a ground with the role `datum` | [phenomenon](../objects/subject/phenomenon.md) |
 | Candidate | an answer whose attitude is `entertained` or `hypothesized` | [claim and hypothesis](../vocabulary/representations/claim-and-hypothesis.md#^attitude-support) |
@@ -91,7 +91,7 @@ Each status of the state qualifies one bearer along one axis. An axis is the que
 | specification of a record | maturity | how far the specification has been revised, and whether further revision is expected | `open`, `provisional`, `stabilized` | [maturity](#^maturity) |
 | slot of a question | commitment | how far the slot fixes its referent | `placeholder`, `identified`, `specified` | [levels of commitment](../objects/question/question.md#^commitment-levels) |
 | phenomenon | evidential status | the kind of evidence that the behavior occurs | `established`, `reported`, `predicted`, `derived` | [phenomenon](../objects/subject/phenomenon.md) |
-| condition of answerability | state of a condition | whether the records show that the condition holds | `established`, `not established`, `refuted` | [states of a condition](../processes/inquiry/conditions-of-answerability.md#^condition-states) |
+| condition of answerability | state of a condition | whether the records show that the condition holds | `established`, `not established`, `refuted` | [states of a condition](../objects/question/conditions-of-answerability.md#^condition-states) |
 | step of an itinerary | verdict of a norm | whether the output of the act meets the norm of its activity | `pass`, `fail`, `pending` | [attributes of an activity](../processes/activities/epistemic-activities.md#^attribute-vocabularies) |
 | test of an assessment | verdict of a test | whether the answer passes one test | `pass`, `fail`, `pending`, `not-applicable` | [conditions of satisfaction](../objects/answer/satisfaction-conditions.md#^conditions-satisfaction) |
 | assessment | disposition | the outcome read from the verdicts of admissibility and warrant | `satisfied`, `not-satisfied`, `withheld`, `corrective` | [disposition](../objects/answer/satisfaction-conditions.md#^disposition) |
@@ -105,7 +105,7 @@ Three groups of statuses are often merged:
 - **Verdict, disposition and acceptance follow one another, and only the first two are read from the records.** Each test returns a verdict, the disposition is read from the verdicts, and [acceptance](#^acceptance-act) is a further act.
 - **Maturity and commitment vary independently**, as the note on the [levels of commitment](../objects/question/question.md#^commitment-levels) states.
 
-**"Established" names a value on two axes.** The evidential status `established` qualifies a phenomenon: the behavior has been shown across data sets or methods. The condition state `established` qualifies a condition of answerability of one question: the records show that the condition holds. The two meet at one point only. When a question presupposes that its phenomenon occurs, the evidential status `established` of that phenomenon is one record that shows that the condition of soundness of the question holds, as the [states of a condition](../processes/inquiry/conditions-of-answerability.md#^condition-states) admit. A condition can also be established without any phenomenon, for instance by an accepted proof that a result of the demanded type exists. ^two-established
+**"Established" names a value on two axes.** The evidential status `established` qualifies a phenomenon: the behavior has been shown across data sets or methods. The condition state `established` qualifies a condition of answerability of one question: the records show that the condition holds. The two meet at one point only. When a question presupposes that its phenomenon occurs, the evidential status `established` of that phenomenon is one record that shows that the condition of soundness of the question holds, as the [states of a condition](../objects/question/conditions-of-answerability.md#^condition-states) admit. A condition can also be established without any phenomenon, for instance by an accepted proof that a result of the demanded type exists. ^two-established
 
 ## Maturity
 

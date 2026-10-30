@@ -36,7 +36,7 @@ An inquiry states the following objects. The first item frames the others, and e
 9. **Model system and binding.** When the route of an answer runs on a stand-in, the answer rests on a [model system](../objects/answer/model-and-binding.md), and a binding relates that model to the phenomenon.
 10. **Assessment.** An [assessment](../objects/answer/satisfaction-conditions.md) tests an answer for admissibility, warrant and appraisal, against conditions fixed before the answer is evaluated.
 11. **Itinerary.** An itinerary records each act of the inquiry as a step typed by its [epistemic activity](../processes/activities/epistemic-activities.md#^itinerary-check), so that its inputs and its output can be checked.
-12. **Concept.** A [concept](../expression/concepts-and-names.md) is a unit of meaning, kept apart from the names and symbols that express it.
+12. **Concept.** A [concept](../expression/names-and-symbols.md) is a unit of meaning, kept apart from the names and symbols that express it.
 
 ## Epistemic processes
 
@@ -44,7 +44,7 @@ An inquiry advances by the following processes, which the method performs or rec
 
 1. **Posing.** The [problem-posing](../processes/activities/problem-posing.md) activities turn a source into a problem, and a problem into the questions that serve it.
 2. **Specifying in order.** The [order of specification](../processes/inquiry/specification-order.md) fixes the order in which a question is specified, and revises an earlier choice without circularity.
-3. **Diagnosing answerability.** The [conditions of answerability](../processes/inquiry/conditions-of-answerability.md) state the conditions that must hold before an answer can be obtained, and the order in which they can be established.
+3. **Diagnosing answerability.** The [conditions of answerability](../objects/question/conditions-of-answerability.md) state the conditions that must hold before an answer can be obtained, and the order in which they can be established.
 4. **Decomposing.** The [decomposition of a question](../processes/inquiry/question-decomposition.md) yields the questions that serve it, as the inquiry proceeds.
 5. **Performing typed epistemic activities.** Each act instantiates one [epistemic activity](../processes/activities/epistemic-activities.md), typed by its inputs, its output and its norm.
 6. **Assessing.** The [conditions of satisfaction](../objects/answer/satisfaction-conditions.md) return a verdict per test, from which the disposition of the assessment is read.
@@ -54,7 +54,7 @@ An inquiry advances by the following processes, which the method performs or rec
 
 ## Expression
 
-The content that the objects state and the processes advance is expressed for a reader without being changed. The [concepts and names](../expression/concepts-and-names.md) keep a meaning apart from the names and symbols that express it, and an [exposition](../expression/exposition.md) selects and orders research units for an audience, adding no content. Projecting into an exposition is therefore not an epistemic process: it changes how the content is presented, never what the inquiry has established.
+The content that the objects state and the processes advance is expressed for a reader without being changed. The [concepts and names](../expression/names-and-symbols.md) keep a meaning apart from the names and symbols that express it, and an [exposition](../expression/exposition.md) selects and orders research units for an audience, adding no content. Projecting into an exposition is therefore not an epistemic process: it changes how the content is presented, never what the inquiry has established.
 
 ## Commitments
 
@@ -93,7 +93,7 @@ Several words of the theory name different objects in different notes. The table
 | explanandum | **explanandum**: the role of the phenomenon when the aim is explanation | [pattern and phenomenon](../vocabulary/regularities/pattern-and-phenomenon.md) |
 | adequacy | **adequacy for purpose**: a model serves the purpose of a question | [model and binding](../objects/answer/model-and-binding.md#^adequacy-for-purpose) |
 | adequacy | **adequacy to use**: a model has the property that its declared use requires | [warrant through the binding](../objects/answer/satisfaction-conditions.md#^warrant-through-binding) |
-| adequacy | **adequacy of an explication**: an explicatum meets the requirements on replacing its explicandum | [concepts and names](../expression/concepts-and-names.md#^concept) |
+| adequacy | **adequacy of an explication**: an explicatum meets the requirements on replacing its explicandum | [concepts and names](../expression/names-and-symbols.md#^concept) |
 | adequacy | **adequacy of a declaration**: a declared quantity represents a property of the target | [things and constructs](things-and-constructs.md#^declaration-adequacy) |
 | appraisal | **appraisal**: the tier of an assessment that compares admissible answers by the virtues, never called adequacy | [conditions of satisfaction](../objects/answer/satisfaction-conditions.md#^conditions-satisfaction) |
 | warrant | **warrant tier**: the tier of an assessment that tests the evidence for an answer | [conditions of satisfaction](../objects/answer/satisfaction-conditions.md#^warrant-through-binding) |
@@ -122,6 +122,6 @@ The notes are read in the following order, in which each note uses only terms de
 6. **Admitted background.** The [background](../objects/knowledge/background.md).
 7. **Task and virtues.** The notes of the [epistemic task](../objects/task/_index.md), in the order of their index.
 8. **Answer and assessment.** The notes of the [answer and its assessment](../objects/answer/_index.md), in the order of their index, then [grounds and dependence](../objects/knowledge/grounds-and-dependence.md).
-9. **Expression.** [Concepts and names](../expression/concepts-and-names.md), then [exposition](../expression/exposition.md).
+9. **Expression.** [Concepts and names](../expression/names-and-symbols.md), then [exposition](../expression/exposition.md).
 10. **Activities.** The [epistemic activities](../processes/activities/epistemic-activities.md), then their families in the order of their [index](../processes/activities/_index.md).
-11. **Course of an inquiry.** The [order of specification](../processes/inquiry/specification-order.md), the [conditions of answerability](../processes/inquiry/conditions-of-answerability.md) the [decomposition of a question](../processes/inquiry/question-decomposition.md) and the [choice of the next act](../processes/inquiry/choice-of-act.md), then the procedure of the [next act](../../procedures/inquiry/next-act.md).
+11. **Course of an inquiry.** The [order of specification](../processes/inquiry/specification-order.md), the [conditions of answerability](../objects/question/conditions-of-answerability.md) the [decomposition of a question](../processes/inquiry/question-decomposition.md) and the [choice of the next act](../processes/inquiry/choice-of-act.md), then the procedure of the [next act](../../procedures/inquiry/next-act.md).

@@ -106,7 +106,7 @@ A problem ends in one of three ways, and the [problem record](../../../specifica
 
 A question asked in order to learn its answer presupposes that its asker lacks that answer. Epistemic analyses of questions build this lack into the meaning of a question: they read a question as the request "bring it about that I know …" [aqvist1965] [hintikka1976]. Attitudes directed at a question, such as inquiring into it, are incompatible with knowing its answer [friedman2013]. ^question-presupposes-problem
 
-The question also presupposes that it has an answer. In the interrogative model of inquiry, a question may be *asked*, that is, put to a source, only once its presupposition is established [hintikka2007]. A question can be *posed* before that point, and its presuppositions then remain to be established, which is the condition of soundness among the [conditions of answerability](../../processes/inquiry/conditions-of-answerability.md). Once $K$ establishes its existence presupposition, $K$ evokes the question.
+The question also presupposes that it has an answer. In the interrogative model of inquiry, a question may be *asked*, that is, put to a source, only once its presupposition is established [hintikka2007]. A question can be *posed* before that point, and its presuppositions then remain to be established, which is the condition of soundness among the [conditions of answerability](../question/conditions-of-answerability.md). Once $K$ establishes its existence presupposition, $K$ evokes the question.
 
 Therefore, every inquiring question $Q$ carries a **minimal problem**: ^minimal-problem
 

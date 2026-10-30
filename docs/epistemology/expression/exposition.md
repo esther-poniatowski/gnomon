@@ -35,7 +35,7 @@ Argumentation is relative to the audience that it addresses: it seeks the adhere
 
 - the **selection** of units, since a unit that the audience already holds can be referenced instead of presented;
 - the **order** of units, and the moves that deliver them;
-- the **names** in which the units are stated, which the glossary of the project admits or forbids for that audience, as the note on [concepts and names](concepts-and-names.md#^glossary) states;
+- the **names** in which the units are stated, which the glossary of the project admits or forbids for that audience, as the note on [concepts and names](names-and-symbols.md#^glossary) states;
 - the **granularity** of the presentation, such as the steps of a derivation that are shown.
 
 The audience changes neither the content nor the warrant of a unit. The warrant of a claim is fixed by its grounds and its assessment, which do not depend on the reader.

@@ -25,7 +25,7 @@ aliases:
 | Set-up and termination conditions | mechanistic philosophy | the states at which the description of a mechanism starts and ends | [machamer2000] |
 | Causal field | causation | the circumstances that a causal question treats as fixed; this method writes them as the [conditions held fixed](../../objects/subject/domain.md) $D$ | [mackie1974] |
 | Necessary, sufficient, INUS condition | logic, causation | a necessary or a sufficient condition; an INUS condition is an insufficient but non-redundant part of an unnecessary but sufficient condition | [mackie1965] |
-| Requirement | this method | a requirement that a question, an answer or an act of the inquiry must meet, such as the [conditions of satisfaction](../../objects/answer/satisfaction-conditions.md) of a question, the [conditions of answerability](../../processes/inquiry/conditions-of-answerability.md), or the conditions of a controlled iteration | — |
+| Requirement | this method | a requirement that a question, an answer or an act of the inquiry must meet, such as the [conditions of satisfaction](../../objects/answer/satisfaction-conditions.md) of a question, the [conditions of answerability](../../objects/question/conditions-of-answerability.md), or the conditions of a controlled iteration | — |
 
 The first five senses name a constraint fixed from outside the derivation: a fact entering the derivation, a starting state, or a restriction on circumstances. The sixth sense is logical: it names a relation between two states of affairs, and a condition in that sense can be derived. The seventh sense is a requirement: it constrains no system, and it states the standard that a question, an answer or an act must meet.
 
