@@ -9,7 +9,7 @@ aliases:
 
 > [!QUESTION] Goal: how does a record name its quantities, so that a formula in one field reaches an entry of another field?
 
-Within an inquiry record, each declared quantity carries a symbol that no other entry shares. Through that symbol, one field reaches a quantity that another field declares: a reference names it directly, and a formula combines it with others into an expression. The same rule governs the symbols of the method itself: one letter carries one meaning across the notes, under the [notation registry](../epistemology/notation/notation.md).
+Within an inquiry record, each declared quantity carries a symbol that no other entry shares. Through that symbol, one field reaches a quantity that another field declares: a reference names it directly, and a formula combines it with others into an expression. The same rule governs the symbols of the method itself: one letter carries one meaning across the notes, under the [notation registry](../epistemology/vocabulary/notation/notation.md).
 
 A prose name cannot replace the symbol, because such a name resolves to no entry. For example, a name written as "velocity field u(x,t)" holds a symbol, a name and a signature at once. A second field then reaches the quantity only by repeating the whole string, and a formula can name a symbol that no entry declares.
 
@@ -30,7 +30,7 @@ A prose name cannot replace the symbol, because such a name resolves to no entry
 
 - **A symbol is unique only *within* its record.** For example, two targets may each declare `L`. A reference from another record therefore prefixes the identifier of the declaring record, and the resulting identifier is unique across the corpus. Within one record, two entries declaring the same symbol are a defect. One entry declaring two quantities is the converse defect: "cross-coupling operators G_AB and G_BA" must become two entries.
 
-- **A record stated against one target names the quantities of that target by the symbol alone.** A phenomenon names its target in the field `target_system`, and a [background record](../epistemology/subject/background.md) in the field `describes`. Therefore, a bare symbol in one of their formulas resolves against the declarations of the record and those of its target together. A reference to any other record keeps the prefix. ^target-scope
+- **A record stated against one target names the quantities of that target by the symbol alone.** A phenomenon names its target in the field `target_system`, and a [background record](../epistemology/objects/knowledge/background.md) in the field `describes`. Therefore, a bare symbol in one of their formulas resolves against the declarations of the record and those of its target together. A reference to any other record keeps the prefix. ^target-scope
 
 - **Only a compound value is quoted: a bare symbol and a vocabulary token stay unquoted.** Inside a bracketed list, the quotes change the parsed value: unquoted, `[maps(prod(a, b), reals)]` splits on its commas, so the record holds one expression cut into three plausible fragments. Outside a list, the serializer parses a compound value the same way in either form. The rule then serves the reader: quotation marks signal that the enclosed string holds more than one identifier. ^quote-compound-values
 

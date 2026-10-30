@@ -13,4 +13,4 @@ The field `maturity` is carried by the records of the following kinds: target sy
 
 Each specification may also carry its own maturity marker (open, provisional, or stabilized), beside the marker that applies to the inquiry as a whole.
 
-The reasons for admitting empty and immature fields are stated under the [safeguards against rigidity](../epistemology/subject/subject-of-inquiry.md).
+The reasons for admitting empty and immature fields are stated under the [safeguards against rigidity](../epistemology/objects/subject/subject-of-inquiry.md).

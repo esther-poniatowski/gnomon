@@ -18,7 +18,7 @@ A claim of detection takes one of four values, which a record must not conflate:
 - **disproved:** a counterexample or a contradiction is established;
 - **undecided:** the question is open and tracked.
 
-The case that motivated the distinction is the status of a proof, but it holds for any detection. A representation without a clean axis of context does not establish that context is absent: it may show only that no marker shaped like an axis was found, while context deforms the whole space ([example 28](../../examples/adversarial-statements.md#^example-statement-using-absence-as-evidence)). Reading "no stored result" as "known absence" is the false negative that the distinction blocks. The [choice of the next act](../epistemology/inquiry/next-act.md) states that no activity records a negative detection, and the four values state what such a record distinguishes.
+The case that motivated the distinction is the status of a proof, but it holds for any detection. A representation without a clean axis of context does not establish that context is absent: it may show only that no marker shaped like an axis was found, while context deforms the whole space ([example 28](../../examples/adversarial-statements.md#^example-statement-using-absence-as-evidence)). Reading "no stored result" as "known absence" is the false negative that the distinction blocks. The [choice of the next act](../procedures/inquiry/next-act.md) states that no activity records a negative detection, and the four values state what such a record distinguishes.
 
 **Literature.** None cited; the candidate arose from the contrast between open-world and closed-world reading in Description Logics.
 

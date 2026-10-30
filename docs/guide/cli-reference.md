@@ -92,7 +92,7 @@ gnomon vocabulary <directory> --markdown
 
 ## `itinerary`
 
-An author who has filled the itineraries of a problem needs to know whether each step takes the products that its activity requires. The `itinerary` command checks every itinerary record of one problem folder against the registries of activities and of product types, and against the records that its steps name. The conditions of the check are stated in the [itinerary check](../epistemology/activities/epistemic-activities.md#^itinerary-check).
+An author who has filled the itineraries of a problem needs to know whether each step takes the products that its activity requires. The `itinerary` command checks every itinerary record of one problem folder against the registries of activities and of product types, and against the records that its steps name. The conditions of the check are stated in the [itinerary check](../epistemology/processes/activities/epistemic-activities.md#^itinerary-check).
 
 ```sh
 gnomon itinerary <directory>

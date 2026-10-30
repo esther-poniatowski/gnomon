@@ -12,7 +12,7 @@ aliases:
 
 > [!QUESTION] Goal: what may a record presuppose about the existence of the objects that it describes?
 
-The positions of the philosophy of science separate a question of existence, whether the object of an inquiry exists independently of its descriptions, from a question of access, whether the object can be known other than through a description. The [note on existence and access](../epistemology/definitions/representations/existence-and-access.md) states both questions and the positions that answer them. The definitions of the method state the realist sense of each term first, as a [reading aid](../epistemology/definitions/systems/things-and-constructs.md), and no decision stated whether the records themselves take a side.
+The positions of the philosophy of science separate a question of existence, whether the object of an inquiry exists independently of its descriptions, from a question of access, whether the object can be known other than through a description. The [note on existence and access](../epistemology/foundations/existence-and-access.md) states both questions and the positions that answer them. The definitions of the method state the realist sense of each term first, as a [reading aid](../epistemology/foundations/things-and-constructs.md), and no decision stated whether the records themselves take a side.
 
 ## Decision
 

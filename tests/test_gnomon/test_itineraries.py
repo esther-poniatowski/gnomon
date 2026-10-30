@@ -27,7 +27,7 @@ from gnomon.itineraries import (
 
 from .paths import EXAMPLES, ROOT
 
-ACTIVITY_NOTES = ROOT / "docs" / "epistemology" / "activities"
+ACTIVITY_NOTES = ROOT / "docs" / "epistemology" / "processes" / "activities"
 VOCABULARY = yaml.safe_load((ROOT / "src" / "gnomon" / "data" / "vocabularies.yml").read_text())
 ACTS = activities()
 TYPES = product_types()

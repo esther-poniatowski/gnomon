@@ -18,7 +18,7 @@ The records of one research problem share one folder. The [record templates](../
 
 ## Fill the records in order
 
-The index of the templates numbers the record kinds in the order of filling, from the problem to the assessment. The [order of specification](../epistemology/inquiry/specification-order.md) states why each stage takes the earlier stages as given, and how a change to an earlier record is made as a revision. A target system and a phenomenon can first be recorded at the commitment `identified`, before their quantities are declared, as the [levels of commitment](../epistemology/inquiry/question.md#^commitment-levels) define it.
+The index of the templates numbers the record kinds in the order of filling, from the problem to the assessment. The [order of specification](../epistemology/processes/inquiry/specification-order.md) states why each stage takes the earlier stages as given, and how a change to an earlier record is made as a revision. A target system and a phenomenon can first be recorded at the commitment `identified`, before their quantities are declared, as the [levels of commitment](../epistemology/objects/question/question.md#^commitment-levels) define it.
 
 ## Read the specification of each field
 
@@ -36,7 +36,7 @@ gnomon vocabulary ./my-problem --markdown
 
 ## Check the itinerary
 
-The steps taken in the inquiry are recorded in an [itinerary](../specification/itinerary.md), each step as an instance of a registered activity. The [choice of the next act](../epistemology/inquiry/next-act.md) guides the step to take. The following command checks each step against the registries and against the records that the step names:
+The steps taken in the inquiry are recorded in an [itinerary](../specification/itinerary.md), each step as an instance of a registered activity. The [choice of the next act](../procedures/inquiry/next-act.md) guides the step to take. The following command checks each step against the registries and against the records that the step names:
 
 ```sh
 gnomon itinerary ./my-problem

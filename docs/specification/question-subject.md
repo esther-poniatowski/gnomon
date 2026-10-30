@@ -12,23 +12,23 @@ aliases:
 
 > [!QUESTION] Goal: what does a researcher write in the `subject` block of a question record?
 
-The grounds of the components are stated in the note on the [subject of inquiry](../epistemology/subject/subject-of-inquiry.md).
+The grounds of the components are stated in the note on the [subject of inquiry](../epistemology/objects/subject/subject-of-inquiry.md).
 
 ## Components of the subject
 
 | Component | When it is required | Role | Example | Canonical tradition |
 | --------- | ------------------- | ---- | ------- | ------------------- |
-| **[Target system](../epistemology/subject/target-system.md) $S$** | always | System or portion of reality about which knowledge is sought, and which the model represents | neuron | Philosophy of scientific models |
-| **[Background](../epistemology/subject/background.md)** of $S$ | when the question rests on laws of $S$ admitted *a priori* | Bodies of laws about $S$ admitted by the question; they qualify $S$ and add no fifth component to $\Sigma$ | the leaky integration of each neuron, admitted with the network | laws of succession and coexistence [winther2020] |
-| **[Phenomenon](../epistemology/subject/phenomenon.md) $P$** ("explanandum") | always, except for an exploratory question, where a search space replaces it | Aspect of $S$ to be explained (e.g. a fact, event, pattern, property, behavior) | firing rate | covering-law explanation [hempel1948] |
-| **[Contrast class](../epistemology/subject/contrast.md) $X$** | for a contrastive why-question, and implicit as the comparator in a question about a causal effect | Alternative(s) relative to which $P$ is puzzling — "why $P$ rather than $P'$?" | why spike rather than inactivity? | contrastive why-questions [vanfraassen1980] |
-| **[Domain of conditions](../epistemology/subject/domain.md) $D$** | when the question holds a condition fixed | Background conditions under which the system is studied (e.g. regime, limit, parameter range) | in vitro slice, injected current between 0 and 500 pA | "causal field" [mackie1974], "background conditions" [woodward2010], and "domain of validity" in physics |
+| **[Target system](../epistemology/objects/subject/target-system.md) $S$** | always | System or portion of reality about which knowledge is sought, and which the model represents | neuron | Philosophy of scientific models |
+| **[Background](../epistemology/objects/knowledge/background.md)** of $S$ | when the question rests on laws of $S$ admitted *a priori* | Bodies of laws about $S$ admitted by the question; they qualify $S$ and add no fifth component to $\Sigma$ | the leaky integration of each neuron, admitted with the network | laws of succession and coexistence [winther2020] |
+| **[Phenomenon](../epistemology/objects/subject/phenomenon.md) $P$** ("explanandum") | always, except for an exploratory question, where a search space replaces it | Aspect of $S$ to be explained (e.g. a fact, event, pattern, property, behavior) | firing rate | covering-law explanation [hempel1948] |
+| **[Contrast class](../epistemology/objects/subject/contrast.md) $X$** | for a contrastive why-question, and implicit as the comparator in a question about a causal effect | Alternative(s) relative to which $P$ is puzzling — "why $P$ rather than $P'$?" | why spike rather than inactivity? | contrastive why-questions [vanfraassen1980] |
+| **[Domain of conditions](../epistemology/objects/subject/domain.md) $D$** | when the question holds a condition fixed | Background conditions under which the system is studied (e.g. regime, limit, parameter range) | in vitro slice, injected current between 0 and 500 pA | "causal field" [mackie1974], "background conditions" [woodward2010], and "domain of validity" in physics |
 
-- **Placeholders before records.** The target-system slot and the phenomenon slot of a question accept a record identifier or a typed placeholder. The type of a placeholder fits its slot: the target-system slot awaits a `system`, and the phenomenon slot a `phenomenon`. A question whose slots hold placeholders is a [question schema](../epistemology/inquiry/question.md#^question-schema). A slot that names a record requires the record to reach at least the commitment `identified`, as the [levels of commitment](../epistemology/inquiry/question.md#^commitment-levels) define it. Each record of a target or of a phenomenon declares its own commitment, `identified` or `specified`. ^placeholder-slots
+- **Placeholders before records.** The target-system slot and the phenomenon slot of a question accept a record identifier or a typed placeholder. The type of a placeholder fits its slot: the target-system slot awaits a `system`, and the phenomenon slot a `phenomenon`. A question whose slots hold placeholders is a [question schema](../epistemology/objects/question/question.md#^question-schema). A slot that names a record requires the record to reach at least the commitment `identified`, as the [levels of commitment](../epistemology/objects/question/question.md#^commitment-levels) define it. Each record of a target or of a phenomenon declares its own commitment, `identified` or `specified`. ^placeholder-slots
 
 ## Contrast
 
-The grounds of the contrast fields are stated in the note on the [contrast](../epistemology/subject/contrast.md). ^contrast-fields
+The grounds of the contrast fields are stated in the note on the [contrast](../epistemology/objects/subject/contrast.md). ^contrast-fields
 
 | Specification | When it is required | Options or frame | Examples | Source |
 | ------------- | ------------------- | ---------------- | -------- | ------ |
@@ -41,7 +41,7 @@ The grounds of the contrast fields are stated in the note on the [contrast](../e
 
 ## Domain of conditions
 
-The grounds of the domain fields are stated in the note on the [domain of conditions](../epistemology/subject/domain.md). ^domain-fields
+The grounds of the domain fields are stated in the note on the [domain of conditions](../epistemology/objects/subject/domain.md). ^domain-fields
 
 | Specification | When it is required | Options or frame | Examples | Source |
 | ------------- | ------------------- | ---------------- | -------- | ------ |

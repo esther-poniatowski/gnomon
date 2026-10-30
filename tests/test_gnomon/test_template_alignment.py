@@ -373,7 +373,7 @@ def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
 
 
 def test_the_virtues_of_the_note_are_the_options_of_the_question() -> None:
-    note = (DOCS / "epistemology/epistemic-task/epistemic-pragmatic-virtues.md").read_text(encoding="utf-8")
+    note = (DOCS / "epistemology/objects/task/epistemic-pragmatic-virtues.md").read_text(encoding="utf-8")
     table = re.search(r"\| Virtue.*?\n\n", note, re.S)
     assert table is not None, "no virtue table in the note"
     names = [
@@ -390,7 +390,7 @@ def criteria(header: Header, column: int) -> list[str]:
     """Return the criteria of a table of tests, as the assessment template writes them."""
     return [
         line.strip("|").split("|")[column].strip().lower().replace(" ", "-")
-        for line in table_lines("epistemology/answer/satisfaction-conditions.md", header)
+        for line in table_lines("epistemology/objects/answer/satisfaction-conditions.md", header)
     ]
 
 
@@ -445,7 +445,7 @@ def test_the_aim_categories_of_the_note_are_the_registry() -> None:
     """
     names = {"answer content": "answer-content", "conceptual work": "conceptual-work", "mode of inquiry": "mode-of-inquiry"}
     documented: dict[str, Any] = {}
-    for line in table_lines("epistemology/epistemic-task/epistemic-aim.md", "| Epistemic aim | Category"):
+    for line in table_lines("epistemology/objects/task/epistemic-aim.md", "| Epistemic aim | Category"):
         cells = [c.strip() for c in line.strip("|").split("|")]
         aim = re.search(r"\(`([a-z-]+)`\)", cells[0])
         assert aim is not None, f"no aim value in {cells[0]!r}"
@@ -461,7 +461,7 @@ def test_the_answer_conditions_of_the_note_are_the_registry() -> None:
         return re.sub(r"\s*\[[a-z0-9_]+\]", "", cell).strip()
 
     documented = {}
-    for line in table_lines("epistemology/epistemic-task/epistemic-aim.md", "| Aim | Direct answer |"):
+    for line in table_lines("epistemology/objects/task/epistemic-aim.md", "| Aim | Direct answer |"):
         cells = [plain(c) for c in line.strip("|").split("|")]
         documented[cells[0].strip("`")] = tuple(cells[1:4])
     aims = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"]["question"]["task.epistemic_aim"]

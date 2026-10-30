@@ -12,7 +12,7 @@ aliases:
 
 > [!QUESTION] Goal: which results may a tool of `gnomon` compute from the records, and which results must the researcher author?
 
-The tools of `gnomon` read records and compute: they resolve symbols, collect the symbol table of a problem, and find the cycles among the steps of an itinerary. Two further computations are specified: the [comparison](../epistemology/answer/model-and-binding.md#^comparison) of a binding with data, which the [decision on answers, models and bindings](answers-models-bindings.md) states is computed, and the [open conditions](../epistemology/inquiry/next-act.md#^open-condition) of a question. Several proposals would let a tool go further and derive claims that the records do not state: a logic-programming layer, a reasoner that classifies records, an engine that computes the acceptance of arguments. The [decision on expression syntax](expression-syntax.md) already excludes proving the claims of an inquiry. No decision drew the boundary between computing over records and inferring.
+The tools of `gnomon` read records and compute: they resolve symbols, collect the symbol table of a problem, and find the cycles among the steps of an itinerary. Two further computations are specified: the [comparison](../epistemology/objects/answer/model-and-binding.md#^comparison) of a binding with data, which the [decision on answers, models and bindings](answers-models-bindings.md) states is computed, and the [open conditions](../procedures/inquiry/next-act.md#^open-condition) of a question. Several proposals would let a tool go further and derive claims that the records do not state: a logic-programming layer, a reasoner that classifies records, an engine that computes the acceptance of arguments. The [decision on expression syntax](expression-syntax.md) already excludes proving the claims of an inquiry. No decision drew the boundary between computing over records and inferring.
 
 ## Decision
 
@@ -20,13 +20,13 @@ The tools of `gnomon` record and validate authored reasoning, and never infer. ^
 
 A tool may compute a value that a declared rule fixes from authored records. The rule is declared in package data or in a note of the documentation, two runs on the same records return the same value, and the value is reported or written to a generated output, never into an authored record. ^admitted-computation
 
-A tool never adds a claim, a relation or a record kind that no record states. A tool never evaluates whether a warrant holds, and never decides whether an answer is accepted. The verdict of a warrant test, the state of a condition and the acceptance of an answer are authored, with pointers to the records that support them. A tool may check that an authored verdict respects a declared rule, such as the [rules on the reports of a comparison](../epistemology/answer/satisfaction-conditions.md#^fidelity-reads-reports). ^excluded-inference
+A tool never adds a claim, a relation or a record kind that no record states. A tool never evaluates whether a warrant holds, and never decides whether an answer is accepted. The verdict of a warrant test, the state of a condition and the acceptance of an answer are authored, with pointers to the records that support them. A tool may check that an authored verdict respects a declared rule, such as the [rules on the reports of a comparison](../epistemology/objects/answer/satisfaction-conditions.md#^fidelity-reads-reports). ^excluded-inference
 
 ## Constraints that decide the boundary
 
 - **A verdict on a warrant depends on content that no grammar fixes.** Whether a test was severe, or a definition eliminable, is judged by the researcher, so the [itinerary](../specification/itinerary.md) records the verdict of each norm and its check reads only whether the verdict is admitted.
 - **A derived claim needs an author.** A claim produced by an engine changes the claims that the records warrant without any edit to them, so no [revision](revision-accountability.md#^traceable-revision) traces the change.
-- **A computed value must be reproducible from the records.** A comparison is [recomputed, never edited](../epistemology/answer/model-and-binding.md#^comparison-recomputed), so its rule and its inputs fix its output.
+- **A computed value must be reproducible from the records.** A comparison is [recomputed, never edited](../epistemology/objects/answer/model-and-binding.md#^comparison-recomputed), so its rule and its inputs fix its output.
 
 ## Options weighed
 

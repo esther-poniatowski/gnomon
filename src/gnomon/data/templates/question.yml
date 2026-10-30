@@ -1,5 +1,5 @@
 # specification: `docs/specification/question.md`, `docs/specification/question-subject.md`, `docs/specification/question-task.md`, `docs/specification/question-virtues.md`; one file per question
-# commitment of the slots: `docs/epistemology/inquiry/question.md`
+# commitment of the slots: `docs/epistemology/objects/question/question.md`
 # symbols and expressions: `docs/specification/expressions.md`
 # name a quantity of another record by source identifier and symbol: `system.TOPIC#SYMBOL`
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled

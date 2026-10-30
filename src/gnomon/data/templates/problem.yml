@@ -1,5 +1,5 @@
 # specification: `docs/specification/problem.md`; one file per research problem
-# theory: `docs/epistemology/inquiry/epistemic-problem.md`, `docs/epistemology/inquiry/problem-types.md`
+# theory: `docs/epistemology/objects/problem/epistemic-problem.md`, `docs/epistemology/objects/problem/problem-types.md`
 # the questions serving this problem name it in their field `addresses`
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 

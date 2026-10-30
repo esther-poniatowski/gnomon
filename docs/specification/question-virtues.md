@@ -9,7 +9,7 @@ aliases:
 
 > [!QUESTION] Goal: which virtues can a question name in the entries of its `virtues` block?
 
-The [virtues](../epistemology/epistemic-task/epistemic-pragmatic-virtues.md) that a question may weigh, and the [standing of a virtue](../epistemology/epistemic-task/epistemic-pragmatic-virtues.md#^virtue-standing), are defined in the theory of epistemic and pragmatic virtues.
+The [virtues](../epistemology/objects/task/epistemic-pragmatic-virtues.md) that a question may weigh, and the [standing of a virtue](../epistemology/objects/task/epistemic-pragmatic-virtues.md#^virtue-standing), are defined in the theory of epistemic and pragmatic virtues.
 
 | Specification | When it is required | Options or frame | Examples |
 | ------------- | ------------------- | ---------------- | -------- |

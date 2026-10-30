@@ -26,7 +26,7 @@ A statement need not assert its content. Two modalities appear in the test set:
 - **A hypothetical statement.** A whole statement is conditional: "if such evidence held, it would mean Z" ([example 3](../../examples/adversarial-statements.md#^example-argument-with-an-undercutting-condition-hidden-inside-an-example), [example 4](../../examples/adversarial-statements.md#^example-research-question-embedded-in-a-critique)).
 - **A counterfactual claim.** A claim concerns what a computation would have been under an intervention that did not take place. "The feature contributes to the task" unpacks as a claim about the computation without the feature ([example 37](../../examples/adversarial-statements.md#^example-statement-with-implicit-dependency-on-counterfactuals)). Such a claim has a meaning only relative to a family of admissible interventions.
 
-The [attitude of a claim](../epistemology/definitions/representations/claim-and-hypothesis.md#^attitude-support), `entertained`, `hypothesized`, `accepted` or `retracted`, already marks a claim that is not asserted. The candidate concerns the content instead: a conditional claim can be accepted as a whole while its antecedent is not asserted, and a counterfactual claim must name its family of interventions.
+The [attitude of a claim](../epistemology/vocabulary/representations/claim-and-hypothesis.md#^attitude-support), `entertained`, `hypothesized`, `accepted` or `retracted`, already marks a claim that is not asserted. The candidate concerns the content instead: a conditional claim can be accepted as a whole while its antecedent is not asserted, and a counterfactual claim must name its family of interventions.
 
 **Literature.** None cited; the candidate derives from the statements of the test set.
 

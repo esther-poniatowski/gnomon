@@ -21,7 +21,7 @@ The record of the acts of an inquiry is the **itinerary**, of type `itinerary` a
 ## Constraints that decide the names
 
 - **The record is built progressively.** An author adds a step once an act is chosen, and records its verdict once its norm is judged. A failed verdict sends the author back to an earlier state of the record. A name for that record must admit pending and performed steps alike.
-- **A name must not collide with a term of `gnomon` or of its consumer.** The phenomenon record already uses `course`, the ontology uses process and history for categories of phenomena, and the [note on dynamics](../epistemology/definitions/change/dynamic.md) uses trajectory. The workspaces use log for task records and decision logs.
+- **A name must not collide with a term of `gnomon` or of its consumer.** The phenomenon record already uses `course`, the ontology uses process and history for categories of phenomena, and the [note on dynamics](../epistemology/vocabulary/change/dynamic.md) uses trajectory. The workspaces use log for task records and decision logs.
 - **The word "output" is a field.** A step carries a field `output`, so a type named "output type" would name a field and its type with one word.
 - **One name serves one notion.** The table of epistemic aims already names an epistemic product for each aim, so a second notion of product would collide with it unless the two are one.
 
@@ -41,5 +41,5 @@ The record of the acts of an inquiry is the **itinerary**, of type `itinerary` a
 - The template `plan.yml` becomes `itinerary.yml`, the record type `plan` becomes `itinerary`, and the prefix `plan` becomes `itin`.
 - The block `plan` of `vocabularies.yml` becomes `itinerary`, the module `plans.py` becomes `itineraries.py`, and the command `gnomon plan` becomes `gnomon itinerary`. The note on the plan, its anchor `plan-check`, the fixtures and the tests follow.
 - The registry `artifact-types.yml` becomes `product-types.yml`, with the identifier `registry.product-types`, the type `product-type-registry` and the key `product_types`. The comments of `activities.yml`, the placeholder `ARTIFACT-TYPE` of the template and the notes that read "artifact type" follow.
-- The column of epistemic products in the table of [epistemic aims](../epistemology/epistemic-task/epistemic-aim.md) names, for each aim, the product types admitted by the aim.
+- The column of epistemic products in the table of [epistemic aims](../epistemology/objects/task/epistemic-aim.md) names, for each aim, the product types admitted by the aim.
 - The word "planning" keeps its sense of choosing the next act.

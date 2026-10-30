@@ -9,25 +9,25 @@ aliases:
 
 > [!QUESTION] Goal: what does a researcher write in each field of the `task` block of a question, and when is each field required?
 
-The dimensions that these fields fix, and the grounds of each dimension, are stated in the theory of the [epistemic task](../epistemology/epistemic-task/epistemic-task.md).
+The dimensions that these fields fix, and the grounds of each dimension, are stated in the theory of the [epistemic task](../epistemology/objects/task/epistemic-task.md).
 
 | Dimension | When it is required | Role | Typical options | Canonical tradition |
 | --------- | ------------------- | ---- | --------------- | ------------------- |
-| **[Epistemic aim](../epistemology/epistemic-task/epistemic-aim.md) $A$** | always: it selects the interrogative word of the question | What knowledge is the inquiry intended to produce? What cognitive achievement is sought? | description/representation, exploration, prediction, explanation, modal knowledge, knowledge of theories or models |  |
-| **[Requested relation](../epistemology/epistemic-task/requested-relation.md) $R$** | whenever the answer must relate an explanans to the explanandum | What kind of relation must the explanans bear to the explanandum to answer the question? | causal, mechanistic, constitutive, functional, statistical, nomological, mathematical | relevance / dependence relation [vanfraassen1980] |
-| **Function sense** | when the requested relation is functional | Which sense of function must the answer establish? | causal role (the contribution of a part to a capacity of the system); etiological (the effects for which the part was selected) | [senses of function](../epistemology/epistemic-task/requested-relation.md#^function-sense) |
-| **[Modal strength](../epistemology/epistemic-task/modal-strength.md) $\mu$** | always | How tightly must the answer bind the phenomenon? | actual, possible, necessary | _how-possibly_ vs _how-actually_ [verreaultjulien2019] |
-| **[Admissible explanans](../epistemology/epistemic-task/admissible-explanans.md) $\lambda$** | only to bound the explanans further, because proportionality with the phenomenon selects the level when $\lambda$ is left unset | Which kinds of variables may enter the explanans? | compositional level; substrate dependence | levels of mechanisms [craver2007]; universality [batterman2000] |
+| **[Epistemic aim](../epistemology/objects/task/epistemic-aim.md) $A$** | always: it selects the interrogative word of the question | What knowledge is the inquiry intended to produce? What cognitive achievement is sought? | description/representation, exploration, prediction, explanation, modal knowledge, knowledge of theories or models |  |
+| **[Requested relation](../epistemology/objects/task/requested-relation.md) $R$** | whenever the answer must relate an explanans to the explanandum | What kind of relation must the explanans bear to the explanandum to answer the question? | causal, mechanistic, constitutive, functional, statistical, nomological, mathematical | relevance / dependence relation [vanfraassen1980] |
+| **Function sense** | when the requested relation is functional | Which sense of function must the answer establish? | causal role (the contribution of a part to a capacity of the system); etiological (the effects for which the part was selected) | [senses of function](../epistemology/objects/task/requested-relation.md#^function-sense) |
+| **[Modal strength](../epistemology/objects/task/modal-strength.md) $\mu$** | always | How tightly must the answer bind the phenomenon? | actual, possible, necessary | _how-possibly_ vs _how-actually_ [verreaultjulien2019] |
+| **[Admissible explanans](../epistemology/objects/task/admissible-explanans.md) $\lambda$** | only to bound the explanans further, because proportionality with the phenomenon selects the level when $\lambda$ is left unset | Which kinds of variables may enter the explanans? | compositional level; substrate dependence | levels of mechanisms [craver2007]; universality [batterman2000] |
 | **Required accuracy $\tau$** | always, and `not-applicable` when the answer is matched against no measurement | Which observables of the target must the answer reproduce, which of its structures must correspond, and to what accuracy? | qualitative agreement; order of magnitude; a stated numeric bound; structural correspondence only. Within a tolerance, `answer` names the candidate's value and `target` the observable that it reproduces. Each output and each structure carries a justification stating why the question demands that particular correspondence. | fidelity criteria [weisberg2013]; adequacy for purpose [parker2020] |
 | **Proof obligations $\omega$** | when the answer must derive a statement rather than match a measurement | Which implication must the answer establish, and in which direction? | Per obligation: the antecedent and the consequent, each as expressions over the declared observables. A converse counts as a separate obligation. | explanation by mathematical proof [lange2017] |
 
 > [!HINT] Practical use
-> Once a candidate exists, it is checked against the required accuracy by the [fidelity test](../epistemology/answer/satisfaction-conditions.md).
+> Once a candidate exists, it is checked against the required accuracy by the [fidelity test](../epistemology/objects/answer/satisfaction-conditions.md).
 
 > [!NOTE]
 > Each dimension is developed in its own note, linked from its row. The required accuracy and the proof obligations have no note yet, because each row holds its whole specification.
 
-- **The demand of a problem bounds the aim of each question that serves it.** A question that serves a problem takes one of the aims that the [demand table](../epistemology/inquiry/problem-types.md) admits for the type of result, and a checker can test that bound once the demand of the problem carries its type.
+- **The demand of a problem bounds the aim of each question that serves it.** A question that serves a problem takes one of the aims that the [demand table](../epistemology/objects/problem/problem-types.md) admits for the type of result, and a checker can test that bound once the demand of the problem carries its type.
 
 ## Specifications each aim requires
 
@@ -52,7 +52,7 @@ Two independent axes supply the options for the level $\lambda$. In addition, a 
 
 | Specification | When it is required | Varied feature | Options | Examples | Source |
 | ------------- | ------------------- | -------------- | ------- | -------- | ------ |
-| Compositional level | when the question restricts the parts whose activities may explain the phenomenon | the constituent kinds or index sets whose parts may enter the explanans | the [constituents of the target system](../epistemology/subject/target-system.md) · their sub-parts · aggregates of them | channel · neuron · circuit · population | [craver2007] |
+| Compositional level | when the question restricts the parts whose activities may explain the phenomenon | the constituent kinds or index sets whose parts may enter the explanans | the [constituents of the target system](../epistemology/objects/subject/target-system.md) · their sub-parts · aggregates of them | channel · neuron · circuit · population | [craver2007] |
 | Substrate dependence | when the question binds the answer to one realization of the system, or explicitly declines to do so | whether the explanans variables are specific to one realization of the system | substrate-specific (variables of the particular parts) · substrate-independent (variables shared by every realization: functional roles, universality classes) · mapping (how substrate-specific variables realize substrate-independent ones) | membrane potentials of identified neurons (specific) · an error signal on any carrier, or the universality class of a phase transition (independent) · how a circuit implements context-dependent gating (mapping) | [batterman2000]; [marr1982]; [bechtel2015] |
 | Justification | whenever an axis is stated | why the research program binds the answer to these variables, and which content is lost when the explanans uses other variables | one clause that carries no commitment already held by the axes | "the forecast names when each subsystem transitions, so the explanans must resolve each of them individually" | — |
 

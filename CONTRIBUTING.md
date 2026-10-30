@@ -160,16 +160,16 @@ An index holds only four kinds of unit: its own goal, stated in one clause of th
 
 ### Cross-references
 
-A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both in an editor and on the repository page. The examples below are written from a note of `docs/epistemology/subject/`:
+A cross-reference is a relative Markdown link carrying the `.md` extension, so that it resolves both in an editor and on the repository page. The examples below are written from a note of `docs/epistemology/objects/subject/`:
 
 ```markdown
-the [types of problem](../inquiry/problem-types.md)
+the [types of problem](../problem/problem-types.md)
 ```
 
 A finer reference appends a block anchor, declared at the end of the target line:
 
 ```markdown
-[links between questions](../inquiry/question.md#^linked-questions)
+[links between questions](../question/question.md#^linked-questions)
 ```
 
 Link text names the result, the object, or the message found at the target, never the file name and never a bare category word.

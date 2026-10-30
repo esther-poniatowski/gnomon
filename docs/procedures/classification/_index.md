@@ -7,7 +7,7 @@ aliases:
 ---
 # Classification
 
-States the method of the activity `classification`, which the [conceptual activities](../../epistemology/activities/conceptual-activities.md) register.
+States the method of the activity `classification`, which the [conceptual activities](../../epistemology/processes/activities/conceptual-activities.md) register.
 
 ## Principles
 
