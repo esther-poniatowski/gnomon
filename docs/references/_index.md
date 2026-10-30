@@ -28,6 +28,10 @@ Gathers the inventory of external frameworks and literature, each stated on its 
 
 - [Research gap against research problem](research-problems-vs-gap.jpg): separates a gap in the literature from the issue that makes an investigation necessary
 
+## Ontological analysis
+
+- [OntoClean](ontoclean.md): checks whether a subsumption between two kinds respects the rigidity, identity and unity of their instances
+
 ## Knowledge interchange formats
 
 - [Open Knowledge Format](open-knowledge-format.md): compares an interchange format for linked Markdown knowledge with the records of `gnomon`
