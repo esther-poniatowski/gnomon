@@ -92,6 +92,15 @@ Each contract of the framework has one owning file. A contributor reads that fil
 
 Every Markdown file under `docs/` is a note: it declares its metadata in a YAML frontmatter block, and it is registered in the index of the folder holding it. A file that satisfies neither is invisible to a reader navigating by index, and is effectively lost while appearing to exist.
 
+### Theory and specification
+
+A content about the records of an inquiry belongs to one of two tiers, decided by one test: would the content still hold if the format of the records changed?
+
+- A content that would still hold belongs to the [epistemology](docs/epistemology/_index.md): a sense of a term, a distinction between concepts, a criterion stated over concepts, a synthesis that `gnomon` draws from the literature, or the grounds of a choice.
+- A content that would change belongs to the [specification](docs/specification/_index.md): the fields of a record, the condition under which each field is required, its admitted values, its examples, and a rule that binds one field to another.
+
+A paragraph that mixes the two is split: its theory claim stays in the epistemology, and its field rule moves to the specification and links that claim.
+
 ### Frontmatter block
 
 Three keys open every note, in this order:
