@@ -16,7 +16,7 @@ aliases:
 An act of research is chosen relative to the [state of an inquiry](../../foundations/inquiry-and-state.md#^state): its accepted knowledge $K$, its proposed candidates $H$ and its open questions, each item with its statuses. Four criteria narrow the acts that can come next:
 
 1. an act addresses a condition of answerability that is open or refuted;
-2. an act is ready when its inputs exist and are warranted;
+2. an act is ready when its inputs exist and are unimpeached;
 3. the ready acts are ranked by stated criteria;
 4. the choices that no criterion settles are left to the researcher.
 
@@ -55,10 +55,10 @@ A revision of a question takes one of the three forms that the note on [question
 
 ## Readiness of an act
 
-An **act instance** is an activity whose inputs are assigned to records, to the outputs of earlier steps, or, for a `source`, to pointers. The condition served by the instance guides the assignment. An act instance is **ready** when its inputs exist and are warranted. ^ready-act
+An **act instance** is an activity whose inputs are assigned to records, to the outputs of earlier steps, or, for a `source`, to pointers. The condition served by the instance guides the assignment. An act instance is **ready** when its inputs exist and are **unimpeached**: no step upstream of them failed its norm. ^ready-act
 
 - **An input must exist.** When an input does not exist, the search proceeds backward through the activity types: the missing input becomes a subgoal, and the activities that produce it are examined in turn.
-- **An input must be warranted.** A record lacks warrant when a step of the itinerary that produced it failed its norm, or when such a step took as input a record that lacks warrant. Therefore, the lack of warrant propagates from producer to consumer along the steps of the itinerary, whatever the output types of the steps. An act that uses a record without warrant inherits the failure, so the repair of the failed step becomes a subgoal, ranked before the act. A pending verdict propagates in the same way, and the result of an act that rests on it stays conditional on it.
+- **An input must be unimpeached.** A record is impeached when a step of the itinerary that produced it failed its norm, or when such a step took as input an impeached record. Therefore, impeachment propagates from producer to consumer along the steps of the itinerary, whatever the output types of the steps. Impeachment differs from the warrant of a law and from the warrant tests of an assessment, since it reads only the verdicts of the norms of the steps. An act that uses an impeached record inherits the failure, so the repair of the failed step becomes a subgoal, ranked before the act. A pending verdict propagates in the same way, and the result of an act that rests on it stays conditional on it.
 - **A pending norm stays to be judged.** When the record produced by a step is stabilized while the verdict of the step is pending, the norm of the step remains to be judged, and the record is treated as the product of a pending step until then.
 - **The necessity of a subgoal is read over itineraries.** A missing input is necessary for the goal when every itinerary that reaches the goal contains an act instance that requires it. A particular act that produces that input is necessary only when, in addition, no other activity produces the input. Even a necessary subgoal does not reach the goal, since the remaining steps are activities whose norms can fail. The problem reduces to the problem of producing that input only when the remaining steps form a recorded, uniform method, as the definition of [reduction](../../objects/problem/epistemic-problem.md#^reduction) requires. Hierarchical task-network planning decomposes a task by methods that replace it with subtasks [erol1994]. Erotetic search scenarios start from a principal question and lead, through auxiliary questions, to its answers [wisniewski2013].
 
@@ -106,13 +106,13 @@ The criteria above either return a determinate result or present alternatives. T
 - how the inputs of an act are assigned, when several records fit;
 - whether an unsupported claim is admitted as a working assumption under the warrant `posited`;
 - whether the acts that rest on a verdict not yet accepted are run before its acceptance;
-- whether an assessed answer is accepted into the accepted knowledge $K$, an [act of acceptance](../../foundations/inquiry-and-state.md#^acceptance-act) informed by the verdicts, the disposition and the credence of its assessment, never computed from them;
+- whether an assessed answer is accepted into the accepted knowledge $K$, an [act of acceptance](../../objects/status/statuses-and-acceptance.md#^acceptance-act) informed by the verdicts, the disposition and the credence of its assessment, never computed from them;
 - when the main question is re-examined;
 - the weighing of the ranking criteria, beyond the rule that settles their main conflict.
 
 ## Dependencies between acts
 
-The dependencies between acts form cycles among types: a concept serves a question, the question selects a model, and the model can revise the concept. These cycles are resolved by iteration, under the conditions of [controlled iteration](specification-order.md#^controlled-iteration). An iteration starts in three places: a refuted condition triggers a revision, a withdrawn record removes the warrant of the acts that used it, and a provisional answer to another question is later revised. The [register of serving questions](../../../procedures/inquiry/decomposing-a-question.md#^register) tracks withdrawn records by marking each serving question with the resistance hypothesis $\eta$ on which it is conditioned, so that a refuted hypothesis invalidates the serving questions that rest on it.
+The dependencies between acts form cycles among types: a concept serves a question, the question selects a model, and the model can revise the concept. These cycles are resolved by iteration, under the conditions of [controlled iteration](specification-order.md#^controlled-iteration). An iteration starts in three places: a refuted condition triggers a revision, a withdrawn record removes the support of the acts that used it, and a provisional answer to another question is later revised. The [register of serving questions](../../../procedures/inquiry/decomposing-a-question.md#^register) tracks withdrawn records by marking each serving question with the resistance hypothesis $\eta$ on which it is conditioned, so that a refuted hypothesis invalidates the serving questions that rest on it.
 
 ---
 ## Sources

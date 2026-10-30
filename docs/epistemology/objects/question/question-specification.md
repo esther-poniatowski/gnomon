@@ -7,7 +7,7 @@ aliases:
 ---
 # Specification of a question
 
-> [!QUESTION] Goal: which layers of decision specify a question, what does each layer decide, and what follows from those decisions for the answers of the question?
+> [!QUESTION] Goal: which layers of decision specify a question, what does each layer decide about its answers, and what follows from those decisions?
 
 > [!DANGER] Philosophy of science offers no single canonical decomposition of a question: the layers of specification combine several traditions.
 
@@ -35,11 +35,11 @@ The symbols of the layers, each with one meaning across the notes, are registere
 
 Three results of the literature support separating the subject from the task:
 
-- In erotetic logic, a question divides into a *subject*, presenting the alternatives, and a *request*, specifying which of them the answer must select [belnap1976].
+- In erotetic logic, a question divides into a *subject*, presenting the alternatives, and a *request*, specifying which of them the answer must select [belnap1976]. The subject $\Sigma$ of this method corresponds to that subject by analogy only: $\Sigma$ names the objects studied, and the alternatives are fixed by $\Sigma$ and $T$ together.
 - A why-question separates its topic, namely its *explanandum* and its *contrast class*, from the sort of information that it requests. The context of the question fixes that sort of information through a *relevance relation*, which corresponds to the requested relation of this method [vanfraassen1980].
 - More broadly, an epistemic achievement, such as explanation or understanding, is distinguished from the objects that it bears on. Understanding, however, is not an [aim](../task/epistemic-aim.md#^understanding) of the task, since it bears on a product of the inquiry without fixing the type of its answers.
 
-**Task (2) versus virtues (3).** The task fixes which answers the question admits, whereas the virtues weigh qualities that the task does not demand. A virtue marked constitutive adds a condition of admissibility. A virtue marked preferred ranks only the answers that are already admissible.
+**Subject and task (1, 2) versus virtues (3).** The subject and the task fix which statements answer the question: its possible answers and its direct answers, as the [answers of a question](question.md#^answer-sets) define them. The virtues fix no answer: they fix the **standards** by which the answers are judged, and weigh qualities that the task does not demand. A virtue marked constitutive adds a condition of admissibility, so it narrows the admissible answers. A virtue marked preferred ranks only the answers that are already admissible.
 
 ## What follows from the layers
 
@@ -69,7 +69,7 @@ The specification of a question serves four goals. ^specification-goals
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | **Transparency**               | The inquiry commits to explicit objectives, so that its claims can be checked and its analyses reproduced.                                                   | predictions stated before data collection separate tests from post hoc accounts [nosek2018]                                                 |
 | **Operationalization**         | Once the system is specified, it can be partly formalized as a repertoire of variables and relations that later analyses use.                                         | a formal model forces the modeler to specify intuitions that otherwise stay unexamined [guest2021]                                          |
-| **Success conditions**         | The layers fix the [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction): the tests that each candidate answer must pass. These tests decide which candidates satisfy the question, and how the answers that satisfy it are appraised. | a question is determined by the set of its possible answers [hamblin1958], and a model is evaluated by its adequacy for a purpose [parker2020] |
+| **Success conditions**         | The layers fix the [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction): the tests that each candidate answer must pass. These tests decide which candidates satisfy the question, and how the answers that satisfy it are appraised. | knowing a question is knowing what counts as its answers [hamblin1958], and a model is evaluated by its adequacy for a purpose [parker2020] |
 | **Guidance towards an answer** | Once analyzed, the question yields the research actions that answer it and serve the other goals.                                                  | a question can be answered through the auxiliary questions that it generates [wisniewski2013]                                               |
 
 ---

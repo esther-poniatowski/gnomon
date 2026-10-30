@@ -14,15 +14,15 @@ aliases:
 > [!QUESTION] Goal: what does a dynamic fix about a system, and how does it differ from a process, a law and a mechanism?
 
 A **dynamic** is the rule by which the state of a system changes. For a deterministic and autonomous system, the dynamic is written as an evolution map
-$$\varphi:\mathbb{T}\times\mathcal{X}\to\mathcal{X},\qquad \varphi(0,x)=x,\qquad \varphi(t+s,x)=\varphi(t,\varphi(s,x)),$$
-over a time set $\mathbb{T}$ and a [state space](../quantities/state-and-configuration.md) $\mathcal{X}$. The map is a construct, stated over a chosen state space. In realist ontology, the pattern of change that it represents is the *law of evolution* of a thing [bunge1977], a law in the pattern sense.
+$$\varphi:\mathcal{T}\times\mathcal{X}\to\mathcal{X},\qquad \varphi(0,x)=x,\qquad \varphi(t+s,x)=\varphi(t,\varphi(s,x)),$$
+over a time set $\mathcal{T}$ and a [state space](../quantities/state-and-configuration.md) $\mathcal{X}$, with times $s,t\in\mathcal{T}$. The time set carries an addition, under which the evolution map composes. The [course](process-event-history.md#^course) $\mathbb{T}$ of a behavior, by contrast, is only ordered: it is a segment of a time set when the behavior unfolds in time, and a sequence of training steps or of swept values of a parameter otherwise. The map is a construct, stated over a chosen state space. In realist ontology, the lawlike regularity of change that the map represents is the *law of evolution* of a thing [bunge1977], a [law₁](../regularities/law.md) among the states of that thing.
 
 ## Senses
 
-| Form | Time set $\mathbb{T}$ | Statement | Example |
+| Form | Time set $\mathcal{T}$ | Statement | Example |
 | --- | --- | --- | --- |
-| Flow | $\mathbb{R}$ | an ordinary differential equation $\dot x=F(x)$, whose solutions define $\varphi$ | a rate model of a neural population |
-| Map | $\mathbb{Z}$ or $\mathbb{N}$ | an iterated function $x_{n+1}=g(x_n)$ | one step of gradient descent |
+| Flow | $\mathbb{R}$ | an ordinary differential equation $\dot x=F(x)$ with a vector field $F$, whose solutions define $\varphi$ | a rate model of a neural population |
+| Map | $\mathbb{Z}$ or $\mathbb{N}$ | an iterated function $g$, with $x_{n+1}=g(x_n)$ at step $n$ | one step of gradient descent |
 | Stochastic dynamic | $\mathbb{R}$ or $\mathbb{N}$ | a transition kernel, or a stochastic differential equation | a neuron driven by noise |
 
 The dynamic **generates** the histories of the system. Each [history](process-event-history.md#^history) is a segment of an orbit $t\mapsto\varphi(t,x_0)$, and each process shown by the system is a predicate satisfied by some of those segments.
@@ -34,8 +34,8 @@ Four terms are often used for one another. The four terms differ in their type a
 | Term | Type | Requires a decomposition into constituents? | Example for a population oscillation |
 | --- | --- | --- | --- |
 | [Process](process-event-history.md#^process) | a predicate on trajectory segments, satisfied by histories | no | the population rate oscillates |
-| Dynamic | a rule that generates trajectories | no | $\dot r=-r+\phi(Wr+u)$ over an aggregate rate $r$, with an external input $u$ |
-| [Law](../regularities/law.md) | an invariant pattern among states, or the statement of it | no | the period depends on the time constant alone |
+| Dynamic | a rule that generates trajectories | no | $\dot r=-r+\tanh(Wr+u)$ over an aggregate rate $r$, with a recurrent weight $W$ and an external input $u$ |
+| [Law](../regularities/law.md) | a lawlike regularity among states, or the statement of it | no | the period depends on the time constant alone |
 | [Mechanism](../regularities/mechanism-and-mechanistic-model.md) | organized constituents and activities that produce a phenomenon | yes | excitatory and inhibitory neurons in a delayed feedback loop |
 
 - **A dynamic and a law can be stated over variables alone, whereas a mechanism requires a decomposition.** A dynamic over an aggregate rate names no constituent, whereas a mechanism names the constituents that engage in its activities. The decomposition is the test of [mechanistic form](../regularities/mechanism-and-mechanistic-model.md#^mechanistic-model-test), and a model that fails it is phenomenological. ^decomposition-test

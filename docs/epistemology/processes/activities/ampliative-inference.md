@@ -26,7 +26,7 @@ The activities of this family output a [hypothesis](../../vocabulary/representat
 
 ## Norms
 
-| Activity | Operation | The test `norm.<activity-id>` passes when |
+| Activity | Operation | The norm passes when |
 | --- | --- | --- |
 | `abduction` | propose a hypothesis on the schema: "The surprising fact, C, is observed. But if A were true, C would be a matter of course. Hence, there is reason to suspect that A is true." | the hypothesis is worth pursuing: it deserves testing, and its truth is not claimed [peirce1934] |
 | `induction` | extend a regularity from observed instances to unobserved instances, possibly guided by heuristics that search the space of candidate laws | the predicates of the generalization are projectible [goodman1955] [langley1987] |

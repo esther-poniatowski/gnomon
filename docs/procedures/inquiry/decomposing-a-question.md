@@ -8,9 +8,34 @@ aliases:
 ---
 # Decomposing a question
 
-> [!QUESTION] Goal: how does a researcher keep the serving questions of an inquiry, revise them locally, and avoid the usual failures of a decomposition?
+> [!QUESTION] Goal: how does a researcher find the serving questions of a question, keep them, revise them locally, and avoid the usual failures of a decomposition?
 
-The [theory of question decomposition](../../epistemology/processes/inquiry/question-decomposition.md) defines a serving question, the relation by which it serves its question, and the triggers that call for a revision. This procedure states the register that a researcher keeps and the steps that a researcher follows.
+The [theory of question decomposition](../../epistemology/processes/inquiry/question-decomposition.md) defines a serving question, the relation by which it serves its question, the sources from which it arises, and the triggers that call for a revision. This procedure states the steps that a researcher follows and the register that a researcher keeps.
+
+## Finding the serving questions
+
+The unmet [conditions of answerability](../../epistemology/processes/inquiry/question-decomposition.md#^serving-sources) of a question are identified in four steps: ^condition-steps
+
+1. **Fix the form.** State the interrogative type, the subject, the possible answers and the direct answers of the question. For a why-question, state also its contrast and its requested relation.
+2. **Extract the presuppositions.** List the propositions entailed by all the direct answers.
+3. **State what the answer must reach.** State the answer type, the required accuracy and the proof obligations, which together fix the desideratum of the question.
+4. **Work backward.** For each direct answer, ask what must be known to select it over its rivals. Record each item missing from the present records as an unmet condition.
+
+The serving question of a blockage met during the inquiry is found in three moves: ^blockage-moves
+
+1. Identify the blockage.
+2. State the reason for which the blockage prevents progress on the served question.
+3. Formulate the smallest question whose answer would remove it, and read its condition in the [table of blockages](../../epistemology/processes/inquiry/question-decomposition.md#^serving-sources).
+
+## Classifying a serving question
+
+The [relevance](../../epistemology/processes/inquiry/question-decomposition.md#^relevance) of a candidate serving question is found by three questions: ^relevance-questions
+
+1. What would become impossible if the serving question were resolved negatively?
+2. What would become supported if it were resolved positively?
+3. What would become newly distinguishable?
+
+When all three answers are empty, the serving question is decorative, and it is removed.
 
 ## Register of serving questions
 
@@ -28,7 +53,7 @@ The serving questions of an inquiry are recorded in a register: ^register
 
 ## Local revision
 
-The [triggers of a local revision](../../epistemology/processes/inquiry/question-decomposition.md) are classified in the theory.
+The [triggers of a local revision](../../epistemology/processes/inquiry/question-decomposition.md#^local-revision) are classified in the theory.
 
 A local revision follows five steps: ^local-revision-steps
 

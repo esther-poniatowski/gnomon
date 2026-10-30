@@ -7,11 +7,11 @@ aliases:
 ---
 # Contrast
 
-> [!QUESTION] Goal: against which alternatives can a phenomenon be questioned, and how does the choice of foil change the admissible answers?
+> [!QUESTION] Goal: against which alternatives can a phenomenon be questioned, and how does the choice of foil change the possible answers of a question?
 
 The contrast is the third component of the [subject of inquiry](subject-of-inquiry.md): the foils relative to which the phenomenon is questioned. A *foil* is an alternative to the fact, against which the question asks for an account.
 
-The contrast passes the [inclusion test](subject-of-inquiry.md#^inclusion-test) for a specification, because it changes the admissible answers: the foil determines which cause explains the phenomenon.
+The contrast passes the [inclusion test](subject-of-inquiry.md#^inclusion-test) for a specification, because it changes the possible answers of the question: the foil determines which cause explains the phenomenon.
 
 *Example*: Smith and Doe had syphilis and Jones did not. Only Smith contracted paresis. Syphilis explains why Smith rather than Jones contracted paresis, but not why Smith rather than Doe did [lipton2004].
 

@@ -19,11 +19,11 @@ aliases:
 | Sense | Definition | Example | Source |
 | --- | --- | --- | --- |
 | Law₁ | a [regularity](pattern-and-phenomenon.md) among the states or changes of things, existing whether or not it is stated, and satisfying a [criterion of lawhood](#^lawhood) | the dependence of the period of a pendulum on its length | [bunge1977] |
-| Law₂, law statement | a general claim that represents a law₁ | the period equals $2\pi\sqrt{\ell/g}$ for small oscillations | [bunge1977]; [bunge1961_kinds] |
+| Law₂, law statement | a general claim that represents a law₁ | the period equals $2\pi\sqrt{\ell/g}$ for small oscillations, where $\ell$ is the length of the pendulum and $g$ the acceleration of gravity | [bunge1977]; [bunge1961_kinds] |
 | Metanomological statement | a statement about law statements, such as a requirement of covariance binding every law of a theory | "every law of mechanics is invariant under Galilean transformations" | [bunge1961_laws] |
-| Law of a record | any general claim about declared quantities that a record admits, together with its role: evolution, state constraint, input–output, measurement, initial distribution, or another | the posited initial distribution of the weights of a network; an energy function of a spin system | — |
+| Law of a record | any general claim about declared quantities that a record admits, together with its [role](#^law-of-a-record) | the posited initial distribution of the weights of a network; an energy function of a spin system | — |
 
-Law statements form a heterogeneous class. Classificatory laws and some statistical laws fail the requirements of strict universality and of counterfactual force [bunge1961_kinds]. A further division separates *phenomenological* laws from *fundamental* laws. Phenomenological laws describe observed regularities [cartwright1983]. Fundamental laws explain those regularities and hold only under idealized conditions [cartwright1983].
+Law statements form a heterogeneous class. Classificatory laws and some statistical laws fail the requirements of strict universality and of counterfactual force [bunge1961_kinds]. A further division separates *phenomenological* laws from *fundamental* laws [cartwright1983]. Phenomenological laws describe observed regularities, and they can be true of them. Fundamental laws explain those regularities, but read as descriptions of real systems they are false: they hold only of idealized models, so their explanatory power is bought at the cost of their truth [cartwright1983].
 
 ## Criteria of lawhood
 
@@ -49,7 +49,7 @@ A law statement is accordingly a [claim](../representations/claim-and-hypothesis
 
 ## Relations to the method
 
-- **A law of a record need not be a law statement.** A [law of a background record](../../objects/knowledge/background.md#^laws) or of a candidate answer is an admitted general claim, a construct that can be false of the target. The three properties of a law statement apply only to a law that the record claims to be a law in the lawhood sense. *Example*: an initial distribution, or a working assumption admitted under the warrant `posited`, supports no counterfactual, and it is still a law of the record. ^law-of-a-record
+- **A law of a record is any admitted general claim about declared quantities, with a role, and it need not be a law statement.** The role states what the law does for the target: evolution, state constraint, input–output, measurement, initial distribution, or another. A law of a [background record](../../objects/knowledge/background.md#^laws) or of a candidate answer is a construct that can be false of the target. The three properties of a law statement apply only to a law that the record claims to be a law in the lawhood sense. *Example*: an initial distribution supports no counterfactual, and neither does a working assumption admitted under the warrant `posited`, which records that the law is assumed rather than derived, fitted or measured. Each is still a law of the record. ^law-of-a-record
 - **The warrant of a law and its criterion of lawhood answer different questions.** The [warrant of a law](../../objects/knowledge/background.md#^law-warrant) states how the record obtained the law. A criterion of lawhood states why a true generalization counts as a law. Therefore, a fitted law can be a law in the sense of invariance, once the range of interventions over which it holds is known.
 
 The fields that bear on a law are documented in the [background record](../../../specification/background.md) and the [model record](../../../specification/model.md).

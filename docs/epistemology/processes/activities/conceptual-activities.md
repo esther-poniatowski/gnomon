@@ -28,7 +28,7 @@ The activities of this family output a concept, a measurement procedure that app
 
 ## Norms
 
-| Activity | Operation | The test `norm.<activity-id>` passes when |
+| Activity | Operation | The norm passes when |
 | --- | --- | --- |
 | `explicit-definition` | state necessary and sufficient conditions for a new term in terms already available | eliminability: the new term can be replaced by its definition in every formula; non-creativity: the definition yields no new theorem stated in the old terms [suppes1957] |
 | `explication` | replace a concept of ordinary or prescientific use by a precise concept | the explicatum is similar to the explicandum, exact, fruitful and simple [carnap1950_logical] |

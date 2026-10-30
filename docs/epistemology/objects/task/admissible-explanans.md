@@ -9,19 +9,23 @@ aliases:
 
 > [!QUESTION] Goal: which variables may an explanans contain, and along which axes is that bound set?
 
-The bound on the explanans $\lambda$ fixes which **variables an admissible explanans may contain**: it is the set of variables from which an explanans may be drawn. The bound forms the fourth dimension of the [epistemic task](epistemic-task.md), the layer that sets the kind of knowledge sought.
+The bound on the explanans $\lambda$ fixes which **variables an admissible explanans may contain**. The bound forms the fourth dimension of the [epistemic task](epistemic-task.md), the layer that sets the kind of knowledge sought.
+
+The bound $\lambda$ is given by its values on two axes, compositional level and substrate dependence. Those values do not name variables by themselves: the set of variables that the bound admits is a function of $\lambda$ and of the [target system](../subject/target-system.md) $S$, since the compositional levels derive from the constituents that $S$ declares. ^bound-and-induced-set
+
+- **The bound applies to an explanation only.** Only the [block of an explanation](../answer/answer-form.md#^explanation-block) holds an explanans, so only a question whose aim is explanation states a bound, and the [test of the admissible explanans](../answer/satisfaction-conditions.md#^admissibility-per-block) reads that block alone. A prediction, a description, a modal claim or a consequence of a model holds no explanans, and no bound applies to it.
 
 *Example.* One gamma oscillation admits explanantia at three levels:
 
 - ion-channel conductances;
 - spike timing in an excitatory–inhibitory loop;
-- a mean-field equation for population rates.
+- a mean-field equation for population rates, an approximation that replaces the interactions of each neuron by their average.
 
-The options of the bound $\lambda$ along its two axes, compositional level and substrate dependence, are listed in the [epistemic task of a question](../../../specification/question-task.md#^level-axes).
+The options of the bound $\lambda$ along its two axes are listed in the [epistemic task of a question](../../../specification/question-task.md#^level-axes).
 
 - **The bound is optional.** An unstated bound *defaults* to the [grain of the phenomenon](../subject/phenomenon.md#^resolution-proportionality) by proportionality. Proportionality requires the explanans variables to covary with the explanandum, and to carry no irrelevant detail [woodward2010]. A stated bound, by contrast, records a *stipulation* of the research program, for instance that only explanations in terms of circuits count.
 
-- **Compositional levels are local.** Compositional levels are internal to one mechanism: they order into a part–whole hierarchy the parts that are constitutively relevant to its behavior [craver2007]. The options therefore derive from the constituents declared for the target system.
+- **Compositional levels are local.** Compositional levels are internal to one mechanism: they order into a part–whole hierarchy the parts that are constitutively relevant to its behavior [craver2007]. The options of this axis therefore derive from the constituents declared for the target system, which is why the [admitted variables](#^bound-and-induced-set) depend on $S$ as well as on $\lambda$.
 	
 - **Substrate dependence applies to any system.** The axis reaches beyond one science because multiple realizability in the special sciences is an instance of universality in physics: macroscopic behavior shared by microscopically different systems [batterman2000]. *Example.* A spin glass is explained either through its specific couplings or through its universality class. A neural circuit likewise admits two explanations: through identified neurons, or through their functional roles.
 	
@@ -33,7 +37,7 @@ The options of the bound $\lambda$ along its two axes, compositional level and s
 	
     A question that links two levels of analysis takes the option `mapping`: the answer gives both descriptions and maps one onto the other. A further level, learning, has been added for trained systems [poggio2012]. A question about learning needs no value on the substrate axis, because its phenomenon is the acquisition itself (for instance, "training produces this algorithm").
 
-- **The bound delimits the terms of the answer without selecting any.** The terms $V$ of the proposed model belong to the [elements of the model on which a candidate answer rests](../../../specification/model.md#^model-elements). The bound $\lambda$ only delimits the set from which these terms are drawn.
+- **The bound delimits the variables of the explanans without selecting any.** The factors $E$ of an explanation bear on the [elements of the model on which the answer rests](../../../specification/model.md#^model-elements), or on the declarations of the target. The bound $\lambda$ only delimits the set from which these factors draw their variables, and the explanation selects among them.
 
 - **The bound is fixed by the epistemic task, not by the [subject of inquiry](../subject/subject-of-inquiry.md).** The bound restricts the admissible answers without naming an object of the question. Beyond its topic and its contrast, a why-question constrains its answers only through the kind of information that it requests [vanfraassen1980], which the [requested relation](requested-relation.md) $R$ fixes. The bound $\lambda$ therefore qualifies the relation $R$.
 

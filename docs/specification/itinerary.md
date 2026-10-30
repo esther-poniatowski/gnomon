@@ -23,16 +23,20 @@ The itinerary record lists the steps of an inquiry. Each step instantiates one [
 | Steps: norm | with every step | the test named by the registry for the activity, written `norm.<activity>`, and its verdict: pass · fail · pending | `norm.testing`, pending until the assessment is stabilized | — |
 | Steps: mode | when the step states its inference | deductive · inductive · abductive · analogical · non-inferential, equal to the mode of the activity | `abductive` for the step that proposes a candidate answer | — |
 
-- **The command `gnomon itinerary` checks the steps and the fields of an itinerary.** An itinerary must pass the [itinerary check](../epistemology/processes/activities/epistemic-activities.md#^itinerary-check), whose five conditions compare types and identifiers only, so the check is decidable. The type of a referenced record follows from its present state: a question with a placeholder slot holds a `question-schema`. A target system at commitment `specified` holds a `target-specification`, and also an `identified-subject`. The command also checks four fields of the record: ^record-checks
+- **The command `gnomon itinerary` checks the steps and the fields of an itinerary.** An itinerary must meet the [conditions of a well-formed itinerary](../epistemology/processes/activities/epistemic-activities.md#^itinerary-check), read on the fields of its steps. These conditions and the conditions on the fields below compare types and identifiers only, so the check is decidable. The type of a referenced record follows from its present state: a question with a placeholder slot holds a `question-schema`. A target system at commitment `specified` holds a `target-specification`, and also an `identified-subject`. The command also checks six fields of the record: ^record-checks
 
     - the itinerary addresses a problem record or a question record;
+    - the activity of each step is an identifier of the activity registry;
     - no two steps share an identifier;
     - an output reference, once given, names a record that holds the output type in its present state;
-    - the norm of a step is the test of its activity, and a stated mode is the mode of the activity.
+    - the norm of a step is the test of its activity, and a stated mode is the mode of the activity;
+    - the verdict of each step is `pass`, `fail` or `pending`.
 
 - **A verdict records a judgment outside the reach of the check.** Whether a norm is met depends on the content of the products: whether a test was severe, whether a definition is eliminable. The itinerary records that judgment as `pass`, `fail` or `pending`, whereas the check reads only whether the verdict is admitted.
 
 - The [requested relation](../epistemology/objects/task/requested-relation.md) of the epistemic task selects one of the candidate relations between an explanans and the phenomenon, so the test `norm.explanation` reads that field.
+
+- **The product-type registry states the coverage of each type by the records.** Each type carries a status: `exists`, when the type is held in full by a kind of record; `partial`, when a record holds part of the type; `to-create`, when no kind of record holds the type yet. The [table of product types](../epistemology/processes/activities/epistemic-activities.md#^product-types) transcribes these statuses until the test that reads them reads the registry instead. ^type-coverage
 
 - **A product of a type without a record kind is reached through a step.** The product types are derived from the taxonomy of activities, so some types have no record kind yet, such as a design of experiments or a concept. An itinerary can take such a product as an input only as the output of one of its own steps. A `source`, by contrast, stays outside the records, so its reference is a pointer, left unresolved by the check.
 

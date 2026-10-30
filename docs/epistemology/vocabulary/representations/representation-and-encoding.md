@@ -13,7 +13,7 @@ aliases:
 
 > [!QUESTION] Goal: what does a statement about the representation of a network, or about its geometry, fix, and under which concept of the method does each representational item fall?
 
-An **encoding** is a map $e:\mathcal{U}\to\mathcal{X}$ from an input space $\mathcal{U}$ to the state space $\mathcal{X}$ of a system. *Example*: the map $u\mapsto x^*(u)$ sends each input $u$ to the fixed point $x^*(u)$ of $\dot x=-x+\phi(Wx+u)$. A **readout** is a map $r:\mathcal{X}\to\mathcal{Y}$ from the state space to an output space. A **representation** is an encoding together with the readouts that use it [decharms2000] [shea2018]. The **representation geometry** is a property of the encoding map alone.
+An **encoding** is a map $e:\mathcal{U}\to\mathcal{X}$ from an input space $\mathcal{U}$ to the state space $\mathcal{X}$ of a system. *Example*: the map $u\mapsto x^*(u)$ sends each input $u$ to the fixed point $x^*(u)$ of $\dot x=-x+\phi(Wx+u)$, where $\phi$ is the activation function, applied elementwise, and $W$ the matrix of connection weights. A **readout** is a map $r:\mathcal{X}\to\mathcal{Y}$ from the state space to an output space. A **representation** is an encoding together with the readouts that use it [decharms2000] [shea2018]. The **representation geometry** is a property of the encoding map alone.
 
 ## Senses
 

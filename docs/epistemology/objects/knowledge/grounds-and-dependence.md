@@ -39,13 +39,13 @@ The roles `assumption`, `idealization` and `criterion` have no counterpart in th
 
 Three properties of a ground reach the claims that rest on it. Each case is stated in one note, linked below: ^propagation
 
-- **Exposure to revision.** A result that rests on a law marked `posited`, `fitted` or `measured` inherits the exposure of that law to new evidence, and an answer built on the result inherits it in turn, as the [warrant of a law](background.md#^law-warrant) states.
+- **Exposure to revision.** A result that rests on a law marked `posited`, `fitted` or `measured` inherits the exposure of that law to new evidence, and an answer built on the result inherits it in turn, as the [warrant of a law](background.md#^law-warrant) states. The [exposure rule](#^weakest-link) below fixes the content of the report.
 - **Conditionality.** A result that rests on a provisional answer, or on an admitted claim that is not accepted, stays conditional on it, as the [rule on provisional answers](../question/conditions-of-answerability.md#^condition-dependencies) states. A result that rests on the output of a step whose verdict is pending stays conditional on that verdict, as the [readiness of an act](../../processes/inquiry/choice-of-act.md#^ready-act) states.
-- **Loss.** A record produced by a step that failed its norm lacks warrant, and every act that uses it inherits the failure, as the same rule of readiness states. A ground withdrawn from the accepted knowledge leaves every claim that rests on it without that ground.
+- **Loss.** A record produced by a step that failed its norm is impeached, and every act that uses it inherits the failure, as the same rule of readiness states: an act is ready only when each of its inputs is unimpeached, with no failed norm upstream. A ground withdrawn from the accepted knowledge leaves every claim that rests on it without that ground.
 
-**The weakest-link rule.** The test of law warrant among the [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction) checks each ground against its role, on the ground that a conclusion inherits the weakest warrant among the laws that it uses. The rule comes from the theory of defeasible reasoning: in the absence of other arguments, the degree of justification that an argument confers on its conclusion is the minimum of the degrees of its premises and of the strengths of its reasons [pollock2001]. Pollock states the rule for degrees ordered on one scale, and rejects the probability calculus for them, since a conjunction of independent premises is less probable than each premise. ^weakest-link
+**The exposure rule.** A conclusion is exposed to revision through every law marked `posited`, `fitted` or `measured` among its grounds, and through every such law from which a derived law among its grounds descends. The set of these exposed laws is reported, not a degree. The test of law warrant among the [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction) checks each ground against the requirement of its role, and the exposure rule states the laws to which the conclusion stays exposed once that test passes. ^weakest-link
 
-The warrant of a law is a kind of provenance, not a degree. The values `posited`, `fitted` and `measured` are not ordered among themselves, and the value `derived` points to other laws instead of grading the law. The method therefore adopts the rule in a qualitative form, as a proposal: a conclusion is exposed to revision through every law marked `posited`, `fitted` or `measured` among its grounds, and through every such law from which a derived law among its grounds descends. The set of these exposed laws is reported, not a degree, and the researcher judges which of them is the weakest.
+The rule departs from the weakest-link principle of the theory of defeasible reasoning. Under that principle, in the absence of other arguments, the degree of justification that an argument confers on its conclusion is the minimum of the degrees of its premises and of the strengths of its reasons [pollock2001]. Pollock states the principle for degrees ordered on one scale, and rejects the probability calculus for them, since a conjunction of independent premises is less probable than each premise. The warrant of a law, by contrast, is a kind of provenance, not a degree. The values `posited`, `fitted` and `measured` are not ordered among themselves, and the value `derived` points to other laws instead of grading the law. Without an order, no law among the grounds is the weakest. Therefore, the method reports the exposed laws, and leaves to the researcher the judgment of how far each one threatens the conclusion.
 
 **Propagation is reported, never applied.** A tool follows the authored relations backward from a revised unit and reports every record that rests on it, and the researcher decides whether each dependent holds, needs an adjustment or is retracted, as the [decision on revision accountability](../../../adr/revision-accountability.md#^flag-not-edit) fixes. A truth-maintenance system tracks the same dependencies, but relabels each belief automatically, in or out, according to whether one of its justifications still holds [doyle1979]. The method keeps the dependencies of such a system and leaves out its relabeling. This choice is consistent with the [accepted knowledge as a belief base](../../foundations/inquiry-and-state.md#^state): an accepted result is a member of the base on its own, so withdrawing one of its grounds does not remove it until the researcher revises the base.
 
@@ -58,15 +58,17 @@ Five relations link one answer to another, as the [relations between answers](..
 | `supports` | dependence | the claim of one answer is a ground of the other |
 | `presupposes` | dependence | one answer is admissible only if the other is true |
 | `tests` | evidence | the claim of one answer is a consequence of the other, compared with the target |
-| `defeats` | attack | the claim of one answer, once accepted, removes a ground of the other |
+| `defeats` | attack | the claim of one answer, once accepted, denies a ground of the other, or denies that a law among its grounds applies |
 | `revises` | lineage | none: the relation records that one answer replaced another over time |
 
-The theory of structured argumentation separates three attacks on an argument: an attack on a premise, called undermining; an attack on the conclusion, called rebutting; and an attack on an inference step, called undercutting [prakken2010]. Rebutting and undercutting come from Pollock's account of defeasible reasoning [pollock1987]. The relation `defeats` covers two of the three:
+The theory of structured argumentation separates three attacks on an argument: an attack on a premise, called undermining, which denies that the premise is true; an attack on the conclusion, called rebutting; and an attack on an inference step, called undercutting, which denies that the step applies without denying its premises [prakken2010]. Rebutting and undercutting come from Pollock's account of defeasible reasoning [pollock1987]. The relation `defeats` covers two of the three, which differ in the object that the claim of the defeating answer denies:
 
-- an answer that removes a ground with the role `datum` or `assumption` **undermines** the other answer;
-- an answer that removes a ground with the role `warrant` **undercuts** it, since the warrant licenses the step to the claim.
+- an answer whose claim denies the truth of a ground **undermines** the other answer, for a ground of any role: `datum`, `assumption` or `warrant`;
+- an answer whose claim denies that a law cited with the role `warrant` applies under the conditions of the answer, while leaving the law true, **undercuts** the other answer, since that law licenses the step to the claim. *Example*: a claim that those conditions lie outside the range over which the law is established.
 
-A **rebuttal**, an answer whose claim contradicts the claim of another answer to the same question, is not one of the five relations. The two answers stand as rival candidates in $H$, the condition of [discrimination](../question/conditions-of-answerability.md#^eight-conditions) separates them, and the assessment and the acceptance decide between them. A relation between rival explanations of one observation remains open under the goal `relation-registry` of the [project goals](../../../../TODO.md).
+The mapping rests on a modelling choice of the method. A law cited with the role `warrant` is at once a premise, which can be false, and the license of a step, which can fail to apply. In argumentation, a premise and an inference rule are separate parts of an argument, so the two attacks fall on different parts. The method lets both attacks fall on one ground, and tells them apart by the content of the defeating claim.
+
+A **rebuttal**, an answer whose claim contradicts the claim of another answer to the same question, is not one of the five relations. The two answers stand as rival candidates in $H$, the condition of [discrimination](../question/conditions-of-answerability.md#^eight-conditions) separates them, their assessment informs the choice between them, and the researcher makes that choice by an [act of acceptance](../status/statuses-and-acceptance.md#^acceptance-act). A relation between rival explanations of one observation remains open under the goal `relation-registry` of the [project goals](../../../../TODO.md).
 
 Two features separate `defeats` from defeat in argumentation. First, the relation takes effect only once the defeating answer is accepted, so before acceptance it records an attack and not a defeat. Second, its effect is a report to the researcher, not a status computed for the defeated answer: an engine that computes the acceptance of arguments from their attacks [dung1995] is excluded by the [decision against inference at run time](../../../adr/no-run-time-inference.md#^excluded-inference).
 
@@ -95,12 +97,12 @@ Cycles are treated differently in the three graphs. A cycle between questions is
 ## Sources
 
 > [!NOTE] Status of the claims
-> - **Established:** the layout of an argument, the weakest-link principle for degrees of justification, the three attacks of structured argumentation, truth maintenance, and abstract argumentation, as cited.
+> - **Established:** the layout of an argument, the weakest-link principle for degrees of justification, from which the exposure rule departs, the three attacks of structured argumentation, truth maintenance, and abstract argumentation, as cited.
 > - **Proposals:**
 > 	- the effect of a failure of a ground, read from its role;
 > 	- the correspondence between the roles of a ground and the layout of an argument;
-> 	- the weakest-link rule in a qualitative form, as a set of exposed laws;
-> 	- the mapping of `defeats` onto undermining and undercutting;
+> 	- the exposure rule, which reports a set of exposed laws in place of a degree;
+> 	- the mapping of `defeats` onto undermining and undercutting, with both attacks on a ground with the role `warrant`;
 > 	- the place where each link between questions enters the dependence among claims.
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).

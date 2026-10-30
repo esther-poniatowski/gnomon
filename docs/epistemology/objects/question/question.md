@@ -12,9 +12,9 @@ aliases:
 ---
 # Question
 
-> [!QUESTION] Goal: what is a question, how far can each slot of a question form stay uncommitted, and how do two questions depend on each other?
+> [!QUESTION] Goal: what is a question, which sets of answers does it delimit, how far can each slot of a question form stay uncommitted, and how do two questions depend on each other?
 
-A **question** is a request whose possible answers form a definite set [hamblin1958]. The [specification of a question](question-specification.md) fixes that set by three layers: the subject $\Sigma$ of the question, its epistemic task $T$, and the virtues $\mathcal{V}$ that it weighs.
+A **question** is a request whose possible answers form a definite set [hamblin1958]. The [specification of a question](question-specification.md) states it in three layers. The possible answers are fixed by the subject $\Sigma$ of the question and by its epistemic task $T$. The virtues $\mathcal{V}$ that it weighs fix the standards by which those answers are judged.
 
 A research question is usually composed of several atomic questions, joined by the [links between questions](#^linked-questions). That composition is the [decomposition](../../processes/inquiry/question-decomposition.md#^decomposition-graph) of the research question, not its definition: each atomic question is a question in the sense above, and each candidate answer answers one atomic question.
 
@@ -30,27 +30,44 @@ The fields of a question, and the rules that bind them, are documented in the [q
 
 The why-question of the pragmatic account corresponds to three components of a question of this method. Its topic is the phenomenon $P$, its [contrast class](../subject/contrast.md) is $X$, and its relevance relation is the [requested relation](../task/requested-relation.md) $R$.
 
+## Answers of a question
+
+A question delimits four nested sets of answers. Each set is a subset of the set listed before it: ^answer-sets
+
+| Set | Its members | Fixed by | Source |
+| --- | --- | --- | --- |
+| **Possible answers** | the statements that count as answers to the question | the subject $\Sigma$ and the task $T$ | [hamblin1958] |
+| **Direct answers** | the possible answers that settle the request: each selects as many alternatives as the request demands, and as completely | the subject $\Sigma$ and the task $T$ | [belnap1976] |
+| **Admissible answers** | the direct answers that pass the admissibility tests, the constitutive virtues included | the standards of the question: the tests derived from $\Sigma$ and $T$, and the constitutive virtues of $\mathcal{V}$ | proposal of this method |
+| **Satisfying answers** | the admissible answers that also pass the warrant tests | the warrant tests of the question | proposal of this method |
+
+The admissibility tests and the warrant tests are stated among the [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction), which the answer notes define. The preferred virtues fix no set: a preferred virtue ranks the admissible answers, as the [standing of a virtue](../task/epistemic-pragmatic-virtues.md#^virtue-standing) states. Therefore, a question is fixed by its possible answers, and its virtues fix only the standards by which those answers are judged.
+
+The **presuppositions** of a question are the statements entailed by every direct answer [belnap1976]. A question has a true answer only if its presuppositions are true. The presuppositions are stated over the direct answers, not over the admissible ones: the admissible answers form a narrower set, so the statements that all of them entail would include claims that the question does not presuppose, such as a claim shared by the answers that a constitutive virtue admits and by none of the other direct answers. ^presupposition
+
 ## Question schema and levels of commitment
 
-A **question schema** is a question form, not yet a question: at least one of its slots holds a typed placeholder instead of a referent. The type of each slot comes from a closed list: `system | phenomenon | observable | contrast | condition`. Thus, a schema fixes the *type* of each slot before any record fixes its referent. A schema becomes a question once each of its slots reaches the level `identified`, because only then do its possible answers form a definite set. ^question-schema
+A **question schema** is a question form, not yet a question: at least one of its slots holds a typed placeholder instead of a referent. The type of each slot comes from a closed list, which the [placeholders of the subject](../../../specification/question-subject.md#^placeholder-slots) enumerate. Thus, a schema fixes the *type* of each slot before any record fixes its referent. A schema becomes a question once each of its slots reaches the level `identified`, because only then do its possible answers form a definite set. ^question-schema
 
 Each slot of a question or of a question schema carries one of three **levels of commitment**: ^commitment-levels
 
-| Level | The slot holds | Decidable check |
-| --- | --- | --- |
-| `placeholder` | a type from the closed list, with a description in words | the type belongs to the list |
-| `identified` | a record whose referent is fixed by a definite description and by pointers to data, results or literature | the record exists and states its identification |
-| `specified` | a record whose formal declarations are written | the required fields are filled, and every symbol resolves |
+| Level | The slot holds |
+| --- | --- |
+| `placeholder` | a type from the closed list, with a description in words |
+| `identified` | a record whose referent is fixed by a definite description and by pointers to data, results or literature |
+| `specified` | a record whose formal declarations are written |
+
+The checks that decide the level of a slot are documented with the [question record](../../../specification/question.md#^commitment-checks).
 
 The level `identified` fixes a referent without stating its formal properties. A definite description can fix the referent of a term without giving its meaning [kripke1980]. *Example*: "the geometry of the fixed points reached by the networks of a stated class" fixes one object before any kernel is written. The description of an identified slot serves as an *explicandum*, an inexact concept already in use. At the level `specified`, an exact *explicatum* replaces that explicandum [carnap1950_logical].
 
-Commitment is kept apart from three other attributes of records and of their fields:
+Commitment is kept apart from three other attributes of records and of their fields: ^record-attributes
 
 | Attribute | Content | Values |
 | --- | --- | --- |
 | Commitment | how far a slot fixes its referent | `placeholder`, `identified`, `specified` |
-| Maturity | how far one specification has been revised, graded by its [maturity marker](../subject/subject-of-inquiry.md) | `open`, `provisional`, `stabilized` |
-| Record status | the attitude taken toward the whole record | one vocabulary per kind of record, such as `entertained` or `accepted` for an answer |
+| Maturity | how far one specification has been revised, as the [maturity of a specification](../status/statuses-and-acceptance.md#^maturity) defines it | `open`, `provisional`, `stabilized` |
+| Record status | the attitude taken toward the whole record; for an answer, the record status is the attitude toward its claim | one vocabulary per kind of record, such as `entertained` or `accepted` for an answer |
 | Empty value | the state of an unfilled field | a gap when the field is required, and a product of the inquiry when the aim lists the field as produced |
 
 - **Commitment and maturity vary independently.** A slot can be identified and stabilized, when the referent is settled and no formal declaration is sought. A slot can also be specified and provisional, when the declarations are written and still under revision.
@@ -74,6 +91,7 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 ## Distinctions
 
 - **A problem is not a question, and every inquiring question presupposes a problem.** The difference between the two is stated in the note on the [epistemic problem](../problem/epistemic-problem.md#^problem-vs-question). A question asked to learn its answer carries at least a [minimal problem](../problem/epistemic-problem.md#^minimal-problem), and a problem record makes that problem explicit.
+- **The link `presupposes` does not point to a question about a presupposition.** A whether-question about the presupposition of another question, such as "does the delay of generalization occur?", has a true answer, positive or negative: its presupposition is trivially true, so no question presupposes it in the sense of the link. A positive answer to it establishes the [soundness](conditions-of-answerability.md#^eight-conditions) of the other question, the condition that its presuppositions are true, so the two questions are linked by `enables`. The link `presupposes` joins two questions when the presupposition of the first entails the presupposition of the second, and the second is not trivially true. *Example*: "which mechanism produces the delay?" presupposes "how long is the delay?", since the first presupposes that a delay exists and is produced by a mechanism, and the second presupposes only that a delay exists.
 - **The link `presupposes` between questions is not the relation of the same name between answers.** Between two questions, the link states that one question has a true answer only if the other has one. Between two [answers](../answer/answer-form.md#^answer-relations), the relation states that one answer is admissible only if the other answer is true.
 - **The type of a problem bounds the aims of its questions.** The [types of problem](../problem/problem-types.md) map each type of result demanded onto the aims, the question forms and the answer forms that it admits.
 
@@ -82,7 +100,7 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [belnap1976] ◐ [Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976](https://catalogue.bnf.fr/ark:/12148/cb353871722); the division of a question into subject and request, checked through Wiśniewski's summaries of the book
+- [belnap1976] ◐ [Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976](https://catalogue.bnf.fr/ark:/12148/cb353871722); a question modeled by its direct answers, a presupposition as a statement entailed by every direct answer, and the division of a question into subject and request, checked through the [SEP entry on questions](https://plato.stanford.edu/entries/questions/) and Wiśniewski's summaries of the book
 - [carnap1950_logical] ◐ Carnap, *Logical Foundations of Probability*, University of Chicago Press, 1950, ch. 1; explicandum, explicatum and the four requirements on an explication, checked through the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/carnap/)
 - [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211); the postulate that knowing what counts as an answer is knowing the question, checked through secondary sources
 - [hamblin1973] ◐ Hamblin, "Questions in Montague English", *Foundations of Language* 10(1), 41–53, 1973; a question denotes the set of its possible answers, checked through secondary sources

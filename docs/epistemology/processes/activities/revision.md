@@ -23,9 +23,12 @@ The activities of this family output a **change of knowledge state**: a change o
 | `theory-change` | `verdict` (several) | `knowledge-state-change` | non-inferential | justification |
 | `framework-revision` | `verdict` (several) | `knowledge-state-change` | non-inferential | both |
 
+> [!WARNING] Mode pending a change of the registry
+> Belief revision is non-inferential. The change of $K$ records an act of the researcher, who accepts or retracts a claim in view of the verdicts, the credence or the ranking, and that act is never derived from them, as the [act of acceptance](../../objects/status/statuses-and-acceptance.md#^acceptance-act) states. The mode `deductive` in the row of `belief-revision` is transcribed from the [registry of activities](../../../../src/gnomon/data/registries/activities.yml), and its correction to `non-inferential` is pending a change of that registry. ^belief-revision-mode
+
 ## Norms
 
-| Activity | Operation | The test `norm.<activity-id>` passes when |
+| Activity | Operation | The norm passes when |
 | --- | --- | --- |
 | `belief-revision` | expand, contract or revise the accepted knowledge $K$, once the researcher accepts or retracts a claim in response to a verdict, a credence or a ranking | the change is minimal: it satisfies the postulates of base revision, the axioms that a rational change of a belief base must satisfy, among them that a claim of the base is given up only when it contributes to the conflict being removed [hansson1999] |
 | `theory-change` | replace a theory, or modify the auxiliary hypotheses that protect its core, in response to anomalies | the successor explains the previous successes of its predecessor, predicts novel facts, and has some of these predictions corroborated [lakatos1970] |
@@ -40,7 +43,7 @@ The activities of this family output a **change of knowledge state**: a change o
 
 ## Relations to the method
 
-- **A revision changes the attitude of an answer.** The content of the answer stays fixed, whereas the attitude of the inquiry toward it moves among entertaining, hypothesizing, accepting and retracting it. Accepting or retracting is a decision of the researcher, informed by the verdicts, the disposition and the credence of the assessment, as the [act of acceptance](../../foundations/inquiry-and-state.md#^acceptance-act) states, and the revision records that decision.
+- **A revision changes the attitude of an answer.** The content of the answer stays fixed, whereas the attitude of the inquiry toward it moves among entertaining, hypothesizing, accepting and retracting it. Accepting or retracting is a decision of the researcher, informed by the verdicts, the disposition and the credence of the assessment, as the [act of acceptance](../../objects/status/statuses-and-acceptance.md#^acceptance-act) states, and the revision records that decision.
 - **The warrant of a law fixes the order of revision.** When new evidence arrives, posited, fitted or measured laws are revised first, as the [warrant of a background law](../../objects/knowledge/background.md#^law-warrant) states.
 - **Formal models of epistemic change are surveyed in this method.** The [formal models of belief change](../../../references/belief-revision-dynamic-epistemic-logic.md) state how an epistemic state changes under new information.
 

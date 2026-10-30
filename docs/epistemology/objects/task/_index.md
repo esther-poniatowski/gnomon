@@ -17,7 +17,7 @@ The second layer of the specification fixes the kind of knowledge that an answer
 - [Epistemic aim](epistemic-aim.md): classifies the cognitive achievements that an inquiry can seek
 - [Requested relation](requested-relation.md): classifies the kinds of dependence that an answer may be asked to establish
 - [Modal strength](modal-strength.md): decides whether the claim of an answer must hold actually, possibly or necessarily
-- [Admissible explanans](admissible-explanans.md): decides which variables an answer may appeal to
+- [Admissible explanans](admissible-explanans.md): decides which variables an explanation may appeal to
 
 ## Virtues
 

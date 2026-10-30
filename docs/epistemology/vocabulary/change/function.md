@@ -12,7 +12,7 @@ aliases:
 
 > [!QUESTION] Goal: which sense of "function" does a statement about a component use?
 
-The **function** of a component is the contribution of its activity to an object beyond the component: a capacity of the containing system, or the history that retained the component. The term is distinct from a mathematical function, a map between sets. The other notes of this folder also use the mathematical sense.
+The **function** of a component is the contribution of its [mechanistic activity](mechanistic-activity.md) to an object beyond the component: a capacity of the containing system, or the history that retained the component. The term is distinct from a mathematical function, a map between sets. The other notes of this folder also use the mathematical sense.
 
 ## Senses
 

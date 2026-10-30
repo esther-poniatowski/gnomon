@@ -16,6 +16,9 @@ Types each operation of an inquiry by the epistemic object that it produces and 
 > [!WARNING] Epistemic and mechanistic activity
 > The notes of this folder type *epistemic* activities: operations of an inquiry, each of which outputs an epistemic object. A *mechanistic* activity is what a component of a target does, such as a neuron firing, and the note on [mechanistic activity](../../vocabulary/change/mechanistic-activity.md) defines it.
 
+> [!WARNING] Evaluation and the conditions of satisfaction
+> [Evaluation](evaluation.md) types the activities that judge a candidate, whereas the [conditions of satisfaction](../../objects/answer/satisfaction-conditions.md) state the tests of an answer and the norms of evidence that govern their verdicts.
+
 ## Criterion and design
 
 - [Epistemic activities](epistemic-activities.md): decides whether an operation is epistemic, and types it so that a research itinerary can be checked

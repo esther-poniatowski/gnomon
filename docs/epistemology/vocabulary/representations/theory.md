@@ -31,7 +31,7 @@ $$\mathsf{K}=\langle\mathsf{M}_p,\mathsf{M},\mathsf{M}_{pp},\mathsf{GC},\mathsf{
 - $\mathsf{GC}$: the global constraints, linking the values of a quantity across models;
 - $\mathsf{GL}$: the global links to other theories.
 
-The intended applications form a subset $\mathsf{I}\subseteq\mathsf{M}_{pp}$, described without the theoretical terms. The **empirical claim** of the theory-element states that these applications can be completed into actual models that respect the constraints and links. In symbols, $\mathsf{I}\in\mathrm{Cn}(\mathsf{K})$, where $\mathrm{Cn}(\mathsf{K})$ restricts $\mathrm{Pot}(\mathsf{M})\cap\mathsf{GC}\cap\mathsf{GL}$ to partial potential models.
+The intended applications form a subset $\mathsf{I}\subseteq\mathsf{M}_{pp}$, described without the theoretical terms. The **empirical claim** of the theory-element states that these applications can be completed into actual models that respect the constraints and links. In symbols, $\mathsf{I}\in\mathrm{Cn}(\mathsf{K})$. The empirical content $\mathrm{Cn}(\mathsf{K})$ of the core restricts $\mathrm{Pot}(\mathsf{M})\cap\mathsf{GC}\cap\mathsf{GL}$ to partial potential models, where $\mathrm{Pot}(\mathsf{M})$ is the set of subsets of $\mathsf{M}$.
 
 ## Distinctions
 

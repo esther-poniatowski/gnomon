@@ -13,7 +13,7 @@ Fixes the senses of the terms that name a representation of a target and the cla
 > - [Model](model.md) separates a model system from its target, whereas the [target-system record](../../../specification/target-system.md) documents the fields of the target specification, the record that delimits the target.
 > - [Existence and access](../../foundations/existence-and-access.md) states what the method presupposes about the objects that it represents, whereas [model](model.md) fixes the senses of the word and the relation between a model system and its target.
 
-- [Model](model.md): fixes the sense of "model" and the relation between a model system and its target
+- [Model](model.md): fixes the sense of "model" and the role of a model, and relates a model to its target
 - [Representation and encoding](representation-and-encoding.md): places an encoding, a readout and a representation geometry among the concepts of the method
 - [Idealization and abstraction](idealization-and-abstraction.md): decides whether a simplifying assumption omits a truth or asserts a falsehood
 - [Theory](theory.md): relates a theory to its models under each view of theories

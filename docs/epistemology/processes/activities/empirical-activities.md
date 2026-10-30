@@ -26,9 +26,12 @@ The activities of this family output a design of inquiry, [data](../../vocabular
 | `intervention` | `design` | `data` | non-inferential | justification |
 | `phenomenon-detection` | `data` | `phenomenon` | inductive | justification |
 
+> [!WARNING] Modes pending a change of the registry
+> Observation and measurement are inferential: each is a model-based inference, which infers an outcome from the output of an instrument through a model of that instrument and of its interaction with the target [tal2013]. The method commits to this account of access in its [stance on mediated access](../../foundations/existence-and-access.md#^mediated-access), and extends it from measurement to observation through an instrument. The mode `non-inferential` in the rows of `observation` and `measurement` is transcribed from the [registry of activities](../../../../src/gnomon/data/registries/activities.yml), and its correction is pending a change of that registry. The closed list of modes holds no value for a model-based inference, so the same change decides which value the two activities take. ^modes-pending
+
 ## Norms
 
-| Activity | Operation | The test `norm.<activity-id>` passes when |
+| Activity | Operation | The norm passes when |
 | --- | --- | --- |
 | `experimental-design` | fix the protocol of an experiment or of a simulation run (e.g. conditions, interventions, controls, sample) before any data are recorded | the possible outcomes discriminate the rival answers to the question: each rival predicts a different outcome, so the design would probably detect an error in any false rival [fisher1935] [mayo1996] [mayo2018] |
 | `observation` | register features of the target through an instrument, or assemble existing recordings of it | the instrument is reliable, as shown independently of the claim under test [hacking1983] |
@@ -39,7 +42,7 @@ The activities of this family output a design of inquiry, [data](../../vocabular
 ## Distinctions
 
 - **Design and execution differ in their output.** Experimental design outputs a design, judged before any datum exists by its possible outcomes. Observation, measurement and intervention execute a design, and output data.
-- **Observation and measurement differ in their requirements.** Observation produces records of features. Such records may be categorical, with no numerical representation. Measurement requires a [scale](../../vocabulary/quantities/scale-and-level.md) and a model of the measuring process [tal2020].
+- **Observation and measurement differ in their requirements.** Observation produces records of features. Such records may be categorical, with no numerical representation, and they rest on a model of the instrument only. Measurement requires, in addition, a [scale](../../vocabulary/quantities/scale-and-level.md), and its model covers the whole measuring process [tal2020].
 - **The norm of measurement combines two accounts.** The representational account states the conditions under which a scale exists: a map that preserves the empirical relations of a property, its admissible transformations, and its type [krantz1971]. The model-based account adds that an outcome is inferred from a reading through a model of the instrument and of its interaction with the object [tal2013]. The method commits to the model-based account in its stance on [access](../../foundations/existence-and-access.md). The norm requires both parts: the representational part fixes what a value means on its scale, and the model-based part fixes which quantity a reading measures.
 - **Observation and intervention differ by manipulation.** An intervention sets a variable, whereas observation records the target as it is [hacking1983]. Therefore, an intervention can support a causal claim under fewer assumptions about confounders than observation requires.
 - **Phenomenon detection is an inference.** The data of one procedure carry its idiosyncrasies, so a phenomenon is typically detected by comparing data across procedures [bogen1988]. The robustness that detection requires holds across procedures, not across time: only a phenomenon of the category *regularity* must recur, and a phenomenon can occur once, as the note on [phenomena](../../vocabulary/regularities/pattern-and-phenomenon.md) states.

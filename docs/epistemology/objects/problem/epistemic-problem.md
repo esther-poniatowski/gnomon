@@ -37,16 +37,16 @@ Each component answers one question about the problem: relative to which knowled
 
 ### The accepted knowledge $K$
 
-$K$ is the **accepted knowledge**: the finite set of accepted claims relative to which the problem is posed. In a research project, $K$ holds the accepted records of the project and the claims of the publications that these records cite. A conflict with a publication that no record cites is asserted with a pointer to it, which brings that publication into the scope of $K$. A finite set of this kind is a *belief base*, as opposed to a set closed under logical consequence [hansson1999]. The corpus of accepted knowledge plays the same role in the epistemology of inquiry [levi1980]. The term *background* is reserved for the [background record](../knowledge/background.md) of a target, which holds the laws admitted about it. An admitted law is taken as a premise of the inquiry, and it need not belong to $K$.
+$K$ is the **accepted knowledge** of the inquiry, the component of its [state](../../foundations/inquiry-and-state.md#^state) relative to which the problem is posed: a finite belief base of claims accepted by an act, not a set closed under logical consequence [hansson1999]. The corpus of accepted knowledge plays the same role in the epistemology of inquiry [levi1980]. A conflict between $K$ and a publication whose claims are not accepted is asserted with a pointer to that publication, and the [types of problem](problem-types.md) classify it as a conflict: a datum not yet accepted that is improbable under $K$. The term *background* is reserved for the [background record](../knowledge/background.md) of a target, which holds the laws admitted about it. An admitted law is taken as a premise of the inquiry, and it need not belong to $K$.
 
-The accepted knowledge is paired with the **available means** $\mathcal{M}$: the methods, data, instruments and proof techniques that can be applied. The expression $K\vdash_{\mathcal{M}} s$ reads: *the claim $s$ has been obtained from $K$ by applying means of $\mathcal{M}$, and the researcher has accepted it in view of its assessment*. The reading is actual, not dispositional: a claim that the means could yield, but have not yet yielded, is not obtained. A claim obtained but not yet accepted, such as a derived result that awaits its assessment, is a proposed candidate, a member of $H$.
+The problem is stated with the two relations that the [state of an inquiry keeps apart](../../foundations/inquiry-and-state.md#^obtained-accepted). A claim $s$ is **obtained**, written $\mathrm{Obt}_{\mathcal{M}}(s)$, when the **available means** $\mathcal{M}$, the methods, data, instruments and proof techniques that can be applied, have yielded it. A claim is **accepted**, written $s\in K$, when the researcher has accepted it. A claim obtained but not yet accepted, such as a derived result that awaits its assessment, is a proposed candidate, a member of $H$.
 
-> [!IMPORTANT] Claims obtained and accepted with the means
-> Under plain logical consequence, a set $K$ containing the laws of a formal model already "contains" every theorem about that model, so no proof problem could arise. Relative to the means, a claim counts as known only once the available means have yielded it and the researcher has accepted it. Therefore, an unproven theorem remains a gap. Obtaining claims with the means is also *not explosive*: a local inconsistency in $K$ does not yield every claim.
+> [!IMPORTANT] Problems to prove
+> Under plain logical consequence, a set $K$ containing the laws of a formal model would already contain every theorem about that model, so no problem to prove could arise. A theorem enters $K$ only once the means have yielded it and the researcher has accepted it. Therefore, an unproven theorem remains a gap, and a problem to prove can exist.
 
 ### The proposed candidates $H$
 
-Beside $K$, the inquiry holds a set $H$ of **proposed candidates**: answers put forward and not yet accepted, such as two rival accounts of the delay. A candidate enters $K$ only when the researcher accepts it. The verdicts, the disposition and the credence of its [assessment](../answer/satisfaction-conditions.md) inform that act, but they do not compute it. A claim without support can still serve as a premise: the researcher admits it as a working assumption under the warrant `posited`, and the admission does not make it a member of $K$. ^candidates
+Beside $K$, the inquiry holds a set $H$ of **proposed candidates**: answers put forward and not yet accepted, such as two rival accounts of the delay. A candidate enters $K$ only through the [act of acceptance](../status/statuses-and-acceptance.md#^acceptance-act) of the researcher, which its [assessment](../answer/satisfaction-conditions.md) informs without computing it. A claim without support can still serve as a premise: the researcher admits it as a working assumption under the warrant `posited`, and the admission does not make it a member of $K$. ^candidates
 
 ### The demand $d$
 
@@ -77,42 +77,42 @@ Each problem defines an **associated question**: the question that asks for the 
 
 $$Q_\pi = \text{which } s \text{ of type } \mathsf{type} \text{ satisfies } \Phi_1,\ \text{under the request } \mathsf{req}\ ?$$
 
-In words: the associated question asks for results of the demanded type that meet the conditions on each candidate. The request fixes how many results an answer must give, and how complete they must be. Whether-questions and which-questions are both elementary questions, with the same subject and request, so this form covers both [belnap1976]. ^presuppositions
+In words: the associated question asks for results of the demanded type that meet the conditions on each candidate. Its [possible answers](../question/question.md#^answer-sets) are propositions of the form "$s$ is a result of type $\mathsf{type}$ that satisfies $\Phi_1$". The request fixes how many such propositions a direct answer must assert, and how completely. Whether-questions and which-questions are both elementary questions, with the same subject and request, so this form covers both [belnap1976]. ^presuppositions
 
 The associated question carries two kinds of presupposition:
 
 - its **existence presupposition**: at least one result of the demanded type meets the conditions on each candidate;
 - its **topic presupposition**, when the demand concerns a fact, such as an explanation of a phenomenon: the fact holds, as a why-question presupposes that its topic is true [vanfraassen1980].
 
-The problem **exists** while its demand is unmet: no direct answer of $Q_\pi$ has been obtained and accepted, so that $K\nvdash_{\mathcal{M}} a$ for every direct answer $a$. ^problem-existence
+The problem **exists** while its demand is unmet: no direct answer of $Q_\pi$ is in $K$, so that $a\notin K$ for every direct answer $a$. ^problem-existence
 
-The problem has an **epistemic gap** when, in addition, $K$ establishes the existence presupposition, so that $K$ **evokes** the question: ^gap
+The problem has an **epistemic gap** when, in addition, the existence presupposition is in $K$, so that $K$ **evokes** the question: ^gap
 
-$$K\vdash_{\mathcal{M}} \exists s\,\big(\mathsf{type}(s)\wedge\Phi_1(s)\big)\qquad\text{and}\qquad K\nvdash_{\mathcal{M}} a\ \text{ for every direct answer } a \text{ of } Q_\pi .$$
+$$\exists s\,\big(\mathsf{type}(s)\wedge\Phi_1(s)\big)\in K\qquad\text{and}\qquad a\notin K\ \text{ for every direct answer } a \text{ of } Q_\pi .$$
 
-In words: the accepted knowledge establishes that a result of the demanded type exists, and no such result has yet been obtained and accepted. This pair of conditions is the **epistemic gap** of the problem. The condition adapts Wiśniewski's evocation, which uses logical entailment [wisniewski1995]. Entailment is replaced by the relation $\vdash_{\mathcal{M}}$: obtained by the available means and accepted by the researcher. The second clause therefore states that no direct answer has been obtained and accepted, which departs further from evocation than a change of consequence relation: an answer that follows from $K$, or that a run has produced without being accepted, leaves the gap open.
+In words: the researcher has accepted that a result of the demanded type exists, and has accepted no direct answer that gives such a result. This pair of conditions is the **epistemic gap** of the problem. The condition adapts Wiśniewski's evocation, which uses logical entailment from the premises [wisniewski1995]. In both clauses, entailment from $K$ is replaced by membership of $K$. The second clause therefore departs further from evocation than a change of consequence relation: an answer that follows from $K$, or that a run has obtained without its being accepted, $\mathrm{Obt}_{\mathcal{M}}(a)$ with $a\notin K$, leaves the gap open.
 
-*Example*: suppose that the admitted dynamics of a class of recurrent networks guarantee that fixed points exist, while no available analysis gives their number at a given gain. Under that supposition, $K$ evokes the question "how many fixed points does a network of the class have at each gain?".
+*Example*: suppose that an accepted proof derives the existence of fixed points from the admitted dynamics of a class of recurrent networks, while no available analysis gives their number at a given gain. Under that supposition, $K$ evokes the question "how many fixed points does a network of the class have at each gain?".
 
 ## How a problem ends
 
 A problem ends in one of three ways, and the [problem record](../../../specification/problem.md) fixes their record values. Two of the three ways have a formal condition: ^problem-outcomes
 
 - **Solved**: a candidate of the demanded type meets the constraints and the request, and the researcher has accepted it, which moves it from $H$ into $K$.
-- **Dissolved**: the revised accepted knowledge yields the negation of a presupposition of $Q_\pi$, its existence presupposition or its topic presupposition. No result of the demanded kind exists, so no solution is needed. *Example*: the delay appears only in a thresholded accuracy, while the test loss falls from the start of training. In that case, no delay of learning exists, and the problem of explaining it dissolves.
+- **Dissolved**: the revised accepted knowledge holds the negation of a presupposition of $Q_\pi$, its existence presupposition or its topic presupposition. No result of the demanded kind exists, so no solution is needed. *Example*: the delay appears only in a thresholded accuracy, while the test loss falls from the start of training. In that case, no delay of learning exists, and the problem of explaining it dissolves.
 - **Abandoned**: the inquiry stops before the problem is solved or dissolved. No formal condition defines this outcome, which records a decision of the researcher.
 
 ## Every inquiring question presupposes a problem
 
 A question asked in order to learn its answer presupposes that its asker lacks that answer. Epistemic analyses of questions build this lack into the meaning of a question: they read a question as the request "bring it about that I know …" [aqvist1965] [hintikka1976]. Attitudes directed at a question, such as inquiring into it, are incompatible with knowing its answer [friedman2013]. ^question-presupposes-problem
 
-The question also presupposes that it has an answer. In the interrogative model of inquiry, a question may be *asked*, that is, put to a source, only once its presupposition is established [hintikka2007]. A question can be *posed* before that point, and its presuppositions then remain to be established, which is the condition of soundness among the [conditions of answerability](../question/conditions-of-answerability.md). Once $K$ establishes its existence presupposition, $K$ evokes the question.
+The question also presupposes that it has an answer. In the interrogative model of inquiry, a question may be *asked*, that is, put to a source, only once its presupposition is established [hintikka2007]. A question can be *posed* before that point, and its presuppositions then remain to be established, which is the condition of soundness among the [conditions of answerability](../question/conditions-of-answerability.md). Once its existence presupposition is in $K$, $K$ evokes the question.
 
 Therefore, every inquiring question $Q$ carries a **minimal problem**: ^minimal-problem
 
 $$\pi_Q=\langle K,\ d_Q,\ \Phi_Q\rangle .$$
 
-The demand $d_Q$ takes the type of result and the request of $Q$. Its explicanda $\Xi_Q$ are the terms of $Q$ that enter by their anchored use rather than as typed slots. The constraints $\Phi_Q$ carry the remaining specifications of $Q$ as conditions on each candidate: its subject, its contrast and its [epistemic task](../task/epistemic-task.md). The associated question of $\pi_Q$ is therefore $Q$ itself. In words: the minimal problem of a question states that its answer is lacking, so it exists for every inquiring question. The minimal problem has an epistemic gap once $K$ establishes the existence presupposition of $Q$.
+The demand $d_Q$ takes the type of result and the request of $Q$. Its explicanda $\Xi_Q$ are the terms of $Q$ that enter by their anchored use rather than as typed slots. The constraints $\Phi_Q$ carry the remaining specifications of $Q$ as conditions on each candidate: its subject, its contrast and its [epistemic task](../task/epistemic-task.md). The associated question of $\pi_Q$ is therefore $Q$ itself. In words: the minimal problem of a question states that its answer is lacking, so it exists for every inquiring question. The minimal problem has an epistemic gap once the existence presupposition of $Q$ is in $K$.
 
 > [!NOTE] Questions outside inquiry
 > The asker of an examination question or of a rhetorical question already holds the answer. Such a question carries no minimal problem and serves no inquiry.
@@ -126,7 +126,7 @@ A problem and a question are distinct objects: ^problem-vs-question
 | | Problem | Question |
 | --- | --- | --- |
 | States | a demand, the accepted knowledge relative to which the demand is unmet, and the constraints on a solution | a set of possible answers, and the request on how many of them an answer selects [hamblin1958] [belnap1976] |
-| Possible answers are | results of a type (models, concepts, consequences …) | propositions |
+| Possible answers are | results of a type (models, concepts, consequences …) | propositions; for the associated question, the propositions "$s$ is a result of type $\mathsf{type}$ that satisfies $\Phi_1$" |
 | Number | one problem motivates one or several questions | one question serves one or several problems |
 
 Two relations connect them:
@@ -144,7 +144,7 @@ Reduction can be conjunctive: $\pi_1$ reduces to $\pi_2$ and $\pi_3$ together wh
 
 ## Distinctions
 
-- **A gap is not a problem, and a problem need not have a gap.** A problem exists while its demand is unmet, and it has a gap when $K$ also establishes the existence presupposition. The gap states a lack, whereas the problem adds the demand and its constraints, which fix the result that would fill the gap.
+- **A gap is not a problem, and a problem need not have a gap.** A problem exists while its demand is unmet, and it has a gap when the existence presupposition is also in $K$. The gap states a lack, whereas the problem adds the demand and its constraints, which fix the result that would fill the gap.
 - **The explicanda of a problem and the placeholders of a question fix a term along two different dimensions.** An explicandum of a problem is *anchored*: a pointer fixes its use, and no type is given. A [placeholder](../question/question.md#^question-schema) is *typed*: its kind is fixed, and no referent is given. The level `identified` of a slot fixes both the type and the referent.
 - **The request is not the aim.** The request fixes how many results, and how complete, the demand asks for. The [epistemic aim](../task/epistemic-aim.md) fixes the kind of knowledge that a question seeks.
 - **"Epistemic problem" names the problem defined here.** The [epistemic task](../task/epistemic-task.md) of a question fixes the kind of knowledge that its answer must deliver. The task belongs to the question, not to the problem.

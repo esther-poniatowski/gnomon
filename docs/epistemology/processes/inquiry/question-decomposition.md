@@ -20,13 +20,13 @@ A precise question does not fix the route to its answer. Decomposing the questio
 
 The method applies to a question already posed. In the exploratory phase of research, before the question is fixed, the first serving question is usually the one that makes the main question well posed.
 
-**Governing criterion.** A serving question is admissible only when its resolution changes the status of the question that it serves: it reduces the set of admissible answers, forces a reformulation, makes a distinction visible that was not yet visible, or establishes a condition of answerability of the served question. The criterion applies at two moments: when the inquiry is planned, before substantial work, and when an obstacle met during the inquiry calls for a local revision. ^governing-criterion
+**Governing criterion.** A serving question is admissible only when its resolution changes the status of the question that it serves: it excludes some direct answers of the served question, forces a reformulation, makes a distinction visible that was not yet visible, or establishes a condition of answerability of the served question. The criterion applies at two moments: when the inquiry is planned, before substantial work, and when an obstacle met during the inquiry calls for a local revision. ^governing-criterion
 
 ## The decomposition graph
 
 A decomposition is a graph whose nodes are questions. Each edge is one of the [links between questions](../../objects/question/question.md#^linked-questions), and one of its two questions *serves* the other. For `subquestion-of` and `enables`, the question that carries the link serves the linked question; for `presupposes` and `explanans-from`, the linked question serves the question that carries the link. This sense of serving is broader than the service of a problem, which requires erotetic implication, as the note on the [epistemic problem](../../objects/problem/epistemic-problem.md#^problem-vs-question) states. ^decomposition-graph
 
-A demand that is a conjunction is decomposed by `subquestion-of`, one serving question per conjunct. A presupposition posed as a question is linked by `enables`, not by `presupposes`. The question whether the presupposition holds always has a true answer, so `presupposes` would make soundness depend on a question that is trivially sound.
+A demand that is a conjunction is decomposed by `subquestion-of`, one serving question per conjunct. The link `presupposes` applies when the question that carries it has a true answer only if the linked question has one. *Example*: "why does the delay grow with the weight decay?" presupposes "at which rate does the delay grow with the weight decay?", since each has a true answer only if the delay grows. A presupposition posed as a yes-or-no question is linked by `enables`, not by `presupposes`. The question whether the presupposition holds always has a true answer, so `presupposes` would make soundness depend on a question that is trivially sound.
 
 The serving questions of one question stand in one of three relations. Serving questions are *conjunctive* when all are needed, *disjunctive* when any one suffices, such as an analytic derivation and a simulation that both give access to a quantity, and *sequential* when the answer of one fixes the form of another. Disjunctive serving questions require a choice among routes, made by the [ranking of acts](choice-of-act.md#^ranking-criteria).
 
@@ -34,18 +34,13 @@ The serving questions of one question stand in one of three relations. Serving q
 
 Serving questions arise from four sources. ^serving-sources
 
-**First, the unmet conditions of answerability.** The conditions are identified from the logical form of the question, in four steps:
-
-1. **Fix the form.** State the interrogative type, the subject and the set of admissible answers, as Hamblin and Belnap and Steel model a question [hamblin1958] [belnap1976]. For a why-question, the form also requires a contrast and a [requested relation](../../objects/task/requested-relation.md) [vanfraassen1980].
-2. **Extract the presuppositions.** Every proposition entailed by all the admissible answers is a presupposition. "Why does the network learn disentangled features?" presupposes that the network learns them.
-3. **State what the answer must reach.** The [answer type](../../objects/question/conditions-of-answerability.md#^eight-conditions) fixes the resolution of the answer, and the [epistemic task](../../objects/task/epistemic-task.md) fixes its required accuracy and its proof obligations. Hintikka calls the epistemic state to be reached the *desideratum* of the question [hintikka2007].
-4. **Work backward.** For each admissible answer, ask what must be known to select it over its rivals. Each item missing from the present records is an unmet condition.
+**First, the unmet conditions of answerability.** The conditions are identified from the logical form of the question. That form fixes the possible answers of the question [hamblin1958] and its direct answers, those that settle the request [belnap1976]. For a why-question, the form also requires a contrast and a [requested relation](../../objects/task/requested-relation.md) [vanfraassen1980]. Every proposition entailed by all the direct answers is a presupposition [belnap1976]: "why does the network learn disentangled features?" presupposes that the network learns them. The [answer type](../../objects/question/conditions-of-answerability.md#^eight-conditions) fixes the resolution of the answer, and the [epistemic task](../../objects/task/epistemic-task.md) fixes its required accuracy and its proof obligations. Hintikka calls the epistemic state to be reached the *desideratum* of the question [hintikka2007]. An unmet condition is an item that the selection of a direct answer over its rivals requires and that the present records lack. The steps that identify these items are stated in the [procedure of decomposition](../../../procedures/inquiry/decomposing-a-question.md#^condition-steps).
 
 An unmet condition becomes a serving question, linked by `enables`, when the researcher chooses to pose it, as the [choice of the next act](choice-of-act.md#^condition-to-question) states.
 
 **Second, a conjunctive demand.** Each conjunct of the demand becomes a serving question linked by `subquestion-of`.
 
-**Third, a blockage met during the inquiry.** A blockage is whatever prevents progress at a given stage. The serving question is found in three moves: identify the blockage, state why it prevents progress on the served question, and formulate the smallest question whose answer would remove it. The usual blockages map onto the conditions of answerability:
+**Third, a blockage met during the inquiry.** A blockage is whatever prevents progress at a given stage. The serving question of a blockage is the smallest question whose answer would remove it, and the moves that find it are stated in the [procedure of decomposition](../../../procedures/inquiry/decomposing-a-question.md#^blockage-moves). The usual blockages map onto the conditions of answerability:
 
 | Blockage | Practical meaning | Serving question | Condition |
 | --- | --- | --- | --- |
@@ -62,12 +57,14 @@ An unmet condition becomes a serving question, linked by `enables`, when the res
 | Burden of justification | Discharged when | Canonical serving questions |
 | --- | --- | --- |
 | Conceptual | the claim is well formed and delimited | which traits are essential? which criteria include and exclude? how does the notion differ from its neighbors? is the definition adequate to its use? |
-| Ontological | the object or mechanism claimed is possible or real | what would count as an instance? could the evidence come from an alternative? what separates existence from artefact? |
+| Existence | the effect claimed is not an artefact of the procedures that detect it | what would count as an instance? could the evidence come from an alternative? what separates the effect from an artefact? |
 | Structural | the internal organization of the object is correctly described | which formal object captures the structure? which invariants matter? which transformations preserve the property? |
 | Causal | the factors invoked produce the phenomenon | which factors covary? which are efficacious? which interventions would change the outcome, and through which mechanism? |
 | Inferential | the conclusion follows from the assumptions | what exactly is to be shown? which assumptions are necessary? which intermediate steps? which domain of validity? |
 | Modal or regime | the conditions of validity, breakdown or transition are identified | which parameters control the phenomenon? are there thresholds? which conditions are necessary, sufficient, or both? |
 | Epistemic | the method that detects, measures or validates the claim is trustworthy | which signatures indicate the target? are they specific? which false positives and negatives? does success reflect the intended property or a confound? |
+
+The existence burden is an empirical burden. This burden asks whether the evidence for an effect survives the alternatives that would produce it as an artefact, and it leaves open whether the objects described exist, as the [stance of the method](../../foundations/existence-and-access.md#^method-stance) requires.
 
 ## Functional types of serving questions
 
@@ -79,7 +76,7 @@ A serving question belongs to one of three functional types, which fix how it is
 | Abductive | during the inquiry, a resistance appears: an obstacle that the current formulation cannot remove | identify a hidden assumption, a missing property or an inadequate formalism | conditional on the resistance hypothesis $\eta$ that explains the resistance |
 | Constructive | the vocabulary collapses distinctions that matter: distinct situations receive the same answer, every candidate notion needs corrections at its boundary, or rival frameworks agree formally and differ structurally | expand the framework: define a concept, construct a formal object, or find a representation under which the question becomes tractable | a semantic prerequisite: the questions downstream are undefined until this one is resolved |
 
-A question generated by a failure must not acquire unconditional status silently. A derivational impasse often generates a local explanatory hypothesis, and once that hypothesis is overturned, the questions spawned by it need reassessment.
+A question generated by a failure stays conditional on the hypothesis that explains the failure. A derivational impasse often generates a local explanatory hypothesis, and once that hypothesis is overturned, the questions spawned by it need reassessment.
 
 ## Relevance of a serving question
 
@@ -91,7 +88,7 @@ Each candidate serving question receives one of three statuses: ^relevance
 | Useful | not strictly required, but improving robustness, scope or explanatory force |
 | Decorative | adjacent or interesting, but without material effect on the answer |
 
-The status is found by three questions: what would become impossible if the serving question were resolved negatively, what would become supported if it were resolved positively, and what would become newly distinguishable. When all three answers are empty, the serving question is decorative and is removed. The [choice of the next act](choice-of-act.md#^ranking-criteria) applies the same test to acts.
+A serving question is decorative, and is removed, when neither of its resolutions makes the served question unanswerable, supports a claim bearing on it, or makes a new distinction visible in it. The questions by which a researcher applies this criterion are stated in the [procedure of decomposition](../../../procedures/inquiry/decomposing-a-question.md#^relevance-questions). The [choice of the next act](choice-of-act.md#^ranking-criteria) applies the same test to acts.
 
 ## Conditioned questions
 
@@ -121,7 +118,7 @@ Acts of generation add candidates or tools and justify no answer, and acts of de
 
 **A serving question can correct the served question.** Its answer can show that a presupposition of the served question is false or that a term of it is ill defined. The served question is then reformulated before any answer is sought for it, a case that a strictly top-down tree cannot represent. ^revision
 
-**Local revision.** The usual triggers of a local revision are the following:
+**Local revision.** The usual triggers of a local revision are the following: ^local-revision
 
 | Trigger | Meaning |
 | --- | --- |
@@ -142,7 +139,7 @@ The steps of a local revision are stated in the [procedure of decomposition](../
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
-- [belnap1976] ◐ [Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976](https://catalogue.bnf.fr/ark:/12148/cb353871722); a question modeled by its admissible answers
+- [belnap1976] ◐ [Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976](https://catalogue.bnf.fr/ark:/12148/cb353871722); a question modeled by its direct answers, and a presupposition entailed by every direct answer
 - [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211); checked through secondary sources
 - [hintikka1999] ◐ [Hintikka, *Inquiry as Inquiry: A Logic of Scientific Discovery*, Jaakko Hintikka Selected Papers 5, Kluwer, 1999](https://doi.org/10.1007/978-94-015-9313-7); the interrogative model of inquiry
 - [hintikka2007] ◐ [Hintikka, *Socratic Epistemology: Explorations of Knowledge-Seeking by Questioning*, Cambridge University Press, 2007](https://doi.org/10.1017/CBO9780511619298); the desideratum of a question

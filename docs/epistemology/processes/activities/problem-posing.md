@@ -30,7 +30,7 @@ The activities of this family output the objects that open an inquiry: a problem
 
 ## Norms
 
-| Activity | Operation | The test `norm.<activity-id>` passes when |
+| Activity | Operation | The norm passes when |
 | --- | --- | --- |
 | `problematization` | state the demand for a solution and the constraints that bind it, from a source such as an anomaly or a conflict between results | the demand and the constraints are stated, and each explicandum carries a pointer to its source [dewey1938] [nickles1981] [laudan1977] |
 | `constraint-specification` | derive further conditions on any solution from the problem and from the admitted background laws | each constraint is traced to a source or to a background law [nickles1981] |

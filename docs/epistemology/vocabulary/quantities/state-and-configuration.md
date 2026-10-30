@@ -15,7 +15,7 @@ aliases:
 
 A **state** is the tuple of values that the state variables of a thing take at one time [bunge1977]:
 $$F(t)=\langle F_1(t),\ldots,F_n(t)\rangle$$
-The **state space** $\mathcal{X}$ is the set of tuples that the thing can take. When the laws of the thing exclude some tuples, the remaining set is its *lawful* state space [bunge1977].
+Here $F_1,\ldots,F_n$ are the $n$ state variables of the thing, and $F(t)$ is their tuple at the time $t$. The **state space** $\mathcal{X}$ is the set of tuples that the thing can take. When the laws of the thing exclude some tuples, the remaining set is its *lawful* state space [bunge1977].
 
 ## Senses
 

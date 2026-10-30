@@ -45,19 +45,19 @@ A second test case, "computing", requires an abstract state space and an impleme
 
 The definitions are stated relative to a **level of description**. The level fixes a state space $\mathcal{X}$. When the level is abstract, $\mathcal{X}$ is the codomain of the [implementation map](computation.md#^implementation-map) $\psi$.
 
-The predicates range over the segments of a declared course, at a declared grain:
+The predicates range over the segments of a declared course, at a declared grain of the course:
 
 - **Course**: an ordered index set $\mathbb{T}$ along which the behavior unfolds, such as time, the steps of training, or an input parameter $\theta$ swept by the question. A **segment** is an interval $[a,b]\subseteq\mathbb{T}$. ^course
-- **Grain**: the length $\delta>0$ below which the description resolves no segment. The grain is needed because closure under restriction fails on very short segments: a segment of walking shorter than one step does not count as walking.
+- **Grain of the course**: the length $\delta>0$ below which the description resolves no segment. The grain is needed because closure under restriction fails on very short segments: a segment of walking shorter than one step does not count as walking.
 - **History** (a token): a trajectory $\gamma:[t_0,t_1]\to\mathcal{X}$ over a segment of the course. ^history
 
 Each predicate $\Pi$ on segments falls in at most one of three classes:
 
-- **State** (a type): $\Pi$ holds of a segment if and only if it holds at every point of the segment, so a state needs no change. *Example*: "the network sits at its fixed point $x^*$". ^state-class
+- **State** (a type): $\Pi$ holds of a segment if and only if it holds at every point of the segment, so a state needs no change. *Example*: "the network sits at its fixed point $x^*$", a state that the dynamic leaves unchanged. ^state-class
 - **Process** (a type): $\Pi$ is closed under restriction to every sub-segment of length at least $\delta$, and it holds at no single point, because it requires change. If $\Pi(\gamma|_{[a,b]})$ holds and $[a',b']\subseteq[a,b]$ with $b'-a'\geq\delta$, then $\Pi(\gamma|_{[a',b']})$ holds. *Examples*: "the rate rises"; "it rains over the region", read as the increase of the precipitation accumulated over the region. A process is often identified by a rate or flux variable that stays non-zero. The condition $r>0$ is evaluated point by point, so on its own it is a state of the rate, and the process is the increase of the quantity accumulated at that rate. The bearer of a process, a system or a region of a field, may be specified after the process. ^process
 - **Event** (a type): $\Pi$ is *quantized*: when it holds of a segment, it holds of no proper sub-segment [krifka1998]. The **culmination** of an event is the first point at which a terminal condition is reached. *Example*: for disjoint sets $\mathcal{A}$ and $\mathcal{B}$ of states, a transition from $\mathcal{A}$ to $\mathcal{B}$ holds of $[a,b]$ when $\gamma(a)\in\mathcal{A}$, $\gamma(b)\in\mathcal{B}$, and $\gamma(t)\notin\mathcal{A}\cup\mathcal{B}$ for $a<t<b$. The culmination is $b$, the first entry into $\mathcal{B}$. The event of realist ontology, the pair $\langle s,s'\rangle$, is this predicate restricted to singleton sets. ^event
 
-A predicate in none of the three classes is restated as an **observable over a declared window** $[a,b]$, and the value of that observable enters a manifestation. Two examples fall in no class: ^window-observable
+A predicate in none of the three classes is restated as an **observable over a declared window** $[a,b]$, and the value of that observable enters a manifestation of the phenomenon. Two examples fall in no class: ^window-observable
 
 - "the mean rate over the window exceeds 5 Hz" can fail on a sub-window, so it is neither a state nor a process. The predicate can also hold of a proper sub-window, so it is not an event either. The predicate is restated as the mean rate over $[a,b]$;
 - "the rate rises then falls" holds at no single point and fails on its rising sub-segment, so it is neither a state nor a process. A proper sub-segment around the peak also satisfies it, so it is not an event. The predicate is restated as the sign pattern of the slope over $[a,b]$.
@@ -66,7 +66,7 @@ A predicate in none of the three classes is restated as an **observable over a d
 | --- | --- | --- |
 | State | $\Pi$ holds on every sub-segment, down to single points | the network sits at its fixed point |
 | Process | $\Pi$ holds on every sub-segment of length at least $\delta$, and at no single point | the rate rises; the network relaxes toward its fixed point |
-| Event | $\Pi$ holds on no proper sub-segment | the membrane potential climbs from rest to threshold; computing $f(3)$ |
+| Event | $\Pi$ holds on no proper sub-segment | the membrane potential climbs from rest to threshold; computing $f(3)$, the value of a function $f$ at the argument 3 |
 | None | restated as an observable over a declared window | the mean rate over the window exceeds 5 Hz |
 
 ## Distinctions

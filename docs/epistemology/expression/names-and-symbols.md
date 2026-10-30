@@ -3,33 +3,16 @@ tags:
   - theory
 index: "[Expression](docs/epistemology/expression/_index.md)"
 aliases:
-  - Concepts and names
-  - Concept and designation
+  - Glossary and notation
+  - Names and symbols
   - Glossary (theory)
   - Notation of a project
 ---
-# Concepts and names
+# Glossary and notation
 
-> [!QUESTION] Goal: what keeps a concept apart from the names and symbols that express it, and what do a glossary and a notation hold?
+> [!QUESTION] Goal: what do a glossary and a notation hold, and how do they express the concepts of a project without changing them?
 
-A **concept** is a unit of meaning that a project uses to describe its objects, such as "disentangled representation" or "fixed point". A **name** is a word or a phrase that designates a concept, and a **symbol** is a written form that designates a quantity or a concept in formulas. A concept keeps one meaning across projects and audiences, whereas its names and symbols vary with the audience and the context of a text. Therefore, the meaning and the names are held in separate places. ^concept
-
-## Grounds of the separation
-
-Two traditions separate a concept from its names:
-
-- **The semiotic triangle.** A symbol relates to its referent only through a thought or reference, which the symbol expresses [ogden1923]. A name and the concept that it expresses are therefore two objects, and the same concept can be expressed by several names.
-- **Concept-oriented terminology.** Terminology work starts from the concept and attaches to it one or several designations: terms, symbols and appellations [iso704]. A concept is fixed by its characteristics and its definition, and a designation is chosen for a concept within a subject field.
-
-The decision on [concepts, glossaries and notations](../../adr/concepts-glossaries-notations.md) applies this separation to the records of a project, for two reasons stated as its constraints. First, a name differing by audience would otherwise duplicate the meaning. Second, two projects that hold one concept would otherwise define it twice, against the [rule of one source](../../adr/one-source-per-unit.md#^one-source).
-
-## The concept
-
-A concept is stated by a gloss, a kind, at most one broader concept, the note that sources it, and its confusions with neighboring concepts, each with the distinction that separates them, as the decision on concepts lists. A concept of another project is referenced, never copied.
-
-- **A concept differs from a term of the theory.** The [vocabulary](../vocabulary/_index.md) fixes the senses of the terms in which the theory of `gnomon` is written, such as "model" or "law". A concept in the sense of this note belongs to the research of a project, and its record is one of the research units of that project.
-- **A concept in use before its definition is an explicandum.** A problem may use a term without a definition, with a pointer to the use that fixes its sense, as the [explicanda of a problem](../objects/problem/epistemic-problem.md#^problem-triple) do. An explication replaces the explicandum by an exact explicatum, which is judged by the adequacy of an explication: similarity to the explicandum, exactness, fruitfulness and simplicity [carnap1950_logical].
-- **A concept differs from a declared quantity.** A target specification declares a quantity with a symbol and a value set. The quantity can instantiate a concept, and the symbol of the quantity then denotes the quantity, not the concept. The [adequacy of a declaration](../foundations/things-and-constructs.md#^declaration-adequacy) applies to the quantity.
+A **name** is a word or a phrase that designates a [concept](../objects/concept/concept.md#^concept), and a **symbol** is a written form that designates a quantity or a concept in formulas. A concept keeps one meaning, whereas its names and symbols vary with the audience and the context of a text. The glossary holds the names of the concepts of one project, and the notation composes its symbols. Both belong to expression: they change how a content is presented, never the content. ^names-symbols
 
 ## Names: the glossary
 
@@ -55,16 +38,13 @@ A **notation** composes the symbols of a project from declared parts: bases, eac
 ## Sources
 
 > [!NOTE] Status of the claims
-> - **Established:** the semiotic triangle, concept-oriented terminology, the requirements of an explication, the separation of concepts from labels, the distinction between sense and reference, and the principle of compositionality, as cited.
+> - **Established:** the separation of concepts from labels, the distinction between sense and reference, and the principle of compositionality, as cited.
 > - **Proposals:**
-> 	- the separation of the concept, the glossary and the notation into three places, as the decision on concepts adopts it;
+> 	- the glossary and the notation as records of one project, apart from the concept;
 > 	- the rule that two forms designate one concept only when they carry the same meaning in the contexts listed.
 
 Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
 
-- [carnap1950_logical] ◐ Carnap, *Logical Foundations of Probability*, University of Chicago Press, 1950, ch. 1; explicandum, explicatum and the four requirements on an explication, checked through the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/carnap/)
 - [frege1892a] ◐ Frege, "Über Sinn und Bedeutung", *Zeitschrift für Philosophie und philosophische Kritik* (N.F.) 100(1), 25–50, 1892; sense and reference
-- [iso704] ◐ International Organization for Standardization, *ISO 704:2022 Terminology work — Principles and methods*, 2022; the links between objects, concepts, definitions and designations, checked through the catalogue entry of the standard
-- [ogden1923] ◐ Ogden & Richards, *The Meaning of Meaning: A Study of the Influence of Language upon Thought and of the Science of Symbolism*, Kegan Paul, Trench, Trubner & Co., 1923; the triangle of symbol, thought or reference, and referent, pp. 10–12 of the 8th edition (1946), checked through a quotation
 - [skos2009] ◐ [Miles & Bechhofer (eds.), *SKOS Simple Knowledge Organization System Reference*, W3C Recommendation, 18 August 2009](https://www.w3.org/TR/skos-reference/); preferred and alternative labels, and the relation `broader`, checked through the namespace document
 - [szabo2020] ◐ [Szabó, "Compositionality", *Stanford Encyclopedia of Philosophy*, substantive revision 17 August 2020](https://plato.stanford.edu/archives/fall2022/entries/compositionality/); principle (C), §1

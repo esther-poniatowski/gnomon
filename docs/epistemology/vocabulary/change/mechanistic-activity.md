@@ -26,7 +26,7 @@ Only the first sense is specific to mechanistic explanation. This note fixes the
 | --- | --- | --- | --- | --- |
 | Mechanistic | new mechanistic philosophy | "Activities are the producers of change"; "Entities are the things that engage in activities", and an activity usually requires that its entities have properties of specific types | pushing, binding, opening, diffusing | [machamer2000] |
 | Aspectual | philosophy of language, ancient philosophy | an atelic predicate, with the subinterval property; a Vendler activity, a process in the sense of Mourelatos, an *energeia* as opposed to a *kinēsis* | running, raining, computing | [vendler1957]; [mourelatos1978]; [aristotle_metaphysics]; [kenny1963] |
-| State variable | neuroscience | the level of firing or of another signal of a neural population, such as the rate $r$ in $\dot r=-r+\phi(Wr+u)$, with an external input $u$ | "neural activity", "population activity" | — |
+| State variable | neuroscience | the level of firing or of another signal of a neural population, such as the rate $r$ in $\dot r=-r+\phi(Wr+u)$, with an activation function $\phi$ applied elementwise, a matrix of connection weights $W$ and an external input $u$ | "neural activity", "population activity" | — |
 | Epistemic | philosophy of science, this method | an act of inquiry, typed by its inputs, its output and its norm in the [taxonomy of epistemic activities](../../processes/activities/epistemic-activities.md) | formulating a question, fitting a model, testing a hypothesis | — |
 
 A mechanistic activity carries four features [machamer2000] [machamer2004]:
@@ -53,7 +53,7 @@ The dualist position is opposed on the ground that the productivity of activitie
 
 - **Raining is an activity in the aspectual sense only.** Raining has the subinterval property. However, no bearer engages in raining, so raining is not a mechanistic activity.
 - **Computing is an activity in both senses.** Computing is atelic, and a mechanism of bearers carries out the computation. The process of computing differs from the [function computed](computation.md): the function is a static map.
-- **Computing $f(3)$ is an accomplishment**, an event in the sense of the [vocabulary of process](process-event-history.md#^event), because it culminates in the output.
+- **Computing $f(3)$, the value of a function $f$ at the argument 3, is an accomplishment**, an event in the sense of the [vocabulary of process](process-event-history.md#^event), because it culminates in the output.
 - **The neuroscientific sense names a variable.** In $\dot r=-r+\phi(Wr+u)$, the "activity" $r$ is a state variable. The terms of the equation name mechanistic activities: leaking ($-r$), integrating the inputs, and coupling through $W$.
 
 > [!WARNING] The *energeia*–*kinēsis* passage of Aristotle
@@ -70,7 +70,7 @@ Each neighboring term differs from a mechanistic activity by one criterion:
 | [Event](process-event-history.md#^event) | aspect is a separate attribute: a mechanistic activity is atelic, as diffusing, or telic, as binding or opening; one occurrence of a telic activity is an event | the quantization test of the vocabulary of process |
 | [Function](function.md) | a function is the contribution of an activity to a [capacity](../regularities/capacity-and-disposition.md) of the containing system | the same activity, pumping, has a function only relative to a system and a capacity [cummins1975] |
 | [Dynamic](dynamic.md) | a dynamic is the global rule of change, and activities are its local components | a dynamic acts on the whole state; an activity changes the variables of its targets |
-| Organization, in the [vocabulary of systems](../systems/system-constituent-environment.md) | an organization arranges several activities relative to one another | an activity is one local change; an organization is a property of an arrangement, such as a delayed feedback loop formed by two activities |
+| Organization, in the [vocabulary of systems](../systems/system-constituent-environment.md) | an organization arranges parts and activities relative to one another | an activity is one local change; an organization is a property of an arrangement, such as a delayed feedback loop formed by two activities |
 | [Mechanism](../regularities/mechanism-and-mechanistic-model.md) | a mechanism is a set of entities and activities organized to produce a phenomenon | a single activity produces a change; a mechanism produces a phenomenon through organization |
 
 ## Proposed criterion of an activity

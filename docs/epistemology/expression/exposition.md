@@ -22,7 +22,7 @@ A statement **carries content** when it states a claim, a definition, a datum, a
 Three grounds support the rule that an exposition adds no content:
 
 - **Communication is not an epistemic activity.** A paper, a talk or a figure carries the content of existing epistemic objects into another medium, so it adds no content to the questions, the knowledge or the warrants of the inquiry, as the [criterion of an epistemic activity](../processes/activities/epistemic-activities.md#^epistemic-criterion) states. An exposition is the product of such communication.
-- **Content has one source.** A motivation or an example stated only in an exposition would be content without a canonical record, against the [rule of one source](../../adr/one-source-per-unit.md#^one-source). Every example, motivation or illustration is therefore first recorded as a research unit.
+- **Content has one source.** A motivation or an example stated only in an exposition would be content without a canonical record, against the [rule of one source](../../adr/one-source-per-unit.md#^one-source). A motivation is therefore first recorded in a research record, as a field or a unit of the record that it motivates. The place of an example or an illustration in the research records is still an open gap, as the [roles of the research units](../objects/status/epistemic-objects.md#^unit-roles) state, so the method sets no obligation for it yet.
 - **Several views over one store keep the store unchanged.** In the architecture of database systems, each group of users reads its own external schema, a view derived from one conceptual schema, and no view stores data of its own [tsichritzis1978]. Literate programming draws a document for human readers and a program for the machine from one source [knuth1984]. An exposition stands to the research records as such a view stands to its store, and a correction therefore goes to the records, after which the exposition is rendered again.
 
 The connectors of an exposition fall under the same rule. Rhetorical Structure Theory separates two kinds of relation between spans of a text [mann1988]. A subject-matter relation, such as cause or elaboration, states a relation between the contents of the spans. A presentational relation, such as motivation or background, aims to change the inclination of the reader. Under a proposal of this method, a connector that states a subject-matter relation restates a relation recorded between the two research units, such as `supports` or `tests`, and a presentational connector adds no content.
@@ -35,13 +35,13 @@ Argumentation is relative to the audience that it addresses: it seeks the adhere
 
 - the **selection** of units, since a unit that the audience already holds can be referenced instead of presented;
 - the **order** of units, and the moves that deliver them;
-- the **names** in which the units are stated, which the glossary of the project admits or forbids for that audience, as the note on [concepts and names](names-and-symbols.md#^glossary) states;
+- the **names** in which the units are stated, which the [glossary of the project](names-and-symbols.md#^glossary) admits or forbids for that audience;
 - the **granularity** of the presentation, such as the steps of a derivation that are shown.
 
 The audience changes neither the content nor the warrant of a unit. The warrant of a claim is fixed by its grounds and its assessment, which do not depend on the reader.
 
 > [!WARNING] Departure from the theory of argumentation
-> In the new rhetoric, a speaker may introduce a premise because the audience grants it [perelman1958]. Such a premise would be content added by the exposition. The method requires instead that a premise needed by an audience first be recorded as a research unit, for instance as a motivation of the object that it motivates.
+> In the new rhetoric, a speaker may introduce a premise because the audience grants it [perelman1958]. Such a premise would be content added by the exposition. The method requires instead that a premise needed by an audience first be recorded in a research record, for instance as a motivation of the object that it motivates.
 
 ## Distinctions
 

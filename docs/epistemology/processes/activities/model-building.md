@@ -36,9 +36,9 @@ The activities of this family output a target specification, a background model 
 
 ## Norms
 
-| Activity | Operation | The test `norm.<activity-id>` passes when |
+| Activity | Operation | The norm passes when |
 | --- | --- | --- |
-| `delimitation` | declare the [constituents, environment and structure](../../vocabulary/systems/system-constituent-environment.md) of the system that a question concerns | every declared constituent and every shared variable occurs in at least one admissible answer type of the question, a member of the answer set over its typed slots [hamblin1958] |
+| `delimitation` | declare the [constituents, environment and structure](../../vocabulary/systems/system-constituent-environment.md) of the system that a question concerns | every declared constituent and every shared variable occurs in at least one admissible answer type of the question, that is, a type of the possible answers fixed by its typed slots [hamblin1958] |
 | `background-appraisal` | admit laws about the target from sources | each admitted law carries a warrant, an origin and a range |
 | `transfer` | carry laws warranted for another class of systems over to the target | structural similarity licenses the extrapolation: the mechanism that supports each law in the source class operates in the target, undisrupted at the stages where the two classes may differ [steel2008] |
 | `abstraction` | omit factors of the target from the model | the omitted factors are named, and no claim of the answer bears on them [jones2005] [cartwright1989] |

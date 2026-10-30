@@ -14,7 +14,7 @@ aliases:
 
 > [!QUESTION] Goal: does a statement name a regularity across instances or one structured pattern, and when does either count as a phenomenon?
 
-"Pattern" covers two objects of different types. A **regularity** is an invariant across a set of instances: configurations, states, histories or data. A **spatial or temporal pattern** is one structured configuration or trajectory, such as stripes or an oscillation. In this method, the **phenomenon** of a question is the behavior of the target that the question concerns, detected through data. The phenomenon is an explanandum only when the aim of the question is explanation. The forms that this behavior can take are stated in the note on the [phenomenon of a question](../../objects/subject/phenomenon.md). This note fixes the senses of the terms.
+"Pattern" covers two objects of different types. A **regularity** is an invariant across a set of instances: configurations, states, histories or data. A **spatial or temporal pattern** is one structured configuration or trajectory, such as stripes or an oscillation. In this method, the **phenomenon** of a question is the behavior of the target that the question concerns, detected through data. The phenomenon is an explanandum, the object that an explanation accounts for, only when the aim of the question, the kind of result that it seeks, is explanation. The forms that this behavior can take are stated in the note on the [phenomenon of a question](../../objects/subject/phenomenon.md). This note fixes the senses of the terms.
 
 ## Senses
 
@@ -40,9 +40,9 @@ The three senses of phenomenon differ in their requirements. The first requires 
 
 ## Relations to the method
 
-- **The evidential status of a regularity records how far its stability is established.** The evidential status ranges from `established`, across data sets or methods, to `derived` within a model. The [phenomenon record](../../../specification/phenomenon.md) grades it, and its detection criterion states the test required of a candidate regularity.
+- **The evidential status of a regularity records how far its stability is established.** The evidential status is the status that grades the support of a phenomenon, and it ranges from `established`, across data sets or methods, to `derived` within a model. The [phenomenon record](../../../specification/phenomenon.md) grades it, and its detection criterion states the test required of a candidate regularity.
 - **An exploratory question leaves its phenomenon open.** The [exploratory question](../../objects/subject/phenomenon.md#^exploratory-phenomenon) fixes the search space in which regularities are sought, and a regularity found there is a candidate phenomenon.
-- **A spatial or temporal pattern enters a record as one occurrence or through an observable.** One pattern, such as the oscillation of one run, is a phenomenon of category *particular-occurrence*. The features of the pattern, such as its frequency, are observables over a [declared window](../change/process-event-history.md#^window-observable).
+- **A spatial or temporal pattern enters a record as one occurrence or through an observable.** One pattern, such as the oscillation of one run, is a phenomenon of category *particular-occurrence*. The features of the pattern, such as its frequency, are observables, quantities that express the phenomenon, taken over a [declared window](../change/process-event-history.md#^window-observable).
 
 ---
 ## Sources

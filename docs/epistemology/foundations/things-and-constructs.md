@@ -93,7 +93,7 @@ Each term of the [vocabulary of inquiry](../vocabulary/_index.md) takes one stat
 | [Appearance](../vocabulary/regularities/pattern-and-phenomenon.md) | representational | the content of an observation or the outcome of a measurement |
 | [Mechanism](../vocabulary/regularities/mechanism-and-mechanistic-model.md) | relational | entities and activities in the world, individuated by the phenomenon chosen |
 | [Mechanistic model](../vocabulary/regularities/mechanism-and-mechanistic-model.md) | representational | a representation of a mechanism |
-| [Model](../vocabulary/representations/model.md), in the representational sense | representational | an object used to represent a target |
+| [Model](../vocabulary/representations/model.md), in the representational sense | representational | an object used to represent a target, which is either the description of that target or a stand-in for it |
 | [Model system](../vocabulary/representations/model.md) | relational | an object whose role as stand-in is fixed by its use |
 | [Target](#^target-senses) | relational | systems of the world, or possible systems, chosen as the object of an inquiry |
 | [Target specification](#^target-senses) | representational | a record that delimits a target |
@@ -109,7 +109,7 @@ Each term of the [vocabulary of inquiry](../vocabulary/_index.md) takes one stat
 | [Epistemic problem](../objects/problem/epistemic-problem.md) | representational | a demand stated relative to the accepted knowledge |
 | [Question](../objects/question/question.md) | representational | a request with a set of answers |
 | [Level of commitment](../objects/question/question.md#^commitment-levels) | representational | the extent to which a record fixes the referent of a slot |
-| [Concept](../expression/names-and-symbols.md#^concept) | representational | a unit of meaning that a project uses, apart from its names |
+| [Concept](../objects/concept/concept.md#^concept) | representational | a unit of meaning that a project uses, apart from its names |
 | [Exposition](../expression/exposition.md#^exposition) | representational | a projection of research units to a chosen audience |
 
 Two groups of terms invite a confusion of statuses: the terms that take two rows, and the relational terms. For each term with two senses, the note defining it fixes a name for each sense.

@@ -27,7 +27,7 @@ The activities of this family output an explanation or a relation between theori
 
 ## Norms
 
-| Activity | Operation | The test `norm.<activity-id>` passes when |
+| Activity | Operation | The norm passes when |
 | --- | --- | --- |
 | `explanation` | show that the explanans, drawn from a model or from the target description, bears to the phenomenon the relation requested by the question | the requested relation holds between the explanans and the explanandum (e.g. deductive subsumption, causal production, invariant dependence) [hempel1948] [salmon1984] [woodward2003] |
 | `unification` | derive many explananda from a small set of argument patterns | the explanations are derived from fewer argument patterns than before [kitcher1989] |

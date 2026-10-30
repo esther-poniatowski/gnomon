@@ -42,9 +42,9 @@ Scientific realism combines three commitments: a metaphysical commitment to a wo
 
 The positions differ on existence and on the achievement of a successful description. The [mediated access](#^mediated-access) stated above is compatible with each of them.
 
-## Commitments of the method
+## Stance of the method
 
-The method of `gnomon` is committed on access and on the semantics of claims, and neutral on existence. The decision on the [neutrality of the records](../../adr/neutral-records-on-existence.md) fixes that stance for the records. ^method-stance
+The method of `gnomon` is committed on access and on the semantics of claims, and neutral on existence. The decision on the [neutrality of the records](../../adr/neutral-records-on-existence.md) fixes that stance for the records, and the [commitments of the method](commitments.md) gather it with the other commitments. ^method-stance
 
 - **Every content of a record is a representation.** A record holds constructs only, as the [statuses of a term](things-and-constructs.md#^layer-test) place them. The target specification is a construct that delimits the target, and an error in it is corrected by revising the record.
 - **The description of a target is a model of that target.** The target description, which is the target specification with its background, represents the target, so it is a model in the [representational sense](../vocabulary/representations/model.md#^target-description-is-a-model). The method reserves the model record for a system other than the target, studied in its place.

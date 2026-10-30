@@ -34,7 +34,7 @@ A statement is **meaningful** when its truth survives every admissible transform
 
 ## Scale of description
 
-In its second sense, the **scale** of a description is its extent and its resolution along one dimension: space, time, or the hierarchy of organization. *Example*: a description of cortex at the scale of millimetres and seconds resolves columns and population rhythms, and no single spike. This sense has no relation to the homomorphism of the measurement sense.
+In its second sense, the **scale** of a description is its extent and its resolution along one dimension: space, time, or the hierarchy of organization. The resolution of a descriptive scale is also called the *grain of description*. *Example*: a description of cortex at the scale of millimetres and seconds resolves columns and population rhythms, and no single spike. This sense has no relation to the homomorphism of the measurement sense.
 
 ## Level
 
@@ -46,13 +46,13 @@ In its second sense, the **scale** of a description is its extent and its resolu
 ## Distinctions
 
 - **A variable and its scale are separated by meaningfulness.** The value set of a variable fixes the values that exist. The scale type fixes the meaningful statements about those values. Two variables with the same value set can carry different scale types. *Example*: integer codes of cell types and counts of spikes both take values in the natural numbers, yet only the counts form a ratio scale.
-- **The two senses of scale are told apart by their object.** A scale in the measurement sense maps a structure onto numbers, so it has a type and admissible transformations. A scale in the descriptive sense is a range and a grain, so it has neither.
+- **The two senses of scale are told apart by their object.** A scale in the measurement sense maps a structure onto numbers, so it has a type and admissible transformations. A scale in the descriptive sense is an extent and a resolution, so it has neither.
 - **The two senses of level are told apart by the item that changes when the level is lowered.** Lowering a level of organization replaces the system by its parts. Lowering a level of description keeps the system and replaces the vocabulary. *Example*: the implementational level describes the visual system itself in physical terms [marr1982], whereas the level of ion channels describes components of a neuron [craver2007].
 
 ## Relations to the method
 
 - When a claim holds on one scale type and fails under the admissible transformations of that type, the claim is an artefact of the representation.
-- **The descriptive scale of a phenomenon sets the default grain of its explanans.** The [proportionality requirement](../../objects/subject/phenomenon.md#^resolution-proportionality) uses scale in the descriptive sense.
+- **The descriptive scale of a phenomenon sets the default grain of description of its explanans.** The [proportionality requirement](../../objects/subject/phenomenon.md#^resolution-proportionality) uses scale in the descriptive sense.
 - **The bound on the explanans uses levels of organization on one of its two axes.** The compositional axis of the [bound on the explanans](../../objects/task/admissible-explanans.md) $\lambda$ restricts the parts that may appear in an answer, so it uses level in the sense of organization. The bound itself is not a level, since its second axis, substrate dependence, orders no parts.
 
 The fields that bear on the scale of a quantity are documented in the [target-system record](../../../specification/target-system.md) and the [phenomenon record](../../../specification/phenomenon.md).

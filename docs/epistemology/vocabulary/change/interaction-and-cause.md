@@ -14,14 +14,14 @@ aliases:
 
 > [!QUESTION] Goal: which sense of "interaction" does a statement use, and what notion of cause does each sense presuppose?
 
-"Interaction" carries two senses. A **causal interaction** is a mutual action between things. Its one-way case is an **action**: a thing $a$ acts on a thing $b$ when the presence of $a$ changes the history of $b$ [bunge1977]. A **statistical interaction** is a property of a model of effects: the effect of two factors is not the sum of their separate effects. Both senses, together with mechanism and law, presuppose a notion of cause.
+"Interaction" carries two senses. A **causal interaction** is a mutual action between things. Its one-way case is an **action**: a thing $o$ acts on a thing $o'$ when the presence of $o$ changes the history of $o'$ [bunge1977]. A **statistical interaction** is a property of a model of effects: the effect of two factors is not the sum of their separate effects. Both senses, together with mechanism and law, presuppose a notion of cause.
 
 ## Senses
 
 | Sense | Community | Definition | Source |
 | --- | --- | --- | --- |
-| Action | realist ontology | a thing $a$ acts on a thing $b$ when the presence of $a$ changes the history of $b$ | [bunge1977] |
-| Causal interaction | realist ontology | mutual action: $a$ acts on $b$ and $b$ acts on $a$ | [bunge1977] |
+| Action | realist ontology | a thing $o$ acts on a thing $o'$ when the presence of $o$ changes the history of $o'$ | [bunge1977] |
+| Causal interaction | realist ontology | mutual action: $o$ acts on $o'$ and $o'$ acts on $o$ | [bunge1977] |
 | Causal interaction | mechanistic philosophy | an interaction of parts characterized by direct, invariant, change-relating generalizations | [glennan2002] |
 | Statistical interaction | statistics | non-additivity: the effect of one factor on a response depends on the level of another factor | [cox1984] |
 | Cause | interventionism | a variable $U$ causes a variable $W$ when some intervention on $U$ would change $W$, other variables being held fixed appropriately | [woodward2003] |
@@ -29,8 +29,8 @@ aliases:
 
 ## Distinctions
 
-- **An action is one-way, and an interaction is mutual.** An interaction between $a$ and $b$ holds when $a$ acts on $b$ and $b$ acts on $a$. A statement of one direction alone states an action, so a claim of interaction requires a test in each direction. ^action-interaction
-- **A relation becomes an action when it changes histories.** "Taller than" and "adjacent to" hold between things without changing the history of either. The test is counterfactual: it asks whether removing $a$ changes the history of $b$. Relations in general are defined in the [vocabulary of properties](../systems/property-attribute-predicate.md).
+- **An action is one-way, and an interaction is mutual.** An interaction between $o$ and $o'$ holds when $o$ acts on $o'$ and $o'$ acts on $o$. A statement of one direction alone states an action, so a claim of interaction requires a test in each direction. ^action-interaction
+- **A relation becomes an action when it changes histories.** "Taller than" and "adjacent to" hold between things without changing the history of either. The test is counterfactual: it asks whether removing $o$ changes the history of $o'$. Relations in general are defined in the [vocabulary of properties](../systems/property-attribute-predicate.md).
 - **Causal and statistical interaction are independent.** Neither entails the other:
     - a one-way action can produce a statistical interaction, as when a drug multiplies the effect of a dose of another drug without either drug acting on the other;
     - a mutual action can produce effects that add up, so that no statistical interaction appears between two treatments.

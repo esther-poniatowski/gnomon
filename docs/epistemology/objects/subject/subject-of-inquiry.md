@@ -7,7 +7,7 @@ aliases:
 ---
 # Subject of inquiry
 
-> [!QUESTION] Goal: which objects does a research question study, and which of them change its admissible answers?
+> [!QUESTION] Goal: which objects does a research question study, and which of them change its possible answers?
 
 The subject of inquiry is the first of the three [layers of specification](../question/question-specification.md#^three-layers) of a question. The layer covers the *subject* of a research question: the objects under study.
 
@@ -28,13 +28,10 @@ The four components fill a statement frame. The [epistemic aim](../task/epistemi
 
 **Inclusion criterion**: ^inclusion-test
 
-> A specification is admitted only if its value *changes the types of the admissible answers*, that is the schema of the admissible answers, or the *presuppositions* of the question.
+> A specification is admitted only if its value *changes the possible answers* of the question, that is their type or their schema, or the *presuppositions* of the question.
 > A specification that fails this test is at most an optional remark.
 
-Each admitted specification divides into two parts:
-
-- **Closed option lists** fix the type of each component (target type, phenomenon category, contrast locus).
-- **Framed free text** states the content, inside a sentence frame with named slots.
+The possible answers and the presuppositions of a question are defined with the [answers of a question](../question/question.md#^answer-sets).
 
 > [!QUOTE] Logic of questions, the source of the inclusion test
 > A question is determined by the set of its possible answers [hamblin1958].
@@ -42,12 +39,9 @@ Each admitted specification divides into two parts:
 
 ## Safeguards against rigidity
 
-- **Type versus content.** Closed lists restrict only the types, so the content remains free text inside a frame.
-- **Conditional requirements.** The [epistemic aim](../task/epistemic-aim.md) $A$ and the form of the question determine which specifications are mandatory:
-    - the contrast $X$, for contrastive why-questions;
-    - the observable $Y$ of the phenomenon, whenever the contrast takes its foils from the possible values of $Y$;
-    - the conditions and byproducts, only once they are known.
-- **Empty values with a maturity marker.** Every specification may stay empty while it is not filled. Whether an empty specification is a gap or a product of the inquiry is read from the [requirements of the epistemic aim](../../../specification/question-task.md#^required-by-aim), never from the record. The marker of each specification is documented under the [maturity of a field](../../../specification/maturity.md). Empty values are admitted because characterizing the phenomenon is itself a discovery task [craver2013], and because the descriptions that this task yields are revised or rejected [colaco2018].
+- **The type of a component can be fixed before its content.** The types of the components can be listed in advance, such as the types of target, the categories of phenomenon or the loci of a contrast, whereas their content cannot. A specification therefore restricts the type of a component and leaves its content free. The lists and the sentence frames are documented in the [subject of a question](../../../specification/question-subject.md).
+- **The aim and the form of the question decide which components are required.** *Example*: a contrastive why-question requires a contrast $X$, as the note on the [contrast](contrast.md) states. The condition under which each component is required is documented with its field.
+- **A specification may stay empty.** Characterizing the phenomenon is itself a discovery task [craver2013], and the descriptions that this task yields are revised or rejected [colaco2018]. A specification may therefore stay empty, and carry a [maturity](../status/statuses-and-acceptance.md#^maturity) that states whether its revision is expected. Whether an empty specification is a gap or a product of the inquiry is read from the aim, as the [attributes of a record](../question/question.md#^record-attributes) state.
 - **Filling order.** The system $S$ and the phenomenon $P$ are specified together, since the partition of variables depends on $P$. The contrast $X$ is filled in two steps. Its locus can be typed as soon as the question schema is posed, as the [order of specification](../../processes/inquiry/specification-order.md) states, whereas its foils are specified afterwards, from the value space of $P$. The domain $D$ bounds all three.
 
 ## Precedent in quantitative methodology
@@ -58,7 +52,7 @@ Quantitative methodology already specifies questions through fixed slots. For ex
 - endpoint → observable of the phenomenon $P$;
 - treatment versus comparator → condition contrast in $X$;
 - population-level summary → scope over instances in $P$;
-- intercurrent events → state restrictions in the domain $D$.
+- intercurrent events, the events after treatment that change the existence or the meaning of the outcome, such as stopping treatment → state restrictions in the domain $D$.
 
 Both frameworks keep the question separate from any model. The [specification of a question](../question/question-specification.md) keeps its subject apart from its answers in the same way. Both frameworks, however, cover only questions about causal effects. The two frameworks therefore support the design of the slots, but not the option lists for capacities, mechanisms, and mathematical explanation.
 

@@ -56,15 +56,23 @@ Each aim of the [registry of aims](../epistemology/objects/task/epistemic-aim.md
 
 ### The block of an explanation
 
-The fields below hold the elements that make the dependences of the core explanatory, as the [block of an explanation](../epistemology/objects/answer/answer-form.md#^explanation-block) states.
+The fields below hold the elements that make the dependences of the core explanatory, as the [block of an explanation](../epistemology/objects/answer/answer-form.md#^explanation-block) states. ^explanation-fields
 
 | Specification | When it is required | Content | Examples |
 | ------------- | ------------------- | ------- | -------- |
 | Contrastive explanandum | always | the fact and the foils that the explanation separates, read from the [contrast](../epistemology/objects/subject/contrast.md) of the question, or the fact alone when its locus is `none` | synchronous oscillations rather than asynchronous activity |
 | Explanatory claim | always | the claim that named dependences of the core are explanatory: they make the difference between the fact and its foils, or they make the fact arise | the dependence of the oscillation on the delay is explanatory; its dependence on the drive is not |
 | Relation | always | the type of the relation, one of the [requested relations](../epistemology/objects/task/requested-relation.md) | mathematical; causal-mechanistic |
-| Factors $E$ | always | per factor, its claim: a *condition* on a quantity, a *property* of a structure or of a law, or a feature of the *organization*; the element on which it bears; the laws and relations that carry its effect; the explanandum variable or manifestation that it accounts for; the foils that it rules out; and the external systems on which it draws | the synaptic delay exceeds its critical value (condition; denoting); the connectivity has rank two (property of a structure; coarse-graining) |
+| Factors $E$ | always | per factor, its claim: a *condition* on a quantity, a *property* of a structure or of a law, or a feature of the *organization*; the element on which it bears; the laws and relations that carry its effect; the explanandum variable or manifestation that it accounts for; the foils that it rules out; the external systems on which it draws; and, in `procedure`, only the steps that the chain from the factor to the phenomenon leaves unstated | the synaptic delay exceeds its critical value (condition; denoting); the connectivity has rank two (property of a structure; coarse-graining) |
 | Factors: target status | always | `denoting` · `coarse-graining` · `limit-construct` · `structural-constraint`, as the [target status of a factor](../epistemology/objects/answer/answer-form.md#^target-status) states; not applicable under a declared use | the delay (denoting); the infinite size of a mean-field network (limit construct) |
+
+- **Each target status requires one kind of feature pair in the binding.** When the route runs on a model, the binding of the answer holds, for each factor: ^status-pairs
+    - `denoting`: a pair of type `quantity`, or of type `component` for a unit of the model alone;
+    - `coarse-graining`: a pair of type `pattern` or `regime`;
+    - `limit-construct`: a pair of type `invariance-class`, which places the target in the universality class of the limit, with the argument for that placement cited among the grounds with the role `warrant`;
+    - `structural-constraint`: a pair of type `invariance-class` or `modal-profile`.
+
+  The [target status of a factor](../epistemology/objects/answer/answer-form.md#^target-status) states what each status claims of the target, and the [types of a feature pair](binding.md#^binding-record) are documented with the binding.
 
 - A factor is often a property found by the answer and absent from every earlier record, as the [account of a factor as a property](../epistemology/objects/answer/answer-form.md#^factor-may-be-found) states. The property is then declared in the model: a property of a law as a law of the model, and a property of a structure as a relation of its organization. A quantity that the property requires is declared in the model as well. The factor then bears on the carrier of the property: a single element, or a family of elements. The field `holds`, in turn, states the property itself. When the property is an invariance, the field `under` names the transformation group. *Example*: the [geometry of a representation](../epistemology/vocabulary/representations/representation-and-encoding.md) is invariant under the rotations of the state space. Where the answer has found the property but cannot yet formalize it, `holds` stays empty and a caveat states the gap. The record then keeps the finding without presenting it as a formula.
 

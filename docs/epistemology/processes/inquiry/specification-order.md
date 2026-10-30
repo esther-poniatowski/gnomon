@@ -17,15 +17,15 @@ Specifying an inquiry appears circular at first. A question names a system and a
 
 An inquiry is specified in five stages. Each stage takes the products of the earlier stages as given.
 
-| Stage | Product | Level of commitment | Record |
-| --- | --- | --- | --- |
-| 1. Problem | the demand, its constraints and its explicanda | terms anchored by pointers | [problem](../../../specification/problem.md) |
-| 2. Question schema | the questions that serve the problem, with typed placeholders, the epistemic task as far as it is fixed, and the locus of each contrast | slots typed | [question](../../../specification/question.md) |
-| 3. Identified subject | the system and the phenomenon, each fixed by a definite description and pointers | slots `identified` | [target system](../../../specification/target-system.md), [phenomenon](../../../specification/phenomenon.md) |
-| 4. Background and specified subject | the admitted laws, and the formal declarations of the system, the phenomenon and the foils of the contrast, each written when a condition requires it | slots `specified`, on demand | [background](../../../specification/background.md) |
-| 5. Candidate answers | the answers proposed to each question, and the models and bindings on which they rest, as products of the inquiry | — | [answer](../../../specification/answer.md), [model](../../../specification/model.md), [binding](../../../specification/binding.md) |
+| Stage | Product | Level of commitment |
+| --- | --- | --- |
+| 1. Problem | the demand, its constraints and its explicanda | terms anchored by pointers |
+| 2. Question schema | the questions that serve the problem, with typed placeholders, the epistemic task as far as it is fixed, and the locus of each contrast | slots typed |
+| 3. Identified subject | the system and the phenomenon, each fixed by a definite description and pointers | slots `identified` |
+| 4. Background and specified subject | the admitted laws, and the formal declarations of the system, the phenomenon and the foils of the contrast, each written when a condition requires it | slots `specified`, on demand |
+| 5. Candidate answers | the answers proposed to each question, and the models and bindings on which they rest, as products of the inquiry | — |
 
-The levels of commitment are defined in the note on [questions](../../objects/question/question.md#^commitment-levels). A change to an earlier stage, made after a later stage, is a revision. The [revision activities](../activities/revision.md) type that change.
+The record that holds each product is documented in the [specification of the records](../../../specification/_index.md). The levels of commitment are defined in the note on [questions](../../objects/question/question.md#^commitment-levels). A change to an earlier stage, made after a later stage, is a revision. The [revision activities](../activities/revision.md) type that change.
 
 Two stages are read with a qualification:
 
@@ -45,6 +45,8 @@ A question is specified by three layers: its subject $\Sigma$, its epistemic tas
 
 Stage 1 belongs to no layer: the problem supplies the demand from which the questions of stage 2 derive. The answer type and the conditions of satisfaction are not a layer either: they follow from the three layers, so they are fixed component by component as the layers are, before any candidate of stage 5 is assessed. The candidate answers of stage 5 are products of the inquiry, and no layer of the specification contains them.
 
+**Each assessment is made against the version of the specification fixed before it.** A revision of a layer after an assessment voids the verdicts made under the earlier version, and the revision records its trigger. Without this rule, a revision made after an evaluation would fit the tests to a candidate already assessed, the practice that pre-registration exists to prevent [nosek2018]. The rule presupposes records that keep successive versions, and whether the records keep them is stated with the [itinerary record](../../../specification/itinerary.md#^record-versions). ^tests-per-version
+
 ## Three distinctions that remove the circularity
 
 **First, a question needs its terms identified, not specified.** A question can name the system and the phenomenon once their referents are fixed, before any model states their properties. The level `identified` fixes a referent by a definite description, as the [levels of commitment](../../objects/question/question.md#^commitment-levels) state.
@@ -61,7 +63,7 @@ One dependency survives the three distinctions. The boundary of the system and t
 - The relation that makes an answer relevant is fixed by the context of the question [vanfraassen1980].
 - Delimiting a target system is already a step of modelling [elliottgraves2020].
 
-The [inclusion criterion](../../objects/subject/subject-of-inquiry.md#^inclusion-test) bounds this dependency. A specification enters the subject only when it changes the types of the admissible answers or the presuppositions of the question. Therefore, only those specifications depend on the question, and every other specification can be fixed, or left out, without it.
+The [inclusion criterion](../../objects/subject/subject-of-inquiry.md#^inclusion-test) bounds this dependency. A specification enters the subject only when it changes the types of the possible answers of the question or its presuppositions. Therefore, only those specifications depend on the question, and every other specification can be fixed, or left out, without it.
 
 ## Controlled iteration
 
@@ -70,7 +72,7 @@ The remaining dependency is handled by mutual adjustment. Rules and inferences a
 The method imposes four conditions under which such an iteration is not circular:
 
 1. **A starting point fixed independently of the outcome.** The first problem statement is written before any result is reconstructed, and it serves as the initially affirmed system from which corrections start.
-2. **Provisional objects, with recorded revisions.** Every object carries a maturity, and every revision records its trigger.
+2. **Provisional objects, with recorded revisions.** Every specification of a record carries a [maturity](../../objects/status/statuses-and-acceptance.md#^maturity), and every revision records its trigger.
 3. **Tests that can fail.** A test that uses a provisional claim supports that claim only when the test could have returned a result against it [glymour1980]. Glymour states this requirement within bootstrap testing, which tests a hypothesis with evidence interpreted through other parts of the same theory.
 4. **A convergence criterion.** The iteration stops when one full pass through the stages triggers no revision. The criterion detects that the iteration has stopped, and it does not guarantee that the iteration stops.
 
@@ -105,6 +107,7 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [goodman1955] ◐ Goodman, *Fact, Fiction, and Forecast*, Harvard University Press, 1955; first edition Athlone Press, 1954; the mutual adjustment of rules and inferences; checked through the [SEP entry on Goodman](https://plato.stanford.edu/entries/goodman/)
 - [hacking1983] ◐ [Hacking, *Representing and Intervening: Introductory Topics in the Philosophy of Natural Science*, Cambridge University Press, 1983](https://doi.org/10.1017/CBO9780511814563)
 - [nickles1981] ◐ [Nickles, "What is a problem that we may solve it?", *Synthese* 47(1), 85–118, 1981](https://doi.org/10.1007/BF01064267); checked through a scanned copy of poor quality
+- [nosek2018] ◐ [Nosek, Ebersole, DeHaven & Mellor, "The preregistration revolution", _PNAS_ 115(11), 2018](https://www.pnas.org/doi/10.1073/pnas.1708274114)
 - [stallman1977] ◐ [Stallman & Sussman, "Forward reasoning and dependency-directed backtracking in a system for computer-aided circuit analysis", *Artificial Intelligence* 9(2), 135–196, 1977](https://doi.org/10.1016/0004-3702(77)90029-7)
 - [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, read in its abridged reprint, "The pragmatic theory of explanation", in Pitt (ed.), *Theories of Explanation*, Oxford University Press, 1988, 136–155 ([PDF](https://www.fitelson.org/290/vanfraassen_pte.pdf))
 - [weld1994] ◐ [Weld, "An introduction to least commitment planning", *AI Magazine* 15(4), 27–61, 1994](https://www.cs.uky.edu/~sgware/reading/papers/weld1994introduction.pdf); deferring decisions, p. 34

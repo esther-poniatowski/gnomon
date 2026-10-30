@@ -7,7 +7,7 @@ aliases:
 ---
 # Processes of inquiry
 
-Defines the processes by which an inquiry advances: the epistemic activities and the norms that judge them, and the course of an inquiry from the order of its specification to the decomposition of its questions.
+Defines the advance of an inquiry, from the typed acts that compose it to the choice of its next act.
 
-- [Course of an inquiry](inquiry/_index.md): orders the specification of an inquiry, diagnoses what its questions need, and decomposes them
-- [Epistemic activities](activities/_index.md): types each operation of an inquiry by its inputs, its output and its norm of success, so that an itinerary can be checked
+- [Epistemic activities](activities/_index.md): types each act of an inquiry by its inputs, its output and its norm, so that an itinerary can be checked
+- [Course of an inquiry](inquiry/_index.md): orders the specification of an inquiry, decomposes its questions, and chooses its next act

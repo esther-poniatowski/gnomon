@@ -25,7 +25,13 @@ The question record names the [problem](problem.md) that it addresses and the qu
 - **A problem is recorded in its own record.** Its fields, and the field by which a question names its problem, are specified in the [problem record](problem.md).
 - **The steps that answer a question are recorded in an itinerary.** An [itinerary](itinerary.md) lists the activities that lead from a problem to its questions, and from a question to its answers and their assessments. The itinerary check verifies that each step takes the types of product required by its activity.
 
-The commitment of a slot takes one of the [levels of commitment](../epistemology/objects/question/question.md#^commitment-levels) defined for a question.
+The commitment of a slot takes one of the [levels of commitment](../epistemology/objects/question/question.md#^commitment-levels) defined for a question. Each level is decided by one check over the records: ^commitment-checks
+
+| Level | Check |
+| --- | --- |
+| `placeholder` | the type of the placeholder belongs to the [admitted types](question-subject.md#^placeholder-slots) |
+| `identified` | the record exists and states its identification |
+| `specified` | the required fields are filled, and every symbol resolves |
 
 - **The slots of a question admit a placeholder.** The rule is stated under [placeholders before records](question-subject.md#^placeholder-slots).
 - **The type of a question record follows the commitment of its slots.** When any slot holds a placeholder, the record is a `question-schema`. When every slot is `identified` or `specified`, the record is a `question`. The two take the same fields.

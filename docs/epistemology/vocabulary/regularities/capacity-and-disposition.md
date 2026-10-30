@@ -10,9 +10,9 @@ aliases:
 ---
 # Capacity and disposition
 
-> [!QUESTION] Goal: what does a statement claim when it ascribes a capacity to a system, and how does a capacity differ from a function, an activity and an occurrence?
+> [!QUESTION] Goal: what does a statement claim when it ascribes a capacity to a system, and how does a capacity differ from a function, a mechanistic activity and an occurrence?
 
-A **disposition** is a property held by a thing whether or not the property is manifested, such as fragility or solubility. A disposition is ascribed through a conditional: if a stimulus condition obtained, the thing would show a manifestation [choi2018]. A **capacity** is a disposition of a system to produce outputs of a class when it receives inputs of a class [cummins1975] [cummins1983]. A record states a capacity as such a conditional, together with a criterion of performance.
+A **disposition** is a property held by a thing whether or not the property is manifested, such as fragility or solubility. A disposition is ascribed through a conditional: if a stimulus condition obtained, the thing would show the manifestation of the disposition [choi2018]. A **capacity** is a disposition of a system to produce outputs of a class when it receives inputs of a class [cummins1975] [cummins1983]. A record states a capacity as such a conditional, together with a criterion of performance.
 
 ## Senses
 
@@ -27,15 +27,16 @@ The simple conditional analysis fails on finks and masks [choi2018]. A fink remo
 ## Distinctions
 
 - **A capacity belongs to a system, whereas a function relates a component to a system.** A capacity is fixed by its classes of inputs and outputs and by its criterion. A [function](../change/function.md) of a component, in the causal-role sense, is the contribution of that component to a capacity of the containing system [cummins1975]. Therefore, ascribing a causal-role function presupposes a capacity.
-- **A capacity is held, whereas an activity occurs.** A system has a capacity whether or not the capacity is exercised. One exercise of a capacity is an occurrence, a [process or an event](../change/process-event-history.md), produced by [activities](../change/mechanistic-activity.md).
+- **A capacity is held, whereas a mechanistic activity occurs.** A system has a capacity whether or not the capacity is exercised. One exercise of a capacity is an occurrence, a [process or an event](../change/process-event-history.md), produced by [activities](../change/mechanistic-activity.md).
 - **The phenomenon category *capacity* selects a capacity as the phenomenon of a question.** A phenomenon of that category has no occurrence class. One observed exercise of the capacity is a phenomenon of category *particular-occurrence*.
+- **The manifestation of a disposition differs from the manifestation of a phenomenon.** The manifestation of a disposition is the outcome that the thing shows when the stimulus condition obtains. The manifestation of a phenomenon is a feature of the behavior, such as its frequency, as the [phenomenon of a question](../../objects/subject/phenomenon.md) defines it. A phenomenon of category *capacity* joins the two: its manifestations in the record state the conditional, whose consequent is the manifestation of the disposition.
 
 ## Relations to the method
 
 - *Example*: for every labeling of the mixture classes in a stated family, a linear readout separates the encoded mixtures. The criterion is linear separability. The count of separable labelings bounds this criterion. For $n$ encoded points in general position in $m$ dimensions, a hyperplane through the origin separates every labeling only when $n\leq m$, and exactly half of the labelings when $n=2m$ [cover1965].
 - **A capacity can be the explanandum of a question whose explanans is a representation geometry.** The performance of a readout is a capacity among the [representational items and their concepts](../representations/representation-and-encoding.md#^decision-table).
 
-The fields that bear on a capacity are documented in the [phenomenon record](../../../specification/phenomenon.md), under the [manifestations of a capacity](../../../specification/phenomenon.md#^capacity-manifestations).
+The fields that bear on a capacity are documented in the [phenomenon record](../../../specification/phenomenon.md), under the [manifestations of a phenomenon of category capacity](../../../specification/phenomenon.md#^capacity-manifestations).
 
 ---
 ## Sources

@@ -29,7 +29,7 @@ A **variable** is an [attribute](../systems/property-attribute-predicate.md) for
 | Variable | realist ontology | a state function $F:\mathcal{D}\to\mathcal{W}$ that assigns to each thing, at each time, a value in a codomain $\mathcal{W}$ | [bunge1977] |
 | Variable | probability | a random variable: a measurable function $F:\Omega\to\mathbb{R}$ on a probability space | [kolmogorov1933] |
 | Variable | logic | a placeholder that ranges over a domain and is bound by a quantifier | [quine1948] |
-| Value | all | an element $w\in\mathcal{W}$ of the codomain; the output $F(a)$ of the variable at one argument $a\in\mathcal{D}$ | — |
+| Value | all | an element $w\in\mathcal{W}$ of the codomain; the output $F(z)$ of the variable at one argument $z\in\mathcal{D}$ | — |
 | Observable | empiricist philosophy of science | an entity that could be observed by the unaided senses under suitable circumstances, opposed to an unobservable entity | [vanfraassen1980] |
 | Observable | classical and quantum physics | a measurable function on the phase space (classical); a self-adjoint operator on the state space (quantum) | — |
 | Observable | control theory | the output $y=g(x)$ of an observation function $g$; a system is *observable* when its state can be reconstructed from its outputs over time | [kalman1960] |
