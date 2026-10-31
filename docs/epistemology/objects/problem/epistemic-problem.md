@@ -14,7 +14,7 @@ aliases:
 
 An **epistemic problem** is a demand for a result that the accepted knowledge does not yet deliver, together with the conditions that the result must meet [nickles1981] [laudan1977]. *Example*: some networks generalize long after they have fitted their training data, and no accepted account derives the duration of that delay. The demand is an account of the delay. One condition on the account is that it derive the delay from the admitted training laws.
 
-A problem is relative to the accepted knowledge of an [inquiry](../../foundations/inquiry-and-state.md). The same demand ceases to be a problem once an accepted result meets it. The demand becomes a problem again when a revision withdraws that result.
+A problem is relative to the accepted knowledge of an [inquiry](../../foundations/inquiry-and-state.md). The same demand ceases to be a problem once the researcher accepts an answer that solves it, or once the accepted knowledge denies one of its presuppositions. The demand becomes a problem again when a revision withdraws that answer.
 
 ## Senses
 
@@ -46,7 +46,7 @@ The problem is stated with the two relations that the [state of an inquiry keeps
 
 ### The proposed candidates $H$
 
-Beside $K$, the inquiry holds a set $H$ of **proposed candidates**: answers put forward and not yet accepted, such as two rival accounts of the delay. A candidate enters $K$ only through the [act of acceptance](../status/statuses-and-acceptance.md#^acceptance-act) of the researcher, which its [assessment](../answer/satisfaction-conditions.md) informs without computing it. A claim without support can still serve as a premise: the researcher admits it as a working assumption under the warrant `posited`, and the admission does not make it a member of $K$. ^candidates
+Beside $K$, the inquiry holds a set $H$ of **proposed candidates**: answers put forward and not yet accepted, such as two rival accounts of the delay. A candidate enters $K$ only through the [act of acceptance](../status/statuses-and-acceptance.md#^acceptance-act). A claim without support can still serve as a premise: the researcher admits it as a working assumption under the warrant `posited`, and the admission does not make it a member of $K$. ^candidates
 
 ### The demand $d$
 
@@ -68,29 +68,30 @@ The request follows the distinction drawn in erotetic logic between the range of
 
 The constraints are the conditions that any solution must meet, each with its source: a result, an admitted law or a publication [nickles1981]. Constraints come in two kinds:
 
-- $\Phi_1$ applies to each candidate alone: *the account derives the delay from the admitted training laws*;
-- $\Phi^*$ applies to the set of results: *the account is unique up to a change of parameters*.
+- $\Phi_1$ applies to each result alone: *the account derives the delay from the admitted training laws*;
+- $\Phi^*$ applies to the set of all the results of the demanded type that satisfy $\Phi_1$: *the account is unique up to a change of parameters*.
 
 ## The question associated with a problem
 
 Each problem defines an **associated question**: the question that asks for the demanded results, and only for them. ^associated-question
 
-$$Q_\pi = \text{which } s \text{ of type } \mathsf{type} \text{ satisfies } \Phi_1,\ \text{under the request } \mathsf{req}\ ?$$
+$$Q_\pi = \text{which } s \text{ of type } \mathsf{type} \text{ satisfies } \Phi_1,\ \text{under the request } \mathsf{req},\ \text{the set of all such } s \text{ meeting } \Phi^*\ ?$$
 
-In words: the associated question asks for results of the demanded type that meet the conditions on each candidate. Its [possible answers](../question/question.md#^answer-sets) are propositions of the form "$s$ is a result of type $\mathsf{type}$ that satisfies $\Phi_1$". The request fixes how many such propositions a direct answer must assert, and how completely. Whether-questions and which-questions are both elementary questions, with the same subject and request, so this form covers both [belnap1976]. ^presuppositions
+In words: the associated question asks for results of the demanded type that meet the conditions on each result. Its [possible answers](../question/question.md#^answer-sets) are propositions of the form "$s$ is a result of type $\mathsf{type}$ that satisfies $\Phi_1$". The request fixes how many such propositions a direct answer must assert, and how completely. Under every request other than `verdict`, a direct answer also asserts that the set of all the results satisfying $\Phi_1$ meets the constraints $\Phi^*$. That claim concerns the whole set of results rather than the selected ones, like the claim of completeness that a direct answer adds to its selection in erotetic logic [belnap1976]. Under the request `verdict`, $Q_\pi$ is a whether-question rather than a which-question, the two kinds of elementary question in erotetic logic [belnap1976]. Its possible answers are then, for each proposed candidate $c$, the proposition that $c$ satisfies $\Phi_1$ and its negation. ^presuppositions
 
-The associated question carries two kinds of presupposition:
+The associated question carries three kinds of presupposition:
 
-- its **existence presupposition**: at least one result of the demanded type meets the conditions on each candidate;
-- its **topic presupposition**, when the demand concerns a fact, such as an explanation of a phenomenon: the fact holds, as a why-question presupposes that its topic is true [vanfraassen1980].
+- its **existence presupposition**: at least one result of the demanded type satisfies $\Phi_1$. Under the request `verdict`, $Q_\pi$ is a whether-question, whose presupposition is trivially true, as for the [whether-question about a presupposition](../question/question.md#^linked-questions);
+- its **topic presupposition**, when the demand concerns a fact, such as an explanation of a phenomenon: the fact holds, as a why-question presupposes that its topic is true [vanfraassen1980];
+- its **set presupposition**, when constraints $\Phi^*$ are stated and the request is not `verdict`: the set of all the results satisfying $\Phi_1$ meets $\Phi^*$, since every direct answer asserts it.
 
-The problem **exists** while its demand is unmet: no direct answer of $Q_\pi$ is in $K$, so that $a\notin K$ for every direct answer $a$. ^problem-existence
+The problem **exists** while its demand is unmet and its presuppositions stand: no direct answer of $Q_\pi$ is in $K$, so that $a\notin K$ for every direct answer $a$, and $K$ holds the negation of no presupposition of $Q_\pi$. A problem whose presupposition $K$ denies has dissolved, and no longer exists. ^problem-existence
 
-The problem has an **epistemic gap** when, in addition, the existence presupposition is in $K$, so that $K$ **evokes** the question: ^gap
+Under every request other than `verdict`, the problem has an **epistemic gap** when, in addition, the existence presupposition of $Q_\pi$ is in $K$, so that $K$ **evokes** the question: ^gap
 
 $$\exists s\,\big(\mathsf{type}(s)\wedge\Phi_1(s)\big)\in K\qquad\text{and}\qquad a\notin K\ \text{ for every direct answer } a \text{ of } Q_\pi .$$
 
-In words: the researcher has accepted that a result of the demanded type exists, and has accepted no direct answer that gives such a result. This pair of conditions is the **epistemic gap** of the problem. The condition adapts Wiśniewski's evocation, which uses logical entailment from the premises [wisniewski1995]. In both clauses, entailment from $K$ is replaced by membership of $K$. The second clause therefore departs further from evocation than a change of consequence relation: an answer that follows from $K$, or that a run has obtained without its being accepted, $\mathrm{Obt}_{\mathcal{M}}(a)$ with $a\notin K$, leaves the gap open.
+In words: the researcher has accepted that a result of the demanded type exists, and has accepted no direct answer that gives such a result. This pair of conditions is the **epistemic gap** of the problem. The condition adapts Wiśniewski's evocation, which uses logical entailment from the premises [wisniewski1995]. In both clauses, entailment from $K$ is replaced by membership of $K$. The second clause therefore departs further from evocation than a change of consequence relation: an answer that follows from $K$, or that a run has obtained without its being accepted, $\mathrm{Obt}_{\mathcal{M}}(a)$ with $a\notin K$, leaves the gap open. Under the request `verdict`, the gap is defined by its second clause alone: no verdict on the candidates is in $K$. The presupposition of a whether-question is trivially true, so the method requires no acceptance of it.
 
 *Example*: suppose that an accepted proof derives the existence of fixed points from the admitted dynamics of a class of recurrent networks, while no available analysis gives their number at a given gain. Under that supposition, $K$ evokes the question "how many fixed points does a network of the class have at each gain?".
 
@@ -98,9 +99,15 @@ In words: the researcher has accepted that a result of the demanded type exists,
 
 A problem ends in one of three ways, and the [problem record](../../../specification/problem.md) fixes their record values. Two of the three ways have a formal condition: ^problem-outcomes
 
-- **Solved**: a candidate of the demanded type meets the constraints and the request, and the researcher has accepted it, which moves it from $H$ into $K$.
-- **Dissolved**: the revised accepted knowledge holds the negation of a presupposition of $Q_\pi$, its existence presupposition or its topic presupposition. No result of the demanded kind exists, so no solution is needed. *Example*: the delay appears only in a thresholded accuracy, while the test loss falls from the start of training. In that case, no delay of learning exists, and the problem of explaining it dissolves.
+- **Solved**: the researcher has accepted a direct answer of $Q_\pi$, which enters $K$. Whether the result itself enters $K$ depends on its type, as the [solution and the solving claim](#^solution-claim) state.
+- **Dissolved**: the revised accepted knowledge holds the negation of a presupposition of $Q_\pi$, its existence, topic or set presupposition. When the existence presupposition fails, no result of the demanded type exists; when the topic presupposition fails, the fact that the demand concerns does not hold; when the set presupposition fails, no set of results meets $\Phi^*$. In each case, no solution is needed. Under the request `verdict`, only the topic presupposition can fail. *Example*: the delay appears only in a thresholded accuracy, while the test loss falls from the start of training. In that case, no delay of learning exists, and the problem of explaining it dissolves.
 - **Abandoned**: the inquiry stops before the problem is solved or dissolved. No formal condition defines this outcome, which records a decision of the researcher.
+
+**The solving claim is the direct answer that the researcher accepts; the result enters $K$ only when it is a claim.** Write $s$ for the demanded result. The [product types](../status/epistemic-objects.md#^accepted-objects) fall into claim types and construct types, separated by whether their objects can be true or false, and a rule below applies to each class. A result of a type not yet classed has no solving rule yet. The logic of problems draws a parallel separation: a problem is solved by a construction, whereas a proposition is proved [kolmogorov1932]. ^solution-claim
+
+- **A result of a claim type enters $K$ with its answer.** An explanation, a consequence or a hypothesis is a claim, stated by an answer. The direct answer "$s$ satisfies $\Phi_1$" is then carried by two records: the answer that states $s$, and the [assessment](../answer/satisfaction-conditions.md#^assessment) whose verdicts find that $s$ meets the constraints. Accepting that answer, with its assessment, counts as accepting the direct answer, and it puts $s$ into $K$.
+- **A result of a construct type stays in its record, and the claim of its adequacy enters $K$.** A model, a concept or a design is judged for its adequacy rather than its truth, so it never enters $K$. The direct answer of $Q_\pi$ is then the claim that the construct meets the constraints. When the result is a model, that claim is a hypothesis about its adequacy for the purpose that the problem fixes, which evidence supports or undermines [parker2020]. When the result is a concept, the constraints $\Phi_1$ state the criteria of adequacy for its explicandum, in the sense of the [adequacy of an explication](../concept/concept.md#^concept). The construct itself is held in a record when a record kind holds its type; the concept and the design have none yet. No record holds the claim of adequacy yet, as the [problem record](../../../specification/problem.md) warns.
+- **A verdict request is solved by a verdict.** Under the request `verdict`, the direct answer states, for each candidate, whether it meets the constraints. The verdict is a claim, so it enters $K$ once accepted, even when every candidate fails. The candidates keep their own place in $H$ or in $K$.
 
 ## Every inquiring question presupposes a problem
 
@@ -112,7 +119,7 @@ Therefore, every inquiring question $Q$ carries a **minimal problem**: ^minimal-
 
 $$\pi_Q=\langle K,\ d_Q,\ \Phi_Q\rangle .$$
 
-The demand $d_Q$ takes the type of result and the request of $Q$. Its explicanda $\Xi_Q$ are the terms of $Q$ that enter by their anchored use rather than as typed slots. The constraints $\Phi_Q$ carry the remaining specifications of $Q$ as conditions on each candidate: its subject, its contrast and its [epistemic task](../task/epistemic-task.md). The associated question of $\pi_Q$ is therefore $Q$ itself. In words: the minimal problem of a question states that its answer is lacking, so it exists for every inquiring question. The minimal problem has an epistemic gap once the existence presupposition of $Q$ is in $K$.
+The demand $d_Q$ takes the type of result and the request of $Q$. Its explicanda $\Xi_Q$ are the terms of $Q$ that enter by their anchored use rather than as typed slots. The constraints $\Phi_Q$ carry the remaining specifications of $Q$ as conditions on each result: its subject, its contrast and its [epistemic task](../task/epistemic-task.md). The associated question of $\pi_Q$ is therefore $Q$ itself. In words: the minimal problem of a question states that its answer is lacking, so it exists for every inquiring question whose presuppositions $K$ does not deny. The minimal problem has an epistemic gap once the existence presupposition of $Q$ is in $K$.
 
 > [!NOTE] Questions outside inquiry
 > The asker of an examination question or of a rhetorical question already holds the answer. Such a question carries no minimal problem and serves no inquiry.
@@ -144,7 +151,7 @@ Reduction can be conjunctive: $\pi_1$ reduces to $\pi_2$ and $\pi_3$ together wh
 
 ## Distinctions
 
-- **A gap is not a problem, and a problem need not have a gap.** A problem exists while its demand is unmet, and it has a gap when the existence presupposition is also in $K$. The gap states a lack, whereas the problem adds the demand and its constraints, which fix the result that would fill the gap.
+- **A gap is not a problem, and a problem need not have a gap.** A problem that [exists](#^problem-existence) has a gap only when its existence presupposition is also in $K$. The gap states a lack, whereas the problem adds the demand and its constraints, which fix the result that would fill the gap.
 - **The explicanda of a problem and the placeholders of a question fix a term along two different dimensions.** An explicandum of a problem is *anchored*: a pointer fixes its use, and no type is given. A [placeholder](../question/question.md#^question-schema) is *typed*: its kind is fixed, and no referent is given. The level `identified` of a slot fixes both the type and the referent.
 - **The request is not the aim.** The request fixes how many results, and how complete, the demand asks for. The [epistemic aim](../task/epistemic-aim.md) fixes the kind of knowledge that a question seeks.
 - **"Epistemic problem" names the problem defined here.** The [epistemic task](../task/epistemic-task.md) of a question fixes the kind of knowledge that its answer must deliver. The task belongs to the question, not to the problem.
@@ -170,6 +177,7 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [levi1980] ◐ Levi, *The Enterprise of Knowledge: An Essay on Knowledge, Credal Probability, and Chance*, MIT Press, 1980; the corpus of knowledge relative to which inquiry proceeds
 - [medvedev1955] ◐ Medvedev, "Degrees of difficulty of mass problems", *Doklady Akademii Nauk SSSR* 104, 501–504, 1955; uniform reducibility of problems, checked through the Encyclopedia of Mathematics entry ["Finitary problem"](https://encyclopediaofmath.org/wiki/Finitary_problem)
 - [nickles1981] ◐ [Nickles, "What is a problem that we may solve it?", *Synthese* 47(1), 85–118, 1981](https://doi.org/10.1007/BF01064267); a problem as a demand together with constraints, checked through a scanned copy of poor quality
+- [parker2020] ◐ [Parker, "Model evaluation: an adequacy-for-purpose view", *Philosophy of Science* 87(3), 457–477, 2020](https://doi.org/10.1086/708691); model evaluation as the investigation of hypotheses about the adequacy-for-purpose of a model, checked through the abstract and secondary summaries
 - [polya1945] ◐ Pólya, *How to Solve It: A New Aspect of Mathematical Method*, Princeton University Press, 1945; the unknown, the data and the condition, and problems to find against problems to prove
 - [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); the topic of a why-question presupposed true; ch. 5, read in its abridged reprint, "The pragmatic theory of explanation", in Pitt (ed.), *Theories of Explanation*, Oxford University Press, 1988, 136–155 ([PDF](https://www.fitelson.org/290/vanfraassen_pte.pdf))
 - [wisniewski1995] ◐ [Wiśniewski, *The Posing of Questions: Logical Foundations of Erotetic Inferences*, Kluwer, 1995](https://doi.org/10.1007/978-94-015-8406-7), ch. 5 on the evocation of questions; both definitions, evocation and erotetic implication, checked through [Wiśniewski, "Erotetic logic and explanation by abnormic hypotheses"](https://www.bu.edu/wcp/Papers/Logi/LogiWisn.htm)

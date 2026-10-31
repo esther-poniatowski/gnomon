@@ -65,7 +65,7 @@ Each comparison also reports three facts about its own conditions: ^comparison-r
 
 - **The comparison is recomputed, never edited.** The inputs of a comparison fix its output, so an assessment that cites a comparison records only those inputs, and any reader recomputes the same output. A revised binding or a new version of the data yields a new comparison, and the earlier comparisons stay as they were. ^comparison-recomputed
 
-- **Adequacy for purpose is judged per question.** A comparison judges the model for the purpose that the question states through its feature pairs and its tolerance, not in general [parker2020]. A model adequate for one question can therefore fail for another question about the same phenomenon. ^adequacy-for-purpose
+- **Adequacy for purpose is judged per question.** A comparison judges the model for the purpose that the question states through its feature pairs and its tolerance, not in general [parker2020]. A model adequate for one question can therefore fail for another question about the same phenomenon. A problem that demands a model is solved by the [claim of its adequacy](../problem/epistemic-problem.md#^solution-claim) for the purpose of the problem. ^adequacy-for-purpose
 
 ---
 ## Sources

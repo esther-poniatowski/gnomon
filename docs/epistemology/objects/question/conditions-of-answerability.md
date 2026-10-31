@@ -60,7 +60,7 @@ Once the conditions of a route hold, the acts that exercise access obtain the qu
 
 At a given time, a condition is in one of three condition states: ^condition-states
 
-- **established**, when the records show that it holds: the norm of the act whose outcome bears on the condition has passed, that outcome is positive, and it has been accepted; or a record field whose definition shows the condition holds the value that shows it, such as the evidential status `established` of a phenomenon, cited by a pointer; or when the researcher asserts that it holds, with pointers to the records or the publications that show it;
+- **established**, when the records show that it holds: the norm of the act whose outcome bears on the condition has passed, that outcome is positive, and the claim that it states has been accepted into $K$; or a record field whose definition shows the condition holds the value that shows it, such as the evidential status `established` of a phenomenon, cited by a pointer; or when the researcher asserts that it holds, with pointers to the records or the publications that show it;
 - **not established**, when nothing yet shows whether it holds;
 - **refuted**, when the records or the literature show that it fails.
 
@@ -109,7 +109,7 @@ Each condition of axis B can be refuted under any value of axis A, with two exce
 
 ## Necessity and joint sufficiency
 
-Each condition of a route is **necessary** for that route, in one of two senses. When definiteness, the answer type, the candidates, discrimination, access or bridging fails, the route cannot obtain an admissible answer. When soundness or representation fails, the route can still obtain an admissible answer, which the evaluation cannot accept, so these two conditions are necessary for an answer that the evaluation can accept. The conditions of one route are meant to be **jointly sufficient** for obtaining an answer: once all hold, the acts that exercise access can run, and the bridging inference turns the value obtained into an answer, which the evaluation then judges. A combination step still has to compose that answer, and a check has to confirm that the combination is valid. The note on [question decomposition](../../processes/inquiry/question-decomposition.md#^synthesis) states what a combination that yields no answer reveals. ^sufficiency
+Each condition of a route is **necessary** for that route, in one of two senses. When definiteness, the answer type, the candidates, discrimination, access or bridging fails, the route cannot obtain an admissible answer. When soundness or representation fails, the route can still obtain an admissible answer, which cannot be a [satisfying answer](question.md#^answer-sets), so these two conditions are necessary for a satisfying answer. The conditions of one route are meant to be **jointly sufficient** for obtaining an answer: once all hold, the acts that exercise access can run, and the bridging inference turns the value obtained into an answer, which the evaluation then judges. A combination step still has to compose that answer, and a check has to confirm that the combination is valid. The note on [question decomposition](../../processes/inquiry/question-decomposition.md#^synthesis) states what a combination that yields no answer reveals. ^sufficiency
 
 ---
 ## Sources

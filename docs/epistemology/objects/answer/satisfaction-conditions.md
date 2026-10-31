@@ -18,7 +18,7 @@ An **assessment** is the object that holds the result of testing one candidate a
 - the appraisal of the answer for each virtue that the question marks preferred;
 - an optional credence of the assessor, with its basis.
 
-An assessment ends at these results. Accepting the answer is a further act of the researcher, which the assessment informs and never decides, as the [act of acceptance](../status/statuses-and-acceptance.md#^acceptance-act) states. The [assessment record](../../../specification/assessment.md) documents the fields of an assessment.
+An assessment ends at these results. Accepting the answer is a further act, the [act of acceptance](../status/statuses-and-acceptance.md#^acceptance-act). The [assessment record](../../../specification/assessment.md) documents the fields of an assessment.
 
 A candidate answer is evaluated at three levels: ^conditions-satisfaction
 

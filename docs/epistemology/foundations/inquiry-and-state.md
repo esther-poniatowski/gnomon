@@ -49,20 +49,20 @@ Each item of these components carries statuses, such as the attitude of a claim 
 
 **The accepted knowledge is a belief base.** A belief base is a set of claims that is not closed under logical consequence, so a consequence of its members belongs to it only once it is itself accepted [hansson1999]. Two features of the method make $K$ a base. First, a claim enters $K$ only by an act of acceptance, never because it follows from members of $K$, as the [relation between obtained and accepted claims](#^obtained-accepted) states. Second, no tool of `gnomon` derives a claim that no record states, as the [decision against inference at run time](../../adr/no-run-time-inference.md#^no-inference) fixes. The revision of $K$ therefore follows the norm of base revision, stated with the activity [`belief-revision`](../processes/activities/revision.md).
 
-**The inquiries of one project share one accepted knowledge.** An acceptance revises the corpus of the project, which the [record of the acceptance](../objects/status/statuses-and-acceptance.md#^acceptance-act) names. An answer accepted in one inquiry is therefore a member of $K$ for every inquiry of the same project. A claim of another project enters $K$ only when a record of the project accepts it, by the rule that governs a cited publication below. A concept that several projects reference adds nothing to $K$, since a concept is assessed for its adequacy and is never accepted. Whether one project may keep several corpora, for instance one for each of two rival programmes, is left open. ^shared-knowledge
+**The inquiries of one project share one accepted knowledge.** An acceptance revises the corpus of the project, which a record of the [act of acceptance](../objects/status/statuses-and-acceptance.md#^acceptance-act) would name. An answer accepted in one inquiry is therefore a member of $K$ for every inquiry of the same project. A claim of another project enters $K$ only when the researcher of the project accepts it, by the rule that governs a cited publication below. A concept that several projects reference adds nothing to $K$, since a concept is assessed for its adequacy and is never accepted. Whether one project may keep several corpora, for instance one for each of two rival programmes, is left open. ^shared-knowledge
 
 ## Obtained and accepted
 
 Two relations hold between a claim $s$ and the accepted knowledge, and only the second makes $s$ a member of $K$: ^obtained-accepted
 
 - $s$ is **obtained**, written $\mathrm{Obt}_{\mathcal{M}}(s)$, when the available means $\mathcal{M}$, the methods, data, instruments and proof techniques that can be applied, have yielded $s$;
-- $s$ is **accepted**, written $s\in K$, when an act of the researcher has accepted $s$. The assessment of $s$ informs that act and never performs it.
+- $s$ is **accepted**, written $s\in K$, when the researcher has accepted $s$ by the [act of acceptance](../objects/status/statuses-and-acceptance.md#^acceptance-act).
 
 Both relations are actual, not dispositional. A claim that the means could yield, but have not yet yielded, is not obtained: an unproven theorem about a formal model stays outside $K$, although it follows from the laws of that model. A claim obtained and not yet accepted stays a candidate of $H$. Neither relation is a consequence relation, since no claim enters $K$ because it follows from claims already in it.
 
-Citing a publication accepts none of its claims. A claim of a cited publication enters $K$ only when a record accepts it. A publication cited to dispute it, or whose claims are only admitted, adds nothing to $K$.
+Citing a publication accepts none of its claims. A claim of a cited publication enters $K$ only when the researcher accepts it. A publication cited to dispute it, or whose claims are only admitted, adds nothing to $K$.
 
-The existence of a problem and its epistemic gap are therefore stated by membership in $K$. A problem exists while no direct answer of its associated question is in $K$. The problem has a gap when, in addition, the claim that a result of the demanded type exists is in $K$, as the [existence of a problem](../objects/problem/epistemic-problem.md#^problem-existence) states.
+The [existence of a problem](../objects/problem/epistemic-problem.md#^problem-existence) and its [epistemic gap](../objects/problem/epistemic-problem.md#^gap) are therefore stated by membership in $K$.
 
 ## Admitted and accepted
 

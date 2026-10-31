@@ -47,7 +47,7 @@ The table lists every epistemic object of an inquiry, in the order of the readin
 
 | Object | Epistemic role | Product type | Record kind | Owner |
 | --- | --- | --- | --- | --- |
-| accepted knowledge $K$ | Result, for each member | none: a collection of accepted claims | none: the accepted research units | [state of an inquiry](../../foundations/inquiry-and-state.md#^state) |
+| accepted knowledge $K$ | Result, for each member | none: a collection of accepted claims | none: the answers whose attitude is `accepted` | [state of an inquiry](../../foundations/inquiry-and-state.md#^state) |
 | proposed candidates $H$ | Candidate, for each member | none: a collection of answers | none: the answers not yet accepted | [state of an inquiry](../../foundations/inquiry-and-state.md#^state) |
 | source | the role of the unit that cites it | `source` | none: an external pointer | [product types](../../processes/activities/epistemic-activities.md#^product-types) |
 | problem | Problem | `problem` | `problem` | [epistemic problem](../problem/epistemic-problem.md) |
@@ -77,7 +77,14 @@ The table lists every epistemic object of an inquiry, in the order of the readin
 | inter-theory relation | Candidate or Result, by its attitude | `inter-theory-relation` | none yet | [explanation and integration](../../processes/activities/explanation-and-integration.md) |
 | knowledge-state change | none of its own: it changes the attitude or the status of other units | `knowledge-state-change` | none of its own: the statuses of the records that it changes | [revision](../../processes/activities/revision.md) |
 | itinerary | none: it records acts, not content | none: a record of acts | `itinerary` | [itinerary](../../processes/activities/epistemic-activities.md#^itinerary) |
-| concept | Definition | `concept` | `concept` | [concept](../concept/concept.md) |
+| concept | Definition | `concept` | none yet | [concept](../concept/concept.md) |
+
+Only a claim can be accepted into $K$, by the [act of acceptance](statuses-and-acceptance.md#^acceptance-act). The product types fall into classes by whether the object that a type produces can be true or false, and only the claim types produce claims. Some claims have no product type yet: the claim that a construct is adequate, which [solves a problem](../problem/epistemic-problem.md#^solution-claim) that demands the construct, and the existence presupposition of a question. ^accepted-objects
+
+- **Claim types**: hypothesis, explanation, consequence, inter-theory relation and verdict.
+- **Construct types**, judged for their adequacy: model, concept, design, key, classification, measurement procedure and target specification.
+- **Types not yet classed**: identified subject, binding, phenomenon, data, background model, credence and ranking. Each of them holds or reports claims, yet none is plainly stated as one claim by an answer.
+- **Types outside both classes**, which are neither claims nor constructs of a target: source, problem, question schema, question and knowledge-state change.
 
 The binding is the output of the binding activity, which takes a model, a phenomenon and a key, pending a change of the registry of activities that adds it.
 
