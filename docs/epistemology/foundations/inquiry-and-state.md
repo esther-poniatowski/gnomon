@@ -29,12 +29,9 @@ The definition adds one element that the records require: each act of an inquiry
 
 ## Records of an inquiry
 
-A **record** is an authored document that states one object of an inquiry in the format of its kind, such as a problem, a question or an answer. The records of a project form two families, told apart by the content that they hold: ^record
+A **record** is an authored document that states one object of an inquiry in the format of its kind, such as a problem, a question or an answer. The **research records** of a project hold the content of the inquiry: its problems, questions, declarations, data, laws and answers. The **itinerary**, a research record of its own, holds the acts that produced that content, each typed by its activity. The presentation of that content to a reader is specified outside `gnomon`, as the [decision on the scope of gnomon](../../adr/research-scope.md) states. ^record
 
-- the **research records** hold the content of the inquiry: its problems, questions, declarations, data, laws and answers. The **itinerary**, a research record of its own, holds the acts that produced that content, each typed by its activity;
-- the **exposition records** hold no content: each selects research units and orders them for an audience, as the note on [exposition](../expression/exposition.md#^exposition) states.
-
-A **research unit** is a research record, or a unit of such a record with an identifier of its own, as the [decision on expositions](../../adr/expositions-as-projections.md) fixes. Content is cited, revised and presented at the grain of the research unit. The [inventory of epistemic objects](../objects/status/epistemic-objects.md) places each kind of research unit with the epistemic role that it bears.
+A **research unit** is a research record, or a unit of such a record with an identifier of its own. Content is cited, revised and presented at the grain of the research unit. The [inventory of epistemic objects](../objects/status/epistemic-objects.md) places each kind of research unit with the epistemic role that it bears.
 
 ## The state of an inquiry
 

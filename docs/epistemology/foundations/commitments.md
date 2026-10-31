@@ -36,11 +36,10 @@ A **commitment** of the method is a choice that binds every record and every pro
 11. **Fallibilism.** Every specification of a record carries a maturity, its own or the maturity that the status of its record states, except the specifications of a problem record and the unmarked specifications of an answer or a question record, which carry none yet, and the specifications of a retracted record, which are withdrawn with it; every revision records its trigger, and the controlled iteration keeps that revision non-circular. *Grounds*: the [maturity](../objects/status/statuses-and-acceptance.md#^maturity) expects revision, and the [decision on revision accountability](../../adr/revision-accountability.md#^traceable-revision) traces each revision to its origin. ^commitment-fallibilism
 12. **Least commitment.** A choice is deferred until a condition requires it. *Grounds*: fewer choices then need revision, as the devices of the [order of specification](../processes/inquiry/specification-order.md) state. ^commitment-least
 
-## Records and their expression
+## Records and their units
 
 13. **One source per unit.** Each research unit has one authored source, and another record names it by its identifier, never restates it. *Grounds*: a restated unit can diverge from its source without any check noticing, as the [rule of one source](../../adr/one-source-per-unit.md#^one-source) states. ^commitment-one-source
 14. **A role fixed by place.** The epistemic role of a research unit is fixed by the kind of object that holds it and by its place in that object, never by a label. *Grounds*: a unit then cannot blend a definition and a result, as the [roles of the research units](../objects/status/epistemic-objects.md#^role-by-place) state. ^commitment-role
-15. **An exposition adds no content.** An exposition selects and orders research units for an audience, and every statement that carries content presents a research unit. *Grounds*: content has one source, and an exposition stands to the records as a view stands to its store, as the [rule against added content](../expression/exposition.md#^adds-no-content) states. ^commitment-exposition
 
 ## Performed, recorded and judged
 

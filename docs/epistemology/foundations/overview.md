@@ -53,9 +53,9 @@ An inquiry advances by the following processes, listed in the order of one cycle
 8. **Revising.** The [revision](../processes/activities/revision.md) activities change the attitude toward existing claims or the frameworks that pose them, and every revision is [reported to the claims that depend on it](../objects/knowledge/grounds-and-dependence.md#^propagation).
 9. **Choosing the next act.** The [choice of the next act](../processes/inquiry/choice-of-act.md) addresses an open or a refuted condition with an act that is ready, and ranks the ready acts, which the [procedure of the next act](../../procedures/inquiry/next-act.md) applies to a state, outside the theory tier.
 
-## Expression
+## Notation and presentation
 
-The content that the objects state and the processes advance is expressed for a reader without being changed. The [glossary and the notation](../expression/names-and-symbols.md) hold the names and the symbols that express the concepts of a project, and an [exposition](../expression/exposition.md) selects and orders research units for an audience, adding no content. Projecting into an exposition is therefore not an epistemic process: it changes how the content is presented, never what the inquiry has established.
+The concepts of a project are written in its [notation](../objects/concept/notation.md), which composes their symbols and serves research. The presentation of the content of an inquiry to a reader, through glossaries, audiences and expositions, is specified in `ekthesis`, as the [decision on the scope of gnomon](../../adr/research-scope.md) states. Presenting a result to a reader is not an epistemic process: it outputs a text, never a new epistemic object.
 
 ## Commitments
 
@@ -75,7 +75,6 @@ The [commitments of the method](commitments.md) are stated with their grounds in
 12. [Least commitment](commitments.md#^commitment-least): a choice is deferred until a condition requires it.
 13. [One source per unit](commitments.md#^commitment-one-source): a record names another unit by its identifier and never restates it.
 14. [A role fixed by place](commitments.md#^commitment-role): the epistemic role of a unit follows from the object and the place that hold it.
-15. [An exposition adds no content](commitments.md#^commitment-exposition): every statement of an exposition that carries content presents a research unit.
 
 ## Words that change sense across the theory
 
@@ -144,8 +143,7 @@ The notes are read in the following order. Each note uses only terms defined bef
 7. **Task and virtues.** The notes of the [epistemic task](../objects/task/_index.md), in the order of their index.
 8. **Answer and assessment.** The [answer form](../objects/answer/answer-form.md), then [grounds and dependence](../objects/knowledge/grounds-and-dependence.md), then the other notes of the [answer and its assessment](../objects/answer/_index.md), in the order of their index.
 9. **Statuses.** The [epistemic objects](../objects/status/epistemic-objects.md), then the [statuses and acceptance](../objects/status/statuses-and-acceptance.md).
-10. **Concept.** The [concept](../objects/concept/concept.md).
-11. **Expression.** The [glossary and the notation](../expression/names-and-symbols.md), then [exposition](../expression/exposition.md).
-12. **Activities.** The [epistemic activities](../processes/activities/epistemic-activities.md), then their families in the order of their [index](../processes/activities/_index.md).
-13. **Course of an inquiry.** The [order of specification](../processes/inquiry/specification-order.md), the [decomposition of a question](../processes/inquiry/question-decomposition.md) and the [choice of the next act](../processes/inquiry/choice-of-act.md), then the procedure of the [next act](../../procedures/inquiry/next-act.md).
-14. **Commitments.** The [commitments of the method](commitments.md), which gather the commitments stated in the notes above, each with its grounds.
+10. **Concept.** The [concept](../objects/concept/concept.md), then the [notation of a project](../objects/concept/notation.md).
+11. **Activities.** The [epistemic activities](../processes/activities/epistemic-activities.md), then their families in the order of their [index](../processes/activities/_index.md).
+12. **Course of an inquiry.** The [order of specification](../processes/inquiry/specification-order.md), the [decomposition of a question](../processes/inquiry/question-decomposition.md) and the [choice of the next act](../processes/inquiry/choice-of-act.md), then the procedure of the [next act](../../procedures/inquiry/next-act.md).
+13. **Commitments.** The [commitments of the method](commitments.md), which gather the commitments stated in the notes above, each with its grounds.

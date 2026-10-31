@@ -24,6 +24,5 @@ Holds the candidate designs that await a decision, each note gathering the alter
 - [Proposals for the second round of inquiry records](inquiry-records-round-2.md): weighs the records that close the gaps of the type graph of activities
 - [Proposals for the problem record](problem-record.md): weighs the extensions of the problem record
 - [Proposals for the classification method](classification-method.md): weighs the routes that build a taxonomic layer on a qualitative feature system
-- [Proposals for the exposition family](exposition-family.md): weighs the units by which an exposition projects research records
 - [Proposals for the model design](model-design.md): weighs the revisions of the model design
 - [Proposals for the assembly schema](assembly-schema.md): weighs the schema of the assembly of a level

@@ -1,14 +1,17 @@
 ---
 tags:
   - decision
-status: accepted
+status: superseded
 created: 2026-10-29
-revised: 2026-10-29
+revised: 2026-10-31
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Expositions as projections
 ---
 # Expositions as projections
+
+> [!WARNING] Superseded
+> The decision on [research as the scope of gnomon](research-scope.md) supersedes this decision: the exposition records, and the rule that an exposition adds no content, move to `ekthesis`.
 
 > [!QUESTION] Goal: which tool specifies the records of an exposition, and what may an exposition add to the research that it presents?
 

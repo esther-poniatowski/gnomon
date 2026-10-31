@@ -110,7 +110,6 @@ Each term of the [vocabulary of inquiry](../vocabulary/_index.md) takes one stat
 | [Question](../objects/question/question.md) | representational | a request with a set of answers |
 | [Level of commitment](../objects/question/question.md#^commitment-levels) | representational | the extent to which a record fixes the referent of a slot |
 | [Concept](../objects/concept/concept.md#^concept) | representational | a unit of meaning that a project uses, apart from its names |
-| [Exposition](../expression/exposition.md#^exposition) | representational | a projection of research units to a chosen audience |
 
 Two groups of terms invite a confusion of statuses: the terms that take two rows, and the relational terms. For each term with two senses, the note defining it fixes a name for each sense.
 

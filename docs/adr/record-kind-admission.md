@@ -30,7 +30,7 @@ Irreducibility tests whether a tool can generate the construct, whereas non-dist
 
 A construct that fails one condition is stated as a field, a value of a closed vocabulary, a relation, a unit of an existing record with an identifier of its own, or a generated view. ^failing-construct
 
-*Examples*: the retired design notes (commit 9e138e2, `docs/design/_backup/object-types-ontology/taxo-criteria-ontology.md`) worked three cases, and each fails non-distortion. A motivation is a field of the object that it motivates. A dependency is a typed relation between two records. A limitation is an attribute of the object that it limits, such as the domain of an answer or the idealizations of a model. An example fails in the same way, since it is a relation [`exemplifies`](../proposals/exposition-family.md), from an existing record to a concept or an answer.
+*Examples*: the retired design notes (commit 9e138e2, `docs/design/_backup/object-types-ontology/taxo-criteria-ontology.md`) worked three cases, and each fails non-distortion. A motivation is a field of the object that it motivates. A dependency is a typed relation between two records. A limitation is an attribute of the object that it limits, such as the domain of an answer or the idealizations of a model. An example fails in the same way, since it is a relation [`exemplifies`](../proposals/relation-registry.md#examples-as-relations), from an existing record to a concept or an answer.
 
 The record kinds of the concerns of an inquiry are fixed by the method, and the test governs every other construct. ^scope-of-admission
 

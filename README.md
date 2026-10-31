@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/python-%E2%89%A53.12-blue)](https://www.python.org/)
 [![License: GPL](https://img.shields.io/badge/License-GPL--3.0-yellow.svg)](https://opensource.org/licenses/GPL-3.0)
 
-Specifies a research inquiry as typed records, from the problem that it addresses to the assessment of its answers, checks those records against the method that they follow, and projects them into expositions for declared audiences.
+Specifies a research inquiry as typed records, from the problem that it addresses to the assessment of its answers, checks those records against the method that they follow, and exports them for the tools that present research to readers.
 
 ---
 
@@ -35,21 +35,21 @@ These failures follow from one organization: prose serves both to store the cont
 - represent the state of knowledge of an inquiry, each result with its maturity;
 - record the logic of the inquiry, that is, the dependencies through which results compose into answers;
 - guide the inquiry, by naming the next act that the current state and the target question call for;
-- project the inquiry into expositions for an audience, which add only announcements, connectors and syntheses.
+- export the content of the inquiry, so that a presentation to a reader references the records instead of restating them.
 
 ### Advantages
 
-`gnomon` replaces the documents by **records**. Each record holds one concern of an inquiry, under a stable identifier, and the records are linked by relations of closed and typed kinds. Expositions are generated from the records and never edited, so the records stay the only source of the content. Three principles govern this design, each stated in an architecture decision:
+`gnomon` replaces the documents by **records**. Each record holds one concern of an inquiry, under a stable identifier, and the records are linked by relations of closed and typed kinds. A presentation of that content to a reader, specified in [`ekthesis`](https://github.com/esther-poniatowski/ekthesis), references the records through their export, so the records stay the only source of the content. Three principles govern this design, each stated in an architecture decision:
 
-- [separation of concerns](docs/adr/expositions-as-projections.md) between research content and its exposition;
+- [separation of concerns](docs/adr/research-scope.md) between research, which `gnomon` specifies, and its presentation to readers, which `ekthesis` specifies;
 - [one source](docs/adr/one-source-per-unit.md) for each unit of content;
 - [explicit dependencies](docs/adr/closed-typed-relations.md), through typed relations that form a graph.
 
 The **method** specifies an inquiry in [ordered stages](docs/epistemology/processes/inquiry/specification-order.md), from the problem to the questions that serve it, their subject, and the candidate answers, each a typed claim resting on models bound to the phenomenon. An assessment tests each answer against conditions of satisfaction fixed before the answer is evaluated, and an itinerary records each act of the inquiry. The stages, the tests and the choice of the next act rest on results from the philosophy of science, collected in the [epistemology of inquiry](docs/epistemology/_index.md).
 
-The **vocabulary records** of a project separate the meaning of a term from its names, as the [decision on concepts, glossaries and notations](docs/adr/concepts-glossaries-notations.md) states. A concept record holds the meaning of a concept, which stays the same across projects. A glossary holds the names of the concepts of a project, with the forms forbidden for given audiences. A notation composes each symbol from declared bases, modifiers and index sets. An audience specification records the knowledge and the register of a readership, and a project specification binds one glossary, one notation and the audiences of a project to its inquiry, as the [decision on terminology, audience and project specifications](docs/adr/terminology-audience-project-specifications.md) states.
+The **vocabulary records** of a project separate the meaning of a term from its symbols, as the [decision on concepts, glossaries and notations](docs/adr/concepts-glossaries-notations.md) states. A concept record holds the meaning of a concept, which stays the same across projects. A notation composes each symbol from declared bases, modifiers and index sets. Glossaries and audiences serve readers, so `ekthesis` specifies them, as the [decision on the scope of gnomon](docs/adr/research-scope.md) states.
 
-**Expositions** form a second family of records, beside the research records. An exposition selects research units, orders them for an audience, and adds only announcements, connectors and syntheses, so that every statement carrying content traces to a research record, as the [decision on expositions](docs/adr/expositions-as-projections.md) states. The terms of an exposition are checked against its glossary and against the audiences that its design brief cites.
+The **research root record** of a project holds its questions and its goals, and references the problem and question records that state them.
 
 The **language** states the content of each record. Every declared quantity carries a symbol, and each record declares its symbols in one table. A formula names only declared symbols, those of its own record or, by reference, those of another record of the same problem. Two consequences follow. A researcher writing a law must name quantities that a record already declares. A reader can find every declaration in one table.
 
@@ -78,11 +78,10 @@ Seven worked inquiries, from as many domains, exercise the method, and each reco
 - [ ] Validates each record against the schema of its type.
 - [ ] Reports the open conditions of each question, and the acts ready to perform.
 - [ ] Computes the comparison of a model with the data through its binding.
-- [ ] Records each concept of a project with one meaning, and its names in a glossary.
-- [ ] Composes the symbols of a notation from declared bases, modifiers and index sets, and generates the LaTeX macros of an exposition.
-- [ ] Specifies the audiences of a project, and the project specification that binds its glossary, its notation and its audiences.
-- [ ] Specifies expositions that select and order research units for an audience, and renders them without adding content.
-- [ ] Checks the terms of an exposition against its glossary and the forms forbidden for its audiences.
+- [ ] Records each concept of a project with one meaning.
+- [ ] Composes the symbols of a notation from declared bases, modifiers and index sets, and generates their LaTeX macros.
+- [ ] Records the questions and the goals of a project in a research root record.
+- [ ] Exports the units, the symbols and the relations of a project under the contract that `ekthesis` publishes.
 - [ ] Formalizes a definition.
 - [ ] Formalizes the derivation yielding an answer.
 - [ ] Derives the epistemic activities from a smaller set of primitive actions.

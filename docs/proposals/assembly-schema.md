@@ -7,7 +7,7 @@ aliases:
 ---
 # Proposals for the assembly schema
 
-The goal [`assembly-schema`](../../TODO.md) specifies the assembly of a level, its components and the checks of its core route.
+The goal [`assembly-schema`](../../TODO.md) specifies the assembly of a level and its components. The status `core` or `elaboration` of a component, the views and the check of the core route move to `ekthesis`, as the [decision on the scope of gnomon](../adr/research-scope.md) states.
 
 ## Locus of the content that depends on an inquiry
 
@@ -15,7 +15,7 @@ Content that depends on an inquiry belongs to an assembly or to one of its steps
 
 The assembly is no record kind, because its identity is relative to an inquiry and a target. The same records arranged toward another target form another assembly, and a lemma may serve as a premise in one assembly and as a conclusion in another. A record local to an assembly, such as an internal lemma, a named rejected route or the end of a support relation, is promoted to a record of its own once it passes the [admission of a record kind](../adr/record-kind-admission.md#^five-conditions). Strategic notes, work metadata and the records of applied operations stay local. A check flags a candidate for promotion, and the author performs the promotion.
 
-Three fields complete the assembly: its gaps, which are the dependencies not yet resolved; its limits of validity, which are its scope and its exclusions; and its deferred components, left out at the current grain. A weakest-link query reports each core component whose support stays below the demand of the assembly.
+Three fields complete the assembly: its gaps, which are the dependencies not yet resolved; its limits of validity, which are its scope and its exclusions; and its deferred components, left out at the current grain. A query reports the laws to which each answer of the assembly is exposed, computed over its grounds, as the [exposure rule](../epistemology/objects/knowledge/grounds-and-dependence.md#^weakest-link) states.
 
 **Literature.** None cited.
 

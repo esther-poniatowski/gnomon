@@ -18,5 +18,4 @@ States the theory of inquiry on which the records of `gnomon` rest: the epistemi
 - [Foundations](foundations/_index.md): states what the theory is about, what it presupposes, and which commitments the method makes
 - [Objects of inquiry](objects/_index.md): defines the epistemic objects that an inquiry states, and the statuses that those objects bear
 - [Processes of inquiry](processes/_index.md): defines the processes by which an inquiry advances, from its epistemic activities to the course of its questions
-- [Expression](expression/_index.md): separates the content of an inquiry from the names, symbols and texts that express it for a reader
 - [Vocabulary](vocabulary/_index.md): fixes the senses of the terms that the theory uses, and the symbols of its notation

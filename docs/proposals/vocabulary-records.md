@@ -7,7 +7,7 @@ aliases:
 ---
 # Proposals for the vocabulary records
 
-The goal [`vocabulary-records`](../../TODO.md) provides the mechanisms of notations, glossaries, audiences and project specifications, and defines the concept record.
+The goal [`vocabulary-records`](../../TODO.md) provides the mechanism of the notation and the research root record of a project, and defines the concept record, as the [decision on the scope of gnomon](../adr/research-scope.md) states.
 
 ## Concept as class and concept as object
 

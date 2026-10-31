@@ -3,12 +3,15 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-10-29
+revised: 2026-10-31
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Concepts, glossaries and notations
 ---
 # Concepts, glossaries and notations
+
+> [!WARNING] Amended
+> The decision on [research as the scope of gnomon](research-scope.md) amends this decision: the concept record and the notation stay in `gnomon`, and the glossary moves to `ekthesis`.
 
 > [!QUESTION] Goal: which record holds the meaning of a concept, which record holds its names, and how does a notation compose its symbols?
 

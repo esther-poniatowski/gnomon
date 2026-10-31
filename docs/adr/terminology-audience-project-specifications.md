@@ -3,12 +3,15 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-10-29
+revised: 2026-10-31
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Terminology, audience and project specifications
 ---
 # Terminology, audience and project specifications
+
+> [!WARNING] Amended
+> The decision on [research as the scope of gnomon](research-scope.md) amends this decision: the mechanism of the notation stays in `gnomon`, the glossary and the audience move to `ekthesis`, and the project specification divides between a research root record of `gnomon`, the bindings of `ekthesis` and the `repository.yml` of the project.
 
 > [!QUESTION] Goal: which tool provides the mechanisms of glossaries, notations, audience specifications and project specifications, and which repository holds their instances?
 

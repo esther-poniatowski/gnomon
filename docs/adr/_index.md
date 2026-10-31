@@ -46,6 +46,6 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 ## Ecosystem ownership
 
 - [Research as the scope of gnomon](research-scope.md): decides whether a record, a check or a note belongs to `gnomon` or to `ekthesis`
-- [Expositions as projections](expositions-as-projections.md): bounds the content that an exposition may add to the research that it presents
+- [Expositions as projections](expositions-as-projections.md): records the earlier placement of exposition in `gnomon`, superseded by the decision on research as the scope of gnomon
 - [Terminology, audience and project specifications](terminology-audience-project-specifications.md): places the mechanism of a notation, a glossary, an audience or a project specification apart from its instances
 - [Knowledge interchange format](knowledge-interchange-format.md): decides whether the Open Knowledge Format serves `gnomon` as a source format, a derived export or a source of trust fields

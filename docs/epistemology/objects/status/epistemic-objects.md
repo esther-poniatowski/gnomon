@@ -90,11 +90,10 @@ The binding is the output of the binding activity, which takes a model, a phenom
 
 ## Objects outside the inventory
 
-Four kinds of content in the records fail the criterion, or bear on it only through another object:
+Three kinds of content in the records fail the criterion, or bear on it only through another object:
 
 - **An inquiry is a course of acts, not a representation.** Its [status](../../foundations/things-and-constructs.md#^layer-test) is ontological, and the itinerary represents it.
-- **An exposition adds no content.** Each exposition presents research units to an audience, as the [rule against added content](../../expression/exposition.md#^adds-no-content) states.
-- **A glossary and a notation hold forms, not meanings.** Each maps concepts or quantities to the forms that express them, as the note on the [glossary and the notation](../../expression/names-and-symbols.md) states.
+- **A notation designates meanings without defining them.** A notation maps concepts or quantities to the symbols that designate them, as the note on the [notation of a project](../concept/notation.md) states.
 - **A condition of answerability is a requirement on a question.** Its state is a status of that question, placed on the [axes of the statuses](statuses-and-acceptance.md#^status-axes).
 
 ## Distinctions

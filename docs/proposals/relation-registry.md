@@ -7,7 +7,7 @@ aliases:
 ---
 # Proposals for the relation registry
 
-The goal [`relation-registry`](../../TODO.md) declares, in one registry, the relations between research units and between exposition units and research units, each with a warrant kind, and decides which relations transmit a revision. The [decision on answers, models and bindings](../adr/answers-models-bindings.md) already fixes the relations between answers: `supports`, `presupposes`, `tests`, `defeats`, and `revises` for the lineage of an answer.
+The goal [`relation-registry`](../../TODO.md) declares, in one registry, the relations between research units, each with a warrant kind, and decides which relations transmit a revision. The [decision on answers, models and bindings](../adr/answers-models-bindings.md) already fixes the relations between answers: `supports`, `presupposes`, `tests`, `defeats`, and `revises` for the lineage of an answer.
 
 ## Typed-relation discipline
 
@@ -111,3 +111,13 @@ The product `inter-theory-relation` of the [registry of product types](../../src
 **Bears on.** [`relation-registry`](../../TODO.md), and the product `inter-theory-relation`.
 
 **Retired source.** `docs/design/_backup/object-types-ontology/taxo-criteria-ontology.md`, at commit 9e138e2.
+
+## Examples as relations
+
+A record enters an inquiry as an example through a relation `exemplifies`, from an existing record to a concept or an answer, whose `use` takes one of five values. Four uses test or establish a claim: `witness`, `counterexample`, `boundary-case` and `construction`. The use `instance` relates an existing record to the concept or the answer that it illustrates. An exposition that presents this illustration relates two research units, so the relation is recorded in `gnomon`, as the [decision on the scope of gnomon](../adr/research-scope.md) states; only an illustration authored for a reader needs no record. A counterexample also names the feature of the record that makes its target fail. The relation, not a record kind, carries the example, since an example is a role that a record plays relative to a target: a record of its own would misrepresent that role as content, against the condition of non-distortion of the [admission of a record kind](../adr/record-kind-admission.md#^five-conditions).
+
+**Literature.** None cited.
+
+**Bears on.** [`relation-registry`](../../TODO.md).
+
+**Retired source.** `docs/design/_backup/object-types-ontology/obj-example.md` and `docs/design/_backup/object-types-ontology/obj-counterexample.md`, at commit 9e138e2.

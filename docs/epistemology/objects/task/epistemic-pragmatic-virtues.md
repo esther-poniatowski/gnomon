@@ -13,7 +13,7 @@ The virtues, written $\mathcal{V}$, form the third layer of the [specification o
 
 The virtues are kept apart from the [adequacy for purpose](../answer/model-and-binding.md#^adequacy-for-purpose) of a model, which the note on the model and its binding owns.
 
-The virtues constrain an answer beyond the requirements of its task: some bear on the range of its claims, and the others on the *form* in which it presents them (e.g. the types of variables, the nature of equations). These constraints are needed because several answers or models may be equally admissible and still differ in their practical and cognitive effects.
+The virtues constrain an answer beyond the requirements of its task: some bear on the range of its claims, and the others on the *form* of its representation (e.g. the types of variables, the nature of equations). These constraints are needed because several answers or models may be equally admissible and still differ in their practical and cognitive effects.
 
 > [!ERROR] A listed virtue never restates a requirement of the epistemic task
 
