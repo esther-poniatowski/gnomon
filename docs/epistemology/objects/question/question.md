@@ -73,9 +73,10 @@ Commitment is kept apart from three other attributes of records and of their fie
 | --- | --- | --- |
 | Commitment | how far a slot fixes its referent | `placeholder`, `identified`, `specified` |
 | Maturity | how far one specification has been revised, as the [maturity of a specification](../status/statuses-and-acceptance.md#^maturity) defines it | `open`, `provisional`, `stabilized` |
-| Record status | the attitude taken toward the whole record; for an answer, the record status is the attitude toward its claim | one vocabulary per kind of record, such as `entertained` or `accepted` for an answer |
+| Record status | the standing of the whole record, by kind: for an answer, the attitude toward its claim; for a problem, a question or an itinerary, the stage of its course; for any other record, the maturity of the record as a whole, `provisional` or `stabilized`, or its retraction, `retracted` | one vocabulary per kind of record, such as `entertained` or `accepted` for an answer, and `posed` or `refined` for a question |
 | Empty value | the state of an unfilled field | a gap when the field is required, and a product of the inquiry when the aim lists the field as produced |
 
+- **A record status can carry the maturity of its record.** For a record that is neither an answer nor the record of a course, the status states the maturity of the record as a whole, or its retraction, and a specification without its own marker takes that maturity, as the [maturity of a field](../../../specification/maturity.md) documents. The status of an answer is an attitude and that of a problem, a question or an itinerary is a stage, so a specification left unmarked in those records takes no maturity from its record.
 - **Commitment and maturity vary independently.** A slot can be identified and stabilized, when the referent is settled and no formal declaration is sought. A slot can also be specified and provisional, when the declarations are written and still under revision.
 - **An empty field is a gap unless the inquiry produces it.** *Example*: an exploratory question leaves the statement and the category of its phenomenon empty, because finding them is the aim of the inquiry. The [epistemic aim](../task/epistemic-aim.md) lists the paths produced by the inquiry.
 

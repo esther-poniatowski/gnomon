@@ -23,7 +23,7 @@ The bound $\lambda$ is given by its values on two axes, compositional level and 
 
 The options of the bound $\lambda$ along its two axes are listed in the [epistemic task of a question](../../../specification/question-task.md#^level-axes).
 
-- **The bound is optional.** An unstated bound *defaults* to the [grain of the phenomenon](../subject/phenomenon.md#^resolution-proportionality) by proportionality. Proportionality requires the explanans variables to covary with the explanandum, and to carry no irrelevant detail [woodward2010]. A stated bound, by contrast, records a *stipulation* of the research program, for instance that only explanations in terms of circuits count.
+- **The bound is optional.** An unstated bound *defaults* to the [grain of the phenomenon](../subject/phenomenon.md#^resolution-proportionality) by proportionality, one of the defaults that the [rule on empty specifications](../answer/satisfaction-conditions.md#^empty-specification) admits. Proportionality requires the explanans variables to covary with the explanandum, and to carry no irrelevant detail [woodward2010]. A stated bound, by contrast, records a *stipulation* of the research program, for instance that only explanations in terms of circuits count.
 
 - **Compositional levels are local.** Compositional levels are internal to one mechanism: they order into a part–whole hierarchy the parts that are constitutively relevant to its behavior [craver2007]. The options of this axis therefore derive from the constituents declared for the target system, which is why the [admitted variables](#^bound-and-induced-set) depend on $S$ as well as on $\lambda$.
 	

@@ -71,7 +71,7 @@ The [commitments of the method](commitments.md) are stated with their grounds in
 8. [Warrant as provenance](commitments.md#^commitment-warrant): a result reports the laws to which it is exposed, never a degree of warrant.
 9. [Base revision](commitments.md#^commitment-base): the accepted knowledge is a belief base.
 10. [No inference at run time](commitments.md#^commitment-no-inference): no tool adds a claim, decides an acceptance or relabels a dependent.
-11. [Fallibilism](commitments.md#^commitment-fallibilism): every specification of a record carries a maturity, and every revision records its trigger.
+11. [Fallibilism](commitments.md#^commitment-fallibilism): every specification of a record carries a maturity, with named exceptions, and every revision records its trigger.
 12. [Least commitment](commitments.md#^commitment-least): a choice is deferred until a condition requires it.
 13. [One source per unit](commitments.md#^commitment-one-source): a record names another unit by its identifier and never restates it.
 14. [A role fixed by place](commitments.md#^commitment-role): the epistemic role of a unit follows from the object and the place that hold it.

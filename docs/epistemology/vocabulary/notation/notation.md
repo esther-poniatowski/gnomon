@@ -56,8 +56,8 @@ A single registry assigns every symbol that a note may use without defining it: 
 | Symbol | Denotes | Declared in |
 | --- | --- | --- |
 | $\mathrm{Sat}$, $\mathrm{Admissible}$, $\mathrm{Warranted}$ | $\mathrm{Sat}(h\mid Q)$: the candidate $h$ satisfies the question $Q$, that is, it passes the tests of admissibility, $\mathrm{Admissible}(h\mid Q)$, and of warrant, $\mathrm{Warranted}(h\mid Q)$ | [conditions of satisfaction](../../objects/answer/satisfaction-conditions.md#^conditions-satisfaction) |
-| $\mathrm{Adequate}$ | $\mathrm{Adequate}(M\mid Q,\Gamma)$: the model $M$ is adequate for the purpose that $Q$ sets, under the circumstances $\Gamma$ | [virtues](../../objects/task/epistemic-pragmatic-virtues.md) |
-| $\Gamma$ | the circumstances, such as resources, use and audience, under which the adequacy of a model for a purpose is judged | [virtues](../../objects/task/epistemic-pragmatic-virtues.md) |
+| $\mathrm{Adequate}$ | $\mathrm{Adequate}(M\mid Q,\Gamma)$: the model $M$ is adequate for the purpose that $Q$ sets, under the circumstances $\Gamma$ | [adequacy for purpose](../../objects/answer/model-and-binding.md#^adequacy-for-purpose) |
+| $\Gamma$ | the user, the methodology and the background circumstances of a use, on which the adequacy of a model for a purpose depends | [adequacy for purpose](../../objects/answer/model-and-binding.md#^adequacy-for-purpose) |
 | $E$ | the explanans: the factors of the block of an explanation | [answer form](../../objects/answer/answer-form.md#^explanation-block) |
 | $I$ | the idealizations among the grounds of an answer, each relative to the target of the answer | [answer form](../../objects/answer/answer-form.md#^idealizations) |
 | $M$ | a model in the representational sense, $M=\langle C,V,L,O\rangle$, which grounds the answers whose route runs on it | [model](../representations/model.md#^model-elements) |

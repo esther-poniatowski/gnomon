@@ -11,9 +11,7 @@ aliases:
 
 The virtues, written $\mathcal{V}$, form the third layer of the [specification of a question](../question/question-specification.md), beside its subject and its [epistemic task](epistemic-task.md). A virtue is a quality that the question selects for its answers, beyond the kind of knowledge that the task fixes. The question marks each selected virtue either **constitutive**, a condition that every admissible answer meets, or **preferred**, a ground for ranking the answers that are already admissible, as the [standing of a virtue](#^virtue-standing) states. The virtues fix none of the possible or direct answers of the question, which its subject and its task fix: they fix its standards, since a constitutive virtue narrows the [admissible answers](../question/question.md#^answer-sets) and a preferred virtue ranks them. The virtues typically bear on practical and cognitive effects that the task does not require: they make an answer more useful, more intelligible, or more reusable.
 
-The virtues bear on the adequacy for purpose of a model, which is **relational and evaluative** [parker2020]:
-$$\mathrm{Adequate}(M\mid Q,\Gamma)$$
-The formula reads: the model $M$ serves the question $Q$, specified by $\langle\Sigma,T,\mathcal{V}\rangle$, under the circumstances $\Gamma$, which contain the *relevant methodological and pragmatic circumstances*, such as the resources available, the intended use and the audience. Both symbols follow the [notation registry](../../vocabulary/notation/notation.md) shared across the method.
+The virtues are kept apart from the [adequacy for purpose](../answer/model-and-binding.md#^adequacy-for-purpose) of a model, which the note on the model and its binding owns.
 
 The virtues constrain an answer beyond the requirements of its task: some bear on the range of its claims, and the others on the *form* in which it presents them (e.g. the types of variables, the nature of equations). These constraints are needed because several answers or models may be equally admissible and still differ in their practical and cognitive effects.
 
@@ -37,7 +35,7 @@ Each virtue below is stated with the operational question that tests it, and the
 | **Intelligibility / qualitative grasp** | Can characteristic consequences be recognized without carrying out the full calculation?      | understanding; qualitative anticipation                             | contextual approach to understanding [deregt2005]                                     |
 | **Structural transparency** | Does the representation make the important components, relations, and dependencies salient?   | grasp of organization and dependence                                | accounts of scientific understanding [grimm2010]; [kvanvig2003]                                   |
 | **Economy / simplicity** | Does the account achieve its purpose without unnecessary representational or computational complexity? | cognitive and methodological efficiency                             | the theoretical virtues of theory choice [kuhn1977]                                   |
-| **Tractability** | Can the model be analyzed, computed, manipulated, or used with the available resources? | practical usability                                                 | adequacy for purpose [parker2020]                                                     |
+| **Tractability** | Can the model be analyzed, computed, manipulated, or used with the available resources? | practical usability                                                 | proposal of this method |
 
 - **Each virtue entry states its standing, independently of the aim.** A virtue bears on an answer in one of two ways. A **constitutive** virtue is a condition of the product: its absence makes an answer inadmissible however accurate. Such a virtue is applied by the product test, one of the [levels of evaluation](../answer/satisfaction-conditions.md#^conditions-satisfaction) of a candidate answer. A **preferred** virtue ranks answers that are already admissible, and is applied by appraisal. The same virtue takes either standing in different inquiries. For example, in one inquiry, intelligibility may be required of any answer regardless of the product sought. In another, the same virtue only decides between two admissible accounts. The question therefore states the standing on each entry. Each virtue is then applied by exactly one tier. ^virtue-standing
 
@@ -46,10 +44,6 @@ Each virtue below is stated with the operational question that tests it, and the
 - **Predictive accuracy is not among the virtues.** Predictive accuracy is the product of the predictive aim itself, fixed by the required accuracy $\tau$, and is therefore tested, not weighed.
 
 - **The virtues divide in two by the aspect of the answer that they bear on.** Unification, generality and robustness bear on the *content* of an answer: its claims and their range. When held constitutive, these three virtues subject the explanatory structure to the [scope criterion](../answer/satisfaction-conditions.md#^conditions-satisfaction) that already governs the claim: the whole reference class under the domain must be reached. Intelligibility, structural transparency, economy and tractability bear instead on the *form* in which that content is presented. No other test checks these four virtues, because every other criterion bears only on the *assertions* of an answer. An inquiry seeking understanding therefore adds nothing to its subject or its task, and states all its specific demands among the virtues. This placement holds because intelligibility is a property of a theory as scientists use it, not a product beside explanation [deregt2005]. ^virtue-kinds
-
-> [!CHECK] Support from the literature
-> The adequacy of a model depends on the purpose that it serves and on the *broader circumstances of use* [parker2020].
-> A model can be adequate for a purpose without being accurate in every respect [parker2020]. An idealized model, for instance, may omit or distort some features yet preserve the features that its intended epistemic function requires.
 
 ---
 ## Sources
@@ -62,5 +56,4 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [kitcher1981] ◐ [Kitcher, "Explanatory unification", _Philosophy of Science_ 48(4), 507–531, 1981](https://philpapers.org/rec/KITEU)
 - [kuhn1977] ◐ Kuhn, "Objectivity, value judgment, and theory choice", in *The Essential Tension: Selected Studies in Scientific Tradition and Change*, University of Chicago Press, 320–339, 1977; accuracy, consistency, scope, simplicity and fruitfulness as criteria of theory choice
 - [kvanvig2003] ◐ [Kvanvig, *The Value of Knowledge and the Pursuit of Understanding*, Cambridge UP, 2003](https://philpapers.org/rec/KVATVO-8)
-- [parker2020] ◐ [Parker, "Model evaluation: an adequacy-for-purpose view", *Philosophy of Science* 87(3), 457–477, 2020](https://doi.org/10.1086/708691)
 - [weisberg2006] ◐ [Weisberg, "Robustness analysis", *Philosophy of Science* 73(5), 730–742, 2006](https://doi.org/10.1086/518628)

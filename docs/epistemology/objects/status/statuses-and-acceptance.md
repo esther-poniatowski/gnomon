@@ -32,7 +32,7 @@ Each status of the state qualifies one bearer along one axis. An axis is the que
 | assessment | disposition | the outcome read from the verdicts of admissibility and warrant | `satisfied`, `not-satisfied`, `withheld`, `corrective` | [disposition](../answer/satisfaction-conditions.md#^disposition) |
 | assessment | credence | the strength of belief of the assessor in the answer, given all verdicts and the prior evidence | a degree, optional | [credence](../answer/satisfaction-conditions.md#^credence) |
 | problem | outcome | whether and how the problem ended | solved, dissolved, abandoned | [outcomes of a problem](../problem/epistemic-problem.md#^problem-outcomes) |
-| record | record status | the attitude taken toward the whole record; the record status of an answer is the attitude of its claim | one vocabulary per kind of record | [question](../question/question.md#^commitment-levels) |
+| record | record status | the standing of the whole record, by kind of record | one vocabulary per kind of record | [record attributes](../question/question.md#^record-attributes) |
 
 Three groups of statuses are often merged:
 
@@ -44,9 +44,9 @@ Three groups of statuses are often merged:
 
 ## Maturity
 
-The **maturity** of a specification states how far it has been revised and whether the inquiry expects to revise it again. A specification is `open` while it is not fixed, `provisional` while it is written and still under revision, and `stabilized` once the inquiry expects no further revision in its current state. The marker belongs to each specification of a record, as the [maturity of a field](../../../specification/maturity.md) documents. ^maturity
+The **maturity** of a specification states how far it has been revised and whether the inquiry expects to revise it again. A specification is `open` while it is not fixed, `provisional` while it is written and still under revision, and `stabilized` once the inquiry expects no further revision in its current state. The marker belongs to each specification of a record: either its own marker, or the maturity that the [record status](../question/question.md#^record-attributes) of its record states, as the [maturity of a field](../../../specification/maturity.md) documents. ^maturity
 
-- **Maturity records the fallibilism of the method.** An inquiry improves its knowledge through successive corrections that start from an initially affirmed system [chang2004]. The [controlled iteration](../../processes/inquiry/specification-order.md#^controlled-iteration) of the method therefore requires every specification of a record to carry a maturity, so that a revision can be expected and traced.
+- **Maturity records the fallibilism of the method.** An inquiry improves its knowledge through successive corrections that start from an initially affirmed system [chang2004]. The [controlled iteration](../../processes/inquiry/specification-order.md#^controlled-iteration) of the method therefore requires every specification of a record to carry a maturity, with the exceptions that the [commitment to fallibilism](../../foundations/commitments.md#^commitment-fallibilism) names, so that a revision can be expected and traced.
 - **Maturity is not a degree of confirmation.** A stabilized specification can still be false, or inadequate when it is a declaration. Maturity states only that no revision is expected, whereas the attitude and the support state the stance toward the claim and the kind of its grounds.
 - **The maturity of a result combines several statuses.** The README asks for each result with its maturity. A result, in the sense of the [role](epistemic-objects.md#^unit-roles), is an answer accepted into $K$, such as the [solving claim](../problem/epistemic-problem.md#^solution-claim) of a problem. Its maturity is therefore read from the attitude and the support of that answer, from the maturity of the specifications on which the answer rests and of the records that hold a demanded construct, and from the warrant of the laws among its grounds. No single status measures it.
 

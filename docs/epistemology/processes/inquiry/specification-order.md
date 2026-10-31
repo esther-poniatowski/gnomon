@@ -72,7 +72,7 @@ The remaining dependency is handled by mutual adjustment. Rules and inferences a
 The method imposes four conditions under which such an iteration is not circular:
 
 1. **A starting point fixed independently of the outcome.** The first problem statement is written before any result is reconstructed, and it serves as the initially affirmed system from which corrections start.
-2. **Provisional objects, with recorded revisions.** Every specification of a record carries a [maturity](../../objects/status/statuses-and-acceptance.md#^maturity), and every revision records its trigger.
+2. **Provisional objects, with recorded revisions.** Every specification of a record carries a [maturity](../../objects/status/statuses-and-acceptance.md#^maturity), with the exceptions that the [commitment to fallibilism](../../foundations/commitments.md#^commitment-fallibilism) names, and every revision records its trigger. The itinerary records acts rather than specifications.
 3. **Tests that can fail.** A test that uses a provisional claim supports that claim only when the test could have returned a result against it [glymour1980]. Glymour states this requirement within bootstrap testing, which tests a hypothesis with evidence interpreted through other parts of the same theory.
 4. **A convergence criterion.** The iteration stops when one full pass through the stages triggers no revision. The criterion detects that the iteration has stopped, and it does not guarantee that the iteration stops.
 
