@@ -10,7 +10,7 @@
 # the claims of the entries that it labels.
 #
 # Each epistemic aim of a question also states its category and its three answer conditions,
-# documented by the registry of aims (`docs/epistemology/objects/task/epistemic-aim.md`). The category of an
+# owned by the note on epistemic aims (`docs/epistemology/objects/task/epistemic-aim.md`). The category of an
 # exploration depends on the origin of its equivalence criterion, so it is keyed by that origin.
 # The kind `comparison` has no template: a comparison is computed from a binding, and its
 # vocabulary lists the values of the calibration treatment that the computation reports.

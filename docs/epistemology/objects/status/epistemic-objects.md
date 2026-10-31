@@ -39,7 +39,7 @@ The method fixes the role of a unit by the kind of object that holds it and by t
 | Verdict | the outcome of a test of an answer, or of the norm of an act | [conditions of satisfaction](../answer/satisfaction-conditions.md) |
 | Motivation | a field, or a unit with an identifier of its own, of the record that it motivates; never a record of its own | [admission of a record kind](../../../adr/record-kind-admission.md#^failing-construct) |
 
-A role belongs to an authored unit, so a computed object bears no role of its own: a comparison or a disposition informs the verdict that cites it. An example has a settled place: the decision on record kinds treats an example as a relation from a record to a concept or an answer, so an example needs no record kind of its own. A proof has no settled place yet, since the formalization of a derivation is an open goal of the [README](../../../../README.md#features).
+A role belongs to an authored unit, so a computed object bears no role of its own: a comparison or a disposition informs the verdict that cites it. The decision on record kinds places an example as a relation from a record to a concept or an answer, so an example needs no record kind of its own; that relation, the candidate `exemplifies`, is pending its registration. A proof has no settled place yet, since the formalization of a derivation is an open goal of the [README](../../../../README.md#features).
 
 ## Inventory
 
@@ -77,7 +77,7 @@ The table lists every epistemic object of an inquiry, in the order of the readin
 | inter-theory relation | Candidate or Result, by its attitude | `inter-theory-relation` | none yet | [explanation and integration](../../processes/activities/explanation-and-integration.md) |
 | knowledge-state change | none of its own: it changes the attitude or the status of other units | `knowledge-state-change` | none of its own: the statuses of the records that it changes | [revision](../../processes/activities/revision.md) |
 | itinerary | none: it records acts, not content | none: a record of acts | `itinerary` | [itinerary](../../processes/activities/epistemic-activities.md#^itinerary) |
-| concept | Definition | `concept` | none yet | [concept](../concept/concept.md) |
+| concept | Definition | `concept` | none yet: the `concept` record is decided by the [decision on concepts](../../../adr/concepts-glossaries-notations.md) and not yet created | [concept](../concept/concept.md) |
 
 Only a claim can be accepted into $K$, by the [act of acceptance](statuses-and-acceptance.md#^acceptance-act). The product types fall into classes by whether the object that a type produces can be true or false, and only the claim types produce claims. Some claims have no product type yet: the claim that a construct is adequate, which [solves a problem](../problem/epistemic-problem.md#^solution-claim) that demands the construct, and the existence presupposition of a question. ^accepted-objects
 

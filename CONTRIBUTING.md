@@ -84,7 +84,8 @@ A change is verified by the narrowest checks that exercise it. A change to a sha
 Each contract of the framework has one owning file. A contributor reads that file before editing any file that depends on the contract.
 
 - The [expression language](docs/specification/expressions.md) fixes the syntax of symbols, expressions and signatures.
-- The [specification](docs/specification/_index.md) fixes the meaning of every inquiry field and the options that the field admits, and the [epistemology](docs/epistemology/_index.md) states the concepts and the grounds behind them.
+- The [registries of the package](src/gnomon/data/_index.md) declare the identifiers and the options that the checkers enforce, as the [decision on registries](docs/adr/registries-as-source.md) states.
+- The [specification](docs/specification/_index.md) fixes the meaning of every inquiry field and documents the options that the field admits, and the [epistemology](docs/epistemology/_index.md) owns the concepts and the grounds behind them, which the registries transcribe.
 - The [record templates](src/gnomon/data/templates/_index.md) fix the machine-readable shape of each record and the order of its keys.
 - The tests of [template alignment](tests/test_gnomon/test_template_alignment.py) and of [symbol resolution](tests/test_gnomon/test_symbol_resolution.py) enforce that each specification table aligns with its template, and that every symbol and every reference resolves.
 

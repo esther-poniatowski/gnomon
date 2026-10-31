@@ -438,7 +438,7 @@ def test_the_laws_of_a_model_take_the_keys_of_the_laws_of_a_background() -> None
 
 
 def test_the_aim_categories_of_the_note_are_the_registry() -> None:
-    """The Category column of the registry of aims states the category that the registry declares.
+    """The registry declares, for each aim, the category that the Category column of the aim note states.
 
     An exploration takes its category from the origin of its equivalence criterion, so its cell
     names one category per origin.
@@ -456,7 +456,7 @@ def test_the_aim_categories_of_the_note_are_the_registry() -> None:
 
 
 def test_the_answer_conditions_of_the_note_are_the_registry() -> None:
-    """Each row of the table of answer conditions states the three conditions that the registry declares."""
+    """The registry carries, for each aim, the three conditions that the table of answer conditions states."""
     def plain(cell: str) -> str:
         return re.sub(r"\s*\[[a-z0-9_]+\]", "", cell).strip()
 

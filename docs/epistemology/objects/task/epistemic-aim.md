@@ -13,7 +13,7 @@ The epistemic aim specifies the kind of direct answer that a question seeks. The
 
 ## The registry of aims
 
-The aims form an open registry. Each entry states its category and its answer conditions, and a new entry is admitted once it states both. The table below is the authority for the aims: the [registry of the options of a question](../../../../src/gnomon/data/vocabularies.yml) transcribes it, and the [specifications that each aim requires](../../../specification/question-task.md#^required-by-aim) are documented with the epistemic task of a question. ^aim-registry
+The aims form an open registry. Each entry states its category and its answer conditions, and a new entry is admitted once it states both. The tables of this note own the content of the aims, their categories and their answer conditions, and the [registry of the options of a question](../../../../src/gnomon/data/vocabularies.yml) declares their identifiers, under the [decision on registries](../../../adr/registries-as-source.md#^concept-ownership). The [specifications that each aim requires](../../../specification/question-task.md#^required-by-aim) are documented with the epistemic task of a question. ^aim-registry
 
 | Epistemic aim | Category | Operational question | Product types admitted | Examples | Status in literature |
 | ------------- | -------- | -------------------- | ---------------------- | -------- | -------------------- |

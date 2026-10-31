@@ -1,7 +1,7 @@
 # Registry of the epistemic activities, one entry per activity of the taxonomy.
-# The itinerary check reads this registry. The notes of `docs/epistemology/activities/`
-# state each activity with its norm, and this registry transcribes their identifiers, their types
-# and their attributes.
+# The itinerary check reads this registry. The notes of `docs/epistemology/processes/activities/`
+# own each activity with its norm, and this registry declares their identifiers, their types
+# and their attributes (docs/adr/registries-as-source.md).
 #
 # An activity is epistemic when its output is an epistemic object: a representation whose content
 # bears on what is asked, known or warranted. Each activity has exactly one output type, and that

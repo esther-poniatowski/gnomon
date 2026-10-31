@@ -53,7 +53,7 @@ The **vocabulary records** of a project separate the meaning of a term from its 
 
 The **language** states the content of each record. Every declared quantity carries a symbol, and each record declares its symbols in one table. A formula names only declared symbols, those of its own record or, by reference, those of another record of the same problem. Two consequences follow. A researcher writing a law must name quantities that a record already declares. A reader can find every declaration in one table.
 
-The vocabulary of the method is declared in [registries](src/gnomon/data/_index.md), written by hand and stored in package data, and each declaration is documented in a specification note.
+The vocabulary of the method is declared in [registries](src/gnomon/data/_index.md), written by hand and stored in package data. Each declaration is documented in a specification note, and a value whose meaning the theory defines is owned by its theory note, as the [decision on registries](docs/adr/registries-as-source.md) states.
 
 The language and the registries together serve one design goal: a record is **machine-checkable**. Four classes of defect are reported:
 

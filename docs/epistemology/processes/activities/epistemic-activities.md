@@ -17,7 +17,7 @@ aliases:
 Each **epistemic activity** of an inquiry is typed by its inputs, its output and its norm. These types serve one purpose: a research itinerary can be checked step by step.
 
 > [!IMPORTANT] Notes and registries
-> The taxonomy is a synthesis proposed by this method. Each family note cites the sources of its activities one by one. The notes are the source of the content: the [registry of activities](../../../../src/gnomon/data/registries/activities.yml) and the [registry of product types](../../../../src/gnomon/data/registries/product-types.yml) transcribe them. Therefore, a change must start in the notes. A note that states a change not yet transcribed says that the change is pending a change of the registry.
+> The taxonomy is a synthesis proposed by this method. Each family note cites the sources of its activities one by one. The notes own the content of the activities and of the product types: their signatures, their norms and their definitions. The [registry of activities](../../../../src/gnomon/data/registries/activities.yml) and the [registry of product types](../../../../src/gnomon/data/registries/product-types.yml) declare their identifiers, under the [decision on registries](../../../adr/registries-as-source.md#^concept-ownership). A note that states a change not yet transcribed says that the change is pending a change of the registry.
 
 ## Criterion of an epistemic activity
 
@@ -107,7 +107,7 @@ The two names are kept apart. A binding records the imputations that its asserte
 
 ## Product types
 
-The product types form a closed list. Each type classifies the epistemic objects taken or produced by activities. The column *Output of* names the family whose activities produce the type. The taxonomy is the authority for the list: a type that no record kind holds yet is a gap of the records, which must be extended to match the taxonomy. ^product-types
+The product types form a closed list. Each type classifies the epistemic objects taken or produced by activities. The column *Output of* names the family whose activities produce the type. The taxonomy owns the list, as the [decision on registries](../../../adr/registries-as-source.md#^concept-ownership) states: a type that no record kind holds yet is a gap of the records, which must be extended to match the taxonomy. ^product-types
 
 > [!NOTE] Implementation coverage
 > The *Status* column is not a content of the theory. That column transcribes from the [registry of product types](../../../../src/gnomon/data/registries/product-types.yml) how far the records of `gnomon` cover each type today, as the [itinerary record](../../../specification/itinerary.md#^type-coverage) documents. The column stays in this note only because a test of the project reads it, and moving that test to the registry is pending an item of the [project goals](../../../../TODO.md).
