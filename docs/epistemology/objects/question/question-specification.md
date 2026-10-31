@@ -13,9 +13,9 @@ aliases:
 
 ## Layers of specification
 
-A [question](question.md) $Q$ is specified by three layers, each with a **distinct logical role**: ^three-layers
+A [question](question.md) $Q$ is specified by three layers, each with a **distinct logical role**, and it is asked under a [request](#^question-request), which stands beside the layers: ^three-layers
 
-$$Q\ \text{specified by}\ \langle\Sigma,\ T,\ \mathcal{V}\rangle .$$
+$$Q\ \text{specified by}\ \langle\Sigma,\ T,\ \mathcal{V}\rangle,\ \text{asked under}\ \mathsf{req} .$$
 
 | Layer of specification | Question that the layer answers | Components |
 | --- | --- | --- |
@@ -35,11 +35,18 @@ The symbols of the layers, each with one meaning across the notes, are registere
 
 Three results of the literature support separating the subject from the task:
 
-- In erotetic logic, a question divides into a *subject*, presenting the alternatives, and a *request*, specifying which of them the answer must select [belnap1976]. The subject $\Sigma$ of this method corresponds to that subject by analogy only: $\Sigma$ names the objects studied, and the alternatives are fixed by $\Sigma$ and $T$ together.
+- In erotetic logic, a question divides into a *subject*, presenting the alternatives, and a *request*, specifying which of them the answer must select [belnap1976]. The subject $\Sigma$ of this method corresponds to that subject by analogy only: $\Sigma$ names the objects studied, and the alternatives are fixed by $\Sigma$ and $T$ together. The request has its counterpart in the [request](#^question-request) of a question.
 - A why-question separates its topic, namely its *explanandum* and its *contrast class*, from the sort of information that it requests. The context of the question fixes that sort of information through a *relevance relation*, which corresponds to the requested relation of this method [vanfraassen1980].
 - More broadly, an epistemic achievement, such as explanation or understanding, is distinguished from the objects that it bears on. Understanding, however, is not an [aim](../task/epistemic-aim.md#^understanding) of the task, since it bears on a product of the inquiry without fixing the type of its answers.
 
-**Subject and task (1, 2) versus virtues (3).** The subject and the task fix which statements answer the question: its possible answers and its direct answers, as the [answers of a question](question.md#^answer-sets) define them. The virtues fix no answer: they fix the **standards** by which the answers are judged, and weigh qualities that the task does not demand. A virtue marked constitutive adds a condition of admissibility, so it narrows the admissible answers. A virtue marked preferred ranks only the answers that are already admissible.
+**Subject and task (1, 2) versus virtues (3).** The subject and the task fix which statements answer the question, as the [answers of a question](question.md#^answer-sets) state. The virtues fix no answer: they fix the **standards** by which the answers are judged, and weigh qualities that the task does not demand. A virtue marked constitutive adds a condition of admissibility, so it narrows the admissible answers. A virtue marked preferred ranks only the answers that are already admissible.
+
+**The request beside the layers.** A question is fixed by its three layers together with its **request** $\mathsf{req}$: how many possible answers a direct answer selects, and whether it claims completeness. Erotetic logic divides a question into a subject, which presents the alternatives, and a request, which fixes the selection [belnap1976]. The three layers fix the alternatives and the standards, and none of them fixes the selection, so the request stands beside them as a fourth element. The request of a question takes the values of the [request of a demand](../problem/epistemic-problem.md#^request-values), and the request of a problem is the request of its [associated question](../problem/epistemic-problem.md#^associated-question). ^question-request
+
+Two other places for the request are discarded:
+
+- **A component of the task.** The task fixes the kind of knowledge sought, and the same kind of knowledge can be sought under every request: an explanation can be asked of one mechanism or of all of them. A component of $T$ that varies independently of the kind of knowledge would blur the question that the task answers.
+- **A field of the question record only.** The request fixes the direct answers, and through them the presuppositions of a question and the condition under which an answer is conclusive, which the theory states. Content that would hold under any format of the records belongs to the theory, by the [test that separates theory from specification](../../../../CONTRIBUTING.md#theory-and-specification).
 
 ## What follows from the layers
 

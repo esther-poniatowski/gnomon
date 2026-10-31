@@ -34,8 +34,8 @@ The four components fill a statement frame. The [epistemic aim](../task/epistemi
 The possible answers and the presuppositions of a question are defined with the [answers of a question](../question/question.md#^answer-sets).
 
 > [!QUOTE] Logic of questions, the source of the inclusion test
-> A question is determined by the set of its possible answers [hamblin1958].
-> A question presupposes every statement that must be true for it to have a true answer [belnap1976].
+> To know a question is to know the statements that count as its answers [hamblin1958], and those answers are built from its possible answers [hamblin1973].
+> A question presupposes every statement that must be true for it to have a true direct answer [belnap1976].
 
 ## Safeguards against rigidity
 
@@ -85,5 +85,6 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [colaco2018] ◐ [Colaço, "Rip it up and start again", _SHPS A_ 72, 2018](https://www.sciencedirect.com/science/article/abs/pii/S003936811730211X)
 - [craver2013] ◐ [Craver & Darden, *In Search of Mechanisms: Discoveries across the Life Sciences*, University of Chicago Press, 2013](https://press.uchicago.edu/ucp/books/book/chicago/I/bo16123713.html)
 - [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211)
+- [hamblin1973] ◐ Hamblin, "Questions in Montague English", *Foundations of Language* 10(1), 41–53, 1973; a question denotes the set of its possible answers, among which it sets up a choice, checked through the [SEP entry on questions](https://plato.stanford.edu/entries/questions/) and secondary sources
 - [ich2019] ◐ [ICH E9(R1) Addendum on Estimands](https://en.wikipedia.org/wiki/ICH_E9\(R1\)_Addendum_On_Estimands_and_Sensitivity_Analyses_in_Clinical_Trials)
 - [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)

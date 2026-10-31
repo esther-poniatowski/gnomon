@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-10-29
+revised: 2026-10-31
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Answers, models and bindings
@@ -34,7 +34,7 @@ The [audits of the model design](../audits/_index.md) and the trials run on the 
 
 ## Constraints that decide the design
 
-- **The type of a question fixes the type of its answers.** A question is determined by its admissible answers [hamblin1958] [belnap1976], and a why-question by its topic, its contrast class and its relevance relation [vanfraassen1980]. Requiring the same components of every answer treats every question as a why-question.
+- **The type of a question fixes the type of its answers.** A question is determined by its direct answers [hamblin1958] [belnap1976], and a why-question by its topic, its contrast class and its relevance relation [vanfraassen1980]. Determination by the admissible answers is discarded: the admissible answers depend on the tests and on the constitutive virtues, which fix standards and not the question, so two questions with the same direct answers would differ by their tests alone, as the [answers of a question](../epistemology/objects/question/question.md#^answer-sets) state. Requiring the same components of every answer treats every question as a why-question.
 - **Grounds are general, and their explanatory reading is not.** Every claim depends on grounds, and sensitivity, robustness and explanatory proofs show that dependence is not specific to explanation [saltelli2008] [weisberg2006] [steiner1978] [lange2017]. Only explanation reads some dependences as difference-making of a requested kind, relative to a contrast [woodward2003] [strevens2008]. A predictor need not explain [shmueli2010].
 - **One model grounds several answers.** Once each answer holds one typed claim, a binding owned by the answer would be repeated across every claim that shares the model. Several bindings use the same observation operators and maps of units, and a measurement outcome is itself inferred through a model, which can be revised [tal2013] [parker2017].
 - **Explanatory factors need not exist in the target.** Minimal models, holistic distortions and explanations by constraint explain without a correspondence of factors [battermanrice2014] [rice2021] [lange2017].

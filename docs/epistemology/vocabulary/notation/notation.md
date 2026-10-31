@@ -22,7 +22,7 @@ A single registry assigns every symbol that a note may use without defining it: 
 | $h$ | a candidate answer, a member of $H$ | [conditions of satisfaction](../../objects/answer/satisfaction-conditions.md#^conditions-satisfaction) |
 | $\mathcal{M}$ | the available means: the methods, data, instruments and proof techniques that can be applied | [epistemic problem](../../objects/problem/epistemic-problem.md) |
 | $\mathrm{Obt}_{\mathcal{M}}$ | $\mathrm{Obt}_{\mathcal{M}}(s)$: the available means $\mathcal{M}$ have yielded the claim $s$; obtaining a claim is distinct from accepting it, which is written $s\in K$ | [obtained and accepted](../../foundations/inquiry-and-state.md#^obtained-accepted) |
-| $d$ | the demand of a problem, $d=\langle\mathsf{type},\mathsf{req},\Xi\rangle$, with the type of result $\mathsf{type}$ and the request $\mathsf{req}$ | [epistemic problem](../../objects/problem/epistemic-problem.md) |
+| $d$ | the demand of a problem, $d=\langle\mathsf{type},\mathsf{req},\Xi\rangle$, with the type of result $\mathsf{type}$ and the request $\mathsf{req}$, which is the request of its associated question | [epistemic problem](../../objects/problem/epistemic-problem.md) |
 | $\Xi$ | the explicanda of a demand | [epistemic problem](../../objects/problem/epistemic-problem.md) |
 | $\Phi$ | the constraints of a problem, $\Phi_1$ on each candidate and $\Phi^*$ on the set of results | [epistemic problem](../../objects/problem/epistemic-problem.md) |
 | $Q_\pi$ | the question associated with the problem $\pi$: the question that asks for the demanded results, and only for them | [epistemic problem](../../objects/problem/epistemic-problem.md#^associated-question) |
@@ -32,7 +32,7 @@ A single registry assigns every symbol that a note may use without defining it: 
 
 | Symbol | Denotes | Declared in |
 | --- | --- | --- |
-| $Q$ | a question: a request whose possible answers form a definite set, fixed by its subject $\Sigma$ and its task $T$; $Q$ is specified by $\langle\Sigma,T,\mathcal{V}\rangle$, in which the virtues $\mathcal{V}$ fix the standards of its answers | [answer sets of a question](../../objects/question/question.md#^answer-sets); [specification of a question](../../objects/question/question-specification.md#^three-layers) |
+| $Q$ | a question: a request whose answers form a definite set, whose possible answers are fixed by its subject $\Sigma$ and its task $T$; $Q$ is specified by $\langle\Sigma,T,\mathcal{V}\rangle$, in which the virtues $\mathcal{V}$ fix the standards of its answers, and asked under a request $\mathsf{req}$ | [answer sets of a question](../../objects/question/question.md#^answer-sets); [specification of a question](../../objects/question/question-specification.md#^three-layers) |
 | $\Sigma$ | the subject of inquiry, $\Sigma=\langle S,P,X,D\rangle$ | [subject of inquiry](../../objects/subject/subject-of-inquiry.md) |
 | $S$ | the target: the system, or the class of systems, that the inquiry is about; the target is relational, and a target-system record specifies it | [target system](../../objects/subject/target-system.md); [two senses of target](../../foundations/things-and-constructs.md#^target-senses) |
 | $N$ | a number of units: of a kind in $S$, or of the constituents $C$ of a model | [target system](../../objects/subject/target-system.md); [mechanistic answer](../../objects/answer/mechanism.md) |

@@ -66,7 +66,7 @@ The [commitments of the method](commitments.md) are stated with their grounds in
 3. [Neutrality on existence](commitments.md#^commitment-neutrality): no record states whether its object exists independently of any description.
 4. [Possible answers fixed by the subject and the task](commitments.md#^commitment-answers): the virtues fix only the standards of the answers.
 5. [Tests fixed before evaluation, under iteration](commitments.md#^commitment-tests): each assessment is made against the version of the specification fixed before it.
-6. [Three layers, with the answer as a product](commitments.md#^commitment-layers): the subject, the task and the virtues specify a question, and the answer is a product of the inquiry.
+6. [Three layers and a request, with the answer as a product](commitments.md#^commitment-layers): the subject, the task and the virtues specify a question asked under a request, and the answer is a product of the inquiry.
 7. [Pluralism on evidence and on representation](commitments.md#^commitment-pluralism): severity and a Bayesian credence complement each other, and a binding records licensed inferences in a vocabulary chosen by the method.
 8. [Warrant as provenance](commitments.md#^commitment-warrant): a result reports the laws to which it is exposed, never a degree of warrant.
 9. [Base revision](commitments.md#^commitment-base): the accepted knowledge is a belief base.

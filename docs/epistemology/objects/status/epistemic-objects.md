@@ -30,7 +30,7 @@ The method fixes the role of a unit by the kind of object that holds it and by t
 | Role | Object that carries it | Note that states it |
 | --- | --- | --- |
 | Problem | a demand with its constraints, relative to $K$ | [epistemic problem](../problem/epistemic-problem.md) |
-| Question | a request whose possible answers form a definite set | [question](../question/question.md) |
+| Question | a request whose answers form a definite set, individuated by its direct answers | [question](../question/question.md) |
 | Definition | a concept with its gloss, a declaration of a quantity, or a key, each assessed for its adequacy rather than its truth | [concept](../concept/concept.md); [adequacy of a declaration](../../foundations/things-and-constructs.md#^declaration-adequacy) |
 | Assumption | a ground of an answer with the role `assumption` or `idealization`, a law admitted in a background, the laws of a model, or a binding | [grounds and dependence](../knowledge/grounds-and-dependence.md#^ground-roles) |
 | Datum | a phenomenon, its data, or a ground with the role `datum` | [phenomenon](../subject/phenomenon.md) |

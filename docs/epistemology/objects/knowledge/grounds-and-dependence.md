@@ -72,7 +72,7 @@ A **rebuttal**, an answer whose claim contradicts the claim of another answer to
 
 Two features separate `defeats` from defeat in argumentation. First, the relation takes effect only once the defeating answer is accepted, so before acceptance it records an attack and not a defeat. Second, its effect is a report to the researcher, not a status computed for the defeated answer: an engine that computes the acceptance of arguments from their attacks [dung1995] is excluded by the [decision against inference at run time](../../../adr/no-run-time-inference.md#^excluded-inference).
 
-The relation `presupposes` between answers is a homonym of the [link `presupposes` between questions](../question/question.md#^linked-questions). Between answers, it conditions the admissibility of one answer on the truth of another. Between questions, it conditions the existence of a true answer to one question on the existence of a true answer to the other.
+The relation `presupposes` between answers is a homonym of the [link `presupposes` between questions](../question/question.md#^linked-questions). Between answers, it conditions the admissibility of one answer on the truth of another. Between questions, it conditions the existence of a true direct answer to one question on the existence of a true direct answer to the other.
 
 ## Three graphs of dependence
 

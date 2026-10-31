@@ -36,7 +36,7 @@ The activities of this family output the objects that open an inquiry: a problem
 | `constraint-specification` | derive further conditions on any solution from the problem and from the admitted background laws | each constraint is traced to a source or to a background law [nickles1981] |
 | `question-formulation` | turn a problem into a question schema, whose slots are typed placeholders | the answer space is typed, and the presuppositions of the question are stated [hamblin1958] [belnap1976] [vanfraassen1980] |
 | `subject-identification` | fix the referent of each slot of a question schema by a definite description and pointers | each slot refers to a record at commitment `identified` |
-| `question-decomposition` | replace a question by subquestions whose answers help to answer it [hintikka1999] [hintikka2007] | erotetic implication holds: under the premises, each subquestion has a true answer if the question has one, and each answer to a subquestion narrows the answers to the question [wisniewski2013] |
+| `question-decomposition` | replace a question by subquestions whose answers help to answer it [hintikka1999] [hintikka2007] | erotetic implication holds: under the premises, each subquestion has a true direct answer if the question has one, and each answer to a subquestion narrows the answers to the question [wisniewski2013] |
 | `question-selection` | choose the question to pursue among several candidates | each candidate is stated with its significance, its tractability and its dependence on other questions, and the candidates are compared on these grounds [laudan1977] |
 
 ## Distinctions
@@ -58,7 +58,7 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 
 - [belnap1976] ◐ [Belnap & Steel, *The Logic of Questions and Answers*, Yale University Press, 1976](https://catalogue.bnf.fr/ark:/12148/cb353871722); checked through library records and published reviews
 - [dewey1938] ◐ [Dewey, *Logic: The Theory of Inquiry*, Henry Holt, 1938](https://search.worldcat.org/oclc/229987); ch. 6, "The pattern of inquiry": a problem is formulated from an indeterminate situation, checked through secondary summaries
-- [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211); the postulates that an answer is a statement and that the possible answers form an exhaustive set of mutually exclusive possibilities, checked through secondary summaries
+- [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211); the postulates that an answer is a statement and that the answers to a question form an exhaustive set of mutually exclusive possibilities, checked through secondary summaries
 - [hintikka1999] ◐ [Hintikka, *Inquiry as Inquiry: A Logic of Scientific Discovery*, Jaakko Hintikka Selected Papers 5, Kluwer, 1999](https://doi.org/10.1007/978-94-015-9313-7)
 - [hintikka2007] ◐ [Hintikka, *Socratic Epistemology: Explorations of Knowledge-Seeking by Questioning*, Cambridge University Press, 2007](https://doi.org/10.1017/CBO9780511619298)
 - [laudan1977] ◐ [Laudan, *Progress and Its Problems: Towards a Theory of Scientific Growth*, University of California Press, 1977](https://www.ucpress.edu/books/progress-and-its-problems/paper); empirical and conceptual problems, and the weighting of problems by importance, checked through the publisher page and secondary summaries

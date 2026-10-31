@@ -25,7 +25,7 @@ A problem is relative to the accepted knowledge of an [inquiry](../../foundation
 | Problem | philosophy of science | a demand that a result be found, together with the constraints that the result must satisfy | [nickles1981] |
 | Problem to find, problem to prove | mathematical heuristics | a problem to find has an unknown, data and a condition; they correspond to the type of result, the accepted knowledge and the constraints below; a problem to prove has a hypothesis and a conclusion | [polya1945] |
 | Problem and its solution | logic of problems | a task whose solution is a construction; one problem reduces to another when a method turns every solution of the second into a solution of the first | [kolmogorov1932]; [medvedev1955] |
-| Evocation of a question | erotetic logic | a set of statements evokes a question when the set entails that the question has a true answer and entails none of its direct answers | [wisniewski1995] |
+| Evocation of a question | erotetic logic | a set of statements evokes a question when the set entails that the question has a true direct answer and entails none of its direct answers | [wisniewski1995] |
 
 ## Formal statement
 
@@ -55,7 +55,7 @@ The demand states the result sought:
 $$d=\langle\mathsf{type},\ \mathsf{req},\ \Xi\rangle .$$
 
 - $\mathsf{type}$, the **type of result**: one of the [product types](../../processes/activities/epistemic-activities.md#^product-types), such as a phenomenon, a model, a consequence, an explanation or a concept.
-- $\mathsf{req}$, the **request**: how many results, and of which completeness, the demand asks for. The request takes one of four values:
+- $\mathsf{req}$, the **request**: how many results, and of which completeness, the demand asks for; it is the [request](../question/question-specification.md#^question-request) of the associated question. The request takes one of four values: ^request-values
   - `one`: one result suffices (find one network that implements a given input–output map);
   - `all`: every result is required (characterize all the fixed points of a network);
   - `over-a-parameter`: a result for each value of a parameter (the fixed points as the gain varies);
@@ -132,13 +132,13 @@ A problem and a question are distinct objects: ^problem-vs-question
 
 | | Problem | Question |
 | --- | --- | --- |
-| States | a demand, the accepted knowledge relative to which the demand is unmet, and the constraints on a solution | a set of possible answers, and the request on how many of them an answer selects [hamblin1958] [belnap1976] |
+| States | a demand, the accepted knowledge relative to which the demand is unmet, and the constraints on a solution | a set of possible answers, and the request on how many of them an answer selects [hamblin1973] [belnap1976] |
 | Possible answers are | results of a type (models, concepts, consequences …) | propositions; for the associated question, the propositions "$s$ is a result of type $\mathsf{type}$ that satisfies $\Phi_1$" |
 | Number | one problem motivates one or several questions | one question serves one or several problems |
 
 Two relations connect them:
 
-- A question **serves** a problem when, given $K$, two conditions hold. First, the question has a true answer whenever the associated question $Q_\pi$ has one. Second, each answer to the question narrows the candidate answers of $Q_\pi$. Formally, $Q_\pi$ implies the question on the basis of $K$, in the sense of erotetic implication [wisniewski1995].
+- A question **serves** a problem when, given $K$, two conditions hold. First, the question has a true direct answer whenever the associated question $Q_\pi$ has one. Second, each answer to the question narrows the candidate answers of $Q_\pi$. Formally, $Q_\pi$ implies the question on the basis of $K$, in the sense of erotetic implication [wisniewski1995].
 - A question **formulates** a problem when it serves the problem and a true complete answer to it yields a solution.
 
 *Example*: "does the delay of generalization shrink when weight decay grows?" serves the problem of the delay, since each answer narrows the candidate accounts. The question "which mechanism, among those compatible with the training laws, fixes the duration of the delay?" formulates the problem.
@@ -168,7 +168,7 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [carnap1950_logical] ◐ Carnap, *Logical Foundations of Probability*, University of Chicago Press, 1950, ch. 1; explicandum and explicatum, checked through the [Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/carnap/)
 - [dewey1938] ◐ [Dewey, *Logic: The Theory of Inquiry*, Henry Holt, 1938](https://search.worldcat.org/oclc/229987); ch. 6; checked through secondary sources
 - [friedman2013] ◐ [Friedman, "Question-directed attitudes", *Philosophical Perspectives* 27, 145–174, 2013](https://doi.org/10.1111/phpe.12026); attitudes directed at a question are incompatible with knowing its answer, checked through secondary sources
-- [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211); checked through secondary sources
+- [hamblin1973] ◐ Hamblin, "Questions in Montague English", *Foundations of Language* 10(1), 41–53, 1973; a question denotes the set of its possible answers, among which it sets up a choice, checked through the [SEP entry on questions](https://plato.stanford.edu/entries/questions/) and secondary sources
 - [hansson1999] ◐ [Hansson, *A Textbook of Belief Dynamics: Theory Change and Database Updating*, Kluwer, 1999](https://doi.org/10.1007/978-94-007-0814-3); belief bases, as opposed to belief sets closed under consequence
 - [hintikka1976] ◐ Hintikka, *The Semantics of Questions and the Questions of Semantics: Case Studies in the Interrelations of Logic, Semantics, and Syntax*, Acta Philosophica Fennica 28(4), North-Holland, 1976; the desideratum of a question, "bring it about that I know …"
 - [hintikka2007] ◐ [Hintikka, *Socratic Epistemology: Explorations of Knowledge-Seeking by Questioning*, Cambridge University Press, 2007](https://doi.org/10.1017/CBO9780511619298); a question may be asked only once its presupposition is established

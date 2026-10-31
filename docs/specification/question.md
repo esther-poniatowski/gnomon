@@ -34,4 +34,7 @@ The commitment of a slot takes one of the [levels of commitment](../epistemology
 | `specified` | the required fields are filled, and every symbol resolves |
 
 - **The slots of a question admit a placeholder.** The rule is stated under [placeholders before records](question-subject.md#^placeholder-slots).
+> [!WARNING] No field for the request
+> The [request](../epistemology/objects/question/question-specification.md#^question-request) of a question fixes its direct answers beside its three layers, but the question record has no field for it yet. The type `question` of a record therefore cannot yet check that the request is fixed. The goal `theory-code-alignment` of the [project goals](../../TODO.md) adds the field.
+
 - **The type of a question record follows the commitment of its slots.** When any slot holds a placeholder, the record is a `question-schema`. When every slot is `identified` or `specified`, the record is a `question`. The two take the same fields.
