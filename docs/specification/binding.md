@@ -9,7 +9,7 @@ aliases:
 
 > [!QUESTION] Goal: what does a researcher write in each field of a binding record, and when is each field required?
 
-A binding records the surrogative inferences from a model to its target that its asserter licenses, as the [theory of the binding](../epistemology/objects/answer/model-and-binding.md) states. Similarity holds in respects and to degrees fixed by a purpose [giere2004] [weisberg2013], so the pairs of a binding state those respects, and the tolerance of the question states those degrees. ^binding-record
+A binding records the surrogative inferences from a model to its target that its asserter licenses, as the [theory of the binding](../epistemology/objects/answer/model-and-binding.md) states. Each pair states one respect in which a feature is imputed to the target, and at a quantitative grain the structural discrepancy states how far the model departs from the target in that respect. For the computed pairs, these are the respects and the degrees of the similarity that the binding asserts, chosen for a purpose [giere2004] [weisberg2013]. The tolerance of each question that uses the binding then states how closely the imputed feature must match the data for that question. ^binding-record
 
 | Specification | When it is required | Content | Examples |
 | ------------- | ------------------- | ------- | -------- |

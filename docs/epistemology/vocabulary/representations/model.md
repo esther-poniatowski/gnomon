@@ -35,7 +35,7 @@ A **model system** is the object studied in place of a **target**: the system, o
 | Isomorphism | a bijection between the model and the target preserves every relation of the model | — |
 | Partial homomorphism | a map preserves some relations of the model, for some elements | a network model whose connectivity matches the measured connectivity of some neurons only |
 
-Strict isomorphism is rarely met by an empirical target. Accounts of scientific representation have weakened that requirement to partial morphisms or replaced it by similarity [frigg2025].
+Strict isomorphism is rarely met by an empirical target. Accounts of scientific representation have weakened that requirement to partial morphisms or replaced it by similarity [frigg2025]. The binding of this method takes no position among these relations as accounts of the constitution of representation, as the [neutrality of the binding](../../objects/answer/model-and-binding.md#^binding-neutrality) states.
 
 ## Distinctions
 
