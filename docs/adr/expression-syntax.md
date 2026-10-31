@@ -20,7 +20,7 @@ An inquiry record states its laws, its derived quantities and its manifestations
 
 ## Decision
 
-A grammar defines the infix surface that authors write over an S-expression core, and a parser operates on that core. Because the surface stays unchanged, no record has to change.
+A grammar defines the infix surface that authors write over an S-expression core, and a parser operates on that core.
 
 ## Constraints that decide the syntax
 

@@ -31,7 +31,7 @@ The decision amends only the reference form of the flat symbol table. Each recor
 
 | Option | Benefit | Reason it is not taken alone |
 | ------ | ------- | ---------------------------- |
-| Keep `system.TOPIC#SYMBOL` | No change to the notes, the checkers or the fixtures | A reference carries two separators, and the subrecord identifiers of the consumers take another form |
+| Keep `system.TOPIC#SYMBOL` | — | A reference carries two separators, and the subrecord identifiers of the consumers take another form |
 | Dots throughout, with the record found by the longest identifier declared | Record identifiers of any length | Each resolution needs a lookup in the declared records, and a record named as the prefix of another one makes the split ambiguous |
 | Dots throughout, with the number of record segments fixed by the prefix and one segment for the unit | One separator, and a split read from the prefix alone | A new record type must declare its number of segments, and every unit without an identifier must gain one |
 

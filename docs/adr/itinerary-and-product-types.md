@@ -29,12 +29,12 @@ The record of the acts of an inquiry is the **itinerary**, of type `itinerary` a
 
 | Option | Benefit | Reason it is not taken alone |
 | ------ | ------- | ---------------------------- |
-| Keep `plan` | No rename of the template, the checker or the fixtures | The name suggests a preparation, and the record tracks acts already performed |
+| Keep `plan` | — | The name suggests a preparation, and the record tracks acts already performed |
 | Name the record a log or a history | The name states that the record tracks acts | "Log" collides with the task records and decision logs of the workspaces, and "history" with the ontology of phenomena |
-| Name the record an itinerary | The name admits a route followed and a route still to follow, built step by step | Every file, command, anchor and fixture that names the plan changes |
+| Name the record an itinerary | The name admits a route followed and a route still to follow, built step by step | — |
 | Name the types output types | The type matches the field that holds its instance | The field `output` and its type would share one name |
 | Name the types epistemic object types | `activities.yml` already calls a product an epistemic object | The key `object` is planned for the assembly schema of the task `assembly-schema` |
-| Name the types product types, and make the product of an aim a set of product types | One notion of product serves both the activities and the aims | Every note and comment that reads "artifact type" changes, and each aim must name the product types that it admits |
+| Name the types product types, and make the product of an aim a set of product types | One notion of product serves both the activities and the aims | Each aim must name the product types that it admits |
 
 ## Consequences
 
