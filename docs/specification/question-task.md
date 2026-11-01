@@ -27,7 +27,7 @@ The dimensions that these fields fix, and the grounds of each dimension, are sta
 > [!NOTE]
 > Each dimension is developed in the theory, linked from its row: the first four in notes of their own, and the required accuracy and the proof obligations in the note on the epistemic task.
 
-- **The demand of a problem bounds the aim of each question that serves it.** A question that serves a problem takes one of the aims that the [demand table](../epistemology/objects/problem/problem-types.md) admits for the type of result, and a checker can test that bound once the demand of the problem carries its type.
+- **The demand of a problem bounds the aim of each question that serves it.** A question that serves a problem takes one of the aims that the [demand table](../epistemology/objects/problem/problem-types.md) admits for the type of result, and a check tests that bound on the type of result of the problem, without the conditions that the table attaches to some aims, such as a closed background for modal knowledge.
 
 ## Specifications each aim requires
 

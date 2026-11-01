@@ -189,6 +189,14 @@ COMPLETENESS_UNKNOWN_CONSTRAINT = _rule(
     "completeness/unknown-constraint",
     "A verdict of an assessment names a constraint that its problem does not state.",
 )
+COMPLETENESS_MISMATCHED_REQUEST = _rule(
+    "completeness/mismatched-request",
+    "The associated question of a problem is no question addressing it, or carries another request.",
+)
+COMPLETENESS_UNBOUNDED_AIM = _rule(
+    "completeness/unbounded-aim",
+    "A question serves a problem under an aim that the type of result of the problem does not admit.",
+)
 COMPLETENESS_UNSTATED_FUNCTION_SENSE = _rule(
     "completeness/unstated-function-sense",
     "A question requests a functional relation without its sense of function.",

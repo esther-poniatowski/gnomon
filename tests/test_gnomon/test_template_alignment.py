@@ -455,3 +455,17 @@ def test_the_aim_categories_of_the_note_are_the_registry() -> None:
     assert documented == {entry["value"]: entry.get("category") for entry in aims}
 
 
+def test_the_aims_admitted_by_each_type_of_result_are_those_of_the_demand_table() -> None:
+    """The registry declares, per type of result, the aims that the demand table admits."""
+    documented: dict[str, set[str]] = {}
+    for line in table_lines("epistemology/objects/problem/problem-types.md", "| Type of result | Admissible aims |"):
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        kinds = re.findall(r"`([a-z-]+)`", cells[0].split(":")[0])
+        aims = set() if cells[1].startswith("none") else {
+            part.split(",")[0].strip().replace(" ", "-") for part in cells[1].split(";")
+        }
+        for kind in kinds:
+            documented.setdefault(kind, set()).update(aims)
+    entries = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"]["problem"][".result_type"]
+    assert documented == {entry["value"]: set(entry["admits"]) for entry in entries}
+

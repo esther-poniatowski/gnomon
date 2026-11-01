@@ -23,7 +23,7 @@ always:
   target-system: [commitment]
   phenomenon: [commitment]
   background: [describes, laws, closure]
-  problem: [statement, kind, demand]
+  problem: [statement, kind, demand, result_type, request]
   itinerary: [addresses, steps]
   answer: [claim, grounds, dependence, route, domain, status, support, modal_strength, erotetic_relation]
   model: [constituents, variables, laws]

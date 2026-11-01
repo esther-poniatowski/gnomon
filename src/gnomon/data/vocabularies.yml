@@ -13,6 +13,9 @@
 # epistemic aims (`docs/epistemology/objects/task/epistemic-aim.md`), which owns the answer conditions of
 # each aim. The category of an exploration depends on the origin of its equivalence criterion, so
 # it is keyed by that origin.
+# Each type of result of a problem lists under `admits` the aims of the questions that may serve
+# it, as the demand table of the note on the types of problem states
+# (`docs/epistemology/objects/problem/problem-types.md`); an empty list admits no aim.
 # The kind `comparison` has no template: a comparison is computed from a binding, and its
 # vocabulary lists the values of the calibration treatment that the computation reports.
 
@@ -419,6 +422,32 @@ vocabularies:
       name: the problem concerns the objects of a domain
     - value: conceptual
       name: the problem concerns the consistency of a theory or its fit with other theories
+    .result_type:
+    - value: phenomenon
+      admits: [exploration, description]
+    - value: consequence
+      admits: [model-knowledge, modal-knowledge]
+    - value: target-claim
+      admits: [prediction, modal-knowledge]
+    - value: model
+      admits: [description, explanation]
+    - value: explanation
+      admits: [explanation]
+    - value: classification
+      admits: [exploration, description]
+    - value: concept
+      admits: []
+    - value: measurement-procedure
+      admits: []
+    - value: knowledge-state-change
+      admits: []
+    - value: inter-theory-relation
+      admits: []
+    .request:
+    - value: one
+    - value: all
+    - value: over-a-parameter
+    - value: decision
   itinerary:
     .status:
     - value: planned

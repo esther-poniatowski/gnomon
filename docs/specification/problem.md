@@ -17,6 +17,9 @@ The problem record states one [epistemic problem](../epistemology/objects/proble
 | Statement | always | "[the result sought], [the obstacle to obtaining it]", as a reading | "overparameterized networks fit their training data long before they generalize, and no account states what produces the delay" | — |
 | Kind | always | empirical, when the problem concerns the objects of a domain · conceptual, when it concerns the consistency of a theory or its fit with other theories | the delay before generalization (empirical); two accounts of representation that assign incompatible roles to one quantity (conceptual) | [laudan1977]; [senses of problem](../epistemology/objects/problem/epistemic-problem.md) |
 | Demand | always | "[the result required of a solution]" | an account that names the determinants of the delay and derives its duration from them | [nickles1981] |
+| Result type | always | the type of result of the demand, one of the rows of the [demand table](../epistemology/objects/problem/problem-types.md): phenomenon · consequence · target-claim · model · explanation · classification · concept · measurement-procedure · knowledge-state-change · inter-theory-relation | `explanation`, for an account of the delay | [nickles1981] |
+| Request | always | one · all · over-a-parameter · decision, as the [request of a demand](../epistemology/objects/problem/epistemic-problem.md#^request-values) defines them | `one`, when one account suffices | [belnap1976] |
+| Associated question | when a question record states the associated question of the problem | the identifier of that question record, whose request equals the request of the problem | the question why the network generalizes late | — |
 | Constraints | when a condition beyond the demand delimits the solutions | per constraint, a name, the condition that a solution must satisfy, and the source that imposes it: a result, an admitted law or a publication | a solution derives the delay from the admitted training laws; a solution separates delayed generalization from persistent memorization | [nickles1981] |
 | Explicanda | when the statement uses a term before any record fixes its sense | per term, the term as used and a pointer to the data, the result or the publication that fixes its use | "generalization", pointing to the threshold on the test loss | [carnap1950_logical] |
 | Sources | when a publication, a data set or an anomaly raises the problem | per source, a pointer | the article that reports the delay | — |
@@ -34,12 +37,12 @@ The problem record states one [epistemic problem](../epistemology/objects/proble
 
 - **A conflict with a publication must be asserted.** No checker reads the literature, so a conflict between a record and a publication is stated with pointers to both.
 
-> [!WARNING] Untyped demand
-> The field `demand` holds a reading in words, so the checks of the existence of a problem and of axis A, which read the demanded type, wait on the typed demand that the goal `problem-record` of the [project goals](../../TODO.md) adds.
+> [!WARNING] Unread status
+> The type of result and the request type the demand, but no check yet reads the existence of a problem, its axis A or its status `solved` from the records, as the goal `problem-record` of the [project goals](../../TODO.md) lists.
 >
-> When the demanded result is of a [construct type](../epistemology/objects/status/epistemic-objects.md#^accepted-objects), such as a model or a concept, the [demand is met](../epistemology/objects/problem/epistemic-problem.md#^demand-met) by the stabilized record of the construct and a satisfied assessment of it against the constraints. An [assessment record](assessment.md) holds a verdict per constraint for a construct, so a check can read that status once the demand is typed, for the constructs that a record kind holds.
+> When the demanded result is of a [construct type](../epistemology/objects/status/epistemic-objects.md#^accepted-objects), such as a model or a concept, the [demand is met](../epistemology/objects/problem/epistemic-problem.md#^demand-met) by the stabilized record of the construct and a satisfied assessment of it against the constraints. An [assessment record](assessment.md) holds a verdict per constraint for a construct, so a check can read that status for the constructs that a record kind holds.
 >
-> Under the request `decision`, the demand is met once every candidate is settled in view of its assessment. For candidate answers, the records hold the attitude of each answer and the disposition of each assessment, so a check can read that status once the demand is typed. Candidate constructs share the limit stated above.
+> Under the request `decision`, the demand is met once every candidate is settled in view of its assessment. For candidate answers, the records hold the attitude of each answer and the disposition of each assessment, so a check can read that status. Candidate constructs share the limit stated above.
 
 *Example*: the [problem of delayed generalization](../../examples/grokking-delayed-generalization/problem.yml) is an empirical problem, with two constraints and one explicandum, and its question names the problem in its field `addresses`.
 

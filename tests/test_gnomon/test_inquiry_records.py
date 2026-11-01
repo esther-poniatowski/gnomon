@@ -22,6 +22,9 @@ from gnomon.completeness import (
     malformed_credence,
     misdirected_assessment,
     mismatched_occurrence,
+    mismatched_request,
+    result_aims,
+    unbounded_aim,
     occurrence_by_category,
     placeholder_types,
     unresolved_question_references,
@@ -309,5 +312,40 @@ def test_an_assessment_of_an_answer_keeps_its_two_levels_of_tests() -> None:
     ]
     assert texts(misdirected_assessment({"assesses": "ans.none"}, records, CONSTRUCTS)) == [
         "assesses: ans.none is no record"
+    ]
+
+
+@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
+@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
+def test_every_question_serves_its_problem_under_an_admitted_aim_and_request(directory: Path) -> None:
+    records, aims = problem_records(directory), result_aims()
+    found = [m for p in of_kind(records, "problem") for m in mismatched_request(p, records)]
+    found += [m for q in of_kind(records, "question") for m in unbounded_aim(q, records, aims)]
+    assert not texts(found), f"{directory.name}: {texts(found)}"
+
+
+def test_a_problem_bounds_the_aim_and_the_request_of_its_questions() -> None:
+    """The associated question takes the request of the demand; each serving question an admitted aim."""
+    problem = {"id": "prob.a", "type": "problem", "result_type": "explanation", "request": "one",
+               "associated_question": "quest.a"}
+    question = {"type": "question", "addresses": "prob.a", "request": "one", "task": {"epistemic_aim": "explanation"}}
+    records = {"prob.a": problem, "quest.a": question, "phen.a": {"type": "phenomenon"}}
+    assert texts(mismatched_request(problem, records)) == []
+    assert texts(unbounded_aim(question, records, result_aims())) == []
+    question["request"] = "all"
+    assert texts(mismatched_request(problem, records)) == [
+        "associated_question: quest.a asks under the request all, and the problem under one"
+    ]
+    assert texts(mismatched_request({**problem, "associated_question": "phen.a"}, records)) == [
+        "associated_question: phen.a is no question record addressing prob.a"
+    ]
+    question["task"]["epistemic_aim"] = "prediction"
+    assert texts(unbounded_aim(question, records, result_aims())) == [
+        "task.epistemic_aim: prediction does not serve a demand for explanation"
+    ]
+    concept = {**records, "prob.a": {**problem, "result_type": "concept"}}
+    question["task"]["epistemic_aim"] = "description"
+    assert texts(unbounded_aim(question, concept, result_aims())) == [
+        "task.epistemic_aim: description does not serve a demand for concept"
     ]
 

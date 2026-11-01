@@ -430,6 +430,70 @@ def malformed_credence(assessment: Mapping[str, Any]) -> list[Finding]:
     return found
 
 
+def result_aims(source: Path | None = None) -> dict[str, frozenset[str]]:
+    """Return, per type of result of a problem, the aims of the questions that may serve it."""
+    registry = yaml.safe_load((source or VOCABULARY_REGISTRY).read_text(encoding="utf-8")) or {}
+    types = ((registry.get("vocabularies") or {}).get("problem") or {}).get(".result_type") or []
+    return {str(entry["value"]): frozenset(entry.get("admits") or []) for entry in types}
+
+
+def mismatched_request(problem: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]) -> list[Finding]:
+    """Return the associated question of a problem that does not take the request of its demand.
+
+    The associated question is derived from the problem, so it takes the request of the demand. A
+    question record that states it addresses the problem and carries the same request.
+
+    >>> problem = {"id": "prob.a", "request": "one", "associated_question": "quest.a"}
+    >>> mismatched_request(problem, {"quest.a": {"type": "question", "addresses": "prob.a", "request": "one"}})
+    []
+    """
+    named = problem.get("associated_question")
+    if not named:
+        return []
+    question = records.get(named) if isinstance(named, str) else None
+    if question is None or question.get("type") != "question" or question.get("addresses") != problem.get("id"):
+        return [
+            finding(rules.COMPLETENESS_MISMATCHED_REQUEST,
+                    f"associated_question: {named} is no question record addressing {problem.get('id')}",
+                    "associated_question")
+        ]
+    if question.get("request") != problem.get("request"):
+        return [
+            finding(rules.COMPLETENESS_MISMATCHED_REQUEST,
+                    f"associated_question: {named} asks under the request {question.get('request')},"
+                    f" and the problem under {problem.get('request')}", "associated_question")
+        ]
+    return []
+
+
+def unbounded_aim(
+    question: Mapping[str, Any],
+    records: Mapping[str, Mapping[str, Any]],
+    aims: Mapping[str, Iterable[str]],
+) -> list[Finding]:
+    """Return the aim of a question that the type of result of its problem does not admit.
+
+    The demand of a problem bounds the aim of each question that serves it. The bound reads the type
+    of result only: a condition that the demand table attaches to an aim, such as a closed background
+    for modal knowledge, is not checked.
+
+    >>> records = {"prob.a": {"type": "problem", "result_type": "explanation"}}
+    >>> texts = [f.text for f in unbounded_aim({"addresses": "prob.a", "task": {"epistemic_aim": "prediction"}},
+    ...                                        records, {"explanation": ["explanation"]})]
+    >>> texts
+    ['task.epistemic_aim: prediction does not serve a demand for explanation']
+    """
+    problem = records.get(question.get("addresses")) if isinstance(question.get("addresses"), str) else None
+    aim = at(question, "task.epistemic_aim")
+    kind = (problem or {}).get("result_type")
+    if not aim or kind not in aims or aim in set(aims[kind]):
+        return []
+    return [
+        finding(rules.COMPLETENESS_UNBOUNDED_AIM,
+                f"task.epistemic_aim: {aim} does not serve a demand for {kind}", "task", "epistemic_aim")
+    ]
+
+
 def misdirected_assessment(
     assessment: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],

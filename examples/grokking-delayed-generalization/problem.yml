@@ -5,6 +5,9 @@ type: problem
 status: posed
 kind: empirical
 demand: "A solution names the determinants of the delay, derives its duration from them, and covers its variation across random initializations."
+result_type: explanation
+request: one
+associated_question: quest.grokking.explain_delay
 constraints:
   - name: "consistency with the training laws"
     statement: "A solution derives the delay from the admitted laws of the forward computation and of the training, or names each law added to them."
