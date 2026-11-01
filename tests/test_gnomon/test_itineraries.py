@@ -181,7 +181,7 @@ def test_an_unregistered_activity_is_reported() -> None:
 def test_input_types_that_do_not_fill_the_activity_are_reported() -> None:
     itinerary = planted(derive={"inputs": [{"type": "data", "ref": "phen.readout"}]})
     assert itinerary_problems(itinerary, RECORDS) == [
-        "steps.derive: derivation takes one input of background-model or model, and the step gives 0",
+        "steps.derive: derivation takes one input of admitted-laws or model, and the step gives 0",
         "steps.derive: derivation takes no input of type data",
     ]
 

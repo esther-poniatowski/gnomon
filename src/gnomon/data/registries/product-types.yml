@@ -70,7 +70,7 @@ product_types:
     record: [target-system]
     when: {commitment: [specified]}
     status: exists
-  - id: background-model
+  - id: admitted-laws
     record: [background]
     status: exists
   - id: model

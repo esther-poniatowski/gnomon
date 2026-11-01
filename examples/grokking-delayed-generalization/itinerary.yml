@@ -60,7 +60,7 @@ steps:
       - type: source
         ref: "the definition of the class of trained networks"
     output:
-      type: background-model
+      type: admitted-laws
       ref: bg.delayed_generalization_networks.training-specification
     norm:
       test: norm.background-appraisal

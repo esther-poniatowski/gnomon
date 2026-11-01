@@ -24,8 +24,8 @@ The activities of this family output a target specification, a background model 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
 | `delimitation` | `question`, `identified-subject` | `target-specification` | non-inferential | discovery |
-| `background-appraisal` | `source` | `background-model` | inductive | justification |
-| `transfer` | `background-model` (other class), `target-specification` | `background-model` | analogical | justification |
+| `background-appraisal` | `source` | `admitted-laws` | inductive | justification |
+| `transfer` | `admitted-laws` (other class), `target-specification` | `admitted-laws` | analogical | justification |
 | `abstraction` | `model` | `model` | non-inferential | discovery |
 | `idealization` | `model` | `model` | non-inferential | discovery |
 | `de-idealization` | `model` | `model` | deductive | justification |

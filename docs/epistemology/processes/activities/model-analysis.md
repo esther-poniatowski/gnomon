@@ -20,7 +20,7 @@ The activities of this family output a **consequence**: a statement derived from
 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
-| `derivation` | `model \| background-model` | `consequence` | deductive | justification |
+| `derivation` | `model \| admitted-laws` | `consequence` | deductive | justification |
 | `simulation` | `model`, `design` | `consequence` | deductive | justification |
 | `robustness-analysis` | `model` (family) | `consequence` | deductive | justification |
 | `thought-experiment` | `model` | `consequence` | deductive | discovery |

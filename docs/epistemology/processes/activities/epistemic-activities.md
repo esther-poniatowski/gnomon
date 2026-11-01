@@ -82,7 +82,7 @@ Each family groups the activities whose output types belong to one class of prod
 | [Problem-posing](problem-posing.md) | `problem`, `question-schema`, `identified-subject`, `question` |
 | [Conceptual activities](conceptual-activities.md) | `concept`, `measurement-procedure`, `classification` |
 | [Empirical activities](empirical-activities.md) | `design`, `data`, `phenomenon` |
-| [Model-building](model-building.md) | `target-specification`, `background-model`, `model` |
+| [Model-building](model-building.md) | `target-specification`, `admitted-laws`, `model` |
 | [Model analysis](model-analysis.md) | `consequence` |
 | [Ampliative inference](ampliative-inference.md) | `hypothesis` |
 | [Evaluation](evaluation.md) | `verdict`, `credence`, `ranking` |
@@ -123,7 +123,7 @@ The product types form a closed list. Each type classifies the epistemic objects
 | `data` | the recorded [values](../../vocabulary/quantities/variable-value-observable.md) of observables | empirical activities |
 | `phenomenon` | the behavior of a target that a question concerns, detected from data; only a phenomenon of the category *regularity* must be stable, as the note on [phenomena](../../vocabulary/regularities/pattern-and-phenomenon.md) states | empirical activities |
 | `target-specification` | the declared constituents and quantities of a [target](../../foundations/things-and-constructs.md) | model-building |
-| `background-model` | the laws admitted about a target, with their closure and organization, as the [background](../../objects/knowledge/background.md) states them | model-building |
+| `admitted-laws` | the laws admitted about a target, with their closure and organization, as the [background](../../objects/knowledge/background.md) states them | model-building |
 | `model` | a candidate [model](../../vocabulary/representations/model.md) of the target | model-building |
 | `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | the [binding activity](#^binding-step), pending a change of the registry |
 | `key` | a shared, versioned map between the side of a model and the side of its target | no activity yet: a gap |

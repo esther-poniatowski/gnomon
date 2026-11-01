@@ -36,7 +36,7 @@ activities:
     family: problem-posing
     inputs:
       - problem
-      - background-model
+      - admitted-laws
     output: problem
     norm: norm.constraint-specification
     mode: deductive
@@ -170,16 +170,16 @@ activities:
     family: model-building
     inputs:
       - source
-    output: background-model
+    output: admitted-laws
     norm: norm.background-appraisal
     mode: inductive
     context: justification
   - id: transfer
     family: model-building
     inputs:
-      - {type: background-model, role: other class}
+      - {type: admitted-laws, role: other class}
       - target-specification
-    output: background-model
+    output: admitted-laws
     norm: norm.transfer
     mode: analogical
     context: justification
@@ -244,7 +244,7 @@ activities:
   - id: derivation
     family: model-analysis
     inputs:
-      - {types: [model, background-model]}
+      - {types: [model, admitted-laws]}
     output: consequence
     norm: norm.derivation
     mode: deductive

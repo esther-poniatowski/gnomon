@@ -60,7 +60,7 @@ The table lists every epistemic object of an inquiry, in the order of the readin
 | design | none yet: a plan of acts, a gap of the role table | `design` | none yet | [empirical activities](../../processes/activities/empirical-activities.md) |
 | data | Datum | `data` | `phenomenon`, in part | [empirical activities](../../processes/activities/empirical-activities.md) |
 | phenomenon | Datum | `phenomenon` | `phenomenon` | [phenomenon](../subject/phenomenon.md) |
-| admitted background | Assumption | `background-model` | `background` | [background](../knowledge/background.md) |
+| admitted background | Assumption | `admitted-laws` | `background` | [background](../knowledge/background.md) |
 | task $T$ | none of its own: part of a question | none: part of a question | `question` | [epistemic task](../task/epistemic-task.md) |
 | virtues $\mathcal{V}$ | none of its own: part of a question | none: part of a question | `question` | [virtues](../task/epistemic-pragmatic-virtues.md) |
 | candidate answer | Candidate | `hypothesis` when its attitude is `hypothesized`; for any other attitude, a gap of the list | `answer` | [answer form](../answer/answer-form.md) |

@@ -22,7 +22,7 @@ The activities of this family output the objects that open an inquiry: a problem
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
 | `problematization` | `source` | `problem` | non-inferential | discovery |
-| `constraint-specification` | `problem`, `background-model` | `problem` | deductive | discovery |
+| `constraint-specification` | `problem`, `admitted-laws` | `problem` | deductive | discovery |
 | `question-formulation` | `problem` | `question-schema` | non-inferential | discovery |
 | `subject-identification` | `question-schema` | `identified-subject` | non-inferential | discovery |
 | `question-decomposition` | `question` | `question` | deductive | discovery |
