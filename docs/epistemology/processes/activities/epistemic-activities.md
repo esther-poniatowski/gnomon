@@ -109,35 +109,32 @@ The two names are kept apart. A binding records the imputations that its asserte
 
 The product types form a closed list. Each type classifies the epistemic objects taken or produced by activities. The column *Output of* names the family whose activities produce the type. The taxonomy owns the list, as the [decision on registries](../../../adr/registries-as-source.md#^concept-ownership) states: a type that no record kind holds yet is a gap of the records, which must be extended to match the taxonomy. ^product-types
 
-> [!NOTE] Implementation coverage
-> The *Status* column is not a content of the theory. That column transcribes from the [registry of product types](../../../../src/gnomon/data/registries/product-types.yml) how far the records of `gnomon` cover each type today, as the [itinerary record](../../../specification/itinerary.md#^type-coverage) documents. The column stays in this note only because a test of the project reads it, and moving that test to the registry is pending an item of the [project goals](../../../../TODO.md).
-
-| Type | Epistemic object | Output of | Status |
-| --- | --- | --- | --- |
-| `source` | a document, a dataset or a result external to the inquiry | no activity, by design | exists |
-| `problem` | a demand for a solution under constraints, defined in the note on the [epistemic problem](../../objects/problem/epistemic-problem.md) | problem-posing | exists |
-| `question-schema` | a [question schema](../../objects/question/question.md#^question-schema): a question form whose slots are typed placeholders, not yet a question | problem-posing | exists |
-| `identified-subject` | the system and the phenomenon of a question, at the [level of commitment](../../objects/question/question.md#^commitment-levels) `identified` or above | problem-posing | exists |
-| `question` | a question, each of whose slots names its referent at the level `identified` or above | problem-posing | exists |
-| `concept` | a term with its definition or its explication | conceptual activities | to-create |
-| `measurement-procedure` | a procedure that assigns values to a quantity on a stated [scale](../../vocabulary/quantities/scale-and-level.md) | conceptual activities | partial |
-| `classification` | a partition of systems into [classes](../../vocabulary/systems/kind-class-population.md) | conceptual activities | exists |
-| `design` | a plan of observations, interventions or simulation runs, with their conditions | empirical activities | to-create |
-| `data` | the recorded [values](../../vocabulary/quantities/variable-value-observable.md) of observables | empirical activities | partial |
-| `phenomenon` | the behavior of a target that a question concerns, detected from data; only a phenomenon of the category *regularity* must be stable, as the note on [phenomena](../../vocabulary/regularities/pattern-and-phenomenon.md) states | empirical activities | exists |
-| `target-specification` | the declared constituents and quantities of a [target](../../foundations/things-and-constructs.md) | model-building | exists |
-| `background-model` | the laws admitted about a target, with their closure and organization, as the [background](../../objects/knowledge/background.md) states them | model-building | exists |
-| `model` | a candidate [model](../../vocabulary/representations/model.md) of the target | model-building | exists |
-| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | the [binding activity](#^binding-step), pending a change of the registry | exists |
-| `key` | a shared, versioned map between the side of a model and the side of its target | no activity yet: a gap | exists |
-| `consequence` | a statement derived from a model, or from the admitted laws of a target; it becomes a claim about the target only through the [transfer to the target](#^binding-step), or when the admitted laws define the target completely | model analysis | partial |
-| `hypothesis` | a [claim](../../vocabulary/representations/claim-and-hypothesis.md) about the target, held with the attitude `hypothesized` | ampliative inference | exists |
-| `verdict` | the outcome of a test of a claim or of a model | evaluation | exists |
-| `credence` | a degree of belief in a claim | evaluation | exists |
-| `ranking` | an order over rival candidates | evaluation | exists |
-| `explanation` | the claim that an explanans explains a phenomenon under the requested relation | explanation and integration | exists |
-| `inter-theory-relation` | a relation of unification, reduction or integration between [theories](../../vocabulary/representations/theory.md) | explanation and integration | to-create |
-| `knowledge-state-change` | a change of the attitude or of the status of existing records | revision | partial |
+| Type | Epistemic object | Output of |
+| --- | --- | --- |
+| `source` | a document, a dataset or a result external to the inquiry | no activity, by design |
+| `problem` | a demand for a solution under constraints, defined in the note on the [epistemic problem](../../objects/problem/epistemic-problem.md) | problem-posing |
+| `question-schema` | a [question schema](../../objects/question/question.md#^question-schema): a question form whose slots are typed placeholders, not yet a question | problem-posing |
+| `identified-subject` | the system and the phenomenon of a question, at the [level of commitment](../../objects/question/question.md#^commitment-levels) `identified` or above | problem-posing |
+| `question` | a question, each of whose slots names its referent at the level `identified` or above | problem-posing |
+| `concept` | a term with its definition or its explication | conceptual activities |
+| `measurement-procedure` | a procedure that assigns values to a quantity on a stated [scale](../../vocabulary/quantities/scale-and-level.md) | conceptual activities |
+| `classification` | a partition of systems into [classes](../../vocabulary/systems/kind-class-population.md) | conceptual activities |
+| `design` | a plan of observations, interventions or simulation runs, with their conditions | empirical activities |
+| `data` | the recorded [values](../../vocabulary/quantities/variable-value-observable.md) of observables | empirical activities |
+| `phenomenon` | the behavior of a target that a question concerns, detected from data; only a phenomenon of the category *regularity* must be stable, as the note on [phenomena](../../vocabulary/regularities/pattern-and-phenomenon.md) states | empirical activities |
+| `target-specification` | the declared constituents and quantities of a [target](../../foundations/things-and-constructs.md) | model-building |
+| `background-model` | the laws admitted about a target, with their closure and organization, as the [background](../../objects/knowledge/background.md) states them | model-building |
+| `model` | a candidate [model](../../vocabulary/representations/model.md) of the target | model-building |
+| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | the [binding activity](#^binding-step), pending a change of the registry |
+| `key` | a shared, versioned map between the side of a model and the side of its target | no activity yet: a gap |
+| `consequence` | a statement derived from a model, or from the admitted laws of a target; it becomes a claim about the target only through the [transfer to the target](#^binding-step), or when the admitted laws define the target completely | model analysis |
+| `hypothesis` | a [claim](../../vocabulary/representations/claim-and-hypothesis.md) about the target, held with the attitude `hypothesized` | ampliative inference |
+| `verdict` | the outcome of a test of a claim or of a model | evaluation |
+| `credence` | a degree of belief in a claim | evaluation |
+| `ranking` | an order over rival candidates | evaluation |
+| `explanation` | the claim that an explanans explains a phenomenon under the requested relation | explanation and integration |
+| `inter-theory-relation` | a relation of unification, reduction or integration between [theories](../../vocabulary/representations/theory.md) | explanation and integration |
+| `knowledge-state-change` | a change of the attitude or of the status of existing records | revision |
 
 The word *hypothesis* has several senses, which the note on [claims and hypotheses](../../vocabulary/representations/claim-and-hypothesis.md) separates. The product type `hypothesis` combines two of them: a claim about the target, as opposed to a consequence that holds of a model, held under the attitude `hypothesized`. The excess of content over the premises is a property of the ampliative inference that produces a hypothesis, not of the type. Two consequences follow. ^hypothesis-type
 

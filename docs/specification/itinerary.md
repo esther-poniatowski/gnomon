@@ -36,7 +36,7 @@ The itinerary record lists the steps of an inquiry. Each step instantiates one [
 
 - The [requested relation](../epistemology/objects/task/requested-relation.md) of the epistemic task selects one of the candidate relations between an explanans and the phenomenon, so the test `norm.explanation` reads that field.
 
-- **The product-type registry states the coverage of each type by the records.** Each type carries a status: `exists`, when the type is held in full by a kind of record; `partial`, when a record holds part of the type; `to-create`, when no kind of record holds the type yet. The [table of product types](../epistemology/processes/activities/epistemic-activities.md#^product-types) transcribes these statuses until the test that reads them reads the registry instead. ^type-coverage
+- **The product-type registry states the coverage of each type by the records.** Each type carries a status: `exists`, when the type is held in full by a kind of record; `partial`, when a record holds part of the type; `to-create`, when no kind of record holds the type yet. The [table of product types](../epistemology/processes/activities/epistemic-activities.md#^product-types) lists the types, and the registry alone states their coverage. ^type-coverage
 
 - **A product of a type without a record kind is reached through a step.** The product types are derived from the taxonomy of activities, so some types have no record kind yet, such as a design of experiments or a concept. An itinerary can take such a product as an input only as the output of one of its own steps. A `source`, by contrast, stays outside the records, so its reference is a pointer, left unresolved by the check.
 

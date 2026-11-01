@@ -94,15 +94,24 @@ def test_each_activity_has_the_signature_its_note_states(identifier: str) -> Non
     assert (act.mode, act.context) == (mode, context)
 
 
-def product_rows() -> dict[str, str]:
+#: The coverage statuses of a product type, as the header of the product-type registry defines them.
+COVERAGE = {"exists", "partial", "to-create"}
+
+
+def product_rows() -> list[str]:
+    """Return the product types that the table of the taxonomy lists."""
     note = ACTIVITY_NOTES / "epistemic-activities.md"
     if not note.is_file():
-        return {}
-    found = {}
-    for line in note.read_text(encoding="utf-8").splitlines():
-        cells = [cell.strip() for cell in line.strip("|").split("|")]
-        if line.startswith("| `") and len(cells) == 4 and cells[-1] in ("exists", "partial", "to-create"):
-            found[cells[0].strip("`")] = cells[-1]
+        return []
+    lines = note.read_text(encoding="utf-8").splitlines()
+    if "| Type | Epistemic object | Output of |" not in lines:
+        return []
+    start = lines.index("| Type | Epistemic object | Output of |") + 2
+    found = []
+    for line in lines[start:]:
+        if not line.startswith("| `"):
+            break
+        found.append(line.strip("|").split("|")[0].strip().strip("`"))
     return found
 
 
@@ -111,9 +120,11 @@ PRODUCT_ROWS = product_rows()
 
 @pytest.mark.skipif(not PRODUCT_ROWS, reason="the overview of the taxonomy carries no table of product types")
 def test_the_registry_lists_the_product_types_of_the_overview() -> None:
+    """The taxonomy owns the list of types, and the registry states the coverage of each."""
     registry = yaml.safe_load((ROOT / "src/gnomon/data/registries/product-types.yml").read_text())
-    declared = {entry["id"]: entry["status"] for entry in registry["product_types"]}
-    assert declared == PRODUCT_ROWS
+    entries = registry["product_types"]
+    assert sorted(entry["id"] for entry in entries) == sorted(PRODUCT_ROWS)
+    assert {entry["id"]: entry["status"] for entry in entries if entry["status"] not in COVERAGE} == {}
 
 
 # An itinerary that passes every check, over records that the planted cases modify one at a time.

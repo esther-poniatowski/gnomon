@@ -160,5 +160,4 @@ The revision of the theory tier fixed senses and norms that the registries, the 
 	- [ ] Decide whether the template key `explanandum_variables` becomes `observables`, since a phenomenon is an explanandum only under the aim explanation, and whether the key `signature` of an observable becomes `index_signature`, apart from the signature of an activity.
 	- [ ] Decide whether the field Domain of an answer, and the domain of comparison of a binding, are renamed to a range, apart from the conditions held fixed $D$ of a question.
 	- [ ] Decide whether the answer relation `presupposes` is renamed, apart from the link `presupposes` between questions, which the [note on questions](docs/epistemology/objects/question/question.md) tells apart.
-	- [ ] Read the record coverage of each product type from the registry or from the [itinerary record](docs/specification/itinerary.md) in `tests/test_gnomon/test_itineraries.py`, instead of the Status column of the theory note on the product types.
 
