@@ -21,13 +21,13 @@ The activities of this family output a **verdict**, a **credence** or a **rankin
 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
-| `testing` | `hypothesis`, `consequence`, `data` | `verdict` | error-statistical | justification |
-| `confirmation` | `hypothesis`, `data` | `credence` | inductive | justification |
+| `testing` | `target-claim` (hypothesized), `consequence`, `data` | `verdict` | error-statistical | justification |
+| `confirmation` | `target-claim` (hypothesized), `data` | `credence` | inductive | justification |
 | `validation` | `model`, `binding`, `question` | `verdict` | non-inferential | justification |
 | `model-selection` | `model` (several), `data` | `ranking` | inductive | justification |
-| `inference-to-the-best-explanation` | `hypothesis` (several), `data` | `verdict` | abductive | justification |
-| `critique` | `hypothesis \| model` | `verdict` | non-inferential | justification |
-| `admissibility-check` | `hypothesis \| model`, `question` | `verdict` | non-inferential | justification |
+| `inference-to-the-best-explanation` | `target-claim` (several, hypothesized), `data` | `verdict` | abductive | justification |
+| `critique` | `target-claim \| model` (hypothesized) | `verdict` | non-inferential | justification |
+| `admissibility-check` | `target-claim \| model` (hypothesized), `question` | `verdict` | non-inferential | justification |
 
 ## Norms
 

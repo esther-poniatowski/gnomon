@@ -72,7 +72,7 @@ steps:
       - type: phenomenon
         ref: phen.grokking.delayed_generalization
     output:
-      type: hypothesis
+      type: target-claim
       ref: ans.grokking.slow-structured-representation
     norm:
       test: norm.abduction
@@ -93,7 +93,7 @@ steps:
   - id: check
     activity: admissibility-check
     inputs:
-      - type: hypothesis
+      - type: target-claim
         ref: propose
       - type: question
         ref: quest.grokking.explain_delay
@@ -107,7 +107,7 @@ steps:
   - id: test
     activity: testing
     inputs:
-      - type: hypothesis
+      - type: target-claim
         ref: propose
       - type: consequence
         ref: derive

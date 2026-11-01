@@ -11,7 +11,9 @@
 # A bare type takes one record of that type. A mapping adds qualifiers:
 #   - `several: true` (two or more records of the type) or `count` (an exact number of records);
 #   - `role`: the part played by the record, stated in the note of the family;
-#   - `types`: alternative types, written `a | b` in the notes, of which the step takes one record.
+#   - `types`: alternative types, written `a | b` in the notes, of which the step takes one record;
+#   - `attitude`: the attitudes of `.status` of an answer under which a referenced answer may fill
+#     the input, written as a qualifier in the notes; a record of another kind is unaffected.
 # `norm` names the test that judges an instance of the activity, and an itinerary records its verdict.
 # `mode` names the inference that the activity performs, from the modes listed under `itinerary` in
 # `../vocabularies.yml`. `context` states whether the activity serves discovery, justification,
@@ -287,7 +289,7 @@ activities:
     family: ampliative-inference
     inputs:
       - phenomenon
-    output: hypothesis
+    output: target-claim
     norm: norm.abduction
     mode: abductive
     context: discovery
@@ -295,7 +297,7 @@ activities:
     family: ampliative-inference
     inputs:
       - data
-    output: hypothesis
+    output: target-claim
     norm: norm.induction
     mode: inductive
     context: discovery
@@ -304,7 +306,7 @@ activities:
     inputs:
       - {type: model, role: source}
       - phenomenon
-    output: hypothesis
+    output: target-claim
     norm: norm.analogical-inference
     mode: analogical
     context: discovery
@@ -313,14 +315,14 @@ activities:
     inputs:
       - data
       - model
-    output: hypothesis
+    output: target-claim
     norm: norm.causal-inference
     mode: inductive
     context: both
   - id: testing
     family: evaluation
     inputs:
-      - hypothesis
+      - {type: target-claim, attitude: [hypothesized]}
       - consequence
       - data
     output: verdict
@@ -330,7 +332,7 @@ activities:
   - id: confirmation
     family: evaluation
     inputs:
-      - hypothesis
+      - {type: target-claim, attitude: [hypothesized]}
       - data
     output: credence
     norm: norm.confirmation
@@ -358,7 +360,7 @@ activities:
   - id: inference-to-the-best-explanation
     family: evaluation
     inputs:
-      - {type: hypothesis, several: true}
+      - {type: target-claim, several: true, attitude: [hypothesized]}
       - data
     output: verdict
     norm: norm.inference-to-the-best-explanation
@@ -367,7 +369,7 @@ activities:
   - id: critique
     family: evaluation
     inputs:
-      - {types: [hypothesis, model]}
+      - {types: [target-claim, model], attitude: [hypothesized]}
     output: verdict
     norm: norm.critique
     mode: non-inferential
@@ -375,7 +377,7 @@ activities:
   - id: admissibility-check
     family: evaluation
     inputs:
-      - {types: [hypothesis, model]}
+      - {types: [target-claim, model], attitude: [hypothesized]}
       - question
     output: verdict
     norm: norm.admissibility-check

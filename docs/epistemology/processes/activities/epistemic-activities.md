@@ -47,8 +47,8 @@ Two activity types are distinct when they differ in their output type or in thei
 The family notes write the inputs of an activity in three forms:
 
 - a type alone, such as `data`, takes one record of that type;
-- a type followed by a qualifier, such as `model` (source), `verdict` (several) or `model` (optional), states the role, the number or the optionality of its records, and leaves the type unchanged;
-- types joined by `|`, such as `hypothesis | model`, take one record of either type.
+- a type followed by a qualifier, such as `model` (source), `verdict` (several), `model` (optional) or `target-claim` (hypothesized), states the role, the number, the optionality or the attitude of its records, and leaves the type unchanged;
+- types joined by `|`, such as `target-claim | model`, take one record of either type.
 
 Three attributes take their values from closed lists: ^attribute-vocabularies
 
@@ -84,7 +84,7 @@ Each family groups the activities whose output types belong to one class of prod
 | [Empirical activities](empirical-activities.md) | `design`, `data`, `phenomenon` |
 | [Model-building](model-building.md) | `target-specification`, `admitted-laws`, `model` |
 | [Model analysis](model-analysis.md) | `consequence` |
-| [Ampliative inference](ampliative-inference.md) | `hypothesis` |
+| [Ampliative inference](ampliative-inference.md) | `target-claim` |
 | [Evaluation](evaluation.md) | `verdict`, `credence`, `ranking` |
 | [Explanation and integration](explanation-and-integration.md) | `explanation`, `inter-theory-relation` |
 | [Revision](revision.md) | `knowledge-state-change` |
@@ -98,9 +98,9 @@ The partition by output type has two consequences for borderline activities. Fir
 Two operations carry a model to its target, and the registry of activities types neither of them yet: ^binding-step
 
 - **The binding activity** takes a `model`, a `phenomenon` and a `key`, and outputs a `binding`. Its norm passes when the binding denotes the phenomenon, and each of its feature pairs states the feature that the model exemplifies, the feature imputed to the target, and the key that carries the feature of the model onto the feature of the target, as the note on the [model and its binding](../../objects/answer/model-and-binding.md) states a binding. An argued pair cites its argument. The norm judges how the binding is stated, not its fidelity, which [validation](evaluation.md) judges through the comparison computed from the binding.
-- **The transfer to the target** takes a `consequence` and a `binding`, and outputs a `hypothesis`: it carries a consequence of the model, through a feature pair of the binding, to a claim about the target. Its norm passes when the consequence bears on a feature that a pair of the binding carries onto the target, the conditions of the consequence lie within the domain over which the binding asserts its pairs, and the hypothesis states the imputed feature that the pair yields: through its key for a computed pair, through its argument for an argued pair. The step differs from the activity `transfer` of [model-building](model-building.md), which carries laws from another class of systems to the target, and from [analogical inference](ampliative-inference.md), which concludes from similarities without a binding that licenses the conclusion.
+- **The transfer to the target** takes a `consequence` and a `binding`, and outputs a `target-claim`: it carries a consequence of the model, through a feature pair of the binding, to a claim about the target. Its norm passes when the consequence bears on a feature that a pair of the binding carries onto the target, the conditions of the consequence lie within the domain over which the binding asserts its pairs, and the hypothesis states the imputed feature that the pair yields: through its key for a computed pair, through its argument for an argued pair. The step differs from the activity `transfer` of [model-building](model-building.md), which carries laws from another class of systems to the target, and from [analogical inference](ampliative-inference.md), which concludes from similarities without a binding that licenses the conclusion.
 
-The two names are kept apart. A binding records the imputations that its asserter licenses, and its computed pairs assert a [theoretical hypothesis](../../objects/answer/model-and-binding.md#^binding-neutrality) in the sense of Giere [giere1988]. The *transfer to the target* names the step that uses a binding. The step is deductive: given the binding, the claim about the target follows from the consequence and the pair that carries it, and the ampliative content lies in the binding, which its asserter licenses. The [partition of the families](#^families) by output type would file the step under ampliative inference, since its output is a `hypothesis`, against its mode. That conflict is open, and the family of the binding activity is likewise fixed when the registry transcribes it.
+The two names are kept apart. A binding records the imputations that its asserter licenses, and its computed pairs assert a [theoretical hypothesis](../../objects/answer/model-and-binding.md#^binding-neutrality) in the sense of Giere [giere1988]. The *transfer to the target* names the step that uses a binding. The step is deductive: given the binding, the claim about the target follows from the consequence and the pair that carries it, and the ampliative content lies in the binding, which its asserter licenses. The [partition of the families](#^families) by output type would file the step under ampliative inference, since its output is a `target-claim`, against its mode. That conflict is open, and the family of the binding activity is likewise fixed when the registry transcribes it.
 
 > [!WARNING] Pending a change of the registry
 > The binding activity and the transfer to the target, with their signatures and their norms, are proposals of this method. Adding them is pending a change of the [registry of activities](../../../../src/gnomon/data/registries/activities.yml). Until that change, an itinerary cannot type the writing of a binding, and a prediction or an explanation about a target that rests on a model cannot be checked as a composition of typed steps.
@@ -128,7 +128,7 @@ The product types form a closed list. Each type classifies the epistemic objects
 | `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | the [binding activity](#^binding-step), pending a change of the registry |
 | `key` | a shared, versioned map between the side of a model and the side of its target | no activity yet: a gap |
 | `consequence` | a statement derived from a model, or from the admitted laws of a target; it becomes a claim about the target only through the [transfer to the target](#^binding-step), or when the admitted laws define the target completely | model analysis |
-| `hypothesis` | a [claim](../../vocabulary/representations/claim-and-hypothesis.md) about the target, held with the attitude `hypothesized` | ampliative inference |
+| `target-claim` | a [claim](../../vocabulary/representations/claim-and-hypothesis.md) about the target, under any attitude | ampliative inference |
 | `verdict` | the outcome of a test of a claim or of a model | evaluation |
 | `credence` | a degree of belief in a claim | evaluation |
 | `ranking` | an order over rival candidates | evaluation |
@@ -136,9 +136,9 @@ The product types form a closed list. Each type classifies the epistemic objects
 | `inter-theory-relation` | a relation of unification, reduction or integration between [theories](../../vocabulary/representations/theory.md) | explanation and integration |
 | `knowledge-state-change` | a change of the attitude or of the status of existing records | revision |
 
-The word *hypothesis* has several senses, which the note on [claims and hypotheses](../../vocabulary/representations/claim-and-hypothesis.md) separates. The product type `hypothesis` combines two of them: a claim about the target, as opposed to a consequence that holds of a model, held under the attitude `hypothesized`. The excess of content over the premises is a property of the ampliative inference that produces a hypothesis, not of the type. Two consequences follow. ^hypothesis-type
+The word *hypothesis* has several senses, which the note on [claims and hypotheses](../../vocabulary/representations/claim-and-hypothesis.md) separates. The product type `target-claim` takes one of them: a claim about the target, as opposed to a consequence that holds of a model, under any attitude. The attitude of a claim, such as `hypothesized`, is an attribute of the claim, not a type, so an activity that requires an attitude states it as a qualifier of its input, such as `target-claim` (hypothesized). The excess of content over the premises is a property of the ampliative inference that produces a hypothesis, not of the type. Two consequences follow. ^target-claim-type
 
-First, an answer whose attitude is `entertained`, `accepted` or `retracted` has no product type of its own, since the attitude of a claim is an attribute of the claim, not a type: a type for an answer claim with any attitude is a gap of the list. Second, a statement that holds of a model is a `consequence`, so the activity `model-prediction` outputs a `consequence`, whereas an inquiry with the aim of prediction requires a `hypothesis` about the target. The [transfer to the target](#^binding-step) carries the first to the second.
+First, an answer holds the type `target-claim` under every attitude, so an entertained, an accepted or a retracted answer can enter an itinerary, and an answer accepted after it was produced keeps the type of its output. Second, a statement that holds of a model is a `consequence`, so the activity `model-prediction` outputs a `consequence`, whereas an inquiry with the aim of prediction requires a `target-claim`. The [transfer to the target](#^binding-step) carries the first to the second.
 
 A theory enters an activity as a `model`, read as a class of models. A framework changes only through the verdicts that motivate the change, so no product type names a framework.
 
@@ -176,7 +176,7 @@ An itinerary is **well formed** when its steps compose by type, which four condi
 
 - each step instantiates one activity type of the taxonomy;
 - the input types and the output type of each step equal those of the signature of its activity;
-- each input of a step is an existing epistemic object of the declared type, or the output of an earlier step of that type;
+- each input of a step is an existing epistemic object of the declared type, held under an attitude that the signature admits when it qualifies the input by one, or the output of an earlier step of that type;
 - the steps, linked by their inputs, form a directed acyclic graph.
 
 The itinerary check tests these conditions on the itinerary record, together with conditions on the fields of that record, as the [record checks of an itinerary](../../../specification/itinerary.md#^record-checks) state. When [subject identification](problem-posing.md) raises the slots of a question schema to the level `identified`, the schema becomes a question, so that change needs no activity of its own.

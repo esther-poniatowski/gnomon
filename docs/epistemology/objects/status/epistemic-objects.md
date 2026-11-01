@@ -63,7 +63,7 @@ The table lists every epistemic object of an inquiry, in the order of the readin
 | admitted background | Assumption | `admitted-laws` | `background` | [background](../knowledge/background.md) |
 | task $T$ | none of its own: part of a question | none: part of a question | `question` | [epistemic task](../task/epistemic-task.md) |
 | virtues $\mathcal{V}$ | none of its own: part of a question | none: part of a question | `question` | [virtues](../task/epistemic-pragmatic-virtues.md) |
-| candidate answer | Candidate | `hypothesis` when its attitude is `hypothesized`; for any other attitude, a gap of the list | `answer` | [answer form](../answer/answer-form.md) |
+| candidate answer | Candidate | `target-claim`, under any attitude | `answer` | [answer form](../answer/answer-form.md) |
 | result | Result | none: an accepted answer, a gap of the list | `answer` | [acceptance](statuses-and-acceptance.md#^acceptance-act) |
 | ground | the role fixed by its ground role, such as Assumption or Datum | none: a unit of an answer | `answer` | [grounds and dependence](../knowledge/grounds-and-dependence.md#^ground) |
 | explanation | Candidate or Result, by the attitude of its answer | `explanation` | `answer` | [answer form](../answer/answer-form.md) |
@@ -99,7 +99,7 @@ Three kinds of content in the records fail the criterion, or bear on it only thr
 ## Distinctions
 
 - **A product type differs from an object.** The product types classify the inputs and the outputs of the activities, whereas the inventory classifies the contents of the state of an inquiry. An answer has a product type only under the attitude `hypothesized`, and the task, the virtues, the comparison and the itinerary have none.
-- **An epistemic role differs from a product type.** The role states the reasoning that a unit licenses, whereas the type states which activity outputs it. A `hypothesis` and an `explanation` share the role Candidate while they are not accepted.
+- **An epistemic role differs from a product type.** The role states the reasoning that a unit licenses, whereas the type states which activity outputs it. A `target-claim` and an `explanation` share the role Candidate while they are not accepted.
 
 ---
 ## Sources

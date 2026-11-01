@@ -32,6 +32,7 @@ ACTIVITY_NOTES = ROOT / "docs" / "epistemology" / "processes" / "activities"
 VOCABULARY = yaml.safe_load((ROOT / "src" / "gnomon" / "data" / "vocabularies.yml").read_text())
 ACTS = activities()
 TYPES = product_types()
+ATTITUDES = {entry["value"] for entry in VOCABULARY["vocabularies"]["answer"][".status"]}
 
 
 def test_the_registries_are_consistent() -> None:
@@ -48,6 +49,13 @@ def test_a_registry_naming_an_unknown_type_mode_or_norm_is_reported() -> None:
         "derivation: intuitive is no admitted mode",
         "derivation: its norm norm.proof is not the test norm.derivation",
     ]
+
+
+def test_a_registry_naming_an_unknown_attitude_is_reported() -> None:
+    act = ACTS["testing"]
+    claim = type(act.inputs[0])(frozenset({"target-claim"}), attitudes=frozenset({"believed"}))
+    broken = {"testing": type(act)(**{**act.__dict__, "inputs": (claim, *act.inputs[1:])})}
+    assert texts(malformed_registry(broken, TYPES, [act.mode])) == ["testing: believed is no attitude of an answer"]
 
 
 def signature_rows() -> dict[str, list[str]]:
@@ -70,8 +78,8 @@ ROWS = signature_rows()
 def typed(cell: str) -> set[str]:
     """Return the type names a cell sets in code, including alternatives written in one span.
 
-    >>> sorted(typed("`hypothesis \\| model`, `data` (several)"))
-    ['data', 'hypothesis', 'model']
+    >>> sorted(typed("`target-claim \\| model` (hypothesized), `data` (several)"))
+    ['data', 'model', 'target-claim']
     """
     return {name for span in re.findall(r"`([^`]*)`", cell) for name in re.findall(r"[a-z][a-z-]*", span)}
 
@@ -91,6 +99,8 @@ def test_each_activity_has_the_signature_its_note_states(identifier: str) -> Non
     act = ACTS[identifier]
     assert act.family == family
     assert typed(inputs) == {t for s in act.inputs for t in s.types}
+    qualifiers = {word.strip() for group in re.findall(r"\(([^)]*)\)", inputs) for word in group.split(",")}
+    assert qualifiers & ATTITUDES == {a for s in act.inputs for a in s.attitudes}
     assert typed(output) == {act.output}
     assert (act.mode, act.context) == (mode, context)
 
@@ -215,7 +225,7 @@ def test_an_input_reference_of_the_wrong_kind_or_to_nothing_is_reported() -> Non
     assert texts(itinerary_problems(absent, RECORDS)) == ["steps.derive: mod.missing is neither a step nor a record"]
     answer = planted(derive={"inputs": [{"type": "model", "ref": "ans.kernel"}]})
     assert texts(itinerary_problems(answer, RECORDS)) == [
-        "steps.derive: ans.kernel holds consequence or explanation or knowledge-state-change, not model"
+        "steps.derive: ans.kernel holds consequence or target-claim or explanation or knowledge-state-change, not model"
     ]
 
 
@@ -314,7 +324,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
              "inputs": [{"type": "model", "ref": "mod.a"}, {"type": "target-specification", "ref": "system.a"}],
              "output": {"type": "consequence"}, "norm": {"test": "norm.model-prediction", "verdict": "pending"}},
             {"id": "judge", "activity": "testing",
-             "inputs": [{"type": "hypothesis", "ref": "ans.a"}, {"type": "consequence", "ref": "predict"},
+             "inputs": [{"type": "target-claim", "ref": "ans.a"}, {"type": "consequence", "ref": "predict"},
                         {"type": "data", "ref": "phen.none"}],
              "output": {"type": "verdict"}, "norm": {"test": "norm.testing", "verdict": "pending"}},
         ],
@@ -323,7 +333,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
         "steps.select: quest.schema holds question-schema or knowledge-state-change, not question",
         "steps.predict: system.a holds identified-subject or classification or measurement-procedure"
         " or knowledge-state-change, not target-specification",
-        "steps.judge: ans.a holds consequence or explanation or knowledge-state-change, not hypothesis",
+        "steps.judge: ans.a is entertained, and testing takes a target-claim held as hypothesized",
         "steps.judge: phen.none is neither a step nor a record",
     ]
     records["quest.schema"]["subject"]["phenomenon"] = "phen.b"
@@ -331,6 +341,29 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
     records["ans.a"]["status"] = "hypothesized"
     itinerary["steps"][2]["inputs"][2]["ref"] = "predict"
     assert texts(itinerary_problems(itinerary, records)) == ["steps.judge: the step predict produces consequence, not data"]
+
+
+def test_an_attitude_restricts_an_answer_only() -> None:
+    """A qualifier of attitude binds an answer; a model in the same slot, or an output, is unaffected."""
+    records = {
+        "prob.a": {"type": "problem"},
+        "mod.a": {"type": "model", "status": "provisional"},
+        "ans.a": {"type": "answer", "status": "accepted"},
+        "phen.a": {"type": "phenomenon"},
+    }
+
+    def step(activity: str, inputs: list[dict[str, str]], output: dict[str, str]) -> dict[str, Any]:
+        return {"addresses": "prob.a", "steps": [{"id": "act", "activity": activity, "inputs": inputs,
+                "output": output, "norm": {"test": f"norm.{activity}", "verdict": "pending"}}]}
+
+    on_model = step("critique", [{"type": "model", "ref": "mod.a"}], {"type": "verdict"})
+    assert texts(itinerary_problems(on_model, records)) == []
+    on_answer = step("critique", [{"type": "target-claim", "ref": "ans.a"}], {"type": "verdict"})
+    assert texts(itinerary_problems(on_answer, records)) == [
+        "steps.act: ans.a is accepted, and critique takes a target-claim held as hypothesized"
+    ]
+    produced = step("abduction", [{"type": "phenomenon", "ref": "phen.a"}], {"type": "target-claim", "ref": "ans.a"})
+    assert texts(itinerary_problems(produced, records)) == []
 
 
 def test_a_specified_record_still_holds_an_identified_subject() -> None:

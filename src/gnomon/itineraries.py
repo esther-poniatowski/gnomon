@@ -49,6 +49,9 @@ EXTERNAL = "external pointer"
 #: The value of ``record`` for a type that no record kind holds yet.
 TO_CREATE = "to-create"
 
+#: The record kind whose status is an attitude, the only kind that an ``attitude`` qualifier restricts.
+ATTITUDE_HOLDER = "answer"
+
 
 @dataclass(frozen=True)
 class Slot:
@@ -62,11 +65,14 @@ class Slot:
         The fewest inputs that fill the slot.
     most : int or None
         The most inputs that fill the slot, or None when it takes any number from ``least``.
+    attitudes : frozenset of str
+        The attitudes under which a referenced answer may hold the type; empty when any serves.
     """
 
     types: frozenset[str]
     least: int = 1
     most: int | None = 1
+    attitudes: frozenset[str] = frozenset()
 
     def admits(self, count: int) -> bool:
         """Return whether ``count`` inputs fill the slot."""
@@ -95,25 +101,43 @@ def slot(entry: Any) -> Slot:
 
     A bare type takes one record. A mapping names one type under ``type`` or alternatives under
     ``types``, and qualifies the number with ``several`` (two or more) or ``count`` (exactly that
-    many); a ``role`` leaves the type unchanged.
+    many); a ``role`` leaves the type unchanged. An ``attitude``, one value or a list, restricts the
+    attitudes under which a referenced answer holds the type, since the attitude of a claim is an
+    attribute of the claim, not a type.
 
     >>> slot("problem")
-    Slot(types=frozenset({'problem'}), least=1, most=1)
+    Slot(types=frozenset({'problem'}), least=1, most=1, attitudes=frozenset())
     >>> slot({"type": "model", "several": True, "role": "family"}).admits(3)
     True
     >>> slot({"type": "model", "count": 2}).admits(1)
     False
-    >>> sorted(slot({"types": ["hypothesis", "model"]}).types)
-    ['hypothesis', 'model']
+    >>> sorted(slot({"types": ["target-claim", "model"]}).types)
+    ['model', 'target-claim']
+    >>> sorted(slot({"type": "target-claim", "attitude": "hypothesized"}).attitudes)
+    ['hypothesized']
     """
     if isinstance(entry, str):
         return Slot(frozenset({entry}))
     declared = entry.get("types") or [entry.get("type")]
     types = frozenset(str(name) for name in declared)
+    attitude = entry.get("attitude") or []
+    attitudes = frozenset([attitude] if isinstance(attitude, str) else (str(value) for value in attitude))
     if entry.get("several"):
-        return Slot(types, least=2, most=None)
+        return Slot(types, least=2, most=None, attitudes=attitudes)
     count = int(entry.get("count", 1))
-    return Slot(types, least=count, most=count)
+    return Slot(types, least=count, most=count, attitudes=attitudes)
+
+
+def required_attitudes(act: Activity, kind: str) -> frozenset[str]:
+    """Return the attitudes under which a record must hold ``kind`` to enter ``act``; empty when any serves.
+
+    An input of one type may fill several slots of an activity, so the attitudes of those slots are
+    united, and a slot that names no attitude admits every attitude.
+    """
+    held = [entry for entry in act.inputs if kind in entry.types]
+    if not held or any(not entry.attitudes for entry in held):
+        return frozenset()
+    return frozenset().union(*(entry.attitudes for entry in held))
 
 
 def activities(source: Path | None = None) -> dict[str, Activity]:
@@ -185,22 +209,26 @@ def record_types(record: Mapping[str, Any], types: Mapping[str, Mapping[str, Any
     return [name for name, entry in types.items() if holds(record, entry)]
 
 
-def _closed(field: str, source: Path | None = None) -> frozenset[str]:
-    itinerary = (_load(source or VOCABULARY_REGISTRY).get("vocabularies") or {}).get("itinerary") or {}
-    return frozenset(entry["value"] for entry in itinerary.get(field) or [])
+def _closed(field: str, source: Path | None = None, kind: str = "itinerary") -> frozenset[str]:
+    vocabulary = (_load(source or VOCABULARY_REGISTRY).get("vocabularies") or {}).get(kind) or {}
+    return frozenset(entry["value"] for entry in vocabulary.get(field) or [])
 
 
 def malformed_registry(
-    acts: Mapping[str, Activity], types: Mapping[str, Any], modes: Iterable[str]
+    acts: Mapping[str, Activity],
+    types: Mapping[str, Any],
+    modes: Iterable[str],
+    attitudes: Iterable[str] | None = None,
 ) -> list[Finding]:
-    """Return every activity that names a type, a mode or a norm the registries do not admit.
+    """Return every activity that names a type, a mode, an attitude or a norm the registries do not admit.
 
     The itinerary check trusts the activity registry, so the registry is itself checked: every input
-    and output names a product type, every mode is admitted, and every norm is the named test
-    of its own activity. Each finding concerns the registry file, under its list ``activities``
-    keyed by activity.
+    and output names a product type, every attitude that qualifies an input is an attitude of an
+    answer, every mode is admitted, and every norm is the named test of its own activity. Each
+    finding concerns the registry file, under its list ``activities`` keyed by activity.
     """
     admitted = set(modes)
+    held_as = set(_closed(".status", kind=ATTITUDE_HOLDER) if attitudes is None else attitudes)
     found = []
     for act in acts.values():
         entry = ("activities", Key(act.id))
@@ -211,6 +239,11 @@ def malformed_registry(
                     finding(rules.REGISTRY_UNKNOWN_PRODUCT_TYPE, f"{act.id}: {kind} is no product type",
                             *where, value=kind)
                 )
+        found += [
+            finding(rules.REGISTRY_UNADMITTED_ATTITUDE, f"{act.id}: {value} is no attitude of an answer",
+                    *entry, "inputs", index, value=value)
+            for index, held in enumerate(act.inputs) for value in sorted(held.attitudes - held_as)
+        ]
         if act.mode not in admitted:
             found.append(
                 finding(rules.REGISTRY_UNADMITTED_MODE, f"{act.id}: {act.mode} is no admitted mode",
@@ -237,8 +270,9 @@ def itinerary_problems(
     - every step names a registered activity;
     - the input types of a step fill the inputs of its activity, in number as well as in type, and
       its output type is the output of that activity;
-    - each input reference names a record that holds the input type in its present state, or a step
-      producing that type; a type held outside the records takes any pointer;
+    - each input reference names a record that holds the input type in its present state, under an
+      attitude that its slot admits, or a step producing that type; a type held outside the records
+      takes any pointer;
     - the references between steps form an acyclic graph;
     - every verdict is admitted.
 
@@ -342,6 +376,16 @@ def itinerary_problems(
                 found.append(
                     finding(rules.ITINERARY_MISTYPED_RECORD_INPUT,
                             f"{where}: {ref} holds {_held(record, types)}, not {kind}", *given)
+                )
+            elif (
+                record.get("type") == ATTITUDE_HOLDER
+                and (attitudes := required_attitudes(act, kind))
+                and record.get("status") not in attitudes
+            ):
+                found.append(
+                    finding(rules.ITINERARY_UNADMITTED_ATTITUDE,
+                            f"{where}: {ref} is {record.get('status')}, and {act.id} takes a {kind}"
+                            f" held as {' or '.join(sorted(attitudes))}", *given)
                 )
         output = step.get("output") if isinstance(step.get("output"), Mapping) else {}
         made = output.get("type")

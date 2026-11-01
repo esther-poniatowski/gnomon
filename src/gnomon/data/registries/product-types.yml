@@ -87,9 +87,8 @@ product_types:
     field_path: "answer: aim_block.model_knowledge; assessment: obligations"
     status: partial
     condition: "The consequence or the counterexample that the block of model knowledge of an answer states, or a settled proof obligation. A consequence derived on the way to another result, and stated by no answer, has no record."
-  - id: hypothesis
+  - id: target-claim
     record: [answer]
-    when: {status: [hypothesized]}
     status: exists
   - id: verdict
     record: [assessment]

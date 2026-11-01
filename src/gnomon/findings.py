@@ -82,6 +82,10 @@ ITINERARY_UNRESOLVED_INPUT = _rule(
 ITINERARY_MISTYPED_RECORD_INPUT = _rule(
     "itinerary/mistyped-record-input", "An input names a record that does not hold its type."
 )
+ITINERARY_UNADMITTED_ATTITUDE = _rule(
+    "itinerary/unadmitted-attitude",
+    "An input names a record that holds its type under an attitude that the activity does not take.",
+)
 ITINERARY_MISTYPED_OUTPUT = _rule(
     "itinerary/mistyped-output", "The output type of a step is not the output of its activity."
 )
@@ -103,6 +107,10 @@ ITINERARY_CYCLE = _rule("itinerary/cycle", "The references between the steps for
 REGISTRY_UNKNOWN_PRODUCT_TYPE = _rule(
     "registry/unknown-product-type",
     "An activity names a type that the product-type registry does not declare.",
+)
+REGISTRY_UNADMITTED_ATTITUDE = _rule(
+    "registry/unadmitted-attitude",
+    "An activity qualifies an input by an attitude that the vocabulary of answers does not admit.",
 )
 REGISTRY_UNADMITTED_MODE = _rule(
     "registry/unadmitted-mode", "An activity proceeds by a mode that the vocabulary does not admit."

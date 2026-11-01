@@ -13,16 +13,16 @@ aliases:
 
 > [!QUESTION] Goal: which inferences reach a hypothesis beyond their premises, and by which norm is each judged?
 
-The activities of this family output a [hypothesis](../../vocabulary/representations/claim-and-hypothesis.md): a claim about the target, held with the attitude `hypothesized`, as the [product type `hypothesis`](epistemic-activities.md#^hypothesis-type) defines it. The content of the hypothesis exceeds that of the premises of the inference that reaches it, which is a property of the inference rather than of the type. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a [hypothesis](../../vocabulary/representations/claim-and-hypothesis.md): a claim about the target, held with the attitude `hypothesized`, of the product type [`target-claim`](epistemic-activities.md#^target-claim-type). The content of the hypothesis exceeds that of the premises of the inference that reaches it, which is a property of the inference rather than of the type. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
-| `abduction` | `phenomenon` | `hypothesis` | abductive | discovery |
-| `induction` | `data` | `hypothesis` | inductive | discovery |
-| `analogical-inference` | `model` (source), `phenomenon` | `hypothesis` | analogical | discovery |
-| `causal-inference` | `data`, `model` | `hypothesis` | inductive | both |
+| `abduction` | `phenomenon` | `target-claim` | abductive | discovery |
+| `induction` | `data` | `target-claim` | inductive | discovery |
+| `analogical-inference` | `model` (source), `phenomenon` | `target-claim` | analogical | discovery |
+| `causal-inference` | `data`, `model` | `target-claim` | inductive | both |
 
 ## Norms
 
