@@ -309,7 +309,9 @@ vocabularies:
     - value: not-applicable
     virtues.standing:
     - value: constitutive
+      name: the product test applies it
     - value: preferred
+      name: appraisal ranks on it
     virtues.virtue:
     - value: unification
     - value: generality
@@ -344,7 +346,9 @@ vocabularies:
     - value: interval
     variables.determined:
     - value: within
+      name: its value is fixed inside the system
     - value: outside
+      name: its value varies but is set beyond the system
     variables.scale:
     - value: nominal
     - value: ordinal
@@ -379,7 +383,7 @@ vocabularies:
     - value: distribution
       name: the law of a random quantity
     - value: admissibility
-      name: a restriction on the parameters or the forms a member may take
+      name: a restriction on the parameters or the forms that a member may take
   background:
     .status:
     - value: provisional
@@ -397,7 +401,7 @@ vocabularies:
     - value: distribution
       name: the law of a random quantity
     - value: admissibility
-      name: a restriction on the parameters or the forms a member may take
+      name: a restriction on the parameters or the forms that a member may take
     laws.warrant:
     - value: derived
       name: from other admitted laws
@@ -494,7 +498,9 @@ vocabularies:
     - value: interval
     variables.determined:
     - value: within
+      name: its value is fixed inside the model
     - value: outside
+      name: its value varies but is set beyond the model
     variables.scale:
     - value: nominal
     - value: ordinal
@@ -566,7 +572,7 @@ vocabularies:
     - value: computed
       name: a key maps the feature onto what the data determine
     - value: argued
-      name: no data determine it, and the answer cites the argument as a ground
+      name: no data determine it, and the answer cites the argument as a ground with the role `warrant`
     domain.kind:
     - value: interpolation
       name: within the range of the calibration data
