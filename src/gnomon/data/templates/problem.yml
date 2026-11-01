@@ -23,6 +23,13 @@ explicanda:                      # terms used in the statement before any record
 sources:
   - "POINTER TO THE PUBLICATION, THE DATA OR THE ANOMALY THAT RAISES THE PROBLEM"
 significance: "THE CONSEQUENCES OF A SOLUTION FOR OTHER WORK"
+knowledge_obstacles:              # one entry per obstacle in the state of the knowledge about the associated question; empty when none
+  - obstacle:                     # open-gap | unassessed-candidates | conflict | unwarranted-claim | ill-defined-terms | unsound-presupposition
+    pointers: [RECORD.ID]         # the records or the publications that establish the obstacle
+answerability_obstacles:          # one entry per refuted condition of answerability of the associated question; empty when none
+  - condition:                    # definiteness | answer-type | discrimination | access | bridging | representation
+    refutation:                   # outright | lack-of-means
+    pointers: [RECORD.ID]         # the records or the publications that establish the refutation
 
 maturity:                        # optional; one maturity per field: open | provisional | stabilized; a field left out is provisional
   FIELD.PATH: open

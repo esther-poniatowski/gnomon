@@ -580,6 +580,61 @@ def presupposition_denied(problem: Mapping[str, Any], records: Mapping[str, Mapp
     )
 
 
+def readable_obstacles(
+    problem: Mapping[str, Any],
+    records: Mapping[str, Mapping[str, Any]],
+    classes: Mapping[str, str],
+    holders: Mapping[str, Iterable[str]],
+) -> dict[str, bool]:
+    """Return, for each knowledge obstacle that the records decide, whether it holds.
+
+    An open gap and unassessed candidates require that the problem exists: its demand is not met
+    and no accepted answer denies a presupposition of its associated question. The proposed
+    candidates are the answers to the questions of the problem that are neither accepted nor
+    retracted: an open gap when none exists, unassessed candidates when some exist and no answer is
+    accepted. An unsound presupposition is an accepted answer that denies a presupposition of the
+    associated question. An obstacle that the records do not decide is left out.
+    """
+    found: dict[str, bool] = {}
+    denied = presupposition_denied(problem, records)
+    if denied is not None:
+        found["unsound-presupposition"] = denied
+    met = demand_met(problem, records, classes, holders)
+    if met is None or denied is None:
+        return found
+    questions = {i for i, r in records.items() if r.get("type") == "question" and r.get("addresses") == problem.get("id")}
+    answers = [r for r in records.values() if r.get("type") == "answer" and r.get("answers") in questions]
+    exists = not met and not denied
+    proposed = [r for r in answers if r.get("status") not in ("accepted", "retracted")]
+    accepted = [r for r in answers if r.get("status") == "accepted"]
+    found["open-gap"] = exists and not proposed
+    found["unassessed-candidates"] = exists and bool(proposed) and not accepted
+    return found
+
+
+def misstated_obstacles(
+    problem: Mapping[str, Any],
+    records: Mapping[str, Mapping[str, Any]],
+    classes: Mapping[str, str],
+    holders: Mapping[str, Iterable[str]],
+) -> list[Finding]:
+    """Return every knowledge obstacle that the records decide and the problem states otherwise."""
+    stated = {
+        str(entry.get("obstacle")) for entry in problem.get("knowledge_obstacles") or [] if isinstance(entry, Mapping)
+    }
+    found = []
+    for name, holds in readable_obstacles(problem, records, classes, holders).items():
+        if holds and name not in stated:
+            found.append(finding(rules.COMPLETENESS_UNSTATED_OBSTACLE,
+                                 f"knowledge_obstacles: the records show {name}, which the problem does not state",
+                                 "knowledge_obstacles", value=name))
+        elif not holds and name in stated:
+            found.append(finding(rules.COMPLETENESS_UNSUPPORTED_OBSTACLE,
+                                 f"knowledge_obstacles: the problem states {name}, which its records contradict",
+                                 "knowledge_obstacles", value=name))
+    return found
+
+
 def unsupported_outcome(
     problem: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],

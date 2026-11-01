@@ -25,6 +25,7 @@ from gnomon.completeness import (
     misdirected_assessment,
     mismatched_occurrence,
     mismatched_request,
+    misstated_obstacles,
     result_aims,
     unbounded_aim,
     occurrence_by_category,
@@ -442,5 +443,32 @@ def test_an_accepted_corrective_answer_to_the_associated_question_dissolves_the_
     records["ans.a"]["status"] = "hypothesized"
     assert texts(unsupported_outcome(problem, records, CLASSES, HOLDERS)) == [
         "status: dissolved, and no accepted answer denies a presupposition of quest.a"
+    ]
+
+
+@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
+@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
+def test_every_problem_states_the_obstacles_that_its_records_show(directory: Path) -> None:
+    records = problem_records(directory)
+    found = [m for p in of_kind(records, "problem") for m in misstated_obstacles(p, records, CLASSES, HOLDERS)]
+    assert not texts(found), f"{directory.name}: {texts(found)}"
+
+
+def test_the_stated_knowledge_obstacles_agree_with_the_records() -> None:
+    problem = {"id": "prob.a", "type": "problem", "result_type": "explanation", "request": "one",
+               "associated_question": "quest.a", "knowledge_obstacles": [{"obstacle": "open-gap"}]}
+    records = {"prob.a": problem, "quest.a": {"type": "question", "addresses": "prob.a", "request": "one"}}
+    assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == []
+    records["ans.a"] = {"type": "answer", "answers": "quest.a", "status": "hypothesized"}
+    assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == [
+        "knowledge_obstacles: the problem states open-gap, which its records contradict",
+        "knowledge_obstacles: the records show unassessed-candidates, which the problem does not state",
+    ]
+    problem["knowledge_obstacles"] = [{"obstacle": "unassessed-candidates"}, {"obstacle": "conflict"}]
+    assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == []
+    records["ans.a"].update(status="accepted", erotetic_relation={"value": "corrective"})
+    assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == [
+        "knowledge_obstacles: the records show unsound-presupposition, which the problem does not state",
+        "knowledge_obstacles: the problem states unassessed-candidates, which its records contradict",
     ]
 

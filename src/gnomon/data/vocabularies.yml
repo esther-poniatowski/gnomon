@@ -448,6 +448,23 @@ vocabularies:
     - value: all
     - value: over-a-parameter
     - value: decision
+    knowledge_obstacles.obstacle:
+    - value: open-gap
+    - value: unassessed-candidates
+    - value: conflict
+    - value: unwarranted-claim
+    - value: ill-defined-terms
+    - value: unsound-presupposition
+    answerability_obstacles.condition:
+    - value: definiteness
+    - value: answer-type
+    - value: discrimination
+    - value: access
+    - value: bridging
+    - value: representation
+    answerability_obstacles.refutation:
+    - value: outright
+    - value: lack-of-means
   itinerary:
     .status:
     - value: planned
