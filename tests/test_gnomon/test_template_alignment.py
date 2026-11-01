@@ -455,16 +455,3 @@ def test_the_aim_categories_of_the_note_are_the_registry() -> None:
     assert documented == {entry["value"]: entry.get("category") for entry in aims}
 
 
-def test_the_answer_conditions_of_the_note_are_the_registry() -> None:
-    """The registry carries, for each aim, the three conditions that the table of answer conditions states."""
-    def plain(cell: str) -> str:
-        return re.sub(r"\s*\[[a-z0-9_]+\]", "", cell).strip()
-
-    documented = {}
-    for line in table_lines("epistemology/objects/task/epistemic-aim.md", "| Aim | Direct answer |"):
-        cells = [plain(c) for c in line.strip("|").split("|")]
-        documented[cells[0].strip("`")] = tuple(cells[1:4])
-    aims = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"]["question"]["task.epistemic_aim"]
-    declared = {e["value"]: (e.get("direct_answer"), e.get("conclusive_when"), e.get("presupposes")) for e in aims}
-    assert documented == declared
-

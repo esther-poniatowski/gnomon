@@ -9,9 +9,10 @@
 # needs of the first cases: a value that absorbs most entries draws no distinction, and hides
 # the claims of the entries that it labels.
 #
-# Each epistemic aim of a question also states its category and its three answer conditions,
-# owned by the note on epistemic aims (`docs/epistemology/objects/task/epistemic-aim.md`). The category of an
-# exploration depends on the origin of its equivalence criterion, so it is keyed by that origin.
+# Each epistemic aim of a question also states its category, a token compared with the note on
+# epistemic aims (`docs/epistemology/objects/task/epistemic-aim.md`), which owns the answer conditions of
+# each aim. The category of an exploration depends on the origin of its equivalence criterion, so
+# it is keyed by that origin.
 # The kind `comparison` has no template: a comparison is computed from a binding, and its
 # vocabulary lists the values of the calibration treatment that the computation reports.
 
@@ -260,36 +261,18 @@ vocabularies:
     task.epistemic_aim:
     - value: description
       category: answer-content
-      direct_answer: an assignment of values to the observables or the features of the named phenomenon, at the grain of the question, with the quantification over instances that its scope fixes
-      conclusive_when: every variable and every feature that the request covers has a value, with its uncertainty
-      presupposes: the phenomenon is identified, and its observables are definable at the grain
     - value: exploration
       category:
         input: answer-content
         output: conceptual-work
-      direct_answer: a partition of the declared space into classes under an equivalence criterion, each class with the pattern that characterizes it
-      conclusive_when: the partition covers the declared space at the resolution that the request fixes, and each class reported meets the detection criterion
-      presupposes: the observables and the varied factors can be recorded over their ranges; no phenomenon is presupposed
     - value: prediction
       category: answer-content
-      direct_answer: a value or a distribution of a declared output of the target under a stated condition, with its uncertainty
-      conclusive_when: the output is among the outputs to match, and the uncertainty lies within the required accuracy
-      presupposes: the stated condition is a condition of the target within the domain of the question
     - value: explanation
       category: answer-content
-      direct_answer: a claim that named factors determine the phenomenon by a relation of the requested kind, and, when the question names foils, that they rule out each foil
-      conclusive_when: the factors determine the phenomenon by a relation of the requested kind, every named foil is ruled out by some factor, and the modal strength is the requested one
-      presupposes: 'the topic holds: the fact obtains, and each named foil does not'
     - value: modal-knowledge
       category: answer-content
-      direct_answer: a claim that a property is possible, impossible or necessary, relative to the admitted laws and the domain
-      conclusive_when: a possibility is witnessed by an instance; an impossibility or a necessity is proved, or shown by an exhaustive exclusion over the space of alternatives
-      presupposes: the admitted laws and the domain fix the space of alternatives
     - value: model-knowledge
       category: answer-content
-      direct_answer: a consequence of the laws of a model (a derived law, a regime, a limit, a structural property), or a counterexample
-      conclusive_when: a checked derivation settles the property that the request names, and discharges each proof obligation that the task states
-      presupposes: the laws of the model are stated, so that its consequences are fixed
     task.requested_relation:
     - value: causal-intervention
     - value: causal-mechanistic
