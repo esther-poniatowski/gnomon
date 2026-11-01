@@ -461,26 +461,24 @@ def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> l
     ]
 
 
-def undeclared_explanans_bound(question: Mapping[str, Any]) -> list[str]:
-    """Return the question that bounds the explanans by nothing without saying which silence it is.
+def unjustified_explanans_bound(question: Mapping[str, Any]) -> list[str]:
+    """Return the bound on the explanans that states an axis without saying why.
 
-    A question may leave the answer free to explain at any level, and a question may not yet know
-    which level its analysis will need. Both are written by leaving the bound empty, and the two
-    read alike while meaning opposite things: the first is a finished decision, the second is work
-    not done. The record separates them by carrying a justification for the decision, or by marking
-    the field open in its maturity, which is what a maturity marker is for.
+    A question that leaves the bound empty takes the default: proportionality with the phenomenon
+    selects the variables of the explanans, so an empty bound is complete as it stands. A stated
+    axis narrows the explanans beyond that default, and only a justification records why the
+    research program binds the answer to those variables and what an answer drawing on others
+    would lose. A bound that the maturity marks open is still being written, so its justification
+    may wait. An empty list of compositional parts states an axis: the system as a whole.
     """
     bound = at(question, "task.admissible_explanans") or {}
-    if bound.get("compositional") is not None or bound.get("substrate") is not None:
+    if bound.get("compositional") is None and bound.get("substrate") is None:
         return []
     if bound.get("justification"):
         return []
     if (question.get("maturity") or {}).get("task.admissible_explanans"):
         return []
-    return [
-        "task.admissible_explanans bounds the answer by nothing, and neither a justification"
-        " nor a maturity marker says whether that is a decision or unfinished work"
-    ]
+    return ["task.admissible_explanans states an axis, and no justification says why the answer is bound to it"]
 
 
 def unstated_standing(question: Mapping[str, Any]) -> list[str]:

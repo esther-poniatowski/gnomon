@@ -35,7 +35,7 @@ from gnomon.completeness import (
     unresolved_slots,
     unstated_function_sense,
     undecided_boundaries,
-    undeclared_explanans_bound,
+    unjustified_explanans_bound,
     unrealized_link,
     unstated_standing,
     unmet_general,
@@ -667,23 +667,28 @@ def test_an_empty_boundary_is_reported_and_an_empty_list_is_not() -> None:
 
 @pytest.mark.skipif(not QUESTIONS, reason="the expressivity fixtures are absent")
 @pytest.mark.parametrize("path", QUESTIONS, ids=[p.parent.name for p in QUESTIONS] or ["none"])
-def test_every_question_says_which_silence_its_explanans_bound_is(path: Path) -> None:
-    """An unbounded explanans is a decision or unfinished work, and the two read alike."""
+def test_every_stated_explanans_bound_is_justified(path: Path) -> None:
+    """A stated axis narrows the explanans beyond the default, so it carries its reason."""
     question = yaml.safe_load(path.read_text(encoding="utf-8"))
-    assert not undeclared_explanans_bound(question), f"{path.parent.name}"
+    assert not unjustified_explanans_bound(question), f"{path.parent.name}"
 
 
-def test_an_unbounded_explanans_with_no_declaration_is_reported() -> None:
-    """A justification records the decision; a maturity marker records the work not done."""
-    bare = {"task": {"admissible_explanans": {"compositional": None, "substrate": None}}}
-    assert len(undeclared_explanans_bound(bare)) == 1
-    assert undeclared_explanans_bound({"task": {}}) == [undeclared_explanans_bound(bare)[0]]
-    decided = {"task": {"admissible_explanans": {"justification": "no explanans is requested"}}}
-    assert undeclared_explanans_bound(decided) == []
-    unsettled = dict(bare, maturity={"task.admissible_explanans": "open"})
-    assert undeclared_explanans_bound(unsettled) == []
+def test_a_stated_axis_without_justification_is_reported() -> None:
+    """An empty bound takes the default; a stated axis needs a justification or an open maturity."""
+    empty = {"task": {"admissible_explanans": {"compositional": None, "substrate": None}}}
+    assert unjustified_explanans_bound(empty) == []
+    assert unjustified_explanans_bound({"task": {}}) == []
     bounded = {"task": {"admissible_explanans": {"compositional": ["sub"], "substrate": None}}}
-    assert undeclared_explanans_bound(bounded) == []
+    assert len(unjustified_explanans_bound(bounded)) == 1
+    whole = {"task": {"admissible_explanans": {"compositional": [], "substrate": None}}}
+    assert unjustified_explanans_bound(whole) == unjustified_explanans_bound(bounded)
+    substrate = {"task": {"admissible_explanans": {"compositional": None, "substrate": "independent"}}}
+    assert len(unjustified_explanans_bound(substrate)) == 1
+    reason = "the forecast names each part"
+    justified = {"task": {"admissible_explanans": {"compositional": ["sub"], "justification": reason}}}
+    assert unjustified_explanans_bound(justified) == []
+    unsettled = dict(bounded, maturity={"task.admissible_explanans": "open"})
+    assert unjustified_explanans_bound(unsettled) == []
 
 
 def test_a_question_asking_for_a_link_needs_the_mapping() -> None:
