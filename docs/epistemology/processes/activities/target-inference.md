@@ -4,16 +4,17 @@ tags:
   - wip
 index: "[Epistemic activities](docs/epistemology/processes/activities/_index.md)"
 aliases:
+  - Inference to the target
   - Ampliative inference
   - Abduction
   - Induction
   - Causal inference
 ---
-# Ampliative inference
+# Inference to the target
 
-> [!QUESTION] Goal: which inferences reach a hypothesis beyond their premises, and by which norm is each judged?
+> [!QUESTION] Goal: which inferences conclude to a claim about the target, and by which norm is each judged?
 
-The activities of this family output a [hypothesis](../../vocabulary/representations/claim-and-hypothesis.md): a claim about the target, held with the attitude `hypothesized`, of the product type [`target-claim`](epistemic-activities.md#^target-claim-type). Each inference of this family is ampliative, in the sense of the [distinction between explicative and ampliative inferences](epistemic-activities.md#^explicative-ampliative): the content of the hypothesis exceeds that of the premises of the inference that reaches it, which is a property of the inference rather than of the type. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a claim about the target, of the product type [`target-claim`](epistemic-activities.md#^target-claim-type), and the family is named after that output. Four of them are ampliative, in the sense of the [distinction between explicative and ampliative inferences](epistemic-activities.md#^explicative-ampliative): abduction, induction, analogical inference and causal inference output a [hypothesis](../../vocabulary/representations/claim-and-hypothesis.md), a claim whose content exceeds that of the premises of the inference that reaches it, and which the inquiry holds with the attitude `hypothesized`. The transfer to the target is deductive: given a binding, its claim follows from a consequence of the model and the pair that carries it, as the [binding and transfer](epistemic-activities.md#^binding-step) state. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 
@@ -23,6 +24,7 @@ The activities of this family output a [hypothesis](../../vocabulary/representat
 | `induction` | `data` | `target-claim` | inductive | discovery |
 | `analogical-inference` | `model` (source), `phenomenon` | `target-claim` | analogical | discovery |
 | `causal-inference` | `data`, `model` | `target-claim` | inductive | both |
+| `transfer-to-target` | `consequence`, `binding` | `target-claim` | deductive | justification |
 
 ## Norms
 
@@ -32,6 +34,7 @@ The activities of this family output a [hypothesis](../../vocabulary/representat
 | `induction` | extend a regularity from observed instances to unobserved instances, possibly guided by heuristics that search the space of candidate laws | the predicates of the generalization are projectible [goodman1955] [langley1987] |
 | `analogical-inference` | carry a property of a source model over to the target along a mapping | the similarities are relevant to the transferred property, and the known differences are not [bartha2010] |
 | `causal-inference` | infer a causal structure or the size of an effect from data and causal assumptions | the effect is identifiable: the stated assumptions and the data determine the target quantity uniquely [pearl2009] [spirtes2000] |
+| `transfer-to-target` | carry a consequence of a model, through a feature pair of a binding, to a claim about the target | the consequence bears on a feature that a pair of the binding carries onto the target, the conditions of the consequence lie within the domain over which the binding asserts its pairs, and the claim states the imputed feature that the pair yields: through its key for a computed pair, through its argument for an argued pair |
 
 On the account of its originator, abduction is the only logical operation that introduces a new idea [peirce1934].
 

@@ -83,9 +83,9 @@ Each family groups the activities whose output types belong to one class of prod
 | [Problem-posing](problem-posing.md) | `problem`, `question-schema`, `identified-subject`, `question` |
 | [Conceptual activities](conceptual-activities.md) | `concept`, `measurement-procedure`, `classification` |
 | [Empirical activities](empirical-activities.md) | `design`, `data`, `phenomenon` |
-| [Model-building](model-building.md) | `target-specification`, `admitted-laws`, `model` |
+| [Model-building](model-building.md) | `target-specification`, `admitted-laws`, `model`, `binding`, `key` |
 | [Model analysis](model-analysis.md) | `consequence` |
-| [Ampliative inference](ampliative-inference.md) | `target-claim` |
+| [Inference to the target](target-inference.md) | `target-claim` |
 | [Evaluation](evaluation.md) | `verdict`, `credence`, `ranking` |
 | [Explanation and integration](explanation-and-integration.md) | `explanation`, `inter-theory-relation` |
 | [Revision](revision.md) | `knowledge-state-change` |
@@ -96,15 +96,13 @@ The partition by output type has two consequences for borderline activities. Fir
 
 ### Binding and transfer to the target
 
-Two operations carry a model to its target, and the registry of activities types neither of them yet: ^binding-step
+Two operations carry a model to its target: ^binding-step
 
-- **The binding activity** takes a `model`, a `phenomenon` and a `key`, and outputs a `binding`. Its norm passes when the binding denotes the phenomenon, and each of its feature pairs states the feature that the model exemplifies, the feature imputed to the target, and the key that carries the feature of the model onto the feature of the target, as the note on the [model and its binding](../../objects/answer/model-and-binding.md) states a binding. An argued pair cites its argument. The norm judges how the binding is stated, not its fidelity, which [validation](evaluation.md) judges through the comparison computed from the binding.
-- **The transfer to the target** takes a `consequence` and a `binding`, and outputs a `target-claim`: it carries a consequence of the model, through a feature pair of the binding, to a claim about the target. Its norm passes when the consequence bears on a feature that a pair of the binding carries onto the target, the conditions of the consequence lie within the domain over which the binding asserts its pairs, and the hypothesis states the imputed feature that the pair yields: through its key for a computed pair, through its argument for an argued pair. The step differs from the activity `transfer` of [model-building](model-building.md), which carries laws from another class of systems to the target, and from [analogical inference](ampliative-inference.md), which concludes from similarities without a binding that licenses the conclusion.
+- **The binding activity**, `binding` in [model-building](model-building.md), takes a `model`, a `phenomenon` and the keys of its computed pairs, and outputs a `binding`, as the note on the [model and its binding](../../objects/answer/model-and-binding.md) states a binding. Its norm judges how the binding is stated, not its fidelity, which [validation](evaluation.md) judges through the comparison computed from the binding. A key is produced by `keying`, of the same family.
+- **The transfer to the target**, `transfer-to-target` in [inference to the target](target-inference.md), takes a `consequence` and a `binding`, and outputs a `target-claim`: it carries a consequence of the model, through a feature pair of the binding, to a claim about the target. The step differs from the activity `transfer` of [model-building](model-building.md), which carries laws from another class of systems to the target, and from [analogical inference](target-inference.md), which concludes from similarities without a binding that licenses the conclusion.
 
-The two names are kept apart. A binding records the imputations that its asserter licenses, and its computed pairs assert a [theoretical hypothesis](../../objects/answer/model-and-binding.md#^binding-neutrality) in the sense of Giere [giere1988]. The *transfer to the target* names the step that uses a binding. The step is deductive: given the binding, the claim about the target follows from the consequence and the pair that carries it, and the ampliative content lies in the binding, which its asserter licenses. The [partition of the families](#^families) by output type would file the step under ampliative inference, since its output is a `target-claim`, against its mode. That conflict is open, and the family of the binding activity is likewise fixed when the registry transcribes it.
+The two names are kept apart. A binding records the imputations that its asserter licenses, and its computed pairs assert a [theoretical hypothesis](../../objects/answer/model-and-binding.md#^binding-neutrality) in the sense of Giere [giere1988]. The *transfer to the target* names the step that uses a binding. The step is deductive: given the binding, the claim about the target follows from the consequence and the pair that carries it, and the ampliative content lies in the binding, which its asserter licenses. The [partition of the families](#^families) by output type files the step under inference to the target, beside the ampliative inferences that also conclude to a claim about the target. The family is named after that output, and the mode of each activity, deductive for the transfer, is an attribute of the activity, as the [distinction between explicative and ampliative inferences](#^explicative-ampliative) classifies it. The binding activity outputs a construct of the target, so it belongs to model-building.
 
-> [!WARNING] Pending a change of the registry
-> The binding activity and the transfer to the target, with their signatures and their norms, are proposals of this method. Adding them is pending a change of the [registry of activities](../../../../src/gnomon/data/registries/activities.yml). Until that change, an itinerary cannot type the writing of a binding, and a prediction or an explanation about a target that rests on a model cannot be checked as a composition of typed steps.
 
 ## Product types
 
@@ -126,10 +124,10 @@ The product types form a closed list. Each type classifies the epistemic objects
 | `target-specification` | the declared constituents and quantities of a [target](../../foundations/things-and-constructs.md) | model-building |
 | `admitted-laws` | the laws admitted about a target, with their closure and organization, as the [background](../../objects/knowledge/background.md) states them | model-building |
 | `model` | a candidate [model](../../vocabulary/representations/model.md) of the target | model-building |
-| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | the [binding activity](#^binding-step), pending a change of the registry |
-| `key` | a shared, versioned map between the side of a model and the side of its target | no activity yet: a gap |
+| `binding` | the relation of a model to a phenomenon, stated as the inferences from the model to the target that its asserter licenses | [model-building](model-building.md) |
+| `key` | a shared, versioned map between the side of a model and the side of its target | [model-building](model-building.md) |
 | `consequence` | a statement derived from a model, or from the admitted laws of a target; it becomes a claim about the target only through the [transfer to the target](#^binding-step), or when the admitted laws define the target completely | model analysis |
-| `target-claim` | a [claim](../../vocabulary/representations/claim-and-hypothesis.md) about the target, under any attitude | ampliative inference |
+| `target-claim` | a [claim](../../vocabulary/representations/claim-and-hypothesis.md) about the target, under any attitude | inference to the target |
 | `verdict` | the outcome of a test of a claim or of a model | evaluation |
 | `credence` | a degree of belief in a claim | evaluation |
 | `ranking` | an order over rival candidates | evaluation |

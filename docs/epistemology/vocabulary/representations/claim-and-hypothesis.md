@@ -28,7 +28,7 @@ The explanans is the set of factors that explain, and the explanandum is the phe
 | --- | --- | --- | --- |
 | Claim | logic, epistemology | a proposition put forward for evaluation, supportable or refutable by evidence or by proof | — |
 | Hypothesis, as an attitude | general usage, this method | a claim held provisionally, while it is tested; in a record, a claim held under the attitude `hypothesized` | — |
-| Hypothesis, as an ampliative product | logic of inference | a claim whose content exceeds that of its premises, reached by an [ampliative inference](../../processes/activities/ampliative-inference.md), such as an induction or an abduction | — |
+| Hypothesis, as an ampliative product | logic of inference | a claim whose content exceeds that of its premises, reached by an [ampliative inference](../../processes/activities/epistemic-activities.md#^explicative-ampliative), such as an induction or an abduction | — |
 | Hypothesis, as a target claim | this method | a claim about the target, as opposed to a consequence, which holds of a model and may fail of the target | — |
 | Resistance hypothesis | this method | the hypothesis $\eta$ that explains why the formulation of a question resists the inquiry, by a hidden assumption, a missing property or an inadequate formalism, as the [types of serving question](../../processes/inquiry/question-decomposition.md#^functional-types) use it | — |
 | Theoretical hypothesis | semantic view of theories | the claim that a model is similar to a target system in specified respects and to specified degrees | [giere1988] |

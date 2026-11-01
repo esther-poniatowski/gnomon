@@ -30,7 +30,7 @@ Types each operation of an inquiry by the epistemic object that it produces and 
 - [Empirical activities](empirical-activities.md): types the activities that design an inquiry into a target and obtain data and phenomena from it
 - [Model-building](model-building.md): types the activities that specify a target, admit its background laws and construct a model of it
 - [Model analysis](model-analysis.md): types the activities that draw consequences holding of a model
-- [Ampliative inference](ampliative-inference.md): types the inferences that reach a hypothesis beyond their premises
+- [Inference to the target](target-inference.md): types the inferences that conclude to a claim about the target
 - [Evaluation](evaluation.md): types the activities that judge, weigh or rank candidate hypotheses and models
 - [Explanation and integration](explanation-and-integration.md): types the activities that explain a phenomenon or relate theories to one another
 - [Revision](revision.md): types the activities that change the attitude or the status of existing records

@@ -37,7 +37,7 @@ The activities of this family output an explanation or a relation between theori
 ## Distinctions
 
 - **An explanation needs a model only when its route runs on one.** When the route of the answer runs on the target description, with no stand-in, the explanans is drawn from the admitted laws and the declarations of the target, and no model enters the step. The input `model` of explanation is therefore optional.
-- **Abduction and explanation are separate activities.** [Abduction](ampliative-inference.md) proposes a candidate hypothesis and licenses its pursuit. Explanation works inside the answer schema of a question, and judges whether an explanans bears the requested relation to the phenomenon.
+- **Abduction and explanation are separate activities.** [Abduction](target-inference.md) proposes a candidate hypothesis and licenses its pursuit. Explanation works inside the answer schema of a question, and judges whether an explanans bears the requested relation to the phenomenon.
 - **Reduction outputs a relation, and the derivation is its evidence.** The output of reduction is the relation between the reduced and the reducing theory, and the derivation with bridge laws shows that the relation holds between the two theories [nagel1961].
 - **Reduction and integration differ in the theories kept.** Reduction derives one theory from another, so the reduced theory becomes dispensable in principle. Integration keeps both theories and relates them, as an interfield theory relates genetics and cytology [darden1977].
 - **A theory enters this family as a model.** The input type of reduction and integration is `model`, read as a class of models, as the semantic view of [theories](../../vocabulary/representations/theory.md) defines a theory.

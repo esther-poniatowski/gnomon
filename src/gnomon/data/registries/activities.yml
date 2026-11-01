@@ -23,7 +23,7 @@
 id: registry.activities
 type: activity-registry
 
-families: [problem-posing, conceptual-activities, empirical-activities, model-building, model-analysis, ampliative-inference, evaluation, explanation-and-integration, revision]
+families: [problem-posing, conceptual-activities, empirical-activities, model-building, model-analysis, target-inference, evaluation, explanation-and-integration, revision]
 contexts: [discovery, justification, both]
 
 activities:
@@ -244,6 +244,25 @@ activities:
     norm: norm.fitting
     mode: inductive
     context: justification
+  - id: binding
+    family: model-building
+    inputs:
+      - model
+      - phenomenon
+      - {type: key, several: true, optional: true}
+    output: binding
+    norm: norm.binding
+    mode: non-inferential
+    context: justification
+  - id: keying
+    family: model-building
+    inputs:
+      - model
+      - target-specification
+    output: key
+    norm: norm.keying
+    mode: non-inferential
+    context: justification
   - id: derivation
     family: model-analysis
     inputs:
@@ -287,7 +306,7 @@ activities:
     mode: deductive
     context: justification
   - id: abduction
-    family: ampliative-inference
+    family: target-inference
     inputs:
       - phenomenon
     output: target-claim
@@ -295,7 +314,7 @@ activities:
     mode: abductive
     context: discovery
   - id: induction
-    family: ampliative-inference
+    family: target-inference
     inputs:
       - data
     output: target-claim
@@ -303,7 +322,7 @@ activities:
     mode: inductive
     context: discovery
   - id: analogical-inference
-    family: ampliative-inference
+    family: target-inference
     inputs:
       - {type: model, role: source}
       - phenomenon
@@ -312,7 +331,7 @@ activities:
     mode: analogical
     context: discovery
   - id: causal-inference
-    family: ampliative-inference
+    family: target-inference
     inputs:
       - data
       - model
@@ -320,6 +339,15 @@ activities:
     norm: norm.causal-inference
     mode: inductive
     context: both
+  - id: transfer-to-target
+    family: target-inference
+    inputs:
+      - consequence
+      - binding
+    output: target-claim
+    norm: norm.transfer-to-target
+    mode: deductive
+    context: justification
   - id: testing
     family: evaluation
     inputs:

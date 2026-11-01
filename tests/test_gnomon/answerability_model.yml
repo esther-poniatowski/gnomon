@@ -107,3 +107,7 @@ activities:
      norm: "the values are derived from the model under the stated conditions of the target"}
   - {id: testing, condition: representation, reason: it tests a prediction of the model against the target,
      norm: "the test is severe: it would probably have detected an error, had the hypothesis been false"}
+  - {id: binding, condition: representation, reason: it states the pairs through which a model is compared with its target,
+     norm: "the binding denotes the phenomenon"}
+  - {id: keying, condition: representation, reason: it states the map that converts a feature of the model into a feature of the target,
+     norm: "the key states its kind"}

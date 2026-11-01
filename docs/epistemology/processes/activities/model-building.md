@@ -17,7 +17,7 @@ aliases:
 
 > [!QUESTION] Goal: which activities specify a target, admit its background laws and construct a model of it, and by which norm is each judged?
 
-The activities of this family output a target specification, admitted laws or a [model](../../vocabulary/representations/model.md). Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a target specification, admitted laws, a [model](../../vocabulary/representations/model.md), a binding or a key. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 
@@ -33,6 +33,8 @@ The activities of this family output a target specification, admitted laws or a 
 | `model-analogy` | `model` (source) | `model` | analogical | discovery |
 | `formalization` | `model` | `model` | non-inferential | both |
 | `fitting` | `model`, `data` | `model` | inductive | justification |
+| `binding` | `model`, `phenomenon`, `key` (several, optional) | `binding` | non-inferential | justification |
+| `keying` | `model`, `target-specification` | `key` | non-inferential | justification |
 
 ## Norms
 
@@ -48,6 +50,8 @@ The activities of this family output a target specification, admitted laws or a 
 | `model-analogy` | carry the structure of a source model over to the domain of the target | the mapping preserves the relations relevant to the phenomenon, and no known difference defeats the transfer [hesse1966] [bartha2010] |
 | `formalization` | state each term and relation of a verbal model as a quantity, a set or an equation | every symbol resolves to a declaration, under the [expression language](../../../specification/expressions.md) |
 | `fitting` | estimate the parameters of a model from data | the estimator and the uncertainty of each estimate are stated, and each fitted parameter carries the warrant `fitted` [kennedyohagan2001] |
+| `binding` | state the inferences from a model to a phenomenon that its asserter licenses, as feature pairs | the binding denotes the phenomenon, and each of its feature pairs states the feature that the model exemplifies, the feature imputed to the target, and the key that carries the feature of the model onto the feature of the target; an argued pair cites its argument instead of a key [friggnguyen2020] [suarez2004] |
+| `keying` | state a map between a side of a model and a side of its target, such as an observation operator or a map of units | the key states its kind, a domain on the side of the model, a codomain on the side of the target, an expression over the symbols of its domain or a pointer to the procedure that computes the map, and a version |
 
 ## Distinctions
 
@@ -57,7 +61,7 @@ The activities of this family output a target specification, admitted laws or a 
 - **De-idealization outputs a model, so it belongs to this family.** A revision changes the attitude toward existing records, whereas de-idealization builds a new model. Removing an idealization often reformulates the model, instead of simply reversing the earlier distortion [knuuttila2019].
 - **Decomposition and localization build a model, and explanation judges it.** Decomposition outputs a model, and its norm checks that each component corresponds to a part of the target. The norm of [explanation](explanation-and-integration.md) judges whether that model explains the phenomenon.
 - **Decomposition of a system differs from decomposition of a question.** Decomposition and localization divide a behavior among the parts of a system [bechtel1993]. The decomposition of a question in [problem-posing](problem-posing.md) divides a question into subquestions, under the norm of erotetic implication.
-- **Analogy as model-building differs from analogical inference.** Model-building by analogy produces a candidate model. [Analogical inference](ampliative-inference.md) concludes that the target has a property, so its output is a hypothesis, judged by the relevance of the similarities.
+- **Analogy as model-building differs from analogical inference.** Model-building by analogy produces a candidate model. [Analogical inference](target-inference.md) concludes that the target has a property, so its output is a hypothesis, judged by the relevance of the similarities.
 
 ## Relations to the method
 
@@ -74,6 +78,7 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [bechtel1993] ◐ [Bechtel & Richardson, *Discovering Complexity: Decomposition and Localization as Strategies in Scientific Research*, Princeton University Press, 1993; reissued MIT Press, 2010](https://doi.org/10.7551/mitpress/8328.001.0001)
 - [cartwright1989] ◐ [Cartwright, *Nature's Capacities and Their Measurement*, Clarendon Press, 1989](https://doi.org/10.1093/0198235070.001.0001)
 - [craver2006] ◐ [Craver, "When mechanistic models explain", *Synthese* 153(3), 355–376, 2006](https://doi.org/10.1007/s11229-006-9097-x); checked through the abstract
+- [friggnguyen2020] ◐ [Frigg & Nguyen, *Modelling Nature: An Opinionated Introduction to Scientific Representation*, Synthese Library 427, Springer, 2020](https://doi.org/10.1007/978-3-030-45153-0); denotation, exemplification, key and imputation
 - [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211); the answers to a question form an exhaustive set of mutually exclusive possibilities, checked through secondary summaries
 - [hesse1966] ◐ [Hesse, *Models and Analogies in Science*, University of Notre Dame Press, 1966](https://philpapers.org/rec/REMAA); revised edition of the Sheed and Ward edition, London, 1963
 - [jones2005] ◐ [Jones, "Idealization and abstraction: a framework", in Jones & Cartwright (eds.), *Idealization XII: Correcting the Model. Idealization and Abstraction in the Sciences*, Poznań Studies in the Philosophy of the Sciences and the Humanities 86, Rodopi, 173–217, 2005](https://philportal.de/records/kug/EBP9789401202732)
@@ -81,4 +86,5 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [knuuttila2019] ◐ [Knuuttila & Morgan, "Deidealization: no easy reversals", *Philosophy of Science* 86(4), 641–661, 2019](https://doi.org/10.1086/704975); checked through the abstract
 - [mcmullin1985] ◐ [McMullin, "Galilean idealization", *Studies in History and Philosophy of Science* 16(3), 247–273, 1985](https://doi.org/10.1016/0039-3681(85)90003-2)
 - [steel2008] ◐ [Steel, *Across the Boundaries: Extrapolation in Biology and Social Science*, Oxford University Press, 2008](https://doi.org/10.1093/acprof:oso/9780195331448.001.0001); the publisher lists the print edition on 1 October 2007; extrapolation by comparative process tracing, checked through the publisher abstract and secondary summaries
+- [suarez2004] ◐ Suárez, "An inferential conception of scientific representation", *Philosophy of Science* 71(5), 767–779, 2004
 - [weisberg2007] ◐ [Weisberg, "Three kinds of idealization", *Journal of Philosophy* 104(12), 639–659, 2007](https://doi.org/10.5840/jphil20071041240)

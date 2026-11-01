@@ -87,7 +87,7 @@ Only a claim can be accepted into $K$, by the [act of acceptance](statuses-and-a
 - **Evaluative types**, which report the standing of a claim or of a construct rather than a claim about the objects of study: verdict, credence and ranking.
 - **Types outside these classes**, which are neither claims, constructs of a target nor evaluations: source, problem, question schema, question and knowledge-state change.
 
-The binding is the output of the binding activity, which takes a model, a phenomenon and a key, pending a change of the registry of activities that adds it.
+The binding is the output of the binding activity, which takes a model, a phenomenon and keys.
 
 ## Objects outside the inventory
 
