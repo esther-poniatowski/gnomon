@@ -1,3 +1,4 @@
+_schema: gnomon:operators@1
 title: "Operators of the inquiry into localized states"
 id: ops.swift-hohenberg-localized-states
 type: operators

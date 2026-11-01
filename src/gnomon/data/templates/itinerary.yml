@@ -3,6 +3,7 @@
 # each step instantiates one registered activity; its inputs and its output take the types fixed by the activity
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 
+_schema: gnomon:itinerary@1
 title: "SHORT NAME OF THE ITINERARY"
 id: itin.TOPIC.NAME
 type: itinerary
@@ -13,7 +14,7 @@ steps:                           # one entry per activity instance; the steps ma
   - id: STEP
     activity: ACTIVITY           # an identifier of the activity registry
     inputs:                      # one entry per input of the activity
-      - type: PRODUCT-TYPE      # an identifier of the product-type registry
+      - type: PRODUCT-TYPE       # an identifier of the product-type registry
         ref: RECORD-OR-STEP      # a record identifier, the identifier of the step that produces the input, or a pointer for a `source`
     output:
       type: PRODUCT-TYPE

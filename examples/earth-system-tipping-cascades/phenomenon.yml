@@ -1,3 +1,4 @@
+_schema: gnomon:phenomenon@1
 title: "Transition sequences under warming trajectories"
 statement: "The selected tipping elements of the actual Earth system are coupled and undergo ordered regime transitions. The identities and event times of these transitions depend on the prescribed warming trajectory and on the interactions among subsystems."
 id: phen.earth-tipping-subsystems.transition-sequences
@@ -133,8 +134,8 @@ detection_criterion:
     procedure: "Each source of spread keeps a separately identifiable contribution."
 
 data:
-  - "wunderling2023: An ensemble of network models of four tipping elements under stylized overshoot trajectories: https://doi.org/10.1038/s41558-022-01545-9"
-  - "wunderling2024: A synthesis of the evidence on interactions among tipping elements and on nonlinear mediators: https://doi.org/10.5194/esd-15-41-2024"
+  - pointer: "wunderling2023: An ensemble of network models of four tipping elements under stylized overshoot trajectories: https://doi.org/10.1038/s41558-022-01545-9"
+  - pointer: "wunderling2024: A synthesis of the evidence on interactions among tipping elements and on nonlinear mediators: https://doi.org/10.5194/esd-15-41-2024"
 
 maturity:                        # sequence law and overshoot effect not yet established
   observables.Z.values: open

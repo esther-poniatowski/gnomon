@@ -1,0 +1,152 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/operators.base.yml
+title: Operators record
+description: The fields of a operators record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/operators.md`; one file per problem'
+- declare only operators beyond the framework's canonical set that the problem's records use
+- type each operator over sets declared by any record of the problem; declarations are read against every
+  record
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+properties:
+  _schema:
+    type:
+    - string
+    - 'null'
+    x-template: gnomon:operators@1
+    x-kind: label
+    title: ' schema'
+    description: The  schema of the record.
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"SHORT NAME OF THE PROBLEM THAT THE OPERATORS SERVE"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: ops.TOPIC
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: operators
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+    - string
+    - 'null'
+    x-template: provisional
+    x-kind: label
+    x-comment: provisional | stabilized | retracted
+    title: Status
+    description: provisional | stabilized | retracted
+  target_system:
+    type:
+    - string
+    - 'null'
+    x-template: system.TOPIC
+    x-kind: label
+    title: Target system
+    description: The target system of the record.
+  operators:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE QUANTITY THAT THE OPERATOR COMPUTES"'
+          x-kind: markdown-line
+          title: name
+          description: The name of the record.
+          examples:
+          - '"the restriction of a field to a region"'
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: symbol
+          description: The symbol of the record.
+          examples:
+          - '`restrict`, `community_jacobian`, `ntk`'
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX TEMPLATE'''
+          x-kind: label
+          x-comment: 'write #0 for the bound indices and #1 for each argument'
+          title: notation
+          description: 'write #0 for the bound indices and #1 for each argument'
+          examples:
+          - '`''\nabla \cdot #1''`; `''\operatorname{spec}( #1 )''`'
+        for_any:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: type variables the operator is general over, usable in `signature` and `values`;
+            omit when the operator acts on declared sets alone
+          title: for any (type variables of the operator)
+          description: type variables the operator is general over, usable in `signature` and `values`;
+            omit when the operator acts on declared sets alone
+          examples:
+          - '`[S]` for an adjoint, typed `maps(S, S)` to `maps(S, S)`; `[S, n]` for an inner product of
+            two vectors'
+        signature:
+          type:
+          - array
+          - 'null'
+          x-template: '["SET EXPRESSION OVER DECLARED SYMBOLS OR A TYPE VARIABLE"]'
+          title: signature
+          description: The signature of the record.
+          examples:
+          - '`["maps(Om, pow(reals, 3))"]`'
+        values:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS OR A TYPE VARIABLE"'
+          x-kind: text
+          title: values
+          description: The values of the record.
+          examples:
+          - '`"maps(Om, reals)"`; `reals`'
+    title: Operators
+    description: The operators of the record.
+    examples:
+    - the restriction of a field to a region; the Jacobian of a community at equilibrium; the empirical
+      neural tangent kernel
+  maturity:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    additionalProperties:
+      x-template-key: FIELD.PATH
+      x-template: open
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'

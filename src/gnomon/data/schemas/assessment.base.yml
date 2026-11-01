@@ -1,0 +1,492 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/assessment.base.yml
+title: Assessment record
+description: The fields of a assessment record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/assessment.md`; one file per assessed candidate answer or demanded
+  construct'
+- 'a construct: name it under `assesses`, its problem under `against`, and keep only `tests.constraints`'
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+- 'admissibility: keep the tests of the core and the tests of the block of the aim of the question; delete
+  the tests of the other blocks'
+- 'the erotetic relation of the answer routes the tests: a corrective answer holds no aim block, so its
+  product test and the tests of its block are `not-applicable`'
+- give `not-applicable` to a test whose specification is empty in the question
+- fill the appraisal for one answer at a time; name another candidate only when one exists
+properties:
+  _schema:
+    type:
+    - string
+    - 'null'
+    x-template: gnomon:assessment@1
+    x-kind: label
+    title: ' schema'
+    description: The  schema of the record.
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"SHORT NAME OF THE ASSESSMENT"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: assess.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: assessment
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+    - string
+    - 'null'
+    x-template: provisional
+    x-vocabulary: .status
+    title: Status
+    description: The status of the record.
+  assesses:
+    type:
+    - string
+    - 'null'
+    x-template: ans.TOPIC.NAME
+    x-kind: label
+    x-comment: the candidate answer, or the record of a construct that a problem demands
+    title: Assesses
+    description: the candidate answer or the construct whose verdicts this record holds the identifier
+      of one candidate answer, or of the record of a construct that a problem demands, such as a model
+    examples:
+    - the answer by inhibitory delay
+  against:
+    type:
+    - string
+    - 'null'
+    x-template: quest.TOPIC.NAME
+    x-kind: label
+    x-comment: the question of an answer, or the revised question that a reformulating answer names; the
+      problem of a construct
+    title: Against
+    description: the record whose specifications fix which tests apply for an answer, the identifier of
+      one question, or the revised question that a reformulating answer names; for a construct, the identifier
+      of its problem
+    examples:
+    - why the network is synchronous rather than asynchronous
+  tests:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      admissibility:
+        type:
+        - object
+        - 'null'
+        properties:
+          product:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: "DERIVATION, SIMULATION, MEASUREMENT OR COMPARISON
+              THAT SETTLES THE TEST"}'
+            title: Product
+            description: The product of the record.
+          scope:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            title: Scope
+            description: The scope of the record.
+          grain:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            title: Grain
+            description: The grain of the record.
+          individuation:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            title: Individuation
+            description: The individuation of the record.
+          binding:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            title: Binding
+            description: The binding of the record.
+          modal-strength:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            title: Modal-strength
+            description: The modal-strength of the record.
+          values:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            x-comment: block of a description
+            title: Values
+            description: block of a description
+          space:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            x-comment: block of an exploration
+            title: Space
+            description: block of an exploration
+          outputs:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            x-comment: block of a prediction
+            title: Outputs
+            description: block of a prediction
+          contrast:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            x-comment: block of an explanation
+            title: Contrast
+            description: block of an explanation
+          relation:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            x-comment: block of an explanation
+            title: Relation
+            description: block of an explanation
+          target-status:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            x-comment: block of an explanation
+            title: Target-status
+            description: block of an explanation
+          admissible-explanans:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            x-comment: block of an explanation
+            title: Admissible-explanans
+            description: block of an explanation
+          witness-or-proof:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            x-comment: block of modal knowledge
+            title: Witness-or-proof
+            description: block of modal knowledge
+          consequence:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            x-comment: block of model knowledge
+            title: Consequence
+            description: block of model knowledge
+        x-comment: the tests of the core, then the tests of each aim block
+        title: admissibility
+        description: per criterion of the tests of the core and of the tests of the block of the aim of
+          the question, a verdict — pending · pass · fail · not-applicable — with the evidence that settles
+          it
+        examples:
+        - 'contrast: pass, by producing the asynchronous state in a simulation; admissible explanans:
+          not-applicable, since the question bounded the answer to no variables'
+      warrant:
+        type:
+        - object
+        - 'null'
+        properties:
+          phenomenon-established:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            title: Phenomenon-established
+            description: The phenomenon-established of the record.
+          foil-evidence:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            title: Foil-evidence
+            description: The foil-evidence of the record.
+          law-warrant:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            title: Law-warrant
+            description: The law-warrant of the record.
+          closure:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            title: Closure
+            description: The closure of the record.
+          fidelity:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            x-comment: name the comparisons that the verdict reads, and how each of their three reports
+              bears on it
+            title: Fidelity
+            description: name the comparisons that the verdict reads, and how each of their three reports
+              bears on it
+          adequacy-to-use:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            x-comment: replaces fidelity for an answer that declares its use
+            title: Adequacy-to-use
+            description: replaces fidelity for an answer that declares its use
+          robustness:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            title: Robustness
+            description: The robustness of the record.
+          selection:
+            type:
+            - object
+            - 'null'
+            x-template: '{verdict: pending, evidence: ""}'
+            title: Selection
+            description: The selection of the record.
+        title: warrant
+        description: per criterion of the warrant table, a verdict with the evidence that settles it
+        examples:
+        - 'robustness: fail, since the claim did not survive at finite network size'
+      constraints:
+        type:
+        - array
+        - 'null'
+        items:
+          type: object
+          properties:
+            constraint:
+              type:
+              - string
+              - 'null'
+              x-template: '"NAME OF THE CONSTRAINT"'
+              x-kind: markdown-line
+              title: Constraint
+              description: The constraint of the record.
+            verdict:
+              type:
+              - string
+              - 'null'
+              x-template: pending
+              x-kind: label
+              title: Verdict
+              description: The verdict of the record.
+            evidence:
+              type:
+              - string
+              - 'null'
+              x-template: '""'
+              x-kind: markdown-line
+              title: Evidence
+              description: The evidence of the record.
+        x-comment: an assessment of a construct, in place of the two levels above; one entry per constraint
+          of the problem
+        title: constraints
+        description: per constraint of the problem, its name and a verdict — pending · pass · fail · not-applicable
+          — with the evidence that settles it
+        examples:
+        - 'a model that reproduces the delay within the tolerance of the problem: pass'
+    x-comment: 'verdict: pending | pass | fail | not-applicable'
+    title: Tests
+    description: 'verdict: pending | pass | fail | not-applicable'
+  comparisons:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: COMPARISON
+          x-kind: label
+          title: Id
+          description: The id of the record.
+        binding:
+          type:
+          - string
+          - 'null'
+          x-template: bind.TOPIC.NAME
+          x-kind: label
+          title: Binding
+          description: The binding of the record.
+        version:
+          type:
+          - string
+          - 'null'
+          x-template: VERSION
+          x-kind: label
+          x-comment: the version of the binding
+          title: Version
+          description: the version of the binding
+        data_version:
+          type:
+          - string
+          - 'null'
+          x-template: VERSION
+          x-kind: label
+          x-comment: the version of the data
+          title: Data version
+          description: the version of the data
+    x-comment: one entry per comparison that a verdict of fidelity reads; the metric and the tolerance
+      are read from the question
+    title: Comparisons
+    description: the inputs from which each comparison cited by a verdict is recomputed per comparison,
+      the binding and its version, and the version of the data; the metric and the tolerance are read
+      from the question
+    examples:
+    - version 2 of the binding of the rate model, with version 3 of the recordings
+  obligations:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        verdict:
+          type:
+          - string
+          - 'null'
+          x-template: pending
+          x-vocabulary: obligations.verdict
+          title: Verdict
+          description: The verdict of the record.
+        evidence:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE DERIVATION OR THE COUNTEREXAMPLE THAT SETTLES THE IMPLICATION"'
+          x-kind: markdown-line
+          title: Evidence
+          description: The evidence of the record.
+    x-comment: one entry per proof obligation of the question, in the same order
+    title: Obligations
+    description: per obligation, a verdict with the derivation or the counterexample that settles it
+    examples:
+    - 'the necessary direction: pass, by the derivation of Lemma 2; the sufficient direction: fail, by
+      a counterexample'
+  appraisal:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        virtue:
+          x-vocabulary: appraisal.virtue
+          type:
+          - string
+          - 'null'
+          title: Virtue
+          description: The virtue of the record.
+        assessment:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE RESULT OF THE OPERATIONAL QUESTION OF THAT VIRTUE FOR THIS ANSWER"'
+          x-kind: markdown-line
+          title: Assessment
+          description: The assessment of the record.
+        preferred_over:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE CANDIDATES THAT THIS ANSWER OUTRANKS ON THAT VIRTUE"'
+          x-kind: markdown-line
+          x-comment: fill when other candidates have been assessed
+          title: Preferred over
+          description: fill when other candidates have been assessed
+    x-comment: one entry per `preferred` virtue of the question; the product test already settles each
+      `constitutive` virtue
+    title: Appraisal
+    description: per virtue, the assessment of this answer, and the candidates over which it is preferred
+      once they have been appraised
+    examples:
+    - 'intelligibility: the oscillation frequency can be read off the delay, without simulating the network'
+  credence:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      value:
+        type:
+        - string
+        - 'null'
+        x-template: '"NUMBER IN THE INTERVAL FROM 0 TO 1"'
+        x-kind: markdown-line
+        title: value
+        description: a number between 0 and 1
+        examples:
+        - '0.6'
+      basis:
+        type:
+        - string
+        - 'null'
+        x-template: '"THE EVIDENCE AND THE PRIOR THAT FIX THE VALUE"'
+        x-kind: markdown-line
+        title: basis
+        description: the evidence and the prior from which the value follows
+        examples:
+        - two replications at a larger width, from a prior of 0.3
+    x-comment: optional; the degree of belief that the assessor places in the answer
+    title: Credence
+    description: a number between 0 and 1, with the evidence and the prior from which it follows
+    examples:
+    - 0.6, after two replications at a larger width
+  maturity:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    additionalProperties:
+      x-template-key: FIELD.PATH
+      x-template: open
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'

@@ -1,3 +1,4 @@
+_schema: gnomon:question@1
 title: "Validity domain of neural tangent dynamics"
 statement: "At fixed depth, as width tends to infinity, under which assumptions do the empirical kernel and nonlinear trajectory approach their linearization at initialization? Which error bounds at finite width, and which training horizons, follow from the model?"
 id: quest.ntk.linearized-dynamics-validity

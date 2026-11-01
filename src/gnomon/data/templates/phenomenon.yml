@@ -4,8 +4,9 @@
 # specifications follow the order of the specification note
 # exploratory question: leave the statement, the category, the occurrence and the evidential status empty, since the inquiry produces them; fill the candidate observables, the varied indices and the detection criterion
 
+_schema: gnomon:phenomenon@1
 title: "SHORT NAME OF THE PHENOMENON"
-statement: "THE PHENOMENON IN WORDS: THE BEARER AND ITS BEHAVIOR" # a reading only: the signatures fix the bearer, the manifestations fix the behavior
+statement: "THE PHENOMENON IN WORDS: THE BEARER AND ITS BEHAVIOR"   # a reading only: the signatures fix the bearer, the manifestations fix the behavior
 id: phen.TOPIC.NAME
 type: phenomenon
 status: provisional              # provisional | stabilized | retracted

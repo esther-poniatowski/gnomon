@@ -4,6 +4,7 @@
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # specifications follow the order of the specification note
 
+_schema: gnomon:target-system@1
 title: "NAME OF THE SYSTEM"
 id: system.TOPIC
 type: target-system
@@ -69,7 +70,7 @@ parameters:                      # quantities held fixed while the phenomenon un
     notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
     of: SYMBOL                   # external system the entry characterizes; omit when the entry belongs to the target
     variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
-    signature: [SYMBOL, SYMBOL]  # one entry per place, e.g. two neurons for a connectivity weight
+    signature: [SYMBOL, SYMBOL]   # one entry per place, e.g. two neurons for a connectivity weight
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
     scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived parameter
@@ -87,7 +88,7 @@ external_systems:                # the variables shared with these systems form 
     constrains:                  # constraints on the shared variables beyond their declared value sets; `[]` when there is none
       - name: "NAME OF THE CONSTRAINT"
         signature: [SYMBOL]      # places the claim ranges over; empty for a claim about the system as a whole
-        role:                    # evolution | input-output | measurement | state-constraint | distribution | admissibility
+        role:                    # evolution (how the state changes along the course) | input-output (how one quantity is determined by others at the same point) | measurement (how an instrument registers the state) | state-constraint (which states may hold together, including at the start and at the boundary) | distribution (the law of a random quantity) | admissibility (a restriction on the parameters or the forms that a member may take)
         expression: "EXPRESSION OVER DECLARED SYMBOLS"
         reading: "THE CONSTRAINT IN WORDS"
     reading: "THE INPUT THAT THE EXTERNAL SYSTEM SUPPLIES OR THE CONSTRAINT THAT IT IMPOSES"   # only content beyond the shared variables

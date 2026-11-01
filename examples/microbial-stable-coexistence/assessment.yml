@@ -1,5 +1,6 @@
 # tests a theorem proving one direction of implication against a modal question asking for both
 
+_schema: gnomon:assessment@1
 title: "Assessment of the theorem that feasibility implies stability"
 id: assess.microbial.feasibility-implies-stability
 type: assessment

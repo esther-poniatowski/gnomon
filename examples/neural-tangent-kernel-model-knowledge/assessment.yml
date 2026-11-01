@@ -1,5 +1,6 @@
 # positive for a candidate that states a theorem under explicit assumptions
 
+_schema: gnomon:assessment@1
 title: "Assessment of the theorem of uniform linearization"
 id: assess.ntk.uniform-linearization-theorem
 type: assessment

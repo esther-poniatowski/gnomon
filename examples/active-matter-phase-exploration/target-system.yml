@@ -1,3 +1,4 @@
+_schema: gnomon:target-system@1
 title: "Spatially extended stochastic systems of two species with nonreciprocal couplings"
 id: system.nonreciprocal-active-matter
 type: target-system

@@ -1,3 +1,4 @@
+_schema: gnomon:question@1
 title: "Necessary and sufficient constraints for stable coexistence"
 statement: "Across models of microbial communities, which constraints on interactions are necessary, sufficient, or both for feasible and locally stable coexistence? The interactions are mediated by resources or of higher order. The contrast is with competitive exclusion and with an unstable positive equilibrium. Which sufficient constraints remain valid as resource supply varies?"
 id: quest.microbial.stable-coexistence-constraints

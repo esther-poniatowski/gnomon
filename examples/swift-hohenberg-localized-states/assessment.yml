@@ -1,5 +1,6 @@
 # qualitative description omitting the requested map over the full coefficient domain
 
+_schema: gnomon:assessment@1
 title: "Assessment of the snakes-and-ladders catalogue"
 id: assess.swift-hohenberg.snakes-ladders-catalogue
 type: assessment

@@ -1,5 +1,6 @@
 # tests the answer form against an exploratory inquiry
 
+_schema: gnomon:answer@1
 title: "Catalogue of exceptional phase transitions"
 statement: "For a deterministic continuum subfamily near a bifurcation at weak amplitude, nonreciprocal coupling changes the spectrum of the linearization of two order parameters. The catalogue that results contains the three regimes named in the second law. The catalogue omits the lattice variant and the persistence tests required for stochastic phases."
 id: ans.nonreciprocal-active-matter.exceptional-transition-catalogue

@@ -6,6 +6,7 @@
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # specifications follow the order of the specification note
 
+_schema: gnomon:model@1
 title: "SHORT NAME OF THE MODEL"
 id: mod.TOPIC.NAME
 type: model

@@ -44,9 +44,7 @@ gnomon init --target <dir>
 
 ## `validate`
 
-> Stub — prints "Record validation is not yet implemented."
-
-Validate each record against the JSON Schema of its type.
+Validate each record against the contract that its field `_schema` names, such as `gnomon:answer@1`. A record whose type has no schema, such as a generated vocabulary, is skipped. The command prints each violation with the path of its field, and exits with a nonzero code when any record breaks its contract.
 
 ```sh
 gnomon validate <paths...>
@@ -55,6 +53,18 @@ gnomon validate <paths...>
 | Argument   | Description                                  |
 | ---------- | -------------------------------------------- |
 | `<paths>`  | One or more record files or directories.     |
+
+## `schemas`
+
+Write the contract of each record type and its template, generated from the base schemas in `src/gnomon/data/schemas/` and from the vocabulary registry. With `--check`, the command writes nothing, reports each generated file that differs from its generated form, and exits with a nonzero code when one does.
+
+```sh
+gnomon schemas [--check]
+```
+
+| Option    | Description                                                        |
+| --------- | ------------------------------------------------------------------ |
+| `--check` | Report the stale generated files instead of writing them.          |
 
 ## `status`
 

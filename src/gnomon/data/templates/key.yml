@@ -4,6 +4,7 @@
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # specifications follow the order of the specification note
 
+_schema: gnomon:key@1
 title: "SHORT NAME OF THE KEY"
 id: key.TOPIC.NAME
 type: key

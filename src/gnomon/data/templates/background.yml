@@ -4,6 +4,7 @@
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # specifications follow the order of the specification note
 
+_schema: gnomon:background@1
 title: "NAME OF THE BODY OF ADMITTED LAWS"
 id: bg.TOPIC.NAME
 type: background

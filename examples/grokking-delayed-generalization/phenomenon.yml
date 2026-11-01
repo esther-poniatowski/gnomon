@@ -1,3 +1,4 @@
+_schema: gnomon:phenomenon@1
 title: "Delayed generalization"
 statement: "A finite neural network brings its training loss under a threshold close to zero, and its test loss crosses the generalization criterion only after a positive delay."
 id: phen.grokking.delayed_generalization
@@ -116,8 +117,8 @@ evidential_status: established
 detection_criterion: null
 
 data:
-  - "liu2022: Empirical phase evidence across repeated seeds: https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
-  - "humayun2024: Trajectories of delayed generalization across neural architectures and tasks: https://proceedings.mlr.press/v235/humayun24a.html"
+  - pointer: "liu2022: Empirical phase evidence across repeated seeds: https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
+  - pointer: "humayun2024: Trajectories of delayed generalization across neural architectures and tasks: https://proceedings.mlr.press/v235/humayun24a.html"
 
 maturity:
   manifestations.features.observed: open

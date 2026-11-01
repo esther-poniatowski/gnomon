@@ -1,5 +1,6 @@
 # tests one deliberately narrow exploratory candidate
 
+_schema: gnomon:assessment@1
 title: "Assessment of the catalogue of exceptional phase transitions"
 id: assess.nonreciprocal-active-matter.exceptional-transition-catalogue
 type: assessment

@@ -1,0 +1,289 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/background.base.yml
+title: Background record
+description: The fields of a background record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/background.md`; one file per body of admitted laws about one target
+  system'
+- 'symbols and expressions: `docs/specification/expressions.md`'
+- name only the quantities declared by the described target system; several background records may describe
+  one target
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+- specifications follow the order of the specification note
+properties:
+  _schema:
+    type:
+    - string
+    - 'null'
+    x-template: gnomon:background@1
+    x-kind: label
+    title: ' schema'
+    description: The  schema of the record.
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"NAME OF THE BODY OF ADMITTED LAWS"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: bg.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: background
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+    - string
+    - 'null'
+    x-template: provisional
+    x-vocabulary: .status
+    title: Status
+    description: The status of the record.
+  describes:
+    type:
+    - string
+    - 'null'
+    x-template: system.TOPIC
+    x-kind: label
+    title: Describes
+    description: the target whose quantities the laws use the identifier of one target-system record
+    examples:
+    - the record of the trained networks; the record of the four tipping elements
+  laws:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE LAW"'
+          x-kind: markdown-line
+          title: Name
+          description: The name of the record.
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: The symbol of the record.
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: variant of the target governed by the law; omit when the law governs every member
+          title: Variant
+          description: variant of the target governed by the law; omit when the law governs every member
+        signature:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: one entry per place of the claim; empty for a claim about the system as a whole
+          title: Signature
+          description: one entry per place of the claim; empty for a claim about the system as a whole
+        role:
+          x-vocabulary: laws.role
+          type:
+          - string
+          - 'null'
+          title: Role
+          description: The role of the record.
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: 'the claim of the law: the only part of the entry that can be false of the system'
+          title: Expression
+          description: 'the claim of the law: the only part of the entry that can be false of the system'
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE LAW IN WORDS"'
+          x-kind: markdown-line
+          title: Reading
+          description: The reading of the record.
+        warrant:
+          x-vocabulary: laws.warrant
+          type:
+          - string
+          - 'null'
+          title: Warrant
+          description: The warrant of the record.
+        rests_on:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE LAWS, THE LIMIT OR THE DATA THAT THE WARRANT REFERS TO"'
+          x-kind: markdown-line
+          title: Rests on
+          description: The rests on of the record.
+        origin:
+          type:
+          - string
+          - 'null'
+          x-template: '"POINTER TO THE SOURCE OF THE LAW: A PUBLICATION, A DATA SET OR A DERIVATION"'
+          x-kind: markdown-line
+          title: origin
+          description: a pointer to the publication, the data set or the derivation from which the law
+            is taken
+          examples:
+          - the article that defines the model; the recordings to which a transfer function was fitted
+        range:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE LAW IS ESTABLISHED"'
+          x-kind: text
+          x-comment: omit when the law is established across the whole reference class
+          title: range
+          description: an expression over declared symbols that bounds the conditions under which the
+            law is established
+          examples:
+          - a rate equation established for inputs below saturation; a scaling law established above a
+            minimal width
+    x-comment: behaviors of the components or of the system admitted a priori
+    title: Laws
+    description: 'known behaviors of the components or of the system an expression over the symbols that
+      the target declares, with its signature and the places that the claim ranges over (one entry each,
+      empty when the law concerns the system as a whole). Its warrant (derived from other admitted laws,
+      derived in a limit, posited, fitted or measured), with its grounds. Its role, one of six:<br>- evolution:
+      how the state changes along the course<br>- input-output: how one quantity is determined by others
+      at the same point<br>- measurement: how an instrument registers the state<br>- state-constraint:
+      which states may hold together, including at the start and at the boundary<br>- distribution: the
+      law of a random quantity<br>- admissibility: a restriction on the parameters or on the forms that
+      a member may take'
+    examples:
+    - '- the leaky integration of each neuron (one place, local, evolution)<br>- the gradient-descent
+      learning rule (collective, evolution)<br>- the energy function on the state space (no place, state-constraint)<br>-
+      the forward map of a network from its inputs to its prediction (input-output)<br>- the spike threshold
+      of the recording (measurement)'
+  closure:
+    x-blank: true
+    x-vocabulary: .closure
+    type:
+    - string
+    - 'null'
+    title: Closure (of the laws)
+    description: separates a formal target from an empirical one complete, for a formal target whose laws
+      define the system · partial, for an empirical target that may admit a rule independent of them
+    examples:
+    - the Wilson–Cowan equations define the model (complete); a recorded circuit, where a plasticity rule
+      may still be discovered (partial)
+  organization:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE RELATION"'
+          x-kind: markdown-line
+          title: Name
+          description: The name of the record.
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: The symbol of the record.
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: variant carrying the entry; omit when every member of the class carries it
+          title: Variant
+          description: variant carrying the entry; omit when every member of the class carries it
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE ARRANGEMENT IN WORDS"'
+          x-kind: markdown-line
+          x-comment: only content beyond the relation and the laws
+          title: Reading
+          description: only content beyond the relation and the laws
+        relates:
+          type:
+          - string
+          - 'null'
+          x-template: '"prod(SOURCE, REACH), or subset(prod(SOURCE, REACH), ADJACENCY)"'
+          x-kind: markdown-line
+          x-comment: 'for a relation among parts: the connected tuples, reach last'
+          title: Relates
+          description: 'for a relation among parts: the connected tuples, reach last'
+        among:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: 'for a relation among laws: the laws, reach last; fill exactly one of `relates` and
+            `among`'
+          title: Among
+          description: 'for a relation among laws: the laws, reach last; fill exactly one of `relates`
+            and `among`'
+        realized_by:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: laws stating a relation among parts; the parts are read from their expressions
+          title: Realized by
+          description: laws stating a relation among parts; the parts are read from their expressions
+    x-comment: relations among parts and laws whose arrangement produces the behavior
+    title: Organization
+    description: per relation, its tuples and its laws. The tuples take the form `prod(source, reach)`
+      or `subset(prod(source, reach), adjacency)`. A directed relation puts the reach last, and a joint
+      one has three or more components. When the ends are laws, the relation names the laws that it orders,
+      with the reach last
+    examples:
+    - a transmitted signal between two climate subsystems; a nonreciprocal cross-coupling between two
+      species fields; two populations jointly changing the growth of a third
+  maturity:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    additionalProperties:
+      x-template-key: FIELD.PATH
+      x-template: open
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'

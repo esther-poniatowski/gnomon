@@ -1,3 +1,4 @@
+_schema: gnomon:operators@1
 title: "Operators of the inquiry into microbial coexistence"
 id: ops.microbial-formal-population-models
 type: operators

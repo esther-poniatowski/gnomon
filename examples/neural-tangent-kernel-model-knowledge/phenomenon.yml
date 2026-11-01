@@ -1,3 +1,4 @@
+_schema: gnomon:phenomenon@1
 title: "Convergence toward neural tangent dynamics"
 statement: "As width increases in network families under neural tangent parameterization, the empirical kernel and the output trajectory approach the linearized dynamics governed by the initial kernel. Both quantities converge only under suitable assumptions on regularity and scaling."
 id: phen.ntk.linearized-dynamics
@@ -142,9 +143,9 @@ detection_criterion:
     procedure: "The bound at finite width on the distance between the initial kernel and its limit is derived and proved to vanish in the declared convergence mode."
 
 data:
-  - "jacot2018: https://papers.nips.cc/paper/2018/hash/5a4be1fa34e62bb8a6ec6b91d2462f5a-Abstract.html"
-  - "lee2019: https://papers.nips.cc/paper_files/paper/2019/hash/0d1a9651497a38d8b1c3871c84528bd4-Abstract.html"
-  - "chizat2019: https://papers.nips.cc/paper/8559-on-lazy-training-in-differentiable-programming.pdf"
+  - pointer: "jacot2018: https://papers.nips.cc/paper/2018/hash/5a4be1fa34e62bb8a6ec6b91d2462f5a-Abstract.html"
+  - pointer: "lee2019: https://papers.nips.cc/paper_files/paper/2019/hash/0d1a9651497a38d8b1c3871c84528bd4-Abstract.html"
+  - pointer: "chizat2019: https://papers.nips.cc/paper/8559-on-lazy-training-in-differentiable-programming.pdf"
 
 maturity:
   manifestations.features.observed: open

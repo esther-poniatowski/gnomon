@@ -1,3 +1,4 @@
+_schema: gnomon:phenomenon@1
 title: "Stationary localized states organized by homoclinic snaking"
 statement: "Stationary solutions of the generalized Swift-Hohenberg equation form patterned states localized within the homogeneous background."
 id: phen.swift-hohenberg.localized-states
@@ -71,8 +72,8 @@ detection_criterion:
     procedure: "Stationary solutions are continued in the coefficients. The residual of the equation and the decay to the homogeneous far field are then checked."
 
 data:
-  - "burke2006: https://doi.org/10.1103/PhysRevE.73.056211"
-  - "beck2009: https://doi.org/10.1137/080713306"
+  - pointer: "burke2006: https://doi.org/10.1103/PhysRevE.73.056211"
+  - pointer: "beck2009: https://doi.org/10.1137/080713306"
 
 maturity:
   manifestations.features.observed: open

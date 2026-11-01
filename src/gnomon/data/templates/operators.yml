@@ -3,6 +3,7 @@
 # type each operator over sets declared by any record of the problem; declarations are read against every record
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 
+_schema: gnomon:operators@1
 title: "SHORT NAME OF THE PROBLEM THAT THE OPERATORS SERVE"
 id: ops.TOPIC
 type: operators
@@ -12,7 +13,7 @@ target_system: system.TOPIC
 operators:
   - name: "THE QUANTITY THAT THE OPERATOR COMPUTES"
     symbol: SYMBOL
-    notation: 'LATEX TEMPLATE'       # write #0 for the bound indices and #1 for each argument
+    notation: 'LATEX TEMPLATE'   # write #0 for the bound indices and #1 for each argument
     for_any: [SYMBOL]            # type variables the operator is general over, usable in `signature` and `values`; omit when the operator acts on declared sets alone
     signature: ["SET EXPRESSION OVER DECLARED SYMBOLS OR A TYPE VARIABLE"]
     values: "SET EXPRESSION OVER DECLARED SYMBOLS OR A TYPE VARIABLE"

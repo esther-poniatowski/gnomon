@@ -1,3 +1,4 @@
+_schema: gnomon:question@1
 title: "Necessary constraints on anomalous scaling"
 statement: "At Re -> ∞, which mathematical constraints of statistically stationary, three-dimensional, incompressible Navier–Stokes flow necessarily make the joint distribution of longitudinal and transverse increments depart from self-similarity? Which resulting relations and exponents remain invariant across admitted forcing and boundary families?"
 id: quest.turbulence.anomalous-scaling-constraints

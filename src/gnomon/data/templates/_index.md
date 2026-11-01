@@ -24,10 +24,12 @@ Two templates stand outside this order:
 
 A target system and a phenomenon can be recorded at commitment `identified`, with a definite description and pointers, before their quantities are declared. A question can name a placeholder in place of either record.
 
+Each template is rendered by `gnomon schemas` from its base schema in the [record schemas](../schemas/_index.md) and from the vocabulary registry, so a field is changed in its base schema and an option in the registry, never in the template.
+
 Each template follows ten conventions of format:
 
 - each file is pure YAML, so that a slot carries its dependent fields as nested keys;
-- each closed field lists its options in lowercase, first in the comment of its line, so that a schema can check them;
+- each closed field lists its options in lowercase, first in the comment of its line, written from the vocabulary registry;
 - a field stays empty while it is not filled, and the requirement registry decides whether an empty field is a gap or a product of the inquiry;
 - each field that holds prose starts as a placeholder consisting only of an UPPERCASE description of the expected content, and the text replacing it may contain formulas;
 - the guidance for filling a field stands in the comment of its line, as terse lowercase instructions that never restate the key: "optional", "omit when the target declares the quantity";

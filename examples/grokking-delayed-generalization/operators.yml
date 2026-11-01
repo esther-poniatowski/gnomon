@@ -1,6 +1,7 @@
 # types finite samples and the quantities the candidate answer defines on learned representations
 # open carriers: the target leaves the type of its heterogeneous architecture unresolved
 
+_schema: gnomon:operators@1
 title: "Operators of the inquiry into delayed generalization"
 id: ops.delayed-generalization-networks
 type: operators

@@ -6,6 +6,7 @@
 # give `not-applicable` to a test whose specification is empty in the question
 # fill the appraisal for one answer at a time; name another candidate only when one exists
 
+_schema: gnomon:assessment@1
 title: "SHORT NAME OF THE ASSESSMENT"
 id: assess.TOPIC.NAME
 type: assessment
@@ -21,22 +22,22 @@ tests:                           # verdict: pending | pass | fail | not-applicab
     individuation: {verdict: pending, evidence: ""}
     binding: {verdict: pending, evidence: ""}
     modal-strength: {verdict: pending, evidence: ""}
-    values: {verdict: pending, evidence: ""}             # block of a description
-    space: {verdict: pending, evidence: ""}              # block of an exploration
-    outputs: {verdict: pending, evidence: ""}            # block of a prediction
-    contrast: {verdict: pending, evidence: ""}           # block of an explanation
-    relation: {verdict: pending, evidence: ""}           # block of an explanation
-    target-status: {verdict: pending, evidence: ""}      # block of an explanation
+    values: {verdict: pending, evidence: ""}   # block of a description
+    space: {verdict: pending, evidence: ""}   # block of an exploration
+    outputs: {verdict: pending, evidence: ""}   # block of a prediction
+    contrast: {verdict: pending, evidence: ""}   # block of an explanation
+    relation: {verdict: pending, evidence: ""}   # block of an explanation
+    target-status: {verdict: pending, evidence: ""}   # block of an explanation
     admissible-explanans: {verdict: pending, evidence: ""}   # block of an explanation
     witness-or-proof: {verdict: pending, evidence: ""}   # block of modal knowledge
-    consequence: {verdict: pending, evidence: ""}        # block of model knowledge
+    consequence: {verdict: pending, evidence: ""}   # block of model knowledge
   warrant:
     phenomenon-established: {verdict: pending, evidence: ""}
     foil-evidence: {verdict: pending, evidence: ""}
     law-warrant: {verdict: pending, evidence: ""}
     closure: {verdict: pending, evidence: ""}
-    fidelity: {verdict: pending, evidence: ""}           # name the comparisons that the verdict reads, and how each of their three reports bears on it
-    adequacy-to-use: {verdict: pending, evidence: ""}    # replaces fidelity for an answer that declares its use
+    fidelity: {verdict: pending, evidence: ""}   # name the comparisons that the verdict reads, and how each of their three reports bears on it
+    adequacy-to-use: {verdict: pending, evidence: ""}   # replaces fidelity for an answer that declares its use
     robustness: {verdict: pending, evidence: ""}
     selection: {verdict: pending, evidence: ""}
   constraints:                   # an assessment of a construct, in place of the two levels above; one entry per constraint of the problem

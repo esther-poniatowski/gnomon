@@ -1,3 +1,4 @@
+_schema: gnomon:phenomenon@1
 title: "Feasible and dynamically stable coexistence"
 statement: "The microbial populations of a member model can possess an equilibrium at which every abundance is positive and to which they return after sufficiently small perturbations of the state."
 id: phen.microbial.stable-coexistence
@@ -108,8 +109,8 @@ detection_criterion:
     procedure: "Linearize the complete dynamics of the member model at that equilibrium and compute the largest real part of the spectrum."
 
 data:
-  - "butler2018: https://www.nature.com/articles/s41467-018-05308-z"
-  - "gibbs2024: https://onlinelibrary.wiley.com/doi/10.1111/ele.14458"
+  - pointer: "butler2018: https://www.nature.com/articles/s41467-018-05308-z"
+  - pointer: "gibbs2024: https://onlinelibrary.wiley.com/doi/10.1111/ele.14458"
 
 maturity:
   observables.Xstar.values: open

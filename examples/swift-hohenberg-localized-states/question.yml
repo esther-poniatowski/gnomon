@@ -1,3 +1,4 @@
+_schema: gnomon:question@1
 title: "Description of the structure of localized states"
 statement: "Across the admitted coefficient domain, what profile and bifurcation structure characterizes the localized stationary states, including their symmetry and stability?"
 id: quest.swift-hohenberg.localized-states-description

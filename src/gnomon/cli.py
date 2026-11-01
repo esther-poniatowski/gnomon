@@ -49,9 +49,23 @@ def cli_init(
 def cli_validate(
     paths: list[str] = typer.Argument(..., help="Record files or directories to validate."),
 ) -> None:
-    """Validate each record against the schema of its type."""
-    typer.echo("Record validation is not yet implemented.")
-    raise typer.Exit(code=0)
+    """Validate each record against the contract that it names, skipping the kinds that have no schema."""
+    from .schemas import record_errors, record_kinds
+
+    files: list[Path] = []
+    for given in map(Path, paths):
+        files += sorted(given.rglob("*.yml")) if given.is_dir() else [given]
+    known, failed, checked = record_kinds(), 0, 0
+    for path in files:
+        record = yaml.safe_load(path.read_text(encoding="utf-8"))
+        if not isinstance(record, dict) or record.get("type") not in known:
+            continue
+        checked += 1
+        for message in record_errors(record):
+            failed += 1
+            typer.echo(f"{path}: {message}")
+    typer.echo(f"{checked} records checked, {failed} errors found")
+    raise typer.Exit(code=1 if failed else 0)
 
 
 @app.command("status")
@@ -146,6 +160,23 @@ def _write_log(log: dict[str, Any], output: Optional[Path]) -> None:
     except OSError as error:
         typer.echo(f"cannot write the log {output}: {error}", err=True)
         raise typer.Exit(code=2) from error
+
+
+@app.command("schemas")
+def cli_schemas(
+    check: bool = typer.Option(False, "--check", help="Report the stale generated files instead of writing them."),
+) -> None:
+    """Write the contracts and the templates generated from the base schemas and the vocabulary registry."""
+    from .schemas import generated_files, stale_files
+
+    if check:
+        stale = stale_files()
+        for path in stale:
+            typer.echo(f"{path}: differs from its generated form", err=True)
+        raise typer.Exit(code=1 if stale else 0)
+    for path, text in generated_files().items():
+        path.write_text(text, encoding="utf-8")
+        typer.echo(f"{path}: written")
 
 
 @app.command("itinerary")

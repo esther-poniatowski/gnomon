@@ -1,3 +1,4 @@
+_schema: gnomon:background@1
 title: "The generalized Swift-Hohenberg equation and its localized states"
 id: bg.swift-hohenberg-localized-states.equation
 type: background

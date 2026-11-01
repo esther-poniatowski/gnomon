@@ -1,0 +1,693 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/model.base.yml
+title: Model record
+description: The fields of a model record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/model.md`; one file per model, which several answers can ground'
+- 'symbols and expressions: `docs/specification/expressions.md`'
+- declare the constituents, index sets, variables and parameters in target-system form, and the laws and
+  organization in background form
+- 'no entry refers to one question, and no quantity enters by reference to a target quantity: a binding
+  relates the model to its target'
+- 'name a symbol of the target by source identifier and symbol: `system.TOPIC.SYMBOL`'
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+- specifications follow the order of the specification note
+properties:
+  _schema:
+    type:
+    - string
+    - 'null'
+    x-template: gnomon:model@1
+    x-kind: label
+    title: ' schema'
+    description: The  schema of the record.
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"SHORT NAME OF THE MODEL"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: mod.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: model
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+    - string
+    - 'null'
+    x-template: provisional
+    x-vocabulary: .status
+    title: Status
+    description: The status of the record.
+  background:
+    x-blank: true
+    type:
+    - string
+    - 'null'
+    x-template: bg.TOPIC.NAME
+    x-kind: label
+    x-comment: fill when a law of the model carries the warrant `derived` or `derived-in-a-limit`
+    title: Background
+    description: the record from which the laws of the model are derived the identifier of one background
+      record
+    examples:
+    - the admitted training laws of the networks of a class
+  constituents:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"KIND OF UNIT"'
+          x-kind: markdown-line
+          title: Name
+          description: The name of the record.
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: The symbol of the record.
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        extent:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Extent
+          description: The extent of the record.
+        map:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER THE CONSTITUENTS DECLARED FOR THE TARGET"'
+          x-kind: text
+          x-comment: give for a unit defined from the target, such as a coarse-graining, a mode decomposition,
+            an aggregation or a quotient by a symmetry; omit for a unit of the model alone
+          title: Map
+          description: give for a unit defined from the target, such as a coarse-graining, a mode decomposition,
+            an aggregation or a quotient by a symmetry; omit for a unit of the model alone
+    x-comment: 'C: the units that the model treats as bearers'
+    title: Constituents $C$
+    description: the units that the model treats as bearers
+    examples:
+    - the slow eigenmodes of the connectivity (defined by a map); the four tipping elements of a box model
+      of the Earth system (units of the model alone)
+  index_sets:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE SET"'
+          x-kind: markdown-line
+          title: Name
+          description: The name of the record.
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: The symbol of the record.
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        extent:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Extent
+          description: The extent of the record.
+        structure:
+          x-vocabulary: index_sets.structure
+          type:
+          - string
+          - 'null'
+          title: Structure
+          description: The structure of the record.
+    x-comment: only sets that the target does not declare
+    title: Index sets
+    description: the set, its extent and its structure, in the format of a target system
+    examples:
+    - a coarse-grained scale; a mode number
+  variables:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE VARIABLE"'
+          x-kind: markdown-line
+          title: Name
+          description: The name of the record.
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: The symbol of the record.
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        determined:
+          x-vocabulary: variables.determined
+          type:
+          - string
+          - 'null'
+          title: Determined
+          description: The determined of the record.
+        signature:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: one constituent kind or index set per place; empty for the model as a whole
+          title: Signature
+          description: one constituent kind or index set per place; empty for the model as a whole
+        values:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Values
+          description: The values of the record.
+        scale:
+          x-vocabulary: variables.scale
+          type:
+          - string
+          - 'null'
+          title: Scale
+          description: The scale of the record.
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: an expression over the symbols of the model, or a map other than the identity from
+            quantities of the target
+          title: Expression
+          description: an expression over the symbols of the model, or a map other than the identity from
+            quantities of the target
+        condition:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION THAT THE QUANTITY SATISFIES"'
+          x-kind: text
+          x-comment: give when no map builds the quantity
+          title: Condition
+          description: give when no map builds the quantity
+        selects:
+          x-comment: required with a condition
+          x-vocabulary: variables.selects
+          type:
+          - string
+          - 'null'
+          title: Selects
+          description: required with a condition
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE EXPRESSION IN WORDS"'
+          x-kind: text
+          title: Reading
+          description: The reading of the record.
+        shared:
+          type:
+          - boolean
+          - 'null'
+          x-template: 'false'
+          x-comment: true when one value holds for every tuple of the signature
+          title: Shared
+          description: true when one value holds for every tuple of the signature
+    x-comment: 'part of V: quantities that vary in the model'
+    title: Variables
+    description: 'per variable, its own symbol, signature and value set, and its construction: an expression
+      over the symbols of the model, or a map other than the identity from the quantities that the target
+      declares'
+    examples:
+    - the population rate; the overlap with a stored pattern
+  parameters:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE PARAMETER"'
+          x-kind: markdown-line
+          title: Name
+          description: The name of the record.
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: The symbol of the record.
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        signature:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          title: Signature
+          description: The signature of the record.
+        values:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Values
+          description: The values of the record.
+        scale:
+          x-vocabulary: parameters.scale
+          type:
+          - string
+          - 'null'
+          title: Scale
+          description: The scale of the record.
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: give for a derived parameter
+          title: Expression
+          description: give for a derived parameter
+        condition:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION THAT THE QUANTITY SATISFIES"'
+          x-kind: text
+          x-comment: give when no map builds the quantity
+          title: Condition
+          description: give when no map builds the quantity
+        selects:
+          x-comment: required with a condition
+          x-vocabulary: parameters.selects
+          type:
+          - string
+          - 'null'
+          title: Selects
+          description: required with a condition
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE EXPRESSION IN WORDS"'
+          x-kind: text
+          title: Reading
+          description: The reading of the record.
+        shared:
+          type:
+          - boolean
+          - 'null'
+          x-template: 'false'
+          x-comment: true when one value holds for every tuple of the signature
+          title: Shared
+          description: true when one value holds for every tuple of the signature
+    x-comment: 'part of V: quantities that the model holds fixed while the phenomenon unfolds; a binding
+      marks those it calibrates'
+    title: Parameters
+    description: the same content as for a variable, for each quantity that the model holds fixed while
+      the phenomenon unfolds
+    examples:
+    - the coupling strength; the adaptation timescale
+  laws:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE LAW"'
+          x-kind: markdown-line
+          title: Name
+          description: The name of the record.
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: The symbol of the record.
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        signature:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: places the claim ranges over; empty for a claim about the model as a whole
+          title: Signature
+          description: places the claim ranges over; empty for a claim about the model as a whole
+        role:
+          x-vocabulary: laws.role
+          type:
+          - string
+          - 'null'
+          title: Role
+          description: The role of the record.
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Expression
+          description: The expression of the record.
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE LAW IN WORDS"'
+          x-kind: markdown-line
+          title: Reading
+          description: The reading of the record.
+        warrant:
+          x-vocabulary: laws.warrant
+          type:
+          - string
+          - 'null'
+          title: Warrant
+          description: The warrant of the record.
+        rests_on:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE LAWS, THE ASSUMPTION OR THE DATA THAT THE WARRANT REFERS TO"'
+          x-kind: markdown-line
+          x-comment: a law derived in a limit names the assumption that the limit introduces
+          title: Rests on
+          description: a law derived in a limit names the assumption that the limit introduces
+        origin:
+          type:
+          - string
+          - 'null'
+          x-template: '"POINTER TO THE SOURCE OF THE LAW: A PUBLICATION, A DATA SET OR A DERIVATION"'
+          x-kind: markdown-line
+          title: Origin
+          description: The origin of the record.
+        range:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE LAW IS ESTABLISHED"'
+          x-kind: text
+          x-comment: omit when the law is established across the whole model
+          title: Range
+          description: omit when the law is established across the whole model
+    x-comment: 'L: dependences linking the terms of the model, in background form'
+    title: Laws or structural relations $L$
+    description: the dependences that link the terms $V$
+    examples:
+    - the mean-field rate equations (derived in a limit); the stability condition that follows from them
+      (derived); a transfer function obtained from recordings (fitted)
+  organization:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE RELATION"'
+          x-kind: markdown-line
+          title: Name
+          description: The name of the record.
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: The symbol of the record.
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE ARRANGEMENT IN WORDS"'
+          x-kind: markdown-line
+          x-comment: only content beyond the relation and the laws
+          title: Reading
+          description: only content beyond the relation and the laws
+        relates:
+          type:
+          - string
+          - 'null'
+          x-template: '"prod(SOURCE, REACH), or subset(prod(SOURCE, REACH), ADJACENCY)"'
+          x-kind: markdown-line
+          x-comment: 'for a relation among parts: the connected tuples, reach last'
+          title: Relates
+          description: 'for a relation among parts: the connected tuples, reach last'
+        among:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: 'for a relation among laws: the laws, reach last; fill exactly one of `relates` and
+            `among`'
+          title: Among
+          description: 'for a relation among laws: the laws, reach last; fill exactly one of `relates`
+            and `among`'
+        realized_by:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: laws stating a relation among parts; the parts are read from their expressions
+          title: Realized by
+          description: laws stating a relation among parts; the parts are read from their expressions
+    x-comment: 'O: relations among parts and laws whose arrangement produces the behavior, in background
+      form'
+    title: Organization $O$
+    description: per relation, the tuples that it connects and the laws that state it, in the format of
+      a background record
+    examples:
+    - a delayed feedback loop, in which excitation drives inhibition and is suppressed in return
+  assumptions:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: ASSUMPTION
+          x-kind: label
+          title: Id
+          description: The id of the record.
+        assumption:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE ASSUMPTION IN WORDS"'
+          x-kind: markdown-line
+          title: Assumption
+          description: The assumption of the record.
+        motive:
+          x-vocabulary: assumptions.motive
+          type:
+          - string
+          - 'null'
+          title: Motive
+          description: The motive of the record.
+        gain:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE DERIVATION THAT THE ASSUMPTION MAKES POSSIBLE, OR THE FACTOR THAT IT EXPOSES"'
+          x-kind: markdown-line
+          title: Gain
+          description: The gain of the record.
+        removable:
+          x-vocabulary: assumptions.removable
+          type:
+          - string
+          - 'null'
+          title: Removable
+          description: The removable of the record.
+    x-comment: only the assumptions that the laws require, such as a limit; each answer that rests on
+      the model classifies them relative to its target
+    title: Assumptions of the laws
+    description: per assumption, its motive, the gain that it provides, and whether it is removable, as
+      the rule on idealizations defines them
+    examples:
+    - 'the mean-field limit, which closes the rate equations (motive: limit; controlled)'
+  maturity:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    additionalProperties:
+      x-template-key: FIELD.PATH
+      x-template: open
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'

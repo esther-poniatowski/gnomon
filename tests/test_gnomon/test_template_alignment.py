@@ -27,7 +27,7 @@ REGISTRY = ROOT / "src" / "gnomon" / "data"
 
 # Fields that identify a record rather than specify an inquiry, so no note documents them.
 RECORD_FIELDS = frozenset(
-    {"id", "type", "title", "status", "answers", "target_system", "phenomenon", "name"}
+    {"_schema", "id", "type", "title", "status", "answers", "target_system", "phenomenon", "name"}
 )
 
 # Keys documented in another note than the one under test, with the note that documents them.

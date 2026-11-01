@@ -1,0 +1,199 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/itinerary.base.yml
+title: Itinerary record
+description: The fields of a itinerary record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/itinerary.md`; one file per itinerary of inquiry'
+- 'activities: `src/gnomon/data/registries/activities.yml`; product types: `src/gnomon/data/registries/product-types.yml`'
+- each step instantiates one registered activity; its inputs and its output take the types fixed by the
+  activity
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+properties:
+  _schema:
+    type:
+    - string
+    - 'null'
+    x-template: gnomon:itinerary@1
+    x-kind: label
+    title: ' schema'
+    description: The  schema of the record.
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"SHORT NAME OF THE ITINERARY"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: itin.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: itinerary
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+    - string
+    - 'null'
+    x-template: planned
+    x-vocabulary: .status
+    title: Status
+    description: The status of the record.
+  addresses:
+    type:
+    - string
+    - 'null'
+    x-template: prob.TOPIC.NAME
+    x-kind: label
+    x-comment: a problem, or a question `quest.TOPIC.NAME`
+    title: Addresses
+    description: the identifier of one problem record or of one question record
+    examples:
+    - the problem of the delay before generalization
+  steps:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: STEP
+          x-kind: label
+          title: id
+          description: a name unique within the itinerary, by which a later step refers to the output
+            of this one
+          examples:
+          - '`pose`; `test`'
+        activity:
+          type:
+          - string
+          - 'null'
+          x-template: ACTIVITY
+          x-kind: label
+          x-comment: an identifier of the activity registry
+          title: activity
+          description: the identifier of one activity of the registry
+          examples:
+          - '`abduction`; `testing`'
+        inputs:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              type:
+                type:
+                - string
+                - 'null'
+                x-template: PRODUCT-TYPE
+                x-kind: label
+                x-comment: an identifier of the product-type registry
+                title: Type
+                description: an identifier of the product-type registry
+              ref:
+                type:
+                - string
+                - 'null'
+                x-template: RECORD-OR-STEP
+                x-kind: label
+                x-comment: a record identifier, the identifier of the step that produces the input, or
+                  a pointer for a `source`
+                title: Ref
+                description: a record identifier, the identifier of the step that produces the input,
+                  or a pointer for a `source`
+          x-comment: one entry per input of the activity
+          title: inputs
+          description: 'per input, its product type and a reference: a record identifier, the full identifier
+            of the step that produces the input, or a pointer for a `source`'
+          examples:
+          - a `target-claim` produced by the step `itin.grokking.explain-delay.propose`; the `data` of
+            a phenomenon record
+        output:
+          type:
+          - object
+          - 'null'
+          properties:
+            type:
+              type:
+              - string
+              - 'null'
+              x-template: PRODUCT-TYPE
+              x-kind: label
+              title: Type
+              description: The type of the record.
+            ref:
+              type:
+              - string
+              - 'null'
+              x-template: RECORD
+              x-kind: label
+              x-comment: the record that holds the product; omit until that record exists
+              title: Ref
+              description: the record that holds the product; omit until that record exists
+          title: output
+          description: the product type of the product, and the record that holds the product, given while
+            that record holds the output type
+          examples:
+          - a `verdict` held by an assessment record
+        norm:
+          type:
+          - object
+          - 'null'
+          properties:
+            test:
+              type:
+              - string
+              - 'null'
+              x-template: norm.ACTIVITY
+              x-kind: label
+              x-comment: the test named by the activity registry for this activity
+              title: Test
+              description: the test named by the activity registry for this activity
+            verdict:
+              type:
+              - string
+              - 'null'
+              x-template: pending
+              x-vocabulary: steps.verdict
+              title: Verdict
+              description: The verdict of the record.
+          title: norm
+          description: 'the test named by the registry for the activity, written `norm.<activity>`, and
+            its verdict: pass · fail · pending'
+          examples:
+          - '`norm.testing`, pending until the assessment is stabilized'
+        mode:
+          x-vocabulary: steps.mode
+          type:
+          - string
+          - 'null'
+          title: mode
+          description: deductive · inductive · abductive · analogical · error-statistical · model-based
+            · non-inferential, equal to the mode of the activity
+          examples:
+          - '`abductive` for the step that proposes a candidate answer'
+    x-comment: one entry per activity instance; the steps may be listed in any order, and their references
+      form an acyclic graph
+    title: Steps
+    description: one entry per activity instance, listed in any order
+    examples:
+    - posing the problem, formulating the question, testing the candidate answer

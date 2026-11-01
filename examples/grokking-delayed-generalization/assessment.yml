@@ -1,5 +1,6 @@
 # tests a mechanistically transparent but deliberately narrow grokking account
 
+_schema: gnomon:assessment@1
 title: "Assessment of the account through a structured representation"
 id: assess.grokking.slow-structured-representation
 type: assessment

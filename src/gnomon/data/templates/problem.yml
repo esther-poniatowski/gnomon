@@ -3,6 +3,7 @@
 # the questions serving this problem name it in their field `addresses`
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 
+_schema: gnomon:problem@1
 title: "SHORT NAME OF THE PROBLEM"
 statement: "THE PROBLEM IN WORDS: THE RESULT SOUGHT, AND THE OBSTACLE TO OBTAINING IT"
 id: prob.TOPIC.NAME
@@ -10,8 +11,8 @@ type: problem
 status: posed                    # posed | refined | solved | dissolved | abandoned
 kind:                            # empirical (the problem concerns the objects of a domain) | conceptual (the problem concerns the consistency of a theory or its fit with other theories)
 demand: "THE RESULT REQUIRED OF A SOLUTION"
-result_type:                      # phenomenon | consequence | target-claim | model | explanation | classification | concept | measurement-procedure | knowledge-state-change | inter-theory-relation
-request:                          # one | all | over-a-parameter | decision
+result_type:                     # phenomenon | consequence | target-claim | model | explanation | classification | concept | measurement-procedure | knowledge-state-change | inter-theory-relation
+request:                         # one | all | over-a-parameter | decision
 associated_question: quest.TOPIC.NAME   # optional; the question record that states the associated question, whose request equals this one
 constraints:                     # conditions on every solution; empty when the demand alone delimits the solutions
   - name: "NAME OF THE CONSTRAINT"
@@ -23,13 +24,13 @@ explicanda:                      # terms used in the statement before any record
 sources:
   - "POINTER TO THE PUBLICATION, THE DATA OR THE ANOMALY THAT RAISES THE PROBLEM"
 significance: "THE CONSEQUENCES OF A SOLUTION FOR OTHER WORK"
-knowledge_obstacles:              # one entry per obstacle in the state of the knowledge about the associated question; empty when none
-  - obstacle:                     # open-gap | unassessed-candidates | conflict | unwarranted-claim | ill-defined-terms | unsound-presupposition
-    pointers: [RECORD.ID]         # the records or the publications that establish the obstacle
-answerability_obstacles:          # one entry per refuted condition of answerability of the associated question; empty when none
-  - condition:                    # definiteness | answer-type | discrimination | access | bridging | representation
-    refutation:                   # outright | lack-of-means
-    pointers: [RECORD.ID]         # the records or the publications that establish the refutation
+knowledge_obstacles:             # one entry per obstacle in the state of the knowledge about the associated question; empty when none
+  - obstacle:                    # open-gap | unassessed-candidates | conflict | unwarranted-claim | ill-defined-terms | unsound-presupposition
+    pointers: [RECORD.ID]        # the records or the publications that establish the obstacle
+answerability_obstacles:         # one entry per refuted condition of answerability of the associated question; empty when none
+  - condition:                   # definiteness | answer-type | discrimination | access | bridging | representation
+    refutation:                  # outright | lack-of-means
+    pointers: [RECORD.ID]        # the records or the publications that establish the refutation
 
 maturity:                        # optional; one maturity per field: open | provisional | stabilized; a field left out is provisional
   FIELD.PATH: open

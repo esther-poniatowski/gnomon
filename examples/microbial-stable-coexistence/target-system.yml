@@ -1,3 +1,4 @@
+_schema: gnomon:target-system@1
 title: "Formal population models of microbial communities"
 id: system.microbial-formal-population-models
 type: target-system

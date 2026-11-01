@@ -1,0 +1,1157 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/answer.base.yml
+title: Answer record
+description: The fields of a answer record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/answer.md`; one file per candidate answer to one atomic question'
+- 'the model on which the route runs: `model.yml`; its relation to the phenomenon: `binding.yml`'
+- the core holds what every aim requires; `aim_block` holds the block of the aim of the question only
+- 'name a symbol of another record by source identifier and symbol: `mod.TOPIC.NAME.SYMBOL`'
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+- record test verdicts in an assessment file
+properties:
+  _schema:
+    type:
+    - string
+    - 'null'
+    x-template: gnomon:answer@1
+    x-kind: label
+    title: ' schema'
+    description: The  schema of the record.
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"SHORT NAME OF THE CANDIDATE ANSWER"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: ans.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: answer
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  answers:
+    type:
+    - string
+    - 'null'
+    x-template: quest.TOPIC.NAME
+    x-kind: label
+    title: Answers
+    description: The answers of the record.
+  claim:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      reading:
+        type:
+        - string
+        - 'null'
+        x-template: '"THE CLAIM IN WORDS"'
+        x-kind: markdown-line
+        title: Reading
+        description: The reading of the record.
+      expression:
+        type:
+        - string
+        - 'null'
+        x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+        x-kind: text
+        x-comment: empty while the claim is not formalized, with a caveat naming the gap
+        title: Expression
+        description: empty while the claim is not formalized, with a caveat naming the gap
+      caveat:
+        type:
+        - string
+        - 'null'
+        x-template: '"THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION"'
+        x-kind: markdown-line
+        title: Caveat
+        description: The caveat of the record.
+      realizations:
+        type:
+        - array
+        - 'null'
+        items:
+          type: object
+          properties:
+            id:
+              type:
+              - string
+              - 'null'
+              x-template: MAPPING
+              x-kind: label
+              title: Id
+              description: The id of the record.
+            realizes:
+              type:
+              - string
+              - 'null'
+              x-template: SYMBOL
+              x-kind: label
+              x-comment: a role, declared by the model independently of any substrate
+              title: Realizes
+              description: a role, declared by the model independently of any substrate
+            by:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION OVER THE SYMBOLS SPECIFIC TO THE SUBSTRATE"'
+              x-kind: text
+              title: By
+              description: The by of the record.
+            reading:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE STRUCTURE THAT THE MAPPING PRESERVES"'
+              x-kind: markdown-line
+              x-comment: only content beyond the expression of `by`
+              title: Reading
+              description: only content beyond the expression of `by`
+        x-comment: fill when the question bounds the explanans to the link between two substrates; one
+          entry per role
+        title: Realizations
+        description: fill when the question bounds the explanans to the link between two substrates; one
+          entry per role
+    x-comment: over the symbols of the model on which the route runs, or over those of the target and
+      the phenomenon when the route runs on the target
+    title: Claim
+    description: '"[the claim of the answer]", as a reading, and, once formalized, an expression over
+      declared symbols'
+    examples:
+    - '"unequal amplification of the activity modes makes the population synchronous rather than asynchronous"'
+  grounds:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: GROUND
+          x-kind: label
+          title: Id
+          description: The id of the record.
+        role:
+          x-vocabulary: grounds.role
+          type:
+          - string
+          - 'null'
+          title: Role
+          description: The role of the record.
+        content:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE GROUND IN WORDS"'
+          x-kind: markdown-line
+          title: Content
+          description: The content of the record.
+        record:
+          type:
+          - string
+          - 'null'
+          x-template: RECORD.UNIT
+          x-kind: label
+          x-comment: 'the record or the unit that holds the ground: a law of the model or of the background,
+            a restriction of the domain, a criterion of the question, a phenomenon for a datum'
+          title: Record
+          description: 'the record or the unit that holds the ground: a law of the model or of the background,
+            a restriction of the domain, a criterion of the question, a phenomenon for a datum'
+        version:
+          type:
+          - string
+          - 'null'
+          x-template: VERSION
+          x-kind: label
+          x-comment: 'datum only: the version of the data'
+          title: Version
+          description: 'datum only: the version of the data'
+        distortion:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE DISTORTION OF THE TARGET THAT THE IDEALIZATION INTRODUCES"'
+          x-kind: markdown-line
+          x-comment: idealization only, as are the four keys below
+          title: Distortion
+          description: idealization only, as are the four keys below
+        motive:
+          x-vocabulary: grounds.motive
+          type:
+          - string
+          - 'null'
+          title: Motive
+          description: The motive of the record.
+        gain:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE DERIVATION THAT THE IDEALIZATION MAKES POSSIBLE, OR THE FACTOR THAT IT EXPOSES"'
+          x-kind: markdown-line
+          title: Gain
+          description: The gain of the record.
+        range:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE IDEALIZATION HOLDS"'
+          x-kind: text
+          title: Range
+          description: The range of the record.
+        removable:
+          x-vocabulary: grounds.removable
+          type:
+          - string
+          - 'null'
+          title: Removable
+          description: The removable of the record.
+    x-comment: what the claim depends on; one entry per ground
+    title: Grounds
+    description: 'what the claim depends on per ground, its content, its *role*: `assumption` · `idealization`
+      · `condition` · `datum` · `warrant` · `criterion`, and the record that holds it. A ground with the
+      role `idealization` also states the distortion that it introduces, its motive (tractability, isolation
+      or limit), the gain that it provides, the range over which it holds, and whether it is removable
+      (controlled, ineliminable or unknown)'
+    examples:
+    - 'the mean-field rate equations (warrant); the mean-field limit (idealization: limit, it closes the
+      rate equations; controlled, since a finite-size correction is known; valid for a large number of
+      neurons); constant drive (condition); the recordings of version 3 (datum)'
+  abstractions:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: ABSTRACTION
+          x-kind: label
+          title: Id
+          description: The id of the record.
+        factor:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE FACTOR LEFT OUT"'
+          x-kind: markdown-line
+          title: Factor
+          description: The factor of the record.
+    x-comment: factors of the target that the claim leaves out and claims nothing about; a reason that
+      a factor makes no difference is a ground with the role `assumption`
+    title: Abstractions
+    description: per factor, the factor left out
+    examples:
+    - the axonal delays of a rate model whose claims bear only on stationary rates; abstraction and the
+      truth test
+  dependence:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        kind:
+          x-vocabulary: dependence.kind
+          type:
+          - string
+          - 'null'
+          title: Kind
+          description: The kind of the record.
+        grounds:
+          type:
+          - array
+          - 'null'
+          x-template: '[GROUND]'
+          x-comment: grounds of this answer, by identifier
+          title: Grounds
+          description: grounds of this answer, by identifier
+        models:
+          type:
+          - array
+          - 'null'
+          x-template: '[mod.TOPIC.NAME]'
+          x-comment: 'robustness only: the models compared'
+          title: Models
+          description: 'robustness only: the models compared'
+        result:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE RESULT OF THE ANALYSIS"'
+          x-kind: markdown-line
+          x-comment: omit for a minimal sufficient set
+          title: Result
+          description: omit for a minimal sufficient set
+    x-comment: how the claim depends on its grounds; one entry per result
+    title: Dependence
+    description: how the claim depends on its grounds per entry, a minimal set of grounds that suffices
+      for the claim; the result of a sensitivity analysis over one ground [saltelli2008]; or the result
+      of a robustness analysis across models that share the claimed structure [weisberg2006]
+    examples:
+    - the derivation of the claim requires the mean-field limit and the delay (minimal sufficient set)
+  route:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      kind:
+        x-vocabulary: route.kind
+        type:
+        - string
+        - 'null'
+        title: Kind
+        description: The kind of the record.
+      runs_on:
+        type:
+        - array
+        - 'null'
+        x-template: '[RECORD]'
+        x-comment: the target system, one model, or every model of a family, by identifier
+        title: Runs on
+        description: the target system, one model, or every model of a family, by identifier
+      family_fidelity:
+        x-comment: fill for a family of models only
+        x-vocabulary: route.family_fidelity
+        type:
+        - string
+        - 'null'
+        title: Family fidelity
+        description: fill for a family of models only
+      pointer:
+        type:
+        - string
+        - 'null'
+        x-template: '"POINTER TO THE DERIVATION, THE CODE OR THE DATA"'
+        x-kind: markdown-line
+        x-comment: the internal steps of a derivation stay in the derivation
+        title: Pointer
+        description: the internal steps of a derivation stay in the derivation
+    title: Route
+    description: '`derivation` · `proof` · `simulation` · `estimation` · `measurement`, the records on
+      which it runs (the target, one model, or a family of models), and a pointer to the derivation, the
+      code or the data'
+    examples:
+    - the linear stability analysis of the rate model (derivation, on one model)
+  domain:
+    x-blank: true
+    type:
+    - string
+    - 'null'
+    x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+    x-kind: text
+    x-comment: for a deductive route, derived from the grounds with the roles `assumption` and `condition`
+      and from the range of each idealization; for a route on a model, within the domain of comparison
+      of the binding
+    title: Domain
+    description: the systems and the conditions over which the claim holds
+    examples:
+    - the networks with more than a thousand neurons, under constant drive
+  variant:
+    x-blank: true
+    type:
+    - string
+    - 'null'
+    x-template: SYMBOL
+    x-kind: label
+    x-comment: symbol of the target variant this answer accounts for; omit when the answer covers every
+      member of the class
+    title: Variant
+    description: the variant of the target that the answer accounts for, and one further variant for each
+      of its parts with a narrower scope
+    examples:
+    - the community that models its resources explicitly, where the account rests on the pools; member
+      schemas under one reference class [lundberg2021]
+  status:
+    x-blank: true
+    type:
+    - string
+    - 'null'
+    x-template: entertained
+    x-comment: the attitude taken toward the answer
+    x-vocabulary: .status
+    title: Status
+    description: the attitude taken toward the answer entertained · hypothesized · accepted · retracted
+    examples:
+    - a mechanism proposed for pursuit (hypothesized); a theorem with a proof checked by the assessment
+      (accepted); attitude and support
+  support:
+    type:
+    - string
+    - 'null'
+    x-template: unsupported
+    x-comment: independent of the status; each law of the model keeps its own `warrant`
+    x-vocabulary: .support
+    title: Support
+    description: the kind of evidence for the answer as a whole unsupported · informal · formally-proven
+      · empirically-supported
+    examples:
+    - an account drawn from simulations of toy models (informal); a published theorem (formally-proven)
+  uncertainty:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        of:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Of
+          description: The of of the record.
+        form:
+          x-vocabulary: uncertainty.form
+          type:
+          - string
+          - 'null'
+          title: Form
+          description: The form of the record.
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Expression
+          description: The expression of the record.
+    x-comment: fill when the claim assigns a value; one entry per value
+    title: Uncertainty
+    description: the uncertainty of each value, as an interval, a distribution or a bound
+    examples:
+    - a frequency of 40 ± 3 Hz
+  modal_strength:
+    x-blank: true
+    x-comment: the strength that the answer claims, compared with the strength the question requests
+    x-vocabulary: .modal_strength
+    type:
+    - string
+    - 'null'
+    title: Modal strength
+    description: the strength that the answer claims actual · possible · necessary
+    examples:
+    - an account of how the trained networks of the class produce the delay (actual); a model that shows
+      one way in which the delay can arise (possible); modal strength
+  erotetic_relation:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      value:
+        x-vocabulary: erotetic_relation.value
+        type:
+        - string
+        - 'null'
+        title: Value
+        description: The value of the record.
+      denies:
+        type:
+        - string
+        - 'null'
+        x-template: '"THE PRESUPPOSITION OF THE QUESTION THAT THE ANSWER SHOWS FALSE"'
+        x-kind: markdown-line
+        x-comment: corrective only
+        title: Denies
+        description: corrective only
+      revised_question:
+        type:
+        - string
+        - 'null'
+        x-template: quest.TOPIC.NAME
+        x-kind: label
+        x-comment: 'reformulating only: the question that the answer answers and is assessed against'
+        title: Revised question
+        description: 'reformulating only: the question that the answer answers and is assessed against'
+    title: Erotetic relation
+    description: how the answer stands to its question `complete` · `partial` · `corrective` · `reformulating`,
+      with the presupposition that a corrective answer denies, or the revised question that a reformulating
+      answer answers
+    examples:
+    - the derivation of the delay for one class of initializations only (partial)
+  binding:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        record:
+          type:
+          - string
+          - 'null'
+          x-template: bind.TOPIC.NAME
+          x-kind: label
+          title: Record
+          description: The record of the record.
+        version:
+          type:
+          - string
+          - 'null'
+          x-template: VERSION
+          x-kind: label
+          title: Version
+          description: The version of the record.
+    x-comment: fill when the route runs on a model other than the target and the claim bears on the target;
+      one entry per model
+    title: Binding
+    description: the record through which the claim bears on the target per model, the identifier and
+      the version of one binding of that model to the phenomenon of the question
+    examples:
+    - version 2 of the binding of the rate model to the gamma oscillations
+  use:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      value:
+        x-comment: a new use enters the vocabulary registry first
+        x-vocabulary: use.value
+        type:
+        - string
+        - 'null'
+        title: Value
+        description: a new use enters the vocabulary registry first
+      property:
+        type:
+        - string
+        - 'null'
+        x-template: '"THE PROPERTY THAT THE MODEL MUST HAVE FOR THAT USE"'
+        x-kind: markdown-line
+        title: Property
+        description: The property of the record.
+    x-comment: fill in place of a binding when the claim bears only on a model or on a formal class
+    title: Use
+    description: the purpose of an answer whose claim bears on no target a use such as `tool`, `proof-of-principle`,
+      `conceptual-exploration` or `understanding`, with the property that the model must have for that
+      use
+    examples:
+    - 'a toy model showing that a delay can arise without any change of the data (proof of principle:
+      the model must exhibit the delay)'
+  aim_block:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      description:
+        type:
+        - object
+        - 'null'
+        properties:
+          values:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              properties:
+                of:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: phen.TOPIC.NAME.SYMBOL
+                  x-kind: label
+                  title: Of
+                  description: The of of the record.
+                across:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: SYMBOL
+                  x-kind: label
+                  x-comment: the source of variation of the phenomenon whose quantification the value
+                    takes; omit for a single instance
+                  title: Across
+                  description: the source of variation of the phenomenon whose quantification the value
+                    takes; omit for a single instance
+                data_version:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: VERSION
+                  x-kind: label
+                  x-comment: 'for a value that the estimator of the phenomenon computes: the version of
+                    the data on which it runs'
+                  title: Data version
+                  description: 'for a value that the estimator of the phenomenon computes: the version
+                    of the data on which it runs'
+                value:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+                  x-kind: text
+                  x-comment: only for a characterization that no estimator computes
+                  title: Value
+                  description: only for a characterization that no estimator computes
+            x-comment: one entry per observable or feature that the request covers, per source of variation
+            title: Values
+            description: one entry per observable or feature that the request covers, per source of variation
+        title: '`description`'
+        description: The `description` of the record.
+        examples:
+        - the frequency and the spatial extent of the gamma oscillations during visual stimulation
+      exploration:
+        type:
+        - object
+        - 'null'
+        properties:
+          space:
+            type:
+            - object
+            - 'null'
+            properties:
+              origin:
+                x-vocabulary: aim_block.origin
+                type:
+                - string
+                - 'null'
+                title: Origin
+                description: The origin of the record.
+              observables:
+                type:
+                - array
+                - 'null'
+                x-template: '[SYMBOL]'
+                x-comment: of the phenomenon
+                title: Observables
+                description: of the phenomenon
+              varied:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: object
+                  properties:
+                    factor:
+                      type:
+                      - string
+                      - 'null'
+                      x-template: SYMBOL
+                      x-kind: label
+                      title: Factor
+                      description: The factor of the record.
+                    range:
+                      type:
+                      - string
+                      - 'null'
+                      x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+                      x-kind: text
+                      title: Range
+                      description: The range of the record.
+                title: Varied
+                description: The varied of the record.
+            x-comment: the observables and the varied factors
+            title: Space
+            description: the observables and the varied factors
+          criterion:
+            type:
+            - object
+            - 'null'
+            properties:
+              origin:
+                x-vocabulary: aim_block.origin
+                type:
+                - string
+                - 'null'
+                title: Origin
+                description: The origin of the record.
+              expression:
+                type:
+                - string
+                - 'null'
+                x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+                x-kind: text
+                title: Expression
+                description: The expression of the record.
+              reading:
+                type:
+                - string
+                - 'null'
+                x-template: '"THE CRITERION IN WORDS"'
+                x-kind: markdown-line
+                title: Reading
+                description: The reading of the record.
+            x-comment: the equivalence criterion that partitions the space
+            title: Criterion
+            description: the equivalence criterion that partitions the space
+          classes:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              properties:
+                id:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: CLASS
+                  x-kind: label
+                  title: Id
+                  description: The id of the record.
+                pattern:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+                  x-kind: text
+                  title: Pattern
+                  description: The pattern of the record.
+                reading:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"THE PATTERN IN WORDS"'
+                  x-kind: markdown-line
+                  title: Reading
+                  description: The reading of the record.
+                detection:
+                  x-comment: the result of the detection criterion of the phenomenon
+                  x-vocabulary: aim_block.detection
+                  type:
+                  - string
+                  - 'null'
+                  title: Detection
+                  description: the result of the detection criterion of the phenomenon
+            x-comment: one entry per class found
+            title: Classes
+            description: one entry per class found
+        title: '`exploration`'
+        description: The `exploration` of the record.
+        examples:
+        - the collective states of a network as the ratio of excitation to inhibition varies, partitioned
+          by the sign of the leading eigenvalue (criterion as input)
+      prediction:
+        type:
+        - object
+        - 'null'
+        properties:
+          outputs:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              properties:
+                target:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: phen.TOPIC.NAME.SYMBOL
+                  x-kind: label
+                  x-comment: one of the outputs to match that the required accuracy of the question names
+                  title: Target
+                  description: one of the outputs to match that the required accuracy of the question
+                    names
+                condition:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+                  x-kind: text
+                  x-comment: the condition of the target under which the output is predicted
+                  title: Condition
+                  description: the condition of the target under which the output is predicted
+                value:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+                  x-kind: text
+                  x-comment: a value or a distribution
+                  title: Value
+                  description: a value or a distribution
+            x-comment: one entry per predicted output
+            title: Outputs
+            description: one entry per predicted output
+        title: '`prediction`'
+        description: The `prediction` of the record.
+        examples:
+        - the gamma power when the stimulus contrast doubles
+      explanation:
+        type:
+        - object
+        - 'null'
+        properties:
+          contrastive_explanandum:
+            type:
+            - string
+            - 'null'
+            x-template: '"THE FACT AND THE FOILS THAT THE EXPLANATION SEPARATES"'
+            x-kind: markdown-line
+            x-comment: read from the contrast of the question; the fact alone when its locus is `none`
+            title: Contrastive explanandum
+            description: the fact and the foils that the explanation separates, read from the contrast
+              of the question, or the fact alone when its locus is `none`
+            examples:
+            - synchronous oscillations rather than asynchronous activity
+          explanatory_claim:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              properties:
+                ground:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: GROUND
+                  x-kind: label
+                  x-comment: the ground on which the claim depends
+                  title: Ground
+                  description: the ground on which the claim depends
+                explanatory:
+                  type:
+                  - boolean
+                  - 'null'
+                  x-template: 'true'
+                  x-comment: false for a dependence that the explanation declares not explanatory
+                  title: Explanatory
+                  description: false for a dependence that the explanation declares not explanatory
+                determinant:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"THE PROPERTY THAT MAKES THE LAW, THE STRUCTURE OR THE DERIVATION RELEVANT"'
+                  x-kind: markdown-line
+                  title: Determinant
+                  description: The determinant of the record.
+            x-comment: one entry per dependence of the core that the explanation reads
+            title: Explanatory claim
+            description: 'the claim that named dependences of the core are explanatory: they make the
+              difference between the fact and its foils, or they make the fact arise'
+            examples:
+            - the dependence of the oscillation on the delay is explanatory; its dependence on the drive
+              is not
+          relation:
+            x-vocabulary: aim_block.relation
+            type:
+            - string
+            - 'null'
+            title: Relation
+            description: the type of the relation, one of the requested relations
+            examples:
+            - mathematical; causal-mechanistic
+          factors:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              properties:
+                id:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: FACTOR
+                  x-kind: label
+                  title: Id
+                  description: The id of the record.
+                name:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"NAME OF THE FACTOR"'
+                  x-kind: markdown-line
+                  title: Name
+                  description: The name of the record.
+                factor:
+                  x-vocabulary: aim_block.factor
+                  type:
+                  - string
+                  - 'null'
+                  title: Factor
+                  description: The factor of the record.
+                holds:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"EXPRESSION OVER DECLARED SYMBOLS THAT STATES THE CLAIM OF THE FACTOR"'
+                  x-kind: text
+                  x-comment: empty while the claim is unformalized, with a caveat naming the gap
+                  title: Holds
+                  description: empty while the claim is unformalized, with a caveat naming the gap
+                under:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+                  x-kind: text
+                  x-comment: the transformation group of an invariance stated by `holds`; omit for any
+                    other claim
+                  title: Under
+                  description: the transformation group of an invariance stated by `holds`; omit for any
+                    other claim
+                bears_on:
+                  type:
+                  - array
+                  - 'null'
+                  x-template: '[SYMBOL]'
+                  x-comment: elements the factor applies to as a property or condition; one entry per
+                    element, so a family spans several entries
+                  title: Bears on
+                  description: elements the factor applies to as a property or condition; one entry per
+                    element, so a family spans several entries
+                through:
+                  type:
+                  - array
+                  - 'null'
+                  x-template: '[SYMBOL]'
+                  x-comment: laws and relations carrying the effect from `bears_on` to the explanandum
+                  title: Through
+                  description: laws and relations carrying the effect from `bears_on` to the explanandum
+                produces:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: SYMBOL
+                  x-kind: label
+                  x-comment: explanandum variable or manifestation the factor accounts for
+                  title: Produces
+                  description: explanandum variable or manifestation the factor accounts for
+                separates:
+                  type:
+                  - array
+                  - 'null'
+                  x-template: '[SYMBOL]'
+                  x-comment: foils ruled out, by their symbols in the foil set; empty where the contrast
+                    has no locus
+                  title: Separates
+                  description: foils ruled out, by their symbols in the foil set; empty where the contrast
+                    has no locus
+                appeals_to:
+                  type:
+                  - array
+                  - 'null'
+                  x-template: '[SYMBOL]'
+                  x-comment: external systems drawn on, by declared symbol; empty when none
+                  title: Appeals to
+                  description: external systems drawn on, by declared symbol; empty when none
+                procedure:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"HOW THE FACTOR PRODUCES ITS EFFECT"'
+                  x-kind: markdown-line
+                  x-comment: only content beyond the chain `bears_on`, `through`, `produces`
+                  title: Procedure
+                  description: only content beyond the chain `bears_on`, `through`, `produces`
+                caveat:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE
+                    OMISSION"'
+                  x-kind: markdown-line
+                  title: Caveat
+                  description: The caveat of the record.
+                target_status:
+                  x-comment: empty under a declared use
+                  x-vocabulary: aim_block.target_status
+                  type:
+                  - string
+                  - 'null'
+                  title: target status
+                  description: '`denoting` · `coarse-graining` · `limit-construct` · `structural-constraint`,
+                    as the target status of a factor states; not applicable under a declared use'
+                  examples:
+                  - the delay (denoting); the infinite size of a mean-field network (limit construct)
+                pair:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: bind.TOPIC.NAME.PAIR
+                  x-kind: label
+                  x-comment: the feature pair of the binding that carries the status; omit when the route
+                    runs on the target
+                  title: Pair
+                  description: the feature pair of the binding that carries the status; omit when the
+                    route runs on the target
+            x-comment: 'E: one entry per explanatory factor'
+            title: Factors $E$
+            description: 'per factor, its claim: a *condition* on a quantity, a *property* of a structure
+              or of a law, or a feature of the *organization*; the element on which it bears; the laws
+              and relations that carry its effect; the explanandum variable or manifestation that it accounts
+              for; the foils that it rules out; the external systems on which it draws; and, in `procedure`,
+              only the steps that the chain from the factor to the phenomenon leaves unstated'
+            examples:
+            - the synaptic delay exceeds its critical value (condition; denoting); the connectivity has
+              rank two (property of a structure; coarse-graining)
+        title: '`explanation`'
+        description: The `explanation` of the record.
+        examples:
+        - the account of the oscillation by an inhibitory delay
+      modal_knowledge:
+        type:
+        - object
+        - 'null'
+        properties:
+          modality:
+            x-vocabulary: aim_block.modality
+            type:
+            - string
+            - 'null'
+            title: Modality
+            description: The modality of the record.
+          property:
+            type:
+            - string
+            - 'null'
+            x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+            x-kind: text
+            x-comment: the property that the modal claim bears on
+            title: Property
+            description: the property that the modal claim bears on
+          space:
+            type:
+            - string
+            - 'null'
+            x-template: '"THE SPACE OF ALTERNATIVES THAT THE ADMITTED LAWS AND THE DOMAIN FIX"'
+            x-kind: markdown-line
+            title: Space
+            description: The space of the record.
+          witness:
+            type:
+            - string
+            - 'null'
+            x-template: RECORD
+            x-kind: label
+            x-comment: 'for a possibility: the instance that witnesses it, such as a model'
+            title: Witness
+            description: 'for a possibility: the instance that witnesses it, such as a model'
+          proof:
+            type:
+            - string
+            - 'null'
+            x-template: '"POINTER TO THE PROOF OR TO THE EXHAUSTIVE EXCLUSION"'
+            x-kind: markdown-line
+            x-comment: for an impossibility or a necessity
+            title: Proof
+            description: for an impossibility or a necessity
+        title: '`modal-knowledge`'
+        description: The `modal-knowledge` of the record.
+        examples:
+        - a network without inhibitory neurons that oscillates at gamma frequency (witness)
+      model_knowledge:
+        type:
+        - object
+        - 'null'
+        properties:
+          form:
+            x-vocabulary: aim_block.form
+            type:
+            - string
+            - 'null'
+            title: Form
+            description: The form of the record.
+          expression:
+            type:
+            - string
+            - 'null'
+            x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+            x-kind: text
+            title: Expression
+            description: The expression of the record.
+          reading:
+            type:
+            - string
+            - 'null'
+            x-template: '"THE CONSEQUENCE IN WORDS"'
+            x-kind: markdown-line
+            title: Reading
+            description: The reading of the record.
+          discharges:
+            type:
+            - array
+            - 'null'
+            x-template: '[OBLIGATION]'
+            x-comment: the proof obligations of the question that the consequence discharges, by name
+            title: Discharges
+            description: the proof obligations of the question that the consequence discharges, by name
+        title: '`model-knowledge`'
+        description: The `model-knowledge` of the record.
+        examples:
+        - the uniqueness of the fixed point of a rate network below a critical gain
+    x-comment: 'fill for a complete or a partial answer only: keep the block of the aim of the question,
+      and delete the others'
+    title: Aim block
+    description: the block of the aim of the question
+    examples:
+    - the explanatory block of an account of the oscillation
+  relations:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        answer:
+          type:
+          - string
+          - 'null'
+          x-template: ans.TOPIC.NAME
+          x-kind: label
+          title: Answer
+          description: The answer of the record.
+        relation:
+          x-vocabulary: relations.relation
+          type:
+          - string
+          - 'null'
+          title: Relation
+          description: The relation of the record.
+    x-comment: fill when the answer bears on another answer; one entry per link
+    title: Relations
+    description: 'the links to other answers per link, the other answer and the relation: `supports` ·
+      `presupposes` · `tests` · `defeats` · `revises`'
+    examples:
+    - a prediction that tests an explanation (tests); a corrected account (revises)
+  maturity:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    additionalProperties:
+      x-template-key: FIELD.PATH
+      x-template: open
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; a specification
+      left out is provisional'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; a specification
+      left out is provisional'

@@ -1,3 +1,4 @@
+_schema: gnomon:target-system@1
 title: "Wide neural networks trained by gradient flow"
 id: system.ntk-gradient-flow
 type: target-system

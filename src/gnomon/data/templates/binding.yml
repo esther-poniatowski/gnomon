@@ -5,6 +5,7 @@
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # specifications follow the order of the specification note
 
+_schema: gnomon:binding@1
 title: "SHORT NAME OF THE BINDING"
 id: bind.TOPIC.NAME
 type: binding
@@ -20,8 +21,8 @@ asserter: "THE PERSON, THE GROUP OR THE PUBLICATION THAT LICENSES THE INFERENCES
 
 feature_pairs:                   # one entry per feature that the model exemplifies and that is imputed to the target
   - id: PAIR
-    type:                        # quantity | pattern | regime | invariance-class | modal-profile | component
-    mode:                        # computed (a key maps the feature onto what the data determine) | argued (no data determine it; the answer cites the argument as a ground with the role `warrant`)
+    type:                        # quantity | pattern | regime | invariance-class | modal-profile | component (a unit of the model alone and the part of the target that it denotes)
+    mode:                        # computed (a key maps the feature onto what the data determine) | argued (no data determine it, and the answer cites the argument as a ground with the role `warrant`)
     exemplified: "EXPRESSION OVER THE SYMBOLS OF THE MODEL"
     imputed: phen.TOPIC.NAME.SYMBOL   # the feature of the target, by the symbol that the phenomenon declares; for a component pair, the constituent that the target system declares or the part that the admissible explanans admits
     key: key.TOPIC.NAME          # computed pairs only
@@ -37,7 +38,7 @@ condition_pairs:                 # fill when a condition of the model stands for
 
 domain:                          # the conditions of the target over which the pairs are asserted; one entry per region
   - region: "EXPRESSION OVER DECLARED SYMBOLS"
-    kind:                        # interpolation (within the range of the calibration data) | extrapolation (outside it)
+    kind:                        # interpolation (within the range of the calibration data) | extrapolation (outside the range of the calibration data)
 
 structural_discrepancy:          # fill at quantitative grain; one entry per discrepancy model or bound
   - pairs: [PAIR]                # the feature pairs that the discrepancy concerns
