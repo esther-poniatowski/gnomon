@@ -19,7 +19,6 @@ tests:                           # verdict: pending | pass | fail | not-applicab
     scope: {verdict: pending, evidence: ""}
     grain: {verdict: pending, evidence: ""}
     individuation: {verdict: pending, evidence: ""}
-    admissible-explanans: {verdict: pending, evidence: ""}
     binding: {verdict: pending, evidence: ""}
     modal-strength: {verdict: pending, evidence: ""}
     values: {verdict: pending, evidence: ""}             # block of a description
@@ -28,6 +27,7 @@ tests:                           # verdict: pending | pass | fail | not-applicab
     contrast: {verdict: pending, evidence: ""}           # block of an explanation
     relation: {verdict: pending, evidence: ""}           # block of an explanation
     target-status: {verdict: pending, evidence: ""}      # block of an explanation
+    admissible-explanans: {verdict: pending, evidence: ""}   # block of an explanation
     witness-or-proof: {verdict: pending, evidence: ""}   # block of modal knowledge
     consequence: {verdict: pending, evidence: ""}        # block of model knowledge
   warrant:
