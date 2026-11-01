@@ -24,7 +24,7 @@ The activities of this family output a **consequence**: a statement derived from
 | `simulation` | `model`, `design` | `consequence` | deductive | justification |
 | `robustness-analysis` | `model` (family) | `consequence` | deductive | justification |
 | `thought-experiment` | `model` | `consequence` | deductive | discovery |
-| `prediction` | `model`, `target-specification` | `consequence` | deductive | justification |
+| `model-prediction` | `model`, `target-specification` | `consequence` | deductive | justification |
 
 ## Norms
 
@@ -34,7 +34,7 @@ The activities of this family output a **consequence**: a statement derived from
 | `simulation` | compute the trajectories of the model numerically, under the conditions fixed by the design | verification holds: the code solves the equations of the model [winsberg2010] |
 | `robustness-analysis` | derive one result from several models that share a core and differ in their auxiliary assumptions | the result holds across models whose auxiliary assumptions are independent [levins1966] [weisberg2006] |
 | `thought-experiment` | reason about an imagined scenario that is not carried out | the conclusion follows by an argument from the premises of the scenario [norton1996] |
-| `prediction` | derive the values assigned by the model to observables under the conditions of a target | the values are derived from the model under the stated conditions of the target |
+| `model-prediction` | derive the values assigned by the model to observables under the conditions of a target | the values are derived from the model under the stated conditions of the target |
 
 ## Distinctions
 

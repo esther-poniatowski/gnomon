@@ -274,13 +274,13 @@ activities:
     norm: norm.thought-experiment
     mode: deductive
     context: discovery
-  - id: prediction
+  - id: model-prediction
     family: model-analysis
     inputs:
       - model
       - target-specification
     output: consequence
-    norm: norm.prediction
+    norm: norm.model-prediction
     mode: deductive
     context: justification
   - id: abduction

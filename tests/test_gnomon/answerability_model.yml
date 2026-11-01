@@ -81,7 +81,7 @@ activities:
      norm: "each deductive step is valid"}
   - {id: simulation, condition: discrimination, reason: it gives the consequences of one candidate,
      norm: "verification holds: the code solves the equations of the model"}
-  - {id: prediction, condition: discrimination, reason: it gives the consequences of one candidate,
+  - {id: model-prediction, condition: discrimination, reason: it gives the consequences of one candidate,
      norm: "the values are derived from the model under the stated conditions of the target"}
   - {id: thought-experiment, condition: discrimination, reason: it gives the consequences of one candidate,
      norm: "the conclusion follows by an argument from the premises of the scenario"}
@@ -103,7 +103,7 @@ activities:
      norm: "each conclusion is shown to be stable under that correction or is corrected"}
   - {id: transfer, condition: representation, reason: it licenses an extrapolation between classes,
      norm: "structural similarity licenses the extrapolation"}
-  - {id: prediction, condition: representation, reason: it gives values of the model for the target,
+  - {id: model-prediction, condition: representation, reason: it gives values of the model for the target,
      norm: "the values are derived from the model under the stated conditions of the target"}
   - {id: testing, condition: representation, reason: it tests a prediction of the model against the target,
      norm: "the test is severe: it would probably have detected an error, had the hypothesis been false"}
