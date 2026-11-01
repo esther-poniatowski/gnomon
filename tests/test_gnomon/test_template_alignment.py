@@ -135,7 +135,7 @@ def documented_keys(note: str, header: Header, paths: Sequence[str], prefix: str
 
 # (label, note, table header, template, scope of the reverse check, prefix, keys documented elsewhere)
 PAIRS = [
-    ("problem", "specification/problem.md", "| Specification", "problem.yml", None, "", {}),
+    ("problem", "specification/problem.md", "| Specification", "problem.yml", None, "", ELSEWHERE_MATURITY),
     ("target-system", "specification/target-system.md", "| Specification", "target-system.yml", None, "", ELSEWHERE_MATURITY),
     ("background", "specification/background.md", "| Specification", "background.yml", None, "", ELSEWHERE_MATURITY),
     ("phenomenon", "specification/phenomenon.md", "| Specification", "phenomenon.yml", None, "", ELSEWHERE_MATURITY),

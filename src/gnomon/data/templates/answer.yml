@@ -141,5 +141,5 @@ relations:                       # fill when the answer bears on another answer;
   - answer: ans.TOPIC.NAME
     relation:                    # supports | presupposes | tests | defeats | revises
 
-maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
+maturity:                        # optional; one maturity per specification: open | provisional | stabilized; a specification left out is provisional
   FIELD.PATH: open

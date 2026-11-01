@@ -20,3 +20,6 @@ explicanda:                      # terms used in the statement before any record
 sources:
   - "POINTER TO THE PUBLICATION, THE DATA OR THE ANOMALY THAT RAISES THE PROBLEM"
 significance: "THE CONSEQUENCES OF A SOLUTION FOR OTHER WORK"
+
+maturity:                        # optional; one maturity per field: open | provisional | stabilized; a field left out is provisional
+  FIELD.PATH: open

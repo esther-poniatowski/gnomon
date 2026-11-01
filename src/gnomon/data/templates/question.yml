@@ -73,5 +73,5 @@ virtues:                         # one entry per virtue the inquiry weighs, unde
     standing:                    # constitutive (the product test applies it) | preferred (appraisal ranks on it)
     justification: "WHY THE INQUIRY WEIGHS THIS VIRTUE"   # also state the shortfall of an answer that lacks this virtue
 
-maturity:                        # optional; one maturity per field: open | provisional | stabilized; the record status applies to every field left out
+maturity:                        # optional; one maturity per field: open | provisional | stabilized; a field left out is provisional
   FIELD.PATH: open
