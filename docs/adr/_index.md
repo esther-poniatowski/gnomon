@@ -29,6 +29,7 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 - [Record schemas](record-schemas.md): locates the file that declares the shape of a record, for validation and for rendering in Ekphrasis
 - [Records as the only input of checks](checks-read-records.md): bounds the files that a check may read
 - [No inference at run time](no-run-time-inference.md): divides the values that a tool computes from the judgments that the researcher authors
+- [Findings output](findings-output.md): fixes the rule, the resource and the locus under which a check reports a defect to the gate
 
 ## Record kinds and relations
 
