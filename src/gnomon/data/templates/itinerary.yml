@@ -21,4 +21,4 @@ steps:                           # one entry per activity instance; the steps ma
     norm:
       test: norm.ACTIVITY        # the test named by the activity registry for this activity
       verdict: pending           # pass | fail | pending
-    mode:                        # deductive | inductive | abductive | analogical | non-inferential
+    mode:                        # deductive | inductive | abductive | analogical | error-statistical | model-based | non-inferential

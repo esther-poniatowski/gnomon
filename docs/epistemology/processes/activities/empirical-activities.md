@@ -21,13 +21,12 @@ The activities of this family output a design of inquiry, [data](../../vocabular
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
 | `experimental-design` | `question`, `model` | `design` | deductive | justification |
-| `observation` | `design` | `data` | non-inferential | justification |
-| `measurement` | `measurement-procedure`, `design` | `data` | non-inferential | justification |
+| `observation` | `design` | `data` | model-based | justification |
+| `measurement` | `measurement-procedure`, `design` | `data` | model-based | justification |
 | `intervention` | `design` | `data` | non-inferential | justification |
 | `phenomenon-detection` | `data` | `phenomenon` | inductive | justification |
 
-> [!WARNING] Modes pending a change of the registry
-> Observation and measurement are inferential: each is a model-based inference, which infers an outcome from the output of an instrument through a model of that instrument and of its interaction with the target [tal2013]. The method commits to this account of access in its [stance on mediated access](../../foundations/existence-and-access.md#^mediated-access), and extends it from measurement to observation through an instrument. The mode `non-inferential` in the rows of `observation` and `measurement` is transcribed from the [registry of activities](../../../../src/gnomon/data/registries/activities.yml), and its correction is pending a change of that registry. The closed list of modes holds no value for a model-based inference, so the same change decides which value the two activities take. ^modes-pending
+- **Observation and measurement are model-based inferences.** Each infers an outcome from the output of an instrument through a model of that instrument and of its interaction with the target [tal2013]. The method commits to this account of access in its [stance on mediated access](../../foundations/existence-and-access.md#^mediated-access), and extends it from measurement to observation through an instrument. Their mode is therefore `model-based`. ^model-based-modes
 
 ## Norms
 

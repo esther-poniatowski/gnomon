@@ -119,4 +119,4 @@ steps:
     norm:
       test: norm.testing
       verdict: pending
-    mode: deductive
+    mode: error-statistical

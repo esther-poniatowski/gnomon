@@ -130,7 +130,7 @@ activities:
       - design
     output: data
     norm: norm.observation
-    mode: non-inferential
+    mode: model-based
     context: justification
   - id: measurement
     family: empirical-activities
@@ -139,7 +139,7 @@ activities:
       - design
     output: data
     norm: norm.measurement
-    mode: non-inferential
+    mode: model-based
     context: justification
   - id: intervention
     family: empirical-activities
@@ -325,7 +325,7 @@ activities:
       - data
     output: verdict
     norm: norm.testing
-    mode: deductive
+    mode: error-statistical
     context: justification
   - id: confirmation
     family: evaluation

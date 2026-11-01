@@ -55,12 +55,12 @@ Three attributes take their values from closed lists: ^attribute-vocabularies
 | Attribute | Values | Assigned to |
 | --- | --- | --- |
 | Verdict of the norm | `pass`, `fail`, `pending` | each step of an itinerary |
-| Mode | `deductive`, `inductive`, `abductive`, `analogical`, `non-inferential` | each activity type |
+| Mode | `deductive`, `inductive`, `abductive`, `analogical`, `error-statistical`, `model-based`, `non-inferential` | each activity type |
 | Context | `discovery`, `justification`, `both` | each activity type |
 
 - **The norm is a named test.** Each activity has one norm, and each step of an itinerary carries the verdict of that norm: `pending` before the norm is judged, then `pass` or `fail`. The identifier under which a record names the norm of an activity is stated with the [itinerary record](../../../specification/itinerary.md).
 - **The verdict of a norm differs from the product type `verdict`.** The verdict of a norm judges one step of an itinerary. The product type `verdict` is the output of an evaluation activity: the outcome of a test of a claim or of a model, which an assessment records as the verdict of a test. The [axes of the statuses](../../objects/status/statuses-and-acceptance.md#^status-axes) place each verdict on its bearer.
-- **The mode `non-inferential` covers operations that draw no inference.** Formalization and idealization are examples. Observation and measurement are not, since each infers an outcome through a model of its instrument, as the [modes of the empirical activities](empirical-activities.md#^modes-pending) state.
+- **The mode `non-inferential` covers operations that draw no inference.** Formalization and idealization are examples. Observation and measurement are not, since each infers an outcome through a model of its instrument, as the [modes of the empirical activities](empirical-activities.md#^model-based-modes) state.
 - **The context is assigned to each activity type.** A family does not fix it: model-building holds activities of discovery, such as idealization, and of justification, such as fitting. An activity of discovery outputs a candidate, and an activity of justification judges or warrants one [reichenbach1938]. The division is contested: the reasoning that generates hypotheses follows patterns that can be analyzed [hanson1958] [simon1973]. The value `both` marks an activity whose norm serves either context, such as classification.
 
 ## Choice of the taxonomy

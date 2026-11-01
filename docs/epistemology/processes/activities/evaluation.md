@@ -21,7 +21,7 @@ The activities of this family output a **verdict**, a **credence** or a **rankin
 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
-| `testing` | `hypothesis`, `consequence`, `data` | `verdict` | deductive | justification |
+| `testing` | `hypothesis`, `consequence`, `data` | `verdict` | error-statistical | justification |
 | `confirmation` | `hypothesis`, `data` | `credence` | inductive | justification |
 | `validation` | `model`, `binding`, `question` | `verdict` | non-inferential | justification |
 | `model-selection` | `model` (several), `data` | `ranking` | inductive | justification |
@@ -49,7 +49,7 @@ A test never bears on a hypothesis alone: the prediction follows from the hypoth
 - **Testing and validation differ in their object.** Testing asks whether a hypothesis is true of its target. Validation asks whether a model is adequate for a purpose, and a model known to be false can be adequate [parker2020].
 - **Testing and confirmation differ in their output.** Testing returns a verdict. Confirmation returns a degree of credence. Evidence changes that degree whenever its probability differs under the hypothesis and under its negation [howson2006].
 - **Testing and confirmation serve two norms of evidence.** Testing outputs the verdict of a test, and confirmation outputs a credence. The norms of evidence that govern the verdicts and the credence of an assessment, and the relation between them, are stated with the [conditions of satisfaction](../../objects/answer/satisfaction-conditions.md#^credence). Acceptance into the accepted knowledge stays an [act of the researcher](../../objects/status/statuses-and-acceptance.md#^acceptance-act), informed by both outputs.
-- **The mode of testing names its deductive part.** The mode `deductive` of testing names the derivation of the prediction from the hypothesis and its auxiliary assumptions. The verdict is reached from the agreement or the disagreement of that prediction with the data, judged by severity, which is an error-statistical criterion, not a deductive one [mayo1996]. The closed list of modes holds no value for an error-statistical inference.
+- **The mode of testing is error-statistical.** Testing derives a prediction from the hypothesis and its auxiliary assumptions, and that derivation is deductive. The verdict is then reached from the agreement or the disagreement of the prediction with the data, judged by severity, which is an error-statistical criterion, not a deductive one [mayo1996]. The verdict rests on that criterion, so the mode `error-statistical` names the inference of testing.
 - **Testing and inference to the best explanation both return a verdict, under different norms.** Testing judges one hypothesis by the severity of the test. Inference to the best explanation compares rival hypotheses by how well each would explain the data, if true [lipton2004].
 - **The norm of critique checks the trace of a social process.** Criticism is transformative only when the community meets social conditions, such as public venues, shared standards and a tempered equality of intellectual authority [longino1990]. A record can hold only the trace of that process: each objection with its ground.
 
