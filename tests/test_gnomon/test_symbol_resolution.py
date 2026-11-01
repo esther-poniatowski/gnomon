@@ -775,7 +775,7 @@ def test_a_match_listed_under_an_inapplicable_accuracy_is_reported() -> None:
 
 def test_the_requirement_table_is_read_from_the_registry() -> None:
     assert REQUIRED["exploration"]["required"] == ["phenomenon.detection_criterion"]
-    assert "question.subject.contrast.foil_set" in REQUIRED["explanation"]["required"]
+    assert REQUIRED["explanation"]["required"] == ["question.task.requested_relation"]
     assert REQUIRED["description"] == {"required": [], "to_produce": []}
     assert "phenomenon.category" in REQUIRED["exploration"]["to_produce"]
     assert REQUIRED["prediction"]["to_produce"] == []

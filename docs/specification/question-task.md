@@ -38,7 +38,7 @@ Because an aim fixes the product that an answer must deliver, the aim also deter
 | `description` | — | — |
 | `exploration` | `phenomenon.detection_criterion` | `phenomenon.statement`, `phenomenon.category`, `phenomenon.occurrence`, `phenomenon.evidential_status` |
 | `prediction` | `phenomenon.manifestations`, `question.task.required_accuracy.outputs_to_match` | — |
-| `explanation` | `question.subject.contrast.foil_set`, `question.task.requested_relation` | — |
+| `explanation` | `question.task.requested_relation` | — |
 | `modal-knowledge` | `question.task.modal_strength`, `question.task.proof_obligations` | — |
 | `model-knowledge` | — | — |
 

@@ -75,7 +75,6 @@ by_aim:
     to_produce: []
   explanation:
     required:
-      - path: question.subject.contrast.foil_set
       - path: question.task.requested_relation
     to_produce: []
   modal-knowledge:
