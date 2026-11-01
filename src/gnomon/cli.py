@@ -13,14 +13,18 @@ vocabulary : Collect the symbols and operators of one problem into a table.
 itinerary : Check every itinerary of one problem against the activity and product-type registries.
 """
 
-from pathlib import Path
-from typing import Any, Mapping
+import json
+from enum import Enum
+from pathlib import Path, PurePosixPath
+from typing import Any, Mapping, Optional
 
 import typer
 import yaml
 
 from . import info as pkg_info, __version__
+from .findings import Finding
 from .itineraries import itinerary_problems
+from .sarif import Located, sarif_log
 from .vocabulary import load_problem, render_markdown, render_yaml
 
 app = typer.Typer(add_completion=False, no_args_is_help=True)
@@ -96,25 +100,120 @@ def cli_vocabulary(
     )
 
 
+class OutputFormat(str, Enum):
+    """The forms in which a check reports its findings."""
+
+    text = "text"
+    sarif = "sarif"
+
+
+def _read_records(
+    source: Path, tolerant: bool
+) -> tuple[dict[str, Mapping[str, Any]], dict[str, Path], list[str]]:
+    """Return the records of ``source`` keyed by identifier, the file of each, and the read failures.
+
+    A later file carrying an identifier already read replaces the earlier one. When ``tolerant`` is
+    false, a file that cannot be read or parsed raises its error; otherwise the failure is returned
+    as a line naming the file, and the remaining files are read.
+    """
+    records: dict[str, Mapping[str, Any]] = {}
+    files: dict[str, Path] = {}
+    failures: list[str] = []
+    for path in sorted(source.glob("*.yml")):
+        if tolerant:
+            try:
+                record = yaml.safe_load(path.read_text(encoding="utf-8"))
+            except (OSError, ValueError, yaml.YAMLError) as error:
+                failures.append(f"{path}: {error}")
+                continue
+        else:
+            record = yaml.safe_load(path.read_text(encoding="utf-8"))
+        if isinstance(record, Mapping) and "id" in record:
+            records[str(record["id"])] = record
+            files[str(record["id"])] = path
+    return records, files, failures
+
+
+def _write_log(log: dict[str, Any], output: Optional[Path]) -> None:
+    """Write ``log`` to ``output``, creating its folders, or to standard output when it is None."""
+    text = json.dumps(log, indent=2, ensure_ascii=False) + "\n"
+    if output is None:
+        typer.echo(text, nl=False)
+        return
+    try:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(text, encoding="utf-8")
+    except OSError as error:
+        typer.echo(f"cannot write the log {output}: {error}", err=True)
+        raise typer.Exit(code=2) from error
+
+
 @app.command("itinerary")
 def cli_itinerary(
     directory: str = typer.Argument(..., help="Directory holding the filled records of one problem."),
+    output_format: OutputFormat = typer.Option(
+        OutputFormat.text, "--format", "-f",
+        help="text prints one line per problem; sarif also writes a SARIF 2.1.0 log in the findings "
+        "profile of Elenchos, on standard output or at --output.",
+    ),
+    output: Optional[Path] = typer.Option(
+        None, "--output", "-o",
+        help="With --format sarif, write the log to this path instead of standard output; "
+        "missing folders are created.",
+    ),
+    root: Path = typer.Option(
+        Path("."), "--root", "-r",
+        help="With --format sarif, the repository root from which the log states every path.",
+    ),
 ) -> None:
-    """Check every itinerary of one problem against the registries and the records it names."""
+    """Check every itinerary of one problem against the registries and the records it names.
+
+    The text output prints one line per problem and a count. With ``--format sarif`` and no
+    ``--output``, the log takes standard output and those lines go to standard error. The command
+    exits with status 1 when a problem is found or a record cannot be read, and with status 2 when
+    the log cannot be written.
+    """
     source = Path(directory)
     if not source.is_dir():
         typer.echo(f"no such directory: {source}", err=True)
         raise typer.Exit(code=1)
-    loaded = [yaml.safe_load(path.read_text(encoding="utf-8")) for path in sorted(source.glob("*.yml"))]
-    records: dict[str, Mapping[str, Any]] = {
-        str(record["id"]): record for record in loaded if isinstance(record, Mapping) and "id" in record
-    }
+    sarif = output_format is OutputFormat.sarif
+    if output is not None and not sarif:
+        raise typer.BadParameter("requires --format sarif", param_hint="--output")
+    folder = PurePosixPath(".")
+    if sarif:
+        try:
+            folder = PurePosixPath(source.resolve().relative_to(root.resolve()).as_posix())
+        except ValueError:
+            typer.echo(f"{source} lies outside the root {root}", err=True)
+            raise typer.Exit(code=1) from None
+    records, files, unreadable = _read_records(source, tolerant=sarif)
+    stopped = (
+        f"{len(unreadable)} record files could not be read, so the itineraries naming their records "
+        "were not fully checked" if unreadable else None
+    )
     itineraries = [record for record in records.values() if record.get("type") == "itinerary"]
-    problems = [f"{itinerary['id']}: {problem}" for itinerary in itineraries for problem in itinerary_problems(itinerary, records)]
+    found: list[tuple[str, Finding]] = []
+    try:
+        for itinerary in itineraries:
+            found += [(str(itinerary["id"]), problem) for problem in itinerary_problems(itinerary, records)]
+    except (OSError, ValueError, yaml.YAMLError) as error:
+        if not sarif:
+            raise
+        stopped = f"the check stopped on an error: {error}"
+    problems = [f"{identifier}: {problem.text}" for identifier, problem in found]
+    to_stderr = sarif and output is None
+    for line in unreadable:
+        typer.echo(line, err=True)
     for line in problems:
-        typer.echo(line)
-    typer.echo(f"{len(itineraries)} itineraries checked, {len(problems)} problems found")
-    if problems:
+        typer.echo(line, err=to_stderr)
+    typer.echo(f"{len(itineraries)} itineraries checked, {len(problems)} problems found", err=to_stderr)
+    if sarif:
+        located = [
+            Located(problem, folder / files[identifier].name, identifier) for identifier, problem in found
+        ]
+        _write_log(sarif_log(located, __version__, stopped), output)
+    if problems or stopped:
         raise typer.Exit(code=1)
 
 

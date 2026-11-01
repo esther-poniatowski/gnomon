@@ -27,6 +27,7 @@ from gnomon.completeness import (
     unresolved_slots,
     unstated_function_sense,
 )
+from gnomon.findings import texts
 
 from .paths import EXAMPLES, ROOT
 
@@ -68,17 +69,17 @@ def test_a_slot_without_an_identified_record_or_a_typed_placeholder_is_reported(
         "target_system": "system.b",
         "phenomenon": {"placeholder": "phenomenon", "description": "the geometry of the representation"},
     }
-    assert unresolved_slots(question, records, TYPES) == [
+    assert texts(unresolved_slots(question, records, TYPES)) == [
         "subject.target_system: system.b carries no identification, so its referent is not fixed"
     ]
     question["subject"] = {"target_system": "phen.a", "phenomenon": {"placeholder": "mood"}}
-    assert unresolved_slots(question, records, TYPES) == [
+    assert texts(unresolved_slots(question, records, TYPES)) == [
         "subject.target_system: phen.a is a phenomenon record, not a target-system record",
         "subject.phenomenon: the placeholder type 'mood' is not admitted",
         "subject.phenomenon: the placeholder carries no description",
     ]
     question["subject"] = {"target_system": "system.z", "phenomenon": None}
-    assert unresolved_slots(question, records, TYPES) == [
+    assert texts(unresolved_slots(question, records, TYPES)) == [
         "subject.target_system: no record carries the identifier system.z",
         "subject.phenomenon: holds neither a record identifier nor a placeholder",
     ]
@@ -115,7 +116,7 @@ def test_linked_questions_and_admitted_backgrounds_are_checked() -> None:
         subject={"target_system": "system.a", "background": ["bg.b", "bg.z"]},
     )
     records["quest.q2"] = question
-    assert unresolved_question_references(question, records) == [
+    assert texts(unresolved_question_references(question, records)) == [
         "addresses: quest.q1 is no problem record",
         "links[0]: a question is linked to itself",
         "links[1]: phen.geometry is no question record",
@@ -134,7 +135,7 @@ def test_every_functional_question_states_its_sense_of_function(directory: Path)
 
 def test_a_functional_question_without_a_sense_of_function_is_reported() -> None:
     question = {"task": {"requested_relation": "functional", "function_sense": None}}
-    assert unstated_function_sense(question) == [
+    assert texts(unstated_function_sense(question)) == [
         "task.function_sense: a functional relation is requested without its sense of function"
     ]
     question["task"]["function_sense"] = "causal-role"
@@ -152,11 +153,11 @@ def test_every_credence_is_a_degree_of_belief_with_its_basis(directory: Path) ->
 def test_a_credence_outside_the_unit_interval_or_without_basis_is_reported() -> None:
     assert malformed_credence({}) == []
     assert malformed_credence({"credence": {"value": 0.7, "basis": "two replications"}}) == []
-    assert malformed_credence({"credence": {"value": 1.4}}) == [
+    assert texts(malformed_credence({"credence": {"value": 1.4}})) == [
         "credence.value: 1.4 is no number between 0 and 1",
         "credence.basis: the value states no basis",
     ]
-    assert malformed_credence({"credence": {"value": True, "basis": "x"}}) == [
+    assert texts(malformed_credence({"credence": {"value": True, "basis": "x"}})) == [
         "credence.value: True is no number between 0 and 1"
     ]
 
@@ -188,7 +189,7 @@ def test_an_answer_status_outside_the_attitudes_is_reported() -> None:
     """The former status `informally-backed` mixed an attitude with a support, and is now refused."""
     record = {"type": "answer", "status": "informally-backed", "support": "informal",
               "grounds": [{"role": "idealization", "removable": "partly"}]}
-    assert inadmissible_values(record, admitted_values("answer")) == [
+    assert texts(inadmissible_values(record, admitted_values("answer"))) == [
         "record.status: informally-backed is not admitted",
         "grounds.removable: partly is not admitted",
     ]
@@ -206,10 +207,10 @@ def test_every_phenomenon_takes_an_occurrence_class_its_category_admits(director
 
 def test_an_occurrence_class_that_the_category_does_not_admit_is_reported() -> None:
     """A regularity relates occurrences without being one; a structural property holds pointwise."""
-    assert mismatched_occurrence({"category": "regularity", "occurrence": "event"}, OCCURRENCES) == [
+    assert texts(mismatched_occurrence({"category": "regularity", "occurrence": "event"}, OCCURRENCES)) == [
         "occurrence: event is no occurrence class of a regularity, which admits not-applicable"
     ]
-    assert mismatched_occurrence({"category": "structural-property", "occurrence": "process"}, OCCURRENCES) == [
+    assert texts(mismatched_occurrence({"category": "structural-property", "occurrence": "process"}, OCCURRENCES)) == [
         "occurrence: process is no occurrence class of a structural-property, which admits state"
     ]
     assert mismatched_occurrence({"category": "particular-occurrence", "occurrence": "event"}, OCCURRENCES) == []
@@ -220,7 +221,7 @@ def test_a_placeholder_whose_type_does_not_fit_its_slot_is_reported() -> None:
     """The target-system slot awaits a system, and the phenomenon slot a phenomenon."""
     question = {"subject": {"target_system": {"placeholder": "contrast", "description": "a foil"},
                             "phenomenon": {"placeholder": "observable", "description": "a readout"}}}
-    assert unresolved_slots(question, {}, TYPES) == [
+    assert texts(unresolved_slots(question, {}, TYPES)) == [
         "subject.target_system: the placeholder type 'contrast' does not fit the slot, which awaits 'system'",
         "subject.phenomenon: the placeholder type 'observable' does not fit the slot, which awaits 'phenomenon'",
     ]

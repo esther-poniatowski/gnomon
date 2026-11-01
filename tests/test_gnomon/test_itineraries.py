@@ -24,6 +24,7 @@ from gnomon.itineraries import (
     malformed_registry,
     itinerary_problems,
 )
+from gnomon.findings import texts
 
 from .paths import EXAMPLES, ROOT
 
@@ -42,7 +43,7 @@ def test_a_registry_naming_an_unknown_type_mode_or_norm_is_reported() -> None:
     act = ACTS["derivation"]
     broken = {"derivation": type(act)(**{**act.__dict__, "output": "theorem", "mode": "intuitive",
                                          "norm": "norm.proof"})}
-    assert malformed_registry(broken, TYPES, ["deductive"]) == [
+    assert texts(malformed_registry(broken, TYPES, ["deductive"])) == [
         "derivation: theorem is no product type",
         "derivation: intuitive is no admitted mode",
         "derivation: its norm norm.proof is not the test norm.derivation",
@@ -173,14 +174,14 @@ def test_a_well_formed_itinerary_passes() -> None:
 
 
 def test_an_unregistered_activity_is_reported() -> None:
-    assert itinerary_problems(planted(derive={"activity": "intuition"}), RECORDS) == [
+    assert texts(itinerary_problems(planted(derive={"activity": "intuition"}), RECORDS)) == [
         "steps.derive: intuition is no registered activity"
     ]
 
 
 def test_input_types_that_do_not_fill_the_activity_are_reported() -> None:
     itinerary = planted(derive={"inputs": [{"type": "data", "ref": "phen.readout"}]})
-    assert itinerary_problems(itinerary, RECORDS) == [
+    assert texts(itinerary_problems(itinerary, RECORDS)) == [
         "steps.derive: derivation takes one input of admitted-laws or model, and the step gives 0",
         "steps.derive: derivation takes no input of type data",
     ]
@@ -192,49 +193,49 @@ def test_a_slot_taking_several_inputs_counts_them() -> None:
             "output": {"type": "ranking"}, "norm": {"test": "norm.model-selection", "verdict": "pending"}}
     itinerary = copy.deepcopy(ITINERARY)
     itinerary["steps"].append(step)
-    assert itinerary_problems(itinerary, RECORDS) == [
+    assert texts(itinerary_problems(itinerary, RECORDS)) == [
         "steps.select: model-selection takes 2 or more inputs of model, and the step gives 1"
     ]
     step["inputs"].append({"type": "model", "ref": "derive"})
-    assert itinerary_problems(itinerary, RECORDS) == ["steps.select: the step derive produces consequence, not model"]
+    assert texts(itinerary_problems(itinerary, RECORDS)) == ["steps.select: the step derive produces consequence, not model"]
 
 
 def test_an_output_type_other_than_the_activity_output_is_reported() -> None:
-    assert itinerary_problems(planted(derive={"output": {"type": "verdict"}}), RECORDS) == [
+    assert texts(itinerary_problems(planted(derive={"output": {"type": "verdict"}}), RECORDS)) == [
         "steps.derive: derivation produces consequence, and the step states verdict"
     ]
 
 
 def test_an_input_reference_of_the_wrong_kind_or_to_nothing_is_reported() -> None:
     wrong = planted(derive={"inputs": [{"type": "model", "ref": "phen.readout"}]})
-    assert itinerary_problems(wrong, RECORDS) == [
+    assert texts(itinerary_problems(wrong, RECORDS)) == [
         "steps.derive: phen.readout holds data or phenomenon or knowledge-state-change, not model"
     ]
     absent = planted(derive={"inputs": [{"type": "model", "ref": "mod.missing"}]})
-    assert itinerary_problems(absent, RECORDS) == ["steps.derive: mod.missing is neither a step nor a record"]
+    assert texts(itinerary_problems(absent, RECORDS)) == ["steps.derive: mod.missing is neither a step nor a record"]
     answer = planted(derive={"inputs": [{"type": "model", "ref": "ans.kernel"}]})
-    assert itinerary_problems(answer, RECORDS) == [
+    assert texts(itinerary_problems(answer, RECORDS)) == [
         "steps.derive: ans.kernel holds consequence or explanation or knowledge-state-change, not model"
     ]
 
 
 def test_a_type_that_no_record_holds_is_reached_only_through_a_step() -> None:
     itinerary = planted(observe={"inputs": [{"type": "design", "ref": "quest.geometry"}]})
-    assert itinerary_problems(itinerary, RECORDS) == [
+    assert texts(itinerary_problems(itinerary, RECORDS)) == [
         "steps.observe: no record holds a design, so its input names a step, and quest.geometry is none"
     ]
 
 
 def test_an_output_reference_of_the_wrong_kind_is_reported() -> None:
     itinerary = planted(pose={"output": {"type": "problem", "ref": "quest.geometry"}})
-    assert itinerary_problems(itinerary, RECORDS) == [
+    assert texts(itinerary_problems(itinerary, RECORDS)) == [
         "steps.pose: quest.geometry holds question or knowledge-state-change, not problem"
     ]
 
 
 def test_a_norm_verdict_or_mode_outside_the_registries_is_reported() -> None:
     itinerary = planted(derive={"norm": {"test": "norm.simulation", "verdict": "likely"}, "mode": "inductive"})
-    assert itinerary_problems(itinerary, RECORDS) == [
+    assert texts(itinerary_problems(itinerary, RECORDS)) == [
         "steps.derive: the norm of derivation is norm.derivation, and the step names norm.simulation",
         "steps.derive: 'likely' is no verdict",
         "steps.derive: derivation proceeds by deductive inference, and the step states inductive",
@@ -246,7 +247,7 @@ def test_a_cycle_among_the_steps_is_reported() -> None:
                                       {"type": "model", "ref": "mod.kernel"},
                                       {"type": "data", "ref": "observe"}]})
     found = itinerary_problems(itinerary, RECORDS)
-    assert "steps: design -> observe -> design forms a cycle" in found
+    assert "steps: design -> observe -> design forms a cycle" in texts(found)
     assert cycles({"a": {"a"}}) == [["a", "a"]]
 
 
@@ -254,7 +255,7 @@ def test_a_itinerary_addressing_no_problem_or_question_and_a_repeated_step_are_r
     itinerary = copy.deepcopy(ITINERARY)
     itinerary["addresses"] = "phen.readout"
     itinerary["steps"].append(copy.deepcopy(itinerary["steps"][0]))
-    assert itinerary_problems(itinerary, RECORDS)[:2] == [
+    assert texts(itinerary_problems(itinerary, RECORDS))[:2] == [
         "addresses: phen.readout is no problem or question record",
         "steps: the identifier pose names several steps",
     ]
@@ -318,7 +319,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
              "output": {"type": "verdict"}, "norm": {"test": "norm.testing", "verdict": "pending"}},
         ],
     }
-    assert itinerary_problems(itinerary, records) == [
+    assert texts(itinerary_problems(itinerary, records)) == [
         "steps.select: quest.schema holds question-schema or knowledge-state-change, not question",
         "steps.predict: system.a holds identified-subject or classification or measurement-procedure"
         " or knowledge-state-change, not target-specification",
@@ -329,7 +330,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
     records["system.a"]["commitment"] = "specified"
     records["ans.a"]["status"] = "hypothesized"
     itinerary["steps"][2]["inputs"][2]["ref"] = "predict"
-    assert itinerary_problems(itinerary, records) == ["steps.judge: the step predict produces consequence, not data"]
+    assert texts(itinerary_problems(itinerary, records)) == ["steps.judge: the step predict produces consequence, not data"]
 
 
 def test_a_specified_record_still_holds_an_identified_subject() -> None:

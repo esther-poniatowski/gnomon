@@ -32,6 +32,9 @@ from typing import Any, Iterable, Mapping
 
 import yaml
 
+from . import findings as rules
+from .findings import Entry, Finding, Place, Rule, Segment, finding
+
 DATA = Path(__file__).parent / "data"
 
 #: The registry declaring what a filled inquiry must carry.
@@ -154,30 +157,48 @@ def at(record: Mapping[str, Any], path: str) -> Any:
     return [at(entry, tail) for entry in node if isinstance(entry, Mapping)]
 
 
+def path_segments(path: str) -> tuple[tuple[Segment, ...], str | None]:
+    """Return the keys of a dotted path up to its first traversed list, and the rest of the path.
+
+    A path written ``key[]`` names a field of every entry of a list, so its locus is the list and
+    the field it names inside each entry is returned apart, or None when the path traverses none.
+
+    >>> path_segments("task.required_accuracy")
+    (('task', 'required_accuracy'), None)
+    >>> path_segments("factors[].target_status")
+    (('factors',), 'target_status')
+    """
+    head, marker, tail = path.partition("[].")
+    return tuple(head.split(".")), (tail if marker else None)
+
+
 def unmet_general(
     record: Mapping[str, Any],
     paths: list[str],
     produced: frozenset[str] | set[str] = frozenset(),
     label: str = "always required",
-) -> list[str]:
+    rule: Rule = rules.COMPLETENESS_UNMET_REQUIREMENT,
+) -> list[Finding]:
     """Return every required specification the record leaves unfilled.
 
     A specification is unfilled when it is absent, null, an empty string, or an empty list or
     mapping. The aim of the inquiry may produce a required specification, so the caller passes the
     paths that aim produces: those may stay unfilled, since the inquiry supplies their values.
+    Each finding of ``rule`` lies at the unfilled path.
     """
-    return [
-        f"{label}: {path}"
-        for path in paths
-        if path not in produced and is_unfilled(at(record, path))
-    ]
+    found = []
+    for path in paths:
+        if path not in produced and is_unfilled(at(record, path)):
+            keys, field = path_segments(path)
+            found.append(finding(rule, f"{label}: {path}", *keys, value=field))
+    return found
 
 
 def unmet_commitment(
     record: Mapping[str, Any],
     table: Mapping[str, Mapping[str, list[str]]],
     produced: frozenset[str] | set[str] = frozenset(),
-) -> list[str]:
+) -> list[Finding]:
     """Return every specification that the level of commitment of the record requires and it lacks.
 
     A record at ``identified`` fixes its referent; a record at ``specified`` also writes the
@@ -186,7 +207,9 @@ def unmet_commitment(
     """
     level = record.get("commitment")
     paths = commitment_requirements(str(record.get("type")), str(level), table)
-    return unmet_general(record, paths, produced, label=f"commitment {level} requires")
+    return unmet_general(
+        record, paths, produced, label=f"commitment {level} requires", rule=rules.COMPLETENESS_UNMET_COMMITMENT
+    )
 
 
 def occurrence_by_category(source: Path | None = None) -> dict[str, list[str]]:
@@ -197,7 +220,7 @@ def occurrence_by_category(source: Path | None = None) -> dict[str, list[str]]:
 
 def mismatched_occurrence(
     phenomenon: Mapping[str, Any], table: Mapping[str, list[str]]
-) -> list[str]:
+) -> list[Finding]:
     """Return the occurrence class that the category of the phenomenon does not admit.
 
     A particular occurrence is one token of a state, a process or an event. A structural property
@@ -206,7 +229,7 @@ def mismatched_occurrence(
     field leaves the pair unfilled, and nothing is reported.
 
     >>> table = {"regularity": ["not-applicable"], "particular-occurrence": ["state", "process", "event"]}
-    >>> mismatched_occurrence({"category": "regularity", "occurrence": "event"}, table)
+    >>> [f.text for f in mismatched_occurrence({"category": "regularity", "occurrence": "event"}, table)]
     ['occurrence: event is no occurrence class of a regularity, which admits not-applicable']
     """
     category, occurrence = phenomenon.get("category"), phenomenon.get("occurrence")
@@ -217,7 +240,13 @@ def mismatched_occurrence(
     admitted = table[category]
     if occurrence in admitted:
         return []
-    return [f"occurrence: {occurrence} is no occurrence class of a {category}, which admits {' or '.join(admitted)}"]
+    return [
+        finding(
+            rules.COMPLETENESS_MISMATCHED_OCCURRENCE,
+            f"occurrence: {occurrence} is no occurrence class of a {category}, which admits {' or '.join(admitted)}",
+            "occurrence",
+        )
+    ]
 
 
 def placeholder_types(source: Path | None = None) -> frozenset[str]:
@@ -229,7 +258,7 @@ def unresolved_slots(
     question: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],
     types: Iterable[str],
-) -> list[str]:
+) -> list[Finding]:
     """Return every subject slot that holds neither an identified record nor a typed placeholder.
 
     A slot of a question schema awaits an item of a type from a closed list, described in words,
@@ -251,32 +280,54 @@ def unresolved_slots(
     subject = question.get("subject") or {}
     found = []
     for slot, kind in SUBJECT_SLOTS.items():
-        value, where = subject.get(slot), f"subject.{slot}"
+        value, where, field = subject.get(slot), f"subject.{slot}", ("subject", slot)
         if isinstance(value, Mapping):
             awaited = value.get("placeholder")
             if awaited not in admitted:
-                found.append(f"{where}: the placeholder type {awaited!r} is not admitted")
+                found.append(
+                    finding(rules.COMPLETENESS_UNADMITTED_PLACEHOLDER,
+                            f"{where}: the placeholder type {awaited!r} is not admitted", *field, "placeholder")
+                )
             elif awaited != SLOT_PLACEHOLDERS[slot]:
-                found.append(f"{where}: the placeholder type {awaited!r} does not fit the slot, which awaits {SLOT_PLACEHOLDERS[slot]!r}")
+                found.append(
+                    finding(rules.COMPLETENESS_MISFIT_PLACEHOLDER,
+                            f"{where}: the placeholder type {awaited!r} does not fit the slot, which awaits {SLOT_PLACEHOLDERS[slot]!r}",
+                            *field, "placeholder")
+                )
             if not value.get("description"):
-                found.append(f"{where}: the placeholder carries no description")
+                found.append(
+                    finding(rules.COMPLETENESS_UNDESCRIBED_PLACEHOLDER,
+                            f"{where}: the placeholder carries no description", *field, "description")
+                )
             continue
         if not isinstance(value, str) or is_empty(value):
-            found.append(f"{where}: holds neither a record identifier nor a placeholder")
+            found.append(
+                finding(rules.COMPLETENESS_UNRESOLVED_SLOT,
+                        f"{where}: holds neither a record identifier nor a placeholder", *field)
+            )
             continue
         record = records.get(value)
         if record is None:
-            found.append(f"{where}: no record carries the identifier {value}")
+            found.append(
+                finding(rules.COMPLETENESS_UNKNOWN_SLOT_RECORD,
+                        f"{where}: no record carries the identifier {value}", *field)
+            )
         elif record.get("type") != kind:
-            found.append(f"{where}: {value} is a {record.get('type')} record, not a {kind} record")
+            found.append(
+                finding(rules.COMPLETENESS_MISTYPED_SLOT_RECORD,
+                        f"{where}: {value} is a {record.get('type')} record, not a {kind} record", *field)
+            )
         elif not (record.get("identification") or {}).get("description"):
-            found.append(f"{where}: {value} carries no identification, so its referent is not fixed")
+            found.append(
+                finding(rules.COMPLETENESS_UNIDENTIFIED_SLOT_RECORD,
+                        f"{where}: {value} carries no identification, so its referent is not fixed", *field)
+            )
     return found
 
 
 def unresolved_question_references(
     question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
-) -> list[str]:
+) -> list[Finding]:
     """Return every problem, linked question and background that a question names and that is missing.
 
     A question names the problem it serves, the questions it is linked to with the shared record
@@ -290,28 +341,47 @@ def unresolved_question_references(
     found = []
     addressed = question.get("addresses")
     if addressed is not None and kind_of(addressed) != "problem":
-        found.append(f"addresses: {addressed} is no problem record")
+        found.append(
+            finding(rules.COMPLETENESS_UNADDRESSED_PROBLEM, f"addresses: {addressed} is no problem record",
+                    "addresses")
+        )
     for index, link in enumerate(question.get("links") or []):
         if not isinstance(link, Mapping):
             continue
         other, via = link.get("question"), link.get("via")
         if kind_of(other) != "question":
-            found.append(f"links[{index}]: {other} is no question record")
+            found.append(
+                finding(rules.COMPLETENESS_LINK_NOT_QUESTION, f"links[{index}]: {other} is no question record",
+                        "links", index, "question")
+            )
         elif other == question.get("id"):
-            found.append(f"links[{index}]: a question is linked to itself")
+            found.append(
+                finding(rules.COMPLETENESS_SELF_LINK, f"links[{index}]: a question is linked to itself",
+                        "links", index, "question")
+            )
         if via is not None and kind_of(via) is None:
-            found.append(f"links[{index}]: no record carries the identifier {via}")
+            found.append(
+                finding(rules.COMPLETENESS_UNKNOWN_LINK_RECORD,
+                        f"links[{index}]: no record carries the identifier {via}", "links", index, "via")
+            )
     subject = question.get("subject") or {}
     target = subject.get("target_system")
-    for name in subject.get("background") or []:
+    for index, name in enumerate(subject.get("background") or []):
         if kind_of(name) != "background":
-            found.append(f"subject.background: {name} is no background record")
+            found.append(
+                finding(rules.COMPLETENESS_NOT_BACKGROUND, f"subject.background: {name} is no background record",
+                        "subject", "background", index)
+            )
         elif isinstance(target, str) and records[name].get("describes") != target:
-            found.append(f"subject.background: {name} describes another target than {target}")
+            found.append(
+                finding(rules.COMPLETENESS_FOREIGN_BACKGROUND,
+                        f"subject.background: {name} describes another target than {target}",
+                        "subject", "background", index)
+            )
     return found
 
 
-def unstated_function_sense(question: Mapping[str, Any]) -> list[str]:
+def unstated_function_sense(question: Mapping[str, Any]) -> list[Finding]:
     """Return the functional question that does not say which sense of function it requests.
 
     A function in the causal-role sense is the contribution of a part to a capacity of the system
@@ -324,10 +394,14 @@ def unstated_function_sense(question: Mapping[str, Any]) -> list[str]:
         return []
     if task.get("function_sense") in ("causal-role", "etiological"):
         return []
-    return ["task.function_sense: a functional relation is requested without its sense of function"]
+    return [
+        finding(rules.COMPLETENESS_UNSTATED_FUNCTION_SENSE,
+                "task.function_sense: a functional relation is requested without its sense of function",
+                "task", "function_sense")
+    ]
 
 
-def malformed_credence(assessment: Mapping[str, Any]) -> list[str]:
+def malformed_credence(assessment: Mapping[str, Any]) -> list[Finding]:
     """Return the credence that is no degree of belief, or that states no basis.
 
     A credence is a number between zero and one; a value outside that interval is no probability,
@@ -337,13 +411,22 @@ def malformed_credence(assessment: Mapping[str, Any]) -> list[str]:
     if credence is None:
         return []
     if not isinstance(credence, Mapping):
-        return ["credence: holds neither a value nor a basis"]
+        return [
+            finding(rules.COMPLETENESS_MALFORMED_CREDENCE, "credence: holds neither a value nor a basis",
+                    "credence")
+        ]
     found = []
     value = credence.get("value")
     if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 1:
-        found.append(f"credence.value: {value!r} is no number between 0 and 1")
+        found.append(
+            finding(rules.COMPLETENESS_CREDENCE_OUT_OF_RANGE,
+                    f"credence.value: {value!r} is no number between 0 and 1", "credence", "value")
+        )
     if not credence.get("basis"):
-        found.append("credence.basis: the value states no basis")
+        found.append(
+            finding(rules.COMPLETENESS_CREDENCE_WITHOUT_BASIS, "credence.basis: the value states no basis",
+                    "credence", "basis")
+        )
     return found
 
 
@@ -394,7 +477,7 @@ def unmet_by_aim(
     question: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],
     required: Mapping[str, dict[str, list]],
-) -> list[str]:
+) -> list[Finding]:
     """Return every specification the aim of this question requires and the records leave open.
 
     Parameters
@@ -409,6 +492,10 @@ def unmet_by_aim(
 
     Notes
     -----
+    Each finding concerns the question, whose aim imposes the requirement: it lies at
+    ``task.epistemic_aim``, with the required path as discriminator, whichever record that path
+    reaches.
+
     An aim fixes what an answer must deliver, so it requires a specification to be filled and
     never a value that specification takes. Which value is right is a judgement of the inquiry,
     and a rule that reaches inside a field belongs to a consistency check between fields.
@@ -418,11 +505,14 @@ def unmet_by_aim(
     for path in (required.get(str(aim)) or {}).get("required", []):
         prefix, _, rest = path.partition(".")
         if is_unfilled(at(records.get(prefix, {}), rest)):
-            missing.append(f"{aim} requires {path}")
+            missing.append(
+                finding(rules.COMPLETENESS_UNMET_AIM, f"{aim} requires {path}", "task", "epistemic_aim",
+                        value=path)
+            )
     return missing
 
 
-def contradictory_accuracy(question: Mapping[str, Any]) -> list[str]:
+def contradictory_accuracy(question: Mapping[str, Any]) -> list[Finding]:
     """Return the matches a question lists while declaring that accuracy does not apply.
 
     No aim decides whether an answer is matched against a measurement: an inquiry over a formal
@@ -433,13 +523,15 @@ def contradictory_accuracy(question: Mapping[str, Any]) -> list[str]:
     if accuracy.get("standard") != "not-applicable":
         return []
     return [
-        f"task.required_accuracy.{key} is listed although accuracy does not apply"
+        finding(rules.COMPLETENESS_CONTRADICTORY_ACCURACY,
+                f"task.required_accuracy.{key} is listed although accuracy does not apply",
+                "task", "required_accuracy", key)
         for key in ("outputs_to_match", "structures_to_match")
         if accuracy.get(key)
     ]
 
 
-def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> list[str]:
+def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> list[Finding]:
     """Return the link a question asks for and the answer does not supply.
 
     A question may bound the explanans to substrate-specific variables, to substrate-independent
@@ -447,21 +539,26 @@ def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> l
     answer to give both descriptions and the mapping that carries one onto the other, since a
     question about how a role is realized is answered by neither description alone. The two
     descriptions are declared in the ordinary blocks; the mapping is what the answer would
-    otherwise leave to a reader to reconstruct.
+    otherwise leave to a reader to reconstruct. Each finding concerns the answer.
     """
     if at(question, "task.admissible_explanans.substrate") != "mapping":
         return []
     realizations = answer.get("realizations") or []
     if not realizations:
-        return ["the question asks for a link, and the answer maps no quantity onto its realization"]
+        return [
+            finding(rules.COMPLETENESS_UNREALIZED_LINK,
+                    "the question asks for a link, and the answer maps no quantity onto its realization",
+                    "realizations")
+        ]
     return [
-        f"realizations[{index}] names what it realizes without saying by what"
+        finding(rules.COMPLETENESS_INCOMPLETE_REALIZATION,
+                f"realizations[{index}] names what it realizes without saying by what", "realizations", index)
         for index, entry in enumerate(realizations)
         if isinstance(entry, Mapping) and not (entry.get("realizes") and entry.get("by"))
     ]
 
 
-def unjustified_explanans_bound(question: Mapping[str, Any]) -> list[str]:
+def unjustified_explanans_bound(question: Mapping[str, Any]) -> list[Finding]:
     """Return the bound on the explanans that states an axis without saying why.
 
     A question that leaves the bound empty takes the default: proportionality with the phenomenon
@@ -478,10 +575,14 @@ def unjustified_explanans_bound(question: Mapping[str, Any]) -> list[str]:
         return []
     if (question.get("maturity") or {}).get("task.admissible_explanans"):
         return []
-    return ["task.admissible_explanans states an axis, and no justification says why the answer is bound to it"]
+    return [
+        finding(rules.COMPLETENESS_UNJUSTIFIED_EXPLANANS_BOUND,
+                "task.admissible_explanans states an axis, and no justification says why the answer is bound to it",
+                "task", "admissible_explanans", "justification")
+    ]
 
 
-def unstated_standing(question: Mapping[str, Any]) -> list[str]:
+def unstated_standing(question: Mapping[str, Any]) -> list[Finding]:
     """Return every virtue the question weighs without saying what failing it costs.
 
     A virtue bears on an answer in one of two ways, and which one is not derivable from the virtue
@@ -492,7 +593,9 @@ def unstated_standing(question: Mapping[str, Any]) -> list[str]:
     an entry that does not leaves the product test unable to say what it applies.
     """
     return [
-        f"virtues[{index}].standing is unstated for {entry.get('virtue') or 'an unnamed virtue'}"
+        finding(rules.COMPLETENESS_UNSTATED_STANDING,
+                f"virtues[{index}].standing is unstated for {entry.get('virtue') or 'an unnamed virtue'}",
+                "virtues", index, "standing")
         for index, entry in enumerate(question.get("virtues") or [])
         if isinstance(entry, Mapping) and not entry.get("standing")
     ]
@@ -500,7 +603,7 @@ def unstated_standing(question: Mapping[str, Any]) -> list[str]:
 
 def malformed_restrictions(
     question: Mapping[str, Any], variables: Iterable[str]
-) -> list[str]:
+) -> list[Finding]:
     """Return every domain restriction that does not say what it holds, or holds it wrongly.
 
     A restriction names one quantity and the set it is held to, or it names none and carries the
@@ -518,25 +621,34 @@ def malformed_restrictions(
     """
     varying = set(variables)
     found = []
-    for entry in at(question, "subject.domain.restrictions") or []:
+    for index, entry in enumerate(at(question, "subject.domain.restrictions") or []):
         if not isinstance(entry, Mapping):
             continue
+        where = ("subject", "domain", "restrictions", Entry(index, entry))
         held = entry.get("of")
         symbol = held.rsplit("#", 1)[-1] if isinstance(held, str) else None
         label = entry.get("name") or held or "an entry"
         carried = [key for key in ("values", "expression") if entry.get(key) is not None]
         if len(carried) != 1:
-            found.append(f"restrictions.{label}: carries {len(carried)} of values and expression")
+            found.append(
+                finding(rules.COMPLETENESS_RESTRICTION_CONTENT,
+                        f"restrictions.{label}: carries {len(carried)} of values and expression", *where)
+            )
         if not held and not entry.get("name"):
-            found.append("restrictions: an entry names neither a quantity nor itself")
+            found.append(
+                finding(rules.COMPLETENESS_ANONYMOUS_RESTRICTION,
+                        "restrictions: an entry names neither a quantity nor itself", *where)
+            )
         if entry.get("restriction") and symbol not in varying:
             found.append(
-                f"restrictions.{label}: states how it is held although it names no variable"
+                finding(rules.COMPLETENESS_RESTRICTION_WITHOUT_VARIABLE,
+                        f"restrictions.{label}: states how it is held although it names no variable",
+                        *where, "restriction")
             )
     return found
 
 
-def undecided_boundaries(record: Mapping[str, Any]) -> list[str]:
+def undecided_boundaries(record: Mapping[str, Any]) -> list[Finding]:
     """Return every external system whose constraint is neither written nor declared absent.
 
     An external system either imposes something on the variables it shares, written as
@@ -547,9 +659,13 @@ def undecided_boundaries(record: Mapping[str, Any]) -> list[str]:
     unknown, the record says so with a ``maturity`` entry rather than by leaving the field empty.
     """
     return [
-        f"external_systems.{entry.get('symbol')}: constrains is empty, so the boundary is named"
-        " without being decided"
-        for entry in record.get("external_systems") or []
+        finding(
+            rules.COMPLETENESS_UNDECIDED_BOUNDARY,
+            f"external_systems.{entry.get('symbol')}: constrains is empty, so the boundary is named"
+            " without being decided",
+            "external_systems", Entry(index, entry), "constrains",
+        )
+        for index, entry in enumerate(record.get("external_systems") or [])
         if isinstance(entry, Mapping) and is_empty(entry.get("constrains"))
     ]
 
@@ -569,30 +685,42 @@ def admitted_values(kind: str, source: Path | None = None) -> dict[str, frozense
     }
 
 
-def inadmissible_values(record: Mapping[str, Any], admitted: Mapping[str, frozenset[str]]) -> list[str]:
-    """Return every closed field of the record holding a value its vocabulary does not admit."""
-    found: list[str] = []
+def inadmissible_values(
+    record: Mapping[str, Any], admitted: Mapping[str, frozenset[str]]
+) -> list[Finding]:
+    """Return every closed field of the record holding a value its vocabulary does not admit.
 
-    def visit(node: Any, block: str) -> None:
+    The message names the top-level block and the field; the finding lies at the full path of the
+    field, and at the item of a field holding a list.
+    """
+    found: list[Finding] = []
+
+    def report(label: str, key: str, value: Any, vocabulary: frozenset[str], where: Place) -> None:
+        items = list(enumerate(value)) if isinstance(value, list) else [(None, value)]
+        for index, item in items:
+            if isinstance(item, str) and item not in vocabulary:
+                place = (*where, key) if index is None else (*where, key, index)
+                found.append(
+                    finding(rules.COMPLETENESS_INADMISSIBLE_VALUE, f"{label}.{key}: {item} is not admitted",
+                            *place)
+                )
+
+    def visit(node: Any, block: str, where: Place) -> None:
         if isinstance(node, Mapping):
             for key, value in node.items():
                 vocabulary = admitted.get(f"{block}.{key}")
                 if vocabulary is not None:
-                    for item in value if isinstance(value, list) else [value]:
-                        if isinstance(item, str) and item not in vocabulary:
-                            found.append(f"{block or 'record'}.{key}: {item} is not admitted")
+                    report(block or "record", key, value, vocabulary, where)
                 if isinstance(value, (Mapping, list)):
-                    visit(value, block or key)
+                    visit(value, block or key, (*where, key))
         elif isinstance(node, list):
-            for item in node:
-                visit(item, block)
+            for index, item in enumerate(node):
+                visit(item, block, (*where, Entry(index, item)))
 
     for key, value in record.items():
         vocabulary = admitted.get(f".{key}")
         if vocabulary is not None:
-            for item in value if isinstance(value, list) else [value]:
-                if isinstance(item, str) and item not in vocabulary:
-                    found.append(f"record.{key}: {item} is not admitted")
+            report("record", key, value, vocabulary, ())
         if isinstance(value, (Mapping, list)):
-            visit(value, key)
+            visit(value, key, (key,))
     return found

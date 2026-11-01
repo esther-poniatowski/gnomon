@@ -75,6 +75,7 @@ from gnomon.vocabulary import (
     unresolved,
     upstream_of,
 )
+from gnomon.findings import texts
 
 from .paths import EXAMPLES, ROOT
 
@@ -135,7 +136,7 @@ def test_a_yaml_keyword_used_as_a_symbol_is_reported() -> None:
     """``on`` is a YAML 1.1 boolean, so an unquoted symbol drawn from that set is not a string."""
     record = yaml.safe_load("type: target-system\noperators:\n  - symbol: on\n    name: restriction\n")
     assert record["operators"][0]["symbol"] is True
-    assert mistyped_symbols(record) == ["operators: True is bool, not a symbol"]
+    assert texts(mistyped_symbols(record)) == ["operators: True is bool, not a symbol"]
     quoted = yaml.safe_load('type: target-system\noperators:\n  - symbol: "on"\n    name: restriction\n')
     assert mistyped_symbols(quoted) == []
 
@@ -318,7 +319,7 @@ def test_an_explanans_appeals_to_a_declared_external_system() -> None:
     }
     assert misattributed_appeals(answer, systems) == []
     answer["explanans"][0]["appeals_to"] = ["y"]
-    assert misattributed_appeals(answer, systems) == [
+    assert texts(misattributed_appeals(answer, systems)) == [
         "explanans.appeals_to: y is no external system of the target"
     ]
 
@@ -333,7 +334,7 @@ def test_an_answer_accounts_for_the_members_it_rests_on() -> None:
         "type": "answer",
         "laws": [{"symbol": "turnover", "expression": "diff(R, t) = G(N, R, rho)"}],
     }
-    assert overreaching_entries(answer, marked) == [
+    assert texts(overreaching_entries(answer, marked)) == [
         "laws.turnover: R is carried only by the resource_explicit variant",
         "laws.turnover: rho is carried only by the resource_explicit variant",
     ]
@@ -351,9 +352,9 @@ def test_a_record_accounts_for_a_variant_the_target_declares() -> None:
     declared = {"resource_explicit", "direct"}
     assert misnamed_variant({"type": "answer", "variant": "direct"}, declared) == []
     assert misnamed_variant({"type": "answer"}, declared) == []
-    assert misnamed_variant({"type": "answer", "variant": "absent"}, declared) == ["variant -> absent"]
+    assert texts(misnamed_variant({"type": "answer", "variant": "absent"}, declared)) == ["variant -> absent"]
     nested = {"laws": [{"variant": "direct"}, {"variant": "absent"}], "c": {"d": [{"variant": "gone"}]}}
-    assert misnamed_variant(nested, declared) == ["laws.variant -> absent", "c.d.variant -> gone"]
+    assert texts(misnamed_variant(nested, declared)) == ["laws.variant -> absent", "c.d.variant -> gone"]
 
 
 def test_a_variant_named_in_prose_is_still_unborne() -> None:
@@ -364,7 +365,7 @@ def test_a_variant_named_in_prose_is_still_unborne() -> None:
                       "differentiation": "position runs over the sites of a lattice"}],
         "variables": [{"symbol": "u", "variant": "continuum"}],
     }
-    assert unborne_variants(record) == [
+    assert texts(unborne_variants(record)) == [
         "variants.lattice: no declaration or law carries it, and its maturity admits no gap"
     ]
     record["maturity"] = {"variants.lattice": "open"}
@@ -452,7 +453,7 @@ def test_a_shared_variable_naming_a_set_is_reported() -> None:
         "variables": [{"symbol": "s"}],
         "external_systems": [{"name": "environment", "shares": ["s", "x"]}],
     }
-    assert misplaced_sharing(record) == ["external_systems.shares: x is no declared quantity"]
+    assert texts(misplaced_sharing(record)) == ["external_systems.shares: x is no declared quantity"]
 
 
 def test_a_parameter_running_along_an_interval_is_reported() -> None:
@@ -462,7 +463,7 @@ def test_a_parameter_running_along_an_interval_is_reported() -> None:
         "index_sets": [{"symbol": "t", "structure": "interval"}, {"symbol": "i", "structure": "discrete-set"}],
         "parameters": [{"symbol": "f", "signature": ["t"]}, {"symbol": "w", "signature": ["i"]}],
     }
-    assert unfixed_parameters(record) == ["parameters.f: held fixed yet indexed by ['t']"]
+    assert texts(unfixed_parameters(record)) == ["parameters.f: held fixed yet indexed by ['t']"]
 
 
 def test_shared_without_a_signature_is_reported() -> None:
@@ -471,7 +472,7 @@ def test_shared_without_a_signature_is_reported() -> None:
         "parameters": [{"symbol": "nu", "signature": [], "shared": True},
                        {"symbol": "w", "signature": ["i"], "shared": True}],
     }
-    assert vacuous_shared(record) == ["parameters.nu: shared without a signature"]
+    assert texts(vacuous_shared(record)) == ["parameters.nu: shared without a signature"]
 
 
 @pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
@@ -497,7 +498,7 @@ def test_a_quantity_carrying_both_an_expression_and_a_condition_is_reported() ->
             {"symbol": "b", "condition": "d_t(N) = 0"},
         ],
     }
-    assert doubly_defined(record) == ["observables.a: both an expression and a condition"]
+    assert texts(doubly_defined(record)) == ["observables.a: both an expression and a condition"]
 
 
 @pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
@@ -515,7 +516,7 @@ def test_a_quantity_owned_by_no_declared_system_is_reported() -> None:
         "parameters": [{"symbol": "T", "of": "bath"}, {"symbol": "g", "of": "furnace"},
                        {"symbol": "nu"}],
     }
-    assert unowned_quantities(record) == ["parameters.g: no external system named furnace"]
+    assert texts(unowned_quantities(record)) == ["parameters.g: no external system named furnace"]
 
 
 @pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
@@ -534,7 +535,7 @@ def test_a_condition_without_a_selection_rule_is_reported() -> None:
             {"symbol": "b", "condition": "d_t(N) = 0", "selects": "any"},
         ],
     }
-    assert unselected_conditions(record) == ["observables.a: a condition without a selection rule"]
+    assert texts(unselected_conditions(record)) == ["observables.a: a condition without a selection rule"]
 
 
 REQUIRED = requirements_by_aim()
@@ -612,7 +613,7 @@ def test_a_record_lacking_what_its_commitment_requires_is_reported() -> None:
                   "identification": {"description": "the behavior", "pointers": []}}
     assert unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT) == []
     phenomenon["commitment"] = "specified"
-    assert unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT) == [
+    assert texts(unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT)) == [
         "commitment specified requires: category",
         "commitment specified requires: course",
         "commitment specified requires: occurrence",
@@ -621,16 +622,16 @@ def test_a_record_lacking_what_its_commitment_requires_is_reported() -> None:
     ]
     del phenomenon["identification"]
     phenomenon["commitment"] = "identified"
-    assert unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT) == [
+    assert texts(unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT)) == [
         "commitment identified requires: identification"
     ]
     target = {"type": "target-system", "commitment": "specified", "target_type": "particular",
               "reference_class": {"name": "a basin"}, "identification": {"description": "the basin"}}
-    assert unmet_commitment(target, REQUIRED_BY_COMMITMENT) == ["commitment specified requires: variables"]
+    assert texts(unmet_commitment(target, REQUIRED_BY_COMMITMENT)) == ["commitment specified requires: variables"]
 
 
 def test_a_record_stating_no_commitment_is_reported() -> None:
-    assert unmet_general({"type": "phenomenon", "commitment": None}, always_required("phenomenon")) == [
+    assert texts(unmet_general({"type": "phenomenon", "commitment": None}, always_required("phenomenon"))) == [
         "always required: commitment"
     ]
 
@@ -639,7 +640,7 @@ def test_an_empty_value_leaves_a_required_specification_unfilled() -> None:
     """Null, an empty string and an empty block are unfilled; `open` is an ordinary value now."""
     paths = ["statement", "category", "manifestations"]
     record = {"type": "phenomenon", "statement": None, "category": "", "manifestations": []}
-    assert unmet_general(record, paths) == [
+    assert texts(unmet_general(record, paths)) == [
         "always required: statement",
         "always required: category",
         "always required: manifestations",
@@ -651,7 +652,7 @@ def test_an_empty_value_leaves_a_required_specification_unfilled() -> None:
 def test_a_path_that_the_aim_produces_may_stay_empty() -> None:
     """The registry, not the record, says whether an empty field is a gap or a product."""
     record = {"type": "phenomenon", "statement": None, "category": None}
-    assert unmet_general(record, ["statement", "category"], {"statement"}) == ["always required: category"]
+    assert texts(unmet_general(record, ["statement", "category"], {"statement"})) == ["always required: category"]
     produced = produced_for("exploration", "phenomenon")
     assert {"statement", "category", "occurrence", "evidential_status"} <= produced
     assert produced_for("explanation", "phenomenon") == set()
@@ -660,7 +661,7 @@ def test_a_path_that_the_aim_produces_may_stay_empty() -> None:
 def test_an_empty_boundary_is_reported_and_an_empty_list_is_not() -> None:
     """An empty value leaves the boundary undecided; `[]` states that it imposes nothing."""
     record = {"external_systems": [{"symbol": "bath", "constrains": None}, {"symbol": "decoder", "constrains": []}]}
-    assert undecided_boundaries(record) == [
+    assert texts(undecided_boundaries(record)) == [
         "external_systems.bath: constrains is empty, so the boundary is named without being decided"
     ]
 
@@ -694,12 +695,12 @@ def test_a_stated_axis_without_justification_is_reported() -> None:
 def test_a_question_asking_for_a_link_needs_the_mapping() -> None:
     """Neither description answers how a role is realized, so the answer states the mapping."""
     question = {"task": {"admissible_explanans": {"substrate": "mapping"}}}
-    assert unrealized_link(question, {}) == [
+    assert texts(unrealized_link(question, {})) == [
         "the question asks for a link, and the answer maps no quantity onto its realization"
     ]
     assert unrealized_link({"task": {"admissible_explanans": {"substrate": "independent"}}}, {}) == []
     half = {"realizations": [{"symbol": "gate", "realizes": "role"}]}
-    assert unrealized_link(question, half) == ["realizations[0] names what it realizes without saying by what"]
+    assert texts(unrealized_link(question, half)) == ["realizations[0] names what it realizes without saying by what"]
     whole = {"realizations": [{"symbol": "gate", "realizes": "role", "by": "g * (v - e)"}]}
     assert unrealized_link(question, whole) == []
 
@@ -710,17 +711,17 @@ def test_a_relation_of_the_organization_says_what_its_ends_are() -> None:
               "organization": [{"symbol": "precedes", "among": ["draw", "update"]}]}
     assert malformed_relations(record) == []
     record["organization"] = [{"symbol": "both", "relates": "prod(a, b)", "among": ["draw", "update"]}]
-    assert malformed_relations(record) == [
+    assert texts(malformed_relations(record)) == [
         "organization.both: a relation runs between parts or between laws, and this one names both"
     ]
     record["organization"] = [{"symbol": "neither"}]
-    assert malformed_relations(record) == [
+    assert texts(malformed_relations(record)) == [
         "organization.neither: a relation runs between parts or between laws, and this one names neither"
     ]
     record["organization"] = [{"symbol": "lone", "among": ["draw"]}]
-    assert malformed_relations(record) == ["organization.lone: a relation among laws orders two or more of them"]
+    assert texts(malformed_relations(record)) == ["organization.lone: a relation among laws orders two or more of them"]
     record["organization"] = [{"symbol": "stray", "among": ["draw", "absent"]}]
-    assert malformed_relations(record) == ["organization.stray: absent is no law of the record"]
+    assert texts(malformed_relations(record)) == ["organization.stray: absent is no law of the record"]
 
 
 @pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
@@ -746,7 +747,7 @@ def test_a_virtue_weighed_without_a_standing_is_reported() -> None:
     question = {"virtues": [{"virtue": "economy", "standing": "preferred"},
                             {"virtue": "tractability"},
                             {"justification": "an entry that never named its virtue"}]}
-    assert unstated_standing(question) == [
+    assert texts(unstated_standing(question)) == [
         "virtues[1].standing is unstated for tractability",
         "virtues[2].standing is unstated for an unnamed virtue",
     ]
@@ -771,7 +772,7 @@ def test_a_match_listed_under_an_inapplicable_accuracy_is_reported() -> None:
             }
         }
     }
-    assert contradictory_accuracy(question) == [
+    assert texts(contradictory_accuracy(question)) == [
         "task.required_accuracy.outputs_to_match is listed although accuracy does not apply"
     ]
     question["task"]["required_accuracy"]["standard"] = "numeric-bound"
@@ -799,7 +800,7 @@ def test_an_inquiry_leaving_a_required_specification_open_is_reported() -> None:
     """A prediction compares an output against a measurement, so it fixes what must match."""
     question = {"task": {"epistemic_aim": "prediction", "required_accuracy": {"outputs_to_match": []}}}
     records = {"question": question, "phenomenon": {"manifestations": []}}
-    assert unmet_by_aim(question, records, REQUIRED) == [
+    assert texts(unmet_by_aim(question, records, REQUIRED)) == [
         "prediction requires phenomenon.manifestations",
         "prediction requires question.task.required_accuracy.outputs_to_match",
     ]
@@ -821,9 +822,9 @@ def test_a_value_outside_its_vocabulary_is_reported() -> None:
     """
     admitted = admitted_values("background")
     record = {"type": "background", "laws": [{"role": "no-such-role"}, {"role": "state-constraint"}]}
-    assert inadmissible_values(record, admitted) == ["laws.role: no-such-role is not admitted"]
+    assert texts(inadmissible_values(record, admitted)) == ["laws.role: no-such-role is not admitted"]
     record["laws"][0]["role"] = "open"   # no longer a sentinel: an ordinary value, and not this one
-    assert inadmissible_values(record, admitted) == ["laws.role: open is not admitted"]
+    assert texts(inadmissible_values(record, admitted)) == ["laws.role: open is not admitted"]
     record["laws"][0]["role"] = None     # an empty field holds no value, so no vocabulary bears on it
     assert inadmissible_values(record, admitted) == []
 
@@ -840,7 +841,7 @@ def test_a_record_field_is_read_apart_from_a_field_of_the_same_name() -> None:
         "terms.status": frozenset({"load-bearing"}),
     }
     record = {"status": "no-such-state", "terms": [{"status": "no-such-status"}]}
-    assert inadmissible_values(record, admitted) == [
+    assert texts(inadmissible_values(record, admitted)) == [
         "record.status: no-such-state is not admitted",
         "terms.status: no-such-status is not admitted",
     ]
@@ -862,7 +863,7 @@ def test_an_expression_split_on_its_commas_is_reported() -> None:
         "type": "target-system",
         "operators": [{"symbol": "f", "signature": ["maps(prod(a", "b)", "reals)"]}],
     }
-    assert split_expressions(record) == [
+    assert texts(split_expressions(record)) == [
         "operators.signature: 'maps(prod(a' is a fragment of a split expression",
         "operators.signature: 'b)' is a fragment of a split expression",
         "operators.signature: 'reals)' is a fragment of a split expression",
@@ -880,7 +881,7 @@ def test_a_latex_form_in_double_quotes_is_reported() -> None:
     """A double-quoted scalar reads the backslash of a LaTeX command as an escape."""
     damaged = yaml.safe_load('parameters:\n  - symbol: nu\n    notation: "\\nu"\n')
     damaged["type"] = "target-system"
-    assert corrupted_notation(damaged) == ["parameters.nu: the notation holds a control character"]
+    assert texts(corrupted_notation(damaged)) == ["parameters.nu: the notation holds a control character"]
     intact = yaml.safe_load("parameters:\n  - symbol: nu\n    notation: '\\nu'\n")
     intact["type"] = "target-system"
     assert corrupted_notation(intact) == []
@@ -896,7 +897,7 @@ def test_a_condition_of_the_phenomenon_is_checked() -> None:
             "inhibiting": [],
         },
     }
-    assert unresolved(record, CANONICAL) == [
+    assert texts(unresolved(record, CANONICAL)) == [
         "conditions_and_byproducts.precipitating.expression -> no_such_symbol"
     ]
 
@@ -927,7 +928,7 @@ def test_a_formula_naming_an_undeclared_symbol_is_reported() -> None:
         "laws": [{"expression": "diff(u, x) = nu * lap(u) + f", "signature": ["x"]}],
         "operators": [{"symbol": "lap", "name": "the Laplacian"}],
     }
-    assert unresolved(record, CANONICAL) == ["laws.expression -> f"]
+    assert texts(unresolved(record, CANONICAL)) == ["laws.expression -> f"]
 
 
 def test_prose_left_in_a_value_set_is_reported() -> None:
@@ -936,7 +937,7 @@ def test_prose_left_in_a_value_set_is_reported() -> None:
         "type": "target-system",
         "parameters": [{"symbol": "nu", "values": "admissible body-force families"}],
     }
-    assert unresolved(record, CANONICAL) == [
+    assert texts(unresolved(record, CANONICAL)) == [
         "parameters.values -> admissible",
         "parameters.values -> body",
         "parameters.values -> families",
@@ -950,7 +951,7 @@ def test_prose_in_a_nested_feature_value_set_is_reported() -> None:
         "type": "phenomenon",
         "manifestations": [{"features": [{"symbol": "a", "values": "prose left here"}]}],
     }
-    assert unresolved(record, CANONICAL) == [
+    assert texts(unresolved(record, CANONICAL)) == [
         "manifestations.features.values -> here",
         "manifestations.features.values -> left",
         "manifestations.features.values -> prose",
@@ -975,12 +976,12 @@ def test_an_operator_the_record_does_not_declare_is_reported() -> None:
             {"symbol": "a", "expression": "max( re( far_field(J) ) )", "signature": []}
         ],
     }
-    assert unresolved(record, CANONICAL) == [
+    assert texts(unresolved(record, CANONICAL)) == [
         "observables.expression -> J",
         "observables.expression -> far_field",
     ]
     record["operators"] = [{"symbol": "far_field", "name": "the far-field limit of a profile"}]
-    assert unresolved(record, CANONICAL) == ["observables.expression -> J"]
+    assert texts(unresolved(record, CANONICAL)) == ["observables.expression -> J"]
 
 
 def test_a_reference_to_an_undeclared_set_is_reported() -> None:
@@ -991,7 +992,7 @@ def test_a_reference_to_an_undeclared_set_is_reported() -> None:
         "variables": [{"symbol": "u", "signature": ["x", "undeclared_index"]}],
         "laws": [{"expression": "u = u", "signature": ["y"]}],
     }
-    assert unresolved(record, CANONICAL) == [
+    assert texts(unresolved(record, CANONICAL)) == [
         "variables.signature -> undeclared_index",
         "laws.signature -> y",
     ]
@@ -1022,4 +1023,4 @@ def test_the_markdown_view_is_built_from_that_record() -> None:
 def test_an_empty_formula_is_skipped_and_open_is_an_unresolved_identifier() -> None:
     """With no sentinel left, `open` in an expression is a word that resolves to no declaration."""
     record = {"type": "target-system", "parameters": [{"symbol": "nu", "values": None}, {"symbol": "mu", "values": "open"}]}
-    assert unresolved(record, CANONICAL) == ["parameters.values -> open"]
+    assert texts(unresolved(record, CANONICAL)) == ["parameters.values -> open"]

@@ -29,6 +29,9 @@ from typing import Any, Iterable, Mapping
 
 import yaml
 
+from . import findings as rules
+from .findings import Entry, Finding, Key, finding
+
 DATA = Path(__file__).parent / "data"
 
 #: The registry declaring the epistemic activities.
@@ -189,23 +192,35 @@ def _closed(field: str, source: Path | None = None) -> frozenset[str]:
 
 def malformed_registry(
     acts: Mapping[str, Activity], types: Mapping[str, Any], modes: Iterable[str]
-) -> list[str]:
+) -> list[Finding]:
     """Return every activity that names a type, a mode or a norm the registries do not admit.
 
     The itinerary check trusts the activity registry, so the registry is itself checked: every input
     and output names a product type, every mode is admitted, and every norm is the named test
-    of its own activity.
+    of its own activity. Each finding concerns the registry file, under its list ``activities``
+    keyed by activity.
     """
     admitted = set(modes)
     found = []
     for act in acts.values():
-        for named in [t for s in act.inputs for t in s.types] + [act.output]:
-            if named not in types:
-                found.append(f"{act.id}: {named} is no product type")
+        entry = ("activities", Key(act.id))
+        named = [(t, (*entry, "inputs", index)) for index, s in enumerate(act.inputs) for t in s.types]
+        for kind, where in [*named, (act.output, (*entry, "output"))]:
+            if kind not in types:
+                found.append(
+                    finding(rules.REGISTRY_UNKNOWN_PRODUCT_TYPE, f"{act.id}: {kind} is no product type",
+                            *where, value=kind)
+                )
         if act.mode not in admitted:
-            found.append(f"{act.id}: {act.mode} is no admitted mode")
+            found.append(
+                finding(rules.REGISTRY_UNADMITTED_MODE, f"{act.id}: {act.mode} is no admitted mode",
+                        *entry, "mode")
+            )
         if act.norm != f"norm.{act.id}":
-            found.append(f"{act.id}: its norm {act.norm} is not the test norm.{act.id}")
+            found.append(
+                finding(rules.REGISTRY_FOREIGN_NORM,
+                        f"{act.id}: its norm {act.norm} is not the test norm.{act.id}", *entry, "norm")
+            )
     return found
 
 
@@ -214,7 +229,7 @@ def itinerary_problems(
     records: Mapping[str, Mapping[str, Any]],
     acts: Mapping[str, Activity] | None = None,
     types: Mapping[str, Any] | None = None,
-) -> list[str]:
+) -> list[Finding]:
     """Return every step of the itinerary that the registries or the records contradict.
 
     The five conditions of the itinerary check, stated in the overview of the activity taxonomy, apply:
@@ -243,76 +258,131 @@ def itinerary_problems(
     acts = activities() if acts is None else acts
     types = product_types() if types is None else types
     verdicts, modes = _closed("steps.verdict"), _closed("steps.mode")
-    steps = [step for step in itinerary.get("steps") or [] if isinstance(step, Mapping)]
-    by_id = {str(step.get("id")): step for step in steps}
-    found: list[str] = []
+    steps = [
+        (index, step) for index, step in enumerate(itinerary.get("steps") or []) if isinstance(step, Mapping)
+    ]
+    by_id = {str(step.get("id")): step for _, step in steps}
+    found: list[Finding] = []
 
     target = itinerary.get("addresses")
     if (records.get(target) or {}).get("type") not in ("problem", "question"):
-        found.append(f"addresses: {target} is no problem or question record")
+        found.append(
+            finding(rules.ITINERARY_UNADDRESSED, f"addresses: {target} is no problem or question record",
+                    "addresses")
+        )
 
-    repeated = [name for name, count in Counter(str(s.get("id")) for s in steps).items() if count > 1]
-    found += [f"steps: the identifier {name} names several steps" for name in repeated]
+    repeated = [name for name, count in Counter(str(s.get("id")) for _, s in steps).items() if count > 1]
+    found += [
+        finding(rules.ITINERARY_REPEATED_STEP, f"steps: the identifier {name} names several steps",
+                "steps", value=name)
+        for name in repeated
+    ]
 
     edges: dict[str, set[str]] = {name: set() for name in by_id}
-    for step in steps:
+    for position, step in steps:
         name = str(step.get("id"))
         where = f"steps.{name}"
+        at = ("steps", Entry(position, step))
         act = acts.get(str(step.get("activity")))
         if act is None:
-            found.append(f"{where}: {step.get('activity')} is no registered activity")
+            found.append(
+                finding(rules.ITINERARY_UNKNOWN_ACTIVITY,
+                        f"{where}: {step.get('activity')} is no registered activity", *at, "activity")
+            )
             continue
-        inputs = [i for i in step.get("inputs") or [] if isinstance(i, Mapping)]
-        counts = Counter(str(i.get("type")) for i in inputs)
+        inputs = [(i, item) for i, item in enumerate(step.get("inputs") or []) if isinstance(item, Mapping)]
+        counts = Counter(str(item.get("type")) for _, item in inputs)
         for index, held in enumerate(act.inputs):
             filled = sum(counts[t] for t in held.types)
             if not held.admits(filled):
                 found.append(
-                    f"{where}: {act.id} takes {_describe(held)} of {' or '.join(sorted(held.types))},"
-                    f" and the step gives {filled}"
+                    finding(
+                        rules.ITINERARY_UNFILLED_INPUT,
+                        f"{where}: {act.id} takes {_describe(held)} of {' or '.join(sorted(held.types))},"
+                        f" and the step gives {filled}",
+                        *at, "inputs", value="|".join(sorted(held.types)),
+                    )
                 )
         accepted = {t for held in act.inputs for t in held.types}
         found += [
-            f"{where}: {act.id} takes no input of type {kind}"
+            finding(rules.ITINERARY_UNACCEPTED_INPUT, f"{where}: {act.id} takes no input of type {kind}",
+                    *at, "inputs", value=kind)
             for kind in sorted(counts) if kind not in accepted
         ]
-        for item in inputs:
+        for index, item in inputs:
+            given = (*at, "inputs", index)
             kind, ref = str(item.get("type")), item.get("ref")
             producer = by_id.get(str(ref))
             if producer is not None:
                 edges[name].add(str(ref))
                 made = (producer.get("output") or {}).get("type")
                 if made != kind:
-                    found.append(f"{where}: the step {ref} produces {made}, not {kind}")
+                    found.append(
+                        finding(rules.ITINERARY_MISTYPED_STEP_INPUT,
+                                f"{where}: the step {ref} produces {made}, not {kind}", *given)
+                    )
                 continue
             entry = types.get(kind) or {}
             if entry.get("record") == EXTERNAL:
                 continue
             if entry.get("record") == TO_CREATE:
-                found.append(f"{where}: no record holds a {kind}, so its input names a step, and {ref} is none")
+                found.append(
+                    finding(rules.ITINERARY_INPUT_WITHOUT_PRODUCER,
+                            f"{where}: no record holds a {kind}, so its input names a step, and {ref} is none",
+                            *given)
+                )
                 continue
             record = records.get(ref) if isinstance(ref, str) else None
             if record is None:
-                found.append(f"{where}: {ref} is neither a step nor a record")
+                found.append(
+                    finding(rules.ITINERARY_UNRESOLVED_INPUT, f"{where}: {ref} is neither a step nor a record",
+                            *given)
+                )
             elif not holds(record, entry):
-                found.append(f"{where}: {ref} holds {_held(record, types)}, not {kind}")
+                found.append(
+                    finding(rules.ITINERARY_MISTYPED_RECORD_INPUT,
+                            f"{where}: {ref} holds {_held(record, types)}, not {kind}", *given)
+                )
         output = step.get("output") if isinstance(step.get("output"), Mapping) else {}
         made = output.get("type")
         if made != act.output:
-            found.append(f"{where}: {act.id} produces {act.output}, and the step states {made}")
+            found.append(
+                finding(rules.ITINERARY_MISTYPED_OUTPUT,
+                        f"{where}: {act.id} produces {act.output}, and the step states {made}",
+                        *at, "output", "type")
+            )
         product = output.get("ref")
         if isinstance(product, str) and product in records:
             if not holds(records[product], types.get(str(made)) or {}):
-                found.append(f"{where}: {product} holds {_held(records[product], types)}, not {made}")
+                found.append(
+                    finding(rules.ITINERARY_MISTYPED_OUTPUT_RECORD,
+                            f"{where}: {product} holds {_held(records[product], types)}, not {made}",
+                            *at, "output", "ref")
+                )
         norm = step.get("norm") if isinstance(step.get("norm"), Mapping) else {}
         if norm.get("test") != act.norm:
-            found.append(f"{where}: the norm of {act.id} is {act.norm}, and the step names {norm.get('test')}")
+            found.append(
+                finding(rules.ITINERARY_FOREIGN_NORM,
+                        f"{where}: the norm of {act.id} is {act.norm}, and the step names {norm.get('test')}",
+                        *at, "norm", "test")
+            )
         if norm.get("verdict") not in verdicts:
-            found.append(f"{where}: {norm.get('verdict')!r} is no verdict")
+            found.append(
+                finding(rules.ITINERARY_UNKNOWN_VERDICT, f"{where}: {norm.get('verdict')!r} is no verdict",
+                        *at, "norm", "verdict")
+            )
         mode = step.get("mode")
         if mode is not None and (mode not in modes or mode != act.mode):
-            found.append(f"{where}: {act.id} proceeds by {act.mode} inference, and the step states {mode}")
-    found += [f"steps: {' -> '.join(cycle)} forms a cycle" for cycle in cycles(edges)]
+            found.append(
+                finding(rules.ITINERARY_MISMATCHED_MODE,
+                        f"{where}: {act.id} proceeds by {act.mode} inference, and the step states {mode}",
+                        *at, "mode")
+            )
+    found += [
+        finding(rules.ITINERARY_CYCLE, f"steps: {' -> '.join(cycle)} forms a cycle", "steps",
+                value=" -> ".join(cycle))
+        for cycle in cycles(edges)
+    ]
     return found
 
 
