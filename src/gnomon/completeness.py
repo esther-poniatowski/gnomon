@@ -558,17 +558,52 @@ def demand_met(
     )
 
 
+def presupposition_denied(problem: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]) -> bool | None:
+    """Return whether an accepted answer denies a presupposition of the associated question, or None when no question is named.
+
+    A corrective answer denies a presupposition of the question that it answers, so an accepted
+    corrective answer to the associated question puts the negation of a presupposition of that
+    question into the accepted knowledge, which dissolves the problem.
+
+    >>> records = {"ans.a": {"type": "answer", "answers": "quest.a", "status": "accepted",
+    ...                      "erotetic_relation": {"value": "corrective"}}}
+    >>> presupposition_denied({"associated_question": "quest.a"}, records)
+    True
+    """
+    named = problem.get("associated_question")
+    if not named:
+        return None
+    return any(
+        r.get("type") == "answer" and r.get("answers") == named and r.get("status") == "accepted"
+        and at(r, "erotetic_relation.value") == "corrective"
+        for r in records.values()
+    )
+
+
 def unsupported_outcome(
     problem: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],
     classes: Mapping[str, str],
     holders: Mapping[str, Iterable[str]],
 ) -> list[Finding]:
-    """Return a status of the problem that its records contradict: solved without its demand met, or the reverse.
+    """Return a status of the problem that its records contradict.
 
-    A dissolved or an abandoned problem is not read, since neither outcome depends on the demand.
+    The status ``solved`` requires the demand met, and the status ``dissolved`` an accepted answer
+    that denies a presupposition of the associated question; each of these, once the records show
+    it, ends a problem still posed or refined. An abandoned problem is not read, since that outcome
+    records a decision of the researcher only.
     """
-    met, status = demand_met(problem, records, classes, holders), problem.get("status")
+    status, denied = problem.get("status"), presupposition_denied(problem, records)
+    if denied is not None:
+        if status == "dissolved" and not denied:
+            return [finding(rules.COMPLETENESS_UNSUPPORTED_DISSOLVED,
+                            "status: dissolved, and no accepted answer denies a presupposition of"
+                            f" {problem.get('associated_question')}", "status")]
+        if denied and status in ("posed", "refined"):
+            return [finding(rules.COMPLETENESS_UNRECORDED_DISSOLUTION,
+                            f"status: {status}, and an accepted answer denies a presupposition of"
+                            f" {problem.get('associated_question')}", "status")]
+    met = demand_met(problem, records, classes, holders)
     if met is None:
         return []
     if status == "solved" and not met:

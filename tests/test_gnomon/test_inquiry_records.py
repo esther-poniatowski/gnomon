@@ -424,3 +424,23 @@ def test_a_demand_of_a_type_without_a_solving_rule_is_not_read() -> None:
     assert demand_met(problem, {"prob.a": problem}, CLASSES, HOLDERS) is None
     assert unsupported_outcome(problem, {"prob.a": problem}, CLASSES, HOLDERS) == []
 
+
+def test_an_accepted_corrective_answer_to_the_associated_question_dissolves_the_problem() -> None:
+    problem = {"id": "prob.a", "type": "problem", "result_type": "explanation", "request": "one",
+               "status": "posed", "associated_question": "quest.a"}
+    records = {
+        "prob.a": problem,
+        "quest.a": {"type": "question", "addresses": "prob.a", "request": "one"},
+        "ans.a": {"type": "answer", "answers": "quest.a", "status": "accepted",
+                  "erotetic_relation": {"value": "corrective"}},
+    }
+    assert texts(unsupported_outcome(problem, records, CLASSES, HOLDERS)) == [
+        "status: posed, and an accepted answer denies a presupposition of quest.a"
+    ]
+    problem["status"] = "dissolved"
+    assert texts(unsupported_outcome(problem, records, CLASSES, HOLDERS)) == []
+    records["ans.a"]["status"] = "hypothesized"
+    assert texts(unsupported_outcome(problem, records, CLASSES, HOLDERS)) == [
+        "status: dissolved, and no accepted answer denies a presupposition of quest.a"
+    ]
+

@@ -37,8 +37,8 @@ The problem record states one [epistemic problem](../epistemology/objects/proble
 
 - **A conflict with a publication must be asserted.** No checker reads the literature, so a conflict between a record and a publication is stated with pointers to both.
 
-> [!WARNING] Unread existence
-> A check compares the status `solved` with the [demand met](../epistemology/objects/problem/epistemic-problem.md#^demand-met) that the records show, but no check yet reads the existence of a problem or its axis A, as the goal `problem-record` of the [project goals](../../TODO.md) lists.
+> [!WARNING] Unread axis A
+> A check compares the status `solved` with the [demand met](../epistemology/objects/problem/epistemic-problem.md#^demand-met) that the records show, and the status `dissolved` with an accepted corrective answer to the associated question, which denies one of its presuppositions. No check yet reads axis A, as the goal `problem-record` of the [project goals](../../TODO.md) lists.
 >
 > When the demanded result is of a [construct type](../epistemology/objects/status/epistemic-objects.md#^accepted-objects), such as a model or a concept, the [demand is met](../epistemology/objects/problem/epistemic-problem.md#^demand-met) by the stabilized record of the construct and a satisfied assessment of it against the constraints. An [assessment record](assessment.md) holds a verdict per constraint for a construct, so the check reads that status for the constructs that a record kind holds.
 >

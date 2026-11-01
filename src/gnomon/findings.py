@@ -203,6 +203,14 @@ COMPLETENESS_UNSUPPORTED_SOLVED = _rule(
 COMPLETENESS_UNRECORDED_SOLUTION = _rule(
     "completeness/unrecorded-solution", "The records meet the demand of a problem that is not marked solved."
 )
+COMPLETENESS_UNSUPPORTED_DISSOLVED = _rule(
+    "completeness/unsupported-dissolved",
+    "A problem is marked dissolved while no accepted answer denies a presupposition of its associated question.",
+)
+COMPLETENESS_UNRECORDED_DISSOLUTION = _rule(
+    "completeness/unrecorded-dissolution",
+    "An accepted answer denies a presupposition of the associated question of a problem not marked dissolved.",
+)
 COMPLETENESS_UNSTATED_FUNCTION_SENSE = _rule(
     "completeness/unstated-function-sense",
     "A question requests a functional relation without its sense of function.",
