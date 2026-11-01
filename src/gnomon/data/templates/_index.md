@@ -40,4 +40,4 @@ Each template follows ten conventions of format:
 Two conventions govern the names of fields:
 
 - each field is named after the distinction that it decides, so two fields of one record that decide different distinctions never share a name;
-- `status` names the lifecycle of a record in every record kind, and only its admissible states depend on the kind.
+- `status` names the standing of the whole record in every record kind, and its sense depends on the kind, as the [record attributes](../../../../docs/epistemology/objects/question/question.md#^record-attributes) state: the attitude toward its claim for an answer, the stage of its course for a problem, a question or an itinerary, and the maturity of the record or its retraction for any other record.
