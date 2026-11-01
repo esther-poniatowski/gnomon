@@ -171,6 +171,24 @@ COMPLETENESS_FOREIGN_BACKGROUND = _rule(
     "completeness/foreign-background",
     "A question admits a background that describes another target than its own.",
 )
+COMPLETENESS_UNKNOWN_ASSESSED = _rule(
+    "completeness/unknown-assessed", "An assessment assesses a record that does not exist."
+)
+COMPLETENESS_UNASSESSABLE_RECORD = _rule(
+    "completeness/unassessable-record",
+    "An assessment assesses a record that is neither a candidate answer nor a construct.",
+)
+COMPLETENESS_MISMATCHED_STANDARD = _rule(
+    "completeness/mismatched-standard",
+    "An assessment is made against a record of the wrong kind for what it assesses.",
+)
+COMPLETENESS_MISSHAPEN_TESTS = _rule(
+    "completeness/misshapen-tests", "The tests of an assessment do not fit what it assesses."
+)
+COMPLETENESS_UNKNOWN_CONSTRAINT = _rule(
+    "completeness/unknown-constraint",
+    "A verdict of an assessment names a constraint that its problem does not state.",
+)
 COMPLETENESS_UNSTATED_FUNCTION_SENSE = _rule(
     "completeness/unstated-function-sense",
     "A question requests a functional relation without its sense of function.",

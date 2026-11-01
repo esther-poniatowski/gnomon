@@ -131,6 +131,21 @@ PRODUCT_ROWS = product_rows()
 
 
 @pytest.mark.skipif(not PRODUCT_ROWS, reason="the overview of the taxonomy carries no table of product types")
+def test_the_classes_of_the_product_types_are_those_of_the_inventory() -> None:
+    """Each type takes the class under which the inventory of epistemic objects lists it."""
+    inventory = (ROOT / "docs/epistemology/objects/status/epistemic-objects.md").read_text(encoding="utf-8")
+    labels = {"Claim types": "claim", "Construct types": "construct", "Types not yet classed": "unclassed",
+              "Evaluative types": "evaluative", "Types outside these classes": "other"}
+    listed = {}
+    for label, token in labels.items():
+        line = re.search(rf"^- \*\*{label}\*\*[^:]*: (.*)$", inventory, re.M)
+        assert line is not None, f"the inventory lists no {label.lower()}"
+        names = re.split(r", | and ", line.group(1).split(". ")[0].rstrip("."))
+        listed.update({name.strip().replace(" ", "-"): token for name in names})
+    registry = yaml.safe_load((ROOT / "src/gnomon/data/registries/product-types.yml").read_text())
+    assert {entry["id"]: entry["class"] for entry in registry["product_types"]} == listed
+
+
 def test_the_registry_lists_the_product_types_of_the_overview() -> None:
     """The taxonomy owns the list of types, and the registry states the coverage of each."""
     registry = yaml.safe_load((ROOT / "src/gnomon/data/registries/product-types.yml").read_text())

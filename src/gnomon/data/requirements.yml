@@ -29,7 +29,7 @@ always:
   model: [constituents, variables, laws]
   binding: [model, target, asserter, feature_pairs, domain, grain, version]
   key: [kind, domain_and_codomain, expression, version]
-  assessment: [answer, question, tests.admissibility, tests.warrant]
+  assessment: [assesses, against]
 
 by_block:
   aim_block.explanation:

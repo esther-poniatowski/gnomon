@@ -6,6 +6,9 @@
 # holds a type yet, the type stays in the list, marked `to-create`, so that the records are
 # extended to match it.
 #
+# Each entry states its class, as the inventory of epistemic objects sorts the types
+# (docs/epistemology/objects/status/epistemic-objects.md): `claim`, `construct`, `evaluative`,
+# `unclassed` (a type not yet classed), or `other`.
 # Each entry names the record kinds that hold a product of the type, and the field that holds it
 # when only a part of a record does. Its status states how far the records cover the type:
 #   - `exists`: a record kind holds the type in full;
@@ -25,92 +28,116 @@ type: product-type-registry
 
 product_types:
   - id: source
+    class: other
     record: external pointer
     status: exists
     condition: "A pointer to a publication, a data set or an observation, held by the sources of a problem and the pointers of an identification."
   - id: problem
+    class: other
     record: [problem]
     status: exists
   - id: question-schema
+    class: other
     record: [question]
     when: {form: schema}
     status: exists
   - id: question
+    class: other
     record: [question]
     when: {form: question}
     status: exists
   - id: identified-subject
+    class: unclassed
     record: [target-system, phenomenon]
     when: {commitment: [identified, specified]}
     status: exists
   - id: concept
+    class: construct
     record: to-create
     status: to-create
   - id: classification
+    class: construct
     record: [target-system]
     field_path: reference_class
     status: exists
   - id: measurement-procedure
+    class: construct
     record: [target-system]
     field_path: "variables[].scale, variables[].expression"
     status: partial
     condition: "The scale and the defining expression of a quantity; the procedure that assigns its values has no field."
   - id: design
+    class: construct
     record: to-create
     status: to-create
   - id: data
+    class: unclassed
     record: [phenomenon]
     field_path: data
     status: partial
     condition: "Pointers to the data that establish the phenomenon; the data themselves stay outside the records."
   - id: phenomenon
+    class: unclassed
     record: [phenomenon]
     status: exists
   - id: target-specification
+    class: construct
     record: [target-system]
     when: {commitment: [specified]}
     status: exists
   - id: admitted-laws
+    class: unclassed
     record: [background]
     status: exists
   - id: model
+    class: construct
     record: [model]
     status: exists
   - id: binding
+    class: unclassed
     record: [binding]
     status: exists
   - id: key
+    class: construct
     record: [key]
     status: exists
   - id: consequence
+    class: claim
     record: [answer, assessment]
     field_path: "answer: aim_block.model_knowledge; assessment: obligations"
     status: partial
     condition: "The consequence or the counterexample that the block of model knowledge of an answer states, or a settled proof obligation. A consequence derived on the way to another result, and stated by no answer, has no record."
   - id: target-claim
+    class: claim
     record: [answer]
     status: exists
   - id: verdict
+    class: evaluative
     record: [assessment]
     field_path: tests
     status: exists
   - id: credence
+    class: evaluative
     record: [assessment]
     field_path: credence
     status: exists
   - id: ranking
+    class: evaluative
     record: [assessment]
     field_path: "appraisal[].preferred_over"
     status: exists
   - id: explanation
+    class: claim
     record: [answer]
     field_path: aim_block.explanation
     status: exists
     condition: "An answer whose block of an explanation reads named dependences of its core as explanatory, by the requested relation."
   - id: inter-theory-relation
+    class: claim
     record: to-create
     status: to-create
   - id: knowledge-state-change
+    class: other
     record: [problem, question, answer, assessment, target-system, phenomenon, background, model, binding, key]
     field_path: status
     status: partial

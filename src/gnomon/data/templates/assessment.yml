@@ -1,4 +1,5 @@
-# specification: `docs/specification/assessment.md`; one file per assessed candidate answer
+# specification: `docs/specification/assessment.md`; one file per assessed candidate answer or demanded construct
+# a construct: name it under `assesses`, its problem under `against`, and keep only `tests.constraints`
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # admissibility: keep the tests of the core and the tests of the block of the aim of the question; delete the tests of the other blocks
 # the erotetic relation of the answer routes the tests: a corrective answer holds no aim block, so its product test and the tests of its block are `not-applicable`
@@ -9,9 +10,8 @@ title: "SHORT NAME OF THE ASSESSMENT"
 id: assess.TOPIC.NAME
 type: assessment
 status: provisional              # provisional | stabilized | retracted
-answer: ans.TOPIC.NAME
-
-question: quest.TOPIC.NAME       # for a reformulating answer, the revised question that the answer names
+assesses: ans.TOPIC.NAME         # the candidate answer, or the record of a construct that a problem demands
+against: quest.TOPIC.NAME        # the question of an answer, or the revised question that a reformulating answer names; the problem of a construct
 
 tests:                           # verdict: pending | pass | fail | not-applicable
   admissibility:                 # the tests of the core, then the tests of each aim block
@@ -39,6 +39,10 @@ tests:                           # verdict: pending | pass | fail | not-applicab
     adequacy-to-use: {verdict: pending, evidence: ""}    # replaces fidelity for an answer that declares its use
     robustness: {verdict: pending, evidence: ""}
     selection: {verdict: pending, evidence: ""}
+  constraints:                   # an assessment of a construct, in place of the two levels above; one entry per constraint of the problem
+    - constraint: "NAME OF THE CONSTRAINT"
+      verdict: pending
+      evidence: ""
 
 comparisons:                     # one entry per comparison that a verdict of fidelity reads; the metric and the tolerance are read from the question
   - id: COMPARISON

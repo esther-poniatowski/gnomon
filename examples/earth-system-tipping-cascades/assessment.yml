@@ -4,8 +4,8 @@ title: "Assessment of the overshoot forecast from a network of four elements"
 id: assess.earth-tipping-subsystems.four-element-overshoot-network
 type: assessment
 status: stabilized
-answer: ans.earth-tipping-subsystems.four-element-overshoot-network
-question: quest.earth-tipping-subsystems.overshoot-sequence-forecast
+assesses: ans.earth-tipping-subsystems.four-element-overshoot-network
+against: quest.earth-tipping-subsystems.overshoot-sequence-forecast
 
 tests:
   admissibility:

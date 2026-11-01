@@ -174,6 +174,23 @@ def product_types(source: Path | None = None) -> dict[str, Mapping[str, Any]]:
     return {str(entry["id"]): entry for entry in registry.get("product_types") or []}
 
 
+def construct_record_kinds(types: Mapping[str, Mapping[str, Any]] | None = None) -> frozenset[str]:
+    """Return the record kinds that hold a product of a construct type.
+
+    >>> sorted(construct_record_kinds({"model": {"class": "construct", "record": ["model"]},
+    ...                                "design": {"class": "construct", "record": "to-create"},
+    ...                                "verdict": {"class": "evaluative", "record": ["assessment"]}}))
+    ['model']
+    """
+    types = product_types() if types is None else types
+    return frozenset(
+        kind
+        for entry in types.values()
+        if entry.get("class") == "construct" and isinstance(entry.get("record"), list)
+        for kind in entry["record"]
+    )
+
+
 def has_placeholder(question: Mapping[str, Any]) -> bool:
     """Return whether some subject slot of a question holds a placeholder rather than a record."""
     subject = question.get("subject") or {}

@@ -20,6 +20,7 @@ from gnomon.completeness import (
     inadmissible_values,
     disposition,
     malformed_credence,
+    misdirected_assessment,
     mismatched_occurrence,
     occurrence_by_category,
     placeholder_types,
@@ -28,11 +29,13 @@ from gnomon.completeness import (
     unstated_function_sense,
 )
 from gnomon.findings import texts
+from gnomon.itineraries import construct_record_kinds
 
 from .paths import EXAMPLES, ROOT
 
 PROBLEMS = sorted(p for p in EXAMPLES.glob("*/") if p.is_dir()) if EXAMPLES.is_dir() else []
 TYPES = placeholder_types()
+CONSTRUCTS = construct_record_kinds()
 
 
 def problem_records(directory: Path) -> dict[str, Mapping[str, Any]]:
@@ -249,4 +252,62 @@ def test_a_corrective_answer_that_passes_its_tests_is_corrective_rather_than_sat
     assert disposition(passing, "corrective") == "corrective"
     failing = {"tests": {"warrant": {"closure": {"verdict": "fail"}}}}
     assert disposition(failing, "corrective") == "not-satisfied"
+
+
+@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
+@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
+def test_every_assessment_fits_what_it_assesses(directory: Path) -> None:
+    records = problem_records(directory)
+    found = [m for a in of_kind(records, "assessment") for m in misdirected_assessment(a, records, CONSTRUCTS)]
+    assert not texts(found), f"{directory.name}: {texts(found)}"
+
+
+def test_an_assessment_of_a_construct_holds_one_verdict_per_constraint() -> None:
+    """A construct is tested against the constraints of its problem; an answer against its question."""
+    records = {
+        "prob.a": {"type": "problem", "constraints": [{"name": "reproduces-delay"}, {"name": "derives-duration"}]},
+        "quest.a": {"type": "question"},
+        "mod.a": {"type": "model"},
+        "ans.a": {"type": "answer"},
+        "phen.a": {"type": "phenomenon"},
+    }
+    verdicts = [{"constraint": "reproduces-delay", "verdict": "pass"}, {"constraint": "derives-duration", "verdict": "fail"}]
+    of_model = {"assesses": "mod.a", "against": "prob.a", "tests": {"constraints": verdicts}}
+    assert texts(misdirected_assessment(of_model, records, CONSTRUCTS)) == []
+    assert disposition(of_model) == "not-satisfied"
+    wrong = {"assesses": "mod.a", "against": "quest.a", "tests": {"constraints": [{"constraint": "stable"}]}}
+    assert texts(misdirected_assessment(wrong, records, CONSTRUCTS)) == [
+        "against: quest.a is a question record, and an assessment of a model is made against a problem",
+    ]
+    unknown = {"assesses": "mod.a", "against": "prob.a", "tests": {"constraints": [{"constraint": "stable"}],
+                                                                  "warrant": {"closure": {"verdict": "pass"}}}}
+    assert texts(misdirected_assessment(unknown, records, CONSTRUCTS)) == [
+        "tests.warrant: an assessment of a construct holds no tests of warrant",
+        "tests.constraints: stable is no constraint of prob.a",
+    ]
+    empty = {"assesses": "mod.a", "against": "prob.a", "tests": {}}
+    assert texts(misdirected_assessment(empty, records, CONSTRUCTS)) == [
+        "tests.constraints: an assessment of a construct holds one verdict per constraint",
+    ]
+
+
+def test_an_assessment_of_an_answer_keeps_its_two_levels_of_tests() -> None:
+    records = {"prob.a": {"type": "problem"}, "ans.a": {"type": "answer"}, "phen.a": {"type": "phenomenon"},
+               "quest.a": {"type": "question"}}
+    tests = {"admissibility": {"scope": {"verdict": "pass"}}, "warrant": {"closure": {"verdict": "pass"}}}
+    assert texts(misdirected_assessment({"assesses": "ans.a", "against": "quest.a", "tests": tests}, records,
+                                        CONSTRUCTS)) == []
+    misread = {"assesses": "ans.a", "against": "prob.a",
+               "tests": {"admissibility": {"scope": {"verdict": "pass"}}, "constraints": [{"constraint": "c"}]}}
+    assert texts(misdirected_assessment(misread, records, CONSTRUCTS)) == [
+        "against: prob.a is a problem record, and an assessment of an answer is made against a question",
+        "tests.warrant: an assessment of an answer holds its tests of warrant",
+        "tests.constraints: an assessment of an answer holds no verdict per constraint",
+    ]
+    assert texts(misdirected_assessment({"assesses": "phen.a"}, records, CONSTRUCTS)) == [
+        "assesses: phen.a is a phenomenon record, neither an answer nor a construct"
+    ]
+    assert texts(misdirected_assessment({"assesses": "ans.none"}, records, CONSTRUCTS)) == [
+        "assesses: ans.none is no record"
+    ]
 

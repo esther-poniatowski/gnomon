@@ -4,8 +4,8 @@ title: "Assessment of the snakes-and-ladders catalogue"
 id: assess.swift-hohenberg.snakes-ladders-catalogue
 type: assessment
 status: stabilized
-answer: ans.swift-hohenberg.snakes-ladders-catalogue
-question: quest.swift-hohenberg.localized-states-description
+assesses: ans.swift-hohenberg.snakes-ladders-catalogue
+against: quest.swift-hohenberg.localized-states-description
 
 tests:
   admissibility:

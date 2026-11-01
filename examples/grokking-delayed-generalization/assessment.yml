@@ -4,8 +4,8 @@ title: "Assessment of the account through a structured representation"
 id: assess.grokking.slow-structured-representation
 type: assessment
 status: stabilized
-answer: ans.grokking.slow-structured-representation
-question: quest.grokking.explain_delay
+assesses: ans.grokking.slow-structured-representation
+against: quest.grokking.explain_delay
 
 tests:
   admissibility:

@@ -4,8 +4,8 @@ title: "Assessment of the theorem that feasibility implies stability"
 id: assess.microbial.feasibility-implies-stability
 type: assessment
 status: stabilized
-answer: ans.microbial.feasibility-implies-stability
-question: quest.microbial.stable-coexistence-constraints
+assesses: ans.microbial.feasibility-implies-stability
+against: quest.microbial.stable-coexistence-constraints
 
 tests:
   admissibility:

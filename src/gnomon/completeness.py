@@ -430,13 +430,98 @@ def malformed_credence(assessment: Mapping[str, Any]) -> list[Finding]:
     return found
 
 
-def disposition(assessment: Mapping[str, Any], erotetic_relation: str | None = None) -> str:
-    """Return the disposition of an assessment, read from its admissibility and warrant verdicts.
+def misdirected_assessment(
+    assessment: Mapping[str, Any],
+    records: Mapping[str, Mapping[str, Any]],
+    construct_kinds: Iterable[str],
+) -> list[Finding]:
+    """Return every mismatch between what an assessment assesses, its standard and its tests.
 
-    An answer satisfies its question only when it is admissible and warranted, so one failed test
-    decides the disposition. Without a failure, a pending verdict withholds it. A corrective answer
-    shows that a presupposition of its question is false, so it cannot satisfy that question: the
-    disposition that would be ``satisfied`` is ``corrective`` instead.
+    An assessment tests a candidate answer against the specification of a question, through its
+    tests of admissibility and of warrant, or a construct that a problem demands against the
+    constraints of that problem, through one verdict per constraint. The record assessed decides
+    which standard and which tests apply.
+
+    Parameters
+    ----------
+    assessment : mapping
+        One filled assessment record.
+    records : mapping
+        The records of the problem, keyed by identifier.
+    construct_kinds : iterable of str
+        The record kinds that hold a construct, read from the product-type registry.
+    """
+    assessed, standard = assessment.get("assesses"), assessment.get("against")
+    target = records.get(assessed) if isinstance(assessed, str) else None
+    if target is None:
+        return [finding(rules.COMPLETENESS_UNKNOWN_ASSESSED, f"assesses: {assessed} is no record", "assesses")]
+    tests = assessment.get("tests") or {}
+    against = records.get(standard) if isinstance(standard, str) else None
+    found: list[Finding] = []
+    if target.get("type") == "answer":
+        expected, shape = "question", ("admissibility", "warrant")
+        found += [
+            finding(rules.COMPLETENESS_MISSHAPEN_TESTS,
+                    f"tests.{level}: an assessment of an answer holds its tests of {level}", "tests", level)
+            for level in shape if not isinstance(tests.get(level), Mapping) or not tests.get(level)
+        ]
+        if tests.get("constraints"):
+            found.append(
+                finding(rules.COMPLETENESS_MISSHAPEN_TESTS,
+                        "tests.constraints: an assessment of an answer holds no verdict per constraint",
+                        "tests", "constraints")
+            )
+    elif target.get("type") in set(construct_kinds):
+        expected = "problem"
+        verdicts = tests.get("constraints")
+        if not isinstance(verdicts, list) or not verdicts:
+            found.append(
+                finding(rules.COMPLETENESS_MISSHAPEN_TESTS,
+                        "tests.constraints: an assessment of a construct holds one verdict per constraint",
+                        "tests", "constraints")
+            )
+            verdicts = []
+        found += [
+            finding(rules.COMPLETENESS_MISSHAPEN_TESTS,
+                    f"tests.{level}: an assessment of a construct holds no tests of {level}", "tests", level)
+            for level in ("admissibility", "warrant") if tests.get(level)
+        ]
+        stated = {c.get("name") for c in (against or {}).get("constraints") or [] if isinstance(c, Mapping)}
+        if against is not None and against.get("type") == "problem":
+            found += [
+                finding(rules.COMPLETENESS_UNKNOWN_CONSTRAINT,
+                        f"tests.constraints: {entry.get('constraint')} is no constraint of {standard}",
+                        "tests", "constraints", Entry(index, entry))
+                for index, entry in enumerate(verdicts)
+                if isinstance(entry, Mapping) and entry.get("constraint") not in stated
+            ]
+    else:
+        return [
+            finding(rules.COMPLETENESS_UNASSESSABLE_RECORD,
+                    f"assesses: {assessed} is a {target.get('type')} record, neither an answer nor a construct",
+                    "assesses")
+        ]
+    if (against or {}).get("type") != expected:
+        kind = f"a {against['type']} record" if (against or {}).get("type") else "no record"
+        assessed_kind = str(target.get("type"))
+        article = "an" if assessed_kind[:1] in "aeiou" else "a"
+        found.insert(
+            0,
+            finding(rules.COMPLETENESS_MISMATCHED_STANDARD,
+                    f"against: {standard} is {kind}, and an assessment of {article} {assessed_kind} is made"
+                    f" against a {expected}", "against"),
+        )
+    return found
+
+
+def disposition(assessment: Mapping[str, Any], erotetic_relation: str | None = None) -> str:
+    """Return the disposition of an assessment, read from its verdicts.
+
+    An answer satisfies its question only when it is admissible and warranted, and a construct meets
+    its problem only when it meets every constraint, so one failed test decides the disposition.
+    Without a failure, a pending verdict withholds it. A corrective answer shows that a
+    presupposition of its question is false, so it cannot satisfy that question: the disposition
+    that would be ``satisfied`` is ``corrective`` instead.
 
     Parameters
     ----------
@@ -459,13 +544,16 @@ def disposition(assessment: Mapping[str, Any], erotetic_relation: str | None = N
     'corrective'
     >>> disposition({"tests": {"warrant": {"closure": {"verdict": "pending"}}}}, "corrective")
     'withheld'
+    >>> disposition({"tests": {"constraints": [{"constraint": "c1", "verdict": "pass"},
+    ...                                        {"constraint": "c2", "verdict": "fail"}]}})
+    'not-satisfied'
     """
     tests = assessment.get("tests") or {}
     verdicts = [
         (entry or {}).get("verdict")
         for level in ("admissibility", "warrant")
         for entry in (tests.get(level) or {}).values()
-    ]
+    ] + [(entry or {}).get("verdict") for entry in tests.get("constraints") or [] if isinstance(entry, Mapping)]
     if "fail" in verdicts:
         return "not-satisfied"
     if any(verdict not in ("pass", "not-applicable") for verdict in verdicts):

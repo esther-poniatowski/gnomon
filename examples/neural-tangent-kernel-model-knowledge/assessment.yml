@@ -4,8 +4,8 @@ title: "Assessment of the theorem of uniform linearization"
 id: assess.ntk.uniform-linearization-theorem
 type: assessment
 status: stabilized
-answer: ans.ntk.uniform-linearization-theorem
-question: quest.ntk.linearized-dynamics-validity
+assesses: ans.ntk.uniform-linearization-theorem
+against: quest.ntk.linearized-dynamics-validity
 
 tests:
   admissibility:

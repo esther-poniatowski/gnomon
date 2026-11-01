@@ -37,7 +37,7 @@ The problem record states one [epistemic problem](../epistemology/objects/proble
 > [!WARNING] Untyped demand
 > The field `demand` holds a reading in words, so the checks of the existence of a problem and of axis A, which read the demanded type, wait on the typed demand that the goal `problem-record` of the [project goals](../../TODO.md) adds.
 >
-> When the demanded result is of a [construct type](../epistemology/objects/status/epistemic-objects.md#^accepted-objects), such as a model or a concept, the [demand is met](../epistemology/objects/problem/epistemic-problem.md#^demand-met) by the stabilized record of the construct and a satisfied assessment of it against the constraints. An assessment record judges a candidate answer only, so the status `solved` of such a problem cannot yet be read from the records.
+> When the demanded result is of a [construct type](../epistemology/objects/status/epistemic-objects.md#^accepted-objects), such as a model or a concept, the [demand is met](../epistemology/objects/problem/epistemic-problem.md#^demand-met) by the stabilized record of the construct and a satisfied assessment of it against the constraints. An [assessment record](assessment.md) holds a verdict per constraint for a construct, so a check can read that status once the demand is typed, for the constructs that a record kind holds.
 >
 > Under the request `decision`, the demand is met once every candidate is settled in view of its assessment. For candidate answers, the records hold the attitude of each answer and the disposition of each assessment, so a check can read that status once the demand is typed. Candidate constructs share the limit stated above.
 
