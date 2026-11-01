@@ -95,11 +95,16 @@ gnomon vocabulary <directory> --markdown
 An author who has filled the itineraries of a problem needs to know whether each step takes the products that its activity requires. The `itinerary` command checks every itinerary record of one problem folder against the registries of activities and of product types, and against the records that its steps name. The conditions of the check are stated in the [itinerary check](../epistemology/processes/activities/epistemic-activities.md#^itinerary-check), and the checks on the fields of an itinerary in the [itinerary record](../specification/itinerary.md#^record-checks).
 
 ```sh
-gnomon itinerary <directory>
+gnomon itinerary <directory> [--format text|sarif] [--output PATH] [--root PATH]
 ```
 
-| Argument      | Description                                       |
-| ------------- | ------------------------------------------------- |
-| `<directory>` | Folder holding the filled records of one problem. |
+| Argument or option | Description                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------- |
+| `<directory>`      | Folder holding the filled records of one problem.                                                 |
+| `--format`, `-f`   | `text` (default) or `sarif`, a log in the findings profile of the gate Elenchos.                  |
+| `--output`, `-o`   | With `sarif`, file receiving the log instead of standard output; its missing folders are created. |
+| `--root`, `-r`     | With `sarif`, root against which the log states every path; the current folder by default.        |
 
 **Output:** one line per defect, prefixed with the identifier of its itinerary, then one line with the number of itineraries checked and the number of defects found. The command exits with code 1 when it finds a defect, or when the folder does not exist.
+
+With `--format sarif`, the [findings output](../adr/findings-output.md#^command-output) states the content of the log and the exit statuses. When the log takes standard output, the text lines go to standard error.
