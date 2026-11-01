@@ -19,12 +19,9 @@ The activities of this family output a **change of knowledge state**: a change o
 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
-| `belief-revision` | `verdict \| credence \| ranking` | `knowledge-state-change` | deductive | justification |
+| `belief-revision` | `verdict \| credence \| ranking` | `knowledge-state-change` | non-inferential | justification |
 | `theory-change` | `verdict` (several) | `knowledge-state-change` | non-inferential | justification |
 | `framework-revision` | `verdict` (several) | `knowledge-state-change` | non-inferential | both |
-
-> [!WARNING] Mode pending a change of the registry
-> Belief revision is non-inferential. The change of $K$ records an act of the researcher, who accepts or retracts a claim in view of the verdicts, the credence or the ranking, and that act is never derived from them, as the [act of acceptance](../../objects/status/statuses-and-acceptance.md#^acceptance-act) states. The mode `deductive` in the row of `belief-revision` is transcribed from the [registry of activities](../../../../src/gnomon/data/registries/activities.yml), and its correction to `non-inferential` is pending a change of that registry. ^belief-revision-mode
 
 ## Norms
 

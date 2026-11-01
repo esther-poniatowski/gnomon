@@ -421,7 +421,7 @@ activities:
       - {types: [verdict, credence, ranking]}
     output: knowledge-state-change
     norm: norm.belief-revision
-    mode: deductive
+    mode: non-inferential
     context: justification
   - id: theory-change
     family: revision
