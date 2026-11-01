@@ -27,6 +27,8 @@ The fields of the contrast are documented in the [subject of a question](../../.
     - implicit in questions about a causal effect, where the contrast is the comparator;
     - optional for how-questions and for descriptive aims.
 
+- **The contrast belongs to the question, not to the phenomenon.** A why-question is fixed by its topic, its contrast class and its relevance relation [vanfraassen1980], so the contrast class is a component of the question. One phenomenon can therefore be questioned against several contrasts, each of which yields other answers, as the example of paresis shows. The phenomenon stays one record shared by those questions, and each question states its own contrast. A question that states no foil takes the other values of the explanandum variable, as the [rule on empty specifications](../answer/satisfaction-conditions.md#^empty-specification) states. ^contrast-in-question
+
 ---
 ## Sources
 
