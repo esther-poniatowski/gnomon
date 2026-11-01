@@ -13,7 +13,7 @@ aliases:
 
 > [!QUESTION] Goal: which inferences reach a hypothesis beyond their premises, and by which norm is each judged?
 
-The activities of this family output a [hypothesis](../../vocabulary/representations/claim-and-hypothesis.md): a claim about the target, held with the attitude `hypothesized`, of the product type [`target-claim`](epistemic-activities.md#^target-claim-type). The content of the hypothesis exceeds that of the premises of the inference that reaches it, which is a property of the inference rather than of the type. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a [hypothesis](../../vocabulary/representations/claim-and-hypothesis.md): a claim about the target, held with the attitude `hypothesized`, of the product type [`target-claim`](epistemic-activities.md#^target-claim-type). Each inference of this family is ampliative, in the sense of the [distinction between explicative and ampliative inferences](epistemic-activities.md#^explicative-ampliative): the content of the hypothesis exceeds that of the premises of the inference that reaches it, which is a property of the inference rather than of the type. Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 
