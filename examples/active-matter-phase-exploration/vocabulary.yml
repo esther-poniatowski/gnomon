@@ -59,68 +59,6 @@ symbols:
   block: organization
   signature: []
   name: nonreciprocal cross-coupling on the lattice
-- symbol: C
-  declared_in: phen.nonreciprocal-active-matter.collective-phases
-  block: explanandum_variables
-  signature:
-  - sp
-  - sp
-  - rsep
-  - lag
-  name: correlation matrix between species
-- symbol: Cl
-  declared_in: phen.nonreciprocal-active-matter.collective-phases
-  block: explanandum_variables
-  signature:
-  - sp
-  - sp
-  - rsite
-  - lag
-  name: correlation matrix between species on the lattice
-- symbol: S
-  declared_in: phen.nonreciprocal-active-matter.collective-phases
-  block: explanandum_variables
-  signature:
-  - sp
-  - sp
-  - k
-  - omega
-  name: spectral matrix between species
-- symbol: Sl
-  declared_in: phen.nonreciprocal-active-matter.collective-phases
-  block: explanandum_variables
-  signature:
-  - sp
-  - sp
-  - klat
-  - omega
-  name: spectral matrix between species on the lattice
-- symbol: diag
-  declared_in: phen.nonreciprocal-active-matter.collective-phases
-  block: explanandum_variables
-  signature:
-  - L
-  - d
-  name: diagnostic of phases for the continuum variant
-- symbol: diag_lattice
-  declared_in: phen.nonreciprocal-active-matter.collective-phases
-  block: explanandum_variables
-  signature:
-  - L
-  - d
-  name: diagnostic of phases for the lattice variant
-- symbol: rho_emp
-  declared_in: phen.nonreciprocal-active-matter.collective-phases
-  block: explanandum_variables
-  signature:
-  - sp
-  name: empirical distribution of the local field state of each species
-- symbol: rho_lat
-  declared_in: phen.nonreciprocal-active-matter.collective-phases
-  block: explanandum_variables
-  signature:
-  - sp
-  name: empirical distribution of the lattice state of each species
 - symbol: k
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: index_sets
@@ -171,6 +109,68 @@ symbols:
   block: manifestations.features
   signature: []
   name: candidate collective phase on the lattice
+- symbol: C
+  declared_in: phen.nonreciprocal-active-matter.collective-phases
+  block: observables
+  signature:
+  - sp
+  - sp
+  - rsep
+  - lag
+  name: correlation matrix between species
+- symbol: Cl
+  declared_in: phen.nonreciprocal-active-matter.collective-phases
+  block: observables
+  signature:
+  - sp
+  - sp
+  - rsite
+  - lag
+  name: correlation matrix between species on the lattice
+- symbol: S
+  declared_in: phen.nonreciprocal-active-matter.collective-phases
+  block: observables
+  signature:
+  - sp
+  - sp
+  - k
+  - omega
+  name: spectral matrix between species
+- symbol: Sl
+  declared_in: phen.nonreciprocal-active-matter.collective-phases
+  block: observables
+  signature:
+  - sp
+  - sp
+  - klat
+  - omega
+  name: spectral matrix between species on the lattice
+- symbol: diag
+  declared_in: phen.nonreciprocal-active-matter.collective-phases
+  block: observables
+  signature:
+  - L
+  - d
+  name: diagnostic of phases for the continuum variant
+- symbol: diag_lattice
+  declared_in: phen.nonreciprocal-active-matter.collective-phases
+  block: observables
+  signature:
+  - L
+  - d
+  name: diagnostic of phases for the lattice variant
+- symbol: rho_emp
+  declared_in: phen.nonreciprocal-active-matter.collective-phases
+  block: observables
+  signature:
+  - sp
+  name: empirical distribution of the local field state of each species
+- symbol: rho_lat
+  declared_in: phen.nonreciprocal-active-matter.collective-phases
+  block: observables
+  signature:
+  - sp
+  name: empirical distribution of the lattice state of each species
 - symbol: coupling
   declared_in: phen.nonreciprocal-active-matter.collective-phases
   block: scope_over_instances

@@ -15,12 +15,6 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `gauge` | bg.turbulence-incompressible-navier-stokes.navier-stokes | laws | — | pressure gauge |
 | `incompressible` | bg.turbulence-incompressible-navier-stokes.navier-stokes | laws | x | incompressibility constraint |
 | `momentum` | bg.turbulence-incompressible-navier-stokes.navier-stokes | laws | x | incompressible momentum balance |
-| `P` | phen.turbulence.velocity-increment-distributions | explanandum variables | rmag, rdir | joint distribution of the increments |
-| `S` | phen.turbulence.velocity-increment-distributions | explanandum variables | p, rmag, rdir | longitudinal structure function |
-| `ST` | phen.turbulence.velocity-increment-distributions | explanandum variables | p, rmag, rdir | transverse structure function |
-| `du` | phen.turbulence.velocity-increment-distributions | explanandum variables | x, t, rmag, rdir | velocity increment across a separation |
-| `duL` | phen.turbulence.velocity-increment-distributions | explanandum variables | x, t, rmag, rdir | longitudinal increment |
-| `duT` | phen.turbulence.velocity-increment-distributions | explanandum variables | x, t, rmag, rdir | transverse increment |
 | `p` | phen.turbulence.velocity-increment-distributions | index sets | — | order of the structure function |
 | `rdir` | phen.turbulence.velocity-increment-distributions | index sets | — | direction of the separation, a unit vector |
 | `rmag` | phen.turbulence.velocity-increment-distributions | index sets | — | magnitude of the separation |
@@ -29,6 +23,12 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `transverse_scaling` | phen.turbulence.velocity-increment-distributions | manifestations | — | power-law scaling of the transverse structure functions |
 | `zetaL` | phen.turbulence.velocity-increment-distributions | manifestations.features | — | longitudinal scaling exponents, one per order |
 | `zetaT` | phen.turbulence.velocity-increment-distributions | manifestations.features | — | transverse scaling exponents, one per order |
+| `P` | phen.turbulence.velocity-increment-distributions | observables | rmag, rdir | joint distribution of the increments |
+| `S` | phen.turbulence.velocity-increment-distributions | observables | p, rmag, rdir | longitudinal structure function |
+| `ST` | phen.turbulence.velocity-increment-distributions | observables | p, rmag, rdir | transverse structure function |
+| `du` | phen.turbulence.velocity-increment-distributions | observables | x, t, rmag, rdir | velocity increment across a separation |
+| `duL` | phen.turbulence.velocity-increment-distributions | observables | x, t, rmag, rdir | longitudinal increment |
+| `duT` | phen.turbulence.velocity-increment-distributions | observables | x, t, rmag, rdir | transverse increment |
 | `family` | phen.turbulence.velocity-increment-distributions | scope over instances | — | admitted families of forcing and boundary conditions |
 | `realization` | phen.turbulence.velocity-increment-distributions | scope over instances | — | flow realizations under one family of forcing and boundary conditions |
 | `boundaryenv` | system.turbulence-incompressible-navier-stokes | external systems | — | formal environment at the boundary |

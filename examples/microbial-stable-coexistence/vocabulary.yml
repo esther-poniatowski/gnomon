@@ -112,32 +112,6 @@ symbols:
   block: organization
   signature: []
   name: higher-order coupling
-- symbol: J
-  declared_in: phen.microbial.stable-coexistence
-  block: explanandum_variables
-  signature: []
-  name: Jacobian of the community at the equilibrium
-- symbol: Nstar
-  declared_in: phen.microbial.stable-coexistence
-  block: explanandum_variables
-  signature:
-  - pop
-  name: abundance of each population at equilibrium
-- symbol: Xstar
-  declared_in: phen.microbial.stable-coexistence
-  block: explanandum_variables
-  signature: []
-  name: complete equilibrium state
-- symbol: alpha
-  declared_in: phen.microbial.stable-coexistence
-  block: explanandum_variables
-  signature: []
-  name: spectral abscissa at the equilibrium
-- symbol: mN
-  declared_in: phen.microbial.stable-coexistence
-  block: explanandum_variables
-  signature: []
-  name: minimum population abundance at equilibrium
 - symbol: feasible
   declared_in: phen.microbial.stable-coexistence
   block: manifestations
@@ -148,6 +122,32 @@ symbols:
   block: manifestations
   signature: []
   name: local asymptotic stability of the coexistence equilibrium
+- symbol: J
+  declared_in: phen.microbial.stable-coexistence
+  block: observables
+  signature: []
+  name: Jacobian of the community at the equilibrium
+- symbol: Nstar
+  declared_in: phen.microbial.stable-coexistence
+  block: observables
+  signature:
+  - pop
+  name: abundance of each population at equilibrium
+- symbol: Xstar
+  declared_in: phen.microbial.stable-coexistence
+  block: observables
+  signature: []
+  name: complete equilibrium state
+- symbol: alpha
+  declared_in: phen.microbial.stable-coexistence
+  block: observables
+  signature: []
+  name: spectral abscissa at the equilibrium
+- symbol: mN
+  declared_in: phen.microbial.stable-coexistence
+  block: observables
+  signature: []
+  name: minimum population abundance at equilibrium
 - symbol: member
   declared_in: phen.microbial.stable-coexistence
   block: scope_over_instances

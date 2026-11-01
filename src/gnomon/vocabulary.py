@@ -46,7 +46,7 @@ DECLARING: Mapping[str, tuple[str, ...]] = {
         "external_systems",
     ),
     "background": ("laws", "organization"),
-    "phenomenon": ("index_sets", "explanandum_variables", "manifestations", "scope_over_instances"),
+    "phenomenon": ("index_sets", "observables", "manifestations", "scope_over_instances"),
 }
 
 #: The record kinds the checkers read. A kind declaring no symbol still carries expressions, so
@@ -70,8 +70,8 @@ FORMULA: tuple[tuple[str, str], ...] = (
     ("parameters", "condition"),
     ("laws", "expression"),
     ("laws", "range"),
-    ("explanandum_variables", "expression"),
-    ("explanandum_variables", "condition"),
+    ("observables", "expression"),
+    ("observables", "condition"),
     ("manifestations", "expression"),
     ("detection_criterion", "expression"),
     ("constituents", "extent"),
@@ -87,13 +87,13 @@ FORMULA: tuple[tuple[str, str], ...] = (
     ("proof_obligations", "antecedent"),
     ("proof_obligations", "consequent"),
     ("parameters", "values"),
-    ("explanandum_variables", "values"),
+    ("observables", "values"),
 )
 
 #: Expression fields inside a mapping carried by a list entry, as (block, mapping, key).
 WITHIN_ENTRY: tuple[tuple[str, str, str], ...] = (
-    ("explanandum_variables", "event", "origin"),
-    ("explanandum_variables", "event", "horizon"),
+    ("observables", "event", "origin"),
+    ("observables", "event", "horizon"),
 )
 
 
@@ -159,7 +159,7 @@ REFERENCE: tuple[tuple[str, str], ...] = (
     ("organization", "among"),
     ("realizations", "realizes"),
     ("realizations", "variant"),
-    ("explanandum_variables", "signature"),
+    ("observables", "signature"),
     ("scope_over_instances", "over"),
     ("scope_over_instances", "conditional_on"),
     ("detection_criterion", "across"),
@@ -291,7 +291,7 @@ def corrupted_notation(record: Mapping[str, Any]) -> list[str]:
     """
     found = []
     for block in ("constituents", "index_sets", "variables",
-                  "parameters", "explanandum_variables", "operators", "terms"):
+                  "parameters", "observables", "operators", "terms"):
         for entry in entries(record, block):
             form = entry.get("notation")
             if isinstance(form, str) and any(c in form for c in "\n\t\r\x0b\x0c\x08\x07"):
@@ -341,7 +341,7 @@ def doubly_defined(record: Mapping[str, Any]) -> list[str]:
     and presupposes that such a value exists. Carrying both would define the quantity twice.
     """
     found = []
-    for block in ("variables", "parameters", "explanandum_variables"):
+    for block in ("variables", "parameters", "observables"):
         for entry in entries(record, block):
             if entry.get("expression") and entry.get("condition"):
                 found.append(f"{block}.{entry.get('symbol')}: both an expression and a condition")
@@ -369,7 +369,7 @@ def unselected_conditions(record: Mapping[str, Any]) -> list[str]:
     presupposed, whether the claim holds of any of them, or whether the quantity is the set.
     """
     found = []
-    for block in ("variables", "parameters", "explanandum_variables"):
+    for block in ("variables", "parameters", "observables"):
         for entry in entries(record, block):
             if entry.get("condition") and entry.get("selects") not in ("unique", "any", "all"):
                 found.append(f"{block}.{entry.get('symbol')}: a condition without a selection rule")
@@ -410,7 +410,7 @@ def declarations(record: Mapping[str, Any]) -> list[Declaration]:
                         signature=tuple(s for s in signature if isinstance(s, str)),
                     )
                 )
-    for entry in entries(record, "explanandum_variables"):
+    for entry in entries(record, "observables"):
         pointer = entry.get("reference")
         if isinstance(pointer, str) and "#" in pointer:
             source, symbol = pointer.split("#", 1)
@@ -797,7 +797,7 @@ def overreaching_entries(record: Mapping[str, Any], marked: Mapping[str, str]) -
                             f" carried only by the {marked[symbol]} variant"
                         )
 
-    for block in ("explanandum_variables", "manifestations", "scope_over_instances",
+    for block in ("observables", "manifestations", "scope_over_instances",
                   "detection_criterion", "constituents", "index_sets", "variables",
                   "parameters", "laws", "organization", "realizations", "explanans"):
         for entry in entries(record, block):

@@ -37,26 +37,6 @@ symbols:
   block: laws
   signature: []
   name: update of the optimizer state
-- symbol: Pdelay
-  declared_in: phen.grokking.delayed_generalization
-  block: explanandum_variables
-  signature: []
-  name: distribution of the delay across initialization draws
-- symbol: delay
-  declared_in: phen.grokking.delayed_generalization
-  block: explanandum_variables
-  signature: []
-  name: duration of the delay
-- symbol: tfit
-  declared_in: phen.grokking.delayed_generalization
-  block: explanandum_variables
-  signature: []
-  name: first crossing time of the training criterion
-- symbol: tgen
-  declared_in: phen.grokking.delayed_generalization
-  block: explanandum_variables
-  signature: []
-  name: first crossing time of the generalization criterion
 - symbol: crossing_order
   declared_in: phen.grokking.delayed_generalization
   block: manifestations
@@ -72,6 +52,26 @@ symbols:
   block: manifestations.features
   signature: []
   name: observed duration of the delay
+- symbol: Pdelay
+  declared_in: phen.grokking.delayed_generalization
+  block: observables
+  signature: []
+  name: distribution of the delay across initialization draws
+- symbol: delay
+  declared_in: phen.grokking.delayed_generalization
+  block: observables
+  signature: []
+  name: duration of the delay
+- symbol: tfit
+  declared_in: phen.grokking.delayed_generalization
+  block: observables
+  signature: []
+  name: first crossing time of the training criterion
+- symbol: tgen
+  declared_in: phen.grokking.delayed_generalization
+  block: observables
+  signature: []
+  name: first crossing time of the generalization criterion
 - symbol: init
   declared_in: phen.grokking.delayed_generalization
   block: scope_over_instances

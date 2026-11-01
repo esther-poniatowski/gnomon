@@ -27,26 +27,6 @@ symbols:
   signature:
   - a
   name: shared initial outputs
-- symbol: Edrift
-  declared_in: phen.ntk.linearized-dynamics
-  block: explanandum_variables
-  signature:
-  - m
-  - t
-  name: drift of the empirical kernel
-- symbol: Elimit
-  declared_in: phen.ntk.linearized-dynamics
-  block: explanandum_variables
-  signature:
-  - m
-  name: discrepancy from the limiting kernel at initialization
-- symbol: Eout
-  declared_in: phen.ntk.linearized-dynamics
-  block: explanandum_variables
-  signature:
-  - m
-  - t
-  name: discrepancy between output trajectories
 - symbol: kernel_drift_vanishes
   declared_in: phen.ntk.linearized-dynamics
   block: manifestations
@@ -102,6 +82,26 @@ symbols:
   block: manifestations.features
   signature: []
   name: mode of convergence of the bound on the outputs over initialization draws
+- symbol: Edrift
+  declared_in: phen.ntk.linearized-dynamics
+  block: observables
+  signature:
+  - m
+  - t
+  name: drift of the empirical kernel
+- symbol: Elimit
+  declared_in: phen.ntk.linearized-dynamics
+  block: observables
+  signature:
+  - m
+  name: discrepancy from the limiting kernel at initialization
+- symbol: Eout
+  declared_in: phen.ntk.linearized-dynamics
+  block: observables
+  signature:
+  - m
+  - t
+  name: discrepancy between output trajectories
 - symbol: init_draw
   declared_in: phen.ntk.linearized-dynamics
   block: scope_over_instances

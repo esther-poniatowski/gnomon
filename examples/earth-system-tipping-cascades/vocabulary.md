@@ -15,14 +15,14 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `evolve` | bg.earth-tipping-subsystems.subsystem-dynamics | laws | sub | evolution of a subsystem |
 | `transmit` | bg.earth-tipping-subsystems.subsystem-dynamics | laws | sub, sub, t | directed interaction between subsystems |
 | `coupling` | bg.earth-tipping-subsystems.subsystem-dynamics | organization | — | directed coupling between subsystems |
-| `Fi` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | sub, H | censored distribution of the transition time |
-| `PZ` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | H | joint law of the marked sequence of transitions |
-| `Tev` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | sub | transition time of a subsystem |
-| `Z` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | — | marked sequence of transitions |
-| `pi` | phen.earth-tipping-subsystems.transition-sequences | explanandum variables | sub, H | probability that a subsystem transitions by the horizon |
 | `H` | phen.earth-tipping-subsystems.transition-sequences | index sets | — | prediction horizon |
 | `overshoot_dependence` | phen.earth-tipping-subsystems.transition-sequences | manifestations | — | dependence of the transition sequence on the warming trajectory |
 | `overshoot_effect` | phen.earth-tipping-subsystems.transition-sequences | manifestations.features | — | effect of an overshoot trajectory on the sequence law |
+| `Fi` | phen.earth-tipping-subsystems.transition-sequences | observables | sub, H | censored distribution of the transition time |
+| `PZ` | phen.earth-tipping-subsystems.transition-sequences | observables | H | joint law of the marked sequence of transitions |
+| `Tev` | phen.earth-tipping-subsystems.transition-sequences | observables | sub | transition time of a subsystem |
+| `Z` | phen.earth-tipping-subsystems.transition-sequences | observables | — | marked sequence of transitions |
+| `pi` | phen.earth-tipping-subsystems.transition-sequences | observables | sub, H | probability that a subsystem transitions by the horizon |
 | `param` | phen.earth-tipping-subsystems.transition-sequences | scope over instances | — | admissible dynamical parameters of each subsystem |
 | `realization` | phen.earth-tipping-subsystems.transition-sequences | scope over instances | — | internal climate variability |
 | `scenario` | phen.earth-tipping-subsystems.transition-sequences | scope over instances | — | prescribed emission scenario |

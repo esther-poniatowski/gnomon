@@ -77,7 +77,7 @@ use:                             # fill in place of a binding when the claim bea
 
 aim_block:                       # fill for a complete or a partial answer only: keep the block of the aim of the question, and delete the others
   description:
-    values:                      # one entry per explanandum variable or feature that the request covers, per source of variation
+    values:                      # one entry per observable or feature that the request covers, per source of variation
       - of: phen.TOPIC.NAME#SYMBOL
         across: SYMBOL           # the source of variation of the phenomenon whose quantification the value takes; omit for a single instance
         data_version: VERSION    # for a value that the estimator of the phenomenon computes: the version of the data on which it runs
@@ -85,7 +85,7 @@ aim_block:                       # fill for a complete or a partial answer only:
   exploration:
     space:                       # the observables and the varied factors
       origin:                    # input (fixed by the question) | output (produced by the answer)
-      observables: [SYMBOL]      # explanandum variables of the phenomenon
+      observables: [SYMBOL]      # of the phenomenon
       varied:
         - factor: SYMBOL
           range: "SET EXPRESSION OVER DECLARED SYMBOLS"

@@ -16,13 +16,6 @@ symbols:
   block: laws
   signature: []
   name: localized boundary condition in the far field
-- symbol: Uloc
-  declared_in: phen.swift-hohenberg.localized-states
-  block: explanandum_variables
-  signature:
-  - r
-  - b
-  name: set of localized stationary profiles
 - symbol: localized_states_exist
   declared_in: phen.swift-hohenberg.localized-states
   block: manifestations
@@ -43,6 +36,13 @@ symbols:
   block: manifestations.features
   signature: []
   name: topology of the solution branches
+- symbol: Uloc
+  declared_in: phen.swift-hohenberg.localized-states
+  block: observables
+  signature:
+  - r
+  - b
+  name: set of localized stationary profiles
 - symbol: t
   declared_in: system.swift-hohenberg-localized-states
   block: index_sets

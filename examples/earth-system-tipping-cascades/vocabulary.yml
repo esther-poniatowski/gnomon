@@ -30,37 +30,6 @@ symbols:
   block: organization
   signature: []
   name: directed coupling between subsystems
-- symbol: Fi
-  declared_in: phen.earth-tipping-subsystems.transition-sequences
-  block: explanandum_variables
-  signature:
-  - sub
-  - H
-  name: censored distribution of the transition time
-- symbol: PZ
-  declared_in: phen.earth-tipping-subsystems.transition-sequences
-  block: explanandum_variables
-  signature:
-  - H
-  name: joint law of the marked sequence of transitions
-- symbol: Tev
-  declared_in: phen.earth-tipping-subsystems.transition-sequences
-  block: explanandum_variables
-  signature:
-  - sub
-  name: transition time of a subsystem
-- symbol: Z
-  declared_in: phen.earth-tipping-subsystems.transition-sequences
-  block: explanandum_variables
-  signature: []
-  name: marked sequence of transitions
-- symbol: pi
-  declared_in: phen.earth-tipping-subsystems.transition-sequences
-  block: explanandum_variables
-  signature:
-  - sub
-  - H
-  name: probability that a subsystem transitions by the horizon
 - symbol: H
   declared_in: phen.earth-tipping-subsystems.transition-sequences
   block: index_sets
@@ -76,6 +45,37 @@ symbols:
   block: manifestations.features
   signature: []
   name: effect of an overshoot trajectory on the sequence law
+- symbol: Fi
+  declared_in: phen.earth-tipping-subsystems.transition-sequences
+  block: observables
+  signature:
+  - sub
+  - H
+  name: censored distribution of the transition time
+- symbol: PZ
+  declared_in: phen.earth-tipping-subsystems.transition-sequences
+  block: observables
+  signature:
+  - H
+  name: joint law of the marked sequence of transitions
+- symbol: Tev
+  declared_in: phen.earth-tipping-subsystems.transition-sequences
+  block: observables
+  signature:
+  - sub
+  name: transition time of a subsystem
+- symbol: Z
+  declared_in: phen.earth-tipping-subsystems.transition-sequences
+  block: observables
+  signature: []
+  name: marked sequence of transitions
+- symbol: pi
+  declared_in: phen.earth-tipping-subsystems.transition-sequences
+  block: observables
+  signature:
+  - sub
+  - H
+  name: probability that a subsystem transitions by the horizon
 - symbol: param
   declared_in: phen.earth-tipping-subsystems.transition-sequences
   block: scope_over_instances

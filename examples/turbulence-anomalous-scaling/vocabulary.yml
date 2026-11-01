@@ -28,56 +28,6 @@ symbols:
   signature:
   - x
   name: incompressible momentum balance
-- symbol: P
-  declared_in: phen.turbulence.velocity-increment-distributions
-  block: explanandum_variables
-  signature:
-  - rmag
-  - rdir
-  name: joint distribution of the increments
-- symbol: S
-  declared_in: phen.turbulence.velocity-increment-distributions
-  block: explanandum_variables
-  signature:
-  - p
-  - rmag
-  - rdir
-  name: longitudinal structure function
-- symbol: ST
-  declared_in: phen.turbulence.velocity-increment-distributions
-  block: explanandum_variables
-  signature:
-  - p
-  - rmag
-  - rdir
-  name: transverse structure function
-- symbol: du
-  declared_in: phen.turbulence.velocity-increment-distributions
-  block: explanandum_variables
-  signature:
-  - x
-  - t
-  - rmag
-  - rdir
-  name: velocity increment across a separation
-- symbol: duL
-  declared_in: phen.turbulence.velocity-increment-distributions
-  block: explanandum_variables
-  signature:
-  - x
-  - t
-  - rmag
-  - rdir
-  name: longitudinal increment
-- symbol: duT
-  declared_in: phen.turbulence.velocity-increment-distributions
-  block: explanandum_variables
-  signature:
-  - x
-  - t
-  - rmag
-  - rdir
-  name: transverse increment
 - symbol: p
   declared_in: phen.turbulence.velocity-increment-distributions
   block: index_sets
@@ -118,6 +68,56 @@ symbols:
   block: manifestations.features
   signature: []
   name: transverse scaling exponents, one per order
+- symbol: P
+  declared_in: phen.turbulence.velocity-increment-distributions
+  block: observables
+  signature:
+  - rmag
+  - rdir
+  name: joint distribution of the increments
+- symbol: S
+  declared_in: phen.turbulence.velocity-increment-distributions
+  block: observables
+  signature:
+  - p
+  - rmag
+  - rdir
+  name: longitudinal structure function
+- symbol: ST
+  declared_in: phen.turbulence.velocity-increment-distributions
+  block: observables
+  signature:
+  - p
+  - rmag
+  - rdir
+  name: transverse structure function
+- symbol: du
+  declared_in: phen.turbulence.velocity-increment-distributions
+  block: observables
+  signature:
+  - x
+  - t
+  - rmag
+  - rdir
+  name: velocity increment across a separation
+- symbol: duL
+  declared_in: phen.turbulence.velocity-increment-distributions
+  block: observables
+  signature:
+  - x
+  - t
+  - rmag
+  - rdir
+  name: longitudinal increment
+- symbol: duT
+  declared_in: phen.turbulence.velocity-increment-distributions
+  block: observables
+  signature:
+  - x
+  - t
+  - rmag
+  - rdir
+  name: transverse increment
 - symbol: family
   declared_in: phen.turbulence.velocity-increment-distributions
   block: scope_over_instances

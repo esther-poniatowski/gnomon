@@ -33,7 +33,7 @@ index_sets:                      # only sets the observables introduce beyond th
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
     structure:                   # continuum | discrete-set | interval
 
-explanandum_variables:           # observables restating the behavior in terms of the system state
+observables:                     # functions of the system state that restate the behavior
   - reference: system.TOPIC#SYMBOL   # for an observable the target already declares as a quantity, give only this reference
     name: "NAME OF THE OBSERVABLE"
     symbol: SYMBOL
@@ -131,8 +131,8 @@ data_model:                      # fill when a model intervenes between the raw 
     source: RECORD               # the model record, or a pointer to the publication that states the model
     reading: "WHAT THE MODEL DOES TO THE DATA"
 
-observation_error:               # fill when the values of the explanandum variables are compared with an answer; one entry per explanandum variable or per data set
-  - of: SYMBOL                   # an explanandum variable, or the pointer of a data set
+observation_error:               # fill when the values of the observables are compared with an answer; one entry per observable or per data set
+  - of: SYMBOL                   # an observable, or the pointer of a data set
     form:                        # distribution | bound
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
 

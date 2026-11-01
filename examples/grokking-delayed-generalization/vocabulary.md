@@ -17,13 +17,13 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `initial_state` | bg.delayed_generalization_networks.training-specification | laws | coord | initial state of the parameters |
 | `update` | bg.delayed_generalization_networks.training-specification | laws | coord | gradient-based update |
 | `update_state` | bg.delayed_generalization_networks.training-specification | laws | — | update of the optimizer state |
-| `Pdelay` | phen.grokking.delayed_generalization | explanandum variables | — | distribution of the delay across initialization draws |
-| `delay` | phen.grokking.delayed_generalization | explanandum variables | — | duration of the delay |
-| `tfit` | phen.grokking.delayed_generalization | explanandum variables | — | first crossing time of the training criterion |
-| `tgen` | phen.grokking.delayed_generalization | explanandum variables | — | first crossing time of the generalization criterion |
 | `crossing_order` | phen.grokking.delayed_generalization | manifestations | — | order of the two crossing times |
 | `positive_delay` | phen.grokking.delayed_generalization | manifestations | — | strictly positive delay |
 | `delay_obs` | phen.grokking.delayed_generalization | manifestations.features | — | observed duration of the delay |
+| `Pdelay` | phen.grokking.delayed_generalization | observables | — | distribution of the delay across initialization draws |
+| `delay` | phen.grokking.delayed_generalization | observables | — | duration of the delay |
+| `tfit` | phen.grokking.delayed_generalization | observables | — | first crossing time of the training criterion |
+| `tgen` | phen.grokking.delayed_generalization | observables | — | first crossing time of the generalization criterion |
 | `init` | phen.grokking.delayed_generalization | scope over instances | — | initialization draw |
 | `spec` | phen.grokking.delayed_generalization | scope over instances | — | training specification |
 | `coord` | system.delayed_generalization_networks | constituents | — | coordinate of the trainable parameters |

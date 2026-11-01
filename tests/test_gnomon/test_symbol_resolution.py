@@ -492,12 +492,12 @@ def test_a_quantity_carrying_both_an_expression_and_a_condition_is_reported() ->
     """One builds the quantity and cannot be false; the other presupposes that a value exists."""
     record = {
         "type": "phenomenon",
-        "explanandum_variables": [
+        "observables": [
             {"symbol": "a", "expression": "min_{i}( N(i) )", "condition": "d_t(N) = 0"},
             {"symbol": "b", "condition": "d_t(N) = 0"},
         ],
     }
-    assert doubly_defined(record) == ["explanandum_variables.a: both an expression and a condition"]
+    assert doubly_defined(record) == ["observables.a: both an expression and a condition"]
 
 
 @pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
@@ -529,12 +529,12 @@ def test_a_condition_without_a_selection_rule_is_reported() -> None:
     """A condition may hold of several values, so the record says which one it denotes."""
     record = {
         "type": "phenomenon",
-        "explanandum_variables": [
+        "observables": [
             {"symbol": "a", "condition": "d_t(N) = 0"},
             {"symbol": "b", "condition": "d_t(N) = 0", "selects": "any"},
         ],
     }
-    assert unselected_conditions(record) == ["explanandum_variables.a: a condition without a selection rule"]
+    assert unselected_conditions(record) == ["observables.a: a condition without a selection rule"]
 
 
 REQUIRED = requirements_by_aim()
@@ -890,7 +890,7 @@ def test_a_condition_of_the_phenomenon_is_checked() -> None:
     """A precipitating condition is an expression, so an undeclared symbol in it is reported."""
     record = {
         "type": "phenomenon",
-        "explanandum_variables": [{"symbol": "Y", "signature": []}],
+        "observables": [{"symbol": "Y", "signature": []}],
         "conditions_and_byproducts": {
             "precipitating": [{"expression": "Y > no_such_symbol"}],
             "inhibiting": [],
@@ -971,16 +971,16 @@ def test_an_operator_the_record_does_not_declare_is_reported() -> None:
     """An operator outside the canonical set resolves only where the record declares it."""
     record: dict[str, Any] = {
         "type": "phenomenon",
-        "explanandum_variables": [
+        "observables": [
             {"symbol": "a", "expression": "max( re( far_field(J) ) )", "signature": []}
         ],
     }
     assert unresolved(record, CANONICAL) == [
-        "explanandum_variables.expression -> J",
-        "explanandum_variables.expression -> far_field",
+        "observables.expression -> J",
+        "observables.expression -> far_field",
     ]
     record["operators"] = [{"symbol": "far_field", "name": "the far-field limit of a profile"}]
-    assert unresolved(record, CANONICAL) == ["explanandum_variables.expression -> J"]
+    assert unresolved(record, CANONICAL) == ["observables.expression -> J"]
 
 
 def test_a_reference_to_an_undeclared_set_is_reported() -> None:

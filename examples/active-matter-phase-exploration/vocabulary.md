@@ -19,14 +19,6 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `nonrecip_lattice` | bg.nonreciprocal-active-matter.local-dynamics | laws | sp, sp | nonreciprocity of the lattice cross-coupling |
 | `crosscoupling` | bg.nonreciprocal-active-matter.local-dynamics | organization | — | nonreciprocal cross-coupling |
 | `crosscoupling_lattice` | bg.nonreciprocal-active-matter.local-dynamics | organization | — | nonreciprocal cross-coupling on the lattice |
-| `C` | phen.nonreciprocal-active-matter.collective-phases | explanandum variables | sp, sp, rsep, lag | correlation matrix between species |
-| `Cl` | phen.nonreciprocal-active-matter.collective-phases | explanandum variables | sp, sp, rsite, lag | correlation matrix between species on the lattice |
-| `S` | phen.nonreciprocal-active-matter.collective-phases | explanandum variables | sp, sp, k, omega | spectral matrix between species |
-| `Sl` | phen.nonreciprocal-active-matter.collective-phases | explanandum variables | sp, sp, klat, omega | spectral matrix between species on the lattice |
-| `diag` | phen.nonreciprocal-active-matter.collective-phases | explanandum variables | L, d | diagnostic of phases for the continuum variant |
-| `diag_lattice` | phen.nonreciprocal-active-matter.collective-phases | explanandum variables | L, d | diagnostic of phases for the lattice variant |
-| `rho_emp` | phen.nonreciprocal-active-matter.collective-phases | explanandum variables | sp | empirical distribution of the local field state of each species |
-| `rho_lat` | phen.nonreciprocal-active-matter.collective-phases | explanandum variables | sp | empirical distribution of the lattice state of each species |
 | `k` | phen.nonreciprocal-active-matter.collective-phases | index sets | — | wavevector |
 | `klat` | phen.nonreciprocal-active-matter.collective-phases | index sets | — | lattice wavevector |
 | `lag` | phen.nonreciprocal-active-matter.collective-phases | index sets | — | temporal lag |
@@ -37,6 +29,14 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `phase_catalogue_lattice` | phen.nonreciprocal-active-matter.collective-phases | manifestations | — | catalogue of distinguishable lattice regimes |
 | `phase` | phen.nonreciprocal-active-matter.collective-phases | manifestations.features | — | candidate collective phase |
 | `phase_lattice` | phen.nonreciprocal-active-matter.collective-phases | manifestations.features | — | candidate collective phase on the lattice |
+| `C` | phen.nonreciprocal-active-matter.collective-phases | observables | sp, sp, rsep, lag | correlation matrix between species |
+| `Cl` | phen.nonreciprocal-active-matter.collective-phases | observables | sp, sp, rsite, lag | correlation matrix between species on the lattice |
+| `S` | phen.nonreciprocal-active-matter.collective-phases | observables | sp, sp, k, omega | spectral matrix between species |
+| `Sl` | phen.nonreciprocal-active-matter.collective-phases | observables | sp, sp, klat, omega | spectral matrix between species on the lattice |
+| `diag` | phen.nonreciprocal-active-matter.collective-phases | observables | L, d | diagnostic of phases for the continuum variant |
+| `diag_lattice` | phen.nonreciprocal-active-matter.collective-phases | observables | L, d | diagnostic of phases for the lattice variant |
+| `rho_emp` | phen.nonreciprocal-active-matter.collective-phases | observables | sp | empirical distribution of the local field state of each species |
+| `rho_lat` | phen.nonreciprocal-active-matter.collective-phases | observables | sp | empirical distribution of the lattice state of each species |
 | `coupling` | phen.nonreciprocal-active-matter.collective-phases | scope over instances | — | admitted nonreciprocal operators of cross-coupling |
 | `coupling_lattice` | phen.nonreciprocal-active-matter.collective-phases | scope over instances | — | admitted nonreciprocal couplings on the lattice |
 | `realization` | phen.nonreciprocal-active-matter.collective-phases | scope over instances | — | stochastic realizations at fixed controls |

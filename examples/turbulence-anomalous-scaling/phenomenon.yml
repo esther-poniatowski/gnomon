@@ -36,7 +36,7 @@ index_sets:
     extent: "pos(reals)"
     structure: continuum
 
-explanandum_variables:
+observables:
   - name: "velocity increment across a separation"
     symbol: du
     notation: '\delta u'

@@ -23,7 +23,7 @@ occurrence: not-applicable
 
 index_sets: []                   # the target already declares every index used here
 
-explanandum_variables:
+observables:
   - name: "set of localized stationary profiles"
     symbol: Uloc
     notation: 'U_{\text{loc}}'

@@ -29,13 +29,13 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `mediation` | bg.microbial-formal-population-models.population-dynamics | organization | — | coupling mediated by resources |
 | `pairing` | bg.microbial-formal-population-models.population-dynamics | organization | — | direct pairwise coupling |
 | `triplet` | bg.microbial-formal-population-models.population-dynamics | organization | — | higher-order coupling |
-| `J` | phen.microbial.stable-coexistence | explanandum variables | — | Jacobian of the community at the equilibrium |
-| `Nstar` | phen.microbial.stable-coexistence | explanandum variables | pop | abundance of each population at equilibrium |
-| `Xstar` | phen.microbial.stable-coexistence | explanandum variables | — | complete equilibrium state |
-| `alpha` | phen.microbial.stable-coexistence | explanandum variables | — | spectral abscissa at the equilibrium |
-| `mN` | phen.microbial.stable-coexistence | explanandum variables | — | minimum population abundance at equilibrium |
 | `feasible` | phen.microbial.stable-coexistence | manifestations | — | feasible coexistence equilibrium |
 | `stable` | phen.microbial.stable-coexistence | manifestations | — | local asymptotic stability of the coexistence equilibrium |
+| `J` | phen.microbial.stable-coexistence | observables | — | Jacobian of the community at the equilibrium |
+| `Nstar` | phen.microbial.stable-coexistence | observables | pop | abundance of each population at equilibrium |
+| `Xstar` | phen.microbial.stable-coexistence | observables | — | complete equilibrium state |
+| `alpha` | phen.microbial.stable-coexistence | observables | — | spectral abscissa at the equilibrium |
+| `mN` | phen.microbial.stable-coexistence | observables | — | minimum population abundance at equilibrium |
 | `member` | phen.microbial.stable-coexistence | scope over instances | — | member models of the admitted class |
 | `supply` | phen.microbial.stable-coexistence | scope over instances | — | admitted nonnegative vectors of resource supply |
 | `pop` | system.microbial-formal-population-models | constituents | — | microbial population |

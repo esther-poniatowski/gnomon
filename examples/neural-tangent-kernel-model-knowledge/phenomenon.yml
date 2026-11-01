@@ -24,7 +24,7 @@ occurrence: not-applicable
 
 index_sets: []                   # the target already declares the training-example index and the time index
 
-explanandum_variables:
+observables:
   - name: "discrepancy between output trajectories"
     symbol: Eout
     signature: [m, t]

@@ -15,9 +15,6 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `init_draw` | bg.ntk-gradient-flow.gradient-flow | laws | — | initialization draw |
 | `init_state` | bg.ntk-gradient-flow.gradient-flow | laws | — | initialization of the parameters |
 | `shared_init` | bg.ntk-gradient-flow.gradient-flow | laws | a | shared initial outputs |
-| `Edrift` | phen.ntk.linearized-dynamics | explanandum variables | m, t | drift of the empirical kernel |
-| `Elimit` | phen.ntk.linearized-dynamics | explanandum variables | m | discrepancy from the limiting kernel at initialization |
-| `Eout` | phen.ntk.linearized-dynamics | explanandum variables | m, t | discrepancy between output trajectories |
 | `kernel_drift_vanishes` | phen.ntk.linearized-dynamics | manifestations | — | vanishing drift of the empirical kernel |
 | `limit_error_vanishes` | phen.ntk.linearized-dynamics | manifestations | — | vanishing distance to the limiting kernel |
 | `output_converges` | phen.ntk.linearized-dynamics | manifestations | — | convergence of the network output to the linearized output |
@@ -29,6 +26,9 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `mode_drift` | phen.ntk.linearized-dynamics | manifestations.features | — | mode of convergence of the bound on the drift of the kernel over initialization draws |
 | `mode_init` | phen.ntk.linearized-dynamics | manifestations.features | — | mode of convergence of the initial kernel over initialization draws |
 | `mode_out` | phen.ntk.linearized-dynamics | manifestations.features | — | mode of convergence of the bound on the outputs over initialization draws |
+| `Edrift` | phen.ntk.linearized-dynamics | observables | m, t | drift of the empirical kernel |
+| `Elimit` | phen.ntk.linearized-dynamics | observables | m | discrepancy from the limiting kernel at initialization |
+| `Eout` | phen.ntk.linearized-dynamics | observables | m, t | discrepancy between output trajectories |
 | `init_draw` | phen.ntk.linearized-dynamics | scope over instances | — | initialization draw |
 | `spec` | phen.ntk.linearized-dynamics | scope over instances | — | specification of the network and its training, indexed by width |
 | `a` | system.ntk-gradient-flow | index sets | — | index of training examples |

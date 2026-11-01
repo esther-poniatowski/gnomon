@@ -20,7 +20,7 @@ course:
 
 occurrence: not-applicable
 
-explanandum_variables:           # restate feasibility and local stability separately
+observables:           # restate feasibility and local stability separately
   - name: "complete equilibrium state"
     symbol: Xstar
     notation: 'X^{*}'
@@ -112,6 +112,6 @@ data:
   - "gibbs2024: https://onlinelibrary.wiley.com/doi/10.1111/ele.14458"
 
 maturity:
-  explanandum_variables.Xstar.values: open
-  explanandum_variables.J.values: open
+  observables.Xstar.values: open
+  observables.J.values: open
   scope_over_instances.quantification: open

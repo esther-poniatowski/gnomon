@@ -21,7 +21,7 @@ course:
 
 occurrence: not-applicable
 
-explanandum_variables:           # reference the loss trajectories: the target declares them as quantities
+observables:           # reference the loss trajectories: the target declares them as quantities
   - reference: system.delayed_generalization_networks#Ltrain
   - reference: system.delayed_generalization_networks#Ltest
   - name: "first crossing time of the training criterion"

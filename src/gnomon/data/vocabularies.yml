@@ -175,14 +175,14 @@ vocabularies:
     - value: continuum
     - value: discrete-set
     - value: interval
-    explanandum_variables.scale:
+    observables.scale:
     - value: nominal
     - value: ordinal
     - value: interval
     - value: ratio
     - value: absolute
     - value: not-applicable
-    explanandum_variables.selects:
+    observables.selects:
     - value: unique
     - value: any
     - value: all
@@ -190,7 +190,7 @@ vocabularies:
     - value: unique
     - value: any
     - value: all
-    explanandum_variables.censoring:
+    observables.censoring:
     - value: right
     - value: left
     - value: interval
@@ -500,7 +500,7 @@ vocabularies:
     - value: retracted
     target.level:
     - value: phenomenon
-      name: compared with the explanandum variables that the phenomenon estimates
+      name: compared with the observables that the phenomenon estimates
     - value: data
       name: compared with a version of the data through an observation operator
     feature_pairs.type:
