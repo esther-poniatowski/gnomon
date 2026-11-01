@@ -23,7 +23,7 @@ A prose name cannot replace the symbol, because such a name resolves to no entry
 | Procedure | when the entry names an operation that is *carried out* | the steps by which it is performed or established | "a candidate regime recurs across stochastic realizations and survives longer observation windows" |
 | Caveat | when the record leaves some content of the entry unstated | the missing content and the reason for its absence, beside a reading, a justification, a differentiation or a procedure | "the record declares no curvature operator, so the concavity the measurements show is not written" |
 | Reference | when a field names a quantity of its own record | the symbol alone | `signature: [x, t]`; `realized_by: [transmit]`; `shares: [f]` |
-| External reference | when a field names a quantity of another record | the identifier of that record, then the symbol | `system.turbulence#u` |
+| External reference | when a field names a quantity of another record | the identifier of that record, then a dot and the symbol, as the [decision on dotted identifiers](../adr/dotted-identifiers.md) fixes | `system.turbulence.u` |
 | Expression | when a field states a formula | symbols joined by operators and by binders, each quantity carrying its indices as arguments | `U * L / nu`; `div(u) = 0` |
 | Binder | when an expression consumes an index | `aggregator_{indices}(expression)`, the aggregator drawn from `mean`, `sum`, `min`, `max`, `dist`, `ft` | `min_{i}( N(i) )`; `mean_{x, t}( u(a, x, t) * u(b, x + r, t + tau) )` |
 | Signature | with every declared quantity | the indices the quantity still takes | `[]` for a scalar; `[a, b, r, tau]` for a correlation matrix |

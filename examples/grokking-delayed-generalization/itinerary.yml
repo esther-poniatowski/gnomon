@@ -21,7 +21,7 @@ steps:
     activity: question-formulation
     inputs:
       - type: problem
-        ref: pose
+        ref: itin.grokking.explain-delay.pose
     output:
       type: question-schema       # the schema was raised to the question quest.grokking.explain_delay, so no record holds it now
     norm:
@@ -32,7 +32,7 @@ steps:
     activity: subject-identification
     inputs:
       - type: question-schema
-        ref: formulate
+        ref: itin.grokking.explain-delay.formulate
     output:
       type: identified-subject
       ref: phen.grokking.delayed_generalization
@@ -46,7 +46,7 @@ steps:
       - type: question
         ref: quest.grokking.explain_delay
       - type: identified-subject
-        ref: identify
+        ref: itin.grokking.explain-delay.identify
     output:
       type: target-specification
       ref: system.delayed_generalization_networks
@@ -94,7 +94,7 @@ steps:
     activity: admissibility-check
     inputs:
       - type: target-claim
-        ref: propose
+        ref: itin.grokking.explain-delay.propose
       - type: question
         ref: quest.grokking.explain_delay
     output:
@@ -108,9 +108,9 @@ steps:
     activity: testing
     inputs:
       - type: target-claim
-        ref: propose
+        ref: itin.grokking.explain-delay.propose
       - type: consequence
-        ref: derive
+        ref: itin.grokking.explain-delay.derive
       - type: data
         ref: phen.grokking.delayed_generalization
     output:

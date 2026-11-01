@@ -22,8 +22,8 @@ course:
 occurrence: not-applicable
 
 observables:           # reference the loss trajectories: the target declares them as quantities
-  - reference: system.delayed_generalization_networks#Ltrain
-  - reference: system.delayed_generalization_networks#Ltest
+  - reference: system.delayed_generalization_networks.Ltrain
+  - reference: system.delayed_generalization_networks.Ltest
   - name: "first crossing time of the training criterion"
     symbol: tfit
     notation: 't_{\text{fit}}'

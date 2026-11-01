@@ -17,7 +17,7 @@ constraints:
     source: "liu2022: https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
 explicanda:
   - term: "generalization"
-    pointer: phen.grokking.delayed_generalization#tgen
+    pointer: phen.grokking.delayed_generalization.tgen
 sources:
   - "liu2022: https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
   - "humayun2024: https://proceedings.mlr.press/v235/humayun24a.html"

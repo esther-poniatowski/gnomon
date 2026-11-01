@@ -11,24 +11,24 @@ answers: quest.microbial.stable-coexistence-constraints
 variant: resource_explicit
 
 constituents:
-  - reference: system.microbial-formal-population-models#pop
-  - reference: system.microbial-formal-population-models#res
+  - reference: system.microbial-formal-population-models.pop
+  - reference: system.microbial-formal-population-models.res
 
 index_sets: []
 
 variables:
-  - reference: system.microbial-formal-population-models#N
-  - reference: system.microbial-formal-population-models#R
+  - reference: system.microbial-formal-population-models.N
+  - reference: system.microbial-formal-population-models.R
 
 parameters:
-  - reference: system.microbial-formal-population-models#S
-  - reference: system.microbial-formal-population-models#M
-  - reference: system.microbial-formal-population-models#rho
-  - reference: system.microbial-formal-population-models#mu
-  - reference: system.microbial-formal-population-models#C
-  - reference: system.microbial-formal-population-models#Pr
-  - reference: system.microbial-formal-population-models#Fr
-  - reference: system.microbial-formal-population-models#G
+  - reference: system.microbial-formal-population-models.S
+  - reference: system.microbial-formal-population-models.M
+  - reference: system.microbial-formal-population-models.rho
+  - reference: system.microbial-formal-population-models.mu
+  - reference: system.microbial-formal-population-models.C
+  - reference: system.microbial-formal-population-models.Pr
+  - reference: system.microbial-formal-population-models.Fr
+  - reference: system.microbial-formal-population-models.G
 
 laws:
   - name: "feasibility implies local stability"

@@ -34,6 +34,7 @@ import yaml
 
 from . import findings as rules
 from .findings import Entry, Finding, Place, Rule, Segment, finding
+from .identifiers import split_reference
 
 DATA = Path(__file__).parent / "data"
 
@@ -954,7 +955,7 @@ def malformed_restrictions(
             continue
         where = ("subject", "domain", "restrictions", Entry(index, entry))
         held = entry.get("of")
-        symbol = held.rsplit("#", 1)[-1] if isinstance(held, str) else None
+        symbol = (split_reference(held) or ("", held))[1] if isinstance(held, str) else None
         label = entry.get("name") or held or "an entry"
         carried = [key for key in ("values", "expression") if entry.get(key) is not None]
         if len(carried) != 1:

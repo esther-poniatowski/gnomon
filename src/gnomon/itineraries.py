@@ -320,8 +320,8 @@ def itinerary_problems(
     - the input types of a step fill the inputs of its activity, in number as well as in type, and
       its output type is the output of that activity;
     - each input reference names a record that holds the input type in its present state, under an
-      attitude that its slot admits, or a step producing that type; a type held outside the records
-      takes any pointer;
+      attitude that its slot admits, or a step producing that type, named in full by the identifier
+      of the itinerary followed by its own; a type held outside the records takes any pointer;
     - the references between steps form an acyclic graph;
     - every verdict is admitted.
 
@@ -345,6 +345,7 @@ def itinerary_problems(
         (index, step) for index, step in enumerate(itinerary.get("steps") or []) if isinstance(step, Mapping)
     ]
     by_id = {str(step.get("id")): step for _, step in steps}
+    own = f"{itinerary.get('id')}."
     found: list[Finding] = []
 
     target = itinerary.get("addresses")
@@ -395,9 +396,10 @@ def itinerary_problems(
         for index, item in inputs:
             given = (*at, "inputs", index)
             kind, ref = str(item.get("type")), item.get("ref")
-            producer = by_id.get(str(ref))
+            local = str(ref)[len(own):] if isinstance(ref, str) and ref.startswith(own) else None
+            producer = by_id.get(local) if local is not None else None
             if producer is not None:
-                edges[name].add(str(ref))
+                edges[name].add(local)
                 made = (producer.get("output") or {}).get("type")
                 if made != kind:
                     found.append(

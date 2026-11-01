@@ -30,7 +30,7 @@ task:
   requested_relation: mathematical
   modal_strength: necessary
   admissible_explanans:
-    compositional: [system.microbial-formal-population-models#pop, system.microbial-formal-population-models#res]
+    compositional: [system.microbial-formal-population-models.pop, system.microbial-formal-population-models.res]
     substrate: independent
     justification: "The sought constraints concern how populations affect one another and, for members with explicit resources, the pools that mediate those effects. No identity specific to a taxon may therefore carry the result."
   required_accuracy:

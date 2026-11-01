@@ -92,7 +92,7 @@ def test_a_step_is_named_by_its_identifier_wherever_it_stands() -> None:
 def test_a_cycle_and_a_repeated_step_are_discriminated_by_their_content() -> None:
     itinerary = copy.deepcopy(ITINERARY)
     itinerary["steps"].append(copy.deepcopy(itinerary["steps"][0]))
-    itinerary["steps"][2]["inputs"].append({"type": "data", "ref": "observe"})
+    itinerary["steps"][2]["inputs"].append({"type": "data", "ref": "itin.geometry.route.observe"})
     found = places(itinerary_problems(itinerary, RECORDS))
     assert ("/steps", "pose") in found
     assert ("/steps", "design -> observe -> design") in found

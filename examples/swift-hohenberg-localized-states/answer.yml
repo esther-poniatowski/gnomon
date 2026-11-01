@@ -13,7 +13,7 @@ constituents: []
 index_sets: []
 
 variables:
-  - reference: system.swift-hohenberg-localized-states#u
+  - reference: system.swift-hohenberg-localized-states.u
   - name: "norm of the profile used for continuation"
     symbol: Nu
     notation: 'N_u'
@@ -34,8 +34,8 @@ variables:
     shared: false
 
 parameters:
-  - reference: system.swift-hohenberg-localized-states#r
-  - reference: system.swift-hohenberg-localized-states#b
+  - reference: system.swift-hohenberg-localized-states.r
+  - reference: system.swift-hohenberg-localized-states.b
 
 laws:
   - name: "localized stationary equation"

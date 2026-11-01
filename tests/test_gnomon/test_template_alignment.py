@@ -469,3 +469,13 @@ def test_the_aims_admitted_by_each_type_of_result_are_those_of_the_demand_table(
     entries = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"]["problem"][".result_type"]
     assert documented == {entry["value"]: set(entry["admits"]) for entry in entries}
 
+
+def test_the_identifier_of_each_template_has_the_segments_of_its_prefix() -> None:
+    """The prefix of a record identifier fixes its number of segments, so a resolver splits a reference alone."""
+    from gnomon.identifiers import RECORD_SEGMENTS
+
+    for path in sorted(TEMPLATES.glob("*.yml")):
+        identifier = str(template(path.name)["id"])
+        prefix = identifier.split(".")[0]
+        assert RECORD_SEGMENTS.get(prefix) == len(identifier.split(".")), path.name
+

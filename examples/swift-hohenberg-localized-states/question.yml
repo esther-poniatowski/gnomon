@@ -29,11 +29,11 @@ task:
     standard: structural-only
     outputs_to_match: []
     structures_to_match:
-      - target: phen.swift-hohenberg.localized-states#topology
+      - target: phen.swift-hohenberg.localized-states.topology
         justification: "The description must distinguish snaking branches, connecting ladders, and isolas when each occurs."
-      - target: phen.swift-hohenberg.localized-states#symmetry
+      - target: phen.swift-hohenberg.localized-states.symmetry
         justification: "The symmetry class separates the two snaking families, both invariant under reflection, from the asymmetric states on the connecting ladders."
-      - target: phen.swift-hohenberg.localized-states#stability
+      - target: phen.swift-hohenberg.localized-states.stability
         justification: "The description must state where each branch is linearly stable, because existence alone does not characterize the localized states."
 
 virtues: []

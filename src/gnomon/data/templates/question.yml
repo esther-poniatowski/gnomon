@@ -1,7 +1,7 @@
 # specification: `docs/specification/question.md`, `docs/specification/question-subject.md`, `docs/specification/question-task.md`, `docs/specification/question-virtues.md`; one file per question
 # commitment of the slots: `docs/epistemology/objects/question/question.md`
 # symbols and expressions: `docs/specification/expressions.md`
-# name a quantity of another record by source identifier and symbol: `system.TOPIC#SYMBOL`
+# name a quantity of another record by source identifier and symbol: `system.TOPIC.SYMBOL`
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # fix the question before evaluating any candidate answer
 
@@ -34,7 +34,7 @@ subject:
   domain:                        # only restrictions of the a priori specification; assumptions of the analysis belong to the answer
     restrictions:                # one entry per restriction the question imposes on the specification
       - name: "NAME OF THE RESTRICTION"   # required when no quantity names the entry
-        of: system.TOPIC#SYMBOL    # quantity held; omit when no single quantity carries the restriction
+        of: system.TOPIC.SYMBOL    # quantity held; omit when no single quantity carries the restriction
         restriction:               # clamped | restricted | initial | stationary | without-event; only where the entry names a variable, since a parameter is already fixed
         values: "SET EXPRESSION OVER DECLARED SYMBOLS"   # set the quantity is held to
         expression: "EXPRESSION OVER DECLARED SYMBOLS"   # replaces `values` when no single quantity carries the restriction
@@ -55,13 +55,13 @@ task:
   required_accuracy:
     standard:                    # qualitative | order-of-magnitude | numeric-bound | structural-only | not-applicable
     outputs_to_match:            # name only the target side; the answer reproduces each output
-      - target: phen.TOPIC.NAME#SYMBOL
+      - target: phen.TOPIC.NAME.SYMBOL
         tolerance:               # omit when the standard is `qualitative` or `structural-only`
           metric: "EXPRESSION OVER `answer` AND `target`"   # measure the difference between `answer` and `target`
           bound: "EXPRESSION THAT THE METRIC MUST NOT EXCEED"
         justification: "WHY THE QUESTION DEMANDS THAT THE ANSWER REPRODUCE THIS OUTPUT"
     structures_to_match:
-      - target: phen.TOPIC.NAME#SYMBOL
+      - target: phen.TOPIC.NAME.SYMBOL
         justification: "WHY THE QUESTION DEMANDS THAT THE ANSWER REPRODUCE THIS STRUCTURE"
   proof_obligations:             # fill when the answer must derive a statement rather than match a measurement
     - name: "NAME OF THE OBLIGATION"

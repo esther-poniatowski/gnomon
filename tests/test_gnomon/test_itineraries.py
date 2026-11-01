@@ -164,6 +164,7 @@ RECORDS: dict[str, dict[str, Any]] = {
     "mod.kernel": {"type": "model"},
 }
 ITINERARY: dict[str, Any] = {
+    "id": "itin.geometry.route",
     "type": "itinerary",
     "addresses": "prob.geometry",
     "steps": [
@@ -180,7 +181,7 @@ ITINERARY: dict[str, Any] = {
          "output": {"type": "design"},
          "norm": {"test": "norm.experimental-design", "verdict": "pending"}},
         {"id": "observe", "activity": "observation",
-         "inputs": [{"type": "design", "ref": "design"}],
+         "inputs": [{"type": "design", "ref": "itin.geometry.route.design"}],
          "output": {"type": "data"},
          "norm": {"test": "norm.observation", "verdict": "pending"}},
     ],
@@ -222,8 +223,8 @@ def test_a_slot_taking_several_inputs_counts_them() -> None:
     assert texts(itinerary_problems(itinerary, RECORDS)) == [
         "steps.select: model-selection takes 2 or more inputs of model, and the step gives 1"
     ]
-    step["inputs"].append({"type": "model", "ref": "derive"})
-    assert texts(itinerary_problems(itinerary, RECORDS)) == ["steps.select: the step derive produces consequence, not model"]
+    step["inputs"].append({"type": "model", "ref": "itin.geometry.route.derive"})
+    assert texts(itinerary_problems(itinerary, RECORDS)) == ["steps.select: the step itin.geometry.route.derive produces consequence, not model"]
 
 
 def test_an_output_type_other_than_the_activity_output_is_reported() -> None:
@@ -271,7 +272,7 @@ def test_a_norm_verdict_or_mode_outside_the_registries_is_reported() -> None:
 def test_a_cycle_among_the_steps_is_reported() -> None:
     itinerary = planted(design={"inputs": [{"type": "question", "ref": "quest.geometry"},
                                       {"type": "model", "ref": "mod.kernel"},
-                                      {"type": "data", "ref": "observe"}]})
+                                      {"type": "data", "ref": "itin.geometry.route.observe"}]})
     found = itinerary_problems(itinerary, RECORDS)
     assert "steps: design -> observe -> design forms a cycle" in texts(found)
     assert cycles({"a": {"a"}}) == [["a", "a"]]
@@ -331,6 +332,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
         "prob.a": {"type": "problem"},
     }
     itinerary = {
+        "id": "itin.a.route",
         "addresses": "prob.a",
         "steps": [
             {"id": "select", "activity": "question-decomposition",
@@ -340,7 +342,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
              "inputs": [{"type": "model", "ref": "mod.a"}, {"type": "target-specification", "ref": "system.a"}],
              "output": {"type": "consequence"}, "norm": {"test": "norm.model-prediction", "verdict": "pending"}},
             {"id": "judge", "activity": "testing",
-             "inputs": [{"type": "target-claim", "ref": "ans.a"}, {"type": "consequence", "ref": "predict"},
+             "inputs": [{"type": "target-claim", "ref": "ans.a"}, {"type": "consequence", "ref": "itin.a.route.predict"},
                         {"type": "data", "ref": "phen.none"}],
              "output": {"type": "verdict"}, "norm": {"test": "norm.testing", "verdict": "pending"}},
         ],
@@ -355,8 +357,8 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
     records["quest.schema"]["subject"]["phenomenon"] = "phen.b"
     records["system.a"]["commitment"] = "specified"
     records["ans.a"]["status"] = "hypothesized"
-    itinerary["steps"][2]["inputs"][2]["ref"] = "predict"
-    assert texts(itinerary_problems(itinerary, records)) == ["steps.judge: the step predict produces consequence, not data"]
+    itinerary["steps"][2]["inputs"][2]["ref"] = "itin.a.route.predict"
+    assert texts(itinerary_problems(itinerary, records)) == ["steps.judge: the step itin.a.route.predict produces consequence, not data"]
 
 
 def test_an_attitude_restricts_an_answer_only() -> None:
@@ -416,3 +418,10 @@ def test_a_specified_record_still_holds_an_identified_subject() -> None:
     assert "identified-subject" in record_types(identified, TYPES)
     assert "target-specification" not in record_types(identified, TYPES)
     assert "identified-subject" not in record_types({"type": "target-system"}, TYPES)
+
+
+def test_a_step_is_referenced_by_its_full_identifier() -> None:
+    """A reference names a step by the identifier of the itinerary followed by that of the step."""
+    short = planted(observe={"inputs": [{"type": "design", "ref": "design"}]})
+    assert texts(itinerary_problems(short, RECORDS)) == ["steps.observe: no record holds a design, so its input names a step, and design is none"]
+

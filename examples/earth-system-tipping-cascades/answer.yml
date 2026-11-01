@@ -10,7 +10,7 @@ modal_strength: possible
 answers: quest.earth-tipping-subsystems.overshoot-sequence-forecast
 
 constituents:
-  - reference: system.earth-tipping-subsystems#sub
+  - reference: system.earth-tipping-subsystems.sub
 
 index_sets:
   - name: "trajectory in the comparison"
@@ -19,8 +19,8 @@ index_sets:
     structure: discrete-set
 
 variables:
-  - reference: system.earth-tipping-subsystems#z
-  - reference: system.earth-tipping-subsystems#DGMT
+  - reference: system.earth-tipping-subsystems.z
+  - reference: system.earth-tipping-subsystems.DGMT
   - name: "modelled law of the marked sequence"
     symbol: PZ_model
     notation: 'P_Z^{\mathrm{model}}'
@@ -41,12 +41,12 @@ variables:
     shared: false
 
 parameters:
-  - reference: system.earth-tipping-subsystems#Theta
-  - reference: system.earth-tipping-subsystems#tau
-  - reference: system.earth-tipping-subsystems#Aij
-  - reference: system.earth-tipping-subsystems#s
-  - reference: system.earth-tipping-subsystems#peak
-  - reference: system.earth-tipping-subsystems#conv
+  - reference: system.earth-tipping-subsystems.Theta
+  - reference: system.earth-tipping-subsystems.tau
+  - reference: system.earth-tipping-subsystems.Aij
+  - reference: system.earth-tipping-subsystems.s
+  - reference: system.earth-tipping-subsystems.peak
+  - reference: system.earth-tipping-subsystems.conv
 
 laws:
   - name: "forecast from the stylized ensemble"

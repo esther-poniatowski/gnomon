@@ -126,7 +126,7 @@ detection_criterion:
     across: []
     expression:
     procedure: "Each transition criterion is predeclared, and the event probabilities are calibrated against independent evidence."
-    limited_by: [system.earth-tipping-subsystems#observation]
+    limited_by: [system.earth-tipping-subsystems.observation]
   - name: "separable sources of spread"
     across: [realization, param, struct, scenario]
     expression:

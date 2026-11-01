@@ -26,18 +26,18 @@ task:
   requested_relation: statistical
   modal_strength: actual
   admissible_explanans:
-    compositional: [system.earth-tipping-subsystems#sub]
+    compositional: [system.earth-tipping-subsystems.sub]
     substrate: specific
     justification: "The forecast names which subsystem transitions and when, so the explanans must resolve every tipping element individually, with its own parameters. An account that holds for any system of that shape cannot determine which subsystem tips first."
   required_accuracy:
     standard: numeric-bound
     outputs_to_match:
-      - target: phen.earth-tipping-subsystems.transition-sequences#pi
+      - target: phen.earth-tipping-subsystems.transition-sequences.pi
         tolerance:
           metric: "abs(answer - target)"
           bound:
         justification: "A forecast is usable only if it assigns each transition a probability, so an answer that only lists possible events does not meet the question."
-      - target: phen.earth-tipping-subsystems.transition-sequences#Fi
+      - target: phen.earth-tipping-subsystems.transition-sequences.Fi
         tolerance:
           metric: "max_{t}( abs(answer - target) )"
           bound:

@@ -2,7 +2,7 @@
 # symbols and expressions: `docs/specification/expressions.md`
 # declare the constituents, index sets, variables and parameters in target-system form, and the laws and organization in background form
 # no entry refers to one question, and no quantity enters by reference to a target quantity: a binding relates the model to its target
-# name a symbol of the target by source identifier and symbol: `system.TOPIC#SYMBOL`
+# name a symbol of the target by source identifier and symbol: `system.TOPIC.SYMBOL`
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # specifications follow the order of the specification note
 

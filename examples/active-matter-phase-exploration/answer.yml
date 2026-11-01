@@ -11,12 +11,12 @@ answers: quest.nonreciprocal-active-matter.phase-exploration
 variant: continuum
 
 constituents:
-  - reference: system.nonreciprocal-active-matter#sp
+  - reference: system.nonreciprocal-active-matter.sp
 
 index_sets: []
 
 variables:
-  - reference: system.nonreciprocal-active-matter#u
+  - reference: system.nonreciprocal-active-matter.u
   - name: "Jacobian of the homogeneous dynamics of the two species"
     symbol: Jlin
     determined: within
@@ -36,11 +36,11 @@ variables:
     shared: true
 
 parameters:
-  - reference: system.nonreciprocal-active-matter#F
-  - reference: system.nonreciprocal-active-matter#G
-  - reference: system.nonreciprocal-active-matter#D
-  - reference: system.nonreciprocal-active-matter#L
-  - reference: system.nonreciprocal-active-matter#d
+  - reference: system.nonreciprocal-active-matter.F
+  - reference: system.nonreciprocal-active-matter.G
+  - reference: system.nonreciprocal-active-matter.D
+  - reference: system.nonreciprocal-active-matter.L
+  - reference: system.nonreciprocal-active-matter.d
 
 laws:
   - name: "classification of the linear spectrum near onset"

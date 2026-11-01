@@ -18,6 +18,7 @@ from typing import Any, Mapping
 import pytest
 import yaml
 
+from gnomon.identifiers import RECORD_SEGMENTS, split_reference
 from gnomon.completeness import (
     admitted_values,
     always_required,
@@ -169,13 +170,21 @@ def test_every_reference_and_formula_identifier_resolves(case: tuple[str, Mappin
 
 
 def external_references() -> list[tuple[str, str]]:
-    """Return every ``record-id#symbol`` reference of the fixture tree, with the file making it."""
+    """Return every dotted reference to a unit of a record in the fixture tree, with the file making it.
+
+    A step of an itinerary is a unit without a symbol, which the itinerary check resolves, so the
+    references to steps are left out.
+    """
     found: list[tuple[str, str]] = []
     if not EXAMPLES.is_dir():
         return found
+    prefixes = "|".join(prefix for prefix in RECORD_SEGMENTS if prefix != "itin")
     for path in sorted(EXAMPLES.glob("*/*.yml")):
-        for text in re.findall(r"[A-Za-z][\w.-]*#\w+", path.read_text(encoding="utf-8")):
-            found.append((str(path.relative_to(ROOT)), text))
+        if path.name == "vocabulary.yml":
+            continue
+        for text in re.findall(rf"\b(?:{prefixes})\.[\w.-]*\w", path.read_text(encoding="utf-8")):
+            if split_reference(text) is not None:
+                found.append((str(path.relative_to(ROOT)), text))
     return sorted(set(found))
 
 
@@ -186,7 +195,7 @@ EXTERNAL = external_references()
 @pytest.mark.parametrize("reference", EXTERNAL, ids=[f"{n}:{r}" for n, r in EXTERNAL] or ["none"])
 def test_every_cross_record_reference_resolves(reference: tuple[str, str]) -> None:
     name, text = reference
-    record_id, symbol = text.split("#", 1)
+    record_id, symbol = split_reference(text) or ("", "")
     by_id = {r["id"]: r for _, r in CASES if "id" in r}
     assert record_id in by_id, f"{name}: no record carries the identifier {record_id}"
     assert symbol in symbols_of(by_id[record_id]), f"{name}: {record_id} declares no symbol {symbol}"

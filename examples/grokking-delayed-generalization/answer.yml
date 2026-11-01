@@ -10,15 +10,15 @@ modal_strength: actual
 answers: quest.grokking.explain_delay
 
 constituents:
-  - reference: system.delayed_generalization_networks#unit
-  - reference: system.delayed_generalization_networks#coord
+  - reference: system.delayed_generalization_networks.unit
+  - reference: system.delayed_generalization_networks.coord
 
 index_sets: []
 
 variables:
-  - reference: system.delayed_generalization_networks#theta
-  - reference: system.delayed_generalization_networks#Ltrain
-  - reference: system.delayed_generalization_networks#Ltest
+  - reference: system.delayed_generalization_networks.theta
+  - reference: system.delayed_generalization_networks.Ltrain
+  - reference: system.delayed_generalization_networks.Ltest
   - name: "normalized learned representation"
     symbol: Rrep
     notation: 'R'
@@ -53,10 +53,10 @@ variables:
     shared: true
 
 parameters:
-  - reference: system.delayed_generalization_networks#Arch
-  - reference: system.delayed_generalization_networks#opt
-  - reference: system.delayed_generalization_networks#train_set
-  - reference: system.delayed_generalization_networks#test_set
+  - reference: system.delayed_generalization_networks.Arch
+  - reference: system.delayed_generalization_networks.opt
+  - reference: system.delayed_generalization_networks.train_set
+  - reference: system.delayed_generalization_networks.test_set
   - name: "learning rate of the embedding"
     symbol: eta_rep
     notation: '\eta_R'

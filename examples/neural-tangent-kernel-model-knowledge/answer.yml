@@ -13,20 +13,20 @@ constituents: []
 index_sets: []
 
 variables:
-  - reference: system.ntk-gradient-flow#theta
-  - reference: system.ntk-gradient-flow#f
-  - reference: system.ntk-gradient-flow#flin
-  - reference: system.ntk-gradient-flow#K
+  - reference: system.ntk-gradient-flow.theta
+  - reference: system.ntk-gradient-flow.f
+  - reference: system.ntk-gradient-flow.flin
+  - reference: system.ntk-gradient-flow.K
 
 parameters:
-  - reference: system.ntk-gradient-flow#m
-  - reference: system.ntk-gradient-flow#L
-  - reference: system.ntk-gradient-flow#X
-  - reference: system.ntk-gradient-flow#y
-  - reference: system.ntk-gradient-flow#sigma
-  - reference: system.ntk-gradient-flow#rho0
-  - reference: system.ntk-gradient-flow#K0
-  - reference: system.ntk-gradient-flow#Kinf
+  - reference: system.ntk-gradient-flow.m
+  - reference: system.ntk-gradient-flow.L
+  - reference: system.ntk-gradient-flow.X
+  - reference: system.ntk-gradient-flow.y
+  - reference: system.ntk-gradient-flow.sigma
+  - reference: system.ntk-gradient-flow.rho0
+  - reference: system.ntk-gradient-flow.K0
+  - reference: system.ntk-gradient-flow.Kinf
   - name: "constant bounding the discrepancy between outputs"
     symbol: Cout
     signature: []

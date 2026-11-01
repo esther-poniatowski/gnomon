@@ -23,7 +23,7 @@ subject:
     foil_status: counterfactual
   domain:
     restrictions:
-      - of: system.turbulence-incompressible-navier-stokes#u
+      - of: system.turbulence-incompressible-navier-stokes.u
         restriction: stationary
         values: "subset(maps(prod(Om, interval(reals)), vectors(reals, 3)), stationary)"
         justification: "The structure functions are means over positions and times, so a flow whose statistics still drift would mix two regimes in each mean."
@@ -36,24 +36,24 @@ task:
   requested_relation: mathematical
   modal_strength: necessary
   admissible_explanans:
-    compositional: [system.turbulence-incompressible-navier-stokes#x]
+    compositional: [system.turbulence-incompressible-navier-stokes.x]
     substrate: independent
     justification: "The exponents are claimed across forcing and boundary families, so an explanans built from the boundary data of one flow cannot answer the question. Variables resolved by position are admitted, because an increment is defined across a separation."
   required_accuracy:
     standard: numeric-bound
     outputs_to_match:
-      - target: phen.turbulence.velocity-increment-distributions#zetaL
+      - target: phen.turbulence.velocity-increment-distributions.zetaL
         tolerance:
           metric: "abs(answer - target)"
           bound:                 # reported uncertainty interval differs with the order p
         justification: "The departure of the longitudinal exponents from the self-similar line is part of the content of intermittency, and its size at each order separates competing accounts."
-      - target: phen.turbulence.velocity-increment-distributions#zetaT
+      - target: phen.turbulence.velocity-increment-distributions.zetaT
         tolerance:
           metric: "abs(answer - target)"
           bound:                 # reported uncertainty interval differs with the order p
         justification: "The transverse exponents and their difference from the longitudinal ones are needed to test whether an account explains both sectors."
     structures_to_match:
-      - target: phen.turbulence.velocity-increment-distributions#P
+      - target: phen.turbulence.velocity-increment-distributions.P
         justification: "The exponents are the scaling exponents of the moments of the joint distribution, so an account that fixes them while predicting the wrong shape would reproduce the targets by construction."
 
 virtues:

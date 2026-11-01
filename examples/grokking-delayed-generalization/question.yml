@@ -42,13 +42,13 @@ task:
   required_accuracy:
     standard: qualitative
     outputs_to_match:
-      - target: phen.grokking.delayed_generalization#crossing_order
+      - target: phen.grokking.delayed_generalization.crossing_order
         tolerance: null
         justification: "The explanandum is that fitting comes first, so an account that produces the opposite order addresses a different phenomenon."
-      - target: phen.grokking.delayed_generalization#delay
+      - target: phen.grokking.delayed_generalization.delay
         tolerance: null
         justification: "An account under which the delay vanishes in the regime where it is observed contradicts the phenomenon. Any candidate must therefore produce a strictly positive delay."
-      - target: phen.grokking.delayed_generalization#Pdelay
+      - target: phen.grokking.delayed_generalization.Pdelay
         tolerance: null
         justification: "The question asks why runs with distinct initializations generalize at different times, so an account must recover the whole distribution of durations: its qualitative spread and its censoring pattern. One representative duration does not answer the question."
     structures_to_match: []

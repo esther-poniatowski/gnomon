@@ -30,6 +30,7 @@ import yaml
 
 from . import findings as rules
 from .findings import Entry, Finding, Key, Place, finding
+from .identifiers import split_reference
 
 DATA = Path(__file__).parent / "data"
 
@@ -474,8 +475,9 @@ def declarations(record: Mapping[str, Any]) -> list[Declaration]:
                 )
     for entry in entries(record, "observables"):
         pointer = entry.get("reference")
-        if isinstance(pointer, str) and "#" in pointer:
-            source, symbol = pointer.split("#", 1)
+        named = split_reference(pointer) if isinstance(pointer, str) else None
+        if named is not None:
+            source, symbol = named
             found.append(Declaration(symbol, "", "referenced", source))
     for entry in entries(record, "manifestations"):
         for feature in entries(entry, "features"):
@@ -665,11 +667,11 @@ def unresolved(
     ]
     for where, place, value in references:
         for index, name in items_of(value):
-            if isinstance(name, str) and "#" not in name and name not in known:
+            if isinstance(name, str) and split_reference(name) is None and name not in known:
                 problems.append(finding(rules.VOCABULARY_UNRESOLVED, f"{where} -> {name}", *_at_item(place, index)))
     for path in PATH_REFERENCE:
         for at, name in reach(record, path):
-            if name.strip() and "#" not in name and name not in known:
+            if name.strip() and split_reference(name) is None and name not in known:
                 problems.append(finding(rules.VOCABULARY_UNRESOLVED, f"{path} -> {name}", *at))
     for where, place, text, variables in formulas(record):
         reachable = known | bound(text) | available | variables
