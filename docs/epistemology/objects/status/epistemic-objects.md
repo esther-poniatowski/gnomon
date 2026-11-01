@@ -79,12 +79,13 @@ The table lists every epistemic object of an inquiry, in the order of the readin
 | itinerary | none: it records acts, not content | none: a record of acts | `itinerary` | [itinerary](../../processes/activities/epistemic-activities.md#^itinerary) |
 | concept | Definition | `concept` | none yet: the `concept` record is decided by the [decision on concepts](../../../adr/concepts-glossaries-notations.md) and not yet created | [concept](../concept/concept.md) |
 
-Only a claim can be accepted into $K$, by the [act of acceptance](statuses-and-acceptance.md#^acceptance-act). The product types fall into classes by whether the object that a type produces can be true or false, and only the claim types produce claims. Some claims have no product type yet: the claim that a construct is adequate, which [solves a problem](../problem/epistemic-problem.md#^solution-claim) that demands the construct, and the existence presupposition of a question. ^accepted-objects
+Only a claim can be accepted into $K$, by the [act of acceptance](statuses-and-acceptance.md#^acceptance-act). The product types fall into classes by what their objects bear on: a claim type produces a claim about the objects of study, which can be true or false, a construct type a construct judged for its adequacy, and an evaluative type a judgment of the standing of a claim or a construct. Only the claim types produce claims. One claim has no product type yet: the existence presupposition of a question. ^accepted-objects
 
-- **Claim types**: hypothesis, explanation, consequence, inter-theory relation and verdict.
+- **Claim types**: target claim, explanation, consequence and inter-theory relation.
 - **Construct types**, judged for their adequacy: model, concept, design, key, classification, measurement procedure and target specification.
-- **Types not yet classed**: identified subject, binding, phenomenon, data, background model, credence and ranking. Each of them holds or reports claims, yet none is plainly stated as one claim by an answer.
-- **Types outside both classes**, which are neither claims nor constructs of a target: source, problem, question schema, question and knowledge-state change.
+- **Types not yet classed**: identified subject, binding, phenomenon, data and admitted laws. Each of them holds or reports claims, yet none is plainly stated as one claim by an answer.
+- **Evaluative types**, which report the standing of a claim or of a construct rather than a claim about the objects of study: verdict, credence and ranking.
+- **Types outside these classes**, which are neither claims, constructs of a target nor evaluations: source, problem, question schema, question and knowledge-state change.
 
 The binding is the output of the binding activity, which takes a model, a phenomenon and a key, pending a change of the registry of activities that adds it.
 

@@ -17,7 +17,7 @@ aliases:
 
 > [!QUESTION] Goal: which activities specify a target, admit its background laws and construct a model of it, and by which norm is each judged?
 
-The activities of this family output a target specification, a background model or a [model](../../vocabulary/representations/model.md). Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a target specification, admitted laws or a [model](../../vocabulary/representations/model.md). Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 

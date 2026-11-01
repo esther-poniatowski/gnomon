@@ -65,7 +65,7 @@ The type of result of the demand fixes the admissible [aims](../task/epistemic-a
 ### Clarifications
 
 - **An explicatum is not judged true or false.** An explication is judged by its similarity to the explicandum, its exactness, its fruitfulness and its simplicity [carnap1950_logical]. Therefore, a demand for a concept calls for criteria of adequacy, not for a test of truth.
-- **A decision is a request, not the type of result of a demand.** A demand with the request `decision` asks for a decision on candidates already proposed. The type of result stays the type of those candidates, and each question that serves the demand keeps the aim of that type. The [evaluation activities](../../processes/activities/evaluation.md) produce the decision.
+- **A decision is a request, not the type of result of a demand.** A demand with the request `decision` asks for a decision on candidates already proposed. The type of result stays the type of those candidates, and each question that serves the demand keeps the aim of that type. The [evaluation activities](../../processes/activities/evaluation.md) produce the verdicts, and the researcher settles each candidate in view of them.
 - **Not every why-question asks for an explanation.** A why-question can ask for the reasons to believe a claim [hempel1965]. Such an answer is a justification, and a justification falls under the request `decision`.
 - **How-possibly and how-actually are modal strengths, not question forms.** A how-question takes either strength, as the [modal strength](../task/modal-strength.md) of the task states. A how-question can also ask for a prediction ("how does the rate change when the contrast doubles?").
 - **A prediction concerns the target, and a consequence concerns a model.** A consequence holds of a model, and it may fail of the target. A prediction claims an outcome of the target, so it is compared with observed outputs.
@@ -89,7 +89,7 @@ The demand of a problem, its request included, is a given of the problem, and th
 | Unsound presupposition | none: the problem is dissolved | — |
 
 - **Several obstacles generate several questions.** The values of axis A are not exclusive, so a problem can carry several obstacles, and each obstacle adds its own questions. *Example*: an open gap together with ill-defined terms generates one question of explication beside $Q_\pi$.
-- **A problem can carry such a demand from the start.** A problem whose demand is a verdict, or a concept, states that demand in its own record, and its associated question is then the question of the table.
+- **A problem can carry such a demand from the start.** A problem under the request `decision`, or whose demand is a concept, states that demand in its own record, and its associated question is then the question of the table.
 
 ## Relations to the method
 

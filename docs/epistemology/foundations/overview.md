@@ -96,7 +96,7 @@ Several words of the theory name different objects in different notes. The table
 | law | **law of a record**: any admitted general claim about declared quantities, with a role | [law of a record](../vocabulary/regularities/law.md#^law-of-a-record) |
 | law | **law statement**: a general claim that meets a criterion of lawhood | [law](../vocabulary/regularities/law.md#^lawhood) |
 | result | **result of a demand**: the object that a problem asks for, of any product type, such as a model, a concept or a consequence | [epistemic problem](../objects/problem/epistemic-problem.md#^solution-claim) |
-| result | **the role Result**: an answer accepted into $K$; the [solving claim](../objects/problem/epistemic-problem.md#^solution-claim) of a problem is one such answer | [roles of the research units](../objects/status/epistemic-objects.md#^unit-roles) |
+| result | **the role Result**: an answer accepted into $K$; the answer accepted to meet a [demand for a claim](../objects/problem/epistemic-problem.md#^solution-claim) is one such answer | [roles of the research units](../objects/status/epistemic-objects.md#^unit-roles) |
 | phenomenon | **phenomenon**: the behavior of the target that a question concerns | [phenomenon](../objects/subject/phenomenon.md) |
 | explanandum | **explanandum**: the role of the phenomenon when the aim is explanation | [claim and hypothesis](../vocabulary/representations/claim-and-hypothesis.md) |
 | adequacy | **adequacy for purpose**: a model serves the purpose of a question | [model and binding](../objects/answer/model-and-binding.md#^adequacy-for-purpose) |

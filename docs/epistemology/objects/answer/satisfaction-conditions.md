@@ -18,7 +18,7 @@ An **assessment** is the object that holds the result of testing one candidate a
 - the appraisal of the answer for each virtue that the question marks preferred;
 - an optional credence of the assessor, with its basis.
 
-An assessment ends at these results. Accepting the answer is a further act, the [act of acceptance](../status/statuses-and-acceptance.md#^acceptance-act). The [assessment record](../../../specification/assessment.md) documents the fields of an assessment.
+An assessment can also test a construct that a problem demands, such as a model or a concept, against the constraints $\Phi_1$ of that problem, which then supply its tests, as the [demand met](../problem/epistemic-problem.md#^demand-met) requires. An assessment ends at these results. Accepting the answer is a further act, the [act of acceptance](../status/statuses-and-acceptance.md#^acceptance-act). The [assessment record](../../../specification/assessment.md) documents the fields of an assessment.
 
 A candidate answer is evaluated at three levels: ^conditions-satisfaction
 

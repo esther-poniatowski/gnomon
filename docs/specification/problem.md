@@ -28,7 +28,7 @@ The problem record states one [epistemic problem](../epistemology/objects/proble
 
 - **The status of a problem records how it ends.** The field `status` of the problem record ends at `solved`, `dissolved` or `abandoned`, the three outcomes defined under [how a problem ends](../epistemology/objects/problem/epistemic-problem.md#^problem-outcomes).
 
-- **A typed demand makes [the existence of a problem](../epistemology/objects/problem/epistemic-problem.md#^problem-existence) checkable over the records.** Over the records of an inquiry, the problem exists when no accepted answer gives a direct answer of $Q_\pi$, and no accepted answer denies a presupposition of $Q_\pi$. The first clause is also the second condition of [the gap](../epistemology/objects/problem/epistemic-problem.md#^gap).
+- **A typed demand makes [the existence of a problem](../epistemology/objects/problem/epistemic-problem.md#^problem-existence) checkable over the records.** Over the records of an inquiry, the problem exists when its [demand is not met](../epistemology/objects/problem/epistemic-problem.md#^demand-met), as the attitudes of the answers, the maturities of the construct records and the dispositions of the assessments show, and when no accepted answer states the negation of a presupposition of $Q_\pi$. The first clause is also the second condition of [the gap](../epistemology/objects/problem/epistemic-problem.md#^gap).
 
 - **Most values of [axis A](../epistemology/objects/problem/problem-types.md) can be read from the records.** Over the records of an inquiry, an open gap is the absence of any accepted answer and of any proposed answer that gives a direct answer of $Q_\pi$. Unassessed candidates are proposed answers with none accepted. An unwarranted claim is an accepted answer whose support is weaker than the demand. Ill-defined terms are explicanda whose definiteness is not established; a specified record of the term is necessary for its definiteness, not sufficient.
 
@@ -37,9 +37,9 @@ The problem record states one [epistemic problem](../epistemology/objects/proble
 > [!WARNING] Untyped demand
 > The field `demand` holds a reading in words, so the checks of the existence of a problem and of axis A, which read the demanded type, wait on the typed demand that the goal `problem-record` of the [project goals](../../TODO.md) adds.
 >
-> When the demanded result is of a [construct type](../epistemology/objects/status/epistemic-objects.md#^accepted-objects), such as a model or a concept, the direct answer of $Q_\pi$ is the [claim of its adequacy](../epistemology/objects/problem/epistemic-problem.md#^solution-claim). No record kind holds that claim, nor the criteria of adequacy of a demanded concept, so the status `solved` of such a problem rests on no record yet.
+> When the demanded result is of a [construct type](../epistemology/objects/status/epistemic-objects.md#^accepted-objects), such as a model or a concept, the [demand is met](../epistemology/objects/problem/epistemic-problem.md#^demand-met) by the stabilized record of the construct and a satisfied assessment of it against the constraints. An assessment record judges a candidate answer only, so the status `solved` of such a problem cannot yet be read from the records.
 >
-> Under the request `decision`, the direct answer is a verdict, which an assessment record holds, whereas the records read $K$ from the answers whose attitude is `accepted`. No record holds an accepted verdict yet, so the existence of such a problem cannot be read from the records.
+> Under the request `decision`, the demand is met once every candidate is settled in view of its assessment. For candidate answers, the records hold the attitude of each answer and the disposition of each assessment, so a check can read that status once the demand is typed. Candidate constructs share the limit stated above.
 
 *Example*: the [problem of delayed generalization](../../examples/grokking-delayed-generalization/problem.yml) is an empirical problem, with two constraints and one explicandum, and its question names the problem in its field `addresses`.
 

@@ -48,7 +48,7 @@ The family notes write the inputs of an activity in three forms:
 
 - a type alone, such as `data`, takes one record of that type;
 - a type followed by a qualifier, such as `model` (source), `verdict` (several), `model` (optional) or `target-claim` (hypothesized), states the role, the number, the optionality or the attitude of its records, and leaves the type unchanged;
-- types joined by `|`, such as `target-claim | model`, take one record of either type.
+- types joined by `|`, such as `target-claim | model`, take one record of either type; a qualifier written after one of them, as in `target-claim` (hypothesized) | `model`, qualifies that type only.
 
 Three attributes take their values from closed lists: ^attribute-vocabularies
 

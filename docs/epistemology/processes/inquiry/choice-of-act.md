@@ -105,7 +105,7 @@ The criteria above either return a determinate result or present alternatives. T
 - which revision of a refuted condition is taken, when its row offers several;
 - how the inputs of an act are assigned, when several records fit;
 - whether an unsupported claim is admitted as a working assumption under the warrant `posited`;
-- whether the acts that rest on a verdict not yet accepted are run before its acceptance;
+- whether the acts that rest on a verdict are run before the norms of the steps that produced it are judged;
 - whether an assessed answer is accepted into the accepted knowledge $K$, an [act of acceptance](../../objects/status/statuses-and-acceptance.md#^acceptance-act) informed by the verdicts, the disposition and the credence of its assessment, never computed from them;
 - when the main question is re-examined;
 - the weighing of the ranking criteria, beyond the rule that settles their main conflict.

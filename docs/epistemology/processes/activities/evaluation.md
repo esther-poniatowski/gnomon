@@ -26,8 +26,8 @@ The activities of this family output a **verdict**, a **credence** or a **rankin
 | `validation` | `model`, `binding`, `question` | `verdict` | non-inferential | justification |
 | `model-selection` | `model` (several), `data` | `ranking` | inductive | justification |
 | `inference-to-the-best-explanation` | `target-claim` (several, hypothesized), `data` | `verdict` | abductive | justification |
-| `critique` | `target-claim \| model` (hypothesized) | `verdict` | non-inferential | justification |
-| `admissibility-check` | `target-claim \| model` (hypothesized), `question` | `verdict` | non-inferential | justification |
+| `critique` | `target-claim` (hypothesized) \| `model` | `verdict` | non-inferential | justification |
+| `admissibility-check` | `target-claim` (hypothesized) \| `model`, `question` | `verdict` | non-inferential | justification |
 
 ## Norms
 

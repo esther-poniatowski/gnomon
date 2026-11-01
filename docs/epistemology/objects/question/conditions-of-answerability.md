@@ -24,7 +24,7 @@ An answer is reached along one of two routes: ^routes
 - **Selection.** Candidates are proposed, a quantity takes different values under them, and the value obtained selects one candidate. *Example*: two rival accounts of gamma oscillations, separated by the effect of blocking the excitatory input to the interneurons.
 - **Construction.** A procedure is named that would yield a direct answer once it is developed or run, and no rival candidates need to be separated. *Example*: an algorithm that enumerates the fixed points of a network at each gain.
 
-A construction route is compatible with the [existence of a problem](../../objects/problem/epistemic-problem.md#^problem-existence), which holds while no direct answer is in the accepted knowledge $K$. A procedure that has not been run has obtained no answer, and a result obtained but not yet accepted is a proposed candidate. Access along this route holds when a procedure of the available means applies to the demanded result, which means that the procedure is designed for that result and that its inputs exist. Establishing access therefore does not end the problem.
+A construction route is compatible with the [existence of a problem](../../objects/problem/epistemic-problem.md#^problem-existence), which holds while its [demand is not met](../../objects/problem/epistemic-problem.md#^demand-met). A procedure that has not been run has obtained no answer, and a result obtained but not yet accepted is a proposed candidate. Access along this route holds when a procedure of the available means applies to the demanded result, which means that the procedure is designed for that result and that its inputs exist. Establishing access therefore does not end the problem.
 
 The conditions of one route are jointly necessary for that route. Alternatives arise at two levels: between the two routes, and between procedures that meet one condition, such as an analytic derivation and a simulation that both give access to a quantity. The [decomposition graph](../../processes/inquiry/question-decomposition.md#^decomposition-graph) records such alternatives as disjunctive relations between serving questions.
 
@@ -60,7 +60,7 @@ Once the conditions of a route hold, the acts that exercise access obtain the qu
 
 At a given time, a condition is in one of three condition states: ^condition-states
 
-- **established**, when the records show that it holds: the norm of the act whose outcome bears on the condition has passed, that outcome is positive, and the claim that it states has been accepted into $K$; or a record field whose definition shows the condition holds the value that shows it, such as the evidential status `established` of a phenomenon, cited by a pointer; or when the researcher asserts that it holds, with pointers to the records or the publications that show it;
+- **established**, when the records show that it holds: the norm of the act whose outcome bears on the condition has passed, that outcome is positive, and, when the outcome is a claim, that claim has been accepted into $K$; or a record field whose definition shows the condition holds the value that shows it, such as the evidential status `established` of a phenomenon, cited by a pointer; or when the researcher asserts that it holds, with pointers to the records or the publications that show it;
 - **not established**, when nothing yet shows whether it holds;
 - **refuted**, when the records or the literature show that it fails.
 
