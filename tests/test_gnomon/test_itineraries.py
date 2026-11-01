@@ -101,6 +101,7 @@ def test_each_activity_has_the_signature_its_note_states(identifier: str) -> Non
     assert typed(inputs) == {t for s in act.inputs for t in s.types}
     qualifiers = {word.strip() for group in re.findall(r"\(([^)]*)\)", inputs) for word in group.split(",")}
     assert qualifiers & ATTITUDES == {a for s in act.inputs for a in s.attitudes}
+    assert ("optional" in qualifiers) == any(s.least == 0 for s in act.inputs)
     assert typed(output) == {act.output}
     assert (act.mode, act.context) == (mode, context)
 
@@ -364,6 +365,24 @@ def test_an_attitude_restricts_an_answer_only() -> None:
     ]
     produced = step("abduction", [{"type": "phenomenon", "ref": "phen.a"}], {"type": "target-claim", "ref": "ans.a"})
     assert texts(itinerary_problems(produced, records)) == []
+
+
+def test_an_explanation_may_run_on_the_target_description() -> None:
+    """The input model of an explanation is optional: a route on the target description takes none."""
+    records = {"prob.a": {"type": "problem"}, "phen.a": {"type": "phenomenon"}, "mod.a": {"type": "model"},
+               "quest.a": {"type": "question", "request": "one", "subject": {"phenomenon": "phen.a"}}}
+    inputs = [{"type": "phenomenon", "ref": "phen.a"}, {"type": "question", "ref": "quest.a"}]
+
+    def explain(given: list[dict[str, str]]) -> dict[str, Any]:
+        return {"addresses": "prob.a", "steps": [{"id": "explain", "activity": "explanation", "inputs": given,
+                "output": {"type": "explanation"}, "norm": {"test": "norm.explanation", "verdict": "pending"}}]}
+
+    assert texts(itinerary_problems(explain(inputs), records)) == []
+    assert texts(itinerary_problems(explain([*inputs, {"type": "model", "ref": "mod.a"}]), records)) == []
+    twice = [*inputs, {"type": "model", "ref": "mod.a"}, {"type": "model", "ref": "mod.a"}]
+    assert texts(itinerary_problems(explain(twice), records)) == [
+        "steps.explain: explanation takes at most one input of model, and the step gives 2"
+    ]
 
 
 def test_a_question_without_a_request_stays_a_schema() -> None:

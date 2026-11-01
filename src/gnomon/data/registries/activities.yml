@@ -10,6 +10,7 @@
 # Each input names a product type of `product-types.yml`, written as the family notes write it.
 # A bare type takes one record of that type. A mapping adds qualifiers:
 #   - `several: true` (two or more records of the type) or `count` (an exact number of records);
+#   - `optional: true`: the step may omit the input, written `(optional)` in the notes;
 #   - `role`: the part played by the record, stated in the note of the family;
 #   - `types`: alternative types, written `a | b` in the notes, of which the step takes one record;
 #   - `attitude`: the attitudes of `.status` of an answer under which a referenced answer may fill
@@ -387,7 +388,7 @@ activities:
     family: explanation-and-integration
     inputs:
       - phenomenon
-      - model
+      - {type: model, optional: true}
       - question
     output: explanation
     norm: norm.explanation

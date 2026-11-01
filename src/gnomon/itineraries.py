@@ -101,7 +101,7 @@ def slot(entry: Any) -> Slot:
 
     A bare type takes one record. A mapping names one type under ``type`` or alternatives under
     ``types``, and qualifies the number with ``several`` (two or more) or ``count`` (exactly that
-    many); a ``role`` leaves the type unchanged. An ``attitude``, one value or a list, restricts the
+    many), and ``optional`` lets the step omit the input; a ``role`` leaves the type unchanged. An ``attitude``, one value or a list, restricts the
     attitudes under which a referenced answer holds the type, since the attitude of a claim is an
     attribute of the claim, not a type.
 
@@ -115,6 +115,8 @@ def slot(entry: Any) -> Slot:
     ['model', 'target-claim']
     >>> sorted(slot({"type": "target-claim", "attitude": "hypothesized"}).attitudes)
     ['hypothesized']
+    >>> slot({"type": "model", "optional": True}).admits(0)
+    True
     """
     if isinstance(entry, str):
         return Slot(frozenset({entry}))
@@ -123,9 +125,9 @@ def slot(entry: Any) -> Slot:
     attitude = entry.get("attitude") or []
     attitudes = frozenset([attitude] if isinstance(attitude, str) else (str(value) for value in attitude))
     if entry.get("several"):
-        return Slot(types, least=2, most=None, attitudes=attitudes)
+        return Slot(types, least=0 if entry.get("optional") else 2, most=None, attitudes=attitudes)
     count = int(entry.get("count", 1))
-    return Slot(types, least=count, most=count, attitudes=attitudes)
+    return Slot(types, least=0 if entry.get("optional") else count, most=count, attitudes=attitudes)
 
 
 def required_attitudes(act: Activity, kind: str) -> frozenset[str]:
@@ -449,6 +451,8 @@ def _held(record: Mapping[str, Any], types: Mapping[str, Mapping[str, Any]]) -> 
 def _describe(held: Slot) -> str:
     if held.most is None:
         return f"{held.least} or more inputs"
+    if held.least == 0:
+        return "at most one input" if held.most == 1 else f"at most {held.most} inputs"
     return "one input" if held.least == held.most == 1 else f"{held.least} inputs"
 
 
