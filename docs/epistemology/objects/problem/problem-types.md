@@ -21,7 +21,7 @@ An [epistemic problem](epistemic-problem.md) $\pi=\langle K,d,\Phi\rangle$ is cl
 
 The obstacle is not a fourth component of the problem. The obstacle is *diagnosed* from the accepted knowledge $K$, from the [proposed candidates](epistemic-problem.md#^candidates) $H$, and from the [associated question](epistemic-problem.md#^associated-question) $Q_\pi$. A problem can carry several obstacles at once, so the diagnosis is a set of values, each with pointers to the records or publications that establish it. The diagnosis runs along two axes. The two axes record different facts, so their values combine, within the exceptions that the [division of the conditions between the two axes](../question/conditions-of-answerability.md#^obstacle-axes) states.
 
-### Axis A: the state of the knowledge about the associated question
+### Knowledge obstacles: the state of the knowledge about the associated question
 
 | Value | Condition | In words | Example | Source |
 | --- | --- | --- | --- | --- |
@@ -37,12 +37,12 @@ The obstacle is not a fourth component of the problem. The obstacle is *diagnose
 - **An unsound presupposition ends the problem.** The problem is dissolved, as the [outcomes of a problem](epistemic-problem.md#^problem-outcomes) state. The value requires an outright refutation, in which $K$ holds the negation of a presupposition of $Q_\pi$. A presupposition that the means considered have failed to establish is not unsound: it stays to be established, and the problem stands.
 - **Laudan's anomaly is comparative.** An anomalous problem, in Laudan's sense, is an empirical problem that a theory has not solved and that a rival theory has solved [laudan1977]. A mismatch between a model and data is a conflict, and the mismatch becomes an anomaly only when a rival account removes it.
 
-### Axis B: the unmet conditions of answerability
+### Answerability obstacles: the refuted conditions of answerability
 
-The second axis records which **condition of answerability** of $Q_\pi$ is refuted. A condition of answerability is a condition that must hold before an answer can be obtained, such as the definiteness of a term, access to a quantity, or a bridging inference from that quantity to the answer. The [conditions of answerability](../question/conditions-of-answerability.md) are defined, with their states and their dependencies, after the notes on the question. The values of axis B are the conditions that can be refuted: definiteness without an adequate criterion, an answer type that no answer can meet, and discrimination, access, bridging and representation. The [division of the conditions between the two axes](../question/conditions-of-answerability.md#^obstacle-axes) states which conditions axis A records instead, and the values of axis A under which each value of axis B can occur.
+The answerability obstacles record which **condition of answerability** of $Q_\pi$ is refuted. A condition of answerability is a condition that must hold before an answer can be obtained, such as the definiteness of a term, access to a quantity, or a bridging inference from that quantity to the answer. The [conditions of answerability](../question/conditions-of-answerability.md) are defined, with their states and their dependencies, after the notes on the question. The answerability obstacles are the conditions that can be refuted: definiteness without an adequate criterion, an answer type that no answer can meet, and discrimination, access, bridging and representation. The [division of the conditions between the two axes](../question/conditions-of-answerability.md#^obstacle-axes) states which conditions the knowledge obstacles record instead, and the knowledge obstacles together with which each answerability obstacle can occur.
 
-- **Axis B records refuted conditions only.** A condition not yet established is not an obstacle on axis B: discrimination is not established for any problem whose candidates have just been proposed. A condition is refuted outright, by an argument of impossibility, or for lack of means, when every means considered has been tried and has failed, as the [states of a condition](../question/conditions-of-answerability.md#^condition-states) define.
-- **A lack of means falls on axis B.** When every means considered fails to meet a condition, that condition is refuted for lack of means. Access fails when no instrument, data set, algorithm or proof technique considered yields the quantity. Discrimination fails when no quantity considered separates the candidates from their alternatives. Bridging and representation fail in the same way, when no auxiliary hypothesis considered holds, or when no model considered represents the target to the required accuracy.
+- **An answerability obstacle is a refuted condition only.** A condition not yet established is no answerability obstacle: discrimination is not established for any problem whose candidates have just been proposed. A condition is refuted outright, by an argument of impossibility, or for lack of means, when every means considered has been tried and has failed, as the [states of a condition](../question/conditions-of-answerability.md#^condition-states) define.
+- **A lack of means is an answerability obstacle.** When every means considered fails to meet a condition, that condition is refuted for lack of means. Access fails when no instrument, data set, algorithm or proof technique considered yields the quantity. Discrimination fails when no quantity considered separates the candidates from their alternatives. Bridging and representation fail in the same way, when no auxiliary hypothesis considered holds, or when no model considered represents the target to the required accuracy.
 - *Example*: the number of fixed points is an open gap. Suppose, in addition, that no algorithm enumerates the fixed points of a network of a thousand units within the available computing time. In that case, the condition of access fails as well.
 
 ## Classification by demand
@@ -79,7 +79,7 @@ The type of result of the demand fixes the admissible [aims](../task/epistemic-a
 
 The demand of a problem, its request included, is a given of the problem, and the obstacle is diagnosed relative to that demand. Each obstacle generates the questions that serve the problem: ^obstacle-questions
 
-| Obstacle (axis A) | Question generated | Demand of that question |
+| Knowledge obstacle | Question generated | Demand of that question |
 | --- | --- | --- |
 | Open gap | none: the associated question $Q_\pi$ itself | — |
 | Unassessed candidates | whether each proposed candidate meets the demand | the request `decision`, on the type of the candidates |
@@ -88,7 +88,7 @@ The demand of a problem, its request included, is a given of the problem, and th
 | Ill-defined terms | which criterion should define the explicandum | a concept or a measurement procedure |
 | Unsound presupposition | none: the problem is dissolved | — |
 
-- **Several obstacles generate several questions.** The values of axis A are not exclusive, so a problem can carry several obstacles, and each obstacle adds its own questions. *Example*: an open gap together with ill-defined terms generates one question of explication beside $Q_\pi$.
+- **Several obstacles generate several questions.** The knowledge obstacles are not exclusive, so a problem can carry several obstacles, and each obstacle adds its own questions. *Example*: an open gap together with ill-defined terms generates one question of explication beside $Q_\pi$.
 - **A problem can carry such a demand from the start.** A problem under the request `decision`, or whose demand is a concept, states that demand in its own record, and its associated question is then the question of the table.
 
 ## Relations to the method

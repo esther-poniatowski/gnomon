@@ -7,11 +7,11 @@ aliases:
 ---
 # Epistemic task
 
-Defines the kind of knowledge that an answer must deliver and the qualities that a question selects for its answers, the second and third layers of the specification of a question.
+Defines the kind of knowledge that an answer must deliver and the qualities that a question selects for its answers, the task layer and the virtues layer of the specification of a question.
 
 ## Epistemic task
 
-The second layer of the specification fixes the kind of knowledge that an answer must deliver.
+The task layer of the specification fixes the kind of knowledge that an answer must deliver.
 
 - [Epistemic task](epistemic-task.md): lays out the dimensions along which a question fixes the kind of knowledge that it requests
 - [Epistemic aim](epistemic-aim.md): classifies the cognitive achievements that an inquiry can seek
@@ -21,6 +21,6 @@ The second layer of the specification fixes the kind of knowledge that an answer
 
 ## Virtues
 
-The third layer of the specification selects the qualities that an answer must have, or by which admissible answers are ranked.
+The virtues layer of the specification selects the qualities that an answer must have, or by which admissible answers are ranked.
 
 - [Epistemic and pragmatic virtues](epistemic-pragmatic-virtues.md): defines the qualities that a question can select for its answers, beyond its task

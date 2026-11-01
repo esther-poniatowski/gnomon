@@ -93,6 +93,10 @@ Each contract of the framework has one owning file. A contributor reads that fil
 
 Every Markdown file under `docs/` is a note: it declares its metadata in a YAML frontmatter block, and it is registered in the index of the folder holding it. A file that satisfies neither is invisible to a reader navigating by index, and is effectively lost while appearing to exist.
 
+### Labels
+
+Every axis, category, classification, level, stage, step, layer, condition, sense or other label of the framework takes a brief descriptive name, never a letter, a number or an ordinal: the knowledge obstacles of a problem, not its axis A. A reference to such an item uses its name. An ordered list may number its items to show their order, when each item also carries its name and no text refers to an item by its number. ^descriptive-labels
+
 ### Theory and specification
 
 A content about the records of an inquiry belongs to one of two tiers, decided by one test: would the content still hold if the format of the records changed?

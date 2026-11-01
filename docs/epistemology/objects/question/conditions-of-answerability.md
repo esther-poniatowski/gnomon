@@ -99,13 +99,13 @@ The definiteness of the terms of a candidate is part of the admissibility of tha
 
 The two axes of the [types of problem](../../objects/problem/problem-types.md) read the obstacle of a problem in terms of these conditions and of the set $H$ of proposed candidates, for the associated question $Q_\pi$. The conditions divide between the two axes as follows: ^obstacle-axes
 
-- the value *unsound presupposition* of axis A is soundness refuted outright; soundness refuted for lack of means leaves the problem standing, with its presupposition still to be established;
+- the knowledge obstacle *unsound presupposition* is soundness refuted outright; soundness refuted for lack of means leaves the problem standing, with its presupposition still to be established;
 - the value *ill-defined terms* is definiteness in the state `not established` for an explicandum of the demand;
 - the values *open gap* and *unassessed candidates* record whether $H$ holds a candidate, and whether none is accepted; they record the occupancy of $H$, not the condition of candidates, which also requires admissibility;
 - the values *conflict* and *unwarranted claim* describe the accepted knowledge $K$, not a condition of $Q_\pi$;
-- the values of axis B are definiteness without an adequate criterion, an answer type that no answer can meet, and discrimination, access, bridging or representation, each refuted outright or for lack of means. The condition of candidates is not refuted on its own: when the question presupposes that its candidates are complete and all are eliminated, soundness is refuted.
+- the answerability obstacles are definiteness without an adequate criterion, an answer type that no answer can meet, and discrimination, access, bridging or representation, each refuted outright or for lack of means. The condition of candidates is not refuted on its own: when the question presupposes that its candidates are complete and all are eliminated, soundness is refuted.
 
-Each condition of axis B can be refuted under any value of axis A, with two exceptions. An unsound presupposition ends the problem, so no condition of answerability applies to it. Under selection, discrimination, access, bridging and representation all [depend](#^condition-dependencies), directly or through other conditions, on admissible candidates. Therefore, when no admissible candidate exists, none of them can be refuted along selection, and only access, bridging and representation can be refuted, along the route of construction.
+Each answerability obstacle can occur together with any knowledge obstacle, with two exceptions. An unsound presupposition ends the problem, so no condition of answerability applies to it. Under selection, discrimination, access, bridging and representation all [depend](#^condition-dependencies), directly or through other conditions, on admissible candidates. Therefore, when no admissible candidate exists, none of them can be refuted along selection, and only access, bridging and representation can be refuted, along the route of construction.
 
 ## Necessity and joint sufficiency
 

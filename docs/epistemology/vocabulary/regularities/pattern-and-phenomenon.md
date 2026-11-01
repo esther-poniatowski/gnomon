@@ -28,7 +28,7 @@ aliases:
 | Appearance | empiricist philosophy of science | the content of an observation, or the outcome of a measurement | [vanfraassen2008] |
 | Phenomenon | realist ontology | a fact as it appears to an observer | [bunge1977] |
 
-The three senses of phenomenon differ in their requirements. The first requires stability and leaves observability open, since a phenomenon may be detected only through instruments and statistics [bogen1988]. The second requires observability. The third requires only an observer. The phenomenon of a question takes the first sense and relaxes its requirement of stability, which binds a regularity only.
+The three senses of phenomenon differ in their requirements. The sense of the philosophy of science requires stability and leaves observability open, since a phenomenon may be detected only through instruments and statistics [bogen1988]. The empiricist sense requires observability. The sense of realist ontology requires only an observer. The phenomenon of a question takes the sense of the philosophy of science and relaxes its requirement of stability, which binds a regularity only.
 
 ## Distinctions
 

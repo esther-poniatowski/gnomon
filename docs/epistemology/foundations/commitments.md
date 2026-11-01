@@ -10,7 +10,7 @@ aliases:
 
 > [!QUESTION] Goal: which commitments does the method of `gnomon` make about the objects and the processes of an inquiry, on which grounds, and which acts does its tool perform rather than record or leave to the researcher?
 
-A **commitment** of the method is a choice that binds every record and every process of an inquiry. Each commitment below is stated with its grounds, and links the note that develops it. The commitments form the third part of the answer to the [root question](overview.md#^root-question) of the theory.
+A **commitment** of the method is a choice that binds every record and every process of an inquiry. Each commitment below is stated with its grounds, and links the note that develops it. The commitments form the part of the answer to the [root question](overview.md#^root-question) of the theory that binds both the objects and the processes.
 
 ## Access, claims and existence
 

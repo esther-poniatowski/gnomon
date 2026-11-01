@@ -79,7 +79,7 @@ A typed relational structure is required because an ordinary graph with binary e
 
 **Relation among components**: a relation of the same family whose terms are all components, $\rho_k\subseteq C^{N_k}\subseteq U^{N_k}$. *Example*: a binary relation among components may hold the pair
 $$(c_i,c_j)\in \rho_k \qquad \text{or} \qquad (i,j,w_{ij},\delta_{ij},\ldots)\in\rho_k$$
-where the second form attaches properties to the pair (e.g. weight, delay).
+where the extended tuple attaches properties to the pair (e.g. weight, delay).
 
 *Examples*: relations can encode productive constraints (e.g. spatial adjacency, temporal precedence, causal dependence, participation of a component in an activity, hierarchical containment):
 

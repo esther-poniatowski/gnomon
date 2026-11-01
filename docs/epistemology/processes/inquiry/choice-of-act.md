@@ -64,7 +64,7 @@ An **act instance** is an activity whose inputs are assigned to records, to the 
 
 ## Ranking of acts
 
-Before the ranking, each act receives one of three statuses by the [test of relevance](question-decomposition.md#^relevance): necessary, useful or decorative. Decorative acts are removed, and the necessary and useful acts are compared by the first five criteria below. The sixth criterion orders the open conditions of one route, not the acts. ^ranking-criteria
+Before the ranking, each act receives one of three statuses by the [test of relevance](question-decomposition.md#^relevance): necessary, useful or decorative. Decorative acts are removed, and the necessary and useful acts are compared by the criteria below from diagnostic power to strength of warrant. The order of tests ranks the open conditions of one route, not the acts. ^ranking-criteria
 
 | Criterion | Preferred | Source |
 | --- | --- | --- |
@@ -94,7 +94,7 @@ Four heuristics propose acts instead of ranking them:
 The criteria above either return a determinate result or present alternatives. The method leaves the following choices to the researcher: ^researcher-choices
 
 - which question stands for the associated question of a problem, when a stated question narrows the demand of the problem;
-- the judgments that fix axis A of the [types of problem](../../objects/problem/problem-types.md), such as whether a datum is improbable under the accepted knowledge, or whether the support of an accepted claim is weaker than the demand requires;
+- the judgments that fix the knowledge obstacles of the [types of problem](../../objects/problem/problem-types.md), such as whether a datum is improbable under the accepted knowledge, or whether the support of an accepted claim is weaker than the demand requires;
 - which question a conflict generates;
 - whether a candidate whose verdict is negative is withdrawn or revised;
 - whether a construction route is named;

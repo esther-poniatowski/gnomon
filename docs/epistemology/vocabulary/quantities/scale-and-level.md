@@ -34,7 +34,7 @@ A statement is **meaningful** when its truth survives every admissible transform
 
 ## Scale of description
 
-In its second sense, the **scale** of a description is its extent and its resolution along one dimension: space, time, or the hierarchy of organization. The resolution of a descriptive scale is also called the *grain of description*. *Example*: a description of cortex at the scale of millimetres and seconds resolves columns and population rhythms, and no single spike. This sense has no relation to the homomorphism of the measurement sense.
+In another sense, the **scale** of a description is its extent and its resolution along one dimension: space, time, or the hierarchy of organization. The resolution of a descriptive scale is also called the *grain of description*. *Example*: a description of cortex at the scale of millimetres and seconds resolves columns and population rhythms, and no single spike. This sense has no relation to the homomorphism of the measurement sense.
 
 ## Level
 
@@ -53,7 +53,7 @@ In its second sense, the **scale** of a description is its extent and its resolu
 
 - When a claim holds on one scale type and fails under the admissible transformations of that type, the claim is an artefact of the representation.
 - **The descriptive scale of a phenomenon sets the default grain of description of its explanans.** The [proportionality requirement](../../objects/subject/phenomenon.md#^resolution-proportionality) uses scale in the descriptive sense.
-- **The bound on the explanans uses levels of organization on one of its two axes.** The compositional axis of the [bound on the explanans](../../objects/task/admissible-explanans.md) $\lambda$ restricts the parts that may appear in an answer, so it uses level in the sense of organization. The bound itself is not a level, since its second axis, substrate dependence, orders no parts.
+- **The bound on the explanans uses levels of organization on one of its two axes.** The compositional axis of the [bound on the explanans](../../objects/task/admissible-explanans.md) $\lambda$ restricts the parts that may appear in an answer, so it uses level in the sense of organization. The bound itself is not a level, since its axis of substrate dependence orders no parts.
 
 The fields that bear on the scale of a quantity are documented in the [target-system record](../../../specification/target-system.md) and the [phenomenon record](../../../specification/phenomenon.md).
 

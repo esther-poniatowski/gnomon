@@ -13,7 +13,7 @@ aliases:
 
 > [!QUESTION] Goal: which sense of "condition" does a statement use, and where does each condition of an inquiry belong among the concepts of the method?
 
-"**Condition**" carries seven senses across logic, physics, the philosophy of science and this method, and none of them is primary for a record. The first six senses bear on a system or on states of affairs, and the seventh bears on a question, an answer or an act of the inquiry. The method classifies the conditions of a system by their **place** alone, among the components of the inquiry that the [places of a condition](../../objects/subject/domain.md#^condition-places) list.
+"**Condition**" carries seven senses across logic, physics, the philosophy of science and this method, and none of them is primary for a record. Six senses bear on a system or on states of affairs, and the sense of requirement bears on a question, an answer or an act of the inquiry. The method classifies the conditions of a system by their **place** alone, among the components of the inquiry that the [places of a condition](../../objects/subject/domain.md#^condition-places) list.
 
 ## Senses
 
@@ -27,14 +27,14 @@ aliases:
 | Necessary, sufficient, INUS condition | logic, causation | a necessary or a sufficient condition; an INUS condition is an insufficient but non-redundant part of an unnecessary but sufficient condition | [mackie1965] |
 | Requirement | this method | a requirement that a question, an answer or an act of the inquiry must meet, such as the [conditions of satisfaction](../../objects/answer/satisfaction-conditions.md) of a question, the [conditions of answerability](../../objects/question/conditions-of-answerability.md), or the conditions of a controlled iteration | — |
 
-The first five senses name a constraint fixed from outside the derivation: a fact entering the derivation, a starting state, or a restriction on circumstances. The sixth sense is logical: it names a relation between two states of affairs, and a condition in that sense can be derived. The seventh sense is a requirement: it constrains no system, and it states the standard that a question, an answer or an act must meet.
+The senses from antecedent condition to causal field name a constraint fixed from outside the derivation: a fact entering the derivation, a starting state, or a restriction on circumstances. The sense of a necessary, sufficient or INUS condition is logical: it names a relation between two states of affairs, and a condition in that sense can be derived. The sense of requirement is a standard: it constrains no system, and it states the standard that a question, an answer or an act must meet.
 
 ## Distinctions
 
 - **A value fixed by a condition takes its role from the role test of a quantity.** The [role test](variable-value-observable.md#^role-test) places each value relative to the course of a phenomenon. *Example*: the initial state $x_0$ is constant along the course and varies across the instances, so a phenomenon names it as an index of an observable or as a source of variation. Since the question varies the initial state, the initial state leaves the conditions held fixed $D$, and its place in the record follows the [rule for a varied factor](../../objects/subject/phenomenon.md#^conditions-byproducts). The state $x(t)$ at a later time varies along the course, and the system determines it.
 - **One quantity can change role between descriptions.** The temperature of a heat bath is a parameter of the system surrounded by the bath, and a boundary condition of the bath itself.
-- **The logical sense of condition is told apart from the first five by derivability.** The first five senses name constraints admitted without derivation. A necessary or sufficient condition is a claim about a dependence, and an inquiry can establish such a claim.
-- **A requirement is told apart from the other six senses by its bearer.** The first six senses bear on a system or on its states of affairs, so a model or a record of the target holds them. A requirement bears on a question, an answer or an act, so it is checked against the inquiry itself. *Example*: the initial state $x_0$ of a network is a condition of the system, whereas the soundness of a question, one of its conditions of answerability, is a requirement on the question.
+- **The logical sense of condition is told apart from the senses of a constraint by derivability.** The senses from antecedent condition to causal field name constraints admitted without derivation. A necessary or sufficient condition is a claim about a dependence, and an inquiry can establish such a claim.
+- **A requirement is told apart from the other senses by its bearer.** The other senses bear on a system or on its states of affairs, so a model or a record of the target holds them. A requirement bears on a question, an answer or an act, so it is checked against the inquiry itself. *Example*: the initial state $x_0$ of a network is a condition of the system, whereas the soundness of a question, one of its conditions of answerability, is a requirement on the question.
 
 ## Relations to the method
 

@@ -18,7 +18,7 @@ aliases:
 - in neuroscience, a state variable;
 - in an itinerary of inquiry, an epistemic act.
 
-Only the first sense is specific to mechanistic explanation. This note fixes the relations of that sense to the neighboring terms.
+Only the sense of a producer of change is specific to mechanistic explanation. This note fixes the relations of that sense to the neighboring terms.
 
 ## Senses
 
