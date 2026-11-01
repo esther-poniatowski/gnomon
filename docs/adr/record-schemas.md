@@ -12,6 +12,8 @@ aliases:
 
 > [!QUESTION] Goal: which file declares the shape of an inquiry record, so that a program can validate the record and an editor can render it as a form?
 
+**Amended** on 2026-11-01 by the decision of `geonexus` on [tool roles](https://github.com/esther-poniatowski/geonexus/blob/827474dca64daef110b9d7fe36a4127c2b32b167/docs/_decisions/tool-roles.md): a schema that narrows no vocabulary keeps its binding to `gnomon:<type>@<n>`; a schema that narrows a vocabulary follows rule 4 of that decision, an unbound base schema and a bound contract.
+
 The records of `gnomon` are specified by YAML templates, whose comments state the admitted values and the guidance for each field. A comment is read by an author only. No program validates the shape of a record against it, and Ekphrasis, the form editor of the consumers of `gnomon`, renders a record only from a JSON Schema.
 
 ## Decision
