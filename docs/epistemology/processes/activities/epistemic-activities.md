@@ -113,9 +113,9 @@ The product types form a closed list. Each type classifies the epistemic objects
 | --- | --- | --- |
 | `source` | a document, a dataset or a result external to the inquiry | no activity, by design |
 | `problem` | a demand for a solution under constraints, defined in the note on the [epistemic problem](../../objects/problem/epistemic-problem.md) | problem-posing |
-| `question-schema` | a [question schema](../../objects/question/question.md#^question-schema): a question form whose slots are typed placeholders, not yet a question | problem-posing |
+| `question-schema` | a [question schema](../../objects/question/question.md#^question-schema): a question form whose slots are typed placeholders, or whose request is not fixed, not yet a question | problem-posing |
 | `identified-subject` | the system and the phenomenon of a question, at the [level of commitment](../../objects/question/question.md#^commitment-levels) `identified` or above | problem-posing |
-| `question` | a question, each of whose slots names its referent at the level `identified` or above | problem-posing |
+| `question` | a question, each of whose slots names its referent at the level `identified` or above, and whose request is fixed | problem-posing |
 | `concept` | a term with its definition or its explication | conceptual activities |
 | `measurement-procedure` | a procedure that assigns values to a quantity on a stated [scale](../../vocabulary/quantities/scale-and-level.md) | conceptual activities |
 | `classification` | a partition of systems into [classes](../../vocabulary/systems/kind-class-population.md) | conceptual activities |

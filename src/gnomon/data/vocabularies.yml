@@ -232,6 +232,11 @@ vocabularies:
     - value: refined
     - value: answered
     - value: abandoned
+    .request:
+    - value: one
+    - value: all
+    - value: over-a-parameter
+    - value: decision
     links.relation:
     - value: subquestion-of
     - value: explanans-from

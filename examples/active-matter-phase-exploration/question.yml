@@ -3,6 +3,7 @@ statement: "Which macroscopic phases occur in spatially extended stochastic mode
 id: quest.nonreciprocal-active-matter.phase-exploration
 type: question
 status: posed
+request: over-a-parameter
 subject:
   target_system: system.nonreciprocal-active-matter
   background: [bg.nonreciprocal-active-matter.local-dynamics]

@@ -17,6 +17,7 @@ The question record names the [problem](problem.md) that it addresses and the qu
 | Statement | always | the question in words, restating its fields in the [statement frame](../epistemology/objects/subject/subject-of-inquiry.md#^question-statement) | "in overparameterized networks trained to fit their data, what produces the delay before generalization?" |
 | Status | always | posed · refined · answered · abandoned | `posed`, for a question not yet refined |
 | Addresses | when a problem record states the problem that the question serves | the identifier of one problem record | the problem of the delay before generalization |
+| Request | to make the record a question rather than a schema | how many possible answers a direct answer selects, and whether it claims completeness: one · all · over-a-parameter · decision, as the [request of a question](../epistemology/objects/question/question-specification.md#^question-request) defines them; the request of the problem that the question serves, when one exists | `one`, for a question that one explanatory account answers |
 | Links | when the answer to another question bears on this one | per link, the other question, the relation, and the record shared by the two questions | — |
 | Links: question | with every link | the identifier of the other question record | the question that describes the representation geometry of a network |
 | Links: relation | with every link | subquestion-of · explanans-from · presupposes · enables | `explanans-from`, for a question that explains a readout capacity by that geometry |
@@ -34,7 +35,4 @@ The commitment of a slot takes one of the [levels of commitment](../epistemology
 | `specified` | the required fields are filled, and every symbol resolves |
 
 - **The slots of a question admit a placeholder.** The rule is stated under [placeholders before records](question-subject.md#^placeholder-slots).
-> [!WARNING] No field for the request
-> The [request](../epistemology/objects/question/question-specification.md#^question-request) of a question fixes its direct answers beside its three layers, but the question record has no field for it yet. The type `question` of a record therefore cannot yet check that the request is fixed. The goal `theory-code-alignment` of the [project goals](../../TODO.md) adds the field.
-
-- **The type of a question record follows the commitment of its slots.** When any slot holds a placeholder, the record is a `question-schema`. When every slot is `identified` or `specified`, the record is a `question`. The two take the same fields.
+- **The type of a question record follows the commitment of its slots.** When any slot holds a placeholder, or the request is not fixed, the record is a `question-schema`. When every slot is `identified` or `specified` and the request is fixed, the record is a `question`. The two take the same fields.

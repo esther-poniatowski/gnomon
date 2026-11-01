@@ -4,6 +4,7 @@ id: quest.grokking.explain_delay
 type: question
 status: posed
 addresses: prob.grokking.delayed-generalization
+request: one
 subject:
   target_system: system.delayed_generalization_networks
   background: [bg.delayed_generalization_networks.training-specification]

@@ -14,8 +14,8 @@
 # `record: external pointer` marks a type held outside the records and reached by a pointer.
 # A `when` mapping states the state in which a record of a listed kind holds the type:
 #   - `commitment`: the admitted levels of commitment of the record;
-#   - `slots`: `placeholder` when some subject slot of a question holds a placeholder, `identified`
-#     when every slot names a record;
+#   - `form`: `schema` when some subject slot of a question holds a placeholder or its request is
+#     not fixed, `question` when every slot names a record and the request is fixed;
 #   - `status`: the admitted statuses of the record.
 # The itinerary check computes the type of a referenced record from its kind and its state. A
 # `condition` states in words the part of the type that the fields of a record hold.
@@ -33,11 +33,11 @@ product_types:
     status: exists
   - id: question-schema
     record: [question]
-    when: {slots: placeholder}
+    when: {form: schema}
     status: exists
   - id: question
     record: [question]
-    when: {slots: identified}
+    when: {form: question}
     status: exists
   - id: identified-subject
     record: [target-system, phenomenon]

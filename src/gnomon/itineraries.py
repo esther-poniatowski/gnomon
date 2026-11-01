@@ -178,14 +178,25 @@ def has_placeholder(question: Mapping[str, Any]) -> bool:
     return any(isinstance(subject.get(slot), Mapping) for slot in ("target_system", "phenomenon"))
 
 
+def question_form(question: Mapping[str, Any]) -> str:
+    """Return ``question`` once every subject slot names a record and the request is fixed, else ``schema``.
+
+    >>> question_form({"subject": {"phenomenon": "phen.a"}, "request": "one"})
+    'question'
+    >>> question_form({"subject": {"phenomenon": "phen.a"}})
+    'schema'
+    """
+    return "question" if not has_placeholder(question) and question.get("request") else "schema"
+
+
 def holds(record: Mapping[str, Any], entry: Mapping[str, Any]) -> bool:
     """Return whether ``record``, in its present state, holds a product of the type of ``entry``.
 
     The kind of the record must be listed, and its state must satisfy the ``when`` mapping: the
-    level of commitment, the slots of a question, or the status.
+    level of commitment, the form of a question, or the status.
 
     >>> holds({"type": "question", "subject": {"phenomenon": {"placeholder": "observable"}}},
-    ...       {"record": ["question"], "when": {"slots": "placeholder"}})
+    ...       {"record": ["question"], "when": {"form": "schema"}})
     True
     >>> holds({"type": "target-system", "commitment": "specified"},
     ...       {"record": ["target-system"], "when": {"commitment": ["identified"]}})
@@ -199,7 +210,7 @@ def holds(record: Mapping[str, Any], entry: Mapping[str, Any]) -> bool:
         return False
     if "status" in when and record.get("status") not in when["status"]:
         return False
-    if "slots" in when and has_placeholder(record) != (when["slots"] == "placeholder"):
+    if "form" in when and question_form(record) != when["form"]:
         return False
     return True
 

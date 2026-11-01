@@ -11,6 +11,7 @@ id: quest.TOPIC.NAME
 type: question
 status: posed                     # posed | refined | answered | abandoned
 addresses: prob.TOPIC.NAME        # the problem that the question serves; omit when no problem record exists
+request:                          # one | all | over-a-parameter | decision; the request of the problem that the question serves; empty while the record is a schema
 links:                            # questions linked to this question by one of four relations; empty when none
   - question: quest.TOPIC.NAME
     relation:                     # subquestion-of | explanans-from | presupposes | enables

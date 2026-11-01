@@ -141,7 +141,7 @@ def test_the_registry_lists_the_product_types_of_the_overview() -> None:
 # An itinerary that passes every check, over records that the planted cases modify one at a time.
 RECORDS: dict[str, dict[str, Any]] = {
     "prob.geometry": {"type": "problem"},
-    "quest.geometry": {"type": "question"},
+    "quest.geometry": {"type": "question", "request": "one"},
     "system.networks": {"type": "target-system"},
     "phen.readout": {"type": "phenomenon"},
     "ans.kernel": {"type": "answer"},
@@ -307,7 +307,7 @@ def test_every_itinerary_of_the_fixtures_passes(path: Path) -> None:
 def test_the_type_of_a_record_follows_from_its_state() -> None:
     """A schema is a question with a placeholder slot; commitment and status decide the other types."""
     records = {
-        "quest.schema": {"type": "question", "subject": {"target_system": "system.a",
+        "quest.schema": {"type": "question", "request": "one", "subject": {"target_system": "system.a",
                                                          "phenomenon": {"placeholder": "observable"}}},
         "system.a": {"type": "target-system", "commitment": "identified"},
         "ans.a": {"type": "answer", "status": "entertained"},
@@ -364,6 +364,14 @@ def test_an_attitude_restricts_an_answer_only() -> None:
     ]
     produced = step("abduction", [{"type": "phenomenon", "ref": "phen.a"}], {"type": "target-claim", "ref": "ans.a"})
     assert texts(itinerary_problems(produced, records)) == []
+
+
+def test_a_question_without_a_request_stays_a_schema() -> None:
+    """Identified slots make the possible answers definite; the request then fixes the direct answers."""
+    question = {"type": "question", "subject": {"target_system": "system.a", "phenomenon": "phen.a"}}
+    assert {"question-schema"} == {"question-schema", "question"} & set(record_types(question, TYPES))
+    question["request"] = "all"
+    assert {"question"} == {"question-schema", "question"} & set(record_types(question, TYPES))
 
 
 def test_a_specified_record_still_holds_an_identified_subject() -> None:
