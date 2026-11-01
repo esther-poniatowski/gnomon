@@ -23,7 +23,7 @@ The criterion tests the content of an object, not the way in which the object co
 
 ## Units of content and their epistemic roles
 
-A research unit, the grain of content defined with the [records of an inquiry](../../foundations/inquiry-and-state.md#^record), bears an **epistemic role**: the kind of reasoning that the unit licenses. A definition licenses substitution, a result licenses citation as a ground, and an assumption licenses a derivation under its scope. Two units have the same role when they license the same reasoning operations, which is the criterion of a [unitary epistemic role](../../../adr/record-kind-admission.md#^five-conditions). ^unit-roles
+A research unit, the grain of content defined with the [records of an inquiry](../../foundations/inquiry-and-state.md#^record), bears an **epistemic role**: the kind of reasoning that the unit licenses. A definition licenses substitution, a result licenses citation as a ground, and an assumption licenses a derivation under its scope. Two units have the same role when they license the same reasoning operations, which is the criterion of a [unitary epistemic role](../../../adr/record-kind-admission.md#^admission-conditions). ^unit-roles
 
 The method fixes the role of a unit by the kind of object that holds it and by the place of the unit in that object, never by a label attached to free text. This rule answers the failure of mixed roles named in the [README](../../../../README.md#motivation): a unit cannot blend a definition and a result, because each role has its own place. ^role-by-place
 

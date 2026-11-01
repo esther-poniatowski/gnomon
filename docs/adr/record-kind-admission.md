@@ -16,7 +16,7 @@ The method fixes one record kind per concern of an inquiry. Other constructs ari
 
 ## Decision
 
-A construct becomes a record kind of its own only if it meets seven conditions: ^five-conditions
+A construct becomes a record kind of its own only if it meets seven conditions: ^admission-conditions
 
 - **independent identity**: the construct is meaningful without the record that would otherwise contain it;
 - **reuse**: several records can cite one instance of the construct;

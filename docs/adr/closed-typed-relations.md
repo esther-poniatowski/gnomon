@@ -38,7 +38,7 @@ The registry that gathers the relation types of every family of records, with th
 | Free linking phrases that harden into types as the inquiry matures, as in concept maps | A relation is recorded before its type exists | One field holds values of two kinds. A relation without a declared type is stated in a reading until the registry admits its type, so the progression runs through the registry |
 | A vocabulary that each problem extends with relations of its own | Each problem names the relations that it needs | Two problems name one relation differently, so a query across problems misses one of them |
 | A store of relations outside the records, such as relational tables or a triple store | A standard query language over an indexed store | The store holds a second copy of each relation, which the [decision on the inputs of checks](checks-read-records.md#^records-are-source) excludes |
-| A record of its own for each relation, carrying its context and its status | A relation carries its own warrant and status | Deferred to the goal `relation-registry`, together with the warrant kinds, and subject to the [admission of a record kind](record-kind-admission.md#^five-conditions) |
+| A record of its own for each relation, carrying its context and its status | A relation carries its own warrant and status | Deferred to the goal `relation-registry`, together with the warrant kinds, and subject to the [admission of a record kind](record-kind-admission.md#^admission-conditions) |
 | A closed vocabulary with typed ends, and a graph built from the records | Every relation is checked, and every query reads one structure | A relation outside the vocabulary waits for a change of the registry |
 
 ## Consequences

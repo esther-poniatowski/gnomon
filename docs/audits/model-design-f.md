@@ -56,7 +56,7 @@ Each defect is repaired by one element of the missing relation:
 2. a derivation from a model to a manifestation is the product of every aim, and only explanation annotates that derivation;
 3. a derived phenomenon binds the values of the answer to the outputs.
 
-Beyond the fixtures, a model passes the test for the [admission of a record kind](../adr/record-kind-admission.md#^five-conditions), on all five of its conditions:
+Beyond the fixtures, a model passes the test for the [admission of a record kind](../adr/record-kind-admission.md#^admission-conditions), on all five of its conditions:
 
 - an identity independent of any answer;
 - reuse across answers and questions;
