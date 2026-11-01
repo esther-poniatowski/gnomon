@@ -17,6 +17,8 @@ import yaml
 
 from gnomon.completeness import (
     admitted_values,
+    demand_met,
+    unsupported_outcome,
     inadmissible_values,
     disposition,
     malformed_credence,
@@ -32,13 +34,14 @@ from gnomon.completeness import (
     unstated_function_sense,
 )
 from gnomon.findings import texts
-from gnomon.itineraries import construct_record_kinds
+from gnomon.itineraries import construct_record_kinds, type_classes, type_holders
 
 from .paths import EXAMPLES, ROOT
 
 PROBLEMS = sorted(p for p in EXAMPLES.glob("*/") if p.is_dir()) if EXAMPLES.is_dir() else []
 TYPES = placeholder_types()
 CONSTRUCTS = construct_record_kinds()
+CLASSES, HOLDERS = type_classes(), type_holders()
 
 
 def problem_records(directory: Path) -> dict[str, Mapping[str, Any]]:
@@ -348,4 +351,76 @@ def test_a_problem_bounds_the_aim_and_the_request_of_its_questions() -> None:
     assert texts(unbounded_aim(question, concept, result_aims())) == [
         "task.epistemic_aim: description does not serve a demand for concept"
     ]
+
+
+@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
+@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
+def test_every_problem_status_agrees_with_its_records(directory: Path) -> None:
+    records = problem_records(directory)
+    found = [m for p in of_kind(records, "problem") for m in unsupported_outcome(p, records, CLASSES, HOLDERS)]
+    assert not texts(found), f"{directory.name}: {texts(found)}"
+
+
+PASSING = {"admissibility": {"scope": {"verdict": "pass"}}, "warrant": {"closure": {"verdict": "pass"}}}
+
+
+def test_a_demand_for_a_claim_is_met_by_an_accepted_complete_satisfied_answer() -> None:
+    problem = {"id": "prob.a", "type": "problem", "result_type": "explanation", "request": "one", "status": "solved"}
+    records = {
+        "prob.a": problem,
+        "quest.a": {"type": "question", "addresses": "prob.a"},
+        "ans.a": {"type": "answer", "answers": "quest.a", "status": "accepted",
+                  "erotetic_relation": {"value": "complete"}},
+        "assess.a": {"type": "assessment", "assesses": "ans.a", "against": "quest.a", "tests": PASSING},
+    }
+    assert demand_met(problem, records, CLASSES, HOLDERS) is True
+    assert texts(unsupported_outcome(problem, records, CLASSES, HOLDERS)) == []
+    records["ans.a"]["erotetic_relation"]["value"] = "partial"
+    assert texts(unsupported_outcome(problem, records, CLASSES, HOLDERS)) == [
+        "status: solved, and the records do not meet the demand"
+    ]
+    records["ans.a"]["erotetic_relation"]["value"] = "complete"
+    problem["status"] = "posed"
+    assert texts(unsupported_outcome(problem, records, CLASSES, HOLDERS)) == [
+        "status: posed, and the records meet the demand"
+    ]
+
+
+def test_a_demand_for_a_construct_is_met_by_a_stabilized_satisfied_construct() -> None:
+    problem = {"id": "prob.a", "type": "problem", "result_type": "model", "request": "one",
+               "constraints": [{"name": "reproduces-delay"}]}
+    verdicts = [{"constraint": "reproduces-delay", "verdict": "pass"}]
+    records = {
+        "prob.a": problem,
+        "mod.a": {"type": "model", "status": "provisional"},
+        "assess.a": {"type": "assessment", "assesses": "mod.a", "against": "prob.a", "tests": {"constraints": verdicts}},
+    }
+    assert demand_met(problem, records, CLASSES, HOLDERS) is False
+    records["mod.a"]["status"] = "stabilized"
+    assert demand_met(problem, records, CLASSES, HOLDERS) is True
+    verdicts[0]["verdict"] = "fail"
+    assert demand_met(problem, records, CLASSES, HOLDERS) is False
+
+
+def test_a_decision_is_met_once_every_candidate_is_settled() -> None:
+    problem = {"id": "prob.a", "type": "problem", "result_type": "explanation", "request": "decision"}
+    records = {
+        "prob.a": problem,
+        "quest.a": {"type": "question", "addresses": "prob.a"},
+        "ans.a": {"type": "answer", "answers": "quest.a", "status": "retracted"},
+        "ans.b": {"type": "answer", "answers": "quest.a", "status": "hypothesized"},
+        "assess.a": {"type": "assessment", "assesses": "ans.a", "tests": PASSING},
+        "assess.b": {"type": "assessment", "assesses": "ans.b", "tests": PASSING},
+    }
+    assert demand_met(problem, records, CLASSES, HOLDERS) is False
+    records["ans.b"]["status"] = "retracted"
+    assert demand_met(problem, records, CLASSES, HOLDERS) is True
+    del records["assess.b"]
+    assert demand_met(problem, records, CLASSES, HOLDERS) is False
+
+
+def test_a_demand_of_a_type_without_a_solving_rule_is_not_read() -> None:
+    problem = {"id": "prob.a", "type": "problem", "result_type": "phenomenon", "request": "one", "status": "solved"}
+    assert demand_met(problem, {"prob.a": problem}, CLASSES, HOLDERS) is None
+    assert unsupported_outcome(problem, {"prob.a": problem}, CLASSES, HOLDERS) == []
 

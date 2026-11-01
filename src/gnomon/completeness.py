@@ -494,6 +494,92 @@ def unbounded_aim(
     ]
 
 
+def demand_met(
+    problem: Mapping[str, Any],
+    records: Mapping[str, Mapping[str, Any]],
+    classes: Mapping[str, str],
+    holders: Mapping[str, Iterable[str]],
+) -> bool | None:
+    """Return whether the records meet the demand of a problem, or None when no rule applies.
+
+    The demand is met once acts of the researcher settle the demanded results. For a result of a
+    claim type, an answer to a question that addresses the problem is accepted, gives a complete
+    answer, and holds a satisfied assessment; the number and the completeness that the request
+    fixes are those of that direct answer. For a result of a construct type, a record that holds
+    the type is stabilized, with a satisfied assessment against the problem. Under the request
+    ``decision``, every candidate is settled in view of an assessment: an answer accepted or
+    retracted, the record of a construct stabilized or retracted. A type of another class has no
+    solving rule, so the function returns None.
+
+    Parameters
+    ----------
+    problem : mapping
+        One filled problem record.
+    records : mapping
+        The records of the problem, keyed by identifier.
+    classes : mapping
+        The class of each product type, read from the product-type registry.
+    holders : mapping
+        The record kinds that hold each product type.
+    """
+    kind, ident = problem.get("result_type"), problem.get("id")
+    klass = classes.get(str(kind))
+    if klass not in ("claim", "construct"):
+        return None
+    questions = {i for i, r in records.items() if r.get("type") == "question" and r.get("addresses") == ident}
+    assessments = [r for r in records.values() if r.get("type") == "assessment"]
+
+    def assessed(name: str) -> list[Mapping[str, Any]]:
+        return [a for a in assessments if a.get("assesses") == name]
+
+    answers = {i: r for i, r in records.items() if r.get("type") == "answer" and r.get("answers") in questions}
+    constructs = {
+        i: r for i, r in records.items()
+        if r.get("type") in set(holders.get(str(kind), ())) and any(a.get("against") == ident for a in assessed(i))
+    }
+    if problem.get("request") == "decision":
+        candidates = answers if klass == "claim" else constructs
+        settled = {"answer": {"accepted", "retracted"}}
+        return bool(candidates) and all(
+            r.get("status") in settled.get(str(r.get("type")), {"stabilized", "retracted"}) and bool(assessed(i))
+            for i, r in candidates.items()
+        )
+    if klass == "claim":
+        return any(
+            r.get("status") == "accepted"
+            and at(r, "erotetic_relation.value") == "complete"
+            and any(disposition(a) == "satisfied" for a in assessed(i))
+            for i, r in answers.items()
+        )
+    return any(
+        r.get("status") == "stabilized"
+        and any(a.get("against") == ident and disposition(a) == "satisfied" for a in assessed(i))
+        for i, r in constructs.items()
+    )
+
+
+def unsupported_outcome(
+    problem: Mapping[str, Any],
+    records: Mapping[str, Mapping[str, Any]],
+    classes: Mapping[str, str],
+    holders: Mapping[str, Iterable[str]],
+) -> list[Finding]:
+    """Return a status of the problem that its records contradict: solved without its demand met, or the reverse.
+
+    A dissolved or an abandoned problem is not read, since neither outcome depends on the demand.
+    """
+    met, status = demand_met(problem, records, classes, holders), problem.get("status")
+    if met is None:
+        return []
+    if status == "solved" and not met:
+        return [finding(rules.COMPLETENESS_UNSUPPORTED_SOLVED,
+                        "status: solved, and the records do not meet the demand", "status")]
+    if met and status in ("posed", "refined"):
+        return [finding(rules.COMPLETENESS_UNRECORDED_SOLUTION,
+                        f"status: {status}, and the records meet the demand", "status")]
+    return []
+
+
 def misdirected_assessment(
     assessment: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],

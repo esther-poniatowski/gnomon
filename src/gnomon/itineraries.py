@@ -174,6 +174,25 @@ def product_types(source: Path | None = None) -> dict[str, Mapping[str, Any]]:
     return {str(entry["id"]): entry for entry in registry.get("product_types") or []}
 
 
+def type_classes(types: Mapping[str, Mapping[str, Any]] | None = None) -> dict[str, str]:
+    """Return the class of each product type, as the inventory of epistemic objects sorts it."""
+    types = product_types() if types is None else types
+    return {name: str(entry.get("class")) for name, entry in types.items()}
+
+
+def type_holders(types: Mapping[str, Mapping[str, Any]] | None = None) -> dict[str, frozenset[str]]:
+    """Return, per product type, the record kinds that hold it; a type that no record holds maps to none.
+
+    >>> type_holders({"model": {"record": ["model"]}, "design": {"record": "to-create"}})
+    {'model': frozenset({'model'}), 'design': frozenset()}
+    """
+    types = product_types() if types is None else types
+    return {
+        name: frozenset(entry["record"]) if isinstance(entry.get("record"), list) else frozenset()
+        for name, entry in types.items()
+    }
+
+
 def construct_record_kinds(types: Mapping[str, Mapping[str, Any]] | None = None) -> frozenset[str]:
     """Return the record kinds that hold a product of a construct type.
 

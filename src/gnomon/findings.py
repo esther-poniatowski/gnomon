@@ -197,6 +197,12 @@ COMPLETENESS_UNBOUNDED_AIM = _rule(
     "completeness/unbounded-aim",
     "A question serves a problem under an aim that the type of result of the problem does not admit.",
 )
+COMPLETENESS_UNSUPPORTED_SOLVED = _rule(
+    "completeness/unsupported-solved", "A problem is marked solved while its records do not meet its demand."
+)
+COMPLETENESS_UNRECORDED_SOLUTION = _rule(
+    "completeness/unrecorded-solution", "The records meet the demand of a problem that is not marked solved."
+)
 COMPLETENESS_UNSTATED_FUNCTION_SENSE = _rule(
     "completeness/unstated-function-sense",
     "A question requests a functional relation without its sense of function.",

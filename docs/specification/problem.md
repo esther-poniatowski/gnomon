@@ -37,12 +37,12 @@ The problem record states one [epistemic problem](../epistemology/objects/proble
 
 - **A conflict with a publication must be asserted.** No checker reads the literature, so a conflict between a record and a publication is stated with pointers to both.
 
-> [!WARNING] Unread status
-> The type of result and the request type the demand, but no check yet reads the existence of a problem, its axis A or its status `solved` from the records, as the goal `problem-record` of the [project goals](../../TODO.md) lists.
+> [!WARNING] Unread existence
+> A check compares the status `solved` with the [demand met](../epistemology/objects/problem/epistemic-problem.md#^demand-met) that the records show, but no check yet reads the existence of a problem or its axis A, as the goal `problem-record` of the [project goals](../../TODO.md) lists.
 >
-> When the demanded result is of a [construct type](../epistemology/objects/status/epistemic-objects.md#^accepted-objects), such as a model or a concept, the [demand is met](../epistemology/objects/problem/epistemic-problem.md#^demand-met) by the stabilized record of the construct and a satisfied assessment of it against the constraints. An [assessment record](assessment.md) holds a verdict per constraint for a construct, so a check can read that status for the constructs that a record kind holds.
+> When the demanded result is of a [construct type](../epistemology/objects/status/epistemic-objects.md#^accepted-objects), such as a model or a concept, the [demand is met](../epistemology/objects/problem/epistemic-problem.md#^demand-met) by the stabilized record of the construct and a satisfied assessment of it against the constraints. An [assessment record](assessment.md) holds a verdict per constraint for a construct, so the check reads that status for the constructs that a record kind holds.
 >
-> Under the request `decision`, the demand is met once every candidate is settled in view of its assessment. For candidate answers, the records hold the attitude of each answer and the disposition of each assessment, so a check can read that status. Candidate constructs share the limit stated above.
+> Under the request `decision`, the demand is met once every candidate is settled in view of its assessment. For candidate answers, the records hold the attitude of each answer and the disposition of each assessment, so the check reads that status. Candidate constructs share the limit stated above.
 
 *Example*: the [problem of delayed generalization](../../examples/grokking-delayed-generalization/problem.yml) is an empirical problem, with two constraints and one explicandum, and its question names the problem in its field `addresses`.
 
