@@ -1,0 +1,17 @@
+# a qualitative abstraction shared by the bindings of the network: the regime of a subsystem read from the state of its element
+
+_schema: gnomon:key@1
+title: "Tipped state of an element"
+id: key.earth-tipping-subsystems.tipped-state
+type: key
+status: provisional
+
+kind: qualitative-abstraction
+
+domain_and_codomain:
+  domain: "reals"
+  codomain: "enum(\"baseline\", \"tipped\")"
+
+expression: "the state x of an element maps to tipped when x > 0, and to baseline otherwise"
+
+version: "1"

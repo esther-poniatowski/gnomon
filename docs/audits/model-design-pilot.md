@@ -44,3 +44,13 @@ The inquiry explains the delay of generalization on an effective theory of repre
 - **A limit may have an uncontrolled error.** The note on derived models admitted a controlled or a singular error for a limit, whereas the limit of the decoder step has no known correction. *Adopted resolution*: a limit is controlled when a correction is known, otherwise uncontrolled, or singular.
 - **The checks read bindings.** *Adopted resolution*: a binding resolves its expressions against its model, its phenomenon and the target system of that phenomenon, and its pairs are units that a factor names by their identifiers.
 
+## Tipping cascades
+
+The inquiry forecasts transition sequences of the Earth system from a stylized network of four tipping elements, whose elements are units of the model alone. Two shared keys and one binding carry the model onto the target.
+
+- **A stylized model is a root model with units of its own.** The former answer entered the subsystems of the target by `reference`, which asserted an identity that the model never has with its target. The model now declares its own elements, and a component pair of the binding carries them onto the subsystems. *Adopted resolution*: this ratifies the end of `reference` for a stylized constituent, as the decision states.
+- **The verdict of individuation follows from the binding.** The component pair carries the four elements one to one onto the four subsystems, by their labels, so the individuation test reads the pair. *Adopted resolution*: this meets the fourth condition of acceptance of the goal `model-design`.
+- **A key serves several pairs.** The key of the tipped state carries both the probability and the distribution of the time of each element, and the map of units carries the prescribed warming onto the global warming through a condition pair. *Adopted resolution*: this ratifies the shared key of the decision.
+- **The references to whole records were not checked.** A misspelled identifier of a key passed every test, and the new check found a broader concept that no record stated. *Adopted resolution*: every reference to a whole record must name a record, and the missing broader concept is now stated.
+- **An argued pair again stands as a warrant.** The correspondence of the elements is a ground of role `warrant` that names an argued pair, as in the grokking inquiry. *Open point*: the same as for the grokking inquiry.
+

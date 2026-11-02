@@ -15,6 +15,22 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `evolve` | bg.earth-tipping-subsystems.subsystem-dynamics | laws | sub | evolution of a subsystem |
 | `transmit` | bg.earth-tipping-subsystems.subsystem-dynamics | laws | sub, sub, t | directed interaction between subsystems |
 | `coupling` | bg.earth-tipping-subsystems.subsystem-dynamics | organization | — | directed coupling between subsystems |
+| `node` | mod.earth-tipping-subsystems.four-element-network | constituents | — | tipping element |
+| `member` | mod.earth-tipping-subsystems.four-element-network | index sets | — | member of the ensemble |
+| `time` | mod.earth-tipping-subsystems.four-element-network | index sets | — | model time |
+| `traj_case` | mod.earth-tipping-subsystems.four-element-network | index sets | — | trajectory in the comparison |
+| `normal_form` | mod.earth-tipping-subsystems.four-element-network | laws | node, traj_case, member, time | normal form of a coupled tipping element |
+| `overshoot_risk` | mod.earth-tipping-subsystems.four-element-network | laws | — | increase of risk under overshoot |
+| `network_coupling` | mod.earth-tipping-subsystems.four-element-network | organization | — | directed network of cascades |
+| `A_m` | mod.earth-tipping-subsystems.four-element-network | parameters | node, node | directed coupling between tipping elements |
+| `Theta_m` | mod.earth-tipping-subsystems.four-element-network | parameters | node | critical temperature of a tipping element |
+| `h_m` | mod.earth-tipping-subsystems.four-element-network | parameters | — | horizon of the forecast |
+| `tau_m` | mod.earth-tipping-subsystems.four-element-network | parameters | node | timescale of a tipping element |
+| `gmt_m` | mod.earth-tipping-subsystems.four-element-network | variables | traj_case, time | prescribed warming of the model |
+| `p_any` | mod.earth-tipping-subsystems.four-element-network | variables | traj_case | probability that at least one element tips by the horizon |
+| `p_tip` | mod.earth-tipping-subsystems.four-element-network | variables | node, traj_case | probability that a tipping element tips by the horizon |
+| `tev_m` | mod.earth-tipping-subsystems.four-element-network | variables | node, traj_case, member | transition time of a tipping element |
+| `x` | mod.earth-tipping-subsystems.four-element-network | variables | node, traj_case, member, time | state of a tipping element |
 | `H` | phen.earth-tipping-subsystems.transition-sequences | index sets | — | prediction horizon |
 | `overshoot_dependence` | phen.earth-tipping-subsystems.transition-sequences | manifestations | — | dependence of the transition sequence on the warming trajectory |
 | `overshoot_effect` | phen.earth-tipping-subsystems.transition-sequences | manifestations.features | — | effect of an overshoot trajectory on the sequence law |
@@ -27,6 +43,7 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `realization` | phen.earth-tipping-subsystems.transition-sequences | scope over instances | — | internal climate variability |
 | `scenario` | phen.earth-tipping-subsystems.transition-sequences | scope over instances | — | prescribed emission scenario |
 | `struct` | phen.earth-tipping-subsystems.transition-sequences | scope over instances | — | admissible interaction architectures among subsystems |
+| `no_overshoot` | quest.earth-tipping-subsystems.overshoot-sequence-forecast | foil set | — | matched non-overshoot trajectory |
 | `sub` | system.earth-tipping-subsystems | constituents | — | climate subsystem |
 | `observation` | system.earth-tipping-subsystems | external systems | — | systems of Earth observation and paleoclimate measurement |
 | `scenario_source` | system.earth-tipping-subsystems | external systems | — | specification of the forcing scenario and Earth-system processes outside the selected subsystems |
@@ -56,10 +73,10 @@ The nodes are kinds, not identified members: which tuples are joined is fixed by
 
 | Sources | Edge | Reach | Through | Ordered tuples |
 | --- | --- | --- | --- | --- |
-| `sub` | `model_coupling` | `sub` | — | `subset(prod(sub, sub), Aij)` |
 | `sub` | `coupling` | `sub` | `Aij`, `emit`, `s`, `u` | `subset(prod(sub, sub), Aij)` |
+| `node` | `network_coupling` | `node` | `A_m` | `subset(prod(node, node), A_m)` |
 
 ## Operators
 
-- Canonical: `abs`, `adjoint`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
+- Canonical: `abs`, `adjoint`, `and`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `not`, `or`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
 - Declared by this problem: `sequence` (the ordered sequence of identities paired with their event times).

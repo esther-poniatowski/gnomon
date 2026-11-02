@@ -1,0 +1,109 @@
+# a stylized model of four tipping elements [wunderling2023]; its elements are units of the model alone, which a binding carries onto the subsystems
+
+_schema: gnomon:model@1
+title: "Network of four tipping elements"
+id: mod.earth-tipping-subsystems.four-element-network
+type: model
+status: provisional
+
+constituents:
+  - name: "tipping element"
+    symbol: node
+    extent: "enum(\"Greenland ice sheet\", \"West Antarctic ice sheet\", \"Atlantic Meridional Overturning Circulation\", \"Amazon rainforest\")"
+
+index_sets:
+  - name: "model time"
+    symbol: time
+    extent: "interval(reals)"
+    structure: continuum
+  - name: "trajectory in the comparison"
+    symbol: traj_case
+    extent: "enum(\"overshoot\", \"matched non-overshoot\")"
+    structure: discrete-set
+  - name: "member of the ensemble"
+    symbol: member
+    extent: "pos(ints)"
+    structure: discrete-set
+
+variables:
+  - name: "state of a tipping element"
+    symbol: x
+    determined: within
+    signature: [node, traj_case, member, time]
+    values: reals
+    reading: "The state of an element relative to its unstable branch: negative in its baseline regime, positive once tipped."
+  - name: "prescribed warming of the model"
+    symbol: gmt_m
+    determined: outside
+    signature: [traj_case, time]
+    values: reals
+    reading: "The warming above the preindustrial level that the comparison prescribes, which the elements do not feed back on."
+  - name: "transition time of a tipping element"
+    symbol: tev_m
+    determined: within
+    signature: [node, traj_case, member]
+    values: "nonneg(reals)"
+    expression: "min_{time}( x > 0 )"
+    reading: "The element tips when its state first crosses its unstable branch."
+  - name: "probability that a tipping element tips by the horizon"
+    symbol: p_tip
+    determined: within
+    signature: [node, traj_case]
+    values: "interval(0, 1)"
+    expression: "mean_{member}( tev_m <= h_m )"
+    reading: "The fraction of the ensemble in which the element has tipped by the horizon."
+  - name: "probability that at least one element tips by the horizon"
+    symbol: p_any
+    determined: within
+    signature: [traj_case]
+    values: "interval(0, 1)"
+    expression: "mean_{member}( min_{node}( tev_m ) <= h_m )"
+    reading: "The fraction of the ensemble in which some element has tipped by the horizon."
+
+parameters:
+  - name: "critical temperature of a tipping element"
+    symbol: Theta_m
+    signature: [node]
+    values: "pos(reals)"
+    reading: "The warming at which the baseline regime of the element disappears, sampled across the ensemble."
+  - name: "timescale of a tipping element"
+    symbol: tau_m
+    signature: [node]
+    values: "pos(reals)"
+    reading: "The time over which the element responds, sampled across the ensemble."
+  - name: "directed coupling between tipping elements"
+    symbol: A_m
+    signature: [node, node]
+    values: reals
+    reading: "The strength with which the state of one element shifts the forcing of another, sampled across the ensemble of networks."
+  - name: "horizon of the forecast"
+    symbol: h_m
+    signature: []
+    values: "pos(reals)"
+    reading: "The model time up to which the probabilities of tipping are counted."
+
+laws:
+  - name: "normal form of a coupled tipping element"
+    symbol: normal_form
+    signature: [node, traj_case, member, time]
+    role: evolution
+    expression: "tau_m * diff(x, time) = -x * x * x + x + gmt_m / Theta_m + sum_{node}( A_m * x )"
+    reading: "Each element follows the normal form of a fold, forced by the prescribed warming relative to its critical temperature and by the states of the elements that couple to it."
+    warrant: posited
+    rests_on: "The law rests on the coupled network of tipping elements of Wunderling et al. [wunderling2023]."
+    origin: "https://doi.org/10.1038/s41558-022-01545-9"
+  - name: "increase of risk under overshoot"
+    symbol: overshoot_risk
+    signature: []
+    role: state-constraint
+    expression: "p_any(\"overshoot\") > p_any(\"matched non-overshoot\")"
+    reading: "Within the studied scenarios, an overshoot raises the probability that some element tips; the reported relative increase reaches at most 72 percent."
+    warrant: measured
+    rests_on: "The law rests on the reported ensemble of the network [wunderling2023]."
+
+organization:
+  - name: "directed network of cascades"
+    symbol: network_coupling
+    reading: "Directed links transmit a change of state from one element to another, so a transition can alter later probabilities of tipping."
+    relates: "subset(prod(node, node), A_m)"
+    realized_by: [normal_form]

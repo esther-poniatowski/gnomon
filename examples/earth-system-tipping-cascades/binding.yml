@@ -1,0 +1,59 @@
+# binds the stylized network of four tipping elements to the transition sequences of the Earth system, at quantitative grain
+
+_schema: gnomon:binding@1
+title: "Four-element network to transition sequences"
+id: bind.earth-tipping-subsystems.four-element-network
+type: binding
+status: provisional
+
+model: mod.earth-tipping-subsystems.four-element-network
+
+target:
+  phenomenon: phen.earth-tipping-subsystems.transition-sequences
+  level: phenomenon
+
+asserter: "Wunderling, Winkelmann, Rockström, Loriani, Armstrong McKay, Ritchie, Sakschewski and Donges, Global warming overshoots increase risks of climate tipping cascades in a network model, Nature Climate Change 13, 75-82, 2023 [wunderling2023]"
+
+feature_pairs:
+  - id: subsystems
+    type: component
+    mode: argued
+    exemplified: "node"
+    imputed: system.earth-tipping-subsystems.sub
+  - id: transition-probability
+    type: quantity
+    mode: computed
+    exemplified: "p_tip"
+    imputed: phen.earth-tipping-subsystems.transition-sequences.pi
+    key: key.earth-tipping-subsystems.tipped-state
+    key_version: "1"
+  - id: transition-time
+    type: quantity
+    mode: computed
+    exemplified: "mean_{member}( tev_m <= time )"
+    imputed: phen.earth-tipping-subsystems.transition-sequences.Fi
+    key: key.earth-tipping-subsystems.tipped-state
+    key_version: "1"
+  - id: overshoot-effect
+    type: pattern
+    mode: argued
+    exemplified: "p_any(\"overshoot\") > p_any(\"matched non-overshoot\")"
+    imputed: phen.earth-tipping-subsystems.transition-sequences.overshoot_effect
+
+condition_pairs:
+  - id: warming
+    model_condition: "gmt_m"
+    target_condition: "DGMT"
+    key: key.earth-tipping-subsystems.warming
+    key_version: "1"
+    calibration: false
+
+domain:
+  - region: "conv <= peak"
+    kind: interpolation
+
+grain: quantitative
+
+version:
+  label: "1"
+  committed: "2026-11-02"

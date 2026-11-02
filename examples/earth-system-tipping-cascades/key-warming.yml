@@ -1,0 +1,17 @@
+# a map of units shared by the bindings of the network: the prescribed warming of the model onto the global mean warming of the target
+
+_schema: gnomon:key@1
+title: "Warming of the model onto global warming"
+id: key.earth-tipping-subsystems.warming
+type: key
+status: provisional
+
+kind: unit-map
+
+domain_and_codomain:
+  domain: "reals"
+  codomain: "reals"
+
+expression: "the identity in kelvin above the preindustrial level, from gmt_m onto DGMT"
+
+version: "1"

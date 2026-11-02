@@ -30,6 +30,106 @@ symbols:
   block: organization
   signature: []
   name: directed coupling between subsystems
+- symbol: node
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: constituents
+  signature: []
+  name: tipping element
+- symbol: member
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: index_sets
+  signature: []
+  name: member of the ensemble
+- symbol: time
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: index_sets
+  signature: []
+  name: model time
+- symbol: traj_case
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: index_sets
+  signature: []
+  name: trajectory in the comparison
+- symbol: normal_form
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: laws
+  signature:
+  - node
+  - traj_case
+  - member
+  - time
+  name: normal form of a coupled tipping element
+- symbol: overshoot_risk
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: laws
+  signature: []
+  name: increase of risk under overshoot
+- symbol: network_coupling
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: organization
+  signature: []
+  name: directed network of cascades
+- symbol: A_m
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: parameters
+  signature:
+  - node
+  - node
+  name: directed coupling between tipping elements
+- symbol: Theta_m
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: parameters
+  signature:
+  - node
+  name: critical temperature of a tipping element
+- symbol: h_m
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: parameters
+  signature: []
+  name: horizon of the forecast
+- symbol: tau_m
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: parameters
+  signature:
+  - node
+  name: timescale of a tipping element
+- symbol: gmt_m
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: variables
+  signature:
+  - traj_case
+  - time
+  name: prescribed warming of the model
+- symbol: p_any
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: variables
+  signature:
+  - traj_case
+  name: probability that at least one element tips by the horizon
+- symbol: p_tip
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: variables
+  signature:
+  - node
+  - traj_case
+  name: probability that a tipping element tips by the horizon
+- symbol: tev_m
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: variables
+  signature:
+  - node
+  - traj_case
+  - member
+  name: transition time of a tipping element
+- symbol: x
+  declared_in: mod.earth-tipping-subsystems.four-element-network
+  block: variables
+  signature:
+  - node
+  - traj_case
+  - member
+  - time
+  name: state of a tipping element
 - symbol: H
   declared_in: phen.earth-tipping-subsystems.transition-sequences
   block: index_sets
@@ -96,6 +196,11 @@ symbols:
   block: scope_over_instances
   signature: []
   name: admissible interaction architectures among subsystems
+- symbol: no_overshoot
+  declared_in: quest.earth-tipping-subsystems.overshoot-sequence-forecast
+  block: foil_set
+  signature: []
+  name: matched non-overshoot trajectory
 - symbol: sub
   declared_in: system.earth-tipping-subsystems
   block: constituents
@@ -236,6 +341,7 @@ operators:
   canonical:
   - abs
   - adjoint
+  - and
   - bools
   - card
   - complex
@@ -267,6 +373,8 @@ operators:
   - min
   - nonneg
   - norm
+  - not
+  - or
   - pos
   - prod
   - range
@@ -280,12 +388,6 @@ operators:
   declared:
     sequence: the ordered sequence of identities paired with their event times
 interactions:
-- edge: model_coupling
-  sources:
-  - sub
-  reach: sub
-  through: []
-  tuples: subset(prod(sub, sub), Aij)
 - edge: coupling
   sources:
   - sub
@@ -296,3 +398,10 @@ interactions:
   - s
   - u
   tuples: subset(prod(sub, sub), Aij)
+- edge: network_coupling
+  sources:
+  - node
+  reach: node
+  through:
+  - A_m
+  tuples: subset(prod(node, node), A_m)
