@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-10-31
+revised: 2026-11-02
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Answers, models and bindings
@@ -12,7 +12,7 @@ aliases:
 
 > [!QUESTION] Goal: which records hold a candidate answer, the model on which it rests, and the relation of that model to the phenomenon, so that each answer has the form that its question requires and its values can be compared with the target?
 
-The [audits of the model design](../audits/_index.md) and the trials run on the test records exposed three defects. Every answer must state an explanans, even when its aim is not explanation. The values that an answer derives are bound to no output of the phenomenon, so the tests of fidelity and of required accuracy cannot be computed. A stylized model enters the quantities of its target by `reference`, which asserts an identity that a model never has with its target. An analysis of the answer forms per aim and of the binding to the target, followed by an adversarial review of its foundations, settled the design below. Both analyses reasoned from the literature, without reading the records of `gnomon`. A review of the notes that implement the decision refined it in place on seven points: the declared use, the erotetic relation, idealizations, the estimates of a phenomenon, the discrepancy, the calibration treatments, and the account of representation. The notes of the epistemology and of the specification now own the details of these points and the fields of every record, so the decision below states only the structure.
+The [audits of the model design](https://github.com/esther-poniatowski/gnomon/blob/a651f8789d763fb082c0a64a91a597a42cc0cb80/docs/audits/_index.md) and the trials run on the test records exposed three defects. Every answer must state an explanans, even when its aim is not explanation. The values that an answer derives are bound to no output of the phenomenon, so the tests of fidelity and of required accuracy cannot be computed. A stylized model enters the quantities of its target by `reference`, which asserts an identity that a model never has with its target. An analysis of the answer forms per aim and of the binding to the target, followed by an adversarial review of its foundations, settled the design below. Both analyses reasoned from the literature, without reading the records of `gnomon`. A review of the notes that implement the decision refined it in place on seven points: the declared use, the erotetic relation, idealizations, the estimates of a phenomenon, the discrepancy, the calibration treatments, and the account of representation. The notes of the epistemology and of the specification now own the details of these points and the fields of every record, so the decision below states only the structure. A pilot on four contrasting inquiries, recorded in the [audit of the pilot](https://github.com/esther-poniatowski/gnomon/blob/a651f8789d763fb082c0a64a91a597a42cc0cb80/docs/audits/model-design-pilot.md), then amended the decision on five points: derived models, the binding of a question with outputs to match, the warrant, the constants of a bound, and the checks of answers, models and bindings.
 
 ## Decision
 
@@ -24,13 +24,17 @@ The [audits of the model design](../audits/_index.md) and the trials run on the 
 
 **Models.** A model is a record of its own, which several answers can ground. A family of models can ground one answer, each model with its own binding, and the family is then assessed as a whole. The fields are specified in the [model record](../specification/model.md#^model-record).
 
-**Bindings.** A binding is a record of its own, which relates a model in use to a phenomenon or to its data, and which records the surrogative inferences that its asserter licenses from the model to the target. A claim of actual strength about an empirical target, and any prediction or description of a target, requires a binding. An answer whose claim bears only on a model or on a formal class declares its use instead. The fields are specified in the [binding record](../specification/binding.md#^binding-record).
+**Derived models.** A model may derive from parent models by typed operations, and it declares only the symbols that its operations yield, such as a collective variable. Each operation is typed relative to its parent. Only an answer classifies an operation or an assumption of the model relative to its target, through a ground. The kinds of operation and their classes of error are defined with the [derived models](../epistemology/objects/answer/model-and-binding.md#^derived-models). A model without a parent states its constituents, its variables and its laws, whereas a derived model states its operations, as the [model record](../specification/model.md#^model-parents) requires.
+
+**Bindings.** A binding is a record of its own, which relates a model in use to a phenomenon or to its data, and which records the surrogative inferences that its asserter licenses from the model to the target. A claim of actual strength about an empirical target, and any prediction or description of a target, requires a binding. An answer on a model other than its target also requires a binding when its question names outputs to match, even if the target is a formal class. An answer whose claim bears only on a model or on a formal class, under a question that names no output, declares its use instead. An argued pair of a binding may stand as a [ground of role `warrant`](../epistemology/objects/knowledge/grounds-and-dependence.md#^ground-roles), beside a law of a model or of a background. The fields are specified in the [binding record](../specification/binding.md#^binding-record).
 
 **Keys.** Observation operators, maps of units and of aggregation, and qualitative abstractions are shared, versioned records, which several bindings reference. The fields are specified in the [key record](../specification/key.md#^key-record).
 
-**Phenomena.** A phenomenon owns the [estimator of its explanandum variables](../epistemology/objects/subject/phenomenon.md#^phenomenon-owns-estimation), and it [declares the facts on which its data depend](../epistemology/objects/subject/phenomenon.md#^data-model-declarations).
+**Phenomena.** A phenomenon owns the [estimator of its explanandum variables](../epistemology/objects/subject/phenomenon.md#^phenomenon-owns-estimation), and it [declares the facts on which its data depend](../epistemology/objects/subject/phenomenon.md#^data-model-declarations). A constant of a bound is a [feature of the manifestation](../specification/phenomenon.md#^bound-constants) that states the bound.
 
 **Comparisons.** A comparison is computed, not recorded, from a binding, a version of the data, and the metric and the tolerance of the question. A revised binding is a new version and leaves earlier comparisons unchanged. The facts that a comparison reports are specified with the [computed comparison](../epistemology/objects/answer/model-and-binding.md#^comparison-reports), and the tests that read them in the [conditions of satisfaction](../epistemology/objects/answer/satisfaction-conditions.md#^fidelity-reads-reports).
+
+**Checks.** The vocabulary check reads answers, models and bindings. Each record resolves its bare symbols against the [tables visible](flat-symbol-table.md#^visible-tables) from it, and reaches a unit without a symbol, such as an operation or a pair, by its identifier.
 
 ## Constraints that decide the design
 
@@ -60,6 +64,16 @@ The constraint on representation discards three alternatives:
 | A network of untyped claims, linked by support and attack | No premature commitment in exploratory phases | No answer has a condition of conclusiveness; an open question, with its answer type still to come, covers the exploratory phase |
 | Typed answers on a shared core, with separate model, binding and key records | Each answer shows what its aim requires, and models, keys and phenomena are reused without repetition | — |
 
+The pilot discards five alternatives to its amendments:
+
+| Alternative | Reason it is not taken |
+| --- | --- |
+| Operations typed relative to the target | One model grounds answers on several targets, so the model would carry classifications that each answer owns |
+| Constituents, variables and laws required of every model | A derived model would declare again the symbols of its parents, which stay visible to it |
+| A binding only for an empirical target | The fidelity test compares the values of a model with the outputs that its question names, and only a binding states the pairs that the comparison reads |
+| A new ground role for the placement of a target in the regime of a limit | The role `warrant` already licenses the step from the other grounds to the claim, so a second role would split one function |
+| A constant of a bound as a derived phenomenon | The bound, its constant and its horizon would sit in two records, although one manifestation asserts them together |
+
 ## Consequences
 
 - The explanans is no longer required of every answer. Its premises become the grounds of the core, and its relevance becomes the block of an explanation.
@@ -67,7 +81,7 @@ The constraint on representation discards three alternatives:
 - The decision of 2026-09-24 (commit 08cc32d), which declared the model of an answer with the blocks of the target, is superseded: the model has a record of its own.
 - The use of `reference` for a stylized constituent ends: a model relates to its target through a binding.
 - The notes that describe the answer, the phenomenon and the assessment remain to be revised, and the registry of aims gains its answer conditions.
-- A pilot on contrasting test cases precedes any migration of the records, as both audits require, and the [project goals](../../TODO.md) track it.
+- The pilot on four contrasting inquiries ratified the design with the amendments above. The worked inquiries outside the pilot migrate under the goal `model-design` of the [project goals](../../TODO.md).
 
 ---
 ## Sources

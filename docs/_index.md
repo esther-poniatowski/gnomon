@@ -23,7 +23,6 @@ Directs a reader of `gnomon` to the folder that serves one task: specifying and 
 
 - [Architecture decisions](adr/_index.md): records the design choices that later work must respect
 - [Proposals](proposals/_index.md): compares the candidate designs of each open goal before a decision
-- [Audits](audits/_index.md): keeps the assessments on which a decision rests until its resolutions are ratified
 
 ## Consult the external literature
 
