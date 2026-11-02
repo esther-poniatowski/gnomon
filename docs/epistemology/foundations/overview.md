@@ -106,7 +106,7 @@ Several words of the theory name different objects in different notes. The table
 | appraisal | **appraisal**: the tier of an assessment that compares admissible answers by the virtues, never called adequacy | [conditions of satisfaction](../objects/answer/satisfaction-conditions.md#^conditions-satisfaction) |
 | warrant | **warrant tier**: the tier of an assessment that tests the evidence for an answer | [conditions of satisfaction](../objects/answer/satisfaction-conditions.md#^warrant-through-binding) |
 | warrant | **warrant of a law**: the provenance of a law, `derived`, `posited`, `fitted` or `measured` | [background](../objects/knowledge/background.md#^law-warrant) |
-| warrant | **ground role `warrant`**: a law that licenses the step from the other grounds to the claim | [grounds and dependence](../objects/knowledge/grounds-and-dependence.md#^ground-roles) |
+| warrant | **ground role `warrant`**: a law of a model or of a background, or an argued pair of a binding, that licenses the step from the other grounds to the claim | [grounds and dependence](../objects/knowledge/grounds-and-dependence.md#^ground-roles) |
 | — | **unimpeached input**: an input of an act with no failed norm upstream, never called a warranted input | [readiness of an act](../processes/inquiry/choice-of-act.md#^ready-act) |
 | — | **burdens of justification**: the kinds of justification that a claim sought requires, never called warrants | [question decomposition](../processes/inquiry/question-decomposition.md) |
 | hypothesis | **attitude** `hypothesized`: a claim held provisionally while it is tested | [claim and hypothesis](../vocabulary/representations/claim-and-hypothesis.md#^attitude-support) |

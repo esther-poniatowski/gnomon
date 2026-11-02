@@ -21,7 +21,7 @@ A role states how the claim uses the ground, and therefore the effect of a failu
 | Role | The claim uses the ground as | A failure of the ground |
 | --- | --- | --- |
 | `datum` | evidence: a version of recorded or derived data | removes the evidence; the claim keeps only its other grounds |
-| `warrant` | a law that licenses the step from the other grounds to the claim | removes the step; the claim no longer follows |
+| `warrant` | a law of a model or of a background, or an argued pair of a binding, that licenses the step from the other grounds to the claim | removes the step; the claim no longer follows |
 | `assumption` | a premise asserted true of the target | removes the support of every step that uses it |
 | `idealization` | a premise known to be false of the target, which licenses the derivation and bounds the claim | is no failure, since its falsity is declared; the claim fails only when it does not survive the removal of the idealization, which the robustness test checks |
 | `condition` | a restriction under which the claim holds | places a case outside the domain of the claim, without refuting the claim |
@@ -29,7 +29,7 @@ A role states how the claim uses the ground, and therefore the effect of a failu
 
 The layout of an argument in the theory of argumentation supplies three of these roles [toulmin1958]. Toulmin separates the data appealed to, the warrant that licenses the step from the data to the claim, the backing that supports the warrant, the qualifier that states the force of the claim, and the rebuttal that states the circumstances in which the warrant does not apply. The correspondence differs from an identity in three places:
 
-- the role `datum` is Toulmin's data, and the role `warrant` is his warrant, restricted to a law of a model or of a background;
+- the role `datum` is Toulmin's data, and the role `warrant` is his warrant, restricted to a law of a model or of a background, or to an argued pair of a binding, whose argument licenses the step from the model to the target;
 - the [warrant of a law](background.md#^law-warrant), which states its provenance, takes the place of the backing, and records the kind of support rather than its content;
 - the role `condition` states positively the circumstances in which the claim holds, whereas the rebuttal states the circumstances of an exception.
 

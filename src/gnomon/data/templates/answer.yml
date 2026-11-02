@@ -25,7 +25,7 @@ grounds:                         # what the claim depends on; one entry per grou
   - id: GROUND
     role:                        # assumption | idealization | condition | datum | warrant | criterion
     content: "THE GROUND IN WORDS"
-    record: RECORD.UNIT          # the record or the unit that holds the ground: a law of the model or of the background, a restriction of the domain, a criterion of the question, a phenomenon for a datum
+    record: RECORD.UNIT          # the record or the unit that holds the ground: a law of the model or of the background, or an argued pair of a binding, for a warrant; a restriction of the domain; a criterion of the question; a phenomenon for a datum
     version: VERSION             # datum only: the version of the data
     distortion: "THE DISTORTION OF THE TARGET THAT THE IDEALIZATION INTRODUCES"   # idealization only, as are the four keys below
     motive:                      # tractability (the undistorted system admits no analysis) | isolation (it removes a factor judged irrelevant) | limit (it exposes the behavior of a limit system)

@@ -167,10 +167,12 @@ properties:
           x-template: RECORD.UNIT
           x-kind: label
           x-comment: 'the record or the unit that holds the ground: a law of the model or of the background,
-            a restriction of the domain, a criterion of the question, a phenomenon for a datum'
+            or an argued pair of a binding, for a warrant; a restriction of the domain; a criterion of the question;
+            a phenomenon for a datum'
           title: Record
           description: 'the record or the unit that holds the ground: a law of the model or of the background,
-            a restriction of the domain, a criterion of the question, a phenomenon for a datum'
+            or an argued pair of a binding, for a warrant; a restriction of the domain; a criterion of the question;
+            a phenomenon for a datum'
         version:
           type:
           - string
