@@ -23,7 +23,7 @@ The [model record](../../../specification/model.md), the [binding record](../../
 > The object on which the route of an answer runs decides which records the answer needs. ^when-a-binding
 > - **The route runs on the target description.** The target description is the target specification with its background, and no model stands in for it. A measurement or an estimation runs on the data of the [phenomenon](../subject/phenomenon.md), and a derivation from the [laws admitted in the background](../knowledge/background.md#^laws) of a formal target runs on the declarations of the target. The claim is then stated over the symbols of the target and of the phenomenon, and the answer needs neither a model record nor a binding.
 > - **The route runs on a model that stands in for the target.** The claim is stated over the symbols of the model, and the step of [transfer to the target](#^binding-records) carries it through a binding of that model to the phenomenon. The warrant test of [fidelity](satisfaction-conditions.md) is computed through that binding.
-> - **The route runs on a model, and the claim bears only on that model or on a formal class.** The answer then [declares its use](answer-form.md#^declared-use) instead of a binding. A claim of actual strength about an empirical target, a prediction or a description of a target never takes this route.
+> - **The route runs on a model, the claim bears only on that model or on a formal class, and the question names no output to match.** The answer then [declares its use](answer-form.md#^declared-use) instead of a binding. A claim of actual strength about an empirical target, a prediction or a description of a target never takes this route.
 
 ## The model
 

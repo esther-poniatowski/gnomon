@@ -230,10 +230,12 @@ def test_an_answer_classifies_each_operation_and_fills_its_requirements(case: tu
     """The first two conditions of acceptance of the goal `model-design`: each operation of a model on
     which the answer runs is classified by a ground, and no required element of the core or of the
     block of the aim stays empty."""
-    from gnomon.completeness import always_required, block_requirements, unclassified_operations
+    from gnomon.completeness import always_required, block_requirements, unbound_outputs, unclassified_operations
 
     name, record = case
-    found = unclassified_operations(record, BY_ID) + unmet_general(record, always_required("answer"))
+    question = BY_ID.get(str(record.get("answers")), {})
+    found = (unclassified_operations(record, BY_ID) + unmet_general(record, always_required("answer"))
+             + unbound_outputs(record, question, BY_ID))
     for block, paths in block_requirements().items():
         if at(record, block) is not None:
             found += unmet_general(record, [f"{block}.{path}" for path in paths])

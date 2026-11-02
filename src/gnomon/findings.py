@@ -264,6 +264,10 @@ COMPLETENESS_UNCLASSIFIED_OPERATION = _rule(
     "completeness/unclassified-operation",
     "An operation of a model on which an answer runs is named by no ground of that answer.",
 )
+COMPLETENESS_UNBOUND_OUTPUTS = _rule(
+    "completeness/unbound-outputs",
+    "An answer on a model cites no binding, although its question names outputs to match.",
+)
 COMPLETENESS_UNJUSTIFIED_EXPLANANS_BOUND = _rule(
     "completeness/unjustified-explanans-bound",
     "The bound on the explanans states an axis without a justification.",

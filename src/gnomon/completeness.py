@@ -963,6 +963,28 @@ def unclassified_operations(
     return found
 
 
+def unbound_outputs(
+    answer: Mapping[str, Any], question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return the missing binding of an answer on a model whose question names outputs to match.
+
+    The comparison with the outputs runs through a binding, so a declared use does not replace it,
+    even on a formal target, as the rule on a declared use states.
+
+    >>> question = {"task": {"required_accuracy": {"outputs_to_match": [{"target": "phen.a.b.x"}]}}}
+    >>> answer = {"route": {"runs_on": ["mod.a.b"]}, "use": {"value": "tool"}}
+    >>> [f.text for f in unbound_outputs(answer, question, {"mod.a.b": {"type": "model"}})]
+    ['the question names outputs to match, and the answer on a model cites no binding']
+    """
+    outputs = at(question, "task.required_accuracy.outputs_to_match") or []
+    on_model = any((records.get(str(r)) or {}).get("type") == "model"
+                   for r in (answer.get("route") or {}).get("runs_on") or [])
+    if outputs and on_model and is_unfilled(answer.get("binding")):
+        return [finding(rules.COMPLETENESS_UNBOUND_OUTPUTS,
+                        "the question names outputs to match, and the answer on a model cites no binding", "binding")]
+    return []
+
+
 def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> list[Finding]:
     """Return the link a question asks for and the answer does not supply.
 
