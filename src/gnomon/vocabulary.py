@@ -553,6 +553,48 @@ def declarations(record: Mapping[str, Any]) -> list[Declaration]:
                     Declaration(symbol, str(feature.get("name") or ""), "manifestations.features", identifier)
                 )
     return found
+#: The blocks whose entries are units named by an `id` rather than by a symbol, per record type,
+#: as the decision on dotted identifiers admits: a reference names such a unit by that `id`.
+ID_UNITS: Mapping[str, tuple[str, ...]] = {
+    "model": ("operations", "assumptions"),
+    "answer": ("grounds", "abstractions"),
+    "design": ("steps", "rules"),
+}
+
+
+def units(record: Mapping[str, Any]) -> list[str]:
+    """Return the names by which a reference may reach a unit of the record: its symbols and the ids of its units.
+
+    >>> units({"type": "model", "laws": [{"symbol": "onset"}], "operations": [{"id": "drop-noise"}]})
+    ['onset', 'drop-noise']
+    """
+    names = [entry.symbol for entry in declarations(record)]
+    names += [str(entry["id"]) for block in ID_UNITS.get(str(record.get("type", "")), ())
+              for entry in entries(record, block) if entry.get("id")]
+    return names
+
+
+def retired_in_use(record: Mapping[str, Any]) -> list[Finding]:
+    """Return every expression of a derived model that uses a symbol which an operation retires.
+
+    >>> model = {"type": "model", "operations": [{"id": "drop", "retires": ["system.a.W"]}],
+    ...          "laws": [{"symbol": "law", "expression": "W + u = 0"}]}
+    >>> [f.text for f in retired_in_use(model)]
+    ['laws.expression uses W, which the operation drop retires']
+    """
+    retired: dict[str, str] = {}
+    for entry in entries(record, "operations"):
+        for name in entry.get("retires") or []:
+            named = split_reference(name) if isinstance(name, str) else None
+            retired[named[1] if named else str(name)] = str(entry.get("id"))
+    return [
+        finding(rules.VOCABULARY_RETIRED_SYMBOL, f"{where} uses {name}, which the operation {retired[name]} retires",
+                *place, value=name)
+        for where, place, text, _ in formulas(record)
+        for name in sorted(identifiers(text) & set(retired))
+    ] if retired else []
+
+
 def local_operators(record: Mapping[str, Any]) -> dict[str, str]:
     """Return the operators the record declares for its own formulas, each with its name."""
     return {

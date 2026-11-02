@@ -45,6 +45,7 @@ from gnomon.completeness import (
 from gnomon.vocabulary import (
     RECORD_KINDS,
     visible_records,
+    units,
     canonical_operators,
     declarations,
     doubly_defined,
@@ -174,6 +175,22 @@ def test_every_reference_and_formula_identifier_resolves(case: tuple[str, Mappin
     assert not problems, f"{name}: {problems}"
 
 
+MODELS = [(name, record) for name, record in CASES if record.get("type") == "model"]
+
+
+@pytest.mark.skipif(not MODELS, reason="no worked model")
+@pytest.mark.parametrize("case", MODELS or [("", {})], ids=[n for n, _ in MODELS] or ["none"])
+def test_a_derived_model_uses_no_retired_symbol_and_completes_its_operations(case: tuple[str, Mapping[str, Any]]) -> None:
+    """Each expression of a derived model avoids the symbols that its operations retire, and each
+    operation states what its kind or its class of error requires."""
+    from gnomon.completeness import incomplete_operations
+    from gnomon.vocabulary import retired_in_use
+
+    name, record = case
+    found = retired_in_use(record) + incomplete_operations(record)
+    assert not found, f"{name}: {texts(found)}"
+
+
 def external_references() -> list[tuple[str, str]]:
     """Return every dotted reference to a unit of a record in the fixture tree, with the file making it.
 
@@ -203,7 +220,7 @@ def test_every_cross_record_reference_resolves(reference: tuple[str, str]) -> No
     record_id, symbol = split_reference(text) or ("", "")
     by_id = {r["id"]: r for _, r in CASES if "id" in r}
     assert record_id in by_id, f"{name}: no record carries the identifier {record_id}"
-    assert symbol in symbols_of(by_id[record_id]), f"{name}: {record_id} declares no symbol {symbol}"
+    assert symbol in units(by_id[record_id]), f"{name}: {record_id} declares no unit {symbol}"
 
 
 @pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")

@@ -256,6 +256,10 @@ COMPLETENESS_UNREALIZED_LINK = _rule(
 COMPLETENESS_INCOMPLETE_REALIZATION = _rule(
     "completeness/incomplete-realization", "A realization names what it realizes without saying by what."
 )
+COMPLETENESS_INCOMPLETE_OPERATION = _rule(
+    "completeness/incomplete-operation",
+    "An operation of a derived model lacks the field that its kind or its class of error requires.",
+)
 COMPLETENESS_UNJUSTIFIED_EXPLANANS_BOUND = _rule(
     "completeness/unjustified-explanans-bound",
     "The bound on the explanans states an axis without a justification.",
@@ -313,6 +317,9 @@ VOCABULARY_VACUOUS_SHARED = _rule(
 )
 VOCABULARY_MISMATCHED_ARITY = _rule(
     "vocabulary/mismatched-arity", "A call passes a number of arguments that its operator does not take."
+)
+VOCABULARY_RETIRED_SYMBOL = _rule(
+    "vocabulary/retired-symbol", "An expression of a derived model uses a symbol that one of its operations retires."
 )
 VOCABULARY_UNRESOLVED = _rule(
     "vocabulary/unresolved", "A reference or a formula identifier resolves to no declaration."

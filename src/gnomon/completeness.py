@@ -899,6 +899,35 @@ def contradictory_accuracy(question: Mapping[str, Any]) -> list[Finding]:
     ]
 
 
+def incomplete_operations(model: Mapping[str, Any]) -> list[Finding]:
+    """Return every operation of a derived model that lacks a field required by its kind or its error.
+
+    A controlled error states its bound, an approximation states its regime, and a singular limit
+    states the order of its limits, as the note on derived models requires.
+
+    >>> [f.text for f in incomplete_operations({"operations": [{"id": "near", "kind": "approximate", "error": "controlled"}]})]
+    ['operations.near: a controlled error states its bound', 'operations.near: an approximation states its regime']
+    """
+    found: list[Finding] = []
+    for index, entry in enumerate(model.get("operations") or []):
+        if not isinstance(entry, Mapping):
+            continue
+        name = entry.get("id")
+        required = [
+            ("bound", entry.get("error") == "controlled", "a controlled error states its bound"),
+            ("regime", entry.get("kind") == "approximate", "an approximation states its regime"),
+            ("order", entry.get("kind") == "limit" and entry.get("error") == "singular",
+             "a singular limit states the order of its limits"),
+        ]
+        found += [
+            finding(rules.COMPLETENESS_INCOMPLETE_OPERATION, f"operations.{name}: {message}",
+                    "operations", index, field)
+            for field, applies, message in required
+            if applies and is_unfilled(entry.get(field))
+        ]
+    return found
+
+
 def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> list[Finding]:
     """Return the link a question asks for and the answer does not supply.
 
