@@ -43,7 +43,7 @@ A model may be derived from one or more parent models, such as a target system o
 | Kind | Acts on | Truth relative to the parent | Information | Class of error |
 | --- | --- | --- | --- | --- |
 | restrict | the class of members | the derived model holds exactly of a subclass of the members | kept | exact |
-| limit | the class of members | the derived model describes a limit system, a system of its own | kept | controlled, or singular |
+| limit | the class of members | the derived model describes a limit system, a system of its own | kept | controlled when a correction is known, otherwise uncontrolled, or singular |
 | change-coordinates | the description | an invertible change of description, exact | kept | exact |
 | aggregate | the description | an exact map onto coarse bearers, with a posited closure of their laws | lost | set by the closure |
 | approximate | the description | an inexact description of the same system | lost | controlled near a reference state, otherwise uncontrolled |

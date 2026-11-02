@@ -57,7 +57,7 @@ DECLARING: Mapping[str, tuple[str, ...]] = {
 #: The record kinds the checkers read. A kind declaring no symbol still carries expressions, so
 #: this set is wider than the keys of :data:`DECLARING`.
 RECORD_KINDS: frozenset[str] = frozenset(
-    {"target-system", "background", "phenomenon", "operators", "question", "model", "answer"}
+    {"target-system", "background", "phenomenon", "operators", "question", "model", "answer", "binding"}
 )
 
 #: The field through which a record of each kind names the target system it is stated against.
@@ -166,6 +166,13 @@ TYPE_PATH_FORMULA: Mapping[str, tuple[str, ...]] = {
         "aim_block.model_knowledge.expression",
     ),
     "model": ("operations[].regime", "operations[].bound"),
+    "binding": (
+        "feature_pairs[].exemplified",
+        "condition_pairs[].model_condition",
+        "condition_pairs[].target_condition",
+        "domain[].region",
+        "structural_discrepancy[].expression",
+    ),
 }
 TYPE_PATH_REFERENCE: Mapping[str, tuple[str, ...]] = {
     "answer": (
@@ -559,6 +566,7 @@ ID_UNITS: Mapping[str, tuple[str, ...]] = {
     "model": ("operations", "assumptions"),
     "answer": ("grounds", "abstractions"),
     "design": ("steps", "rules"),
+    "binding": ("feature_pairs", "condition_pairs"),
 }
 
 
@@ -1255,7 +1263,8 @@ def visible_records(
 
     An answer sees the records on which its route runs, and the question that it answers with the
     target system, the phenomenon and the backgrounds of that question; a model sees its parents
-    and its background. Any other record sees none through this function.
+    and its background; a binding sees its model, its phenomenon and the target system of that
+    phenomenon. Any other record sees none through this function.
 
     >>> records = {"quest.a.b": {"subject": {"phenomenon": "phen.a.b"}}, "phen.a.b": {"id": "phen.a.b"}}
     >>> [r.get("id") for r in visible_records({"type": "answer", "answers": "quest.a.b"}, records)]
@@ -1270,6 +1279,10 @@ def visible_records(
                  subject.get("target_system"), subject.get("phenomenon"), *(subject.get("background") or [])]
     elif kind == "model":
         names = [*(record.get("derives_from") or []), record.get("background")]
+    elif kind == "binding":
+        target = record.get("target") if isinstance(record.get("target"), Mapping) else {}
+        phenomenon = records.get(str(target.get("phenomenon")), {})
+        names = [record.get("model"), target.get("phenomenon"), phenomenon.get("target_system")]
     found = [records[name] for name in dict.fromkeys(names) if isinstance(name, str) and name in records]
     return found + [parent for model in found if model.get("type") == "model"
                     for parent in visible_records(model, records) if parent not in found]

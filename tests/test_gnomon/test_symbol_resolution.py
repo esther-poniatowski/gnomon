@@ -166,7 +166,7 @@ def test_every_reference_and_formula_identifier_resolves(case: tuple[str, Mappin
     # an answer and a model read against the records that they cite, as visible_records states
     if record.get("type") in ("operators", "question"):
         external = PROBLEM_SYMBOLS[problem_of(name)]
-    elif record.get("type") in ("answer", "model"):
+    elif record.get("type") in ("answer", "model", "binding"):
         external = [s for seen in visible_records(record, BY_ID) for s in symbols_of(seen)]
     else:
         external = symbols_of(upstream)
