@@ -1,0 +1,42 @@
+# binds the effective theory of representation learning to the phenomenon of delayed generalization, at qualitative grain
+
+_schema: gnomon:binding@1
+title: "Effective representation to delayed generalization"
+id: bind.grokking.effective-representation
+type: binding
+status: provisional
+
+model: mod.grokking.effective-representation
+
+target:
+  phenomenon: phen.grokking.delayed_generalization
+  level: phenomenon
+
+asserter: "Liu, Kitouni, Nolte, Michaud, Tegmark and Williams, Towards understanding grokking: an effective theory of representation learning, NeurIPS 2022 [liu2022]"
+
+feature_pairs:
+  - id: crossing-order
+    type: pattern
+    mode: argued
+    exemplified: "delay_m > 0"
+    imputed: phen.grokking.delayed_generalization.crossing_order
+  - id: delay-scale
+    type: quantity
+    mode: argued
+    exemplified: "delay_m"
+    imputed: phen.grokking.delayed_generalization.delay
+  - id: learning-regime
+    type: regime
+    mode: argued
+    exemplified: "lambda3 > 0"
+    imputed: phen.grokking.delayed_generalization.positive_delay
+
+domain:
+  - region: "algorithmic(source) and P > card(train)"
+    kind: extrapolation
+
+grain: qualitative
+
+version:
+  label: "1"
+  committed: "2026-11-02"

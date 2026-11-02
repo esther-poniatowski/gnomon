@@ -1,0 +1,116 @@
+# the effective theory of representation learning [liu2022], derived from the target by four operations
+
+_schema: gnomon:model@1
+title: "Effective theory of representation learning"
+id: mod.grokking.effective-representation
+type: model
+status: provisional
+
+derives_from:
+  - system.delayed_generalization_networks
+operations:
+  - id: toy-addition
+    kind: restrict
+    acts_on: [system.delayed_generalization_networks.source, system.delayed_generalization_networks.Arch]
+    yields: [addition]
+    regime: "source = addition"
+    error: exact
+    gain: "an explicit observable of the quality of the representation, and an effective loss over the geometry of the embeddings"
+    rests_on: "the toy addition task with a learned embedding table and a decoder, on which the effective theory is stated [liu2022]"
+  - id: representation
+    kind: aggregate
+    acts_on: [system.delayed_generalization_networks.theta]
+    yields: [Rrep, RQI, Hrep, lambda3]
+    error: uncontrolled
+    gain: "a coarse description of the embeddings, whose quality the index measures and whose relaxation the Hessian governs"
+    rests_on: "the effective loss of the normalized representation, posited rather than derived from the training laws [liu2022]"
+  - id: decoder-step
+    kind: limit
+    acts_on: [system.delayed_generalization_networks.opt]
+    error: uncontrolled
+    gain: "a closed linear relaxation of the representation, separated from the motion of the decoder"
+    rests_on: "the limit of a decoder step infinitesimal relative to representation learning [liu2022]"
+  - id: effective-law
+    kind: extend
+    yields: [eta_rep, representation_flow]
+    error: uncontrolled
+    gain: "the relaxation of the representation along the modes of its Hessian"
+    rests_on: "the effective relaxation law, posited by the effective theory [liu2022]"
+
+variables:
+  - name: "normalized learned representation"
+    symbol: Rrep
+    determined: within
+    signature: [step]
+    expression: "representation(theta)"
+    reading: "The variable holds the normalized input embeddings extracted from the trained model."
+  - name: "representation quality index"
+    symbol: RQI
+    determined: within
+    signature: [step]
+    values: "interval(0, 1)"
+    expression: "representation_quality(Rrep)"
+    reading: "The index gives the fraction of parallelograms consistent with the task that the learned embedding geometry realizes."
+  - name: "effective Hessian of the representation"
+    symbol: Hrep
+    determined: within
+    signature: []
+    expression: "jacobian(grad(effective_loss(Rrep)), Rrep, Rrep)"
+    reading: "The variable is the Hessian of the normalized effective loss of the representation."
+  - name: "slowest positive rate of representation learning"
+    symbol: lambda3
+    determined: within
+    signature: []
+    values: "nonneg(reals)"
+    expression: "min(pos(re(spectrum(Hrep))))"
+    reading: "The variable gives the first nonzero relaxation rate of the effective dynamics of the representation."
+  - name: "delay between fitting and generalization in the model"
+    symbol: delay_m
+    determined: within
+    signature: []
+    values: "nonneg(reals)"
+    reading: "The model time by which the representation reaches the quality that generalization requires, after the decoder has fitted the training set."
+
+parameters:
+  - name: "toy addition task"
+    symbol: addition
+    signature: []
+    values: "measures(data)"
+    reading: "The distribution of the toy addition task, to which the operation toy-addition restricts the source of the training data."
+  - name: "learning rate of the embedding"
+    symbol: eta_rep
+    signature: []
+    values: "pos(reals)"
+    reading: "The optimizer applies this step size to the embedding coordinates."
+  - name: "threshold of representation quality for generalization"
+    symbol: q_gen
+    signature: []
+    values: "interval(0, 1)"
+    reading: "The held-out task criterion is reached at this representation quality."
+
+laws:
+  - name: "effective relaxation of the representation"
+    symbol: representation_flow
+    signature: [step]
+    role: evolution
+    expression: "diff(Rrep, step) = -eta_rep * Hrep * Rrep"
+    reading: "The effective theory relaxes the normalized embedding geometry along the modes of its Hessian."
+    warrant: posited
+    rests_on: "The law rests on the operation effective-law, and on a published effective loss [liu2022]."
+    origin: "https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
+  - name: "timescale of representation learning"
+    symbol: representation_time
+    signature: []
+    role: input-output
+    expression: "depends_on(delay_m, 1 / (lambda3 * eta_rep))"
+    reading: "The inverse of the slowest nonzero rate of the representation sets the scale of the delay after fitting."
+    warrant: derived-in-a-limit
+    rests_on: "The law follows from the linear effective dynamics, under the operation decoder-step [liu2022]."
+  - name: "structured representation supports held-out prediction"
+    symbol: generalization_link
+    signature: [step]
+    role: state-constraint
+    expression: "RQI >= q_gen implies Ltest <= eps_gen"
+    reading: "Once additive structure consistent with the task is present in the embeddings, unseen input pairs share the representation used for trained pairs."
+    warrant: measured
+    rests_on: "The law rests on the correspondence between representation quality and held-out accuracy reported across the toy experiments [liu2022]."

@@ -15,6 +15,8 @@ This case checks whether the framework can keep a temporal regularity apart from
 - [Background laws](background.yml): to know which laws of the target the question admits, and on what warrant.
 - [Phenomenon](phenomenon.yml): to know which regularity the question concerns and how its delay is measured.
 - [Question](question.yml): to know what an explanation must establish, and against which alternatives.
+- [Effective theory](model.yml): to read the model of representation learning that four operations derive from the target.
+- [Binding](binding.yml): to read how the effective theory is paired with the delay and the crossing order of the phenomenon.
 - [Candidate answer](answer.yml): to examine a candidate explanation drawn from a published effective theory.
 - [Assessment](assessment.yml): to learn which tests the candidate passes or fails, and why.
 - [Itinerary](itinerary.yml): to follow the steps of the inquiry, from the problem to the test of the candidate, with the verdict of each norm.

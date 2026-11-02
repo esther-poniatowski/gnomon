@@ -1,4 +1,4 @@
-# tests a mechanistically transparent but deliberately narrow grokking account
+# negative for an explanation derived on a toy effective theory, which misses the distribution of the delay
 
 _schema: gnomon:assessment@1
 title: "Assessment of the account through a structured representation"
@@ -10,56 +10,63 @@ against: quest.grokking.explain_delay
 
 tests:
   admissibility:
-    scope:
-      verdict: fail
-      evidence: "The account is derived for a toy architecture that learns addition and is supported by selected experiments on that task and on permutation tasks. Further evidence comes from transformer and MNIST experiments. The question, however, ranges over finite overparameterized networks on algorithmic tasks."
-    grain:
-      verdict: fail
-      evidence: "The candidate explains a positive delay scale for a training specification but does not derive the requested censored distribution Pdelay across initialization draws."
-    contrast:
-      verdict: pass
-      evidence: "A faster representation mode removes the delay. With lambda3 = 0, no representation is learned and memorization persists. The two factors therefore address both declared foils."
-    relation:
-      verdict: pass
-      evidence: "Within the effective toy theory, the spectral decomposition of Hrep yields the timescale of the delay mathematically. The declared link law then connects that timescale to the held-out loss through representation quality."
-    individuation:
-      verdict: pass
-      evidence: "The account retains the computational units and parameter coordinates of the target and defines its representation and Hessian from the parameter trajectory."
-    admissible-explanans:
-      verdict: pending
-      evidence: "The question deliberately leaves the admissible level open. The candidate supplies an account at the level of the representation, but no prior bound determines whether that choice is admissible."
-    modal-strength:
-      verdict: pass
-      evidence: "The candidate claims actual strength, as the question requests. Whether the relation holds across the actual target class is decided by the warrant tests of closure, law warrant and fidelity: closure and fidelity fail, and law warrant passes."
     product:
       verdict: fail
-      evidence: "The mechanism is structurally transparent in the toy setting, but it does not explain the distribution of durations or the phenomenon across the declared class."
+      evidence: "The mechanism is structurally transparent in the effective theory, but it explains neither the distribution of the delay nor the phenomenon across the declared class."
+    scope:
+      verdict: fail
+      evidence: "The domain of the answer is the toy addition task, which the operation toy-addition restricts, whereas the question ranges over finite overparameterized networks on algorithmic tasks."
+    grain:
+      verdict: fail
+      evidence: "The candidate derives a positive scale of the delay for one training specification, but not the censored distribution Pdelay across initialization draws."
+    individuation:
+      verdict: pass
+      evidence: "The derived model defines its representation, its index and its Hessian from the parameters of the target, through the operation representation, and introduces no bearer unrelated to the target."
+    binding:
+      verdict: pass
+      evidence: "The binding pairs the delay, its sign and the regime of the model with the delay, the crossing order and the positive delay of the phenomenon, at qualitative grain."
+    modal-strength:
+      verdict: pass
+      evidence: "The candidate claims the actual strength that the question requests; whether the relation holds across the class is decided by the warrant tests, of which closure and fidelity fail."
+    contrast:
+      verdict: pass
+      evidence: "A faster mode of the representation removes the delay, and a zero rate leaves memorization, so the two factors separate both declared foils."
+    relation:
+      verdict: pass
+      evidence: "Within the effective theory, the spectrum of the Hessian yields the timescale of the delay mathematically, and the link law connects that timescale to the held-out loss."
+    target-status:
+      verdict: pass
+      evidence: "The slow relaxation holds only in the limit of an infinitesimal decoder step, so it is a limit construct, placed in that regime by the argued pair delay-scale; the nonzero mode describes the representation at a coarse level, carried onto the positive delay by the pair learning-regime."
+    admissible-explanans:
+      verdict: pending
+      evidence: "The question leaves the admissible level open, so no bound decides whether an account at the level of the representation is admissible."
   warrant:
     phenomenon-established:
       verdict: pass
-      evidence: "Delayed generalization and the associated phase diagrams are observed across repeated runs in the cited study and in the independent evidence of the phenomenon record."
+      evidence: "Delayed generalization and its phase diagrams are observed across repeated runs, in the cited study and in the independent evidence of the phenomenon."
     foil-evidence:
       verdict: pass
-      evidence: "The phase diagrams contain the memorization and confusion regimes as well as comprehension and grokking. Both foil outcomes therefore occur under measured training specifications."
+      evidence: "The phase diagrams contain the regimes of memorization and comprehension beside grokking, so both foils occur under measured training specifications."
     law-warrant:
       verdict: pass
-      evidence: "The answer labels the effective flow as posited, the spectral timescale as derived only within that reduction, and the generalization link as measured. These warrants match the cited evidence."
+      evidence: "The model marks the relaxation law as posited, the timescale as derived in the limit of the operation decoder-step, and the link as measured, as the cited evidence supports."
     closure:
       verdict: fail
-      evidence: "The architecture and optimizer laws of the target do not derive the proposed effective loss of the representation. The mathematical chain therefore does not close on the original training dynamics."
+      evidence: "The operation representation posits its closure: the training laws of the target do not derive the effective loss of the representation, so the chain does not close on the original dynamics."
     fidelity:
       verdict: fail
-      evidence: "The source reports qualitative agreement together with quantitative discrepancies. The candidate also does not reproduce the distribution Pdelay that the question requires."
+      evidence: "No comparison is computed, since every pair of the binding is argued; the source reports qualitative agreement with quantitative discrepancies, and the model does not produce the distribution Pdelay that the question requires."
     robustness:
       verdict: fail
-      evidence: "The candidate does not show that the derivation survives without the toy architecture or without the infinitesimal decoder step."
+      evidence: "Three operations of the derived model have an uncontrolled error, and the candidate shows no derivation that survives without the toy task or without the infinitesimal decoder step."
     selection:
       verdict: not-applicable
-      evidence: "Membership in the target class is not conditioned on exhibiting grokking."
+      evidence: "Membership in the target class does not depend on exhibiting grokking."
 
 obligations: []
 appraisal:
   - virtue: unification
-    assessment: "The virtue is not appraised, because the candidate fails admissibility and warrant. The template has no dedicated representation for withholding appraisal when those gates fail."
+    assessment: "The virtue is not appraised, since the candidate fails admissibility and warrant."
+
 maturity:
   tests.admissibility.admissible-explanans: open

@@ -37,6 +37,65 @@ symbols:
   block: laws
   signature: []
   name: update of the optimizer state
+- symbol: generalization_link
+  declared_in: mod.grokking.effective-representation
+  block: laws
+  signature:
+  - step
+  name: structured representation supports held-out prediction
+- symbol: representation_flow
+  declared_in: mod.grokking.effective-representation
+  block: laws
+  signature:
+  - step
+  name: effective relaxation of the representation
+- symbol: representation_time
+  declared_in: mod.grokking.effective-representation
+  block: laws
+  signature: []
+  name: timescale of representation learning
+- symbol: addition
+  declared_in: mod.grokking.effective-representation
+  block: parameters
+  signature: []
+  name: toy addition task
+- symbol: eta_rep
+  declared_in: mod.grokking.effective-representation
+  block: parameters
+  signature: []
+  name: learning rate of the embedding
+- symbol: q_gen
+  declared_in: mod.grokking.effective-representation
+  block: parameters
+  signature: []
+  name: threshold of representation quality for generalization
+- symbol: Hrep
+  declared_in: mod.grokking.effective-representation
+  block: variables
+  signature: []
+  name: effective Hessian of the representation
+- symbol: RQI
+  declared_in: mod.grokking.effective-representation
+  block: variables
+  signature:
+  - step
+  name: representation quality index
+- symbol: Rrep
+  declared_in: mod.grokking.effective-representation
+  block: variables
+  signature:
+  - step
+  name: normalized learned representation
+- symbol: delay_m
+  declared_in: mod.grokking.effective-representation
+  block: variables
+  signature: []
+  name: delay between fitting and generalization in the model
+- symbol: lambda3
+  declared_in: mod.grokking.effective-representation
+  block: variables
+  signature: []
+  name: slowest positive rate of representation learning
 - symbol: crossing_order
   declared_in: phen.grokking.delayed_generalization
   block: manifestations
@@ -82,6 +141,16 @@ symbols:
   block: scope_over_instances
   signature: []
   name: training specification
+- symbol: no_delay
+  declared_in: quest.grokking.explain_delay
+  block: foil_set
+  signature: []
+  name: immediate generalization
+- symbol: no_generalization
+  declared_in: quest.grokking.explain_delay
+  block: foil_set
+  signature: []
+  name: persistent memorization
 - symbol: coord
   declared_in: system.delayed_generalization_networks
   block: constituents
@@ -246,6 +315,7 @@ operators:
   canonical:
   - abs
   - adjoint
+  - and
   - bools
   - card
   - complex
@@ -277,6 +347,8 @@ operators:
   - min
   - nonneg
   - norm
+  - not
+  - or
   - pos
   - prod
   - range
@@ -293,9 +365,4 @@ operators:
     representation: the learned representation extracted from a parameter trajectory
     representation_quality: the fraction of the relations consistent with the task that are realized by
       a learned representation
-interactions:
-- edge: two_timescale_training
-  sources: []
-  reach: null
-  through: []
-  tuples: null
+interactions: []
