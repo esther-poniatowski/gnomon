@@ -17,8 +17,9 @@ The templates are filled in this order:
 
 A model is filled only when the route of an answer runs on a model other than the target, and a binding with its keys only when the claim of that answer also bears on the target. The assessment stays apart from the answer, so that a candidate can be restated without altering its verdicts.
 
-Two templates stand outside this order:
+Three templates stand outside this order:
 
+- [Concept](concept.yml): states the meaning of one concept of the research, which any record of the project can use
 - [Operators](operators.yml): declares, once per problem, every operator beyond the canonical set that a formula of the problem requires
 - [Itinerary](itinerary.yml): records each step of one itinerary of inquiry as an instance of a registered epistemic activity, for `gnomon itinerary` to check against the registries
 

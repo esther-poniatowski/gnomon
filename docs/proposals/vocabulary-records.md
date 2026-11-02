@@ -16,17 +16,3 @@ A concept is both a category, a class of things, and an object of inquiry, which
 **Literature.** Metamodeling in Description Logics.
 
 **Bears on.** [`vocabulary-records`](../../TODO.md), for the schema of the concept record, and `definitions-framework`.
-
-## Kind, confusions and boundary of a concept
-
-Three parts of the concept record admit a closed form:
-
-- **The kind of a concept** takes one of four values: a system, a subtype or class, a property, which may have an antagonist, and a process. The values are aligned with the definitions of [system, constituent and environment](../epistemology/vocabulary/systems/system-constituent-environment.md), [kind, class and population](../epistemology/vocabulary/systems/kind-class-population.md), [property, attribute and predicate](../epistemology/vocabulary/systems/property-attribute-predicate.md), and [process, event and history](../epistemology/vocabulary/change/process-event-history.md).
-- **A confusion with another concept** names the other concept, the axis along which the two differ, the feature that blocks their interchange, the source of the risk of conflating them, and the consequence of that conflation.
-- **The boundary criterion** separates a concept from a claim: content that fixes a meaning without asserting belongs to the concept, and content that asserts, denies, defines or evaluates belongs to a claim or a definition.
-
-**Literature.** None cited.
-
-**Bears on.** [`vocabulary-records`](../../TODO.md), for the schema of the concept record.
-
-**Retired source.** `docs/design/3-aspect-specific/ontology.md`, `docs/design/_backup/object-types-ontology/obj-distinction.md` and `docs/design/_backup/object-types-ontology/taxo-boundaries.md`, at commit 9e138e2.

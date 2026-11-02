@@ -1,0 +1,17 @@
+_schema: gnomon:concept@1
+title: "Stable coexistence"
+id: concept.microbial.stable-coexistence
+type: concept
+status: provisional
+
+gloss: "the existence, in a model of a community, of a feasible equilibrium that is locally asymptotically stable"
+kind: property
+broader: concept.microbial.coexistence
+source: "the research problem of this case, in description.md"
+
+confusions:
+  - other: permanence
+    axis: "the behavior near one equilibrium against the behavior of every trajectory that starts inside the state space"
+    blocking_feature: "permanence bounds every population away from zero from every interior initial state, whereas a locally stable equilibrium attracts only the states near it"
+    risk: "both are read as the persistence of every population"
+    consequence: "a constraint proved sufficient for a stable feasible equilibrium is reported as sufficient for persistence, although the boundary of the state space can hold another attractor"

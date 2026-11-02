@@ -37,6 +37,7 @@ Documents the fields of each record of an inquiry: the content that a researcher
 ## Itinerary and language
 
 - [Itinerary record](itinerary.md): records the steps of an inquiry so that each step can be checked
+- [Concept record](concept.md): fills the record of the meaning of a concept of the research, with its confusions
 - [Symbols and expressions](expressions.md): writes the symbols and the formulas of any record so that the checks resolve them
 - [Operator record](operators.md): declares the operators that a problem adds to the canonical set
 - [Maturity of a field](maturity.md): marks how far each field of a record has been revised

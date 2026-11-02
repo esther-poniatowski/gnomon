@@ -414,6 +414,16 @@ vocabularies:
       name: 'formal target: the laws define the system'
     - value: partial
       name: empirical target
+  concept:
+    .status:
+    - value: provisional
+    - value: stabilized
+    - value: retracted
+    .kind:
+    - value: system
+    - value: subtype-or-class
+    - value: property
+    - value: process
   problem:
     .status:
     - value: posed

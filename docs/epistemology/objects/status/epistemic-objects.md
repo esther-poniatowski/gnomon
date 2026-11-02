@@ -77,7 +77,7 @@ The table lists every epistemic object of an inquiry, in the order of the readin
 | inter-theory relation | Candidate or Result, by its attitude | `inter-theory-relation` | none yet | [explanation and integration](../../processes/activities/explanation-and-integration.md) |
 | knowledge-state change | none of its own: it changes the attitude or the status of other units | `knowledge-state-change` | none of its own: the statuses of the records that it changes | [revision](../../processes/activities/revision.md) |
 | itinerary | none: it records acts, not content | none: a record of acts | `itinerary` | [itinerary](../../processes/activities/epistemic-activities.md#^itinerary) |
-| concept | Definition | `concept` | none yet: the `concept` record is decided by the [decision on concepts](../../../adr/concepts-glossaries-notations.md) and not yet created | [concept](../concept/concept.md) |
+| concept | Definition | `concept` | [`concept`](../../../specification/concept.md) | [concept](../concept/concept.md) |
 
 Only a claim can be accepted into $K$, by the [act of acceptance](statuses-and-acceptance.md#^acceptance-act). The product types fall into classes by what their objects bear on: a claim type produces a claim about the objects of study, which can be true or false, a construct type a construct judged for its adequacy, and an evaluative type a judgment of the standing of a claim or a construct. Only the claim types produce claims. One claim has no product type yet: the existence presupposition of a question. ^accepted-objects
 

@@ -14,14 +14,15 @@ The schemas of this folder declare the shape of each record type, so that a prog
 > [!IMPORTANT] One entry per schema
 > Each entry gives the logical identifier `gnomon:<type>@<version>` of its schema, and is added in the edit that writes the schema.
 
-- [Answer record](answer.base.yml): declares the fields of a answer record, which its [contract](answer.contract.yml) binds as `gnomon:answer@1`
-- [Assessment record](assessment.base.yml): declares the fields of a assessment record, which its [contract](assessment.contract.yml) binds as `gnomon:assessment@1`
+- [Answer record](answer.base.yml): declares the fields of an answer record, which its [contract](answer.contract.yml) binds as `gnomon:answer@1`
+- [Assessment record](assessment.base.yml): declares the fields of an assessment record, which its [contract](assessment.contract.yml) binds as `gnomon:assessment@1`
 - [Background record](background.base.yml): declares the fields of a background record, which its [contract](background.contract.yml) binds as `gnomon:background@1`
 - [Binding record](binding.base.yml): declares the fields of a binding record, which its [contract](binding.contract.yml) binds as `gnomon:binding@1`
-- [Itinerary record](itinerary.base.yml): declares the fields of a itinerary record, which its [contract](itinerary.contract.yml) binds as `gnomon:itinerary@1`
+- [Concept record](concept.base.yml): declares the fields of a concept record, which its [contract](concept.contract.yml) binds as `gnomon:concept@1`
+- [Itinerary record](itinerary.base.yml): declares the fields of an itinerary record, which its [contract](itinerary.contract.yml) binds as `gnomon:itinerary@1`
 - [Key record](key.base.yml): declares the fields of a key record, which its [contract](key.contract.yml) binds as `gnomon:key@1`
 - [Model record](model.base.yml): declares the fields of a model record, which its [contract](model.contract.yml) binds as `gnomon:model@1`
-- [Operators record](operators.base.yml): declares the fields of a operators record, which its [contract](operators.contract.yml) binds as `gnomon:operators@1`
+- [Operators record](operators.base.yml): declares the fields of an operators record, which its [contract](operators.contract.yml) binds as `gnomon:operators@1`
 - [Phenomenon record](phenomenon.base.yml): declares the fields of a phenomenon record, which its [contract](phenomenon.contract.yml) binds as `gnomon:phenomenon@1`
 - [Problem record](problem.base.yml): declares the fields of a problem record, which its [contract](problem.contract.yml) binds as `gnomon:problem@1`
 - [Question record](question.base.yml): declares the fields of a question record, which its [contract](question.contract.yml) binds as `gnomon:question@1`

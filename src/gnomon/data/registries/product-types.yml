@@ -53,8 +53,8 @@ product_types:
     status: exists
   - id: concept
     class: construct
-    record: to-create
-    status: to-create
+    record: [concept]
+    status: exists
   - id: classification
     class: construct
     record: [target-system]

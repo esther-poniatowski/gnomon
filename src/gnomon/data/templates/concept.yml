@@ -1,0 +1,28 @@
+# specification: `docs/specification/concept.md`; one file per concept of the research
+# theory: `docs/epistemology/objects/concept/concept.md`
+# a concept of another project is referenced by its identifier, never copied
+# replace every UPPERCASE placeholder; leave a field empty while it is not filled
+
+_schema: gnomon:concept@1
+title: "SHORT NAME OF THE CONCEPT"
+id: concept.TOPIC.NAME
+type: concept
+status: provisional              # provisional | stabilized | retracted
+
+gloss: "ONE SENTENCE THAT STATES THE MEANING OF THE CONCEPT"
+kind:                            # system | subtype-or-class | property | process
+antagonist: concept.TOPIC.NAME   # property only, optional; the property opposed to this one
+broader: concept.TOPIC.NAME      # at most one; the broader concept, named in this direction only
+source: "POINTER TO THE NOTE THAT SOURCES THE CONCEPT"
+
+confusions:                      # one entry per concept with which this one risks being conflated; empty when none
+  - other: concept.TOPIC.NAME    # the other concept, or a term in use when no record states it
+    axis: "THE AXIS ALONG WHICH THE TWO CONCEPTS DIFFER"
+    blocking_feature: "THE FEATURE THAT BLOCKS THEIR INTERCHANGE"
+    risk: "THE SOURCE OF THE RISK OF CONFLATING THEM"
+    consequence: "THE CONSEQUENCE OF CONFLATING THEM"
+
+definition: "POINTER TO A FULL DEFINITION OBJECT"   # optional; omit until a full definition object exists
+
+maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
+  FIELD.PATH: open

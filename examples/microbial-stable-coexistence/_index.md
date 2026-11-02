@@ -16,6 +16,7 @@ This case checks whether the framework can keep each requirement in its proper l
 - [Question](question.yml): to know which implications an answer must prove.
 - [Candidate answer](answer.yml): to examine a candidate that proves one direction for one subclass of models.
 - [Assessment](assessment.yml): to learn which tests the candidate passes or fails, and why.
+- [Stable coexistence](concept.yml): to read the meaning of the property that the phenomenon names, and its confusion with permanence.
 - [Operators](operators.yml): to find the operators that the records of this problem use beyond the canonical set.
 - [Open issues](issues.md): to know which limitations of the framework the case still exposes.
 - [Vocabulary](vocabulary.yml): to choose a new symbol without colliding with one already declared.

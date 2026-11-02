@@ -24,7 +24,7 @@ The decision on [concepts, glossaries and notations](../../../adr/concepts-gloss
 
 ## The concept
 
-A concept is stated by a gloss, a kind, at most one broader concept, the note that sources it, and its confusions with neighboring concepts, each with the distinction that separates them, as the decision on concepts lists. A concept of another project is referenced, never copied.
+A concept is stated by a gloss, a kind, at most one broader concept, the note that sources it, and its confusions with neighboring concepts, each with the distinction that separates them, as the decision on concepts lists. The fields are documented in the [concept record](../../../specification/concept.md). A concept of another project is referenced, never copied.
 
 - **A concept differs from a term of the theory.** The [vocabulary](../../vocabulary/_index.md) fixes the senses of the terms in which the theory of `gnomon` is written, such as "model" or "law". A concept in the sense of this note belongs to the research: its record is a research unit of the project that defines it, and other projects reference that unit.
 - **A concept in use before its definition is an explicandum.** A problem may use a term without a definition, with a pointer to the use that fixes its sense, as the [explicanda of a problem](../problem/epistemic-problem.md#^problem-triple) do. An explication replaces the explicandum by an exact explicatum, which is judged by the adequacy of an explication: similarity to the explicandum, exactness, fruitfulness and simplicity [carnap1950_logical].
