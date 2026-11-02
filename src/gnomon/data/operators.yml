@@ -4,6 +4,11 @@
 #
 # `notation` renders the operator in LaTeX. `#0` stands for the indices a binder consumes and
 # `#1`, `#2` for its arguments, so a renderer composes the form without parsing the operator.
+#
+# The arity of an operator is the number of its arguments, apart from the indices that a binder
+# consumes. An operator with a `signature` takes one argument per entry of it; any other operator
+# states its `arity`, so that no arity is read from a template. `variadic: true` lets the last
+# argument repeat, and the arity is then the least number of arguments.
 
 id: registry.operators
 type: operator-registry
@@ -12,54 +17,67 @@ operators:
   kind: binder
   name: the mean over the indices it binds
   notation: '\langle #1 \rangle_{#0}'
+  arity: 1
 - symbol: sum
   kind: binder
   name: the sum over the indices it binds
   notation: '\sum_{#0} #1'
+  arity: 1
 - symbol: min
   kind: binder
   name: the least value over the indices it binds
   notation: '\min_{#0} #1'
+  arity: 1
 - symbol: max
   kind: binder
   name: the greatest value over the indices it binds
   notation: '\max_{#0} #1'
+  arity: 1
 - symbol: limit
   kind: binder
   name: the limit as the indices it binds approach their stated value
   notation: '\lim_{#0} #1'
+  arity: 1
 - symbol: norm
   kind: binder
   name: the norm over the indices it binds
   notation: '\lVert #1 \rVert_{#0}'
+  arity: 1
 - symbol: dist
   kind: binder
   name: the distribution formed over the indices it binds
   notation: '\mathbb{P}_{#0}( #1 )'
+  arity: 1
 - symbol: implies
   kind: relation
   name: the implication between two statements
   notation: '#1 \Rightarrow #2'
+  arity: 2
 - symbol: depends_on
   kind: relation
   name: the dependence of one quantity on another
   notation: '\operatorname{dep}( #1, #2 )'
+  arity: 2
 - symbol: increasing
   kind: relation
   name: the monotone increase of one quantity in another
   notation: '\operatorname{incr}( #1, #2 )'
+  arity: 2
 - symbol: decreasing
   kind: relation
   name: the monotone decrease of one quantity in another
   notation: '\operatorname{decr}( #1, #2 )'
+  arity: 2
 - symbol: drawn_from
   kind: relation
   name: the quantity is distributed as the law given
   notation: '#1 \sim #2'
+  arity: 2
 - symbol: abs
   kind: map
   name: the magnitude of a number or a vector
   notation: '\lvert #1 \rvert'
+  arity: 1
 - symbol: ft
   kind: binder
   name: the Fourier transform over the indices it binds, introducing their conjugates
@@ -126,6 +144,7 @@ operators:
   kind: constant
   name: the unbounded limit of a quantity
   notation: '\infty'
+  arity: 0
 - symbol: diff
   kind: map
   name: the derivative of a quantity along the index given
@@ -137,75 +156,95 @@ operators:
   kind: set
   name: the real numbers
   notation: \mathbb{R}
+  arity: 0
 - symbol: ints
   kind: set
   name: the integers
   notation: \mathbb{Z}
+  arity: 0
 - symbol: bools
   kind: set
   name: the truth values
   notation: \mathbb{B}
+  arity: 0
 - symbol: pos
   kind: set
   name: the strictly positive members of a set
   notation: '#1_{>0}'
+  arity: 1
 - symbol: nonneg
   kind: set
   name: the nonnegative members of a set
   notation: '#1_{\geq 0}'
+  arity: 1
 - symbol: vectors
   kind: set
   name: the tuples of a given length over a set
   notation: '#1^{#2}'
+  arity: 2
 - symbol: matrices
   kind: set
   name: the arrays over a set, indexed by two sets
   notation: '#1^{#2 \times #3}'
+  arity: 3
 - symbol: prod
   kind: set
   name: the product of two sets
   notation: '#1 \times #2'
+  arity: 2
 - symbol: enum
   kind: set
   name: the set of the listed members
   notation: '\{ #1 \}'
+  arity: 1
+  variadic: true
 - symbol: range
   kind: set
   name: the identifiers of a finite collection, given its size
   notation: '\{ 1, \dots, #1 \}'
+  arity: 1
 - symbol: interval
   kind: set
   name: an interval of an ordered set, or the interval between two bounds
   notation: '[ #1, #2 ]'
+  arity: 2
 - symbol: maps
   kind: set
   name: the maps from one set to another
   notation: '#1 \to #2'
+  arity: 2
 - symbol: measures
   kind: set
   name: the probability measures on a set
   notation: '\mathcal{P}( #1 )'
+  arity: 1
 - symbol: intersect
   kind: set
   name: the members two sets share
   notation: '#1 \cap #2'
+  arity: 2
 - symbol: union
   kind: set
   name: the members of either set
   notation: '#1 \cup #2'
+  arity: 2
 - symbol: empty
   kind: set
   name: the set with no member
   notation: '\emptyset'
+  arity: 0
 - symbol: complex
   kind: set
   name: the complex numbers
   notation: '\mathbb{C}'
+  arity: 0
 - symbol: card
   kind: set
   name: the size of a set
   notation: '\lvert #1 \rvert'
+  arity: 1
 - symbol: subset
   kind: set
   name: the members of a set satisfying a predicate
   notation: '\{ x \in #1 : #2(x) \}'
+  arity: 2

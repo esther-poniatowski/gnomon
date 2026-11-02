@@ -275,6 +275,29 @@ def canonical_operators(source: Path | None = None) -> frozenset[str]:
     if not found:
         raise ValueError(f"{(source or OPERATOR_REGISTRY).name} declares no operator")
     return found
+def operator_arity(entry: Mapping[str, Any]) -> tuple[int, bool] | None:
+    """Return the arity of an operator entry and whether its last argument repeats.
+
+    The arity counts the arguments apart from the indices that a binder consumes. An entry with a
+    signature takes one argument per entry of it; any other entry states its arity. An entry that
+    states both, or neither, has no arity, and the registry check reports it.
+
+    >>> operator_arity({"symbol": "dot", "signature": ["vectors(S, n)", "vectors(S, n)"]})
+    (2, False)
+    >>> operator_arity({"symbol": "enum", "arity": 1, "variadic": True})
+    (1, True)
+    >>> operator_arity({"symbol": "odd", "arity": 1, "signature": ["S"]}) is None
+    True
+    """
+    signature, stated = entry.get("signature"), entry.get("arity")
+    if (signature is None) == (stated is None):
+        return None
+    count = len(signature) if isinstance(signature, list) else stated
+    if not isinstance(count, int) or isinstance(count, bool) or count < 0:
+        return None
+    return count, bool(entry.get("variadic"))
+
+
 def mistyped_symbols(record: Mapping[str, Any]) -> list[Finding]:
     """Return every ``symbol`` entry that YAML did not resolve to a string.
 

@@ -253,6 +253,19 @@ def test_the_operator_note_lists_the_registry():
     assert documented == declared, f"note and registry differ: {documented ^ declared}"
 
 
+def test_every_canonical_operator_has_one_source_of_arity() -> None:
+    """An operator takes its arity from its signature, or states it; never both, and never from its template."""
+    from gnomon.vocabulary import operator_arity
+
+    operators = yaml.safe_load((REGISTRY / "operators.yml").read_text())["operators"]
+    missing = [e["symbol"] for e in operators if operator_arity(e) is None]
+    assert not missing, f"operators without exactly one source of arity: {missing}"
+    lone = [e["symbol"] for e in operators if e.get("variadic") and operator_arity(e) == (0, True)]
+    assert not lone, f"variadic operators without an argument to repeat: {lone}"
+    binders = [e["symbol"] for e in operators if e["kind"] == "binder" and operator_arity(e)[0] < 1]
+    assert not binders, f"binders without a body: {binders}"
+
+
 def test_no_operator_notation_doubles_a_backslash() -> None:
     """A single-quoted YAML scalar keeps every backslash, so a doubled one reaches LaTeX as a line break."""
     operators = yaml.safe_load((REGISTRY / "operators.yml").read_text())["operators"]
