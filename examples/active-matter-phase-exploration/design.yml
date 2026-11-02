@@ -1,0 +1,47 @@
+_schema: gnomon:design@1
+title: "Sweep of the nonreciprocal coupling across system sizes"
+id: design.nonreciprocal-active-matter.coupling-sweep
+type: design
+status: provisional
+
+kind: simulation-run
+serves: quest.nonreciprocal-active-matter.phase-exploration
+task: "detect the phases of the lattice realization across the nonreciprocal coupling, at each system size, so that a finite-size analysis can decide which phases persist as the size grows"
+
+inputs:
+  - name: "lattice realization"
+    description: "the lattice member of the target system, in each selected spatial dimension"
+  - name: "grid of control parameters"
+    description: "the values of the nonreciprocal coupling, crossed with the system sizes"
+  - name: "initial states"
+    description: "independent random initial states, several per point of the grid"
+
+steps:
+  - id: draw-initial-states
+    act: "draw independent random initial states for each point of the grid"
+  - id: equilibrate
+    act: "run the stochastic dynamics until relaxation, and discard the transient"
+  - id: record-correlations
+    act: "record the correlation matrix and the spectral matrix between species over a window of fixed length"
+  - id: classify-phase
+    act: "assign each run to a phase by the detection criterion of the phenomenon"
+
+rules:
+  - id: common-seeds
+    rule: "runs at different sizes reuse the same seeds of the random generator"
+  - id: relaxation-window
+    rule: "the recording window is a fixed multiple of the relaxation time measured at each point of the grid"
+
+output: "per point of the grid and per run, the correlation and spectral matrices between species and the assigned phase"
+stopping: "every point of the grid holds the planned number of runs, and each run stops at the end of its recording window"
+
+failure_modes:
+  - mode: "a run recorded before relaxation is read as a distinct phase"
+    guard: equilibrate
+  - mode: "a difference between sizes that comes from sampling noise is read as an effect of size"
+    guard: common-seeds
+
+protocol:
+  intervention: "the nonreciprocal coupling, varied over a grid, crossed with the system size"
+  control: "the runs at zero nonreciprocal coupling"
+  observation: "the correlation matrix between species on the lattice, with its spectral matrix"

@@ -25,6 +25,7 @@ always:
   background: [describes, laws, closure]
   problem: [statement, kind, demand, result_type, request]
   concept: [gloss, kind, source]
+  design: [kind, serves, task, steps, output, stopping]
   itinerary: [addresses, steps]
   answer: [claim, grounds, dependence, route, domain, status, support, modal_strength, erotetic_relation]
   model: [constituents, variables, laws]

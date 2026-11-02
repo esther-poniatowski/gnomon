@@ -16,6 +16,7 @@ This case checks whether the framework can specify a search whose possible pheno
 - [Question](question.yml): to know which results the exploration must deliver.
 - [Candidate answer](answer.yml): to examine a deliberately narrow candidate answer.
 - [Assessment](assessment.yml): to learn which tests the candidate fails, and why.
+- [Coupling sweep](design.yml): to read the simulation runs that would detect the phases at each system size.
 - [Operators](operators.yml): to find the operators that the records of this problem use beyond the canonical set.
 - [Open issues](issues.md): to know which limitations of the framework the case still exposes.
 - [Vocabulary](vocabulary.yml): to choose a new symbol without colliding with one already declared.

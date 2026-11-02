@@ -32,6 +32,7 @@ The method fixes the role of a unit by the kind of object that holds it and by t
 | Problem | a demand with its constraints, relative to $K$ | [epistemic problem](../problem/epistemic-problem.md) |
 | Question | a request whose answers form a definite set, individuated by its direct answers | [question](../question/question.md) |
 | Definition | a concept with its gloss, a declaration of a quantity, or a key, each assessed for its adequacy rather than its truth | [concept](../concept/concept.md); [adequacy of a declaration](../../foundations/things-and-constructs.md#^declaration-adequacy) |
+| Plan | a design, which licenses an execution: a run that follows its steps and its rules on its inputs yields its output | [empirical activities](../../processes/activities/empirical-activities.md); [decision on the design record](../../../adr/design-record.md) |
 | Assumption | a ground of an answer with the role `assumption` or `idealization`, a law admitted in a background, the laws of a model, or a binding | [grounds and dependence](../knowledge/grounds-and-dependence.md#^ground-roles) |
 | Datum | a phenomenon, its data, or a ground with the role `datum` | [phenomenon](../subject/phenomenon.md) |
 | Candidate | an answer whose attitude is `entertained` or `hypothesized` | [claim and hypothesis](../../vocabulary/representations/claim-and-hypothesis.md#^attitude-support) |
@@ -57,7 +58,7 @@ The table lists every epistemic object of an inquiry, in the order of the readin
 | target specification | Definition | `target-specification` | `target-system` | [target system](../subject/target-system.md) |
 | measurement procedure | Definition | `measurement-procedure` | `target-system`, in part | [conceptual activities](../../processes/activities/conceptual-activities.md) |
 | classification | Definition | `classification` | `target-system` | [conceptual activities](../../processes/activities/conceptual-activities.md) |
-| design | none yet: a plan of acts, a gap of the role table | `design` | none yet | [empirical activities](../../processes/activities/empirical-activities.md) |
+| design | Plan | `design` | [`design`](../../../specification/design.md) | [empirical activities](../../processes/activities/empirical-activities.md) |
 | data | Datum | `data` | `phenomenon`, in part | [empirical activities](../../processes/activities/empirical-activities.md) |
 | phenomenon | Datum | `phenomenon` | `phenomenon` | [phenomenon](../subject/phenomenon.md) |
 | admitted background | Assumption | `admitted-laws` | `background` | [background](../knowledge/background.md) |
@@ -110,4 +111,5 @@ Three kinds of content in the records fail the criterion, or bear on it only thr
 > 	- the criterion of an epistemic object stated over content, and its four ways of coming about;
 > 	- the epistemic role of a unit fixed by the object and the place that hold it;
 > 	- the roles assigned to the laws of a model, to a binding and to a key;
+> 	- the role Plan, borne by a design;
 > 	- the inventory, and the objects excluded from it.

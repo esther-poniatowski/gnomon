@@ -424,6 +424,18 @@ vocabularies:
     - value: subtype-or-class
     - value: property
     - value: process
+  design:
+    .status:
+    - value: provisional
+    - value: stabilized
+    - value: retracted
+    .kind:
+    - value: experiment
+      name: an intervention on the target
+    - value: simulation-run
+      name: a run of a simulation of a model
+    - value: method
+      name: a procedure that solves a task
   problem:
     .status:
     - value: posed
@@ -452,6 +464,8 @@ vocabularies:
     - value: concept
       admits: []
     - value: measurement-procedure
+      admits: []
+    - value: design
       admits: []
     - value: knowledge-state-change
       admits: []

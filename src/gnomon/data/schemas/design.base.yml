@@ -1,0 +1,213 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/design.base.yml
+title: Design record
+description: The fields of a design record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/design.md`; one file per design'
+- 'decision: `docs/adr/design-record.md`'
+- a step, a rule or a mode of failure is named by a descriptive identifier, never by a number
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+properties:
+  _schema:
+    type: string
+    x-template: gnomon:design@1
+    x-kind: label
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  title:
+    type: [string, 'null']
+    x-template: '"SHORT NAME OF THE DESIGN"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type: [string, 'null']
+    x-template: design.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type: [string, 'null']
+    x-template: design
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type: [string, 'null']
+    x-template: provisional
+    x-vocabulary: .status
+    title: Status
+    description: The maturity of the record as a whole, or its retraction.
+  kind:
+    type: [string, 'null']
+    x-blank: true
+    x-vocabulary: .kind
+    title: Kind
+    description: Whether the design plans an experiment on the target, a run of a simulation of a model, or a method that solves a task.
+    examples: [simulation-run]
+  serves:
+    type: [string, 'null']
+    x-template: quest.TOPIC.NAME
+    x-kind: label
+    x-comment: the question or the problem that the design serves
+    title: Serves
+    description: The identifier of the question or the problem that the design serves.
+    examples: [quest.nonreciprocal-active-matter.phase-exploration]
+  task:
+    type: [string, 'null']
+    x-template: '"WHAT AN EXECUTION MUST ACHIEVE"'
+    x-kind: markdown-line
+    title: Task
+    description: One sentence that states what an execution of the design must achieve.
+    examples: ['detect the phases of the lattice realization across the nonreciprocal coupling, at each system size']
+  inputs:
+    type: [array, 'null']
+    x-blank: true
+    x-comment: one entry per object that an execution takes
+    title: Inputs
+    description: The objects that an execution takes, such as systems, a sample, initial states or data.
+    items:
+      type: object
+      properties:
+        name:
+          type: [string, 'null']
+          x-template: '"NAME OF THE INPUT"'
+          x-kind: markdown-line
+          title: Name
+          description: The name of the input.
+          examples: ['grid of control parameters']
+        description:
+          type: [string, 'null']
+          x-template: '"WHAT THE INPUT HOLDS"'
+          x-kind: markdown-line
+          title: Description
+          description: The content of the input, stated in one phrase.
+          examples: ['the values of the nonreciprocal coupling, crossed with the system sizes']
+  steps:
+    type: [array, 'null']
+    x-blank: true
+    x-comment: one entry per act, in the order of execution
+    title: Steps
+    description: The acts of an execution, in their order.
+    items:
+      type: object
+      properties:
+        id:
+          type: [string, 'null']
+          x-template: STEP-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the step, unique within the record.
+          examples: [equilibrate]
+        act:
+          type: [string, 'null']
+          x-template: '"THE ACT THAT THE STEP PERFORMS"'
+          x-kind: markdown-line
+          title: Act
+          description: The act that the step performs.
+          examples: ['run the stochastic dynamics until relaxation, and discard the transient']
+  rules:
+    type: [array, 'null']
+    x-blank: true
+    x-comment: one entry per admissible move or decision; empty when none
+    title: Rules
+    description: The rules that state the admissible moves or decisions of an execution.
+    items:
+      type: object
+      properties:
+        id:
+          type: [string, 'null']
+          x-template: RULE-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the rule, unique within the record.
+          examples: [common-seeds]
+        rule:
+          type: [string, 'null']
+          x-template: '"THE MOVE OR THE DECISION THAT THE RULE ADMITS"'
+          x-kind: markdown-line
+          title: Rule
+          description: The move or the decision that the rule admits or imposes.
+          examples: ['runs at different sizes reuse the same seeds of the random generator']
+  output:
+    type: [string, 'null']
+    x-blank: true
+    x-template: '"WHAT AN EXECUTION YIELDS"'
+    x-kind: markdown-line
+    title: Output
+    description: What an execution yields, such as data or consequences.
+    examples: ['per point of the grid and per run, the correlation matrices between species and the assigned phase']
+  stopping:
+    type: [string, 'null']
+    x-template: '"THE CONDITION UNDER WHICH AN EXECUTION STOPS"'
+    x-kind: markdown-line
+    title: Stopping condition
+    description: The condition under which an execution stops.
+    examples: ['every point of the grid holds the planned number of runs']
+  failure_modes:
+    type: [array, 'null']
+    x-blank: true
+    x-comment: one entry per way in which an execution can mislead; empty when none
+    title: Failure modes
+    description: The ways in which an execution can yield a misleading output, each with the step or the rule that guards against it.
+    items:
+      type: object
+      properties:
+        mode:
+          type: [string, 'null']
+          x-template: '"HOW AN EXECUTION CAN MISLEAD"'
+          x-kind: markdown-line
+          title: Mode
+          description: The way in which an execution can yield a misleading output.
+          examples: ['a run recorded before relaxation is read as a distinct phase']
+        guard:
+          type: [string, 'null']
+          x-template: STEP-OR-RULE-NAME
+          x-kind: label
+          x-comment: optional; the step or the rule that detects or prevents the failure
+          title: Guard
+          description: The identifier of the step or the rule that detects or prevents the failure.
+          examples: [equilibrate]
+  protocol:
+    type: [object, 'null']
+    x-blank: true
+    x-comment: experiment and simulation-run only
+    title: Protocol
+    description: The intervention, the control and the observation of an experiment or of a simulation run.
+    properties:
+      intervention:
+        type: [string, 'null']
+        x-template: '"THE QUANTITY THAT AN EXECUTION SETS, WITH ITS LEVELS"'
+        x-kind: markdown-line
+        title: Intervention
+        description: The quantity that an execution sets, with its levels.
+        examples: ['the nonreciprocal coupling, varied over a grid, crossed with the system size']
+      control:
+        type: [string, 'null']
+        x-template: '"THE CONDITION AGAINST WHICH THE EFFECT IS READ"'
+        x-kind: markdown-line
+        title: Control
+        description: The condition against which the effect of the intervention is read.
+        examples: ['the runs at zero nonreciprocal coupling']
+      observation:
+        type: [string, 'null']
+        x-template: '"THE OBSERVABLE RECORDED"'
+        x-kind: markdown-line
+        title: Observation
+        description: The observable that an execution records, with the key or the measurement procedure that yields it.
+        examples: ['the correlation matrix between species on the lattice']
+  maturity:
+    type: [object, 'null']
+    x-blank: true
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    additionalProperties:
+      type: [string, 'null']
+      x-template-key: FIELD.PATH
+      x-template: open

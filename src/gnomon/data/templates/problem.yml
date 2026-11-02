@@ -11,7 +11,7 @@ type: problem
 status: posed                    # posed | refined | solved | dissolved | abandoned
 kind:                            # empirical (the problem concerns the objects of a domain) | conceptual (the problem concerns the consistency of a theory or its fit with other theories)
 demand: "THE RESULT REQUIRED OF A SOLUTION"
-result_type:                     # phenomenon | consequence | target-claim | model | explanation | classification | concept | measurement-procedure | knowledge-state-change | inter-theory-relation
+result_type:                     # phenomenon | consequence | target-claim | model | explanation | classification | concept | measurement-procedure | design | knowledge-state-change | inter-theory-relation
 request:                         # one | all | over-a-parameter | decision
 associated_question: quest.TOPIC.NAME   # optional; the question record that states the associated question, whose request equals this one
 constraints:                     # conditions on every solution; empty when the demand alone delimits the solutions

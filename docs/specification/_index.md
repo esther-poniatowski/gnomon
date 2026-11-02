@@ -18,6 +18,7 @@ Documents the fields of each record of an inquiry: the content that a researcher
 - [Target-system record](target-system.md): fills the record that delimits a system studied and declares its quantities
 - [Background record](background.md): fills the record of the laws admitted about a target system
 - [Phenomenon record](phenomenon.md): fills the record of a behavior of the target system that questions address
+- [Design record](design.md): fills the record of a plan of acts whose execution yields data or consequences
 
 ## Question
 

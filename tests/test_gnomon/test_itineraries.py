@@ -246,9 +246,16 @@ def test_an_input_reference_of_the_wrong_kind_or_to_nothing_is_reported() -> Non
     ]
 
 
+def unrecorded_design() -> dict[str, Any]:
+    """Return the product types with `design` held by no record, so that a planted case can reach that rule."""
+    types = dict(product_types())
+    types["design"] = {**types["design"], "record": "to-create"}
+    return types
+
+
 def test_a_type_that_no_record_holds_is_reached_only_through_a_step() -> None:
     itinerary = planted(observe={"inputs": [{"type": "design", "ref": "quest.geometry"}]})
-    assert texts(itinerary_problems(itinerary, RECORDS)) == [
+    assert texts(itinerary_problems(itinerary, RECORDS, types=unrecorded_design())) == [
         "steps.observe: no record holds a design, so its input names a step, and quest.geometry is none"
     ]
 
@@ -423,5 +430,7 @@ def test_a_specified_record_still_holds_an_identified_subject() -> None:
 def test_a_step_is_referenced_by_its_full_identifier() -> None:
     """A reference names a step by the identifier of the itinerary followed by that of the step."""
     short = planted(observe={"inputs": [{"type": "design", "ref": "design"}]})
-    assert texts(itinerary_problems(short, RECORDS)) == ["steps.observe: no record holds a design, so its input names a step, and design is none"]
+    assert texts(itinerary_problems(short, RECORDS, types=unrecorded_design())) == [
+        "steps.observe: no record holds a design, so its input names a step, and design is none"
+    ]
 

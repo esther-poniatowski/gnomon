@@ -59,6 +59,7 @@ The type of result of the demand fixes the admissible [aims](../task/epistemic-a
 | `explanation` | explanation | why the phenomenon holds rather than its contrast; how the system produces it | an answer that holds the [block of an explanation](../answer/answer-form.md#^explanation-block), resting on a model when its route runs on one | why the network oscillates rather than stays asynchronous |
 | `classification` | exploration; description | which kinds or regimes exist (`all`) | a partition with its criteria | which dynamical regimes divide the parameter space of a network |
 | `concept` or `measurement-procedure` | none: an explication | which criterion should define the explicandum | an explicatum with its criteria of adequacy | the criterion of a compositional representation |
+| `design` | none: a construction | which protocol or method achieves a task (`one`) | a design record | which stimulation protocol discriminates the two candidate mechanisms of gamma oscillations |
 | `knowledge-state-change` | none: a revision | which accepted claim to withdraw | the revised status of the records concerned | which of two clashing claims to withdraw |
 | `inter-theory-relation` | none: an integration | how two accounts of one phenomenon relate | a relation between theories (no record yet) | how two accounts of training relate: the mean-field account, which replaces the interactions of each unit by their average, and the kernel account, in which training at infinite width is governed by a fixed kernel |
 

@@ -68,8 +68,8 @@ product_types:
     condition: "The scale and the defining expression of a quantity; the procedure that assigns its values has no field."
   - id: design
     class: construct
-    record: to-create
-    status: to-create
+    record: [design]
+    status: exists
   - id: data
     class: unclassed
     record: [phenomenon]

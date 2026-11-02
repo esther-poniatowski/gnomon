@@ -194,6 +194,7 @@ PAIRS = [
         ELSEWHERE_MATURITY,
     ),
     ("concept", "specification/concept.md", "| Specification", "concept.yml", None, "", ELSEWHERE_MATURITY),
+    ("design", "specification/design.md", "| Specification", "design.yml", None, "", ELSEWHERE_MATURITY),
     ("itinerary", "specification/itinerary.md", "| Specification", "itinerary.yml", None, "", {}),
 ]
 

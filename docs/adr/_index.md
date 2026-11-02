@@ -36,6 +36,7 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 - [Admission of a record kind](record-kind-admission.md): decides whether a proposed construct becomes a record of its own or a unit of an existing record
 - [Answers, models and bindings](answers-models-bindings.md): decides which records hold a candidate answer, its model and the relation of that model to the phenomenon
 - [Itinerary and product types](itinerary-and-product-types.md): names the record of the acts of an inquiry and the types of their products
+- [Design record](design-record.md): decides which record holds a plan of acts, and the role that it bears
 - [Concepts, glossaries and notations](concepts-glossaries-notations.md): decides how a concept, its names and its symbols are recorded
 - [Closed typed relations](closed-typed-relations.md): decides how a relation between records is typed and checked
 

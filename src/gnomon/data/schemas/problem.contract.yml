@@ -35,6 +35,7 @@ properties:
     - classification
     - concept
     - measurement-procedure
+    - design
     - knowledge-state-change
     - inter-theory-relation
     - null
