@@ -262,7 +262,7 @@ COMPLETENESS_INCOMPLETE_OPERATION = _rule(
 )
 COMPLETENESS_UNCLASSIFIED_OPERATION = _rule(
     "completeness/unclassified-operation",
-    "An operation of a model on which an answer runs is named by no ground of that answer.",
+    "An operation or an assumption of a model on which an answer runs is named by no ground of that answer.",
 )
 COMPLETENESS_UNBOUND_OUTPUTS = _rule(
     "completeness/unbound-outputs",

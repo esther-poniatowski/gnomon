@@ -248,11 +248,11 @@ def test_an_answer_classifies_each_operation_and_fills_its_requirements(case: tu
 def test_a_derived_model_uses_no_retired_symbol_and_completes_its_operations(case: tuple[str, Mapping[str, Any]]) -> None:
     """Each expression of a derived model avoids the symbols that its operations retire, and each
     operation states what its kind or its class of error requires."""
-    from gnomon.completeness import incomplete_operations
+    from gnomon.completeness import incomplete_operations, requirements_by_presence, unmet_by_presence
     from gnomon.vocabulary import retired_in_use
 
     name, record = case
-    found = retired_in_use(record) + incomplete_operations(record)
+    found = retired_in_use(record) + incomplete_operations(record) + unmet_by_presence(record, requirements_by_presence())
     assert not found, f"{name}: {texts(found)}"
 
 

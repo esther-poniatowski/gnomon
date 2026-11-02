@@ -221,6 +221,36 @@ def unmet_commitment(
     )
 
 
+def requirements_by_presence(source: Path | None = None) -> dict[str, dict[str, dict[str, list[str]]]]:
+    """Return, per record kind and field, the specifications that the presence and the absence of the field impose."""
+    table = _registry(source).get("by_presence") or {}
+    return {
+        str(kind): {
+            str(field): {state: list((cases or {}).get(state) or []) for state in ("present", "absent")}
+            for field, cases in (fields or {}).items()
+        }
+        for kind, fields in table.items()
+    }
+
+
+def unmet_by_presence(
+    record: Mapping[str, Any], table: Mapping[str, Mapping[str, Mapping[str, list[str]]]]
+) -> list[Finding]:
+    """Return every specification that the presence or the absence of a field requires and the record lacks.
+
+    >>> table = {"model": {"derives_from": {"present": ["operations"], "absent": ["laws"]}}}
+    >>> [f.text for f in unmet_by_presence({"type": "model"}, table)]
+    ['derives_from absent requires: laws']
+    >>> [f.text for f in unmet_by_presence({"type": "model", "derives_from": ["system.a"]}, table)]
+    ['derives_from present requires: operations']
+    """
+    found: list[Finding] = []
+    for field, cases in (table.get(str(record.get("type"))) or {}).items():
+        state = "absent" if is_unfilled(record.get(field)) else "present"
+        found += unmet_general(record, cases.get(state, []), label=f"{field} {state} requires")
+    return found
+
+
 def requirements_by_value(source: Path | None = None) -> dict[str, dict[str, dict[str, list[str]]]]:
     """Return, per record kind, field and value, the specifications that the value imposes."""
     table = _registry(source).get("by_value") or {}
@@ -954,12 +984,13 @@ def unclassified_operations(
         model = records.get(str(identifier)) or {}
         if model.get("type") != "model":
             continue
-        for entry in model.get("operations") or []:
-            units = [entry.get("id"), *(entry.get("yields") or [])]
-            if not any(f"{identifier}.{unit}" in named for unit in units if unit):
-                found.append(finding(rules.COMPLETENESS_UNCLASSIFIED_OPERATION,
-                                     f"operation {entry.get('id')} of {identifier} is named by no ground of the answer",
-                                     "grounds"))
+        for block, label in (("operations", "operation"), ("assumptions", "assumption")):
+            for entry in model.get(block) or []:
+                units = [entry.get("id"), *(entry.get("yields") or [])]
+                if not any(f"{identifier}.{unit}" in named for unit in units if unit):
+                    found.append(finding(rules.COMPLETENESS_UNCLASSIFIED_OPERATION,
+                                         f"{label} {entry.get('id')} of {identifier} is named by no ground of the answer",
+                                         "grounds"))
     return found
 
 

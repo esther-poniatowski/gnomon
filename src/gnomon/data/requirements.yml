@@ -9,6 +9,9 @@
 # specifications of `identified`.
 # `by_value` lists the specifications that a value of a closed field imposes, keyed by the record
 # kind, the field and the value: a design of the kind `experiment` carries a protocol.
+# `by_presence` lists the specifications that the presence or the absence of a field imposes,
+# keyed by the record kind and the field: a root model, which names no parent, declares its
+# constituents, its variables and its laws, whereas a derived model states its operations.
 # `by_aim` adds the requirements that an epistemic aim imposes. Under `to_produce`, it lists the
 # general requirements that the inquiry itself produces: an inquiry that produces a phenomenon
 # cannot state that phenomenon in advance.
@@ -30,7 +33,6 @@ always:
   design: [kind, serves, task, steps, output, stopping]
   itinerary: [addresses, steps]
   answer: [claim, grounds, dependence, route, domain, status, support, modal_strength, erotetic_relation]
-  model: [constituents, variables, laws]
   binding: [model, target, asserter, feature_pairs, domain, grain, version]
   key: [kind, domain_and_codomain, expression, version]
   assessment: [assesses, against]
@@ -50,6 +52,12 @@ by_commitment:
   specified:
     target-system: [variables]
     phenomenon: [category, course, occurrence, manifestations, evidential_status]
+
+by_presence:
+  model:
+    derives_from:
+      present: [operations]
+      absent: [constituents, variables, laws]
 
 by_value:
   design:

@@ -370,6 +370,23 @@ def test_the_rows_required_for_a_kind_are_the_registry_entries_by_value(
     assert documented == declared, f"{note}: {documented} against {declared}"
 
 
+def test_the_rows_required_for_a_root_or_a_derived_model_are_the_registry_entries_by_presence() -> None:
+    """A row required "for a root model" is one that the absence of parents imposes, and a row required
+    "for a derived model" one that their presence imposes; the field of the parents is not counted."""
+    paths = flatten(template("model.yml"))
+    documented: dict[str, list[str]] = {"absent": [], "present": []}
+    for line in table_lines("specification/model.md", "| Element"):
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        for opening, state in (("for a root model", "absent"), ("for a derived model", "present")):
+            if len(cells) > 1 and cells[1].lower().startswith(opening):
+                key = resolve(row_slugs(cells[0]), paths, "")
+                assert key is not None, f"no key of model.yml answers to the row {cells[0]!r}"
+                if key != "derives_from":
+                    documented[state].append(key)
+    registry = yaml.safe_load((REGISTRY / "requirements.yml").read_text())
+    assert documented == registry["by_presence"]["model"]["derives_from"]
+
+
 @pytest.mark.parametrize(
     "name",
     [
