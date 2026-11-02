@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-10-29
+revised: 2026-11-02
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Record schemas
@@ -42,4 +42,5 @@ A rule on one record is stated in standard keywords or under `x-rules`. A rule a
 
 - The record schemas live in `src/gnomon/data/schemas/`, whose index gives the logical identifier of each schema.
 - The schemas are exported as files of a Git revision. A consumer materializes them from an exact commit, and resolves `gnomon:<type>@<version>` through its own generated registry.
+- The resource record `specs/schema-resources.yml` lists the exported contracts, and Kleisis generates the registry `specs/schema-registry.yml` from it. Each schema file ends in `.schema.yml`, the suffix by which Kleisis recognizes an owned schema. A base schema declares no property `_schema`, since Kleisis reads such a property as the binding of a contract.
 - A check reports a schema whose vocabularies differ from the registries, and a template that differs from its generated form. Such a check compares a generated copy with its source, unlike a check holding two authored copies equal, and it replaces the check of template comments of the decision on registries.

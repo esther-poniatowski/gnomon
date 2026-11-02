@@ -51,3 +51,6 @@ docs/_build/
 .obsidian/plugins/*/*
 !.obsidian/plugins/*/manifest.json
 !.obsidian/plugins/*/data.json
+
+## External schemas reproduced by Kleisis from the exact sources in specs/schema-resources.yml.
+/.schema-resources/

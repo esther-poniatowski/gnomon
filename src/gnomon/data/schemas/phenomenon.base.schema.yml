@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://github.com/esther-poniatowski/gnomon/schemas/phenomenon.base.yml
+$id: https://github.com/esther-poniatowski/gnomon/schemas/phenomenon.base.schema.yml
 title: Phenomenon record
 description: The fields of a phenomenon record, as the specification of the record documents them.
 type: object
@@ -14,12 +14,6 @@ x-header:
   since the inquiry produces them; fill the candidate observables, the varied indices and the detection
   criterion'
 properties:
-  _schema:
-    type: string
-    x-template: gnomon:phenomenon@1
-    x-kind: label
-    title: Schema
-    description: The logical identifier of the contract that the record follows.
   title:
     type:
     - string

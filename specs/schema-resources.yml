@@ -1,0 +1,26 @@
+# Inputs of the local schema closure; generated files remain outside this record.
+format_version: 1
+
+paths:
+  owned_schemas: src/gnomon/data/schemas
+  registry: specs/schema-registry.yml
+  resources: .schema-resources
+
+exports:
+  - gnomon:answer@1
+  - gnomon:assessment@1
+  - gnomon:background@1
+  - gnomon:binding@1
+  - gnomon:concept@1
+  - gnomon:design@1
+  - gnomon:itinerary@1
+  - gnomon:key@1
+  - gnomon:model@1
+  - gnomon:operators@1
+  - gnomon:phenomenon@1
+  - gnomon:problem@1
+  - gnomon:question@1
+  - gnomon:target-system@1
+
+dependencies: []
+projects: []

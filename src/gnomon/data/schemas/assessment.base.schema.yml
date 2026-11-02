@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://github.com/esther-poniatowski/gnomon/schemas/assessment.base.yml
+$id: https://github.com/esther-poniatowski/gnomon/schemas/assessment.base.schema.yml
 title: Assessment record
 description: The fields of a assessment record, as the specification of the record documents them.
 type: object
@@ -17,12 +17,6 @@ x-header:
 - give `not-applicable` to a test whose specification is empty in the question
 - fill the appraisal for one answer at a time; name another candidate only when one exists
 properties:
-  _schema:
-    type: string
-    x-template: gnomon:assessment@1
-    x-kind: label
-    title: Schema
-    description: The logical identifier of the contract that the record follows.
   title:
     type:
     - string

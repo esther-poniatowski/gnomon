@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://github.com/esther-poniatowski/gnomon/schemas/operators.base.yml
+$id: https://github.com/esther-poniatowski/gnomon/schemas/operators.base.schema.yml
 title: Operators record
 description: The fields of a operators record, as the specification of the record documents them.
 type: object
@@ -12,12 +12,6 @@ x-header:
   record
 - replace every UPPERCASE placeholder; leave a field empty while it is not filled
 properties:
-  _schema:
-    type: string
-    x-template: gnomon:operators@1
-    x-kind: label
-    title: Schema
-    description: The logical identifier of the contract that the record follows.
   title:
     type:
     - string

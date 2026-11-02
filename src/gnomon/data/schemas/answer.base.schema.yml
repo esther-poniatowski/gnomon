@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://github.com/esther-poniatowski/gnomon/schemas/answer.base.yml
+$id: https://github.com/esther-poniatowski/gnomon/schemas/answer.base.schema.yml
 title: Answer record
 description: The fields of a answer record, as the specification of the record documents them.
 type: object
@@ -13,12 +13,6 @@ x-header:
 - replace every UPPERCASE placeholder; leave a field empty while it is not filled
 - record test verdicts in an assessment file
 properties:
-  _schema:
-    type: string
-    x-template: gnomon:answer@1
-    x-kind: label
-    title: Schema
-    description: The logical identifier of the contract that the record follows.
   title:
     type:
     - string
