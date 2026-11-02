@@ -18,13 +18,11 @@ x-header:
 - fill the appraisal for one answer at a time; name another candidate only when one exists
 properties:
   _schema:
-    type:
-    - string
-    - 'null'
+    type: string
     x-template: gnomon:assessment@1
     x-kind: label
-    title: ' schema'
-    description: The  schema of the record.
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
   title:
     type:
     - string

@@ -15,13 +15,11 @@ x-header:
 - specifications follow the order of the specification note
 properties:
   _schema:
-    type:
-    - string
-    - 'null'
+    type: string
     x-template: gnomon:background@1
     x-kind: label
-    title: ' schema'
-    description: The  schema of the record.
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
   title:
     type:
     - string

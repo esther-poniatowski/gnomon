@@ -12,13 +12,11 @@ x-header:
 - replace every UPPERCASE placeholder; leave a field empty while it is not filled
 properties:
   _schema:
-    type:
-    - string
-    - 'null'
+    type: string
     x-template: gnomon:problem@1
     x-kind: label
-    title: ' schema'
-    description: The  schema of the record.
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
   title:
     type:
     - string
