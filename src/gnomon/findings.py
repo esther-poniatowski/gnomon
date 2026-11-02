@@ -260,6 +260,10 @@ COMPLETENESS_INCOMPLETE_OPERATION = _rule(
     "completeness/incomplete-operation",
     "An operation of a derived model lacks the field that its kind or its class of error requires.",
 )
+COMPLETENESS_UNCLASSIFIED_OPERATION = _rule(
+    "completeness/unclassified-operation",
+    "An operation of a model on which an answer runs is named by no ground of that answer.",
+)
 COMPLETENESS_UNJUSTIFIED_EXPLANANS_BOUND = _rule(
     "completeness/unjustified-explanans-bound",
     "The bound on the explanans states an axis without a justification.",

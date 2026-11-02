@@ -101,6 +101,11 @@ def always_required(kind: str, source: Path | None = None) -> list[str]:
     return list((_registry(source).get("always") or {}).get(kind) or [])
 
 
+def block_requirements(source: Path | None = None) -> dict[str, list[str]]:
+    """Return, per path of an aim block of an answer, the specifications that the block carries, relative to it."""
+    return {str(block): list(paths or []) for block, paths in (_registry(source).get("by_block") or {}).items()}
+
+
 def record_kinds(source: Path | None = None) -> list[str]:
     """Return every record kind the registry states a general requirement for."""
     return sorted((_registry(source).get("always") or {}))
@@ -925,6 +930,36 @@ def incomplete_operations(model: Mapping[str, Any]) -> list[Finding]:
             for field, applies, message in required
             if applies and is_unfilled(entry.get(field))
         ]
+    return found
+
+
+def unclassified_operations(
+    answer: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return every operation of a model on the route of the answer that no ground of the answer names.
+
+    Only an answer classifies an assumption against its target, so each operation of a model on
+    which its route runs is named by a ground, by the identifier of the operation or by a symbol
+    that the operation yields: the removal of the noise as an idealization, a restriction as a
+    condition, a posited law as a warrant.
+
+    >>> model = {"id": "mod.a.b", "type": "model", "operations": [{"id": "near", "yields": ["J"]}, {"id": "drop"}]}
+    >>> answer = {"route": {"runs_on": ["mod.a.b"]}, "grounds": [{"record": "mod.a.b.J"}]}
+    >>> [f.text for f in unclassified_operations(answer, {"mod.a.b": model})]
+    ['operation drop of mod.a.b is named by no ground of the answer']
+    """
+    named = {str(ground.get("record")) for ground in answer.get("grounds") or [] if isinstance(ground, Mapping)}
+    found: list[Finding] = []
+    for identifier in (answer.get("route") or {}).get("runs_on") or []:
+        model = records.get(str(identifier)) or {}
+        if model.get("type") != "model":
+            continue
+        for entry in model.get("operations") or []:
+            units = [entry.get("id"), *(entry.get("yields") or [])]
+            if not any(f"{identifier}.{unit}" in named for unit in units if unit):
+                found.append(finding(rules.COMPLETENESS_UNCLASSIFIED_OPERATION,
+                                     f"operation {entry.get('id')} of {identifier} is named by no ground of the answer",
+                                     "grounds"))
     return found
 
 

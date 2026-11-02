@@ -21,6 +21,7 @@ import yaml
 from gnomon.identifiers import RECORD_SEGMENTS, split_reference
 from gnomon.completeness import (
     admitted_values,
+    at,
     always_required,
     inadmissible_values,
     malformed_restrictions,
@@ -220,6 +221,24 @@ def test_every_reference_to_a_record_names_a_record(reference: tuple[str, str]) 
 
 
 MODELS = [(name, record) for name, record in CASES if record.get("type") == "model"]
+ANSWERS = [(name, record) for name, record in CASES if record.get("type") == "answer"]
+
+
+@pytest.mark.skipif(not ANSWERS, reason="no migrated answer")
+@pytest.mark.parametrize("case", ANSWERS or [("", {})], ids=[n for n, _ in ANSWERS] or ["none"])
+def test_an_answer_classifies_each_operation_and_fills_its_requirements(case: tuple[str, Mapping[str, Any]]) -> None:
+    """The first two conditions of acceptance of the goal `model-design`: each operation of a model on
+    which the answer runs is classified by a ground, and no required element of the core or of the
+    block of the aim stays empty."""
+    from gnomon.completeness import always_required, block_requirements, unclassified_operations
+
+    name, record = case
+    found = unclassified_operations(record, BY_ID) + unmet_general(record, always_required("answer"))
+    for block, paths in block_requirements().items():
+        if at(record, block) is not None:
+            found += unmet_general(record, [f"{block}.{path}" for path in paths])
+    assert not found, f"{name}: {texts(found)}"
+
 
 
 @pytest.mark.skipif(not MODELS, reason="no worked model")
