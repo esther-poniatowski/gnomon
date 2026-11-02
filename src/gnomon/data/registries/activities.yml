@@ -124,6 +124,8 @@ activities:
       - question
       - model
     output: design
+    output_values:
+      kind: [experiment, simulation-run]
     norm: norm.experimental-design
     mode: deductive
     context: justification
@@ -134,6 +136,8 @@ activities:
       - type: model
         optional: true
     output: design
+    output_values:
+      kind: [method]
     norm: norm.method-design
     mode: deductive
     context: both

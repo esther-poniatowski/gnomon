@@ -104,6 +104,14 @@ ITINERARY_CYCLE = _rule("itinerary/cycle", "The references between the steps for
 
 # --- Activity registry ----------------------------------------------------------------------------
 
+ITINERARY_UNADMITTED_OUTPUT_VALUE = _rule(
+    "itinerary/unadmitted-output-value",
+    "The output reference of a step names a record whose field holds a value that the activity does not produce.",
+)
+REGISTRY_UNKNOWN_OUTPUT_VALUE = _rule(
+    "registry/unknown-output-value",
+    "An activity restricts a field of its output to a value that the vocabulary of that field does not admit.",
+)
 REGISTRY_UNKNOWN_PRODUCT_TYPE = _rule(
     "registry/unknown-product-type",
     "An activity names a type that the product-type registry does not declare.",

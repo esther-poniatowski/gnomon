@@ -58,6 +58,13 @@ def test_a_registry_naming_an_unknown_attitude_is_reported() -> None:
     assert texts(malformed_registry(broken, TYPES, [act.mode])) == ["testing: believed is no attitude of an answer"]
 
 
+def test_a_registry_restricting_an_output_to_an_unknown_value_is_reported() -> None:
+    act = ACTS["experimental-design"]
+    assert act.output_values == {"kind": ("experiment", "simulation-run")}
+    broken = {act.id: type(act)(**{**act.__dict__, "output_values": {"kind": ("experiment", "survey")}})}
+    assert texts(malformed_registry(broken, TYPES, [act.mode])) == ["experimental-design: survey is no kind of a design"]
+
+
 def signature_rows() -> dict[str, list[str]]:
     """Return, per activity of the notes, the cells of its row in the table of signatures."""
     rows: dict[str, list[str]] = {}
@@ -258,6 +265,18 @@ def test_a_type_that_no_record_holds_is_reached_only_through_a_step() -> None:
     assert texts(itinerary_problems(itinerary, RECORDS, types=unrecorded_design())) == [
         "steps.observe: no record holds a design, so its input names a step, and quest.geometry is none"
     ]
+
+
+def test_an_output_whose_value_the_activity_does_not_produce_is_reported() -> None:
+    """Experimental design outputs protocols; a design of the kind `method` comes from method design."""
+    records = {**RECORDS, "design.geometry.protocol": {"type": "design", "kind": "method"}}
+    itinerary = planted(design={"output": {"type": "design", "ref": "design.geometry.protocol"}})
+    assert texts(itinerary_problems(itinerary, records)) == [
+        "steps.design: design.geometry.protocol has the kind method, and experimental-design produces"
+        " a design of the kind experiment or simulation-run"
+    ]
+    records["design.geometry.protocol"] = {"type": "design", "kind": "simulation-run"}
+    assert itinerary_problems(itinerary, records) == []
 
 
 def test_an_output_reference_of_the_wrong_kind_is_reported() -> None:

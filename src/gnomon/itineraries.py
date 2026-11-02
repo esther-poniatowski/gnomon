@@ -23,7 +23,7 @@ data/registries/product-types.yml : the types its inputs and output take.
 from __future__ import annotations
 
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
@@ -90,6 +90,7 @@ class Activity:
     norm: str
     mode: str
     context: str
+    output_values: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -160,6 +161,10 @@ def activities(source: Path | None = None) -> dict[str, Activity]:
             norm=str(entry.get("norm")),
             mode=str(entry.get("mode")),
             context=str(entry.get("context")),
+            output_values={
+                str(name): tuple(str(value) for value in values or [])
+                for name, values in (entry.get("output_values") or {}).items()
+            },
         )
         for entry in registry.get("activities") or []
     }
@@ -298,6 +303,15 @@ def malformed_registry(
                 finding(rules.REGISTRY_UNADMITTED_MODE, f"{act.id}: {act.mode} is no admitted mode",
                         *entry, "mode")
             )
+        holders = type_holders(types).get(act.output, frozenset())
+        for name, values in act.output_values.items():
+            vocabulary = set().union(*(_closed(f".{name}", kind=holder) for holder in holders))
+            found += [
+                finding(rules.REGISTRY_UNKNOWN_OUTPUT_VALUE,
+                        f"{act.id}: {value} is no {name} of a {act.output}", *entry, "output_values",
+                        name, value=value)
+                for value in values if value not in vocabulary
+            ]
         if act.norm != f"norm.{act.id}":
             found.append(
                 finding(rules.REGISTRY_FOREIGN_NORM,
@@ -454,6 +468,15 @@ def itinerary_problems(
                             f"{where}: {product} holds {_held(records[product], types)}, not {made}",
                             *at, "output", "ref")
                 )
+            for name, admitted in act.output_values.items():
+                value = records[product].get(name)
+                if isinstance(value, str) and value and value not in admitted:
+                    found.append(
+                        finding(rules.ITINERARY_UNADMITTED_OUTPUT_VALUE,
+                                f"{where}: {product} has the {name} {value}, and {act.id} produces"
+                                f" a {act.output} of the {name} {' or '.join(admitted)}",
+                                *at, "output", "ref")
+                    )
         norm = step.get("norm") if isinstance(step.get("norm"), Mapping) else {}
         if norm.get("test") != act.norm:
             found.append(
