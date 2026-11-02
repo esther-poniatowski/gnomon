@@ -89,7 +89,33 @@ RECORDS = sorted(
 )
 
 
-@pytest.mark.parametrize("path, record", RECORDS, ids=[f"{p.parent.name}/{p.name}" for p, _ in RECORDS])
+#: The keys of the former answer, which held its model; the worked answers keep them until the
+#: pilot of the goal `model-design` migrates them to model records, as the task list states.
+FORMER_ANSWER_KEYS = frozenset(
+    {"statement", "constituents", "index_sets", "variables", "parameters", "laws", "organization",
+     "realizations", "idealizations", "explanans"}
+)
+
+
+def awaiting_migration(record: dict[str, Any]) -> bool:
+    """Whether a worked answer still holds the keys of the former answer."""
+    return record.get("type") == "answer" and bool(FORMER_ANSWER_KEYS & set(record))
+
+
+CASES = [
+    pytest.param(
+        path,
+        record,
+        id=f"{path.parent.name}/{path.name}",
+        marks=pytest.mark.xfail(
+            strict=True, reason="the answer awaits its migration under the goal `model-design`"
+        ) if awaiting_migration(record) else (),
+    )
+    for path, record in RECORDS
+]
+
+
+@pytest.mark.parametrize("path, record", CASES)
 def test_every_worked_record_follows_its_contract(path: Any, record: dict[str, Any]) -> None:
     assert record.get("_schema"), f"{path} names no contract"
     assert schemas.record_errors(record) == []
@@ -103,4 +129,13 @@ def test_a_record_that_breaks_its_contract_is_reported() -> None:
     assert schemas.record_errors({**record, "statement": 3}) == ["statement: 3 is not of type 'string', 'null'"]
     assert schemas.record_errors({"type": "problem"}) == ["_schema: the record names no contract"]
     assert schemas.record_errors({**record, "_schema": "gnomon:problem@9"}) == ["_schema: gnomon:problem@9 is no contract of gnomon"]
+
+
+def test_a_key_that_the_contract_does_not_declare_is_reported() -> None:
+    """A misspelled key would otherwise pass as an unknown field, at the root and at any depth."""
+    record = {"_schema": "gnomon:concept@1", "type": "concept", "id": "concept.a.b"}
+    assert schemas.record_errors({**record, "glos": "x"})[0].startswith("(record): 'glos' is not one of")
+    nested = {**record, "confusions": [{"with": "fixed point"}]}
+    assert schemas.record_errors(nested)[0].startswith("confusions.0: 'with' is not one of")
+    assert schemas.record_errors({**record, "confusions": [{"other": "fixed point"}]}) == []
 

@@ -21,6 +21,10 @@ properties:
     - retracted
     - null
   target:
+    propertyNames:
+      enum:
+      - phenomenon
+      - level
     properties:
       level:
         enum:
@@ -29,6 +33,15 @@ properties:
         - null
   feature_pairs:
     items:
+      propertyNames:
+        enum:
+        - id
+        - type
+        - mode
+        - exemplified
+        - imputed
+        - key
+        - key_version
       properties:
         type:
           enum:
@@ -44,8 +57,22 @@ properties:
           - computed
           - argued
           - null
+  condition_pairs:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - model_condition
+        - target_condition
+        - key
+        - key_version
+        - calibration
   domain:
     items:
+      propertyNames:
+        enum:
+        - region
+        - kind
       properties:
         kind:
           enum:
@@ -54,15 +81,52 @@ properties:
           - null
   structural_discrepancy:
     items:
+      propertyNames:
+        enum:
+        - pairs
+        - form
+        - expression
+        - reading
       properties:
         form:
           enum:
           - model
           - bound
           - null
+  calibration_provenance:
+    items:
+      propertyNames:
+        enum:
+        - parameter
+        - data_version
+        - method
+        - identifiable
   grain:
     enum:
     - quantitative
     - qualitative
     - null
+  version:
+    propertyNames:
+      enum:
+      - label
+      - committed
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - model
+  - target
+  - asserter
+  - feature_pairs
+  - condition_pairs
+  - domain
+  - structural_discrepancy
+  - calibration_provenance
+  - grain
+  - version
+  - maturity

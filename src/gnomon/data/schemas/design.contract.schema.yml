@@ -26,4 +26,52 @@ properties:
     - simulation-run
     - method
     - null
+  inputs:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - description
+  steps:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - act
+  rules:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - rule
+  failure_modes:
+    items:
+      propertyNames:
+        enum:
+        - mode
+        - guard
+  protocol:
+    propertyNames:
+      enum:
+      - intervention
+      - control
+      - observation
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - kind
+  - serves
+  - task
+  - inputs
+  - steps
+  - rules
+  - output
+  - stopping
+  - failure_modes
+  - protocol
+  - maturity

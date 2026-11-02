@@ -14,4 +14,24 @@ properties:
     description: The logical identifier of the contract that the record follows.
   type:
     const: operators
+  operators:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - for_any
+        - signature
+        - values
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - target_system
+  - operators
+  - maturity

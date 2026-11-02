@@ -14,8 +14,36 @@ properties:
     description: The logical identifier of the contract that the record follows.
   type:
     const: answer
+  claim:
+    propertyNames:
+      enum:
+      - reading
+      - expression
+      - caveat
+      - realizations
+    properties:
+      realizations:
+        items:
+          propertyNames:
+            enum:
+            - id
+            - realizes
+            - by
+            - reading
   grounds:
     items:
+      propertyNames:
+        enum:
+        - id
+        - role
+        - content
+        - record
+        - version
+        - distortion
+        - motive
+        - gain
+        - range
+        - removable
       properties:
         role:
           enum:
@@ -38,8 +66,20 @@ properties:
           - ineliminable
           - unknown
           - null
+  abstractions:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - factor
   dependence:
     items:
+      propertyNames:
+        enum:
+        - kind
+        - grounds
+        - models
+        - result
       properties:
         kind:
           enum:
@@ -48,6 +88,12 @@ properties:
           - robustness
           - null
   route:
+    propertyNames:
+      enum:
+      - kind
+      - runs_on
+      - family_fidelity
+      - pointer
     properties:
       kind:
         enum:
@@ -78,6 +124,11 @@ properties:
     - null
   uncertainty:
     items:
+      propertyNames:
+        enum:
+        - of
+        - form
+        - expression
       properties:
         form:
           enum:
@@ -92,6 +143,11 @@ properties:
     - necessary
     - null
   erotetic_relation:
+    propertyNames:
+      enum:
+      - value
+      - denies
+      - revised_question
     properties:
       value:
         enum:
@@ -100,7 +156,17 @@ properties:
         - corrective
         - reformulating
         - null
+  binding:
+    items:
+      propertyNames:
+        enum:
+        - record
+        - version
   use:
+    propertyNames:
+      enum:
+      - value
+      - property
     properties:
       value:
         enum:
@@ -110,17 +176,59 @@ properties:
         - understanding
         - null
   aim_block:
+    propertyNames:
+      enum:
+      - description
+      - exploration
+      - prediction
+      - explanation
+      - modal_knowledge
+      - model_knowledge
     properties:
+      description:
+        propertyNames:
+          enum:
+          - values
+        properties:
+          values:
+            items:
+              propertyNames:
+                enum:
+                - of
+                - across
+                - data_version
+                - value
       exploration:
+        propertyNames:
+          enum:
+          - space
+          - criterion
+          - classes
         properties:
           space:
+            propertyNames:
+              enum:
+              - origin
+              - observables
+              - varied
             properties:
               origin:
                 enum:
                 - input
                 - output
                 - null
+              varied:
+                items:
+                  propertyNames:
+                    enum:
+                    - factor
+                    - range
           criterion:
+            propertyNames:
+              enum:
+              - origin
+              - expression
+              - reading
             properties:
               origin:
                 enum:
@@ -129,6 +237,12 @@ properties:
                 - null
           classes:
             items:
+              propertyNames:
+                enum:
+                - id
+                - pattern
+                - reading
+                - detection
               properties:
                 detection:
                   enum:
@@ -136,8 +250,33 @@ properties:
                   - fail
                   - pending
                   - null
-      explanation:
+      prediction:
+        propertyNames:
+          enum:
+          - outputs
         properties:
+          outputs:
+            items:
+              propertyNames:
+                enum:
+                - target
+                - condition
+                - value
+      explanation:
+        propertyNames:
+          enum:
+          - contrastive_explanandum
+          - explanatory_claim
+          - relation
+          - factors
+        properties:
+          explanatory_claim:
+            items:
+              propertyNames:
+                enum:
+                - ground
+                - explanatory
+                - determinant
           relation:
             enum:
             - causal-intervention
@@ -150,6 +289,22 @@ properties:
             - null
           factors:
             items:
+              propertyNames:
+                enum:
+                - id
+                - name
+                - factor
+                - holds
+                - under
+                - bears_on
+                - through
+                - produces
+                - separates
+                - appeals_to
+                - procedure
+                - caveat
+                - target_status
+                - pair
               properties:
                 factor:
                   enum:
@@ -166,6 +321,13 @@ properties:
                   - structural-constraint
                   - null
       modal_knowledge:
+        propertyNames:
+          enum:
+          - modality
+          - property
+          - space
+          - witness
+          - proof
         properties:
           modality:
             enum:
@@ -174,6 +336,12 @@ properties:
             - necessary
             - null
       model_knowledge:
+        propertyNames:
+          enum:
+          - form
+          - expression
+          - reading
+          - discharges
         properties:
           form:
             enum:
@@ -185,6 +353,10 @@ properties:
             - null
   relations:
     items:
+      propertyNames:
+        enum:
+        - answer
+        - relation
       properties:
         relation:
           enum:
@@ -195,3 +367,27 @@ properties:
           - revises
           - null
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - answers
+  - claim
+  - grounds
+  - abstractions
+  - dependence
+  - route
+  - domain
+  - variant
+  - status
+  - support
+  - uncertainty
+  - modal_strength
+  - erotetic_relation
+  - binding
+  - use
+  - aim_block
+  - relations
+  - maturity

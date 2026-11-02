@@ -171,11 +171,19 @@ def render_template(kind: str, base: Mapping[str, Any], options: Options) -> str
 
 
 def overlay(field: Mapping[str, Any], options: Options) -> dict[str, Any] | None:
-    """Return the constraints that a contract adds to a field: the values of its vocabulary, deep."""
+    """Return the constraints that a contract adds to a field, deep: the values of its vocabulary,
+    and the keys that an object may hold.
+
+    The keys are closed by ``propertyNames``, since each subschema of ``allOf`` is validated alone,
+    so ``additionalProperties`` in the contract would reject the keys that the base declares.
+    """
     added: dict[str, Any] = {}
     vocabulary = field.get("x-vocabulary")
     if vocabulary:
         added["enum"] = [value for value, _ in options[str(vocabulary)]] + [None]
+    declared = field.get("properties")
+    if isinstance(declared, Mapping) and declared:
+        added["propertyNames"] = {"enum": list(declared)}
     nested = {
         name: sub for name, child in (field.get("properties") or {}).items() if (sub := overlay(child, options))
     }
@@ -244,6 +252,7 @@ def contract(kind: str, base: Mapping[str, Any], options: Options) -> dict[str, 
     added = overlay(base, options)
     if added and "properties" in added:
         schema["properties"].update(added["properties"])
+    schema["propertyNames"] = {"enum": ["_schema", *(base.get("properties") or {})]}
     return schema
 
 

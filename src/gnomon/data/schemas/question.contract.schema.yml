@@ -30,6 +30,11 @@ properties:
     - null
   links:
     items:
+      propertyNames:
+        enum:
+        - question
+        - relation
+        - via
       properties:
         relation:
           enum:
@@ -39,8 +44,19 @@ properties:
           - enables
           - null
   subject:
+    propertyNames:
+      enum:
+      - target_system
+      - background
+      - phenomenon
+      - contrast
+      - domain
     properties:
       phenomenon:
+        propertyNames:
+          enum:
+          - placeholder
+          - description
         properties:
           placeholder:
             enum:
@@ -51,6 +67,12 @@ properties:
             - condition
             - null
       contrast:
+        propertyNames:
+          enum:
+          - locus
+          - foil_set
+          - compatibility
+          - foil_status
         properties:
           locus:
             enum:
@@ -59,6 +81,14 @@ properties:
             - other-condition
             - none
             - null
+          foil_set:
+            items:
+              propertyNames:
+                enum:
+                - name
+                - symbol
+                - expression
+                - reading
           foil_status:
             enum:
             - observed
@@ -66,9 +96,21 @@ properties:
             - not-applicable
             - null
       domain:
+        propertyNames:
+          enum:
+          - restrictions
+          - limit
         properties:
           restrictions:
             items:
+              propertyNames:
+                enum:
+                - name
+                - of
+                - restriction
+                - values
+                - expression
+                - justification
               properties:
                 restriction:
                   enum:
@@ -78,7 +120,21 @@ properties:
                   - stationary
                   - without-event
                   - null
+          limit:
+            propertyNames:
+              enum:
+              - expression
+              - justification
   task:
+    propertyNames:
+      enum:
+      - epistemic_aim
+      - requested_relation
+      - function_sense
+      - modal_strength
+      - admissible_explanans
+      - required_accuracy
+      - proof_obligations
     properties:
       epistemic_aim:
         enum:
@@ -112,6 +168,11 @@ properties:
         - necessary
         - null
       admissible_explanans:
+        propertyNames:
+          enum:
+          - compositional
+          - substrate
+          - justification
         properties:
           substrate:
             enum:
@@ -120,6 +181,11 @@ properties:
             - mapping
             - null
       required_accuracy:
+        propertyNames:
+          enum:
+          - standard
+          - outputs_to_match
+          - structures_to_match
         properties:
           standard:
             enum:
@@ -129,8 +195,40 @@ properties:
             - structural-only
             - not-applicable
             - null
+          outputs_to_match:
+            items:
+              propertyNames:
+                enum:
+                - target
+                - tolerance
+                - justification
+              properties:
+                tolerance:
+                  propertyNames:
+                    enum:
+                    - metric
+                    - bound
+          structures_to_match:
+            items:
+              propertyNames:
+                enum:
+                - target
+                - justification
+      proof_obligations:
+        items:
+          propertyNames:
+            enum:
+            - name
+            - reading
+            - antecedent
+            - consequent
   virtues:
     items:
+      propertyNames:
+        enum:
+        - virtue
+        - standing
+        - justification
       properties:
         virtue:
           enum:
@@ -148,3 +246,18 @@ properties:
           - preferred
           - null
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - statement
+  - id
+  - type
+  - status
+  - addresses
+  - request
+  - links
+  - subject
+  - task
+  - virtues
+  - maturity

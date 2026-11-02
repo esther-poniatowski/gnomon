@@ -23,8 +23,31 @@ properties:
     - null
   steps:
     items:
+      propertyNames:
+        enum:
+        - id
+        - activity
+        - inputs
+        - output
+        - norm
+        - mode
       properties:
+        inputs:
+          items:
+            propertyNames:
+              enum:
+              - type
+              - ref
+        output:
+          propertyNames:
+            enum:
+            - type
+            - ref
         norm:
+          propertyNames:
+            enum:
+            - test
+            - verdict
           properties:
             verdict:
               enum:
@@ -43,3 +66,12 @@ properties:
           - non-inferential
           - null
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - addresses
+  - steps

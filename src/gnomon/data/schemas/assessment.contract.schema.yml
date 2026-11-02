@@ -20,8 +20,63 @@ properties:
     - stabilized
     - retracted
     - null
+  tests:
+    propertyNames:
+      enum:
+      - admissibility
+      - warrant
+      - constraints
+    properties:
+      admissibility:
+        propertyNames:
+          enum:
+          - product
+          - scope
+          - grain
+          - individuation
+          - binding
+          - modal-strength
+          - values
+          - space
+          - outputs
+          - contrast
+          - relation
+          - target-status
+          - admissible-explanans
+          - witness-or-proof
+          - consequence
+      warrant:
+        propertyNames:
+          enum:
+          - phenomenon-established
+          - foil-evidence
+          - law-warrant
+          - closure
+          - fidelity
+          - adequacy-to-use
+          - robustness
+          - selection
+      constraints:
+        items:
+          propertyNames:
+            enum:
+            - constraint
+            - verdict
+            - evidence
+  comparisons:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - binding
+        - version
+        - data_version
   obligations:
     items:
+      propertyNames:
+        enum:
+        - verdict
+        - evidence
       properties:
         verdict:
           enum:
@@ -32,6 +87,11 @@ properties:
           - null
   appraisal:
     items:
+      propertyNames:
+        enum:
+        - virtue
+        - assessment
+        - preferred_over
       properties:
         virtue:
           enum:
@@ -43,4 +103,24 @@ properties:
           - economy
           - tractability
           - null
+  credence:
+    propertyNames:
+      enum:
+      - value
+      - basis
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - assesses
+  - against
+  - tests
+  - comparisons
+  - obligations
+  - appraisal
+  - credence
+  - maturity

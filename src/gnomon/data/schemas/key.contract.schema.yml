@@ -27,4 +27,21 @@ properties:
     - aggregation-map
     - qualitative-abstraction
     - null
+  domain_and_codomain:
+    propertyNames:
+      enum:
+      - domain
+      - codomain
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - kind
+  - domain_and_codomain
+  - expression
+  - version
+  - maturity

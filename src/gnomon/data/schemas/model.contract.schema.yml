@@ -20,8 +20,26 @@ properties:
     - stabilized
     - retracted
     - null
+  constituents:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - variant
+        - extent
+        - map
   index_sets:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - variant
+        - extent
+        - structure
       properties:
         structure:
           enum:
@@ -31,6 +49,21 @@ properties:
           - null
   variables:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - variant
+        - determined
+        - signature
+        - values
+        - scale
+        - expression
+        - condition
+        - selects
+        - reading
+        - shared
       properties:
         determined:
           enum:
@@ -54,6 +87,20 @@ properties:
           - null
   parameters:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - variant
+        - signature
+        - values
+        - scale
+        - expression
+        - condition
+        - selects
+        - reading
+        - shared
       properties:
         scale:
           enum:
@@ -72,6 +119,19 @@ properties:
           - null
   laws:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - variant
+        - signature
+        - role
+        - expression
+        - reading
+        - warrant
+        - rests_on
+        - origin
+        - range
       properties:
         role:
           enum:
@@ -90,8 +150,26 @@ properties:
           - fitted
           - measured
           - null
+  organization:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - variant
+        - reading
+        - relates
+        - among
+        - realized_by
   assumptions:
     items:
+      propertyNames:
+        enum:
+        - id
+        - assumption
+        - motive
+        - gain
+        - removable
       properties:
         motive:
           enum:
@@ -106,3 +184,19 @@ properties:
           - unknown
           - null
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - background
+  - constituents
+  - index_sets
+  - variables
+  - parameters
+  - laws
+  - organization
+  - assumptions
+  - maturity

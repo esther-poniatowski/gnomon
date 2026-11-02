@@ -33,9 +33,23 @@ properties:
     - hypothetical
     - no-external-target
     - null
+  identification:
+    propertyNames:
+      enum:
+      - description
+      - pointers
   reference_class:
+    propertyNames:
+      enum:
+      - name
+      - projectibility
+      - selection_criteria
     properties:
       projectibility:
+        propertyNames:
+          enum:
+          - status
+          - evidence
         properties:
           status:
             enum:
@@ -43,8 +57,40 @@ properties:
             - tested
             - not-claimed
             - null
+      selection_criteria:
+        items:
+          propertyNames:
+            enum:
+            - name
+            - expression
+            - justification
+  variants:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - differentiation
+        - caveat
+  constituents:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - variant
+        - extent
   index_sets:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - variant
+        - extent
+        - structure
       properties:
         structure:
           enum:
@@ -54,6 +100,22 @@ properties:
           - null
   variables:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - of
+        - variant
+        - determined
+        - signature
+        - values
+        - scale
+        - expression
+        - condition
+        - selects
+        - reading
+        - shared
       properties:
         determined:
           enum:
@@ -77,6 +139,21 @@ properties:
           - null
   parameters:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - of
+        - variant
+        - signature
+        - values
+        - scale
+        - expression
+        - condition
+        - selects
+        - reading
+        - shared
       properties:
         scale:
           enum:
@@ -95,9 +172,25 @@ properties:
           - null
   external_systems:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - variant
+        - class
+        - shares
+        - constrains
+        - reading
       properties:
         constrains:
           items:
+            propertyNames:
+              enum:
+              - name
+              - signature
+              - role
+              - expression
+              - reading
             properties:
               role:
                 enum:
@@ -109,3 +202,21 @@ properties:
                 - admissibility
                 - null
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - commitment
+  - target_type
+  - identification
+  - reference_class
+  - variants
+  - constituents
+  - index_sets
+  - variables
+  - parameters
+  - external_systems
+  - maturity

@@ -217,6 +217,15 @@ properties:
           x-comment: only when the LaTeX form differs from the symbol
           title: Notation
           description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: variant carrying the entry; omit when every member of the class carries it
+          title: Variant
+          description: variant carrying the entry; omit when every member of the class carries it
         extent:
           type:
           - string

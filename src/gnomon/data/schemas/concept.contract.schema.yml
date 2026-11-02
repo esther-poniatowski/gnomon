@@ -27,4 +27,28 @@ properties:
     - property
     - process
     - null
+  confusions:
+    items:
+      propertyNames:
+        enum:
+        - other
+        - axis
+        - blocking_feature
+        - risk
+        - consequence
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - gloss
+  - kind
+  - antagonist
+  - broader
+  - source
+  - confusions
+  - definition
+  - maturity

@@ -25,6 +25,11 @@ properties:
     - identified
     - specified
     - null
+  identification:
+    propertyNames:
+      enum:
+      - description
+      - pointers
   category:
     enum:
     - particular-occurrence
@@ -32,6 +37,12 @@ properties:
     - capacity
     - structural-property
     - null
+  course:
+    propertyNames:
+      enum:
+      - index
+      - grain
+      - varies
   occurrence:
     enum:
     - state
@@ -41,6 +52,14 @@ properties:
     - null
   index_sets:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - variant
+        - extent
+        - structure
       properties:
         structure:
           enum:
@@ -50,6 +69,22 @@ properties:
           - null
   observables:
     items:
+      propertyNames:
+        enum:
+        - reference
+        - name
+        - symbol
+        - notation
+        - variant
+        - signature
+        - values
+        - scale
+        - expression
+        - condition
+        - selects
+        - reading
+        - event
+        - estimator
       properties:
         scale:
           enum:
@@ -67,6 +102,12 @@ properties:
           - all
           - null
         event:
+          propertyNames:
+            enum:
+            - origin
+            - horizon
+            - censoring
+            - reading
           properties:
             censoring:
               enum:
@@ -75,8 +116,23 @@ properties:
               - interval
               - none
               - null
+        estimator:
+          propertyNames:
+            enum:
+            - method
+            - data_version
+            - uncertainty
   manifestations:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - variant
+        - form
+        - expression
+        - reading
+        - features
       properties:
         form:
           enum:
@@ -88,6 +144,16 @@ properties:
           - null
         features:
           items:
+            propertyNames:
+              enum:
+              - name
+              - symbol
+              - values
+              - observed
+              - condition
+              - selects
+              - procedure
+              - caveat
             properties:
               selects:
                 enum:
@@ -97,6 +163,16 @@ properties:
                 - null
   scope_over_instances:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - variant
+        - over
+        - source
+        - quantification
+        - conditional_on
+        - differentiation
       properties:
         source:
           enum:
@@ -114,6 +190,57 @@ properties:
           - ensemble-distribution
           - universal
           - null
+  conditions_and_byproducts:
+    propertyNames:
+      enum:
+      - precipitating
+      - inhibiting
+      - modulating
+      - nonstandard
+      - byproducts
+    properties:
+      precipitating:
+        items:
+          propertyNames:
+            enum:
+            - name
+            - variant
+            - expression
+            - justification
+      inhibiting:
+        items:
+          propertyNames:
+            enum:
+            - name
+            - variant
+            - expression
+            - justification
+            - caveat
+      modulating:
+        items:
+          propertyNames:
+            enum:
+            - name
+            - variant
+            - expression
+            - reading
+            - effect
+      nonstandard:
+        items:
+          propertyNames:
+            enum:
+            - name
+            - variant
+            - expression
+            - differentiation
+      byproducts:
+        items:
+          propertyNames:
+            enum:
+            - name
+            - variant
+            - expression
+            - justification
   evidential_status:
     enum:
     - established
@@ -121,8 +248,29 @@ properties:
     - predicted
     - derived
     - null
+  detection_criterion:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - variant
+        - across
+        - expression
+        - procedure
+        - limited_by
+  data:
+    items:
+      propertyNames:
+        enum:
+        - pointer
+        - version
   data_model:
     items:
+      propertyNames:
+        enum:
+        - kind
+        - source
+        - reading
       properties:
         kind:
           enum:
@@ -133,10 +281,56 @@ properties:
           - null
   observation_error:
     items:
+      propertyNames:
+        enum:
+        - of
+        - form
+        - expression
       properties:
         form:
           enum:
           - distribution
           - bound
           - null
+  pattern_selection:
+    items:
+      propertyNames:
+        enum:
+        - manifestation
+        - procedure
+        - set_aside
+        - motivated_by
+  adequacy:
+    items:
+      propertyNames:
+        enum:
+        - purpose
+        - grounds
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - statement
+  - id
+  - type
+  - status
+  - commitment
+  - target_system
+  - identification
+  - category
+  - course
+  - occurrence
+  - index_sets
+  - observables
+  - manifestations
+  - scope_over_instances
+  - conditions_and_byproducts
+  - evidential_status
+  - detection_criterion
+  - data
+  - data_model
+  - observation_error
+  - pattern_selection
+  - adequacy
+  - maturity

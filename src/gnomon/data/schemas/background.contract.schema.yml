@@ -22,6 +22,19 @@ properties:
     - null
   laws:
     items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - variant
+        - signature
+        - role
+        - expression
+        - reading
+        - warrant
+        - rests_on
+        - origin
+        - range
       properties:
         role:
           enum:
@@ -45,4 +58,27 @@ properties:
     - complete
     - partial
     - null
+  organization:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - variant
+        - reading
+        - relates
+        - among
+        - realized_by
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - describes
+  - laws
+  - closure
+  - organization
+  - maturity

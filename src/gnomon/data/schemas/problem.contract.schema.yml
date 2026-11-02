@@ -48,8 +48,25 @@ properties:
     - over-a-parameter
     - decision
     - null
+  constraints:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - statement
+        - source
+  explicanda:
+    items:
+      propertyNames:
+        enum:
+        - term
+        - pointer
   knowledge_obstacles:
     items:
+      propertyNames:
+        enum:
+        - obstacle
+        - pointers
       properties:
         obstacle:
           enum:
@@ -62,6 +79,11 @@ properties:
           - null
   answerability_obstacles:
     items:
+      propertyNames:
+        enum:
+        - condition
+        - refutation
+        - pointers
       properties:
         condition:
           enum:
@@ -78,3 +100,23 @@ properties:
           - lack-of-means
           - null
 x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - statement
+  - id
+  - type
+  - status
+  - kind
+  - demand
+  - result_type
+  - request
+  - associated_question
+  - constraints
+  - explicanda
+  - sources
+  - significance
+  - knowledge_obstacles
+  - answerability_obstacles
+  - maturity

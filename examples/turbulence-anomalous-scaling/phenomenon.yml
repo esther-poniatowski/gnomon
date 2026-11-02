@@ -88,7 +88,6 @@ manifestations:
     features:
       - name: "longitudinal scaling exponents, one per order"
         symbol: zetaL
-        notation: '\zeta_L'
         values: "maps(pos(reals), reals)"
         observed:
         condition: "zetaL(4) != 4 / 3"
@@ -103,7 +102,6 @@ manifestations:
     features:
       - name: "transverse scaling exponents, one per order"
         symbol: zetaT
-        notation: '\zeta_T'
         values: "maps(pos(reals), reals)"
         observed:
         condition: "zetaT(4) != 4 / 3"
