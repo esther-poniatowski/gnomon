@@ -53,6 +53,23 @@ operators:
   name: the implication between two statements
   notation: '#1 \Rightarrow #2'
   arity: 2
+- symbol: and
+  kind: relation
+  name: the conjunction of statements
+  notation: '#1 \land #2'
+  arity: 2
+  variadic: true
+- symbol: or
+  kind: relation
+  name: the disjunction of statements
+  notation: '#1 \lor #2'
+  arity: 2
+  variadic: true
+- symbol: not
+  kind: relation
+  name: the negation of a statement
+  notation: '\lnot #1'
+  arity: 1
 - symbol: depends_on
   kind: relation
   name: the dependence of one quantity on another

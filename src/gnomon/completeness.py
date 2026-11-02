@@ -911,16 +911,17 @@ def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> l
     """
     if at(question, "task.admissible_explanans.substrate") != "mapping":
         return []
-    realizations = answer.get("realizations") or []
+    realizations = at(answer, "claim.realizations") or []
     if not realizations:
         return [
             finding(rules.COMPLETENESS_UNREALIZED_LINK,
                     "the question asks for a link, and the answer maps no quantity onto its realization",
-                    "realizations")
+                    "claim", "realizations")
         ]
     return [
         finding(rules.COMPLETENESS_INCOMPLETE_REALIZATION,
-                f"realizations[{index}] names what it realizes without saying by what", "realizations", index)
+                f"claim.realizations[{index}] names what it realizes without saying by what",
+                "claim", "realizations", index)
         for index, entry in enumerate(realizations)
         if isinstance(entry, Mapping) and not (entry.get("realizes") and entry.get("by"))
     ]

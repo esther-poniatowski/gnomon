@@ -51,12 +51,13 @@ DECLARING: Mapping[str, tuple[str, ...]] = {
     ),
     "background": ("laws", "organization"),
     "phenomenon": ("index_sets", "observables", "manifestations", "scope_over_instances"),
+    "model": ("constituents", "index_sets", "variables", "parameters", "laws", "organization"),
 }
 
 #: The record kinds the checkers read. A kind declaring no symbol still carries expressions, so
 #: this set is wider than the keys of :data:`DECLARING`.
 RECORD_KINDS: frozenset[str] = frozenset(
-    {"target-system", "background", "phenomenon", "operators", "question"}
+    {"target-system", "background", "phenomenon", "operators", "question", "model", "answer"}
 )
 
 #: The field through which a record of each kind names the target system it is stated against.
@@ -143,6 +144,43 @@ PATH_REFERENCE: tuple[str, ...] = (
     "course.index",
     "course.varies[]",
 )
+
+#: Expression and reference fields of one record type alone, named by dotted paths, as
+#: (record type, paths): an answer nests its expressions under its claim and its aim blocks, and
+#: another type may use the same key, such as `domain`, with other symbols.
+TYPE_PATH_FORMULA: Mapping[str, tuple[str, ...]] = {
+    "answer": (
+        "claim.expression",
+        "claim.realizations[].by",
+        "domain",
+        "uncertainty[].expression",
+        "aim_block.description.values[].value",
+        "aim_block.exploration.space.varied[].range",
+        "aim_block.exploration.criterion.expression",
+        "aim_block.exploration.classes[].pattern",
+        "aim_block.prediction.outputs[].condition",
+        "aim_block.prediction.outputs[].value",
+        "aim_block.explanation.factors[].holds",
+        "aim_block.explanation.factors[].under",
+        "aim_block.modal_knowledge.property",
+        "aim_block.model_knowledge.expression",
+    ),
+    "model": ("operations[].regime", "operations[].bound"),
+}
+TYPE_PATH_REFERENCE: Mapping[str, tuple[str, ...]] = {
+    "answer": (
+        "claim.realizations[].realizes",
+        "uncertainty[].of",
+        "aim_block.exploration.space.observables[]",
+        "aim_block.exploration.space.varied[].factor",
+        "aim_block.explanation.factors[].bears_on[]",
+        "aim_block.explanation.factors[].through[]",
+        "aim_block.explanation.factors[].produces",
+        "aim_block.explanation.factors[].separates[]",
+        "aim_block.explanation.factors[].appeals_to[]",
+    ),
+    "model": ("operations[].yields[]",),
+}
 
 #: Names a tolerance may use where every other field names a declared symbol: the candidate's
 #: value and the observable it reproduces, as the epistemic-task note fixes them.
@@ -502,6 +540,11 @@ def declarations(record: Mapping[str, Any]) -> list[Declaration]:
         if named is not None:
             source, symbol = named
             found.append(Declaration(symbol, "", "referenced", source))
+    if record.get("type") == "question":
+        contrast = (record.get("subject") or {}).get("contrast") or {}
+        for foil in contrast.get("foil_set") or [] if isinstance(contrast, Mapping) else []:
+            if isinstance(foil, Mapping) and isinstance(foil.get("symbol"), str):
+                found.append(Declaration(foil["symbol"], str(foil.get("name") or ""), "foil_set", identifier))
     for entry in entries(record, "manifestations"):
         for feature in entries(entry, "features"):
             symbol = feature.get("symbol")
@@ -581,7 +624,7 @@ def formulas(record: Mapping[str, Any]) -> list[tuple[str, Place, str, frozenset
     ]
     reached += [
         (path, place, text, frozenset())
-        for path in PATH_FORMULA
+        for path in (*PATH_FORMULA, *TYPE_PATH_FORMULA.get(str(record.get("type", "")), ()))
         for place, text in reach(record, path)
         if text.strip()
     ]
@@ -692,7 +735,7 @@ def unresolved(
         for index, name in items_of(value):
             if isinstance(name, str) and split_reference(name) is None and name not in known:
                 problems.append(finding(rules.VOCABULARY_UNRESOLVED, f"{where} -> {name}", *_at_item(place, index)))
-    for path in PATH_REFERENCE:
+    for path in (*PATH_REFERENCE, *TYPE_PATH_REFERENCE.get(str(record.get("type", "")), ())):
         for at, name in reach(record, path):
             if name.strip() and split_reference(name) is None and name not in known:
                 problems.append(finding(rules.VOCABULARY_UNRESOLVED, f"{path} -> {name}", *at))
@@ -1161,6 +1204,33 @@ def upstream_of(record: Mapping[str, Any], records: Mapping[str, Mapping[str, An
     field_name = UPSTREAM_FIELD.get(str(record.get("type", "")))
     identifier = record.get(field_name) if field_name else None
     return records.get(identifier, {}) if isinstance(identifier, str) else {}
+
+
+def visible_records(
+    record: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Mapping[str, Any]]:
+    """Return the records whose symbols the bare identifiers of an answer or a model may name.
+
+    An answer sees the records on which its route runs, and the question that it answers with the
+    target system, the phenomenon and the backgrounds of that question; a model sees its parents
+    and its background. Any other record sees none through this function.
+
+    >>> records = {"quest.a.b": {"subject": {"phenomenon": "phen.a.b"}}, "phen.a.b": {"id": "phen.a.b"}}
+    >>> [r.get("id") for r in visible_records({"type": "answer", "answers": "quest.a.b"}, records)]
+    [None, 'phen.a.b']
+    """
+    kind = record.get("type")
+    names: list[Any] = []
+    if kind == "answer":
+        question = records.get(str(record.get("answers")), {})
+        subject = question.get("subject") if isinstance(question.get("subject"), Mapping) else {}
+        names = [*((record.get("route") or {}).get("runs_on") or []), record.get("answers"),
+                 subject.get("target_system"), subject.get("phenomenon"), *(subject.get("background") or [])]
+    elif kind == "model":
+        names = [*(record.get("derives_from") or []), record.get("background")]
+    found = [records[name] for name in dict.fromkeys(names) if isinstance(name, str) and name in records]
+    return found + [parent for model in found if model.get("type") == "model"
+                    for parent in visible_records(model, records) if parent not in found]
 
 
 def load_problem(directory: Path, registry: Path | None = None) -> Problem:

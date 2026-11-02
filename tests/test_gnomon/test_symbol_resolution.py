@@ -44,6 +44,7 @@ from gnomon.completeness import (
 
 from gnomon.vocabulary import (
     RECORD_KINDS,
+    visible_records,
     canonical_operators,
     declarations,
     doubly_defined,
@@ -78,6 +79,7 @@ from gnomon.vocabulary import (
 )
 from gnomon.findings import texts
 
+from .migration import awaiting_migration
 from .paths import EXAMPLES, ROOT
 
 CANONICAL = canonical_operators()
@@ -90,7 +92,8 @@ def records() -> list[tuple[str, Mapping[str, Any]]]:
     found = []
     for path in sorted(EXAMPLES.glob("*/*.yml")):
         loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
-        if isinstance(loaded, Mapping) and loaded.get("type") in RECORD_KINDS:
+        # an answer of the former form is checked by its contract alone until its migration
+        if isinstance(loaded, Mapping) and loaded.get("type") in RECORD_KINDS and not awaiting_migration(loaded):
             found.append((str(path.relative_to(ROOT)), loaded))
     return found
 
@@ -159,11 +162,13 @@ def test_every_reference_and_formula_identifier_resolves(case: tuple[str, Mappin
     # an operator is typed over the sets of its whole problem, so it reads against all of them
     # an operator and a question are both read against the whole problem: the first is typed over
     # whatever set declares it, the second reaches the target and the phenomenon alike
-    external = (
-        PROBLEM_SYMBOLS[problem_of(name)]
-        if record.get("type") in ("operators", "question")
-        else symbols_of(upstream)
-    )
+    # an answer and a model read against the records that they cite, as visible_records states
+    if record.get("type") in ("operators", "question"):
+        external = PROBLEM_SYMBOLS[problem_of(name)]
+    elif record.get("type") in ("answer", "model"):
+        external = [s for seen in visible_records(record, BY_ID) for s in symbols_of(seen)]
+    else:
+        external = symbols_of(upstream)
     inherited = CANONICAL | frozenset(PROBLEM_OPERATORS[problem_of(name)])
     problems = unresolved(record, inherited, external)
     assert not problems, f"{name}: {problems}"
@@ -720,9 +725,11 @@ def test_a_question_asking_for_a_link_needs_the_mapping() -> None:
         "the question asks for a link, and the answer maps no quantity onto its realization"
     ]
     assert unrealized_link({"task": {"admissible_explanans": {"substrate": "independent"}}}, {}) == []
-    half = {"realizations": [{"symbol": "gate", "realizes": "role"}]}
-    assert texts(unrealized_link(question, half)) == ["realizations[0] names what it realizes without saying by what"]
-    whole = {"realizations": [{"symbol": "gate", "realizes": "role", "by": "g * (v - e)"}]}
+    half = {"claim": {"realizations": [{"id": "gate", "realizes": "role"}]}}
+    assert texts(unrealized_link(question, half)) == [
+        "claim.realizations[0] names what it realizes without saying by what"
+    ]
+    whole = {"claim": {"realizations": [{"id": "gate", "realizes": "role", "by": "g * (v - e)"}]}}
     assert unrealized_link(question, whole) == []
 
 

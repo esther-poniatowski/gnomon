@@ -17,6 +17,8 @@ from referencing import Registry, Resource
 
 from gnomon import schemas
 
+from .migration import AWAITING_MIGRATION, awaiting_migration
+
 KINDS = schemas.kinds()
 
 
@@ -89,27 +91,12 @@ RECORDS = sorted(
 )
 
 
-#: The keys of the former answer, which held its model; the worked answers keep them until the
-#: pilot of the goal `model-design` migrates them to model records, as the task list states.
-FORMER_ANSWER_KEYS = frozenset(
-    {"statement", "constituents", "index_sets", "variables", "parameters", "laws", "organization",
-     "realizations", "idealizations", "explanans"}
-)
-
-
-def awaiting_migration(record: dict[str, Any]) -> bool:
-    """Whether a worked answer still holds the keys of the former answer."""
-    return record.get("type") == "answer" and bool(FORMER_ANSWER_KEYS & set(record))
-
-
 CASES = [
     pytest.param(
         path,
         record,
         id=f"{path.parent.name}/{path.name}",
-        marks=pytest.mark.xfail(
-            strict=True, reason="the answer awaits its migration under the goal `model-design`"
-        ) if awaiting_migration(record) else (),
+        marks=AWAITING_MIGRATION if awaiting_migration(record) else (),
     )
     for path, record in RECORDS
 ]
