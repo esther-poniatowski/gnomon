@@ -310,6 +310,8 @@ REQUIREMENT_TABLES = [
     ("binding", "specification/binding.md", ("binding-record", "| Specification"), "binding.yml", ""),
     ("key", "specification/key.md", ("key-record", "| Specification"), "key.yml", ""),
     ("assessment", "specification/assessment.md", ("assessment-record", "| Specification"), "assessment.yml", ""),
+    ("concept", "specification/concept.md", "| Specification", "concept.yml", ""),
+    ("design", "specification/design.md", "| Specification", "design.yml", ""),
 ]
 
 
@@ -344,6 +346,27 @@ def test_the_requirement_rows_of_a_note_are_the_registry_entries(
                 for level in ("identified", "specified")
             },
         }
+    assert documented == declared, f"{note}: {documented} against {declared}"
+
+
+@pytest.mark.parametrize(
+    "entry,note,header,tpl,prefix", REQUIREMENT_TABLES, ids=[table[0] for table in REQUIREMENT_TABLES]
+)
+def test_the_rows_required_for_a_kind_are_the_registry_entries_by_value(
+    entry: str, note: str, header: Header, tpl: str, prefix: str
+) -> None:
+    """A row required "for the kinds `a` and `b`" is one that `by_value` lists under each of those kinds."""
+    paths = flatten(template(tpl))
+    documented: dict[str, list[str]] = {}
+    for line in table_lines(note, header):
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) > 1 and cells[1].lower().startswith("for the kind"):
+            key = resolve(row_slugs(cells[0]), paths, prefix)
+            assert key is not None, f"{note}: no key of {tpl} answers to the row {cells[0]!r}"
+            for value in re.findall(r"`([a-z-]+)`", cells[1]):
+                documented.setdefault(value, []).append(key)
+    registry = yaml.safe_load((REGISTRY / "requirements.yml").read_text())
+    declared = ((registry.get("by_value") or {}).get(entry) or {}).get("kind") or {}
     assert documented == declared, f"{note}: {documented} against {declared}"
 
 

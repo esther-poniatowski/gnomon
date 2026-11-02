@@ -70,4 +70,4 @@ The kind meets the seven [conditions of admission](record-kind-admission.md#^adm
 - The table of epistemic roles gains the role Plan, and the demand table gains the type of result `design`.
 - The product type `measurement-procedure` stays partial in the target-system record.
 - The activity `method-design` outputs a design of the kind `method`, and `experimental-design` outputs the protocols.
-- The protocol is required for the kinds `experiment` and `simulation-run`, which the specification states and no check enforces yet.
+- The protocol is required for the kinds `experiment` and `simulation-run`, as the specification states and the requirements by value of the requirement registry declare.

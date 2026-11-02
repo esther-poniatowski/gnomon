@@ -128,6 +128,10 @@ COMPLETENESS_UNMET_COMMITMENT = _rule(
     "completeness/unmet-commitment",
     "A record leaves unfilled a specification that its level of commitment requires.",
 )
+COMPLETENESS_UNMET_BY_VALUE = _rule(
+    "completeness/unmet-by-value",
+    "A record leaves unfilled a specification that the value of one of its fields requires.",
+)
 COMPLETENESS_MISMATCHED_OCCURRENCE = _rule(
     "completeness/mismatched-occurrence",
     "A phenomenon takes an occurrence class that its category does not admit.",

@@ -7,6 +7,8 @@ The requirements that govern a record are declared in two registries rather than
 - the general ones, listed per record kind under ``always`` in ``data/requirements.yml``;
 - the ones a level of commitment imposes on a target system or a phenomenon, under
   ``by_commitment``;
+- the ones a value of a closed field imposes, such as the protocol of an experiment, under
+  ``by_value``;
 - the ones an epistemic aim adds, and the general ones the inquiry produces, under ``by_aim``. An
   inquiry that produces a phenomenon cannot be asked to state that phenomenon in advance, so
   those paths may stay empty.
@@ -212,6 +214,42 @@ def unmet_commitment(
     return unmet_general(
         record, paths, produced, label=f"commitment {level} requires", rule=rules.COMPLETENESS_UNMET_COMMITMENT
     )
+
+
+def requirements_by_value(source: Path | None = None) -> dict[str, dict[str, dict[str, list[str]]]]:
+    """Return, per record kind, field and value, the specifications that the value imposes."""
+    table = _registry(source).get("by_value") or {}
+    return {
+        str(kind): {
+            str(field): {str(value): list(paths or []) for value, paths in (values or {}).items()}
+            for field, values in (fields or {}).items()
+        }
+        for kind, fields in table.items()
+    }
+
+
+def unmet_by_value(
+    record: Mapping[str, Any],
+    table: Mapping[str, Mapping[str, Mapping[str, list[str]]]],
+    produced: frozenset[str] | set[str] = frozenset(),
+) -> list[Finding]:
+    """Return every specification that the value of a field of the record requires and it lacks.
+
+    >>> table = {"design": {"kind": {"experiment": ["protocol"]}}}
+    >>> [f.text for f in unmet_by_value({"type": "design", "kind": "experiment"}, table)]
+    ['kind experiment requires: protocol']
+    >>> unmet_by_value({"type": "design", "kind": "method"}, table)
+    []
+    """
+    found: list[Finding] = []
+    for field, values in (table.get(str(record.get("type"))) or {}).items():
+        value = record.get(field)
+        if isinstance(value, str) and value in values:
+            found += unmet_general(
+                record, values[value], produced, label=f"{field} {value} requires",
+                rule=rules.COMPLETENESS_UNMET_BY_VALUE,
+            )
+    return found
 
 
 def occurrence_by_category(source: Path | None = None) -> dict[str, list[str]]:

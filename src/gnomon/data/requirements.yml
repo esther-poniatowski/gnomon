@@ -7,6 +7,8 @@
 # `by_commitment` lists the specifications that a target system or a phenomenon carries at each
 # level of commitment. The levels are cumulative: a record at `specified` also carries the
 # specifications of `identified`.
+# `by_value` lists the specifications that a value of a closed field imposes, keyed by the record
+# kind, the field and the value: a design of the kind `experiment` carries a protocol.
 # `by_aim` adds the requirements that an epistemic aim imposes. Under `to_produce`, it lists the
 # general requirements that the inquiry itself produces: an inquiry that produces a phenomenon
 # cannot state that phenomenon in advance.
@@ -48,6 +50,12 @@ by_commitment:
   specified:
     target-system: [variables]
     phenomenon: [category, course, occurrence, manifestations, evidential_status]
+
+by_value:
+  design:
+    kind:
+      experiment: [protocol]
+      simulation-run: [protocol]
 
 # The occurrence classes admitted by each category of phenomenon. A particular occurrence takes
 # the class of its one token. A structural property holds at each point of the course, so it takes

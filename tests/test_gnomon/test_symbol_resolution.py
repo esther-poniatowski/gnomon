@@ -616,6 +616,18 @@ def test_each_record_carries_what_its_commitment_requires(path: Path) -> None:
     assert not missing, f"{path.parent.name} ({aim}): {missing}"
 
 
+def test_a_design_carries_what_its_kind_requires() -> None:
+    """An experiment or a simulation run states its protocol; a method needs none."""
+    from gnomon.completeness import requirements_by_value, unmet_by_value
+
+    table = requirements_by_value()
+    design = yaml.safe_load((EXAMPLES / "active-matter-phase-exploration" / "design.yml").read_text())
+    assert unmet_by_value(design, table) == []
+    bare = {key: value for key, value in design.items() if key != "protocol"}
+    assert texts(unmet_by_value(bare, table)) == ["kind simulation-run requires: protocol"]
+    assert unmet_by_value({**bare, "kind": "method"}, table) == []
+
+
 def test_a_record_lacking_what_its_commitment_requires_is_reported() -> None:
     """The levels are cumulative, so a specified record also carries what identification needs."""
     phenomenon = {"type": "phenomenon", "commitment": "identified", "statement": "A behavior.",
