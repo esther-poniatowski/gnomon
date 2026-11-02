@@ -62,12 +62,12 @@ The kind meets the seven [conditions of admission](record-kind-admission.md#^adm
 | Keep the design without a record, in the prose of a question or of an itinerary | No kind is added | The steps and the stopping condition move into prose, and a problem that demands a design can never be solved |
 | A record for the protocols of experiments and of simulation runs only | The record matches the single activity that outputs a design | A method that a problem demands has no home, although it has the same parts and licenses the same execution |
 | One record for designs and for measurement procedures | One record for every procedure | A measurement procedure defines a quantity and licenses substitution, so the record would hold two roles |
-| One record for every plan of acts, with a protocol for experiments and simulation runs | One record and one role for every plan, and a demand for a design can be met | No registered activity outputs a method yet |
+| One record for every plan of acts, with a protocol for experiments and simulation runs | One record and one role for every plan, and a demand for a design can be met | A method needs an activity of its own, since the norm of experimental design does not judge it |
 
 ## Consequences
 
 - The record kinds gain `design`, with its [specification](../specification/design.md), its base schema and its contract.
 - The table of epistemic roles gains the role Plan, and the demand table gains the type of result `design`.
 - The product type `measurement-procedure` stays partial in the target-system record.
-- No registered activity outputs a design of the kind `method`, so an itinerary cannot yet produce one.
+- The activity `method-design` outputs a design of the kind `method`, and `experimental-design` outputs the protocols.
 - The protocol is required for the kinds `experiment` and `simulation-run`, which the specification states and no check enforces yet.

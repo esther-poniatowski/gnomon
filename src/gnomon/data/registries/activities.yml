@@ -127,6 +127,16 @@ activities:
     norm: norm.experimental-design
     mode: deductive
     context: justification
+  - id: method-design
+    family: empirical-activities
+    inputs:
+      - question
+      - type: model
+        optional: true
+    output: design
+    norm: norm.method-design
+    mode: deductive
+    context: both
   - id: observation
     family: empirical-activities
     inputs:

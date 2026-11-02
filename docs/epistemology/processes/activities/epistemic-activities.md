@@ -90,7 +90,7 @@ Each family groups the activities whose output types belong to one class of prod
 | [Explanation and integration](explanation-and-integration.md) | `explanation`, `inter-theory-relation` |
 | [Revision](revision.md) | `knowledge-state-change` |
 
-Three types are the output of no registered activity. The type `source` is an exception by design, since a source enters an inquiry from outside it. The type `key` is a gap of the taxonomy: a key is written during an inquiry, yet no activity types the act of writing it. The type `binding` is the output of the binding activity stated below, which the registry does not yet transcribe. Conversely, a type may be the input of no activity. Such a type is a final product of an inquiry (e.g. `classification`, `inter-theory-relation`).
+One type is the output of no registered activity: the type `source`, by design, since a source enters an inquiry from outside it. Conversely, a type may be the input of no activity. Such a type is a final product of an inquiry (e.g. `classification`, `inter-theory-relation`).
 
 The partition by output type has two consequences for borderline activities. First, when the output of an activity is a model, the activity belongs to model-building, regardless of its mode and its context. Second, revision outputs only changes of attitude or of status across existing records, so a new model is never the output of a revision.
 
@@ -118,7 +118,7 @@ The product types form a closed list. Each type classifies the epistemic objects
 | `concept` | a term with its definition or its explication | conceptual activities |
 | `measurement-procedure` | a procedure that assigns values to a quantity on a stated [scale](../../vocabulary/quantities/scale-and-level.md) | conceptual activities |
 | `classification` | a partition of systems into [classes](../../vocabulary/systems/kind-class-population.md) | conceptual activities |
-| `design` | a plan of observations, interventions or simulation runs, with their conditions | empirical activities |
+| `design` | a plan of observations, interventions or simulation runs, with their conditions, or a method that solves a task | empirical activities |
 | `data` | the recorded [values](../../vocabulary/quantities/variable-value-observable.md) of observables | empirical activities |
 | `phenomenon` | the behavior of a target that a question concerns, detected from data; only a phenomenon of the category *regularity* must be stable, as the note on [phenomena](../../vocabulary/regularities/pattern-and-phenomenon.md) states | empirical activities |
 | `target-specification` | the declared constituents and quantities of a [target](../../foundations/things-and-constructs.md) | model-building |

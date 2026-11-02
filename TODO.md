@@ -86,7 +86,7 @@ The Mixture pilot of `geonexus` corrected several parts of the framework while s
 		- [ ] the warrant `numerical`, the grade of an idealization, supersession of a retracted law, and the open parts of gaps excluded by a question;
 		- [ ] the verdicts `partial` and `unsupported`, identifiers on obligations, and verdicts per law that reference the step supplying their evidence;
 		- [ ] a rationale on each itinerary step, naming the question served and what the step acts on: one of the eight [conditions of answerability](docs/epistemology/objects/question/conditions-of-answerability.md) for obtaining an answer (definiteness, answer type, soundness, candidates, discrimination, access, bridging, representation), the acts that obtain the answer, or the evaluation of an obtained answer, as the [choice of the next act](docs/procedures/inquiry/next-act.md) orders them;
-		- [ ] an activity that outputs a design of the kind `method`, as the [decision on the design record](docs/adr/design-record.md) leaves open, and the activities of the pilot absent from the registry, beside the gaps listed under `inquiry-records-round-2`: comparing a derived law with a simulation;
+		- [ ] the activities of the pilot absent from the registry, beside the gaps listed under `inquiry-records-round-2`: comparing a derived law with a simulation;
 		- [ ] the checks of produced content, of the rationale and of revisions.
 
 ## Open issues of the model-design audits

@@ -12,15 +12,16 @@ aliases:
 ---
 # Empirical activities
 
-> [!QUESTION] Goal: which activities design an inquiry into a target and obtain data and phenomena from it, and by which norm is each judged?
+> [!QUESTION] Goal: which activities design the plans that an inquiry executes, obtain data and phenomena from its target, and by which norm is each judged?
 
-The activities of this family output a design of inquiry, [data](../../vocabulary/quantities/variable-value-observable.md) or a [phenomenon](../../vocabulary/regularities/pattern-and-phenomenon.md). Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
+The activities of this family output a [design](../../../specification/design.md), [data](../../vocabulary/quantities/variable-value-observable.md) or a [phenomenon](../../vocabulary/regularities/pattern-and-phenomenon.md). Each activity of this family is typed by its [signature](epistemic-activities.md#^activity-criterion).
 
 ## Signatures
 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
 | `experimental-design` | `question`, `model` | `design` | deductive | justification |
+| `method-design` | `question`, `model` (optional) | `design` | deductive | both |
 | `observation` | `design` | `data` | model-based | justification |
 | `measurement` | `measurement-procedure`, `design` | `data` | model-based | justification |
 | `intervention` | `design` | `data` | non-inferential | justification |
@@ -33,6 +34,7 @@ The activities of this family output a design of inquiry, [data](../../vocabular
 | Activity | Operation | The norm passes when |
 | --- | --- | --- |
 | `experimental-design` | fix the protocol of an experiment or of a simulation run (e.g. conditions, interventions, controls, sample) before any data are recorded | the possible outcomes discriminate the rival answers to the question: each rival predicts a different outcome, so the design would probably detect an error in any false rival [fisher1935] [mayo1996] [mayo2018] |
+| `method-design` | fix a method that solves the task of a question: its inputs, its steps, its rules and its condition of stopping | on every admissible input, an execution stops after finitely many steps, each step is defined precisely enough to be executed, and the output achieves the task [knuth1997] |
 | `observation` | register features of the target through an instrument, or assemble existing recordings of it | the instrument is reliable, as shown independently of the claim under test [hacking1983] |
 | `measurement` | assign values to a property by a map that preserves its empirical relations | a representation theorem guarantees that the map exists, a uniqueness theorem fixes its admissible transformations, and the scale type is stated [krantz1971]; the outcome is inferred from the reading through a stated model of the measuring process [tal2013] |
 | `intervention` | set a variable of the target, and record the response | the intervention changes the response only through the manipulated variable, and is independent of the other causes of the response [woodward2003] [hacking1983] |
@@ -41,6 +43,7 @@ The activities of this family output a design of inquiry, [data](../../vocabular
 ## Distinctions
 
 - **Design and execution differ in their output.** Experimental design outputs a design, judged before any datum exists by its possible outcomes. Observation, measurement and intervention execute a design, and output data.
+- **Experimental design and method design differ in their task.** An experimental design obtains data that discriminate the rival answers to a question. A method obtains the answer itself, by computation or by construction, such as an algorithm that enumerates the fixed points of a network. A method that runs on a model is executed by [simulation](model-analysis.md), which takes a model and a design. The [partition by output type](epistemic-activities.md#^families) files method design in this family, since its output is a design, although its execution need not reach the target.
 - **Observation and measurement differ in their requirements.** Observation produces records of features. Such records may be categorical, with no numerical representation, and they rest on a model of the instrument only. Measurement requires, in addition, a [scale](../../vocabulary/quantities/scale-and-level.md), and its model covers the whole measuring process [tal2020].
 - **The norm of measurement combines two accounts.** The representational account states the conditions under which a scale exists: a map that preserves the empirical relations of a property, its admissible transformations, and its type [krantz1971]. The model-based account adds that an outcome is inferred from a reading through a model of the instrument and of its interaction with the object [tal2013]. The method commits to the model-based account in its stance on [access](../../foundations/existence-and-access.md). The norm requires both parts: the representational part fixes what a value means on its scale, and the model-based part fixes which quantity a reading measures.
 - **Observation and intervention differ by manipulation.** An intervention sets a variable, whereas observation records the target as it is [hacking1983]. Therefore, an intervention can support a causal claim under fewer assumptions about confounders than observation requires.
@@ -62,6 +65,7 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [bogen1988] ◐ [Bogen & Woodward, "Saving the phenomena", *Philosophical Review* 97(3), 303–352, 1988](https://doi.org/10.2307/2185445)
 - [fisher1935] ◐ [Fisher, *The Design of Experiments*, Oliver and Boyd, 1935](https://en.wikipedia.org/wiki/The_Design_of_Experiments); randomization, replication and blocking as principles of design, checked through secondary summaries
 - [hacking1983] ◐ [Hacking, *Representing and Intervening: Introductory Topics in the Philosophy of Natural Science*, Cambridge University Press, 1983](https://doi.org/10.1017/CBO9780511814563)
+- [knuth1997] ○ Knuth, *The Art of Computer Programming*, vol. 1, *Fundamental Algorithms*, 3rd ed., Addison-Wesley, 1997, §1.1; the finiteness, the definiteness, the inputs, the outputs and the effectiveness of an algorithm
 - [krantz1971] ◐ [Krantz, Luce, Suppes & Tversky, *Foundations of Measurement*, vol. I, *Additive and Polynomial Representations*, Academic Press, 1971](https://shop.elsevier.com/books/additive-and-polynomial-representations/krantz/978-0-12-425401-5)
 - [mayo1996] ◐ [Mayo, *Error and the Growth of Experimental Knowledge*, University of Chicago Press, 1996](https://www.press.uchicago.edu/ucp/books/book/chicago/E/bo3637756.html)
 - [mayo2018] ◐ [Mayo, *Statistical Inference as Severe Testing: How to Get beyond the Statistics Wars*, Cambridge University Press, 2018](https://doi.org/10.1017/9781107286184)

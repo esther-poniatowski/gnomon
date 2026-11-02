@@ -87,6 +87,8 @@ activities:
      norm: "the conclusion follows by an argument from the premises of the scenario"}
   - {id: experimental-design, condition: access, reason: its output, a design, fixes the procedure that obtains the quantity,
      norm: "the possible outcomes discriminate the rival answers to the question"}
+  - {id: method-design, condition: access, reason: its output, a method, fixes the procedure that obtains the answer,
+     norm: "on every admissible input, an execution stops after finitely many steps"}
   - {id: operationalization, condition: access, reason: it states the procedure that obtains values,
      norm: "the procedure assigns values on a stated scale"}
   - {id: derivation, condition: bridging, reason: it derives a linking lemma,
