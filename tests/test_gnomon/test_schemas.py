@@ -17,8 +17,6 @@ from referencing import Registry, Resource
 
 from gnomon import schemas
 
-from .migration import AWAITING_MIGRATION, awaiting_migration
-
 KINDS = schemas.kinds()
 
 
@@ -92,12 +90,7 @@ RECORDS = sorted(
 
 
 CASES = [
-    pytest.param(
-        path,
-        record,
-        id=f"{path.parent.name}/{path.name}",
-        marks=AWAITING_MIGRATION if awaiting_migration(record) else (),
-    )
+    pytest.param(path, record, id=f"{path.parent.name}/{path.name}")
     for path, record in RECORDS
 ]
 

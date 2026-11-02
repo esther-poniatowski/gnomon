@@ -83,7 +83,7 @@ steps:
     activity: derivation
     inputs:
       - type: model
-        ref: ans.grokking.slow-structured-representation
+        ref: mod.grokking.effective-representation
     output:
       type: consequence
       ref: ans.grokking.slow-structured-representation

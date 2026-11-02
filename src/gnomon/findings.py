@@ -337,7 +337,7 @@ VOCABULARY_OVERREACHING_ENTRY = _rule(
     "An entry asserts of every member what only the members of one variant carry.",
 )
 VOCABULARY_MISATTRIBUTED_APPEAL = _rule(
-    "vocabulary/misattributed-appeal", "An explanans appeals to something that is no external system."
+    "vocabulary/misattributed-appeal", "A factor appeals to something that is no external system."
 )
 VOCABULARY_UNBORNE_VARIANT = _rule(
     "vocabulary/unborne-variant", "A variant is carried by no declaration or law, and no maturity admits it."

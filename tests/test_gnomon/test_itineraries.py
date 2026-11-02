@@ -318,21 +318,8 @@ def fixture_itineraries() -> list[Path]:
     return sorted(EXAMPLES.glob("*/itinerary.yml")) if EXAMPLES.is_dir() else []
 
 
-#: The fixtures whose itinerary still takes an answer record as a model, as the earlier design did.
-EARLIER_ANSWER_DESIGN = {"grokking-delayed-generalization"}
-
-
 def itinerary_cases() -> list[Any]:
-    return [
-        pytest.param(
-            path,
-            id=path.parent.name,
-            marks=[pytest.mark.xfail(strict=True, reason="fixture follows the earlier answer design until the pilot migrates it (TODO model-design)")]
-            if path.parent.name in EARLIER_ANSWER_DESIGN
-            else [],
-        )
-        for path in fixture_itineraries()
-    ]
+    return [pytest.param(path, id=path.parent.name) for path in fixture_itineraries()]
 
 
 @pytest.mark.skipif(not fixture_itineraries(), reason="no fixture carries an itinerary")

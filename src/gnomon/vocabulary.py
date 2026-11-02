@@ -86,9 +86,6 @@ FORMULA: tuple[tuple[str, str], ...] = (
     ("variables", "values"),
     ("external_systems", "class"),
     ("organization", "relates"),
-    ("realizations", "by"),
-    ("explanans", "holds"),
-    ("explanans", "under"),
     ("proof_obligations", "antecedent"),
     ("proof_obligations", "consequent"),
     ("parameters", "values"),
@@ -199,14 +196,8 @@ REFERENCE: tuple[tuple[str, str], ...] = (
     ("laws", "signature"),
     ("interface", "variable"),
     ("external_systems", "shares"),
-    ("explanans", "bears_on"),
-    ("explanans", "through"),
-    ("explanans", "separates"),
-    ("explanans", "appeals_to"),
     ("organization", "realized_by"),
     ("organization", "among"),
-    ("realizations", "realizes"),
-    ("realizations", "variant"),
     ("observables", "signature"),
     ("scope_over_instances", "over"),
     ("scope_over_instances", "conditional_on"),
@@ -903,7 +894,7 @@ FORMAL_KEYS: frozenset[str] = frozenset(
 
 
 def misattributed_appeals(record: Mapping[str, Any], systems: Iterable[str]) -> list[Finding]:
-    """Return every explanans appealing to something that is not an external system.
+    """Return every factor of an explanation appealing to something that is not an external system.
 
     An answer may explain the phenomenon by the environment rather than by the target alone: by
     the structure of the inputs, or by the class of system that reads the outputs. Naming that
@@ -911,11 +902,12 @@ def misattributed_appeals(record: Mapping[str, Any], systems: Iterable[str]) -> 
     target declares. A quantity that system owns is reached as a term, under its own symbol.
     """
     declared = set(systems)
+    explanation = (record.get("aim_block") or {}).get("explanation") or {}
     return [
         finding(rules.VOCABULARY_MISATTRIBUTED_APPEAL,
-                f"explanans.appeals_to: {name} is no external system of the target",
-                "explanans", Entry(position, entry), "appeals_to", index)
-        for position, entry in indexed(record, "explanans")
+                f"aim_block.explanation.factors.appeals_to: {name} is no external system of the target",
+                "aim_block", "explanation", "factors", Entry(position, entry), "appeals_to", index)
+        for position, entry in indexed(explanation, "factors")
         for index, name in enumerate(entry.get("appeals_to") or [])
         if isinstance(name, str) and name not in declared
     ]
@@ -1022,7 +1014,7 @@ def overreaching_entries(record: Mapping[str, Any], marked: Mapping[str, str]) -
 
     for block in ("observables", "manifestations", "scope_over_instances",
                   "detection_criterion", "constituents", "index_sets", "variables",
-                  "parameters", "laws", "organization", "realizations", "explanans"):
+                  "parameters", "laws", "organization"):
         for index, entry in indexed(record, block):
             scan(block, (block, Entry(index, entry)), entry)
     holder = record.get("conditions_and_byproducts")
@@ -1273,13 +1265,15 @@ def visible_records(
     names: list[Any] = []
     if kind == "answer":
         question = records.get(str(record.get("answers")), {})
-        subject = question.get("subject") if isinstance(question.get("subject"), Mapping) else {}
+        stated = question.get("subject")
+        subject: Mapping[str, Any] = stated if isinstance(stated, Mapping) else {}
         names = [*((record.get("route") or {}).get("runs_on") or []), record.get("answers"),
                  subject.get("target_system"), subject.get("phenomenon"), *(subject.get("background") or [])]
     elif kind == "model":
         names = [*(record.get("derives_from") or []), record.get("background")]
     elif kind == "binding":
-        target = record.get("target") if isinstance(record.get("target"), Mapping) else {}
+        stated = record.get("target")
+        target: Mapping[str, Any] = stated if isinstance(stated, Mapping) else {}
         phenomenon = records.get(str(target.get("phenomenon")), {})
         names = [record.get("model"), target.get("phenomenon"), phenomenon.get("target_system")]
     found = [records[name] for name in dict.fromkeys(names) if isinstance(name, str) and name in records]

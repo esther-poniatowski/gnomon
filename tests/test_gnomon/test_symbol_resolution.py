@@ -81,7 +81,6 @@ from gnomon.vocabulary import (
 )
 from gnomon.findings import texts
 
-from .migration import awaiting_migration
 from .paths import EXAMPLES, ROOT
 
 CANONICAL = canonical_operators()
@@ -94,8 +93,7 @@ def records() -> list[tuple[str, Mapping[str, Any]]]:
     found = []
     for path in sorted(EXAMPLES.glob("*/*.yml")):
         loaded = yaml.safe_load(path.read_text(encoding="utf-8"))
-        # an answer of the former form is checked by its contract alone until its migration
-        if isinstance(loaded, Mapping) and loaded.get("type") in RECORD_KINDS and not awaiting_migration(loaded):
+        if isinstance(loaded, Mapping) and loaded.get("type") in RECORD_KINDS:
             found.append((str(path.relative_to(ROOT)), loaded))
     return found
 
@@ -401,7 +399,7 @@ def test_every_variant_is_carried_or_admitted_open(case: tuple[str, Mapping[str,
     assert not unborne, f"{name}: {unborne}"
 
 
-def test_an_explanans_appeals_to_a_declared_external_system() -> None:
+def test_a_factor_appeals_to_a_declared_external_system() -> None:
     """An answer may explain by the environment, and names which part of it it draws on."""
     target = {
         "type": "target-system",
@@ -411,12 +409,14 @@ def test_an_explanans_appeals_to_a_declared_external_system() -> None:
     systems = {e["symbol"] for e in target["external_systems"]}
     answer = {
         "type": "answer",
-        "explanans": [{"claim": "a linear decoder reads the outputs", "appeals_to": ["decoder"]}],
+        "aim_block": {"explanation": {"factors": [
+            {"holds": "a linear decoder reads the outputs", "appeals_to": ["decoder"]}
+        ]}},
     }
     assert misattributed_appeals(answer, systems) == []
-    answer["explanans"][0]["appeals_to"] = ["y"]
+    answer["aim_block"]["explanation"]["factors"][0]["appeals_to"] = ["y"]
     assert texts(misattributed_appeals(answer, systems)) == [
-        "explanans.appeals_to: y is no external system of the target"
+        "aim_block.explanation.factors.appeals_to: y is no external system of the target"
     ]
 
 
