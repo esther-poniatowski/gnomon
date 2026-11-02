@@ -14,6 +14,7 @@ This case checks whether the framework can specify a search whose possible pheno
 - [Background laws](background.yml): to know which laws of the target the question admits, and on what warrant.
 - [Phenomenon](phenomenon.yml): to know what the exploration must detect, without a catalogue of phases fixed in advance.
 - [Question](question.yml): to know which results the exploration must deliver.
+- [Model near onset](model.yml): to read the deterministic model that two operations derive from the target, on which the candidate answer rests.
 - [Candidate answer](answer.yml): to examine a deliberately narrow candidate answer.
 - [Assessment](assessment.yml): to learn which tests the candidate fails, and why.
 - [Coupling sweep](design.yml): to read the simulation runs that would detect the phases at each system size.

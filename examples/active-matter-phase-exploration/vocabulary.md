@@ -19,6 +19,11 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `nonrecip_lattice` | bg.nonreciprocal-active-matter.local-dynamics | laws | sp, sp | nonreciprocity of the lattice cross-coupling |
 | `crosscoupling` | bg.nonreciprocal-active-matter.local-dynamics | organization | — | nonreciprocal cross-coupling |
 | `crosscoupling_lattice` | bg.nonreciprocal-active-matter.local-dynamics | organization | — | nonreciprocal cross-coupling on the lattice |
+| `onset` | mod.nonreciprocal-active-matter.near-onset | laws | — | onset of the instability |
+| `onset_distance` | mod.nonreciprocal-active-matter.near-onset | parameters | — | distance to onset within which the linearization holds |
+| `u_star` | mod.nonreciprocal-active-matter.near-onset | parameters | sp | homogeneous ordered state |
+| `Jlin` | mod.nonreciprocal-active-matter.near-onset | variables | — | Jacobian of the homogeneous dynamics of the two species |
+| `gamma_max` | mod.nonreciprocal-active-matter.near-onset | variables | — | largest growth rate of a mode |
 | `k` | phen.nonreciprocal-active-matter.collective-phases | index sets | — | wavevector |
 | `klat` | phen.nonreciprocal-active-matter.collective-phases | index sets | — | lattice wavevector |
 | `lag` | phen.nonreciprocal-active-matter.collective-phases | index sets | — | temporal lag |
@@ -72,11 +77,10 @@ The nodes are kinds, not identified members: which tuples are joined is fixed by
 
 | Sources | Edge | Reach | Through | Ordered tuples |
 | --- | --- | --- | --- | --- |
-| `sp` | `answer_crosscoupling` | `sp` | — | `prod(sp, sp)` |
 | `sp` | `crosscoupling` | `sp` | `G` | `prod(sp, sp)` |
 | `sp` | `crosscoupling_lattice` | `sp` | `Gl` | `prod(sp, sp)` |
 
 ## Operators
 
-- Canonical: `abs`, `adjoint`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
+- Canonical: `abs`, `adjoint`, `and`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `not`, `or`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
 - Declared by this problem: `lattice_lap` (the discrete Laplacian on the declared lattice), `regions` (the admissible regions of a space, of a given linear size and boundary geometry), `sites` (the sites of a finite lattice of a given dimension, size and boundary geometry).

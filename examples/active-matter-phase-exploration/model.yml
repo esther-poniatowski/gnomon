@@ -1,0 +1,70 @@
+# a model derived from the target by two operations: an idealization that removes the noise, and an approximation near onset
+
+_schema: gnomon:model@1
+title: "Deterministic linearization near onset"
+id: mod.nonreciprocal-active-matter.near-onset
+type: model
+status: provisional
+
+derives_from:
+  - system.nonreciprocal-active-matter
+operations:
+  - id: drop-noise
+    kind: idealize
+    acts_on: [system.nonreciprocal-active-matter.W, system.nonreciprocal-active-matter.Q]
+    retires: [system.nonreciprocal-active-matter.W, system.nonreciprocal-active-matter.Q]
+    error: uncontrolled
+    gain: "a deterministic bifurcation problem, whose stationary and oscillatory instabilities separate in the spectrum"
+    rests_on: "the assumption, not shown, that weak fluctuations neither destroy nor reorder the deterministic phases"
+  - id: weak-amplitude
+    kind: approximate
+    acts_on: [system.nonreciprocal-active-matter.u]
+    yields: [u_star, Jlin, gamma_max, onset_distance]
+    regime: "abs(gamma_max) <= onset_distance"
+    error: uncontrolled
+    gain: "a finite-dimensional linearization about the homogeneous ordered state, whose spectrum classifies the instability"
+    rests_on: "the expansion at weak amplitude about the homogeneous ordered state, https://doi.org/10.1038/s41586-021-03375-9 [fruchart2021]"
+
+variables:
+  - name: "Jacobian of the homogeneous dynamics of the two species"
+    symbol: Jlin
+    variant: continuum
+    determined: within
+    signature: []
+    values: "matrices(reals, sp, sp)"
+    expression: "jacobian(F + G, u, u_star)"
+    reading: "The Jacobian linearizes the deterministic local dynamics about the homogeneous ordered state."
+  - name: "largest growth rate of a mode"
+    symbol: gamma_max
+    variant: continuum
+    determined: within
+    signature: []
+    values: reals
+    expression: "max(re(spectrum(Jlin)))"
+    reading: "The variable takes the largest real part among the linearized collective modes."
+
+parameters:
+  - name: "homogeneous ordered state"
+    symbol: u_star
+    variant: continuum
+    signature: [sp]
+    values: "U(sp)"
+    reading: "The state about which the dynamics are linearized."
+  - name: "distance to onset within which the linearization holds"
+    symbol: onset_distance
+    variant: continuum
+    signature: []
+    values: "pos(reals)"
+    reading: "The bound on the largest growth rate below which the approximation near onset is admitted."
+
+laws:
+  - name: "onset of the instability"
+    symbol: onset
+    variant: continuum
+    signature: []
+    role: state-constraint
+    expression: "gamma_max = 0"
+    reading: "The homogeneous ordered state loses stability where the largest growth rate of a mode crosses zero; a real leading eigenvalue gives a stationary loss of stability, and a complex pair an oscillatory one."
+    warrant: derived-in-a-limit
+    rests_on: "The law rests on the operation weak-amplitude, and on the bifurcation analysis of nonreciprocal phase transitions [fruchart2021]."
+    origin: "https://doi.org/10.1038/s41586-021-03375-9"

@@ -1,4 +1,4 @@
-# tests one deliberately narrow exploratory candidate
+# negative for an exploration that derives a catalogue on a reduced model and omits the search and the persistence results
 
 _schema: gnomon:assessment@1
 title: "Assessment of the catalogue of exceptional phase transitions"
@@ -10,53 +10,49 @@ against: quest.nonreciprocal-active-matter.phase-exploration
 
 tests:
   admissibility:
-    scope:
-      verdict: fail
-      evidence: "The answer covers one deterministic continuum subfamily at weak amplitude, whereas the question includes the continuum and lattice variants. The search of the question also varies the stochastic realization and the spatial dimension, along with the admitted self-dynamics and coupling operators."
-    grain:
-      verdict: fail
-      evidence: "The catalogue supplies three qualitative labels but no diagnostic at each (L, d). The answer also supplies neither recurrence distributions nor the finite-size scaling that separates a regime that disappears as L grows from a thermodynamic phase."
-    contrast:
-      verdict: not-applicable
-      evidence: "The question declares locus: none and names no foil."
-    relation:
-      verdict: not-applicable
-      evidence: "Exploration requests no relation between an explanans and an already specified phenomenon."
-    individuation:
-      verdict: pass
-      evidence: "The answer retains the declared species fields and derives its Jacobian from the target operators, so it introduces no incompatible bearer."
-    admissible-explanans:
-      verdict: not-applicable
-      evidence: "The exploratory question requests no explanans. The admissibility bound therefore has nothing to restrict."
-    modal-strength:
-      verdict: fail
-      evidence: "The question requests the actual strength for the admitted stochastic models. Relative to these models, the answer claims at most a possible strength: it derives the regimes in a noise-free reduction without claiming that they occur in the stochastic models."
     product:
       verdict: fail
-      evidence: "An exploration must return the detected catalogue and persistence classification over the declared search space. The candidate omits the lattice search and every persistence result."
+      evidence: "An exploration returns the detected catalogue and the classification of persistence over the declared search space. The candidate omits the lattice search, and the detection of each of its three classes stays pending."
+    scope:
+      verdict: fail
+      evidence: "The domain of the answer is the deterministic continuum subfamily near onset, whereas the question covers the continuum and lattice variants of the stochastic class, at every size and dimension that it selects."
+    grain:
+      verdict: fail
+      evidence: "The catalogue gives three qualitative classes without a diagnostic at each size and dimension, without distributions over realizations, and without the finite-size scaling that separates a persistent phase."
+    individuation:
+      verdict: pass
+      evidence: "The derived model keeps the species fields of the target and builds its Jacobian from the operators of the target, so it introduces no incompatible bearer."
+    binding:
+      verdict: not-applicable
+      evidence: "The claim bears on a formal class, so the answer declares its use; the operations of the derived model carry its relation to the target."
+    modal-strength:
+      verdict: fail
+      evidence: "The question requests the actual strength for the admitted stochastic models. Relative to them, the answer claims at most a possible strength, since it derives the regimes in a model without noise."
+    space:
+      verdict: fail
+      evidence: "The space varies the cross-coupling only, whereas the question also varies the self-dynamics, the size and the dimension, and covers the lattice observables."
   warrant:
     phenomenon-established:
       verdict: not-applicable
-      evidence: "The phenomenon is the product of the exploration and was deliberately left open."
+      evidence: "The phenomenon is the product of the exploration, and was deliberately left open."
     foil-evidence:
       verdict: not-applicable
-      evidence: "No foil is specified."
+      evidence: "The question names no foil."
     law-warrant:
       verdict: pass
-      evidence: "The candidate labels both laws as limit derivations tied to a published bifurcation analysis [fruchart2021]. The labels therefore claim no measured property of the full target class."
+      evidence: "The law of onset is derived in a limit, from the operation weak-amplitude and a published bifurcation analysis [fruchart2021], so it claims no measured property of the full class."
     closure:
       verdict: fail
-      evidence: "The generic target laws do not select the homogeneous ordered state or the normal form at weak amplitude from which the candidate laws are derived."
-    fidelity:
-      verdict: not-applicable
-      evidence: "The question declares required accuracy not applicable because no empirical measurement is being matched."
+      evidence: "The derived model states the onset of the instability, not the normal form whose phase diagram yields the three classes, so the catalogue rests on the cited diagrams rather than on the laws of the model."
+    adequacy-to-use:
+      verdict: pass
+      evidence: "The linearization keeps the spectral distinction between stationary and oscillatory instabilities, which the conceptual exploration requires."
     robustness:
       verdict: fail
-      evidence: "The answer relaxes neither the idealization that removes noise nor the reduction to weak amplitude, and it supplies no finite-size analysis."
+      evidence: "Both operations of the derived model have an uncontrolled error: the answer relaxes neither the removal of the noise nor the linearization near onset, and supplies no analysis at finite size."
     selection:
       verdict: not-applicable
-      evidence: "Membership in the target class is not conditioned on observing a phase."
+      evidence: "Membership in the target class does not depend on observing a phase."
 
 obligations: []
 appraisal: []
-maturity: {}
