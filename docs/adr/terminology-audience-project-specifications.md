@@ -11,7 +11,7 @@ aliases:
 # Terminology, audience and project specifications
 
 > [!WARNING] Amended
-> The decision on [research as the scope of gnomon](research-scope.md) amends this decision: the mechanism of the notation stays in `gnomon`, the glossary and the audience move to `ekthesis`, and the project specification divides between a research root record of `gnomon`, the bindings of `ekthesis` and the `repository.yml` of the project.
+> The decision on [research as the scope of gnomon](research-scope.md) amends this decision: the mechanism of the notation stays in `gnomon`, the glossary and the audience move to `ekthesis`, and the project specification divides between the problem and question records of `gnomon`, the bindings of `ekthesis` and the `repository.yml` of the project.
 
 > [!QUESTION] Goal: which tool provides the mechanisms of glossaries, notations, audience specifications and project specifications, and which repository holds their instances?
 

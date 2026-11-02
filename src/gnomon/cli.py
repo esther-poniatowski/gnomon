@@ -11,6 +11,7 @@ validate : Validate each record against the schema of its type.
 status : List the open conditions of the questions of a workspace.
 vocabulary : Collect the symbols and operators of one problem into a table.
 itinerary : Check every itinerary of one problem against the activity and product-type registries.
+tree : Print the question tree of a project, from its problems to the assessments of its answers.
 """
 
 import json
@@ -25,6 +26,7 @@ from . import info as pkg_info, __version__
 from .findings import Finding
 from .itineraries import itinerary_problems
 from .sarif import Located, sarif_log
+from .views import question_tree, render_tree
 from .vocabulary import load_problem, render_markdown, render_yaml
 
 app = typer.Typer(add_completion=False, no_args_is_help=True)
@@ -122,18 +124,19 @@ class OutputFormat(str, Enum):
 
 
 def _read_records(
-    source: Path, tolerant: bool
+    source: Path, tolerant: bool, pattern: str = "*.yml"
 ) -> tuple[dict[str, Mapping[str, Any]], dict[str, Path], list[str]]:
     """Return the records of ``source`` keyed by identifier, the file of each, and the read failures.
 
-    A later file carrying an identifier already read replaces the earlier one. When ``tolerant`` is
+    The files are those that ``pattern`` matches, such as ``**/*.yml`` for a whole tree. A later
+    file carrying an identifier already read replaces the earlier one. When ``tolerant`` is
     false, a file that cannot be read or parsed raises its error; otherwise the failure is returned
     as a line naming the file, and the remaining files are read.
     """
     records: dict[str, Mapping[str, Any]] = {}
     files: dict[str, Path] = {}
     failures: list[str] = []
-    for path in sorted(source.glob("*.yml")):
+    for path in sorted(source.glob(pattern)):
         if tolerant:
             try:
                 record = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -246,6 +249,21 @@ def cli_itinerary(
         _write_log(sarif_log(located, __version__, stopped), output)
     if problems or stopped:
         raise typer.Exit(code=1)
+
+
+@app.command("tree")
+def cli_tree(
+    directory: str = typer.Argument(..., help="Directory holding the records of a project, read recursively."),
+) -> None:
+    """Print the question tree of a project, from its problems to the assessments of its answers."""
+    source = Path(directory)
+    if not source.is_dir():
+        typer.echo(f"no such directory: {source}", err=True)
+        raise typer.Exit(code=1)
+    records, _, failures = _read_records(source, tolerant=True, pattern="**/*.yml")
+    for failure in failures:
+        typer.echo(failure, err=True)
+    typer.echo(render_tree(question_tree(records)), nl=False)
 
 
 @app.callback()

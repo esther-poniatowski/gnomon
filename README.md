@@ -49,7 +49,7 @@ The **method** specifies an inquiry in [ordered stages](docs/epistemology/proces
 
 The **vocabulary records** of a project separate the meaning of a term from its symbols, as the [decision on concepts, glossaries and notations](docs/adr/concepts-glossaries-notations.md) states. A concept record holds the meaning of a concept, which stays the same across projects. A notation composes each symbol from declared bases, modifiers and index sets. Glossaries and audiences serve readers, so `ekthesis` specifies them, as the [decision on the scope of gnomon](docs/adr/research-scope.md) states.
 
-The **research root record** of a project holds its questions and its goals, and references the problem and question records that state them.
+The **views** of a project are generated from its records. The question tree presents each problem, the questions that serve it, their subquestions, their candidate answers and the assessments of those answers, so no record restates the questions and the goals of a project.
 
 The **language** states the content of each record. Every declared quantity carries a symbol, and each record declares its symbols in one table. A formula names only declared symbols, those of its own record or, by reference, those of another record of the same problem. Two consequences follow. A researcher writing a law must name quantities that a record already declares. A reader can find every declaration in one table.
 
@@ -73,14 +73,14 @@ Seven worked inquiries, from as many domains, exercise the method, and each reco
 - [x] Checks each filled record against the requirements of its epistemic aim, and each closed field against its registry.
 - [x] Collects the symbols and the operators of a research problem into one table.
 - [x] Checks each step of an itinerary of inquiry against the registry of epistemic activities.
+- [x] Validates each record against the schema of its type.
+- [x] Records each concept of a project with one meaning.
 - [x] Formalizes the decomposition of a question into subquestions.
+- [x] Generates the question tree of a project, from its problems to the assessments of its answers.
 - [ ] Scaffolds a research workspace from a standard template.
-- [ ] Validates each record against the schema of its type.
 - [ ] Reports the open conditions of each question, and the acts ready to perform.
 - [ ] Computes the comparison of a model with the data through its binding.
-- [ ] Records each concept of a project with one meaning.
 - [ ] Composes the symbols of a notation from declared bases, modifiers and index sets, and generates their LaTeX macros.
-- [ ] Records the questions and the goals of a project in a research root record.
 - [ ] Exports the units, the symbols and the relations of a project under the contract that `ekthesis` publishes.
 - [ ] Formalizes a definition.
 - [ ] Formalizes the derivation yielding an answer.

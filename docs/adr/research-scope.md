@@ -3,12 +3,15 @@ tags:
   - decision
 status: accepted
 created: 2026-10-30
-revised: 2026-10-31
+revised: 2026-11-02
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Research as the scope of gnomon
 ---
 # Research as the scope of gnomon
+
+> [!WARNING] Amended
+> On 2026-11-02, this decision drops the research root record that it gave to `gnomon`. The questions of a project are question records, linked by the relation `subquestion-of`, and its goals are problem records, each with its demand and its type of result. A view generated from these records, the question tree, presents the problems and the questions of a project. The root record was weighed against the [admission of a record kind](record-kind-admission.md#^admission-conditions), and it fails two conditions. The root record fails irreducibility, since a tool computes the questions of a project and their roots from the records. The root record also fails non-distortion, since the problem and question records already state its content without loss.
 
 > [!QUESTION] Goal: which tool specifies expositions, glossaries, audiences and project specifications, and which units does `gnomon` keep?
 
@@ -34,7 +37,7 @@ Under this test, the units divide as follows:
     - the conventions of typography;
     - the LaTeX macros generated from the symbols.
 
-    `gnomon` also receives the research root record of a project. That record holds the questions and the goals of the project.
+    The questions and the goals of a project are stated by its question and problem records.
 - **`ekthesis` receives** the exposition records, together with the mechanisms serving them:
     - the status `core` or `elaboration` of a component of an argument;
     - the rhetorical relations, each with its devices;
@@ -69,7 +72,7 @@ An artifact may rename a symbol to follow the convention of its venue. The renam
 - **The status `core` or `elaboration` is relative to one argument.** An argument may answer a question stated by no research record, so the same unit may be core in one argument and an elaboration in another. An assembly of research is also relative to a question, but to a question recorded by the inquiry. Its checks read the [grounds](../epistemology/objects/knowledge/grounds-and-dependence.md#^ground) of an answer. Those grounds follow from declared dependencies. In research, an act is relevant through the [open condition](../epistemology/processes/inquiry/choice-of-act.md#^open-condition) served by the act, so no declared status is needed.
 - **Each family declares its own relations.** An epistemic act fixes the relation between the objects consumed and produced by the act. A rhetorical relation, such as an illustration, which falls under the abstraction–instance form of elaboration in Rhetorical Structure Theory [mann1988], or an antithesis, is realized by a device, such as a connector or a synthesis. Therefore, `gnomon` declares the relations between research units, `ekthesis` declares the rhetorical relations and the class of the contract required by each, and the contract of the export joins the two.
 - **A concept and its symbols serve research, whereas its names serve readers.** A concept is produced by explication, and keeps one meaning. A researcher formulates and manipulates concepts in a notation, and writes derivations with its conventions and its macros, so the notation stays with research. An artifact selects among the symbols of that notation, many for a thesis and few for a poster, and may print a symbol in the convention of its venue. Therefore, neither the density nor the printed forms required by research bind an artifact. A research record names a concept by its identifier and its gloss, whereas the names admitted or forbidden for an audience matter only to a reader. Therefore, the glossary leaves `gnomon`.
-- **A reference across tools creates no dependency.** Under the decision of `geonexus` on [tool roles](https://github.com/esther-poniatowski/geonexus/blob/827474dca64daef110b9d7fe36a4127c2b32b167/docs/_decisions/tool-roles.md), a record of one field refers to a record of another field by a logical target, typed by the contract that the target must satisfy. Therefore, the project specification divides by the work that needs each part. The questions and the goals of a project state its inquiry, so they form a research root record of `gnomon`. The bindings to a glossary, a notation and audiences serve the presentation of the project, so they go to `ekthesis`. The binding names the notation of `gnomon` by a logical target. The identity of the project serves neither tool alone, and stays in its `repository.yml`.
+- **A reference across tools creates no dependency.** Under the decision of `geonexus` on [tool roles](https://github.com/esther-poniatowski/geonexus/blob/827474dca64daef110b9d7fe36a4127c2b32b167/docs/_decisions/tool-roles.md), a record of one field refers to a record of another field by a logical target, typed by the contract that the target must satisfy. Therefore, the project specification divides by the work that needs each part. The questions and the goals of a project state its inquiry, so they are stated by the question and problem records of `gnomon`. The bindings to a glossary, a notation and audiences serve the presentation of the project, so they go to `ekthesis`. The binding names the notation of `gnomon` by a logical target. The identity of the project serves neither tool alone, and stays in its `repository.yml`.
 
 ## Options weighed
 
@@ -100,9 +103,9 @@ The present decision takes the last option. Identifiers, schemas, typed relation
     - `exposition-family` moves to `ekthesis`;
     - `relation-registry` keeps the relations between research units;
     - `assembly-schema` keeps the gaps of an assembly, its limits of validity and its deferred components. The goal also keeps the query of the laws to which an answer is exposed, computed over the grounds of the answer rather than over a declared status, as the [exposure rule](../epistemology/objects/knowledge/grounds-and-dependence.md#^weakest-link) states. The status `core` or `elaboration`, the views and the check of the core route move;
-    - `vocabulary-records` keeps the concept record, the notation and the research root record of a project; the glossary, the audience and the bindings of a project move;
+    - `vocabulary-records` keeps the concept record and the notation; the glossary, the audience and the bindings of a project move;
     - `record-view` stays, since a researcher checks a record through its view, and the view presents no argument.
-- The schema and the template of the notation, and the checks of symbols, move from `geonexus` to `gnomon`, in the order of extraction set by the decision on tool roles. The project specifications of the standalone projects migrate in the same order: their questions and goals become research root records.
+- The schema and the template of the notation, and the checks of symbols, move from `geonexus` to `gnomon`, in the order of extraction set by the decision on tool roles. The project specifications of the standalone projects migrate in the same order: their questions become question records, and their goals become problem records.
 - The export is a copy generated from its sources. The [rule of one source](one-source-per-unit.md#^generated-copies-only) admits such a copy.
 - The moved files keep their history, carried by `git filter-repo`.
 
