@@ -11,6 +11,9 @@ aliases:
 # Research as the scope of gnomon
 
 > [!WARNING] Amended
+> On 2026-11-02, the decision of `geonexus` on [designation and typography](https://github.com/esther-poniatowski/geonexus/blob/dc3ed97106ae909724fdad76c5e88e01a10ae043/docs/_decisions/designation-and-typography.md) moves the notation out of `gnomon`, together with the glossary out of `ekthesis`, to one designation tool. A research record states the identifiers of its symbols and no printed form, the export carries no LaTeX macro, and an operator states its arity. The passages that keep the notation in `gnomon` stand until the goal `vocabulary-records` rewrites them.
+
+> [!WARNING] Amended
 > On 2026-11-02, this decision drops the research root record that it gave to `gnomon`. The questions of a project are question records, linked by the relation `subquestion-of`, and its goals are problem records, each with its demand and its type of result. A view generated from these records, the question tree, presents the problems and the questions of a project. The root record was weighed against the [admission of a record kind](record-kind-admission.md#^admission-conditions), and it fails two conditions. The root record fails irreducibility, since a tool computes the questions of a project and their roots from the records. The root record also fails non-distortion, since the problem and question records already state its content without loss.
 
 > [!QUESTION] Goal: which tool specifies expositions, glossaries, audiences and project specifications, and which units does `gnomon` keep?

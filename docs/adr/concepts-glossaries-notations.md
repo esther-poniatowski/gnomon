@@ -11,6 +11,9 @@ aliases:
 # Concepts, glossaries and notations
 
 > [!WARNING] Amended
+> On 2026-11-02, the decision of `geonexus` on [designation and typography](https://github.com/esther-poniatowski/geonexus/blob/dc3ed97106ae909724fdad76c5e88e01a10ae043/docs/_decisions/designation-and-typography.md) moves the notation and the glossary to one designation tool. The concept record stays in `gnomon`, and a notation entry names the unit that it denotes through `denotes`.
+
+> [!WARNING] Amended
 > The decision on [research as the scope of gnomon](research-scope.md) amends this decision: the concept record and the notation stay in `gnomon`, and the glossary moves to `ekthesis`.
 
 > [!QUESTION] Goal: which record holds the meaning of a concept, which record holds its names, and how does a notation compose its symbols?
