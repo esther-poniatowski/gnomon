@@ -841,18 +841,35 @@ def test_a_value_outside_its_vocabulary_is_reported() -> None:
 def test_a_record_field_is_read_apart_from_a_field_of_the_same_name() -> None:
     """A record field and an entry field may share a name, under separate vocabularies.
 
-    No field of the current templates collides, the last one having gone when the answer stopped
-    calling its quantities terms, so the rule is stated against a vocabulary written here: a
-    collision must not let one lookup answer for the other.
+    The rule is stated against a vocabulary written here: a collision of names must not let one
+    lookup answer for the other.
     """
     admitted = {
-        ".status": frozenset({"draft"}),
+        "status": frozenset({"draft"}),
         "terms.status": frozenset({"load-bearing"}),
     }
     record = {"status": "no-such-state", "terms": [{"status": "no-such-status"}]}
     assert texts(inadmissible_values(record, admitted)) == [
-        "record.status: no-such-state is not admitted",
+        "status: no-such-state is not admitted",
         "terms.status: no-such-status is not admitted",
+    ]
+
+
+def test_two_fields_of_one_block_that_share_a_name_take_the_vocabulary_of_their_own_path() -> None:
+    """In an answer, the kind of an explanatory factor is closed, and a varied factor holds a symbol.
+
+    Both fields are named ``factor`` inside the block ``aim_block``, so a lookup by block and name
+    would check the symbol against the kinds of a factor.
+    """
+    admitted = admitted_values("answer")
+    assert "aim_block.explanation.factors.factor" in admitted
+    assert "aim_block.exploration.space.varied.factor" not in admitted
+    record = {"type": "answer", "aim_block": {
+        "exploration": {"space": {"varied": [{"factor": "g", "range": "[0, 2]"}]}},
+        "explanation": {"factors": [{"factor": "no-such-kind"}, {"factor": "condition"}]},
+    }}
+    assert texts(inadmissible_values(record, admitted)) == [
+        "aim_block.explanation.factors.factor: no-such-kind is not admitted",
     ]
 
 

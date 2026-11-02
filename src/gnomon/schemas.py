@@ -190,6 +190,32 @@ def overlay(field: Mapping[str, Any], options: Options) -> dict[str, Any] | None
     return added or None
 
 
+def vocabulary_paths(base: Mapping[str, Any]) -> dict[str, str]:
+    """Return the vocabulary bound to each closed field of a base schema, keyed by the path of the field.
+
+    The path joins the keys from the root with dots; an entry of a list adds no segment.
+
+    >>> vocabulary_paths({"properties": {"status": {"x-vocabulary": ".status"},
+    ...     "laws": {"items": {"properties": {"role": {"x-vocabulary": "laws.role"}}}}}})
+    {'status': '.status', 'laws.role': 'laws.role'}
+    """
+    bound: dict[str, str] = {}
+
+    def walk(node: Mapping[str, Any], path: tuple[str, ...]) -> None:
+        for name, child in (node.get("properties") or {}).items():
+            if not isinstance(child, Mapping):
+                continue
+            if child.get("x-vocabulary"):
+                bound[".".join((*path, name))] = str(child["x-vocabulary"])
+            walk(child, (*path, name))
+        items = node.get("items")
+        if isinstance(items, Mapping):
+            walk(items, path)
+
+    walk(base, ())
+    return bound
+
+
 def identifier(kind: str, version: int) -> str:
     """Return the logical identifier of the contract of a record type."""
     return f"{NAMESPACE}:{kind}@{version}"

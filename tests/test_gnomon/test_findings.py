@@ -100,14 +100,14 @@ def test_a_cycle_and_a_repeated_step_are_discriminated_by_their_content() -> Non
 
 def test_a_closed_field_lies_at_its_full_path() -> None:
     """The message names the top-level block and the field alone; the locus keeps every level."""
-    admitted = {"laws.role": frozenset({"evolution"}), ".status": frozenset({"draft"})}
+    admitted = {"laws.inner.role": frozenset({"evolution"}), "status": frozenset({"draft"})}
     record = {"status": "wrong", "laws": [{"symbol": "f", "inner": {"role": "bad"}},
                                           {"inner": {"role": ["evolution", "worse"]}}]}
     found = inadmissible_values(record, admitted)
     assert [f.text for f in found] == [
-        "record.status: wrong is not admitted",
-        "laws.role: bad is not admitted",
-        "laws.role: worse is not admitted",
+        "status: wrong is not admitted",
+        "laws.inner.role: bad is not admitted",
+        "laws.inner.role: worse is not admitted",
     ]
     assert places(found) == [("/status", ""), ("/laws", "f/inner/role"), ("/laws/1/inner/role/1", "")]
 

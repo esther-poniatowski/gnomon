@@ -1,5 +1,7 @@
-# The closed vocabularies of the inquiry records, keyed by the block that encloses each field
-# and the field itself. A key opening with a dot names a field of the record itself.
+# The closed vocabularies of the inquiry records. A key names the block that encloses a field and
+# the field itself, and a key opening with a dot names a field of the record itself. The key only
+# names the vocabulary: the base schema of each record type binds a closed field to its vocabulary
+# through the keyword `x-vocabulary`, at the path of the field.
 #
 # Source of truth for the checkers. A closed field holds one of its listed values, or stays empty
 # while it is not filled. The requirement registry decides whether an empty field is a gap.
