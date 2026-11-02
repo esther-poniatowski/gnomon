@@ -1,0 +1,9 @@
+_schema: gnomon:concept@1
+title: "Coexistence"
+id: concept.microbial.coexistence
+type: concept
+status: provisional
+
+gloss: "the persistence of every population of a community, without one of them vanishing"
+kind: property
+source: "the research problem of this case, in description.md"

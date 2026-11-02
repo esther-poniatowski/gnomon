@@ -175,6 +175,50 @@ def test_every_reference_and_formula_identifier_resolves(case: tuple[str, Mappin
     assert not problems, f"{name}: {problems}"
 
 
+def record_references() -> list[tuple[str, str]]:
+    """Return every reference to a whole record in the fixture tree, with the file making it.
+
+    A reference to a whole record has the number of segments that its prefix fixes, so a
+    reference to a unit, one segment longer, is left to the check of units. The identifier of a
+    record is its own declaration, not a reference.
+    """
+    from gnomon.identifiers import RECORD_SEGMENTS
+
+    found: list[tuple[str, str]] = []
+
+    def walk(node: Any, name: str) -> None:
+        if isinstance(node, Mapping):
+            for key, value in node.items():
+                if key != "id":
+                    walk(value, name)
+        elif isinstance(node, list):
+            for item in node:
+                walk(item, name)
+        elif isinstance(node, str) and " " not in node:
+            parts = node.split(".")
+            if RECORD_SEGMENTS.get(parts[0]) == len(parts) and all(parts):
+                found.append((name, node))
+
+    for path in sorted(EXAMPLES.glob("*/*.yml")) if EXAMPLES.is_dir() else []:
+        walk(yaml.safe_load(path.read_text(encoding="utf-8")), str(path.relative_to(ROOT)))
+    return found
+
+
+RECORD_REFERENCES = record_references()
+EXAMPLE_IDS = {
+    str(loaded["id"])
+    for path in (sorted(EXAMPLES.glob("*/*.yml")) if EXAMPLES.is_dir() else [])
+    if isinstance(loaded := yaml.safe_load(path.read_text(encoding="utf-8")), Mapping) and "id" in loaded
+}
+
+
+@pytest.mark.skipif(not RECORD_REFERENCES, reason="no reference to a whole record is made")
+@pytest.mark.parametrize("reference", RECORD_REFERENCES, ids=[f"{n}:{r}" for n, r in RECORD_REFERENCES] or ["none"])
+def test_every_reference_to_a_record_names_a_record(reference: tuple[str, str]) -> None:
+    name, text = reference
+    assert text in EXAMPLE_IDS, f"{name}: no record carries the identifier {text}"
+
+
 MODELS = [(name, record) for name, record in CASES if record.get("type") == "model"]
 
 
