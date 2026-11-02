@@ -10,60 +10,56 @@ against: quest.ntk.linearized-dynamics-validity
 
 tests:
   admissibility:
-    scope:
-      verdict: pass
-      evidence: "The answer states assumptions on depth and inputs. The theorem also states the regularity of the activation and the initialization law. A final assumption imposes a positive gap of the limiting kernel. Together the assumptions identify a validity domain inside the declared model class."
-    grain:
-      verdict: pass
-      evidence: "Separate bounds of order m^(-1/2) are given for Eout, Edrift, and Elimit. The two claims about trajectories cover every nonnegative training time. The claim about the limit gives convergence in probability over initialization."
-    contrast:
-      verdict: not-applicable
-      evidence: "The question declares no foil."
-    relation:
-      verdict: pass
-      evidence: "The source theorem proves the three mathematical implications from the stated assumptions to the discrepancy bounds."
-    individuation:
-      verdict: pass
-      evidence: "The answer retains the target's parameter vector, output trajectories, and empirical kernel and introduces only scalar bounds derived from these quantities."
-    admissible-explanans:
-      verdict: not-applicable
-      evidence: "The question deliberately admits every declared part of the formal model as a source of its consequences."
-    modal-strength:
-      verdict: pass
-      evidence: "The answer claims the necessary strength that the question requests: under the assumptions of the theorem, the bounds hold with probability tending to one over the declared initialization distribution. Whether the claim holds is decided by the warrant tests of closure and law warrant."
     product:
       verdict: pass
-      evidence: "The answer supplies a validity domain and three bounds at finite width. The record also supplies their convergence modes and full training horizons. Together, these fields deliver the requested consequences of the model."
+      evidence: "The answer supplies a validity domain and three bounds at finite width, with their convergence mode and a horizon covering every training time. Together, these deliver the consequences that the question requests."
+    scope:
+      verdict: pass
+      evidence: "The domain of the answer conjoins its four assumptions on the gap of the limiting kernel, the inputs and the activation. It lies inside the declared class of networks, at fixed depth, as the question requires."
+    grain:
+      verdict: pass
+      evidence: "The claim bounds Eout, Edrift and Elimit separately at order m^(-1/2). The two bounds on trajectories cover every training time, and the third holds in probability over initialization."
+    individuation:
+      verdict: pass
+      evidence: "The route runs on the target, and the claim reaches the features that the phenomenon declares, so the answer introduces no quantity of its own."
+    binding:
+      verdict: not-applicable
+      evidence: "The claim bears on a formal class, so the answer declares its use instead of a binding."
+    modal-strength:
+      verdict: pass
+      evidence: "The answer claims the necessary strength that the question requests: under the assumptions of the theorem, the bounds hold with probability tending to one over the declared initialization law."
+    consequence:
+      verdict: pass
+      evidence: "The derived law states the three bounds and their rate, and discharges the three proof obligations of the question by name."
   warrant:
     phenomenon-established:
       verdict: pass
-      evidence: "The cited theorem at finite width and the result on the kernel limit derive all three manifestations of convergence."
+      evidence: "The cited theorem at finite width, with the result on the limiting kernel, derives the three manifestations of convergence."
     foil-evidence:
       verdict: not-applicable
-      evidence: "No foil is specified."
+      evidence: "The question declares no foil."
     law-warrant:
       verdict: pass
-      evidence: "Each answer law identifies the theorem or limiting result on which its declared derivation rests."
+      evidence: "The warrant of the answer is the gradient flow of the background, and the route names the theorem from which the bounds follow."
     closure:
       verdict: pass
-      evidence: "The proof starts from the declared fully connected network and its initialization under neural tangent parameterization. The proof also uses gradient flow on the squared loss and the shared initial output. The proof then bounds the resulting trajectories."
-    fidelity:
-      verdict: not-applicable
-      evidence: "The question requests consequences of a formal model and declares measurement accuracy not applicable."
+      evidence: "The proof starts from the declared network and its initialization under neural tangent parameterization, uses gradient flow on the squared loss from the shared initial outputs, and bounds the resulting trajectories."
+    adequacy-to-use:
+      verdict: pass
+      evidence: "The bounds hold uniformly in training time at every finite width, which is the property that the use of the linearized dynamics as a stand-in requires."
     robustness:
       verdict: not-applicable
-      evidence: "The answer introduces no idealization beyond the hypotheses of the theorem."
+      evidence: "The answer rests on no idealization; each assumption of the theorem bounds its domain."
     selection:
       verdict: not-applicable
-      evidence: "Membership in the network class does not depend on whether the linearization under neural tangent parameterization succeeds."
+      evidence: "Membership in the class of networks does not depend on whether the linearization succeeds."
 
 obligations:
   - verdict: pass
-    evidence: "The uniform output bound gives Tout = infinity, Bout = Bout_ans, and max_{t >= 0} Eout <= Bout_ans with Bout_ans tending to zero at order m^(-1/2)."
+    evidence: "The claim bounds max_{t} Eout by Bout for every training time, with m * Bout^2 <= Cout^2, so Bout vanishes at order m^(-1/2)."
   - verdict: pass
-    evidence: "The estimate of kernel stability gives Tdrift = infinity and max_{t >= 0} Edrift <= Bdrift_ans with a bound of order m^(-1/2) that vanishes as width grows."
+    evidence: "The claim bounds max_{t} Edrift by Bdrift for every training time, with m * Bdrift^2 <= Cdrift^2, so the drift vanishes as width grows."
   - verdict: pass
-    evidence: "The initial kernel concentrates, so Elimit <= Binit_ans holds in probability, with Binit_ans tending to zero at order m^(-1/2)."
+    evidence: "The claim bounds Elimit by Binit in probability over initialization, with m * Binit^2 <= Cinit^2."
 
 appraisal: []
-maturity: {}

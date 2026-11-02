@@ -13,4 +13,5 @@ Holds the assessments on which an architecture decision rests, until that decisi
 
 - [Audit - Model design (F)](model-design-f.md): gives one expert assessment of the proposed model design, which the synthesis weighs
 - [Audit - Model design (S)](model-design-s.md): gives the second expert assessment of the proposed model design, which the synthesis weighs
+- [Audit - Model design (Pilot)](model-design-pilot.md): records what the four inquiries of the pilot ratify, amend or leave open of the synthesis
 - [Audit - Model design (Synth)](model-design-synth.md): reconciles the two assessments, and states the resolutions that the pilot of the [decision on answers, models and bindings](../adr/answers-models-bindings.md) must ratify

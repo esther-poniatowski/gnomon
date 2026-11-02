@@ -66,6 +66,10 @@ manifestations:
         symbol: mode_out
         values: "enum(\"in-probability\", \"almost-sure\", \"mean-square\", \"in-distribution\")"
         observed:
+      - name: "width-independent constant of the bound on the outputs"
+        symbol: Cout
+        values: "pos(reals)"
+        observed:
   - name: "vanishing drift of the empirical kernel"
     symbol: kernel_drift_vanishes
     form: scaling
@@ -86,6 +90,10 @@ manifestations:
         symbol: mode_drift
         values: "enum(\"in-probability\", \"almost-sure\", \"mean-square\", \"in-distribution\")"
         observed:
+      - name: "width-independent constant of the bound on the drift of the kernel"
+        symbol: Cdrift
+        values: "pos(reals)"
+        observed:
   - name: "vanishing distance to the limiting kernel"
     symbol: limit_error_vanishes
     form: scaling
@@ -101,6 +109,10 @@ manifestations:
       - name: "mode of convergence of the initial kernel over initialization draws"
         symbol: mode_init
         values: "enum(\"in-probability\", \"almost-sure\", \"mean-square\", \"in-distribution\")"
+        observed:
+      - name: "width-independent constant of the bound on the initial kernel"
+        symbol: Cinit
+        values: "pos(reals)"
         observed:
 
 scope_over_instances:

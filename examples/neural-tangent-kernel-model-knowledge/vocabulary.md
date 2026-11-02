@@ -21,6 +21,9 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `Bdrift` | phen.ntk.linearized-dynamics | manifestations.features | — | finite-width bound on the drift of the empirical kernel |
 | `Binit` | phen.ntk.linearized-dynamics | manifestations.features | — | finite-width bound on the discrepancy from the limiting kernel |
 | `Bout` | phen.ntk.linearized-dynamics | manifestations.features | — | finite-width bound on the discrepancy between output trajectories |
+| `Cdrift` | phen.ntk.linearized-dynamics | manifestations.features | — | width-independent constant of the bound on the drift of the kernel |
+| `Cinit` | phen.ntk.linearized-dynamics | manifestations.features | — | width-independent constant of the bound on the initial kernel |
+| `Cout` | phen.ntk.linearized-dynamics | manifestations.features | — | width-independent constant of the bound on the outputs |
 | `Tdrift` | phen.ntk.linearized-dynamics | manifestations.features | — | training horizon for the bound on the drift of the kernel |
 | `Tout` | phen.ntk.linearized-dynamics | manifestations.features | — | training horizon for the bound on the outputs |
 | `mode_drift` | phen.ntk.linearized-dynamics | manifestations.features | — | mode of convergence of the bound on the drift of the kernel over initialization draws |
@@ -57,5 +60,5 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 
 ## Operators
 
-- Canonical: `abs`, `adjoint`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
+- Canonical: `abs`, `adjoint`, `and`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `not`, `or`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
 - Declared by this problem: `at_zero` (the value of a trajectory at zero training time), `grad_output` (the gradient with respect to the output vector), `grad_parameter` (the gradient with respect to the parameter vector), `limiting_ntk` (the deterministic neural tangent kernel in the infinite-width limit), `lipschitz` (predicate that a real-valued map is Lipschitz continuous), `lipschitz_derivative` (predicate that a real-valued map has a Lipschitz derivative), `network` (the outputs of a fully connected network), `ntk` (the empirical neural tangent kernel), `parameter_count` (the number of parameters fixed by width and depth), `risk` (the squared empirical risk).

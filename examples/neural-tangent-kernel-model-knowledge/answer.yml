@@ -1,130 +1,55 @@
-# positive fixture for answer and assessment
+# positive fixture for answer and assessment; the route runs on the target, a formal class, so no model and no binding
 
 _schema: gnomon:answer@1
 title: "Theorem of uniform linearization under neural tangent parameterization"
-statement: "At fixed depth, the theorem assumes bounded inputs and a regular activation. The theorem also assumes independent initialization under neural tangent parameterization and a positive spectral gap of the limiting kernel on the training set. Under the four assumptions, gradient flow keeps the empirical kernel within order m^(-1/2) of its initial value. The nonlinear output obeys a bound of the same order relative to its linearization at the initial kernel. Both bounds hold uniformly over nonnegative training time with probability tending to one."
 id: ans.ntk.uniform-linearization-theorem
 type: answer
-status: accepted
-support: formally-proven
-modal_strength: necessary
 answers: quest.ntk.linearized-dynamics-validity
 
-constituents: []
-index_sets: []
+claim:
+  reading: "Under the assumptions of the theorem, with probability tending to one over initialization, the nonlinear output stays within a bound of its linearization for every training time, the empirical kernel drifts by at most a bound throughout training, and the initial kernel lies within a bound of its limit; each bound is of order m^(-1/2)."
+  expression: "max_{t}(Eout(m, t)) <= Bout(m) and max_{t}(Edrift(m, t)) <= Bdrift(m) and Elimit(m) <= Binit(m) and m * Bout(m) * Bout(m) <= Cout * Cout and m * Bdrift(m) * Bdrift(m) <= Cdrift * Cdrift and m * Binit(m) * Binit(m) <= Cinit * Cinit and mode_out = \"in-probability\" and mode_drift = \"in-probability\" and mode_init = \"in-probability\""
 
-variables:
-  - reference: system.ntk-gradient-flow.theta
-  - reference: system.ntk-gradient-flow.f
-  - reference: system.ntk-gradient-flow.flin
-  - reference: system.ntk-gradient-flow.K
+grounds:
+  - id: spectral-gap
+    role: assumption
+    content: "The limiting kernel has a positive spectral gap on the training set: min(re(spectrum(Kinf))) > 0."
+  - id: regular-inputs
+    role: assumption
+    content: "The inputs are bounded and the activation is regular: max_{a}(norm(X)) <= 1, with sigma and its derivative Lipschitz."
+  - id: independent-initialization
+    role: assumption
+    content: "The parameters are drawn independently under neural tangent parameterization, as the initialization law of the background states."
+    record: bg.ntk-gradient-flow.gradient-flow.init_draw
+  - id: gradient-flow
+    role: warrant
+    content: "The parameters follow gradient flow on the squared loss from the shared initial outputs."
+    record: bg.ntk-gradient-flow.gradient-flow.flow
 
-parameters:
-  - reference: system.ntk-gradient-flow.m
-  - reference: system.ntk-gradient-flow.L
-  - reference: system.ntk-gradient-flow.X
-  - reference: system.ntk-gradient-flow.y
-  - reference: system.ntk-gradient-flow.sigma
-  - reference: system.ntk-gradient-flow.rho0
-  - reference: system.ntk-gradient-flow.K0
-  - reference: system.ntk-gradient-flow.Kinf
-  - name: "constant bounding the discrepancy between outputs"
-    symbol: Cout
-    signature: []
-    values: "pos(reals)"
-    reading: "The constant does not depend on width and is fixed by the training specification and the spectral gap of the limiting kernel."
-  - name: "constant bounding the drift of the kernel"
-    symbol: Cdrift
-    signature: []
-    values: "pos(reals)"
-    reading: "The constant does not depend on width and enters the uniform estimate of the drift of the kernel."
-  - name: "constant bounding the distance of the initial kernel to its limit"
-    symbol: Cinit
-    signature: []
-    values: "pos(reals)"
-    reading: "The constant does not depend on width and governs the concentration of the initial empirical kernel."
-  - name: "finite-width bound on the discrepancy between outputs"
-    symbol: Bout_ans
-    notation: 'B_{\mathrm{out}}^{\mathrm{ans}}'
-    signature: [m]
-    values: "nonneg(reals)"
-    condition: "m * Bout_ans(m) * Bout_ans(m) <= Cout * Cout"
-    selects: any
-    reading: "The value gives an upper bound of order m^(-1/2) on the discrepancy between the nonlinear and the linearized outputs."
-  - name: "finite-width bound on the drift of the kernel"
-    symbol: Bdrift_ans
-    notation: 'B_{\mathrm{drift}}^{\mathrm{ans}}'
-    signature: [m]
-    values: "nonneg(reals)"
-    condition: "m * Bdrift_ans(m) * Bdrift_ans(m) <= Cdrift * Cdrift"
-    selects: any
-    reading: "The value gives an upper bound of order m^(-1/2) on the drift of the empirical kernel."
-  - name: "finite-width bound on the distance of the initial kernel to its limit"
-    symbol: Binit_ans
-    notation: 'B_{\mathrm{init}}^{\mathrm{ans}}'
-    signature: [m]
-    values: "nonneg(reals)"
-    condition: "m * Binit_ans(m) * Binit_ans(m) <= Cinit * Cinit"
-    selects: any
-    reading: "The value gives a concentration bound of order m^(-1/2) for the initial empirical kernel."
+dependence:
+  - kind: minimal-set
+    grounds: [spectral-gap, regular-inputs, independent-initialization, gradient-flow]
 
-laws:
-  - name: "uniform bound on the deviation of the output from its linearization"
-    symbol: output_bound
-    signature: [m]
-    role: state-constraint
-    expression: "max_{t >= 0}(Eout(m, t)) <= Bout_ans(m)"
-    reading: "With probability tending to one over initialization, the nonlinear output remains uniformly close to its linearization for all training times."
-    warrant: derived
-    rests_on: "The law rests on Theorem 2.1, https://papers.nips.cc/paper_files/paper/2019/hash/0d1a9651497a38d8b1c3871c84528bd4-Abstract.html [lee2019]."
-  - name: "uniform bound on the drift of the empirical kernel"
-    symbol: kernel_bound
-    signature: [m]
-    role: state-constraint
-    expression: "max_{t >= 0}(Edrift(m, t)) <= Bdrift_ans(m)"
-    reading: "With probability tending to one, the empirical neural tangent kernel moves by at most order m^(-1/2) throughout training."
-    warrant: derived
-    rests_on: "The law rests on the part of Theorem 2.1 that establishes the stability of the kernel [lee2019]."
-  - name: "concentration of the initial kernel"
-    symbol: initial_kernel_bound
-    signature: [m]
-    role: distribution
-    expression: "Elimit(m) <= Binit_ans(m)"
-    reading: "The empirical kernel at initialization converges in probability to the deterministic limiting kernel at order m^(-1/2)."
-    warrant: derived-in-a-limit
-    rests_on: "The law rests on a concentration result for the kernel at finite width that the theorem uses [lee2019]. The law also rests on the result that establishes the limiting kernel, https://papers.nips.cc/paper/2018/hash/5a4be1fa34e62bb8a6ec6b91d2462f5a-Abstract.html [jacot2018]."
+route:
+  kind: proof
+  runs_on: [system.ntk-gradient-flow]
+  pointer: "Theorem 2.1 of Lee et al., Wide neural networks of any depth evolve as linear models under gradient descent, NeurIPS 2019, https://papers.nips.cc/paper_files/paper/2019/hash/0d1a9651497a38d8b1c3871c84528bd4-Abstract.html; the limiting kernel of Jacot et al., NeurIPS 2018, https://papers.nips.cc/paper/2018/hash/5a4be1fa34e62bb8a6ec6b91d2462f5a-Abstract.html"
 
-organization: []
-realizations: []
-idealizations: []
+domain: "min(re(spectrum(Kinf))) > 0 and max_{a}(norm(X)) <= 1 and lipschitz(sigma) and lipschitz_derivative(sigma)"
 
-explanans:
-  - name: "positive spectral gap of the limiting kernel"
-    factor: condition
-    holds: "min(re(spectrum(Kinf))) > 0"
-    bears_on: [Kinf]
-    through: [output_bound, kernel_bound]
-    produces: output_converges
-    separates: []
-    appeals_to: []
-    procedure: "The positive gap of the kernel makes the linearized risk contract. The gap also bounds the displacement of the parameters and closes the uniform perturbation estimate."
-  - name: "bounded inputs and regular activation"
-    factor: condition
-    holds: "max_{a}(norm(X)) <= 1 and lipschitz(sigma) and lipschitz_derivative(sigma)"
-    bears_on: [X, sigma]
-    through: [initial_kernel_bound, kernel_bound, output_bound]
-    produces: kernel_drift_vanishes
-    separates: []
-    appeals_to: []
-    procedure: "The regularity bounds control the parameter Jacobian and its change inside the neighborhood of the initialization."
-  - name: "independent initialization under neural tangent parameterization"
-    factor: law-property
-    holds: "drawn_from(theta0, rho0)"
-    bears_on: [rho0, K0]
-    through: [initial_kernel_bound]
-    produces: limit_error_vanishes
-    separates: []
-    appeals_to: []
-    procedure: "The initial parameter coordinates are drawn independently, so the empirical kernel at time zero concentrates around its deterministic limit as width grows."
+status: accepted
+support: formally-proven
 
-maturity: {}
+modal_strength: necessary
+
+erotetic_relation:
+  value: complete
+
+use:
+  value: tool
+  property: "The bounds hold uniformly in training time at finite width, so the linearized dynamics can stand in for the training dynamics of a wide network."
+
+aim_block:
+  model_knowledge:
+    form: derived-law
+    discharges: ["nonlinear path approaches its linearization", "empirical kernel remains near its initial value", "initial empirical kernel approaches its deterministic limit"]
