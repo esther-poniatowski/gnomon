@@ -68,6 +68,8 @@ The block of an explanation holds what makes the dependences of the core explana
 
   When the route runs on the target description, a factor stated over the symbols of the target is denoting by declaration, and no binding is needed. Under a [declared use](#^declared-use), the claim bears on no target, so no factor carries a target status.
 
+  When the route runs on a [derived model](model-and-binding.md#^derived-models), the operations that yield the symbols of a factor bound its status. A factor that holds only in the limit system of a `limit` operation is a limit construct, by the definition of that status. A factor stated over the coarse bearers that an `aggregate` operation yields describes the target at the level of those bearers, so it is a coarse-graining, unless it also holds only in a limit. Neither factor is denoting, since no quantity or part of the target corresponds to it. ^status-from-operations
+
 - **The explanatory claim names the determinant, including for a nomological or a mathematical relation.** The laws of a model can reproduce the phenomenon by derivation without identifying its determinant. The explanatory claim must therefore name the property that makes the law, the structure or the derivation relevant (e.g. a symmetry, a conservation, a bound, a rank, a saturation). This requirement is essential for an explanation that rests on a *constraint*: a fact more necessary than the ordinary laws, such as a symmetry or a conservation law [lange2017].
 
 - **A factor is a property, possibly stated in no record.** A factor rarely coincides with a declared element. Instead, the factor is a condition on such an element, or one of its properties. Such properties include a law that is invariant, additive or factorizing, a structure that is sparse or low-rank, and an arrangement that closes a feedback loop. Such a property is often *found* by the answer and absent from every earlier record. ^factor-may-be-found
@@ -124,6 +126,7 @@ For a nomological, statistical or mathematical relation, the organization $O$ of
 > 	- the declared use, admitted only for a claim on a model or a formal class, with an open list of uses;
 > 	- an explanatory proof recorded as an answer on the properties of a model, which supports an explanation;
 > 	- the four target statuses of a factor, and the way in which the binding carries each status onto the target;
+> 	- the bound that the operations of a derived model set on the target status of a factor;
 > 	- the four kinds of factor (a condition on a quantity, a property of a structure, a property of a law, a feature of the organization);
 > 	- the mapping of the elements onto a mechanism, written in the [shared notation](../../vocabulary/notation/notation.md).
 

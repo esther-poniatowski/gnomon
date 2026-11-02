@@ -29,7 +29,7 @@ A role states how the claim uses the ground, and therefore the effect of a failu
 
 The layout of an argument in the theory of argumentation supplies three of these roles [toulmin1958]. Toulmin separates the data appealed to, the warrant that licenses the step from the data to the claim, the backing that supports the warrant, the qualifier that states the force of the claim, and the rebuttal that states the circumstances in which the warrant does not apply. The correspondence differs from an identity in three places:
 
-- the role `datum` is Toulmin's data, and the role `warrant` is his warrant, restricted to a law of a model or of a background, or to an argued pair of a binding, whose argument licenses the step from the model to the target;
+- the role `datum` is Toulmin's data, and the role `warrant` is his warrant, restricted to a law of a model or of a background, or to an argued pair of a binding. A model represents its target only if it lets an informed agent draw specific inferences about the target [suarez2004], and an argued pair states one such inference with the argument that licenses it, so it licenses the step from the model to the target;
 - the [warrant of a law](background.md#^law-warrant), which states its provenance, takes the place of the backing, and records the kind of support rather than its content;
 - the role `condition` states positively the circumstances in which the claim holds, whereas the rebuttal states the circumstances of an exception.
 
@@ -101,6 +101,7 @@ Cycles are treated differently in the three graphs. A cycle between questions is
 > - **Proposals:**
 > 	- the effect of a failure of a ground, read from its role;
 > 	- the correspondence between the roles of a ground and the layout of an argument;
+> 	- the admission of an argued pair of a binding as a warrant;
 > 	- the exposure rule, which reports a set of exposed laws in place of a degree;
 > 	- the mapping of `defeats` onto undermining and undercutting, with both attacks on a ground with the role `warrant`;
 > 	- the place where each link between questions enters the dependence among claims.
@@ -112,4 +113,5 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [pollock1987] ◐ [Pollock, "Defeasible reasoning", *Cognitive Science* 11(4), 481–518, 1987](https://doi.org/10.1207/s15516709cog1104_4); rebutting and undercutting defeaters
 - [pollock2001] ◐ [Pollock, "Defeasible reasoning with variable degrees of justification", *Artificial Intelligence* 133(1–2), 233–282, 2001](https://doi.org/10.1016/S0004-3702(01)00145-X); the weakest-link principle, checked through the [revised version on the author's site](https://www.johnpollock.us/ftp/OSCAR-web-page/Degrees.pdf)
 - [prakken2010] ◐ [Prakken, "An abstract framework for argumentation with structured arguments", *Argument & Computation* 1(2), 93–124, 2010](https://doi.org/10.1080/19462160903564592); undermining, rebutting and undercutting, read in the abstract of the [author's preprint](https://webspace.science.uu.nl/~prakk101/pubs/aspicAF.pdf)
+- [suarez2004] ◐ Suárez, "An inferential conception of scientific representation", *Philosophy of Science* 71(5), 767–779, 2004
 - [toulmin1958] ◐ Toulmin, *The Uses of Argument*, Cambridge University Press, 1958; data, warrant, backing, qualifier and rebuttal

@@ -47,13 +47,13 @@ A model may be derived from one or more parent models, such as a target system o
 | change-coordinates | the description | an invertible change of description, exact | kept | exact |
 | aggregate | the description | an exact map onto coarse bearers, with a posited closure of their laws | lost | set by the closure |
 | approximate | the description | an inexact description of the same system | lost | controlled near a reference state, otherwise uncontrolled |
-| idealize | the description | a distortion: the derived model ascribes to the parent a feature that the parent lacks | lost | uncontrolled, unless a bound is known |
+| idealize | the description | another system, real or fictitious, which has a feature that the parent lacks and whose properties describe the parent inexactly | lost | uncontrolled, unless a bound is known |
 | extend | the laws | a law or a definition posited beside those of the parent | kept | set by the warrant of the added law |
 
-- **A derived model declares what its operations yield.** The symbols of its parents stay visible, and the derived model declares only the new ones: the collective variables or the coarse bearers of an aggregation, the amplitude of a reduction near onset, a law posited by an extension. Therefore, a root model declares its constituents, its variables and its laws, whereas a derived model states its parents and its operations.
+- **A derived model declares the symbols that its operations yield.** The symbols of its parents stay visible, and the derived model declares only the new ones: the collective variables or the coarse bearers of an aggregation, the amplitude of a reduction near onset, a law posited by an extension. Therefore, a root model declares its constituents, its variables and its laws, whereas a derived model states its parents and its operations.
 - **An approximation describes the same system; an idealization introduces another one.** An approximation states the properties of the parent inexactly, whereas an idealization introduces a system whose properties approximate those of the parent [norton2012]. Therefore, an approximation states the regime in which it holds and the class of its error.
 - **An aggregation is consistent only if its interventions agree.** A coarse model must agree with the fine model on the interventions represented at both levels [rubenstein2017], so the closure posited by an aggregation is a claim that a binding or an answer can test.
-- **A singular limit states its order.** A limit is singular when the limit system behaves otherwise than the systems that approach it, or when two limits taken in a different order yield different systems. The operation then states the order in which its limits are taken.
+- **A singular limit states its order.** A limit is regular when the systems that approach it tend smoothly to the limit system, and singular when the limit system behaves qualitatively otherwise than every system near it [batterman2002]. Two singular limits may also fail to commute, so that taking them in a different order yields different systems [berry1994]. The operation then states the order in which its limits are taken.
 - **The error of an operation has four classes.** The class `exact` admits no error, `controlled` admits an error with a known bound, `uncontrolled` admits an error with no known bound, and `singular` admits an error that no bound can contain near the limit.
 
 ## The binding
@@ -96,12 +96,12 @@ Each comparison also reports three facts about its own conditions: ^comparison-r
 > [!NOTE] Status of the claims
 > - **Established:** the surrogative character of inferences from a model to its target, the theoretical hypothesis as a claim of similarity in respects and degrees, the vocabulary of denotation, exemplification, key and imputation within its own account, the separation of structural discrepancy from observation error, and the dependence of data on models, as cited.
 > - **Proposals:**
-> 	- the typing of the operations that derive a model from its parents, on four axes and relative to the parent;
+> 	- the typing of the operations that derive a model from its parents, on four axes and relative to the parent, with four classes of error;
 > 	- the division into three records and one computed object, with the model, the binding and the key shared by several answers;
 > 	- the adoption of the vocabulary of denotation, exemplification, key and imputation to state a binding, as a choice without the claim that its conditions suffice for representation, with a neutrality on the constitution of representation;
 > 	- the reading of the computed pairs of a binding, with its structural discrepancy, as a theoretical hypothesis of similarity, independent of the questions that use the binding;
 > 	- the step of transfer to the target, deductive through a pair of a binding and within its domain, and the binding activity;
-> 	- the rule that decides, from the object on which the route runs, whether an answer needs a binding;
+> 	- the rule that decides, from the object on which the route runs and from the outputs that the question names, whether an answer needs a binding;
 > 	- the distinction between a map that defines a term of the model and a binding that asserts a match with the target;
 > 	- the types of a feature pair, and its two modes, computed or argued;
 > 	- the pair of type `component`, which relates a unit of the model alone to a part of the target;
@@ -114,7 +114,9 @@ Each comparison also reports three facts about its own conditions: ^comparison-r
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
+- [batterman2002] ◐ [Batterman, *The Devil in the Details: Asymptotic Reasoning in Explanation, Reduction, and Emergence*, Oxford University Press, 2002](https://doi.org/10.1093/0195146476.001.0001); regular and singular asymptotics
 - [bechtel1993] ◐ [Bechtel & Richardson, *Discovering Complexity: Decomposition and Localization as Strategies in Scientific Research*, Princeton University Press, 1993; reissued MIT Press, 2010](https://doi.org/10.7551/mitpress/8328.001.0001)
+- [berry1994] ◐ Berry, "Asymptotics, singularities and the reduction of theories", in Prawitz, Skyrms & Westerståhl (eds.), *Logic, Methodology and Philosophy of Science IX*, Elsevier, 597–607, 1994; the non-commutation of singular limits is cited from memory
 - [bokulichparker2021] ◐ Bokulich & Parker, "Data models, representation and adequacy-for-purpose", *European Journal for Philosophy of Science* 11, 31, 2021
 - [brynjarsdottir2014] ◐ Brynjarsdóttir & O'Hagan, "Learning about physical parameters: the importance of model discrepancy", *Inverse Problems* 30, 114007, 2014
 - [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Oxford University Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001)
