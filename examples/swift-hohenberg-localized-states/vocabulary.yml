@@ -75,6 +75,7 @@ operators:
   canonical:
   - abs
   - adjoint
+  - and
   - bools
   - card
   - complex
@@ -106,6 +107,8 @@ operators:
   - min
   - nonneg
   - norm
+  - not
+  - or
   - pos
   - prod
   - range

@@ -12,7 +12,7 @@ tests:
   admissibility:
     scope:
       verdict: fail
-      evidence: "The answer combines representative numerical slices with analytic results on the branches. The answer does not assign a topology and a stability structure throughout the full real domain of the coefficients (r, b) declared by the target."
+      evidence: "The domain of the answer is the slice b = 1.64 that the cited continuation explores. The answer does not assign a topology and a stability structure throughout the full real domain of the coefficients (r, b) declared by the target."
     grain:
       verdict: fail
       evidence: "The answer states the topology and symmetry classes. The stability result supplies a criterion but omits the requested intervals along every branch."
@@ -24,10 +24,10 @@ tests:
       evidence: "The descriptive aim requests a characterization and no explanatory relation."
     individuation:
       verdict: pass
-      evidence: "The answer keeps the target field as its bearer. The candidate derives both the continuation norm and the stability eigenvalue from the target field and its evolution law."
-    admissible-explanans:
+      evidence: "The route runs on the target, and the description gives its values through the features that the phenomenon declares, so the answer introduces no quantity of its own."
+    binding:
       verdict: not-applicable
-      evidence: "The descriptive aim requests no explanans. The question therefore deliberately places no bound on the explanans."
+      evidence: "The route runs on the laws of the formal target, with no model standing in for it, so the answer needs no binding."
     modal-strength:
       verdict: pass
       evidence: "The answer claims the actual strength that the question requests: at the coefficient values explored by continuation, the reported branches are stationary solutions of the formal equation. Whether the claim holds is decided by the warrant tests of closure and law warrant."
@@ -43,16 +43,16 @@ tests:
       evidence: "No foil is specified."
     law-warrant:
       verdict: pass
-      evidence: "The stationary equation is derived from the target law. Branch topology and stability are accurately marked as numerical results of the cited studies."
+      evidence: "The two warrants of the answer are the evolution law and the localized condition of the closed background, and the route names the numerical studies on which the topology and the stability rest."
     closure:
       verdict: pass
       evidence: "Both numerical procedures, continuation and the computation of eigenvalues, use the complete formal Swift-Hohenberg equation that the target declares."
     fidelity:
-      verdict: fail
-      evidence: "The `structural-only` requirement covers three features. The answer supplies topology and symmetry but does not match stability at the requested grain over coefficients."
+      verdict: not-applicable
+      evidence: "The derivation runs on the laws of the formal target, not on a model of it, so no binding supplies a comparison; the missing intervals of stability fail the tests of grain and product."
     robustness:
       verdict: pending
-      evidence: "The answer states the idealization of a finite domain. The answer does not check that each reported branch regime survives an enlarged domain."
+      evidence: "The answer states the idealization of a finite domain as a ground. The answer does not check that each reported branch regime survives an enlarged domain."
     selection:
       verdict: not-applicable
       evidence: "Membership in the equation class does not depend on whether localized states were found."
