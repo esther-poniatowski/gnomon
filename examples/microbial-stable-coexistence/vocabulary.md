@@ -38,6 +38,8 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `mN` | phen.microbial.stable-coexistence | observables | — | minimum population abundance at equilibrium |
 | `member` | phen.microbial.stable-coexistence | scope over instances | — | member models of the admitted class |
 | `supply` | phen.microbial.stable-coexistence | scope over instances | — | admitted nonnegative vectors of resource supply |
+| `exclusion` | quest.microbial.stable-coexistence-constraints | foil set | — | competitive exclusion |
+| `unstable` | quest.microbial.stable-coexistence-constraints | foil set | — | feasible but unstable equilibrium |
 | `pop` | system.microbial-formal-population-models | constituents | — | microbial population |
 | `res` | system.microbial-formal-population-models | constituents | — | abiotic resource pool |
 | `supply` | system.microbial-formal-population-models | external systems | — | formal environment that supplies the resources |
@@ -77,5 +79,5 @@ The nodes are kinds, not identified members: which tuples are joined is fixed by
 
 ## Operators
 
-- Canonical: `abs`, `adjoint`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
+- Canonical: `abs`, `adjoint`, `and`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `not`, `or`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
 - Declared by this problem: `community_jacobian` (the Jacobian of the complete dynamics of the member model at a selected equilibrium), `equilibrium` (the predicate that a complete member state belongs to an equilibrium of the dynamics of the member model), `population_component` (the component of a complete member state that holds the population abundances).

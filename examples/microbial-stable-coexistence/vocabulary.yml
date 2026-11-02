@@ -158,6 +158,16 @@ symbols:
   block: scope_over_instances
   signature: []
   name: admitted nonnegative vectors of resource supply
+- symbol: exclusion
+  declared_in: quest.microbial.stable-coexistence-constraints
+  block: foil_set
+  signature: []
+  name: competitive exclusion
+- symbol: unstable
+  declared_in: quest.microbial.stable-coexistence-constraints
+  block: foil_set
+  signature: []
+  name: feasible but unstable equilibrium
 - symbol: pop
   declared_in: system.microbial-formal-population-models
   block: constituents
@@ -285,6 +295,7 @@ operators:
   canonical:
   - abs
   - adjoint
+  - and
   - bools
   - card
   - complex
@@ -316,6 +327,8 @@ operators:
   - min
   - nonneg
   - norm
+  - not
+  - or
   - pos
   - prod
   - range

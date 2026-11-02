@@ -27,12 +27,12 @@ The antecedent of the sufficient condition and the consequent of the necessary o
 
 ## Answer and assessment trial
 
-The [consumer-resource theorem](answer.yml) supplies one of those narrower results. In its [assessment](assessment.yml), the theorem passes the sufficient proof obligation for the stated subclass and fails three tests:
+The [consumer-resource theorem](answer.yml) supplies one of those narrower results. In its [assessment](assessment.yml), the theorem passes the sufficient proof obligation for the stated subclass and fails three checks:
 
-- the necessary direction;
-- modal strength;
+- the obligation of the necessary direction;
+- the scope, which covers both variants;
 - the product over the full class.
 
 Because the obligations are ordered, the assessment keeps necessity and sufficiency distinct and does not turn a unidirectional theorem into a biconditional.
 
-The answer can name the target variant `community with explicit resources`, but it cannot declare the narrower domain of the theorem: communities whose microbes consume resources without producing any. The hypotheses of the theorem must therefore be distributed across a law expression and explanans conditions. The [decision on answers, models and bindings](../../docs/adr/answers-models-bindings.md) closes this gap for all cases: the core of an answer holds the domain of its claim.
+The answer names the target variant `community with explicit resources`, and its core declares the narrower domain of the theorem: communities whose resource pools are at least as numerous as the populations and whose microbes consume resources without producing any. Each hypothesis of the theorem is a ground of role `condition`, as the [decision on answers, models and bindings](../../docs/adr/answers-models-bindings.md) provides.

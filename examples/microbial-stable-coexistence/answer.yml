@@ -1,61 +1,60 @@
-# tests whether the records separate sufficiency from necessity and from the scope of a subclass
+# tests whether the records separate sufficiency from necessity and from the scope of a subclass; the route runs on the target, a formal class
 
 _schema: gnomon:answer@1
 title: "Theorem that feasibility implies stability in consumer-resource models"
-statement: "The theorem concerns the model with explicit resource pools that microbes consume but never produce. In that model, every feasible equilibrium is locally stable when the resource pools are at least as numerous as the populations [butler2018]. The theorem therefore supplies a sufficient result for this subclass, but its condition is not necessary across all admitted microbial models."
 id: ans.microbial.feasibility-implies-stability
 type: answer
-status: accepted
-support: formally-proven
-modal_strength: necessary
 answers: quest.microbial.stable-coexistence-constraints
+
+claim:
+  reading: "In the models with explicit resource pools that microbes consume but never produce, every feasible equilibrium is locally stable when the resource pools are at least as numerous as the populations [butler2018]. The condition is sufficient for this subclass, but not necessary across the admitted microbial models."
+  expression: "M >= S and Pr = 0 and mN > 0 implies alpha < 0"
+
+grounds:
+  - id: surplus-resources
+    role: condition
+    content: "The resource pools are at least as numerous as the populations: M >= S."
+  - id: no-production
+    role: condition
+    content: "The microbes consume the resources and produce none: Pr = 0."
+    record: bg.microbial-formal-population-models.population-dynamics.produce
+  - id: consumer-resource-growth
+    role: warrant
+    content: "Each population grows in proportion to its abundance and to a per-capita rate set by the resource pools."
+    record: bg.microbial-formal-population-models.population-dynamics.grow_resource
+  - id: resource-turnover
+    role: warrant
+    content: "Each resource pool changes under supply and consumption."
+    record: bg.microbial-formal-population-models.population-dynamics.turnover
+
+dependence:
+  - kind: minimal-set
+    grounds: [surplus-resources, no-production, consumer-resource-growth, resource-turnover]
+
+route:
+  kind: proof
+  runs_on: [system.microbial-formal-population-models]
+  pointer: "The factorization of the Jacobian at the complete equilibrium through the consumer-resource incidence matrices, and the theorem that every eigenvalue then has a negative real part at a feasible equilibrium, https://doi.org/10.1038/s41467-018-05308-z [butler2018]"
+
+domain: "M >= S and Pr = 0"
+
 variant: resource_explicit
 
-constituents:
-  - reference: system.microbial-formal-population-models.pop
-  - reference: system.microbial-formal-population-models.res
+status: accepted
+support: formally-proven
 
-index_sets: []
+modal_strength: necessary
 
-variables:
-  - reference: system.microbial-formal-population-models.N
-  - reference: system.microbial-formal-population-models.R
+erotetic_relation:
+  value: partial
 
-parameters:
-  - reference: system.microbial-formal-population-models.S
-  - reference: system.microbial-formal-population-models.M
-  - reference: system.microbial-formal-population-models.rho
-  - reference: system.microbial-formal-population-models.mu
-  - reference: system.microbial-formal-population-models.C
-  - reference: system.microbial-formal-population-models.Pr
-  - reference: system.microbial-formal-population-models.Fr
-  - reference: system.microbial-formal-population-models.G
+use:
+  value: understanding
+  property: "The factorization of the Jacobian shows which structure of the consumer-resource coupling makes feasibility sufficient for local stability."
 
-laws:
-  - name: "feasibility implies local stability"
-    symbol: feasible_implies_stable
-    variant: resource_explicit
-    signature: []
-    role: state-constraint
-    expression: "M >= S and Pr = 0 and mN > 0 implies alpha < 0"
-    reading: "Every feasible equilibrium is locally asymptotically stable in the subclass whose explicit resource pools are consumed but never produced and are at least as numerous as the populations."
-    warrant: derived
-    rests_on: "The law follows from the factorization of the Jacobian and from the stability theorem, both established in https://doi.org/10.1038/s41467-018-05308-z [butler2018]."
-organization: []
-
-realizations: []
-idealizations: []
-
-explanans:
-  - name: "feasible equilibrium with surplus resources and no production"
-    variant: resource_explicit
-    factor: condition
-    holds: "M >= S and Pr = 0 and mN > 0"
-    bears_on: [M, S, Pr, N]
-    through: [feasible_implies_stable]
-    produces: stable
-    separates: [exclusion, unstable]
-    appeals_to: [supply]
-    procedure: "Factor the Jacobian at the complete equilibrium through the consumer-resource incidence matrices. Then show that every eigenvalue has negative real part whenever the equilibrium is feasible."
-
-maturity: {}
+aim_block:
+  modal_knowledge:
+    modality: necessary
+    property: "mN > 0 implies alpha < 0"
+    space: "The feasible equilibria of the members with explicit resources whose pools are at least as numerous as the populations and which produce no resource"
+    proof: "The theorem on the factorized Jacobian of consumer-resource models, https://doi.org/10.1038/s41467-018-05308-z [butler2018]"
