@@ -35,6 +35,26 @@ The [model record](../../../specification/model.md), the [binding record](../../
 
 - **A family of models can ground one answer.** Several models then ground the claim together, each with its own binding. The family is assessed as a whole: the [robustness test](satisfaction-conditions.md) asks whether the claim holds across its members, which is the form of robustness analysis [weisberg2006]. The answer also declares how the fidelity of the family is judged: by one comparison per member, each of which must pass, or by one comparison of the ensemble of the family. ^model-family
 
+
+### Derived models
+
+A model may be derived from one or more parent models, such as a target system or another model, by typed operations applied in order. Each operation is typed relative to its parent, never relative to the target: whether an assumption distorts the target is judged by the answer that rests on the model, as the [rule on idealizations](answer-form.md#^idealizations) states. The kinds of operation differ on four axes: the object acted on, the truth of the derived model about its parent, the information that the derived model keeps, and the class of the error introduced. ^derived-models
+
+| Kind | Acts on | Truth relative to the parent | Information | Class of error |
+| --- | --- | --- | --- | --- |
+| restrict | the class of members | the derived model holds exactly of a subclass of the members | kept | exact |
+| limit | the class of members | the derived model describes a limit system, a system of its own | kept | controlled, or singular |
+| change-coordinates | the description | an invertible change of description, exact | kept | exact |
+| aggregate | the description | an exact map onto coarse bearers, with a posited closure of their laws | lost | set by the closure |
+| approximate | the description | an inexact description of the same system | lost | controlled near a reference state, otherwise uncontrolled |
+| idealize | the description | a distortion: the derived model ascribes to the parent a feature that the parent lacks | lost | uncontrolled, unless a bound is known |
+| extend | the laws | a law or a definition posited beside those of the parent | kept | set by the warrant of the added law |
+
+- **An approximation describes the same system; an idealization introduces another one.** An approximation states the properties of the parent inexactly, whereas an idealization introduces a system whose properties approximate those of the parent [norton2012]. Therefore, an approximation states the regime in which it holds and the class of its error.
+- **An aggregation is consistent only if its interventions agree.** A coarse model must agree with the fine model on the interventions represented at both levels [rubenstein2017], so the closure posited by an aggregation is a claim that a binding or an answer can test.
+- **A singular limit states its order.** A limit is singular when the limit system behaves otherwise than the systems that approach it, or when two limits taken in a different order yield different systems. The operation then states the order in which its limits are taken.
+- **The error of an operation has four classes.** The class `exact` admits no error, `controlled` admits an error with a known bound, `uncontrolled` admits an error with no known bound, and `singular` admits an error that no bound can contain near the limit.
+
 ## The binding
 
 A binding relates a model in use to a phenomenon, or to its data, and records the surrogative inferences from the model to the target that its asserter licenses [suarez2004]. Each licensed inference imputes a feature to the target, so a binding asserts claims about the target, which can be false. A consequence of the model becomes a claim about the target through the step of *transfer to the target*, which carries the consequence through the binding that licenses it. The binding activity produces a binding from a model, a phenomenon and keys, and the transfer to the target carries the consequence, as the [binding and transfer](../../processes/activities/epistemic-activities.md#^binding-step) state. ^binding-records
@@ -75,6 +95,7 @@ Each comparison also reports three facts about its own conditions: ^comparison-r
 > [!NOTE] Status of the claims
 > - **Established:** the surrogative character of inferences from a model to its target, the theoretical hypothesis as a claim of similarity in respects and degrees, the vocabulary of denotation, exemplification, key and imputation within its own account, the separation of structural discrepancy from observation error, and the dependence of data on models, as cited.
 > - **Proposals:**
+> 	- the typing of the operations that derive a model from its parents, on four axes and relative to the parent;
 > 	- the division into three records and one computed object, with the model, the binding and the key shared by several answers;
 > 	- the adoption of the vocabulary of denotation, exemplification, key and imputation to state a binding, as a choice without the claim that its conditions suffice for representation, with a neutrality on the constitution of representation;
 > 	- the reading of the computed pairs of a binding, with its structural discrepancy, as a theoretical hypothesis of similarity, independent of the questions that use the binding;
@@ -104,7 +125,9 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [kaplan2011] ◐ [Kaplan & Craver, "The explanatory force of dynamical and mathematical models in neuroscience: a mechanistic perspective", *Philosophy of Science* 78(4), 601–627, 2011](https://doi.org/10.1086/661755); the model-to-mechanism-mapping requirement, checked through the abstract
 - [kennedyohagan2001] ◐ [Kennedy & O'Hagan, "Bayesian calibration of computer models", *Journal of the Royal Statistical Society, Series B* 63(3), 425–464, 2001](https://doi.org/10.1111/1467-9868.00294); the model discrepancy separated from the observation error; the tolerance set by a question has no counterpart in the paper
 - [massimi2022] ◐ [Massimi, *Perspectival Realism*, Oxford University Press, 2022](https://doi.org/10.1093/oso/9780197555620.001.0001)
+- [norton2012] ◐ [Norton, "Approximation and idealization: why the difference matters", *Philosophy of Science* 79(2), 2012](https://philpapers.org/rec/NORAAI)
 - [parker2020] ◐ [Parker, "Model evaluation: an adequacy-for-purpose view", *Philosophy of Science* 87(3), 457–477, 2020](https://doi.org/10.1086/708691)
+- [rubenstein2017] ◐ [Rubenstein et al., "Causal consistency of structural equation models", *UAI*, 2017](https://www.auai.org/uai2017/proceedings/papers/11.pdf)
 - [steelewerndl2013] ◐ Steele & Werndl, "Climate models, calibration, and confirmation", *British Journal for the Philosophy of Science* 64(3), 609–635, 2013
 - [suarez2004] ◐ Suárez, "An inferential conception of scientific representation", *Philosophy of Science* 71(5), 767–779, 2004
 - [weisberg2006] ◐ [Weisberg, "Robustness analysis", *Philosophy of Science* 73(5), 730–742, 2006](https://doi.org/10.1086/518628)

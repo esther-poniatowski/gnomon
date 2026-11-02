@@ -61,6 +61,104 @@ properties:
       record
     examples:
     - the admitted training laws of the networks of a class
+  derives_from:
+    x-blank: true
+    type: [array, 'null']
+    x-comment: fill for a derived model; the target system or the models that the operations act on
+    title: Derives from
+    description: The parent models, such as a target system or another model, from which the operations derive this model.
+    items:
+      type: [string, 'null']
+      x-template: mod.TOPIC.NAME
+      x-kind: label
+    examples:
+    - [system.grokking]
+  operations:
+    type: [array, 'null']
+    x-comment: fill for a derived model; one entry per operation, in the order applied
+    title: Operations
+    description: The typed operations that derive this model from its parents, in the order in which they are applied.
+    items:
+      type: object
+      properties:
+        id:
+          type: [string, 'null']
+          x-template: OPERATION-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the operation, unique within the record.
+          examples: [weak-amplitude]
+        kind:
+          type: [string, 'null']
+          x-vocabulary: operations.kind
+          title: Kind
+          description: The kind of the operation, relative to the parent.
+          examples: [approximate]
+        acts_on:
+          type: [array, 'null']
+          x-template: '[SYMBOL]'
+          x-comment: symbols of a parent, written `RECORD.SYMBOL`
+          title: Acts on
+          description: The symbols of a parent on which the operation acts.
+          examples: [[system.grokking.u]]
+        yields:
+          type: [array, 'null']
+          x-template: '[SYMBOL]'
+          x-comment: symbols of this model that realize the operation
+          title: Yields
+          description: The symbols of this model that realize the operation.
+          examples: [[A]]
+        retires:
+          type: [array, 'null']
+          x-template: '[SYMBOL]'
+          x-comment: symbols of a parent that this model no longer carries; empty when every symbol stays visible
+          title: Retires
+          description: The symbols of a parent that this model no longer carries.
+          examples: [[system.grokking.u]]
+        regime:
+          type: [string, 'null']
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: the regime in which the operation holds; required for an approximation
+          title: Regime
+          description: The regime in which the operation holds, as an expression over declared symbols.
+          examples: ['A << 1']
+        error:
+          type: [string, 'null']
+          x-vocabulary: operations.error
+          title: Class of error
+          description: The class of the error that the operation introduces.
+          examples: [controlled]
+        bound:
+          type: [string, 'null']
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: required when the error is `controlled`
+          title: Bound
+          description: The bound on the error, for a controlled operation.
+          examples: ['O(A^2)']
+        order:
+          type: [string, 'null']
+          x-template: '"THE ORDER IN WHICH THE LIMITS ARE TAKEN"'
+          x-kind: markdown-line
+          x-comment: required for a singular limit, or for limits that do not commute
+          title: Order
+          description: The order in which the limits of the operation are taken.
+          examples: ['the width to infinity before the time to infinity']
+        gain:
+          type: [string, 'null']
+          x-template: '"THE DERIVATION OR THE FACTOR THAT THE OPERATION MAKES AVAILABLE"'
+          x-kind: markdown-line
+          title: Gain
+          description: The derivation or the factor that the operation makes available.
+          examples: ['the amplitude equation of the pattern near onset']
+        rests_on:
+          type: [string, 'null']
+          x-template: '"THE RESULT, THE LIMIT OR THE SOURCE THAT JUSTIFIES THE OPERATION"'
+          x-kind: markdown-line
+          title: Rests on
+          description: The result, the limit or the source that justifies the operation.
+          examples: ['the expansion near the onset of instability']
   constituents:
     x-blank: true
     type:

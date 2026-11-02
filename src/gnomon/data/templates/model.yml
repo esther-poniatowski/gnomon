@@ -14,6 +14,21 @@ status: provisional              # provisional | stabilized | retracted
 
 background: bg.TOPIC.NAME        # fill when a law of the model carries the warrant `derived` or `derived-in-a-limit`
 
+derives_from:                    # fill for a derived model; the target system or the models that the operations act on
+  - mod.TOPIC.NAME
+operations:                      # fill for a derived model; one entry per operation, in the order applied
+  - id: OPERATION-NAME
+    kind:                        # restrict (a subclass of the members of the parent) | limit (a limit system of the parent) | change-coordinates (an invertible change of description) | aggregate (coarse bearers, with a posited closure of their laws) | approximate (an inexact description of the same system) | idealize (a feature that the parent lacks) | extend (a law or a definition posited beside those of the parent)
+    acts_on: [SYMBOL]            # symbols of a parent, written `RECORD.SYMBOL`
+    yields: [SYMBOL]             # symbols of this model that realize the operation
+    retires: [SYMBOL]            # symbols of a parent that this model no longer carries; empty when every symbol stays visible
+    regime: "EXPRESSION OVER DECLARED SYMBOLS"   # the regime in which the operation holds; required for an approximation
+    error:                       # exact | controlled (a bound on the error is known) | uncontrolled (no bound on the error is known) | singular (no bound can contain the error near the limit)
+    bound: "EXPRESSION OVER DECLARED SYMBOLS"   # required when the error is `controlled`
+    order: "THE ORDER IN WHICH THE LIMITS ARE TAKEN"   # required for a singular limit, or for limits that do not commute
+    gain: "THE DERIVATION OR THE FACTOR THAT THE OPERATION MAKES AVAILABLE"
+    rests_on: "THE RESULT, THE LIMIT OR THE SOURCE THAT JUSTIFIES THE OPERATION"
+
 constituents:                    # C: the units that the model treats as bearers
   - name: "KIND OF UNIT"
     symbol: SYMBOL

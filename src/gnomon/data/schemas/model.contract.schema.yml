@@ -20,6 +20,39 @@ properties:
     - stabilized
     - retracted
     - null
+  operations:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - kind
+        - acts_on
+        - yields
+        - retires
+        - regime
+        - error
+        - bound
+        - order
+        - gain
+        - rests_on
+      properties:
+        kind:
+          enum:
+          - restrict
+          - limit
+          - change-coordinates
+          - aggregate
+          - approximate
+          - idealize
+          - extend
+          - null
+        error:
+          enum:
+          - exact
+          - controlled
+          - uncontrolled
+          - singular
+          - null
   constituents:
     items:
       propertyNames:
@@ -192,6 +225,8 @@ propertyNames:
   - type
   - status
   - background
+  - derives_from
+  - operations
   - constituents
   - index_sets
   - variables

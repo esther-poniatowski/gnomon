@@ -514,6 +514,29 @@ vocabularies:
     - value: model-based
     - value: non-inferential
   model:
+    operations.kind:
+    - value: restrict
+      name: a subclass of the members of the parent
+    - value: limit
+      name: a limit system of the parent
+    - value: change-coordinates
+      name: an invertible change of description
+    - value: aggregate
+      name: coarse bearers, with a posited closure of their laws
+    - value: approximate
+      name: an inexact description of the same system
+    - value: idealize
+      name: a feature that the parent lacks
+    - value: extend
+      name: a law or a definition posited beside those of the parent
+    operations.error:
+    - value: exact
+    - value: controlled
+      name: a bound on the error is known
+    - value: uncontrolled
+      name: no bound on the error is known
+    - value: singular
+      name: no bound can contain the error near the limit
     .status:
     - value: provisional
     - value: stabilized
