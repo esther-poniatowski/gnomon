@@ -52,7 +52,7 @@ Each aim of the [registry of aims](../epistemology/objects/task/epistemic-aim.md
 | `prediction` | per predicted output, the output among the outputs to match that the task names, the condition of the target under which it is predicted, and its value or distribution | the gamma power when the stimulus contrast doubles |
 | `explanation` | the contrastive explanandum, the explanatory claim, the relation and the factors, as the [block of an explanation](../epistemology/objects/answer/answer-form.md#^explanation-block) states | the account of the oscillation by an inhibitory delay |
 | `modal-knowledge` | the modal claim (possible, impossible or necessary), the space of alternatives that the admitted laws and the domain fix, and the witness of a possibility or the proof of an impossibility or a necessity | a network without inhibitory neurons that oscillates at gamma frequency (witness) |
-| `model-knowledge` | the consequence (a derived law, a regime, a limit or a structural property) or the counterexample, with the proof obligations of the task that it discharges | the uniqueness of the fixed point of a rate network below a critical gain |
+| `model-properties` | the form of the property that the claim of the core states (a derived law, a regime, a limit or a structural property) or of the counterexample, with the proof obligations of the task that it discharges | the uniqueness of the fixed point of a rate network below a critical gain |
 
 ### The block of an explanation
 

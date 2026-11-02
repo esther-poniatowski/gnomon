@@ -1,9 +1,9 @@
 ---
 tags:
   - examples
-index: "[Neural tangent dynamics](examples/neural-tangent-kernel-model-knowledge/_index.md)"
+index: "[Neural tangent dynamics](examples/neural-tangent-kernel-model-properties/_index.md)"
 aliases:
-  - Neural tangent kernel model-knowledge test description
+  - Neural tangent kernel model-properties test description
 ---
 # Validity of neural tangent dynamics
 
@@ -19,7 +19,7 @@ The target is a class of fully connected networks with scalar output under neura
 
 The phenomenon to characterize is conditional convergence toward linearized dynamics governed by the initial kernel as width increases. Its observables compare the relevant trajectories and kernels at each stage of the limit. The set of network and training specifications for which convergence holds remains part of the requested result.
 
-## Requested model knowledge
+## Requested properties of the model
 
 A satisfactory answer must state which convergence claims follow from the model. Each claim must identify its assumptions and quantify over initializations. Each claim must also delimit its limiting regime. Its conclusion must state the training horizon and the error at finite width. For this reason, a report of representative simulations remains incomplete when it does not delimit the domain of the claim.
 

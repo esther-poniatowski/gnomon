@@ -20,7 +20,7 @@ Tests the records of `gnomon` on completed inquiries, to consult before filling 
 - [Tipping cascades in the Earth system](earth-system-tipping-cascades/_index.md): tests whether a prediction can carry several sources of uncertainty about a partially known system
 - [Stable microbial coexistence](microbial-stable-coexistence/_index.md): tests whether necessary and sufficient conditions stay distinct across model variants
 - [Localized Swift-Hohenberg states](swift-hohenberg-localized-states/_index.md): tests whether a description can name the features that it seeks without supplying their values
-- [Neural tangent dynamics](neural-tangent-kernel-model-knowledge/_index.md): tests whether an inquiry can specify the knowledge that it seeks about a formal class of models
+- [Neural tangent dynamics](neural-tangent-kernel-model-properties/_index.md): tests whether an inquiry can specify the knowledge that it seeks about a formal class of models
 
 ## Statements
 

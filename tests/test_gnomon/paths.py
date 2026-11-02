@@ -21,7 +21,7 @@ EXPECTED_CASES = (
     "earth-system-tipping-cascades",
     "grokking-delayed-generalization",
     "microbial-stable-coexistence",
-    "neural-tangent-kernel-model-knowledge",
+    "neural-tangent-kernel-model-properties",
     "swift-hohenberg-localized-states",
     "turbulence-anomalous-scaling",
 )

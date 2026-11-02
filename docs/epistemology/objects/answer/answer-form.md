@@ -36,7 +36,7 @@ The [answer record](../../../specification/answer.md) documents each field of a 
     - **reformulating**: the answer answers a revised question, which it names, and it is assessed against that revised question.
 
 - **An answer whose claim bears on no target declares its use.** A model can be studied without being bound to any phenomenon: as a tool, as a proof of principle that a behavior can arise, as a conceptual exploration of a class of models, or for the understanding that it affords. Such an answer cites no binding and states its use instead. A declared use is admitted only when the claim bears on a model or on a formal class: ^declared-use
-    - a consequence or a counterexample of model knowledge;
+    - a property of a model, derived from its laws, or a counterexample;
     - a modal claim whose witness is a model;
     - an exploration of a class of models;
     - a claim of possible strength over a formal target.
@@ -56,7 +56,7 @@ The [answer record](../../../specification/answer.md) documents each field of a 
 
 ## The block of an explanation
 
-The block of an explanation holds what makes the dependences of the core explanatory. An explanatory proof, which explains why a mathematical result holds, is an answer of model knowledge linked to this block by `supports` [steiner1978] [lange2017]. ^explanation-block
+The block of an explanation holds what makes the dependences of the core explanatory. An explanatory proof, which explains why a mathematical result holds, is an answer on the properties of a model, linked to this block by `supports` [steiner1978] [lange2017]. ^explanation-block
 
 - **How-actually and how-possibly follow from the modal strength.** The explanation claims the modal strength that its core states, and the [modal strength](../task/modal-strength.md) requested by the question decides whether the explanation must be how-actually or how-possibly. The block holds no field of its own for that distinction.
 
@@ -122,7 +122,7 @@ For a nomological, statistical or mathematical relation, the organization $O$ of
 > 	- the declaration of an assumption by the model and its classification as an idealization by the answer, relative to its target, with abstractions kept apart from the grounds;
 > 	- the four values of the erotetic relation and the five relations between answers;
 > 	- the declared use, admitted only for a claim on a model or a formal class, with an open list of uses;
-> 	- an explanatory proof recorded as an answer of model knowledge that supports an explanation;
+> 	- an explanatory proof recorded as an answer on the properties of a model, which supports an explanation;
 > 	- the four target statuses of a factor, and the way in which the binding carries each status onto the target;
 > 	- the four kinds of factor (a condition on a quantity, a property of a structure, a property of a law, a feature of the organization);
 > 	- the mapping of the elements onto a mechanism, written in the [shared notation](../../vocabulary/notation/notation.md).

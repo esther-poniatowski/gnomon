@@ -1,9 +1,9 @@
 ---
 tags:
   - generated
-index: "[neural-tangent-kernel-model-knowledge](examples/neural-tangent-kernel-model-knowledge/_index.md)"
+index: "[neural-tangent-kernel-model-properties](examples/neural-tangent-kernel-model-properties/_index.md)"
 ---
-# Vocabulary of neural-tangent-kernel-model-knowledge
+# Vocabulary of neural-tangent-kernel-model-properties
 
 Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, not this file.
 

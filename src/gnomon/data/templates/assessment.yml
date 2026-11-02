@@ -30,7 +30,7 @@ tests:                           # verdict: pending | pass | fail | not-applicab
     target-status: {verdict: pending, evidence: ""}   # block of an explanation
     admissible-explanans: {verdict: pending, evidence: ""}   # block of an explanation
     witness-or-proof: {verdict: pending, evidence: ""}   # block of modal knowledge
-    consequence: {verdict: pending, evidence: ""}   # block of model knowledge
+    consequence: {verdict: pending, evidence: ""}   # block of model properties
   warrant:
     phenomenon-established: {verdict: pending, evidence: ""}
     foil-evidence: {verdict: pending, evidence: ""}

@@ -281,7 +281,7 @@ vocabularies:
       category: answer-content
     - value: modal-knowledge
       category: answer-content
-    - value: model-knowledge
+    - value: model-properties
       category: answer-content
     task.requested_relation:
     - value: causal-intervention
@@ -454,7 +454,7 @@ vocabularies:
     - value: phenomenon
       admits: [exploration, description]
     - value: consequence
-      admits: [model-knowledge, modal-knowledge]
+      admits: [model-properties, modal-knowledge]
     - value: target-claim
       admits: [prediction, modal-knowledge]
     - value: model

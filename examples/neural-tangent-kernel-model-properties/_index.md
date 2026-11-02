@@ -3,7 +3,7 @@ tags:
   - index
 index: "[Worked inquiries](examples/_index.md)"
 aliases:
-  - Neural tangent kernel model-knowledge test
+  - Neural tangent kernel model-properties test
 ---
 # Neural tangent dynamics
 

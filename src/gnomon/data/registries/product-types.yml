@@ -104,9 +104,9 @@ product_types:
   - id: consequence
     class: claim
     record: [answer, assessment]
-    field_path: "answer: aim_block.model_knowledge; assessment: obligations"
+    field_path: "answer: aim_block.model_properties; assessment: obligations"
     status: partial
-    condition: "The consequence or the counterexample that the block of model knowledge of an answer states, or a settled proof obligation. A consequence derived on the way to another result, and stated by no answer, has no record."
+    condition: "The consequence or the counterexample that the block of model properties of an answer states, or a settled proof obligation. A consequence derived on the way to another result, and stated by no answer, has no record."
   - id: target-claim
     class: claim
     record: [answer]

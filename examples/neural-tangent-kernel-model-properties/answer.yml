@@ -50,6 +50,6 @@ use:
   property: "The bounds hold uniformly in training time at finite width, so the linearized dynamics can stand in for the training dynamics of a wide network."
 
 aim_block:
-  model_knowledge:
+  model_properties:
     form: derived-law
     discharges: ["nonlinear path approaches its linearization", "empirical kernel remains near its initial value", "initial empirical kernel approaches its deterministic limit"]

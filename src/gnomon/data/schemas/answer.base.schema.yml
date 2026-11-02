@@ -1059,7 +1059,7 @@ properties:
         description: The `modal-knowledge` of the record.
         examples:
         - a network without inhibitory neurons that oscillates at gamma frequency (witness)
-      model_knowledge:
+      model_properties:
         type:
         - object
         - 'null'
@@ -1071,22 +1071,6 @@ properties:
             - 'null'
             title: Form
             description: The form of the record.
-          expression:
-            type:
-            - string
-            - 'null'
-            x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
-            x-kind: text
-            title: Expression
-            description: The expression of the record.
-          reading:
-            type:
-            - string
-            - 'null'
-            x-template: '"THE CONSEQUENCE IN WORDS"'
-            x-kind: markdown-line
-            title: Reading
-            description: The reading of the record.
           discharges:
             type:
             - array
@@ -1095,8 +1079,8 @@ properties:
             x-comment: the proof obligations of the question that the consequence discharges, by name
             title: Discharges
             description: the proof obligations of the question that the consequence discharges, by name
-        title: '`model-knowledge`'
-        description: The `model-knowledge` of the record.
+        title: '`model-properties`'
+        description: The `model-properties` of the record.
         examples:
         - the uniqueness of the fixed point of a rate network below a critical gain
     x-comment: 'fill for a complete or a partial answer only: keep the block of the aim of the question,

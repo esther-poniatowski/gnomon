@@ -1,9 +1,9 @@
 ---
 tags:
   - audit
-index: "[Neural tangent dynamics](examples/neural-tangent-kernel-model-knowledge/_index.md)"
+index: "[Neural tangent dynamics](examples/neural-tangent-kernel-model-properties/_index.md)"
 aliases:
-  - Neural tangent kernel model-knowledge issues
+  - Neural tangent kernel model-properties issues
 ---
 # Current assessment of the specification of neural tangent dynamics
 
@@ -13,7 +13,7 @@ The current records express the requested model consequences as three proof obli
 
 ## Global issues
 
-The requirement registry adds no structured product for `model-knowledge`. The question on neural tangent dynamics uses `proof_obligations`, because its requested products are theorems. The validator would nevertheless also accept a question with the aim `model-knowledge` and no proof obligations. The aim should require either proof obligations or another explicit specification of consequences.
+The requirement registry adds no structured product for `model-properties`. The question on neural tangent dynamics uses `proof_obligations`, because its requested products are theorems. The validator would nevertheless also accept a question with the aim `model-properties` and no proof obligations. The aim should require either proof obligations or another explicit specification of consequences.
 
 The domain limit remains one expression plus a justification. The components of each convergence claim are consequently distributed across the justification and the phenomenon features and proof obligations that it references. A structured limit reference could connect these fields directly.
 

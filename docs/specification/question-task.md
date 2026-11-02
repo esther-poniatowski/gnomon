@@ -40,7 +40,7 @@ Because an aim fixes the product that an answer must deliver, the aim also deter
 | `prediction` | `phenomenon.manifestations`, `question.task.required_accuracy.outputs_to_match` | — |
 | `explanation` | `question.task.requested_relation` | — |
 | `modal-knowledge` | `question.task.modal_strength`, `question.task.proof_obligations` | — |
-| `model-knowledge` | — | — |
+| `model-properties` | — | — |
 
 - **An exploratory inquiry fixes no phenomenon in advance, so it must fix the criterion that would establish one.** The exploratory inquiry produces the statement, the category, the occurrence class and the evidential status, although every other aim fixes these four specifications. In their place, the detection criterion states the test that a candidate pattern must pass. Exploration illustrates a general division: a general requirement lists the fields of a complete record, and an aim marks the fields that the inquiry itself fills.
 

@@ -92,6 +92,6 @@ by_aim:
       - path: question.task.modal_strength
       - path: question.task.proof_obligations
     to_produce: []
-  model-knowledge:
+  model-properties:
     required: []
     to_produce: []

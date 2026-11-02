@@ -163,7 +163,6 @@ TYPE_PATH_FORMULA: Mapping[str, tuple[str, ...]] = {
         "aim_block.explanation.factors[].holds",
         "aim_block.explanation.factors[].under",
         "aim_block.modal_knowledge.property",
-        "aim_block.model_knowledge.expression",
     ),
     "model": ("operations[].regime", "operations[].bound"),
     "binding": (

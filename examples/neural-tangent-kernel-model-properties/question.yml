@@ -21,7 +21,7 @@ subject:
       justification: "The limit varies width and holds every other specification fixed (the dataset size and values, the input dimension, the depth, the activation, the training rate). Bounds at finite width connect this limit to individual networks."
 
 task:
-  epistemic_aim: model-knowledge
+  epistemic_aim: model-properties
   requested_relation: mathematical
   modal_strength: necessary
   admissible_explanans:

@@ -132,10 +132,8 @@ aim_block:                       # fill for a complete or a partial answer only:
     space: "THE SPACE OF ALTERNATIVES THAT THE ADMITTED LAWS AND THE DOMAIN FIX"
     witness: RECORD              # for a possibility: the instance that witnesses it, such as a model
     proof: "POINTER TO THE PROOF OR TO THE EXHAUSTIVE EXCLUSION"   # for an impossibility or a necessity
-  model_knowledge:
+  model_properties:
     form:                        # derived-law | regime | limit | structural-property | counterexample
-    expression: "EXPRESSION OVER DECLARED SYMBOLS"
-    reading: "THE CONSEQUENCE IN WORDS"
     discharges: [OBLIGATION]     # the proof obligations of the question that the consequence discharges, by name
 
 relations:                       # fill when the answer bears on another answer; one entry per link

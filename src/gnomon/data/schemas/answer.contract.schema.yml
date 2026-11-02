@@ -183,7 +183,7 @@ properties:
       - prediction
       - explanation
       - modal_knowledge
-      - model_knowledge
+      - model_properties
     properties:
       description:
         propertyNames:
@@ -335,12 +335,10 @@ properties:
             - impossible
             - necessary
             - null
-      model_knowledge:
+      model_properties:
         propertyNames:
           enum:
           - form
-          - expression
-          - reading
           - discharges
         properties:
           form:

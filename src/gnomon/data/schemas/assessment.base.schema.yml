@@ -198,9 +198,9 @@ properties:
             - object
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
-            x-comment: block of model knowledge
+            x-comment: block of model properties
             title: Consequence
-            description: block of model knowledge
+            description: block of model properties
         x-comment: the tests of the core, then the tests of each aim block
         title: admissibility
         description: per criterion of the tests of the core and of the tests of the block of the aim of
