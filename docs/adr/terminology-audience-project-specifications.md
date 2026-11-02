@@ -11,7 +11,7 @@ aliases:
 # Terminology, audience and project specifications
 
 > [!WARNING] Amended
-> On 2026-11-02, the decision of `geonexus` on [designation and typography](https://github.com/esther-poniatowski/geonexus/blob/dc3ed97106ae909724fdad76c5e88e01a10ae043/docs/_decisions/designation-and-typography.md) moves the mechanism of the notation and of the glossary to one designation tool, keeps the audience in `ekthesis` as a profile of its readers, and replaces the bindings of a project by binding keys resolved by Anagraphe.
+> On 2026-11-02, the decision of `geonexus` on [designation and typography](https://github.com/esther-poniatowski/geonexus/blob/584a14f134e7b6231eeae31518622439acf10d00/docs/_decisions/designation-and-typography.md) moves the mechanism of the notation and of the glossary to Onomasia, the designation tool, keeps the audience in `ekthesis` as a profile of its readers, and replaces the bindings of a project by binding keys resolved by Anagraphe.
 
 > [!WARNING] Amended
 > The decision on [research as the scope of gnomon](research-scope.md) amends this decision: the mechanism of the notation stays in `gnomon`, the glossary and the audience move to `ekthesis`, and the project specification divides between the problem and question records of `gnomon`, the bindings of `ekthesis` and the `repository.yml` of the project.
