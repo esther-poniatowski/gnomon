@@ -512,6 +512,17 @@ def itinerary_problems(
                         *at, "output", "type")
             )
         product = output.get("ref")
+        if made == "knowledge-state-change" and isinstance(product, str) and product in records:
+            before = output.get("before")
+            earlier = states(product, before) if states is not None and isinstance(before, str) and before else None
+            if earlier is None:
+                found.append(finding(rules.ITINERARY_UNCHANGED_STATE,
+                                     f"{where}: the change of {product} names no readable revision before it",
+                                     *at, "output", "before"))
+            elif earlier.get("status") == records[product].get("status"):
+                found.append(finding(rules.ITINERARY_UNCHANGED_STATE,
+                                     f"{where}: the status of {product} is {earlier.get('status')} before and after the step",
+                                     *at, "output", "before"))
         if isinstance(product, str) and product in records:
             if not holds(records[product], types.get(str(made)) or {}):
                 found.append(

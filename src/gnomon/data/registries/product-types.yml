@@ -148,4 +148,4 @@ product_types:
     record: [problem, question, answer, assessment, target-system, phenomenon, background, model, binding, key]
     fields: [status]
     status: partial
-    note: "A change of the status of a record, read for now from its present status; reading it as the change between two revisions, and a log of the revisions with their grounds, are still to be created."
+    note: "A change of the status of a record, which the itinerary check reads as a difference between the status at the revision before the step and the present status."

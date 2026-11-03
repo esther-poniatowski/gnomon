@@ -151,6 +151,15 @@ properties:
               x-comment: the record that holds the product; omit until that record exists
               title: Ref
               description: the record that holds the product; omit until that record exists
+            before:
+              type:
+              - string
+              - 'null'
+              x-template: REVISION
+              x-kind: label
+              x-comment: for a knowledge-state-change only, the revision of the repository before the change
+              title: Before
+              description: for a knowledge-state-change only, the revision of the repository before the change
           title: output
           description: the product type of the product, and the record that holds the product, given while
             that record holds the output type

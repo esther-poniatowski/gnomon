@@ -15,8 +15,6 @@ The records represent each act of an inquiry as the act is taken, so that the co
 - [ ] Represent every act of an inquiry operationally in its records: close the gaps of the graph of activities, keep each itinerary valid as the records change, and compute the next act. The second review of the records found that a restart of a project can be written but not fully tracked. 🆔 inquiry-records-round-2
 	- [ ] Close the gaps of the type graph of activities, as the [choice of the next act](docs/procedures/inquiry/next-act.md) marks them in its map from conditions to activities and in its tables of acts:
 		- [ ] develop a proof technique or an algorithm that gives access to a quantity, whose product the [record of a technique](docs/proposals/inquiry-records-round-2.md#record-of-a-technique) proposes; an algorithm is a design of kind `method`, and a proof technique waits on the decision of `derivation-framework` on reusable reasoning schemes.
-	- [ ] Make the [choice of the next act](docs/procedures/inquiry/next-act.md) computable on the records:
-		- [ ] read the type `knowledge-state-change` from a change of the status of a record between two revisions, instead of its present status, now that the [registry of product types](src/gnomon/data/registries/product-types.yml) states its fields;
 
 ## 2. Global views
 

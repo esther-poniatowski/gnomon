@@ -48,6 +48,7 @@ properties:
             enum:
             - type
             - ref
+            - before
         norm:
           propertyNames:
             enum:

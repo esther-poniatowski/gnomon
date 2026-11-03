@@ -509,3 +509,17 @@ def test_a_well_formed_branch_passes() -> None:
                                "output": {"type": "consequence"}, "rationale": {"serves": "prob.geometry"},
                                "norm": {"test": "norm.simulation", "verdict": "pending"}})
     assert itinerary_problems(itinerary, RECORDS) == []
+
+
+def test_a_change_of_knowledge_state_differs_from_the_status_before_it() -> None:
+    records = {**RECORDS, "ans.kernel": {"type": "answer", "status": "accepted"},
+               "assess.kernel": {"type": "assessment", "tests": {"warrant": {}}}}
+    step = {"id": "accept", "activity": "belief-revision", "inputs": [{"type": "verdict", "ref": "assess.kernel"}],
+            "output": {"type": "knowledge-state-change", "ref": "ans.kernel", "before": "abc123"},
+            "norm": {"test": "norm.belief-revision", "verdict": "pending"}, "rationale": {"serves": "prob.geometry"}}
+    itinerary = served(copy.deepcopy(ITINERARY))
+    itinerary["steps"].append(step)
+    assert itinerary_problems(itinerary, records, states=lambda i, r: {"status": "hypothesized"}) == []
+    assert texts(itinerary_problems(itinerary, records, states=lambda i, r: {"status": "accepted"})) == [
+        "steps.accept: the status of ans.kernel is accepted before and after the step"
+    ]

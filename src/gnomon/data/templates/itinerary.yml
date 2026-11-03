@@ -20,6 +20,7 @@ steps:                           # one entry per activity instance; the steps ma
     output:
       type: PRODUCT-TYPE
       ref: RECORD                # the record that holds the product; omit until that record exists
+      before: REVISION           # for a knowledge-state-change only, the revision of the repository before the change
     norm:
       test: norm.ACTIVITY        # the test named by the activity registry for this activity
       verdict: pending           # pass | fail | pending
