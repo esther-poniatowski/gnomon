@@ -1,6 +1,6 @@
 """Model of the conditions for obtaining an answer, checked against the notes that state it.
 
-The model lives in ``answerability_model.yml``. These tests check that each quoted norm occurs in the
+The model lives in the registry ``src/gnomon/data/registries/answerability.yml``. These tests check that each quoted norm occurs in the
 note of its activity, that the dependency table of the conditions note states the model's dependencies
 route by route, that the activity map of the procedure note lists the model's activities, and that the
 dependencies are acyclic in the stated order. A last test checks the facts of the records that the
@@ -20,7 +20,7 @@ import yaml
 
 from .paths import EXAMPLES, ROOT
 
-MODEL = yaml.safe_load((Path(__file__).with_name("answerability_model.yml")).read_text(encoding="utf-8"))
+MODEL = yaml.safe_load((Path(__file__).resolve().parents[2] / "src/gnomon/data/registries/answerability.yml").read_text(encoding="utf-8"))
 CASE = EXAMPLES / "grokking-delayed-generalization"
 CONDITIONS: list[str] = MODEL["conditions"]
 ROUTES = ("selection", "construction")

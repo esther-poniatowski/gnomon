@@ -621,6 +621,153 @@ properties:
     x-comment: one entry per virtue the inquiry weighs, under any epistemic aim
     title: Virtues
     description: one entry per virtue the inquiry weighs, under any epistemic aim
+  presuppositions:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: PRESUPPOSITION
+          x-kind: label
+          title: Id
+          description: a name unique within the question
+        part:
+          x-vocabulary: presuppositions.part
+          type:
+          - string
+          - 'null'
+          title: Part
+          description: The part of soundness to which the presupposition belongs.
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE PRESUPPOSITION IN WORDS"'
+          x-kind: markdown-line
+          title: Reading
+          description: the presupposition in words
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: optional; empty while the presupposition is not formalized
+          title: Expression
+          description: optional; empty while the presupposition is not formalized
+    x-comment: fill for a presupposition that neither a link `presupposes` nor the evidential status of the phenomenon states; one entry per presupposition
+    title: Presuppositions
+    description: per presupposition, its part of soundness (existence · topic), its reading and, once formalized, its expression
+    examples:
+    - a stable fixed point exists for every admitted gain (existence)
+  construction:
+    type:
+    - object
+    - 'null'
+    properties:
+        procedure:
+          type:
+          - string
+          - 'null'
+          x-template: RECORD-OR-POINTER
+          x-kind: label
+          x-comment: a design of kind method, or a pointer to the procedure
+          title: Procedure
+          description: a design of kind method, or a pointer to the procedure
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"HOW THE PROCEDURE WOULD YIELD A DIRECT ANSWER"'
+          x-kind: markdown-line
+          title: Reading
+          description: how the procedure would yield a direct answer
+    x-comment: fill when a procedure is named that would yield a direct answer; the route of construction is then diagnosed
+    title: Construction
+    description: the procedure named for the route of construction, and how it would yield a direct answer
+    examples:
+    - an algorithm that enumerates the fixed points of the network at each gain
+  answerability:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        condition:
+          x-vocabulary: answerability.condition
+          type:
+          - string
+          - 'null'
+          title: Condition
+          description: The condition whose state is stated.
+        route:
+          x-vocabulary: answerability.route
+          type:
+          - string
+          - 'null'
+          title: Route
+          description: The route on which the state holds.
+        term:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL-OR-RECORD
+          x-kind: label
+          x-comment: 'definiteness only: the term whose definiteness is stated'
+          title: Term
+          description: 'definiteness only: the term whose definiteness is stated'
+        state:
+          x-vocabulary: answerability.state
+          type:
+          - string
+          - 'null'
+          title: State
+          description: The state of the condition.
+        refutation:
+          x-vocabulary: answerability.refutation
+          type:
+          - string
+          - 'null'
+          x-comment: refuted only
+          title: Refutation
+          description: refuted only
+        means:
+          type:
+          - array
+          - 'null'
+          items:
+            type:
+            - string
+            - 'null'
+            x-template: '"A MEANS CONSIDERED, TRIED AND FAILED"'
+          x-comment: 'lack-of-means only: every means considered, each tried and failed'
+          title: Means
+          description: every means considered, each tried and failed
+        pointers:
+          type:
+          - array
+          - 'null'
+          items:
+            type:
+            - string
+            - 'null'
+            x-template: RECORD-OR-POINTER
+          x-comment: the records, the steps or the publications that show the state
+          title: Pointers
+          description: the records, the steps or the publications that show the state
+    x-comment: one entry per condition whose state the inquiry asserts; a condition left out is not established
+    title: Answerability
+    description: per condition asserted, its route, its state (established · refuted), how a refutation holds (outright · lack-of-means) with the means tried, and the pointers that show the state
+    examples:
+    - access refuted for lack of means, after a mean-field derivation and a simulation both failed
   maturity:
     x-blank: true
     type:

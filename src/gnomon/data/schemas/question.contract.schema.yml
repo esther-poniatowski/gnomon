@@ -245,6 +245,64 @@ properties:
           - constitutive
           - preferred
           - null
+  presuppositions:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - part
+        - reading
+        - expression
+      properties:
+        part:
+          enum:
+          - existence
+          - topic
+          - null
+  construction:
+    propertyNames:
+      enum:
+      - procedure
+      - reading
+  answerability:
+    items:
+      propertyNames:
+        enum:
+        - condition
+        - route
+        - term
+        - state
+        - refutation
+        - means
+        - pointers
+      properties:
+        condition:
+          enum:
+          - definiteness
+          - answer-type
+          - soundness
+          - candidates
+          - discrimination
+          - access
+          - bridging
+          - representation
+          - null
+        route:
+          enum:
+          - selection
+          - construction
+          - both
+          - null
+        state:
+          enum:
+          - established
+          - refuted
+          - null
+        refutation:
+          enum:
+          - outright
+          - lack-of-means
+          - null
 x-identifier: id
 propertyNames:
   enum:
@@ -260,4 +318,7 @@ propertyNames:
   - subject
   - task
   - virtues
+  - presuppositions
+  - construction
+  - answerability
   - maturity

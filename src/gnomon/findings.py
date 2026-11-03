@@ -274,6 +274,10 @@ COMPLETENESS_UNCLASSIFIED_OPERATION = _rule(
     "completeness/unclassified-operation",
     "An operation or an assumption of a model on which an answer runs is named by no ground of that answer.",
 )
+COMPLETENESS_MALFORMED_ANSWERABILITY = _rule(
+    "completeness/malformed-answerability",
+    "An asserted state of a condition lacks its kind, its means or its pointers, or contradicts the records.",
+)
 COMPLETENESS_PREMATURE_APPRAISAL = _rule(
     "completeness/premature-appraisal",
     "An assessment appraises an answer that has not passed admissibility and warrant.",

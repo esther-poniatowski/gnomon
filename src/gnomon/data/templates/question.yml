@@ -75,5 +75,25 @@ virtues:                         # one entry per virtue the inquiry weighs, unde
     standing:                    # constitutive (the product test applies it) | preferred (appraisal ranks on it)
     justification: "WHY THE INQUIRY WEIGHS THIS VIRTUE"   # also state the shortfall of an answer that lacks this virtue
 
+presuppositions:                 # fill for a presupposition that neither a link `presupposes` nor the evidential status of the phenomenon states; one entry per presupposition
+  - id: PRESUPPOSITION
+    part:                        # existence (a result of the demanded type exists) | topic (the fact in question holds)
+    reading: "THE PRESUPPOSITION IN WORDS"
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"   # optional; empty while the presupposition is not formalized
+construction:                    # fill when a procedure is named that would yield a direct answer; the route of construction is then diagnosed
+  procedure: RECORD-OR-POINTER   # a design of kind method, or a pointer to the procedure
+  reading: "HOW THE PROCEDURE WOULD YIELD A DIRECT ANSWER"
+
+answerability:                   # one entry per condition whose state the inquiry asserts; a condition left out is not established
+  - condition:                   # definiteness | answer-type | soundness | candidates | discrimination | access | bridging | representation
+    route:                       # selection | construction | both
+    term: SYMBOL-OR-RECORD       # definiteness only: the term whose definiteness is stated
+    state:                       # established | refuted
+    refutation:                  # outright (an argument of impossibility shows that the condition fails) | lack-of-means (every means considered was tried and failed); refuted only
+    means:                       # lack-of-means only: every means considered, each tried and failed
+      - "A MEANS CONSIDERED, TRIED AND FAILED"
+    pointers:                    # the records, the steps or the publications that show the state
+      - RECORD-OR-POINTER
+
 maturity:                        # optional; one maturity per field: open | provisional | stabilized; a field left out is provisional
   FIELD.PATH: open

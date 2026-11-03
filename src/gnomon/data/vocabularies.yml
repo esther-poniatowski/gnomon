@@ -238,6 +238,32 @@ vocabularies:
     - value: distribution
     - value: bound
   question:
+    presuppositions.part:
+    - value: existence
+      name: a result of the demanded type exists
+    - value: topic
+      name: the fact in question holds
+    answerability.condition:
+    - value: definiteness
+    - value: answer-type
+    - value: soundness
+    - value: candidates
+    - value: discrimination
+    - value: access
+    - value: bridging
+    - value: representation
+    answerability.route:
+    - value: selection
+    - value: construction
+    - value: both
+    answerability.state:
+    - value: established
+    - value: refuted
+    answerability.refutation:
+    - value: outright
+      name: an argument of impossibility shows that the condition fails
+    - value: lack-of-means
+      name: every means considered was tried and failed
     .status:
     - value: posed
     - value: refined

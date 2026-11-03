@@ -95,9 +95,9 @@ class Activity:
     output_values: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
 
 
-
 #: The form of the date of a judgment: YYYY-MM-DD.
 DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
+
 
 def _load(path: Path) -> dict[str, Any]:
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}

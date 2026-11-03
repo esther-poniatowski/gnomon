@@ -93,17 +93,24 @@ gnomon schemas [--check]
 
 ## `status`
 
-> Stub — prints "Workspace status reporting is not yet implemented."
+A researcher choosing the next act of an inquiry needs the conditions that block each question and the acts that can lift them. The `status` command applies the [choice of the next act](../procedures/inquiry/next-act.md) to the records of a directory tree, question by question and route by route:
 
-List the open conditions of answerability of each question of a research workspace, and the acts that address them.
+- the state of each [condition for obtaining an answer](../epistemology/objects/question/conditions-of-answerability.md#^condition-states), read from the block `answerability` of the question, else from a field that shows it, else `not-established`;
+- the open conditions, each with the activities that act on it, and whether each activity is ready, its required inputs held by records of the problem that no failed step impeached;
+- the refuted conditions, which call for a revision;
+- the steps whose record is stabilized while their verdict is pending, so that their norm is judged anew, and the impeached records.
 
 ```sh
-gnomon status --target <dir>
+gnomon status <directory> [--format text|yaml] [--output PATH]
 ```
 
-| Option           | Default | Description                      |
-| ---------------- | ------- | -------------------------------- |
-| `--target`, `-t` | `.`     | Research workspace directory.    |
+| Argument or option | Description                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| `<directory>`      | Directory of records, read recursively; each folder is one problem.                      |
+| `--format`, `-f`   | `text` (default), one line per open or refuted condition, or `yaml`, the full diagnosis. |
+| `--output`, `-o`   | File receiving the report instead of standard output; its missing folders are created.   |
+
+**Output:** the `yaml` report holds no date and no absolute path, so two runs on unchanged records write the same file. A state that the records do not show stays `not-established` until the researcher asserts it with pointers, so the diagnosis never replaces a judgment. The command exits with code 1 when a file cannot be read, and with code 2 when the report cannot be written.
 
 ## `vocabulary`
 

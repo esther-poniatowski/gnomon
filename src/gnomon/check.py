@@ -39,6 +39,7 @@ from typing import Any, Callable, Iterable, Mapping
 import yaml
 
 from . import completeness as c
+from .answerability import malformed_answerability
 from . import vocabulary as v
 from .findings import CHECK_FAILED, Finding, finding
 from .history import StateReader, git_states
@@ -284,7 +285,8 @@ def _question(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
             + c.contradictory_accuracy(record) + c.unresolved_slots(record, records, ctx.registries.slot_types)
             + c.unresolved_question_references(record, records) + c.unstated_function_sense(record)
             + c.unbounded_aim(record, records, ctx.registries.aims)
-            + c.unmet_by_aim(record, reached, ctx.registries.by_aim))
+            + c.unmet_by_aim(record, reached, ctx.registries.by_aim)
+            + malformed_answerability(record, records))
 
 
 def _answer(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
