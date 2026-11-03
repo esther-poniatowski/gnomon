@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-09-25
-revised: 2026-09-25
+revised: 2026-11-03
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Single field per fact
@@ -21,8 +21,8 @@ A fact is carried by one field. A field that another field determines is retired
 ## Constraints that decide the assignment
 
 - **A block fixes the role of the formula that it holds.** A law can be false of the system and a definition cannot, but the block already separates the two, so two field names encoded that distinction twice.
-- **A boundary between blocks earns its place by a rule of its own.** Restrictions on a parameter and on a variable differ in the kind of quantity that they name, and the target record already classifies that kind. The separate blocks left implicit and unchecked the only rule that the boundary carried: only a variable can be clamped or held stationary.
-- **A derived fact is read from its source.** Every index absent from the signature was consumed by a binder that already names the map, so the retention field restated the grain.
+- **A boundary between blocks earns its place by a rule of its own.** Restrictions on a parameter and on a variable differ in the kind of quantity that they name, and the target record already classifies that kind. The separate blocks left implicit and unchecked the only rule that the boundary carried: only a quantity that varies along the course can be clamped or held stationary, that is, a variable, or a parameter that the [course of the phenomenon](../epistemology/objects/subject/phenomenon.md#^course-and-occurrence) lists as varying.
+- **A derived fact is read from its source.** Every index absent from the signature was consumed by a binder that already names the map, so the retention field restated the indices that the signature retains. The [grain of an observable](../epistemology/objects/answer/satisfaction-conditions.md) is read from those indices together with its value set.
 
 ## Options weighed
 
@@ -38,11 +38,11 @@ One rule produced every retirement of the reorientation: each retired field or b
 
 | Retired | Determined by |
 | ------- | ------------- |
-| The grain, and the retention field that restated it | The signature of the quantity |
+| The grain field, and the retention field that restated it | The signature of the quantity, which fixes the retained indices; the value set fixes the rest of the grain |
 | The declared direction of a shared variable | The block that declares the variable |
 | The three restriction blocks | The kind of quantity that each entry names |
 | The two variable blocks | The key stating where the quantity is determined |
 | The interaction block | The law that asserts the interaction |
 
-- A block survives wherever its boundary carries a rule. The parameters stay apart from the variables because a parameter may not be indexed by the course.
+- A block survives wherever its boundary carries a rule. The parameters stay apart from the variables because a parameter is held fixed while the dynamics run, so its signature holds no interval index; a phenomenon whose course changes a parameter lists it under `course.varies` instead.
 - A record that states an interaction states it as a law, since a dependence of a growth law on a coefficient is falsifiable and expressible with the canonical relations.

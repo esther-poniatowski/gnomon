@@ -311,13 +311,12 @@ def test_every_restriction_says_what_it_holds(case: tuple[str, Mapping[str, Any]
     name, record = case
     if record.get("type") != "question":
         return
-    targets = {r["id"]: r for _, r in CASES if r.get("type") == "target-system"}
-    upstream = targets.get(record.get("subject", {}).get("target_system", ""), {})
-    varying = {
-        entry.get("symbol")
-        for entry in upstream.get("variables") or []
-        if isinstance(entry, Mapping)
-    }
+    from gnomon.completeness import varying_symbols
+
+    by_id = {r["id"]: r for _, r in CASES if isinstance(r.get("id"), str)}
+    subject = record.get("subject", {})
+    varying = varying_symbols(by_id.get(subject.get("target_system", ""), {}),
+                              by_id.get(subject.get("phenomenon", "")))
     malformed = malformed_restrictions(record, varying)
     assert not malformed, f"{name}: {malformed}"
 

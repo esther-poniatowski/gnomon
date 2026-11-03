@@ -126,6 +126,21 @@ def test_a_restriction_lies_under_the_domain_of_the_subject() -> None:
     ]
 
 
+def test_a_parameter_listed_as_varying_can_be_held() -> None:
+    """A parameter that the course lists as varying is held like a variable; a fixed one is not."""
+    from gnomon.completeness import varying_symbols
+
+    target = {"variables": [{"symbol": "x"}], "parameters": [{"symbol": "w"}, {"symbol": "k"}]}
+    question = {"subject": {"domain": {"restrictions": [
+        {"of": "w", "values": "w0", "restriction": "clamped"},
+        {"of": "k", "values": "k0", "restriction": "clamped"},
+    ]}}}
+    found = malformed_restrictions(question, varying_symbols(target, {"course": {"varies": ["w"]}}))
+    assert [f.text for f in found] == [
+        "restrictions.k: states how it is held although it names no quantity that varies"
+    ]
+
+
 def test_an_unresolved_symbol_lies_at_its_field_or_its_expression() -> None:
     """A reference lies at its item; a formula identifier is discriminated by its name."""
     record = {

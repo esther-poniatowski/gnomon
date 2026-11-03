@@ -288,7 +288,7 @@ COMPLETENESS_ANONYMOUS_RESTRICTION = _rule(
 )
 COMPLETENESS_RESTRICTION_WITHOUT_VARIABLE = _rule(
     "completeness/restriction-without-variable",
-    "A domain restriction states how it holds a quantity that is no variable.",
+    "A domain restriction states how it holds a quantity that does not vary along the course.",
 )
 COMPLETENESS_UNDECIDED_BOUNDARY = _rule(
     "completeness/undecided-boundary",

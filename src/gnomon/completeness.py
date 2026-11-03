@@ -1108,6 +1108,23 @@ def unstated_standing(question: Mapping[str, Any]) -> list[Finding]:
     ]
 
 
+def varying_symbols(target: Mapping[str, Any], phenomenon: Mapping[str, Any] | None = None) -> set[str]:
+    """Return the symbols that vary along the course of a phenomenon of the target.
+
+    The variables of the target vary, and so does each parameter that the course of the phenomenon
+    lists under ``varies``, as the role test of a quantity reads a parameter.
+
+    >>> varying_symbols({"variables": [{"symbol": "x"}], "parameters": [{"symbol": "w"}]},
+    ...                 {"course": {"varies": ["w"]}}) == {"x", "w"}
+    True
+    """
+    found = {e["symbol"] for e in target.get("variables") or [] if isinstance(e, Mapping) and isinstance(e.get("symbol"), str)}
+    course = (phenomenon or {}).get("course")
+    if isinstance(course, Mapping):
+        found |= {s for s in course.get("varies") or [] if isinstance(s, str)}
+    return found
+
+
 def malformed_restrictions(
     question: Mapping[str, Any], variables: Iterable[str]
 ) -> list[Finding]:
@@ -1117,14 +1134,16 @@ def malformed_restrictions(
     expression it holds under; carrying both says the same thing twice and carrying neither says
     nothing. An entry naming no quantity needs a name, since nothing else identifies it. How a
     quantity is held — clamped, initial, stationary, without an event — applies to something that
-    varies, so an entry naming a parameter states no such kind: a parameter is already fixed.
+    varies, so an entry naming a fixed parameter states no such kind. A parameter that the course
+    of the phenomenon lists as varying changes along that course, so it can be held like a variable.
 
     Parameters
     ----------
     question : mapping
         One filled question record.
     variables : iterable of str
-        The symbols its target system declares as variables rather than as parameters.
+        The symbols that vary along the course of its phenomenon, as :func:`varying_symbols`
+        collects them.
     """
     varying = set(variables)
     found = []
@@ -1149,7 +1168,7 @@ def malformed_restrictions(
         if entry.get("restriction") and symbol not in varying:
             found.append(
                 finding(rules.COMPLETENESS_RESTRICTION_WITHOUT_VARIABLE,
-                        f"restrictions.{label}: states how it is held although it names no variable",
+                        f"restrictions.{label}: states how it is held although it names no quantity that varies",
                         *where, "restriction")
             )
     return found
