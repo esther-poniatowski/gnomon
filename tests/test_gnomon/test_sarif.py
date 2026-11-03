@@ -118,9 +118,9 @@ RECORDS: dict[str, dict[str, Any]] = {
         "steps": [
             {"id": "derive", "activity": "derivation", "inputs": [{"type": "model", "ref": "mod.demo"}],
              "output": {"type": "consequence"}, "norm": {"test": "norm.derivation", "verdict": "pending"},
-             "mode": "deductive"},
+             "rationale": {"serves": "prob.demo"}, "mode": "deductive"},
             {"id": "guess", "activity": "intuition", "inputs": [], "output": {"type": "consequence"},
-             "norm": {"test": "norm.intuition", "verdict": "pending"}},
+             "norm": {"test": "norm.intuition", "verdict": "pending"}, "rationale": {"serves": "prob.demo"}},
         ],
     },
 }

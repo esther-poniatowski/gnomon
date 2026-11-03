@@ -178,7 +178,8 @@ ITINERARY: dict[str, Any] = {
         {"id": "pose", "activity": "problematization",
          "inputs": [{"type": "source", "ref": "doi:10.1000/anomaly"}],
          "output": {"type": "problem", "ref": "prob.geometry"},
-         "norm": {"test": "norm.problematization", "verdict": "pass"}, "mode": "non-inferential"},
+         "norm": {"test": "norm.problematization", "verdict": "pass", "evidence": "The demand is stated.",
+                  "judged": "2026-11-03"}, "mode": "non-inferential"},
         {"id": "derive", "activity": "derivation",
          "inputs": [{"type": "model", "ref": "mod.kernel"}],
          "output": {"type": "consequence"},
@@ -195,6 +196,13 @@ ITINERARY: dict[str, Any] = {
 }
 
 
+def served(itinerary: dict[str, Any]) -> dict[str, Any]:
+    """Return the itinerary with a rationale that serves its problem on every step that states none."""
+    for step in itinerary.get("steps") or []:
+        step.setdefault("rationale", {"serves": itinerary.get("addresses")})
+    return itinerary
+
+
 def planted(**changes: Any) -> dict[str, Any]:
     """Return a copy of the passing itinerary with the steps named in ``changes`` updated."""
     itinerary = copy.deepcopy(ITINERARY)
@@ -204,18 +212,18 @@ def planted(**changes: Any) -> dict[str, Any]:
 
 
 def test_a_well_formed_itinerary_passes() -> None:
-    assert itinerary_problems(ITINERARY, RECORDS) == []
+    assert itinerary_problems(served(ITINERARY), RECORDS) == []
 
 
 def test_an_unregistered_activity_is_reported() -> None:
-    assert texts(itinerary_problems(planted(derive={"activity": "intuition"}), RECORDS)) == [
+    assert texts(itinerary_problems(served(planted(derive={"activity": "intuition"})), RECORDS)) == [
         "steps.derive: intuition is no registered activity"
     ]
 
 
 def test_input_types_that_do_not_fill_the_activity_are_reported() -> None:
     itinerary = planted(derive={"inputs": [{"type": "data", "ref": "phen.readout"}]})
-    assert texts(itinerary_problems(itinerary, RECORDS)) == [
+    assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
         "steps.derive: derivation takes one input of admitted-laws or model or target-claim, and the step gives 0",
         "steps.derive: derivation takes no input of type data",
     ]
@@ -227,28 +235,28 @@ def test_a_slot_taking_several_inputs_counts_them() -> None:
             "output": {"type": "ranking"}, "norm": {"test": "norm.model-selection", "verdict": "pending"}}
     itinerary = copy.deepcopy(ITINERARY)
     itinerary["steps"].append(step)
-    assert texts(itinerary_problems(itinerary, RECORDS)) == [
+    assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
         "steps.select: model-selection takes 2 or more inputs of model, and the step gives 1"
     ]
     step["inputs"].append({"type": "model", "ref": "itin.geometry.route.derive"})
-    assert texts(itinerary_problems(itinerary, RECORDS)) == ["steps.select: the step itin.geometry.route.derive produces consequence, not model"]
+    assert texts(itinerary_problems(served(itinerary), RECORDS)) == ["steps.select: the step itin.geometry.route.derive produces consequence, not model"]
 
 
 def test_an_output_type_other_than_the_activity_output_is_reported() -> None:
-    assert texts(itinerary_problems(planted(derive={"output": {"type": "verdict"}}), RECORDS)) == [
+    assert texts(itinerary_problems(served(planted(derive={"output": {"type": "verdict"}})), RECORDS)) == [
         "steps.derive: derivation produces consequence, and the step states verdict"
     ]
 
 
 def test_an_input_reference_of_the_wrong_kind_or_to_nothing_is_reported() -> None:
     wrong = planted(derive={"inputs": [{"type": "model", "ref": "phen.readout"}]})
-    assert texts(itinerary_problems(wrong, RECORDS)) == [
+    assert texts(itinerary_problems(served(wrong), RECORDS)) == [
         "steps.derive: phen.readout holds data or phenomenon or knowledge-state-change, not model"
     ]
     absent = planted(derive={"inputs": [{"type": "model", "ref": "mod.missing"}]})
-    assert texts(itinerary_problems(absent, RECORDS)) == ["steps.derive: mod.missing is neither a step nor a record"]
+    assert texts(itinerary_problems(served(absent), RECORDS)) == ["steps.derive: mod.missing is neither a step nor a record"]
     answer = planted(derive={"inputs": [{"type": "model", "ref": "ans.kernel"}]})
-    assert texts(itinerary_problems(answer, RECORDS)) == [
+    assert texts(itinerary_problems(served(answer), RECORDS)) == [
         "steps.derive: ans.kernel holds consequence or target-claim or explanation or knowledge-state-change, not model"
     ]
 
@@ -262,7 +270,7 @@ def unrecorded_design() -> dict[str, Any]:
 
 def test_a_type_that_no_record_holds_is_reached_only_through_a_step() -> None:
     itinerary = planted(observe={"inputs": [{"type": "design", "ref": "quest.geometry"}]})
-    assert texts(itinerary_problems(itinerary, RECORDS, types=unrecorded_design())) == [
+    assert texts(itinerary_problems(served(itinerary), RECORDS, types=unrecorded_design())) == [
         "steps.observe: no record holds a design, so its input names a step, and quest.geometry is none"
     ]
 
@@ -271,24 +279,24 @@ def test_an_output_whose_value_the_activity_does_not_produce_is_reported() -> No
     """Experimental design outputs protocols; a design of the kind `method` comes from method design."""
     records = {**RECORDS, "design.geometry.protocol": {"type": "design", "kind": "method"}}
     itinerary = planted(design={"output": {"type": "design", "ref": "design.geometry.protocol"}})
-    assert texts(itinerary_problems(itinerary, records)) == [
+    assert texts(itinerary_problems(served(itinerary), records)) == [
         "steps.design: design.geometry.protocol has the kind method, and experimental-design produces"
         " a design of the kind experiment or simulation-run"
     ]
     records["design.geometry.protocol"] = {"type": "design", "kind": "simulation-run"}
-    assert itinerary_problems(itinerary, records) == []
+    assert itinerary_problems(served(itinerary), records) == []
 
 
 def test_an_output_reference_of_the_wrong_kind_is_reported() -> None:
     itinerary = planted(pose={"output": {"type": "problem", "ref": "quest.geometry"}})
-    assert texts(itinerary_problems(itinerary, RECORDS)) == [
+    assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
         "steps.pose: quest.geometry holds question or knowledge-state-change, not problem"
     ]
 
 
 def test_a_norm_verdict_or_mode_outside_the_registries_is_reported() -> None:
     itinerary = planted(derive={"norm": {"test": "norm.simulation", "verdict": "likely"}, "mode": "inductive"})
-    assert texts(itinerary_problems(itinerary, RECORDS)) == [
+    assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
         "steps.derive: the norm of derivation is norm.derivation, and the step names norm.simulation",
         "steps.derive: 'likely' is no verdict",
         "steps.derive: derivation proceeds by deductive inference, and the step states inductive",
@@ -299,7 +307,7 @@ def test_a_cycle_among_the_steps_is_reported() -> None:
     itinerary = planted(design={"inputs": [{"type": "question", "ref": "quest.geometry"},
                                       {"type": "model", "ref": "mod.kernel"},
                                       {"type": "data", "ref": "itin.geometry.route.observe"}]})
-    found = itinerary_problems(itinerary, RECORDS)
+    found = itinerary_problems(served(itinerary), RECORDS)
     assert "steps: design -> observe -> design forms a cycle" in texts(found)
     assert cycles({"a": {"a"}}) == [["a", "a"]]
 
@@ -308,7 +316,7 @@ def test_a_itinerary_addressing_no_problem_or_question_and_a_repeated_step_are_r
     itinerary = copy.deepcopy(ITINERARY)
     itinerary["addresses"] = "phen.readout"
     itinerary["steps"].append(copy.deepcopy(itinerary["steps"][0]))
-    assert texts(itinerary_problems(itinerary, RECORDS))[:2] == [
+    assert texts(itinerary_problems(served(itinerary), RECORDS))[:2] == [
         "addresses: phen.readout is no problem or question record",
         "steps: the identifier pose names several steps",
     ]
@@ -331,7 +339,7 @@ def test_every_itinerary_of_the_fixtures_passes(path: Path) -> None:
         if isinstance(record, dict) and "id" in record:
             records[str(record["id"])] = record
     itinerary = yaml.safe_load(path.read_text(encoding="utf-8"))
-    assert itinerary_problems(itinerary, records) == []
+    assert itinerary_problems(served(itinerary), records) == []
 
 
 def test_the_type_of_a_record_follows_from_its_state() -> None:
@@ -360,7 +368,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
              "output": {"type": "verdict"}, "norm": {"test": "norm.testing", "verdict": "pending"}},
         ],
     }
-    assert texts(itinerary_problems(itinerary, records)) == [
+    assert texts(itinerary_problems(served(itinerary), records)) == [
         "steps.select: quest.schema holds question-schema or knowledge-state-change, not question",
         "steps.predict: system.a holds identified-subject or classification or measurement-procedure"
         " or knowledge-state-change, not target-specification",
@@ -371,7 +379,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
     records["system.a"]["commitment"] = "specified"
     records["ans.a"]["status"] = "hypothesized"
     itinerary["steps"][2]["inputs"][2]["ref"] = "itin.a.route.predict"
-    assert texts(itinerary_problems(itinerary, records)) == ["steps.judge: the step itin.a.route.predict produces consequence, not data"]
+    assert texts(itinerary_problems(served(itinerary), records)) == ["steps.judge: the step itin.a.route.predict produces consequence, not data"]
 
 
 def test_an_attitude_restricts_an_answer_only() -> None:
@@ -388,13 +396,13 @@ def test_an_attitude_restricts_an_answer_only() -> None:
                 "output": output, "norm": {"test": f"norm.{activity}", "verdict": "pending"}}]}
 
     on_model = step("critique", [{"type": "model", "ref": "mod.a"}], {"type": "verdict"})
-    assert texts(itinerary_problems(on_model, records)) == []
+    assert texts(itinerary_problems(served(on_model), records)) == []
     on_answer = step("critique", [{"type": "target-claim", "ref": "ans.a"}], {"type": "verdict"})
-    assert texts(itinerary_problems(on_answer, records)) == [
+    assert texts(itinerary_problems(served(on_answer), records)) == [
         "steps.act: ans.a is accepted, and critique takes a target-claim held as hypothesized"
     ]
     produced = step("abduction", [{"type": "phenomenon", "ref": "phen.a"}], {"type": "target-claim", "ref": "ans.a"})
-    assert texts(itinerary_problems(produced, records)) == []
+    assert texts(itinerary_problems(served(produced), records)) == []
 
 
 def test_an_explanation_may_run_on_the_target_description() -> None:
@@ -407,10 +415,10 @@ def test_an_explanation_may_run_on_the_target_description() -> None:
         return {"addresses": "prob.a", "steps": [{"id": "explain", "activity": "explanation", "inputs": given,
                 "output": {"type": "explanation"}, "norm": {"test": "norm.explanation", "verdict": "pending"}}]}
 
-    assert texts(itinerary_problems(explain(inputs), records)) == []
-    assert texts(itinerary_problems(explain([*inputs, {"type": "model", "ref": "mod.a"}]), records)) == []
+    assert texts(itinerary_problems(served(explain(inputs)), records)) == []
+    assert texts(itinerary_problems(served(explain([*inputs, {"type": "model", "ref": "mod.a"}])), records)) == []
     twice = [*inputs, {"type": "model", "ref": "mod.a"}, {"type": "model", "ref": "mod.a"}]
-    assert texts(itinerary_problems(explain(twice), records)) == [
+    assert texts(itinerary_problems(served(explain(twice)), records)) == [
         "steps.explain: explanation takes at most one input of model, and the step gives 2"
     ]
 
@@ -436,7 +444,50 @@ def test_a_specified_record_still_holds_an_identified_subject() -> None:
 def test_a_step_is_referenced_by_its_full_identifier() -> None:
     """A reference names a step by the identifier of the itinerary followed by that of the step."""
     short = planted(observe={"inputs": [{"type": "design", "ref": "design"}]})
-    assert texts(itinerary_problems(short, RECORDS, types=unrecorded_design())) == [
+    assert texts(itinerary_problems(served(short), RECORDS, types=unrecorded_design())) == [
         "steps.observe: no record holds a design, so its input names a step, and design is none"
     ]
 
+
+
+def test_a_judged_verdict_states_its_evidence_and_its_date() -> None:
+    itinerary = planted(derive={"norm": {"test": "norm.derivation", "verdict": "fail", "judged": "03/11/2026"}})
+    assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
+        "steps.derive: the verdict fail states no evidence",
+        "steps.derive: the verdict fail states no date of judgment, written YYYY-MM-DD",
+    ]
+
+
+def test_a_step_serves_a_question_or_a_problem_and_names_what_it_acts_on() -> None:
+    itinerary = planted(derive={"rationale": {"serves": "quest.geometry"}},
+                        design={"rationale": {"serves": "mod.kernel", "acts_on": "access"}})
+    assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
+        "steps.derive: the rationale serves a question and names no condition or act among access, answer-type, "
+        "bridging, candidates, definiteness, discrimination, evaluation, obtaining, representation, soundness",
+        "steps.design: the rationale serves mod.kernel, which is no question or problem record",
+    ]
+
+
+def test_an_input_named_as_of_a_revision_is_read_at_that_revision() -> None:
+    """A step stays valid once its record is revised, since it names the state that it read."""
+    then = {"type": "model"}
+    itinerary = planted(derive={"inputs": [{"type": "model", "ref": "mod.earlier", "as_of": "abc123"}]})
+    revised = {**RECORDS, "mod.earlier": {"type": "answer"}}
+    assert itinerary_problems(served(itinerary), revised, states=lambda ident, rev: then) == []
+    assert texts(itinerary_problems(served(itinerary), revised, states=lambda ident, rev: None)) == [
+        "steps.derive: mod.earlier cannot be read at the revision abc123"
+    ]
+    assert texts(itinerary_problems(served(itinerary), revised)) == [
+        "steps.derive: mod.earlier cannot be read at the revision abc123"
+    ]
+
+
+def test_the_history_reads_a_record_at_a_revision_of_its_repository() -> None:
+    from gnomon.history import git_states
+
+    path = EXAMPLES / "grokking-delayed-generalization" / "question.yml"
+    ident = yaml.safe_load(path.read_text(encoding="utf-8"))["id"]
+    read = git_states({ident: path})
+    assert (read(ident, "HEAD") or {}).get("id") == ident
+    assert read(ident, "no-such-revision") is None
+    assert read("quest.absent", "HEAD") is None

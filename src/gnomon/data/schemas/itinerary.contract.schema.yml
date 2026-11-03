@@ -30,6 +30,7 @@ properties:
         - inputs
         - output
         - norm
+        - rationale
         - mode
       properties:
         inputs:
@@ -38,6 +39,7 @@ properties:
               enum:
               - type
               - ref
+              - as_of
         output:
           propertyNames:
             enum:
@@ -48,12 +50,33 @@ properties:
             enum:
             - test
             - verdict
+            - evidence
+            - judged
           properties:
             verdict:
               enum:
               - pass
               - fail
               - pending
+              - null
+        rationale:
+          propertyNames:
+            enum:
+            - serves
+            - acts_on
+          properties:
+            acts_on:
+              enum:
+              - definiteness
+              - answer-type
+              - soundness
+              - candidates
+              - discrimination
+              - access
+              - bridging
+              - representation
+              - obtaining
+              - evaluation
               - null
         mode:
           enum:

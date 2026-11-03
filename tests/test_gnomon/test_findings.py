@@ -18,7 +18,7 @@ from gnomon.findings import RULE_ID, RULES, Rule, pointer
 from gnomon.itineraries import activities, itinerary_problems, malformed_registry, product_types
 from gnomon.vocabulary import doubly_defined, misnamed_variant, unresolved
 
-from .test_itineraries import ITINERARY, RECORDS
+from .test_itineraries import ITINERARY, RECORDS, served
 
 
 def places(found: list[Any]) -> list[tuple[str, str]]:
@@ -82,7 +82,7 @@ def test_an_entry_of_an_unkeyed_list_keeps_its_index() -> None:
 
 
 def test_a_step_is_named_by_its_identifier_wherever_it_stands() -> None:
-    itinerary = copy.deepcopy(ITINERARY)
+    itinerary = served(copy.deepcopy(ITINERARY))
     itinerary["steps"][1]["activity"] = "intuition"
     assert places(itinerary_problems(itinerary, RECORDS)) == [("/steps", "derive/activity")]
     itinerary["steps"].reverse()
@@ -90,7 +90,7 @@ def test_a_step_is_named_by_its_identifier_wherever_it_stands() -> None:
 
 
 def test_a_cycle_and_a_repeated_step_are_discriminated_by_their_content() -> None:
-    itinerary = copy.deepcopy(ITINERARY)
+    itinerary = served(copy.deepcopy(ITINERARY))
     itinerary["steps"].append(copy.deepcopy(itinerary["steps"][0]))
     itinerary["steps"][2]["inputs"].append({"type": "data", "ref": "itin.geometry.route.observe"})
     found = places(itinerary_problems(itinerary, RECORDS))

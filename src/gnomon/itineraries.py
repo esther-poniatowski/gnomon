@@ -22,10 +22,12 @@ data/registries/product-types.yml : the types its inputs and output take.
 
 from __future__ import annotations
 
+import re
+
 from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Iterable, Mapping
+from typing import Any, Callable, Iterable, Mapping
 
 import yaml
 
@@ -92,6 +94,10 @@ class Activity:
     context: str
     output_values: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
 
+
+
+#: The form of the date of a judgment: YYYY-MM-DD.
+DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 
 def _load(path: Path) -> dict[str, Any]:
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
@@ -325,6 +331,7 @@ def itinerary_problems(
     records: Mapping[str, Mapping[str, Any]],
     acts: Mapping[str, Activity] | None = None,
     types: Mapping[str, Any] | None = None,
+    states: Callable[[str, str], Mapping[str, Any] | None] | None = None,
 ) -> list[Finding]:
     """Return every step of the itinerary that the registries or the records contradict.
 
@@ -333,15 +340,16 @@ def itinerary_problems(
     - every step names a registered activity;
     - the input types of a step fill the inputs of its activity, in number as well as in type, and
       its output type is the output of that activity;
-    - each input reference names a record that holds the input type in its present state, under an
-      attitude that its slot admits, or a step producing that type, named in full by the identifier
+    - each input reference names a record that holds the input type in its present state, or at
+      the revision that the input names by ``as_of``, under an attitude that its slot admits, or a step producing that type, named in full by the identifier
       of the itinerary followed by its own; a type held outside the records takes any pointer;
     - the references between steps form an acyclic graph;
-    - every verdict is admitted.
+    - every verdict is admitted, and a verdict ``pass`` or ``fail`` states its evidence and its date.
 
-    Four checks of the record fields complete them: the itinerary addresses a problem or a question; no
+    Five checks of the record fields complete them: the itinerary addresses a problem or a question; no
     two steps share an identifier; an output reference, once given, names a record that holds the
-    output type; the norm of a step is the test of its activity, and a stated mode is its mode.
+    output type; the norm of a step is the test of its activity, and a stated mode is its mode; the
+    rationale of a step serves a question or a problem, and names a condition when it serves a question.
 
     Parameters
     ----------
@@ -351,10 +359,13 @@ def itinerary_problems(
         The records of the problem, keyed by identifier.
     acts, types : mapping, optional
         The two registries, read from package data when omitted.
+    states : callable, optional
+        A reader of a record at a revision, as :func:`gnomon.history.git_states` returns; without
+        it, an input named ``as_of`` a revision is reported as unreadable.
     """
     acts = activities() if acts is None else acts
     types = product_types() if types is None else types
-    verdicts, modes = _closed("steps.verdict"), _closed("steps.mode")
+    verdicts, modes, acts_on = _closed("steps.verdict"), _closed("steps.mode"), _closed("steps.acts_on")
     steps = [
         (index, step) for index, step in enumerate(itinerary.get("steps") or []) if isinstance(step, Mapping)
     ]
@@ -432,6 +443,15 @@ def itinerary_problems(
                 )
                 continue
             record = records.get(ref) if isinstance(ref, str) else None
+            revision = item.get("as_of")
+            if isinstance(ref, str) and isinstance(revision, str) and revision:
+                record = states(ref, revision) if states is not None else None
+                if record is None:
+                    found.append(
+                        finding(rules.ITINERARY_UNREADABLE_STATE,
+                                f"{where}: {ref} cannot be read at the revision {revision}", *given, "as_of")
+                    )
+                    continue
             if record is None:
                 found.append(
                     finding(rules.ITINERARY_UNRESOLVED_INPUT, f"{where}: {ref} is neither a step nor a record",
@@ -488,6 +508,33 @@ def itinerary_problems(
             found.append(
                 finding(rules.ITINERARY_UNKNOWN_VERDICT, f"{where}: {norm.get('verdict')!r} is no verdict",
                         *at, "norm", "verdict")
+            )
+        elif norm.get("verdict") != "pending":
+            judged = norm.get("judged")
+            if not isinstance(norm.get("evidence"), str) or not norm["evidence"].strip():
+                found.append(
+                    finding(rules.ITINERARY_UNJUSTIFIED_VERDICT,
+                            f"{where}: the verdict {norm.get('verdict')} states no evidence", *at, "norm", "evidence")
+                )
+            if not DATE.fullmatch(str(judged)):
+                found.append(
+                    finding(rules.ITINERARY_UNJUSTIFIED_VERDICT,
+                            f"{where}: the verdict {norm.get('verdict')} states no date of judgment, written YYYY-MM-DD",
+                            *at, "norm", "judged")
+                )
+        rationale = step.get("rationale") if isinstance(step.get("rationale"), Mapping) else {}
+        served = (records.get(str(rationale.get("serves"))) or {}).get("type")
+        if served not in ("question", "problem"):
+            found.append(
+                finding(rules.ITINERARY_UNSERVED,
+                        f"{where}: the rationale serves {rationale.get('serves')}, which is no question or problem record",
+                        *at, "rationale", "serves")
+            )
+        elif served == "question" and rationale.get("acts_on") not in acts_on:
+            found.append(
+                finding(rules.ITINERARY_UNSERVED,
+                        f"{where}: the rationale serves a question and names no condition or act among"
+                        f" {', '.join(sorted(acts_on))}", *at, "rationale", "acts_on")
             )
         mode = step.get("mode")
         if mode is not None and (mode not in modes or mode != act.mode):

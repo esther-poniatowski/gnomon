@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-10-29
+revised: 2026-11-03
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Versions and history
@@ -24,7 +24,7 @@ Three references fix a state of their target: ^pinned-references
 
 - a reference to a binding or to a key, which names its [version](../specification/binding.md#^binding-version);
 - the root property `_schema` of a record, which names its schema at a version;
-- a step of an itinerary, which is planned to name the state of each record that it used, by `as_of`, under the goal `inquiry-records-round-2` of the [project goals](../../TODO.md). The goal also decides the form of `as_of`: a version of the record, or a revision of the repository.
+- a step of an itinerary, which names the state of each record that it used, by `as_of`, a revision of the repository. A version of the record was the other form weighed. That form is discarded because a step may use a record of any kind, so it would require a version on every record, the option that the table below discards.
 
 Every other reference names its target at its current state. ^current-by-default
 
@@ -47,5 +47,5 @@ Every other reference names its target at its current state. ^current-by-default
 ## Consequences
 
 - The decision replaces the criterion of the retired design notes that excluded any version history, including its prohibition of references fixed to a past state.
-- The check of the itinerary resolves `as_of` once the goal `inquiry-records-round-2` adds it.
+- The check of the itinerary reads a record named with `as_of` from the history of the repository, at that revision.
 - A new reference that must fix a state is added to the list of references that fix a state, with the reason that the referring record must stay valid.

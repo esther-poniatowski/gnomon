@@ -17,6 +17,10 @@ steps:
     norm:
       test: norm.problematization
       verdict: pass
+      evidence: "The problem states its demand, its constraints and its explicanda, and each explicandum points to its source, a phenomenon or a candidate answer."
+      judged: "2026-10-27"
+    rationale:
+      serves: prob.grokking.delayed-generalization
     mode: non-inferential
   - id: formulate
     activity: question-formulation
@@ -28,6 +32,11 @@ steps:
     norm:
       test: norm.question-formulation
       verdict: pass
+      evidence: "The aim, the requested relation and the modal strength type the answer space, and the contrast states the foils; the topic presupposed by the question is the phenomenon, whose evidential status is established."
+      judged: "2026-10-27"
+    rationale:
+      serves: quest.grokking.explain_delay
+      acts_on: answer-type
     mode: non-inferential
   - id: identify
     activity: subject-identification
@@ -40,6 +49,11 @@ steps:
     norm:
       test: norm.subject-identification
       verdict: pass
+      evidence: "The phenomenon was fixed by a definite description and pointers, at the commitment identified, so the slot of the question refers to it."
+      judged: "2026-10-27"
+    rationale:
+      serves: quest.grokking.explain_delay
+      acts_on: definiteness
     mode: non-inferential
   - id: delimit
     activity: delimitation
@@ -54,6 +68,9 @@ steps:
     norm:
       test: norm.delimitation
       verdict: pending
+    rationale:
+      serves: quest.grokking.explain_delay
+      acts_on: definiteness
     mode: non-inferential
   - id: admit
     activity: background-appraisal
@@ -65,7 +82,12 @@ steps:
       ref: bg.delayed_generalization_networks.training-specification
     norm:
       test: norm.background-appraisal
-      verdict: fail             # no admitted law states its origin or its range yet
+      verdict: fail
+      evidence: "No admitted law of the background states its origin or the range over which it is established."
+      judged: "2026-10-27"
+    rationale:
+      serves: quest.grokking.explain_delay
+      acts_on: bridging
     mode: inductive
   - id: propose
     activity: abduction
@@ -78,6 +100,11 @@ steps:
     norm:
       test: norm.abduction
       verdict: pass
+      evidence: "The candidate proposes a mechanism, the slow formation of a structured representation, that would produce the delay, and its status hypothesized claims no truth for it."
+      judged: "2026-10-27"
+    rationale:
+      serves: quest.grokking.explain_delay
+      acts_on: candidates
     mode: abductive
   - id: derive
     activity: derivation
@@ -90,6 +117,9 @@ steps:
     norm:
       test: norm.derivation
       verdict: pending
+    rationale:
+      serves: quest.grokking.explain_delay
+      acts_on: candidates
     mode: deductive
   - id: check
     activity: admissibility-check
@@ -104,6 +134,9 @@ steps:
     norm:
       test: norm.admissibility-check
       verdict: pending
+    rationale:
+      serves: quest.grokking.explain_delay
+      acts_on: evaluation
     mode: non-inferential
   - id: test
     activity: testing
@@ -120,4 +153,7 @@ steps:
     norm:
       test: norm.testing
       verdict: pending
+    rationale:
+      serves: quest.grokking.explain_delay
+      acts_on: evaluation
     mode: error-statistical

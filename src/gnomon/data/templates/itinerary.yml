@@ -16,10 +16,16 @@ steps:                           # one entry per activity instance; the steps ma
     inputs:                      # one entry per input of the activity
       - type: PRODUCT-TYPE       # an identifier of the product-type registry
         ref: RECORD-OR-STEP      # a record identifier, the identifier of the step that produces the input, or a pointer for a `source`
+        as_of: REVISION          # optional; the revision of the repository at which the step read the record; omit to read the record in its present state
     output:
       type: PRODUCT-TYPE
       ref: RECORD                # the record that holds the product; omit until that record exists
     norm:
       test: norm.ACTIVITY        # the test named by the activity registry for this activity
       verdict: pending           # pass | fail | pending
+      evidence: "WHY THE PRODUCT MEETS THE NORM OR FAILS IT"   # fill with a verdict pass or fail, from the content of the products
+      judged: DATE               # fill with a verdict pass or fail; the date of the last judgment, written YYYY-MM-DD
+    rationale:
+      serves: quest.TOPIC.NAME   # the question that the step serves, or the problem for a step that precedes any question
+      acts_on:                   # definiteness | answer-type | soundness | candidates | discrimination | access | bridging | representation | obtaining (the acts that obtain the answer once every condition of a route is established) | evaluation (the evaluation of an obtained answer)
     mode:                        # deductive | inductive | abductive | analogical | error-statistical | model-based | non-inferential

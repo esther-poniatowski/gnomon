@@ -504,6 +504,19 @@ vocabularies:
     - value: pass
     - value: fail
     - value: pending
+    steps.acts_on:
+    - value: definiteness
+    - value: answer-type
+    - value: soundness
+    - value: candidates
+    - value: discrimination
+    - value: access
+    - value: bridging
+    - value: representation
+    - value: obtaining
+      name: the acts that obtain the answer once every condition of a route is established
+    - value: evaluation
+      name: the evaluation of an obtained answer
     steps.mode:
     - value: deductive
     - value: inductive

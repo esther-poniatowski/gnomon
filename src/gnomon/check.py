@@ -41,6 +41,7 @@ import yaml
 from . import completeness as c
 from . import vocabulary as v
 from .findings import CHECK_FAILED, Finding, finding
+from .history import StateReader, git_states
 from .itineraries import construct_record_kinds, itinerary_problems, type_classes, type_holders
 from .sarif import Located
 
@@ -101,6 +102,16 @@ class Workspace:
     def by_id(self) -> dict[str, Mapping[str, Any]]:
         """Every record of the workspace, keyed by identifier."""
         return {ident: record for problem in self.problems for ident, record in problem.records.items()}
+
+    @cached_property
+    def files(self) -> dict[str, Path]:
+        """The file of every record of the workspace, keyed by identifier."""
+        return {ident: path for problem in self.problems for ident, path in problem.files.items()}
+
+    @cached_property
+    def states(self) -> StateReader:
+        """A reader of the records of the workspace at a revision of their repository."""
+        return git_states(self.files)
 
 
 def load_workspace(root: Path) -> Workspace:
@@ -313,7 +324,7 @@ def _problem(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 def _itinerary(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The steps of an itinerary against the registries and the records that they name."""
-    return itinerary_problems(record, {**ctx.workspace.by_id, **ctx.problem.records})
+    return itinerary_problems(record, {**ctx.workspace.by_id, **ctx.problem.records}, states=ctx.workspace.states)
 
 
 def _every_record(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:

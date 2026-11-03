@@ -97,6 +97,16 @@ ITINERARY_FOREIGN_NORM = _rule(
     "itinerary/foreign-norm", "The norm of a step is not the test of its activity."
 )
 ITINERARY_UNKNOWN_VERDICT = _rule("itinerary/unknown-verdict", "The verdict of a step is not admitted.")
+ITINERARY_UNJUSTIFIED_VERDICT = _rule(
+    "itinerary/unjustified-verdict", "A judged verdict states no evidence, or no date of its judgment."
+)
+ITINERARY_UNREADABLE_STATE = _rule(
+    "itinerary/unreadable-state", "An input names a record at a revision that cannot be read."
+)
+ITINERARY_UNSERVED = _rule(
+    "itinerary/unserved-step",
+    "A step states no rationale, or a rationale that serves no question or problem, or names no condition.",
+)
 ITINERARY_MISMATCHED_MODE = _rule(
     "itinerary/mismatched-mode", "The mode of a step is not admitted, or not the mode of its activity."
 )

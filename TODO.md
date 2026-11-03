@@ -13,11 +13,10 @@ This list holds the goals of `gnomon` that span several parts of the project, gr
 The records represent each act of an inquiry as the act is taken, so that the course of research is tracked and the next act can be computed.
 
 - [ ] Represent every act of an inquiry operationally in its records: close the gaps of the graph of activities, keep each itinerary valid as the records change, and compute the next act. The second review of the records found that a restart of a project can be written but not fully tracked. 🆔 inquiry-records-round-2
-	- [ ] Let an itinerary step reference a record at the state it had when the step ran (`as_of`), so that an itinerary stays valid once its steps succeed.
 	- [ ] Close the gaps of the type graph of activities, as the [choice of the next act](docs/procedures/inquiry/next-act.md) marks them in its map from conditions to activities and in its tables of acts:
 		- [ ] raise a phenomenon to commitment `specified`, and fill or revise the fields of the epistemic task;
 		- [ ] build a candidate model from a target specification and a background without a phenomenon, retrieve an accepted result as a candidate, and compare the consequences of several candidates;
-		- [ ] record a negative detection; turn a derived consequence into a phenomenon; judge the norm of an itinerary step;
+		- [ ] record a negative detection; turn a derived consequence into a phenomenon;
 		- [ ] revise a question after a corrective answer, narrow the conditions that it holds fixed or its contrast, and decompose a problem into subproblems; give a question of explication a record form, since its explicandum is not a slot;
 		- [ ] develop a proof technique or an algorithm that gives access to a quantity, whose product the [record of a technique](docs/proposals/inquiry-records-round-2.md#record-of-a-technique) proposes.
 	- [ ] Make the [choice of the next act](docs/procedures/inquiry/next-act.md) computable on the records:
@@ -31,7 +30,6 @@ The records represent each act of an inquiry as the act is taken, so that the co
 	- [ ] State requirements on leaf fields, so that a block with empty fields fails; require the field path of a product type in the itinerary check.
 	- [ ] Give the three remaining slot types a placeholder (contrast, observable, condition), or reduce the closed list of slot types.
 	- [ ] Apply the itinerary corrections of the Mixture pilot:
-		- [ ] a rationale on each itinerary step, naming the question served and what the step acts on: one of the eight [conditions of answerability](docs/epistemology/objects/question/conditions-of-answerability.md) for obtaining an answer (definiteness, answer type, soundness, candidates, discrimination, access, bridging, representation), the acts that obtain the answer, or the evaluation of an obtained answer, as the [choice of the next act](docs/procedures/inquiry/next-act.md) orders them;
 		- [ ] the activities of the pilot absent from the registry, beside the gaps listed above: comparing a derived law with a simulation;
 		- [ ] the checks of produced content, of the rationale and of revisions.
 - [ ] Decide which changes of the attitude or of the support of a claim, such as a retraction, flag the records resting on it for review, and state the rule in the [propagation through grounds](docs/epistemology/objects/knowledge/grounds-and-dependence.md#^propagation). A flag never edits a dependent: the researcher decides whether each dependent holds, needs an adjustment or is retracted, as the [decision on revision accountability](docs/adr/revision-accountability.md#^flag-not-edit) fixes. A candidate classification sorts the transitions into three classes. A retracting transition, from any value to `retracted`, flags every dependent. A strengthening transition, such as from `hypothesized` to `accepted`, calls for a re-examination of the dependents. A lateral transition, such as the refinement of a question, flags nothing. Its [candidate formalisms](docs/proposals/status-propagation.md) await adoption or decline. 🆔 status-propagation

@@ -112,6 +112,16 @@ properties:
                 title: Ref
                 description: a record identifier, the identifier of the step that produces the input,
                   or a pointer for a `source`
+              as_of:
+                type:
+                - string
+                - 'null'
+                x-template: REVISION
+                x-kind: label
+                x-comment: optional; the revision of the repository at which the step read the record;
+                  omit to read the record in its present state
+                title: As of
+                description: the revision of the repository at which the step read the record
           x-comment: one entry per input of the activity
           title: inputs
           description: 'per input, its product type and a reference: a record identifier, the full identifier
@@ -168,11 +178,56 @@ properties:
               x-vocabulary: steps.verdict
               title: Verdict
               description: The verdict of the record.
+            evidence:
+              type:
+              - string
+              - 'null'
+              x-template: '"WHY THE PRODUCT MEETS THE NORM OR FAILS IT"'
+              x-kind: markdown-line
+              x-comment: fill with a verdict pass or fail, from the content of the products
+              title: Evidence
+              description: why the product meets the norm or fails it
+            judged:
+              type:
+              - string
+              - 'null'
+              x-template: DATE
+              x-kind: label
+              x-comment: fill with a verdict pass or fail; the date of the last judgment, written YYYY-MM-DD
+              title: Judged
+              description: the date of the last judgment of the verdict
           title: norm
-          description: 'the test named by the registry for the activity, written `norm.<activity>`, and
-            its verdict: pass · fail · pending'
+          description: 'the test named by the registry for the activity, written `norm.<activity>`, its
+            verdict: pass · fail · pending, and, once judged, the evidence and the date of the judgment'
           examples:
           - '`norm.testing`, pending until the assessment is stabilized'
+        rationale:
+          type:
+          - object
+          - 'null'
+          properties:
+            serves:
+              type:
+              - string
+              - 'null'
+              x-template: quest.TOPIC.NAME
+              x-kind: label
+              x-comment: the question that the step serves, or the problem for a step that precedes any question
+              title: Serves
+              description: the question that the step serves, or the problem
+            acts_on:
+              type:
+              - string
+              - 'null'
+              x-vocabulary: steps.acts_on
+              title: Acts on
+              description: The condition or the act on which the step acts.
+          title: rationale
+          description: 'the question that the step serves, or its problem, and the object on which the
+            step acts: one of the eight conditions for obtaining an answer, the obtaining of the answer,
+            or its evaluation'
+          examples:
+          - '`quest.grokking.explain_delay`, acting on the candidates'
         mode:
           x-vocabulary: steps.mode
           type:

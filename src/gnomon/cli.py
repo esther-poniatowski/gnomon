@@ -26,6 +26,7 @@ import yaml
 
 from . import info as pkg_info, __version__
 from .findings import Finding
+from .history import git_states
 from .itineraries import itinerary_problems
 from .sarif import Located, sarif_log
 from .views import question_tree, render_tree
@@ -316,7 +317,8 @@ def cli_itinerary(
     found: list[tuple[str, Finding]] = []
     try:
         for itinerary in itineraries:
-            found += [(str(itinerary["id"]), problem) for problem in itinerary_problems(itinerary, records)]
+            found += [(str(itinerary["id"]), problem)
+                      for problem in itinerary_problems(itinerary, records, states=git_states(files))]
     except (OSError, ValueError, yaml.YAMLError) as error:
         if not sarif:
             raise
