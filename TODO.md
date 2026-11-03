@@ -22,7 +22,6 @@ A researcher who proceeds by local increments needs the global state of a projec
 
 - [ ] Decide whether the Markdown table that `gnomon vocabulary --markdown` writes gives way to a render of its YAML record by Ekphrasis, as the views of `gnomon views` do. 🆔 vocabulary-view
 - [ ] Build the view of a filled inquiry record: compose the question statement from its fields, and typeset each expression in LaTeX from the notation that the [operator registry](src/gnomon/data/operators.yml) and the `operators.yml` of each problem already hold. The [syntax decision](docs/adr/expression-syntax.md) fixes the input notation; only the view of a vocabulary is built so far. 🆔 record-view
-	- [ ] Correct the comment of `statement` in the [question template](src/gnomon/data/templates/question.yml), which names a command `gnomon render` that does not exist: name the view of this goal instead. The consequence of the [decision on grammatical fields](docs/adr/grammatical-fields-and-readings.md) that cites this comment then needs the same correction.
 
 ## 3. Research frameworks
 
