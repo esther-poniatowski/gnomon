@@ -19,7 +19,7 @@ laws:                            # behaviors of the components or of the system 
     role:                        # evolution (how the state changes along the course) | input-output (how one quantity is determined by others at the same point) | measurement (how an instrument registers the state) | state-constraint (which states may hold together, including at the start and at the boundary) | distribution (the law of a random quantity) | admissibility (a restriction on the parameters or the forms that a member may take)
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # the claim of the law: the only part of the entry that can be false of the system
     reading: "THE LAW IN WORDS"
-    warrant:                     # derived (from other admitted laws) | derived-in-a-limit | posited | fitted | measured
+    warrant:                     # derived (from other admitted laws, in a limit or not, the range of the law stating the limit) | posited | fitted | measured
     rests_on: "THE LAWS, THE LIMIT OR THE DATA THAT THE WARRANT REFERS TO"
     origin: "POINTER TO THE SOURCE OF THE LAW: A PUBLICATION, A DATA SET OR A DERIVATION"
     range: "EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE LAW IS ESTABLISHED"   # omit when the law is established across the whole reference class

@@ -104,7 +104,7 @@ laws:
     role: input-output
     expression: "depends_on(delay_m, 1 / (lambda3 * eta_rep))"
     reading: "The inverse of the slowest nonzero rate of the representation sets the scale of the delay after fitting."
-    warrant: derived-in-a-limit
+    warrant: derived
     rests_on: "The law follows from the linear effective dynamics, under the operation decoder-step [liu2022]."
   - name: "structured representation supports held-out prediction"
     symbol: generalization_link

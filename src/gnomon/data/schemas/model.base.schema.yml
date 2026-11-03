@@ -55,7 +55,7 @@ properties:
     - 'null'
     x-template: bg.TOPIC.NAME
     x-kind: label
-    x-comment: fill when a law of the model carries the warrant `derived` or `derived-in-a-limit`
+    x-comment: fill when a law of the model carries the warrant `derived`
     title: Background
     description: the record from which the laws of the model are derived the identifier of one background
       record
@@ -611,9 +611,9 @@ properties:
           - 'null'
           x-template: '"THE LAWS, THE ASSUMPTION OR THE DATA THAT THE WARRANT REFERS TO"'
           x-kind: markdown-line
-          x-comment: a law derived in a limit names the assumption that the limit introduces
+          x-comment: a law derived through an operation, such as a limit or an approximation, names that operation
           title: Rests on
-          description: a law derived in a limit names the assumption that the limit introduces
+          description: a law derived through an operation, such as a limit or an approximation, names that operation
         origin:
           type:
           - string
@@ -635,7 +635,7 @@ properties:
     title: Laws or structural relations $L$
     description: the dependences that link the terms $V$
     examples:
-    - the mean-field rate equations (derived in a limit); the stability condition that follows from them
+    - the mean-field rate equations (derived through a mean-field limit); the stability condition that follows from them
       (derived); a transfer function obtained from recordings (fitted)
   organization:
     x-blank: true

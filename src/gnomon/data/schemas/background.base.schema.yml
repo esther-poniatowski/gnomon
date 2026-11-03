@@ -165,7 +165,7 @@ properties:
     description: 'known behaviors of the components or of the system an expression over the symbols that
       the target declares, with its signature and the places that the claim ranges over (one entry each,
       empty when the law concerns the system as a whole). Its warrant (derived from other admitted laws,
-      derived in a limit, posited, fitted or measured), with its grounds. Its role, one of six:<br>- evolution:
+      in a limit or not, posited, fitted or measured), with its grounds. Its role, one of six:<br>- evolution:
       how the state changes along the course<br>- input-output: how one quantity is determined by others
       at the same point<br>- measurement: how an instrument registers the state<br>- state-constraint:
       which states may hold together, including at the start and at the boundary<br>- distribution: the

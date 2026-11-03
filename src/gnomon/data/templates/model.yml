@@ -12,7 +12,7 @@ id: mod.TOPIC.NAME
 type: model
 status: provisional              # provisional | stabilized | retracted
 
-background: bg.TOPIC.NAME        # fill when a law of the model carries the warrant `derived` or `derived-in-a-limit`
+background: bg.TOPIC.NAME        # fill when a law of the model carries the warrant `derived`
 
 derives_from:                    # fill for a derived model; the target system or the models that the operations act on
   - mod.TOPIC.NAME
@@ -82,8 +82,8 @@ laws:                            # L: dependences linking the terms of the model
     role:                        # evolution | input-output | measurement | state-constraint | distribution | admissibility
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
     reading: "THE LAW IN WORDS"
-    warrant:                     # derived (from the laws of the background) | derived-in-a-limit | posited | fitted | measured
-    rests_on: "THE LAWS, THE ASSUMPTION OR THE DATA THAT THE WARRANT REFERS TO"   # a law derived in a limit names the assumption that the limit introduces
+    warrant:                     # derived (from the laws of the background or of a parent, through the operations of the model) | posited | fitted | measured
+    rests_on: "THE LAWS, THE ASSUMPTION OR THE DATA THAT THE WARRANT REFERS TO"   # a law derived through an operation, such as a limit or an approximation, names that operation
     origin: "POINTER TO THE SOURCE OF THE LAW: A PUBLICATION, A DATA SET OR A DERIVATION"
     range: "EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE LAW IS ESTABLISHED"   # omit when the law is established across the whole model
 

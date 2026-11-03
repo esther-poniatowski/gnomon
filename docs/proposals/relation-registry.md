@@ -84,7 +84,7 @@ The split keeps a weak relation on the record and a strong one on the assembly. 
 
 Each support relation carries a warrant kind from a closed list: `deductive`, `empirical`, `abductive`, `analogical`, `heuristic`, `methodological`, `definitional` and `interpretive`. Each kind is declared monotonic or defeasible, so the defeasibility of a record is computed from the kinds of the relations that support it, and reported: a record is defeasible when one of its supports is defeasible. Such a computation applies a declared rule to authored relations, which the [decision against inference at run time](../adr/no-run-time-inference.md#^admitted-computation) admits. The retired notes classed `deductive` as monotonic, and `empirical`, `abductive`, `analogical` and `heuristic` as defeasible, and left the three other kinds unclassified.
 
-The list must be aligned with two vocabularies that already exist in the [vocabulary registry](../../src/gnomon/data/vocabularies.yml): the `mode` of an activity, declared under `itinerary`, and the `laws.warrant` of a model and of a background (`derived`, `derived-in-a-limit`, `posited`, `fitted`, `measured`).
+The list must be aligned with two vocabularies that already exist in the [vocabulary registry](../../src/gnomon/data/vocabularies.yml): the `mode` of an activity, declared under `itinerary`, and the `laws.warrant` of a model and of a background (`derived`, `posited`, `fitted`, `measured`).
 
 **Literature.** None cited.
 

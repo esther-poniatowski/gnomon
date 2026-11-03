@@ -65,6 +65,6 @@ laws:
     role: state-constraint
     expression: "gamma_max = 0"
     reading: "The homogeneous ordered state loses stability where the largest growth rate of a mode crosses zero; a real leading eigenvalue gives a stationary loss of stability, and a complex pair an oscillatory one."
-    warrant: derived-in-a-limit
+    warrant: derived
     rests_on: "The law rests on the operation weak-amplitude, and on the bifurcation analysis of nonreciprocal phase transitions [fruchart2021]."
     origin: "https://doi.org/10.1038/s41586-021-03375-9"

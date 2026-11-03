@@ -40,7 +40,7 @@ tests:
       evidence: "The question names no foil."
     law-warrant:
       verdict: pass
-      evidence: "The law of onset is derived in a limit, from the operation weak-amplitude and a published bifurcation analysis [fruchart2021], so it claims no measured property of the full class."
+      evidence: "The law of onset is derived through the operation weak-amplitude, an approximation near onset, and a published bifurcation analysis [fruchart2021], so it claims no measured property of the full class."
     closure:
       verdict: fail
       evidence: "The derived model states the onset of the instability, not the normal form whose phase diagram yields the three classes, so the catalogue rests on the cited diagrams rather than on the laws of the model."

@@ -48,7 +48,6 @@ properties:
         warrant:
           enum:
           - derived
-          - derived-in-a-limit
           - posited
           - fitted
           - measured

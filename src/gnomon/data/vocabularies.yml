@@ -406,8 +406,7 @@ vocabularies:
       name: a restriction on the parameters or the forms that a member may take
     laws.warrant:
     - value: derived
-      name: from other admitted laws
-    - value: derived-in-a-limit
+      name: from other admitted laws, in a limit or not, the range of the law stating the limit
     - value: posited
     - value: fitted
     - value: measured
@@ -581,8 +580,7 @@ vocabularies:
     - value: admissibility
     laws.warrant:
     - value: derived
-      name: from the laws of the background
-    - value: derived-in-a-limit
+      name: from the laws of the background or of a parent, through the operations of the model
     - value: posited
     - value: fitted
     - value: measured
