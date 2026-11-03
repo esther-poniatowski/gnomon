@@ -71,7 +71,7 @@ The table lists every epistemic object of an inquiry, in the order of the readin
 | consequence | Candidate or Result, by the attitude of the answer that states it | `consequence` | `answer` or `assessment`, in part | [model analysis](../../processes/activities/model-analysis.md) |
 | model system | Assumption | `model` | `model` | [model and binding](../answer/model-and-binding.md) |
 | binding | Assumption | `binding` | `binding` | [model and binding](../answer/model-and-binding.md#^map-versus-binding) |
-| key | Definition | `key`; no activity outputs it yet | `key` | [model and binding](../answer/model-and-binding.md) |
+| key | Definition | `key` | `key` | [model and binding](../answer/model-and-binding.md) |
 | comparison | none: computed | none: computed | none: recomputed from the inputs that an assessment cites | [computed comparison](../answer/model-and-binding.md#^comparison) |
 | assessment | Verdict | `verdict`, `credence` and `ranking`, for its parts | `assessment` | [assessment](../answer/satisfaction-conditions.md#^assessment) |
 | disposition | none: computed | none: computed | none: read from the verdicts of an assessment | [disposition](../answer/satisfaction-conditions.md#^disposition) |

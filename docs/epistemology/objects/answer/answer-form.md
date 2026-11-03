@@ -119,6 +119,7 @@ For a nomological, statistical or mathematical relation, the organization $O$ of
 > - **Established:** the possible answers of a question and its direct answers, the generality of dependence beyond explanation, the explanatory roles of distortions and constraints, and the account of each element, as cited.
 > - **Proposals:**
 > 	- one typed claim per answer, with a core shared by every aim and one aim block;
+> 	- a question left open, with no answer type, while its answer space is not formed;
 > 	- the roles of a ground, and the domain of a deductive claim, stated by the answer and judged against its grounds;
 > 	- the three motives of an idealization, and the gain that each idealization states;
 > 	- the declaration of an assumption by the model and its classification as an idealization by the answer, relative to its target, with abstractions kept apart from the grounds;

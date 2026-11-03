@@ -51,7 +51,7 @@ The activities of this family output a target specification, admitted laws, a [m
 | `formalization` | state each term and relation of a verbal model as a quantity, a set or an equation | every symbol resolves to a declaration, under the [expression language](../../../specification/expressions.md) |
 | `fitting` | estimate the parameters of a model from data | the estimator and the uncertainty of each estimate are stated, and each fitted parameter carries the warrant `fitted` [kennedyohagan2001] |
 | `binding` | state the inferences from a model to a phenomenon that its asserter licenses, as feature pairs | the binding denotes the phenomenon, and each of its feature pairs states the feature that the model exemplifies, the feature imputed to the target, and the key that carries the feature of the model onto the feature of the target; an argued pair cites its argument instead of a key [friggnguyen2020] [suarez2004] |
-| `keying` | state a map between a side of a model and a side of its target, such as an observation operator or a map of units | the key states its kind, a domain on the side of the model, a codomain on the side of the target, an expression over the symbols of its domain or a pointer to the procedure that computes the map, and a version |
+| `keying` | state a map between a side of a model and a side of its target: an observation operator, a map of units, a map of aggregation or a qualitative abstraction | the key states its kind, a domain on the side of the model, a codomain on the side of the target, an expression over the symbols of its domain or a pointer to the procedure that computes the map, and a version |
 
 ## Distinctions
 

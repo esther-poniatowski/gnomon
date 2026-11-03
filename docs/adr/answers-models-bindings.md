@@ -61,7 +61,7 @@ The constraint on representation discards three alternatives:
 | A uniform form, with every block optional and rules conditioned on the aim | One schema, simple queries across aims | The form represents the same content as typed answers, so the choice rests on the unit of an answer; with blocks optional, an answer can still carry a pseudo-explanans |
 | Typed result blocks without a shared core | Each aim has exactly its fields | The grounds, the domain and the status cannot be compared across aims, and their fields repeat in every block |
 | Typed answers with a binding owned by the answer | The author of the answer commits to its interpretation | One model grounds several answers, so every binding would be repeated, and shared keys would be copied |
-| A network of untyped claims, linked by support and attack | No premature commitment in exploratory phases | No answer has a condition of conclusiveness; an open question, with its answer type still to come, covers the exploratory phase |
+| A network of untyped claims, linked by support and attack | No premature commitment in exploratory phases | No answer has a condition of conclusiveness; an open question, with its answer type still to come, covers the phase before its answer space is formed, and the aim `exploration` covers the search of a declared space |
 | Typed answers on a shared core, with separate model, binding and key records | Each answer shows what its aim requires, and models, keys and phenomena are reused without repetition | — |
 
 The pilot discards five alternatives to its amendments:

@@ -31,6 +31,12 @@ The fields of the record are documented in the [background record](../../../spec
 ---
 ## Sources
 
+> [!NOTE] Status of the claims
+> - **Proposals:**
+> 	- the four warrants of a law: `derived`, `posited`, `fitted` and `measured`;
+> 	- the organization as one block of relations, each carried by laws along ordered tuples whose every place indexes the carrier, joint relations of three places or more included;
+> 	- relations whose ends are laws, without a carrying quantity.
+
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
 - [craver2007] ◐ [Craver, *Explaining the Brain: Mechanisms and the Mosaic Unity of Neuroscience*, Oxford University Press, 2007](https://doi.org/10.1093/acprof:oso/9780199299317.001.0001)

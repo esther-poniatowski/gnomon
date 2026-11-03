@@ -20,12 +20,12 @@ A field of the shared schema binds every record, so a field added for one proble
 
 ## Decision
 
-A typed distinction earns a field only when it recurs across cases or when it changes the admissible answers. The design of the framework justifies a field on its own, and the absence of a construction from the filled cases refutes none.
+A typed distinction earns a field only when it recurs across cases or when it changes the possible answers of a question or its presuppositions, as the [inclusion test](../epistemology/objects/subject/subject-of-inquiry.md#^inclusion-test) states. The design of the framework justifies a field on its own, and the absence of a construction from the filled cases refutes none.
 
 ## Constraints that decide the grounds
 
 - **A complication local to one case must not expand every record.** A limitation met once is repaired within its own case whenever that case can express the repair, because a field admitted to the shared schema reaches every author of every later inquiry.
-- **A count over the cases measures the corpus.** The seven filled problems request no causal relation, although inquiries seeking a causal relation are ordinary, so the absence of a construction among them refutes no requirement.
+- **A count over the cases measures the corpus.** The seven filled problems request no causal relation, although the [requested relations](../epistemology/objects/task/requested-relation.md) admit two causal ones, so the absence of a construction among them refutes no requirement.
 - **A declaration already written carries typed content.** In three cases the purpose of an unused declaration could be stated, and a field of the record now connects it (four microbial coefficients, for instance, type the interaction specification).
 
 ## Options weighed

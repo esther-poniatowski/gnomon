@@ -49,6 +49,8 @@ The fields of the record are documented in the [phenomenon record](../../../spec
 
     The restriction matters because each declared index changes the possible answers. *Examples*: a correlation computed over aggregates can differ from its value over individuals [robinson1950]. The result can also depend on the order of the averaging over instances relative to the analysis. A *quenched* computation obtains the result for each random draw and then averages it, whereas an *annealed* computation averages over the random draws before it obtains the result, and the two can differ [mezard1987].
 
+- **Each source of variation states its kind, its quantification and the sources held fixed.** A claim over instances targets one population and one summary of it, and two claims that differ in either have different estimands, the quantities that their evidence estimates [lundberg2021] [ich2019]. A source of variation therefore states its kind: a member of the class, a realization, a draw of parameters, a draw of structure, or a scenario. The source also states its quantification, from a single instance to every member, and the other sources held fixed while it varies, since a quantity averaged with another source held fixed is not the same estimand as one averaged over both. ^scope-sources
+
 - **A censored event is not a large value.** Within a finite observation window, either the event occurs and its time is recorded, or only the horizon is known. A single number pooling an event time with a horizon represents neither. The horizon and the censoring are therefore stated beside the observable, not inside its value. ^censoring-is-not-a-value
 
 - **The constant of a bound is a feature of the manifestation that states the bound.** A bound of order $m^{-1/2}$ asserts more than its rate: some constant $C$ and some threshold $m_0$ satisfy $E(m) \le C\, m^{-1/2}$ for every $m \ge m_0$, over a stated horizon and in a stated mode of convergence. The constant, the horizon and the mode are features of the convergence, as a manifestation is a feature of the occurrent [craver2013]. The manifestation that states the bound therefore declares them, and an answer gives their values through these features, as the [phenomenon record](../../../specification/phenomenon.md#^bound-constants) specifies. ^bound-constants
@@ -67,7 +69,7 @@ The fields of the record are documented in the [phenomenon record](../../../spec
 
     The kinds of model and the form of each declaration are documented in the [phenomenon record](../../../specification/phenomenon.md).
 
-- **An exploratory question fixes a search space, and the inquiry produces the phenomenon.** Exploratory experimentation varies parameters systematically to find regularities and to form concepts, when no theory yet delimits the phenomenon [steinle1997]. This search is supported by instruments that measure many variables at once [franklin2005].
+- **An exploratory question fixes a search space, and the inquiry produces the phenomenon.** Exploratory experimentation varies parameters systematically to find regularities and to form concepts, when no theory yet delimits the phenomenon [steinle1997]. Since the inquiry produces the phenomenon, the question fixes instead the detection criterion that a candidate pattern must meet to count as one, so that the phenomenon is not delimited after its pattern is found. This search is supported by instruments that measure many variables at once [franklin2005].
 
     *Example*: "in a recurrent network trained on a task that depends on a context cue, which patterns appear in the population activity as the strength of that cue varies?" ^exploratory-phenomenon
 
@@ -83,7 +85,9 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [cummins2000] ✓ [Cummins, "How does it work?" versus "What are the laws?", in _Explanation and Cognition_, MIT Press, 2000](https://direct.mit.edu/books/edited-volume/4894/chapter/623167/How-Does-It-Work-versus-What-Are-the-Laws-Two)
 - [feest2017] ◐ [Feest, "Phenomena and objects of research…", _Philosophy of Science_ 84(5), 2017](https://philarchive.org/rec/FEEPAO)
 - [franklin2005] ◐ [Franklin, "Exploratory experiments", _Philosophy of Science_ 72(5), 2005](https://philpapers.org/rec/FRAEE)
+- [ich2019] ◐ [ICH E9(R1) Addendum on Estimands](https://en.wikipedia.org/wiki/ICH_E9\(R1\)_Addendum_On_Estimands_and_Sensitivity_Analyses_in_Clinical_Trials)
 - [kaiser2017] ◐ [Kaiser & Krickel, "The metaphysics of constitutive mechanistic phenomena", _BJPS_ 68(3), 2017](https://academic.oup.com/bjps/article/68/3/745/2669661)
+- [lundberg2021] ✓ [Lundberg, Johnson & Stewart, "What is your estimand?", _ASR_ 86(3), 2021](https://journals.sagepub.com/doi/abs/10.1177/00031224211004187)
 - [mezard1987] ◐ Mézard, Parisi & Virasoro, _Spin Glass Theory and Beyond_, World Scientific, 1987, quenched versus annealed averages
 - [parker2017] ◐ Parker, "Computer simulation, measurement, and data assimilation", *British Journal for the Philosophy of Science* 68(1), 273–304, 2017
 - [robinson1950] ◐ [Robinson, "Ecological correlations and the behavior of individuals", _American Sociological Review_ 15(3), 1950](https://en.wikipedia.org/wiki/Ecological_correlation)

@@ -76,7 +76,12 @@ Both frameworks keep the question separate from any model. The [specification of
 > 	- the variation test that separates the domain $D$ from the conditions of $P$;
 > 	- the consistency conditions between specifications (target type with $\mu$, phenomenon category with $R$, foil status with the source of evidence);
 > 	- the split of the specifications that a question admits about its target into a target record, which delimits $S$, and background records, which admit laws about it;
-> 	- typed placeholders in the slots of a question, and the levels of commitment of the records that fill them.
+> 	- typed placeholders in the slots of a question, and the levels of commitment of the records that fill them;
+> 	- the variant of a target, for members that differ in their declarations, apart from a restriction of the domain, and an unmarked entry read as holding of every member;
+> 	- the kind, the quantification and the conditioning sources of each source of variation;
+> 	- a censored event stated by its horizon and its censoring beside the observable;
+> 	- the ownership of the estimator of the observables and of the declarations of the data by the phenomenon;
+> 	- the constant of a bound as a feature of the manifestation that states the bound.
 > - **Absent from the literature:** a complete form for research questions.
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).

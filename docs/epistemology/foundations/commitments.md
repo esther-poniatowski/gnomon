@@ -56,8 +56,15 @@ The commitments against inference at run time and for one source divide each pro
 
 The [choices left to the researcher](../processes/inquiry/choice-of-act.md#^researcher-choices) when the next act is chosen extend the last column.
 
+A verdict on a warrant stays in the last column because no rule over the records computes it. A test is severe when it would very probably have detected the error that it probes, had that error been present [mayo1996] [mayo2018]. That probability depends on the ways in which the error could arise, which no record enumerates. ^warrant-judged
+
 ---
 ## Sources
 
 > [!NOTE] Status of the claims
 > - **Proposals:** the list of commitments, the grouping of the commitments, and the division of each process into the acts that the tool performs, the contents that the records hold and the judgments of the researcher. The grounds of each commitment are established or proposed in the note that it links.
+
+Marks follow the [legend of reading marks](../../../CONTRIBUTING.md#^reading-marks).
+
+- [mayo1996] ◐ [Mayo, *Error and the Growth of Experimental Knowledge*, University of Chicago Press, 1996](https://www.press.uchicago.edu/ucp/books/book/chicago/E/bo3637756.html)
+- [mayo2018] ◐ [Mayo, *Statistical Inference as Severe Testing: How to Get beyond the Statistics Wars*, Cambridge University Press, 2018](https://doi.org/10.1017/9781107286184)

@@ -72,6 +72,7 @@ Each aim states three answer conditions: what counts as a direct answer, when th
 > 	- the three categories of an aim, and the category of each registered aim, exploration in particular;
 > 	- the answer conditions of each aim, with the clause on foils conditional on named foils;
 > 	- a change of accepted claims kept outside the registry of aims, as the effect of an act of acceptance;
+> 	- understanding kept outside the registry of aims, as a dimension of appraisal or a declared use;
 > 	- the step of transfer to the target, through a binding, between the consequence of a model and a claim about the target.
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).

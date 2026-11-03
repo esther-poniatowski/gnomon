@@ -28,7 +28,7 @@ A **notation** composes the symbols of a project from declared parts: bases, eac
 
 > [!NOTE] Status of the claims
 > - **Established:** the principle of compositionality, as cited.
-> - **Proposals:** the notation as a record of one project, apart from the concept, and composed from bases, modifiers and index sets.
+> - **Proposals:** the notation as a record of one project, apart from the concept, and composed from bases, modifiers and index sets; the notation kept with research, since derivations are written in its conventions.
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
