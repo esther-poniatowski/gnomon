@@ -9,7 +9,9 @@ held in another folder.
 
 This module only orchestrates. Each check lives in the module that owns its rule:
 :mod:`gnomon.vocabulary`, :mod:`gnomon.completeness` or :mod:`gnomon.itineraries`. A generated
-record, such as the symbol table that ``gnomon vocabulary`` writes, is not checked.
+record, such as the symbol table that ``gnomon vocabulary`` writes, is not checked, and neither is a
+template not yet filled, whose identifier is still the placeholder of its template: a researcher
+fills the records stage by stage, so a template of a later stage is listed apart, not reported.
 
 Classes
 -------
@@ -28,6 +30,7 @@ check_workspace
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path, PurePosixPath
@@ -43,6 +46,9 @@ from .sarif import Located
 
 #: The kinds of record that a tool generates from the others, which no check reads.
 GENERATED_KINDS = frozenset({"vocabulary"})
+
+#: A segment of an identifier that is still the placeholder of a template, such as ``TOPIC``.
+PLACEHOLDER_SEGMENT = re.compile(r"(?:^|\.)[A-Z][A-Z0-9_]*(?:\.|$)")
 
 Records = Mapping[str, Mapping[str, Any]]
 
@@ -82,11 +88,14 @@ class Workspace:
         One problem per folder that holds records, in the order of the folders.
     failures : tuple of str
         One line per file that could not be read or parsed.
+    unfilled : tuple of Path
+        The files whose record is still a template, which no check reads.
     """
 
     root: Path
     problems: tuple[Problem, ...]
     failures: tuple[str, ...] = ()
+    unfilled: tuple[Path, ...] = ()
 
     @cached_property
     def by_id(self) -> dict[str, Mapping[str, Any]]:
@@ -103,6 +112,7 @@ def load_workspace(root: Path) -> Workspace:
     """
     folders: dict[Path, Problem] = {}
     failures: list[str] = []
+    unfilled: list[Path] = []
     for path in sorted(root.rglob("*.yml")):
         if any(part.startswith(".") for part in path.relative_to(root).parts):
             continue
@@ -115,10 +125,13 @@ def load_workspace(root: Path) -> Workspace:
             continue
         if record.get("type") in GENERATED_KINDS:
             continue
+        if PLACEHOLDER_SEGMENT.search(str(record["id"])):
+            unfilled.append(path)
+            continue
         problem = folders.setdefault(path.parent, Problem(path.parent, {}, {}))
         problem.records[str(record["id"])] = record
         problem.files[str(record["id"])] = path
-    return Workspace(root, tuple(folders[f] for f in sorted(folders)), tuple(failures))
+    return Workspace(root, tuple(folders[f] for f in sorted(folders)), tuple(failures), tuple(unfilled))
 
 
 @dataclass

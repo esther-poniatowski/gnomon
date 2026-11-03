@@ -130,13 +130,15 @@ def cli_check(
     workspace = load_workspace(source)
     found = check_workspace(workspace)
     count = len(workspace.by_id)
-    summary = f"{count} records checked in {len(workspace.problems)} folders, {len(found)} findings"
+    summary = (f"{count} records checked in {len(workspace.problems)} folders, {len(found)} findings, "
+               f"{len(workspace.unfilled)} templates not yet filled")
     for line in workspace.failures:
         typer.echo(line, err=True)
     if output_format is CheckFormat.text:
         text = "".join(f"{x.file}: {x.record}: {x.finding.rule.id}: {x.finding.text}\n" for x in found) + summary + "\n"
     elif output_format is CheckFormat.yaml:
-        text = render_yaml_report(found, source.name, count)
+        unfilled = [p.relative_to(source).as_posix() for p in workspace.unfilled]
+        text = render_yaml_report(found, source.name, count, unfilled)
     else:
         stopped = f"{len(workspace.failures)} record files could not be read" if workspace.failures else None
         text = json.dumps(sarif_log(found, __version__, stopped), indent=2, ensure_ascii=False) + "\n"

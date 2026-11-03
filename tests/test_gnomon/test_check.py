@@ -117,3 +117,31 @@ def test_the_commands_exit_with_the_status_of_their_findings(planted: Path, tmp_
     assert result.exit_code == 1 and (tmp_path / "r.yml").is_file()
     assert runner.invoke(app, ["init", str(tmp_path / "new")]).exit_code == 0
     assert runner.invoke(app, ["init", str(tmp_path / "new")]).exit_code == 1
+
+
+def test_a_template_not_yet_filled_is_listed_apart_and_not_checked(tmp_path: Path) -> None:
+    """A researcher fills the records stage by stage, so the templates of later stages stay silent."""
+    folder = tmp_path / "my-problem"
+    scaffold(folder, CORE_KINDS)
+    workspace = load_workspace(tmp_path)
+    assert not workspace.by_id and len(workspace.unfilled) == len(CORE_KINDS)
+    assert check_workspace(workspace) == []
+    problem = folder / "problem.yml"
+    problem.write_text(problem.read_text(encoding="utf-8").replace("id: prob.TOPIC.NAME", "id: prob.demo.first"),
+                       encoding="utf-8")
+    found = check_workspace(load_workspace(tmp_path))
+    assert found and {x.record for x in found} == {"prob.demo.first"}
+    assert not any(x.finding.rule.id == "vocabulary/unknown-record" for x in found)
+
+
+def test_the_scaffold_opens_the_itinerary_and_follows_the_stages(tmp_path: Path) -> None:
+    """The itinerary records each act from the first, and the question precedes its subject."""
+    entries = template_entries()
+    order = list(entries)
+    assert order[0] == "itinerary" and order.index("question") < order.index("target-system")
+    assert entries["question"].stage.startswith("2.") and entries["answer"].stage.startswith("5.")
+    folder = tmp_path / "my-problem"
+    scaffold(folder, CORE_KINDS)
+    index = (folder / "_index.md").read_text(encoding="utf-8")
+    assert index.index("## Throughout the inquiry") < index.index("## 1. Problem") < index.index("## 2. Question schema")
+

@@ -2,29 +2,54 @@
 
 These templates specify an inquiry: a research project copies and fills them, following the method of `docs/epistemology/objects/question/question-specification.md`. Each object of the inquiry takes a separate file, because one target system can support several phenomena, and each phenomenon can be the subject of more than one question. A file therefore references each object that it depends on by its identifier.
 
-The templates are filled in this order:
+The templates follow the [order of specification](../../../../docs/epistemology/processes/inquiry/specification-order.md) of an inquiry: each stage takes the records of the earlier stages as given, and a change to an earlier record is made as a revision.
 
-1. [Problem](problem.yml): states one research problem, with the demand and the constraints that its questions serve
-2. [Target system](target-system.yml): delimits one system studied, which every later record refers to, and declares its quantities
-3. [Background](background.yml): states one body of laws admitted about a target system, with their closure and their organization
-4. [Phenomenon](phenomenon.yml): states one behavior of the target system that questions address, with what its data depend on
-5. [Question](question.yml): fixes one research question before any candidate answer is evaluated
-6. [Model](model.yml): declares one system that stands in for the target, which several answers can ground
-7. [Key](key.yml): states one versioned map from the side of a model to the side of the target, which several bindings share
-8. [Binding](binding.yml): relates one model to one phenomenon through the inferences that its asserter licenses
-9. [Answer](answer.yml): states one candidate answer to an atomic question, as a typed claim with its grounds and the block of its aim
-10. [Assessment](assessment.yml): records whether one candidate passes the tests of its question
+## Throughout the inquiry
 
-A model is filled only when the route of an answer runs on a model other than the target, and a binding with its keys only when the claim of that answer also bears on the target. The assessment stays apart from the answer, so that a candidate can be restated without altering its verdicts.
+The itinerary is opened with the problem, and records each act of the inquiry as the act is taken.
 
-The templates below stand outside this order:
+- [Itinerary](itinerary.yml): records each step of one itinerary of inquiry as an instance of a registered epistemic activity, for `gnomon itinerary` to check against the registries
+
+## 1. Problem
+
+- [Problem](problem.yml): states one research problem, with the demand and the constraints that its questions serve
+
+## 2. Question schema
+
+A question is typed before its terms are identified, so it names a placeholder in place of a target system or a phenomenon not yet recorded.
+
+- [Question](question.yml): fixes one research question before any candidate answer is evaluated
+
+## 3. Identified subject
+
+A target system and a phenomenon are first recorded at commitment `identified`, with a definite description and pointers, before their quantities are declared.
+
+- [Target system](target-system.yml): delimits one system studied, which every later record refers to, and declares its quantities
+- [Phenomenon](phenomenon.yml): states one behavior of the target system that questions address, with what its data depend on
+
+## 4. Background and specified subject
+
+A record is raised to commitment `specified` only when an open condition of a question requires the definiteness of its terms.
+
+- [Background](background.yml): states one body of laws admitted about a target system, with their closure and their organization
+- [Operators](operators.yml): declares, once per problem, every operator beyond the canonical set that a formula of the problem requires
+
+## 5. Candidate answers
+
+A model is filled only when the route of an answer runs on a model other than the target, a binding with its keys only when the claim of that answer also bears on the target, and the assessment stays apart from the answer, so that a candidate can be restated without altering its verdicts.
+
+- [Model](model.yml): declares one system that stands in for the target, which several answers can ground
+- [Key](key.yml): states one versioned map from the side of a model to the side of the target, which several bindings share
+- [Binding](binding.yml): relates one model to one phenomenon through the inferences that its asserter licenses
+- [Answer](answer.yml): states one candidate answer to an atomic question, as a typed claim with its grounds and the block of its aim
+- [Assessment](assessment.yml): records whether one candidate passes the tests of its question
+
+## Outside the order
 
 - [Concept](concept.yml): states the meaning of one concept of the research, which any record of the project can use
 - [Design](design.yml): states one plan of acts, whose execution yields the data of a phenomenon or the consequences of a model
-- [Operators](operators.yml): declares, once per problem, every operator beyond the canonical set that a formula of the problem requires
-- [Itinerary](itinerary.yml): records each step of one itinerary of inquiry as an instance of a registered epistemic activity, for `gnomon itinerary` to check against the registries
 
-A target system and a phenomenon can be recorded at commitment `identified`, with a definite description and pointers, before their quantities are declared. A question can name a placeholder in place of either record.
+## Conventions
 
 Each template is rendered by `gnomon schemas` from its base schema in the [record schemas](../schemas/_index.md) and from the vocabulary registry, so a field is changed in its base schema and an option in the registry, never in the template.
 

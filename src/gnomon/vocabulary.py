@@ -608,7 +608,8 @@ def dangling_references(record: Mapping[str, Any], records: Mapping[str, Mapping
 
     A reference has the segments that the prefix of its kind fixes, to reach a whole record, or one
     more, to reach a unit: a symbol, or the identifier of a unit such as an operation or a pair. A
-    step of an itinerary is a unit that the itinerary check resolves, so it is left to that check.
+    step of an itinerary is a unit that the itinerary check resolves, so it is left to that check, and
+    a placeholder of a template, such as ``quest.TOPIC.NAME``, names no record yet.
 
     >>> records = {"mod.a.m": {"type": "model", "laws": [{"symbol": "onset"}]}}
     >>> [f.text for f in dangling_references({"record": "mod.a.m.onset", "other": "mod.a.x"}, records)]
@@ -618,6 +619,8 @@ def dangling_references(record: Mapping[str, Any], records: Mapping[str, Mapping
     for path, text in references(record):
         parts = text.split(".")
         count = RECORD_SEGMENTS[parts[0]]
+        if any(part.isupper() for part in parts[1:count]):
+            continue
         where = ".".join(str(segment) for segment in path)
         if len(parts) == count:
             if text not in records:

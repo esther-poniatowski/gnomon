@@ -22,9 +22,17 @@ gnomon init ./my-problem
 
 A later record kind is added to the folder with the option `--with`, such as `--with answer --with assessment` once a candidate answer is in view. The header of each template names its specification note and states how many files of its kind a problem holds: for instance, one file per target system, per phenomenon or per candidate answer. A second file of one kind is a copy of its template, kept in the folder of the problem.
 
-## Fill the records in order
+## Fill the records stage by stage
 
-The index of the templates numbers the record kinds in the order of filling, from the problem to the assessment. The [order of specification](../epistemology/processes/inquiry/specification-order.md) states why each stage takes the earlier stages as given, and how a change to an earlier record is made as a revision. A target system and a phenomenon can first be recorded at the commitment `identified`, before their quantities are declared, as the [levels of commitment](../epistemology/objects/question/question.md#^commitment-levels) define it.
+The records are filled in the five stages of the [order of specification](../epistemology/processes/inquiry/specification-order.md), which the index of the folder lists:
+
+1. the problem, with its demand, its constraints and its explicanda;
+2. the question schema: each question that serves the problem, typed before its terms are identified, with a placeholder in place of a target system or a phenomenon not yet recorded;
+3. the identified subject: the target system and the phenomenon at the commitment `identified`, each fixed by a definite description and pointers, as the [levels of commitment](../epistemology/objects/question/question.md#^commitment-levels) define it;
+4. the background and the specified subject: the admitted laws, and the formal declarations of a record raised to the commitment `specified` when an open condition of a question requires them;
+5. the candidate answers, with the models, the keys and the bindings on which they rest, and the assessment of each answer.
+
+Each stage takes the records of the earlier stages as given, and a change to an earlier record is made as a revision. The itinerary records each act of the inquiry as a step, from the statement of the problem on. A template not yet started keeps the placeholder identifier of its template, such as `quest.TOPIC.NAME`; the command `gnomon check` lists it apart and checks only the records already started, so the folder can be checked after each stage.
 
 ## Read the specification of each field
 

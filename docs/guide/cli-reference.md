@@ -30,7 +30,7 @@ gnomon info
 
 ## `init`
 
-A researcher starting a problem needs the record templates in a folder of its own, in the order in which they are filled. The `init` command creates that folder with the templates of the problem, the target system, the background, the phenomenon, the question and the operators, and with an index that lists them in the order of filling, each with the goal of its record.
+A researcher starting a problem needs the record templates in a folder of its own, in the order in which they are filled. The `init` command creates that folder with the itinerary, opened with the problem, and with the templates of the first four stages of the [order of specification](../epistemology/processes/inquiry/specification-order.md): the problem, the question, the target system, the phenomenon, the background and the operators. The index of the folder lists them stage by stage, each with the goal of its record.
 
 ```sh
 gnomon init <directory> [--with KIND]... [--force]
@@ -39,7 +39,7 @@ gnomon init <directory> [--with KIND]... [--force]
 | Argument or option | Description                                                                                                                              |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `<directory>`      | Folder of the new problem, created when it does not exist.                                                                               |
-| `--with`, `-w`     | A further record kind to scaffold: `model`, `key`, `binding`, `answer`, `assessment`, `concept`, `design` or `itinerary`; repeat it for several. |
+| `--with`, `-w`     | A further record kind to scaffold: `model`, `key`, `binding`, `answer`, `assessment`, `concept` or `design`; repeat it for several. |
 | `--force`          | Overwrite the files that already exist.                                                                                                  |
 
 **Output:** one line per file written, then the next step. The command writes no file and exits with code 1 when one of the files exists and `--force` is not given, or when a kind has no template.
@@ -65,7 +65,7 @@ A researcher needs to know, before an answer is assessed, whether the records of
 - the consistency between records, such as the classification of each operation of a model by a ground of the answer, the binding of an answer whose question names outputs to match, and the pair of each target status;
 - the steps of each itinerary.
 
-Each folder that holds records is checked as one problem, and a reference may reach a record of any folder. A generated record, such as a vocabulary, is not checked.
+Each folder that holds records is checked as one problem, and a reference may reach a record of any folder. A generated record, such as a vocabulary, is not checked. A template not yet started, whose identifier is still the placeholder of its template, is listed apart and not checked, so a folder can be checked after each stage of filling.
 
 ```sh
 gnomon check <directory> [--format text|yaml|sarif] [--output PATH]
