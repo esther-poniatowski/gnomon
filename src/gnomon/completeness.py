@@ -68,8 +68,20 @@ def is_empty(value: Any) -> bool:
 
 
 def is_unfilled(value: Any) -> bool:
-    """Return whether a required specification is unfilled: empty, or an empty list or mapping."""
-    return is_empty(value) or value in ([], {})
+    """Return whether a required specification is unfilled.
+
+    A value is unfilled when it is empty, and a list or a mapping when every value that it holds is
+    unfilled, so that a required block whose fields are all empty fails its requirement as a missing
+    block does.
+
+    >>> [is_unfilled(v) for v in (None, [], {}, {"a": None, "b": [""]}, [{"a": ""}], {"a": "x"}, 0)]
+    [True, True, True, True, True, False, False]
+    """
+    if isinstance(value, Mapping):
+        return all(is_unfilled(item) for item in value.values())
+    if isinstance(value, list):
+        return all(is_unfilled(item) for item in value)
+    return is_empty(value)
 
 
 def _registry(source: Path | None) -> dict[str, Any]:

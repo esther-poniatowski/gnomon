@@ -15,8 +15,9 @@
 # `by_aim` adds the requirements that an epistemic aim imposes. Under `to_produce`, it lists the
 # general requirements that the inquiry itself produces: an inquiry that produces a phenomenon
 # cannot state that phenomenon in advance.
-# An empty value means that a field is not filled. A required path left empty is a gap. A path
-# listed under `to_produce` for the aim of the inquiry may stay empty.
+# An empty value means that a field is not filled, and a block or a list whose values are all empty
+# is not filled either. A required path left empty is a gap. A path listed under `to_produce` for
+# the aim of the inquiry may stay empty.
 # A requirement names a field path. An aim fixes what an answer must deliver, never which value
 # a field takes, so no entry constrains a value.
 

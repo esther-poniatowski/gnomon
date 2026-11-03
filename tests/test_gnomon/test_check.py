@@ -145,3 +145,11 @@ def test_the_scaffold_opens_the_itinerary_and_follows_the_stages(tmp_path: Path)
     index = (folder / "_index.md").read_text(encoding="utf-8")
     assert index.index("## Throughout the inquiry") < index.index("## 1. Problem") < index.index("## 2. Question schema")
 
+
+def test_a_required_block_whose_fields_are_all_empty_fails_its_requirement() -> None:
+    from gnomon.completeness import unmet_general
+
+    empty = {"construction": {"procedure": None, "reading": ""}}
+    assert [f.text for f in unmet_general(empty, ["construction"])] == ["always required: construction"]
+    assert unmet_general({"construction": {"procedure": "design.a.b", "reading": ""}}, ["construction"]) == []
+
