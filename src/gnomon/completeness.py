@@ -1140,6 +1140,30 @@ def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> l
     ]
 
 
+def unanchored_explicandum(question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]) -> list[Finding]:
+    """Return the explicandum of a question of explication that no explicandum of its problem anchors.
+
+    The explicandum of such a question is not a slot: it enters through the use that a pointer of
+    the problem anchors, so it names a term among the explicanda of the problem that the question
+    addresses.
+
+    >>> problem = {"explicanda": [{"term": "disentangled", "pointer": "doi:10.1000/a"}]}
+    >>> question = {"addresses": "prob.a.b", "task": {"epistemic_aim": "explication", "explicandum": "modular"}}
+    >>> [f.text for f in unanchored_explicandum(question, {"prob.a.b": problem})]
+    ['task.explicandum: modular is no explicandum of prob.a.b']
+    """
+    if at(question, "task.epistemic_aim") != "explication":
+        return []
+    term = at(question, "task.explicandum")
+    problem = records.get(str(question.get("addresses"))) or {}
+    terms = {str(e.get("term")) for e in problem.get("explicanda") or [] if isinstance(e, Mapping)}
+    if is_empty(term) or term in terms:
+        return []
+    return [finding(rules.COMPLETENESS_UNANCHORED_EXPLICANDUM,
+                    f"task.explicandum: {term} is no explicandum of {question.get('addresses')}",
+                    "task", "explicandum")]
+
+
 def unjustified_explanans_bound(question: Mapping[str, Any]) -> list[Finding]:
     """Return the bound on the explanans that states an axis without saying why.
 

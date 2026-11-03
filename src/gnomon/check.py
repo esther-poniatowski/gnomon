@@ -286,7 +286,7 @@ def _question(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
             + c.unresolved_question_references(record, records) + c.unstated_function_sense(record)
             + c.unbounded_aim(record, records, ctx.registries.aims)
             + c.unmet_by_aim(record, reached, ctx.registries.by_aim)
-            + malformed_answerability(record, records))
+            + malformed_answerability(record, records) + c.unanchored_explicandum(record, records))
 
 
 def _answer(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:

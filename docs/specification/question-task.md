@@ -13,7 +13,8 @@ The dimensions that these fields fix, and the grounds of each dimension, are sta
 
 | Dimension | When it is required | Role | Typical options | Canonical tradition |
 | --------- | ------------------- | ---- | --------------- | ------------------- |
-| **[Epistemic aim](../epistemology/objects/task/epistemic-aim.md) $A$** | always: it selects the interrogative word of the question | What knowledge is the inquiry intended to produce? What cognitive achievement is sought? | description/representation, exploration, prediction, explanation, modal knowledge, knowledge of theories or models |  |
+| **[Epistemic aim](../epistemology/objects/task/epistemic-aim.md) $A$** | always: it selects the interrogative word of the question | What knowledge is the inquiry intended to produce? What cognitive achievement is sought? | description/representation, exploration, prediction, explanation, modal knowledge, knowledge of theories or models, explication |  |
+| **Explicandum** | under the aim `explication` | Which term must the question define? | the term of an explicandum that the problem addressed by the question names, with the pointer that anchors its use; not a slot of the subject | what counts as a disentangled representation | [explication](../epistemology/objects/task/epistemic-aim.md#^explication-aim) |
 | **[Requested relation](../epistemology/objects/task/requested-relation.md) $R$** | whenever the answer must relate an explanans to the explanandum | What kind of relation must the explanans bear to the explanandum to answer the question? | causal, mechanistic, constitutive, functional, statistical, nomological, mathematical | relevance / dependence relation [vanfraassen1980] |
 | **Function sense** | when the requested relation is functional | Which sense of function must the answer establish? | causal role (the contribution of a part to a capacity of the system); etiological (the effects for which the part was selected) | [senses of function](../epistemology/objects/task/requested-relation.md#^function-sense) |
 | **[Modal strength](../epistemology/objects/task/modal-strength.md) $\mu$** | always | How tightly must the answer bind the phenomenon? | actual, possible, necessary | _how-possibly_ vs _how-actually_ [verreaultjulien2019] |
@@ -41,6 +42,7 @@ Because an aim fixes the product that an answer must deliver, the aim also deter
 | `explanation` | `question.task.requested_relation` | — |
 | `modal-knowledge` | `question.task.modal_strength`, `question.task.proof_obligations` | — |
 | `model-properties` | — | — |
+| `explication` | `question.task.explicandum` | — |
 
 - **An exploratory inquiry fixes no phenomenon in advance, so it must fix the criterion that would establish one.** The exploratory inquiry produces the statement, the category, the occurrence class and the evidential status, although every other aim fixes these four specifications. In their place, the detection criterion states the test that a candidate pattern must pass. Exploration illustrates a general division: a general requirement lists the fields of a complete record, and an aim marks the fields that the inquiry itself fills.
 

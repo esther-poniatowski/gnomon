@@ -126,6 +126,7 @@ properties:
     propertyNames:
       enum:
       - epistemic_aim
+      - explicandum
       - requested_relation
       - function_sense
       - modal_strength
@@ -141,6 +142,7 @@ properties:
         - explanation
         - modal-knowledge
         - model-properties
+        - explication
         - null
       requested_relation:
         enum:

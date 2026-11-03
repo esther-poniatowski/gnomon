@@ -45,7 +45,8 @@ subject:
       justification: "WHY THE QUESTION CONCERNS THE LIMIT SYSTEM"
 
 task:
-  epistemic_aim:                 # description | exploration | prediction | explanation | modal-knowledge | model-properties
+  epistemic_aim:                 # description | exploration | prediction | explanation | modal-knowledge | model-properties | explication
+  explicandum: "TERM OF AN EXPLICANDUM OF THE PROBLEM"   # explication only: the term of an explicandum that the problem addressed by the question names
   requested_relation:            # causal-intervention | causal-mechanistic | constitutive | functional | nomological | statistical | mathematical | not-applicable
   function_sense:                # causal-role | etiological; required when the requested relation is `functional`
   modal_strength:                # actual | possible | necessary

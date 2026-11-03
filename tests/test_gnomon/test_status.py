@@ -109,3 +109,11 @@ def test_the_command_reports_the_diagnosis_of_the_worked_inquiries() -> None:
     first = runner.invoke(app, ["status", str(EXAMPLES), "--format", "yaml"]).output
     assert first == runner.invoke(app, ["status", str(EXAMPLES), "--format", "yaml"]).output
     assert "bg.delayed_generalization_networks.training-specification" in first
+
+
+def test_a_question_of_explication_has_no_condition_of_definiteness() -> None:
+    """Its explicandum is not a slot, so a dependency on its definiteness is void."""
+    question = {"id": "quest.a.b", "type": "question", "task": {"epistemic_aim": "explication"}}
+    found = diagnose({"quest.a.b": question})
+    assert "definiteness" not in states(found)
+    assert "answer-type" in found.questions[0].routes[0].open

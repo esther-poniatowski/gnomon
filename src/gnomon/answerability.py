@@ -275,6 +275,9 @@ def diagnose(records: Records, registry: Mapping[str, Any] | None = None, local:
         routes = []
         for route in routes_of(question):
             applicable = conditions_on(route, deps)
+            if c.at(question, "task.epistemic_aim") == "explication":
+                # the explicandum is not a slot, so its definiteness is no condition and a dependency on it is void
+                applicable = {k: [d for d in v if d != "definiteness"] for k, v in applicable.items() if k != "definiteness"}
             states: dict[str, ConditionState] = {}
             for condition in (name for name in order if name in applicable):
                 states[condition] = (asserted(question, condition, route) or derived(question, condition, records)

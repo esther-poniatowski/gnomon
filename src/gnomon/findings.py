@@ -274,6 +274,10 @@ COMPLETENESS_UNCLASSIFIED_OPERATION = _rule(
     "completeness/unclassified-operation",
     "An operation or an assumption of a model on which an answer runs is named by no ground of that answer.",
 )
+COMPLETENESS_UNANCHORED_EXPLICANDUM = _rule(
+    "completeness/unanchored-explicandum",
+    "A question of explication names a term that no explicandum of its problem anchors.",
+)
 COMPLETENESS_MALFORMED_ANSWERABILITY = _rule(
     "completeness/malformed-answerability",
     "An asserted state of a condition lacks its kind, its means or its pointers, or contradicts the records.",

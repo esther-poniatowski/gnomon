@@ -388,6 +388,15 @@ properties:
         - 'null'
         title: Epistemic aim $A$
         description: The epistemic aim $a$ of the record.
+      explicandum:
+        type:
+        - string
+        - 'null'
+        x-template: '"TERM OF AN EXPLICANDUM OF THE PROBLEM"'
+        x-kind: label
+        x-comment: 'explication only: the term of an explicandum that the problem addressed by the question names'
+        title: Explicandum
+        description: 'explication only: the term of an explicandum that the problem addressed by the question names, not a slot of the subject'
       requested_relation:
         x-vocabulary: task.requested_relation
         type:

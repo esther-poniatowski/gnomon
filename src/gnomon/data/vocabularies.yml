@@ -312,6 +312,8 @@ vocabularies:
       category: answer-content
     - value: model-properties
       category: answer-content
+    - value: explication
+      category: conceptual-work
     task.requested_relation:
     - value: causal-intervention
     - value: causal-mechanistic
@@ -492,9 +494,9 @@ vocabularies:
     - value: classification
       admits: [exploration, description]
     - value: concept
-      admits: []
+      admits: [explication]
     - value: measurement-procedure
-      admits: []
+      admits: [explication]
     - value: design
       admits: []
     - value: knowledge-state-change

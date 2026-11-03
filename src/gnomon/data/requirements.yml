@@ -108,3 +108,7 @@ by_aim:
   model-properties:
     required: []
     to_produce: []
+  explication:
+    required:
+      - path: question.task.explicandum
+    to_produce: []
