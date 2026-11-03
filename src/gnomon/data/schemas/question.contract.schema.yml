@@ -62,9 +62,6 @@ properties:
             enum:
             - system
             - phenomenon
-            - observable
-            - contrast
-            - condition
             - null
       contrast:
         propertyNames:

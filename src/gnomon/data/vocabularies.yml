@@ -282,9 +282,6 @@ vocabularies:
     subject.placeholder:
     - value: system
     - value: phenomenon
-    - value: observable
-    - value: contrast
-    - value: condition
     subject.locus:
     - value: other-outcome
     - value: other-system

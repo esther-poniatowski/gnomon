@@ -230,11 +230,11 @@ def test_an_occurrence_class_that_the_category_does_not_admit_is_reported() -> N
 
 def test_a_placeholder_whose_type_does_not_fit_its_slot_is_reported() -> None:
     """The target-system slot awaits a system, and the phenomenon slot a phenomenon."""
-    question = {"subject": {"target_system": {"placeholder": "contrast", "description": "a foil"},
-                            "phenomenon": {"placeholder": "observable", "description": "a readout"}}}
+    question = {"subject": {"target_system": {"placeholder": "phenomenon", "description": "a readout"},
+                            "phenomenon": {"placeholder": "system", "description": "a network"}}}
     assert texts(unresolved_slots(question, {}, TYPES)) == [
-        "subject.target_system: the placeholder type 'contrast' does not fit the slot, which awaits 'system'",
-        "subject.phenomenon: the placeholder type 'observable' does not fit the slot, which awaits 'phenomenon'",
+        "subject.target_system: the placeholder type 'phenomenon' does not fit the slot, which awaits 'system'",
+        "subject.phenomenon: the placeholder type 'system' does not fit the slot, which awaits 'phenomenon'",
     ]
     question["subject"] = {"target_system": {"placeholder": "system", "description": "networks of the benchmark"},
                            "phenomenon": {"placeholder": "phenomenon", "description": "their geometry"}}

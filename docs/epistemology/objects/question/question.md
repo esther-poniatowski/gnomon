@@ -53,7 +53,7 @@ The **presuppositions** of a question are the statements entailed by every direc
 
 ## Question schema and levels of commitment
 
-A **question schema** is a question form, not yet a question: at least one of its slots holds a typed placeholder instead of a referent. The type of each slot comes from a closed list, which the [placeholders of the subject](../../../specification/question-subject.md#^placeholder-slots) enumerate. Thus, a schema fixes the *type* of each slot before any record fixes its referent. A schema becomes a question once each of its slots reaches the level `identified` and its request is fixed: the identified slots make its possible answers a definite set, and the request then fixes its direct answers. ^question-schema
+A **question schema** is a question form, not yet a question: at least one of its slots holds a typed placeholder instead of a referent. The type of each slot comes from a closed list, which the [placeholders of the subject](../../../specification/question-subject.md#^placeholder-slots) enumerate: a slot that names a record, the target system or the phenomenon, awaits that record, whereas the contrast is typed by its locus and needs no placeholder. Thus, a schema fixes the *type* of each slot before any record fixes its referent. A schema becomes a question once each of its slots reaches the level `identified` and its request is fixed: the identified slots make its possible answers a definite set, and the request then fixes its direct answers. ^question-schema
 
 Each slot of a question or of a question schema carries one of three **levels of commitment**: ^commitment-levels
 

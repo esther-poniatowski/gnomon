@@ -21,7 +21,7 @@ subject:
   target_system: system.TOPIC    # a record identifier; in a question schema, a placeholder written as for `phenomenon`
   background: [bg.TOPIC.NAME]    # background records whose laws the question admits; empty when it admits none
   phenomenon:                    # a record identifier `phen.TOPIC.NAME`; in a question schema, the placeholder below
-    placeholder:                 # system | phenomenon | observable | contrast | condition
+    placeholder:                 # system | phenomenon
     description: "THE ITEM AWAITED BY THE SLOT"
   contrast:
     locus:                       # other-outcome | other-system | other-condition | none

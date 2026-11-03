@@ -346,7 +346,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
     """A schema is a question with a placeholder slot; commitment and status decide the other types."""
     records = {
         "quest.schema": {"type": "question", "request": "one", "subject": {"target_system": "system.a",
-                                                         "phenomenon": {"placeholder": "observable"}}},
+                                                         "phenomenon": {"placeholder": "phenomenon"}}},
         "system.a": {"type": "target-system", "commitment": "identified"},
         "ans.a": {"type": "answer", "status": "entertained"},
         "mod.a": {"type": "model"},

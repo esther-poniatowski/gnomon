@@ -245,7 +245,7 @@ def holds(record: Mapping[str, Any], entry: Mapping[str, Any]) -> bool:
     of commitment, the form of a question, or the status), and, when the entry names the fields
     that hold the type, one of them must be filled.
 
-    >>> holds({"type": "question", "subject": {"phenomenon": {"placeholder": "observable"}}},
+    >>> holds({"type": "question", "subject": {"phenomenon": {"placeholder": "phenomenon"}}},
     ...       {"record": ["question"], "when": {"form": "schema"}})
     True
     >>> holds({"type": "target-system", "commitment": "specified"},
