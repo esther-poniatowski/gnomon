@@ -97,7 +97,6 @@ class CheckFormat(str, Enum):
 
     text = "text"
     yaml = "yaml"
-    markdown = "markdown"
     sarif = "sarif"
 
 
@@ -106,7 +105,7 @@ def cli_check(
     directory: str = typer.Argument(..., help="Directory of records, read recursively; each folder is one problem."),
     output_format: CheckFormat = typer.Option(
         CheckFormat.text, "--format", "-f",
-        help="text prints one line per finding; yaml and markdown write a stable report; sarif "
+        help="text prints one line per finding; yaml writes a stable report; sarif "
         "writes a SARIF 2.1.0 log in the findings profile of Elenchos.",
     ),
     output: Optional[Path] = typer.Option(
@@ -122,7 +121,7 @@ def cli_check(
     report cannot be written.
     """
     from .check import check_workspace, load_workspace
-    from .report import render_markdown_report, render_yaml_report
+    from .report import render_yaml_report
 
     source = Path(directory)
     if not source.is_dir():
@@ -138,8 +137,6 @@ def cli_check(
         text = "".join(f"{x.file}: {x.record}: {x.finding.rule.id}: {x.finding.text}\n" for x in found) + summary + "\n"
     elif output_format is CheckFormat.yaml:
         text = render_yaml_report(found, source.name, count)
-    elif output_format is CheckFormat.markdown:
-        text = render_markdown_report(found, source.name, count, source, None if output is None else output.parent)
     else:
         stopped = f"{len(workspace.failures)} record files could not be read" if workspace.failures else None
         text = json.dumps(sarif_log(found, __version__, stopped), indent=2, ensure_ascii=False) + "\n"

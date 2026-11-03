@@ -40,10 +40,10 @@ The following command runs every check of `gnomon` on the folder, and prints one
 gnomon check ./my-problem
 ```
 
-A template left unfilled reports one finding per placeholder, so the count falls as the records are filled. A stable report, which can be kept beside the records and compared between two runs, is written in YAML or in Markdown, the second readable in Obsidian:
+A template left unfilled reports one finding per placeholder, so the count falls as the records are filled. A stable report, which can be kept beside the records and compared between two runs, is written in YAML:
 
 ```sh
-gnomon check ./my-problem --format markdown --output ./my-problem/reports/check.md
+gnomon check ./my-problem --format yaml --output ./my-problem/reports/check.yml
 ```
 
 ## Collect the symbols

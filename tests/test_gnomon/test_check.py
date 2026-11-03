@@ -17,7 +17,7 @@ from typer.testing import CliRunner
 from gnomon import check as check_module
 from gnomon.check import check_workspace, load_workspace
 from gnomon.cli import app
-from gnomon.report import render_markdown_report, render_yaml_report
+from gnomon.report import render_yaml_report
 from gnomon.scaffold import CORE_KINDS, scaffold, template_entries
 
 from .paths import EXAMPLES
@@ -81,14 +81,12 @@ def test_an_unreadable_file_is_reported_and_skipped(tmp_path: Path) -> None:
     assert len(workspace.failures) == 1 and not workspace.problems
 
 
-def test_the_reports_are_stable_and_link_each_file(planted: Path, tmp_path: Path) -> None:
+def test_the_report_is_stable_and_grouped_by_file(planted: Path) -> None:
     found = check_workspace(load_workspace(planted))
     first = render_yaml_report(found, "plant", 11)
     assert first == render_yaml_report(list(reversed(found)), "plant", 11)
     document = yaml.safe_load(first)
     assert document["findings"] == len(found) and document["files"][0]["file"].startswith(CASE)
-    page = render_markdown_report(found, "plant", 11, planted, planted / "reports")
-    assert f"](../{CASE}/answer.yml)" in page
 
 
 def test_the_scaffold_writes_the_templates_in_the_order_of_filling(tmp_path: Path) -> None:

@@ -68,16 +68,16 @@ A researcher needs to know, before an answer is assessed, whether the records of
 Each folder that holds records is checked as one problem, and a reference may reach a record of any folder. A generated record, such as a vocabulary, is not checked.
 
 ```sh
-gnomon check <directory> [--format text|yaml|markdown|sarif] [--output PATH]
+gnomon check <directory> [--format text|yaml|sarif] [--output PATH]
 ```
 
 | Argument or option | Description                                                                                                         |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------- |
 | `<directory>`      | Directory of records, read recursively.                                                                             |
-| `--format`, `-f`   | `text` (default), `yaml` or `markdown` for a report, or `sarif` for a log in the findings profile of the gate Elenchos. |
+| `--format`, `-f`   | `text` (default), `yaml` for a report, or `sarif` for a log in the findings profile of the gate Elenchos. |
 | `--output`, `-o`   | File receiving the report instead of standard output; its missing folders are created.                              |
 
-**Output:** in `text`, one line per finding with its file, its record, its rule and its message, then one line counting the records and the findings. The `yaml` and `markdown` reports group the findings by file, hold no date and no absolute path, and sort their content, so two runs on unchanged records write the same file. The `markdown` report can be read in Obsidian, where each heading links to the file of its records, from the folder of the report. Paths are stated relative to `<directory>`. The command exits with code 1 when it reports a finding or cannot read a file, and with code 2 when it cannot write the report.
+**Output:** in `text`, one line per finding with its file, its record, its rule and its message, then one line counting the records and the findings. The `yaml` report groups the findings by file, holds no date and no absolute path, and sorts its content, so two runs on unchanged records write the same file; a renderer of the workspace, such as Ekphrasis in Obsidian, presents it. Paths are stated relative to `<directory>`. The command exits with code 1 when it reports a finding or cannot read a file, and with code 2 when it cannot write the report.
 
 ## `schemas`
 
