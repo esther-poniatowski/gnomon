@@ -10,7 +10,7 @@ aliases:
 The goal [`research-actions`](../../TODO.md) decides whether the activities of the registry of activities are primitive, or derive from a smaller set of constructors.
 
 > [!IMPORTANT] Decision of 2026-11-03
-> The activities stay primitive, each with one norm, and an activity may take alternative inputs under that norm, a limited form of multiple dispatch, as the [signature of an activity type](../epistemology/processes/activities/epistemic-activities.md#^primitive-activities) states. The constructors `branch` and `iterate` remain candidates for the structure of an itinerary, under the goal `inquiry-records-round-2`, and the moves remain candidates for the goal `relation-registry`.
+> The activities stay primitive, each with one norm, and an activity may take alternative inputs under that norm, a limited form of multiple dispatch, as the [signature of an activity type](../epistemology/processes/activities/epistemic-activities.md#^primitive-activities) states. The constructors `branch` and `iterate` structure an itinerary, as the [constructors of an itinerary](../epistemology/processes/activities/epistemic-activities.md#^itinerary-constructors) state, whereas `compose` and `parallel` follow from the references between its steps; the moves remain candidates for the goal `relation-registry`.
 
 ## Multiple dispatch
 

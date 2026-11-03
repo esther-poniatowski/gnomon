@@ -103,6 +103,10 @@ ITINERARY_UNJUSTIFIED_VERDICT = _rule(
 ITINERARY_UNREADABLE_STATE = _rule(
     "itinerary/unreadable-state", "An input names a record at a revision that cannot be read."
 )
+ITINERARY_MALFORMED_CONSTRUCTOR = _rule(
+    "itinerary/malformed-constructor",
+    "A branch states no condition or no alternative of the same output, or an iteration cannot repeat.",
+)
 ITINERARY_UNSERVED = _rule(
     "itinerary/unserved-step",
     "A step states no rationale, or a rationale that serves no question or problem, or names no condition.",

@@ -228,6 +228,53 @@ properties:
             or its evaluation'
           examples:
           - '`quest.grokking.explain_delay`, acting on the candidates'
+        branch:
+          type:
+          - object
+          - 'null'
+          properties:
+            condition:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE CONDITION UNDER WHICH THE STEP IS TAKEN"'
+              x-kind: markdown-line
+              title: Condition
+              description: the condition under which the step is taken
+            otherwise:
+              type:
+              - string
+              - 'null'
+              x-template: STEP
+              x-kind: label
+              x-comment: the step taken when the condition fails, which produces the same output type
+              title: Otherwise
+              description: the step taken when the condition fails, which produces the same output type
+          x-comment: optional; a step taken under a condition, with its alternative
+          title: branch
+          description: the condition under which the step is taken, and the step of the same output type
+            taken otherwise
+          examples:
+          - a simulation taken when no closed form is found, otherwise the derivation
+        iterate:
+          type:
+          - object
+          - 'null'
+          properties:
+            until:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE CRITERION THAT ENDS THE REPETITION"'
+              x-kind: markdown-line
+              title: Until
+              description: the criterion that ends the repetition
+          x-comment: optional; a step repeated on its own output until the criterion holds
+          title: iterate
+          description: the criterion that ends the repetition of a step that takes its own output type
+            as input
+          examples:
+          - a fitting repeated until the residuals fall below the tolerance of the question
         mode:
           x-vocabulary: steps.mode
           type:

@@ -28,4 +28,9 @@ steps:                           # one entry per activity instance; the steps ma
     rationale:
       serves: quest.TOPIC.NAME   # the question that the step serves, or the problem for a step that precedes any question
       acts_on:                   # definiteness | answer-type | soundness | candidates | discrimination | access | bridging | representation | obtaining (the acts that obtain the answer once every condition of a route is established) | evaluation (the evaluation of an obtained answer)
+    branch:                      # optional; a step taken under a condition, with its alternative
+      condition: "THE CONDITION UNDER WHICH THE STEP IS TAKEN"
+      otherwise: STEP            # the step taken when the condition fails, which produces the same output type
+    iterate:                     # optional; a step repeated on its own output until the criterion holds
+      until: "THE CRITERION THAT ENDS THE REPETITION"
     mode:                        # deductive | inductive | abductive | analogical | error-statistical | model-based | non-inferential

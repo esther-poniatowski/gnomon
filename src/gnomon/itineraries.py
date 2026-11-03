@@ -567,6 +567,26 @@ def itinerary_problems(
                         f"{where}: the rationale serves a question and names no condition or act among"
                         f" {', '.join(sorted(acts_on))}", *at, "rationale", "acts_on")
             )
+        branch = step.get("branch") if isinstance(step.get("branch"), Mapping) else None
+        if branch is not None:
+            other = by_id.get(str(branch.get("otherwise")))
+            made_other = ((other or {}).get("output") or {}).get("type")
+            if not isinstance(branch.get("condition"), str) or not branch["condition"].strip():
+                found.append(finding(rules.ITINERARY_MALFORMED_CONSTRUCTOR,
+                                     f"{where}: the branch states no condition", *at, "branch", "condition"))
+            if other is None or made_other != act.output:
+                found.append(finding(rules.ITINERARY_MALFORMED_CONSTRUCTOR,
+                                     f"{where}: the branch names no step that produces {act.output} otherwise",
+                                     *at, "branch", "otherwise"))
+        iterate = step.get("iterate") if isinstance(step.get("iterate"), Mapping) else None
+        if iterate is not None:
+            if not isinstance(iterate.get("until"), str) or not iterate["until"].strip():
+                found.append(finding(rules.ITINERARY_MALFORMED_CONSTRUCTOR,
+                                     f"{where}: the iteration states no criterion of termination", *at, "iterate", "until"))
+            if act.output not in {t for held in act.inputs for t in held.types}:
+                found.append(finding(rules.ITINERARY_MALFORMED_CONSTRUCTOR,
+                                     f"{where}: {act.id} takes no input of its output type {act.output}, so it cannot repeat on it",
+                                     *at, "iterate"))
         mode = step.get("mode")
         if mode is not None and (mode not in modes or mode != act.mode):
             found.append(

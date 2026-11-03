@@ -490,3 +490,22 @@ def test_the_history_reads_a_record_at_a_revision_of_its_repository() -> None:
     assert (read(ident, "HEAD") or {}).get("id") == ident
     assert read(ident, "no-such-revision") is None
     assert read("quest.absent", "HEAD") is None
+
+
+def test_a_branch_names_a_condition_and_an_alternative_of_the_same_output() -> None:
+    itinerary = planted(derive={"branch": {"otherwise": "observe"}, "iterate": {"until": "the bound is tight"}})
+    assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
+        "steps.derive: the branch states no condition",
+        "steps.derive: the branch names no step that produces consequence otherwise",
+        "steps.derive: derivation takes no input of its output type consequence, so it cannot repeat on it",
+    ]
+
+
+def test_a_well_formed_branch_passes() -> None:
+    itinerary = served(planted(derive={"branch": {"condition": "a closed form is found", "otherwise": "simulate"}}))
+    itinerary["steps"].append({"id": "simulate", "activity": "simulation",
+                               "inputs": [{"type": "model", "ref": "mod.kernel"},
+                                          {"type": "design", "ref": "itin.geometry.route.design"}],
+                               "output": {"type": "consequence"}, "rationale": {"serves": "prob.geometry"},
+                               "norm": {"test": "norm.simulation", "verdict": "pending"}})
+    assert itinerary_problems(itinerary, RECORDS) == []

@@ -31,6 +31,8 @@ properties:
         - output
         - norm
         - rationale
+        - branch
+        - iterate
         - mode
       properties:
         inputs:
@@ -78,6 +80,15 @@ properties:
               - obtaining
               - evaluation
               - null
+        branch:
+          propertyNames:
+            enum:
+            - condition
+            - otherwise
+        iterate:
+          propertyNames:
+            enum:
+            - until
         mode:
           enum:
           - deductive
