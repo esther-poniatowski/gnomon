@@ -7,11 +7,14 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+from jsonschema import Draft202012Validator
 from typer.testing import CliRunner
 
 import gnomon.views
 from gnomon.cli import app
 from gnomon.views import question_tree, render_tree
+
+from .paths import EXAMPLES
 
 RECORDS: dict[str, dict[str, Any]] = {
     "prob.geometry.readout": {"type": "problem", "title": "Readout", "status": "posed"},
@@ -72,3 +75,32 @@ def test_the_command_prints_the_tree_of_a_directory_read_recursively(tmp_path: P
 
 def test_the_examples_of_the_module_hold() -> None:
     assert doctest.testmod(gnomon.views).failed == 0
+
+
+def test_every_view_of_the_worked_inquiries_follows_its_schema_and_is_stable(tmp_path) -> None:
+    """A renderer reads each view through its schema, and two runs write the same files."""
+    schemas = Path(__file__).resolve().parents[2] / "src/gnomon/data/views"
+    runner = CliRunner()
+    first, second = tmp_path / "a", tmp_path / "b"
+    assert runner.invoke(app, ["views", str(EXAMPLES), "--output", str(first)]).exit_code == 0
+    assert runner.invoke(app, ["views", str(EXAMPLES), "--output", str(second)]).exit_code == 0
+    written = sorted(p.name for p in first.glob("*.yml"))
+    assert written == sorted(p.name.replace(".schema", "") for p in schemas.glob("*.schema.yml"))
+    for name in written:
+        assert (first / name).read_text() == (second / name).read_text()
+        view = yaml.safe_load((first / name).read_text())
+        schema = yaml.safe_load((schemas / name.replace(".yml", ".schema.yml")).read_text())
+        errors = [e.message for e in Draft202012Validator(schema).iter_errors(view)]
+        assert not errors, f"{name}: {errors}"
+
+
+def test_the_progress_of_an_itinerary_orders_its_steps_and_marks_impeachment() -> None:
+    records = {"itin.a.b": {"type": "itinerary", "steps": [
+        {"id": "late", "activity": "testing", "inputs": [{"ref": "itin.a.b.early"}], "output": {"ref": "assess.a"},
+         "norm": {"verdict": "pending"}},
+        {"id": "early", "activity": "derivation", "inputs": [], "output": {"ref": "mod.a"}, "norm": {"verdict": "fail"}},
+    ]}}
+    view = gnomon.views.itinerary_progress(records, impeached={"mod.a", "assess.a"}, conditional=set())
+    assert [s["step"] for s in view["steps"]] == ["early", "late"]
+    assert {s["state"] for s in view["steps"]} == {"impeached"}
+    assert view["edges"] == [{"itinerary": "itin.a.b", "from": "early", "to": "late"}]

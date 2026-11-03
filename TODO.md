@@ -20,9 +20,7 @@ The records represent each act of an inquiry as the act is taken, so that the co
 
 A researcher who proceeds by local increments needs the global state of a project, which the views compute from the records.
 
-- [ ] Generate views of the state of an inquiry from its records, beside the [question tree](src/gnomon/views.py), so that a researcher reads the global state of a project without opening each record. Its [candidate views](docs/proposals/inquiry-views.md) await adoption or decline. 🆔 inquiry-views
-	- [ ] Emit each view as a stable YAML record, which Ekphrasis renders in Obsidian as a table, a tree or a graph, and decide which renders stay dynamic as the records change.
-	- [ ] Emit the question tree of `gnomon tree` as such a record, and decide whether the Markdown table of `gnomon vocabulary` gives way to a render of its YAML record.
+- [ ] Decide whether the Markdown table that `gnomon vocabulary --markdown` writes gives way to a render of its YAML record by Ekphrasis, as the views of `gnomon views` do. 🆔 vocabulary-view
 - [ ] Build the view of a filled inquiry record: compose the question statement from its fields, and typeset each expression in LaTeX from the notation that the [operator registry](src/gnomon/data/operators.yml) and the `operators.yml` of each problem already hold. The [syntax decision](docs/adr/expression-syntax.md) fixes the input notation; only the view of a vocabulary is built so far. 🆔 record-view
 	- [ ] Correct the comment of `statement` in the [question template](src/gnomon/data/templates/question.yml), which names a command `gnomon render` that does not exist: name the view of this goal instead. The consequence of the [decision on grammatical fields](docs/adr/grammatical-fields-and-readings.md) that cites this comment then needs the same correction.
 
@@ -127,6 +125,7 @@ The Mixture pilot of `geonexus` corrected several parts of the framework while s
 		- [ ] implement the target contract of `denotes` that Onomasia publishes, and check that a notation entry names the most specific unit and that its class agrees with the value set of its target;
 		- [ ] write macro names in the generated views, from the lookup table of Onomasia;
 		- [ ] rewrite the passages of the decisions and of the [specification of expressions](docs/specification/expressions.md) that keep the notation in `gnomon`;
+- [ ] Ask Ekphrasis for the renderers that the views of `gnomon views` need: a display of a tree from a table of nodes and a table of edges, a display of a graph from the same tables, and the read-only display of a record whose schema marks it `readOnly`, as the [view schemas](src/gnomon/data/views/_index.md) declare. 🆔 view-renderers
 - [ ] Generate the export of a project: its research units, their symbols and their relations, each relation mapped onto the classes of the contract that `ekthesis` publishes, as the [decision on the scope of gnomon](docs/adr/research-scope.md) states. 🆔 research-export
 - [ ] Align the conventions of `gnomon` with those of `geonexus`, which the [documentation index of `geonexus`](https://github.com/esther-poniatowski/geonexus/blob/42d8a238991105b3c1640a69d5bfe27c8db703e0/docs/_index.md) registers. 🆔 geonexus-conventions
 	- [ ] Compare the two workspaces on frontmatter keys, conventional file types (task lists, dashboards, handoffs), and task syntax.

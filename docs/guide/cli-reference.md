@@ -152,6 +152,28 @@ gnomon itinerary <directory> [--format text|sarif] [--output PATH] [--root PATH]
 
 With `--format sarif`, the [findings output](../adr/findings-output.md#^command-output) states the content of the log and the exit statuses. When the log takes standard output, the text lines go to standard error.
 
+## `views`
+
+A researcher who proceeds by local increments needs the global state of the research. The `views` command writes six views of a directory tree of records, each as a YAML record that a renderer such as Ekphrasis displays as a read-only form:
+
+- the state of each problem: its demand met, its accepted answers and its candidates, and its obstacles, stated and shown;
+- the open conditions and the ready acts, the diagnosis of `gnomon status` as tables;
+- the exposure of each answer to the revisable laws among its grounds;
+- the progress of each itinerary: its steps in the order of their dependencies, sound, conditional or impeached, with the edges between them;
+- the maturity of each record and of its marked fields;
+- the question tree, as nodes and edges.
+
+```sh
+gnomon views <directory> [--output DIR]
+```
+
+| Argument or option | Description                                                                          |
+| ------------------ | ------------------------------------------------------------------------------------ |
+| `<directory>`      | Directory of records, read recursively; each folder is one problem.                  |
+| `--output`, `-o`   | Folder receiving the views; the folder `views` of `<directory>` by default.          |
+
+**Output:** one file per view, named after the view, each declaring the schema `gnomon:view.<name>@1` of the [view schemas](../../src/gnomon/data/views/_index.md), which the schema registry of the renderer maps to its file. A view holds no date and no absolute path, so two runs on unchanged records write the same files, and `gnomon check` skips the views. The command exits with code 1 when a file cannot be read, and with code 2 when a view cannot be written.
+
 ## `tree`
 
 A researcher reading a project needs its questions and their answers at a glance. The `tree` command prints the question tree of a directory, read recursively, from its problems to the assessments of its answers.

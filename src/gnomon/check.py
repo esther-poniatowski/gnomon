@@ -47,7 +47,7 @@ from .itineraries import construct_record_kinds, itinerary_problems, type_classe
 from .sarif import Located
 
 #: The kinds of record that a tool generates from the others, which no check reads.
-GENERATED_KINDS = frozenset({"vocabulary"})
+GENERATED_KINDS = frozenset({"vocabulary", "view"})
 
 #: A segment of an identifier that is still the placeholder of a template, such as ``TOPIC``.
 PLACEHOLDER_SEGMENT = re.compile(r"(?:^|\.)[A-Z][A-Z0-9_]*(?:\.|$)")

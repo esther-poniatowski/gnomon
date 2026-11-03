@@ -27,6 +27,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Iterable, Mapping
 
+from .completeness import demand_met, presupposition_denied, readable_obstacles
+from .identifiers import split_reference
+from .itineraries import type_classes, type_holders
+
 Records = Mapping[str, Mapping[str, Any]]
 
 
@@ -136,3 +140,184 @@ def render_tree(roots: Iterable[Node]) -> str:
     for root in roots:
         walk(root, 0)
     return "\n".join(lines) + ("\n" if lines else "")
+
+
+# --- Views as generated records ------------------------------------------------------------------
+#
+# Each view below is a generated record: a mapping in a stable order, which `gnomon views` writes as
+# YAML, and which the schema of the view, in `data/views/`, declares for a renderer such as
+# Ekphrasis. Every cell of a table is a scalar, so that a renderer displays it as a table row; a tree
+# or a graph is stated by a table of nodes and a table of edges.
+
+#: The maturity that a record status states, for the records whose status is a maturity.
+MATURITIES = ("open", "provisional", "stabilized")
+
+
+def _header(name: str, title: str) -> dict[str, Any]:
+    return {"_schema": f"gnomon:view.{name}@1", "id": f"view.{name}", "type": "view", "title": title,
+            "generated_by": "gnomon views"}
+
+
+def _joined(values: Iterable[Any]) -> str:
+    return ", ".join(sorted(str(v) for v in values))
+
+
+def _undetermined(value: bool | None) -> str:
+    return "undetermined" if value is None else ("yes" if value else "no")
+
+
+def problem_state(records: Records) -> dict[str, Any]:
+    """Return the state of each problem: its demand met, its answers and its obstacles.
+
+    The demand met, the obstacles that the records show and a denied presupposition are computed by
+    the completeness module; a problem whose demand is met while its status is still ``posed`` is
+    marked, since the researcher may close it.
+    """
+    classes, holders = type_classes(), type_holders()
+    problems, obstacles = [], []
+    for key in _of_type(records, "problem"):
+        problem = records[key]
+        questions = {q for q in _of_type(records, "question") if records[q].get("addresses") == key}
+        answers = [a for a in _of_type(records, "answer") if records[a].get("answers") in questions]
+        met = demand_met(problem, records, classes, holders)
+        problems.append({
+            "problem": key, "title": str(problem.get("title") or ""), "status": str(problem.get("status") or ""),
+            "result_type": str(problem.get("result_type") or ""), "request": str(problem.get("request") or ""),
+            "demand_met": _undetermined(met),
+            "presupposition_denied": _undetermined(presupposition_denied(problem, records)),
+            "accepted": _joined(a for a in answers if records[a].get("status") == "accepted"),
+            "candidates": _joined(a for a in answers if records[a].get("status") in ("entertained", "hypothesized")),
+            "may_close": bool(met) and problem.get("status") == "posed",
+        })
+        stated = {str(o.get("obstacle")) for o in problem.get("knowledge_obstacles") or [] if isinstance(o, Mapping)}
+        for obstacle, derived in sorted(readable_obstacles(problem, records, classes, holders).items()):
+            obstacles.append({"problem": key, "obstacle": obstacle, "stated": obstacle in stated, "derived": derived})
+    return {**_header("problem-state", "State of each problem"), "problems": problems, "obstacles": obstacles}
+
+
+def next_act(diagnosis_document: Mapping[str, Any]) -> dict[str, Any]:
+    """Return the open conditions and the ready acts, flattened from the diagnosis of ``gnomon status``."""
+    conditions, acts, refuted = [], [], []
+    for question in diagnosis_document.get("questions") or []:
+        for route in question["routes"]:
+            where = {"question": question["question"], "route": route["route"]}
+            conditions += [{**where, "condition": c["condition"], "state": c["state"], "source": c["source"]}
+                           for c in route["conditions"]]
+            acts += [{**where, "condition": o["condition"], "activity": a["activity"], "ready": a["ready"],
+                      "missing": "; ".join(a.get("missing") or [])}
+                     for o in route["open"] for a in o["acts"]]
+            refuted += [{**where, "condition": r["condition"]} for r in route["refuted"]]
+    itineraries = diagnosis_document.get("itineraries") or {}
+    signals = ([{"record": r, "signal": "impeached"} for r in itineraries.get("impeached") or []]
+               + [{"record": r, "signal": "conditional"} for r in itineraries.get("conditional") or []]
+               + [{"record": s, "signal": "judge anew"} for s in itineraries.get("judge_anew") or []])
+    revisions = [{"step": r["step"], "record": r["record"], "kind": r["kind"], "to_review": _joined(r["to_review"])}
+                 for r in diagnosis_document.get("revisions") or []]
+    return {**_header("next-act", "Open conditions and ready acts"), "conditions": conditions, "acts": acts,
+            "refuted": refuted, "revisions": revisions, "signals": signals}
+
+
+def exposure(records: Records) -> dict[str, Any]:
+    """Return, for each answer, the revisable laws among its grounds, as the exposure rule states.
+
+    A law marked ``posited``, ``fitted`` or ``measured`` exposes the answer directly. A law marked
+    ``derived`` exposes it to the laws from which it descends, which the records do not yet state, so
+    the row says so instead of guessing them.
+    """
+    rows = []
+    for key in _of_type(records, "answer"):
+        for ground in records[key].get("grounds") or []:
+            ref = ground.get("record") if isinstance(ground, Mapping) else None
+            split = split_reference(ref) if isinstance(ref, str) else None
+            if split is None:
+                continue
+            owner, unit = split
+            law = next((l for l in (records.get(owner) or {}).get("laws") or []
+                        if isinstance(l, Mapping) and l.get("symbol") == unit), None)
+            if law is None:
+                continue
+            warrant = str(law.get("warrant") or "")
+            if warrant in ("posited", "fitted", "measured"):
+                rows.append({"answer": key, "law": ref, "warrant": warrant, "via": "direct"})
+            elif warrant == "derived":
+                rows.append({"answer": key, "law": ref, "warrant": warrant, "via": "descent not recorded"})
+    return {**_header("exposure", "Exposure of each answer to revisable laws"), "exposures": rows}
+
+
+def itinerary_progress(records: Records, impeached: set[str], conditional: set[str]) -> dict[str, Any]:
+    """Return the steps of each itinerary in the order of their dependencies, with their verdicts.
+
+    A step is ``impeached`` when a failed norm lies upstream of its output, ``conditional`` when a
+    pending one does, and ``sound`` otherwise. The edges between steps are listed for a renderer of
+    graphs.
+    """
+    steps_rows, edges = [], []
+    for key in _of_type(records, "itinerary"):
+        own = f"{key}."
+        steps = {str(s.get("id")): s for s in records[key].get("steps") or [] if isinstance(s, Mapping)}
+        after = {name: sorted({str(i.get("ref"))[len(own):] for i in s.get("inputs") or []
+                               if isinstance(i, Mapping) and str(i.get("ref")).startswith(own)} & set(steps))
+                 for name, s in steps.items()}
+        order: list[str] = []
+        while len(order) < len(steps):
+            ready = [n for n in sorted(steps) if n not in order and all(p in order for p in after[n])]
+            order += ready or [n for n in sorted(steps) if n not in order][:1]
+        for name in order:
+            step = steps[name]
+            output = str((step.get("output") or {}).get("ref") or "")
+            state = "impeached" if output in impeached else "conditional" if output in conditional else "sound"
+            steps_rows.append({"itinerary": key, "step": name, "activity": str(step.get("activity") or ""),
+                               "verdict": str((step.get("norm") or {}).get("verdict") or ""),
+                               "output": output, "state": state})
+            edges += [{"itinerary": key, "from": parent, "to": name} for parent in after[name]]
+    return {**_header("itinerary-progress", "Progress of each itinerary"), "steps": steps_rows, "edges": edges}
+
+
+def maturity_map(records: Records) -> dict[str, Any]:
+    """Return the maturity of the marked fields of each record, and the default of each record.
+
+    A field left unmarked takes the maturity that the status of its record states, when that status
+    is a maturity, and ``provisional`` otherwise, as the maturity of a field specifies.
+    """
+    rows = []
+    for key in sorted(records):
+        record = records[key]
+        if record.get("type") in ("itinerary", "view", "vocabulary"):
+            continue
+        status = record.get("status")
+        rows.append({"record": key, "field": "(default)",
+                     "maturity": status if status in MATURITIES else "provisional"})
+        for path, value in sorted((record.get("maturity") or {}).items()):
+            rows.append({"record": key, "field": str(path), "maturity": str(value)})
+    return {**_header("maturity", "Maturity of each record"), "fields": rows}
+
+
+def question_tree_view(records: Records) -> dict[str, Any]:
+    """Return the question tree as a table of nodes and a table of edges, for a renderer of trees."""
+    nodes, edges = [], []
+
+    def walk(node: Node, parent: str | None, depth: int) -> None:
+        nodes.append({"id": node.identifier, "kind": str(node.record.get("type") or ""),
+                      "title": str(node.record.get("title") or ""), "status": str(node.record.get("status") or ""),
+                      "depth": depth})
+        if parent is not None:
+            edges.append({"parent": parent, "child": node.identifier})
+        for child in node.children:
+            walk(child, node.identifier, depth + 1)
+
+    for root in question_tree(records):
+        walk(root, None, 0)
+    return {**_header("question-tree", "Question tree"), "nodes": nodes, "edges": edges}
+
+
+def all_views(records: Records, diagnosis_document: Mapping[str, Any], impeached: set[str],
+              conditional: set[str]) -> dict[str, dict[str, Any]]:
+    """Return the six views of a set of records, keyed by the name of each view.
+
+    The diagnosis of the conditions of answerability, and the impeached and conditional records of
+    the itineraries, are computed by the caller, which reads them per problem.
+    """
+    built = [problem_state(records), next_act(diagnosis_document), exposure(records),
+             itinerary_progress(records, impeached, conditional), maturity_map(records), question_tree_view(records)]
+    return {str(view["id"]).removeprefix("view."): view for view in built}
+
