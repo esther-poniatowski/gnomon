@@ -7,7 +7,7 @@
 
 _schema: gnomon:question@1
 title: "SHORT NAME OF THE QUESTION"
-statement: "THE QUESTION IN WORDS"   # restate the fields of the subject and the task, from which the view of the record will compose the same question
+statement: "THE QUESTION IN WORDS"   # restate the fields of the subject and the task; `gnomon views` composes the subject and the aim beside it
 id: quest.TOPIC.NAME
 type: question
 status: posed                    # posed | refined | answered | abandoned

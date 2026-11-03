@@ -5,3 +5,4 @@ The registries of this folder declare the epistemic activities, the products tha
 - [Epistemic activities](activities.yml): to find the input and output types, the norm, the mode and the context of an activity before writing a step of an itinerary.
 - [Product types](product-types.yml): to find which record kind holds a product of a given type, and which types no record kind holds yet.
 - [Conditions of answerability](answerability.yml): to find, for each condition of answerability, the conditions on which it depends and the activities that act on it.
+- [Words of the statement frame](statements.yml): to find the words of each clause of the statement frame.

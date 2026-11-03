@@ -8,3 +8,4 @@ The schemas of this folder declare the views that `gnomon views` generates from 
 - [Progress of each itinerary](itinerary-progress.schema.yml): to read how far each itinerary has advanced, and which steps a failed norm impeaches
 - [Maturity of each record](maturity.schema.yml): to read which parts of the research are settled
 - [Question tree](question-tree.schema.yml): to read the problems, questions and answers of a project as one tree
+- [Statement of each question](question-statements.schema.yml): to compare the authored statement of each question with the statement composed from its fields

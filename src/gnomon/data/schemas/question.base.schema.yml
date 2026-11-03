@@ -30,7 +30,7 @@ properties:
     - 'null'
     x-template: '"THE QUESTION IN WORDS"'
     x-kind: markdown-line
-    x-comment: restate the fields of the subject and the task, from which the view of the record will compose the same question
+    x-comment: restate the fields of the subject and the task; `gnomon views` composes the subject and the aim beside it
     title: Statement
     description: the question in words, restating its fields in the statement frame
     examples:

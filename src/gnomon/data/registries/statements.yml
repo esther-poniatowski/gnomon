@@ -1,0 +1,55 @@
+# Registry of the words of the statement frame, which composes the statement of a question from its
+# fields. The note on the subject of inquiry owns the frame, the selection of its interrogative by the
+# epistemic aim, and the selection of its connective of contrast by the locus of the foils:
+# `docs/epistemology/objects/subject/subject-of-inquiry.md` (docs/adr/registries-as-source.md). Each
+# interrogative restates the operational question of its aim in the note on epistemic aims, with the
+# phenomenon in place of "this phenomenon". `gnomon views` reads this registry to compose the view of
+# the statements, and `tests/test_gnomon/test_statement.py` checks that the aims and the loci below
+# match the vocabularies of the question.
+#
+# Placeholders: `{S}` the target system, `{D}` the restrictions of the domain, `{L}` the limit,
+# `{Q}` a quantity, `{P}` the phenomenon, `{E}` the explicandum, `{X}` the foils. A phenomenon or a
+# system is named by a noun phrase of either number, so no interrogative puts a finite verb in
+# agreement with `{P}`.
+
+id: registry.statements
+type: statement-registry
+
+sources:
+  frame: docs/epistemology/objects/subject/subject-of-inquiry.md
+  aims: docs/epistemology/objects/task/epistemic-aim.md
+  contrast: docs/epistemology/objects/subject/contrast.md
+
+# The clauses of the frame "In [S] under [D], [interrogative] [P] rather than [X]?", in their order.
+system: "In {S}"
+restrictions: "under {D}"
+limit: "in the limit {L}"
+
+interrogatives:
+  description: "what structure characterizes {P}"
+  exploration: "which classes of {P} occur as the conditions vary"
+  prediction: "what will {P} be"
+  explanation: "what explains {P}"
+  modal-knowledge: "which modal status, possible, impossible or necessary, holds for {P}"
+  model-properties: "what follows from the admitted laws for {P}"
+  explication: "which criterion should define {E}"
+
+# The words of a restriction that names no entry of its own, per kind of restriction, `{Q}` being the
+# name that the record holding the quantity declares, else its symbol; a restriction of no kind is
+# written as `restricted`.
+restriction_kinds:
+  clamped: "clamped {Q}"
+  restricted: "restricted {Q}"
+  initial: "restricted initial {Q}"
+  stationary: "stationary {Q}"
+  without-event: "{Q} without the excluded event"
+
+# The connective of contrast per locus; a question whose locus is `none` states no contrast.
+contrasts:
+  other-outcome: "rather than {X}"
+  other-system: "rather than in {X}"
+  other-condition: "rather than under {X}"
+  none: ""
+
+# The foils of a locus other than `none` when the question names none, as the template states.
+default_foils: "the other values of the explanandum variable"

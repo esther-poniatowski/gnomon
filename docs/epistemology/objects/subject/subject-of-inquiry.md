@@ -22,6 +22,20 @@ The four components fill a statement frame. The [epistemic aim](../task/epistemi
 
 > In [$S$] under [$D$], [interrogative word] [$P$] rather than [$X$]?
 
+The [locus](contrast.md) of the foils selects the connective of the contrast:
+
+- a foil in the outcome is written "rather than $X$";
+- a foil in the system is written "rather than in $X$";
+- a foil in the conditions is written "rather than under $X$".
+
+The last two foils differ from the fact in the system or in the conditions, not in the outcome, so their connective names where they differ [lipton2004]. A question whose locus is `none` states no contrast, and its statement drops the last clause. Under the aim of explication, the explicandum takes the place of $P$, since the explicandum is a term of the problem and not a component of the subject.
+
+The frame holds only the subject and the aim. For instance, a why-question is a triple of a topic, a contrast class and a relevance relation, and the frame holds no relevance relation [vanfraassen1980]. Therefore, the statement composed from the fields of a question can differ from the authored statement in three ways:
+
+- the authored statement restates a specification of the task outside the frame, such as the requested relation;
+- the authored statement states a specification missing from the fields;
+- the authored statement adds a remark that changes no possible answer.
+
 > [!WARNING] The domain $D$ holds only [restrictions](domain.md#^domain-restrictions) of the values that the target record and the background records admit about $S$.
 
 ## Selecting the specifications

@@ -154,14 +154,15 @@ With `--format sarif`, the [findings output](../adr/findings-output.md#^command-
 
 ## `views`
 
-A researcher who proceeds by local increments needs the global state of the research. The `views` command writes six views of a directory tree of records, each as a YAML record that a renderer such as Ekphrasis displays as a read-only form:
+A researcher who proceeds by local increments needs the global state of the research. The `views` command writes seven views of a directory tree of records, each as a YAML record that a renderer such as Ekphrasis displays as a read-only form:
 
 - the state of each problem: its demand met, its accepted answers and its candidates, and its obstacles, stated and shown;
 - the open conditions and the ready acts, the diagnosis of `gnomon status` as tables;
 - the exposure of each answer to the revisable laws among its grounds;
 - the progress of each itinerary: its steps in the order of their dependencies, sound, conditional or impeached, with the edges between them;
 - the maturity of each record and of its marked fields;
-- the question tree, as nodes and edges.
+- the question tree, as nodes and edges;
+- the statement of each question, authored and composed from its subject and its aim in the [statement frame](../epistemology/objects/subject/subject-of-inquiry.md#^question-statement), with the slots left unfilled by its fields.
 
 ```sh
 gnomon views <directory> [--output DIR]

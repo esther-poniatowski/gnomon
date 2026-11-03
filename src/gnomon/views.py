@@ -30,6 +30,7 @@ from typing import Any, Iterable, Mapping
 from .completeness import demand_met, presupposition_denied, readable_obstacles
 from .identifiers import split_reference
 from .itineraries import type_classes, type_holders
+from .statement import compose_statement, load_statement_registry
 
 Records = Mapping[str, Mapping[str, Any]]
 
@@ -310,14 +311,29 @@ def question_tree_view(records: Records) -> dict[str, Any]:
     return {**_header("question-tree", "Question tree"), "nodes": nodes, "edges": edges}
 
 
+def question_statements(records: Records) -> dict[str, Any]:
+    """Return, for each question and question schema, its authored statement beside the one composed
+    from its fields, with the slots of the frame that the fields leave unfilled."""
+    registry = load_statement_registry()
+    rows = []
+    for key in sorted(k for k, r in records.items() if r.get("type") in ("question", "question-schema")):
+        question = records[key]
+        composed = compose_statement(question, records, registry)
+        rows.append({"question": key, "aim": str((question.get("task") or {}).get("epistemic_aim") or ""),
+                     "authored": str(question.get("statement") or ""), "composed": composed.text,
+                     "gaps": ", ".join(composed.gaps)})
+    return {**_header("question-statements", "Statement of each question"), "statements": rows}
+
+
 def all_views(records: Records, diagnosis_document: Mapping[str, Any], impeached: set[str],
               conditional: set[str]) -> dict[str, dict[str, Any]]:
-    """Return the six views of a set of records, keyed by the name of each view.
+    """Return the views of a set of records, keyed by the name of each view.
 
     The diagnosis of the conditions of answerability, and the impeached and conditional records of
     the itineraries, are computed by the caller, which reads them per problem.
     """
     built = [problem_state(records), next_act(diagnosis_document), exposure(records),
-             itinerary_progress(records, impeached, conditional), maturity_map(records), question_tree_view(records)]
+             itinerary_progress(records, impeached, conditional), maturity_map(records), question_tree_view(records),
+             question_statements(records)]
     return {str(view["id"]).removeprefix("view."): view for view in built}
 
