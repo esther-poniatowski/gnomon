@@ -37,6 +37,7 @@ from . import completeness as c
 from . import findings as rules
 from .findings import Entry, Finding, finding
 from .itineraries import Activity, activities, holds, product_types
+from .propagation import Revision, revisions
 
 #: The registry of the conditions of answerability.
 REGISTRY = Path(__file__).parent / "data" / "registries" / "answerability.yml"
@@ -102,6 +103,7 @@ class Diagnosis:
     """The diagnosis of every question of a set of records, and the state of their itineraries."""
 
     questions: list[QuestionDiagnosis] = field(default_factory=list)
+    revisions: list[Revision] = field(default_factory=list)
     impeached: set[str] = field(default_factory=set)
     conditional: set[str] = field(default_factory=set)
     judge_anew: list[str] = field(default_factory=list)
@@ -238,6 +240,7 @@ def merge(diagnoses: list[Diagnosis]) -> Diagnosis:
         merged.impeached |= d.impeached
         merged.conditional |= d.conditional
         merged.judge_anew += d.judge_anew
+        merged.revisions += [r for r in d.revisions if r not in merged.revisions]
     merged.questions.sort(key=lambda q: q.question)
     return merged
 
@@ -269,7 +272,8 @@ def diagnose(records: Records, registry: Mapping[str, Any] | None = None, local:
     acts, types = activities(), product_types()
     local = records if local is None else local
     impeached, conditional, anew = itinerary_state(local)
-    result = Diagnosis(impeached=impeached, conditional=conditional, judge_anew=anew)
+    result = Diagnosis(impeached=impeached, conditional=conditional, judge_anew=anew,
+                       revisions=revisions(records, itineraries=local))
     for ident in sorted(i for i, r in local.items() if r.get("type") == "question"):
         question = local[ident]
         routes = []
@@ -313,6 +317,11 @@ def as_document(diagnosis: Diagnosis) -> dict[str, Any]:
                 for r in q.routes]}
             for q in diagnosis.questions
         ],
+        "revisions": [
+            {"step": r.step, "record": r.record, "kind": r.kind, "flagged": list(r.flagged),
+             "to_review": list(r.to_review)}
+            for r in sorted(diagnosis.revisions, key=lambda x: x.step)
+        ],
         "itineraries": {
             "impeached": sorted(diagnosis.impeached),
             "conditional": sorted(diagnosis.conditional),
@@ -335,6 +344,9 @@ def render_text(diagnosis: Diagnosis) -> str:
                 lines.append(f"  refuted {cond}: revise by {', '.join(REVISIONS)}")
             if not r.open and not r.refuted:
                 lines.append("  every condition is established: obtain the answer, then evaluate it")
+    for rev in sorted(diagnosis.revisions, key=lambda x: x.step):
+        if rev.to_review:
+            lines.append(f"review after the {rev.kind} of {rev.record} ({rev.step}): {', '.join(rev.to_review)}")
     for step in sorted(diagnosis.judge_anew):
         lines.append(f"judge anew the norm of {step}, whose record is stabilized")
     if diagnosis.impeached:

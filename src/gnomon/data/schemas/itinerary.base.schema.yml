@@ -275,6 +275,57 @@ properties:
             as input
           examples:
           - a fitting repeated until the residuals fall below the tolerance of the question
+        revises:
+          type:
+          - object
+          - 'null'
+          properties:
+            record:
+              type:
+              - string
+              - 'null'
+              x-template: RECORD
+              x-kind: label
+              title: Record
+              description: the record that the step revises
+            kind:
+              x-vocabulary: steps.kind
+              type:
+              - string
+              - 'null'
+              title: Kind
+              description: The kind of the revision.
+            reviews:
+              type:
+              - array
+              - 'null'
+              items:
+                type: object
+                properties:
+                  dependent:
+                    type:
+                    - string
+                    - 'null'
+                    x-template: RECORD
+                    x-kind: label
+                    title: Dependent
+                    description: a record that the revision flags
+                  state:
+                    x-vocabulary: steps.state
+                    type:
+                    - string
+                    - 'null'
+                    title: State
+                    description: The state of the review.
+              x-comment: one entry per flagged dependent that the researcher has reviewed
+              title: Reviews
+              description: one entry per flagged dependent that the researcher has reviewed
+          x-comment: optional; a step that revises a record, with the kind of the revision
+          title: revises
+          description: 'the record that the step revises, the kind of the revision, and the review of each
+            flagged dependent: pending · revised · unaffected · retracted'
+          examples:
+          - the retraction of a background law, with the answers resting on it reviewed one by one
         mode:
           x-vocabulary: steps.mode
           type:

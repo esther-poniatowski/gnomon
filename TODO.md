@@ -17,9 +17,6 @@ The records represent each act of an inquiry as the act is taken, so that the co
 		- [ ] develop a proof technique or an algorithm that gives access to a quantity, whose product the [record of a technique](docs/proposals/inquiry-records-round-2.md#record-of-a-technique) proposes; an algorithm is a design of kind `method`, and a proof technique waits on the decision of `derivation-framework` on reusable reasoning schemes.
 	- [ ] Make the [choice of the next act](docs/procedures/inquiry/next-act.md) computable on the records:
 		- [ ] read the type `knowledge-state-change` from a change of the status of a record between two revisions, instead of its present status, now that the [registry of product types](src/gnomon/data/registries/product-types.yml) states its fields;
-	- [ ] Apply the itinerary corrections of the Mixture pilot:
-		- [ ] the checks of produced content, of the rationale and of revisions.
-- [ ] Decide which changes of the attitude or of the support of a claim, such as a retraction, flag the records resting on it for review, and state the rule in the [propagation through grounds](docs/epistemology/objects/knowledge/grounds-and-dependence.md#^propagation). A flag never edits a dependent: the researcher decides whether each dependent holds, needs an adjustment or is retracted, as the [decision on revision accountability](docs/adr/revision-accountability.md#^flag-not-edit) fixes. A candidate classification sorts the transitions into three classes. A retracting transition, from any value to `retracted`, flags every dependent. A strengthening transition, such as from `hypothesized` to `accepted`, calls for a re-examination of the dependents. A lateral transition, such as the refinement of a question, flags nothing. Its [candidate formalisms](docs/proposals/status-propagation.md) await adoption or decline. 🆔 status-propagation
 
 ## 2. Global views
 

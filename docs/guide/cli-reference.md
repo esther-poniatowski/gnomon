@@ -98,7 +98,8 @@ A researcher choosing the next act of an inquiry needs the conditions that block
 - the state of each [condition for obtaining an answer](../epistemology/objects/question/conditions-of-answerability.md#^condition-states), read from the block `answerability` of the question, else from a field that shows it, else `not-established`;
 - the open conditions, each with the activities that act on it, and whether each activity is ready, its required inputs held by records of the problem that no failed step impeached;
 - the refuted conditions, which call for a revision;
-- the steps whose record is stabilized while their verdict is pending, so that their norm is judged anew, and the impeached records.
+- the steps whose record is stabilized while their verdict is pending, so that their norm is judged anew, and the impeached records;
+- for each revision that a step records, the dependents that it flags, by the [kind of the revision](../epistemology/objects/knowledge/grounds-and-dependence.md#^revision-kinds) and the warrant of each dependent, and those that the researcher has not yet reviewed.
 
 ```sh
 gnomon status <directory> [--format text|yaml] [--output PATH]

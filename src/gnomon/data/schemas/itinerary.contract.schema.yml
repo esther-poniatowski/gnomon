@@ -33,6 +33,7 @@ properties:
         - rationale
         - branch
         - iterate
+        - revises
         - mode
       properties:
         inputs:
@@ -89,6 +90,36 @@ properties:
           propertyNames:
             enum:
             - until
+        revises:
+          propertyNames:
+            enum:
+            - record
+            - kind
+            - reviews
+          properties:
+            kind:
+              enum:
+              - retraction
+              - scope-narrowing
+              - scope-generalization
+              - reorientation
+              - taxonomic-restructure
+              - correction
+              - null
+            reviews:
+              items:
+                propertyNames:
+                  enum:
+                  - dependent
+                  - state
+                properties:
+                  state:
+                    enum:
+                    - pending
+                    - revised
+                    - unaffected
+                    - retracted
+                    - null
         mode:
           enum:
           - deductive

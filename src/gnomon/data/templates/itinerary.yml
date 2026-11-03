@@ -33,4 +33,10 @@ steps:                           # one entry per activity instance; the steps ma
       otherwise: STEP            # the step taken when the condition fails, which produces the same output type
     iterate:                     # optional; a step repeated on its own output until the criterion holds
       until: "THE CRITERION THAT ENDS THE REPETITION"
+    revises:                     # optional; a step that revises a record, with the kind of the revision
+      record: RECORD
+      kind:                      # retraction (the record is no longer pursued) | scope-narrowing (the domain of the record shrinks) | scope-generalization (the domain of the record extends) | reorientation (the content is reframed without changing its scope) | taxonomic-restructure (the classification of the record changes by renaming, regrouping, splitting or merging) | correction (the content changes within its scope, as when an error of a proof is fixed)
+      reviews:                   # one entry per flagged dependent that the researcher has reviewed
+        - dependent: RECORD
+          state:                 # pending | revised | unaffected | retracted
     mode:                        # deductive | inductive | abductive | analogical | error-statistical | model-based | non-inferential

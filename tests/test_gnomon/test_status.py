@@ -11,7 +11,7 @@ from typing import Any
 
 from typer.testing import CliRunner
 
-from gnomon.answerability import diagnose, itinerary_state, malformed_answerability, routes_of
+from gnomon.answerability import diagnose, itinerary_state, malformed_answerability, render_text, routes_of
 from gnomon.cli import app
 from gnomon.findings import texts
 
@@ -117,3 +117,25 @@ def test_a_question_of_explication_has_no_condition_of_definiteness() -> None:
     found = diagnose({"quest.a.b": question})
     assert "definiteness" not in states(found)
     assert "answer-type" in found.questions[0].routes[0].open
+
+
+def test_a_revision_flags_its_dependents_by_kind_and_warrant() -> None:
+    """A proven answer is flagged by a retraction, not by a narrowing; a defeasible one by both."""
+    from gnomon.propagation import revisions
+
+    records = {
+        "bg.a.b": {"id": "bg.a.b", "type": "background"},
+        "ans.proven": {"id": "ans.proven", "type": "answer", "support": "formally-proven",
+                       "grounds": [{"record": "bg.a.b.law"}]},
+        "ans.fitted": {"id": "ans.fitted", "type": "answer", "support": "informal",
+                       "grounds": [{"record": "bg.a.b.law"}]},
+        "itin.a.b": {"id": "itin.a.b", "type": "itinerary", "steps": [
+            {"id": "narrow", "revises": {"record": "bg.a.b", "kind": "scope-narrowing"}},
+            {"id": "retract", "revises": {"record": "bg.a.b", "kind": "retraction",
+                                          "reviews": [{"dependent": "ans.proven", "state": "unaffected"}]}},
+        ]},
+    }
+    narrow, retract = revisions(records)
+    assert narrow.flagged == ("ans.fitted",) and narrow.to_review == ("ans.fitted",)
+    assert retract.flagged == ("ans.fitted", "ans.proven") and retract.to_review == ("ans.fitted",)
+    assert "review after the retraction of bg.a.b" in render_text(diagnose(records))

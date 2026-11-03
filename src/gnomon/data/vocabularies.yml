@@ -548,6 +548,24 @@ vocabularies:
       name: the acts that obtain the answer once every condition of a route is established
     - value: evaluation
       name: the evaluation of an obtained answer
+    steps.kind:
+    - value: retraction
+      name: the record is no longer pursued
+    - value: scope-narrowing
+      name: the domain of the record shrinks
+    - value: scope-generalization
+      name: the domain of the record extends
+    - value: reorientation
+      name: the content is reframed without changing its scope
+    - value: taxonomic-restructure
+      name: the classification of the record changes by renaming, regrouping, splitting or merging
+    - value: correction
+      name: the content changes within its scope, as when an error of a proof is fixed
+    steps.state:
+    - value: pending
+    - value: revised
+    - value: unaffected
+    - value: retracted
     steps.mode:
     - value: deductive
     - value: inductive
