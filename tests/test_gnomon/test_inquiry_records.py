@@ -22,6 +22,7 @@ from gnomon.completeness import (
     inadmissible_values,
     disposition,
     malformed_credence,
+    premature_appraisal,
     misdirected_assessment,
     mismatched_occurrence,
     mismatched_request,
@@ -259,6 +260,25 @@ def test_a_corrective_answer_that_passes_its_tests_is_corrective_rather_than_sat
     assert disposition(passing, "corrective") == "corrective"
     failing = {"tests": {"warrant": {"closure": {"verdict": "fail"}}}}
     assert disposition(failing, "corrective") == "not-satisfied"
+
+
+def test_no_fixture_assessment_appraises_an_answer_that_has_not_passed() -> None:
+    """A virtue ranks only answers that pass admissibility and warrant."""
+    found = [
+        f for path in sorted(EXAMPLES.glob("*/assessment.yml"))
+        for f in premature_appraisal(yaml.safe_load(path.read_text(encoding="utf-8")))
+    ]
+    assert not found, texts(found)
+
+
+def test_an_appraisal_is_reported_unless_the_answer_passes() -> None:
+    appraisal = [{"virtue": "unification", "assessment": "high"}]
+    pending = {"tests": {"admissibility": {"scope": {"verdict": "pending"}}}, "appraisal": appraisal}
+    assert texts(premature_appraisal(pending)) == [
+        "appraisal: the answer is appraised although its disposition is withheld"
+    ]
+    passing = {"tests": {"admissibility": {"scope": {"verdict": "pass"}}}, "appraisal": appraisal}
+    assert premature_appraisal(passing) == []
 
 
 @pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")

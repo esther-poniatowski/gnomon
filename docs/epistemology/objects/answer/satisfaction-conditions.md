@@ -104,7 +104,7 @@ The warrant tests apply to the answer, and through it to the records on which it
 The [epistemic and pragmatic virtues](../task/epistemic-pragmatic-virtues.md) appraise an answer that passed both tiers. A virtue therefore never compensates for a failed test (e.g. an economical answer that ignores the foil is still inadmissible).
 
 > [!NOTE] Appraisal records ^appraisal-record
-> Appraisal adds no test of its own. Its criteria are the virtues marked [preferred](../task/epistemic-pragmatic-virtues.md#^virtue-standing) by the question, and each of them already carries its operational question. Appraisal therefore adds only a record, filled for one answer at a time, whose fields the [assessment record](../../../specification/assessment.md) documents.
+> Appraisal adds no test of its own. Its criteria are the virtues marked [preferred](../task/epistemic-pragmatic-virtues.md#^virtue-standing) by the question, and each of them already carries its operational question. Appraisal therefore adds only a record, filled for one answer at a time, whose fields the [assessment record](../../../specification/assessment.md) documents. An answer that has not passed both tiers carries no appraisal record.
 
 - **An answer is appraised on its own.** The assessment states the result that each selected virtue returns for the answer, so a lone candidate is appraised as fully as one of several. A ranking against another candidate is recorded only once that candidate has been appraised. The ranking is then drawn from the assessments already filled.
 

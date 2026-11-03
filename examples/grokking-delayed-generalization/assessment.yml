@@ -64,9 +64,7 @@ tests:
       evidence: "Membership in the target class does not depend on exhibiting grokking."
 
 obligations: []
-appraisal:
-  - virtue: unification
-    assessment: "The virtue is not appraised, since the candidate fails admissibility and warrant."
+appraisal: []                    # the candidate fails admissibility and warrant, so its preferred virtue is not appraised
 
 maturity:
   tests.admissibility.admissible-explanans: open

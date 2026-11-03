@@ -264,6 +264,10 @@ COMPLETENESS_UNCLASSIFIED_OPERATION = _rule(
     "completeness/unclassified-operation",
     "An operation or an assumption of a model on which an answer runs is named by no ground of that answer.",
 )
+COMPLETENESS_PREMATURE_APPRAISAL = _rule(
+    "completeness/premature-appraisal",
+    "An assessment appraises an answer that has not passed admissibility and warrant.",
+)
 COMPLETENESS_UNBOUND_OUTPUTS = _rule(
     "completeness/unbound-outputs",
     "An answer on a model cites no binding, although its question names outputs to match.",

@@ -431,7 +431,7 @@ properties:
           x-comment: fill when other candidates have been assessed
           title: Preferred over
           description: fill when other candidates have been assessed
-    x-comment: one entry per `preferred` virtue of the question; the product test already settles each
+    x-comment: one entry per `preferred` virtue of the question, only once no test of admissibility or of warrant fails or stays pending; the product test already settles each
       `constitutive` virtue
     title: Appraisal
     description: per virtue, the assessment of this answer, and the candidates over which it is preferred

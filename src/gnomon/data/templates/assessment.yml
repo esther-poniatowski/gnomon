@@ -55,7 +55,7 @@ obligations:                     # one entry per proof obligation of the questio
   - verdict: pending             # pending | pass | fail | not-applicable
     evidence: "THE DERIVATION OR THE COUNTEREXAMPLE THAT SETTLES THE IMPLICATION"
 
-appraisal:                       # one entry per `preferred` virtue of the question; the product test already settles each `constitutive` virtue
+appraisal:                       # one entry per `preferred` virtue of the question, only once no test of admissibility or of warrant fails or stays pending; the product test already settles each `constitutive` virtue
   - virtue:                      # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability
     assessment: "THE RESULT OF THE OPERATIONAL QUESTION OF THAT VIRTUE FOR THIS ANSWER"
     preferred_over: "THE CANDIDATES THAT THIS ANSWER OUTRANKS ON THAT VIRTUE"   # fill when other candidates have been assessed

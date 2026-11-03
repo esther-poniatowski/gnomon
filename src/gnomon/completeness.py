@@ -876,6 +876,27 @@ def disposition(assessment: Mapping[str, Any], erotetic_relation: str | None = N
     return "corrective" if erotetic_relation == "corrective" else "satisfied"
 
 
+def premature_appraisal(assessment: Mapping[str, Any]) -> list[Finding]:
+    """Return the appraisal of an answer that has not passed both tiers of tests.
+
+    A virtue ranks answers that already satisfy the question, and never compensates for a failed
+    test, so an answer is appraised only once no test of admissibility or of warrant fails or
+    stays pending.
+
+    >>> failing = {"tests": {"warrant": {"closure": {"verdict": "fail"}}},
+    ...            "appraisal": [{"virtue": "unification", "assessment": "high"}]}
+    >>> [f.text for f in premature_appraisal(failing)]
+    ['appraisal: the answer is appraised although its disposition is not-satisfied']
+    >>> premature_appraisal({**failing, "appraisal": []})
+    []
+    """
+    state = disposition(assessment)
+    if state in ("satisfied", "corrective") or is_unfilled(assessment.get("appraisal")):
+        return []
+    return [finding(rules.COMPLETENESS_PREMATURE_APPRAISAL,
+                    f"appraisal: the answer is appraised although its disposition is {state}", "appraisal")]
+
+
 def unmet_by_aim(
     question: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],
