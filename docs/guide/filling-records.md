@@ -14,7 +14,13 @@ Leads a researcher from a research problem to a folder of records that the check
 
 ## Create the folder of a problem
 
-The records of one research problem share one folder. The [record templates](../../src/gnomon/data/templates/_index.md) supply one file per record kind. The header of each template names its specification note and states how many files of its kind a problem holds: for instance, one file per target system, per phenomenon or per candidate answer. Each record is filled in a copy of its template, kept in the folder of the problem.
+The records of one research problem share one folder. The following command creates that folder with the [record templates](../../src/gnomon/data/templates/_index.md) of the problem, its subject, its question and its operators, and with an index listing them in the order of filling:
+
+```sh
+gnomon init ./my-problem
+```
+
+A later record kind is added to the folder with the option `--with`, such as `--with answer --with assessment` once a candidate answer is in view. The header of each template names its specification note and states how many files of its kind a problem holds: for instance, one file per target system, per phenomenon or per candidate answer. A second file of one kind is a copy of its template, kept in the folder of the problem.
 
 ## Fill the records in order
 
@@ -25,6 +31,20 @@ The index of the templates numbers the record kinds in the order of filling, fro
 The [specification](../specification/_index.md) documents each record kind in one note. Its tables state, row by row, the content of a field, the condition under which the field is required, and its admitted values. The question record is documented in four notes, all listed in the header of its template.
 
 Completed records can be consulted in the [worked inquiries](../../examples/_index.md). For each worked inquiry, an issues note states what its records could not express.
+
+## Check the records
+
+The following command runs every check of `gnomon` on the folder, and prints one line per finding with its file, its record and its rule:
+
+```sh
+gnomon check ./my-problem
+```
+
+A template left unfilled reports one finding per placeholder, so the count falls as the records are filled. A stable report, which can be kept beside the records and compared between two runs, is written in YAML or in Markdown, the second readable in Obsidian:
+
+```sh
+gnomon check ./my-problem --format markdown --output ./my-problem/reports/check.md
+```
 
 ## Collect the symbols
 
@@ -42,4 +62,4 @@ The steps taken in the inquiry are recorded in an [itinerary](../specification/i
 gnomon itinerary ./my-problem
 ```
 
-Each line of the output names one defect and the itinerary that holds it, and the command exits with an error when it finds a defect. The options and the outputs of both commands are listed in the [command reference](cli-reference.md).
+Each line of the output names one defect and the itinerary that holds it, and the command exits with an error when it finds a defect. The command `gnomon check` runs the same check together with the others. The options and the outputs of every command are listed in the [command reference](cli-reference.md).

@@ -94,11 +94,12 @@ The capabilities not yet available are recorded in the [project goals](TODO.md).
 
 To specify a research problem, a researcher fills one record per concern in a folder of its own, from the [record templates](src/gnomon/data/templates/_index.md). The [guide to filling the records of an inquiry](docs/guide/filling-records.md) leads through the records in order, and completed records can be consulted in the [worked inquiries](examples/_index.md).
 
-The two commands below check a filled folder. The command `gnomon vocabulary` collects the symbols and the operators that its records declare, and the command `gnomon itinerary` checks each step of its itineraries against the registry of epistemic activities:
+The first command below creates the folder with its templates and an index in the order of filling. The second runs every check of `gnomon` on the filled records, and the third collects the symbols and the operators that they declare:
 
 ```sh
+gnomon init ./my-problem
+gnomon check ./my-problem
 gnomon vocabulary ./my-problem --markdown
-gnomon itinerary ./my-problem
 ```
 
 Every command is specified in the [CLI reference](docs/guide/cli-reference.md).

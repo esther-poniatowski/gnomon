@@ -30,17 +30,19 @@ gnomon info
 
 ## `init`
 
-> Stub — prints "Research workspace scaffolding is not yet implemented."
-
-Scaffold a research workspace into a target directory.
+A researcher starting a problem needs the record templates in a folder of its own, in the order in which they are filled. The `init` command creates that folder with the templates of the problem, the target system, the background, the phenomenon, the question and the operators, and with an index that lists them in the order of filling, each with the goal of its record.
 
 ```sh
-gnomon init --target <dir>
+gnomon init <directory> [--with KIND]... [--force]
 ```
 
-| Option           | Default | Description                  |
-| ---------------- | ------- | ---------------------------- |
-| `--target`, `-t` | `.`     | Target workspace directory.  |
+| Argument or option | Description                                                                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `<directory>`      | Folder of the new problem, created when it does not exist.                                                                               |
+| `--with`, `-w`     | A further record kind to scaffold: `model`, `key`, `binding`, `answer`, `assessment`, `concept`, `design` or `itinerary`; repeat it for several. |
+| `--force`          | Overwrite the files that already exist.                                                                                                  |
+
+**Output:** one line per file written, then the next step. The command writes no file and exits with code 1 when one of the files exists and `--force` is not given, or when a kind has no template.
 
 ## `validate`
 
@@ -53,6 +55,29 @@ gnomon validate <paths...>
 | Argument   | Description                                  |
 | ---------- | -------------------------------------------- |
 | `<paths>`  | One or more record files or directories.     |
+
+## `check`
+
+A researcher needs to know, before an answer is assessed, whether the records of a problem hold the specifications that the method requires. The `check` command runs every check of `gnomon` on a directory tree:
+
+- the resolution of each symbol, operator and reference;
+- the specifications that each record kind, each aim and each level of commitment require;
+- the consistency between records, such as the classification of each operation of a model by a ground of the answer, the binding of an answer whose question names outputs to match, and the pair of each target status;
+- the steps of each itinerary.
+
+Each folder that holds records is checked as one problem, and a reference may reach a record of any folder. A generated record, such as a vocabulary, is not checked.
+
+```sh
+gnomon check <directory> [--format text|yaml|markdown|sarif] [--output PATH]
+```
+
+| Argument or option | Description                                                                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| `<directory>`      | Directory of records, read recursively.                                                                             |
+| `--format`, `-f`   | `text` (default), `yaml` or `markdown` for a report, or `sarif` for a log in the findings profile of the gate Elenchos. |
+| `--output`, `-o`   | File receiving the report instead of standard output; its missing folders are created.                              |
+
+**Output:** in `text`, one line per finding with its file, its record, its rule and its message, then one line counting the records and the findings. The `yaml` and `markdown` reports group the findings by file, hold no date and no absolute path, and sort their content, so two runs on unchanged records write the same file. The `markdown` report can be read in Obsidian, where each heading links to the file of its records, from the folder of the report. Paths are stated relative to `<directory>`. The command exits with code 1 when it reports a finding or cannot read a file, and with code 2 when it cannot write the report.
 
 ## `schemas`
 
@@ -118,3 +143,13 @@ gnomon itinerary <directory> [--format text|sarif] [--output PATH] [--root PATH]
 **Output:** one line per defect, prefixed with the identifier of its itinerary, then one line with the number of itineraries checked and the number of defects found. The command exits with code 1 when it finds a defect, or when the folder does not exist.
 
 With `--format sarif`, the [findings output](../adr/findings-output.md#^command-output) states the content of the log and the exit statuses. When the log takes standard output, the text lines go to standard error.
+
+## `tree`
+
+A researcher reading a project needs its questions and their answers at a glance. The `tree` command prints the question tree of a directory, read recursively, from its problems to the assessments of its answers.
+
+```sh
+gnomon tree <directory>
+```
+
+**Output:** one indented line per record, with its kind, its identifier, its title and its status. A file that cannot be read is reported on standard error, and the command exits with code 1 only when the folder does not exist.

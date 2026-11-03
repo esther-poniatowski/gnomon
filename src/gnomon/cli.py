@@ -6,8 +6,9 @@ Defines commands available via `python -m gnomon` or `gnomon` if installed as a 
 Commands
 --------
 info : Display diagnostic information.
-init : Scaffold research workspace structure into a target directory.
+init : Create the folder of a problem, with the record templates in the order of filling.
 validate : Validate each record against the schema of its type.
+check : Run every check on the records of a directory tree.
 status : List the open conditions of the questions of a workspace.
 vocabulary : Collect the symbols and operators of one problem into a table.
 itinerary : Check every itinerary of one problem against the activity and product-type registries.
@@ -15,6 +16,7 @@ tree : Print the question tree of a project, from its problems to the assessment
 """
 
 import json
+import os
 from enum import Enum
 from pathlib import Path, PurePosixPath
 from typing import Any, Mapping, Optional
@@ -40,11 +42,31 @@ def cli_info() -> None:
 
 @app.command("init")
 def cli_init(
-    target: str = typer.Option(".", "--target", "-t", help="Target workspace directory."),
+    directory: str = typer.Argument(..., help="Folder of the new problem, created when it does not exist."),
+    with_kinds: list[str] = typer.Option(
+        [], "--with", "-w",
+        help="A further record kind to scaffold, such as model, binding, key, answer, assessment, "
+        "itinerary, concept or design; repeat the option for several.",
+    ),
+    force: bool = typer.Option(False, "--force", help="Overwrite the files that already exist."),
 ) -> None:
-    """Scaffold research workspace structure into a target directory."""
-    typer.echo("Research workspace scaffolding is not yet implemented.")
-    raise typer.Exit(code=0)
+    """Create the folder of a problem, with the record templates in the order of filling.
+
+    The folder receives the templates of the problem, the target system, the background, the
+    phenomenon, the question and the operators, the further kinds that ``--with`` names, and an
+    index listing them in the order of filling. The command exits with status 1 when a file exists
+    and ``--force`` is not given, or when a kind has no template.
+    """
+    from .scaffold import CORE_KINDS, scaffold
+
+    try:
+        written = scaffold(Path(directory), [*CORE_KINDS, *with_kinds], force)
+    except (FileExistsError, ValueError) as error:
+        typer.echo(str(error), err=True)
+        raise typer.Exit(code=1) from error
+    for path in written:
+        typer.echo(f"{path}: written")
+    typer.echo(f"Fill the records in the order of {Path(directory) / '_index.md'}, then run: gnomon check {directory}")
 
 
 @app.command("validate")
@@ -68,6 +90,71 @@ def cli_validate(
             typer.echo(f"{path}: {message}")
     typer.echo(f"{checked} records checked, {failed} errors found")
     raise typer.Exit(code=1 if failed else 0)
+
+
+class CheckFormat(str, Enum):
+    """The forms in which ``gnomon check`` reports its findings."""
+
+    text = "text"
+    yaml = "yaml"
+    markdown = "markdown"
+    sarif = "sarif"
+
+
+@app.command("check")
+def cli_check(
+    directory: str = typer.Argument(..., help="Directory of records, read recursively; each folder is one problem."),
+    output_format: CheckFormat = typer.Option(
+        CheckFormat.text, "--format", "-f",
+        help="text prints one line per finding; yaml and markdown write a stable report; sarif "
+        "writes a SARIF 2.1.0 log in the findings profile of Elenchos.",
+    ),
+    output: Optional[Path] = typer.Option(
+        None, "--output", "-o",
+        help="Write the report to this path instead of standard output; missing folders are created.",
+    ),
+) -> None:
+    """Run every check on the records of a directory tree.
+
+    Each folder that holds records is checked as one problem, and a reference may reach a record of
+    any folder. The text output prints one line per finding and a count. The command exits with
+    status 1 when a finding is reported or a file cannot be read, and with status 2 when the
+    report cannot be written.
+    """
+    from .check import check_workspace, load_workspace
+    from .report import render_markdown_report, render_yaml_report
+
+    source = Path(directory)
+    if not source.is_dir():
+        typer.echo(f"no such directory: {source}", err=True)
+        raise typer.Exit(code=1)
+    workspace = load_workspace(source)
+    found = check_workspace(workspace)
+    count = len(workspace.by_id)
+    summary = f"{count} records checked in {len(workspace.problems)} folders, {len(found)} findings"
+    for line in workspace.failures:
+        typer.echo(line, err=True)
+    if output_format is CheckFormat.text:
+        text = "".join(f"{x.file}: {x.record}: {x.finding.rule.id}: {x.finding.text}\n" for x in found) + summary + "\n"
+    elif output_format is CheckFormat.yaml:
+        text = render_yaml_report(found, source.name, count)
+    elif output_format is CheckFormat.markdown:
+        text = render_markdown_report(found, source.name, count, source, None if output is None else output.parent)
+    else:
+        stopped = f"{len(workspace.failures)} record files could not be read" if workspace.failures else None
+        text = json.dumps(sarif_log(found, __version__, stopped), indent=2, ensure_ascii=False) + "\n"
+    if output is None:
+        typer.echo(text, nl=False)
+    else:
+        try:
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(text, encoding="utf-8")
+        except OSError as error:
+            typer.echo(f"cannot write the report {output}: {error}", err=True)
+            raise typer.Exit(code=2) from error
+        typer.echo(summary, err=True)
+    if found or workspace.failures:
+        raise typer.Exit(code=1)
 
 
 @app.command("status")

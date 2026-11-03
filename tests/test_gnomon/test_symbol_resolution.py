@@ -18,7 +18,6 @@ from typing import Any, Mapping
 import pytest
 import yaml
 
-from gnomon.identifiers import RECORD_SEGMENTS, split_reference
 from gnomon.completeness import (
     admitted_values,
     at,
@@ -46,7 +45,6 @@ from gnomon.completeness import (
 from gnomon.vocabulary import (
     RECORD_KINDS,
     visible_records,
-    units,
     canonical_operators,
     declarations,
     doubly_defined,
@@ -174,48 +172,33 @@ def test_every_reference_and_formula_identifier_resolves(case: tuple[str, Mappin
     assert not problems, f"{name}: {problems}"
 
 
-def record_references() -> list[tuple[str, str]]:
-    """Return every reference to a whole record in the fixture tree, with the file making it.
-
-    A reference to a whole record has the number of segments that its prefix fixes, so a
-    reference to a unit, one segment longer, is left to the check of units. The identifier of a
-    record is its own declaration, not a reference.
-    """
-    from gnomon.identifiers import RECORD_SEGMENTS
-
-    found: list[tuple[str, str]] = []
-
-    def walk(node: Any, name: str) -> None:
-        if isinstance(node, Mapping):
-            for key, value in node.items():
-                if key != "id":
-                    walk(value, name)
-        elif isinstance(node, list):
-            for item in node:
-                walk(item, name)
-        elif isinstance(node, str) and " " not in node:
-            parts = node.split(".")
-            if RECORD_SEGMENTS.get(parts[0]) == len(parts) and all(parts):
-                found.append((name, node))
-
-    for path in sorted(EXAMPLES.glob("*/*.yml")) if EXAMPLES.is_dir() else []:
-        walk(yaml.safe_load(path.read_text(encoding="utf-8")), str(path.relative_to(ROOT)))
-    return found
-
-
-RECORD_REFERENCES = record_references()
-EXAMPLE_IDS = {
-    str(loaded["id"])
+#: Every record of the fixture tree, of any kind, keyed by identifier.
+ALL_RECORDS: dict[str, Mapping[str, Any]] = {
+    str(loaded["id"]): loaded
     for path in (sorted(EXAMPLES.glob("*/*.yml")) if EXAMPLES.is_dir() else [])
     if isinstance(loaded := yaml.safe_load(path.read_text(encoding="utf-8")), Mapping) and "id" in loaded
 }
 
 
-@pytest.mark.skipif(not RECORD_REFERENCES, reason="no reference to a whole record is made")
-@pytest.mark.parametrize("reference", RECORD_REFERENCES, ids=[f"{n}:{r}" for n, r in RECORD_REFERENCES] or ["none"])
-def test_every_reference_to_a_record_names_a_record(reference: tuple[str, str]) -> None:
-    name, text = reference
-    assert text in EXAMPLE_IDS, f"{name}: no record carries the identifier {text}"
+@pytest.mark.skipif(not ALL_RECORDS, reason="the expressivity fixtures are absent")
+@pytest.mark.parametrize("ident", sorted(ALL_RECORDS) or ["none"])
+def test_every_reference_names_a_record_and_a_unit_that_exist(ident: str) -> None:
+    """A reference to a whole record names a record, and a reference to a unit names a unit of it."""
+    from gnomon.vocabulary import dangling_references
+
+    found = dangling_references(ALL_RECORDS[ident], ALL_RECORDS)
+    assert not found, f"{ident}: {texts(found)}"
+
+
+def test_a_reference_to_a_missing_record_or_unit_is_reported() -> None:
+    from gnomon.vocabulary import dangling_references
+
+    records = {"mod.a.m": {"type": "model", "laws": [{"symbol": "onset"}]}}
+    record = {"id": "ans.a.b", "route": {"runs_on": ["mod.a.m", "mod.a.x"]}, "grounds": [{"record": "mod.a.m.drift"}]}
+    assert texts(dangling_references(record, records)) == [
+        "route.runs_on.1: no record carries the identifier mod.a.x",
+        "grounds.0.record: mod.a.m declares no unit drift",
+    ]
 
 
 MODELS = [(name, record) for name, record in CASES if record.get("type") == "model"]
@@ -254,38 +237,6 @@ def test_a_derived_model_uses_no_retired_symbol_and_completes_its_operations(cas
     name, record = case
     found = retired_in_use(record) + incomplete_operations(record) + unmet_by_presence(record, requirements_by_presence())
     assert not found, f"{name}: {texts(found)}"
-
-
-def external_references() -> list[tuple[str, str]]:
-    """Return every dotted reference to a unit of a record in the fixture tree, with the file making it.
-
-    A step of an itinerary is a unit without a symbol, which the itinerary check resolves, so the
-    references to steps are left out.
-    """
-    found: list[tuple[str, str]] = []
-    if not EXAMPLES.is_dir():
-        return found
-    prefixes = "|".join(prefix for prefix in RECORD_SEGMENTS if prefix != "itin")
-    for path in sorted(EXAMPLES.glob("*/*.yml")):
-        if path.name == "vocabulary.yml":
-            continue
-        for text in re.findall(rf"\b(?:{prefixes})\.[\w.-]*\w", path.read_text(encoding="utf-8")):
-            if split_reference(text) is not None:
-                found.append((str(path.relative_to(ROOT)), text))
-    return sorted(set(found))
-
-
-EXTERNAL = external_references()
-
-
-@pytest.mark.skipif(not EXTERNAL, reason="no cross-record reference is made")
-@pytest.mark.parametrize("reference", EXTERNAL, ids=[f"{n}:{r}" for n, r in EXTERNAL] or ["none"])
-def test_every_cross_record_reference_resolves(reference: tuple[str, str]) -> None:
-    name, text = reference
-    record_id, symbol = split_reference(text) or ("", "")
-    by_id = {r["id"]: r for _, r in CASES if "id" in r}
-    assert record_id in by_id, f"{name}: no record carries the identifier {record_id}"
-    assert symbol in units(by_id[record_id]), f"{name}: {record_id} declares no unit {symbol}"
 
 
 @pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")

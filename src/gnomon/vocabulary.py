@@ -30,7 +30,7 @@ import yaml
 
 from . import findings as rules
 from .findings import Entry, Finding, Key, Place, finding
-from .identifiers import split_reference
+from .identifiers import RECORD_SEGMENTS, split_reference
 
 DATA = Path(__file__).parent / "data"
 
@@ -571,6 +571,82 @@ def units(record: Mapping[str, Any]) -> list[str]:
               for entry in entries(record, block) if entry.get("id")]
     return names
 
+
+
+#: A dotted token opening on the prefix of a record kind, wherever it stands in a string.
+REFERENCE_TOKEN = re.compile(rf"(?<![\w.-])(?:{'|'.join(RECORD_SEGMENTS)})\.[\w.-]*\w")
+
+
+def references(record: Mapping[str, Any]) -> list[tuple[tuple[str | int, ...], str]]:
+    """Return every dotted reference that the record makes, with the path of the field holding it.
+
+    The identifier of a record or of a unit is its declaration, not a reference, so the fields
+    ``id`` are skipped.
+
+    >>> references({"id": "ans.a.b", "route": {"runs_on": ["mod.a.m"]}})
+    [(('route', 'runs_on', 0), 'mod.a.m')]
+    """
+    found: list[tuple[tuple[str | int, ...], str]] = []
+
+    def walk(node: Any, path: tuple[str | int, ...]) -> None:
+        if isinstance(node, Mapping):
+            for key, value in node.items():
+                if key != "id":
+                    walk(value, (*path, str(key)))
+        elif isinstance(node, list):
+            for index, item in enumerate(node):
+                walk(item, (*path, index))
+        elif isinstance(node, str):
+            found.extend((path, text) for text in REFERENCE_TOKEN.findall(node))
+
+    walk(record, ())
+    return found
+
+
+def dangling_references(record: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]) -> list[Finding]:
+    """Return every reference to a record or to a unit that the records of the workspace do not declare.
+
+    A reference has the segments that the prefix of its kind fixes, to reach a whole record, or one
+    more, to reach a unit: a symbol, or the identifier of a unit such as an operation or a pair. A
+    step of an itinerary is a unit that the itinerary check resolves, so it is left to that check.
+
+    >>> records = {"mod.a.m": {"type": "model", "laws": [{"symbol": "onset"}]}}
+    >>> [f.text for f in dangling_references({"record": "mod.a.m.onset", "other": "mod.a.x"}, records)]
+    ['other: no record carries the identifier mod.a.x']
+    """
+    found = []
+    for path, text in references(record):
+        parts = text.split(".")
+        count = RECORD_SEGMENTS[parts[0]]
+        where = ".".join(str(segment) for segment in path)
+        if len(parts) == count:
+            if text not in records:
+                found.append(finding(rules.VOCABULARY_UNKNOWN_RECORD,
+                                     f"{where}: no record carries the identifier {text}", *path, value=text))
+            continue
+        split = split_reference(text)
+        if split is None or parts[0] == "itin":
+            continue
+        owner, unit = split
+        if owner not in records:
+            found.append(finding(rules.VOCABULARY_UNKNOWN_RECORD,
+                                 f"{where}: no record carries the identifier {owner}", *path, value=text))
+        elif unit not in units(records[owner]):
+            found.append(finding(rules.VOCABULARY_UNKNOWN_UNIT,
+                                 f"{where}: {owner} declares no unit {unit}", *path, value=text))
+    return found
+
+
+def repeated_symbols(record: Mapping[str, Any]) -> list[Finding]:
+    """Return every symbol that the record declares more than once.
+
+    >>> record = {"type": "target-system", "variables": [{"symbol": "x"}], "parameters": [{"symbol": "x"}]}
+    >>> [f.text for f in repeated_symbols(record)]
+    ['x: declared more than once']
+    """
+    seen = [entry.symbol for entry in declarations(record)]
+    return [finding(rules.VOCABULARY_REPEATED_SYMBOL, f"{symbol}: declared more than once", value=symbol)
+            for symbol in sorted({s for s in seen if seen.count(s) > 1})]
 
 def retired_in_use(record: Mapping[str, Any]) -> list[Finding]:
     """Return every expression of a derived model that uses a symbol which an operation retires.
@@ -1276,7 +1352,7 @@ def visible_records(
         target: Mapping[str, Any] = stated if isinstance(stated, Mapping) else {}
         phenomenon = records.get(str(target.get("phenomenon")), {})
         names = [record.get("model"), target.get("phenomenon"), phenomenon.get("target_system")]
-    found = [records[name] for name in dict.fromkeys(names) if isinstance(name, str) and name in records]
+    found = [records[name] for name in dict.fromkeys(n for n in names if isinstance(n, str)) if name in records]
     return found + [parent for model in found if model.get("type") == "model"
                     for parent in visible_records(model, records) if parent not in found]
 

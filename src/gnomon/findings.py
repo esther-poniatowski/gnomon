@@ -369,6 +369,18 @@ VOCABULARY_MISROUTED_INTERACTION = _rule(
     "vocabulary/misrouted-interaction",
     "The laws stating a relation name no quantity indexed by every one of its places.",
 )
+CHECK_FAILED = _rule(
+    "check/failed", "A check stopped on an error, so the record was not fully checked."
+)
+VOCABULARY_UNKNOWN_RECORD = _rule(
+    "vocabulary/unknown-record", "A reference names a record that no record of the workspace declares."
+)
+VOCABULARY_UNKNOWN_UNIT = _rule(
+    "vocabulary/unknown-unit", "A reference names a unit that its record does not declare."
+)
+VOCABULARY_REPEATED_SYMBOL = _rule(
+    "vocabulary/repeated-symbol", "A record declares one symbol more than once."
+)
 VOCABULARY_UNUSED_DECLARATION = _rule(
     "vocabulary/unused-declaration", "A declared quantity is mentioned by no other field of its problem."
 )
