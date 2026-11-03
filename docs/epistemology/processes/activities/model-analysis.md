@@ -25,6 +25,7 @@ The activities of this family output a **consequence**: a statement derived from
 | `robustness-analysis` | `model` (family) | `consequence` | deductive | justification |
 | `thought-experiment` | `model` | `consequence` | deductive | discovery |
 | `model-prediction` | `model`, `target-specification` | `consequence` | deductive | justification |
+| `consequence-comparison` | `consequence` (several) | `consequence` | deductive | justification |
 
 ## Norms
 
@@ -35,8 +36,11 @@ The activities of this family output a **consequence**: a statement derived from
 | `robustness-analysis` | derive one result from several models that share a core and differ in their auxiliary assumptions | the result holds across models whose auxiliary assumptions are independent [levins1966] [weisberg2006] |
 | `thought-experiment` | reason about an imagined scenario that is not carried out | the conclusion follows by an argument from the premises of the scenario [norton1996] |
 | `model-prediction` | derive the values assigned by the model to observables under the conditions of a target | the values are derived from the model under the stated conditions of the target |
+| `consequence-comparison` | compare the consequences of rival candidates, or a derived law with a simulation, under one set of conditions | the consequences are derived under one set of conditions, and the conditions under which they differ are stated [platt1964] |
 
 ## Distinctions
+
+- **A comparison of consequences locates a crucial test.** Rival hypotheses are discriminated by an experiment whose possible outcomes exclude some of them [platt1964]. A comparison of their consequences under one set of conditions states the conditions under which the rivals differ, so it precedes the design of such an experiment, and it equally compares a derived law with the result of a simulation of the same model. ^consequence-comparison
 
 - **A candidate claim is derived from together with the admitted laws.** A hypothesis yields a consequence only together with auxiliary assumptions [duhem1906]. A derivation that takes a candidate claim therefore takes the admitted laws as its auxiliary premises, and its consequence stays conditional on both, so that the consequence can serve to test the candidate. ^derivation-from-candidate
 - **Verification belongs to simulation, and validation to evaluation.** Verification compares two [levels of a computation](../../vocabulary/change/computation.md), the algorithm of the code and the function fixed by the model, without reference to the target. Therefore, verification stays within this family. [Validation](evaluation.md) asks whether the model is adequate to its target for a purpose.
@@ -59,5 +63,6 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [giere1988] ◐ [Giere, *Explaining Science: A Cognitive Approach*, University of Chicago Press, 1988](https://press.uchicago.edu/ucp/books/book/chicago/E/bo3622319.html); theoretical hypotheses assert a similarity between a model and a real system
 - [levins1966] ◐ [Levins, "The strategy of model building in population biology", *American Scientist* 54(4), 421–431, 1966](https://www.zoology.ubc.ca/let/pdfs/Levins1966.pdf); robust theorems, p. 423
 - [norton1996] ◐ [Norton, "Are thought experiments just what you thought?", *Canadian Journal of Philosophy* 26(3), 333–366, 1996](https://doi.org/10.1080/00455091.1996.10717457)
+- [platt1964] ◐ [Platt, "Strong inference", *Science* 146(3642), 347–353, 1964](https://doi.org/10.1126/science.146.3642.347); devising alternative hypotheses and a crucial experiment whose outcomes exclude some of them
 - [weisberg2006] ◐ [Weisberg, "Robustness analysis", *Philosophy of Science* 73(5), 730–742, 2006](https://doi.org/10.1086/518628)
 - [winsberg2010] ◐ [Winsberg, *Science in the Age of Computer Simulation*, University of Chicago Press, 2010](https://doi.org/10.7208/9780226902050)

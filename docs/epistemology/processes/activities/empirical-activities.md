@@ -26,6 +26,8 @@ The activities of this family output a [design](../../../specification/design.md
 | `measurement` | `measurement-procedure`, `design` | `data` | model-based | justification |
 | `intervention` | `design` | `data` | non-inferential | justification |
 | `phenomenon-detection` | `data` | `phenomenon` | inductive | justification |
+| `phenomenon-specification` | `identified-subject`, `target-specification` | `phenomenon` | non-inferential | discovery |
+| `phenomenon-derivation` | `consequence`, `target-specification` | `phenomenon` | non-inferential | discovery |
 
 - **Observation and measurement are model-based inferences.** Each infers an outcome from the output of an instrument through a model of that instrument and of its interaction with the target [tal2013]. The method commits to this account of access in its [stance on mediated access](../../foundations/existence-and-access.md#^mediated-access), and extends it from measurement to observation through an instrument. Their mode is therefore `model-based`. ^model-based-modes
 
@@ -39,8 +41,12 @@ The activities of this family output a [design](../../../specification/design.md
 | `measurement` | assign values to a property by a map that preserves its empirical relations | a representation theorem guarantees that the map exists, a uniqueness theorem fixes its admissible transformations, and the scale type is stated [krantz1971]; the outcome is inferred from the reading through a stated model of the measuring process [tal2013] |
 | `intervention` | set a variable of the target, and record the response | the intervention changes the response only through the manipulated variable, and is independent of the other causes of the response [woodward2003] [hacking1983] |
 | `phenomenon-detection` | infer from data a behavior of the target, robust across procedures, or its absence from a closed search | the feature is stable across independent procedures, replications included, and confounders and artefacts are controlled; an absence is inferred only from a search whose procedures would probably have detected the feature within its stated scope [bogen1988] [woodward1989] [mayo1996] |
+| `phenomenon-specification` | raise an identified phenomenon to commitment `specified`: state its observables, its manifestations and its course over the declared quantities of the target | each observable is an expression over the declared quantities of the target, and the manifestations restate the identified behavior [craver2013] |
+| `phenomenon-derivation` | state a derived consequence as a phenomenon of the target, whose evidential status is derived or predicted | the phenomenon restates the consequence over observables of the target, and its evidential status is derived or predicted |
 
 ## Distinctions
+
+- **Detection, specification and derivation of a phenomenon differ in their source.** Detection infers a phenomenon from data. Specification states a phenomenon already identified over the declared quantities of the target, so that the questions about it become definite; the mechanistic sciences characterize a phenomenon in this way before they build a schema of its mechanism [craver2013]. Derivation states as a phenomenon a consequence of a model or of the admitted laws, whose evidential status is then derived or predicted, and which a later detection may establish. ^phenomenon-sources
 
 - **Design and execution differ in their output.** Experimental design outputs a design, judged before any datum exists by its possible outcomes. Observation, measurement and intervention execute a design, and output data.
 - **Experimental design and method design differ in their task.** An experimental design obtains data that discriminate the rival answers to a question. A method obtains the answer itself, by computation or by construction, such as an algorithm that enumerates the fixed points of a network. A method that runs on a model is executed by [simulation](model-analysis.md), which takes a model and a design. Each activity outputs its own kinds of design: `experimental-design` the kinds `experiment` and `simulation-run`, and `method-design` the kind `method`. The [partition by output type](epistemic-activities.md#^families) files method design in this family, since its output is a design, although its execution need not reach the target.
@@ -63,6 +69,7 @@ The fields that record the outcome of detection and the observation map of an in
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
 - [bogen1988] ◐ [Bogen & Woodward, "Saving the phenomena", *Philosophical Review* 97(3), 303–352, 1988](https://doi.org/10.2307/2185445)
+- [craver2013] ◐ [Craver & Darden, *In Search of Mechanisms: Discoveries across the Life Sciences*, University of Chicago Press, 2013](https://press.uchicago.edu/ucp/books/book/chicago/I/bo16123713.html); the features of a manifestation and the five kinds of conditions and byproducts cited from standard knowledge
 - [fisher1935] ◐ [Fisher, *The Design of Experiments*, Oliver and Boyd, 1935](https://en.wikipedia.org/wiki/The_Design_of_Experiments); randomization, replication and blocking as principles of design, checked through secondary summaries
 - [hacking1983] ◐ [Hacking, *Representing and Intervening: Introductory Topics in the Philosophy of Natural Science*, Cambridge University Press, 1983](https://doi.org/10.1017/CBO9780511814563)
 - [knuth1997] ○ Knuth, *The Art of Computer Programming*, vol. 1, *Fundamental Algorithms*, 3rd ed., Addison-Wesley, 1997, §1.1; the finiteness, the definiteness, the inputs, the outputs and the effectiveness of an algorithm

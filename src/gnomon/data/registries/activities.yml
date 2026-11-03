@@ -76,6 +76,31 @@ activities:
     norm: norm.question-selection
     mode: non-inferential
     context: discovery
+  - id: question-revision
+    family: problem-posing
+    inputs:
+      - question
+      - {types: [target-claim, verdict], optional: true}
+    output: question
+    norm: norm.question-revision
+    mode: non-inferential
+    context: discovery
+  - id: question-generation
+    family: problem-posing
+    inputs:
+      - question
+    output: question
+    norm: norm.question-generation
+    mode: deductive
+    context: discovery
+  - id: problem-decomposition
+    family: problem-posing
+    inputs:
+      - problem
+    output: problem
+    norm: norm.problem-decomposition
+    mode: non-inferential
+    context: discovery
   - id: explicit-definition
     family: conceptual-activities
     inputs:
@@ -174,6 +199,24 @@ activities:
     norm: norm.phenomenon-detection
     mode: inductive
     context: justification
+  - id: phenomenon-specification
+    family: empirical-activities
+    inputs:
+      - identified-subject
+      - target-specification
+    output: phenomenon
+    norm: norm.phenomenon-specification
+    mode: non-inferential
+    context: discovery
+  - id: phenomenon-derivation
+    family: empirical-activities
+    inputs:
+      - consequence
+      - target-specification
+    output: phenomenon
+    norm: norm.phenomenon-derivation
+    mode: non-inferential
+    context: discovery
   - id: delimitation
     family: model-building
     inputs:
@@ -232,6 +275,15 @@ activities:
     output: model
     norm: norm.decomposition-localization
     mode: abductive
+    context: discovery
+  - id: model-assembly
+    family: model-building
+    inputs:
+      - target-specification
+      - admitted-laws
+    output: model
+    norm: norm.model-assembly
+    mode: non-inferential
     context: discovery
   - id: model-analogy
     family: model-building
@@ -320,6 +372,14 @@ activities:
     norm: norm.model-prediction
     mode: deductive
     context: justification
+  - id: consequence-comparison
+    family: model-analysis
+    inputs:
+      - {type: consequence, several: true}
+    output: consequence
+    norm: norm.consequence-comparison
+    mode: deductive
+    context: justification
   - id: abduction
     family: target-inference
     inputs:
@@ -363,6 +423,15 @@ activities:
     norm: norm.transfer-to-target
     mode: deductive
     context: justification
+  - id: result-retrieval
+    family: target-inference
+    inputs:
+      - question
+      - {type: target-claim, attitude: [accepted]}
+    output: target-claim
+    norm: norm.result-retrieval
+    mode: non-inferential
+    context: discovery
   - id: testing
     family: evaluation
     inputs:

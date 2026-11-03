@@ -30,6 +30,7 @@ The activities of this family output a target specification, admitted laws, a [m
 | `idealization` | `model` | `model` | non-inferential | discovery |
 | `de-idealization` | `model` | `model` | deductive | justification |
 | `decomposition-localization` | `phenomenon`, `target-specification` | `model` | abductive | discovery |
+| `model-assembly` | `target-specification`, `admitted-laws` | `model` | non-inferential | discovery |
 | `model-analogy` | `model` (source) | `model` | analogical | discovery |
 | `formalization` | `model` | `model` | non-inferential | both |
 | `fitting` | `model`, `data` | `model` | inductive | justification |
@@ -47,6 +48,7 @@ The activities of this family output a target specification, admitted laws, a [m
 | `idealization` | introduce a deliberate distortion into the model | the motive is stated, and the condition of its kind holds: a Galilean idealization, introduced for tractability, can be removed; a minimalist idealization, kept because the omitted factors make no difference to the phenomenon, omits only such factors [mcmullin1985] [weisberg2007] |
 | `de-idealization` | remove an idealization from the model, or correct for it | a correction to the idealized result is known, so the idealization is `controlled`, and each conclusion is shown to be stable under that correction or is corrected [mcmullin1985] [knuuttila2019] |
 | `decomposition-localization` | divide the behavior of the target into activities, and assign each activity to a part | each component of the model maps onto a constituent of the target or onto a declared admissible part, as the [explanatory mapping](../../vocabulary/regularities/mechanism-and-mechanistic-model.md#^mechanistic-model-test) requires [bechtel1993] [craver2006] |
+| `model-assembly` | assemble a model from the declared target and its admitted laws, without a phenomenon to explain | every law of the model is an admitted law or is derived from admitted laws, and every bearer of the model is declared by the target or defined from its declarations [giere1988] |
 | `model-analogy` | carry the structure of a source model over to the domain of the target | the mapping preserves the relations relevant to the phenomenon, and no known difference defeats the transfer [hesse1966] [bartha2010] |
 | `formalization` | state each term and relation of a verbal model as a quantity, a set or an equation | every symbol resolves to a declaration, under the [expression language](../../../specification/expressions.md) |
 | `fitting` | estimate the parameters of a model from data | the estimator and the uncertainty of each estimate are stated, and each fitted parameter carries the warrant `fitted` [kennedyohagan2001] |
@@ -54,6 +56,8 @@ The activities of this family output a target specification, admitted laws, a [m
 | `keying` | state a map between a side of a model and a side of its target: an observation operator, a map of units, a map of aggregation or a qualitative abstraction | the key states its kind, a domain on the side of the model, a codomain on the side of the target, an expression over the symbols of its domain or a pointer to the procedure that computes the map, and a version |
 
 ## Distinctions
+
+- **Assembly and decomposition-localization build a model from different starting points.** Decomposition-localization starts from a phenomenon and divides its behavior among parts [bechtel1993]. Assembly starts from the declared target and its admitted laws, as a model is built from the general principles of a theory [giere1988], so that a phenomenon can later be derived from the model rather than presupposed by it. ^model-assembly
 
 - **The norm of delimitation ranges over answer types.** Candidate answers are produced after delimitation, so a norm stated over them cannot be checked when the target is specified. The answer types of a question exist as soon as its slots are typed.
 - **Background appraisal and transfer share their output and differ in their norm.** Appraisal admits laws warranted for the class of the target, each with its warrant. Transfer admits laws warranted for another class, and its norm requires evidence that the supporting mechanism is shared [steel2008].
@@ -79,6 +83,7 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [cartwright1989] ◐ [Cartwright, *Nature's Capacities and Their Measurement*, Clarendon Press, 1989](https://doi.org/10.1093/0198235070.001.0001)
 - [craver2006] ◐ [Craver, "When mechanistic models explain", *Synthese* 153(3), 355–376, 2006](https://doi.org/10.1007/s11229-006-9097-x); checked through the abstract
 - [friggnguyen2020] ◐ [Frigg & Nguyen, *Modelling Nature: An Opinionated Introduction to Scientific Representation*, Synthese Library 427, Springer, 2020](https://doi.org/10.1007/978-3-030-45153-0); denotation, exemplification, key and imputation
+- [giere1988] ◐ [Giere, *Explaining Science: A Cognitive Approach*, University of Chicago Press, 1988](https://press.uchicago.edu/ucp/books/book/chicago/E/bo3622319.html); theoretical hypotheses assert a similarity between a model and a real system
 - [hamblin1958] ◐ [Hamblin, "Questions", *Australasian Journal of Philosophy* 36(3), 159–168, 1958](https://doi.org/10.1080/00048405885200211); the answers to a question form an exhaustive set of mutually exclusive possibilities, checked through secondary summaries
 - [hesse1966] ◐ [Hesse, *Models and Analogies in Science*, University of Notre Dame Press, 1966](https://philpapers.org/rec/REMAA); revised edition of the Sheed and Ward edition, London, 1963
 - [jones2005] ◐ [Jones, "Idealization and abstraction: a framework", in Jones & Cartwright (eds.), *Idealization XII: Correcting the Model. Idealization and Abstraction in the Sciences*, Poznań Studies in the Philosophy of the Sciences and the Humanities 86, Rodopi, 173–217, 2005](https://philportal.de/records/kug/EBP9789401202732)

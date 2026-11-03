@@ -25,6 +25,7 @@ The activities of this family output a claim about the target, of the product ty
 | `analogical-inference` | `model` (source), `phenomenon` | `target-claim` | analogical | discovery |
 | `causal-inference` | `data`, `model` | `target-claim` | inductive | both |
 | `transfer-to-target` | `consequence`, `binding` | `target-claim` | deductive | justification |
+| `result-retrieval` | `question`, `target-claim` (accepted) | `target-claim` | non-inferential | discovery |
 
 ## Norms
 
@@ -35,10 +36,13 @@ The activities of this family output a claim about the target, of the product ty
 | `analogical-inference` | carry a property of a source model over to the target along a mapping | the similarities are relevant to the transferred property, and the known differences are not [bartha2010] |
 | `causal-inference` | infer a causal structure or the size of an effect from data and causal assumptions | the effect is identifiable: the stated assumptions and the data determine the target quantity uniquely [pearl2009] [spirtes2000] |
 | `transfer-to-target` | carry a consequence of a model, through a feature pair of a binding, to a claim about the target | the consequence bears on a feature that a pair of the binding carries onto the target, the conditions of the consequence lie within the domain over which the binding asserts its pairs, and the claim states the imputed feature that the pair yields: through its key for a computed pair, through its argument for an argued pair |
+| `result-retrieval` | take an answer accepted for another question as a candidate answer to this one | the accepted claim has the answer type of the question, and its domain covers the domain of the question |
 
 On the account of its originator, abduction is the only logical operation that introduces a new idea [peirce1934].
 
 ## Distinctions
+
+- **Retrieval proposes a candidate that the inquiry already holds.** An answer accepted for another question can answer this one when its claim has the answer type of this question and its domain covers this domain. The retrieved candidate is still assessed against this question, since its acceptance was judged against the other. ^result-retrieval
 
 - **Abduction outputs a candidate, and inference to the best explanation outputs a verdict.** Abduction generates a hypothesis and licenses its pursuit. [Inference to the best explanation](evaluation.md) selects among rival hypotheses and licenses acceptance, so it belongs to evaluation.
 - **Induction and causal inference differ in their assumptions.** Induction extends a regularity. Causal inference also requires assumptions about the causal structure, such as the assumption that no hidden common cause exists. Only under these assumptions does a causal conclusion follow from correlations [pearl2009] [spirtes2000].

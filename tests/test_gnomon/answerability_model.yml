@@ -39,6 +39,8 @@ activities:
      norm: "every declared constituent and every shared variable occurs in at least one admissible answer type of the question"}
   - {id: formalization, condition: definiteness, reason: it resolves the symbols of a model,
      norm: "every symbol resolves to a declaration"}
+  - {id: phenomenon-specification, condition: definiteness, reason: it raises a phenomenon to commitment specified,
+     norm: "each observable is an expression over the declared quantities of the target"}
   - {id: question-formulation, condition: answer type, reason: it types the answer space,
      norm: "the answer space is typed, and the presuppositions of the question are stated"}
   - {id: delimitation, condition: answer type, reason: it fixes the extent through the target,
@@ -75,6 +77,10 @@ activities:
      norm: "each objection is named with its ground"}
   - {id: admissibility-check, condition: candidates, reason: it applies the admissibility tests that make up the condition,
      norm: "each admissibility test is applied to the declared specifications, with its evidence"}
+  - {id: model-assembly, condition: candidates, reason: it builds a candidate model from the target and its admitted laws,
+     norm: "every law of the model is an admitted law or is derived from admitted laws"}
+  - {id: result-retrieval, condition: candidates, reason: it proposes an accepted result as a candidate,
+     norm: "the accepted claim has the answer type of the question"}
   - {id: experimental-design, condition: discrimination, reason: its outcomes must discriminate the rivals,
      norm: "the possible outcomes discriminate the rival answers to the question: each rival predicts a different outcome"}
   - {id: derivation, condition: discrimination, reason: it gives the consequences of one candidate,
@@ -85,6 +91,8 @@ activities:
      norm: "the values are derived from the model under the stated conditions of the target"}
   - {id: thought-experiment, condition: discrimination, reason: it gives the consequences of one candidate,
      norm: "the conclusion follows by an argument from the premises of the scenario"}
+  - {id: consequence-comparison, condition: discrimination, reason: it states where the consequences of rival candidates differ,
+     norm: "the consequences are derived under one set of conditions"}
   - {id: experimental-design, condition: access, reason: its output, a design, fixes the procedure that obtains the quantity,
      norm: "the possible outcomes discriminate the rival answers to the question"}
   - {id: method-design, condition: access, reason: its output, a method, fixes the procedure that obtains the answer,

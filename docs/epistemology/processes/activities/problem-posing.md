@@ -27,6 +27,9 @@ The activities of this family output the objects that open an inquiry: a problem
 | `subject-identification` | `question-schema` | `identified-subject` | non-inferential | discovery |
 | `question-decomposition` | `question` | `question` | deductive | discovery |
 | `question-selection` | `question` (several) | `question` | non-inferential | discovery |
+| `question-revision` | `question`, `target-claim \| verdict` (optional) | `question` | non-inferential | discovery |
+| `question-generation` | `question` | `question` | deductive | discovery |
+| `problem-decomposition` | `problem` | `problem` | non-inferential | discovery |
 
 ## Norms
 
@@ -38,12 +41,18 @@ The activities of this family output the objects that open an inquiry: a problem
 | `subject-identification` | fix the referent of each slot of a question schema by a definite description and pointers | each slot refers to a record at commitment `identified` |
 | `question-decomposition` | replace a question by subquestions whose answers help to answer it [hintikka1999] [hintikka2007] | erotetic implication holds: under the premises, each subquestion has a true direct answer if the question has one, and each answer to a subquestion narrows the answers to the question [wisniewski2013] |
 | `question-selection` | choose the question to pursue among several candidates | each candidate is stated with its significance, its tractability and its dependence on other questions, and the candidates are compared on these grounds [laudan1977] |
+| `question-revision` | revise a question after a corrective answer or a refuted condition: narrow the conditions that it holds fixed or its contrast, or change the fields of its epistemic task | the revised question serves the problem of the original, and none of its presuppositions is one that a corrective answer or a refuted condition has denied [vanfraassen1980] |
+| `question-generation` | pose the question whose answer would establish or refute an open condition of another question, linked to it by `enables` | a direct answer of the generated question establishes or refutes the condition [hintikka1999] |
+| `problem-decomposition` | divide a problem into subproblems, each with a demand of its own | the demands of the subproblems, once met, jointly meet the demand of the problem [polya1945] [simon1962] |
 
 ## Distinctions
 
 - **Problematization and constraint specification share their output and differ in their norm.** Problematization states the demand and the constraints visible in a source. Constraint specification adds conditions that follow from background laws. These conditions may remain implicit in the statement of a problem [nickles1981].
 - **Question formulation and subject identification differ in commitment.** Formulation types each slot of the question by a placeholder. Identification fixes the referent of each slot. The quantities of each referent are declared later, by [delimitation](model-building.md).
 - **Decomposition and selection both output a question, under different norms.** The norm of decomposition is a logical relation between a question and its subquestions. The norm of selection compares candidate questions on pragmatic grounds, since problems differ in importance [laudan1977].
+- **Generation and decomposition of a question differ in the object that the new question serves.** A subquestion of a decomposition helps to answer its question, by erotetic implication. A generated question serves a condition for obtaining an answer to another question: its answer supplies a premise that the inquiry needs, as an interrogative move does [hintikka1999], and the two questions are linked by `enables`. ^question-generation
+- **Revision changes a question after a failure of its presuppositions.** A corrective answer shows that the question has no true direct answer, since one of its presuppositions is false [vanfraassen1980], and a refuted condition shows that it cannot be answered as posed. The revised question keeps the problem that it serves and drops the denied presupposition. ^question-revision
+- **A problem divides when its demand does.** A problem whose demand is a conjunction, or whose obstacles fall into nearly independent parts, divides into subproblems [polya1945]. The division succeeds when meeting the demands of the parts meets the demand of the whole, as in a nearly decomposable system, whose parts interact more within than between them [simon1962]. ^problem-decomposition
 
 ## Relations to the method
 
@@ -63,5 +72,7 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [hintikka2007] ◐ [Hintikka, *Socratic Epistemology: Explorations of Knowledge-Seeking by Questioning*, Cambridge University Press, 2007](https://doi.org/10.1017/CBO9780511619298)
 - [laudan1977] ◐ [Laudan, *Progress and Its Problems: Towards a Theory of Scientific Growth*, University of California Press, 1977](https://www.ucpress.edu/books/progress-and-its-problems/paper); empirical and conceptual problems, and the weighting of problems by importance, checked through the publisher page and secondary summaries
 - [nickles1981] ◐ [Nickles, "What is a problem that we may solve it?", *Synthese* 47(1), 85–118, 1981](https://doi.org/10.1007/BF01064267); §V, p. 109: a problem consists of the constraints on the solution plus the demand that a solution be found
+- [polya1945] ◐ Pólya, *How to Solve It: A New Aspect of Mathematical Method*, Princeton University Press, 1945; the heuristics "decomposing and recombining" and "auxiliary problem"
+- [simon1962] ◐ [Simon, "The architecture of complexity", *Proceedings of the American Philosophical Society* 106(6), 467–482, 1962](https://www.jstor.org/stable/985254); near-decomposable systems, whose subsystems interact more within than between them
 - [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5: topic, contrast class and relevance relation of a why-question
 - [wisniewski2013] ◐ [Wiśniewski, *Questions, Inferences, and Scenarios*, Studies in Logic 46, College Publications, 2013](https://philpapers.org/rec/WINQIA); erotetic implication of a question by a question and a set of declarative sentences
