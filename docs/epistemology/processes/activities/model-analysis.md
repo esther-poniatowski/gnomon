@@ -40,6 +40,8 @@ The activities of this family output a **consequence**: a statement derived from
 
 ## Distinctions
 
+- **A consequence is recorded where it is stated.** A consequence takes one of four records: a law that a model or a background marks `derived`, the block of model properties of an answer, or a settled proof obligation of an assessment. A derivation that serves another result therefore names, as its output, the model or the background whose derived law states the consequence. ^consequence-records
+
 - **A comparison of consequences locates a crucial test.** Rival hypotheses are discriminated by an experiment whose possible outcomes exclude some of them [platt1964]. A comparison of their consequences under one set of conditions states the conditions under which the rivals differ, so it precedes the design of such an experiment, and it equally compares a derived law with the result of a simulation of the same model. ^consequence-comparison
 
 - **A candidate claim is derived from together with the admitted laws.** A hypothesis yields a consequence only together with auxiliary assumptions [duhem1906]. A derivation that takes a candidate claim therefore takes the admitted laws as its auxiliary premises, and its consequence stays conditional on both, so that the consequence can serve to test the candidate. ^derivation-from-candidate

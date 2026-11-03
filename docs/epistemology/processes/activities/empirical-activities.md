@@ -46,6 +46,8 @@ The activities of this family output a [design](../../../specification/design.md
 
 ## Distinctions
 
+- **Measurement is an empirical activity, distinct from a measure in the sense of measure theory.** A measurement assigns numbers to a property of the target by a map that preserves its empirical relations, and the representational theory of measurement states when such a map exists and how unique it is [krantz1971]. A measure, in measure theory, is a countably additive function on the subsets of a set, an object of mathematics that the operator `measures` builds in an expression. The records reserve the noun "measure" for the second sense, and name the first by "measurement" or, for a function that compares values, by "metric". ^measurement-and-measure
+
 - **Detection, specification and derivation of a phenomenon differ in their source.** Detection infers a phenomenon from data. Specification states a phenomenon already identified over the declared quantities of the target, so that the questions about it become definite; the mechanistic sciences characterize a phenomenon in this way before they build a schema of its mechanism [craver2013]. Derivation states as a phenomenon a consequence of a model or of the admitted laws, whose evidential status is then derived or predicted, and which a later detection may establish. ^phenomenon-sources
 
 - **Design and execution differ in their output.** Experimental design outputs a design, judged before any datum exists by its possible outcomes. Observation, measurement and intervention execute a design, and output data.

@@ -166,7 +166,7 @@ RECORDS: dict[str, dict[str, Any]] = {
     "prob.geometry": {"type": "problem"},
     "quest.geometry": {"type": "question", "request": "one"},
     "system.networks": {"type": "target-system"},
-    "phen.readout": {"type": "phenomenon"},
+    "phen.readout": {"type": "phenomenon", "data": [{"pointer": "doi:10.1000/recordings"}]},
     "ans.kernel": {"type": "answer"},
     "mod.kernel": {"type": "model"},
 }
@@ -251,13 +251,13 @@ def test_an_output_type_other_than_the_activity_output_is_reported() -> None:
 def test_an_input_reference_of_the_wrong_kind_or_to_nothing_is_reported() -> None:
     wrong = planted(derive={"inputs": [{"type": "model", "ref": "phen.readout"}]})
     assert texts(itinerary_problems(served(wrong), RECORDS)) == [
-        "steps.derive: phen.readout holds data or phenomenon or knowledge-state-change, not model"
+        "steps.derive: phen.readout holds data or phenomenon, not model"
     ]
     absent = planted(derive={"inputs": [{"type": "model", "ref": "mod.missing"}]})
     assert texts(itinerary_problems(served(absent), RECORDS)) == ["steps.derive: mod.missing is neither a step nor a record"]
     answer = planted(derive={"inputs": [{"type": "model", "ref": "ans.kernel"}]})
     assert texts(itinerary_problems(served(answer), RECORDS)) == [
-        "steps.derive: ans.kernel holds consequence or target-claim or explanation or knowledge-state-change, not model"
+        "steps.derive: ans.kernel holds target-claim, not model"
     ]
 
 
@@ -290,7 +290,7 @@ def test_an_output_whose_value_the_activity_does_not_produce_is_reported() -> No
 def test_an_output_reference_of_the_wrong_kind_is_reported() -> None:
     itinerary = planted(pose={"output": {"type": "problem", "ref": "quest.geometry"}})
     assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
-        "steps.pose: quest.geometry holds question or knowledge-state-change, not problem"
+        "steps.pose: quest.geometry holds question, not problem"
     ]
 
 
@@ -369,9 +369,8 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
         ],
     }
     assert texts(itinerary_problems(served(itinerary), records)) == [
-        "steps.select: quest.schema holds question-schema or knowledge-state-change, not question",
-        "steps.predict: system.a holds identified-subject or classification or measurement-procedure"
-        " or knowledge-state-change, not target-specification",
+        "steps.select: quest.schema holds question-schema, not question",
+        "steps.predict: system.a holds identified-subject, not target-specification",
         "steps.judge: ans.a is entertained, and testing takes a target-claim held as hypothesized",
         "steps.judge: phen.none is neither a step nor a record",
     ]

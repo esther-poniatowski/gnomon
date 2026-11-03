@@ -241,8 +241,9 @@ def question_form(question: Mapping[str, Any]) -> str:
 def holds(record: Mapping[str, Any], entry: Mapping[str, Any]) -> bool:
     """Return whether ``record``, in its present state, holds a product of the type of ``entry``.
 
-    The kind of the record must be listed, and its state must satisfy the ``when`` mapping: the
-    level of commitment, the form of a question, or the status.
+    The kind of the record must be listed, its state must satisfy the ``when`` mapping (the level
+    of commitment, the form of a question, or the status), and, when the entry names the fields
+    that hold the type, one of them must be filled.
 
     >>> holds({"type": "question", "subject": {"phenomenon": {"placeholder": "observable"}}},
     ...       {"record": ["question"], "when": {"form": "schema"}})
@@ -250,6 +251,11 @@ def holds(record: Mapping[str, Any], entry: Mapping[str, Any]) -> bool:
     >>> holds({"type": "target-system", "commitment": "specified"},
     ...       {"record": ["target-system"], "when": {"commitment": ["identified"]}})
     False
+    >>> entry = {"record": ["model"], "fields": {"model": ["laws[].warrant=derived"]}}
+    >>> holds({"type": "model", "laws": [{"warrant": "posited"}]}, entry)
+    False
+    >>> holds({"type": "model", "laws": [{"warrant": "posited"}, {"warrant": "derived"}]}, entry)
+    True
     """
     kinds = entry.get("record")
     if not isinstance(kinds, list) or record.get("type") not in kinds:
@@ -261,7 +267,32 @@ def holds(record: Mapping[str, Any], entry: Mapping[str, Any]) -> bool:
         return False
     if "form" in when and question_form(record) != when["form"]:
         return False
-    return True
+    fields = entry.get("fields")
+    paths = fields.get(str(record.get("type")), []) if isinstance(fields, Mapping) else fields or []
+    return not paths or any(filled(record, path) for path in paths)
+
+
+def filled(record: Mapping[str, Any], path: str) -> bool:
+    """Return whether a field path of the registry of product types holds content in ``record``.
+
+    A segment ending in ``[]`` ranges over the items of a list, and a final ``=value`` requires that
+    value.
+
+    >>> filled({"laws": [{"warrant": "derived"}]}, "laws[].warrant=derived")
+    True
+    >>> filled({"aim_block": {"explanation": {}}}, "aim_block.explanation"), filled({}, "data")
+    (False, False)
+    """
+    path, _, value = path.partition("=")
+    nodes: list[Any] = [record]
+    for segment in path.split("."):
+        name, many = (segment[:-2], True) if segment.endswith("[]") else (segment, False)
+        nodes = [node.get(name) for node in nodes if isinstance(node, Mapping)]
+        if many:
+            nodes = [item for node in nodes if isinstance(node, list) for item in node]
+    if value:
+        return any(node == value for node in nodes)
+    return any(node not in (None, "", [], {}) for node in nodes)
 
 
 def record_types(record: Mapping[str, Any], types: Mapping[str, Mapping[str, Any]]) -> list[str]:

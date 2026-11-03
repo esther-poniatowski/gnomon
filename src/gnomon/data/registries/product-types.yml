@@ -9,8 +9,11 @@
 # Each entry states its class, as the inventory of epistemic objects sorts the types
 # (docs/epistemology/objects/status/epistemic-objects.md): `claim`, `construct`, `evaluative`,
 # `unclassed` (a type not yet classed), or `other`.
-# Each entry names the record kinds that hold a product of the type, and the field that holds it
-# when only a part of a record does. Its status states how far the records cover the type:
+# Each entry names the record kinds that hold a product of the type, and, under `fields`, the
+# fields that hold it when only a part of a record does: a list for every listed kind, or a mapping
+# from a kind to its list. A field path writes `[]` after a list and may end in `=value`, so that
+# `laws[].warrant=derived` reads a law marked derived. A record holds the type only when one of its
+# fields is filled. Its status states how far the records cover the type:
 #   - `exists`: a record kind holds the type in full;
 #   - `partial`: a record holds part of the type, and the condition names the missing part;
 #   - `to-create`: no record kind holds the type, so an itinerary reaches it only as the output of a step.
@@ -20,8 +23,8 @@
 #   - `form`: `schema` when some subject slot of a question holds a placeholder or its request is
 #     not fixed, `question` when every slot names a record and the request is fixed;
 #   - `status`: the admitted statuses of the record.
-# The itinerary check computes the type of a referenced record from its kind and its state. A
-# `condition` states in words the part of the type that the fields of a record hold.
+# The itinerary check computes the type of a referenced record from its kind, its state and its
+# fields. A `note` states in words, for a reader, what the fields hold and what they still lack.
 
 id: registry.product-types
 type: product-type-registry
@@ -31,7 +34,7 @@ product_types:
     class: other
     record: external pointer
     status: exists
-    condition: "A pointer to a publication, a data set or an observation, held by the sources of a problem and the pointers of an identification."
+    note: "A pointer to a publication, a data set or an observation, held by the sources of a problem and the pointers of an identification."
   - id: problem
     class: other
     record: [problem]
@@ -58,14 +61,14 @@ product_types:
   - id: classification
     class: construct
     record: [target-system]
-    field_path: reference_class
+    fields: [reference_class]
     status: exists
   - id: measurement-procedure
     class: construct
     record: [target-system]
-    field_path: "variables[].scale, variables[].expression"
+    fields: ["variables[].scale", "variables[].expression"]
     status: partial
-    condition: "The scale and the defining expression of a quantity; the procedure that assigns its values has no field."
+    note: "The scale and the defining expression of a quantity; the procedure that assigns its values has no field."
   - id: design
     class: construct
     record: [design]
@@ -73,9 +76,9 @@ product_types:
   - id: data
     class: unclassed
     record: [phenomenon]
-    field_path: data
+    fields: [data]
     status: partial
-    condition: "Pointers to the data that establish the phenomenon; the data themselves stay outside the records."
+    note: "Pointers to the data that establish the phenomenon; the data themselves stay outside the records."
   - id: phenomenon
     class: unclassed
     record: [phenomenon]
@@ -103,10 +106,14 @@ product_types:
     status: exists
   - id: consequence
     class: claim
-    record: [answer, assessment]
-    field_path: "answer: aim_block.model_properties; assessment: obligations"
-    status: partial
-    condition: "The consequence or the counterexample that the block of model properties of an answer states, or a settled proof obligation. A consequence derived on the way to another result, and stated by no answer, has no record."
+    record: [answer, assessment, model, background]
+    fields:
+      answer: [aim_block.model_properties]
+      assessment: [obligations]
+      model: ["laws[].warrant=derived"]
+      background: ["laws[].warrant=derived"]
+    status: exists
+    note: "The consequence or the counterexample that the block of model properties of an answer states, a settled proof obligation, or a law that a model or a background marks derived."
   - id: target-claim
     class: claim
     record: [answer]
@@ -114,24 +121,24 @@ product_types:
   - id: verdict
     class: evaluative
     record: [assessment]
-    field_path: tests
+    fields: [tests]
     status: exists
   - id: credence
     class: evaluative
     record: [assessment]
-    field_path: credence
+    fields: [credence]
     status: exists
   - id: ranking
     class: evaluative
     record: [assessment]
-    field_path: "appraisal[].preferred_over"
+    fields: ["appraisal[].preferred_over"]
     status: exists
   - id: explanation
     class: claim
     record: [answer]
-    field_path: aim_block.explanation
+    fields: [aim_block.explanation]
     status: exists
-    condition: "An answer whose block of an explanation reads named dependences of its core as explanatory, by the requested relation."
+    note: "An answer whose block of an explanation reads named dependences of its core as explanatory, by the requested relation."
   - id: inter-theory-relation
     class: claim
     record: to-create
@@ -139,6 +146,6 @@ product_types:
   - id: knowledge-state-change
     class: other
     record: [problem, question, answer, assessment, target-system, phenomenon, background, model, binding, key]
-    field_path: status
+    fields: [status]
     status: partial
-    condition: "A change of the status of a record. A log of the revisions, with their grounds, is still to be created."
+    note: "A change of the status of a record, read for now from its present status; reading it as the change between two revisions, and a log of the revisions with their grounds, are still to be created."

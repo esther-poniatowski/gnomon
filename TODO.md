@@ -17,9 +17,9 @@ The records represent each act of an inquiry as the act is taken, so that the co
 		- [ ] give a question of explication a record form, since its explicandum is not a slot;
 		- [ ] develop a proof technique or an algorithm that gives access to a quantity, whose product the [record of a technique](docs/proposals/inquiry-records-round-2.md#record-of-a-technique) proposes; an algorithm is a design of kind `method`, and a proof technique waits on the decision of `derivation-framework` on reusable reasoning schemes.
 	- [ ] Make the [choice of the next act](docs/procedures/inquiry/next-act.md) computable on the records:
-		- [ ] make the types of records exact in the [registry of product types](src/gnomon/data/registries/product-types.yml): replace its prose conditions and its compound field paths by field paths that a program can read, and read the type `knowledge-state-change` from a change of the record status of each kind instead of its present state;
+		- [ ] read the type `knowledge-state-change` from a change of the status of a record between two revisions, instead of its present status, now that the [registry of product types](src/gnomon/data/registries/product-types.yml) states its fields;
 	- [ ] Decide whether an itinerary gains the constructors `branch` and `iterate` of the [proposals for research actions](docs/proposals/research-actions.md#constructors-of-operations), so that a step can state a branch or a fallback, which a sequence of steps cannot state.
-	- [ ] State requirements on leaf fields, so that a block with empty fields fails; require the field path of a product type in the itinerary check.
+	- [ ] State requirements on leaf fields, so that a block with empty fields fails.
 	- [ ] Give the three remaining slot types a placeholder (contrast, observable, condition), or reduce the closed list of slot types.
 	- [ ] Apply the itinerary corrections of the Mixture pilot:
 		- [ ] the checks of produced content, of the rationale and of revisions.

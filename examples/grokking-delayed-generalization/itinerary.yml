@@ -113,7 +113,7 @@ steps:
         ref: mod.grokking.effective-representation
     output:
       type: consequence
-      ref: ans.grokking.slow-structured-representation
+      ref: mod.grokking.effective-representation
     norm:
       test: norm.derivation
       verdict: pending
