@@ -223,6 +223,12 @@ vocabularies:
     - value: reported
     - value: predicted
     - value: derived
+    - value: absent
+      name: a closed search found no instance
+    - value: disproved
+      name: a counterexample or a contradiction is established
+    - value: undecided
+      name: the occurrence is an open question that the inquiry tracks
     data_model.kind:
     - value: instrument-model
     - value: background-simulation

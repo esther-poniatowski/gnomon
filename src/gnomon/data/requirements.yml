@@ -64,6 +64,10 @@ by_value:
     kind:
       experiment: [protocol]
       simulation-run: [protocol]
+  phenomenon:
+    evidential_status:
+      absent: [search.scope, search.procedure]
+      disproved: [search.counterexample]
 
 # The occurrence classes admitted by each category of phenomenon. A particular occurrence takes
 # the class of its one token. A structural property holds at each point of the course, so it takes

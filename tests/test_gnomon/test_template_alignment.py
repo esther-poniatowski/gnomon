@@ -355,19 +355,29 @@ def test_the_requirement_rows_of_a_note_are_the_registry_entries(
 def test_the_rows_required_for_a_kind_are_the_registry_entries_by_value(
     entry: str, note: str, header: Header, tpl: str, prefix: str
 ) -> None:
-    """A row required "for the kinds `a` and `b`" is one that `by_value` lists under each of those kinds."""
+    """A row required "for the kinds `a` and `b`", or "for the evidential status `a`", is one that
+    `by_value` lists under each of those values of its field."""
     paths = flatten(template(tpl))
-    documented: dict[str, list[str]] = {}
+    documented: dict[str, dict[str, list[str]]] = {}
     for line in table_lines(note, header):
         cells = [c.strip() for c in line.strip("|").split("|")]
-        if len(cells) > 1 and cells[1].lower().startswith("for the kind"):
+        named = re.match(r"for the (kinds?|evidential status(?:es)?) ", cells[1].lower()) if len(cells) > 1 else None
+        if named:
+            field = "kind" if named.group(1).startswith("kind") else "evidential_status"
             key = resolve(row_slugs(cells[0]), paths, prefix)
             assert key is not None, f"{note}: no key of {tpl} answers to the row {cells[0]!r}"
             for value in re.findall(r"`([a-z-]+)`", cells[1]):
-                documented.setdefault(value, []).append(key)
+                documented.setdefault(field, {}).setdefault(value, []).append(key)
     registry = yaml.safe_load((REGISTRY / "requirements.yml").read_text())
-    declared = ((registry.get("by_value") or {}).get(entry) or {}).get("kind") or {}
-    assert documented == declared, f"{note}: {documented} against {declared}"
+    declared = (registry.get("by_value") or {}).get(entry) or {}
+    # a row whose children are documented stands for them, so only the deepest rows are compared
+    leaves = {
+        field: {value: sorted(k for k in keys if not any(other.startswith(k + ".") for other in keys))
+                for value, keys in values.items()}
+        for field, values in documented.items()
+    }
+    expected = {field: {value: sorted(keys) for value, keys in values.items()} for field, values in declared.items()}
+    assert leaves == expected, f"{note}: {leaves} against {expected}"
 
 
 def test_the_status_pairs_of_the_specification_are_those_that_the_check_reads() -> None:

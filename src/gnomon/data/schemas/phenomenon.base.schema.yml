@@ -965,9 +965,48 @@ properties:
     - 'null'
     title: Evidential status
     description: established across data sets or methods · reported · predicted · derived within a model
+      · absent from a closed search · disproved · undecided
     examples:
     - gamma oscillations in V1, recorded across laboratories (established); a transition to chaos in mean-field
       theory (predicted); the stationary rate of a balanced network (derived)
+  search:
+    type:
+    - object
+    - 'null'
+    properties:
+      scope:
+        type:
+        - string
+        - 'null'
+        x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+        x-kind: text
+        x-comment: the region of the members, conditions and courses that the search covered
+        title: Scope
+        description: the region of the members, conditions and courses that the search covered
+      procedure:
+        type:
+        - string
+        - 'null'
+        x-template: '"THE PROCEDURES AND THE DATA SEARCHED, AND WHY THEY WOULD HAVE DETECTED THE BEHAVIOR"'
+        x-kind: markdown-line
+        title: Procedure
+        description: the procedures and the data searched, and why they would have detected the behavior
+          within the scope
+      counterexample:
+        type:
+        - string
+        - 'null'
+        x-template: RECORD-OR-POINTER
+        x-kind: label
+        title: Counterexample
+        description: the record or the publication that establishes the counterexample or the contradiction
+    x-comment: fill when the evidential status is absent or disproved
+    title: Search
+    description: the search behind a negative status, its scope and procedure for an absence, its counterexample
+      for a disproof
+    examples:
+    - the recordings of three laboratories across the full range of contrast, which would have shown a peak
+      of gamma power (absent)
   detection_criterion:
     x-blank: true
     type:

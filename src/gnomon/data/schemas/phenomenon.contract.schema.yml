@@ -247,7 +247,16 @@ properties:
     - reported
     - predicted
     - derived
+    - absent
+    - disproved
+    - undecided
     - null
+  search:
+    propertyNames:
+      enum:
+      - scope
+      - procedure
+      - counterexample
   detection_criterion:
     items:
       propertyNames:
@@ -327,6 +336,7 @@ propertyNames:
   - scope_over_instances
   - conditions_and_byproducts
   - evidential_status
+  - search
   - detection_criterion
   - data
   - data_model

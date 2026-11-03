@@ -114,7 +114,11 @@ conditions_and_byproducts:       # put a factor the question varies among the in
       expression: "EXPRESSION OVER DECLARED SYMBOLS"
       justification: "WHY THE BYPRODUCT FALLS OUTSIDE THE PHENOMENON"   # only content beyond the expression
 
-evidential_status:               # established | reported | predicted | derived
+evidential_status:               # established | reported | predicted | derived | absent (a closed search found no instance) | disproved (a counterexample or a contradiction is established) | undecided (the occurrence is an open question that the inquiry tracks)
+search:                          # fill when the evidential status is absent or disproved
+  scope: "EXPRESSION OVER DECLARED SYMBOLS"   # the region of the members, conditions and courses that the search covered
+  procedure: "THE PROCEDURES AND THE DATA SEARCHED, AND WHY THEY WOULD HAVE DETECTED THE BEHAVIOR"
+  counterexample: RECORD-OR-POINTER
 
 detection_criterion:             # conditions a candidate pattern must satisfy to count as established
   - name: "NAME OF THE TEST"

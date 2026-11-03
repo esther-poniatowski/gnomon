@@ -16,7 +16,7 @@ The records represent each act of an inquiry as the act is taken, so that the co
 	- [ ] Close the gaps of the type graph of activities, as the [choice of the next act](docs/procedures/inquiry/next-act.md) marks them in its map from conditions to activities and in its tables of acts:
 		- [ ] raise a phenomenon to commitment `specified`, and fill or revise the fields of the epistemic task;
 		- [ ] build a candidate model from a target specification and a background without a phenomenon, retrieve an accepted result as a candidate, and compare the consequences of several candidates;
-		- [ ] record a negative detection; turn a derived consequence into a phenomenon;
+		- [ ] turn a derived consequence into a phenomenon;
 		- [ ] revise a question after a corrective answer, narrow the conditions that it holds fixed or its contrast, and decompose a problem into subproblems; give a question of explication a record form, since its explicandum is not a slot;
 		- [ ] develop a proof technique or an algorithm that gives access to a quantity, whose product the [record of a technique](docs/proposals/inquiry-records-round-2.md#record-of-a-technique) proposes.
 	- [ ] Make the [choice of the next act](docs/procedures/inquiry/next-act.md) computable on the records:

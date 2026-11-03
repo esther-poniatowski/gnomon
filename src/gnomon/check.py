@@ -153,6 +153,7 @@ class _Registries:
     by_aim: dict[str, dict[str, list]] = field(default_factory=c.requirements_by_aim)
     by_commitment: dict[str, dict[str, list[str]]] = field(default_factory=c.requirements_by_commitment)
     by_presence: dict[str, Any] = field(default_factory=c.requirements_by_presence)
+    by_value: dict[str, Any] = field(default_factory=c.requirements_by_value)
     blocks: dict[str, list[str]] = field(default_factory=c.block_requirements)
     kinds: list[str] = field(default_factory=c.record_kinds)
     slot_types: frozenset[str] = field(default_factory=c.placeholder_types)
@@ -259,12 +260,14 @@ def _against_target(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 
 def _requirements(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
-    """The specifications that every record of a kind carries, and those of its commitment."""
+    """The specifications that every record of a kind carries, those that a value of a field
+    imposes, and those of its commitment."""
     kind = str(record.get("type"))
     if kind not in ctx.registries.kinds:
         return []
     produced = ctx.produced.get(kind, set())
     found = c.unmet_general(record, c.always_required(kind), produced)
+    found += c.unmet_by_value(record, ctx.registries.by_value, produced)
     if kind in ("target-system", "phenomenon"):
         found += c.unmet_commitment(record, ctx.registries.by_commitment, produced)
     return found

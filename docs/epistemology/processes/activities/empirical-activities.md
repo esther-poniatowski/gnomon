@@ -38,7 +38,7 @@ The activities of this family output a [design](../../../specification/design.md
 | `observation` | register features of the target through an instrument, or assemble existing recordings of it | the instrument is reliable, as shown independently of the claim under test [hacking1983] |
 | `measurement` | assign values to a property by a map that preserves its empirical relations | a representation theorem guarantees that the map exists, a uniqueness theorem fixes its admissible transformations, and the scale type is stated [krantz1971]; the outcome is inferred from the reading through a stated model of the measuring process [tal2013] |
 | `intervention` | set a variable of the target, and record the response | the intervention changes the response only through the manipulated variable, and is independent of the other causes of the response [woodward2003] [hacking1983] |
-| `phenomenon-detection` | infer from data a behavior of the target, robust across procedures | the feature is stable across independent procedures, replications included, and confounders and artefacts are controlled [bogen1988] [woodward1989] |
+| `phenomenon-detection` | infer from data a behavior of the target, robust across procedures, or its absence from a closed search | the feature is stable across independent procedures, replications included, and confounders and artefacts are controlled; an absence is inferred only from a search whose procedures would probably have detected the feature within its stated scope [bogen1988] [woodward1989] [mayo1996] |
 
 ## Distinctions
 
