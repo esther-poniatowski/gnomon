@@ -1037,6 +1037,69 @@ def unbound_outputs(
     return []
 
 
+#: The types of feature pair that each target status of a factor admits, when the route runs on a
+#: model, as the status pairs of the answer specification (docs/specification/answer.md#^status-pairs)
+#: state them; an alignment test keeps the two equal.
+STATUS_PAIRS: Mapping[str, frozenset[str]] = {
+    "denoting": frozenset({"quantity", "component"}),
+    "coarse-graining": frozenset({"pattern", "regime"}),
+    "limit-construct": frozenset({"invariance-class"}),
+    "structural-constraint": frozenset({"invariance-class", "modal-profile"}),
+}
+
+
+def mismatched_status_pairs(
+    answer: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return every factor whose pair does not carry its target status onto the target.
+
+    When the route runs on a model, the binding carries each factor onto the target through a pair
+    of the type that its status requires, and a limit construct cites, as a ground with the role
+    `warrant`, the argued pair that places the target in the class of its limit. A route on the
+    target needs no pair, since a factor stated over the symbols of the target denotes by declaration.
+
+    >>> records = {"mod.a.m": {"type": "model"},
+    ...            "bind.a.b": {"feature_pairs": [{"id": "p", "type": "quantity"}]}}
+    >>> answer = {"route": {"runs_on": ["mod.a.m"]},
+    ...           "aim_block": {"explanation": {"factors": [
+    ...               {"id": "f", "target_status": "limit-construct", "pair": "bind.a.b.p"}]}}}
+    >>> [f.text for f in mismatched_status_pairs(answer, records)]  # doctest: +NORMALIZE_WHITESPACE
+    ['factors.f: the status limit-construct requires a pair of type invariance-class, and bind.a.b.p is of type quantity',
+     'factors.f: no ground with the role warrant cites the pair bind.a.b.p that places the target in the class of the limit']
+    """
+    on_model = any((records.get(str(r)) or {}).get("type") == "model"
+                   for r in (answer.get("route") or {}).get("runs_on") or [])
+    if not on_model:
+        return []
+    warrants = {g.get("record") for g in answer.get("grounds") or []
+                if isinstance(g, Mapping) and g.get("role") == "warrant"}
+    found = []
+    for index, factor in enumerate(at(answer, "aim_block.explanation.factors") or []):
+        if not isinstance(factor, Mapping) or factor.get("target_status") not in STATUS_PAIRS:
+            continue
+        status, ref = factor["target_status"], factor.get("pair")
+        admitted = STATUS_PAIRS[status]
+        where = ("aim_block", "explanation", "factors", Entry(index, factor), "pair")
+        name = factor.get("id") or index
+        if not isinstance(ref, str):
+            found.append(finding(rules.COMPLETENESS_MISMATCHED_STATUS_PAIR,
+                                 f"factors.{name}: the status {status} requires a pair of type"
+                                 f" {' or '.join(sorted(admitted))}, and the factor names none", *where))
+            continue
+        record, unit = split_reference(ref) or (ref, "")
+        pair = next((p for p in (records.get(record) or {}).get("feature_pairs") or []
+                     if isinstance(p, Mapping) and p.get("id") == unit), None)
+        if pair is not None and pair.get("type") not in admitted:
+            found.append(finding(rules.COMPLETENESS_MISMATCHED_STATUS_PAIR,
+                                 f"factors.{name}: the status {status} requires a pair of type"
+                                 f" {' or '.join(sorted(admitted))}, and {ref} is of type {pair.get('type')}", *where))
+        if status == "limit-construct" and ref not in warrants:
+            found.append(finding(rules.COMPLETENESS_MISMATCHED_STATUS_PAIR,
+                                 f"factors.{name}: no ground with the role warrant cites the pair {ref}"
+                                 " that places the target in the class of the limit", *where))
+    return found
+
+
 def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> list[Finding]:
     """Return the link a question asks for and the answer does not supply.
 

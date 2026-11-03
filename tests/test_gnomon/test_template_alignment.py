@@ -370,6 +370,22 @@ def test_the_rows_required_for_a_kind_are_the_registry_entries_by_value(
     assert documented == declared, f"{note}: {documented} against {declared}"
 
 
+def test_the_status_pairs_of_the_specification_are_those_that_the_check_reads() -> None:
+    """Each target status admits, in the check, the types of feature pair that the specification lists."""
+    from gnomon.completeness import STATUS_PAIRS
+
+    registry = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text(encoding="utf-8"))
+    types = {e["value"] for e in registry["vocabularies"]["binding"]["feature_pairs.type"]}
+    text = (DOCS / "specification" / "answer.md").read_text(encoding="utf-8")
+    block = text[text.index("^status-pairs"):].split("\n\n", 1)[0]
+    documented = {}
+    for line in block.splitlines()[1:]:
+        tokens = re.findall(r"`([^`]+)`", line)
+        if tokens:
+            documented[tokens[0]] = frozenset(t for t in tokens[1:] if t in types)
+    assert documented == dict(STATUS_PAIRS)
+
+
 def test_the_rows_required_for_a_root_or_a_derived_model_are_the_registry_entries_by_presence() -> None:
     """A row required "for a root model" is one that the absence of parents imposes, and a row required
     "for a derived model" one that their presence imposes; the field of the parents is not counted."""

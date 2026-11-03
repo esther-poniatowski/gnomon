@@ -29,8 +29,8 @@ grounds:
     removable: unknown
   - id: timescale-separation
     role: warrant
-    content: "The networks of the question fit their decoder much faster than their representation learns, which places them in the regime of the limit decoder-step."
-    record: bind.grokking.effective-representation.delay-scale
+    content: "The networks of the question fit their decoder much faster than their representation learns, as the order of the two crossings shows, which places them in the class of the limit decoder-step, where the delay depends on the rate of the representation alone."
+    record: bind.grokking.effective-representation.decoder-limit
   - id: relaxation-law
     role: warrant
     content: "The representation relaxes along the modes of its Hessian."
@@ -92,7 +92,7 @@ aim_block:
         separates: [no_delay]
         procedure: "The decoder first memorizes the training sample; the slower positive mode of the representation then builds geometry consistent with the task and lowers the held-out loss."
         target_status: limit-construct
-        pair: bind.grokking.effective-representation.delay-scale
+        pair: bind.grokking.effective-representation.decoder-limit
       - id: nonzero-mode
         name: "nonzero mode of representation learning"
         factor: structural-property

@@ -268,6 +268,10 @@ COMPLETENESS_PREMATURE_APPRAISAL = _rule(
     "completeness/premature-appraisal",
     "An assessment appraises an answer that has not passed admissibility and warrant.",
 )
+COMPLETENESS_MISMATCHED_STATUS_PAIR = _rule(
+    "completeness/mismatched-status-pair",
+    "A factor of an explanation names no pair of the type that its target status requires.",
+)
 COMPLETENESS_UNBOUND_OUTPUTS = _rule(
     "completeness/unbound-outputs",
     "An answer on a model cites no binding, although its question names outputs to match.",

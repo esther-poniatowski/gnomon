@@ -25,6 +25,11 @@ feature_pairs:
     mode: argued
     exemplified: "delay_m"
     imputed: phen.grokking.delayed_generalization.delay
+  - id: decoder-limit
+    type: invariance-class
+    mode: argued
+    exemplified: "depends_on(delay_m, 1 / (lambda3 * eta_rep))"
+    imputed: phen.grokking.delayed_generalization.crossing_order
   - id: learning-regime
     type: regime
     mode: argued

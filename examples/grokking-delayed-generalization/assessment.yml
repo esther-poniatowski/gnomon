@@ -36,7 +36,7 @@ tests:
       evidence: "Within the effective theory, the spectrum of the Hessian yields the timescale of the delay mathematically, and the link law connects that timescale to the held-out loss."
     target-status:
       verdict: pass
-      evidence: "The slow relaxation holds only in the limit of an infinitesimal decoder step, so it is a limit construct, placed in that regime by the argued pair delay-scale; the nonzero mode describes the representation at a coarse level, carried onto the positive delay by the pair learning-regime."
+      evidence: "The slow relaxation holds only in the limit of an infinitesimal decoder step, so it is a limit construct, placed in the class of that limit by the argued pair decoder-limit, of type invariance-class; the nonzero mode describes the representation at a coarse level, carried onto the positive delay by the pair learning-regime."
     admissible-explanans:
       verdict: pending
       evidence: "The question leaves the admissible level open, so no bound decides whether an account at the level of the representation is admissible."
