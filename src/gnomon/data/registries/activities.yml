@@ -79,7 +79,7 @@ activities:
   - id: explicit-definition
     family: conceptual-activities
     inputs:
-      - concept
+      - {types: [concept, problem]}
     output: concept
     norm: norm.explicit-definition
     mode: deductive
@@ -87,7 +87,7 @@ activities:
   - id: explication
     family: conceptual-activities
     inputs:
-      - concept
+      - {types: [concept, problem]}
     output: concept
     norm: norm.explication
     mode: non-inferential
@@ -280,7 +280,8 @@ activities:
   - id: derivation
     family: model-analysis
     inputs:
-      - {types: [model, admitted-laws]}
+      - {types: [model, admitted-laws, target-claim]}
+      - {type: admitted-laws, optional: true}
     output: consequence
     norm: norm.derivation
     mode: deductive
@@ -463,7 +464,7 @@ activities:
   - id: belief-revision
     family: revision
     inputs:
-      - {types: [verdict, credence, ranking]}
+      - {types: [verdict, credence, ranking, consequence]}
     output: knowledge-state-change
     norm: norm.belief-revision
     mode: non-inferential

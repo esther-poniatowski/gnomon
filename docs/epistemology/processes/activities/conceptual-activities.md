@@ -20,8 +20,8 @@ The activities of this family output a concept, a measurement procedure that app
 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
-| `explicit-definition` | `concept` | `concept` | deductive | both |
-| `explication` | `concept` | `concept` | non-inferential | discovery |
+| `explicit-definition` | `concept \| problem` | `concept` | deductive | both |
+| `explication` | `concept \| problem` | `concept` | non-inferential | discovery |
 | `operationalization` | `concept` | `measurement-procedure` | non-inferential | both |
 | `classification` | `concept`, `data` | `classification` | inductive | both |
 | `concept-revision` | `concept`, `phenomenon` | `concept` | abductive | discovery |
@@ -38,6 +38,7 @@ The activities of this family output a concept, a measurement procedure that app
 
 ## Distinctions
 
+- **A first concept is formed from an explicandum of the problem.** A problem may use a term without a definition, with a pointer to the use that fixes its sense, as the [explicanda of a problem](../../objects/problem/epistemic-problem.md#^problem-triple) do. An explication or an explicit definition then takes the problem as input and outputs the first concept record of the term; a later one takes that concept record. Both steps fall under one norm, since the norm judges the concept produced against the use that the explicandum fixes. ^first-concept
 - **Explicit definition and explication differ in their norm.** A definition must be eliminable, so it adds no content. An explication may depart from the explicandum, as long as the explicatum is similar enough to serve the same uses and is more fruitful [carnap1950_logical].
 - **The strict and the partial form of operationalization fix a meaning to different extents.** The strict form identifies a concept with one set of operations, so two procedures define two concepts [bridgman1927]. The partial form fixes how the concept applies under test conditions only, and leaves its meaning open elsewhere [carnap1936].
 - **Operationalization outputs a procedure, and measurement outputs data.** Operationalization is judged before any value is recorded, by the scale stated by its procedure. [Measurement](empirical-activities.md) executes that procedure on a target.

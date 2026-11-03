@@ -42,7 +42,7 @@ An activity type is specified by its **signature**: ^activity-criterion
 - the **mode** of inference performed by the operation;
 - the **context** of the activity: discovery or justification.
 
-Two activity types are distinct when they differ in their output type or in their norm. When two procedures share both, they are two methods for one activity type, such as two estimators implementing [fitting](model-building.md).
+Two activity types are distinct when they differ in their output type or in their norm. When two procedures share both, they are two methods for one activity type, such as two estimators implementing [fitting](model-building.md). A difference of inputs alone makes no new activity either: an activity may take alternative inputs under its one norm, such as an explication that takes a concept or the explicandum that a problem names. The activities are therefore primitive, each defined by its output and its norm, and the composition of activities belongs to the structure of an itinerary, not to the definition of an activity. ^primitive-activities
 
 The family notes write the inputs of an activity in three forms:
 

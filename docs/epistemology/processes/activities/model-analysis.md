@@ -20,7 +20,7 @@ The activities of this family output a **consequence**: a statement derived from
 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
-| `derivation` | `model \| admitted-laws` | `consequence` | deductive | justification |
+| `derivation` | `model \| admitted-laws \| target-claim`, `admitted-laws` (optional) | `consequence` | deductive | justification |
 | `simulation` | `model`, `design` | `consequence` | deductive | justification |
 | `robustness-analysis` | `model` (family) | `consequence` | deductive | justification |
 | `thought-experiment` | `model` | `consequence` | deductive | discovery |
@@ -30,7 +30,7 @@ The activities of this family output a **consequence**: a statement derived from
 
 | Activity | Operation | The norm passes when |
 | --- | --- | --- |
-| `derivation` | deduce a statement from the laws and assumptions of a model, or from the admitted background laws | each deductive step is valid |
+| `derivation` | deduce a statement from the laws and assumptions of a model, from the admitted background laws, or from a candidate claim together with the admitted laws | each deductive step is valid |
 | `simulation` | compute the trajectories of the model numerically, under the conditions fixed by the design | verification holds: the code solves the equations of the model [winsberg2010] |
 | `robustness-analysis` | derive one result from several models that share a core and differ in their auxiliary assumptions | the result holds across models whose auxiliary assumptions are independent [levins1966] [weisberg2006] |
 | `thought-experiment` | reason about an imagined scenario that is not carried out | the conclusion follows by an argument from the premises of the scenario [norton1996] |
@@ -38,6 +38,7 @@ The activities of this family output a **consequence**: a statement derived from
 
 ## Distinctions
 
+- **A candidate claim is derived from together with the admitted laws.** A hypothesis yields a consequence only together with auxiliary assumptions [duhem1906]. A derivation that takes a candidate claim therefore takes the admitted laws as its auxiliary premises, and its consequence stays conditional on both, so that the consequence can serve to test the candidate. ^derivation-from-candidate
 - **Verification belongs to simulation, and validation to evaluation.** Verification compares two [levels of a computation](../../vocabulary/change/computation.md), the algorithm of the code and the function fixed by the model, without reference to the target. Therefore, verification stays within this family. [Validation](evaluation.md) asks whether the model is adequate to its target for a purpose.
 - **The norm of a thought experiment is contested.** On the argument view adopted here, a thought experiment can be reconstructed as an argument from the premises of its scenario [norton1996]. On a rival account, some scenarios give access to a law without such an argument [brown1991].
 - **Prediction as an activity differs from prediction as an aim.** The activity derives expected values from a model. The activity serves inquiries of every aim, for instance to test an explanation. The [aim of prediction](../../objects/task/epistemic-aim.md) makes a warranted expectation the product required of the whole inquiry. The two differ in their product type: the activity outputs a `consequence`, which holds of the model, whereas the aim requires a `target-claim`, as the [product type `target-claim`](epistemic-activities.md#^target-claim-type) states. The [transfer to the target](epistemic-activities.md#^binding-step) carries the consequence to a claim about the target.
@@ -54,6 +55,7 @@ The activities of this family output a **consequence**: a statement derived from
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
 - [brown1991] ◐ [Brown, *The Laboratory of the Mind: Thought Experiments in the Natural Sciences*, Routledge, 1991](https://www.cambridge.org/core/journals/philosophy-of-science/article/abs/james-robert-brown-the-laboratory-of-the-mind-thought-experiments-in-the-natural-sciences-new-york-routledge-1991-xi-175-pp-4995-cloth/0A84321B5BCDAE346E84A3B9B27B57D6); checked through a published review
+- [duhem1906] ◐ Duhem, *La théorie physique : son objet et sa structure*, Chevalier et Rivière, 1906; 2nd ed., Marcel Rivière, 1914, translated as *The Aim and Structure of Physical Theory*, Princeton University Press, 1954; a hypothesis is tested only together with auxiliary hypotheses; p. 187 of the translation, checked through the [SEP entry on underdetermination](https://plato.stanford.edu/entries/scientific-underdetermination/)
 - [giere1988] ◐ [Giere, *Explaining Science: A Cognitive Approach*, University of Chicago Press, 1988](https://press.uchicago.edu/ucp/books/book/chicago/E/bo3622319.html); theoretical hypotheses assert a similarity between a model and a real system
 - [levins1966] ◐ [Levins, "The strategy of model building in population biology", *American Scientist* 54(4), 421–431, 1966](https://www.zoology.ubc.ca/let/pdfs/Levins1966.pdf); robust theorems, p. 423
 - [norton1996] ◐ [Norton, "Are thought experiments just what you thought?", *Canadian Journal of Philosophy* 26(3), 333–366, 1996](https://doi.org/10.1080/00455091.1996.10717457)

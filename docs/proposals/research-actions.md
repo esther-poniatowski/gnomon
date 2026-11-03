@@ -9,6 +9,9 @@ aliases:
 
 The goal [`research-actions`](../../TODO.md) decides whether the activities of the registry of activities are primitive, or derive from a smaller set of constructors.
 
+> [!IMPORTANT] Decision of 2026-11-03
+> The activities stay primitive, each with one norm, and an activity may take alternative inputs under that norm, a limited form of multiple dispatch, as the [signature of an activity type](../epistemology/processes/activities/epistemic-activities.md#^primitive-activities) states. The constructors `branch` and `iterate` remain candidates for the structure of an itinerary, under the goal `inquiry-records-round-2`, and the moves remain candidates for the goal `relation-registry`.
+
 ## Multiple dispatch
 
 An operation need not belong to one of its arguments. A generic function holds several methods, and the method that applies is selected on the types of all its arguments together. Several operations on research content have no single owner:

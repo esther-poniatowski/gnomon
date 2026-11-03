@@ -19,7 +19,7 @@ The activities of this family output a **change of knowledge state**: a change o
 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
-| `belief-revision` | `verdict \| credence \| ranking` | `knowledge-state-change` | non-inferential | justification |
+| `belief-revision` | `verdict \| credence \| ranking \| consequence` | `knowledge-state-change` | non-inferential | justification |
 | `theory-change` | `verdict` (several) | `knowledge-state-change` | non-inferential | justification |
 | `framework-revision` | `verdict` (several) | `knowledge-state-change` | non-inferential | both |
 
@@ -27,12 +27,13 @@ The activities of this family output a **change of knowledge state**: a change o
 
 | Activity | Operation | The norm passes when |
 | --- | --- | --- |
-| `belief-revision` | expand, contract or revise the accepted knowledge $K$, once the researcher accepts or retracts a claim in response to a verdict, a credence or a ranking | the change is minimal: it satisfies the postulates of base revision, the axioms that a rational change of a belief base must satisfy, among them that a claim of the base is given up only when it contributes to the conflict being removed [hansson1999] |
+| `belief-revision` | expand, contract or revise the accepted knowledge $K$, once the researcher accepts or retracts a claim in response to a verdict, a credence, a ranking, or a derivation whose norm has passed | the change is minimal: it satisfies the postulates of base revision, the axioms that a rational change of a belief base must satisfy, among them that a claim of the base is given up only when it contributes to the conflict being removed [hansson1999] |
 | `theory-change` | replace a theory, or modify the auxiliary hypotheses that protect its core, in response to anomalies | the successor explains the previous successes of its predecessor, predicts novel facts, and has some of these predictions corroborated [lakatos1970] |
 | `framework-revision` | replace the framework that fixes how questions are posed and answered | the external question of adopting the framework is settled as a practical decision, by stated pragmatic criteria [carnap1950_empiricism] |
 
 ## Distinctions
 
+- **A derived consequence is accepted without a verdict.** A consequence obtained by a derivation whose norm has passed follows from its premises, so the researcher can accept it into $K$ on the strength of that derivation alone, and no test produces a verdict on it. The accepted consequence stays conditional on the premises of the derivation, and is exposed to the laws among them that are not derived, as the [exposure rule](../../objects/knowledge/grounds-and-dependence.md#^weakest-link) states. ^accepted-consequence
 - **The norm of belief revision is base revision.** The postulates of Alchourrón, Gärdenfors and Makinson (AGM) govern belief sets, closed under logical consequence [alchourron1985] [gardenfors1988]. The accepted knowledge $K$ of an inquiry is a belief base: a finite set of accepted claims, not closed under consequence. The method therefore adopts the postulates of base revision, which keep apart a claim accepted for itself and a claim that only follows from accepted claims [hansson1999].
 - **Revision of beliefs and change of theory differ in their unit.** Belief revision changes a set of claims in response to one input claim. Theory change concerns structured wholes, such as a hard core protected by a belt of auxiliary hypotheses [lakatos1970]. Theory change has no accepted set of postulates comparable to those of belief revision.
 - **The norm of theory change is contested.** The norm adopted here requires corroborated novel predictions [lakatos1970]. On a rival account, the successor must resolve some recognized anomaly and preserve much of the problem-solving ability of its predecessor [kuhn1962]. On another, the new conceptual system must have greater explanatory coherence than the old one [thagard1992].
