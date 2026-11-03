@@ -49,7 +49,7 @@ route:
   family_fidelity:               # per-member (one comparison per member, each of which must pass) | ensemble (one comparison of the ensemble of the family); fill for a family of models only
   pointer: "POINTER TO THE DERIVATION, THE CODE OR THE DATA"   # the internal steps of a derivation stay in the derivation
 
-domain: "EXPRESSION OVER DECLARED SYMBOLS"   # for a deductive route, derived from the grounds with the roles `assumption` and `condition` and from the range of each idealization; for a route on a model, within the domain of comparison of the binding
+domain: "EXPRESSION OVER DECLARED SYMBOLS"   # for a deductive route, implied by the grounds with the roles `assumption` and `condition` and by the range of each idealization, as the scope test judges; for a route on a model, within the domain of comparison of the binding
 
 variant: SYMBOL                  # symbol of the target variant this answer accounts for; omit when the answer covers every member of the class
 

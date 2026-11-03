@@ -361,8 +361,8 @@ properties:
     - 'null'
     x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
     x-kind: text
-    x-comment: for a deductive route, derived from the grounds with the roles `assumption` and `condition`
-      and from the range of each idealization; for a route on a model, within the domain of comparison
+    x-comment: for a deductive route, implied by the grounds with the roles `assumption` and `condition`
+      and by the range of each idealization, as the scope test judges; for a route on a model, within the domain of comparison
       of the binding
     title: Domain
     description: the systems and the conditions over which the claim holds
