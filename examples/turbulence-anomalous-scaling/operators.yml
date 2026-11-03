@@ -37,4 +37,4 @@ operators:
     values: bools
 
 maturity:
-  operators.regions.values: open
+  operators.regions.values: open  # outside the type language: a set of regions of a space

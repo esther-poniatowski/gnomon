@@ -23,7 +23,7 @@ operators:
     values:
 
 maturity:
-  operators.equilibrium.signature: open
-  operators.population_component.signature: open
-  operators.community_jacobian.signature: open
-  operators.community_jacobian.values: open
+  operators.equilibrium.signature: open  # outside the type language: the member state has a different type in each variant
+  operators.population_component.signature: open  # outside the type language: the member state has a different type in each variant
+  operators.community_jacobian.signature: open  # outside the type language: the member state has a different type in each variant
+  operators.community_jacobian.values: open  # outside the type language: the member state has a different type in each variant

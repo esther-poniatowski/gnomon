@@ -191,11 +191,11 @@ external_systems:
     reading: "The task distribution supplies the two disjoint samples."
 
 maturity:
-  variables.z.values: open
-  parameters.algorithmic.values: open
-  parameters.Arch.values: open
-  parameters.opt.values: open
-  parameters.proto.values: open
-  parameters.data.values: open
-  parameters.opt_state.values: open
-  parameters.z0.values: open
+  variables.z.values: open  # outside the type language: heterogeneous computational objects without a common structural type
+  parameters.algorithmic.values: open  # outside the type language: heterogeneous computational objects without a common structural type
+  parameters.Arch.values: open  # outside the type language: heterogeneous computational objects without a common structural type
+  parameters.opt.values: open  # outside the type language: heterogeneous computational objects without a common structural type
+  parameters.proto.values: open  # outside the type language: heterogeneous computational objects without a common structural type
+  parameters.data.values: open  # outside the type language: heterogeneous computational objects without a common structural type
+  parameters.opt_state.values: open  # outside the type language: heterogeneous computational objects without a common structural type
+  parameters.z0.values: open  # outside the type language: heterogeneous computational objects without a common structural type

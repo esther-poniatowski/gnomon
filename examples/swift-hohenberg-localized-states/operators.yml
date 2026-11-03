@@ -19,4 +19,4 @@ operators:
     values:
 
 maturity:
-  operators.powerset.values: open
+  operators.powerset.values: open  # outside the type language: a set of subsets

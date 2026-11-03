@@ -13,4 +13,4 @@ operators:
     values:
 
 maturity:
-  operators.sequence.values: open
+  operators.sequence.values: open  # outside the type language: an ordered sequence of identities paired with times

@@ -113,6 +113,6 @@ data:
   - pointer: "gibbs2024: https://onlinelibrary.wiley.com/doi/10.1111/ele.14458"
 
 maturity:
-  observables.Xstar.values: open
-  observables.J.values: open
-  scope_over_instances.quantification: open
+  observables.Xstar.values: open  # outside the type language: the member state has a different type in each variant
+  observables.J.values: open  # outside the type language: the member state has a different type in each variant
+  scope_over_instances.quantification: open  # pending decision: the quantification over the members is not chosen

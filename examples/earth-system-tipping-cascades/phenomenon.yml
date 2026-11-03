@@ -138,8 +138,8 @@ data:
   - pointer: "wunderling2024: A synthesis of the evidence on interactions among tipping elements and on nonlinear mediators: https://doi.org/10.5194/esd-15-41-2024"
 
 maturity:                        # sequence law and overshoot effect not yet established
-  observables.Z.values: open
-  manifestations.features.values: open
-  manifestations.features.observed: open
+  observables.Z.values: open  # outside the type language: a marked sequence of transitions
+  manifestations.features.values: open  # outside the type language: an effect on a law of sequences
+  manifestations.features.observed: open  # unknown result: not observed
   scope_over_instances: provisional
-  detection_criterion.expression: open
+  detection_criterion.expression: open  # pending decision: the robustness criterion is not yet formalized

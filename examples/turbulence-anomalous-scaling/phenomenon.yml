@@ -149,5 +149,5 @@ data:
   - pointer: "buaria2026: https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/turbulence-intermittency-and-velocity-gradients/83110A5131F55CF9B890415703AA7770"
 
 maturity:                        # exponent values and their universality not yet established
-  manifestations.features.observed: open
-  scope_over_instances.quantification: open
+  manifestations.features.observed: open  # unknown result: not observed
+  scope_over_instances.quantification: open  # unknown result: universality across the families of forcing is not established

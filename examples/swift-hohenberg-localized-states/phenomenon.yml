@@ -76,4 +76,4 @@ data:
   - pointer: "beck2009: https://doi.org/10.1137/080713306"
 
 maturity:
-  manifestations.features.observed: open
+  manifestations.features.observed: open  # unknown result: not observed

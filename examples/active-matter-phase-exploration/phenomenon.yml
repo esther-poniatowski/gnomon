@@ -221,15 +221,15 @@ detection_criterion:             # the phase-separating diagnostic is the produc
 data: []
 
 maturity:                        # phase catalogue and its characterization remain the product of the inquiry
-  statement: open
-  category: open
-  manifestations.form: open
-  manifestations.expression: open
-  manifestations.features.values: open
-  manifestations.features.observed: open
-  observables.diag.values: open
-  observables.diag.expression: open
-  observables.diag_lattice.values: open
-  observables.diag_lattice.expression: open
-  detection_criterion.expression: open
-  evidential_status: open
+  statement: open  # unknown result: produced by the exploratory inquiry
+  category: open  # unknown result: produced by the exploratory inquiry
+  manifestations.form: open  # unknown result: produced by the exploratory inquiry
+  manifestations.expression: open  # unknown result: produced by the exploratory inquiry
+  manifestations.features.values: open  # unknown result: produced by the exploratory inquiry
+  manifestations.features.observed: open  # unknown result: produced by the exploratory inquiry
+  observables.diag.values: open  # unknown result: produced by the exploratory inquiry
+  observables.diag.expression: open  # unknown result: produced by the exploratory inquiry
+  observables.diag_lattice.values: open  # unknown result: produced by the exploratory inquiry
+  observables.diag_lattice.expression: open  # unknown result: produced by the exploratory inquiry
+  detection_criterion.expression: open  # unknown result: produced by the exploratory inquiry
+  evidential_status: open  # unknown result: produced by the exploratory inquiry

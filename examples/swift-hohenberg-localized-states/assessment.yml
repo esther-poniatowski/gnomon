@@ -60,4 +60,4 @@ tests:
 obligations: []
 appraisal: []
 maturity:
-  tests.warrant.robustness: open
+  tests.warrant.robustness: open  # unknown result: no check on an enlarged domain

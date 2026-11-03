@@ -67,4 +67,4 @@ obligations: []
 appraisal: []                    # the candidate fails admissibility and warrant, so its preferred virtue is not appraised
 
 maturity:
-  tests.admissibility.admissible-explanans: open
+  tests.admissibility.admissible-explanans: open  # pending decision: the question leaves the admissible level open

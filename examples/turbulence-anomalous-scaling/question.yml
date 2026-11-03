@@ -69,4 +69,4 @@ virtues:
     justification: "An account can reproduce the exponents and still hide the mechanism that produces the departure from self-similarity. The mechanism must therefore be shown."
 
 maturity:
-  task.required_accuracy.outputs_to_match.tolerance.bound: open
+  task.required_accuracy.outputs_to_match.tolerance.bound: open  # pending decision: the tolerance is not chosen

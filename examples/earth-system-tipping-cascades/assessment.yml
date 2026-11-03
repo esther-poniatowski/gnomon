@@ -57,4 +57,4 @@ tests:
 obligations: []
 appraisal: []
 maturity:
-  tests.warrant.fidelity: open
+  tests.warrant.fidelity: open  # pending decision: the tolerances of the question are not chosen

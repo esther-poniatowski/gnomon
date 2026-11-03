@@ -51,4 +51,4 @@ virtues:
     justification: "A cascade propagates along the interactions among subsystems, and the question requires the answer to reproduce their architecture. An answer whose transmission pathway is not inspectable cannot be checked against that architecture."
 
 maturity:
-  task.required_accuracy.outputs_to_match.tolerance.bound: open
+  task.required_accuracy.outputs_to_match.tolerance.bound: open  # pending decision: the tolerance is not chosen

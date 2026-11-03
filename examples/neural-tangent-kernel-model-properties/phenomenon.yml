@@ -160,5 +160,5 @@ data:
   - pointer: "chizat2019: https://papers.nips.cc/paper/8559-on-lazy-training-in-differentiable-programming.pdf"
 
 maturity:
-  manifestations.features.observed: open
-  scope_over_instances.quantification: open
+  manifestations.features.observed: open  # unknown result: not observed
+  scope_over_instances.quantification: open  # pending decision: the quantification over widths is not chosen

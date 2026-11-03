@@ -61,4 +61,4 @@ aim_block:
         value:
 
 maturity:
-  aim_block.description.values.value: open
+  aim_block.description.values.value: open  # unknown result: the intervals of stability are not reported

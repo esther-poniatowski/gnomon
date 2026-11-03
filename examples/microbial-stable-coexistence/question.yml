@@ -51,5 +51,5 @@ task:
 virtues: []
 
 maturity:
-  task.proof_obligations.necessity.consequent: open
-  task.proof_obligations.sufficiency.antecedent: open
+  task.proof_obligations.necessity.consequent: open  # unknown result: the sought constraint
+  task.proof_obligations.sufficiency.antecedent: open  # unknown result: the sought constraint

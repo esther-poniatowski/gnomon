@@ -29,8 +29,8 @@ operators:
     values: reals
 
 maturity:
-  operators.powerset.values: open
-  operators.representation.signature: open
-  operators.representation.values: open
-  operators.representation_quality.signature: open
-  operators.effective_loss.signature: open
+  operators.powerset.values: open  # outside the type language: a set of subsets
+  operators.representation.signature: open  # outside the type language: heterogeneous computational objects without a common structural type
+  operators.representation.values: open  # outside the type language: heterogeneous computational objects without a common structural type
+  operators.representation_quality.signature: open  # outside the type language: heterogeneous computational objects without a common structural type
+  operators.effective_loss.signature: open  # outside the type language: heterogeneous computational objects without a common structural type

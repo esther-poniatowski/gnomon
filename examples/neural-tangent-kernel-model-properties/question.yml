@@ -49,4 +49,4 @@ task:
 virtues: []
 
 maturity:
-  task.proof_obligations.antecedent: open
+  task.proof_obligations.antecedent: open  # unknown result: the sought assumptions

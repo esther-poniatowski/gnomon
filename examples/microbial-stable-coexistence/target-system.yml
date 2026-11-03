@@ -157,4 +157,4 @@ external_systems:
 
 maturity:
   parameters.theta.values: open  # member specification has a different type in each variant
-  external_systems.class: open
+  external_systems.class: open  # pending decision: no class is chosen beyond the supply vector

@@ -26,5 +26,5 @@ operators:
     values: "maps(q, S)"
 
 maturity:
-  operators.regions.values: open
-  operators.sites.values: open
+  operators.regions.values: open  # outside the type language: a set of regions of a given geometry
+  operators.sites.values: open  # outside the type language: a set of lattice sites of a given geometry

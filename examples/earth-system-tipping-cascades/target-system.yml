@@ -173,12 +173,12 @@ external_systems:
     reading: "The regime indicator is read off instruments and proxies, so the criterion for a transition depends on the quantities that these measurements resolve."
 
 maturity:
-  variables.z.values: open
-  variables.u.values: open
-  variables.ind.values: open
-  variables.eta.values: open
-  parameters.s.values: open
-  parameters.intern.values: open
-  parameters.emit.values: open
-  parameters.detect.values: open
-  external_systems.class: open
+  variables.z.values: open  # unknown result: the physical state space is not known
+  variables.u.values: open  # unknown result: the physical signal of each interaction is not known
+  variables.ind.values: open  # unknown result: the physical indicators are not known
+  variables.eta.values: open  # unknown result: the internal variability is not characterized
+  parameters.s.values: open  # unknown result: the physical law is not known
+  parameters.intern.values: open  # unknown result: the physical law is not known
+  parameters.emit.values: open  # unknown result: the physical law is not known
+  parameters.detect.values: open  # pending decision: the detection rule is not chosen
+  external_systems.class: open  # pending decision: no scenario generator is chosen
