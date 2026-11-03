@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-11-02
+revised: 2026-11-03
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Answers, models and bindings
@@ -16,7 +16,7 @@ The [audits of the model design](https://github.com/esther-poniatowski/gnomon/bl
 
 ## Decision
 
-**Questions.** The full atomic question, its aim together with its parameters, fixes the type of its direct answers. A research question is a graph of atomic questions, linked by the [links between questions](../epistemology/objects/question/question.md#^linked-questions). A question may stay *open*, with no answer type yet, while its answer space is not formed.
+**Questions.** The full atomic question, its aim together with its parameters, fixes the type of its direct answers. A research question is usually composed of atomic questions, linked by the [links between questions](../epistemology/objects/question/question.md#^linked-questions), and each candidate answer answers one atomic question. A question may stay *open*, with no answer type yet, while its answer space is not formed.
 
 **Aims.** The aims form an open [registry](../epistemology/objects/task/epistemic-aim.md#^aim-registry), in which each entry states its [answer conditions](../epistemology/objects/task/epistemic-aim.md#^answer-conditions). Only the aims of answer content and of conceptual work generate an aim block. A change of accepted claims is not an aim, since it is the effect of accepting an answer. Understanding is not an aim either, since it is a dimension of assessment or a declared use of an answer.
 
@@ -30,7 +30,7 @@ The [audits of the model design](https://github.com/esther-poniatowski/gnomon/bl
 
 **Keys.** Observation operators, maps of units and of aggregation, and qualitative abstractions are shared, versioned records, which several bindings reference. The fields are specified in the [key record](../specification/key.md#^key-record).
 
-**Phenomena.** A phenomenon owns the [estimator of its explanandum variables](../epistemology/objects/subject/phenomenon.md#^phenomenon-owns-estimation), and it [declares the facts on which its data depend](../epistemology/objects/subject/phenomenon.md#^data-model-declarations). A constant of a bound is a [feature of the manifestation](../specification/phenomenon.md#^bound-constants) that states the bound.
+**Phenomena.** A phenomenon owns the [estimator of its observables](../epistemology/objects/subject/phenomenon.md#^phenomenon-owns-estimation), and it [declares the facts on which its data depend](../epistemology/objects/subject/phenomenon.md#^data-model-declarations). A constant of a bound is a [feature of the manifestation](../specification/phenomenon.md#^bound-constants) that states the bound.
 
 **Comparisons.** A comparison is computed, not recorded, from a binding, a version of the data, and the metric and the tolerance of the question. A revised binding is a new version and leaves earlier comparisons unchanged. The facts that a comparison reports are specified with the [computed comparison](../epistemology/objects/answer/model-and-binding.md#^comparison-reports), and the tests that read them in the [conditions of satisfaction](../epistemology/objects/answer/satisfaction-conditions.md#^fidelity-reads-reports).
 

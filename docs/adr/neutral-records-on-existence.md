@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-30
-revised: 2026-10-30
+revised: 2026-11-03
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Neutral records on existence
@@ -34,7 +34,7 @@ A claim of a record is read literally, and it can be false of its object. A decl
 | Option | Benefit | Reason it is not taken alone |
 | ------ | ------- | ---------------------------- |
 | Realist records: a field states that each declared constituent or law exists independently | A reader knows the commitment of each record | An empiricist cannot fill the field truthfully, and no check would use it |
-| Empiricist records: claims about unobservables are recorded as instruments of prediction only | No metaphysical commitment enters a record | A claim then cannot be false of its object, and the tests of fidelity and warrant lose their object |
+| Instrumentalist records: claims about unobservables are recorded as instruments of prediction only | No metaphysical commitment enters a record | A claim then cannot be false of its object, and the tests of fidelity and warrant lose their object |
 | A status field per item, filled by the author with a stance of their choice | Each author records their own stance | The field yields no verdict and fragments the records of one inquiry across stances, against the [grounds for a shared field](shared-field-grounds.md) |
 | Records neutral on existence, literal on claims, and representational in every content | Every reading of the philosophy of science except instrumentalism fits the same records, and every check keeps its object | A reader who needs the stance of an author finds it outside the records, in the prose of the inquiry |
 

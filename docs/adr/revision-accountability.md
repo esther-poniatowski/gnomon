@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-10-29
+revised: 2026-11-03
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Revision accountability
@@ -37,7 +37,7 @@ The mechanism that realizes these requirements remains open. The goal `status-pr
 | Leave revisions to the history of git | No field records a revision | A dependent keeps resting on a withdrawn premise, and nothing reports it |
 | Record each episode of revision as a record of its own, and move retired records to an archive, as the retired design notes (commit 9e138e2) proposed | One record gathers the reason, the priority and the progress of an episode | Deferred to the goal `status-propagation`, which first decides which changes mark the dependents. An archive of earlier records must not become the store of past versions that the [decision on versions](versions-and-history.md#^git-keeps-history) excludes |
 | Write the provenance of each revision in the data model of W3C PROV [moreau2013] | A standard model separates the revised entity, the activity and the agent, and names a revision `wasRevisionOf` | A second record of provenance would restate the steps of the itinerary and the relation `revises`, which the [rule of one source](one-source-per-unit.md#^one-source) excludes. PROV serves as a reference model for the mechanism, not as its format |
-| Type each revision by the operations of belief revision: expansion, contraction and revision [agm1985] | Each revision carries a kind with a defined effect | The postulates assume a theory closed under logical consequence, which the records never form, since no tool infers. The operations stay candidate kinds of revision under the goal `status-propagation` |
+| Type each revision by the operations of belief revision: expansion, contraction and revision [alchourron1985] | Each revision carries a kind with a defined effect | The postulates of Alchourrón, Gärdenfors and Makinson assume a theory closed under logical consequence, which the records never form, since no tool infers. The postulates of base revision, which the [revision activities](../epistemology/processes/activities/revision.md) adopt for the accepted knowledge, need no closure [hansson1999], but they type only a change of the accepted claims, whereas a revision may change a question, a specification or a design that no one accepts as true. The operations stay candidate kinds for the revisions of accepted claims, under the goal `status-propagation` |
 | Expire a unit at a fixed date | Staleness requires no relation | A unit becomes stale when a unit upstream of it is revised, as the [decision on the knowledge interchange format](knowledge-interchange-format.md#^not-transferred) states for the field `stale_after` of the Open Knowledge Format |
 | Traceability and flagged propagation, as requirements on a mechanism decided later | Each later mechanism meets fixed requirements | Until the mechanism exists, the requirements hold for answers and for bindings only |
 
@@ -52,5 +52,6 @@ The mechanism that realizes these requirements remains open. The goal `status-pr
 
 Marks follow the [legend of reading marks](../../CONTRIBUTING.md#^reading-marks). A mark ◐ records a check of the bibliographic record.
 
-- [agm1985] ◐ Alchourrón, Gärdenfors & Makinson, "On the logic of theory change: partial meet contraction and revision functions", *Journal of Symbolic Logic* 50(2), 510–530, 1985
+- [alchourron1985] ◐ Alchourrón, Gärdenfors & Makinson, "On the logic of theory change: partial meet contraction and revision functions", *Journal of Symbolic Logic* 50(2), 510–530, 1985
+- [hansson1999] ◐ [Hansson, *A Textbook of Belief Dynamics: Theory Change and Database Updating*, Kluwer, 1999](https://doi.org/10.1007/978-94-007-0814-3); belief bases, as opposed to belief sets closed under consequence, and the postulates of base revision
 - [moreau2013] ◐ Moreau & Missier (eds.), *PROV-DM: The PROV Data Model*, W3C Recommendation, 30 April 2013
