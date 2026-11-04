@@ -1,0 +1,1062 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/derivation.base.schema.yml
+title: Derivation record
+description: The fields of a derivation record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+  - 'specification: `docs/specification/derivation.md`; one file per derivation'
+  - 'decision: `docs/adr/derivation-record.md`'
+  - a unit is named by a descriptive identifier, unique within the record, never by a number
+  - replace every UPPERCASE placeholder; leave a field empty while it is not filled
+properties:
+  title:
+    type:
+      - string
+      - 'null'
+    x-template: '"SHORT NAME OF THE DERIVATION"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type:
+      - string
+      - 'null'
+    x-template: derivation.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+      - string
+      - 'null'
+    x-template: derivation
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+      - string
+      - 'null'
+    x-template: provisional
+    x-vocabulary: .status
+    title: Status
+    description: The maturity of the record as a whole, or its retraction.
+  serves:
+    type:
+      - string
+      - 'null'
+    x-blank: true
+    x-template: quest.TOPIC.NAME
+    x-kind: label
+    x-comment: optional; empty for a derivation that constructs its result
+    title: Serves
+    description: 'The identifier of the record that the derivation serves: a question, a proof obligation,
+      or a law or an operation of a derived model stated in advance; empty for a derivation that constructs
+      its result.'
+    examples:
+      - quest.grokking.explain_delay
+  runs_on:
+    type:
+      - array
+      - 'null'
+    x-comment: the models, the backgrounds, the target system or the answer that hold the premises
+    title: Runs on
+    description: The records whose laws, assumptions or claims are the premises of the derivation, by
+      identifier.
+    examples:
+      - - mod.grokking.effective-representation
+    items:
+      type:
+        - string
+        - 'null'
+      x-template: RECORD
+      x-kind: label
+  uses:
+    type:
+      - array
+      - 'null'
+    x-comment: optional; one entry per derivation whose consequences are used
+    title: Uses
+    description: The derivations whose consequences the derivation uses, by identifier.
+    examples:
+      - - derivation.grokking.mode-spectrum
+    items:
+      type:
+        - string
+        - 'null'
+      x-template: derivation.TOPIC.NAME
+      x-kind: label
+  sought:
+    type:
+      - object
+      - 'null'
+    x-blank: true
+    x-comment: 'type and condition empty: open; type alone: typed; both: determinate'
+    title: Sought
+    description: 'The root sought: the unknown or the statement that the derivation seeks; its type and
+      its condition fix its degree of determinacy.'
+    properties:
+      id:
+        type:
+          - string
+          - 'null'
+        x-template: SOUGHT-NAME
+        x-kind: label
+        title: Identifier
+        description: A descriptive identifier of the sought, unique within the record.
+        examples:
+          - delay-scale
+      statement:
+        type:
+          - string
+          - 'null'
+        x-template: '"WHAT THE DERIVATION SEEKS"'
+        x-kind: markdown-line
+        title: Statement
+        description: The unknown or the statement sought, in one phrase.
+        examples:
+          - the law that sets the scale of the delay after fitting
+      type:
+        type:
+          - string
+          - 'null'
+        x-vocabulary: sought.type
+        title: Type
+        description: The type of the unknown, once known; empty for an open sought.
+        examples:
+          - law
+      condition:
+        type:
+          - string
+          - 'null'
+        x-template: '"THE CONDITION THAT THE UNKNOWN SATISFIES"'
+        x-kind: markdown-line
+        title: Condition
+        description: The condition that the unknown must satisfy; empty for an open or a typed sought.
+        examples:
+          - in the linear relaxation of the effective theory
+  subordinate:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: optional; one entry per sought that the derivation sets for itself
+    title: Subordinate soughts
+    description: The soughts that the derivation sets for itself, each answered by a lemma or left at
+      an impasse.
+    items:
+      type: object
+      properties:
+        id:
+          type:
+            - string
+            - 'null'
+          x-template: SOUGHT-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the sought, unique within the record.
+          examples:
+            - crossing-time
+        statement:
+          type:
+            - string
+            - 'null'
+          x-template: '"WHAT THE SUBORDINATE SOUGHT SEEKS"'
+          x-kind: markdown-line
+          title: Statement
+          description: The unknown or the statement sought, in one phrase.
+          examples:
+            - the time at which the quality of the representation reaches its threshold
+        type:
+          type:
+            - string
+            - 'null'
+          x-vocabulary: subordinate.type
+          title: Type
+          description: The type of the unknown, once known; empty for an open sought.
+          examples:
+            - value-or-bound
+        condition:
+          type:
+            - string
+            - 'null'
+          x-template: '"THE CONDITION THAT THE UNKNOWN SATISFIES"'
+          x-kind: markdown-line
+          title: Condition
+          description: The condition that the unknown must satisfy.
+          examples:
+            - the slowest structured mode has decayed by the factor that the closure fixes
+        replaces:
+          type:
+            - string
+            - 'null'
+          x-template: SOUGHT-NAME
+          x-kind: label
+          x-comment: optional; with a reason
+          title: Replaces
+          description: The identifier of the subordinate sought that this one replaces, when the earlier
+            one proved ill-posed.
+        reason:
+          type:
+            - string
+            - 'null'
+          x-template: '"WHY THE EARLIER SOUGHT WAS ILL-POSED"'
+          x-kind: markdown-line
+          x-comment: with a replacement only
+          title: Reason
+          description: The reason for the replacement.
+  slots:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: optional; one entry per unknown introduced while the derivation proceeds
+    title: Slots
+    description: The symbols introduced by a move or a posit, and bound later by a move.
+    items:
+      type: object
+      properties:
+        symbol:
+          type:
+            - string
+            - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: The symbol of the slot, unique within the record.
+          examples:
+            - a_mode
+        reading:
+          type:
+            - string
+            - 'null'
+          x-template: '"WHAT THE SLOT STANDS FOR"'
+          x-kind: markdown-line
+          title: Reading
+          description: What the slot stands for.
+          examples:
+            - the amplitude of one eigenmode of the effective Hessian
+        introduced_by:
+          type:
+            - string
+            - 'null'
+          x-template: MOVE-OR-POSIT-NAME
+          x-kind: label
+          title: Introduced by
+          description: The identifier of the move or the posit that introduces the slot.
+          examples:
+            - diagonalize
+  objects:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: one entry per object that a move takes or yields
+    title: Intermediate objects
+    description: The intermediate objects that the moves take and yield, cited by no other record.
+    items:
+      type: object
+      properties:
+        id:
+          type:
+            - string
+            - 'null'
+          x-template: OBJECT-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the object, unique within the record.
+          examples:
+            - mode-decay
+        form:
+          type:
+            - string
+            - 'null'
+          x-vocabulary: objects.form
+          title: Form
+          description: Whether the object is a symbol, a quantity or a term, or an equation, an inequality
+            or a condition.
+          examples:
+            - expression
+        expression:
+          type:
+            - string
+            - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: optional
+          title: Expression
+          description: The object, written in the expression syntax over the symbols that the derivation
+            sees.
+          examples:
+            - exp(-eta_rep * lambda3 * step)
+        reading:
+          type:
+            - string
+            - 'null'
+          x-template: '"WHAT THE OBJECT STATES"'
+          x-kind: markdown-line
+          title: Reading
+          description: The object stated in one phrase.
+          examples:
+            - each eigenmode of the representation decays exponentially at its own rate
+  posits:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: optional; one entry per premise introduced on trial
+    title: Posits
+    description: The premises that the derivation introduces on trial, each with its origin and its tests.
+    items:
+      type: object
+      properties:
+        id:
+          type:
+            - string
+            - 'null'
+          x-template: POSIT-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the posit, unique within the record.
+          examples:
+            - quality-tracks-slow-mode
+        kind:
+          type:
+            - string
+            - 'null'
+          x-vocabulary: posits.kind
+          title: Kind
+          description: The kind of posit.
+          examples:
+            - closure
+        statement:
+          type:
+            - string
+            - 'null'
+          x-template: '"WHAT THE DERIVATION ASSUMES"'
+          x-kind: markdown-line
+          title: Statement
+          description: The form or the relation assumed.
+          examples:
+            - the representation quality reaches its threshold once the slowest structured mode has decayed
+              by a fixed factor
+        origin:
+          type:
+            - object
+            - 'null'
+          title: Origin
+          description: Where the guess came from.
+          properties:
+            kind:
+              type:
+                - string
+                - 'null'
+              x-vocabulary: origin.kind
+              title: Kind
+              description: The kind of origin of the guess.
+              examples:
+                - source
+            ref:
+              type:
+                - string
+                - 'null'
+              x-template: '"STEP, SOURCE OR SCHEME"'
+              x-kind: markdown-line
+              x-comment: empty when the origin is none
+              title: Reference
+              description: The act, the source or the scheme from which the guess came.
+              examples:
+                - Liu et al., NeurIPS 2022
+        tests:
+          type:
+            - array
+            - 'null'
+          x-comment: empty while no test is made
+          title: Tests
+          description: The tests of the posit, each with its verdict.
+          items:
+            type: object
+            properties:
+              kind:
+                type:
+                  - string
+                  - 'null'
+                x-vocabulary: tests.kind
+                title: Kind
+                description: The kind of test.
+                examples:
+                  - empirical
+              verdict:
+                type:
+                  - string
+                  - 'null'
+                x-vocabulary: tests.verdict
+                title: Verdict
+                description: Whether the test supports or refutes the posit.
+                examples:
+                  - supports
+              standard:
+                type:
+                  - string
+                  - 'null'
+                x-vocabulary: tests.standard
+                x-comment: computation only
+                title: Standard
+                description: For a computation, whether the computation is certified or numerical.
+                examples:
+                  - numerical
+              by:
+                type:
+                  - string
+                  - 'null'
+                x-template: '"MOVE, RECORD OR SOURCE"'
+                x-kind: markdown-line
+                title: By
+                description: The move, the record or the source that carries the test.
+                examples:
+                  - mod.grokking.effective-representation.generalization_link
+  moves:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: one entry per move stated, in the order of the derivation
+    title: Moves
+    description: 'The steps that the record states: every non-routine move, and the routine moves that
+      no segment bridges.'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+            - string
+            - 'null'
+          x-template: MOVE-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the move, unique within the record.
+          examples:
+            - slowest-dominates
+        kind:
+          type:
+            - string
+            - 'null'
+          x-vocabulary: moves.kind
+          title: Kind
+          description: The atomic kind of the move.
+          examples:
+            - take-limit
+        inputs:
+          type:
+            - array
+            - 'null'
+          title: Inputs
+          description: The objects, posits or premises that the move takes, by identifier.
+          examples:
+            - - mode-decay
+          items:
+            type:
+              - string
+              - 'null'
+            x-template: OBJECT-OR-PREMISE
+            x-kind: label
+        outputs:
+          type:
+            - array
+            - 'null'
+          title: Outputs
+          description: The objects that the move yields, by identifier.
+          examples:
+            - - slowest-mode
+          items:
+            type:
+              - string
+              - 'null'
+            x-template: OBJECT-NAME
+            x-kind: label
+        binds:
+          type:
+            - array
+            - 'null'
+          x-comment: optional
+          title: Binds
+          description: The slots that the move binds, by symbol.
+          examples:
+            - - a_mode
+          items:
+            type:
+              - string
+              - 'null'
+            x-template: SYMBOL
+            x-kind: label
+        warrant:
+          type:
+            - object
+            - 'null'
+          title: Warrant
+          description: 'What licenses the move: its source, the class of its error, its regime and the
+            property that makes it apply.'
+          properties:
+            source:
+              type:
+                - string
+                - 'null'
+              x-vocabulary: warrant.source
+              title: Source
+              description: The source of the license.
+              examples:
+                - approximation
+            cites:
+              type:
+                - string
+                - 'null'
+              x-template: '"DEFINITION, THEOREM, RECORD OR STEP"'
+              x-kind: markdown-line
+              x-comment: optional
+              title: Cites
+              description: The definition, the theorem, the record or the step that licenses the move.
+              examples:
+                - dominance of the slowest positive mode of a linear relaxation
+            error:
+              type:
+                - string
+                - 'null'
+              x-vocabulary: warrant.error
+              title: Class of error
+              description: The class of the error that the move introduces.
+              examples:
+                - controlled
+            regime:
+              type:
+                - string
+                - 'null'
+              x-template: '"REGIME OF VALIDITY"'
+              x-kind: markdown-line
+              x-comment: when the error is not exact
+              title: Regime
+              description: The regime in which the warrant holds, for an approximation, a limit or a truncation.
+              examples:
+                - times long compared with the inverse of the spectral gap
+            applies_because:
+              type:
+                - string
+                - 'null'
+              x-template: INTERPRETATION-NAME
+              x-kind: label
+              x-comment: optional
+              title: Applies because
+              description: The identifier of the structural or magnitude interpretation that makes the
+                warrant apply at this point.
+              examples:
+                - spectral-gap
+  kernel:
+    type:
+      - string
+      - 'null'
+    x-blank: true
+    x-template: MOVE-NAME
+    x-kind: label
+    x-comment: optional; the kernel test checks the declaration
+    title: Kernel
+    description: The identifier of the move declared as the kernel of the derivation.
+    examples:
+      - slowest-dominates
+  orientations:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: one entry per non-routine move and per segment
+    title: Orientations
+    description: The prospective rationale of each non-routine move and of each segment.
+    items:
+      type: object
+      properties:
+        id:
+          type:
+            - string
+            - 'null'
+          x-template: ORIENTATION-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the orientation, unique within the record.
+          examples:
+            - isolate-slow-mode
+        of:
+          type:
+            - string
+            - 'null'
+          x-template: MOVE-OR-SEGMENT-NAME
+          x-kind: label
+          title: Of
+          description: The identifier of the move or the segment that the orientation selects.
+          examples:
+            - slowest-dominates
+        purpose:
+          type:
+            - string
+            - 'null'
+          x-template: '"TO …"'
+          x-kind: markdown-line
+          title: Purpose
+          description: 'The end of the move, written as a goal: to determine an unknown, or to bring about
+            a change.'
+          examples:
+            - to isolate the mode that sets the long-time behavior
+        determines:
+          type:
+            - string
+            - 'null'
+          x-template: SOUGHT-NAME
+          x-kind: label
+          x-comment: either this field or change
+          title: Determines
+          description: The identifier of the sought that the purpose determines.
+        change:
+          type:
+            - string
+            - 'null'
+          x-vocabulary: orientations.change
+          x-comment: either this field or determines
+          title: Change
+          description: The intended change of state that the purpose brings about.
+          examples:
+            - isolate
+        occasion:
+          type:
+            - string
+            - 'null'
+          x-template: INTERPRETATION-NAME
+          x-kind: label
+          x-comment: when the purpose does not follow from the sought alone
+          title: Occasion
+          description: The identifier of the interpretation that makes the purpose relevant now.
+          examples:
+            - spectral-gap
+        means:
+          type:
+            - string
+            - 'null'
+          x-template: '"KIND OF MOVE, SCHEME OR ACT"'
+          x-kind: markdown-line
+          x-comment: optional
+          title: Means
+          description: The kind of move, the scheme or the act that the purpose calls for.
+          examples:
+            - take the limit of long times
+        alternatives:
+          type:
+            - array
+            - 'null'
+          x-comment: optional
+          title: Alternatives
+          description: The moves considered at that point and set aside, each with its reason.
+          items:
+            type: object
+            properties:
+              move:
+                type:
+                  - string
+                  - 'null'
+                x-template: '"THE MOVE SET ASIDE"'
+                x-kind: markdown-line
+                title: Move
+                description: The move set aside.
+                examples:
+                  - integrate the nonlinear effective dynamics numerically
+              reason:
+                type:
+                  - string
+                  - 'null'
+                x-vocabulary: alternatives.reason
+                title: Reason
+                description: The reason for setting the move aside.
+                examples:
+                  - costlier
+        provenance:
+          type:
+            - string
+            - 'null'
+          x-vocabulary: orientations.provenance
+          title: Provenance
+          description: Whether the orientation was written while the derivation was carried out, or reconstructed
+            afterwards from a source.
+          examples:
+            - reconstructed
+        expected_gain:
+          type:
+            - string
+            - 'null'
+          x-template: '"THE GAIN EXPECTED"'
+          x-kind: markdown-line
+          x-comment: optional
+          title: Expected gain
+          description: The gain that the move is expected to bring.
+          examples:
+            - one rate in place of the whole spectrum
+  interpretations:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: one entry per meaning that the record states
+    title: Interpretations
+    description: The meanings assigned to the items of the derivation, each with its ground.
+    items:
+      type: object
+      properties:
+        id:
+          type:
+            - string
+            - 'null'
+          x-template: INTERPRETATION-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the interpretation, unique within the record.
+          examples:
+            - spectral-gap
+        of:
+          type:
+            - string
+            - 'null'
+          x-template: UNIT-NAME
+          x-kind: label
+          title: Of
+          description: 'The identifier of the item interpreted: an object, a move, a feature, a segment
+            or a consequence.'
+          examples:
+            - mode-decay
+        kind:
+          type:
+            - string
+            - 'null'
+          x-vocabulary: interpretations.kind
+          title: Kind
+          description: The kind of meaning assigned.
+          examples:
+            - magnitude
+        reading:
+          type:
+            - string
+            - 'null'
+          x-template: '"THE MEANING ASSIGNED"'
+          x-kind: markdown-line
+          title: Reading
+          description: The meaning assigned, in one sentence.
+          examples:
+            - at long times the slowest positive mode dominates, the faster ones being smaller by an exponential
+              factor
+        grounds:
+          type:
+            - array
+            - 'null'
+          x-comment: optional
+          title: Grounds
+          description: The references on which the meaning rests, of the type that its kind requires.
+          examples:
+            - - mod.grokking.effective-representation.Hrep
+          items:
+            type:
+              - string
+              - 'null'
+            x-template: REFERENCE
+            x-kind: label
+  features:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: optional; one entry per event of the calculation
+    title: Features of the calculation
+    description: The events that the calculation exhibits, which only a diagnostic interpretation reads.
+    items:
+      type: object
+      properties:
+        id:
+          type:
+            - string
+            - 'null'
+          x-template: FEATURE-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the feature, unique within the record.
+          examples:
+            - zero-mode
+        kind:
+          type:
+            - string
+            - 'null'
+          x-vocabulary: features.kind
+          title: Kind
+          description: The kind of event.
+          examples:
+            - zero-mode
+        at:
+          type:
+            - string
+            - 'null'
+          x-template: OBJECT-NAME
+          x-kind: label
+          title: At
+          description: The identifier of the object at which the event occurs.
+          examples:
+            - mode-decay
+  segments:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: optional; one entry per group of moves under one idea
+    title: Segments
+    description: The groups of contiguous moves that serve one sought under one idea, each bridging the
+      moves that it omits.
+    items:
+      type: object
+      properties:
+        id:
+          type:
+            - string
+            - 'null'
+          x-template: SEGMENT-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the segment, unique within the record.
+          examples:
+            - relaxation
+        serves:
+          type:
+            - string
+            - 'null'
+          x-template: SOUGHT-NAME
+          x-kind: label
+          title: Serves
+          description: The identifier of the sought that the segment serves.
+          examples:
+            - delay-scale
+        moves:
+          type:
+            - array
+            - 'null'
+          title: Moves
+          description: The moves stated inside the segment, by identifier.
+          examples:
+            - - diagonalize
+              - slowest-dominates
+          items:
+            type:
+              - string
+              - 'null'
+            x-template: MOVE-NAME
+            x-kind: label
+        inputs:
+          type:
+            - array
+            - 'null'
+          title: Inputs
+          description: The objects or premises that the segment consumes.
+          examples:
+            - - mod.grokking.effective-representation.representation_flow
+          items:
+            type:
+              - string
+              - 'null'
+            x-template: OBJECT-OR-PREMISE
+            x-kind: label
+        outputs:
+          type:
+            - array
+            - 'null'
+          title: Outputs
+          description: The objects that the segment produces.
+          examples:
+            - - delay-law
+          items:
+            type:
+              - string
+              - 'null'
+            x-template: OBJECT-NAME
+            x-kind: label
+        applies:
+          type:
+            - string
+            - 'null'
+          x-template: design.TOPIC.NAME
+          x-kind: label
+          x-comment: optional
+          title: Applies
+          description: The identifier of the design of kind method that the segment applies as a scheme.
+        within:
+          type:
+            - string
+            - 'null'
+          x-template: SEGMENT-NAME
+          x-kind: label
+          x-comment: optional
+          title: Within
+          description: The identifier of the segment that encloses this one.
+  consequences:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: one entry per statement established
+    title: Consequences
+    description: The statements that the derivation establishes; a consequence answering a subordinate
+      sought is a lemma.
+    items:
+      type: object
+      properties:
+        id:
+          type:
+            - string
+            - 'null'
+          x-template: CONSEQUENCE-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the consequence, unique within the record.
+          examples:
+            - delay-law
+        answers:
+          type:
+            - string
+            - 'null'
+          x-template: SOUGHT-NAME
+          x-kind: label
+          title: Answers
+          description: The identifier of the sought that the consequence answers.
+          examples:
+            - delay-scale
+        from:
+          type:
+            - string
+            - 'null'
+          x-template: OBJECT-NAME
+          x-kind: label
+          title: From
+          description: The identifier of the object that states the consequence.
+          examples:
+            - delay-law
+        record:
+          type:
+            - string
+            - 'null'
+          x-template: RECORD.UNIT
+          x-kind: label
+          x-comment: required for a consequence of the root sought; empty for a lemma
+          title: Record
+          description: The identifier of the law, the answer or the obligation that states the consequence.
+          examples:
+            - mod.grokking.effective-representation.representation_time
+        gain:
+          type:
+            - string
+            - 'null'
+          x-template: '"THE GAIN OBTAINED"'
+          x-kind: markdown-line
+          x-comment: optional
+          title: Gain
+          description: The gain that the derivation actually brought.
+          examples:
+            - the delay is read from one spectral quantity of the effective Hessian
+        principle:
+          type:
+            - string
+            - 'null'
+          x-template: INTERPRETATION-NAME
+          x-kind: label
+          x-comment: optional
+          title: Principle
+          description: The identifier of the variation interpretation that names the property making the
+            consequence hold.
+          examples:
+            - rate-variation
+        pattern:
+          type:
+            - string
+            - 'null'
+          x-template: '"THE PATTERN OF THE DERIVATION"'
+          x-kind: markdown-line
+          x-comment: optional
+          title: Pattern
+          description: The scheme applied, with the other problems within its reach.
+          examples:
+            - the slowest mode of a stable linear relaxation sets its relaxation time
+  impasses:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: optional; one entry per sought left without answer
+    title: Impasses
+    description: The obstacles left by the derivation, each leaving a sought without answer.
+    items:
+      type: object
+      properties:
+        sought:
+          type:
+            - string
+            - 'null'
+          x-template: SOUGHT-NAME
+          x-kind: label
+          title: Sought
+          description: The identifier of the sought left without answer.
+        obstacle:
+          type:
+            - string
+            - 'null'
+          x-template: INTERPRETATION-NAME
+          x-kind: label
+          title: Obstacle
+          description: The identifier of the diagnostic interpretation that names the obstacle.
+  refutations:
+    type:
+      - array
+      - 'null'
+    x-blank: true
+    x-comment: optional; one entry per refutation
+    title: Refutations
+    description: The statements that the derivation shows to fail.
+    items:
+      type: object
+      properties:
+        target:
+          type:
+            - string
+            - 'null'
+          x-template: UNIT-OR-RECORD
+          x-kind: label
+          title: Target
+          description: The posit, the consequence or the claim refuted, by identifier.
+        form:
+          type:
+            - string
+            - 'null'
+          x-vocabulary: refutations.form
+          title: Form
+          description: Whether a counterexample or a refuting test refutes the target.
+        by:
+          type:
+            - string
+            - 'null'
+          x-template: OBJECT-OR-POSIT
+          x-kind: label
+          title: By
+          description: The object that is the counterexample, or the posit whose test refutes it.
+  maturity:
+    type:
+      - object
+      - 'null'
+    x-blank: true
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    additionalProperties:
+      type:
+        - string
+        - 'null'
+      x-template-key: FIELD.PATH
+      x-template: open

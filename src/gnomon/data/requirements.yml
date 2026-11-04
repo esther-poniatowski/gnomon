@@ -32,6 +32,7 @@ always:
   problem: [statement, kind, demand, result_type, request]
   concept: [gloss, kind, source]
   design: [kind, task, steps, output, stopping]
+  derivation: [runs_on, sought, objects, moves]
   itinerary: [addresses, steps]
   answer: [claim, grounds, dependence, route, domain, status, support, modal_strength, erotetic_relation]
   binding: [model, target, asserter, feature_pairs, domain, grain, version]

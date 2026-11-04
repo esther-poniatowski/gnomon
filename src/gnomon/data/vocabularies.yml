@@ -468,6 +468,177 @@ vocabularies:
       name: a run of a simulation of a model
     - value: method
       name: a procedure that solves a task
+  derivation:
+    .status:
+    - value: provisional
+    - value: stabilized
+    - value: retracted
+    sought.type:
+    - value: law
+      name: a law over declared quantities
+    - value: value-or-bound
+      name: a value or a bound
+    - value: object
+      name: an object, such as a witness or a counterexample
+    - value: classification
+      name: a classification
+    - value: claim-truth
+      name: 'the truth of a stated claim: a problem to prove'
+    subordinate.type:
+    - value: law
+      name: a law over declared quantities
+    - value: value-or-bound
+      name: a value or a bound
+    - value: object
+      name: an object, such as a witness or a counterexample
+    - value: classification
+      name: a classification
+    - value: claim-truth
+      name: 'the truth of a stated claim: a problem to prove'
+    objects.form:
+    - value: object
+      name: a symbol, a quantity or one term of an expression
+    - value: expression
+      name: an equation, an inequality or a condition
+    posits.kind:
+    - value: ansatz
+      name: a trial form, with parameters left undetermined
+    - value: closure
+      name: a relation closing an intermediate system of equations
+    - value: relevant-quantities
+      name: the quantities on which a relation depends
+    - value: complete-similarity
+      name: a dimensionless group dropped in a limit
+    - value: incomplete-similarity
+      name: a dimensionless group entering as a power of unknown exponent
+    origin.kind:
+    - value: act
+      name: a step of the itinerary
+    - value: source
+      name: a published source
+    - value: scheme
+      name: a design of kind method that prescribes the posit
+    - value: none
+      name: an insight that left no record
+    tests.kind:
+    - value: consistency
+      name: the neglected terms stay smaller than the terms kept
+    - value: limit
+      name: the consequence recovers a known result in a limit
+    - value: exact
+      name: a proof that the posited form or relation holds
+    - value: approximation
+      name: a bound on the distance to the exact object
+    - value: empirical
+      name: a comparison of the consequence with data
+    - value: computation
+      name: a computation, certified or numerical, of the posited object
+    tests.verdict:
+    - value: supports
+    - value: refutes
+    tests.standard:
+    - value: certified
+      name: a computation whose result is proved, such as interval arithmetic
+    - value: numerical
+      name: a computation with an error that no proof bounds
+    moves.kind:
+    - value: substitute
+      name: transformation
+    - value: transform
+      name: transformation
+    - value: rescale
+      name: transformation
+    - value: eliminate
+      name: transformation
+    - value: expand
+      name: approximation
+    - value: truncate
+      name: approximation
+    - value: take-limit
+      name: approximation
+    - value: estimate
+      name: approximation
+    - value: solve
+      name: determination
+    - value: impose
+      name: determination
+    - value: require-self-consistency
+      name: determination
+    - value: match
+      name: determination
+    - value: apply-theorem
+      name: inference
+    - value: split-cases
+      name: inference
+    - value: induct
+      name: inference
+    - value: derive-contradiction
+      name: inference
+    - value: compute
+      name: computation
+    - value: import
+      name: computation
+    - value: compare
+      name: comparison
+    warrant.source:
+    - value: definition
+      name: a definition
+    - value: theorem
+      name: a theorem
+    - value: approximation
+      name: an approximation
+    - value: computation
+      name: a computation
+    - value: act-verdict
+      name: the verdict of the norm of an act whose output the move imports
+    warrant.error:
+    - value: exact
+      name: no error
+    - value: controlled
+      name: a bound on the error is known
+    - value: uncontrolled
+      name: no bound on the error is known
+    - value: singular
+      name: no bound can contain the error near the limit
+    orientations.change:
+    - value: eliminate
+    - value: decouple
+    - value: isolate
+    - value: reduce
+    - value: expose
+    - value: close
+    - value: match
+    alternatives.reason:
+    - value: inapplicable
+    - value: inconsistent
+    - value: costlier
+    - value: losing-information
+    - value: tried-without-success
+    orientations.provenance:
+    - value: contemporaneous
+      name: written while the derivation was carried out
+    - value: reconstructed
+      name: written afterwards from a source
+    interpretations.kind:
+    - value: referential
+    - value: form
+    - value: process
+    - value: structural
+    - value: magnitude
+    - value: variation
+    - value: analogical
+    - value: diagnostic
+    features.kind:
+    - value: divergence
+    - value: secular-term
+    - value: zero-mode
+    - value: sign-change
+    - value: crossing
+    refutations.form:
+    - value: counterexample
+      name: a consequence of type object that falsifies the target
+    - value: refuting-test
+      name: a test whose result contradicts a posit
   problem:
     .status:
     - value: posed

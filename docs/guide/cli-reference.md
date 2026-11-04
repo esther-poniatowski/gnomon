@@ -39,7 +39,7 @@ gnomon init <directory> [--with KIND]... [--force]
 | Argument or option | Description                                                                                                                              |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `<directory>`      | Folder of the new problem, created when it does not exist.                                                                               |
-| `--with`, `-w`     | A further record kind to scaffold: `model`, `key`, `binding`, `answer`, `assessment`, `concept` or `design`; repeat it for several. |
+| `--with`, `-w`     | A further record kind to scaffold: `model`, `key`, `binding`, `answer`, `assessment`, `concept`, `design` or `derivation`; repeat it for several. |
 | `--force`          | Overwrite the files that already exist.                                                                                                  |
 
 **Output:** one line per file written, then the next step. The command writes no file and exits with code 1 when one of the files exists and `--force` is not given, or when a kind has no template.

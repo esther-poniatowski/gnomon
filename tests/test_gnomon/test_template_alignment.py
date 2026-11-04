@@ -317,6 +317,15 @@ PAIRS: list[Pair] = [
         "",
         ELSEWHERE_MATURITY,
     ),
+    (
+        "derivation",
+        "specification/derivation.md",
+        "| Specification",
+        "derivation.yml",
+        None,
+        "",
+        ELSEWHERE_MATURITY,
+    ),
     ("itinerary", "specification/itinerary.md", "| Specification", "itinerary.yml", None, "", {}),
 ]
 
@@ -470,6 +479,7 @@ REQUIREMENT_TABLES = [
     ),
     ("concept", "specification/concept.md", "| Specification", "concept.yml", ""),
     ("design", "specification/design.md", "| Specification", "design.yml", ""),
+    ("derivation", "specification/derivation.md", "| Specification", "derivation.yml", ""),
 ]
 
 

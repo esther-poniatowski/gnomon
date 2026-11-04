@@ -19,6 +19,7 @@ Documents the fields of each record of an inquiry: the content that a researcher
 - [Background record](background.md): fills the record of the laws admitted about a target system
 - [Phenomenon record](phenomenon.md): fills the record of a behavior of the target system that questions address
 - [Design record](design.md): fills the record of a plan of acts whose execution yields data or consequences
+- [Derivation record](derivation.md): fills the record of the reasoning that establishes a consequence from its premises
 
 ## Question
 

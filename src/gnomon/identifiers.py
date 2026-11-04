@@ -22,6 +22,7 @@ RECORD_SEGMENTS: dict[str, int] = {
     "prob": 3,
     "concept": 3,
     "design": 3,
+    "derivation": 3,
     "quest": 3,
     "phen": 3,
     "bg": 3,

@@ -20,6 +20,7 @@ The schemas of this folder declare the shape of each record type, so that a prog
 - [Binding record](binding.base.schema.yml): declares the fields of a binding record, which its [contract](binding.contract.schema.yml) binds as `gnomon:binding@1`
 - [Concept record](concept.base.schema.yml): declares the fields of a concept record, which its [contract](concept.contract.schema.yml) binds as `gnomon:concept@1`
 - [Design record](design.base.schema.yml): declares the fields of a design record, which its [contract](design.contract.schema.yml) binds as `gnomon:design@1`
+- [Derivation record](derivation.base.schema.yml): declares the fields of a derivation record, which its [contract](derivation.contract.schema.yml) binds as `gnomon:derivation@1`
 - [Itinerary record](itinerary.base.schema.yml): declares the fields of an itinerary record, which its [contract](itinerary.contract.schema.yml) binds as `gnomon:itinerary@1`
 - [Key record](key.base.schema.yml): declares the fields of a key record, which its [contract](key.contract.schema.yml) binds as `gnomon:key@1`
 - [Model record](model.base.schema.yml): declares the fields of a model record, which its [contract](model.contract.schema.yml) binds as `gnomon:model@1`

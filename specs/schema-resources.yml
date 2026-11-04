@@ -13,6 +13,7 @@ exports:
   - gnomon:binding@1
   - gnomon:concept@1
   - gnomon:design@1
+  - gnomon:derivation@1
   - gnomon:itinerary@1
   - gnomon:key@1
   - gnomon:model@1

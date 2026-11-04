@@ -1,0 +1,132 @@
+# specification: `docs/specification/derivation.md`; one file per derivation
+# decision: `docs/adr/derivation-record.md`
+# a unit is named by a descriptive identifier, unique within the record, never by a number
+# replace every UPPERCASE placeholder; leave a field empty while it is not filled
+
+_schema: gnomon:derivation@1
+title: "SHORT NAME OF THE DERIVATION"
+id: derivation.TOPIC.NAME
+type: derivation
+status: provisional              # provisional | stabilized | retracted
+
+serves: quest.TOPIC.NAME         # optional; empty for a derivation that constructs its result
+runs_on:                         # the models, the backgrounds, the target system or the answer that hold the premises
+  - RECORD
+uses:                            # optional; one entry per derivation whose consequences are used
+  - derivation.TOPIC.NAME
+
+sought:                          # type and condition empty: open; type alone: typed; both: determinate
+  id: SOUGHT-NAME
+  statement: "WHAT THE DERIVATION SEEKS"
+  type:                          # law (a law over declared quantities) | value-or-bound (a value or a bound) | object (an object, such as a witness or a counterexample) | classification (a classification) | claim-truth (the truth of a stated claim: a problem to prove)
+  condition: "THE CONDITION THAT THE UNKNOWN SATISFIES"
+
+subordinate:                     # optional; one entry per sought that the derivation sets for itself
+  - id: SOUGHT-NAME
+    statement: "WHAT THE SUBORDINATE SOUGHT SEEKS"
+    type:                        # law (a law over declared quantities) | value-or-bound (a value or a bound) | object (an object, such as a witness or a counterexample) | classification (a classification) | claim-truth (the truth of a stated claim: a problem to prove)
+    condition: "THE CONDITION THAT THE UNKNOWN SATISFIES"
+    replaces: SOUGHT-NAME        # optional; with a reason
+    reason: "WHY THE EARLIER SOUGHT WAS ILL-POSED"   # with a replacement only
+
+slots:                           # optional; one entry per unknown introduced while the derivation proceeds
+  - symbol: SYMBOL
+    reading: "WHAT THE SLOT STANDS FOR"
+    introduced_by: MOVE-OR-POSIT-NAME
+
+objects:                         # one entry per object that a move takes or yields
+  - id: OBJECT-NAME
+    form:                        # object (a symbol, a quantity or one term of an expression) | expression (an equation, an inequality or a condition)
+    expression: "EXPRESSION OVER DECLARED SYMBOLS"   # optional
+    reading: "WHAT THE OBJECT STATES"
+
+posits:                          # optional; one entry per premise introduced on trial
+  - id: POSIT-NAME
+    kind:                        # ansatz (a trial form, with parameters left undetermined) | closure (a relation closing an intermediate system of equations) | relevant-quantities (the quantities on which a relation depends) | complete-similarity (a dimensionless group dropped in a limit) | incomplete-similarity (a dimensionless group entering as a power of unknown exponent)
+    statement: "WHAT THE DERIVATION ASSUMES"
+    origin:
+      kind:                      # act (a step of the itinerary) | source (a published source) | scheme (a design of kind method that prescribes the posit) | none (an insight that left no record)
+      ref: "STEP, SOURCE OR SCHEME"   # empty when the origin is none
+    tests:                       # empty while no test is made
+      - kind:                    # consistency (the neglected terms stay smaller than the terms kept) | limit (the consequence recovers a known result in a limit) | exact (a proof that the posited form or relation holds) | approximation (a bound on the distance to the exact object) | empirical (a comparison of the consequence with data) | computation (a computation, certified or numerical, of the posited object)
+        verdict:                 # supports | refutes
+        standard:                # certified (a computation whose result is proved, such as interval arithmetic) | numerical (a computation with an error that no proof bounds); computation only
+        by: "MOVE, RECORD OR SOURCE"
+
+moves:                           # one entry per move stated, in the order of the derivation
+  - id: MOVE-NAME
+    kind:                        # substitute (transformation) | transform (transformation) | rescale (transformation) | eliminate (transformation) | expand (approximation) | truncate (approximation) | take-limit (approximation) | estimate (approximation) | solve (determination) | impose (determination) | require-self-consistency (determination) | match (determination) | apply-theorem (inference) | split-cases (inference) | induct (inference) | derive-contradiction (inference) | compute (computation) | import (computation) | compare (comparison)
+    inputs:
+      - OBJECT-OR-PREMISE
+    outputs:
+      - OBJECT-NAME
+    binds:                       # optional
+      - SYMBOL
+    warrant:
+      source:                    # definition (a definition) | theorem (a theorem) | approximation (an approximation) | computation (a computation) | act-verdict (the verdict of the norm of an act whose output the move imports)
+      cites: "DEFINITION, THEOREM, RECORD OR STEP"   # optional
+      error:                     # exact (no error) | controlled (a bound on the error is known) | uncontrolled (no bound on the error is known) | singular (no bound can contain the error near the limit)
+      regime: "REGIME OF VALIDITY"   # when the error is not exact
+      applies_because: INTERPRETATION-NAME   # optional
+
+kernel: MOVE-NAME                # optional; the kernel test checks the declaration
+
+orientations:                    # one entry per non-routine move and per segment
+  - id: ORIENTATION-NAME
+    of: MOVE-OR-SEGMENT-NAME
+    purpose: "TO …"
+    determines: SOUGHT-NAME      # either this field or change
+    change:                      # eliminate | decouple | isolate | reduce | expose | close | match; either this field or determines
+    occasion: INTERPRETATION-NAME   # when the purpose does not follow from the sought alone
+    means: "KIND OF MOVE, SCHEME OR ACT"   # optional
+    alternatives:                # optional
+      - move: "THE MOVE SET ASIDE"
+        reason:                  # inapplicable | inconsistent | costlier | losing-information | tried-without-success
+    provenance:                  # contemporaneous (written while the derivation was carried out) | reconstructed (written afterwards from a source)
+    expected_gain: "THE GAIN EXPECTED"   # optional
+
+interpretations:                 # one entry per meaning that the record states
+  - id: INTERPRETATION-NAME
+    of: UNIT-NAME
+    kind:                        # referential | form | process | structural | magnitude | variation | analogical | diagnostic
+    reading: "THE MEANING ASSIGNED"
+    grounds:                     # optional
+      - REFERENCE
+
+features:                        # optional; one entry per event of the calculation
+  - id: FEATURE-NAME
+    kind:                        # divergence | secular-term | zero-mode | sign-change | crossing
+    at: OBJECT-NAME
+
+segments:                        # optional; one entry per group of moves under one idea
+  - id: SEGMENT-NAME
+    serves: SOUGHT-NAME
+    moves:
+      - MOVE-NAME
+    inputs:
+      - OBJECT-OR-PREMISE
+    outputs:
+      - OBJECT-NAME
+    applies: design.TOPIC.NAME   # optional
+    within: SEGMENT-NAME         # optional
+
+consequences:                    # one entry per statement established
+  - id: CONSEQUENCE-NAME
+    answers: SOUGHT-NAME
+    from: OBJECT-NAME
+    record: RECORD.UNIT          # required for a consequence of the root sought; empty for a lemma
+    gain: "THE GAIN OBTAINED"    # optional
+    principle: INTERPRETATION-NAME   # optional
+    pattern: "THE PATTERN OF THE DERIVATION"   # optional
+
+impasses:                        # optional; one entry per sought left without answer
+  - sought: SOUGHT-NAME
+    obstacle: INTERPRETATION-NAME
+
+refutations:                     # optional; one entry per refutation
+  - target: UNIT-OR-RECORD
+    form:                        # counterexample (a consequence of type object that falsifies the target) | refuting-test (a test whose result contradicts a posit)
+    by: OBJECT-OR-POSIT
+
+maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
+  FIELD.PATH: open

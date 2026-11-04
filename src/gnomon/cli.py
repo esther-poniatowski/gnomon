@@ -58,7 +58,7 @@ def cli_init(
         "--with",
         "-w",
         help="A further record kind to scaffold, such as model, binding, key, answer, assessment, "
-        "itinerary, concept or design; repeat the option for several.",
+        "itinerary, concept, design or derivation; repeat the option for several.",
     ),
     force: bool = typer.Option(False, "--force", help="Overwrite the files that already exist."),
 ) -> None:
