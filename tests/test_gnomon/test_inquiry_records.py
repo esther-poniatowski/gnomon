@@ -129,8 +129,8 @@ def test_a_credence_outside_the_unit_interval_or_without_basis_is_reported() -> 
 
 
 def test_an_answer_status_outside_the_attitudes_is_reported() -> None:
-    """The former status `informally-backed` mixed an attitude with a support, and is now refused.
-    """
+    """The former status `informally-backed` mixed an attitude with a support, and is now
+    refused."""
     record = {
         "type": "answer",
         "status": "informally-backed",
@@ -227,8 +227,8 @@ def test_an_appraisal_is_reported_unless_the_answer_passes() -> None:
 
 
 def test_an_assessment_of_a_construct_holds_one_verdict_per_constraint() -> None:
-    """A construct is tested against the constraints of its problem; an answer against its question.
-    """
+    """A construct is tested against the constraints of its problem; an answer against its
+    question."""
     records = {
         "prob.a": {
             "type": "problem",

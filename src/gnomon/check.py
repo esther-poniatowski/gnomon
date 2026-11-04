@@ -341,8 +341,8 @@ def _answer(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 
 def _model(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
-    """The checks of a model: retired symbols, its operations and the requirements of its parents.
-    """
+    """The checks of a model: retired symbols, its operations and the requirements of its
+    parents."""
     return (
         v.retired_in_use(record)
         + c.incomplete_operations(record)

@@ -77,8 +77,8 @@ def dependencies(condition: str, route: str) -> set[str]:
 
 
 def stated_dependencies(cell: str, route: str) -> set[str]:
-    """Bold condition names of a cell, keeping the segments unqualified or qualified by ``route``.
-    """
+    """Bold condition names of a cell, keeping the segments unqualified or qualified by
+    ``route``."""
     names: set[str] = set()
     for segment in cell.split(";"):
         qualifier = re.match(r"\s*under (selection|construction)\b", segment)

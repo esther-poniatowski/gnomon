@@ -114,8 +114,8 @@ def _quantity(reference: str, records: Records) -> str:
 def _restrictions(
     domain: Mapping[str, Any], records: Records, kinds: Mapping[str, str]
 ) -> list[str]:
-    """Return the words of each restriction of a domain: its name, else the kind and the quantity.
-    """
+    """Return the words of each restriction of a domain: its name, else the kind and the
+    quantity."""
     words = []
     for entry in domain.get("restrictions") or []:
         if not isinstance(entry, Mapping) or is_unfilled(entry):

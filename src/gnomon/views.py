@@ -408,8 +408,8 @@ def maturity_map(records: Records) -> dict[str, Any]:
 
 
 def question_tree_view(records: Records) -> dict[str, Any]:
-    """Return the question tree as a table of nodes and a table of edges, for a renderer of trees.
-    """
+    """Return the question tree as a table of nodes and a table of edges, for a renderer of
+    trees."""
     nodes, edges = [], []
 
     def walk(node: Node, parent: str | None, depth: int) -> None:

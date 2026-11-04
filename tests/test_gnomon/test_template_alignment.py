@@ -654,8 +654,8 @@ TIERS = {
 
 @pytest.mark.parametrize("tier", sorted(TIERS))
 def test_the_criteria_of_the_note_are_the_tests_of_the_assessment(tier: str) -> None:
-    """Each criterion of the tables of a tier is one test of the template, in the order of the note.
-    """
+    """Each criterion of the tables of a tier is one test of the template, in the order of the
+    note."""
     documented = [name for header, column in TIERS[tier] for name in criteria(header, column)]
     assert documented == list(template("assessment.yml")["tests"][tier])
 

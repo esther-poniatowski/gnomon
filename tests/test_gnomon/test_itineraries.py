@@ -250,8 +250,8 @@ ITINERARY: dict[str, Any] = {
 
 
 def served(itinerary: dict[str, Any]) -> dict[str, Any]:
-    """Return the itinerary with a rationale that serves its problem on every step that states none.
-    """
+    """Return the itinerary with a rationale that serves its problem on every step that states
+    none."""
     for step in itinerary.get("steps") or []:
         step.setdefault("rationale", {"serves": itinerary.get("addresses")})
     return itinerary
@@ -399,8 +399,8 @@ def test_a_itinerary_addressing_no_problem_or_question_and_a_repeated_step_are_r
 
 
 def test_the_type_of_a_record_follows_from_its_state() -> None:
-    """A schema is a question with a placeholder slot; commitment and status decide the other types.
-    """
+    """A schema is a question with a placeholder slot; commitment and status decide the other
+    types."""
     records = {
         "quest.schema": {
             "type": "question",
@@ -500,8 +500,8 @@ def test_an_attitude_restricts_an_answer_only() -> None:
 
 
 def test_an_explanation_may_run_on_the_target_description() -> None:
-    """The input model of an explanation is optional: a route on the target description takes none.
-    """
+    """The input model of an explanation is optional: a route on the target description takes
+    none."""
     records = {
         "prob.a": {"type": "problem"},
         "phen.a": {"type": "phenomenon"},
@@ -554,8 +554,8 @@ def test_a_question_without_a_request_stays_a_schema() -> None:
 
 
 def test_a_specified_record_still_holds_an_identified_subject() -> None:
-    """Commitment is cumulative for the identified subject, and strict for the target specification.
-    """
+    """Commitment is cumulative for the identified subject, and strict for the target
+    specification."""
     specified = {"type": "target-system", "commitment": "specified"}
     identified = {"type": "target-system", "commitment": "identified"}
     assert {"identified-subject", "target-specification"} <= set(record_types(specified, TYPES))
