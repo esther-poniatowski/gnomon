@@ -318,8 +318,8 @@ def calls(text: str) -> list[tuple[str, int]]:
     A binder carries the indices it consumes between its name and its arguments, and those are
     not arguments: ``mean_{x, t}( u )`` calls ``mean`` with one.
 
-    >>> calls("div(u) = 0")
-    [('div', 1)]
+    >>> calls("div(u, x) = 0")
+    [('div', 2)]
     >>> calls("mean_{x, t}( u(a, x) * 2 )")
     [('mean', 1), ('u', 2)]
     """

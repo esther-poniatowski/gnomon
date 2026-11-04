@@ -10,7 +10,7 @@ laws:
     symbol: momentum
     signature: [x]
     role: evolution
-    expression: "diff(u, t) + dot(u, grad(u)) = - grad(pr) + nu * lap(u) + f"
+    expression: "diff(u, t) + dot(u, grad(u, x)) = - grad(pr, x) + nu * lap(u, x) + f"
     reading: "The velocity changes under its own advection, the pressure gradient, viscous diffusion, and the applied force."
     warrant: posited
     rests_on: "The law rests on the definition of the model class."
@@ -18,7 +18,7 @@ laws:
     symbol: incompressible
     signature: [x]
     role: state-constraint
-    expression: "div(u) = 0"
+    expression: "div(u, x) = 0"
     reading: "The flow neither compresses nor expands any element of fluid."
     warrant: posited
     rests_on: "The law rests on the definition of the model class."

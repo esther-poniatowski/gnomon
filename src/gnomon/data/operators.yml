@@ -13,7 +13,8 @@
 # `dimension` states how the operator combines the dimensional formulas of its arguments, as the
 # decision on the dimensional formula requires (docs/adr/dimensional-formula.md): `preserve` gives
 # the formula of the first argument, `product` adds the exponents of the arguments, `derivative`
-# divides the first argument by the second, `pure` yields a pure number whatever the arguments,
+# divides the first argument by the second, `second-derivative` divides the first argument by the
+# square of the second, `pure` yields a pure number whatever the arguments,
 # `pure-argument` requires pure arguments and yields a pure number, and `unchecked` leaves the
 # formula of the result undecided.
 
@@ -167,27 +168,27 @@ operators:
   values: "matrices(reals, A, A)"
 - symbol: grad
   kind: map
-  dimension: unchecked
-  name: the gradient of a field over its domain
-  notation: '\nabla #1'
+  dimension: derivative
+  name: the gradient of a field along the coordinates given
+  notation: '\nabla_{#2} #1'
   for_any: [A, S, n]
-  signature: ["maps(A, S)"]
+  signature: ["maps(A, S)", "vectors(reals, n)"]
   values: "maps(A, vectors(S, n))"
 - symbol: div
   kind: map
-  dimension: unchecked
-  name: the divergence of a vector field over its domain
-  notation: '\nabla \cdot #1'
+  dimension: derivative
+  name: the divergence of a vector field along the coordinates given
+  notation: '\nabla_{#2} \cdot #1'
   for_any: [A, S, n]
-  signature: ["maps(A, vectors(S, n))"]
+  signature: ["maps(A, vectors(S, n))", "vectors(reals, n)"]
   values: "maps(A, S)"
 - symbol: lap
   kind: map
-  dimension: unchecked
-  name: the Laplacian of a field over its domain
-  notation: '\Delta #1'
-  for_any: [A, S]
-  signature: ["maps(A, S)"]
+  dimension: second-derivative
+  name: the Laplacian of a field along the coordinates given
+  notation: '\Delta_{#2} #1'
+  for_any: [A, S, n]
+  signature: ["maps(A, S)", "vectors(reals, n)"]
   values: "maps(A, S)"
 - symbol: infinity
   kind: constant

@@ -55,7 +55,7 @@ variables:
     symbol: Hrep
     determined: within
     signature: []
-    expression: "jacobian(grad(effective_loss(Rrep)), Rrep, Rrep)"
+    expression: "jacobian(grad(effective_loss(Rrep), Rrep), Rrep, Rrep)"
     reading: "The variable is the Hessian of the normalized effective loss of the representation."
   - name: "slowest positive rate of representation learning"
     symbol: lambda3

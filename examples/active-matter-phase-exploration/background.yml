@@ -11,7 +11,7 @@ laws:
     variant: continuum
     signature: [sp, x, t]
     role: evolution
-    expression: "diff(u, t) = D * lap(u) + F(u) + G(u) + W"
+    expression: "diff(u, t) = D * lap(u, x) + F(u) + G(u) + W"
     reading: "The field of each species diffuses in space and evolves under its own local dynamics. A noise term and the cross-coupling from the other species also drive the field."
     warrant: posited
     rests_on: "The definition of the model class posits this law."

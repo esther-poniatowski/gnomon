@@ -34,7 +34,7 @@ laws:
     symbol: update
     signature: [coord]
     role: evolution
-    expression: "diff(theta, step) = opt(grad(Ltrain), z)"
+    expression: "diff(theta, step) = opt(grad(Ltrain, theta), z)"
     reading: "The optimizer moves the parameters along the gradient of the training loss, using its own auxiliary state."
     warrant: posited
     rests_on: "The class fixes the optimizer."
@@ -42,7 +42,7 @@ laws:
     symbol: update_state
     signature: []
     role: evolution
-    expression: "diff(z, step) = opt_state(grad(Ltrain), z)"
+    expression: "diff(z, step) = opt_state(grad(Ltrain, theta), z)"
     reading: "The optimizer updates its auxiliary state together with the trainable parameters."
     warrant: posited
     rests_on: "The class fixes the optimizer."

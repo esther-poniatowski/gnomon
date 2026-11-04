@@ -122,7 +122,7 @@ def _index(record: dict[str, Any], symbol: str) -> dict[str, Any]:
 @pytest.mark.parametrize(
     ("formula", "rule", "text"),
     [
-        ("L", "dimension/inhomogeneous", "the sides of = have the formulas T^-1 and L T^-2"),
+        ("L", "dimension/inhomogeneous", "the terms of a sum have the formulas T^-1 and L T^-2"),
         (None, "dimension/unchecked-law", "no dimensional formula is declared for t"),
     ],
 )
@@ -138,3 +138,57 @@ def test_the_formula_of_the_time_axis_decides_the_momentum_law(
         if located.finding.rule.id == rule
     ]
     assert any("laws.momentum" in f.text and text in f.text for f in found), [f.text for f in found]
+
+
+def test_every_term_of_the_momentum_law_is_decided() -> None:
+    from gnomon.dimensions import declared_formulas, parse_expression
+
+    records = [
+        yaml.safe_load((CASE / name).read_text(encoding="utf-8"))
+        for name in ("target-system.yml", "background.yml")
+    ]
+    symbols = declared_formulas(records, base_dimensions())
+    law = next(entry for entry in records[1]["laws"] if entry["symbol"] == "momentum")
+    tree = parse_expression(law["expression"])
+    assert tree is not None and tree[0] == "cmp"
+    for side in tree[2:]:
+        evaluation = evaluate(law["expression"], symbols)
+        assert evaluation is not None
+        assert evaluation.value(side) == {"L": Fraction(1), "T": Fraction(-2)}
+
+
+def test_a_laplacian_divides_by_the_square_of_its_coordinates() -> None:
+    symbols = {"u": {"L": Fraction(1), "T": Fraction(-1)}, "x": {"L": Fraction(1)}}
+    evaluation = evaluate("lap(u, x)", symbols)
+    assert evaluation is not None
+    assert evaluation.result == {"L": Fraction(-1), "T": Fraction(-1)}
+
+
+def test_a_wrong_pressure_breaks_the_momentum_law(tmp_path: Path) -> None:
+    folder = tmp_path / CASE.name
+    shutil.copytree(CASE, folder)
+
+    def pressure(record: dict[str, Any]) -> None:
+        entry = next(v for v in record["variables"] if v["symbol"] == "pr")
+        entry["dimensional_formula"] = "L T^-2"
+
+    _edit("target-system.yml", pressure)(folder)
+    texts = [
+        located.finding.text
+        for located in check_workspace(load_workspace(folder))
+        if located.finding.rule.id == "dimension/inhomogeneous"
+    ]
+    assert any(text.startswith("laws.momentum.expression") for text in texts), texts
+
+
+def test_a_gradient_without_its_coordinates_is_reported(tmp_path: Path) -> None:
+    folder = tmp_path / CASE.name
+    shutil.copytree(CASE, folder)
+
+    def implicit(record: dict[str, Any]) -> None:
+        law = next(entry for entry in record["laws"] if entry["symbol"] == "incompressible")
+        law["expression"] = "div(u) = 0"
+
+    _edit("background.yml", implicit)(folder)
+    rules = {located.finding.rule.id for located in check_workspace(load_workspace(folder))}
+    assert "vocabulary/mismatched-arity" in rules

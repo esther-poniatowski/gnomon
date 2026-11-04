@@ -408,9 +408,10 @@ class Evaluation:
                     total = _add(total, v)  # type: ignore[arg-type]
                 return total
             return None
-        if rule == "derivative" and len(values) >= 2:
+        if rule in ("derivative", "second-derivative") and len(values) >= 2:
             if isinstance(values[0], Mapping) and isinstance(values[1], Mapping):
-                return _add(values[0], values[1], -1)
+                order = 2 if rule == "second-derivative" else 1
+                return _add(values[0], _scale(values[1], Fraction(order)), -1)
             return None
         if rule == "pure-argument":
             for v in values:
@@ -426,7 +427,7 @@ class Evaluation:
     def _argument(self, tree: Tree, rule: str | None, position: int) -> Value:
         """Return the formula of an argument, counting its missing formulas only where the rule
         of the operator uses that argument."""
-        used = rule in ("product", "derivative", "pure-argument") or (
+        used = rule in ("product", "derivative", "second-derivative", "pure-argument") or (
             rule == "preserve" and position == 0
         )
         if used:

@@ -647,6 +647,8 @@ vocabularies:
       name: the sum of the exponents of the arguments
     - value: derivative
       name: the first argument divided by the second
+    - value: second-derivative
+      name: the first argument divided by the square of the second
     - value: pure
       name: a pure number, whatever the arguments
     - value: pure-argument

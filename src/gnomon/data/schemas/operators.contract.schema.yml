@@ -37,6 +37,7 @@ properties:
           - preserve
           - product
           - derivative
+          - second-derivative
           - pure
           - pure-argument
           - unchecked
