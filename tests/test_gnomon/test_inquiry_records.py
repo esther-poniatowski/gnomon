@@ -52,7 +52,10 @@ def test_a_slot_without_an_identified_record_or_a_typed_placeholder_is_reported(
     assert unresolved_slots(question, records, TYPES) == []
     question["subject"] = {
         "target_system": "system.b",
-        "phenomenon": {"placeholder": "phenomenon", "description": "the geometry of the representation"},
+        "phenomenon": {
+            "placeholder": "phenomenon",
+            "description": "the geometry of the representation",
+        },
     }
     assert texts(unresolved_slots(question, records, TYPES)) == [
         "subject.target_system: system.b carries no identification, so its referent is not fixed"
@@ -127,8 +130,12 @@ def test_a_credence_outside_the_unit_interval_or_without_basis_is_reported() -> 
 
 def test_an_answer_status_outside_the_attitudes_is_reported() -> None:
     """The former status `informally-backed` mixed an attitude with a support, and is now refused."""
-    record = {"type": "answer", "status": "informally-backed", "support": "informal",
-              "grounds": [{"role": "idealization", "removable": "partly"}]}
+    record = {
+        "type": "answer",
+        "status": "informally-backed",
+        "support": "informal",
+        "grounds": [{"role": "idealization", "removable": "partly"}],
+    }
     assert texts(inadmissible_values(record, admitted_values("answer"))) == [
         "status: informally-backed is not admitted",
         "grounds.removable: partly is not admitted",
@@ -140,26 +147,39 @@ OCCURRENCES = occurrence_by_category()
 
 def test_an_occurrence_class_that_the_category_does_not_admit_is_reported() -> None:
     """A regularity relates occurrences without being one; a structural property holds pointwise."""
-    assert texts(mismatched_occurrence({"category": "regularity", "occurrence": "event"}, OCCURRENCES)) == [
-        "occurrence: event is no occurrence class of a regularity, which admits not-applicable"
-    ]
-    assert texts(mismatched_occurrence({"category": "structural-property", "occurrence": "process"}, OCCURRENCES)) == [
-        "occurrence: process is no occurrence class of a structural-property, which admits state"
-    ]
-    assert mismatched_occurrence({"category": "particular-occurrence", "occurrence": "event"}, OCCURRENCES) == []
+    assert texts(
+        mismatched_occurrence({"category": "regularity", "occurrence": "event"}, OCCURRENCES)
+    ) == ["occurrence: event is no occurrence class of a regularity, which admits not-applicable"]
+    assert texts(
+        mismatched_occurrence(
+            {"category": "structural-property", "occurrence": "process"}, OCCURRENCES
+        )
+    ) == ["occurrence: process is no occurrence class of a structural-property, which admits state"]
+    assert (
+        mismatched_occurrence(
+            {"category": "particular-occurrence", "occurrence": "event"}, OCCURRENCES
+        )
+        == []
+    )
     assert mismatched_occurrence({"category": None, "occurrence": None}, OCCURRENCES) == []
 
 
 def test_a_placeholder_whose_type_does_not_fit_its_slot_is_reported() -> None:
     """The target-system slot awaits a system, and the phenomenon slot a phenomenon."""
-    question = {"subject": {"target_system": {"placeholder": "phenomenon", "description": "a readout"},
-                            "phenomenon": {"placeholder": "system", "description": "a network"}}}
+    question = {
+        "subject": {
+            "target_system": {"placeholder": "phenomenon", "description": "a readout"},
+            "phenomenon": {"placeholder": "system", "description": "a network"},
+        }
+    }
     assert texts(unresolved_slots(question, {}, TYPES)) == [
         "subject.target_system: the placeholder type 'phenomenon' does not fit the slot, which awaits 'system'",
         "subject.phenomenon: the placeholder type 'system' does not fit the slot, which awaits 'phenomenon'",
     ]
-    question["subject"] = {"target_system": {"placeholder": "system", "description": "networks of the benchmark"},
-                           "phenomenon": {"placeholder": "phenomenon", "description": "their geometry"}}
+    question["subject"] = {
+        "target_system": {"placeholder": "system", "description": "networks of the benchmark"},
+        "phenomenon": {"placeholder": "phenomenon", "description": "their geometry"},
+    }
     assert unresolved_slots(question, {}, TYPES) == []
 
 
@@ -175,8 +195,12 @@ def test_the_dispositions_of_the_fixture_assessments() -> None:
 
 def test_a_corrective_answer_that_passes_its_tests_is_corrective_rather_than_satisfied() -> None:
     """A corrective answer shows that its question has no true direct answer, so it cannot satisfy it."""
-    passing = {"tests": {"admissibility": {"product": {"verdict": "not-applicable"}},
-                         "warrant": {"closure": {"verdict": "pass"}}}}
+    passing = {
+        "tests": {
+            "admissibility": {"product": {"verdict": "not-applicable"}},
+            "warrant": {"closure": {"verdict": "pass"}},
+        }
+    }
     assert disposition(passing) == "satisfied"
     assert disposition(passing, "partial") == "satisfied"
     assert disposition(passing, "corrective") == "corrective"
@@ -186,7 +210,10 @@ def test_a_corrective_answer_that_passes_its_tests_is_corrective_rather_than_sat
 
 def test_an_appraisal_is_reported_unless_the_answer_passes() -> None:
     appraisal = [{"virtue": "unification", "assessment": "high"}]
-    pending = {"tests": {"admissibility": {"scope": {"verdict": "pending"}}}, "appraisal": appraisal}
+    pending = {
+        "tests": {"admissibility": {"scope": {"verdict": "pending"}}},
+        "appraisal": appraisal,
+    }
     assert texts(premature_appraisal(pending)) == [
         "appraisal: the answer is appraised although its disposition is withheld"
     ]
@@ -197,22 +224,38 @@ def test_an_appraisal_is_reported_unless_the_answer_passes() -> None:
 def test_an_assessment_of_a_construct_holds_one_verdict_per_constraint() -> None:
     """A construct is tested against the constraints of its problem; an answer against its question."""
     records = {
-        "prob.a": {"type": "problem", "constraints": [{"name": "reproduces-delay"}, {"name": "derives-duration"}]},
+        "prob.a": {
+            "type": "problem",
+            "constraints": [{"name": "reproduces-delay"}, {"name": "derives-duration"}],
+        },
         "quest.a": {"type": "question"},
         "mod.a": {"type": "model"},
         "ans.a": {"type": "answer"},
         "phen.a": {"type": "phenomenon"},
     }
-    verdicts = [{"constraint": "reproduces-delay", "verdict": "pass"}, {"constraint": "derives-duration", "verdict": "fail"}]
+    verdicts = [
+        {"constraint": "reproduces-delay", "verdict": "pass"},
+        {"constraint": "derives-duration", "verdict": "fail"},
+    ]
     of_model = {"assesses": "mod.a", "against": "prob.a", "tests": {"constraints": verdicts}}
     assert texts(misdirected_assessment(of_model, records, CONSTRUCTS)) == []
     assert disposition(of_model) == "not-satisfied"
-    wrong = {"assesses": "mod.a", "against": "quest.a", "tests": {"constraints": [{"constraint": "stable"}]}}
+    wrong = {
+        "assesses": "mod.a",
+        "against": "quest.a",
+        "tests": {"constraints": [{"constraint": "stable"}]},
+    }
     assert texts(misdirected_assessment(wrong, records, CONSTRUCTS)) == [
         "against: quest.a is a question record, and an assessment of a model is made against a problem",
     ]
-    unknown = {"assesses": "mod.a", "against": "prob.a", "tests": {"constraints": [{"constraint": "stable"}],
-                                                                  "warrant": {"closure": {"verdict": "pass"}}}}
+    unknown = {
+        "assesses": "mod.a",
+        "against": "prob.a",
+        "tests": {
+            "constraints": [{"constraint": "stable"}],
+            "warrant": {"closure": {"verdict": "pass"}},
+        },
+    }
     assert texts(misdirected_assessment(unknown, records, CONSTRUCTS)) == [
         "tests.warrant: an assessment of a construct holds no tests of warrant",
         "tests.constraints: stable is no constraint of prob.a",
@@ -224,13 +267,32 @@ def test_an_assessment_of_a_construct_holds_one_verdict_per_constraint() -> None
 
 
 def test_an_assessment_of_an_answer_keeps_its_two_levels_of_tests() -> None:
-    records = {"prob.a": {"type": "problem"}, "ans.a": {"type": "answer"}, "phen.a": {"type": "phenomenon"},
-               "quest.a": {"type": "question"}}
-    tests = {"admissibility": {"scope": {"verdict": "pass"}}, "warrant": {"closure": {"verdict": "pass"}}}
-    assert texts(misdirected_assessment({"assesses": "ans.a", "against": "quest.a", "tests": tests}, records,
-                                        CONSTRUCTS)) == []
-    misread = {"assesses": "ans.a", "against": "prob.a",
-               "tests": {"admissibility": {"scope": {"verdict": "pass"}}, "constraints": [{"constraint": "c"}]}}
+    records = {
+        "prob.a": {"type": "problem"},
+        "ans.a": {"type": "answer"},
+        "phen.a": {"type": "phenomenon"},
+        "quest.a": {"type": "question"},
+    }
+    tests = {
+        "admissibility": {"scope": {"verdict": "pass"}},
+        "warrant": {"closure": {"verdict": "pass"}},
+    }
+    assert (
+        texts(
+            misdirected_assessment(
+                {"assesses": "ans.a", "against": "quest.a", "tests": tests}, records, CONSTRUCTS
+            )
+        )
+        == []
+    )
+    misread = {
+        "assesses": "ans.a",
+        "against": "prob.a",
+        "tests": {
+            "admissibility": {"scope": {"verdict": "pass"}},
+            "constraints": [{"constraint": "c"}],
+        },
+    }
     assert texts(misdirected_assessment(misread, records, CONSTRUCTS)) == [
         "against: prob.a is a problem record, and an assessment of an answer is made against a question",
         "tests.warrant: an assessment of an answer holds its tests of warrant",
@@ -246,9 +308,19 @@ def test_an_assessment_of_an_answer_keeps_its_two_levels_of_tests() -> None:
 
 def test_a_problem_bounds_the_aim_and_the_request_of_its_questions() -> None:
     """The associated question takes the request of the demand; each serving question an admitted aim."""
-    problem = {"id": "prob.a", "type": "problem", "result_type": "explanation", "request": "one",
-               "associated_question": "quest.a"}
-    question = {"type": "question", "addresses": "prob.a", "request": "one", "task": {"epistemic_aim": "explanation"}}
+    problem = {
+        "id": "prob.a",
+        "type": "problem",
+        "result_type": "explanation",
+        "request": "one",
+        "associated_question": "quest.a",
+    }
+    question = {
+        "type": "question",
+        "addresses": "prob.a",
+        "request": "one",
+        "task": {"epistemic_aim": "explanation"},
+    }
     records = {"prob.a": problem, "quest.a": question, "phen.a": {"type": "phenomenon"}}
     assert texts(mismatched_request(problem, records)) == []
     assert texts(unbounded_aim(question, records, result_aims())) == []
@@ -270,17 +342,35 @@ def test_a_problem_bounds_the_aim_and_the_request_of_its_questions() -> None:
     ]
 
 
-PASSING = {"admissibility": {"scope": {"verdict": "pass"}}, "warrant": {"closure": {"verdict": "pass"}}}
+PASSING = {
+    "admissibility": {"scope": {"verdict": "pass"}},
+    "warrant": {"closure": {"verdict": "pass"}},
+}
 
 
 def test_a_demand_for_a_claim_is_met_by_an_accepted_complete_satisfied_answer() -> None:
-    problem = {"id": "prob.a", "type": "problem", "result_type": "explanation", "request": "one", "status": "solved"}
+    problem = {
+        "id": "prob.a",
+        "type": "problem",
+        "result_type": "explanation",
+        "request": "one",
+        "status": "solved",
+    }
     records = {
         "prob.a": problem,
         "quest.a": {"type": "question", "addresses": "prob.a"},
-        "ans.a": {"type": "answer", "answers": "quest.a", "status": "accepted",
-                  "erotetic_relation": {"value": "complete"}},
-        "assess.a": {"type": "assessment", "assesses": "ans.a", "against": "quest.a", "tests": PASSING},
+        "ans.a": {
+            "type": "answer",
+            "answers": "quest.a",
+            "status": "accepted",
+            "erotetic_relation": {"value": "complete"},
+        },
+        "assess.a": {
+            "type": "assessment",
+            "assesses": "ans.a",
+            "against": "quest.a",
+            "tests": PASSING,
+        },
     }
     assert demand_met(problem, records, CLASSES, HOLDERS) is True
     assert texts(unsupported_outcome(problem, records, CLASSES, HOLDERS)) == []
@@ -296,13 +386,23 @@ def test_a_demand_for_a_claim_is_met_by_an_accepted_complete_satisfied_answer() 
 
 
 def test_a_demand_for_a_construct_is_met_by_a_stabilized_satisfied_construct() -> None:
-    problem = {"id": "prob.a", "type": "problem", "result_type": "model", "request": "one",
-               "constraints": [{"name": "reproduces-delay"}]}
+    problem = {
+        "id": "prob.a",
+        "type": "problem",
+        "result_type": "model",
+        "request": "one",
+        "constraints": [{"name": "reproduces-delay"}],
+    }
     verdicts = [{"constraint": "reproduces-delay", "verdict": "pass"}]
     records = {
         "prob.a": problem,
         "mod.a": {"type": "model", "status": "provisional"},
-        "assess.a": {"type": "assessment", "assesses": "mod.a", "against": "prob.a", "tests": {"constraints": verdicts}},
+        "assess.a": {
+            "type": "assessment",
+            "assesses": "mod.a",
+            "against": "prob.a",
+            "tests": {"constraints": verdicts},
+        },
     }
     assert demand_met(problem, records, CLASSES, HOLDERS) is False
     records["mod.a"]["status"] = "stabilized"
@@ -312,7 +412,12 @@ def test_a_demand_for_a_construct_is_met_by_a_stabilized_satisfied_construct() -
 
 
 def test_a_decision_is_met_once_every_candidate_is_settled() -> None:
-    problem = {"id": "prob.a", "type": "problem", "result_type": "explanation", "request": "decision"}
+    problem = {
+        "id": "prob.a",
+        "type": "problem",
+        "result_type": "explanation",
+        "request": "decision",
+    }
     records = {
         "prob.a": problem,
         "quest.a": {"type": "question", "addresses": "prob.a"},
@@ -329,19 +434,35 @@ def test_a_decision_is_met_once_every_candidate_is_settled() -> None:
 
 
 def test_a_demand_of_a_type_without_a_solving_rule_is_not_read() -> None:
-    problem = {"id": "prob.a", "type": "problem", "result_type": "phenomenon", "request": "one", "status": "solved"}
+    problem = {
+        "id": "prob.a",
+        "type": "problem",
+        "result_type": "phenomenon",
+        "request": "one",
+        "status": "solved",
+    }
     assert demand_met(problem, {"prob.a": problem}, CLASSES, HOLDERS) is None
     assert unsupported_outcome(problem, {"prob.a": problem}, CLASSES, HOLDERS) == []
 
 
 def test_an_accepted_corrective_answer_to_the_associated_question_dissolves_the_problem() -> None:
-    problem = {"id": "prob.a", "type": "problem", "result_type": "explanation", "request": "one",
-               "status": "posed", "associated_question": "quest.a"}
+    problem = {
+        "id": "prob.a",
+        "type": "problem",
+        "result_type": "explanation",
+        "request": "one",
+        "status": "posed",
+        "associated_question": "quest.a",
+    }
     records = {
         "prob.a": problem,
         "quest.a": {"type": "question", "addresses": "prob.a", "request": "one"},
-        "ans.a": {"type": "answer", "answers": "quest.a", "status": "accepted",
-                  "erotetic_relation": {"value": "corrective"}},
+        "ans.a": {
+            "type": "answer",
+            "answers": "quest.a",
+            "status": "accepted",
+            "erotetic_relation": {"value": "corrective"},
+        },
     }
     assert texts(unsupported_outcome(problem, records, CLASSES, HOLDERS)) == [
         "status: posed, and an accepted answer denies a presupposition of quest.a"
@@ -355,20 +476,31 @@ def test_an_accepted_corrective_answer_to_the_associated_question_dissolves_the_
 
 
 def test_the_stated_knowledge_obstacles_agree_with_the_records() -> None:
-    problem = {"id": "prob.a", "type": "problem", "result_type": "explanation", "request": "one",
-               "associated_question": "quest.a", "knowledge_obstacles": [{"obstacle": "open-gap"}]}
-    records = {"prob.a": problem, "quest.a": {"type": "question", "addresses": "prob.a", "request": "one"}}
+    problem = {
+        "id": "prob.a",
+        "type": "problem",
+        "result_type": "explanation",
+        "request": "one",
+        "associated_question": "quest.a",
+        "knowledge_obstacles": [{"obstacle": "open-gap"}],
+    }
+    records = {
+        "prob.a": problem,
+        "quest.a": {"type": "question", "addresses": "prob.a", "request": "one"},
+    }
     assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == []
     records["ans.a"] = {"type": "answer", "answers": "quest.a", "status": "hypothesized"}
     assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == [
         "knowledge_obstacles: the problem states open-gap, which its records contradict",
         "knowledge_obstacles: the records show unassessed-candidates, which the problem does not state",
     ]
-    problem["knowledge_obstacles"] = [{"obstacle": "unassessed-candidates"}, {"obstacle": "conflict"}]
+    problem["knowledge_obstacles"] = [
+        {"obstacle": "unassessed-candidates"},
+        {"obstacle": "conflict"},
+    ]
     assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == []
     records["ans.a"].update(status="accepted", erotetic_relation={"value": "corrective"})
     assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == [
         "knowledge_obstacles: the records show unsound-presupposition, which the problem does not state",
         "knowledge_obstacles: the problem states unassessed-candidates, which its records contradict",
     ]
-

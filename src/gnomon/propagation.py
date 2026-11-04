@@ -94,11 +94,22 @@ def revisions(records: Records, itineraries: Records | None = None) -> list[Revi
                 continue
             kind = str(revises.get("kind"))
             flagged = tuple(
-                d for d in dependents(revises["record"], records)
+                d
+                for d in dependents(revises["record"], records)
                 if kind in MONOTONIC_KINDS or not rests_monotonically(records[d])
             )
-            reviewed = {str(r.get("dependent")) for r in revises.get("reviews") or []
-                        if isinstance(r, Mapping) and r.get("state") not in (None, "pending")}
-            found.append(Revision(f"{itinerary.get('id')}.{step.get('id')}", revises["record"], kind, flagged,
-                                  tuple(d for d in flagged if d not in reviewed)))
+            reviewed = {
+                str(r.get("dependent"))
+                for r in revises.get("reviews") or []
+                if isinstance(r, Mapping) and r.get("state") not in (None, "pending")
+            }
+            found.append(
+                Revision(
+                    f"{itinerary.get('id')}.{step.get('id')}",
+                    revises["record"],
+                    kind,
+                    flagged,
+                    tuple(d for d in flagged if d not in reviewed),
+                )
+            )
     return found

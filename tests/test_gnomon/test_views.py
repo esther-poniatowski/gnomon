@@ -18,21 +18,31 @@ from .paths import EXAMPLES
 
 RECORDS: dict[str, dict[str, Any]] = {
     "prob.geometry.readout": {"type": "problem", "title": "Readout", "status": "posed"},
-    "quest.geometry.capacity": {"type": "question", "addresses": "prob.geometry.readout", "status": "posed"},
+    "quest.geometry.capacity": {
+        "type": "question",
+        "addresses": "prob.geometry.readout",
+        "status": "posed",
+    },
     "quest.geometry.dimension": {
         "type": "question",
         "addresses": "prob.geometry.readout",
         "links": [{"question": "quest.geometry.capacity", "relation": "subquestion-of"}],
     },
     "quest.geometry.loose": {"type": "question"},
-    "ans.geometry.kernel": {"type": "answer", "answers": "quest.geometry.capacity", "status": "entertained"},
+    "ans.geometry.kernel": {
+        "type": "answer",
+        "answers": "quest.geometry.capacity",
+        "status": "entertained",
+    },
     "assess.geometry.kernel": {"type": "assessment", "assesses": "ans.geometry.kernel"},
     "design.geometry.sweep": {"type": "design", "serves": "quest.geometry.capacity"},
     "design.geometry.method": {"type": "design", "serves": "prob.geometry.readout"},
 }
 
 
-def test_a_problem_governs_its_questions_and_a_question_its_subquestions_answers_and_designs() -> None:
+def test_a_problem_governs_its_questions_and_a_question_its_subquestions_answers_and_designs() -> (
+    None
+):
     assert render_tree(question_tree(RECORDS)) == (
         "problem prob.geometry.readout: Readout [posed]\n"
         "  question quest.geometry.capacity [posed]\n"
@@ -46,15 +56,25 @@ def test_a_problem_governs_its_questions_and_a_question_its_subquestions_answers
 
 
 def test_a_subquestion_of_an_absent_question_forms_a_root() -> None:
-    records = {"quest.a.b": {"type": "question",
-                             "links": [{"question": "quest.a.absent", "relation": "subquestion-of"}]}}
+    records = {
+        "quest.a.b": {
+            "type": "question",
+            "links": [{"question": "quest.a.absent", "relation": "subquestion-of"}],
+        }
+    }
     assert render_tree(question_tree(records)) == "question quest.a.b\n"
 
 
 def test_questions_on_a_cycle_of_links_appear_once() -> None:
     records = {
-        "quest.a.b": {"type": "question", "links": [{"question": "quest.a.c", "relation": "subquestion-of"}]},
-        "quest.a.c": {"type": "question", "links": [{"question": "quest.a.b", "relation": "subquestion-of"}]},
+        "quest.a.b": {
+            "type": "question",
+            "links": [{"question": "quest.a.c", "relation": "subquestion-of"}],
+        },
+        "quest.a.c": {
+            "type": "question",
+            "links": [{"question": "quest.a.b", "relation": "subquestion-of"}],
+        },
     }
     text = render_tree(question_tree(records))
     assert text == "question quest.a.b\n  question quest.a.c\n"
@@ -67,7 +87,9 @@ def test_an_empty_project_yields_an_empty_tree() -> None:
 def test_the_command_prints_the_tree_of_a_directory_read_recursively(tmp_path: Path) -> None:
     (tmp_path / "sub").mkdir()
     for key, record in RECORDS.items():
-        (tmp_path / "sub" / f"{key}.yml").write_text(yaml.safe_dump({"id": key, **record}), encoding="utf-8")
+        (tmp_path / "sub" / f"{key}.yml").write_text(
+            yaml.safe_dump({"id": key, **record}), encoding="utf-8"
+        )
     result = CliRunner().invoke(app, ["tree", str(tmp_path)])
     assert result.exit_code == 0
     assert result.output == render_tree(question_tree(RECORDS))
@@ -95,12 +117,30 @@ def test_every_view_of_the_worked_inquiries_follows_its_schema_and_is_stable(tmp
 
 
 def test_the_progress_of_an_itinerary_orders_its_steps_and_marks_impeachment() -> None:
-    records = {"itin.a.b": {"type": "itinerary", "steps": [
-        {"id": "late", "activity": "testing", "inputs": [{"ref": "itin.a.b.early"}], "output": {"ref": "assess.a"},
-         "norm": {"verdict": "pending"}},
-        {"id": "early", "activity": "derivation", "inputs": [], "output": {"ref": "mod.a"}, "norm": {"verdict": "fail"}},
-    ]}}
-    view = gnomon.views.itinerary_progress(records, impeached={"mod.a", "assess.a"}, conditional=set())
+    records = {
+        "itin.a.b": {
+            "type": "itinerary",
+            "steps": [
+                {
+                    "id": "late",
+                    "activity": "testing",
+                    "inputs": [{"ref": "itin.a.b.early"}],
+                    "output": {"ref": "assess.a"},
+                    "norm": {"verdict": "pending"},
+                },
+                {
+                    "id": "early",
+                    "activity": "derivation",
+                    "inputs": [],
+                    "output": {"ref": "mod.a"},
+                    "norm": {"verdict": "fail"},
+                },
+            ],
+        }
+    }
+    view = gnomon.views.itinerary_progress(
+        records, impeached={"mod.a", "assess.a"}, conditional=set()
+    )
     assert [s["step"] for s in view["steps"]] == ["early", "late"]
     assert {s["state"] for s in view["steps"]} == {"impeached"}
     assert view["edges"] == [{"itinerary": "itin.a.b", "from": "early", "to": "late"}]

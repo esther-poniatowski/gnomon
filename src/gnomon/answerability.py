@@ -119,7 +119,9 @@ def routes_of(question: Mapping[str, Any]) -> tuple[str, ...]:
     return ROUTES if isinstance(named, str) and named.strip() else ROUTES[:1]
 
 
-def conditions_on(route: str, dependencies: Mapping[str, Mapping[str, list[str]]]) -> dict[str, list[str]]:
+def conditions_on(
+    route: str, dependencies: Mapping[str, Mapping[str, list[str]]]
+) -> dict[str, list[str]]:
     """Return the conditions that apply on a route, each with the conditions on which it depends there."""
     return {
         condition: [*(table.get(BOTH) or []), *(table.get(route) or [])]
@@ -131,8 +133,11 @@ def conditions_on(route: str, dependencies: Mapping[str, Mapping[str, list[str]]
 def asserted(question: Mapping[str, Any], condition: str, route: str) -> ConditionState | None:
     """Return the state that the question asserts for a condition on a route, or None."""
     entries = [
-        e for e in question.get("answerability") or []
-        if isinstance(e, Mapping) and e.get("condition") == condition and e.get("route", BOTH) in (route, BOTH)
+        e
+        for e in question.get("answerability") or []
+        if isinstance(e, Mapping)
+        and e.get("condition") == condition
+        and e.get("route", BOTH) in (route, BOTH)
     ]
     for state in ("refuted", "established"):
         chosen = [e for e in entries if e.get("state") == state]
@@ -155,21 +160,38 @@ def derived(question: Mapping[str, Any], condition: str, records: Records) -> Co
     if condition == "soundness":
         phenomenon = records.get(str(subject.get("phenomenon"))) or {}
         if phenomenon.get("evidential_status") in REFUTING_STATUSES:
-            return ConditionState(condition, "refuted", "derived", (str(subject.get("phenomenon")),))
+            return ConditionState(
+                condition, "refuted", "derived", (str(subject.get("phenomenon")),)
+            )
     if condition == "answer-type":
-        reached = {"question": question,
-                   "phenomenon": records.get(str(subject.get("phenomenon"))) or {},
-                   "target-system": records.get(str(subject.get("target_system"))) or {}}
+        reached = {
+            "question": question,
+            "phenomenon": records.get(str(subject.get("phenomenon"))) or {},
+            "target-system": records.get(str(subject.get("target_system"))) or {},
+        }
         unmet = c.unmet_by_aim(question, reached, c.requirements_by_aim())
         unmet += c.unmet_general(question, c.always_required("question"))
         if c.at(question, "task.epistemic_aim") and not unmet:
             return ConditionState(condition, "established", "derived")
     if condition == "candidates":
-        for answer in (r for r in records.values() if r.get("type") == "answer" and r.get("answers") == question.get("id")):
-            for assessment in (r for r in records.values() if r.get("type") == "assessment" and r.get("assesses") == answer.get("id")):
-                verdicts = [(t or {}).get("verdict") for t in ((assessment.get("tests") or {}).get("admissibility") or {}).values()]
+        for answer in (
+            r
+            for r in records.values()
+            if r.get("type") == "answer" and r.get("answers") == question.get("id")
+        ):
+            for assessment in (
+                r
+                for r in records.values()
+                if r.get("type") == "assessment" and r.get("assesses") == answer.get("id")
+            ):
+                verdicts = [
+                    (t or {}).get("verdict")
+                    for t in ((assessment.get("tests") or {}).get("admissibility") or {}).values()
+                ]
                 if verdicts and all(v in ("pass", "not-applicable") for v in verdicts):
-                    return ConditionState(condition, "established", "derived", (str(assessment.get("id")),))
+                    return ConditionState(
+                        condition, "established", "derived", (str(assessment.get("id")),)
+                    )
     return None
 
 
@@ -186,7 +208,9 @@ def itinerary_state(records: Records) -> tuple[set[str], set[str], list[str]]:
     anew: list[str] = []
     for itinerary in (r for r in records.values() if r.get("type") == "itinerary"):
         own = f"{itinerary.get('id')}."
-        steps = {str(s.get("id")): s for s in itinerary.get("steps") or [] if isinstance(s, Mapping)}
+        steps = {
+            str(s.get("id")): s for s in itinerary.get("steps") or [] if isinstance(s, Mapping)
+        }
         bad_steps: set[str] = set()
         open_steps: set[str] = set()
         changed = True
@@ -194,9 +218,17 @@ def itinerary_state(records: Records) -> tuple[set[str], set[str], list[str]]:
             changed = False
             for name, step in steps.items():
                 verdict = (step.get("norm") or {}).get("verdict")
-                refs = [str(i.get("ref")) for i in step.get("inputs") or [] if isinstance(i, Mapping)]
-                upstream_bad = any(r in impeached or (r.startswith(own) and r[len(own):] in bad_steps) for r in refs)
-                upstream_open = any(r in conditional or (r.startswith(own) and r[len(own):] in open_steps) for r in refs)
+                refs = [
+                    str(i.get("ref")) for i in step.get("inputs") or [] if isinstance(i, Mapping)
+                ]
+                upstream_bad = any(
+                    r in impeached or (r.startswith(own) and r[len(own) :] in bad_steps)
+                    for r in refs
+                )
+                upstream_open = any(
+                    r in conditional or (r.startswith(own) and r[len(own) :] in open_steps)
+                    for r in refs
+                )
                 output = str((step.get("output") or {}).get("ref") or "")
                 if (verdict == "fail" or upstream_bad) and name not in bad_steps:
                     bad_steps.add(name)
@@ -210,21 +242,31 @@ def itinerary_state(records: Records) -> tuple[set[str], set[str], list[str]]:
                         conditional.add(output)
         for name, step in sorted(steps.items()):
             output = str((step.get("output") or {}).get("ref") or "")
-            if (step.get("norm") or {}).get("verdict") == "pending" and (records.get(output) or {}).get("status") == "stabilized":
+            if (step.get("norm") or {}).get("verdict") == "pending" and (
+                records.get(output) or {}
+            ).get("status") == "stabilized":
                 anew.append(f"{own}{name}")
     return impeached, conditional - impeached, anew
 
 
-def readiness(act: Activity, records: Records, types: Mapping[str, Any], impeached: set[str],
-              conditional: set[str]) -> Act:
+def readiness(
+    act: Activity,
+    records: Records,
+    types: Mapping[str, Any],
+    impeached: set[str],
+    conditional: set[str],
+) -> Act:
     """Return whether every input that an activity requires is held by an unimpeached record."""
     missing: list[str] = []
     rests_on_pending = False
     for held in act.inputs:
         if held.least == 0 or held.types & {"source"}:
             continue
-        holders = [ident for ident, r in records.items() if ident not in impeached
-                   and any(holds(r, types.get(t) or {}) for t in held.types)]
+        holders = [
+            ident
+            for ident, r in records.items()
+            if ident not in impeached and any(holds(r, types.get(t) or {}) for t in held.types)
+        ]
         if len(holders) < held.least:
             missing.append(" | ".join(sorted(held.types)))
         elif all(h in conditional for h in holders):
@@ -245,7 +287,9 @@ def merge(diagnoses: list[Diagnosis]) -> Diagnosis:
     return merged
 
 
-def diagnose(records: Records, registry: Mapping[str, Any] | None = None, local: Records | None = None) -> Diagnosis:
+def diagnose(
+    records: Records, registry: Mapping[str, Any] | None = None, local: Records | None = None
+) -> Diagnosis:
     """Return the diagnosis of every question of a set of records.
 
     ``records`` holds every record that a state may read, such as the phenomenon of another folder;
@@ -261,9 +305,12 @@ def diagnose(records: Records, registry: Mapping[str, Any] | None = None, local:
     registry = registry or answerability_registry()
     dependencies = registry.get("dependencies") or {}
     order = [str(name).replace(" ", "-") for name in registry.get("conditions") or []]
-    deps = {str(k).replace(" ", "-"): {route: [str(d).replace(" ", "-") for d in names]
-                                         for route, names in (v or {}).items()}
-            for k, v in dependencies.items()}
+    deps = {
+        str(k).replace(" ", "-"): {
+            route: [str(d).replace(" ", "-") for d in names] for route, names in (v or {}).items()
+        }
+        for k, v in dependencies.items()
+    }
     acting: dict[str, list[str]] = {}
     for entry in registry.get("activities") or []:
         name = str(entry.get("condition")).replace(" ", "-")
@@ -272,8 +319,12 @@ def diagnose(records: Records, registry: Mapping[str, Any] | None = None, local:
     acts, types = activities(), product_types()
     local = records if local is None else local
     impeached, conditional, anew = itinerary_state(local)
-    result = Diagnosis(impeached=impeached, conditional=conditional, judge_anew=anew,
-                       revisions=revisions(records, itineraries=local))
+    result = Diagnosis(
+        impeached=impeached,
+        conditional=conditional,
+        judge_anew=anew,
+        revisions=revisions(records, itineraries=local),
+    )
     for ident in sorted(i for i, r in local.items() if r.get("type") == "question"):
         question = local[ident]
         routes = []
@@ -281,18 +332,31 @@ def diagnose(records: Records, registry: Mapping[str, Any] | None = None, local:
             applicable = conditions_on(route, deps)
             if c.at(question, "task.epistemic_aim") == "explication":
                 # the explicandum is not a slot, so its definiteness is no condition and a dependency on it is void
-                applicable = {k: [d for d in v if d != "definiteness"] for k, v in applicable.items() if k != "definiteness"}
+                applicable = {
+                    k: [d for d in v if d != "definiteness"]
+                    for k, v in applicable.items()
+                    if k != "definiteness"
+                }
             states: dict[str, ConditionState] = {}
             for condition in (name for name in order if name in applicable):
-                states[condition] = (asserted(question, condition, route) or derived(question, condition, records)
-                                     or ConditionState(condition, "not-established", "default"))
+                states[condition] = (
+                    asserted(question, condition, route)
+                    or derived(question, condition, records)
+                    or ConditionState(condition, "not-established", "default")
+                )
             opened = {
-                condition: tuple(readiness(acts[a], local, types, impeached, conditional)
-                                 for a in acting.get(condition, []) if a in acts)
+                condition: tuple(
+                    readiness(acts[a], local, types, impeached, conditional)
+                    for a in acting.get(condition, [])
+                    if a in acts
+                )
                 for condition, state in states.items()
                 if state.state == "not-established"
-                and all(states.get(d, ConditionState(d, "established", "default")).state == "established"
-                        for d in applicable[condition])
+                and all(
+                    states.get(d, ConditionState(d, "established", "default")).state
+                    == "established"
+                    for d in applicable[condition]
+                )
             }
             refuted = tuple(cond for cond, state in states.items() if state.state == "refuted")
             routes.append(RouteDiagnosis(route, tuple(states.values()), opened, refuted))
@@ -304,22 +368,52 @@ def as_document(diagnosis: Diagnosis) -> dict[str, Any]:
     """Return the diagnosis as a mapping in a stable order, for a YAML report."""
     return {
         "questions": [
-            {"question": q.question, "routes": [
-                {"route": r.route,
-                 "conditions": [{"condition": s.condition, "state": s.state, "source": s.source,
-                                 **({"pointers": list(s.pointers)} if s.pointers else {})} for s in r.states],
-                 "open": [{"condition": cond, "acts": [
-                     {"activity": a.activity, "ready": a.ready,
-                      **({"missing": list(a.missing)} if a.missing else {}),
-                      **({"conditional": True} if a.conditional else {})} for a in acts_]}
-                          for cond, acts_ in r.open.items()],
-                 "refuted": [{"condition": cond, "revisions": list(REVISIONS)} for cond in r.refuted]}
-                for r in q.routes]}
+            {
+                "question": q.question,
+                "routes": [
+                    {
+                        "route": r.route,
+                        "conditions": [
+                            {
+                                "condition": s.condition,
+                                "state": s.state,
+                                "source": s.source,
+                                **({"pointers": list(s.pointers)} if s.pointers else {}),
+                            }
+                            for s in r.states
+                        ],
+                        "open": [
+                            {
+                                "condition": cond,
+                                "acts": [
+                                    {
+                                        "activity": a.activity,
+                                        "ready": a.ready,
+                                        **({"missing": list(a.missing)} if a.missing else {}),
+                                        **({"conditional": True} if a.conditional else {}),
+                                    }
+                                    for a in acts_
+                                ],
+                            }
+                            for cond, acts_ in r.open.items()
+                        ],
+                        "refuted": [
+                            {"condition": cond, "revisions": list(REVISIONS)} for cond in r.refuted
+                        ],
+                    }
+                    for r in q.routes
+                ],
+            }
             for q in diagnosis.questions
         ],
         "revisions": [
-            {"step": r.step, "record": r.record, "kind": r.kind, "flagged": list(r.flagged),
-             "to_review": list(r.to_review)}
+            {
+                "step": r.step,
+                "record": r.record,
+                "kind": r.kind,
+                "flagged": list(r.flagged),
+                "to_review": list(r.to_review),
+            }
             for r in sorted(diagnosis.revisions, key=lambda x: x.step)
         ],
         "itineraries": {
@@ -337,16 +431,25 @@ def render_text(diagnosis: Diagnosis) -> str:
         for r in q.routes:
             lines.append(f"{q.question} [{r.route}]")
             for cond, acts_ in r.open.items():
-                ready = ", ".join(a.activity + ("" if a.ready else " (missing " + "; ".join(a.missing) + ")")
-                                  for a in acts_) or "no registered activity"
+                ready = (
+                    ", ".join(
+                        a.activity + ("" if a.ready else " (missing " + "; ".join(a.missing) + ")")
+                        for a in acts_
+                    )
+                    or "no registered activity"
+                )
                 lines.append(f"  open {cond}: {ready}")
             for cond in r.refuted:
                 lines.append(f"  refuted {cond}: revise by {', '.join(REVISIONS)}")
             if not r.open and not r.refuted:
-                lines.append("  every condition is established: obtain the answer, then evaluate it")
+                lines.append(
+                    "  every condition is established: obtain the answer, then evaluate it"
+                )
     for rev in sorted(diagnosis.revisions, key=lambda x: x.step):
         if rev.to_review:
-            lines.append(f"review after the {rev.kind} of {rev.record} ({rev.step}): {', '.join(rev.to_review)}")
+            lines.append(
+                f"review after the {rev.kind} of {rev.record} ({rev.step}): {', '.join(rev.to_review)}"
+            )
     for step in sorted(diagnosis.judge_anew):
         lines.append(f"judge anew the norm of {step}, whose record is stabilized")
     if diagnosis.impeached:
@@ -367,18 +470,45 @@ def malformed_answerability(question: Mapping[str, Any], records: Records) -> li
         where = ("answerability", Entry(index, entry))
         label = f"answerability.{entry.get('condition')}"
         if entry.get("state") == "refuted" and not entry.get("refutation"):
-            found.append(finding(rules.COMPLETENESS_MALFORMED_ANSWERABILITY, f"{label}: a refutation states no kind",
-                                 *where, "refutation"))
+            found.append(
+                finding(
+                    rules.COMPLETENESS_MALFORMED_ANSWERABILITY,
+                    f"{label}: a refutation states no kind",
+                    *where,
+                    "refutation",
+                )
+            )
         if entry.get("refutation") == "lack-of-means" and not entry.get("means"):
-            found.append(finding(rules.COMPLETENESS_MALFORMED_ANSWERABILITY,
-                                 f"{label}: a refutation for lack of means names no means tried", *where, "means"))
+            found.append(
+                finding(
+                    rules.COMPLETENESS_MALFORMED_ANSWERABILITY,
+                    f"{label}: a refutation for lack of means names no means tried",
+                    *where,
+                    "means",
+                )
+            )
         if entry.get("state") in ("established", "refuted") and not entry.get("pointers"):
-            found.append(finding(rules.COMPLETENESS_MALFORMED_ANSWERABILITY,
-                                 f"{label}: the state {entry.get('state')} cites no pointer", *where, "pointers"))
+            found.append(
+                finding(
+                    rules.COMPLETENESS_MALFORMED_ANSWERABILITY,
+                    f"{label}: the state {entry.get('state')} cites no pointer",
+                    *where,
+                    "pointers",
+                )
+            )
         term = records.get(str(entry.get("term"))) or {}
-        if (entry.get("condition") == "definiteness" and entry.get("state") == "established"
-                and term.get("type") in ("target-system", "phenomenon") and term.get("commitment") != "specified"):
-            found.append(finding(rules.COMPLETENESS_MALFORMED_ANSWERABILITY,
-                                 f"{label}: {entry.get('term')} is not specified, which definiteness requires",
-                                 *where, "term"))
+        if (
+            entry.get("condition") == "definiteness"
+            and entry.get("state") == "established"
+            and term.get("type") in ("target-system", "phenomenon")
+            and term.get("commitment") != "specified"
+        ):
+            found.append(
+                finding(
+                    rules.COMPLETENESS_MALFORMED_ANSWERABILITY,
+                    f"{label}: {entry.get('term')} is not specified, which definiteness requires",
+                    *where,
+                    "term",
+                )
+            )
     return found

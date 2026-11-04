@@ -44,9 +44,13 @@ def cli_info() -> None:
 
 @app.command("init")
 def cli_init(
-    directory: str = typer.Argument(..., help="Folder of the new problem, created when it does not exist."),
+    directory: str = typer.Argument(
+        ..., help="Folder of the new problem, created when it does not exist."
+    ),
     with_kinds: list[str] = typer.Option(
-        [], "--with", "-w",
+        [],
+        "--with",
+        "-w",
         help="A further record kind to scaffold, such as model, binding, key, answer, assessment, "
         "itinerary, concept or design; repeat the option for several.",
     ),
@@ -68,7 +72,9 @@ def cli_init(
         raise typer.Exit(code=1) from error
     for path in written:
         typer.echo(f"{path}: written")
-    typer.echo(f"Fill the records in the order of {Path(directory) / '_index.md'}, then run: gnomon check {directory}")
+    typer.echo(
+        f"Fill the records in the order of {Path(directory) / '_index.md'}, then run: gnomon check {directory}"
+    )
 
 
 @app.command("validate")
@@ -104,14 +110,20 @@ class CheckFormat(str, Enum):
 
 @app.command("check")
 def cli_check(
-    directory: str = typer.Argument(..., help="Directory of records, read recursively; each folder is one problem."),
+    directory: str = typer.Argument(
+        ..., help="Directory of records, read recursively; each folder is one problem."
+    ),
     output_format: CheckFormat = typer.Option(
-        CheckFormat.text, "--format", "-f",
+        CheckFormat.text,
+        "--format",
+        "-f",
         help="text prints one line per finding; yaml writes a stable report; sarif "
         "writes a SARIF 2.1.0 log in the findings profile of Elenchos.",
     ),
     output: Path | None = typer.Option(
-        None, "--output", "-o",
+        None,
+        "--output",
+        "-o",
         help="Write the report to this path instead of standard output; missing folders are created.",
     ),
 ) -> None:
@@ -132,18 +144,30 @@ def cli_check(
     workspace = load_workspace(source)
     found = check_workspace(workspace)
     count = len(workspace.by_id)
-    summary = (f"{count} records checked in {len(workspace.problems)} folders, {len(found)} findings, "
-               f"{len(workspace.unfilled)} templates not yet filled")
+    summary = (
+        f"{count} records checked in {len(workspace.problems)} folders, {len(found)} findings, "
+        f"{len(workspace.unfilled)} templates not yet filled"
+    )
     for line in workspace.failures:
         typer.echo(line, err=True)
     if output_format is CheckFormat.text:
-        text = "".join(f"{x.file}: {x.record}: {x.finding.rule.id}: {x.finding.text}\n" for x in found) + summary + "\n"
+        text = (
+            "".join(f"{x.file}: {x.record}: {x.finding.rule.id}: {x.finding.text}\n" for x in found)
+            + summary
+            + "\n"
+        )
     elif output_format is CheckFormat.yaml:
         unfilled = [p.relative_to(source).as_posix() for p in workspace.unfilled]
         text = render_yaml_report(found, source.name, count, unfilled)
     else:
-        stopped = f"{len(workspace.failures)} record files could not be read" if workspace.failures else None
-        text = json.dumps(sarif_log(found, __version__, stopped), indent=2, ensure_ascii=False) + "\n"
+        stopped = (
+            f"{len(workspace.failures)} record files could not be read"
+            if workspace.failures
+            else None
+        )
+        text = (
+            json.dumps(sarif_log(found, __version__, stopped), indent=2, ensure_ascii=False) + "\n"
+        )
     if output is None:
         typer.echo(text, nl=False)
     else:
@@ -169,9 +193,14 @@ class StatusFormat(str, Enum):
 def cli_status(
     directory: str = typer.Argument(..., help="Directory of records, read recursively."),
     output_format: StatusFormat = typer.Option(
-        StatusFormat.text, "--format", "-f", help="text prints the open and refuted conditions; yaml writes the full diagnosis."
+        StatusFormat.text,
+        "--format",
+        "-f",
+        help="text prints the open and refuted conditions; yaml writes the full diagnosis.",
     ),
-    output: Path | None = typer.Option(None, "--output", "-o", help="Write the report to this path instead of standard output."),
+    output: Path | None = typer.Option(
+        None, "--output", "-o", help="Write the report to this path instead of standard output."
+    ),
 ) -> None:
     """List the open conditions of answerability of each question, and the acts that address them.
 
@@ -190,10 +219,14 @@ def cli_status(
     workspace = load_workspace(source)
     for line in workspace.failures:
         typer.echo(line, err=True)
-    diagnosis = merge([diagnose(workspace.by_id, local=problem.records) for problem in workspace.problems])
+    diagnosis = merge(
+        [diagnose(workspace.by_id, local=problem.records) for problem in workspace.problems]
+    )
     if output_format is StatusFormat.yaml:
-        text = ("# Generated by `gnomon status`. Edit the records, not this file.\n"
-                + yaml.safe_dump(as_document(diagnosis), sort_keys=False, allow_unicode=True, width=100))
+        text = (
+            "# Generated by `gnomon status`. Edit the records, not this file.\n"
+            + yaml.safe_dump(as_document(diagnosis), sort_keys=False, allow_unicode=True, width=100)
+        )
     else:
         text = render_text(diagnosis)
     if output is None:
@@ -211,7 +244,9 @@ def cli_status(
 
 @app.command("vocabulary")
 def cli_vocabulary(
-    directory: str = typer.Argument(..., help="Directory holding the filled records of one problem."),
+    directory: str = typer.Argument(
+        ..., help="Directory holding the filled records of one problem."
+    ),
     output: str = typer.Option(
         "vocabulary.yml", "--output", "-o", help="Record written inside that directory."
     ),
@@ -297,7 +332,9 @@ def _write_log(log: dict[str, Any], output: Path | None) -> None:
 
 @app.command("schemas")
 def cli_schemas(
-    check: bool = typer.Option(False, "--check", help="Report the stale generated files instead of writing them."),
+    check: bool = typer.Option(
+        False, "--check", help="Report the stale generated files instead of writing them."
+    ),
 ) -> None:
     """Write the contracts and the templates generated from the base schemas and the vocabulary registry."""
     from .schemas import generated_files, stale_files
@@ -314,19 +351,27 @@ def cli_schemas(
 
 @app.command("itinerary")
 def cli_itinerary(
-    directory: str = typer.Argument(..., help="Directory holding the filled records of one problem."),
+    directory: str = typer.Argument(
+        ..., help="Directory holding the filled records of one problem."
+    ),
     output_format: OutputFormat = typer.Option(
-        OutputFormat.text, "--format", "-f",
+        OutputFormat.text,
+        "--format",
+        "-f",
         help="text prints one line per problem; sarif also writes a SARIF 2.1.0 log in the findings "
         "profile of Elenchos, on standard output or at --output.",
     ),
     output: Path | None = typer.Option(
-        None, "--output", "-o",
+        None,
+        "--output",
+        "-o",
         help="With --format sarif, write the log to this path instead of standard output; "
         "missing folders are created.",
     ),
     root: Path = typer.Option(
-        Path("."), "--root", "-r",
+        Path("."),
+        "--root",
+        "-r",
         help="With --format sarif, the repository root from which the log states every path.",
     ),
 ) -> None:
@@ -354,14 +399,18 @@ def cli_itinerary(
     records, files, unreadable = _read_records(source, tolerant=sarif)
     stopped = (
         f"{len(unreadable)} record files could not be read, so the itineraries naming their records "
-        "were not fully checked" if unreadable else None
+        "were not fully checked"
+        if unreadable
+        else None
     )
     itineraries = [record for record in records.values() if record.get("type") == "itinerary"]
     found: list[tuple[str, Finding]] = []
     try:
         for itinerary in itineraries:
-            found += [(str(itinerary["id"]), problem)
-                      for problem in itinerary_problems(itinerary, records, states=git_states(files))]
+            found += [
+                (str(itinerary["id"]), problem)
+                for problem in itinerary_problems(itinerary, records, states=git_states(files))
+            ]
     except (OSError, ValueError, yaml.YAMLError) as error:
         if not sarif:
             raise
@@ -372,10 +421,13 @@ def cli_itinerary(
         typer.echo(line, err=True)
     for line in problems:
         typer.echo(line, err=to_stderr)
-    typer.echo(f"{len(itineraries)} itineraries checked, {len(problems)} problems found", err=to_stderr)
+    typer.echo(
+        f"{len(itineraries)} itineraries checked, {len(problems)} problems found", err=to_stderr
+    )
     if sarif:
         located = [
-            Located(problem, folder / files[identifier].name, identifier) for identifier, problem in found
+            Located(problem, folder / files[identifier].name, identifier)
+            for identifier, problem in found
         ]
         _write_log(sarif_log(located, __version__, stopped), output)
     if problems or stopped:
@@ -384,9 +436,14 @@ def cli_itinerary(
 
 @app.command("views")
 def cli_views(
-    directory: str = typer.Argument(..., help="Directory of records, read recursively; each folder is one problem."),
+    directory: str = typer.Argument(
+        ..., help="Directory of records, read recursively; each folder is one problem."
+    ),
     output: Path | None = typer.Option(
-        None, "--output", "-o", help="Folder receiving the views; the folder `views` of the directory by default."
+        None,
+        "--output",
+        "-o",
+        help="Folder receiving the views; the folder `views` of the directory by default.",
     ),
 ) -> None:
     """Write the views of the state of an inquiry as YAML records, one file per view.
@@ -408,15 +465,21 @@ def cli_views(
     workspace = load_workspace(source)
     for line in workspace.failures:
         typer.echo(line, err=True)
-    diagnosis = merge([diagnose(workspace.by_id, local=problem.records) for problem in workspace.problems])
+    diagnosis = merge(
+        [diagnose(workspace.by_id, local=problem.records) for problem in workspace.problems]
+    )
     target = output if output is not None else source / "views"
     try:
         target.mkdir(parents=True, exist_ok=True)
-        for name, view in all_views(workspace.by_id, as_document(diagnosis), diagnosis.impeached,
-                                    diagnosis.conditional).items():
+        for name, view in all_views(
+            workspace.by_id, as_document(diagnosis), diagnosis.impeached, diagnosis.conditional
+        ).items():
             path = target / f"{name}.yml"
-            path.write_text("# Generated by `gnomon views`. Edit the records, not this file.\n"
-                            + yaml.safe_dump(view, sort_keys=False, allow_unicode=True, width=100), encoding="utf-8")
+            path.write_text(
+                "# Generated by `gnomon views`. Edit the records, not this file.\n"
+                + yaml.safe_dump(view, sort_keys=False, allow_unicode=True, width=100),
+                encoding="utf-8",
+            )
             typer.echo(f"{path}: written")
     except OSError as error:
         typer.echo(f"cannot write the views in {target}: {error}", err=True)
@@ -427,7 +490,9 @@ def cli_views(
 
 @app.command("tree")
 def cli_tree(
-    directory: str = typer.Argument(..., help="Directory holding the records of a project, read recursively."),
+    directory: str = typer.Argument(
+        ..., help="Directory holding the records of a project, read recursively."
+    ),
 ) -> None:
     """Print the question tree of a project, from its problems to the assessments of its answers."""
     source = Path(directory)

@@ -56,6 +56,7 @@ SUBJECT_SLOTS: Mapping[str, str] = {"target_system": "target-system", "phenomeno
 #: The subject slots of a question, each with the one placeholder type it admits.
 SLOT_PLACEHOLDERS: Mapping[str, str] = {"target_system": "system", "phenomenon": "phenomenon"}
 
+
 def is_empty(value: Any) -> bool:
     """Return whether ``value`` leaves its field unfilled: absent, null, or an empty string.
 
@@ -115,7 +116,10 @@ def always_required(kind: str, source: Path | None = None) -> list[str]:
 
 def block_requirements(source: Path | None = None) -> dict[str, list[str]]:
     """Return, per path of an aim block of an answer, the specifications that the block carries, relative to it."""
-    return {str(block): list(paths or []) for block, paths in (_registry(source).get("by_block") or {}).items()}
+    return {
+        str(block): list(paths or [])
+        for block, paths in (_registry(source).get("by_block") or {}).items()
+    }
 
 
 def record_kinds(source: Path | None = None) -> list[str]:
@@ -135,8 +139,10 @@ def requirements_by_commitment(source: Path | None = None) -> dict[str, dict[str
     unknown = set(table) - set(COMMITMENT_LEVELS)
     if unknown:
         raise ValueError(f"unknown levels of commitment: {sorted(unknown)}")
-    return {level: {kind: list(paths or []) for kind, paths in (table.get(level) or {}).items()}
-            for level in COMMITMENT_LEVELS}
+    return {
+        level: {kind: list(paths or []) for kind, paths in (table.get(level) or {}).items()}
+        for level in COMMITMENT_LEVELS
+    }
 
 
 def commitment_requirements(
@@ -229,16 +235,24 @@ def unmet_commitment(
     level = record.get("commitment")
     paths = commitment_requirements(str(record.get("type")), str(level), table)
     return unmet_general(
-        record, paths, produced, label=f"commitment {level} requires", rule=rules.COMPLETENESS_UNMET_COMMITMENT
+        record,
+        paths,
+        produced,
+        label=f"commitment {level} requires",
+        rule=rules.COMPLETENESS_UNMET_COMMITMENT,
     )
 
 
-def requirements_by_presence(source: Path | None = None) -> dict[str, dict[str, dict[str, list[str]]]]:
+def requirements_by_presence(
+    source: Path | None = None,
+) -> dict[str, dict[str, dict[str, list[str]]]]:
     """Return, per record kind and field, the specifications that the presence and the absence of the field impose."""
     table = _registry(source).get("by_presence") or {}
     return {
         str(kind): {
-            str(field): {state: list((cases or {}).get(state) or []) for state in ("present", "absent")}
+            str(field): {
+                state: list((cases or {}).get(state) or []) for state in ("present", "absent")
+            }
             for field, cases in (fields or {}).items()
         }
         for kind, fields in table.items()
@@ -293,7 +307,10 @@ def unmet_by_value(
         value = record.get(field)
         if isinstance(value, str) and value in values:
             found += unmet_general(
-                record, values[value], produced, label=f"{field} {value} requires",
+                record,
+                values[value],
+                produced,
+                label=f"{field} {value} requires",
                 rule=rules.COMPLETENESS_UNMET_BY_VALUE,
             )
     return found
@@ -372,42 +389,65 @@ def unresolved_slots(
             awaited = value.get("placeholder")
             if awaited not in admitted:
                 found.append(
-                    finding(rules.COMPLETENESS_UNADMITTED_PLACEHOLDER,
-                            f"{where}: the placeholder type {awaited!r} is not admitted", *field, "placeholder")
+                    finding(
+                        rules.COMPLETENESS_UNADMITTED_PLACEHOLDER,
+                        f"{where}: the placeholder type {awaited!r} is not admitted",
+                        *field,
+                        "placeholder",
+                    )
                 )
             elif awaited != SLOT_PLACEHOLDERS[slot]:
                 found.append(
-                    finding(rules.COMPLETENESS_MISFIT_PLACEHOLDER,
-                            f"{where}: the placeholder type {awaited!r} does not fit the slot, which awaits {SLOT_PLACEHOLDERS[slot]!r}",
-                            *field, "placeholder")
+                    finding(
+                        rules.COMPLETENESS_MISFIT_PLACEHOLDER,
+                        f"{where}: the placeholder type {awaited!r} does not fit the slot, which awaits {SLOT_PLACEHOLDERS[slot]!r}",
+                        *field,
+                        "placeholder",
+                    )
                 )
             if not value.get("description"):
                 found.append(
-                    finding(rules.COMPLETENESS_UNDESCRIBED_PLACEHOLDER,
-                            f"{where}: the placeholder carries no description", *field, "description")
+                    finding(
+                        rules.COMPLETENESS_UNDESCRIBED_PLACEHOLDER,
+                        f"{where}: the placeholder carries no description",
+                        *field,
+                        "description",
+                    )
                 )
             continue
         if not isinstance(value, str) or is_empty(value):
             found.append(
-                finding(rules.COMPLETENESS_UNRESOLVED_SLOT,
-                        f"{where}: holds neither a record identifier nor a placeholder", *field)
+                finding(
+                    rules.COMPLETENESS_UNRESOLVED_SLOT,
+                    f"{where}: holds neither a record identifier nor a placeholder",
+                    *field,
+                )
             )
             continue
         record = records.get(value)
         if record is None:
             found.append(
-                finding(rules.COMPLETENESS_UNKNOWN_SLOT_RECORD,
-                        f"{where}: no record carries the identifier {value}", *field)
+                finding(
+                    rules.COMPLETENESS_UNKNOWN_SLOT_RECORD,
+                    f"{where}: no record carries the identifier {value}",
+                    *field,
+                )
             )
         elif record.get("type") != kind:
             found.append(
-                finding(rules.COMPLETENESS_MISTYPED_SLOT_RECORD,
-                        f"{where}: {value} is a {record.get('type')} record, not a {kind} record", *field)
+                finding(
+                    rules.COMPLETENESS_MISTYPED_SLOT_RECORD,
+                    f"{where}: {value} is a {record.get('type')} record, not a {kind} record",
+                    *field,
+                )
             )
         elif not (record.get("identification") or {}).get("description"):
             found.append(
-                finding(rules.COMPLETENESS_UNIDENTIFIED_SLOT_RECORD,
-                        f"{where}: {value} carries no identification, so its referent is not fixed", *field)
+                finding(
+                    rules.COMPLETENESS_UNIDENTIFIED_SLOT_RECORD,
+                    f"{where}: {value} carries no identification, so its referent is not fixed",
+                    *field,
+                )
             )
     return found
 
@@ -422,6 +462,7 @@ def unresolved_question_references(
     record of the expected kind, and an admitted background describes the target of the question,
     since its laws are stated over the quantities of that target.
     """
+
     def kind_of(identifier: Any) -> Any:
         return (records.get(identifier) or {}).get("type") if isinstance(identifier, str) else None
 
@@ -429,8 +470,11 @@ def unresolved_question_references(
     addressed = question.get("addresses")
     if addressed is not None and kind_of(addressed) != "problem":
         found.append(
-            finding(rules.COMPLETENESS_UNADDRESSED_PROBLEM, f"addresses: {addressed} is no problem record",
-                    "addresses")
+            finding(
+                rules.COMPLETENESS_UNADDRESSED_PROBLEM,
+                f"addresses: {addressed} is no problem record",
+                "addresses",
+            )
         )
     for index, link in enumerate(question.get("links") or []):
         if not isinstance(link, Mapping):
@@ -438,32 +482,56 @@ def unresolved_question_references(
         other, via = link.get("question"), link.get("via")
         if kind_of(other) != "question":
             found.append(
-                finding(rules.COMPLETENESS_LINK_NOT_QUESTION, f"links[{index}]: {other} is no question record",
-                        "links", index, "question")
+                finding(
+                    rules.COMPLETENESS_LINK_NOT_QUESTION,
+                    f"links[{index}]: {other} is no question record",
+                    "links",
+                    index,
+                    "question",
+                )
             )
         elif other == question.get("id"):
             found.append(
-                finding(rules.COMPLETENESS_SELF_LINK, f"links[{index}]: a question is linked to itself",
-                        "links", index, "question")
+                finding(
+                    rules.COMPLETENESS_SELF_LINK,
+                    f"links[{index}]: a question is linked to itself",
+                    "links",
+                    index,
+                    "question",
+                )
             )
         if via is not None and kind_of(via) is None:
             found.append(
-                finding(rules.COMPLETENESS_UNKNOWN_LINK_RECORD,
-                        f"links[{index}]: no record carries the identifier {via}", "links", index, "via")
+                finding(
+                    rules.COMPLETENESS_UNKNOWN_LINK_RECORD,
+                    f"links[{index}]: no record carries the identifier {via}",
+                    "links",
+                    index,
+                    "via",
+                )
             )
     subject = question.get("subject") or {}
     target = subject.get("target_system")
     for index, name in enumerate(subject.get("background") or []):
         if kind_of(name) != "background":
             found.append(
-                finding(rules.COMPLETENESS_NOT_BACKGROUND, f"subject.background: {name} is no background record",
-                        "subject", "background", index)
+                finding(
+                    rules.COMPLETENESS_NOT_BACKGROUND,
+                    f"subject.background: {name} is no background record",
+                    "subject",
+                    "background",
+                    index,
+                )
             )
         elif isinstance(target, str) and records[name].get("describes") != target:
             found.append(
-                finding(rules.COMPLETENESS_FOREIGN_BACKGROUND,
-                        f"subject.background: {name} describes another target than {target}",
-                        "subject", "background", index)
+                finding(
+                    rules.COMPLETENESS_FOREIGN_BACKGROUND,
+                    f"subject.background: {name} describes another target than {target}",
+                    "subject",
+                    "background",
+                    index,
+                )
             )
     return found
 
@@ -482,9 +550,12 @@ def unstated_function_sense(question: Mapping[str, Any]) -> list[Finding]:
     if task.get("function_sense") in ("causal-role", "etiological"):
         return []
     return [
-        finding(rules.COMPLETENESS_UNSTATED_FUNCTION_SENSE,
-                "task.function_sense: a functional relation is requested without its sense of function",
-                "task", "function_sense")
+        finding(
+            rules.COMPLETENESS_UNSTATED_FUNCTION_SENSE,
+            "task.function_sense: a functional relation is requested without its sense of function",
+            "task",
+            "function_sense",
+        )
     ]
 
 
@@ -499,20 +570,31 @@ def malformed_credence(assessment: Mapping[str, Any]) -> list[Finding]:
         return []
     if not isinstance(credence, Mapping):
         return [
-            finding(rules.COMPLETENESS_MALFORMED_CREDENCE, "credence: holds neither a value nor a basis",
-                    "credence")
+            finding(
+                rules.COMPLETENESS_MALFORMED_CREDENCE,
+                "credence: holds neither a value nor a basis",
+                "credence",
+            )
         ]
     found = []
     value = credence.get("value")
     if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 1:
         found.append(
-            finding(rules.COMPLETENESS_CREDENCE_OUT_OF_RANGE,
-                    f"credence.value: {value!r} is no number between 0 and 1", "credence", "value")
+            finding(
+                rules.COMPLETENESS_CREDENCE_OUT_OF_RANGE,
+                f"credence.value: {value!r} is no number between 0 and 1",
+                "credence",
+                "value",
+            )
         )
     if not credence.get("basis"):
         found.append(
-            finding(rules.COMPLETENESS_CREDENCE_WITHOUT_BASIS, "credence.basis: the value states no basis",
-                    "credence", "basis")
+            finding(
+                rules.COMPLETENESS_CREDENCE_WITHOUT_BASIS,
+                "credence.basis: the value states no basis",
+                "credence",
+                "basis",
+            )
         )
     return found
 
@@ -524,7 +606,9 @@ def result_aims(source: Path | None = None) -> dict[str, frozenset[str]]:
     return {str(entry["value"]): frozenset(entry.get("admits") or []) for entry in types}
 
 
-def mismatched_request(problem: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]) -> list[Finding]:
+def mismatched_request(
+    problem: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
     """Return the associated question of a problem that does not take the request of its demand.
 
     The associated question is derived from the problem, so it takes the request of the demand. A
@@ -538,17 +622,26 @@ def mismatched_request(problem: Mapping[str, Any], records: Mapping[str, Mapping
     if not named:
         return []
     question = records.get(named) if isinstance(named, str) else None
-    if question is None or question.get("type") != "question" or question.get("addresses") != problem.get("id"):
+    if (
+        question is None
+        or question.get("type") != "question"
+        or question.get("addresses") != problem.get("id")
+    ):
         return [
-            finding(rules.COMPLETENESS_MISMATCHED_REQUEST,
-                    f"associated_question: {named} is no question record addressing {problem.get('id')}",
-                    "associated_question")
+            finding(
+                rules.COMPLETENESS_MISMATCHED_REQUEST,
+                f"associated_question: {named} is no question record addressing {problem.get('id')}",
+                "associated_question",
+            )
         ]
     if question.get("request") != problem.get("request"):
         return [
-            finding(rules.COMPLETENESS_MISMATCHED_REQUEST,
-                    f"associated_question: {named} asks under the request {question.get('request')},"
-                    f" and the problem under {problem.get('request')}", "associated_question")
+            finding(
+                rules.COMPLETENESS_MISMATCHED_REQUEST,
+                f"associated_question: {named} asks under the request {question.get('request')},"
+                f" and the problem under {problem.get('request')}",
+                "associated_question",
+            )
         ]
     return []
 
@@ -577,8 +670,12 @@ def unbounded_aim(
     if not aim or not isinstance(kind, str) or kind not in aims or aim in set(aims[kind]):
         return []
     return [
-        finding(rules.COMPLETENESS_UNBOUNDED_AIM,
-                f"task.epistemic_aim: {aim} does not serve a demand for {kind}", "task", "epistemic_aim")
+        finding(
+            rules.COMPLETENESS_UNBOUNDED_AIM,
+            f"task.epistemic_aim: {aim} does not serve a demand for {kind}",
+            "task",
+            "epistemic_aim",
+        )
     ]
 
 
@@ -614,22 +711,31 @@ def demand_met(
     klass = classes.get(str(kind))
     if klass not in ("claim", "construct"):
         return None
-    questions = {i for i, r in records.items() if r.get("type") == "question" and r.get("addresses") == ident}
+    questions = {
+        i for i, r in records.items() if r.get("type") == "question" and r.get("addresses") == ident
+    }
     assessments = [r for r in records.values() if r.get("type") == "assessment"]
 
     def assessed(name: str) -> list[Mapping[str, Any]]:
         return [a for a in assessments if a.get("assesses") == name]
 
-    answers = {i: r for i, r in records.items() if r.get("type") == "answer" and r.get("answers") in questions}
+    answers = {
+        i: r
+        for i, r in records.items()
+        if r.get("type") == "answer" and r.get("answers") in questions
+    }
     constructs = {
-        i: r for i, r in records.items()
-        if r.get("type") in set(holders.get(str(kind), ())) and any(a.get("against") == ident for a in assessed(i))
+        i: r
+        for i, r in records.items()
+        if r.get("type") in set(holders.get(str(kind), ()))
+        and any(a.get("against") == ident for a in assessed(i))
     }
     if problem.get("request") == "decision":
         candidates = answers if klass == "claim" else constructs
         settled = {"answer": {"accepted", "retracted"}}
         return bool(candidates) and all(
-            r.get("status") in settled.get(str(r.get("type")), {"stabilized", "retracted"}) and bool(assessed(i))
+            r.get("status") in settled.get(str(r.get("type")), {"stabilized", "retracted"})
+            and bool(assessed(i))
             for i, r in candidates.items()
         )
     if klass == "claim":
@@ -646,7 +752,9 @@ def demand_met(
     )
 
 
-def presupposition_denied(problem: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]) -> bool | None:
+def presupposition_denied(
+    problem: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> bool | None:
     """Return whether an accepted answer denies a presupposition of the associated question, or None when no question is named.
 
     A corrective answer denies a presupposition of the question that it answers, so an accepted
@@ -662,7 +770,9 @@ def presupposition_denied(problem: Mapping[str, Any], records: Mapping[str, Mapp
     if not named:
         return None
     return any(
-        r.get("type") == "answer" and r.get("answers") == named and r.get("status") == "accepted"
+        r.get("type") == "answer"
+        and r.get("answers") == named
+        and r.get("status") == "accepted"
         and at(r, "erotetic_relation.value") == "corrective"
         for r in records.values()
     )
@@ -690,8 +800,14 @@ def readable_obstacles(
     met = demand_met(problem, records, classes, holders)
     if met is None or denied is None:
         return found
-    questions = {i for i, r in records.items() if r.get("type") == "question" and r.get("addresses") == problem.get("id")}
-    answers = [r for r in records.values() if r.get("type") == "answer" and r.get("answers") in questions]
+    questions = {
+        i
+        for i, r in records.items()
+        if r.get("type") == "question" and r.get("addresses") == problem.get("id")
+    }
+    answers = [
+        r for r in records.values() if r.get("type") == "answer" and r.get("answers") in questions
+    ]
     exists = not met and not denied
     proposed = [r for r in answers if r.get("status") not in ("accepted", "retracted")]
     accepted = [r for r in answers if r.get("status") == "accepted"]
@@ -708,18 +824,30 @@ def misstated_obstacles(
 ) -> list[Finding]:
     """Return every knowledge obstacle that the records decide and the problem states otherwise."""
     stated = {
-        str(entry.get("obstacle")) for entry in problem.get("knowledge_obstacles") or [] if isinstance(entry, Mapping)
+        str(entry.get("obstacle"))
+        for entry in problem.get("knowledge_obstacles") or []
+        if isinstance(entry, Mapping)
     }
     found = []
     for name, holds in readable_obstacles(problem, records, classes, holders).items():
         if holds and name not in stated:
-            found.append(finding(rules.COMPLETENESS_UNSTATED_OBSTACLE,
-                                 f"knowledge_obstacles: the records show {name}, which the problem does not state",
-                                 "knowledge_obstacles", value=name))
+            found.append(
+                finding(
+                    rules.COMPLETENESS_UNSTATED_OBSTACLE,
+                    f"knowledge_obstacles: the records show {name}, which the problem does not state",
+                    "knowledge_obstacles",
+                    value=name,
+                )
+            )
         elif not holds and name in stated:
-            found.append(finding(rules.COMPLETENESS_UNSUPPORTED_OBSTACLE,
-                                 f"knowledge_obstacles: the problem states {name}, which its records contradict",
-                                 "knowledge_obstacles", value=name))
+            found.append(
+                finding(
+                    rules.COMPLETENESS_UNSUPPORTED_OBSTACLE,
+                    f"knowledge_obstacles: the problem states {name}, which its records contradict",
+                    "knowledge_obstacles",
+                    value=name,
+                )
+            )
     return found
 
 
@@ -739,22 +867,42 @@ def unsupported_outcome(
     status, denied = problem.get("status"), presupposition_denied(problem, records)
     if denied is not None:
         if status == "dissolved" and not denied:
-            return [finding(rules.COMPLETENESS_UNSUPPORTED_DISSOLVED,
-                            "status: dissolved, and no accepted answer denies a presupposition of"
-                            f" {problem.get('associated_question')}", "status")]
+            return [
+                finding(
+                    rules.COMPLETENESS_UNSUPPORTED_DISSOLVED,
+                    "status: dissolved, and no accepted answer denies a presupposition of"
+                    f" {problem.get('associated_question')}",
+                    "status",
+                )
+            ]
         if denied and status in ("posed", "refined"):
-            return [finding(rules.COMPLETENESS_UNRECORDED_DISSOLUTION,
-                            f"status: {status}, and an accepted answer denies a presupposition of"
-                            f" {problem.get('associated_question')}", "status")]
+            return [
+                finding(
+                    rules.COMPLETENESS_UNRECORDED_DISSOLUTION,
+                    f"status: {status}, and an accepted answer denies a presupposition of"
+                    f" {problem.get('associated_question')}",
+                    "status",
+                )
+            ]
     met = demand_met(problem, records, classes, holders)
     if met is None:
         return []
     if status == "solved" and not met:
-        return [finding(rules.COMPLETENESS_UNSUPPORTED_SOLVED,
-                        "status: solved, and the records do not meet the demand", "status")]
+        return [
+            finding(
+                rules.COMPLETENESS_UNSUPPORTED_SOLVED,
+                "status: solved, and the records do not meet the demand",
+                "status",
+            )
+        ]
     if met and status in ("posed", "refined"):
-        return [finding(rules.COMPLETENESS_UNRECORDED_SOLUTION,
-                        f"status: {status}, and the records meet the demand", "status")]
+        return [
+            finding(
+                rules.COMPLETENESS_UNRECORDED_SOLUTION,
+                f"status: {status}, and the records meet the demand",
+                "status",
+            )
+        ]
     return []
 
 
@@ -782,52 +930,84 @@ def misdirected_assessment(
     assessed, standard = assessment.get("assesses"), assessment.get("against")
     target = records.get(assessed) if isinstance(assessed, str) else None
     if target is None:
-        return [finding(rules.COMPLETENESS_UNKNOWN_ASSESSED, f"assesses: {assessed} is no record", "assesses")]
+        return [
+            finding(
+                rules.COMPLETENESS_UNKNOWN_ASSESSED,
+                f"assesses: {assessed} is no record",
+                "assesses",
+            )
+        ]
     tests = assessment.get("tests") or {}
     against = records.get(standard) if isinstance(standard, str) else None
     found: list[Finding] = []
     if target.get("type") == "answer":
         expected, shape = "question", ("admissibility", "warrant")
         found += [
-            finding(rules.COMPLETENESS_MISSHAPEN_TESTS,
-                    f"tests.{level}: an assessment of an answer holds its tests of {level}", "tests", level)
-            for level in shape if not isinstance(tests.get(level), Mapping) or not tests.get(level)
+            finding(
+                rules.COMPLETENESS_MISSHAPEN_TESTS,
+                f"tests.{level}: an assessment of an answer holds its tests of {level}",
+                "tests",
+                level,
+            )
+            for level in shape
+            if not isinstance(tests.get(level), Mapping) or not tests.get(level)
         ]
         if tests.get("constraints"):
             found.append(
-                finding(rules.COMPLETENESS_MISSHAPEN_TESTS,
-                        "tests.constraints: an assessment of an answer holds no verdict per constraint",
-                        "tests", "constraints")
+                finding(
+                    rules.COMPLETENESS_MISSHAPEN_TESTS,
+                    "tests.constraints: an assessment of an answer holds no verdict per constraint",
+                    "tests",
+                    "constraints",
+                )
             )
     elif target.get("type") in set(construct_kinds):
         expected = "problem"
         verdicts = tests.get("constraints")
         if not isinstance(verdicts, list) or not verdicts:
             found.append(
-                finding(rules.COMPLETENESS_MISSHAPEN_TESTS,
-                        "tests.constraints: an assessment of a construct holds one verdict per constraint",
-                        "tests", "constraints")
+                finding(
+                    rules.COMPLETENESS_MISSHAPEN_TESTS,
+                    "tests.constraints: an assessment of a construct holds one verdict per constraint",
+                    "tests",
+                    "constraints",
+                )
             )
             verdicts = []
         found += [
-            finding(rules.COMPLETENESS_MISSHAPEN_TESTS,
-                    f"tests.{level}: an assessment of a construct holds no tests of {level}", "tests", level)
-            for level in ("admissibility", "warrant") if tests.get(level)
+            finding(
+                rules.COMPLETENESS_MISSHAPEN_TESTS,
+                f"tests.{level}: an assessment of a construct holds no tests of {level}",
+                "tests",
+                level,
+            )
+            for level in ("admissibility", "warrant")
+            if tests.get(level)
         ]
-        stated = {c.get("name") for c in (against or {}).get("constraints") or [] if isinstance(c, Mapping)}
+        stated = {
+            c.get("name")
+            for c in (against or {}).get("constraints") or []
+            if isinstance(c, Mapping)
+        }
         if against is not None and against.get("type") == "problem":
             found += [
-                finding(rules.COMPLETENESS_UNKNOWN_CONSTRAINT,
-                        f"tests.constraints: {entry.get('constraint')} is no constraint of {standard}",
-                        "tests", "constraints", Entry(index, entry))
+                finding(
+                    rules.COMPLETENESS_UNKNOWN_CONSTRAINT,
+                    f"tests.constraints: {entry.get('constraint')} is no constraint of {standard}",
+                    "tests",
+                    "constraints",
+                    Entry(index, entry),
+                )
                 for index, entry in enumerate(verdicts)
                 if isinstance(entry, Mapping) and entry.get("constraint") not in stated
             ]
     else:
         return [
-            finding(rules.COMPLETENESS_UNASSESSABLE_RECORD,
-                    f"assesses: {assessed} is a {target.get('type')} record, neither an answer nor a construct",
-                    "assesses")
+            finding(
+                rules.COMPLETENESS_UNASSESSABLE_RECORD,
+                f"assesses: {assessed} is a {target.get('type')} record, neither an answer nor a construct",
+                "assesses",
+            )
         ]
     against_type = (against or {}).get("type")
     if against_type != expected:
@@ -836,9 +1016,12 @@ def misdirected_assessment(
         article = "an" if assessed_kind[:1] in "aeiou" else "a"
         found.insert(
             0,
-            finding(rules.COMPLETENESS_MISMATCHED_STANDARD,
-                    f"against: {standard} is {kind}, and an assessment of {article} {assessed_kind} is made"
-                    f" against a {expected}", "against"),
+            finding(
+                rules.COMPLETENESS_MISMATCHED_STANDARD,
+                f"against: {standard} is {kind}, and an assessment of {article} {assessed_kind} is made"
+                f" against a {expected}",
+                "against",
+            ),
         )
     return found
 
@@ -882,7 +1065,11 @@ def disposition(assessment: Mapping[str, Any], erotetic_relation: str | None = N
         (entry or {}).get("verdict")
         for level in ("admissibility", "warrant")
         for entry in (tests.get(level) or {}).values()
-    ] + [(entry or {}).get("verdict") for entry in tests.get("constraints") or [] if isinstance(entry, Mapping)]
+    ] + [
+        (entry or {}).get("verdict")
+        for entry in tests.get("constraints") or []
+        if isinstance(entry, Mapping)
+    ]
     if "fail" in verdicts:
         return "not-satisfied"
     if any(verdict not in ("pass", "not-applicable") for verdict in verdicts):
@@ -907,8 +1094,13 @@ def premature_appraisal(assessment: Mapping[str, Any]) -> list[Finding]:
     state = disposition(assessment)
     if state in ("satisfied", "corrective") or is_unfilled(assessment.get("appraisal")):
         return []
-    return [finding(rules.COMPLETENESS_PREMATURE_APPRAISAL,
-                    f"appraisal: the answer is appraised although its disposition is {state}", "appraisal")]
+    return [
+        finding(
+            rules.COMPLETENESS_PREMATURE_APPRAISAL,
+            f"appraisal: the answer is appraised although its disposition is {state}",
+            "appraisal",
+        )
+    ]
 
 
 def unmet_by_aim(
@@ -944,8 +1136,13 @@ def unmet_by_aim(
         prefix, _, rest = path.partition(".")
         if is_unfilled(at(records.get(prefix, {}), rest)):
             missing.append(
-                finding(rules.COMPLETENESS_UNMET_AIM, f"{aim} requires {path}", "task", "epistemic_aim",
-                        value=path)
+                finding(
+                    rules.COMPLETENESS_UNMET_AIM,
+                    f"{aim} requires {path}",
+                    "task",
+                    "epistemic_aim",
+                    value=path,
+                )
             )
     return missing
 
@@ -961,9 +1158,13 @@ def contradictory_accuracy(question: Mapping[str, Any]) -> list[Finding]:
     if accuracy.get("standard") != "not-applicable":
         return []
     return [
-        finding(rules.COMPLETENESS_CONTRADICTORY_ACCURACY,
-                f"task.required_accuracy.{key} is listed although accuracy does not apply",
-                "task", "required_accuracy", key)
+        finding(
+            rules.COMPLETENESS_CONTRADICTORY_ACCURACY,
+            f"task.required_accuracy.{key} is listed although accuracy does not apply",
+            "task",
+            "required_accuracy",
+            key,
+        )
         for key in ("outputs_to_match", "structures_to_match")
         if accuracy.get(key)
     ]
@@ -986,12 +1187,20 @@ def incomplete_operations(model: Mapping[str, Any]) -> list[Finding]:
         required = [
             ("bound", entry.get("error") == "controlled", "a controlled error states its bound"),
             ("regime", entry.get("kind") == "approximate", "an approximation states its regime"),
-            ("order", entry.get("kind") == "limit" and entry.get("error") == "singular",
-             "a singular limit states the order of its limits"),
+            (
+                "order",
+                entry.get("kind") == "limit" and entry.get("error") == "singular",
+                "a singular limit states the order of its limits",
+            ),
         ]
         found += [
-            finding(rules.COMPLETENESS_INCOMPLETE_OPERATION, f"operations.{name}: {message}",
-                    "operations", index, field)
+            finding(
+                rules.COMPLETENESS_INCOMPLETE_OPERATION,
+                f"operations.{name}: {message}",
+                "operations",
+                index,
+                field,
+            )
             for field, applies, message in required
             if applies and is_unfilled(entry.get(field))
         ]
@@ -1013,7 +1222,11 @@ def unclassified_operations(
     >>> [f.text for f in unclassified_operations(answer, {"mod.a.b": model})]
     ['operation drop of mod.a.b is named by no ground of the answer']
     """
-    named = {str(ground.get("record")) for ground in answer.get("grounds") or [] if isinstance(ground, Mapping)}
+    named = {
+        str(ground.get("record"))
+        for ground in answer.get("grounds") or []
+        if isinstance(ground, Mapping)
+    }
     found: list[Finding] = []
     for identifier in (answer.get("route") or {}).get("runs_on") or []:
         model = records.get(str(identifier)) or {}
@@ -1023,9 +1236,13 @@ def unclassified_operations(
             for entry in model.get(block) or []:
                 units = [entry.get("id"), *(entry.get("yields") or [])]
                 if not any(f"{identifier}.{unit}" in named for unit in units if unit):
-                    found.append(finding(rules.COMPLETENESS_UNCLASSIFIED_OPERATION,
-                                         f"{label} {entry.get('id')} of {identifier} is named by no ground of the answer",
-                                         "grounds"))
+                    found.append(
+                        finding(
+                            rules.COMPLETENESS_UNCLASSIFIED_OPERATION,
+                            f"{label} {entry.get('id')} of {identifier} is named by no ground of the answer",
+                            "grounds",
+                        )
+                    )
     return found
 
 
@@ -1043,11 +1260,18 @@ def unbound_outputs(
     ['the question names outputs to match, and the answer on a model cites no binding']
     """
     outputs = at(question, "task.required_accuracy.outputs_to_match") or []
-    on_model = any((records.get(str(r)) or {}).get("type") == "model"
-                   for r in (answer.get("route") or {}).get("runs_on") or [])
+    on_model = any(
+        (records.get(str(r)) or {}).get("type") == "model"
+        for r in (answer.get("route") or {}).get("runs_on") or []
+    )
     if outputs and on_model and is_unfilled(answer.get("binding")):
-        return [finding(rules.COMPLETENESS_UNBOUND_OUTPUTS,
-                        "the question names outputs to match, and the answer on a model cites no binding", "binding")]
+        return [
+            finding(
+                rules.COMPLETENESS_UNBOUND_OUTPUTS,
+                "the question names outputs to match, and the answer on a model cites no binding",
+                "binding",
+            )
+        ]
     return []
 
 
@@ -1081,12 +1305,17 @@ def mismatched_status_pairs(
     ['factors.f: the status limit-construct requires a pair of type invariance-class, and bind.a.b.p is of type quantity',
      'factors.f: no ground with the role warrant cites the pair bind.a.b.p that places the target in the class of the limit']
     """
-    on_model = any((records.get(str(r)) or {}).get("type") == "model"
-                   for r in (answer.get("route") or {}).get("runs_on") or [])
+    on_model = any(
+        (records.get(str(r)) or {}).get("type") == "model"
+        for r in (answer.get("route") or {}).get("runs_on") or []
+    )
     if not on_model:
         return []
-    warrants = {g.get("record") for g in answer.get("grounds") or []
-                if isinstance(g, Mapping) and g.get("role") == "warrant"}
+    warrants = {
+        g.get("record")
+        for g in answer.get("grounds") or []
+        if isinstance(g, Mapping) and g.get("role") == "warrant"
+    }
     found = []
     for index, factor in enumerate(at(answer, "aim_block.explanation.factors") or []):
         if not isinstance(factor, Mapping) or factor.get("target_status") not in STATUS_PAIRS:
@@ -1096,21 +1325,42 @@ def mismatched_status_pairs(
         where = ("aim_block", "explanation", "factors", Entry(index, factor), "pair")
         name = factor.get("id") or index
         if not isinstance(ref, str):
-            found.append(finding(rules.COMPLETENESS_MISMATCHED_STATUS_PAIR,
-                                 f"factors.{name}: the status {status} requires a pair of type"
-                                 f" {' or '.join(sorted(admitted))}, and the factor names none", *where))
+            found.append(
+                finding(
+                    rules.COMPLETENESS_MISMATCHED_STATUS_PAIR,
+                    f"factors.{name}: the status {status} requires a pair of type"
+                    f" {' or '.join(sorted(admitted))}, and the factor names none",
+                    *where,
+                )
+            )
             continue
         record, unit = split_reference(ref) or (ref, "")
-        pair = next((p for p in (records.get(record) or {}).get("feature_pairs") or []
-                     if isinstance(p, Mapping) and p.get("id") == unit), None)
+        pair = next(
+            (
+                p
+                for p in (records.get(record) or {}).get("feature_pairs") or []
+                if isinstance(p, Mapping) and p.get("id") == unit
+            ),
+            None,
+        )
         if pair is not None and pair.get("type") not in admitted:
-            found.append(finding(rules.COMPLETENESS_MISMATCHED_STATUS_PAIR,
-                                 f"factors.{name}: the status {status} requires a pair of type"
-                                 f" {' or '.join(sorted(admitted))}, and {ref} is of type {pair.get('type')}", *where))
+            found.append(
+                finding(
+                    rules.COMPLETENESS_MISMATCHED_STATUS_PAIR,
+                    f"factors.{name}: the status {status} requires a pair of type"
+                    f" {' or '.join(sorted(admitted))}, and {ref} is of type {pair.get('type')}",
+                    *where,
+                )
+            )
         if status == "limit-construct" and ref not in warrants:
-            found.append(finding(rules.COMPLETENESS_MISMATCHED_STATUS_PAIR,
-                                 f"factors.{name}: no ground with the role warrant cites the pair {ref}"
-                                 " that places the target in the class of the limit", *where))
+            found.append(
+                finding(
+                    rules.COMPLETENESS_MISMATCHED_STATUS_PAIR,
+                    f"factors.{name}: no ground with the role warrant cites the pair {ref}"
+                    " that places the target in the class of the limit",
+                    *where,
+                )
+            )
     return found
 
 
@@ -1129,20 +1379,29 @@ def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> l
     realizations = at(answer, "claim.realizations") or []
     if not realizations:
         return [
-            finding(rules.COMPLETENESS_UNREALIZED_LINK,
-                    "the question asks for a link, and the answer maps no quantity onto its realization",
-                    "claim", "realizations")
+            finding(
+                rules.COMPLETENESS_UNREALIZED_LINK,
+                "the question asks for a link, and the answer maps no quantity onto its realization",
+                "claim",
+                "realizations",
+            )
         ]
     return [
-        finding(rules.COMPLETENESS_INCOMPLETE_REALIZATION,
-                f"claim.realizations[{index}] names what it realizes without saying by what",
-                "claim", "realizations", index)
+        finding(
+            rules.COMPLETENESS_INCOMPLETE_REALIZATION,
+            f"claim.realizations[{index}] names what it realizes without saying by what",
+            "claim",
+            "realizations",
+            index,
+        )
         for index, entry in enumerate(realizations)
         if isinstance(entry, Mapping) and not (entry.get("realizes") and entry.get("by"))
     ]
 
 
-def unanchored_explicandum(question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]) -> list[Finding]:
+def unanchored_explicandum(
+    question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
     """Return the explicandum of a question of explication that no explicandum of its problem anchors.
 
     The explicandum of such a question is not a slot: it enters through the use that a pointer of
@@ -1161,9 +1420,14 @@ def unanchored_explicandum(question: Mapping[str, Any], records: Mapping[str, Ma
     terms = {str(e.get("term")) for e in problem.get("explicanda") or [] if isinstance(e, Mapping)}
     if is_empty(term) or term in terms:
         return []
-    return [finding(rules.COMPLETENESS_UNANCHORED_EXPLICANDUM,
-                    f"task.explicandum: {term} is no explicandum of {question.get('addresses')}",
-                    "task", "explicandum")]
+    return [
+        finding(
+            rules.COMPLETENESS_UNANCHORED_EXPLICANDUM,
+            f"task.explicandum: {term} is no explicandum of {question.get('addresses')}",
+            "task",
+            "explicandum",
+        )
+    ]
 
 
 def unjustified_explanans_bound(question: Mapping[str, Any]) -> list[Finding]:
@@ -1184,9 +1448,13 @@ def unjustified_explanans_bound(question: Mapping[str, Any]) -> list[Finding]:
     if (question.get("maturity") or {}).get("task.admissible_explanans"):
         return []
     return [
-        finding(rules.COMPLETENESS_UNJUSTIFIED_EXPLANANS_BOUND,
-                "task.admissible_explanans states an axis, and no justification says why the answer is bound to it",
-                "task", "admissible_explanans", "justification")
+        finding(
+            rules.COMPLETENESS_UNJUSTIFIED_EXPLANANS_BOUND,
+            "task.admissible_explanans states an axis, and no justification says why the answer is bound to it",
+            "task",
+            "admissible_explanans",
+            "justification",
+        )
     ]
 
 
@@ -1201,15 +1469,21 @@ def unstated_standing(question: Mapping[str, Any]) -> list[Finding]:
     an entry that does not leaves the product test unable to say what it applies.
     """
     return [
-        finding(rules.COMPLETENESS_UNSTATED_STANDING,
-                f"virtues[{index}].standing is unstated for {entry.get('virtue') or 'an unnamed virtue'}",
-                "virtues", index, "standing")
+        finding(
+            rules.COMPLETENESS_UNSTATED_STANDING,
+            f"virtues[{index}].standing is unstated for {entry.get('virtue') or 'an unnamed virtue'}",
+            "virtues",
+            index,
+            "standing",
+        )
         for index, entry in enumerate(question.get("virtues") or [])
         if isinstance(entry, Mapping) and not entry.get("standing")
     ]
 
 
-def varying_symbols(target: Mapping[str, Any], phenomenon: Mapping[str, Any] | None = None) -> set[str]:
+def varying_symbols(
+    target: Mapping[str, Any], phenomenon: Mapping[str, Any] | None = None
+) -> set[str]:
     """Return the symbols that vary along the course of a phenomenon of the target.
 
     The variables of the target vary, and so does each parameter that the course of the phenomenon
@@ -1219,16 +1493,18 @@ def varying_symbols(target: Mapping[str, Any], phenomenon: Mapping[str, Any] | N
     ...                 {"course": {"varies": ["w"]}}) == {"x", "w"}
     True
     """
-    found = {e["symbol"] for e in target.get("variables") or [] if isinstance(e, Mapping) and isinstance(e.get("symbol"), str)}
+    found = {
+        e["symbol"]
+        for e in target.get("variables") or []
+        if isinstance(e, Mapping) and isinstance(e.get("symbol"), str)
+    }
     course = (phenomenon or {}).get("course")
     if isinstance(course, Mapping):
         found |= {s for s in course.get("varies") or [] if isinstance(s, str)}
     return found
 
 
-def malformed_restrictions(
-    question: Mapping[str, Any], variables: Iterable[str]
-) -> list[Finding]:
+def malformed_restrictions(question: Mapping[str, Any], variables: Iterable[str]) -> list[Finding]:
     """Return every domain restriction that does not say what it holds, or holds it wrongly.
 
     A restriction names one quantity and the set it is held to, or it names none and carries the
@@ -1258,19 +1534,28 @@ def malformed_restrictions(
         carried = [key for key in ("values", "expression") if entry.get(key) is not None]
         if len(carried) != 1:
             found.append(
-                finding(rules.COMPLETENESS_RESTRICTION_CONTENT,
-                        f"restrictions.{label}: carries {len(carried)} of values and expression", *where)
+                finding(
+                    rules.COMPLETENESS_RESTRICTION_CONTENT,
+                    f"restrictions.{label}: carries {len(carried)} of values and expression",
+                    *where,
+                )
             )
         if not held and not entry.get("name"):
             found.append(
-                finding(rules.COMPLETENESS_ANONYMOUS_RESTRICTION,
-                        "restrictions: an entry names neither a quantity nor itself", *where)
+                finding(
+                    rules.COMPLETENESS_ANONYMOUS_RESTRICTION,
+                    "restrictions: an entry names neither a quantity nor itself",
+                    *where,
+                )
             )
         if entry.get("restriction") and symbol not in varying:
             found.append(
-                finding(rules.COMPLETENESS_RESTRICTION_WITHOUT_VARIABLE,
-                        f"restrictions.{label}: states how it is held although it names no quantity that varies",
-                        *where, "restriction")
+                finding(
+                    rules.COMPLETENESS_RESTRICTION_WITHOUT_VARIABLE,
+                    f"restrictions.{label}: states how it is held although it names no quantity that varies",
+                    *where,
+                    "restriction",
+                )
             )
     return found
 
@@ -1290,7 +1575,9 @@ def undecided_boundaries(record: Mapping[str, Any]) -> list[Finding]:
             rules.COMPLETENESS_UNDECIDED_BOUNDARY,
             f"external_systems.{entry.get('symbol')}: constrains is empty, so the boundary is named"
             " without being decided",
-            "external_systems", Entry(index, entry), "constrains",
+            "external_systems",
+            Entry(index, entry),
+            "constrains",
         )
         for index, entry in enumerate(record.get("external_systems") or [])
         if isinstance(entry, Mapping) and is_empty(entry.get("constrains"))
@@ -1301,10 +1588,7 @@ def vocabularies(kind: str, source: Path | None = None) -> dict[str, frozenset[s
     """Return, per vocabulary of ``kind`` in the registry, the values it admits, keyed as the registry keys it."""
     registry = yaml.safe_load((source or VOCABULARY_REGISTRY).read_text(encoding="utf-8")) or {}
     fields = (registry.get("vocabularies") or {}).get(kind) or {}
-    return {
-        name: frozenset(entry["value"] for entry in values)
-        for name, values in fields.items()
-    }
+    return {name: frozenset(entry["value"] for entry in values) for name, values in fields.items()}
 
 
 def admitted_values(kind: str, source: Path | None = None) -> dict[str, frozenset[str]]:
@@ -1319,7 +1603,11 @@ def admitted_values(kind: str, source: Path | None = None) -> dict[str, frozense
     """
     values = vocabularies(kind, source)
     if kind in kinds():
-        return {path: values[key] for path, key in vocabulary_paths(load_base(kind)).items() if key in values}
+        return {
+            path: values[key]
+            for path, key in vocabulary_paths(load_base(kind)).items()
+            if key in values
+        }
     return {key[1:]: admitted for key, admitted in values.items() if key.startswith(".")}
 
 
@@ -1340,7 +1628,11 @@ def inadmissible_values(
             if isinstance(item, str) and item not in vocabulary:
                 place = (*where, key) if index is None else (*where, key, index)
                 found.append(
-                    finding(rules.COMPLETENESS_INADMISSIBLE_VALUE, f"{label}: {item} is not admitted", *place)
+                    finding(
+                        rules.COMPLETENESS_INADMISSIBLE_VALUE,
+                        f"{label}: {item} is not admitted",
+                        *place,
+                    )
                 )
 
     def visit(node: Any, path: tuple[str, ...], where: Place) -> None:

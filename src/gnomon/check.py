@@ -102,7 +102,9 @@ class Workspace:
     @cached_property
     def by_id(self) -> dict[str, Mapping[str, Any]]:
         """Every record of the workspace, keyed by identifier."""
-        return {ident: record for problem in self.problems for ident, record in problem.records.items()}
+        return {
+            ident: record for problem in self.problems for ident, record in problem.records.items()
+        }
 
     @cached_property
     def files(self) -> dict[str, Path]:
@@ -143,7 +145,9 @@ def load_workspace(root: Path) -> Workspace:
         problem = folders.setdefault(path.parent, Problem(path.parent, {}, {}))
         problem.records[str(record["id"])] = record
         problem.files[str(record["id"])] = path
-    return Workspace(root, tuple(folders[f] for f in sorted(folders)), tuple(failures), tuple(unfilled))
+    return Workspace(
+        root, tuple(folders[f] for f in sorted(folders)), tuple(failures), tuple(unfilled)
+    )
 
 
 @dataclass
@@ -152,7 +156,9 @@ class _Registries:
 
     canonical: frozenset[str] = field(default_factory=v.canonical_operators)
     by_aim: dict[str, dict[str, list[str]]] = field(default_factory=c.requirements_by_aim)
-    by_commitment: dict[str, dict[str, list[str]]] = field(default_factory=c.requirements_by_commitment)
+    by_commitment: dict[str, dict[str, list[str]]] = field(
+        default_factory=c.requirements_by_commitment
+    )
     by_presence: dict[str, Any] = field(default_factory=c.requirements_by_presence)
     by_value: dict[str, Any] = field(default_factory=c.requirements_by_value)
     blocks: dict[str, list[str]] = field(default_factory=c.block_requirements)
@@ -189,7 +195,9 @@ class _Context:
     @cached_property
     def symbols(self) -> list[str]:
         """Every symbol that a record of the problem declares."""
-        return [d.symbol for record in self.problem.records.values() for d in v.declarations(record)]
+        return [
+            d.symbol for record in self.problem.records.values() for d in v.declarations(record)
+        ]
 
     @cached_property
     def arities(self) -> dict[str, int]:
@@ -232,7 +240,11 @@ def _symbols(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     if kind in ("operators", "question"):
         external: Iterable[str] = ctx.symbols
     elif kind in ("answer", "model", "binding"):
-        external = [d.symbol for seen in v.visible_records(record, ctx.workspace.by_id) for d in v.declarations(seen)]
+        external = [
+            d.symbol
+            for seen in v.visible_records(record, ctx.workspace.by_id)
+            for d in v.declarations(seen)
+        ]
     else:
         external = [d.symbol for d in v.declarations(v.upstream_of(record, ctx.workspace.by_id))]
     return v.unresolved(record, ctx.operators, external)
@@ -240,21 +252,39 @@ def _symbols(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 def _structure(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The checks of the declarations of a record that need no other record."""
-    return (v.mistyped_symbols(record) + v.repeated_symbols(record) + c.undecided_boundaries(record)
-            + v.misplaced_sharing(record) + v.vacuous_shared(record) + v.unfixed_parameters(record)
-            + v.doubly_defined(record) + v.unowned_quantities(record) + v.unselected_conditions(record)
-            + v.malformed_relations(record) + v.split_expressions(record) + v.corrupted_notation(record))
+    return (
+        v.mistyped_symbols(record)
+        + v.repeated_symbols(record)
+        + c.undecided_boundaries(record)
+        + v.misplaced_sharing(record)
+        + v.vacuous_shared(record)
+        + v.unfixed_parameters(record)
+        + v.doubly_defined(record)
+        + v.unowned_quantities(record)
+        + v.unselected_conditions(record)
+        + v.malformed_relations(record)
+        + v.split_expressions(record)
+        + v.corrupted_notation(record)
+    )
 
 
 def _against_target(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The checks of a record against the target system that it is stated against."""
     upstream = v.upstream_of(record, ctx.workspace.by_id)
     target = ctx.target_of(record)
-    backgrounds = [r for r in ctx.workspace.by_id.values()
-                   if r.get("type") == "background" and r.get("describes") == record.get("id")]
-    found = (v.unordered_interactions(record, upstream) + v.overreaching_declarations(record, upstream)
-             + v.misrouted_interactions(record, upstream) + v.misnamed_variant(record, v.declared_variants(target))
-             + v.mismatched_arity(record, ctx.arities) + v.unborne_variants(record, backgrounds))
+    backgrounds = [
+        r
+        for r in ctx.workspace.by_id.values()
+        if r.get("type") == "background" and r.get("describes") == record.get("id")
+    ]
+    found = (
+        v.unordered_interactions(record, upstream)
+        + v.overreaching_declarations(record, upstream)
+        + v.misrouted_interactions(record, upstream)
+        + v.misnamed_variant(record, v.declared_variants(target))
+        + v.mismatched_arity(record, ctx.arities)
+        + v.unborne_variants(record, backgrounds)
+    )
     if record.get("type") in ("phenomenon", "answer"):
         found += v.overreaching_entries(record, v.variant_symbols(target))
     return found
@@ -280,20 +310,29 @@ def _question(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     target = ctx.record(c.at(record, "subject.target_system"))
     reached = {"question": record, "phenomenon": phenomenon, "target-system": target}
     records = {**ctx.workspace.by_id, **ctx.problem.records}
-    return (c.malformed_restrictions(record, c.varying_symbols(target, phenomenon))
-            + c.unjustified_explanans_bound(record) + c.unstated_standing(record)
-            + c.contradictory_accuracy(record) + c.unresolved_slots(record, records, ctx.registries.slot_types)
-            + c.unresolved_question_references(record, records) + c.unstated_function_sense(record)
-            + c.unbounded_aim(record, records, ctx.registries.aims)
-            + c.unmet_by_aim(record, reached, ctx.registries.by_aim)
-            + malformed_answerability(record, records) + c.unanchored_explicandum(record, records))
+    return (
+        c.malformed_restrictions(record, c.varying_symbols(target, phenomenon))
+        + c.unjustified_explanans_bound(record)
+        + c.unstated_standing(record)
+        + c.contradictory_accuracy(record)
+        + c.unresolved_slots(record, records, ctx.registries.slot_types)
+        + c.unresolved_question_references(record, records)
+        + c.unstated_function_sense(record)
+        + c.unbounded_aim(record, records, ctx.registries.aims)
+        + c.unmet_by_aim(record, reached, ctx.registries.by_aim)
+        + malformed_answerability(record, records)
+        + c.unanchored_explicandum(record, records)
+    )
 
 
 def _answer(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The checks of an answer: its operations, its block, its binding and its status pairs."""
     by_id = ctx.workspace.by_id
-    found = (c.unclassified_operations(record, by_id) + c.unbound_outputs(record, ctx.record(record.get("answers")), by_id)
-             + c.mismatched_status_pairs(record, by_id))
+    found = (
+        c.unclassified_operations(record, by_id)
+        + c.unbound_outputs(record, ctx.record(record.get("answers")), by_id)
+        + c.mismatched_status_pairs(record, by_id)
+    )
     for block, paths in ctx.registries.blocks.items():
         if c.at(record, block) is not None:
             found += c.unmet_general(record, [f"{block}.{path}" for path in paths])
@@ -302,15 +341,21 @@ def _answer(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 def _model(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The checks of a model: retired symbols, its operations and the requirements of its parents."""
-    return (v.retired_in_use(record) + c.incomplete_operations(record)
-            + c.unmet_by_presence(record, ctx.registries.by_presence))
+    return (
+        v.retired_in_use(record)
+        + c.incomplete_operations(record)
+        + c.unmet_by_presence(record, ctx.registries.by_presence)
+    )
 
 
 def _assessment(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The checks of an assessment: its credence, what it assesses, and its appraisal."""
     records = {**ctx.workspace.by_id, **ctx.problem.records}
-    return (c.malformed_credence(record) + c.misdirected_assessment(record, records, ctx.registries.constructs)
-            + c.premature_appraisal(record))
+    return (
+        c.malformed_credence(record)
+        + c.misdirected_assessment(record, records, ctx.registries.constructs)
+        + c.premature_appraisal(record)
+    )
 
 
 def _phenomenon(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
@@ -322,20 +367,25 @@ def _problem(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The checks of a problem against the records that serve it."""
     records = {**ctx.workspace.by_id, **ctx.problem.records}
     reg = ctx.registries
-    return (c.mismatched_request(record, records)
-            + c.unsupported_outcome(record, records, reg.classes, reg.holders)
-            + c.misstated_obstacles(record, records, reg.classes, reg.holders))
+    return (
+        c.mismatched_request(record, records)
+        + c.unsupported_outcome(record, records, reg.classes, reg.holders)
+        + c.misstated_obstacles(record, records, reg.classes, reg.holders)
+    )
 
 
 def _itinerary(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The steps of an itinerary against the registries and the records that they name."""
-    return itinerary_problems(record, {**ctx.workspace.by_id, **ctx.problem.records}, states=ctx.workspace.states)
+    return itinerary_problems(
+        record, {**ctx.workspace.by_id, **ctx.problem.records}, states=ctx.workspace.states
+    )
 
 
 def _every_record(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The checks that every record undergoes: references and closed values."""
-    return (v.dangling_references(record, ctx.workspace.by_id)
-            + c.inadmissible_values(record, ctx.registries.admitted_values(str(record.get("type")))))
+    return v.dangling_references(record, ctx.workspace.by_id) + c.inadmissible_values(
+        record, ctx.registries.admitted_values(str(record.get("type")))
+    )
 
 
 #: The checks of each kind of record, in the order of their reports.
@@ -370,12 +420,25 @@ def check_workspace(workspace: Workspace) -> list[Located]:
             for run in checks:
                 try:
                     results = run(record, ctx)
-                except Exception as error:  # a malformed record must not stop the checks of the others
-                    results = [finding(CHECK_FAILED, f"{run.__name__.strip('_')}: stopped on {type(error).__name__}: {error}",
-                                       value=run.__name__)]
+                except (
+                    Exception
+                ) as error:  # a malformed record must not stop the checks of the others
+                    results = [
+                        finding(
+                            CHECK_FAILED,
+                            f"{run.__name__.strip('_')}: stopped on {type(error).__name__}: {error}",
+                            value=run.__name__,
+                        )
+                    ]
                 found += [Located(f, file, ident) for f in results]
         unused = v.unused_declarations(problem.folder)
         for ident, f in unused:
             if ident in problem.files:
-                found.append(Located(f, PurePosixPath(problem.files[ident].relative_to(workspace.root).as_posix()), ident))
+                found.append(
+                    Located(
+                        f,
+                        PurePosixPath(problem.files[ident].relative_to(workspace.root).as_posix()),
+                        ident,
+                    )
+                )
     return found

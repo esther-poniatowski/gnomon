@@ -20,7 +20,11 @@ import yaml
 
 from .paths import EXAMPLES, ROOT
 
-MODEL = yaml.safe_load((Path(__file__).resolve().parents[2] / "src/gnomon/data/registries/answerability.yml").read_text(encoding="utf-8"))
+MODEL = yaml.safe_load(
+    (
+        Path(__file__).resolve().parents[2] / "src/gnomon/data/registries/answerability.yml"
+    ).read_text(encoding="utf-8")
+)
 CASE = EXAMPLES / "grokking-delayed-generalization"
 CONDITIONS: list[str] = MODEL["conditions"]
 ROUTES = ("selection", "construction")
@@ -102,7 +106,9 @@ def test_norm_quotation_occurs(entry: Mapping[str, Any]) -> None:
 
 
 def test_mapped_activities_exist_in_the_registry() -> None:
-    registry = yaml.safe_load((ROOT / "src/gnomon/data/registries/activities.yml").read_text(encoding="utf-8"))
+    registry = yaml.safe_load(
+        (ROOT / "src/gnomon/data/registries/activities.yml").read_text(encoding="utf-8")
+    )
     assert {e["id"] for e in MODEL["activities"]} <= {a["id"] for a in registry["activities"]}
 
 
@@ -142,8 +148,14 @@ def test_record_facts_cited_by_the_example() -> None:
     verdicts = {step["id"]: step["norm"]["verdict"] for step in itinerary["steps"]}
     cited = ("pose", "formulate", "identify", "propose", "derive", "admit", "check", "test")
     assert {k: verdicts[k] for k in cited} == {
-        "pose": "pass", "formulate": "pass", "identify": "pass", "propose": "pass",
-        "derive": "pending", "admit": "fail", "check": "pending", "test": "pending",
+        "pose": "pass",
+        "formulate": "pass",
+        "identify": "pass",
+        "propose": "pass",
+        "derive": "pending",
+        "admit": "fail",
+        "check": "pending",
+        "test": "pending",
     }
     phenomenon = yaml.safe_load((CASE / "phenomenon.yml").read_text(encoding="utf-8"))
     assert phenomenon["evidential_status"] == "established"
@@ -151,9 +163,13 @@ def test_record_facts_cited_by_the_example() -> None:
     assert question["maturity"]["task.admissible_explanans"] == "open"
     tests = yaml.safe_load((CASE / "assessment.yml").read_text(encoding="utf-8"))["tests"]
     assert tests["admissibility"]["modal-strength"]["verdict"] == "pass"
-    failed = {level: {k for k, v in t.items() if v["verdict"] == "fail"} for level, t in tests.items()}
-    assert failed == {"admissibility": {"scope", "grain", "product"},
-                      "warrant": {"closure", "fidelity", "robustness"}}
+    failed = {
+        level: {k for k, v in t.items() if v["verdict"] == "fail"} for level, t in tests.items()
+    }
+    assert failed == {
+        "admissibility": {"scope", "grain", "product"},
+        "warrant": {"closure", "fidelity", "robustness"},
+    }
 
 
 def test_route_column_of_the_conditions_note_matches_the_model() -> None:

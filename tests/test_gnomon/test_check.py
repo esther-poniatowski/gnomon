@@ -33,14 +33,36 @@ CASE = "grokking-delayed-generalization"
 #: Each defect planted in a copy of the grokking inquiry: the file, the text replaced, its
 #: replacement, and the rule that must report it.
 PLANTED = [
-    ("answer.yml", 'holds: "0 < lambda3 * eta_rep"', 'holds: "0 < lambda3 * eta_zzz"', "vocabulary/unresolved"),
-    ("answer.yml", "pair: bind.grokking.effective-representation.decoder-limit",
-     "pair: bind.grokking.effective-representation.delay-scale", "completeness/mismatched-status-pair"),
-    ("answer.yml", "record: mod.grokking.effective-representation.representation_flow",
-     "record: mod.grokking.effective-representation.no_such_law", "vocabulary/unknown-unit"),
-    ("assessment.yml", "assesses: ans.grokking.slow-structured-representation",
-     "assesses: ans.grokking.missing-answer", "vocabulary/unknown-record"),
-    ("answer.yml", "modal_strength: actual", "modal_strength: certain", "completeness/inadmissible-value"),
+    (
+        "answer.yml",
+        'holds: "0 < lambda3 * eta_rep"',
+        'holds: "0 < lambda3 * eta_zzz"',
+        "vocabulary/unresolved",
+    ),
+    (
+        "answer.yml",
+        "pair: bind.grokking.effective-representation.decoder-limit",
+        "pair: bind.grokking.effective-representation.delay-scale",
+        "completeness/mismatched-status-pair",
+    ),
+    (
+        "answer.yml",
+        "record: mod.grokking.effective-representation.representation_flow",
+        "record: mod.grokking.effective-representation.no_such_law",
+        "vocabulary/unknown-unit",
+    ),
+    (
+        "assessment.yml",
+        "assesses: ans.grokking.slow-structured-representation",
+        "assesses: ans.grokking.missing-answer",
+        "vocabulary/unknown-record",
+    ),
+    (
+        "answer.yml",
+        "modal_strength: actual",
+        "modal_strength: certain",
+        "completeness/inadmissible-value",
+    ),
     ("binding.yml", "grain: qualitative", "grain:", "completeness/unmet-requirement"),
 ]
 
@@ -69,26 +91,64 @@ def test_the_worked_inquiries_pass_every_check() -> None:
 CHECKERS: dict[ModuleType, tuple[str, ...]] = {
     check_module: ("malformed_answerability", "itinerary_problems"),
     completeness: (
-        "undecided_boundaries", "unmet_general", "unmet_by_value", "unmet_commitment", "malformed_restrictions",
-        "unjustified_explanans_bound", "unstated_standing", "contradictory_accuracy", "unresolved_slots",
-        "unresolved_question_references", "unstated_function_sense", "unbounded_aim", "unmet_by_aim",
-        "unanchored_explicandum", "unclassified_operations", "unbound_outputs", "mismatched_status_pairs",
-        "incomplete_operations", "unmet_by_presence", "malformed_credence", "misdirected_assessment",
-        "premature_appraisal", "mismatched_occurrence", "mismatched_request", "unsupported_outcome",
-        "misstated_obstacles", "inadmissible_values",
+        "undecided_boundaries",
+        "unmet_general",
+        "unmet_by_value",
+        "unmet_commitment",
+        "malformed_restrictions",
+        "unjustified_explanans_bound",
+        "unstated_standing",
+        "contradictory_accuracy",
+        "unresolved_slots",
+        "unresolved_question_references",
+        "unstated_function_sense",
+        "unbounded_aim",
+        "unmet_by_aim",
+        "unanchored_explicandum",
+        "unclassified_operations",
+        "unbound_outputs",
+        "mismatched_status_pairs",
+        "incomplete_operations",
+        "unmet_by_presence",
+        "malformed_credence",
+        "misdirected_assessment",
+        "premature_appraisal",
+        "mismatched_occurrence",
+        "mismatched_request",
+        "unsupported_outcome",
+        "misstated_obstacles",
+        "inadmissible_values",
     ),
     vocabulary: (
-        "unresolved", "mistyped_symbols", "repeated_symbols", "misplaced_sharing", "vacuous_shared",
-        "unfixed_parameters", "doubly_defined", "unowned_quantities", "unselected_conditions",
-        "malformed_relations", "split_expressions", "corrupted_notation", "unordered_interactions",
-        "overreaching_declarations", "misrouted_interactions", "misnamed_variant", "mismatched_arity",
-        "unborne_variants", "overreaching_entries", "retired_in_use", "dangling_references",
+        "unresolved",
+        "mistyped_symbols",
+        "repeated_symbols",
+        "misplaced_sharing",
+        "vacuous_shared",
+        "unfixed_parameters",
+        "doubly_defined",
+        "unowned_quantities",
+        "unselected_conditions",
+        "malformed_relations",
+        "split_expressions",
+        "corrupted_notation",
+        "unordered_interactions",
+        "overreaching_declarations",
+        "misrouted_interactions",
+        "misnamed_variant",
+        "mismatched_arity",
+        "unborne_variants",
+        "overreaching_entries",
+        "retired_in_use",
+        "dangling_references",
         "unused_declarations",
     ),
 }
 
 
-def _recorded(function: Callable[..., list[Any]], calls: list[list[Any]]) -> Callable[..., list[Any]]:
+def _recorded(
+    function: Callable[..., list[Any]], calls: list[list[Any]]
+) -> Callable[..., list[Any]]:
     """Return ``function``, recording the result of each call into ``calls``."""
 
     def spy(*args: Any, **kwargs: Any) -> list[Any]:
@@ -113,12 +173,15 @@ def corpus_run() -> dict[str, list[list[Any]]]:
 
 @pytest.mark.parametrize("name", [name for names in CHECKERS.values() for name in names])
 def test_each_checker_runs_on_the_worked_inquiries_and_reports_nothing(
-    name: str, corpus_run: dict[str, list[list[Any]]],
+    name: str,
+    corpus_run: dict[str, list[list[Any]]],
 ) -> None:
     """A checker that the command never reaches is reported, as is any finding on the worked inquiries."""
     calls = corpus_run[name]
     assert calls, f"gnomon check never runs {name} on the worked inquiries"
-    found: list[Finding] = [item[-1] if isinstance(item, tuple) else item for result in calls for item in result]
+    found: list[Finding] = [
+        item[-1] if isinstance(item, tuple) else item for result in calls for item in result
+    ]
     assert not found, texts(found)
 
 
@@ -128,13 +191,17 @@ def test_every_planted_defect_is_reported(planted: Path) -> None:
     assert not missing, f"not reported: {missing}"
 
 
-def test_a_check_that_fails_is_reported_and_the_others_still_run(planted: Path, monkeypatch) -> None:
+def test_a_check_that_fails_is_reported_and_the_others_still_run(
+    planted: Path, monkeypatch
+) -> None:
     def broken(record, ctx):
         raise RuntimeError("planted")
 
     monkeypatch.setitem(check_module.BY_KIND, "binding", (broken,))
     found = check_workspace(load_workspace(planted))
-    assert any(x.finding.rule.id == "check/failed" and (x.record or "").startswith("bind.") for x in found)
+    assert any(
+        x.finding.rule.id == "check/failed" and (x.record or "").startswith("bind.") for x in found
+    )
     assert any(x.finding.rule.id == "vocabulary/unresolved" for x in found)
 
 
@@ -159,7 +226,9 @@ def test_the_scaffold_writes_the_templates_in_the_order_of_filling(tmp_path: Pat
     names = [p.stem for p in written if p.suffix == ".yml"]
     assert names == sorted(names, key=order.index) and set(names) == {*CORE_KINDS, "answer"}
     index = (folder / "_index.md").read_text(encoding="utf-8")
-    assert index.index("(problem.yml)") < index.index("(question.yml)") < index.index("(answer.yml)")
+    assert (
+        index.index("(problem.yml)") < index.index("(question.yml)") < index.index("(answer.yml)")
+    )
 
 
 def test_the_scaffold_never_overwrites_a_record_unless_forced(tmp_path: Path) -> None:
@@ -176,7 +245,9 @@ def test_the_scaffold_never_overwrites_a_record_unless_forced(tmp_path: Path) ->
 def test_the_commands_exit_with_the_status_of_their_findings(planted: Path, tmp_path: Path) -> None:
     runner = CliRunner()
     assert runner.invoke(app, ["check", str(EXAMPLES)]).exit_code == 0
-    result = runner.invoke(app, ["check", str(planted), "--format", "yaml", "--output", str(tmp_path / "r.yml")])
+    result = runner.invoke(
+        app, ["check", str(planted), "--format", "yaml", "--output", str(tmp_path / "r.yml")]
+    )
     assert result.exit_code == 1 and (tmp_path / "r.yml").is_file()
     assert runner.invoke(app, ["init", str(tmp_path / "new")]).exit_code == 0
     assert runner.invoke(app, ["init", str(tmp_path / "new")]).exit_code == 1
@@ -190,8 +261,10 @@ def test_a_template_not_yet_filled_is_listed_apart_and_not_checked(tmp_path: Pat
     assert not workspace.by_id and len(workspace.unfilled) == len(CORE_KINDS)
     assert check_workspace(workspace) == []
     problem = folder / "problem.yml"
-    problem.write_text(problem.read_text(encoding="utf-8").replace("id: prob.TOPIC.NAME", "id: prob.demo.first"),
-                       encoding="utf-8")
+    problem.write_text(
+        problem.read_text(encoding="utf-8").replace("id: prob.TOPIC.NAME", "id: prob.demo.first"),
+        encoding="utf-8",
+    )
     found = check_workspace(load_workspace(tmp_path))
     assert found and {x.record for x in found} == {"prob.demo.first"}
     assert not any(x.finding.rule.id == "vocabulary/unknown-record" for x in found)
@@ -206,13 +279,23 @@ def test_the_scaffold_opens_the_itinerary_and_follows_the_stages(tmp_path: Path)
     folder = tmp_path / "my-problem"
     scaffold(folder, CORE_KINDS)
     index = (folder / "_index.md").read_text(encoding="utf-8")
-    assert index.index("## Throughout the inquiry") < index.index("## 1. Problem") < index.index("## 2. Question schema")
+    assert (
+        index.index("## Throughout the inquiry")
+        < index.index("## 1. Problem")
+        < index.index("## 2. Question schema")
+    )
 
 
 def test_a_required_block_whose_fields_are_all_empty_fails_its_requirement() -> None:
     from gnomon.completeness import unmet_general
 
     empty = {"construction": {"procedure": None, "reading": ""}}
-    assert [f.text for f in unmet_general(empty, ["construction"])] == ["always required: construction"]
-    assert unmet_general({"construction": {"procedure": "design.a.b", "reading": ""}}, ["construction"]) == []
-
+    assert [f.text for f in unmet_general(empty, ["construction"])] == [
+        "always required: construction"
+    ]
+    assert (
+        unmet_general(
+            {"construction": {"procedure": "design.a.b", "reading": ""}}, ["construction"]
+        )
+        == []
+    )

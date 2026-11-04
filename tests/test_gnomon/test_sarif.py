@@ -28,7 +28,9 @@ from gnomon.findings import (
 from gnomon.sarif import Located, sarif_log
 
 CYCLE = Finding(ITINERARY_CYCLE, ("steps",), "steps: a -> b -> a forms a cycle", "a -> b -> a")
-UNADDRESSED = Finding(ITINERARY_UNADDRESSED, ("addresses",), "addresses: x is no problem or question record")
+UNADDRESSED = Finding(
+    ITINERARY_UNADDRESSED, ("addresses",), "addresses: x is no problem or question record"
+)
 FILE = PurePosixPath("problems/demo/itinerary.yml")
 
 
@@ -52,27 +54,42 @@ def test_a_complete_run_lists_every_rule_and_declares_its_success() -> None:
 
 
 def test_a_failed_run_declares_an_error_notification() -> None:
-    run = run_of(sarif_log([Located(UNADDRESSED, FILE, "itin.demo")], "1.2.3", stopped="a file was unreadable"))
-    assert run["invocations"] == [{
-        "executionSuccessful": False,
-        "toolExecutionNotifications": [{"level": "error", "message": {"text": "a file was unreadable"}}],
-    }]
+    run = run_of(
+        sarif_log(
+            [Located(UNADDRESSED, FILE, "itin.demo")], "1.2.3", stopped="a file was unreadable"
+        )
+    )
+    assert run["invocations"] == [
+        {
+            "executionSuccessful": False,
+            "toolExecutionNotifications": [
+                {"level": "error", "message": {"text": "a file was unreadable"}}
+            ],
+        }
+    ]
     assert len(run["results"]) == 1
 
 
 def test_a_result_holds_its_rule_message_and_two_locations() -> None:
-    run = run_of(sarif_log([Located(CYCLE, FILE, "itin.demo"), Located(UNADDRESSED, FILE, "itin.demo")], "1"))
+    run = run_of(
+        sarif_log([Located(CYCLE, FILE, "itin.demo"), Located(UNADDRESSED, FILE, "itin.demo")], "1")
+    )
     cycle, unaddressed = run["results"]
     assert cycle == {
         "ruleId": "itinerary/cycle",
         "level": "error",
         "message": {"text": "steps: a -> b -> a forms a cycle"},
-        "locations": [{
-            "physicalLocation": {
-                "artifactLocation": {"uri": "problems/demo/itinerary.yml", "uriBaseId": "SRCROOT"}
-            },
-            "logicalLocations": [{"name": "id:itin.demo#/steps"}],
-        }],
+        "locations": [
+            {
+                "physicalLocation": {
+                    "artifactLocation": {
+                        "uri": "problems/demo/itinerary.yml",
+                        "uriBaseId": "SRCROOT",
+                    }
+                },
+                "logicalLocations": [{"name": "id:itin.demo#/steps"}],
+            }
+        ],
         "partialFingerprints": {"discriminator/v1": "a -> b -> a"},
     }
     assert "partialFingerprints" not in unaddressed
@@ -122,11 +139,23 @@ RECORDS: dict[str, dict[str, Any]] = {
         "type": "itinerary",
         "addresses": "prob.demo",
         "steps": [
-            {"id": "derive", "activity": "derivation", "inputs": [{"type": "model", "ref": "mod.demo"}],
-             "output": {"type": "consequence"}, "norm": {"test": "norm.derivation", "verdict": "pending"},
-             "rationale": {"serves": "prob.demo"}, "mode": "deductive"},
-            {"id": "guess", "activity": "intuition", "inputs": [], "output": {"type": "consequence"},
-             "norm": {"test": "norm.intuition", "verdict": "pending"}, "rationale": {"serves": "prob.demo"}},
+            {
+                "id": "derive",
+                "activity": "derivation",
+                "inputs": [{"type": "model", "ref": "mod.demo"}],
+                "output": {"type": "consequence"},
+                "norm": {"test": "norm.derivation", "verdict": "pending"},
+                "rationale": {"serves": "prob.demo"},
+                "mode": "deductive",
+            },
+            {
+                "id": "guess",
+                "activity": "intuition",
+                "inputs": [],
+                "output": {"type": "consequence"},
+                "norm": {"test": "norm.intuition", "verdict": "pending"},
+                "rationale": {"serves": "prob.demo"},
+            },
         ],
     },
 }
@@ -155,7 +184,17 @@ def test_the_text_output_prints_one_line_per_problem(problem: Path) -> None:
 def test_the_command_writes_a_log_and_keeps_its_text_output(problem: Path, tmp_path: Path) -> None:
     output = tmp_path / "logs" / "nested" / "gnomon.sarif"
     result = CliRunner().invoke(
-        app, ["itinerary", str(problem), "--format", "sarif", "--output", str(output), "--root", str(tmp_path)]
+        app,
+        [
+            "itinerary",
+            str(problem),
+            "--format",
+            "sarif",
+            "--output",
+            str(output),
+            "--root",
+            str(tmp_path),
+        ],
     )
     assert result.exit_code == 1
     assert result.stdout.splitlines() == LINES
@@ -167,14 +206,17 @@ def test_the_command_writes_a_log_and_keeps_its_text_output(problem: Path, tmp_p
     assert found["message"]["text"] == "steps.guess: intuition is no registered activity"
     location = found["locations"][0]
     assert location["physicalLocation"]["artifactLocation"] == {
-        "uri": "problems/demo/itinerary.yml", "uriBaseId": "SRCROOT"
+        "uri": "problems/demo/itinerary.yml",
+        "uriBaseId": "SRCROOT",
     }
     assert location["logicalLocations"] == [{"name": "id:itin.demo#/steps"}]
     assert found["partialFingerprints"] == {"discriminator/v1": "guess/activity"}
 
 
 def test_without_output_the_log_takes_standard_output(problem: Path, tmp_path: Path) -> None:
-    result = CliRunner().invoke(app, ["itinerary", str(problem), "--format", "sarif", "--root", str(tmp_path)])
+    result = CliRunner().invoke(
+        app, ["itinerary", str(problem), "--format", "sarif", "--root", str(tmp_path)]
+    )
     assert result.exit_code == 1
     assert len(run_of(json.loads(result.stdout))["results"]) == 1
     assert result.stderr.splitlines() == LINES
@@ -184,7 +226,17 @@ def test_an_unreadable_record_declares_a_failed_run(problem: Path, tmp_path: Pat
     (problem / "broken.yml").write_text("id: [unclosed\n", encoding="utf-8")
     output = tmp_path / "gnomon.sarif"
     result = CliRunner().invoke(
-        app, ["itinerary", str(problem), "--format", "sarif", "--output", str(output), "--root", str(tmp_path)]
+        app,
+        [
+            "itinerary",
+            str(problem),
+            "--format",
+            "sarif",
+            "--output",
+            str(output),
+            "--root",
+            str(tmp_path),
+        ],
     )
     assert result.exit_code == 1
     (invocation,) = run_of(json.loads(output.read_text(encoding="utf-8")))["invocations"]
@@ -202,5 +254,7 @@ def test_a_folder_outside_the_root_is_refused(problem: Path, tmp_path: Path) -> 
 
 
 def test_an_output_requires_the_sarif_format(problem: Path, tmp_path: Path) -> None:
-    result = CliRunner().invoke(app, ["itinerary", str(problem), "--output", str(tmp_path / "x.sarif")])
+    result = CliRunner().invoke(
+        app, ["itinerary", str(problem), "--output", str(tmp_path / "x.sarif")]
+    )
     assert result.exit_code == 2

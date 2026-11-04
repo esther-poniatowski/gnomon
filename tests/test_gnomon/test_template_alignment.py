@@ -79,9 +79,17 @@ def resolve(slugs: Sequence[str], paths: Sequence[str], prefix: str) -> str | No
                 elif path.startswith(base + ".") and path.count(".") == base.count(".") + 1:
                     children.append(path.split(".")[-1])
         candidates = list(dict.fromkeys(children))
-        hit = name if name in candidates else next(  # an exact name wins over a prefix: "data_model" over "data"
-            (key for key in candidates if name.startswith(key + "_") or key.startswith(name + "_")),
-            None,
+        hit = (
+            name
+            if name in candidates
+            else next(  # an exact name wins over a prefix: "data_model" over "data"
+                (
+                    key
+                    for key in candidates
+                    if name.startswith(key + "_") or key.startswith(name + "_")
+                ),
+                None,
+            )
         )
         if hit is None:
             return None
@@ -105,9 +113,13 @@ def table_lines(note: str, header: Header) -> list[str]:
     anchor, opening = header if isinstance(header, tuple) else ("", header)
     after = 0
     if anchor:
-        after = next((i for i, line in enumerate(lines) if line.rstrip().endswith(f"^{anchor}")), -1)
+        after = next(
+            (i for i, line in enumerate(lines) if line.rstrip().endswith(f"^{anchor}")), -1
+        )
         assert after >= 0, f"no block anchor ^{anchor} in {note}"
-    start = next((i for i, line in enumerate(lines) if i >= after and line.startswith(opening)), None)
+    start = next(
+        (i for i, line in enumerate(lines) if i >= after and line.startswith(opening)), None
+    )
     assert start is not None, f"no table opening with {opening!r} in {note}"
     end = start
     while end + 1 < len(lines) and lines[end + 1].startswith("|"):
@@ -135,10 +147,42 @@ def documented_keys(note: str, header: Header, paths: Sequence[str], prefix: str
 
 # (label, note, table header, template, scope of the reverse check, prefix, keys documented elsewhere)
 PAIRS = [
-    ("problem", "specification/problem.md", "| Specification", "problem.yml", None, "", ELSEWHERE_MATURITY),
-    ("target-system", "specification/target-system.md", "| Specification", "target-system.yml", None, "", ELSEWHERE_MATURITY),
-    ("background", "specification/background.md", "| Specification", "background.yml", None, "", ELSEWHERE_MATURITY),
-    ("phenomenon", "specification/phenomenon.md", "| Specification", "phenomenon.yml", None, "", ELSEWHERE_MATURITY),
+    (
+        "problem",
+        "specification/problem.md",
+        "| Specification",
+        "problem.yml",
+        None,
+        "",
+        ELSEWHERE_MATURITY,
+    ),
+    (
+        "target-system",
+        "specification/target-system.md",
+        "| Specification",
+        "target-system.yml",
+        None,
+        "",
+        ELSEWHERE_MATURITY,
+    ),
+    (
+        "background",
+        "specification/background.md",
+        "| Specification",
+        "background.yml",
+        None,
+        "",
+        ELSEWHERE_MATURITY,
+    ),
+    (
+        "phenomenon",
+        "specification/phenomenon.md",
+        "| Specification",
+        "phenomenon.yml",
+        None,
+        "",
+        ELSEWHERE_MATURITY,
+    ),
     (
         "operators",
         "specification/operators.md",
@@ -149,10 +193,42 @@ PAIRS = [
         ELSEWHERE_MATURITY,
     ),
     ("question-links", "specification/question.md", "| Field", "question.yml", "links", "", {}),
-    ("subject-of-inquiry", "specification/question-subject.md", "| Component", "question.yml", "subject", "subject", {}),
-    ("contrast", "specification/question-subject.md", ("contrast-fields", "| Specification"), "question.yml", "subject.contrast", "subject.contrast", {}),
-    ("domain", "specification/question-subject.md", ("domain-fields", "| Specification"), "question.yml", "subject.domain", "subject.domain", {}),
-    ("epistemic-task", "specification/question-task.md", "| Dimension", "question.yml", "task", "task", {}),
+    (
+        "subject-of-inquiry",
+        "specification/question-subject.md",
+        "| Component",
+        "question.yml",
+        "subject",
+        "subject",
+        {},
+    ),
+    (
+        "contrast",
+        "specification/question-subject.md",
+        ("contrast-fields", "| Specification"),
+        "question.yml",
+        "subject.contrast",
+        "subject.contrast",
+        {},
+    ),
+    (
+        "domain",
+        "specification/question-subject.md",
+        ("domain-fields", "| Specification"),
+        "question.yml",
+        "subject.domain",
+        "subject.domain",
+        {},
+    ),
+    (
+        "epistemic-task",
+        "specification/question-task.md",
+        "| Dimension",
+        "question.yml",
+        "task",
+        "task",
+        {},
+    ),
     (
         "admissible-explanans",
         "specification/question-task.md",
@@ -162,8 +238,24 @@ PAIRS = [
         "task.admissible_explanans",
         {},
     ),
-    ("answer-core", "specification/answer.md", "| Element", "answer.yml", None, "", ELSEWHERE_MATURITY),
-    ("answer-aim-blocks", "specification/answer.md", "| Aim |", "answer.yml", "aim_block", "aim_block", {}),
+    (
+        "answer-core",
+        "specification/answer.md",
+        "| Element",
+        "answer.yml",
+        None,
+        "",
+        ELSEWHERE_MATURITY,
+    ),
+    (
+        "answer-aim-blocks",
+        "specification/answer.md",
+        "| Aim |",
+        "answer.yml",
+        "aim_block",
+        "aim_block",
+        {},
+    ),
     (
         "answer-explanation-block",
         "specification/answer.md",
@@ -183,7 +275,15 @@ PAIRS = [
         "",
         ELSEWHERE_MATURITY,
     ),
-    ("key", "specification/key.md", ("key-record", "| Specification"), "key.yml", None, "", ELSEWHERE_MATURITY),
+    (
+        "key",
+        "specification/key.md",
+        ("key-record", "| Specification"),
+        "key.yml",
+        None,
+        "",
+        ELSEWHERE_MATURITY,
+    ),
     (
         "assessment",
         "specification/assessment.md",
@@ -193,8 +293,24 @@ PAIRS = [
         "",
         ELSEWHERE_MATURITY,
     ),
-    ("concept", "specification/concept.md", "| Specification", "concept.yml", None, "", ELSEWHERE_MATURITY),
-    ("design", "specification/design.md", "| Specification", "design.yml", None, "", ELSEWHERE_MATURITY),
+    (
+        "concept",
+        "specification/concept.md",
+        "| Specification",
+        "concept.yml",
+        None,
+        "",
+        ELSEWHERE_MATURITY,
+    ),
+    (
+        "design",
+        "specification/design.md",
+        "| Specification",
+        "design.yml",
+        None,
+        "",
+        ELSEWHERE_MATURITY,
+    ),
     ("itinerary", "specification/itinerary.md", "| Specification", "itinerary.yml", None, "", {}),
 ]
 
@@ -249,7 +365,9 @@ def test_the_operator_note_lists_the_registry():
     bullet = re.search(r"- \*\*The canonical operators.*?\^operator-groups", note, re.DOTALL)
     assert bullet is not None, "the note declares no canonical operators"
     documented = set(re.findall(r"`([A-Za-z_][A-Za-z_0-9]*)`", bullet.group(0)))
-    declared = {e["symbol"] for e in yaml.safe_load((REGISTRY / "operators.yml").read_text())["operators"]}
+    declared = {
+        e["symbol"] for e in yaml.safe_load((REGISTRY / "operators.yml").read_text())["operators"]
+    }
     assert documented == declared, f"note and registry differ: {documented ^ declared}"
 
 
@@ -269,14 +387,18 @@ def test_every_canonical_operator_has_one_source_of_arity() -> None:
 def test_no_operator_notation_doubles_a_backslash() -> None:
     """A single-quoted YAML scalar keeps every backslash, so a doubled one reaches LaTeX as a line break."""
     operators = yaml.safe_load((REGISTRY / "operators.yml").read_text())["operators"]
-    doubled = [e["symbol"] for e in operators if re.search(r"\\\\[A-Za-z]", e.get("notation") or "")]
+    doubled = [
+        e["symbol"] for e in operators if re.search(r"\\\\[A-Za-z]", e.get("notation") or "")
+    ]
     assert not doubled, f"notations that double a backslash before a command: {doubled}"
 
 
 def test_the_aim_note_lists_the_requirement_registry() -> None:
     """Each row of the aim table states what the registry declares for that aim."""
     note = (DOCS / "specification/question-task.md").read_text(encoding="utf-8")
-    section = re.search(r"\| Aim \| Additionally required \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)", note)
+    section = re.search(
+        r"\| Aim \| Additionally required \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)", note
+    )
     assert section is not None, "the note carries no requirement table"
     documented = {}
     for row in section.group(1).splitlines():
@@ -289,12 +411,18 @@ def test_the_aim_note_lists_the_requirement_registry() -> None:
     assert set(documented) == set(declared), f"aims differ: {set(documented) ^ set(declared)}"
     for aim, (required, produced) in documented.items():
         entry = declared[aim]
-        assert required == [e["path"] for e in entry.get("required") or []], f"{aim}: required differs"
+        assert required == [
+            e["path"] for e in entry.get("required") or []
+        ], f"{aim}: required differs"
         assert produced == list(entry.get("to_produce") or []), f"{aim}: produced differs"
 
 
 #: The cell openings of the column "When it is required" that state a registered requirement.
-REQUIREMENT_CELLS = {"always": "always", "from `identified`": "identified", "from `specified`": "specified"}
+REQUIREMENT_CELLS = {
+    "always": "always",
+    "from `identified`": "identified",
+    "from `specified`": "specified",
+}
 
 # (registry entry, note, table header, template, prefix): a record kind is read under `always` and
 # `by_commitment`, and the path of an aim block under `by_block`.
@@ -305,18 +433,38 @@ REQUIREMENT_TABLES = [
     ("problem", "specification/problem.md", "| Specification", "problem.yml", ""),
     ("itinerary", "specification/itinerary.md", "| Specification", "itinerary.yml", ""),
     ("answer", "specification/answer.md", "| Element", "answer.yml", ""),
-    ("aim_block.explanation", "specification/answer.md", "| Specification", "answer.yml", "aim_block.explanation"),
+    (
+        "aim_block.explanation",
+        "specification/answer.md",
+        "| Specification",
+        "answer.yml",
+        "aim_block.explanation",
+    ),
     ("model", "specification/model.md", "| Element", "model.yml", ""),
-    ("binding", "specification/binding.md", ("binding-record", "| Specification"), "binding.yml", ""),
+    (
+        "binding",
+        "specification/binding.md",
+        ("binding-record", "| Specification"),
+        "binding.yml",
+        "",
+    ),
     ("key", "specification/key.md", ("key-record", "| Specification"), "key.yml", ""),
-    ("assessment", "specification/assessment.md", ("assessment-record", "| Specification"), "assessment.yml", ""),
+    (
+        "assessment",
+        "specification/assessment.md",
+        ("assessment-record", "| Specification"),
+        "assessment.yml",
+        "",
+    ),
     ("concept", "specification/concept.md", "| Specification", "concept.yml", ""),
     ("design", "specification/design.md", "| Specification", "design.yml", ""),
 ]
 
 
 @pytest.mark.parametrize(
-    "entry,note,header,tpl,prefix", REQUIREMENT_TABLES, ids=[table[0] for table in REQUIREMENT_TABLES]
+    "entry,note,header,tpl,prefix",
+    REQUIREMENT_TABLES,
+    ids=[table[0] for table in REQUIREMENT_TABLES],
 )
 def test_the_requirement_rows_of_a_note_are_the_registry_entries(
     entry: str, note: str, header: Header, tpl: str, prefix: str
@@ -350,7 +498,9 @@ def test_the_requirement_rows_of_a_note_are_the_registry_entries(
 
 
 @pytest.mark.parametrize(
-    "entry,note,header,tpl,prefix", REQUIREMENT_TABLES, ids=[table[0] for table in REQUIREMENT_TABLES]
+    "entry,note,header,tpl,prefix",
+    REQUIREMENT_TABLES,
+    ids=[table[0] for table in REQUIREMENT_TABLES],
 )
 def test_the_rows_required_for_a_kind_are_the_registry_entries_by_value(
     entry: str, note: str, header: Header, tpl: str, prefix: str
@@ -361,7 +511,11 @@ def test_the_rows_required_for_a_kind_are_the_registry_entries_by_value(
     documented: dict[str, dict[str, list[str]]] = {}
     for line in table_lines(note, header):
         cells = [c.strip() for c in line.strip("|").split("|")]
-        named = re.match(r"for the (kinds?|evidential status(?:es)?) ", cells[1].lower()) if len(cells) > 1 else None
+        named = (
+            re.match(r"for the (kinds?|evidential status(?:es)?) ", cells[1].lower())
+            if len(cells) > 1
+            else None
+        )
         if named:
             field = "kind" if named.group(1).startswith("kind") else "evidential_status"
             key = resolve(row_slugs(cells[0]), paths, prefix)
@@ -372,11 +526,16 @@ def test_the_rows_required_for_a_kind_are_the_registry_entries_by_value(
     declared = (registry.get("by_value") or {}).get(entry) or {}
     # a row whose children are documented stands for them, so only the deepest rows are compared
     leaves = {
-        field: {value: sorted(k for k in keys if not any(other.startswith(k + ".") for other in keys))
-                for value, keys in values.items()}
+        field: {
+            value: sorted(k for k in keys if not any(other.startswith(k + ".") for other in keys))
+            for value, keys in values.items()
+        }
         for field, values in documented.items()
     }
-    expected = {field: {value: sorted(keys) for value, keys in values.items()} for field, values in declared.items()}
+    expected = {
+        field: {value: sorted(keys) for value, keys in values.items()}
+        for field, values in declared.items()
+    }
     assert leaves == expected, f"{note}: {leaves} against {expected}"
 
 
@@ -387,7 +546,7 @@ def test_the_status_pairs_of_the_specification_are_those_that_the_check_reads() 
     registry = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text(encoding="utf-8"))
     types = {e["value"] for e in registry["vocabularies"]["binding"]["feature_pairs.type"]}
     text = (DOCS / "specification" / "answer.md").read_text(encoding="utf-8")
-    block = text[text.index("^status-pairs"):].split("\n\n", 1)[0]
+    block = text[text.index("^status-pairs") :].split("\n\n", 1)[0]
     documented = {}
     for line in block.splitlines()[1:]:
         tokens = re.findall(r"`([^`]+)`", line)
@@ -396,9 +555,12 @@ def test_the_status_pairs_of_the_specification_are_those_that_the_check_reads() 
     assert documented == dict(STATUS_PAIRS)
 
 
-def test_the_rows_required_for_a_root_or_a_derived_model_are_the_registry_entries_by_presence() -> None:
+def test_the_rows_required_for_a_root_or_a_derived_model_are_the_registry_entries_by_presence() -> (
+    None
+):
     """A row required "for a root model" is one that the absence of parents imposes, and a row required
-    "for a derived model" one that their presence imposes; the field of the parents is not counted."""
+    "for a derived model" one that their presence imposes; the field of the parents is not counted.
+    """
     paths = flatten(template("model.yml"))
     documented: dict[str, list[str]] = {"absent": [], "present": []}
     for line in table_lines("specification/model.md", "| Element"):
@@ -454,7 +616,9 @@ def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
 
 
 def test_the_virtues_of_the_note_are_the_options_of_the_question() -> None:
-    note = (DOCS / "epistemology/objects/task/epistemic-pragmatic-virtues.md").read_text(encoding="utf-8")
+    note = (DOCS / "epistemology/objects/task/epistemic-pragmatic-virtues.md").read_text(
+        encoding="utf-8"
+    )
     table = re.search(r"\| Virtue.*?\n\n", note, re.DOTALL)
     assert table is not None, "no virtue table in the note"
     names = [
@@ -501,7 +665,9 @@ def test_every_template_parses_and_declares_its_kind() -> None:
 def test_the_occurrence_table_of_the_phenomenon_note_is_the_registry() -> None:
     """The note documents which occurrence classes each category admits; the registry decides."""
     note = (DOCS / "specification/phenomenon.md").read_text(encoding="utf-8")
-    section = re.search(r"\| Category \| Admitted occurrence \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)", note)
+    section = re.search(
+        r"\| Category \| Admitted occurrence \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)", note
+    )
     assert section is not None, "the note carries no table of occurrence classes"
     documented = {}
     for row in section.group(1).splitlines():
@@ -524,30 +690,49 @@ def test_the_aim_categories_of_the_note_are_the_registry() -> None:
     An exploration takes its category from the origin of its equivalence criterion, so its cell
     names one category per origin.
     """
-    names = {"answer content": "answer-content", "conceptual work": "conceptual-work", "mode of inquiry": "mode-of-inquiry"}
+    names = {
+        "answer content": "answer-content",
+        "conceptual work": "conceptual-work",
+        "mode of inquiry": "mode-of-inquiry",
+    }
     documented: dict[str, Any] = {}
-    for line in table_lines("epistemology/objects/task/epistemic-aim.md", "| Epistemic aim | Category"):
+    for line in table_lines(
+        "epistemology/objects/task/epistemic-aim.md", "| Epistemic aim | Category"
+    ):
         cells = [c.strip() for c in line.strip("|").split("|")]
         aim = re.search(r"\(`([a-z-]+)`\)", cells[0])
         assert aim is not None, f"no aim value in {cells[0]!r}"
-        by_origin = re.findall(r"(answer content|conceptual work|mode of inquiry), when (?:its|the) (?:equivalence )?criterion is an (input|output)", cells[1])
-        documented[aim.group(1)] = {o: names[c] for c, o in by_origin} if by_origin else names[cells[1]]
-    aims = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"]["question"]["task.epistemic_aim"]
+        by_origin = re.findall(
+            r"(answer content|conceptual work|mode of inquiry), when (?:its|the) (?:equivalence )?criterion is an (input|output)",
+            cells[1],
+        )
+        documented[aim.group(1)] = (
+            {o: names[c] for c, o in by_origin} if by_origin else names[cells[1]]
+        )
+    aims = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"]["question"][
+        "task.epistemic_aim"
+    ]
     assert documented == {entry["value"]: entry.get("category") for entry in aims}
 
 
 def test_the_aims_admitted_by_each_type_of_result_are_those_of_the_demand_table() -> None:
     """The registry declares, per type of result, the aims that the demand table admits."""
     documented: dict[str, set[str]] = {}
-    for line in table_lines("epistemology/objects/problem/problem-types.md", "| Type of result | Admissible aims |"):
+    for line in table_lines(
+        "epistemology/objects/problem/problem-types.md", "| Type of result | Admissible aims |"
+    ):
         cells = [cell.strip() for cell in line.strip("|").split("|")]
         kinds = re.findall(r"`([a-z-]+)`", cells[0].split(":")[0])
-        aims = set() if cells[1].startswith("none") else {
-            part.split(",")[0].strip().replace(" ", "-") for part in cells[1].split(";")
-        }
+        aims = (
+            set()
+            if cells[1].startswith("none")
+            else {part.split(",")[0].strip().replace(" ", "-") for part in cells[1].split(";")}
+        )
         for kind in kinds:
             documented.setdefault(kind, set()).update(aims)
-    entries = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"]["problem"][".result_type"]
+    entries = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"][
+        "problem"
+    ][".result_type"]
     assert documented == {entry["value"]: set(entry["admits"]) for entry in entries}
 
 
@@ -559,4 +744,3 @@ def test_the_identifier_of_each_template_has_the_segments_of_its_prefix() -> Non
         identifier = str(template(path.name)["id"])
         prefix = identifier.split(".")[0]
         assert RECORD_SEGMENTS.get(prefix) == len(identifier.split(".")), path.name
-

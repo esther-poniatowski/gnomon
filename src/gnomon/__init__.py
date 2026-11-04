@@ -21,6 +21,7 @@ info() -> str
 data_path() -> Path
     Return the absolute path to the package data directory.
 """
+
 import platform
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path

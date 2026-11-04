@@ -65,7 +65,8 @@ ITINERARY_UNKNOWN_ACTIVITY = _rule(
     "itinerary/unknown-activity", "A step names no registered activity."
 )
 ITINERARY_UNFILLED_INPUT = _rule(
-    "itinerary/unfilled-input", "The inputs of a step do not fill an input of its activity in number."
+    "itinerary/unfilled-input",
+    "The inputs of a step do not fill an input of its activity in number.",
 )
 ITINERARY_UNACCEPTED_INPUT = _rule(
     "itinerary/unaccepted-input", "A step gives an input of a type that its activity does not take."
@@ -96,9 +97,12 @@ ITINERARY_MISTYPED_OUTPUT_RECORD = _rule(
 ITINERARY_FOREIGN_NORM = _rule(
     "itinerary/foreign-norm", "The norm of a step is not the test of its activity."
 )
-ITINERARY_UNKNOWN_VERDICT = _rule("itinerary/unknown-verdict", "The verdict of a step is not admitted.")
+ITINERARY_UNKNOWN_VERDICT = _rule(
+    "itinerary/unknown-verdict", "The verdict of a step is not admitted."
+)
 ITINERARY_UNJUSTIFIED_VERDICT = _rule(
-    "itinerary/unjustified-verdict", "A judged verdict states no evidence, or no date of its judgment."
+    "itinerary/unjustified-verdict",
+    "A judged verdict states no evidence, or no date of its judgment.",
 )
 ITINERARY_UNREADABLE_STATE = _rule(
     "itinerary/unreadable-state", "An input names a record at a revision that cannot be read."
@@ -116,7 +120,8 @@ ITINERARY_UNSERVED = _rule(
     "A step states no rationale, or a rationale that serves no question or problem, or names no condition.",
 )
 ITINERARY_MISMATCHED_MODE = _rule(
-    "itinerary/mismatched-mode", "The mode of a step is not admitted, or not the mode of its activity."
+    "itinerary/mismatched-mode",
+    "The mode of a step is not admitted, or not the mode of its activity.",
 )
 ITINERARY_CYCLE = _rule("itinerary/cycle", "The references between the steps form a cycle.")
 
@@ -148,7 +153,8 @@ REGISTRY_FOREIGN_NORM = _rule(
 # --- Completeness and consistency of records ------------------------------------------------------
 
 COMPLETENESS_UNMET_REQUIREMENT = _rule(
-    "completeness/unmet-requirement", "A record leaves unfilled a specification that it always carries."
+    "completeness/unmet-requirement",
+    "A record leaves unfilled a specification that it always carries.",
 )
 COMPLETENESS_UNMET_COMMITMENT = _rule(
     "completeness/unmet-commitment",
@@ -163,22 +169,27 @@ COMPLETENESS_MISMATCHED_OCCURRENCE = _rule(
     "A phenomenon takes an occurrence class that its category does not admit.",
 )
 COMPLETENESS_UNADMITTED_PLACEHOLDER = _rule(
-    "completeness/unadmitted-placeholder", "A subject slot holds a placeholder of a type not admitted."
+    "completeness/unadmitted-placeholder",
+    "A subject slot holds a placeholder of a type not admitted.",
 )
 COMPLETENESS_MISFIT_PLACEHOLDER = _rule(
-    "completeness/misfit-placeholder", "A subject slot holds a placeholder of a type that it does not await."
+    "completeness/misfit-placeholder",
+    "A subject slot holds a placeholder of a type that it does not await.",
 )
 COMPLETENESS_UNDESCRIBED_PLACEHOLDER = _rule(
-    "completeness/undescribed-placeholder", "A placeholder of a subject slot carries no description."
+    "completeness/undescribed-placeholder",
+    "A placeholder of a subject slot carries no description.",
 )
 COMPLETENESS_UNRESOLVED_SLOT = _rule(
-    "completeness/unresolved-slot", "A subject slot holds neither a record identifier nor a placeholder."
+    "completeness/unresolved-slot",
+    "A subject slot holds neither a record identifier nor a placeholder.",
 )
 COMPLETENESS_UNKNOWN_SLOT_RECORD = _rule(
     "completeness/unknown-slot-record", "A subject slot names an identifier that no record carries."
 )
 COMPLETENESS_MISTYPED_SLOT_RECORD = _rule(
-    "completeness/mistyped-slot-record", "A subject slot names a record of another kind than it awaits."
+    "completeness/mistyped-slot-record",
+    "A subject slot names a record of another kind than it awaits.",
 )
 COMPLETENESS_UNIDENTIFIED_SLOT_RECORD = _rule(
     "completeness/unidentified-slot-record",
@@ -228,10 +239,12 @@ COMPLETENESS_UNBOUNDED_AIM = _rule(
     "A question serves a problem under an aim that the type of result of the problem does not admit.",
 )
 COMPLETENESS_UNSUPPORTED_SOLVED = _rule(
-    "completeness/unsupported-solved", "A problem is marked solved while its records do not meet its demand."
+    "completeness/unsupported-solved",
+    "A problem is marked solved while its records do not meet its demand.",
 )
 COMPLETENESS_UNRECORDED_SOLUTION = _rule(
-    "completeness/unrecorded-solution", "The records meet the demand of a problem that is not marked solved."
+    "completeness/unrecorded-solution",
+    "The records meet the demand of a problem that is not marked solved.",
 )
 COMPLETENESS_UNSUPPORTED_DISSOLVED = _rule(
     "completeness/unsupported-dissolved",
@@ -242,10 +255,12 @@ COMPLETENESS_UNRECORDED_DISSOLUTION = _rule(
     "An accepted answer denies a presupposition of the associated question of a problem not marked dissolved.",
 )
 COMPLETENESS_UNSTATED_OBSTACLE = _rule(
-    "completeness/unstated-obstacle", "The records show a knowledge obstacle that the problem does not state."
+    "completeness/unstated-obstacle",
+    "The records show a knowledge obstacle that the problem does not state.",
 )
 COMPLETENESS_UNSUPPORTED_OBSTACLE = _rule(
-    "completeness/unsupported-obstacle", "The problem states a knowledge obstacle that its records contradict."
+    "completeness/unsupported-obstacle",
+    "The problem states a knowledge obstacle that its records contradict.",
 )
 COMPLETENESS_UNSTATED_FUNCTION_SENSE = _rule(
     "completeness/unstated-function-sense",
@@ -261,7 +276,8 @@ COMPLETENESS_CREDENCE_WITHOUT_BASIS = _rule(
     "completeness/credence-without-basis", "A credence states no basis."
 )
 COMPLETENESS_UNMET_AIM = _rule(
-    "completeness/unmet-aim", "The records leave open a specification that the aim of the question requires."
+    "completeness/unmet-aim",
+    "The records leave open a specification that the aim of the question requires.",
 )
 COMPLETENESS_CONTRADICTORY_ACCURACY = _rule(
     "completeness/contradictory-accuracy",
@@ -272,7 +288,8 @@ COMPLETENESS_UNREALIZED_LINK = _rule(
     "The question asks for a link, and the answer maps no quantity onto its realization.",
 )
 COMPLETENESS_INCOMPLETE_REALIZATION = _rule(
-    "completeness/incomplete-realization", "A realization names what it realizes without saying by what."
+    "completeness/incomplete-realization",
+    "A realization names what it realizes without saying by what.",
 )
 COMPLETENESS_INCOMPLETE_OPERATION = _rule(
     "completeness/incomplete-operation",
@@ -314,7 +331,8 @@ COMPLETENESS_RESTRICTION_CONTENT = _rule(
     "A domain restriction carries both or neither of a value set and an expression.",
 )
 COMPLETENESS_ANONYMOUS_RESTRICTION = _rule(
-    "completeness/anonymous-restriction", "A domain restriction names neither a quantity nor itself."
+    "completeness/anonymous-restriction",
+    "A domain restriction names neither a quantity nor itself.",
 )
 COMPLETENESS_RESTRICTION_WITHOUT_VARIABLE = _rule(
     "completeness/restriction-without-variable",
@@ -325,13 +343,15 @@ COMPLETENESS_UNDECIDED_BOUNDARY = _rule(
     "An external system neither writes its constraint nor declares it absent.",
 )
 COMPLETENESS_INADMISSIBLE_VALUE = _rule(
-    "completeness/inadmissible-value", "A closed field holds a value that its vocabulary does not admit."
+    "completeness/inadmissible-value",
+    "A closed field holds a value that its vocabulary does not admit.",
 )
 
 # --- Symbols and operators ------------------------------------------------------------------------
 
 VOCABULARY_MISTYPED_SYMBOL = _rule(
-    "vocabulary/mistyped-symbol", "A symbol was read by YAML as a value of another type than a string."
+    "vocabulary/mistyped-symbol",
+    "A symbol was read by YAML as a value of another type than a string.",
 )
 VOCABULARY_SPLIT_EXPRESSION = _rule(
     "vocabulary/split-expression", "An expression was split into fragments by the serializer."
@@ -340,10 +360,12 @@ VOCABULARY_CORRUPTED_NOTATION = _rule(
     "vocabulary/corrupted-notation", "A notation holds a control character left by an escape."
 )
 VOCABULARY_MISPLACED_SHARING = _rule(
-    "vocabulary/misplaced-sharing", "An external system shares something other than a declared quantity."
+    "vocabulary/misplaced-sharing",
+    "An external system shares something other than a declared quantity.",
 )
 VOCABULARY_UNFIXED_PARAMETER = _rule(
-    "vocabulary/unfixed-parameter", "A parameter is indexed by an interval, along which it would vary."
+    "vocabulary/unfixed-parameter",
+    "A parameter is indexed by an interval, along which it would vary.",
 )
 VOCABULARY_DOUBLY_DEFINED = _rule(
     "vocabulary/doubly-defined", "A quantity carries both an expression and a condition."
@@ -358,10 +380,12 @@ VOCABULARY_VACUOUS_SHARED = _rule(
     "vocabulary/vacuous-shared", "A quantity marks `shared` while taking no signature."
 )
 VOCABULARY_MISMATCHED_ARITY = _rule(
-    "vocabulary/mismatched-arity", "A call passes a number of arguments that its operator does not take."
+    "vocabulary/mismatched-arity",
+    "A call passes a number of arguments that its operator does not take.",
 )
 VOCABULARY_RETIRED_SYMBOL = _rule(
-    "vocabulary/retired-symbol", "An expression of a derived model uses a symbol that one of its operations retires."
+    "vocabulary/retired-symbol",
+    "An expression of a derived model uses a symbol that one of its operations retires.",
 )
 VOCABULARY_UNRESOLVED = _rule(
     "vocabulary/unresolved", "A reference or a formula identifier resolves to no declaration."
@@ -374,16 +398,19 @@ VOCABULARY_MISATTRIBUTED_APPEAL = _rule(
     "vocabulary/misattributed-appeal", "A factor appeals to something that is no external system."
 )
 VOCABULARY_UNBORNE_VARIANT = _rule(
-    "vocabulary/unborne-variant", "A variant is carried by no declaration or law, and no maturity admits it."
+    "vocabulary/unborne-variant",
+    "A variant is carried by no declaration or law, and no maturity admits it.",
 )
 VOCABULARY_MISNAMED_VARIANT = _rule(
-    "vocabulary/misnamed-variant", "A variant mark names a variant that the target does not declare."
+    "vocabulary/misnamed-variant",
+    "A variant mark names a variant that the target does not declare.",
 )
 VOCABULARY_UNORDERED_INTERACTION = _rule(
     "vocabulary/unordered-interaction", "A relation names no ordered product of declared kinds."
 )
 VOCABULARY_RELATION_ENDS = _rule(
-    "vocabulary/relation-ends", "A relation names both or neither of the parts and the laws it runs between."
+    "vocabulary/relation-ends",
+    "A relation names both or neither of the parts and the laws it runs between.",
 )
 VOCABULARY_SHORT_RELATION = _rule(
     "vocabulary/short-relation", "A relation among laws orders fewer than two of them."
@@ -399,7 +426,8 @@ CHECK_FAILED = _rule(
     "check/failed", "A check stopped on an error, so the record was not fully checked."
 )
 VOCABULARY_UNKNOWN_RECORD = _rule(
-    "vocabulary/unknown-record", "A reference names a record that no record of the workspace declares."
+    "vocabulary/unknown-record",
+    "A reference names a record that no record of the workspace declares.",
 )
 VOCABULARY_UNKNOWN_UNIT = _rule(
     "vocabulary/unknown-unit", "A reference names a unit that its record does not declare."
@@ -408,7 +436,8 @@ VOCABULARY_REPEATED_SYMBOL = _rule(
     "vocabulary/repeated-symbol", "A record declares one symbol more than once."
 )
 VOCABULARY_UNUSED_DECLARATION = _rule(
-    "vocabulary/unused-declaration", "A declared quantity is mentioned by no other field of its problem."
+    "vocabulary/unused-declaration",
+    "A declared quantity is mentioned by no other field of its problem.",
 )
 
 #: Every rule a check of gnomon can report, in the order of declaration.

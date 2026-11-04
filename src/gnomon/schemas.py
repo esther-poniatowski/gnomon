@@ -54,7 +54,14 @@ COMMENT_COLUMN = 33
 COMMENT_WIDTH = 30
 
 #: The keywords that render a template, which a contract does not repeat.
-TEMPLATE_KEYWORDS = ("x-template", "x-comment", "x-vocabulary", "x-blank", "x-template-key", "x-header")
+TEMPLATE_KEYWORDS = (
+    "x-template",
+    "x-comment",
+    "x-vocabulary",
+    "x-blank",
+    "x-template-key",
+    "x-header",
+)
 
 
 Options = Mapping[str, list[tuple[str, str]]]
@@ -72,7 +79,9 @@ def contract_path(kind: str) -> Path:
 
 def kinds() -> list[str]:
     """Return the record types that declare a base schema, in alphabetical order."""
-    return sorted(path.name.removesuffix(".base.schema.yml") for path in SCHEMAS.glob("*.base.schema.yml"))
+    return sorted(
+        path.name.removesuffix(".base.schema.yml") for path in SCHEMAS.glob("*.base.schema.yml")
+    )
 
 
 @cache
@@ -107,7 +116,9 @@ def comment_of(field: Mapping[str, Any], options: Options) -> str:
     vocabulary = field.get("x-vocabulary")
     if not vocabulary:
         return guidance
-    listed = " | ".join(f"{value} ({name})" if name else value for value, name in options[str(vocabulary)])
+    listed = " | ".join(
+        f"{value} ({name})" if name else value for value, name in options[str(vocabulary)]
+    )
     return f"{listed}; {guidance}" if guidance else listed
 
 
@@ -125,8 +136,14 @@ def head(key: str, field: Mapping[str, Any]) -> str:
     return f"{key}: {raw}" if raw not in (None, "") else f"{key}:"
 
 
-def render_field(key: str, field: Mapping[str, Any], indent: int, options: Options, out: list[str],
-                 dash: bool = False) -> None:
+def render_field(
+    key: str,
+    field: Mapping[str, Any],
+    indent: int,
+    options: Options,
+    out: list[str],
+    dash: bool = False,
+) -> None:
     """Append the lines of one field, and of the fields that it holds, to ``out``."""
     if field.get("x-blank"):
         out.append("")
@@ -145,7 +162,12 @@ def render_field(key: str, field: Mapping[str, Any], indent: int, options: Optio
         render_item(items, inner + 2, options, out)
     elif isinstance(free, Mapping) and free.get("x-template-key"):
         out.append(line(prefix + key + ":", comment))
-        out.append(line(" " * (inner + 2) + head(str(free["x-template-key"]), free), comment_of(free, options)))
+        out.append(
+            line(
+                " " * (inner + 2) + head(str(free["x-template-key"]), free),
+                comment_of(free, options),
+            )
+        )
     else:
         out.append(line(prefix + head(key, field), comment))
 
@@ -155,9 +177,13 @@ def render_item(items: Mapping[str, Any], indent: int, options: Options, out: li
     properties = items.get("properties")
     if isinstance(properties, Mapping) and properties:
         for position, (name, child) in enumerate(properties.items()):
-            render_field(name, child, indent + (2 if position else 0), options, out, dash=not position)
+            render_field(
+                name, child, indent + (2 if position else 0), options, out, dash=not position
+            )
     else:
-        out.append(line(" " * indent + f"- {items.get('x-template', '')}", comment_of(items, options)))
+        out.append(
+            line(" " * indent + f"- {items.get('x-template', '')}", comment_of(items, options))
+        )
 
 
 def render_template(kind: str, base: Mapping[str, Any], options: Options) -> str:
@@ -186,7 +212,9 @@ def overlay(field: Mapping[str, Any], options: Options) -> dict[str, Any] | None
     if isinstance(declared, Mapping) and declared:
         added["propertyNames"] = {"enum": list(declared)}
     nested = {
-        name: sub for name, child in (field.get("properties") or {}).items() if (sub := overlay(child, options))
+        name: sub
+        for name, child in (field.get("properties") or {}).items()
+        if (sub := overlay(child, options))
     }
     if nested:
         added["properties"] = nested
@@ -286,7 +314,9 @@ def contract_validator(kind: str) -> Any:
     from jsonschema import Draft202012Validator
     from referencing import Registry, Resource
 
-    resources = [(load_base(name)["$id"], Resource.from_contents(load_base(name))) for name in kinds()]
+    resources = [
+        (load_base(name)["$id"], Resource.from_contents(load_base(name))) for name in kinds()
+    ]
     return Draft202012Validator(
         yaml.safe_load(contract_path(kind).read_text(encoding="utf-8")),
         registry=Registry().with_resources(resources),
@@ -300,7 +330,9 @@ def record_errors(record: Mapping[str, Any]) -> list[str]:
     missing or unknown; each other error states the path of the field and the violated keyword.
     """
     named = record.get("_schema")
-    published = {identifier(kind, int(load_base(kind).get("x-version", 1))): kind for kind in kinds()}
+    published = {
+        identifier(kind, int(load_base(kind).get("x-version", 1))): kind for kind in kinds()
+    }
     if not named:
         return ["_schema: the record names no contract"]
     if named not in published:
@@ -308,11 +340,16 @@ def record_errors(record: Mapping[str, Any]) -> list[str]:
     validator = contract_validator(published[named])
     return [
         f"{'.'.join(str(part) for part in error.absolute_path) or '(record)'}: {error.message}"
-        for error in sorted(validator.iter_errors(dict(record)), key=lambda e: list(map(str, e.absolute_path)))
+        for error in sorted(
+            validator.iter_errors(dict(record)), key=lambda e: list(map(str, e.absolute_path))
+        )
     ]
 
 
 def stale_files() -> list[Path]:
     """Return every generated file whose content differs from its generated form."""
-    return [path for path, text in generated_files().items()
-            if not path.is_file() or path.read_text(encoding="utf-8") != text]
+    return [
+        path
+        for path, text in generated_files().items()
+        if not path.is_file() or path.read_text(encoding="utf-8") != text
+    ]

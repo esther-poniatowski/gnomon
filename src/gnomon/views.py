@@ -70,7 +70,9 @@ def narrowed(question: Mapping[str, Any]) -> list[str]:
     return [
         str(link["question"])
         for link in question.get("links") or []
-        if isinstance(link, Mapping) and link.get("relation") == "subquestion-of" and link.get("question")
+        if isinstance(link, Mapping)
+        and link.get("relation") == "subquestion-of"
+        and link.get("question")
     ]
 
 
@@ -93,25 +95,37 @@ def question_tree(records: Records) -> list[Node]:
 
     def answer(key: str) -> Node:
         node = Node(key, records[key])
-        node.children = [Node(other, records[other]) for other in assessments
-                         if records[other].get("assesses") == key]
+        node.children = [
+            Node(other, records[other])
+            for other in assessments
+            if records[other].get("assesses") == key
+        ]
         return node
 
     def question(key: str) -> Node:
         shown.add(key)
         node = Node(key, records[key])
-        node.children.extend(question(other) for other in questions
-                             if other not in shown and key in narrowed(records[other]))
-        node.children.extend(answer(other) for other in answers if records[other].get("answers") == key)
+        node.children.extend(
+            question(other)
+            for other in questions
+            if other not in shown and key in narrowed(records[other])
+        )
+        node.children.extend(
+            answer(other) for other in answers if records[other].get("answers") == key
+        )
         node.children.extend(served(key))
         return node
 
     roots: list[Node] = []
     for key in _of_type(records, "problem"):
         node = Node(key, records[key])
-        node.children.extend(question(other) for other in questions
-                             if other not in shown and records[other].get("addresses") == key
-                             and not narrowed(records[other]))
+        node.children.extend(
+            question(other)
+            for other in questions
+            if other not in shown
+            and records[other].get("addresses") == key
+            and not narrowed(records[other])
+        )
         node.children.extend(served(key))
         roots.append(node)
     for key in questions:
@@ -155,8 +169,13 @@ MATURITIES = ("open", "provisional", "stabilized")
 
 
 def _header(name: str, title: str) -> dict[str, Any]:
-    return {"_schema": f"gnomon:view.{name}@1", "id": f"view.{name}", "type": "view", "title": title,
-            "generated_by": "gnomon views"}
+    return {
+        "_schema": f"gnomon:view.{name}@1",
+        "id": f"view.{name}",
+        "type": "view",
+        "title": title,
+        "generated_by": "gnomon views",
+    }
 
 
 def _joined(values: Iterable[Any]) -> str:
@@ -181,19 +200,45 @@ def problem_state(records: Records) -> dict[str, Any]:
         questions = {q for q in _of_type(records, "question") if records[q].get("addresses") == key}
         answers = [a for a in _of_type(records, "answer") if records[a].get("answers") in questions]
         met = demand_met(problem, records, classes, holders)
-        problems.append({
-            "problem": key, "title": str(problem.get("title") or ""), "status": str(problem.get("status") or ""),
-            "result_type": str(problem.get("result_type") or ""), "request": str(problem.get("request") or ""),
-            "demand_met": _undetermined(met),
-            "presupposition_denied": _undetermined(presupposition_denied(problem, records)),
-            "accepted": _joined(a for a in answers if records[a].get("status") == "accepted"),
-            "candidates": _joined(a for a in answers if records[a].get("status") in ("entertained", "hypothesized")),
-            "may_close": bool(met) and problem.get("status") == "posed",
-        })
-        stated = {str(o.get("obstacle")) for o in problem.get("knowledge_obstacles") or [] if isinstance(o, Mapping)}
-        for obstacle, derived in sorted(readable_obstacles(problem, records, classes, holders).items()):
-            obstacles.append({"problem": key, "obstacle": obstacle, "stated": obstacle in stated, "derived": derived})
-    return {**_header("problem-state", "State of each problem"), "problems": problems, "obstacles": obstacles}
+        problems.append(
+            {
+                "problem": key,
+                "title": str(problem.get("title") or ""),
+                "status": str(problem.get("status") or ""),
+                "result_type": str(problem.get("result_type") or ""),
+                "request": str(problem.get("request") or ""),
+                "demand_met": _undetermined(met),
+                "presupposition_denied": _undetermined(presupposition_denied(problem, records)),
+                "accepted": _joined(a for a in answers if records[a].get("status") == "accepted"),
+                "candidates": _joined(
+                    a
+                    for a in answers
+                    if records[a].get("status") in ("entertained", "hypothesized")
+                ),
+                "may_close": bool(met) and problem.get("status") == "posed",
+            }
+        )
+        stated = {
+            str(o.get("obstacle"))
+            for o in problem.get("knowledge_obstacles") or []
+            if isinstance(o, Mapping)
+        }
+        for obstacle, derived in sorted(
+            readable_obstacles(problem, records, classes, holders).items()
+        ):
+            obstacles.append(
+                {
+                    "problem": key,
+                    "obstacle": obstacle,
+                    "stated": obstacle in stated,
+                    "derived": derived,
+                }
+            )
+    return {
+        **_header("problem-state", "State of each problem"),
+        "problems": problems,
+        "obstacles": obstacles,
+    }
 
 
 def next_act(diagnosis_document: Mapping[str, Any]) -> dict[str, Any]:
@@ -202,20 +247,45 @@ def next_act(diagnosis_document: Mapping[str, Any]) -> dict[str, Any]:
     for question in diagnosis_document.get("questions") or []:
         for route in question["routes"]:
             where = {"question": question["question"], "route": route["route"]}
-            conditions += [{**where, "condition": c["condition"], "state": c["state"], "source": c["source"]}
-                           for c in route["conditions"]]
-            acts += [{**where, "condition": o["condition"], "activity": a["activity"], "ready": a["ready"],
-                      "missing": "; ".join(a.get("missing") or [])}
-                     for o in route["open"] for a in o["acts"]]
+            conditions += [
+                {**where, "condition": c["condition"], "state": c["state"], "source": c["source"]}
+                for c in route["conditions"]
+            ]
+            acts += [
+                {
+                    **where,
+                    "condition": o["condition"],
+                    "activity": a["activity"],
+                    "ready": a["ready"],
+                    "missing": "; ".join(a.get("missing") or []),
+                }
+                for o in route["open"]
+                for a in o["acts"]
+            ]
             refuted += [{**where, "condition": r["condition"]} for r in route["refuted"]]
     itineraries = diagnosis_document.get("itineraries") or {}
-    signals = ([{"record": r, "signal": "impeached"} for r in itineraries.get("impeached") or []]
-               + [{"record": r, "signal": "conditional"} for r in itineraries.get("conditional") or []]
-               + [{"record": s, "signal": "judge anew"} for s in itineraries.get("judge_anew") or []])
-    revisions = [{"step": r["step"], "record": r["record"], "kind": r["kind"], "to_review": _joined(r["to_review"])}
-                 for r in diagnosis_document.get("revisions") or []]
-    return {**_header("next-act", "Open conditions and ready acts"), "conditions": conditions, "acts": acts,
-            "refuted": refuted, "revisions": revisions, "signals": signals}
+    signals = (
+        [{"record": r, "signal": "impeached"} for r in itineraries.get("impeached") or []]
+        + [{"record": r, "signal": "conditional"} for r in itineraries.get("conditional") or []]
+        + [{"record": s, "signal": "judge anew"} for s in itineraries.get("judge_anew") or []]
+    )
+    revisions = [
+        {
+            "step": r["step"],
+            "record": r["record"],
+            "kind": r["kind"],
+            "to_review": _joined(r["to_review"]),
+        }
+        for r in diagnosis_document.get("revisions") or []
+    ]
+    return {
+        **_header("next-act", "Open conditions and ready acts"),
+        "conditions": conditions,
+        "acts": acts,
+        "refuted": refuted,
+        "revisions": revisions,
+        "signals": signals,
+    }
 
 
 def exposure(records: Records) -> dict[str, Any]:
@@ -233,19 +303,29 @@ def exposure(records: Records) -> dict[str, Any]:
             if split is None:
                 continue
             owner, unit = split
-            law = next((entry for entry in (records.get(owner) or {}).get("laws") or []
-                        if isinstance(entry, Mapping) and entry.get("symbol") == unit), None)
+            law = next(
+                (
+                    entry
+                    for entry in (records.get(owner) or {}).get("laws") or []
+                    if isinstance(entry, Mapping) and entry.get("symbol") == unit
+                ),
+                None,
+            )
             if law is None:
                 continue
             warrant = str(law.get("warrant") or "")
             if warrant in ("posited", "fitted", "measured"):
                 rows.append({"answer": key, "law": ref, "warrant": warrant, "via": "direct"})
             elif warrant == "derived":
-                rows.append({"answer": key, "law": ref, "warrant": warrant, "via": "descent not recorded"})
+                rows.append(
+                    {"answer": key, "law": ref, "warrant": warrant, "via": "descent not recorded"}
+                )
     return {**_header("exposure", "Exposure of each answer to revisable laws"), "exposures": rows}
 
 
-def itinerary_progress(records: Records, impeached: set[str], conditional: set[str]) -> dict[str, Any]:
+def itinerary_progress(
+    records: Records, impeached: set[str], conditional: set[str]
+) -> dict[str, Any]:
     """Return the steps of each itinerary in the order of their dependencies, with their verdicts.
 
     A step is ``impeached`` when a failed norm lies upstream of its output, ``conditional`` when a
@@ -255,23 +335,50 @@ def itinerary_progress(records: Records, impeached: set[str], conditional: set[s
     steps_rows, edges = [], []
     for key in _of_type(records, "itinerary"):
         own = f"{key}."
-        steps = {str(s.get("id")): s for s in records[key].get("steps") or [] if isinstance(s, Mapping)}
-        after = {name: sorted({str(i.get("ref"))[len(own):] for i in s.get("inputs") or []
-                               if isinstance(i, Mapping) and str(i.get("ref")).startswith(own)} & set(steps))
-                 for name, s in steps.items()}
+        steps = {
+            str(s.get("id")): s for s in records[key].get("steps") or [] if isinstance(s, Mapping)
+        }
+        after = {
+            name: sorted(
+                {
+                    str(i.get("ref"))[len(own) :]
+                    for i in s.get("inputs") or []
+                    if isinstance(i, Mapping) and str(i.get("ref")).startswith(own)
+                }
+                & set(steps)
+            )
+            for name, s in steps.items()
+        }
         order: list[str] = []
         while len(order) < len(steps):
-            ready = [n for n in sorted(steps) if n not in order and all(p in order for p in after[n])]
+            ready = [
+                n for n in sorted(steps) if n not in order and all(p in order for p in after[n])
+            ]
             order += ready or [n for n in sorted(steps) if n not in order][:1]
         for name in order:
             step = steps[name]
             output = str((step.get("output") or {}).get("ref") or "")
-            state = "impeached" if output in impeached else "conditional" if output in conditional else "sound"
-            steps_rows.append({"itinerary": key, "step": name, "activity": str(step.get("activity") or ""),
-                               "verdict": str((step.get("norm") or {}).get("verdict") or ""),
-                               "output": output, "state": state})
+            state = (
+                "impeached"
+                if output in impeached
+                else "conditional" if output in conditional else "sound"
+            )
+            steps_rows.append(
+                {
+                    "itinerary": key,
+                    "step": name,
+                    "activity": str(step.get("activity") or ""),
+                    "verdict": str((step.get("norm") or {}).get("verdict") or ""),
+                    "output": output,
+                    "state": state,
+                }
+            )
             edges += [{"itinerary": key, "from": parent, "to": name} for parent in after[name]]
-    return {**_header("itinerary-progress", "Progress of each itinerary"), "steps": steps_rows, "edges": edges}
+    return {
+        **_header("itinerary-progress", "Progress of each itinerary"),
+        "steps": steps_rows,
+        "edges": edges,
+    }
 
 
 def maturity_map(records: Records) -> dict[str, Any]:
@@ -286,8 +393,13 @@ def maturity_map(records: Records) -> dict[str, Any]:
         if record.get("type") in ("itinerary", "view", "vocabulary"):
             continue
         status = record.get("status")
-        rows.append({"record": key, "field": "(default)",
-                     "maturity": status if status in MATURITIES else "provisional"})
+        rows.append(
+            {
+                "record": key,
+                "field": "(default)",
+                "maturity": status if status in MATURITIES else "provisional",
+            }
+        )
         for path, value in sorted((record.get("maturity") or {}).items()):
             rows.append({"record": key, "field": str(path), "maturity": str(value)})
     return {**_header("maturity", "Maturity of each record"), "fields": rows}
@@ -298,9 +410,15 @@ def question_tree_view(records: Records) -> dict[str, Any]:
     nodes, edges = [], []
 
     def walk(node: Node, parent: str | None, depth: int) -> None:
-        nodes.append({"id": node.identifier, "kind": str(node.record.get("type") or ""),
-                      "title": str(node.record.get("title") or ""), "status": str(node.record.get("status") or ""),
-                      "depth": depth})
+        nodes.append(
+            {
+                "id": node.identifier,
+                "kind": str(node.record.get("type") or ""),
+                "title": str(node.record.get("title") or ""),
+                "status": str(node.record.get("status") or ""),
+                "depth": depth,
+            }
+        )
         if parent is not None:
             edges.append({"parent": parent, "child": node.identifier})
         for child in node.children:
@@ -316,24 +434,41 @@ def question_statements(records: Records) -> dict[str, Any]:
     from its fields, with the slots of the frame that the fields leave unfilled."""
     registry = load_statement_registry()
     rows = []
-    for key in sorted(k for k, r in records.items() if r.get("type") in ("question", "question-schema")):
+    for key in sorted(
+        k for k, r in records.items() if r.get("type") in ("question", "question-schema")
+    ):
         question = records[key]
         composed = compose_statement(question, records, registry)
-        rows.append({"question": key, "aim": str((question.get("task") or {}).get("epistemic_aim") or ""),
-                     "authored": str(question.get("statement") or ""), "composed": composed.text,
-                     "gaps": ", ".join(composed.gaps)})
+        rows.append(
+            {
+                "question": key,
+                "aim": str((question.get("task") or {}).get("epistemic_aim") or ""),
+                "authored": str(question.get("statement") or ""),
+                "composed": composed.text,
+                "gaps": ", ".join(composed.gaps),
+            }
+        )
     return {**_header("question-statements", "Statement of each question"), "statements": rows}
 
 
-def all_views(records: Records, diagnosis_document: Mapping[str, Any], impeached: set[str],
-              conditional: set[str]) -> dict[str, dict[str, Any]]:
+def all_views(
+    records: Records,
+    diagnosis_document: Mapping[str, Any],
+    impeached: set[str],
+    conditional: set[str],
+) -> dict[str, dict[str, Any]]:
     """Return the views of a set of records, keyed by the name of each view.
 
     The diagnosis of the conditions of answerability, and the impeached and conditional records of
     the itineraries, are computed by the caller, which reads them per problem.
     """
-    built = [problem_state(records), next_act(diagnosis_document), exposure(records),
-             itinerary_progress(records, impeached, conditional), maturity_map(records), question_tree_view(records),
-             question_statements(records)]
+    built = [
+        problem_state(records),
+        next_act(diagnosis_document),
+        exposure(records),
+        itinerary_progress(records, impeached, conditional),
+        maturity_map(records),
+        question_tree_view(records),
+        question_statements(records),
+    ]
     return {str(view["id"]).removeprefix("view."): view for view in built}
-

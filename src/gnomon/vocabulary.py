@@ -57,7 +57,16 @@ DECLARING: Mapping[str, tuple[str, ...]] = {
 #: The record kinds the checkers read. A kind declaring no symbol still carries expressions, so
 #: this set is wider than the keys of :data:`DECLARING`.
 RECORD_KINDS: frozenset[str] = frozenset(
-    {"target-system", "background", "phenomenon", "operators", "question", "model", "answer", "binding"}
+    {
+        "target-system",
+        "background",
+        "phenomenon",
+        "operators",
+        "question",
+        "model",
+        "answer",
+        "binding",
+    }
 )
 
 #: The field through which a record of each kind names the target system it is stated against.
@@ -204,6 +213,8 @@ REFERENCE: tuple[tuple[str, str], ...] = (
     ("detection_criterion", "across"),
     ("detection_criterion", "limited_by"),
 )
+
+
 @dataclass(frozen=True)
 class Declaration:
     """One symbol a record declares, with what the author needs in order to reuse or avoid it.
@@ -227,6 +238,8 @@ class Declaration:
     block: str
     record: str
     signature: tuple[str, ...] = ()
+
+
 @dataclass
 class Problem:
     """The vocabulary of one problem, collected from the records filled for it.
@@ -266,6 +279,8 @@ class Problem:
         for entry in self.declarations:
             by_symbol.setdefault(entry.symbol, []).append(entry.record)
         return {s: r for s, r in by_symbol.items() if len(set(r)) > 1}
+
+
 def entries(record: Mapping[str, Any], block: str) -> list[Mapping[str, Any]]:
     """Return the entries of ``block``, or none when the record has no such block."""
     return [entry for _, entry in indexed(record, block)]
@@ -274,7 +289,11 @@ def entries(record: Mapping[str, Any], block: str) -> list[Mapping[str, Any]]:
 def indexed(record: Mapping[str, Any], block: str) -> list[tuple[int, Mapping[str, Any]]]:
     """Return the entries of ``block`` with their index in the list, as :func:`entries` selects them."""
     value = record.get(block)
-    return [(i, e) for i, e in enumerate(value) if isinstance(e, Mapping)] if isinstance(value, list) else []
+    return (
+        [(i, e) for i, e in enumerate(value) if isinstance(e, Mapping)]
+        if isinstance(value, list)
+        else []
+    )
 
 
 def items_of(value: Any) -> list[tuple[int | None, Any]]:
@@ -289,6 +308,8 @@ def items_of(value: Any) -> list[tuple[int | None, Any]]:
 def _at_item(place: Place, index: int | None) -> Place:
     """Return the path of one item of a field: the field itself, or the item at ``index``."""
     return place if index is None else (*place, index)
+
+
 def canonical_operators(source: Path | None = None) -> frozenset[str]:
     """Return the operator vocabulary the framework supplies.
 
@@ -310,6 +331,8 @@ def canonical_operators(source: Path | None = None) -> frozenset[str]:
     if not found:
         raise ValueError(f"{(source or OPERATOR_REGISTRY).name} declares no operator")
     return found
+
+
 def operator_arity(entry: Mapping[str, Any]) -> tuple[int, bool] | None:
     """Return the arity of an operator entry and whether its last argument repeats.
 
@@ -347,11 +370,17 @@ def mistyped_symbols(record: Mapping[str, Any]) -> list[Finding]:
         for index, entry in indexed(record, block):
             if "symbol" in entry and not isinstance(entry["symbol"], str):
                 found.append(
-                    finding(rules.VOCABULARY_MISTYPED_SYMBOL,
-                            f"{block}: {entry['symbol']!r} is {type(entry['symbol']).__name__}, not a symbol",
-                            block, Entry(index, entry), "symbol")
+                    finding(
+                        rules.VOCABULARY_MISTYPED_SYMBOL,
+                        f"{block}: {entry['symbol']!r} is {type(entry['symbol']).__name__}, not a symbol",
+                        block,
+                        Entry(index, entry),
+                        "symbol",
+                    )
                 )
     return found
+
+
 def split_expressions(record: Mapping[str, Any]) -> list[Finding]:
     """Return every expression a serializer split into fragments.
 
@@ -366,11 +395,18 @@ def split_expressions(record: Mapping[str, Any]) -> list[Finding]:
             for index, item in enumerate(value) if isinstance(value, list) else []:
                 if isinstance(item, str) and item.count("(") != item.count(")"):
                     found.append(
-                        finding(rules.VOCABULARY_SPLIT_EXPRESSION,
-                                f"{block}.{key}: {item!r} is a fragment of a split expression",
-                                block, Entry(position, entry), key, index)
+                        finding(
+                            rules.VOCABULARY_SPLIT_EXPRESSION,
+                            f"{block}.{key}: {item!r} is a fragment of a split expression",
+                            block,
+                            Entry(position, entry),
+                            key,
+                            index,
+                        )
                     )
     return found
+
+
 def corrupted_notation(record: Mapping[str, Any]) -> list[Finding]:
     """Return every notation a serializer damaged by reading a backslash as an escape.
 
@@ -379,17 +415,30 @@ def corrupted_notation(record: Mapping[str, Any]) -> list[Finding]:
     trace of that reading.
     """
     found = []
-    for block in ("constituents", "index_sets", "variables",
-                  "parameters", "observables", "operators", "terms"):
+    for block in (
+        "constituents",
+        "index_sets",
+        "variables",
+        "parameters",
+        "observables",
+        "operators",
+        "terms",
+    ):
         for index, entry in indexed(record, block):
             form = entry.get("notation")
             if isinstance(form, str) and any(c in form for c in "\n\t\r\x0b\x0c\x08\x07"):
                 found.append(
-                    finding(rules.VOCABULARY_CORRUPTED_NOTATION,
-                            f"{block}.{entry.get('symbol')}: the notation holds a control character",
-                            block, Entry(index, entry), "notation")
+                    finding(
+                        rules.VOCABULARY_CORRUPTED_NOTATION,
+                        f"{block}.{entry.get('symbol')}: the notation holds a control character",
+                        block,
+                        Entry(index, entry),
+                        "notation",
+                    )
                 )
     return found
+
+
 def misplaced_sharing(record: Mapping[str, Any]) -> list[Finding]:
     """Return every shared variable that names something other than a quantity.
 
@@ -409,11 +458,18 @@ def misplaced_sharing(record: Mapping[str, Any]) -> list[Finding]:
         for index, name in enumerate(entry.get("shares") or []):
             if isinstance(name, str) and name not in quantities:
                 found.append(
-                    finding(rules.VOCABULARY_MISPLACED_SHARING,
-                            f"external_systems.shares: {name} is no declared quantity",
-                            "external_systems", Entry(position, entry), "shares", index)
+                    finding(
+                        rules.VOCABULARY_MISPLACED_SHARING,
+                        f"external_systems.shares: {name} is no declared quantity",
+                        "external_systems",
+                        Entry(position, entry),
+                        "shares",
+                        index,
+                    )
                 )
     return found
+
+
 def unfixed_parameters(record: Mapping[str, Any]) -> list[Finding]:
     """Return every parameter whose signature runs along an interval index.
 
@@ -430,11 +486,17 @@ def unfixed_parameters(record: Mapping[str, Any]) -> list[Finding]:
         along = [s for s in entry.get("signature") or [] if s in running]
         if along:
             found.append(
-                finding(rules.VOCABULARY_UNFIXED_PARAMETER,
-                        f"parameters.{entry.get('symbol')}: held fixed yet indexed by {along}",
-                        "parameters", Entry(index, entry), "signature")
+                finding(
+                    rules.VOCABULARY_UNFIXED_PARAMETER,
+                    f"parameters.{entry.get('symbol')}: held fixed yet indexed by {along}",
+                    "parameters",
+                    Entry(index, entry),
+                    "signature",
+                )
             )
     return found
+
+
 def doubly_defined(record: Mapping[str, Any]) -> list[Finding]:
     """Return every quantity carrying both an expression and a condition.
 
@@ -446,11 +508,16 @@ def doubly_defined(record: Mapping[str, Any]) -> list[Finding]:
         for index, entry in indexed(record, block):
             if entry.get("expression") and entry.get("condition"):
                 found.append(
-                    finding(rules.VOCABULARY_DOUBLY_DEFINED,
-                            f"{block}.{entry.get('symbol')}: both an expression and a condition",
-                            block, Entry(index, entry))
+                    finding(
+                        rules.VOCABULARY_DOUBLY_DEFINED,
+                        f"{block}.{entry.get('symbol')}: both an expression and a condition",
+                        block,
+                        Entry(index, entry),
+                    )
                 )
     return found
+
+
 def unowned_quantities(record: Mapping[str, Any]) -> list[Finding]:
     """Return every quantity naming an owner that the record declares no external system for.
 
@@ -466,11 +533,17 @@ def unowned_quantities(record: Mapping[str, Any]) -> list[Finding]:
             owner = entry.get("of")
             if isinstance(owner, str) and owner not in systems:
                 found.append(
-                    finding(rules.VOCABULARY_UNOWNED_QUANTITY,
-                            f"{block}.{entry.get('symbol')}: no external system named {owner}",
-                            block, Entry(index, entry), "of")
+                    finding(
+                        rules.VOCABULARY_UNOWNED_QUANTITY,
+                        f"{block}.{entry.get('symbol')}: no external system named {owner}",
+                        block,
+                        Entry(index, entry),
+                        "of",
+                    )
                 )
     return found
+
+
 def unselected_conditions(record: Mapping[str, Any]) -> list[Finding]:
     """Return every quantity fixed by a condition without saying which value it denotes.
 
@@ -482,9 +555,13 @@ def unselected_conditions(record: Mapping[str, Any]) -> list[Finding]:
         for index, entry in indexed(record, block):
             if entry.get("condition") and entry.get("selects") not in ("unique", "any", "all"):
                 found.append(
-                    finding(rules.VOCABULARY_UNSELECTED_CONDITION,
-                            f"{block}.{entry.get('symbol')}: a condition without a selection rule",
-                            block, Entry(index, entry), "selects")
+                    finding(
+                        rules.VOCABULARY_UNSELECTED_CONDITION,
+                        f"{block}.{entry.get('symbol')}: a condition without a selection rule",
+                        block,
+                        Entry(index, entry),
+                        "selects",
+                    )
                 )
     for position, entry in indexed(record, "manifestations"):
         for index, feature in indexed(entry, "features"):
@@ -493,10 +570,16 @@ def unselected_conditions(record: Mapping[str, Any]) -> list[Finding]:
                     finding(
                         rules.VOCABULARY_UNSELECTED_CONDITION,
                         f"manifestations.features.{feature.get('symbol')}: a condition without a selection rule",
-                        "manifestations", Entry(position, entry), "features", Entry(index, feature), "selects",
+                        "manifestations",
+                        Entry(position, entry),
+                        "features",
+                        Entry(index, feature),
+                        "selects",
                     )
                 )
     return found
+
+
 def vacuous_shared(record: Mapping[str, Any]) -> list[Finding]:
     """Return every quantity that marks ``shared`` while taking no signature.
 
@@ -508,11 +591,17 @@ def vacuous_shared(record: Mapping[str, Any]) -> list[Finding]:
         for index, entry in indexed(record, block):
             if "shared" in entry and not (entry.get("signature") or []):
                 found.append(
-                    finding(rules.VOCABULARY_VACUOUS_SHARED,
-                            f"{block}.{entry.get('symbol')}: shared without a signature",
-                            block, Entry(index, entry), "shared")
+                    finding(
+                        rules.VOCABULARY_VACUOUS_SHARED,
+                        f"{block}.{entry.get('symbol')}: shared without a signature",
+                        block,
+                        Entry(index, entry),
+                        "shared",
+                    )
                 )
     return found
+
+
 def declarations(record: Mapping[str, Any]) -> list[Declaration]:
     """Return every symbol the record declares, in block order."""
     found: list[Declaration] = []
@@ -541,15 +630,24 @@ def declarations(record: Mapping[str, Any]) -> list[Declaration]:
         contrast = (record.get("subject") or {}).get("contrast") or {}
         for foil in contrast.get("foil_set") or [] if isinstance(contrast, Mapping) else []:
             if isinstance(foil, Mapping) and isinstance(foil.get("symbol"), str):
-                found.append(Declaration(foil["symbol"], str(foil.get("name") or ""), "foil_set", identifier))
+                found.append(
+                    Declaration(foil["symbol"], str(foil.get("name") or ""), "foil_set", identifier)
+                )
     for entry in entries(record, "manifestations"):
         for feature in entries(entry, "features"):
             symbol = feature.get("symbol")
             if isinstance(symbol, str):
                 found.append(
-                    Declaration(symbol, str(feature.get("name") or ""), "manifestations.features", identifier)
+                    Declaration(
+                        symbol,
+                        str(feature.get("name") or ""),
+                        "manifestations.features",
+                        identifier,
+                    )
                 )
     return found
+
+
 #: The blocks whose entries are units named by an `id` rather than by a symbol, per record type,
 #: as the decision on dotted identifiers admits: a reference names such a unit by that `id`.
 ID_UNITS: Mapping[str, tuple[str, ...]] = {
@@ -567,10 +665,13 @@ def units(record: Mapping[str, Any]) -> list[str]:
     ['onset', 'drop-noise']
     """
     names = [entry.symbol for entry in declarations(record)]
-    names += [str(entry["id"]) for block in ID_UNITS.get(str(record.get("type", "")), ())
-              for entry in entries(record, block) if entry.get("id")]
+    names += [
+        str(entry["id"])
+        for block in ID_UNITS.get(str(record.get("type", "")), ())
+        for entry in entries(record, block)
+        if entry.get("id")
+    ]
     return names
-
 
 
 #: A dotted token opening on the prefix of a record kind, wherever it stands in a string.
@@ -603,7 +704,9 @@ def references(record: Mapping[str, Any]) -> list[tuple[tuple[str | int, ...], s
     return found
 
 
-def dangling_references(record: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]) -> list[Finding]:
+def dangling_references(
+    record: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
     """Return every reference to a record or to a unit that the records of the workspace do not declare.
 
     A reference has the segments that the prefix of its kind fixes, to reach a whole record, or one
@@ -624,19 +727,37 @@ def dangling_references(record: Mapping[str, Any], records: Mapping[str, Mapping
         where = ".".join(str(segment) for segment in path)
         if len(parts) == count:
             if text not in records:
-                found.append(finding(rules.VOCABULARY_UNKNOWN_RECORD,
-                                     f"{where}: no record carries the identifier {text}", *path, value=text))
+                found.append(
+                    finding(
+                        rules.VOCABULARY_UNKNOWN_RECORD,
+                        f"{where}: no record carries the identifier {text}",
+                        *path,
+                        value=text,
+                    )
+                )
             continue
         split = split_reference(text)
         if split is None or parts[0] == "itin":
             continue
         owner, unit = split
         if owner not in records:
-            found.append(finding(rules.VOCABULARY_UNKNOWN_RECORD,
-                                 f"{where}: no record carries the identifier {owner}", *path, value=text))
+            found.append(
+                finding(
+                    rules.VOCABULARY_UNKNOWN_RECORD,
+                    f"{where}: no record carries the identifier {owner}",
+                    *path,
+                    value=text,
+                )
+            )
         elif unit not in units(records[owner]):
-            found.append(finding(rules.VOCABULARY_UNKNOWN_UNIT,
-                                 f"{where}: {owner} declares no unit {unit}", *path, value=text))
+            found.append(
+                finding(
+                    rules.VOCABULARY_UNKNOWN_UNIT,
+                    f"{where}: {owner} declares no unit {unit}",
+                    *path,
+                    value=text,
+                )
+            )
     return found
 
 
@@ -648,8 +769,13 @@ def repeated_symbols(record: Mapping[str, Any]) -> list[Finding]:
     ['x: declared more than once']
     """
     seen = [entry.symbol for entry in declarations(record)]
-    return [finding(rules.VOCABULARY_REPEATED_SYMBOL, f"{symbol}: declared more than once", value=symbol)
-            for symbol in sorted({s for s in seen if seen.count(s) > 1})]
+    return [
+        finding(
+            rules.VOCABULARY_REPEATED_SYMBOL, f"{symbol}: declared more than once", value=symbol
+        )
+        for symbol in sorted({s for s in seen if seen.count(s) > 1})
+    ]
+
 
 def retired_in_use(record: Mapping[str, Any]) -> list[Finding]:
     """Return every expression of a derived model that uses a symbol which an operation retires.
@@ -664,12 +790,20 @@ def retired_in_use(record: Mapping[str, Any]) -> list[Finding]:
         for name in entry.get("retires") or []:
             named = split_reference(name) if isinstance(name, str) else None
             retired[named[1] if named else str(name)] = str(entry.get("id"))
-    return [
-        finding(rules.VOCABULARY_RETIRED_SYMBOL, f"{where} uses {name}, which the operation {retired[name]} retires",
-                *place, value=name)
-        for where, place, text, _ in formulas(record)
-        for name in sorted(identifiers(text) & set(retired))
-    ] if retired else []
+    return (
+        [
+            finding(
+                rules.VOCABULARY_RETIRED_SYMBOL,
+                f"{where} uses {name}, which the operation {retired[name]} retires",
+                *place,
+                value=name,
+            )
+            for where, place, text, _ in formulas(record)
+            for name in sorted(identifiers(text) & set(retired))
+        ]
+        if retired
+        else []
+    )
 
 
 def local_operators(record: Mapping[str, Any]) -> dict[str, str]:
@@ -679,6 +813,8 @@ def local_operators(record: Mapping[str, Any]) -> dict[str, str]:
         for e in entries(record, "operators")
         if isinstance(e.get("symbol"), str)
     }
+
+
 def identifiers(text: str) -> set[str]:
     """Return the identifiers occurring in an expression.
 
@@ -696,6 +832,8 @@ def identifiers(text: str) -> set[str]:
     without_literals = re.sub(r"'[^']*'|\"[^\"]*\"", " ", text)
     found = {token.rstrip("_") for token in re.findall(r"[A-Za-z_][A-Za-z_0-9]*", without_literals)}
     return {token for token in found if token}
+
+
 def bound(text: str) -> set[str]:
     """Return the indices a binder of the expression introduces.
 
@@ -706,6 +844,8 @@ def bound(text: str) -> set[str]:
     for group in re.findall(r"[A-Za-z_][A-Za-z_0-9]*_\{([^}]*)\}", text):
         found |= {name.strip() for name in group.split(",") if name.strip()}
     return found
+
+
 def formulas(record: Mapping[str, Any]) -> list[tuple[str, Place, str, frozenset[str]]]:
     """Return every expression the record holds, with where it sits, its path and its type variables.
 
@@ -727,7 +867,9 @@ def formulas(record: Mapping[str, Any]) -> list[tuple[str, Place, str, frozenset
         for i, entry in indexed(record, block):
             held = entry.get(mapping)
             if isinstance(held, Mapping):
-                checked.append((f"{block}.{mapping}.{key}", (block, Entry(i, entry), mapping), held, key))
+                checked.append(
+                    (f"{block}.{mapping}.{key}", (block, Entry(i, entry), mapping), held, key)
+                )
     for mapping, inner, key in WITHIN_MAPPING:
         holder = record.get(mapping)
         if isinstance(holder, Mapping):
@@ -764,7 +906,7 @@ def calls(text: str) -> list[tuple[str, int]]:
     found: list[tuple[str, int]] = []
     for match in re.finditer(r"([A-Za-z_]\w*)(_\{[^}]*\})?\s*\(", text):
         depth, argument, empty = 1, 1, True
-        for character in text[match.end():]:
+        for character in text[match.end() :]:
             if character == "(":
                 depth += 1
             elif character == ")":
@@ -792,9 +934,12 @@ def mismatched_arity(record: Mapping[str, Any], arities: Mapping[str, int]) -> l
             expected = arities.get(name)
             if expected is not None and passed != expected:
                 found.append(
-                    finding(rules.VOCABULARY_MISMATCHED_ARITY,
-                            f"{where}: {name} takes {expected} arguments and is passed {passed}",
-                            *place, value=name)
+                    finding(
+                        rules.VOCABULARY_MISMATCHED_ARITY,
+                        f"{where}: {name} takes {expected} arguments and is passed {passed}",
+                        *place,
+                        value=name,
+                    )
                 )
     return found
 
@@ -845,7 +990,11 @@ def unresolved(
         for i, entry in indexed(record, block)
     ]
     references += [
-        (f"{outer}.{inner}.{key}", (outer, Entry(i, entry), inner, Entry(j, nested), key), nested.get(key))
+        (
+            f"{outer}.{inner}.{key}",
+            (outer, Entry(i, entry), inner, Entry(j, nested), key),
+            nested.get(key),
+        )
         for outer, inner, key in NESTED_REFERENCE
         for i, entry in indexed(record, outer)
         for j, nested in indexed(entry, inner)
@@ -853,7 +1002,11 @@ def unresolved(
     for where, place, value in references:
         for index, name in items_of(value):
             if isinstance(name, str) and split_reference(name) is None and name not in known:
-                problems.append(finding(rules.VOCABULARY_UNRESOLVED, f"{where} -> {name}", *_at_item(place, index)))
+                problems.append(
+                    finding(
+                        rules.VOCABULARY_UNRESOLVED, f"{where} -> {name}", *_at_item(place, index)
+                    )
+                )
     for path in (*PATH_REFERENCE, *TYPE_PATH_REFERENCE.get(str(record.get("type", "")), ())):
         for at, name in reach(record, path):
             if name.strip() and split_reference(name) is None and name not in known:
@@ -868,6 +1021,8 @@ def unresolved(
             if name not in reachable
         ]
     return problems
+
+
 def generic(entry: Mapping[str, Any]) -> frozenset[str]:
     """Return the type variables an operator is generic in, which its own types may name.
 
@@ -908,10 +1063,14 @@ def reach(node: Any, path: str) -> list[tuple[Place, str]]:
                 nxt.append(((*place, key), value))
         found = nxt
     return [(place, held) for place, held in found if isinstance(held, str)]
+
+
 def declared_variants(record: Mapping[str, Any]) -> frozenset[str]:
     """Return the shapes a member of the reference class may take, which only a target declares."""
     return frozenset(
-        entry["symbol"] for entry in entries(record, "variants") if isinstance(entry.get("symbol"), str)
+        entry["symbol"]
+        for entry in entries(record, "variants")
+        if isinstance(entry.get("symbol"), str)
     )
 
 
@@ -924,6 +1083,8 @@ def variant_symbols(record: Mapping[str, Any]) -> dict[str, str]:
             if isinstance(symbol, str) and isinstance(variant, str):
                 found[symbol] = variant
     return found
+
+
 def overreaching_declarations(
     record: Mapping[str, Any], upstream: Mapping[str, Any] | None = None
 ) -> list[Finding]:
@@ -958,16 +1119,34 @@ def overreaching_declarations(
                                     rules.VOCABULARY_OVERREACHING_ENTRY,
                                     f"{block}.{entry.get('name') or entry.get('symbol')}: {name} is"
                                     f" carried only by the {variants[name]} variant",
-                                    *_at_item((block, Entry(position, entry), key), index), value=name,
+                                    *_at_item((block, Entry(position, entry), key), index),
+                                    value=name,
                                 )
                             )
     return found
+
+
 #: Fields of an entry holding an expression or a reference, so a symbol in them is load-bearing.
 FORMAL_KEYS: frozenset[str] = frozenset(
     {
-        "expression", "condition", "values", "extent", "signature", "observed", "effect",
-        "over", "across", "conditional_on", "selects_on", "origin", "horizon", "influence",
-        "constrains", "shares", "relates", "among",
+        "expression",
+        "condition",
+        "values",
+        "extent",
+        "signature",
+        "observed",
+        "effect",
+        "over",
+        "across",
+        "conditional_on",
+        "selects_on",
+        "origin",
+        "horizon",
+        "influence",
+        "constrains",
+        "shares",
+        "relates",
+        "among",
     }
 )
 
@@ -983,9 +1162,16 @@ def misattributed_appeals(record: Mapping[str, Any], systems: Iterable[str]) -> 
     declared = set(systems)
     explanation = (record.get("aim_block") or {}).get("explanation") or {}
     return [
-        finding(rules.VOCABULARY_MISATTRIBUTED_APPEAL,
-                f"aim_block.explanation.factors.appeals_to: {name} is no external system of the target",
-                "aim_block", "explanation", "factors", Entry(position, entry), "appeals_to", index)
+        finding(
+            rules.VOCABULARY_MISATTRIBUTED_APPEAL,
+            f"aim_block.explanation.factors.appeals_to: {name} is no external system of the target",
+            "aim_block",
+            "explanation",
+            "factors",
+            Entry(position, entry),
+            "appeals_to",
+            index,
+        )
         for position, entry in indexed(explanation, "factors")
         for index, name in enumerate(entry.get("appeals_to") or [])
         if isinstance(name, str) and name not in declared
@@ -1022,9 +1208,12 @@ def unborne_variants(
         if borne.get(symbol) or admitted.get(f"variants.{symbol}") == "open":
             continue
         found.append(
-            finding(rules.VOCABULARY_UNBORNE_VARIANT,
-                    f"variants.{symbol}: no declaration or law carries it, and its maturity admits no gap",
-                    "variants", Entry(index, variant))
+            finding(
+                rules.VOCABULARY_UNBORNE_VARIANT,
+                f"variants.{symbol}: no declaration or law carries it, and its maturity admits no gap",
+                "variants",
+                Entry(index, variant),
+            )
         )
     return found
 
@@ -1043,8 +1232,14 @@ def misnamed_variant(record: Mapping[str, Any], variants: Iterable[str]) -> list
     def walk(node: Any, where: str, place: Place) -> list[Finding]:
         if isinstance(node, Mapping):
             found = (
-                [finding(rules.VOCABULARY_MISNAMED_VARIANT, f"{where}variant -> {node['variant']}",
-                         *place, "variant")]
+                [
+                    finding(
+                        rules.VOCABULARY_MISNAMED_VARIANT,
+                        f"{where}variant -> {node['variant']}",
+                        *place,
+                        "variant",
+                    )
+                ]
                 if isinstance(node.get("variant"), str) and node["variant"] not in declared
                 else []
             )
@@ -1052,7 +1247,11 @@ def misnamed_variant(record: Mapping[str, Any], variants: Iterable[str]) -> list
                 found += walk(value, f"{where}{key}.", (*place, key))
             return found
         if isinstance(node, list):
-            return [p for index, item in enumerate(node) for p in walk(item, where, (*place, Entry(index, item)))]
+            return [
+                p
+                for index, item in enumerate(node)
+                for p in walk(item, where, (*place, Entry(index, item)))
+            ]
         return []
 
     return walk(record, "", ())
@@ -1087,21 +1286,34 @@ def overreaching_entries(record: Mapping[str, Any], marked: Mapping[str, str]) -
                                 rules.VOCABULARY_OVERREACHING_ENTRY,
                                 f"{where}.{entry.get('name') or entry.get('symbol')}: {symbol} is"
                                 f" carried only by the {marked[symbol]} variant",
-                                *_at_item((*place, key), index), value=symbol,
+                                *_at_item((*place, key), index),
+                                value=symbol,
                             )
                         )
 
-    for block in ("observables", "manifestations", "scope_over_instances",
-                  "detection_criterion", "constituents", "index_sets", "variables",
-                  "parameters", "laws", "organization"):
+    for block in (
+        "observables",
+        "manifestations",
+        "scope_over_instances",
+        "detection_criterion",
+        "constituents",
+        "index_sets",
+        "variables",
+        "parameters",
+        "laws",
+        "organization",
+    ):
         for index, entry in indexed(record, block):
             scan(block, (block, Entry(index, entry)), entry)
     holder = record.get("conditions_and_byproducts")
     if isinstance(holder, Mapping):
         for kind in ("precipitating", "inhibiting", "modulating", "nonstandard", "byproducts"):
             for index, entry in indexed(holder, kind):
-                scan(f"conditions_and_byproducts.{kind}",
-                     ("conditions_and_byproducts", kind, Entry(index, entry)), entry)
+                scan(
+                    f"conditions_and_byproducts.{kind}",
+                    ("conditions_and_byproducts", kind, Entry(index, entry)),
+                    entry,
+                )
     return found
 
 
@@ -1132,7 +1344,9 @@ def interaction_graph(
     >>> interaction_graph(background, target)
     [{'edge': 'coupling', 'sources': ['sub'], 'reach': 'sub', 'through': ['u'], 'tuples': 'prod(sub, sub)'}]
     """
-    signatures = {d.symbol: d.signature for d in declarations(upstream or {}) + declarations(record)}
+    signatures = {
+        d.symbol: d.signature for d in declarations(upstream or {}) + declarations(record)
+    }
     stated = {
         str(law.get("symbol")): str(law["expression"])
         for law in entries(record, "laws")
@@ -1141,9 +1355,7 @@ def interaction_graph(
     graph = []
     for relation in entries(record, "organization"):
         places = influence_places(str(relation.get("relates") or ""))
-        text = " ".join(
-            stated.get(str(name), "") for name in relation.get("realized_by") or []
-        )
+        text = " ".join(stated.get(str(name), "") for name in relation.get("realized_by") or [])
         carriers = [
             name
             for name in sorted(identifiers(text))
@@ -1173,7 +1385,9 @@ def influence_places(influence: str) -> list[str]:
     if not found:
         return []
     places = [part.strip() for part in found.group(1).split(",")]
-    return places if len(places) > 1 and all(re.fullmatch(r"[A-Za-z_]\w*", p) for p in places) else []
+    return (
+        places if len(places) > 1 and all(re.fullmatch(r"[A-Za-z_]\w*", p) for p in places) else []
+    )
 
 
 def unordered_interactions(
@@ -1194,7 +1408,7 @@ def unordered_interactions(
     found = []
     for index, relation in indexed(record, "organization"):
         if relation.get("among"):
-            continue                       # its ends are laws, and malformed_relations checks those
+            continue  # its ends are laws, and malformed_relations checks those
         places = influence_places(str(relation.get("relates") or ""))
         if not places or any(place not in kinds for place in places):
             found.append(
@@ -1202,7 +1416,9 @@ def unordered_interactions(
                     rules.VOCABULARY_UNORDERED_INTERACTION,
                     f"organization.{relation.get('symbol')}:"
                     " the relation names no ordered product of declared kinds",
-                    "organization", Entry(index, relation), "relates",
+                    "organization",
+                    Entry(index, relation),
+                    "relates",
                 )
             )
     return found
@@ -1239,15 +1455,24 @@ def malformed_relations(record: Mapping[str, Any]) -> list[Finding]:
             continue
         if not isinstance(among, list) or len(among) < 2:
             found.append(
-                finding(rules.VOCABULARY_SHORT_RELATION,
-                        f"{where}: a relation among laws orders two or more of them", *place, "among")
+                finding(
+                    rules.VOCABULARY_SHORT_RELATION,
+                    f"{where}: a relation among laws orders two or more of them",
+                    *place,
+                    "among",
+                )
             )
             continue
         for position, name in enumerate(among):
             if name not in laws:
                 found.append(
-                    finding(rules.VOCABULARY_UNKNOWN_RELATION_LAW, f"{where}: {name} is no law of the record",
-                            *place, "among", position)
+                    finding(
+                        rules.VOCABULARY_UNKNOWN_RELATION_LAW,
+                        f"{where}: {name} is no law of the record",
+                        *place,
+                        "among",
+                        position,
+                    )
                 )
     return found
 
@@ -1262,6 +1487,8 @@ def joins(signature: list[str], endpoints: Sequence[Any]) -> bool:
             return False
         remaining.remove(endpoint)
     return True
+
+
 def misrouted_interactions(
     record: Mapping[str, Any], upstream: Mapping[str, Any] | None = None
 ) -> list[Finding]:
@@ -1277,16 +1504,22 @@ def misrouted_interactions(
             rules.VOCABULARY_MISROUTED_INTERACTION,
             f"organization.{edge['edge']}: the laws stating it name no quantity indexed by"
             f" every one of {edge['sources'] + [edge['reach']]}",
-            "organization", Entry(index, relation), "realized_by",
+            "organization",
+            Entry(index, relation),
+            "realized_by",
         )
-        for (index, relation), edge in zip(indexed(record, "organization"), interaction_graph(record, upstream), strict=True)
+        for (index, relation), edge in zip(
+            indexed(record, "organization"), interaction_graph(record, upstream), strict=True
+        )
         if not edge["through"]
     ]
+
+
 #: Blocks whose declarations exist to be reached by another field. A manifestation, a source of
 #: variation, an observable or a feature is terminal: it states the phenomenon rather than serving it.
-REACHED: frozenset[str] = frozenset(
-    {"constituents", "index_sets", "variables", "parameters"}
-)
+REACHED: frozenset[str] = frozenset({"constituents", "index_sets", "variables", "parameters"})
+
+
 def unused_declarations(directory: Path, registry: Path | None = None) -> list[tuple[str, Finding]]:
     """Return every quantity the problem declares that no other field of it mentions.
 
@@ -1308,14 +1541,23 @@ def unused_declarations(directory: Path, registry: Path | None = None) -> list[t
             continue
         symbol = re.escape(declaration.symbol)
         if len(re.findall(rf"(?<![\w.]){symbol}(?![\w])", text)) <= 1:
-            found.append((
-                declaration.record,
-                finding(rules.VOCABULARY_UNUSED_DECLARATION,
+            found.append(
+                (
+                    declaration.record,
+                    finding(
+                        rules.VOCABULARY_UNUSED_DECLARATION,
                         f"{declaration.block}.{declaration.symbol}: declared and never used",
-                        declaration.block, Key(declaration.symbol)),
-            ))
+                        declaration.block,
+                        Key(declaration.symbol),
+                    ),
+                )
+            )
     return found
-def upstream_of(record: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]) -> Mapping[str, Any]:
+
+
+def upstream_of(
+    record: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> Mapping[str, Any]:
     """Return the target system that ``record`` is stated against, or an empty mapping.
 
     >>> upstream_of({"type": "background", "describes": "system.a"}, {"system.a": {"id": "system.a"}})
@@ -1346,8 +1588,13 @@ def visible_records(
         question = records.get(str(record.get("answers")), {})
         stated = question.get("subject")
         subject: Mapping[str, Any] = stated if isinstance(stated, Mapping) else {}
-        names = [*((record.get("route") or {}).get("runs_on") or []), record.get("answers"),
-                 subject.get("target_system"), subject.get("phenomenon"), *(subject.get("background") or [])]
+        names = [
+            *((record.get("route") or {}).get("runs_on") or []),
+            record.get("answers"),
+            subject.get("target_system"),
+            subject.get("phenomenon"),
+            *(subject.get("background") or []),
+        ]
     elif kind == "model":
         names = [*(record.get("derives_from") or []), record.get("background")]
     elif kind == "binding":
@@ -1355,15 +1602,26 @@ def visible_records(
         target: Mapping[str, Any] = stated if isinstance(stated, Mapping) else {}
         phenomenon = records.get(str(target.get("phenomenon")), {})
         names = [record.get("model"), target.get("phenomenon"), phenomenon.get("target_system")]
-    found = [records[name] for name in dict.fromkeys(n for n in names if isinstance(n, str)) if name in records]
-    return found + [parent for model in found if model.get("type") == "model"
-                    for parent in visible_records(model, records) if parent not in found]
+    found = [
+        records[name]
+        for name in dict.fromkeys(n for n in names if isinstance(n, str))
+        if name in records
+    ]
+    return found + [
+        parent
+        for model in found
+        if model.get("type") == "model"
+        for parent in visible_records(model, records)
+        if parent not in found
+    ]
 
 
 def load_problem(directory: Path, registry: Path | None = None) -> Problem:
     """Collect the vocabulary of the problem whose records fill ``directory``."""
     problem = Problem(name=directory.name, canonical=canonical_operators(registry))
-    loaded = [yaml.safe_load(path.read_text(encoding="utf-8")) for path in sorted(directory.glob("*.yml"))]
+    loaded = [
+        yaml.safe_load(path.read_text(encoding="utf-8")) for path in sorted(directory.glob("*.yml"))
+    ]
     records = [record for record in loaded if isinstance(record, Mapping)]
     by_id = {str(record["id"]): record for record in records if "id" in record}
     for record in records:
@@ -1371,6 +1629,8 @@ def load_problem(directory: Path, registry: Path | None = None) -> Problem:
         problem.local.update(local_operators(record))
         problem.interactions.extend(interaction_graph(record, upstream_of(record, by_id)))
     return problem
+
+
 def as_data(problem: Problem) -> dict[str, Any]:
     """Return the vocabulary of a problem in the record form it is stored in."""
     return {
@@ -1388,13 +1648,17 @@ def as_data(problem: Problem) -> dict[str, Any]:
             }
             for entry in sorted(problem.declarations, key=lambda d: (d.record, d.block, d.symbol))
         ],
-        "reused_across_records": {s: sorted(set(r)) for s, r in sorted(problem.collisions().items())},
+        "reused_across_records": {
+            s: sorted(set(r)) for s, r in sorted(problem.collisions().items())
+        },
         "operators": {
             "canonical": sorted(problem.canonical),
             "declared": dict(sorted(problem.local.items())),
         },
         "interactions": problem.interactions,
     }
+
+
 def render_yaml(problem: Problem) -> str:
     """Return the vocabulary as the YAML the command writes."""
     header = (
@@ -1402,6 +1666,8 @@ def render_yaml(problem: Problem) -> str:
         "# A symbol is unique within its record, so the same letter may return under another record.\n"
     )
     return header + yaml.safe_dump(as_data(problem), sort_keys=False, allow_unicode=True, width=100)
+
+
 def render_markdown(problem: Problem, index_path: str = "_index.md") -> str:
     """Return the table an author reads, built from the same record.
 
@@ -1468,7 +1734,10 @@ def render_markdown(problem: Problem, index_path: str = "_index.md") -> str:
     lines += [f"- Canonical: {', '.join(f'`{o}`' for o in data['operators']['canonical'])}."]
     declared = data["operators"]["declared"]
     lines += [
-        f"- Declared by this problem: {', '.join(f'`{o}` ({g})' for o, g in declared.items())}."
-        if declared else "- This problem declares no operator of its own."
+        (
+            f"- Declared by this problem: {', '.join(f'`{o}` ({g})' for o, g in declared.items())}."
+            if declared
+            else "- This problem declares no operator of its own."
+        )
     ]
     return "\n".join(lines) + "\n"

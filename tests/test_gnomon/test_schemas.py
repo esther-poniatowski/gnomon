@@ -23,7 +23,8 @@ KINDS = schemas.kinds()
 def registry() -> Registry:
     """Return the resources of every base schema, keyed by its absolute identifier."""
     resources = [
-        (schemas.load_base(kind)["$id"], Resource.from_contents(schemas.load_base(kind))) for kind in KINDS
+        (schemas.load_base(kind)["$id"], Resource.from_contents(schemas.load_base(kind)))
+        for kind in KINDS
     ]
     return Registry().with_resources(resources)
 
@@ -35,7 +36,9 @@ def test_every_generated_file_equals_its_generated_form() -> None:
 @pytest.mark.parametrize("kind", KINDS)
 def test_the_base_schema_and_the_contract_are_valid(kind: str) -> None:
     Draft202012Validator.check_schema(schemas.load_base(kind))
-    Draft202012Validator.check_schema(yaml.safe_load(schemas.contract_path(kind).read_text(encoding="utf-8")))
+    Draft202012Validator.check_schema(
+        yaml.safe_load(schemas.contract_path(kind).read_text(encoding="utf-8"))
+    )
 
 
 def enums(node: Mapping[str, Any], path: str = "") -> dict[str, list[Any]]:
@@ -90,8 +93,7 @@ RECORDS = sorted(
 
 
 CASES = [
-    pytest.param(path, record, id=f"{path.parent.name}/{path.name}")
-    for path, record in RECORDS
+    pytest.param(path, record, id=f"{path.parent.name}/{path.name}") for path, record in RECORDS
 ]
 
 
@@ -104,18 +106,25 @@ def test_every_worked_record_follows_its_contract(path: Any, record: dict[str, A
 def test_a_record_that_breaks_its_contract_is_reported() -> None:
     record = {"_schema": "gnomon:problem@1", "type": "problem", "id": "prob.a.b", "status": "posed"}
     assert schemas.record_errors(record) == []
-    assert schemas.record_errors({**record, "status": "pending"})[0].startswith("status: 'pending' is not one of")
+    assert schemas.record_errors({**record, "status": "pending"})[0].startswith(
+        "status: 'pending' is not one of"
+    )
     assert schemas.record_errors({**record, "type": "question"}) == ["type: 'problem' was expected"]
-    assert schemas.record_errors({**record, "statement": 3}) == ["statement: 3 is not of type 'string', 'null'"]
+    assert schemas.record_errors({**record, "statement": 3}) == [
+        "statement: 3 is not of type 'string', 'null'"
+    ]
     assert schemas.record_errors({"type": "problem"}) == ["_schema: the record names no contract"]
-    assert schemas.record_errors({**record, "_schema": "gnomon:problem@9"}) == ["_schema: gnomon:problem@9 is no contract of gnomon"]
+    assert schemas.record_errors({**record, "_schema": "gnomon:problem@9"}) == [
+        "_schema: gnomon:problem@9 is no contract of gnomon"
+    ]
 
 
 def test_a_key_that_the_contract_does_not_declare_is_reported() -> None:
     """A misspelled key would otherwise pass as an unknown field, at the root and at any depth."""
     record = {"_schema": "gnomon:concept@1", "type": "concept", "id": "concept.a.b"}
-    assert schemas.record_errors({**record, "glos": "x"})[0].startswith("(record): 'glos' is not one of")
+    assert schemas.record_errors({**record, "glos": "x"})[0].startswith(
+        "(record): 'glos' is not one of"
+    )
     nested = {**record, "confusions": [{"with": "fixed point"}]}
     assert schemas.record_errors(nested)[0].startswith("confusions.0: 'with' is not one of")
     assert schemas.record_errors({**record, "confusions": [{"other": "fixed point"}]}) == []
-

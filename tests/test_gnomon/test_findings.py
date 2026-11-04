@@ -37,7 +37,9 @@ def places(found: list[Any]) -> list[tuple[str, str]]:
         (("relations", 2, "target"), "/relations/2/target"),
     ],
 )
-def test_a_field_path_converts_to_a_json_pointer(path: tuple[str | int, ...], expected: str) -> None:
+def test_a_field_path_converts_to_a_json_pointer(
+    path: tuple[str | int, ...], expected: str
+) -> None:
     """``~`` is escaped before ``/``, so that ``/`` never becomes ``~01``."""
     assert pointer(path) == expected
 
@@ -67,17 +69,25 @@ def test_an_entry_of_a_keyed_list_is_named_by_its_identifier() -> None:
 
 
 def test_an_entry_without_identifier_keeps_its_index() -> None:
-    record = {"type": "target-system", "variables": [{"symbol": "a"}, {"expression": "x", "condition": "y"}]}
+    record = {
+        "type": "target-system",
+        "variables": [{"symbol": "a"}, {"expression": "x", "condition": "y"}],
+    }
     assert places(doubly_defined(record)) == [("/variables/1", "")]
 
 
 def test_an_identifier_is_escaped_in_the_discriminator() -> None:
-    record = {"type": "target-system", "variables": [{"symbol": "a/b~c", "expression": "x", "condition": "y"}]}
+    record = {
+        "type": "target-system",
+        "variables": [{"symbol": "a/b~c", "expression": "x", "condition": "y"}],
+    }
     assert places(doubly_defined(record)) == [("/variables", "a~1b~0c")]
 
 
 def test_an_entry_of_an_unkeyed_list_keeps_its_index() -> None:
-    question = {"virtues": [{"virtue": "economy", "standing": "preferred"}, {"virtue": "tractability"}]}
+    question = {
+        "virtues": [{"virtue": "economy", "standing": "preferred"}, {"virtue": "tractability"}]
+    }
     assert places(unstated_standing(question)) == [("/virtues/1/standing", "")]
 
 
@@ -101,22 +111,37 @@ def test_a_cycle_and_a_repeated_step_are_discriminated_by_their_content() -> Non
 def test_a_closed_field_lies_at_its_full_path() -> None:
     """The message names the top-level block and the field alone; the locus keeps every level."""
     admitted = {"laws.inner.role": frozenset({"evolution"}), "status": frozenset({"draft"})}
-    record = {"status": "wrong", "laws": [{"symbol": "f", "inner": {"role": "bad"}},
-                                          {"inner": {"role": ["evolution", "worse"]}}]}
+    record = {
+        "status": "wrong",
+        "laws": [
+            {"symbol": "f", "inner": {"role": "bad"}},
+            {"inner": {"role": ["evolution", "worse"]}},
+        ],
+    }
     found = inadmissible_values(record, admitted)
     assert [f.text for f in found] == [
         "status: wrong is not admitted",
         "laws.inner.role: bad is not admitted",
         "laws.inner.role: worse is not admitted",
     ]
-    assert places(found) == [("/status", ""), ("/laws", "f/inner/role"), ("/laws/1/inner/role/1", "")]
+    assert places(found) == [
+        ("/status", ""),
+        ("/laws", "f/inner/role"),
+        ("/laws/1/inner/role/1", ""),
+    ]
 
 
 def test_a_restriction_lies_under_the_domain_of_the_subject() -> None:
-    question = {"subject": {"domain": {"restrictions": [
-        {"name": "clamped flux", "values": "x", "expression": "y"},
-        {"restriction": "clamped"},
-    ]}}}
+    question = {
+        "subject": {
+            "domain": {
+                "restrictions": [
+                    {"name": "clamped flux", "values": "x", "expression": "y"},
+                    {"restriction": "clamped"},
+                ]
+            }
+        }
+    }
     found = malformed_restrictions(question, set())
     assert places(found) == [
         ("/subject/domain/restrictions", "clamped flux"),
@@ -131,10 +156,16 @@ def test_a_parameter_listed_as_varying_can_be_held() -> None:
     from gnomon.completeness import varying_symbols
 
     target = {"variables": [{"symbol": "x"}], "parameters": [{"symbol": "w"}, {"symbol": "k"}]}
-    question = {"subject": {"domain": {"restrictions": [
-        {"of": "w", "values": "w0", "restriction": "clamped"},
-        {"of": "k", "values": "k0", "restriction": "clamped"},
-    ]}}}
+    question = {
+        "subject": {
+            "domain": {
+                "restrictions": [
+                    {"of": "w", "values": "w0", "restriction": "clamped"},
+                    {"of": "k", "values": "k0", "restriction": "clamped"},
+                ]
+            }
+        }
+    }
     found = malformed_restrictions(question, varying_symbols(target, {"course": {"varies": ["w"]}}))
     assert [f.text for f in found] == [
         "restrictions.k: states how it is held although it names no quantity that varies"
@@ -176,4 +207,7 @@ def test_a_finding_on_the_registry_names_the_activity() -> None:
     act = activities()["derivation"]
     broken = {"derivation": type(act)(**{**act.__dict__, "output": "theorem", "mode": "intuitive"})}
     found = malformed_registry(broken, product_types(), ["deductive"])
-    assert places(found) == [("/activities", "derivation/output/theorem"), ("/activities", "derivation/mode")]
+    assert places(found) == [
+        ("/activities", "derivation/output/theorem"),
+        ("/activities", "derivation/mode"),
+    ]

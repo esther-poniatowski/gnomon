@@ -31,7 +31,13 @@ from .schemas import TEMPLATES
 #: The kinds that every problem receives: the itinerary, opened with the problem, and the records
 #: of the stages that precede any candidate answer.
 CORE_KINDS: tuple[str, ...] = (
-    "itinerary", "problem", "question", "target-system", "phenomenon", "background", "operators",
+    "itinerary",
+    "problem",
+    "question",
+    "target-system",
+    "phenomenon",
+    "background",
+    "operators",
 )
 
 #: An entry of the index of templates: its link text, its file and the goal of the record.
@@ -96,16 +102,26 @@ def scaffold(folder: Path, kinds: Sequence[str], force: bool = False) -> list[Pa
     entries = template_entries()
     unknown = [k for k in kinds if k not in entries]
     if unknown:
-        raise ValueError(f"no template for the kinds {', '.join(unknown)}; the kinds are {', '.join(entries)}")
+        raise ValueError(
+            f"no template for the kinds {', '.join(unknown)}; the kinds are {', '.join(entries)}"
+        )
     chosen = [k for k in entries if k in set(kinds)]
     targets = [folder / f"{k}.yml" for k in chosen] + [folder / "_index.md"]
     existing = [p for p in targets if p.exists()]
     if existing and not force:
-        raise FileExistsError(f"{', '.join(map(str, existing))} already exist; pass --force to overwrite")
+        raise FileExistsError(
+            f"{', '.join(map(str, existing))} already exist; pass --force to overwrite"
+        )
     folder.mkdir(parents=True, exist_ok=True)
     for kind in chosen:
-        (folder / f"{kind}.yml").write_text((TEMPLATES / f"{kind}.yml").read_text(encoding="utf-8"), encoding="utf-8")
-    lines = [f"# {folder.name}", "", "Fill the records stage by stage, and run `gnomon check` on this folder after each stage."]
+        (folder / f"{kind}.yml").write_text(
+            (TEMPLATES / f"{kind}.yml").read_text(encoding="utf-8"), encoding="utf-8"
+        )
+    lines = [
+        f"# {folder.name}",
+        "",
+        "Fill the records stage by stage, and run `gnomon check` on this folder after each stage.",
+    ]
     stage = None
     for kind in chosen:
         entry = entries[kind]

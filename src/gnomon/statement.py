@@ -111,7 +111,9 @@ def _quantity(reference: str, records: Records) -> str:
     return symbol
 
 
-def _restrictions(domain: Mapping[str, Any], records: Records, kinds: Mapping[str, str]) -> list[str]:
+def _restrictions(
+    domain: Mapping[str, Any], records: Records, kinds: Mapping[str, str]
+) -> list[str]:
     """Return the words of each restriction of a domain: its name, else the kind and the quantity."""
     words = []
     for entry in domain.get("restrictions") or []:
@@ -127,8 +129,9 @@ def _restrictions(domain: Mapping[str, Any], records: Records, kinds: Mapping[st
     return words
 
 
-def compose_statement(question: Mapping[str, Any], records: Records,
-                      registry: Mapping[str, Any] | None = None) -> Statement:
+def compose_statement(
+    question: Mapping[str, Any], records: Records, registry: Mapping[str, Any] | None = None
+) -> Statement:
     """Compose the statement of a question from its fields and from the records that they name.
 
     >>> records = {"system.a": {"title": "Wide networks"}, "phen.a.b": {"title": "Lazy training"}}
@@ -155,7 +158,11 @@ def compose_statement(question: Mapping[str, Any], records: Records,
     system = slot("S", _named(subject.get("target_system"), records))
     domain = subject.get("domain") or {}
     restrictions = _restrictions(domain, records, words.get("restriction_kinds") or {})
-    limit = (domain.get("limit") or {}).get("expression") if isinstance(domain.get("limit"), Mapping) else None
+    limit = (
+        (domain.get("limit") or {}).get("expression")
+        if isinstance(domain.get("limit"), Mapping)
+        else None
+    )
 
     aim = task.get("epistemic_aim")
     interrogative = (words.get("interrogatives") or {}).get(aim)
@@ -171,7 +178,11 @@ def compose_statement(question: Mapping[str, Any], records: Records,
     contrast = subject.get("contrast") or {}
     locus = contrast.get("locus")
     connective = (words.get("contrasts") or {}).get(locus)
-    foils = [str(f["name"]) for f in contrast.get("foil_set") or [] if isinstance(f, Mapping) and f.get("name")]
+    foils = [
+        str(f["name"])
+        for f in contrast.get("foil_set") or []
+        if isinstance(f, Mapping) and f.get("name")
+    ]
     if connective is None:
         connective = "rather than {X}"
         foil_words = slot("X", None)
@@ -180,7 +191,9 @@ def compose_statement(question: Mapping[str, Any], records: Records,
 
     text = str(words.get("system", "In {S}")).replace("{S}", system)
     if restrictions:
-        text += " " + str(words.get("restrictions", "under {D}")).replace("{D}", _listed(restrictions, "and"))
+        text += " " + str(words.get("restrictions", "under {D}")).replace(
+            "{D}", _listed(restrictions, "and")
+        )
     if limit:
         text += ", " + str(words.get("limit", "in the limit {L}")).replace("{L}", str(limit))
     clause = str(interrogative)
