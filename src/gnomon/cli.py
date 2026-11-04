@@ -531,3 +531,6 @@ def main_callback(
         typer.echo(__version__)
         raise typer.Exit()
 
+
+if __name__ == "__main__":
+    app()
