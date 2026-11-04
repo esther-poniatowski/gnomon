@@ -1,22 +1,28 @@
 """The commands that check a user's directory and scaffold a problem.
 
 ``gnomon check`` runs every check of the package on a directory tree, so it must stay silent on the
-worked inquiries and report each defect planted in a copy of one of them. ``gnomon init`` writes the
-templates in the order of filling and never overwrites a filled record.
+worked inquiries and report each defect planted in a copy of one of them. Each checker is observed
+during one run on the worked inquiries, so a test of the corpus reads the context that the command
+assembles rather than assembling its own. ``gnomon init`` writes the templates in the order of
+filling and never overwrites a filled record.
 """
 
 from __future__ import annotations
 
 import shutil
 from pathlib import Path
+from types import ModuleType
+from typing import Any, Callable
 
 import pytest
 import yaml
 from typer.testing import CliRunner
 
 from gnomon import check as check_module
+from gnomon import completeness, vocabulary
 from gnomon.check import check_workspace, load_workspace
 from gnomon.cli import app
+from gnomon.findings import Finding, texts
 from gnomon.report import render_yaml_report
 from gnomon.scaffold import CORE_KINDS, scaffold, template_entries
 
@@ -57,6 +63,63 @@ def test_the_worked_inquiries_pass_every_check() -> None:
     assert workspace.problems and not workspace.failures
     found = check_workspace(workspace)
     assert not found, [f"{x.file}: {x.finding.text}" for x in found]
+
+
+#: The checkers that ``check_workspace`` runs, by the module through which it calls each of them.
+CHECKERS: dict[ModuleType, tuple[str, ...]] = {
+    check_module: ("malformed_answerability", "itinerary_problems"),
+    completeness: (
+        "undecided_boundaries", "unmet_general", "unmet_by_value", "unmet_commitment", "malformed_restrictions",
+        "unjustified_explanans_bound", "unstated_standing", "contradictory_accuracy", "unresolved_slots",
+        "unresolved_question_references", "unstated_function_sense", "unbounded_aim", "unmet_by_aim",
+        "unanchored_explicandum", "unclassified_operations", "unbound_outputs", "mismatched_status_pairs",
+        "incomplete_operations", "unmet_by_presence", "malformed_credence", "misdirected_assessment",
+        "premature_appraisal", "mismatched_occurrence", "mismatched_request", "unsupported_outcome",
+        "misstated_obstacles", "inadmissible_values",
+    ),
+    vocabulary: (
+        "unresolved", "mistyped_symbols", "repeated_symbols", "misplaced_sharing", "vacuous_shared",
+        "unfixed_parameters", "doubly_defined", "unowned_quantities", "unselected_conditions",
+        "malformed_relations", "split_expressions", "corrupted_notation", "unordered_interactions",
+        "overreaching_declarations", "misrouted_interactions", "misnamed_variant", "mismatched_arity",
+        "unborne_variants", "overreaching_entries", "retired_in_use", "dangling_references",
+        "unused_declarations",
+    ),
+}
+
+
+def _recorded(function: Callable[..., list[Any]], calls: list[list[Any]]) -> Callable[..., list[Any]]:
+    """Return ``function``, recording the result of each call into ``calls``."""
+
+    def spy(*args: Any, **kwargs: Any) -> list[Any]:
+        result = function(*args, **kwargs)
+        calls.append(result)
+        return result
+
+    return spy
+
+
+@pytest.fixture(scope="module")
+def corpus_run() -> dict[str, list[list[Any]]]:
+    """Run ``check_workspace`` once on the worked inquiries, and return the results of each checker."""
+    calls: dict[str, list[list[Any]]] = {name: [] for names in CHECKERS.values() for name in names}
+    with pytest.MonkeyPatch.context() as patch:
+        for module, names in CHECKERS.items():
+            for name in names:
+                patch.setattr(module, name, _recorded(getattr(module, name), calls[name]))
+        check_workspace(load_workspace(EXAMPLES))
+    return calls
+
+
+@pytest.mark.parametrize("name", [name for names in CHECKERS.values() for name in names])
+def test_each_checker_runs_on_the_worked_inquiries_and_reports_nothing(
+    name: str, corpus_run: dict[str, list[list[Any]]],
+) -> None:
+    """A checker that the command never reaches is reported, as is any finding on the worked inquiries."""
+    calls = corpus_run[name]
+    assert calls, f"gnomon check never runs {name} on the worked inquiries"
+    found: list[Finding] = [item[-1] if isinstance(item, tuple) else item for result in calls for item in result]
+    assert not found, texts(found)
 
 
 def test_every_planted_defect_is_reported(planted: Path) -> None:

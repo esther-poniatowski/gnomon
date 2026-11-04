@@ -4,15 +4,13 @@ A question names its subject through slots that hold a record or a typed placeho
 problem it serves, the questions it is linked to and the background records it admits. These tests
 check each name against the records of its problem, and check every closed field of every record
 kind against the vocabulary registry, answers and assessments included. Each rule carries a
-planted case that fails for the intended reason.
+planted case that fails for the intended reason. The worked inquiries are checked in
+``test_check.py``, through the context that ``gnomon check`` assembles.
 """
 
 from __future__ import annotations
 
-from pathlib import Path
-from typing import Any, Mapping
 
-import pytest
 import yaml
 
 from gnomon.completeness import (
@@ -38,34 +36,11 @@ from gnomon.completeness import (
 from gnomon.findings import texts
 from gnomon.itineraries import construct_record_kinds, type_classes, type_holders
 
-from .paths import EXAMPLES, ROOT
+from .paths import EXAMPLES
 
-PROBLEMS = sorted(p for p in EXAMPLES.glob("*/") if p.is_dir()) if EXAMPLES.is_dir() else []
 TYPES = placeholder_types()
 CONSTRUCTS = construct_record_kinds()
 CLASSES, HOLDERS = type_classes(), type_holders()
-
-
-def problem_records(directory: Path) -> dict[str, Mapping[str, Any]]:
-    """Return the records of one problem, keyed by identifier."""
-    found = {}
-    for path in sorted(directory.glob("*.yml")):
-        record = yaml.safe_load(path.read_text(encoding="utf-8"))
-        if isinstance(record, Mapping) and "id" in record:
-            found[str(record["id"])] = record
-    return found
-
-
-def of_kind(records: Mapping[str, Mapping[str, Any]], kind: str) -> list[Mapping[str, Any]]:
-    return [record for record in records.values() if record.get("type") == kind]
-
-
-@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
-def test_every_subject_slot_names_an_identified_record_or_a_placeholder(directory: Path) -> None:
-    records = problem_records(directory)
-    found = [m for q in of_kind(records, "question") for m in unresolved_slots(q, records, TYPES)]
-    assert not found, f"{directory.name}: {found}"
 
 
 def test_a_slot_without_an_identified_record_or_a_typed_placeholder_is_reported() -> None:
@@ -94,14 +69,6 @@ def test_a_slot_without_an_identified_record_or_a_typed_placeholder_is_reported(
         "subject.target_system: no record carries the identifier system.z",
         "subject.phenomenon: holds neither a record identifier nor a placeholder",
     ]
-
-
-@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
-def test_every_problem_link_and_background_of_a_question_resolves(directory: Path) -> None:
-    records = problem_records(directory)
-    found = [m for q in of_kind(records, "question") for m in unresolved_question_references(q, records)]
-    assert not found, f"{directory.name}: {found}"
 
 
 def test_linked_questions_and_admitted_backgrounds_are_checked() -> None:
@@ -137,13 +104,6 @@ def test_linked_questions_and_admitted_backgrounds_are_checked() -> None:
     ]
 
 
-@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
-def test_every_functional_question_states_its_sense_of_function(directory: Path) -> None:
-    found = [m for q in of_kind(problem_records(directory), "question") for m in unstated_function_sense(q)]
-    assert not found, f"{directory.name}: {found}"
-
-
 def test_a_functional_question_without_a_sense_of_function_is_reported() -> None:
     question = {"task": {"requested_relation": "functional", "function_sense": None}}
     assert texts(unstated_function_sense(question)) == [
@@ -152,13 +112,6 @@ def test_a_functional_question_without_a_sense_of_function_is_reported() -> None
     question["task"]["function_sense"] = "causal-role"
     assert unstated_function_sense(question) == []
     assert unstated_function_sense({"task": {"requested_relation": "causal-mechanistic"}}) == []
-
-
-@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
-def test_every_credence_is_a_degree_of_belief_with_its_basis(directory: Path) -> None:
-    found = [m for a in of_kind(problem_records(directory), "assessment") for m in malformed_credence(a)]
-    assert not found, f"{directory.name}: {found}"
 
 
 def test_a_credence_outside_the_unit_interval_or_without_basis_is_reported() -> None:
@@ -173,29 +126,6 @@ def test_a_credence_outside_the_unit_interval_or_without_basis_is_reported() -> 
     ]
 
 
-def every_record() -> list[tuple[str, Mapping[str, Any]]]:
-    found = []
-    for path in sorted(EXAMPLES.glob("*/*.yml")) if EXAMPLES.is_dir() else []:
-        record = yaml.safe_load(path.read_text(encoding="utf-8"))
-        if isinstance(record, Mapping) and admitted_values(str(record.get("type"))):
-            found.append((str(path.relative_to(ROOT)), record))
-    return found
-
-
-ALL = every_record()
-
-
-@pytest.mark.skipif(not ALL, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", ALL or [("", {})], ids=[n for n, _ in ALL] or ["none"])
-def test_every_closed_field_of_every_record_kind_holds_an_admitted_value(
-    case: tuple[str, Mapping[str, Any]],
-) -> None:
-    """Answers and assessments carry closed fields too, such as the attitude and the warrant."""
-    name, record = case
-    bad = inadmissible_values(record, admitted_values(str(record.get("type"))))
-    assert not bad, f"{name}: {bad}"
-
-
 def test_an_answer_status_outside_the_attitudes_is_reported() -> None:
     """The former status `informally-backed` mixed an attitude with a support, and is now refused."""
     record = {"type": "answer", "status": "informally-backed", "support": "informal",
@@ -207,13 +137,6 @@ def test_an_answer_status_outside_the_attitudes_is_reported() -> None:
 
 
 OCCURRENCES = occurrence_by_category()
-
-
-@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
-def test_every_phenomenon_takes_an_occurrence_class_its_category_admits(directory: Path) -> None:
-    found = [m for r in of_kind(problem_records(directory), "phenomenon") for m in mismatched_occurrence(r, OCCURRENCES)]
-    assert not found, f"{directory.name}: {found}"
 
 
 def test_an_occurrence_class_that_the_category_does_not_admit_is_reported() -> None:
@@ -262,15 +185,6 @@ def test_a_corrective_answer_that_passes_its_tests_is_corrective_rather_than_sat
     assert disposition(failing, "corrective") == "not-satisfied"
 
 
-def test_no_fixture_assessment_appraises_an_answer_that_has_not_passed() -> None:
-    """A virtue ranks only answers that pass admissibility and warrant."""
-    found = [
-        f for path in sorted(EXAMPLES.glob("*/assessment.yml"))
-        for f in premature_appraisal(yaml.safe_load(path.read_text(encoding="utf-8")))
-    ]
-    assert not found, texts(found)
-
-
 def test_an_appraisal_is_reported_unless_the_answer_passes() -> None:
     appraisal = [{"virtue": "unification", "assessment": "high"}]
     pending = {"tests": {"admissibility": {"scope": {"verdict": "pending"}}}, "appraisal": appraisal}
@@ -279,14 +193,6 @@ def test_an_appraisal_is_reported_unless_the_answer_passes() -> None:
     ]
     passing = {"tests": {"admissibility": {"scope": {"verdict": "pass"}}}, "appraisal": appraisal}
     assert premature_appraisal(passing) == []
-
-
-@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
-def test_every_assessment_fits_what_it_assesses(directory: Path) -> None:
-    records = problem_records(directory)
-    found = [m for a in of_kind(records, "assessment") for m in misdirected_assessment(a, records, CONSTRUCTS)]
-    assert not texts(found), f"{directory.name}: {texts(found)}"
 
 
 def test_an_assessment_of_a_construct_holds_one_verdict_per_constraint() -> None:
@@ -339,15 +245,6 @@ def test_an_assessment_of_an_answer_keeps_its_two_levels_of_tests() -> None:
     ]
 
 
-@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
-def test_every_question_serves_its_problem_under_an_admitted_aim_and_request(directory: Path) -> None:
-    records, aims = problem_records(directory), result_aims()
-    found = [m for p in of_kind(records, "problem") for m in mismatched_request(p, records)]
-    found += [m for q in of_kind(records, "question") for m in unbounded_aim(q, records, aims)]
-    assert not texts(found), f"{directory.name}: {texts(found)}"
-
-
 def test_a_problem_bounds_the_aim_and_the_request_of_its_questions() -> None:
     """The associated question takes the request of the demand; each serving question an admitted aim."""
     problem = {"id": "prob.a", "type": "problem", "result_type": "explanation", "request": "one",
@@ -372,14 +269,6 @@ def test_a_problem_bounds_the_aim_and_the_request_of_its_questions() -> None:
     assert texts(unbounded_aim(question, concept, result_aims())) == [
         "task.epistemic_aim: description does not serve a demand for concept"
     ]
-
-
-@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
-def test_every_problem_status_agrees_with_its_records(directory: Path) -> None:
-    records = problem_records(directory)
-    found = [m for p in of_kind(records, "problem") for m in unsupported_outcome(p, records, CLASSES, HOLDERS)]
-    assert not texts(found), f"{directory.name}: {texts(found)}"
 
 
 PASSING = {"admissibility": {"scope": {"verdict": "pass"}}, "warrant": {"closure": {"verdict": "pass"}}}
@@ -464,14 +353,6 @@ def test_an_accepted_corrective_answer_to_the_associated_question_dissolves_the_
     assert texts(unsupported_outcome(problem, records, CLASSES, HOLDERS)) == [
         "status: dissolved, and no accepted answer denies a presupposition of quest.a"
     ]
-
-
-@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
-def test_every_problem_states_the_obstacles_that_its_records_show(directory: Path) -> None:
-    records = problem_records(directory)
-    found = [m for p in of_kind(records, "problem") for m in misstated_obstacles(p, records, CLASSES, HOLDERS)]
-    assert not texts(found), f"{directory.name}: {texts(found)}"
 
 
 def test_the_stated_knowledge_obstacles_agree_with_the_records() -> None:

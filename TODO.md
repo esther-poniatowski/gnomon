@@ -94,7 +94,8 @@ A researcher new to `gnomon` needs a procedure that leads, step by step, from a 
 ## 7. Checks
 
 - [ ] Close each known limit of the checks, or state it in the note that owns the rule. 🆔 check-limits
-	- [ ] Run the corpus tests of `tests/test_gnomon/test_symbol_resolution.py` and `test_inquiry_records.py` through the orchestration of `src/gnomon/check.py`, so that the context of each checker is assembled in one place; the tests still assemble it themselves.
+	- [x] Run the corpus tests of `tests/test_gnomon/test_symbol_resolution.py` and `test_inquiry_records.py` through the orchestration of `src/gnomon/check.py`, so that the context of each checker is assembled in one place; the tests still assemble it themselves.
+	- [ ] Plant a defect for each checker that no test reports on a planted record: `unordered_interactions`, `overreaching_declarations`, `misrouted_interactions`, `mismatched_arity` and `unused_declarations` of `src/gnomon/vocabulary.py`. The test of each checker in `tests/test_gnomon/test_check.py` shows only that the worked inquiries pass them.
 	- [ ] Decide whether a parser enforces the expression grammar, as the [syntax decision](docs/adr/expression-syntax.md) anticipates. The check of `vocabulary.py` is lexical: it resolves identifiers without parsing binders. A parser would close two limits:
 		- the signature of a derived observable is declared and not derived from its definition, so a record can declare a signature that its definition contradicts;
 		- a domain limit such as `Re -> infinity` is one string whose arrow no operator defines, so no check verifies that its left side is a declared quantity of the target;

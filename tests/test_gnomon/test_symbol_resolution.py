@@ -2,7 +2,9 @@
 
 A record declares each quantity under a ``symbol`` unique within that record, and names a
 quantity by that symbol rather than by its name in words. The collecting logic lives in
-``gnomon.vocabulary``; these tests exercise it against the framework note and the filled records.
+``gnomon.vocabulary``; these tests exercise it on planted records and against the framework note.
+The worked inquiries are checked in ``test_check.py``, through the context that ``gnomon check``
+assembles.
 
 The check is lexical. Identifiers are extracted from a formula without parsing its binders, so a
 declared signature is not verified against the definition that would compute the signature. An
@@ -20,21 +22,13 @@ import yaml
 
 from gnomon.completeness import (
     admitted_values,
-    at,
     always_required,
     inadmissible_values,
-    malformed_restrictions,
-    malformed_credence,
     contradictory_accuracy,
-    placeholder_types,
-    record_kinds,
     requirements_by_aim,
     requirements_by_commitment,
     unmet_by_aim,
     unmet_commitment,
-    unresolved_question_references,
-    unresolved_slots,
-    unstated_function_sense,
     undecided_boundaries,
     unjustified_explanans_bound,
     unrealized_link,
@@ -44,7 +38,6 @@ from gnomon.completeness import (
 
 from gnomon.vocabulary import (
     RECORD_KINDS,
-    visible_records,
     canonical_operators,
     declarations,
     doubly_defined,
@@ -55,20 +48,12 @@ from gnomon.vocabulary import (
     split_expressions,
     unfixed_parameters,
     interaction_graph,
-    declared_variants,
     malformed_relations,
     misattributed_appeals,
     misnamed_variant,
-    misrouted_interactions,
-    arities,
-    mismatched_arity,
-    unordered_interactions,
     unborne_variants,
     overreaching_entries,
-    overreaching_declarations,
-    variant_symbols,
     unselected_conditions,
-    unused_declarations,
     unowned_quantities,
     mistyped_symbols,
     vacuous_shared,
@@ -96,11 +81,6 @@ def records() -> list[tuple[str, Mapping[str, Any]]]:
     return found
 
 
-def symbols_of(record: Mapping[str, Any]) -> list[str]:
-    """Return the symbols the record declares, repetitions kept."""
-    return [entry.symbol for entry in declarations(record)]
-
-
 CASES = records()
 IDS = [name for name, _ in CASES] or ["no-fixture"]
 
@@ -108,30 +88,7 @@ IDS = [name for name, _ in CASES] or ["no-fixture"]
 BY_ID: dict[str, Mapping[str, Any]] = {str(r["id"]): r for _, r in CASES if "id" in r}
 
 
-def backgrounds_of(target: Mapping[str, Any]) -> list[Mapping[str, Any]]:
-    """Return the background records that describe ``target``."""
-    return [r for r in BY_ID.values() if r.get("type") == "background" and r.get("describes") == target.get("id")]
-
-
-def problem_of(name: str) -> str:
-    """Return the directory whose records make up one problem."""
-    return str(Path(name).parent)
-
-
-#: Per problem, the operators every one of its records may use, and every symbol they declare.
-PROBLEM_OPERATORS: dict[str, set[str]] = {}
-PROBLEM_SYMBOLS: dict[str, list[str]] = {}
-for _name, _record in CASES:
-    PROBLEM_OPERATORS.setdefault(problem_of(_name), set()).update(local_operators(_record))
-    PROBLEM_SYMBOLS.setdefault(problem_of(_name), []).extend(symbols_of(_record))
 PROBLEMS = sorted(p for p in EXAMPLES.glob("*/") if p.is_dir()) if EXAMPLES.is_dir() else []
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_symbol_resolved_to_a_string(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    assert not mistyped_symbols(record), f"{name}: {mistyped_symbols(record)}"
 
 
 def test_a_yaml_keyword_used_as_a_symbol_is_reported() -> None:
@@ -141,53 +98,6 @@ def test_a_yaml_keyword_used_as_a_symbol_is_reported() -> None:
     assert texts(mistyped_symbols(record)) == ["operators: True is bool, not a symbol"]
     quoted = yaml.safe_load('type: target-system\noperators:\n  - symbol: "on"\n    name: restriction\n')
     assert mistyped_symbols(quoted) == []
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_no_symbol_is_declared_twice(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    found = symbols_of(record)
-    repeated = sorted({s for s in found if found.count(s) > 1})
-    assert not repeated, f"{name}: {repeated} declared more than once"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_reference_and_formula_identifier_resolves(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    upstream = upstream_of(record, BY_ID)
-    # an operator is typed over the sets of its whole problem, so it reads against all of them
-    # an operator and a question are both read against the whole problem: the first is typed over
-    # whatever set declares it, the second reaches the target and the phenomenon alike
-    # an answer and a model read against the records that they cite, as visible_records states
-    if record.get("type") in ("operators", "question"):
-        external = PROBLEM_SYMBOLS[problem_of(name)]
-    elif record.get("type") in ("answer", "model", "binding"):
-        external = [s for seen in visible_records(record, BY_ID) for s in symbols_of(seen)]
-    else:
-        external = symbols_of(upstream)
-    inherited = CANONICAL | frozenset(PROBLEM_OPERATORS[problem_of(name)])
-    problems = unresolved(record, inherited, external)
-    assert not problems, f"{name}: {problems}"
-
-
-#: Every record of the fixture tree, of any kind, keyed by identifier.
-ALL_RECORDS: dict[str, Mapping[str, Any]] = {
-    str(loaded["id"]): loaded
-    for path in (sorted(EXAMPLES.glob("*/*.yml")) if EXAMPLES.is_dir() else [])
-    if isinstance(loaded := yaml.safe_load(path.read_text(encoding="utf-8")), Mapping) and "id" in loaded
-}
-
-
-@pytest.mark.skipif(not ALL_RECORDS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("ident", sorted(ALL_RECORDS) or ["none"])
-def test_every_reference_names_a_record_and_a_unit_that_exist(ident: str) -> None:
-    """A reference to a whole record names a record, and a reference to a unit names a unit of it."""
-    from gnomon.vocabulary import dangling_references
-
-    found = dangling_references(ALL_RECORDS[ident], ALL_RECORDS)
-    assert not found, f"{ident}: {texts(found)}"
 
 
 def test_a_reference_to_a_missing_record_or_unit_is_reported() -> None:
@@ -201,44 +111,6 @@ def test_a_reference_to_a_missing_record_or_unit_is_reported() -> None:
     ]
 
 
-MODELS = [(name, record) for name, record in CASES if record.get("type") == "model"]
-ANSWERS = [(name, record) for name, record in CASES if record.get("type") == "answer"]
-
-
-@pytest.mark.skipif(not ANSWERS, reason="no migrated answer")
-@pytest.mark.parametrize("case", ANSWERS or [("", {})], ids=[n for n, _ in ANSWERS] or ["none"])
-def test_an_answer_classifies_each_operation_and_fills_its_requirements(case: tuple[str, Mapping[str, Any]]) -> None:
-    """The first two conditions of acceptance of the goal `model-design`: each operation of a model on
-    which the answer runs is classified by a ground, and no required element of the core or of the
-    block of the aim stays empty."""
-    from gnomon.completeness import (
-        always_required, block_requirements, mismatched_status_pairs, unbound_outputs, unclassified_operations,
-    )
-
-    name, record = case
-    question = BY_ID.get(str(record.get("answers")), {})
-    found = (unclassified_operations(record, BY_ID) + unmet_general(record, always_required("answer"))
-             + unbound_outputs(record, question, BY_ID) + mismatched_status_pairs(record, BY_ID))
-    for block, paths in block_requirements().items():
-        if at(record, block) is not None:
-            found += unmet_general(record, [f"{block}.{path}" for path in paths])
-    assert not found, f"{name}: {texts(found)}"
-
-
-
-@pytest.mark.skipif(not MODELS, reason="no worked model")
-@pytest.mark.parametrize("case", MODELS or [("", {})], ids=[n for n, _ in MODELS] or ["none"])
-def test_a_derived_model_uses_no_retired_symbol_and_completes_its_operations(case: tuple[str, Mapping[str, Any]]) -> None:
-    """Each expression of a derived model avoids the symbols that its operations retire, and each
-    operation states what its kind or its class of error requires."""
-    from gnomon.completeness import incomplete_operations, requirements_by_presence, unmet_by_presence
-    from gnomon.vocabulary import retired_in_use
-
-    name, record = case
-    found = retired_in_use(record) + incomplete_operations(record) + unmet_by_presence(record, requirements_by_presence())
-    assert not found, f"{name}: {texts(found)}"
-
-
 @pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
 @pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
 def test_every_declared_operator_is_used_by_its_own_problem(directory: Path) -> None:
@@ -247,108 +119,6 @@ def test_every_declared_operator_is_used_by_its_own_problem(directory: Path) -> 
     text = " ".join(path.read_text(encoding="utf-8") for path in directory.glob("*.yml"))
     unused = [op for op in problem.local if len(re.findall(rf"\b{re.escape(op)}(?:\b|_\{{)", text)) <= 1]
     assert not unused, f"{directory.name}: declares {unused} without using them"
-
-
-@pytest.mark.skipif(not PROBLEMS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("directory", PROBLEMS, ids=[p.name for p in PROBLEMS] or ["none"])
-def test_every_declared_quantity_is_reached_by_its_own_problem(directory: Path) -> None:
-    """A quantity nothing reaches is a stray declaration, or a law the record never wrote."""
-    unused = unused_declarations(directory)
-    assert not unused, f"{directory.name}: {unused}"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_restriction_says_what_it_holds(case: tuple[str, Mapping[str, Any]]) -> None:
-    """A restriction holds one quantity to a set, or states the expression it holds under."""
-    name, record = case
-    if record.get("type") != "question":
-        return
-    from gnomon.completeness import varying_symbols
-
-    by_id = {r["id"]: r for _, r in CASES if isinstance(r.get("id"), str)}
-    subject = record.get("subject", {})
-    varying = varying_symbols(by_id.get(subject.get("target_system", ""), {}),
-                              by_id.get(subject.get("phenomenon", "")))
-    malformed = malformed_restrictions(record, varying)
-    assert not malformed, f"{name}: {malformed}"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_external_system_decides_what_it_imposes(case: tuple[str, Mapping[str, Any]]) -> None:
-    """A boundary left open reads like one that imposes nothing, so the field is never open."""
-    name, record = case
-    undecided = undecided_boundaries(record)
-    assert not undecided, f"{name}: {undecided}"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_interaction_runs_along_ordered_pairs(case: tuple[str, Mapping[str, Any]]) -> None:
-    """The direction of an influence is the order of its pairs, so the pairs name two kinds."""
-    name, record = case
-    unordered = unordered_interactions(record, upstream_of(record, BY_ID))
-    assert not unordered, f"{name}: {unordered}"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_no_entry_ranges_beyond_the_members_that_bear_it(
-    case: tuple[str, Mapping[str, Any]],
-) -> None:
-    """Only a target declares variants, so which members carry a symbol reaches a record upstream.
-
-    An answer reaches its target through its question, and a phenomenon names it directly; the
-    records of one problem share one target, so the problem locates it for either kind.
-    """
-    name, record = case
-    if record.get("type") not in ("phenomenon", "answer"):
-        return
-    overreaching = overreaching_entries(record, variant_symbols(PROBLEM_TARGETS[problem_of(name)]))
-    assert not overreaching, f"{name}: {overreaching}"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_variant_mark_names_a_variant_the_target_declares(
-    case: tuple[str, Mapping[str, Any]],
-) -> None:
-    """Only a target declares the variants, and every record of its problem marks against them."""
-    name, record = case
-    misnamed = misnamed_variant(record, declared_variants(PROBLEM_TARGETS[problem_of(name)]))
-    assert not misnamed, f"{name}: {misnamed}"
-
-
-#: Per problem, the target system its other records declare their quantities against.
-PROBLEM_TARGETS: dict[str, Mapping[str, Any]] = {
-    problem_of(name): record for name, record in CASES if record.get("type") == "target-system"
-}
-
-
-#: Per problem, the number of arguments each operator it may use takes.
-PROBLEM_ARITIES: dict[str, dict[str, int]] = {
-    problem_of(name): arities(*[r for n, r in CASES if problem_of(n) == problem_of(name)])
-    for name, _ in CASES
-}
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_call_passes_what_its_operator_takes(case: tuple[str, Mapping[str, Any]]) -> None:
-    """An operator states what it takes, so a call passing more or fewer is reported."""
-    name, record = case
-    mismatched = mismatched_arity(record, PROBLEM_ARITIES[problem_of(name)])
-    assert not mismatched, f"{name}: {mismatched}"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_variant_is_carried_or_admitted_open(case: tuple[str, Mapping[str, Any]]) -> None:
-    """A variant nothing carries names a member the record cannot generate, unless it says so."""
-    name, record = case
-    unborne = unborne_variants(record, backgrounds_of(record))
-    assert not unborne, f"{name}: {unborne}"
 
 
 def test_a_factor_appeals_to_a_declared_external_system() -> None:
@@ -427,32 +197,6 @@ def test_a_variant_named_in_prose_is_still_unborne() -> None:
 
 @pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
 @pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_no_declaration_asserts_of_all_members_what_only_some_carry(
-    case: tuple[str, Mapping[str, Any]],
-) -> None:
-    """An entry left unmarked holds of every member, so it names no symbol of one variant alone.
-
-    A law reaches the class through its expression, a relation of the organization through the
-    parts it runs between and the laws realizing it, an external system through what it shares.
-    """
-    name, record = case
-    overreaching = overreaching_declarations(record, upstream_of(record, BY_ID))
-    assert not overreaching, f"{name}: {overreaching}"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_interaction_passes_through_a_shared_quantity(
-    case: tuple[str, Mapping[str, Any]],
-) -> None:
-    """A quantity indexed by one endpoint alone cannot carry an influence between two."""
-    name, record = case
-    misrouted = misrouted_interactions(record, upstream_of(record, BY_ID))
-    assert not misrouted, f"{name}: {misrouted}"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
 def test_the_record_generates_a_directed_interaction_graph(
     case: tuple[str, Mapping[str, Any]],
 ) -> None:
@@ -477,20 +221,6 @@ def test_the_record_generates_a_directed_interaction_graph(
         for carrier in edge["through"]:
             assert carrier in declared, f"{name}: {carrier} is not declared"
         assert edge["tuples"], f"{name}: the edge {edge['edge']} names no ordered tuples"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_shared_variable_is_a_quantity(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    assert not misplaced_sharing(record), f"{name}: {misplaced_sharing(record)}"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_no_quantity_marks_shared_without_a_signature(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    assert not vacuous_shared(record), f"{name}: {vacuous_shared(record)}"
 
 
 def test_a_shared_variable_naming_a_set_is_reported() -> None:
@@ -523,20 +253,6 @@ def test_shared_without_a_signature_is_reported() -> None:
     assert texts(vacuous_shared(record)) == ["parameters.nu: shared without a signature"]
 
 
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_no_parameter_runs_along_an_interval(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    assert not unfixed_parameters(record), f"{name}: {unfixed_parameters(record)}"
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_no_quantity_is_both_built_and_conditioned(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    assert not doubly_defined(record), f"{name}: {doubly_defined(record)}"
-
-
 def test_a_quantity_carrying_both_an_expression_and_a_condition_is_reported() -> None:
     """One builds the quantity and cannot be false; the other presupposes that a value exists."""
     record = {
@@ -549,13 +265,6 @@ def test_a_quantity_carrying_both_an_expression_and_a_condition_is_reported() ->
     assert texts(doubly_defined(record)) == ["observables.a: both an expression and a condition"]
 
 
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_owner_resolves_to_an_external_system(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    assert not unowned_quantities(record), f"{name}: {unowned_quantities(record)}"
-
-
 def test_a_quantity_owned_by_no_declared_system_is_reported() -> None:
     """A quantity characterizes the target unless it names an external system that exists."""
     record = {
@@ -565,13 +274,6 @@ def test_a_quantity_owned_by_no_declared_system_is_reported() -> None:
                        {"symbol": "nu"}],
     }
     assert texts(unowned_quantities(record)) == ["parameters.g: no external system named furnace"]
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_condition_states_which_value_it_denotes(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    assert not unselected_conditions(record), f"{name}: {unselected_conditions(record)}"
 
 
 def test_a_condition_without_a_selection_rule_is_reported() -> None:
@@ -587,72 +289,15 @@ def test_a_condition_without_a_selection_rule_is_reported() -> None:
 
 
 REQUIRED = requirements_by_aim()
-QUESTIONS = sorted(EXAMPLES.glob("*/question.yml")) if EXAMPLES.is_dir() else []
 
 
 REQUIRED_BY_COMMITMENT = requirements_by_commitment()
-
-
-def records_of(directory: Path) -> dict[str, Any]:
-    kinds = {
-        "question": "question.yml",
-        "phenomenon": "phenomenon.yml",
-        "target-system": "target-system.yml",
-        "background": "background.yml",
-        "problem": "problem.yml",
-        "itinerary": "itinerary.yml",
-    }
-    return {
-        prefix: yaml.safe_load((directory / name).read_text(encoding="utf-8"))
-        for prefix, name in kinds.items()
-        if (directory / name).is_file()
-    }
-
-
-@pytest.mark.skipif(not QUESTIONS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("path", QUESTIONS, ids=[p.parent.name for p in QUESTIONS] or ["none"])
-def test_each_inquiry_fixes_what_its_aim_requires(path: Path) -> None:
-    records = records_of(path.parent)
-    missing = unmet_by_aim(records["question"], records, REQUIRED)
-    assert not missing, f"{path.parent.name}: {missing}"
 
 
 def produced_for(aim: str, kind: str) -> set[str]:
     """Return the paths of ``kind`` that ``aim`` produces, with the record prefix stripped."""
     entry = REQUIRED.get(aim) or {}
     return {p.split(".", 1)[1] for p in entry.get("to_produce", []) if p.startswith(f"{kind}.")}
-
-
-@pytest.mark.skipif(not QUESTIONS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("path", QUESTIONS, ids=[p.parent.name for p in QUESTIONS] or ["none"])
-def test_each_record_carries_what_the_notes_require_always(path: Path) -> None:
-    records = records_of(path.parent)
-    aim = str(((records["question"].get("task") or {}).get("epistemic_aim")))
-    missing = []
-    for kind in record_kinds():
-        record = records.get(kind)
-        if record is None:
-            continue
-        missing += [
-            f"{kind}: {m}"
-            for m in unmet_general(record, always_required(kind), produced_for(aim, kind))
-        ]
-    assert not missing, f"{path.parent.name} ({aim}): {missing}"
-
-
-@pytest.mark.skipif(not QUESTIONS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("path", QUESTIONS, ids=[p.parent.name for p in QUESTIONS] or ["none"])
-def test_each_record_carries_what_its_commitment_requires(path: Path) -> None:
-    """A record at `identified` fixes its referent; one at `specified` also writes its declarations."""
-    records = records_of(path.parent)
-    aim = str(((records["question"].get("task") or {}).get("epistemic_aim")))
-    missing = [
-        f"{kind}: {m}"
-        for kind in ("target-system", "phenomenon")
-        if kind in records
-        for m in unmet_commitment(records[kind], REQUIRED_BY_COMMITMENT, produced_for(aim, kind))
-    ]
-    assert not missing, f"{path.parent.name} ({aim}): {missing}"
 
 
 def test_a_design_carries_what_its_kind_requires() -> None:
@@ -726,14 +371,6 @@ def test_an_empty_boundary_is_reported_and_an_empty_list_is_not() -> None:
     ]
 
 
-@pytest.mark.skipif(not QUESTIONS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("path", QUESTIONS, ids=[p.parent.name for p in QUESTIONS] or ["none"])
-def test_every_stated_explanans_bound_is_justified(path: Path) -> None:
-    """A stated axis narrows the explanans beyond the default, so it carries its reason."""
-    question = yaml.safe_load(path.read_text(encoding="utf-8"))
-    assert not unjustified_explanans_bound(question), f"{path.parent.name}"
-
-
 def test_a_stated_axis_without_justification_is_reported() -> None:
     """An empty bound takes the default; a stated axis needs a justification or an open maturity."""
     empty = {"task": {"admissible_explanans": {"compositional": None, "substrate": None}}}
@@ -786,24 +423,6 @@ def test_a_relation_of_the_organization_says_what_its_ends_are() -> None:
     assert texts(malformed_relations(record)) == ["organization.stray: absent is no law of the record"]
 
 
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_relation_of_the_organization_is_well_formed(
-    case: tuple[str, Mapping[str, Any]],
-) -> None:
-    """Every record declaring an organization says, per relation, what its ends are."""
-    name, record = case
-    assert not malformed_relations(record), f"{name}: {malformed_relations(record)}"
-
-
-@pytest.mark.skipif(not QUESTIONS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("path", QUESTIONS, ids=[p.parent.name for p in QUESTIONS] or ["none"])
-def test_every_virtue_a_question_weighs_states_its_standing(path: Path) -> None:
-    """Which tier applies a virtue is not derivable from the virtue, so the question says."""
-    question = yaml.safe_load(path.read_text(encoding="utf-8"))
-    assert not unstated_standing(question), f"{path.parent.name}: {unstated_standing(question)}"
-
-
 def test_a_virtue_weighed_without_a_standing_is_reported() -> None:
     """A virtue with no standing leaves the product test unable to say what it applies."""
     question = {"virtues": [{"virtue": "economy", "standing": "preferred"},
@@ -814,13 +433,6 @@ def test_a_virtue_weighed_without_a_standing_is_reported() -> None:
         "virtues[2].standing is unstated for an unnamed virtue",
     ]
     assert unstated_standing({}) == []
-
-
-@pytest.mark.skipif(not QUESTIONS, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("path", QUESTIONS, ids=[p.parent.name for p in QUESTIONS] or ["none"])
-def test_no_question_lists_a_match_while_excluding_accuracy(path: Path) -> None:
-    question = yaml.safe_load(path.read_text(encoding="utf-8"))
-    assert not contradictory_accuracy(question), f"{path.parent.name}: {contradictory_accuracy(question)}"
 
 
 def test_a_match_listed_under_an_inapplicable_accuracy_is_reported() -> None:
@@ -866,14 +478,6 @@ def test_an_inquiry_leaving_a_required_specification_open_is_reported() -> None:
         "prediction requires phenomenon.manifestations",
         "prediction requires question.task.required_accuracy.outputs_to_match",
     ]
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_every_closed_field_holds_an_admitted_value(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    bad = inadmissible_values(record, admitted_values(str(record.get("type"))))
-    assert not bad, f"{name}: {bad}"
 
 
 def test_a_value_outside_its_vocabulary_is_reported() -> None:
@@ -926,13 +530,6 @@ def test_two_fields_of_one_block_that_share_a_name_take_the_vocabulary_of_their_
     ]
 
 
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_no_expression_was_split_by_the_serializer(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    assert not split_expressions(record), f"{name}: {split_expressions(record)}"
-
-
 def test_an_expression_split_on_its_commas_is_reported() -> None:
     """An unquoted expression inside a bracketed list splits into plausible fragments.
 
@@ -947,13 +544,6 @@ def test_an_expression_split_on_its_commas_is_reported() -> None:
         "operators.signature: 'b)' is a fragment of a split expression",
         "operators.signature: 'reals)' is a fragment of a split expression",
     ]
-
-
-@pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
-@pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_no_notation_was_damaged_by_the_serializer(case: tuple[str, Mapping[str, Any]]) -> None:
-    name, record = case
-    assert not corrupted_notation(record), f"{name}: {corrupted_notation(record)}"
 
 
 def test_a_latex_form_in_double_quotes_is_reported() -> None:

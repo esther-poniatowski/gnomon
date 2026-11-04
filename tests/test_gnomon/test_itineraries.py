@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import copy
 import re
-from pathlib import Path
 from typing import Any
 
 import pytest
@@ -322,26 +321,6 @@ def test_a_itinerary_addressing_no_problem_or_question_and_a_repeated_step_are_r
     ]
 
 
-def fixture_itineraries() -> list[Path]:
-    return sorted(EXAMPLES.glob("*/itinerary.yml")) if EXAMPLES.is_dir() else []
-
-
-def itinerary_cases() -> list[Any]:
-    return [pytest.param(path, id=path.parent.name) for path in fixture_itineraries()]
-
-
-@pytest.mark.skipif(not fixture_itineraries(), reason="no fixture carries an itinerary")
-@pytest.mark.parametrize("path", itinerary_cases() or [Path("none")])
-def test_every_itinerary_of_the_fixtures_passes(path: Path) -> None:
-    records = {}
-    for source in sorted(path.parent.glob("*.yml")):
-        record = yaml.safe_load(source.read_text(encoding="utf-8"))
-        if isinstance(record, dict) and "id" in record:
-            records[str(record["id"])] = record
-    itinerary = yaml.safe_load(path.read_text(encoding="utf-8"))
-    assert itinerary_problems(served(itinerary), records) == []
-
-
 def test_the_type_of_a_record_follows_from_its_state() -> None:
     """A schema is a question with a placeholder slot; commitment and status decide the other types."""
     records = {
@@ -446,7 +425,6 @@ def test_a_step_is_referenced_by_its_full_identifier() -> None:
     assert texts(itinerary_problems(served(short), RECORDS, types=unrecorded_design())) == [
         "steps.observe: no record holds a design, so its input names a step, and design is none"
     ]
-
 
 
 def test_a_judged_verdict_states_its_evidence_and_its_date() -> None:
