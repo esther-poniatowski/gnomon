@@ -399,6 +399,15 @@ DERIVATION_FAILED_KERNEL = _rule(
 DERIVATION_UNRECORDED_CONSEQUENCE = _rule(
     "derivation/unrecorded-consequence", "A consequence of the root sought names no record."
 )
+DERIVATION_IDLE_MOVE = _rule(
+    "derivation/idle-move",
+    "A move yields only what it takes, or its outputs reach no outcome and no cited"
+    " interpretation.",
+)
+DERIVATION_CYCLIC_NESTING = _rule(
+    "derivation/cyclic-nesting",
+    "Segments, or replacements of soughts, enclose one another in a cycle.",
+)
 DERIVATION_UNRECORDED_DESCENT = _rule(
     "derivation/unrecorded-descent",
     "A law marked derived names neither a derivation that states it as a consequence nor a"

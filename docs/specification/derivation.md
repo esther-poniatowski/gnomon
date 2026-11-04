@@ -124,4 +124,6 @@ The checks of a derivation read these fields as follows:
 - each orientation cites, through its occasion, only objects established before its move;
 - each non-routine move has an orientation, and each orientation states exactly one of `determines` and `change`;
 - the declared kernel lies on every route from the premises to each consequence of the root sought;
-- each consequence of the root sought names its record, and the moves form no cycle.
+- each consequence of the root sought names its record, and the moves form no cycle;
+- each move yields something that it does not take, and its outputs reach an outcome or an interpretation cited by the record;
+- no segment encloses itself, and no subordinate sought replaces itself, through a cycle.

@@ -111,6 +111,13 @@ def _cycle(record: dict[str, Any]) -> None:
     unit(record, "moves", "diagonalize")["inputs"].append("delay-law")
 
 
+def _detour(record: dict[str, Any]) -> None:
+    record["objects"].append({"id": "stray", "form": "object", "reading": "an unused object"})
+    record["moves"].append(
+        {"id": "detour", "kind": "rescale", "inputs": ["mode-decay"], "outputs": ["stray"]}
+    )
+
+
 PLANTED: dict[str, Callable[[dict[str, Any]], None]] = {
     "derivation/repeated-unit": _set("objects", "hessian", "id", "diagonalize"),
     "derivation/unknown-unit": _set("moves", "crossing", "inputs", ["slowest-mode", "ghost"]),
@@ -127,6 +134,8 @@ PLANTED: dict[str, Callable[[dict[str, Any]], None]] = {
     "derivation/failed-kernel": _avoidable_kernel,
     "derivation/unrecorded-consequence": _set("consequences", "scale-law", "record", None),
     "derivation/unbound-slot": _set("moves", "solve-modes", "binds", []),
+    "derivation/idle-move": _detour,
+    "derivation/cyclic-nesting": _set("segments", "relaxation", "within", "relaxation"),
 }
 
 

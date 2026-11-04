@@ -687,6 +687,105 @@ def unrecorded_descents(record: Mapping[str, Any], descents: Mapping[str, str]) 
     return found
 
 
+def _targets(record: Derivation) -> set[str]:
+    """Return the objects that an outcome or a cited interpretation concerns: the objects stating
+    consequences and counterexamples, and the objects interpreted by the obstacle of an impasse, by
+    the occasion of an orientation or by the property that a warrant cites."""
+    interpreted = {
+        str(e.get("id")): str(e.get("of")) for _, e in _entries(record, "interpretations")
+    }
+    cited = {str(i.get("obstacle")) for _, i in _entries(record, "impasses")}
+    cited |= {str(o.get("occasion")) for _, o in _entries(record, "orientations")}
+    cited |= {
+        str(_mapping(m.get("warrant")).get("applies_because")) for _, m in _entries(record, "moves")
+    }
+    found = {str(c.get("from")) for _, c in _entries(record, "consequences") if c.get("from")}
+    found |= {str(r.get("by")) for _, r in _entries(record, "refutations") if r.get("by")}
+    for name in cited & set(interpreted):
+        found |= _concerned(record, interpreted[name])
+    return found
+
+
+def idle_moves(record: Derivation) -> list[Finding]:
+    """Return the moves that yield only what they take, and the moves whose outputs reach, through
+    the moves and the segments, no outcome and no interpretation that the record cites.
+
+    >>> record = {"sought": {"id": "s"},
+    ...           "objects": [{"id": "x"}, {"id": "y"}, {"id": "z"}],
+    ...           "moves": [{"id": "a", "inputs": ["p"], "outputs": ["x"]},
+    ...                     {"id": "b", "inputs": ["p"], "outputs": ["z"]}],
+    ...           "consequences": [{"id": "c", "answers": "s", "from": "x"}]}
+    >>> [f.text for f in idle_moves(record)]
+    ['moves.b: the outputs of the move reach no outcome and no cited interpretation']
+    """
+    targets = _targets(record)
+    if not targets:
+        return []
+    producers = _producers(record, segments=True)
+    found = []
+    for i, move in _entries(record, "moves"):
+        ins, outs = set(_names(move.get("inputs"))), set(_names(move.get("outputs")))
+        if outs and outs <= ins:
+            text = "the move yields only what it takes"
+        else:
+            reached = set(outs)
+            changed = True
+            while changed:
+                changed = False
+                for p_ins, p_outs in producers.values():
+                    if p_ins & reached and not p_outs <= reached:
+                        reached |= p_outs
+                        changed = True
+            if reached & targets:
+                continue
+            text = "the outputs of the move reach no outcome and no cited interpretation"
+        found.append(
+            finding(
+                rules.DERIVATION_IDLE_MOVE,
+                f"moves.{move.get('id') or i}: {text}",
+                "moves",
+                Entry(i, move),
+            )
+        )
+    return found
+
+
+def cyclic_nesting(record: Derivation) -> list[Finding]:
+    """Return the cycles of the segments that enclose one another, and of the subordinate soughts
+    that replace one another.
+
+    >>> record = {"segments": [{"id": "a", "within": "b"}, {"id": "b", "within": "a"}]}
+    >>> [f.text for f in cyclic_nesting(record)]
+    ['segments: a -> b -> a enclose one another in a cycle']
+    """
+    found = []
+    for name, key in (("segments", "within"), ("subordinate", "replaces")):
+        parent = {
+            str(e.get("id")): str(e.get(key)) for _, e in _entries(record, name) if e.get(key)
+        }
+        reported: set[frozenset[str]] = set()
+        for start in sorted(parent):
+            trail = [start]
+            while trail[-1] in parent and parent[trail[-1]] not in trail:
+                trail.append(parent[trail[-1]])
+            if trail[-1] in parent and parent[trail[-1]] in trail:
+                loop = trail[trail.index(parent[trail[-1]]) :]
+                if frozenset(loop) in reported:
+                    continue
+                reported.add(frozenset(loop))
+                path = " -> ".join([*loop, loop[0]])
+                verb = "enclose" if name == "segments" else "replace"
+                found.append(
+                    finding(
+                        rules.DERIVATION_CYCLIC_NESTING,
+                        f"{name}: {path} {verb} one another in a cycle",
+                        name,
+                        value=path,
+                    )
+                )
+    return found
+
+
 def derivation_problems(record: Derivation) -> list[Finding]:
     """Return every finding of the checks of a derivation, in the order of the checks."""
     return [
@@ -695,10 +794,12 @@ def derivation_problems(record: Derivation) -> list[Finding]:
         *unadmitted_pairs(record),
         *mistyped_grounds(record),
         *cyclic_moves(record),
+        *cyclic_nesting(record),
         *retrospective_orientations(record),
         *ambiguous_purposes(record),
         *unoriented_moves(record),
         *failed_kernel(record),
+        *idle_moves(record),
         *unrecorded_consequences(record),
         *unbound_slots(record),
     ]

@@ -31,21 +31,3 @@ The [attitude of a claim](../epistemology/vocabulary/representations/claim-and-h
 **Literature.** None cited; the candidate derives from the statements of the test set.
 
 **Bears on.** [`derivation-framework`](../../TODO.md).
-
-## Defects of a derivation
-
-Three conditions make a derivation adequate:
-
-- **C1**, the warrant of each step is stated at the right generality, neither restating the instance nor trivially permissive;
-- **C2**, the reason for a step names a contrastive choice: why this inference rather than one salient alternative;
-- **C3**, the subgoals form a well-founded tree rooted at the thesis, and a step that closes no assumption, discharges no obstacle and serves no segment is idle.
-
-Six named defects make a derivation look arbitrary: a **blind step** has a warrant and no local reason; a **hidden obstacle** is a non-trivial rewrite without the obstacle that it removes; a **spurious move** is valid and makes no progress; a **teleological gap** is a move that does not aim at the current target; an **untyped transition** is a move outside the vocabulary of moves; and a **state ambiguity** leaves unclear which facts are active at a step.
-
-The [decision on the derivation record](../adr/derivation-record.md) adopts the kernel and the segments, and declines a record for each lemma. The candidate left open is the set of conditions and defects that a check reports from the units of the record.
-
-**Literature.** None cited.
-
-**Bears on.** [`derivation-framework`](../../TODO.md), whose report of idle units C3 specifies.
-
-**Retired source.** `docs/design/_backup/arguments-reasoning/derivation-proof-encoding-C.md`, `docs/design/_backup/arguments-reasoning/derivation-proof-encoding-G.md` and `docs/design/_backup/architecture-C.md`, at commit 9e138e2.
