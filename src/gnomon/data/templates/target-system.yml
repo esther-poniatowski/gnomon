@@ -47,6 +47,7 @@ index_sets:                      # sets that index a quantity without being unit
     variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
     structure:                   # continuum | discrete-set | interval
+    dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; the formula of the coordinate that the set indexes, such as L or T
 
 variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate variables determined `within`
   - name: "NAME OF THE VARIABLE"

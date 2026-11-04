@@ -46,6 +46,7 @@ from . import vocabulary as v
 from .answerability import malformed_answerability
 from .derivations import derivation_problems
 from .dimensions import (
+    FORMULA_BLOCKS,
     Scope,
     base_dimensions,
     declared_formulas,
@@ -246,11 +247,11 @@ class _Context:
 
     @cached_property
     def declares_formulas(self) -> bool:
-        """Whether some quantity of the problem declares a dimensional formula."""
+        """Whether some quantity or index set of the problem declares a dimensional formula."""
         return any(
             isinstance(entry, Mapping) and entry.get("dimensional_formula") is not None
             for record in self.problem.records.values()
-            for block in ("variables", "parameters", "observables")
+            for block in FORMULA_BLOCKS
             for entry in record.get(block) or []
         )
 

@@ -41,8 +41,12 @@ REGISTRY = Path(__file__).parent / "data" / "registries" / "dimensions.yml"
 #: The registry of the canonical operators, whose entries state their rule of dimension.
 OPERATOR_REGISTRY = Path(__file__).parent / "data" / "operators.yml"
 
-#: The blocks whose entries are quantities that may carry a dimensional formula.
+#: The blocks whose entries are quantities, whose definitions are checked against their formula.
 QUANTITY_BLOCKS: tuple[str, ...] = ("variables", "parameters", "observables")
+
+#: The blocks whose entries may carry a dimensional formula: the quantities, and the index sets,
+#: whose formula a derivative along the index divides by.
+FORMULA_BLOCKS: tuple[str, ...] = (*QUANTITY_BLOCKS, "index_sets")
 
 #: The blocks whose entries are laws, whose expressions must be homogeneous.
 LAW_BLOCKS: tuple[str, ...] = ("laws",)
@@ -503,12 +507,12 @@ def _entries(record: Mapping[str, Any], block: str) -> list[tuple[int, Mapping[s
 def declared_formulas(
     records: Iterable[Mapping[str, Any]], bases: Iterable[str]
 ) -> dict[str, Formula | None]:
-    """Return the formula of each quantity that the records declare, None when it states none or
-    states a malformed one."""
+    """Return the formula of each quantity and each index set that the records declare, None when
+    it states none or states a malformed one."""
     known = set(bases)
     table: dict[str, Formula | None] = {}
     for record in records:
-        for block in QUANTITY_BLOCKS:
+        for block in FORMULA_BLOCKS:
             for _, entry in _entries(record, block):
                 symbol = entry.get("symbol")
                 if not isinstance(symbol, str):
@@ -529,7 +533,7 @@ def malformed_formulas(record: Mapping[str, Any], bases: Iterable[str]) -> list[
     ['variables.u.dimensional_formula: Q is no declared base dimension']
     """
     found = []
-    for block in QUANTITY_BLOCKS:
+    for block in FORMULA_BLOCKS:
         for i, entry in _entries(record, block):
             stated = entry.get("dimensional_formula")
             if stated is None:

@@ -105,3 +105,36 @@ def test_each_rule_fires_on_its_planted_defect(rule: str, tmp_path: Path) -> Non
     shutil.copytree(CASE, folder)
     PLANTED[rule](folder)
     assert rule in {located.finding.rule.id for located in check_workspace(load_workspace(folder))}
+
+
+def test_a_derivative_divides_by_the_formula_of_its_index() -> None:
+    symbols = {"u": {"L": Fraction(1), "T": Fraction(-1)}, "t": {"T": Fraction(1)}}
+    evaluation = evaluate("diff(u, t)", symbols)
+    assert evaluation is not None
+    assert evaluation.result == {"L": Fraction(1), "T": Fraction(-2)}
+
+
+def _index(record: dict[str, Any], symbol: str) -> dict[str, Any]:
+    entry: dict[str, Any] = next(s for s in record["index_sets"] if s["symbol"] == symbol)
+    return entry
+
+
+@pytest.mark.parametrize(
+    ("formula", "rule", "text"),
+    [
+        ("L", "dimension/inhomogeneous", "the sides of = have the formulas T^-1 and L T^-2"),
+        (None, "dimension/unchecked-law", "no dimensional formula is declared for t"),
+    ],
+)
+def test_the_formula_of_the_time_axis_decides_the_momentum_law(
+    formula: str | None, rule: str, text: str, tmp_path: Path
+) -> None:
+    folder = tmp_path / CASE.name
+    shutil.copytree(CASE, folder)
+    _edit("target-system.yml", lambda r: _index(r, "t").update(dimensional_formula=formula))(folder)
+    found = [
+        located.finding
+        for located in check_workspace(load_workspace(folder))
+        if located.finding.rule.id == rule
+    ]
+    assert any("laws.momentum" in f.text and text in f.text for f in found), [f.text for f in found]

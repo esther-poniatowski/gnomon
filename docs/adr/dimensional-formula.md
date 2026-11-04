@@ -17,7 +17,7 @@ The value set of a quantity holds its dimensionality, and its signature holds it
 
 ## Decision
 
-**A quantity may state its dimensional formula.** The optional attribute `dimensional_formula` of a quantity holds a monomial over base dimensions, such as `M L T^-2`, or `1` for a pure number. The attribute applies to parameters, variables and observables alike.
+**A quantity may state its dimensional formula.** The optional attribute `dimensional_formula` of a quantity holds a monomial over base dimensions, such as `M L T^-2`, or `1` for a pure number. The attribute applies to parameters, variables and observables alike. An index set may state it too, for the coordinate that it collects, such as `L` for a spatial domain or `T` for a time axis; amended on 2026-11-04.
 
 **The base dimensions come from two sources.** The package data declare the seven base dimensions of the International System of Quantities. The operator record of a problem may declare further **base scales**, such as the scale of the parameters and the scale of the loss of a learning system, next to the operators added by the problem to the canonical set.
 
@@ -25,7 +25,7 @@ The value set of a quantity holds its dimensionality, and its signature holds it
 
 - a product adds the exponents of its factors, and a quotient subtracts them;
 - a power multiplies the exponents by its exponent, and that exponent must be a pure number;
-- a derivative divides the dimension of its argument by the dimension of its variable, and an integral multiplies by it;
+- a derivative divides the dimension of its argument by the dimension of its variable, which may be an index set, and an integral multiplies by it;
 - the argument of an exponential, a logarithm or a trigonometric function must be a pure number;
 - a sum, a difference, a minimum and a maximum require that their terms share one formula;
 - the number zero is homogeneous with every formula, so an equation such as `mean_{x}(p) = 0` is homogeneous.
@@ -46,6 +46,7 @@ The value set of a quantity holds its dimensionality, and its signature holds it
 | Units in place of dimensions, such as `kg m s^-2` | A unit fixes the numerical values as well as their transformation | A model often has no chosen unit, and homogeneity depends on the dimension alone, so a unit would demand a choice that the claim does not need |
 | A required attribute on every quantity | Every law is checked | Many quantities, such as counts and indices, are pure numbers by construction, and the requirement would force a value that the author has not considered |
 | The seven base dimensions only | One canonical set, with no declaration per problem | The quantities of a learning system or of a formal model have base scales that are not physical |
+| No formula on index sets | The attribute stays on quantities alone | A derivative along a time axis or a spatial domain stays undecided, so the evolution laws of a field are never checked; added on 2026-11-04 |
 | No attribute | No change to the records | No check tests homogeneity, and a move warranted by the Π-theorem cites no formula |
 
 ## Consequences
@@ -54,5 +55,5 @@ The value set of a quantity holds its dimensionality, and its signature holds it
 - The package data gain the base dimensions, and the operator record of a problem gains its base scales.
 - The operator registry gains a rule of dimension for each operator.
 - The checks gain a homogeneity check, tested on planted laws that fail it, and a report of the laws left unchecked in a problem that declares formulas.
-- An index set declares no formula, so a derivative along an index, such as a time derivative, stays undecided.
+- An index set may declare a formula, so that a derivative along an index, such as a time derivative, is checked; in a problem that declares formulas, a derivative along an index without one is reported as a gap.
 - A move of a [derivation record](derivation-record.md) warranted by the Π-theorem cites the dimensional formulas of its quantities, as the property that makes its warrant apply.

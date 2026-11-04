@@ -287,6 +287,19 @@ properties:
           - 'null'
           title: Structure
           description: The structure of the record.
+        dimensional_formula:
+          type:
+          - string
+          - 'null'
+          x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          x-kind: label
+          x-comment: optional; the formula of the coordinate that the set indexes, such as L or T
+          title: dimensional formula
+          description: optional; the dimensional formula of the coordinate that the index set collects,
+            such as L for a spatial domain or T for a time axis, so that a derivative along the index is
+            checked
+          examples:
+          - '`L` for a spatial domain; `T` for a time axis'
     x-comment: only sets that the target does not declare
     title: Index sets
     description: the set, its extent and its structure, in the format of a target system

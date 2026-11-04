@@ -25,10 +25,12 @@ index_sets:
     symbol: x
     extent: Om
     structure: continuum
+    dimensional_formula: "L"
   - name: "time"
     symbol: t
     extent: "interval(reals)"
     structure: interval
+    dimensional_formula: "T"
 
 variables:
   - name: "velocity field"

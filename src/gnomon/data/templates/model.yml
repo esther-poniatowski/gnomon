@@ -44,6 +44,7 @@ index_sets:                      # only sets that the target does not declare
     variant: SYMBOL              # symbol of the target variant that the entry models; omit when the model stands for every member of the class
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
     structure:                   # continuum | discrete-set | interval
+    dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; the formula of the coordinate that the set indexes, such as L or T
 
 variables:                       # part of V: quantities that vary in the model
   - name: "NAME OF THE VARIABLE"

@@ -73,6 +73,7 @@ properties:
         - variant
         - extent
         - structure
+        - dimensional_formula
       properties:
         structure:
           enum:

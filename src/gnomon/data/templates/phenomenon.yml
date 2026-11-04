@@ -34,6 +34,7 @@ index_sets:                      # only sets the observables introduce beyond th
     variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
     structure:                   # continuum | discrete-set | interval
+    dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; the formula of the coordinate that the set indexes, such as L or T
 
 observables:                     # functions of the system state that restate the behavior
   - reference: system.TOPIC.SYMBOL   # for an observable the target already declares as a quantity, give only this reference
