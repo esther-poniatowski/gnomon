@@ -46,9 +46,9 @@ properties:
     type: [string, 'null']
     x-template: quest.TOPIC.NAME
     x-kind: label
-    x-comment: the question or the problem that the design serves
+    x-comment: the question or the problem that the design serves; empty for a method stated apart from any problem
     title: Serves
-    description: The identifier of the question or the problem that the design serves.
+    description: The identifier of the question or the problem that the design serves; empty for a method stated apart from any problem, which is then a reusable scheme.
     examples: [quest.nonreciprocal-active-matter.phase-exploration]
   task:
     type: [string, 'null']
@@ -57,6 +57,16 @@ properties:
     title: Task
     description: One sentence that states what an execution of the design must achieve.
     examples: ['detect the phases of the lattice realization across the nonreciprocal coupling, at each system size']
+  applies_when:
+    type: [array, 'null']
+    x-comment: method only; one entry per condition of application, each a grammatical expression or a named property
+    title: Conditions of application
+    description: The conditions under which the method applies, each a grammatical expression or a named property.
+    examples: [['the operator is self-adjoint', 'a small parameter separates two time scales']]
+    items:
+      type: [string, 'null']
+      x-template: '"CONDITION OF APPLICATION"'
+      x-kind: markdown-line
   inputs:
     type: [array, 'null']
     x-blank: true

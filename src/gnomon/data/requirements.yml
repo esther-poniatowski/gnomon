@@ -31,7 +31,7 @@ always:
   background: [describes, laws, closure]
   problem: [statement, kind, demand, result_type, request]
   concept: [gloss, kind, source]
-  design: [kind, serves, task, steps, output, stopping]
+  design: [kind, task, steps, output, stopping]
   itinerary: [addresses, steps]
   answer: [claim, grounds, dependence, route, domain, status, support, modal_strength, erotetic_relation]
   binding: [model, target, asserter, feature_pairs, domain, grain, version]
@@ -63,8 +63,8 @@ by_presence:
 by_value:
   design:
     kind:
-      experiment: [protocol]
-      simulation-run: [protocol]
+      experiment: [serves, protocol]
+      simulation-run: [serves, protocol]
   phenomenon:
     evidential_status:
       absent: [search.scope, search.procedure]

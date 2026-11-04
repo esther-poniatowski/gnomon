@@ -10,8 +10,10 @@ type: design
 status: provisional              # provisional | stabilized | retracted
 
 kind:                            # experiment (an intervention on the target) | simulation-run (a run of a simulation of a model) | method (a procedure that solves a task)
-serves: quest.TOPIC.NAME         # the question or the problem that the design serves
+serves: quest.TOPIC.NAME         # the question or the problem that the design serves; empty for a method stated apart from any problem
 task: "WHAT AN EXECUTION MUST ACHIEVE"
+applies_when:                    # method only; one entry per condition of application, each a grammatical expression or a named property
+  - "CONDITION OF APPLICATION"
 
 inputs:                          # one entry per object that an execution takes
   - name: "NAME OF THE INPUT"

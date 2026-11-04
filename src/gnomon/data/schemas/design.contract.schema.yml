@@ -67,6 +67,7 @@ propertyNames:
   - kind
   - serves
   - task
+  - applies_when
   - inputs
   - steps
   - rules

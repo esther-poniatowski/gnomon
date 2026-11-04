@@ -16,8 +16,9 @@ A step, a rule and a mode of failure are named by descriptive identifiers, uniqu
 | Specification | When it is required | Content | Examples |
 | ------------- | ------------------- | ------- | -------- |
 | Kind | always | `experiment` · `simulation-run` · `method` | a sweep of the coupling of a simulated lattice (simulation run); a stimulation protocol in slices of cortex (experiment); an algorithm that enumerates the fixed points of a network (method) |
-| Serves | always | the identifier of the question or of the problem that the design serves | `quest.nonreciprocal-active-matter.phase-exploration` |
+| Serves | for the kinds `experiment` and `simulation-run`; for a method, when it solves the task of one problem | the identifier of the question or of the problem that the design serves; a method that serves none is a reusable scheme, such as a [scheme of derivation](../epistemology/objects/derivation/segment-and-scheme.md) | `quest.nonreciprocal-active-matter.phase-exploration` |
 | Task | always | one sentence that states what an execution must achieve | detect the phases of the lattice realization across the nonreciprocal coupling, at each system size |
+| Applies when — the conditions of application | for a method that serves no problem | one entry per condition under which the method applies, each a grammatical expression or a named property | the operator is self-adjoint; a small parameter separates two time scales |
 | Inputs | when an execution takes objects that the design does not create | one entry per input, with a name and a description | the grid of control parameters; the initial states |
 | Inputs: name | in each entry | the name of the input | grid of control parameters |
 | Inputs: description | in each entry | the content of the input, in one phrase | the values of the nonreciprocal coupling, crossed with the system sizes |
