@@ -138,13 +138,13 @@ def test_every_declared_operator_is_used_by_its_own_problem(directory: Path) -> 
 
 def test_a_factor_appeals_to_a_declared_external_system() -> None:
     """An answer may explain by the environment, and names which part of it it draws on."""
-    target = {
+    target: dict[str, Any] = {
         "type": "target-system",
         "external_systems": [{"symbol": "decoder", "name": "the system reading the outputs"}],
         "variables": [{"symbol": "y", "of": "decoder", "signature": []}],
     }
     systems = {e["symbol"] for e in target["external_systems"]}
-    answer = {
+    answer: dict[str, Any] = {
         "type": "answer",
         "aim_block": {
             "explanation": {
@@ -167,7 +167,7 @@ def test_an_answer_accounts_for_the_members_it_rests_on() -> None:
     No answer record exists in the fixtures, so the rule is exercised here.
     """
     marked = {"R": "resource_explicit", "rho": "resource_explicit"}
-    answer = {
+    answer: dict[str, Any] = {
         "type": "answer",
         "laws": [{"symbol": "turnover", "expression": "diff(R, t) = G(N, R, rho)"}],
     }
@@ -204,7 +204,7 @@ def test_a_record_accounts_for_a_variant_the_target_declares() -> None:
 
 def test_a_variant_named_in_prose_is_still_unborne() -> None:
     """The name of a variant recurs in its own prose, so the count is of what carries it."""
-    record = {
+    record: dict[str, Any] = {
         "type": "target-system",
         "variants": [
             {
@@ -547,7 +547,12 @@ def test_a_record_stating_no_commitment_is_reported() -> None:
 def test_an_empty_value_leaves_a_required_specification_unfilled() -> None:
     """Null, an empty string and an empty block are unfilled; `open` is an ordinary value now."""
     paths = ["statement", "category", "manifestations"]
-    record = {"type": "phenomenon", "statement": None, "category": "", "manifestations": []}
+    record: dict[str, Any] = {
+        "type": "phenomenon",
+        "statement": None,
+        "category": "",
+        "manifestations": [],
+    }
     assert texts(unmet_general(record, paths)) == [
         "always required: statement",
         "always required: category",
@@ -588,7 +593,9 @@ def test_a_stated_axis_without_justification_is_reported() -> None:
     assert unjustified_explanans_bound({"task": {}}) == []
     bounded = {"task": {"admissible_explanans": {"compositional": ["sub"], "substrate": None}}}
     assert len(unjustified_explanans_bound(bounded)) == 1
-    whole = {"task": {"admissible_explanans": {"compositional": [], "substrate": None}}}
+    whole: dict[str, Any] = {
+        "task": {"admissible_explanans": {"compositional": [], "substrate": None}}
+    }
     assert unjustified_explanans_bound(whole) == unjustified_explanans_bound(bounded)
     substrate = {
         "task": {"admissible_explanans": {"compositional": None, "substrate": "independent"}}
@@ -711,7 +718,10 @@ def test_an_inquiry_leaving_a_required_specification_open_is_reported() -> None:
     question = {
         "task": {"epistemic_aim": "prediction", "required_accuracy": {"outputs_to_match": []}}
     }
-    records = {"question": question, "phenomenon": {"manifestations": []}}
+    records: dict[str, dict[str, Any]] = {
+        "question": question,
+        "phenomenon": {"manifestations": []},
+    }
     assert texts(unmet_by_aim(question, records, REQUIRED)) == [
         "prediction requires phenomenon.manifestations",
         "prediction requires question.task.required_accuracy.outputs_to_match",
@@ -725,7 +735,7 @@ def test_a_value_outside_its_vocabulary_is_reported() -> None:
     with an admitted value would leave the check unable to fail.
     """
     admitted = admitted_values("background")
-    record = {
+    record: dict[str, Any] = {
         "type": "background",
         "laws": [{"role": "no-such-role"}, {"role": "state-constraint"}],
     }

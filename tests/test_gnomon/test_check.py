@@ -12,7 +12,7 @@ from __future__ import annotations
 import shutil
 from pathlib import Path
 from types import ModuleType
-from typing import Any, Callable
+from typing import Any, Callable, Mapping
 
 import pytest
 import yaml
@@ -194,9 +194,9 @@ def test_every_planted_defect_is_reported(planted: Path) -> None:
 
 
 def test_a_check_that_fails_is_reported_and_the_others_still_run(
-    planted: Path, monkeypatch
+    planted: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    def broken(record, ctx):
+    def broken(record: Mapping[str, Any], ctx: object) -> list[Finding]:
         raise RuntimeError("planted")
 
     monkeypatch.setitem(check_module.BY_KIND, "binding", (broken,))

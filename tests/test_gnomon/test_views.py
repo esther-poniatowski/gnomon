@@ -99,7 +99,9 @@ def test_the_examples_of_the_module_hold() -> None:
     assert doctest.testmod(gnomon.views).failed == 0
 
 
-def test_every_view_of_the_worked_inquiries_follows_its_schema_and_is_stable(tmp_path) -> None:
+def test_every_view_of_the_worked_inquiries_follows_its_schema_and_is_stable(
+    tmp_path: Path,
+) -> None:
     """A renderer reads each view through its schema, and two runs write the same files."""
     schemas = Path(__file__).resolve().parents[2] / "src/gnomon/data/views"
     runner = CliRunner()

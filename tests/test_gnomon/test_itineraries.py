@@ -285,7 +285,7 @@ def test_input_types_that_do_not_fill_the_activity_are_reported() -> None:
 
 
 def test_a_slot_taking_several_inputs_counts_them() -> None:
-    step = {
+    step: dict[str, Any] = {
         "id": "select",
         "activity": "model-selection",
         "inputs": [{"type": "model", "ref": "mod.kernel"}, {"type": "data", "ref": "phen.readout"}],
@@ -401,7 +401,7 @@ def test_a_itinerary_addressing_no_problem_or_question_and_a_repeated_step_are_r
 def test_the_type_of_a_record_follows_from_its_state() -> None:
     """A schema is a question with a placeholder slot; commitment and status decide the other
     types."""
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "quest.schema": {
             "type": "question",
             "request": "one",
@@ -412,7 +412,7 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
         "mod.a": {"type": "model"},
         "prob.a": {"type": "problem"},
     }
-    itinerary = {
+    itinerary: dict[str, Any] = {
         "id": "itin.a.route",
         "addresses": "prob.a",
         "steps": [
@@ -502,7 +502,7 @@ def test_an_attitude_restricts_an_answer_only() -> None:
 def test_an_explanation_may_run_on_the_target_description() -> None:
     """The input model of an explanation is optional: a route on the target description takes
     none."""
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "prob.a": {"type": "problem"},
         "phen.a": {"type": "phenomenon"},
         "mod.a": {"type": "model"},

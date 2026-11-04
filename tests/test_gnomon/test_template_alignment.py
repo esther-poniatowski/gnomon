@@ -106,6 +106,10 @@ def resolve(slugs: Sequence[str], paths: Sequence[str], prefix: str) -> str | No
 #: after the line that declares the anchor.
 Header = str | tuple[str, str]
 
+#: A note and its template: label, note, table header, template, scope of the reverse check,
+#: prefix, and the keys documented elsewhere.
+Pair = tuple[str, str, Header, str, str | None, str, Mapping[str, str]]
+
 
 def table_lines(note: str, header: Header) -> list[str]:
     """Return the body rows of the table opened by ``header``, as lines of the note."""
@@ -133,7 +137,8 @@ def table_rows(note: str, header: Header) -> list[str]:
 
 
 def template(name: str) -> dict[str, Any]:
-    return yaml.safe_load((TEMPLATES / name).read_text(encoding="utf-8"))
+    loaded: dict[str, Any] = yaml.safe_load((TEMPLATES / name).read_text(encoding="utf-8"))
+    return loaded
 
 
 def documented_keys(note: str, header: Header, paths: Sequence[str], prefix: str) -> list[str]:
@@ -147,7 +152,7 @@ def documented_keys(note: str, header: Header, paths: Sequence[str], prefix: str
 
 # (label, note, table header, template, scope of the reverse check, prefix,
 #  keys documented elsewhere)
-PAIRS = [
+PAIRS: list[Pair] = [
     (
         "problem",
         "specification/problem.md",
@@ -319,14 +324,14 @@ IDS = [pair[0] for pair in PAIRS]
 
 
 @pytest.mark.parametrize("pair", PAIRS, ids=IDS)
-def test_every_specification_of_the_note_exists_in_its_template(pair: tuple) -> None:
+def test_every_specification_of_the_note_exists_in_its_template(pair: Pair) -> None:
     _, note, header, tpl, _, prefix, _ = pair
     paths = flatten(template(tpl))
     documented_keys(note, header, paths, prefix)  # asserts on the first row without a key
 
 
 @pytest.mark.parametrize("pair", PAIRS, ids=IDS)
-def test_the_note_and_its_template_agree_on_the_order(pair: tuple) -> None:
+def test_the_note_and_its_template_agree_on_the_order(pair: Pair) -> None:
     _, note, header, tpl, _, prefix, _ = pair
     paths = flatten(template(tpl))
     keys = documented_keys(note, header, paths, prefix)
@@ -338,7 +343,7 @@ def test_the_note_and_its_template_agree_on_the_order(pair: tuple) -> None:
 
 
 @pytest.mark.parametrize("pair", PAIRS, ids=IDS)
-def test_no_key_of_the_template_is_undocumented(pair: tuple) -> None:
+def test_no_key_of_the_template_is_undocumented(pair: Pair) -> None:
     _, note, header, tpl, scope, prefix, elsewhere = pair
     paths = flatten(template(tpl))
     keys = documented_keys(note, header, paths, prefix)
@@ -360,7 +365,7 @@ def test_no_key_of_the_template_is_undocumented(pair: tuple) -> None:
     assert not undocumented, f"{tpl}: {undocumented} appear in no row of {note}"
 
 
-def test_the_operator_note_lists_the_registry():
+def test_the_operator_note_lists_the_registry() -> None:
     """The registry is the source; the note documents it and must not drift from it."""
     note = (DOCS / "specification/expressions.md").read_text(encoding="utf-8")
     bullet = re.search(r"- \*\*The canonical operators.*?\^operator-groups", note, re.DOTALL)
@@ -382,7 +387,11 @@ def test_every_canonical_operator_has_one_source_of_arity() -> None:
     assert not missing, f"operators without exactly one source of arity: {missing}"
     lone = [e["symbol"] for e in operators if e.get("variadic") and operator_arity(e) == (0, True)]
     assert not lone, f"variadic operators without an argument to repeat: {lone}"
-    binders = [e["symbol"] for e in operators if e["kind"] == "binder" and operator_arity(e)[0] < 1]
+    binders = [
+        e["symbol"]
+        for e in operators
+        if e["kind"] == "binder" and (arity := operator_arity(e)) is not None and arity[0] < 1
+    ]
     assert not binders, f"binders without a body: {binders}"
 
 
@@ -599,6 +608,12 @@ def test_the_rows_required_for_a_root_or_a_derived_model_are_the_registry_entrie
 def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
     """The registry is the source; a template comment documents it and must not drift from it."""
     vocab = re.compile(r"#\s*([a-z][a-z-]*(?: \([^)]*\))?(?: \| [a-z][a-z-]*(?: \([^)]*\))?)+)")
+
+    def head(option: str) -> str:
+        match = re.match(r"[a-z-]+", option.strip())
+        assert match is not None, option
+        return match.group(0)
+
     documented, block = {}, ""
     for line in (TEMPLATES / name).read_text(encoding="utf-8").splitlines():
         m = re.match(r"^(\s*)(- )?([a-z_]+):(.*)$", line)
@@ -609,10 +624,7 @@ def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
         found = vocab.search(m.group(4))
         if found:
             key = f"{'' if len(m.group(1)) == 0 else block}.{m.group(3)}"
-            documented[key] = [
-                re.match(r"([a-z-]+)", option.strip()).group(1)
-                for option in found.group(1).split(" | ")
-            ]
+            documented[key] = [head(option) for option in found.group(1).split(" | ")]
     kind = template(name)["type"]
     declared = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"][kind]
     assert set(documented) == set(declared), f"{name}: {set(documented) ^ set(declared)}"
@@ -646,7 +658,7 @@ def criteria(header: Header, column: int) -> list[str]:
 
 #: The tables of tests of each tier: the tests of the core and of each aim block for admissibility,
 #: and the table of the warrant level. The column holds the name of the criterion.
-TIERS = {
+TIERS: dict[str, list[tuple[Header, int]]] = {
     "admissibility": [(("admissibility-per-block", "| Criterion"), 0), ("| Aim block |", 1)],
     "warrant": [(("warrant-through-binding", "| Criterion"), 0)],
 }

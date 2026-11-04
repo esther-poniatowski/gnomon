@@ -55,7 +55,7 @@ def test_the_catalogue_holds_one_well_formed_rule_per_identifier() -> None:
 
 def test_an_entry_of_a_keyed_list_is_named_by_its_identifier() -> None:
     """Reordering the list keeps each identity; the identifier opens the discriminator."""
-    record = {
+    record: dict[str, Any] = {
         "type": "target-system",
         "variables": [
             {"symbol": "a", "expression": "x", "condition": "y"},

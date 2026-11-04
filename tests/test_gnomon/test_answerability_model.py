@@ -41,7 +41,8 @@ def normalize(text: str) -> str:
 
 
 def read(key: str) -> str:
-    return (ROOT / MODEL["sources"][key]).read_text(encoding="utf-8")
+    source: str = MODEL["sources"][key]
+    return (ROOT / source).read_text(encoding="utf-8")
 
 
 def table_rows(text: str, header: str) -> list[list[str]]:

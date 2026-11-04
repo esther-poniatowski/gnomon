@@ -36,7 +36,8 @@ FILE = PurePosixPath("problems/demo/itinerary.yml")
 
 def run_of(log: dict[str, Any]) -> dict[str, Any]:
     assert log["version"] == "2.1.0" and len(log["runs"]) == 1
-    return log["runs"][0]
+    run: dict[str, Any] = log["runs"][0]
+    return run
 
 
 def test_a_complete_run_lists_every_rule_and_declares_its_success() -> None:

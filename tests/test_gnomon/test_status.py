@@ -77,7 +77,7 @@ def test_the_route_of_construction_is_diagnosed_once_a_procedure_is_named() -> N
 
 
 def test_a_negative_phenomenon_refutes_soundness() -> None:
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "quest.a.b": {"id": "quest.a.b", "type": "question", "subject": {"phenomenon": "phen.a.b"}},
         "phen.a.b": {"id": "phen.a.b", "type": "phenomenon", "evidential_status": "absent"},
     }
@@ -85,7 +85,7 @@ def test_a_negative_phenomenon_refutes_soundness() -> None:
 
 
 def test_an_answer_passing_admissibility_establishes_the_candidates() -> None:
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "quest.a.b": {"id": "quest.a.b", "type": "question"},
         "ans.a.b": {"id": "ans.a.b", "type": "answer", "answers": "quest.a.b"},
         "assess.a.b": {
@@ -134,7 +134,10 @@ def test_impeachment_and_pending_verdicts_propagate_along_an_itinerary() -> None
             },
         ],
     }
-    records = {"itin.a.b": itinerary, "assess.a.c": {"type": "assessment", "status": "stabilized"}}
+    records: dict[str, dict[str, Any]] = {
+        "itin.a.b": itinerary,
+        "assess.a.c": {"type": "assessment", "status": "stabilized"},
+    }
     impeached, conditional, anew = itinerary_state(records)
     assert impeached == {"bg.a.b", "ans.a.b"}
     assert conditional == {"ans.a.c", "assess.a.c"}
@@ -187,7 +190,7 @@ def test_a_revision_flags_its_dependents_by_kind_and_warrant() -> None:
     """A proven answer is flagged by a retraction, not by a narrowing; a defeasible one by both."""
     from gnomon.propagation import revisions
 
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "bg.a.b": {"id": "bg.a.b", "type": "background"},
         "ans.proven": {
             "id": "ans.proven",

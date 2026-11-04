@@ -10,6 +10,8 @@ planted case that fails for the intended reason. The worked inquiries are checke
 
 from __future__ import annotations
 
+from typing import Any
+
 import yaml
 
 from gnomon.completeness import (
@@ -43,12 +45,12 @@ CLASSES, HOLDERS = type_classes(), type_holders()
 
 
 def test_a_slot_without_an_identified_record_or_a_typed_placeholder_is_reported() -> None:
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "system.a": {"type": "target-system", "identification": {"description": "the basin"}},
         "system.b": {"type": "target-system"},
         "phen.a": {"type": "phenomenon", "identification": {"description": "the flow"}},
     }
-    question = {"subject": {"target_system": "system.a", "phenomenon": "phen.a"}}
+    question: dict[str, Any] = {"subject": {"target_system": "system.a", "phenomenon": "phen.a"}}
     assert unresolved_slots(question, records, TYPES) == []
     question["subject"] = {
         "target_system": "system.b",
@@ -75,7 +77,7 @@ def test_a_slot_without_an_identified_record_or_a_typed_placeholder_is_reported(
 
 def test_linked_questions_and_admitted_backgrounds_are_checked() -> None:
     """Q2 takes its explanans from Q1 through the phenomenon both questions share."""
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "prob.a": {"type": "problem"},
         "quest.q1": {"type": "question", "id": "quest.q1"},
         "phen.geometry": {"type": "phenomenon"},
@@ -229,7 +231,7 @@ def test_an_appraisal_is_reported_unless_the_answer_passes() -> None:
 def test_an_assessment_of_a_construct_holds_one_verdict_per_constraint() -> None:
     """A construct is tested against the constraints of its problem; an answer against its
     question."""
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "prob.a": {
             "type": "problem",
             "constraints": [{"name": "reproduces-delay"}, {"name": "derives-duration"}],
@@ -324,13 +326,17 @@ def test_a_problem_bounds_the_aim_and_the_request_of_its_questions() -> None:
         "request": "one",
         "associated_question": "quest.a",
     }
-    question = {
+    question: dict[str, Any] = {
         "type": "question",
         "addresses": "prob.a",
         "request": "one",
         "task": {"epistemic_aim": "explanation"},
     }
-    records = {"prob.a": problem, "quest.a": question, "phen.a": {"type": "phenomenon"}}
+    records: dict[str, dict[str, Any]] = {
+        "prob.a": problem,
+        "quest.a": question,
+        "phen.a": {"type": "phenomenon"},
+    }
     assert texts(mismatched_request(problem, records)) == []
     assert texts(unbounded_aim(question, records, result_aims())) == []
     question["request"] = "all"
@@ -344,7 +350,10 @@ def test_a_problem_bounds_the_aim_and_the_request_of_its_questions() -> None:
     assert texts(unbounded_aim(question, records, result_aims())) == [
         "task.epistemic_aim: prediction does not serve a demand for explanation"
     ]
-    concept = {**records, "prob.a": {**problem, "result_type": "concept"}}
+    concept: dict[str, dict[str, Any]] = {
+        **records,
+        "prob.a": {**problem, "result_type": "concept"},
+    }
     question["task"]["epistemic_aim"] = "description"
     assert texts(unbounded_aim(question, concept, result_aims())) == [
         "task.epistemic_aim: description does not serve a demand for concept"
@@ -365,7 +374,7 @@ def test_a_demand_for_a_claim_is_met_by_an_accepted_complete_satisfied_answer() 
         "request": "one",
         "status": "solved",
     }
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "prob.a": problem,
         "quest.a": {"type": "question", "addresses": "prob.a"},
         "ans.a": {
@@ -403,7 +412,7 @@ def test_a_demand_for_a_construct_is_met_by_a_stabilized_satisfied_construct() -
         "constraints": [{"name": "reproduces-delay"}],
     }
     verdicts = [{"constraint": "reproduces-delay", "verdict": "pass"}]
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "prob.a": problem,
         "mod.a": {"type": "model", "status": "provisional"},
         "assess.a": {
@@ -427,7 +436,7 @@ def test_a_decision_is_met_once_every_candidate_is_settled() -> None:
         "result_type": "explanation",
         "request": "decision",
     }
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "prob.a": problem,
         "quest.a": {"type": "question", "addresses": "prob.a"},
         "ans.a": {"type": "answer", "answers": "quest.a", "status": "retracted"},
@@ -463,7 +472,7 @@ def test_an_accepted_corrective_answer_to_the_associated_question_dissolves_the_
         "status": "posed",
         "associated_question": "quest.a",
     }
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "prob.a": problem,
         "quest.a": {"type": "question", "addresses": "prob.a", "request": "one"},
         "ans.a": {
@@ -493,7 +502,7 @@ def test_the_stated_knowledge_obstacles_agree_with_the_records() -> None:
         "associated_question": "quest.a",
         "knowledge_obstacles": [{"obstacle": "open-gap"}],
     }
-    records = {
+    records: dict[str, dict[str, Any]] = {
         "prob.a": problem,
         "quest.a": {"type": "question", "addresses": "prob.a", "request": "one"},
     }
