@@ -1,0 +1,24 @@
+# Registry of the base dimensions that a dimensional formula may name, beside the base scales that
+# the operator record of a problem declares. The note on dimension owns the concept
+# (`docs/epistemology/vocabulary/quantities/dimension.md`), and the decision on the dimensional
+# formula fixes the attribute and its check (`docs/adr/dimensional-formula.md`). The symbols are
+# those of the International System of Quantities, with `Theta` for temperature.
+
+id: registry.dimensions
+type: dimension-registry
+
+base_dimensions:
+  - symbol: M
+    name: mass
+  - symbol: L
+    name: length
+  - symbol: T
+    name: time
+  - symbol: I
+    name: electric current
+  - symbol: Theta
+    name: thermodynamic temperature
+  - symbol: N
+    name: amount of substance
+  - symbol: J
+    name: luminous intensity

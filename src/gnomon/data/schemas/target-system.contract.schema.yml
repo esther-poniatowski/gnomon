@@ -111,6 +111,7 @@ properties:
         - signature
         - values
         - scale
+        - dimensional_formula
         - expression
         - condition
         - selects
@@ -149,6 +150,7 @@ properties:
         - signature
         - values
         - scale
+        - dimensional_formula
         - expression
         - condition
         - selects

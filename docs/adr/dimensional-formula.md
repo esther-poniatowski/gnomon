@@ -27,9 +27,10 @@ The value set of a quantity holds its dimensionality, and its signature holds it
 - a power multiplies the exponents by its exponent, and that exponent must be a pure number;
 - a derivative divides the dimension of its argument by the dimension of its variable, and an integral multiplies by it;
 - the argument of an exponential, a logarithm or a trigonometric function must be a pure number;
-- a sum, a difference, a minimum and a maximum require that their terms share one formula.
+- a sum, a difference, a minimum and a maximum require that their terms share one formula;
+- the number zero is homogeneous with every formula, so an equation such as `mean_{x}(p) = 0` is homogeneous.
 
-**A check tests homogeneity.** The terms of a sum, and the two sides of an equation, must share one dimensional formula, as the [dimensional homogeneity](../epistemology/vocabulary/quantities/dimension.md#^dimensional-homogeneity) of a law requires. A tool computes the formula of each expression by the declared rules, as the [admitted computations](no-run-time-inference.md#^admitted-computation) allow. When a law names a quantity without a dimensional formula, the law is left unchecked, and the check reports that gap.
+**A check tests homogeneity.** The terms of a sum, and the two sides of an equation, must share one dimensional formula, as the [dimensional homogeneity](../epistemology/vocabulary/quantities/dimension.md#^dimensional-homogeneity) of a law requires. A tool computes the formula of each expression by the declared rules, as the [admitted computations](no-run-time-inference.md#^admitted-computation) allow. When a law names a quantity without a dimensional formula, the law is left unchecked. In a problem that declares a formula for at least one quantity, the check reports that gap, so that a problem that does not use dimensional analysis receives no report.
 
 ## Constraints that decide the attribute
 
@@ -52,5 +53,6 @@ The value set of a quantity holds its dimensionality, and its signature holds it
 - The specification of a quantity gains the optional attribute `dimensional_formula`, and the schemas of the records that declare quantities gain it with the grammar of a monomial.
 - The package data gain the base dimensions, and the operator record of a problem gains its base scales.
 - The operator registry gains a rule of dimension for each operator.
-- The checks gain a homogeneity check, tested on planted laws that fail it, and a report of the laws left unchecked.
+- The checks gain a homogeneity check, tested on planted laws that fail it, and a report of the laws left unchecked in a problem that declares formulas.
+- An index set declares no formula, so a derivative along an index, such as a time derivative, stays undecided.
 - A move of a [derivation record](derivation-record.md) warranted by the Π-theorem cites the dimensional formulas of its quantities, as the property that makes its warrant apply.

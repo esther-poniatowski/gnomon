@@ -639,6 +639,20 @@ vocabularies:
       name: a consequence of type object that falsifies the target
     - value: refuting-test
       name: a test whose result contradicts a posit
+  operators:
+    operators.dimension:
+    - value: preserve
+      name: the formula of the first argument
+    - value: product
+      name: the sum of the exponents of the arguments
+    - value: derivative
+      name: the first argument divided by the second
+    - value: pure
+      name: a pure number, whatever the arguments
+    - value: pure-argument
+      name: a pure number, from pure arguments only
+    - value: unchecked
+      name: the formula of the result stays undecided
   problem:
     .status:
     - value: posed

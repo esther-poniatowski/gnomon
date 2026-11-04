@@ -44,6 +44,7 @@ observables:                     # functions of the system state that restate th
     signature: [SYMBOL]          # indices the observable still takes; empty for a scalar
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
     scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
+    dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived observable
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
     selects:                     # unique | any | all; required with a condition

@@ -58,6 +58,7 @@ variables:                       # quantities that vary while the phenomenon unf
     signature: [SYMBOL]          # one constituent kind or index set per place; empty for the system as a whole
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
     scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
+    dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give when a map builds the quantity from declared symbols
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
     selects:                     # unique | any | all; required with a condition
@@ -73,6 +74,7 @@ parameters:                      # quantities held fixed while the phenomenon un
     signature: [SYMBOL, SYMBOL]   # one entry per place, e.g. two neurons for a connectivity weight
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
     scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
+    dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived parameter
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
     selects:                     # unique | any | all; required with a condition

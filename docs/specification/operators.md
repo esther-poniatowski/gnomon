@@ -13,6 +13,9 @@ One file per problem holds the operators that its records declare, filled from `
 
 | Specification | When it is required | Form | Examples |
 | ------------- | ------------------- | ---- | -------- |
+| Base scales | when a dimensional formula of the problem names a scale that no base dimension of the package measures | one entry per base scale, with a symbol unique among the [base dimensions](../../src/gnomon/data/registries/dimensions.yml) and a name, as the [decision on the dimensional formula](../adr/dimensional-formula.md) states | the scale of the parameters, `W`, and the scale of the loss, `E`, of a learning system |
+| Base scales: symbol | in each entry | an identifier unique among the base dimensions and the base scales | `W` |
+| Base scales: name | in each entry | the quantity whose scale the base scale measures | "the scale of the parameters" |
 | Operators | when a formula of any record of the problem uses an operator beyond the canonical set | one entry per operator | the restriction of a field to a region; the Jacobian of a community at equilibrium; the empirical neural tangent kernel |
 | Operators: name | with every operator | the result that the operator computes, in words and with no symbol or formula | "the restriction of a field to a region" |
 | Operators: symbol | with every operator | an identifier, unique across the problem and distinct from every declared quantity | `restrict`, `community_jacobian`, `ntk` |
@@ -20,6 +23,7 @@ One file per problem holds the operators that its records declare, filled from `
 | Operators: for any (type variables of the operator) | when the operator is general over the sets on which it acts | the type variables that its signature and values may name, so that a general operator is typed once for all its call sites | `[S]` for an adjoint, typed `maps(S, S)` to `maps(S, S)`; `[S, n]` for an inner product of two vectors |
 | Operators: signature | with every operator | the set expression of each argument, in order | `["maps(Om, pow(reals, 3))"]` |
 | Operators: values | with every operator | the set expression in which its result lies | `"maps(Om, reals)"`; `reals` |
+| Operators: dimension | when a law that uses the operator must be checked for homogeneity | `preserve` · `product` · `derivative` · `pure` · `pure-argument` · `unchecked`; an operator that states none leaves the formula of its result undecided | `pure-argument` for an exponential |
 
 - **One operator vocabulary serves one problem.** Every record of a problem reads the same operator file. A phenomenon, its target and its questions therefore draw on one set, and no record redeclares an operator that a sibling declares. An operator is typed over sets that any record of the problem may declare. The operator file is therefore read against the *whole problem*. ^one-operator-file
 

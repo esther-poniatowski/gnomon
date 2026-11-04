@@ -14,6 +14,12 @@ properties:
     description: The logical identifier of the contract that the record follows.
   type:
     const: operators
+  base_scales:
+    items:
+      propertyNames:
+        enum:
+        - symbol
+        - name
   operators:
     items:
       propertyNames:
@@ -24,6 +30,17 @@ properties:
         - for_any
         - signature
         - values
+        - dimension
+      properties:
+        dimension:
+          enum:
+          - preserve
+          - product
+          - derivative
+          - pure
+          - pure-argument
+          - unchecked
+          - null
 x-identifier: id
 propertyNames:
   enum:
@@ -33,5 +50,6 @@ propertyNames:
   - type
   - status
   - target_system
+  - base_scales
   - operators
   - maturity

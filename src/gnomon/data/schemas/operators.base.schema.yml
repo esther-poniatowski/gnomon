@@ -53,6 +53,40 @@ properties:
     x-kind: label
     title: Target system
     description: The target system of the record.
+  base_scales:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    x-comment: optional; one entry per base scale that the dimensional formulas of the problem may name
+    title: Base scales
+    description: The base scales of the problem, beside the base dimensions of the package, that the
+      dimensional formulas of its quantities may name.
+    examples:
+    - the scale of the parameters and the scale of the loss of a learning system
+    items:
+      type: object
+      properties:
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: symbol
+          description: The symbol of the base scale, unique among the base dimensions.
+          examples:
+          - '`W` for the scale of the parameters'
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE QUANTITY WHOSE SCALE IS INDEPENDENT"'
+          x-kind: markdown-line
+          title: name
+          description: The quantity whose scale the base scale measures.
+          examples:
+          - '"the scale of the parameters"'
   operators:
     x-blank: true
     type:
@@ -124,6 +158,17 @@ properties:
           description: The values of the record.
           examples:
           - '`"maps(Om, reals)"`; `reals`'
+        dimension:
+          x-vocabulary: operators.dimension
+          type:
+          - string
+          - 'null'
+          x-comment: optional; how the operator combines the dimensional formulas of its arguments
+          title: dimension
+          description: How the operator combines the dimensional formulas of its arguments; an operator
+            that states no rule leaves the formula of its result undecided.
+          examples:
+          - '`pure-argument` for an exponential'
     title: Operators
     description: The operators of the record.
     examples:

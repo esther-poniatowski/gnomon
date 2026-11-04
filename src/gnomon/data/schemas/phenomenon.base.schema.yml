@@ -329,6 +329,18 @@ properties:
           description: nominal · ordinal · interval · ratio · absolute · not-applicable
           examples:
           - a regime label (nominal); a delay counted in training steps (ratio)
+        dimensional_formula:
+          type:
+          - string
+          - 'null'
+          x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          x-kind: label
+          x-comment: optional; a monomial such as M L T^-2, or 1 for a pure number
+          title: dimensional formula
+          description: optional; a monomial over the base dimensions and the base scales of the problem,
+            such as M L T^-2, or 1 for a pure number
+          examples:
+          - '`M L T^-2` for a force; `T` for a delay; `1` for a fraction'
         expression:
           type:
           - string
