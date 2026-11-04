@@ -8,6 +8,7 @@ dependencies:
   - pyyaml                 # YAML file handling
   - types-pyyaml           # type stubs for PyYAML
   - jsonschema             # validation of records against their contracts
+  - types-jsonschema       # type stubs for jsonschema
   # Development tools
   - black                  # code formatting
   - mypy                   # static type checking
