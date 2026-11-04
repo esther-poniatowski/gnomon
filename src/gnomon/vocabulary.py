@@ -19,6 +19,8 @@ See Also
 data/operators.yml : the operator vocabulary the framework supplies.
 """
 
+# pylint: disable=too-many-lines  # beyond the limit: see the task code-size
+
 from __future__ import annotations
 
 import re
@@ -966,6 +968,7 @@ def arities(*records: Mapping[str, Any], source: Path | None = None) -> dict[str
     return found
 
 
+# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def unresolved(
     record: Mapping[str, Any],
     operators: Iterable[str],
@@ -1109,6 +1112,7 @@ def overreaching_declarations(
     """
     variants = {**variant_symbols(upstream or {}), **variant_symbols(record)}
     found = []
+    # pylint: disable-next=too-many-nested-blocks  # beyond the limit: see the task code-size
     for block, keys in (
         ("laws", ("expression",)),
         ("organization", ("relates", "among", "realized_by")),

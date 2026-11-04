@@ -27,6 +27,8 @@ See Also
 data/requirements.yml : the registry these functions read.
 """
 
+# pylint: disable=too-many-lines  # beyond the limit: see the task code-size
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -922,6 +924,7 @@ def unsupported_outcome(
     return []
 
 
+# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def misdirected_assessment(
     assessment: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],

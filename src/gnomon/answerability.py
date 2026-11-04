@@ -196,6 +196,7 @@ def derived(question: Mapping[str, Any], condition: str, records: Records) -> Co
     return None
 
 
+# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def itinerary_state(records: Records) -> tuple[set[str], set[str], list[str]]:
     """Return the impeached records, the conditional records, and the steps whose norm awaits a new
     judgment.
@@ -289,6 +290,7 @@ def merge(diagnoses: list[Diagnosis]) -> Diagnosis:
     return merged
 
 
+# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def diagnose(
     records: Records, registry: Mapping[str, Any] | None = None, local: Records | None = None
 ) -> Diagnosis:

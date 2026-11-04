@@ -130,6 +130,7 @@ def _restrictions(
     return words
 
 
+# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def compose_statement(
     question: Mapping[str, Any], records: Records, registry: Mapping[str, Any] | None = None
 ) -> Statement:

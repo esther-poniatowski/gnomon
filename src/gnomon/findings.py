@@ -37,6 +37,7 @@ class Rule:
         If the identifier is not lowercase components separated by ``/``.
     """
 
+    # pylint: disable-next=disallowed-name  # the field mirrors the key `id` of a rule
     id: str
     description: str
 

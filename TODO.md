@@ -111,6 +111,10 @@ A researcher new to `gnomon` needs a procedure that leads, step by step, from a 
 	- [ ] Give a detection test a symbol once an assessment reports a verdict per detection test. No field references a detection test yet.
 	- [ ] Give `gnomon.cli` a `__main__` guard, or state in the [command reference](docs/guide/cli-reference.md) that the module form of the command is `python -m gnomon`. Invoked as `python -m gnomon.cli`, the command imports the module, exits 0 and performs no action.
 	- [ ] Exercise in the worked inquiries the fields that no case fills: the `claim.realizations` of an answer, once the migration under `model-design` moves the key, and the inhibiting conditions, nonstandard circumstances and byproducts of a phenomenon. These instances need quantities that no case declares yet, such as a dissipation rate for the turbulent anomaly or an intervention scale for a nonstandard preparation.
+- [ ] Bring the modules and the functions of the package within the size limits of pylint, and remove each pragma that names this task: `grep -rn "task code-size" src/`. 🆔 code-size
+	- [ ] Split `completeness.py` and `vocabulary.py`, each beyond 1000 lines, into modules of one responsibility.
+	- [ ] Split `itinerary_problems` of `itineraries.py` into one function per check of a step.
+	- [ ] Reduce the locals, the arguments or the nesting of the other functions that a pragma names.
 
 ## 8. Integration with the ecosystem
 

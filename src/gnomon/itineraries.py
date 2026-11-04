@@ -82,9 +82,11 @@ class Slot:
 
 
 @dataclass(frozen=True)
+# pylint: disable-next=too-many-instance-attributes  # one attribute per key of an entry
 class Activity:
     """One epistemic activity, as the registry declares it."""
 
+    # pylint: disable-next=disallowed-name  # the field mirrors the key `id` of an entry
     id: str
     family: str
     inputs: tuple[Slot, ...]
@@ -312,6 +314,7 @@ def _closed(name: str, source: Path | None = None, kind: str = "itinerary") -> f
     return frozenset(entry["value"] for entry in vocabulary.get(name) or [])
 
 
+# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def malformed_registry(
     acts: Mapping[str, Activity],
     types: Mapping[str, Any],
@@ -392,6 +395,7 @@ def malformed_registry(
     return found
 
 
+# pylint: disable-next=too-many-locals,too-many-branches,too-many-statements  # beyond the limit: see the task code-size
 def itinerary_problems(
     itinerary: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],
@@ -810,11 +814,11 @@ def _held(record: Mapping[str, Any], types: Mapping[str, Mapping[str, Any]]) -> 
 
 
 def _describe(held: Slot) -> str:
+    """Return the number of inputs that a slot takes, in words."""
     if held.most is None:
         return f"{held.least} or more inputs"
     if held.least == 0:
         return "at most one input" if held.most == 1 else f"at most {held.most} inputs"
-    """Return the number of inputs that a slot takes, in words."""
     return "one input" if held.least == held.most == 1 else f"{held.least} inputs"
 
 

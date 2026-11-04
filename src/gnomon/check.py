@@ -163,6 +163,7 @@ def load_workspace(root: Path) -> Workspace:
 
 
 @dataclass
+# pylint: disable-next=too-many-instance-attributes  # one attribute per registry
 class _Registries:
     """The registries that the checks read, loaded once per run."""
 

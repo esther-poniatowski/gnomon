@@ -16,6 +16,8 @@ tree : Print the question tree of a project, from its problems to the assessment
 views : Write the views of the state of an inquiry as YAML records.
 """
 
+# pylint: disable=import-outside-toplevel  # each command imports what it runs; --help stays fast
+
 import json
 from enum import Enum
 from pathlib import Path, PurePosixPath
@@ -111,6 +113,7 @@ class CheckFormat(str, Enum):
 
 
 @app.command("check")
+# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def cli_check(
     directory: str = typer.Argument(
         ..., help="Directory of records, read recursively; each folder is one problem."
@@ -303,11 +306,11 @@ def _read_records(
     false, a file that cannot be read or parsed raises its error; otherwise the failure is returned
     as a line naming the file, and the remaining files are read.
     """
+    from .check import parse_file
+
     records: dict[str, Mapping[str, Any]] = {}
     files: dict[str, Path] = {}
     failures: list[str] = []
-    from .check import parse_file
-
     for path in sorted(source.glob(pattern)):
         if tolerant:
             record, failure = parse_file(path)
@@ -357,6 +360,7 @@ def cli_schemas(
 
 
 @app.command("itinerary")
+# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def cli_itinerary(
     directory: str = typer.Argument(
         ..., help="Directory holding the filled records of one problem."
@@ -443,6 +447,7 @@ def cli_itinerary(
 
 
 @app.command("views")
+# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def cli_views(
     directory: str = typer.Argument(
         ..., help="Directory of records, read recursively; each folder is one problem."

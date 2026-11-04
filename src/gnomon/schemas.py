@@ -137,6 +137,7 @@ def head(key: str, field: Mapping[str, Any]) -> str:
     return f"{key}: {raw}" if raw not in (None, "") else f"{key}:"
 
 
+# pylint: disable-next=too-many-arguments,too-many-positional-arguments  # beyond the limit: see the task code-size
 def render_field(
     key: str,
     field: Mapping[str, Any],
@@ -316,6 +317,7 @@ def record_kinds() -> dict[str, str]:
 @cache
 def contract_validator(kind: str) -> Any:
     """Return the validator of the contract of a record type, which resolves the base schemas."""
+    # pylint: disable=import-outside-toplevel  # jsonschema loads only when a record is validated
     from jsonschema import Draft202012Validator
     from referencing import Registry, Resource
 
