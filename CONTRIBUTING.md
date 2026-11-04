@@ -69,6 +69,16 @@ Contributions to the codebase should be developed in a local clone of the reposi
 - Use the body to explain what and why (not how)
 - Add references to issues or other commits using [GitHub keywords](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/using-keywords-in-issues-and-pull-requests)
 
+### Ignoring layout commits in `git blame`
+
+A commit that changes only the layout of the code, such as a pass of Black, is listed by its full hash in `.git-blame-ignore-revs`, at the root of the repository. GitHub reads that file without configuration. Configure `git` to read it for a local `git blame`:
+
+```sh
+git config blame.ignoreRevsFile .git-blame-ignore-revs
+```
+
+A commit that also changes the behavior or the wording of the code is not listed, since `git blame` would then hide that change.
+
 ### Verifying a change
 
 A change is verified by the narrowest checks that exercise it. A change to a shared template reaches every dependent fixture and every downstream template, so those fixtures and templates are checked in the same pass.

@@ -1,0 +1,7 @@
+# Commits that change only the layout of the code, which `git blame` skips. List a commit by its
+# full hash once it is on the main branch, since a rewrite of the history changes the hash.
+
+# style: Format the code with black
+4c32d711b5dc85955421095dab299c9d0331d369
+# style: Close each wrapped summary on its text
+02015d9b72bc3a61f2cc670589236bdf581ed758
