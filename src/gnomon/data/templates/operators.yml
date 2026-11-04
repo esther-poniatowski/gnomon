@@ -21,7 +21,7 @@ operators:
     for_any: [SYMBOL]            # type variables the operator is general over, usable in `signature` and `values`; omit when the operator acts on declared sets alone
     signature: ["SET EXPRESSION OVER DECLARED SYMBOLS OR A TYPE VARIABLE"]
     values: "SET EXPRESSION OVER DECLARED SYMBOLS OR A TYPE VARIABLE"
-    dimension:                   # preserve (the formula of the first argument) | product (the sum of the exponents of the arguments) | derivative (the first argument divided by the second) | second-derivative (the first argument divided by the square of the second) | pure (a pure number, whatever the arguments) | pure-argument (a pure number, from pure arguments only) | unchecked (the formula of the result stays undecided); optional; how the operator combines the dimensional formulas of its arguments
+    dimension:                   # preserve (the formula of the first argument) | product (the sum of the exponents of the arguments) | derivative (the first argument divided by the second) | second-derivative (the first argument divided by the square of the second) | derivative-at (the first argument divided by the second, at a point of the formula of the second) | pure (a pure number, whatever the arguments) | pure-argument (a pure number, from pure arguments only) | unchecked (the formula of the result stays undecided); optional; how the operator combines the dimensional formulas of its arguments
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
   FIELD.PATH: open

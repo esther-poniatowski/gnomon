@@ -14,7 +14,8 @@
 # decision on the dimensional formula requires (docs/adr/dimensional-formula.md): `preserve` gives
 # the formula of the first argument, `product` adds the exponents of the arguments, `derivative`
 # divides the first argument by the second, `second-derivative` divides the first argument by the
-# square of the second, `pure` yields a pure number whatever the arguments,
+# square of the second, `derivative-at` divides the first argument by the second and requires the
+# point given third to share the formula of the second, `pure` yields a pure number whatever the arguments,
 # `pure-argument` requires pure arguments and yields a pure number, and `unchecked` leaves the
 # formula of the result undecided.
 
@@ -160,12 +161,12 @@ operators:
   values: complex
 - symbol: jacobian
   kind: map
-  dimension: unchecked
-  name: the matrix of first derivatives of a map, at a point
-  notation: '\operatorname{J}_{#3}( #1 )'
-  for_any: [A]
-  signature: ["maps(A, reals)", A, A]
-  values: "matrices(reals, A, A)"
+  dimension: derivative-at
+  name: the matrix of first derivatives of a map along the coordinates given, at a point
+  notation: '\operatorname{J}_{#2} #1 \big|_{#3}'
+  for_any: [A, S, m, n]
+  signature: ["maps(A, vectors(S, m))", "vectors(reals, n)", "vectors(reals, n)"]
+  values: "matrices(S, m, n)"
 - symbol: grad
   kind: map
   dimension: derivative

@@ -25,7 +25,7 @@ The value set of a quantity holds its dimensionality, and its signature holds it
 
 - a product adds the exponents of its factors, and a quotient subtracts them;
 - a power multiplies the exponents by its exponent, and that exponent must be a pure number;
-- a derivative divides the dimension of its argument by the dimension of its variable, which may be an index set, and an integral multiplies by it; a gradient and a divergence divide by the dimension of the coordinates that they name, and a Laplacian by its square;
+- a derivative divides the dimension of its argument by the dimension of its variable, which may be an index set, and an integral multiplies by it; a gradient and a divergence divide by the dimension of the coordinates that they name, and a Laplacian by its square; a Jacobian divides by the dimension of its coordinates, and its point of evaluation must share that dimension;
 - the argument of an exponential, a logarithm or a trigonometric function must be a pure number;
 - a sum, a difference, a minimum and a maximum require that their terms share one formula;
 - the number zero is homogeneous with every formula, so an equation such as `mean_{x}(p) = 0` is homogeneous.

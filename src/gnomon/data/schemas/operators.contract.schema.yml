@@ -38,6 +38,7 @@ properties:
           - product
           - derivative
           - second-derivative
+          - derivative-at
           - pure
           - pure-argument
           - unchecked

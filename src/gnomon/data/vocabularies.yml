@@ -649,6 +649,8 @@ vocabularies:
       name: the first argument divided by the second
     - value: second-derivative
       name: the first argument divided by the square of the second
+    - value: derivative-at
+      name: the first argument divided by the second, at a point of the formula of the second
     - value: pure
       name: a pure number, whatever the arguments
     - value: pure-argument

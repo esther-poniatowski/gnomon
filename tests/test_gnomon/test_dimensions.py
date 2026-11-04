@@ -192,3 +192,22 @@ def test_a_gradient_without_its_coordinates_is_reported(tmp_path: Path) -> None:
     _edit("background.yml", implicit)(folder)
     rules = {located.finding.rule.id for located in check_workspace(load_workspace(folder))}
     assert "vocabulary/mismatched-arity" in rules
+
+
+ENERGY = {"M": Fraction(1), "L": Fraction(2), "T": Fraction(-2)}
+
+
+def test_a_hessian_divides_by_the_square_of_its_coordinates() -> None:
+    symbols = {"E": ENERGY, "x": {"L": Fraction(1)}, "x0": {"L": Fraction(1)}}
+    evaluation = evaluate("jacobian(grad(E, x), x, x0)", symbols)
+    assert evaluation is not None and not evaluation.violations
+    assert evaluation.result == {"M": Fraction(1), "T": Fraction(-2)}
+
+
+def test_a_jacobian_at_a_point_of_another_dimension_is_inhomogeneous() -> None:
+    symbols = {"E": ENERGY, "x": {"L": Fraction(1)}, "t0": {"T": Fraction(1)}}
+    evaluation = evaluate("jacobian(grad(E, x), x, t0)", symbols)
+    assert evaluation is not None
+    assert evaluation.violations == [
+        ("inhomogeneous", "the point of jacobian has the formula T, and its coordinates L")
+    ]

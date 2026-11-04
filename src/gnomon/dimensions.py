@@ -61,6 +61,9 @@ Value = Formula | str | None
 
 PURE: Formula = {}
 
+#: The rules of the operators that divide their first argument by the formula of their coordinates.
+DERIVATIVE_RULES: tuple[str, ...] = ("derivative", "second-derivative", "derivative-at")
+
 #: The order in which a formula writes the base dimensions of the package, before the base scales.
 ISQ_ORDER: tuple[str, ...] = ("M", "L", "T", "I", "Theta", "N", "J")
 
@@ -408,11 +411,8 @@ class Evaluation:
                     total = _add(total, v)  # type: ignore[arg-type]
                 return total
             return None
-        if rule in ("derivative", "second-derivative") and len(values) >= 2:
-            if isinstance(values[0], Mapping) and isinstance(values[1], Mapping):
-                order = 2 if rule == "second-derivative" else 1
-                return _add(values[0], _scale(values[1], Fraction(order)), -1)
-            return None
+        if rule in DERIVATIVE_RULES:
+            return self._derivative(name, rule, values)
         if rule == "pure-argument":
             for v in values:
                 if isinstance(v, Mapping) and v:
@@ -424,10 +424,30 @@ class Evaluation:
             return PURE
         return None
 
+    def _derivative(self, name: str, rule: str, values: list[Value]) -> Value:
+        """Return the formula of a derivative: the function divided by its coordinates, once or
+        twice, with the point of evaluation, when given, sharing the formula of the coordinates."""
+        if len(values) < 2:
+            return None
+        if rule == "derivative-at" and len(values) >= 3:
+            variable, point = values[1], values[2]
+            if isinstance(variable, Mapping) and isinstance(point, Mapping) and variable != point:
+                self.violations.append(
+                    (
+                        "inhomogeneous",
+                        f"the point of {name} has the formula {show(point)}, and its coordinates"
+                        f" {show(variable)}",
+                    )
+                )
+        if isinstance(values[0], Mapping) and isinstance(values[1], Mapping):
+            order = 2 if rule == "second-derivative" else 1
+            return _add(values[0], _scale(values[1], Fraction(order)), -1)
+        return None
+
     def _argument(self, tree: Tree, rule: str | None, position: int) -> Value:
         """Return the formula of an argument, counting its missing formulas only where the rule
         of the operator uses that argument."""
-        used = rule in ("product", "derivative", "second-derivative", "pure-argument") or (
+        used = rule in ("product", "pure-argument", *DERIVATIVE_RULES) or (
             rule == "preserve" and position == 0
         )
         if used:
