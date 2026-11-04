@@ -405,7 +405,7 @@ def itinerary_problems(
     found: list[Finding] = []
 
     target = itinerary.get("addresses")
-    if (records.get(target) or {}).get("type") not in ("problem", "question"):
+    if (records.get(str(target)) or {}).get("type") not in ("problem", "question"):
         found.append(
             finding(rules.ITINERARY_UNADDRESSED, f"addresses: {target} is no problem or question record",
                     "addresses")
@@ -453,8 +453,7 @@ def itinerary_problems(
             given = (*at, "inputs", index)
             kind, ref = str(item.get("type")), item.get("ref")
             local = str(ref)[len(own):] if isinstance(ref, str) and ref.startswith(own) else None
-            producer = by_id.get(local) if local is not None else None
-            if producer is not None:
+            if local is not None and (producer := by_id.get(local)) is not None:
                 edges[name].add(local)
                 made = (producer.get("output") or {}).get("type")
                 if made != kind:
@@ -503,7 +502,7 @@ def itinerary_problems(
                             f"{where}: {ref} is {record.get('status')}, and {act.id} takes a {kind}"
                             f" held as {' or '.join(sorted(attitudes))}", *given)
                 )
-        output = step.get("output") if isinstance(step.get("output"), Mapping) else {}
+        output = _block(step, "output") or {}
         made = output.get("type")
         if made != act.output:
             found.append(
@@ -539,7 +538,7 @@ def itinerary_problems(
                                 f" a {act.output} of the {name} {' or '.join(admitted)}",
                                 *at, "output", "ref")
                     )
-        norm = step.get("norm") if isinstance(step.get("norm"), Mapping) else {}
+        norm = _block(step, "norm") or {}
         if norm.get("test") != act.norm:
             found.append(
                 finding(rules.ITINERARY_FOREIGN_NORM,
@@ -564,7 +563,7 @@ def itinerary_problems(
                             f"{where}: the verdict {norm.get('verdict')} states no date of judgment, written YYYY-MM-DD",
                             *at, "norm", "judged")
                 )
-        rationale = step.get("rationale") if isinstance(step.get("rationale"), Mapping) else {}
+        rationale = _block(step, "rationale") or {}
         served = (records.get(str(rationale.get("serves"))) or {}).get("type")
         if served not in ("question", "problem"):
             found.append(
@@ -578,7 +577,7 @@ def itinerary_problems(
                         f"{where}: the rationale serves a question and names no condition or act among"
                         f" {', '.join(sorted(acts_on))}", *at, "rationale", "acts_on")
             )
-        branch = step.get("branch") if isinstance(step.get("branch"), Mapping) else None
+        branch = _block(step, "branch")
         if branch is not None:
             other = by_id.get(str(branch.get("otherwise")))
             made_other = ((other or {}).get("output") or {}).get("type")
@@ -589,7 +588,7 @@ def itinerary_problems(
                 found.append(finding(rules.ITINERARY_MALFORMED_CONSTRUCTOR,
                                      f"{where}: the branch names no step that produces {act.output} otherwise",
                                      *at, "branch", "otherwise"))
-        iterate = step.get("iterate") if isinstance(step.get("iterate"), Mapping) else None
+        iterate = _block(step, "iterate")
         if iterate is not None:
             if not isinstance(iterate.get("until"), str) or not iterate["until"].strip():
                 found.append(finding(rules.ITINERARY_MALFORMED_CONSTRUCTOR,
@@ -611,6 +610,12 @@ def itinerary_problems(
         for cycle in cycles(edges)
     ]
     return found
+
+
+def _block(record: Mapping[str, Any], key: str) -> Mapping[str, Any] | None:
+    """Return the block that a record holds under a key, or None when the key holds no mapping."""
+    value = record.get(key)
+    return value if isinstance(value, Mapping) else None
 
 
 def _held(record: Mapping[str, Any], types: Mapping[str, Mapping[str, Any]]) -> str:
