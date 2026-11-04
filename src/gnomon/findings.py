@@ -399,6 +399,11 @@ DERIVATION_FAILED_KERNEL = _rule(
 DERIVATION_UNRECORDED_CONSEQUENCE = _rule(
     "derivation/unrecorded-consequence", "A consequence of the root sought names no record."
 )
+DERIVATION_UNRECORDED_DESCENT = _rule(
+    "derivation/unrecorded-descent",
+    "A law marked derived names neither a derivation that states it as a consequence nor a"
+    " published origin.",
+)
 DERIVATION_UNBOUND_SLOT = _rule(
     "derivation/unbound-slot", "A slot is bound by no move, and the derivation ends in no impasse."
 )

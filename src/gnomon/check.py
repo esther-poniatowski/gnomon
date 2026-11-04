@@ -44,7 +44,7 @@ import yaml
 from . import completeness as c
 from . import vocabulary as v
 from .answerability import malformed_answerability
-from .derivations import derivation_problems
+from .derivations import derivation_problems, recorded_descents, unrecorded_descents
 from .dimensions import (
     FORMULA_BLOCKS,
     Scope,
@@ -222,6 +222,11 @@ class _Context:
         return [
             d.symbol for record in self.problem.records.values() for d in v.declarations(record)
         ]
+
+    @cached_property
+    def descents(self) -> dict[str, str]:
+        """The derivation that states each law of the workspace as a consequence."""
+        return recorded_descents(self.workspace.by_id.values())
 
     @cached_property
     def bases(self) -> frozenset[str]:
@@ -451,6 +456,12 @@ def _dimensions(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     return malformed_formulas(record, ctx.bases) + dimension_problems(record, scope)
 
 
+def _descent(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
+    """The laws of a model or a background marked derived, against the derivations that state
+    them."""
+    return unrecorded_descents(record, ctx.descents)
+
+
 def _derivation(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
     """The units, the interpretations, the orientations, the kernel and the slots of a
     derivation."""
@@ -475,7 +486,8 @@ def _every_record(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 BY_KIND: Mapping[str, tuple[Check, ...]] = {
     "question": (_question,),
     "answer": (_answer,),
-    "model": (_model,),
+    "model": (_model, _descent),
+    "background": (_descent,),
     "assessment": (_assessment,),
     "phenomenon": (_phenomenon,),
     "problem": (_problem,),

@@ -330,6 +330,10 @@ def exposure(records: Records) -> dict[str, Any]:
                 rows.append({"answer": key, "law": ref, "warrant": warrant, "via": "direct"})
             elif warrant == "derived" and ref in recorded:
                 descents.append(recorded[ref])
+            elif warrant == "derived" and law.get("origin"):
+                rows.append(
+                    {"answer": key, "law": ref, "warrant": warrant, "via": "descent in its origin"}
+                )
             elif warrant == "derived":
                 rows.append(
                     {"answer": key, "law": ref, "warrant": warrant, "via": "descent not recorded"}

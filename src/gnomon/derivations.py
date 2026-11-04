@@ -642,6 +642,51 @@ def unbound_slots(record: Derivation) -> list[Finding]:
     ]
 
 
+def recorded_descents(records: Iterable[Mapping[str, Any]]) -> dict[str, str]:
+    """Return, for each record that a consequence of a derivation names, that derivation.
+
+    >>> recorded_descents([{"type": "derivation", "id": "derivation.a.b",
+    ...                     "consequences": [{"record": "mod.a.m.law"}]}])
+    {'mod.a.m.law': 'derivation.a.b'}
+    """
+    return {
+        str(consequence.get("record")): str(record.get("id"))
+        for record in records
+        if record.get("type") == "derivation"
+        for _, consequence in _entries(record, "consequences")
+        if consequence.get("record")
+    }
+
+
+def unrecorded_descents(record: Mapping[str, Any], descents: Mapping[str, str]) -> list[Finding]:
+    """Return the laws marked ``derived`` whose descent is recorded nowhere: no derivation states
+    the law as a consequence, and the law names no published origin holding its derivation.
+
+    >>> law = {"symbol": "bound", "warrant": "derived"}
+    >>> [f.text for f in unrecorded_descents({"id": "bg.a.b", "laws": [law]}, {})]
+    ['laws.bound: the law is marked derived, and no derivation or origin records its descent']
+    >>> unrecorded_descents({"id": "bg.a.b", "laws": [law]}, {"bg.a.b.bound": "derivation.a.c"})
+    []
+    """
+    found = []
+    for i, law in _entries(record, "laws"):
+        if law.get("warrant") != "derived" or law.get("origin"):
+            continue
+        if f"{record.get('id')}.{law.get('symbol')}" in descents:
+            continue
+        found.append(
+            finding(
+                rules.DERIVATION_UNRECORDED_DESCENT,
+                f"laws.{law.get('symbol') or i}: the law is marked derived, and no derivation or"
+                " origin records its descent",
+                "laws",
+                Entry(i, law),
+                "warrant",
+            )
+        )
+    return found
+
+
 def derivation_problems(record: Derivation) -> list[Finding]:
     """Return every finding of the checks of a derivation, in the order of the checks."""
     return [
