@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-09-25
-revised: 2026-11-02
+revised: 2026-11-04
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Flat symbol table
@@ -28,7 +28,8 @@ Each record carries one flat table of symbols, and each symbol is unique within 
 - a question and an operator record see every record of their problem;
 - an answer sees the records on which its route runs, and the question that it answers with the target system, the phenomenon and the backgrounds of that question;
 - a model sees its parents, with their own visible tables, and its background;
-- a binding sees its model, its phenomenon and the target system of that phenomenon.
+- a binding sees its model, its phenomenon and the target system of that phenomenon;
+- a derivation sees the records holding its premises, the record served, and the derivations whose consequences it uses, and declares its slots in its own table.
 
 A unit without a symbol, such as an operation of a model, a ground of an answer or a pair of a binding, is reached by its identifier, as the decision on [dotted identifiers](dotted-identifiers.md) admits.
 
@@ -52,5 +53,6 @@ A unit without a symbol, such as an operation of a model, a ground of an answer 
 
 - A reference resolves by naming a record and a symbol, in the form that [symbols and expressions](../specification/expressions.md) fixes.
 - The visible tables, added on 2026-11-02 by the pilot of the [decision on answers, models and bindings](answers-models-bindings.md), let the vocabulary check read answers, models and bindings.
+- The row of a derivation, added on 2026-11-04 by the [decision on the derivation record](derivation-record.md), lets the vocabulary check resolve the symbols of its moves.
 - A claim left unmarked asserts a property of every member of the reference class, so the checks report a law, a relation or an external system that names a symbol that only some members carry.
 - One symbol table is generated per problem, reversing an earlier decision to collect none. The earlier decision followed from the absence of scope across the corpus. An author fills and consults the records of one problem together, so one table per problem serves the author.

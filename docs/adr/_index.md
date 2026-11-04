@@ -16,6 +16,7 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 
 - [Surface syntax and parseable core for expressions](expression-syntax.md): fixes the notation that formulas must use
 - [Flat symbol table per record](flat-symbol-table.md): decides where a symbol is declared within a record
+- [Dimensional formula of a quantity](dimensional-formula.md): decides where a record states the dimension of a quantity, for a check of homogeneity
 - [Dotted identifiers](dotted-identifiers.md): fixes the form of a reference to a record or to a unit nested inside it
 - [Grammatical fields and prose readings](grammatical-fields-and-readings.md): separates the fields that a tool interprets from the prose written for a reader
 - [Single field per fact](single-field-per-fact.md): tells a field that carries a fact from a field that restates that fact
@@ -37,6 +38,7 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 - [Answers, models and bindings](answers-models-bindings.md): decides which records hold a candidate answer, its model and the relation of that model to the phenomenon
 - [Itinerary and product types](itinerary-and-product-types.md): names the record of the acts of an inquiry and the types of their products
 - [Design record](design-record.md): decides which record holds a plan of acts, and the role that it bears
+- [Derivation record](derivation-record.md): decides which record holds the reasoning that establishes a consequence, and the parts of that record
 - [Concepts, glossaries and notations](concepts-glossaries-notations.md): decides how a concept, its names and its symbols are recorded
 - [Closed typed relations](closed-typed-relations.md): decides how a relation between records is typed and checked
 

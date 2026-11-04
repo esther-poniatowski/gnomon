@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-11-02
-revised: 2026-11-02
+revised: 2026-11-04
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Design record
@@ -18,17 +18,20 @@ The activity `experimental-design` outputs a design, which the activities of obs
 
 **A design record holds one plan of acts.** Its kind is one of three: the protocol of an experiment on the target, the protocol of a run of a simulation of a model, or a method that solves a task. The record states:
 
-- the question or the problem that the design serves;
+- the question or the problem served by the design, except for a method stated apart from any problem;
 - the task, which an execution must achieve;
 - the inputs that an execution takes;
 - the steps, in their order;
 - the rules that state the admissible moves or decisions;
 - the output that an execution yields;
 - the condition under which an execution stops;
-- the modes of failure, each with the step or the rule that guards against it;
+- the modes of failure, each with the step or the rule that guards against it, and for a method, the situation announcing the failure and the patch required;
+- for a method, its conditions of application, `applies_when`, each a grammatical expression or a named property;
 - for an experiment or a simulation run, the protocol: the intervention, the control and the observation.
 
 **A design bears the role Plan.** A plan licenses an execution: a run that follows its steps and its rules on its inputs yields its output. This role joins the [table of epistemic roles](../epistemology/objects/status/epistemic-objects.md#^unit-roles).
+
+**A method stated apart from any problem is a scheme.** A design of kind `method` whose `serves` is empty states a reusable way of working, such as a [scheme of derivation](../epistemology/objects/derivation/segment-and-scheme.md). A segment of a derivation cites the scheme applied. The empty `serves` marks such a method, so no further field restates its generality, as the decision on a [single field per fact](single-field-per-fact.md) requires. Amended on 2026-11-04.
 
 **The procedure that assigns the values of a quantity stays apart.** That procedure keeps the role Definition and stays in the target-system record.
 
@@ -62,6 +65,8 @@ The kind meets the seven [conditions of admission](record-kind-admission.md#^adm
 | Keep the design without a record, in the prose of a question or of an itinerary | No kind is added | The steps and the stopping condition move into prose, and a problem that demands a design can never be solved |
 | A record for the protocols of experiments and of simulation runs only | The record matches the single activity that outputs a design | A method that a problem demands has no home, although it has the same parts and licenses the same execution |
 | One record for designs and for measurement procedures | One record for every procedure | A measurement procedure defines a quantity and licenses substitution, so the record would hold two roles |
+| A record kind `scheme` for the reusable ways of deriving | A scheme is found apart from the methods that solve a task | A method already holds the inputs, the steps, the admissible moves, the output and the modes of failure of a way of working, so the kind fails the condition of non-distortion; added on 2026-11-04 |
+| A field `generic` that marks a method stated apart from any problem | The generality of a method is read from one field | An empty `serves` already determines that generality, so the field would restate a fact; added on 2026-11-04 |
 | One record for every plan of acts, with a protocol for experiments and simulation runs | One record and one role for every plan, and a demand for a design can be met | A method needs an activity of its own, since the norm of experimental design does not judge it |
 
 ## Consequences
@@ -71,3 +76,4 @@ The kind meets the seven [conditions of admission](record-kind-admission.md#^adm
 - The product type `measurement-procedure` stays partial in the target-system record.
 - The activity `method-design` outputs a design of the kind `method`, and `experimental-design` outputs the protocols.
 - The protocol is required for the kinds `experiment` and `simulation-run`, as the specification states and the requirements by value of the requirement registry declare.
+- The field `serves` becomes optional for the kind `method`, and the kind gains the field `applies_when`, so that the [derivation record](derivation-record.md) cites a scheme as a method.
