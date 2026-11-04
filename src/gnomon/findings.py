@@ -403,6 +403,30 @@ DERIVATION_UNBOUND_SLOT = _rule(
     "derivation/unbound-slot", "A slot is bound by no move, and the derivation ends in no impasse."
 )
 
+# --- Dimensions -----------------------------------------------------------------------------------
+
+DIMENSION_MALFORMED_FORMULA = _rule(
+    "dimension/malformed-formula",
+    "A dimensional formula is not a monomial over the declared base dimensions.",
+)
+DIMENSION_INHOMOGENEOUS = _rule(
+    "dimension/inhomogeneous",
+    "The terms of a sum, or the sides of an equation or an inequality, have different dimensional"
+    " formulas.",
+)
+DIMENSION_IMPURE_ARGUMENT = _rule(
+    "dimension/impure-argument",
+    "An exponent, or the argument of an operator that requires a pure number, has a dimension.",
+)
+DIMENSION_MISMATCHED_DEFINITION = _rule(
+    "dimension/mismatched-definition",
+    "The expression that defines a quantity has another dimensional formula than the one declared.",
+)
+DIMENSION_UNCHECKED_LAW = _rule(
+    "dimension/unchecked-law",
+    "In a problem that declares dimensional formulas, a law names a quantity without one.",
+)
+
 # --- Symbols and operators ------------------------------------------------------------------------
 
 VOCABULARY_MISTYPED_SYMBOL = _rule(

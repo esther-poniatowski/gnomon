@@ -128,6 +128,16 @@ symbols:
   block: scope_over_instances
   signature: []
   name: flow realizations under one family of forcing and boundary conditions
+- symbol: identical_scaling
+  declared_in: quest.turbulence.anomalous-scaling-constraints
+  block: foil_set
+  signature: []
+  name: identical longitudinal and transverse intermittency
+- symbol: self_similar
+  declared_in: quest.turbulence.anomalous-scaling-constraints
+  block: foil_set
+  signature: []
+  name: self-similar scaling
 - symbol: boundaryenv
   declared_in: system.turbulence-incompressible-navier-stokes
   block: external_systems
@@ -216,6 +226,7 @@ operators:
   canonical:
   - abs
   - adjoint
+  - and
   - bools
   - card
   - complex
@@ -247,6 +258,8 @@ operators:
   - min
   - nonneg
   - norm
+  - not
+  - or
   - pos
   - prod
   - range

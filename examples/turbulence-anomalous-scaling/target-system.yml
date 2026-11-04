@@ -36,6 +36,7 @@ variables:
     determined: within
     signature: [x, t]
     values: "vectors(reals, 3)"
+    dimensional_formula: "L T^-1"
     expression: null
     shared: false
   - name: "field of kinematic pressure"
@@ -43,6 +44,7 @@ variables:
     determined: within
     signature: [x, t]
     values: reals
+    dimensional_formula: "L^2 T^-2"
     expression: null
     shared: false
   - name: "field of body force"
@@ -51,12 +53,14 @@ variables:
     determined: outside
     signature: [x, t]
     values: "vectors(reals, 3)"
+    dimensional_formula: "L T^-2"
   - name: "boundary data"
     symbol: b
     of: boundaryenv
     determined: outside
     signature: [x, t]
     values: "vectors(reals, 3)"
+    dimensional_formula: "L T^-1"
 
 parameters:
   - name: "mean rate of energy injection by the forcing"
@@ -65,28 +69,33 @@ parameters:
     of: forcing
     signature: []
     values: "pos(reals)"
+    dimensional_formula: "L^2 T^-3"
     expression: null
   - name: "kinematic viscosity"
     symbol: nu
     notation: '\nu'
     signature: []
     values: "pos(reals)"
+    dimensional_formula: "L^2 T^-1"
     expression: null
   - name: "characteristic velocity scale"
     symbol: U
     signature: []
     values: "pos(reals)"
+    dimensional_formula: "L T^-1"
     expression: null
   - name: "characteristic length scale"
     symbol: Lc
     notation: 'L_c'
     signature: []
     values: "pos(reals)"
+    dimensional_formula: "L"
     expression: null
   - name: "Reynolds number"
     symbol: Re
     signature: []
     values: "pos(reals)"
+    dimensional_formula: "1"
     expression: "U * Lc / nu"
     reading: "The Reynolds number gives the ratio of inertial to viscous transport at the characteristic scales."
   - name: "Kolmogorov dissipation scale"
@@ -94,6 +103,7 @@ parameters:
     notation: '\eta_K'
     signature: []
     values: pos(reals)
+    dimensional_formula: "L"
     expression: "(nu^3 / eps)^(1/4)"
     reading: "At this scale, viscous dissipation balances the energy transferred down the cascade."
   - name: "flow domain"

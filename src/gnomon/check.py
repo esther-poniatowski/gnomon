@@ -8,8 +8,8 @@ that it assesses. A reference may reach any record of the workspace, so a proble
 held in another folder.
 
 This module only orchestrates. Each check lives in the module that owns its rule:
-:mod:`gnomon.vocabulary`, :mod:`gnomon.completeness`, :mod:`gnomon.itineraries` or
-:mod:`gnomon.derivations`. A generated
+:mod:`gnomon.vocabulary`, :mod:`gnomon.completeness`, :mod:`gnomon.itineraries`,
+:mod:`gnomon.derivations` or :mod:`gnomon.dimensions`. A generated
 record, such as the symbol table that ``gnomon vocabulary`` writes, is not checked, and neither is a
 template not yet filled, whose identifier is still the placeholder of its template: a researcher
 fills the records stage by stage, so a template of a later stage is listed apart, not reported.
@@ -45,6 +45,14 @@ from . import completeness as c
 from . import vocabulary as v
 from .answerability import malformed_answerability
 from .derivations import derivation_problems
+from .dimensions import (
+    Scope,
+    base_dimensions,
+    declared_formulas,
+    dimension_problems,
+    malformed_formulas,
+    operator_rules,
+)
 from .findings import CHECK_FAILED, Finding, finding
 from .history import StateReader, git_states
 from .itineraries import construct_record_kinds, itinerary_problems, type_classes, type_holders
@@ -213,6 +221,38 @@ class _Context:
         return [
             d.symbol for record in self.problem.records.values() for d in v.declarations(record)
         ]
+
+    @cached_property
+    def bases(self) -> frozenset[str]:
+        """The base dimensions of the package and the base scales that the problem declares."""
+        scales = {
+            str(entry.get("symbol"))
+            for record in self.problem.of_kind("operators")
+            for entry in record.get("base_scales") or []
+            if isinstance(entry, Mapping) and entry.get("symbol")
+        }
+        return base_dimensions() | frozenset(scales)
+
+    @cached_property
+    def dimension_rules(self) -> dict[str, str]:
+        """The rule of dimension of each operator that the problem may use."""
+        local = {
+            str(op.get("symbol")): str(op.get("dimension"))
+            for record in self.problem.of_kind("operators")
+            for op in record.get("operators") or []
+            if isinstance(op, Mapping) and op.get("symbol") and op.get("dimension")
+        }
+        return {**operator_rules(), **local}
+
+    @cached_property
+    def declares_formulas(self) -> bool:
+        """Whether some quantity of the problem declares a dimensional formula."""
+        return any(
+            isinstance(entry, Mapping) and entry.get("dimensional_formula") is not None
+            for record in self.problem.records.values()
+            for block in ("variables", "parameters", "observables")
+            for entry in record.get(block) or []
+        )
 
     @cached_property
     def arities(self) -> dict[str, int]:
@@ -391,6 +431,25 @@ def _problem(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     )
 
 
+#: The kinds of record whose quantities and laws carry dimensional formulas.
+DIMENSIONED_KINDS = frozenset({"target-system", "background", "phenomenon", "model"})
+
+
+def _dimensions(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
+    """The dimensional formulas of a record, and the homogeneity of its laws and definitions,
+    against the formulas of the records that it sees."""
+    if record.get("type") not in DIMENSIONED_KINDS:
+        return []
+    by_id = ctx.workspace.by_id
+    seen = [*v.visible_records(record, by_id), v.upstream_of(record, by_id), record]
+    scope = Scope(
+        declared_formulas([r for r in seen if r], ctx.bases),
+        ctx.dimension_rules,
+        ctx.declares_formulas,
+    )
+    return malformed_formulas(record, ctx.bases) + dimension_problems(record, scope)
+
+
 def _derivation(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
     """The units, the interpretations, the orientations, the kernel and the slots of a
     derivation."""
@@ -438,7 +497,7 @@ def check_workspace(workspace: Workspace) -> list[Located]:
             record = problem.records[ident]
             checks: list[Check] = [_every_record, _requirements]
             if record.get("type") in v.RECORD_KINDS:
-                checks += [_symbols, _structure, _against_target]
+                checks += [_symbols, _structure, _against_target, _dimensions]
             checks += list(BY_KIND.get(str(record.get("type")), ()))
             file = PurePosixPath(problem.files[ident].relative_to(workspace.root).as_posix())
             for run in checks:

@@ -31,6 +31,8 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `duT` | phen.turbulence.velocity-increment-distributions | observables | x, t, rmag, rdir | transverse increment |
 | `family` | phen.turbulence.velocity-increment-distributions | scope over instances | — | admitted families of forcing and boundary conditions |
 | `realization` | phen.turbulence.velocity-increment-distributions | scope over instances | — | flow realizations under one family of forcing and boundary conditions |
+| `identical_scaling` | quest.turbulence.anomalous-scaling-constraints | foil set | — | identical longitudinal and transverse intermittency |
+| `self_similar` | quest.turbulence.anomalous-scaling-constraints | foil set | — | self-similar scaling |
 | `boundaryenv` | system.turbulence-incompressible-navier-stokes | external systems | — | formal environment at the boundary |
 | `forcing` | system.turbulence-incompressible-navier-stokes | external systems | — | formal forcing process |
 | `t` | system.turbulence-incompressible-navier-stokes | index sets | — | time |
@@ -49,5 +51,5 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 
 ## Operators
 
-- Canonical: `abs`, `adjoint`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
+- Canonical: `abs`, `adjoint`, `and`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `not`, `or`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
 - Declared by this problem: `boundary` (the boundary of a spatial domain), `norm_one` (whether a three-dimensional vector has unit Euclidean norm), `regions` (the admissible regions of a space), `restrict` (the restriction of a field to a region), `stationary` (whether the statistics of a field indexed by time are invariant under time translation).
