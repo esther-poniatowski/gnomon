@@ -339,6 +339,14 @@ properties:
         - 'null'
         title: Family fidelity
         description: fill for a family of models only
+      derivations:
+        type:
+        - array
+        - 'null'
+        x-template: '[derivation.TOPIC.NAME]'
+        x-comment: for a derivation or a proof; the derivation records on which the claim rests
+        title: Derivations
+        description: for a derivation or a proof; the derivation records on which the claim rests
       pointer:
         type:
         - string

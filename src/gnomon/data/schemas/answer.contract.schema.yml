@@ -93,6 +93,7 @@ properties:
       - kind
       - runs_on
       - family_fidelity
+      - derivations
       - pointer
     properties:
       kind:

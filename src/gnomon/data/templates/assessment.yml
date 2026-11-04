@@ -54,6 +54,7 @@ comparisons:                     # one entry per comparison that a verdict of fi
 obligations:                     # one entry per proof obligation of the question, in the same order
   - verdict: pending             # pending | pass | fail | not-applicable
     evidence: "THE DERIVATION OR THE COUNTEREXAMPLE THAT SETTLES THE IMPLICATION"
+    derivation: derivation.TOPIC.NAME   # optional; the derivation record that settles the obligation
 
 appraisal:                       # one entry per `preferred` virtue of the question, only once no test of admissibility or of warrant fails or stays pending; the product test already settles each `constitutive` virtue
   - virtue:                      # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability

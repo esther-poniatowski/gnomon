@@ -393,6 +393,15 @@ properties:
           x-kind: markdown-line
           title: Evidence
           description: The evidence of the record.
+        derivation:
+          type:
+          - string
+          - 'null'
+          x-template: derivation.TOPIC.NAME
+          x-kind: label
+          x-comment: optional; the derivation record that settles the obligation
+          title: Derivation
+          description: The identifier of the derivation record that settles the obligation.
     x-comment: one entry per proof obligation of the question, in the same order
     title: Obligations
     description: per obligation, a verdict with the derivation or the counterexample that settles it
