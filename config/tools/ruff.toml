@@ -1,0 +1,71 @@
+# ==================================================================================================
+# Ruff Configurations for gnomon Package
+#
+# File: `config/tools/ruff.toml`
+#
+# Usage
+# -----
+# From the terminal, pass this configuration file to the Ruff linter:
+#
+# ```sh
+# ruff check --config config/tools/ruff.toml src/ tests/
+# ```
+#
+# In VS Code `settings.json` file, pass this configuration to the Ruff extension:
+#
+# ```json
+# {
+#   "ruff.configuration": "${workspaceFolder}/config/tools/ruff.toml",
+# }
+# ```
+#
+# Notes
+# -----
+# Configuration file:
+#
+# A dedicated `ruff.toml` file declares its settings at top level, without the `[tool.ruff]` prefix
+# of a `pyproject.toml` file. Ruff finds a configuration only in the folders above the files that it
+# checks, so a command run without `--config` falls back to the default rules of its version.
+#
+# Rule selection:
+#
+# The rules are selected explicitly, so that an upgrade of Ruff does not change them. Each family
+# selected reports a likely defect or a convention that the code follows; each rule ignored names
+# the idiom of the code that it would contradict.
+#
+# Line length:
+#
+# The line length matches the one of `black.toml`, as the line length synchronization of that file
+# requires. The rule E501 stays unselected until the lines longer than the limit are wrapped.
+# ==================================================================================================
+
+target-version = "py312"
+line-length = 100
+
+[lint]
+select = [
+    "F",      # pyflakes: undefined and unused names
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "I",      # import order
+    "UP",     # syntax of the target version
+    "B",      # bugbear: likely bugs
+    "C4",     # comprehensions
+    "SIM",    # simplifications
+    "PIE",    # unnecessary constructs
+    "PLE",    # pylint errors
+    "PLW",    # pylint warnings
+    "FURB",   # modern idioms
+    "RUF",    # rules specific to Ruff
+]
+ignore = [
+    "E501",   # see the note on the line length
+    "UP035",  # the package imports its abstract types from `typing`
+    "UP042",  # Typer reads the choices of a `str` enum, and `StrEnum` changes what `str()` returns
+]
+
+[lint.flake8-bugbear]
+extend-immutable-calls = ["typer.Argument", "typer.Option"]   # the Typer idiom for declaring parameters
+
+[lint.isort]
+known-first-party = ["gnomon"]

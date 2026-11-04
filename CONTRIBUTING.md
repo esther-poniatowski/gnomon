@@ -219,6 +219,7 @@ Contains dedicated configuration files for each development tool. This achieves 
 | `mypy.ini`            | MyPy                   | Static type checking rules        |
 | `pylintrc.ini`        | Pylint                 | Linting rules (main code)         |
 | `pylintrc_tests.ini`  | Pylint                 | Linting rules (test code)         |
+| `ruff.toml`           | Ruff                   | Linting rules (main and test code)|
 | `pyrightconfig.json`  | Pyright                | Static type analysis overrides    |
 | `releaserc.toml`      | Python Semantic Release| Versioning and changelog           |
 

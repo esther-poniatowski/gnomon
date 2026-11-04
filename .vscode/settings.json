@@ -83,6 +83,7 @@
 
   // --- Linting -----------------------------------------------------------------------------------
   "pylint.args": ["--rcfile=${workspaceFolder}/config/tools/pylintrc.ini"],
+  "ruff.configuration": "${workspaceFolder}/config/tools/ruff.toml",
   "python.analysis.typeCheckingMode": "strict",
 
   // --- Static Type Checking ----------------------------------------------------------------------
