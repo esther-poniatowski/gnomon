@@ -306,9 +306,10 @@ def record_types(record: Mapping[str, Any], types: Mapping[str, Mapping[str, Any
     return [name for name, entry in types.items() if holds(record, entry)]
 
 
-def _closed(field: str, source: Path | None = None, kind: str = "itinerary") -> frozenset[str]:
+def _closed(name: str, source: Path | None = None, kind: str = "itinerary") -> frozenset[str]:
+    """Return the values that the vocabulary registry admits for the field ``name`` of ``kind``."""
     vocabulary = (_load(source or VOCABULARY_REGISTRY).get("vocabularies") or {}).get(kind) or {}
-    return frozenset(entry["value"] for entry in vocabulary.get(field) or [])
+    return frozenset(entry["value"] for entry in vocabulary.get(name) or [])
 
 
 def malformed_registry(
@@ -494,14 +495,14 @@ def itinerary_problems(
         ]
         counts = Counter(str(item.get("type")) for _, item in inputs)
         for held in act.inputs:
-            filled = sum(counts[t] for t in held.types)
-            if not held.admits(filled):
+            supplied = sum(counts[t] for t in held.types)
+            if not held.admits(supplied):
                 found.append(
                     finding(
                         rules.ITINERARY_UNFILLED_INPUT,
                         f"{where}: {act.id} takes {_describe(held)} of"
                         f" {' or '.join(sorted(held.types))},"
-                        f" and the step gives {filled}",
+                        f" and the step gives {supplied}",
                         *at,
                         "inputs",
                         value="|".join(sorted(held.types)),
@@ -813,6 +814,7 @@ def _describe(held: Slot) -> str:
         return f"{held.least} or more inputs"
     if held.least == 0:
         return "at most one input" if held.most == 1 else f"at most {held.most} inputs"
+    """Return the number of inputs that a slot takes, in words."""
     return "one input" if held.least == held.most == 1 else f"{held.least} inputs"
 
 

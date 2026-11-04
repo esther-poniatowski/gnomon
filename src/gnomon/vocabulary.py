@@ -485,12 +485,12 @@ def unfixed_parameters(record: Mapping[str, Any]) -> list[Finding]:
     }
     found = []
     for index, entry in indexed(record, "parameters"):
-        along = [s for s in entry.get("signature") or [] if s in running]
-        if along:
+        running_along = [s for s in entry.get("signature") or [] if s in running]
+        if running_along:
             found.append(
                 finding(
                     rules.VOCABULARY_UNFIXED_PARAMETER,
-                    f"parameters.{entry.get('symbol')}: held fixed yet indexed by {along}",
+                    f"parameters.{entry.get('symbol')}: held fixed yet indexed by {running_along}",
                     "parameters",
                     Entry(index, entry),
                     "signature",
@@ -930,7 +930,7 @@ def calls(text: str) -> list[tuple[str, int]]:
     return found
 
 
-def mismatched_arity(record: Mapping[str, Any], arities: Mapping[str, int]) -> list[Finding]:
+def mismatched_arity(record: Mapping[str, Any], taken: Mapping[str, int]) -> list[Finding]:
     """Return every call passing a number of arguments its operator does not take.
 
     An operator states what it takes, so a call that passes more or fewer is reported. Only an
@@ -940,7 +940,7 @@ def mismatched_arity(record: Mapping[str, Any], arities: Mapping[str, int]) -> l
     found = []
     for where, place, text, _ in formulas(record):
         for name, passed in calls(text):
-            expected = arities.get(name)
+            expected = taken.get(name)
             if expected is not None and passed != expected:
                 found.append(
                     finding(
@@ -993,12 +993,12 @@ def unresolved(
         | set(local_operators(record))
     )
     problems: list[Finding] = []
-    references: list[tuple[str, Place, Any]] = [
+    cited: list[tuple[str, Place, Any]] = [
         (f"{block}.{key}", (block, Entry(i, entry), key), entry.get(key))
         for block, key in REFERENCE
         for i, entry in indexed(record, block)
     ]
-    references += [
+    cited += [
         (
             f"{outer}.{inner}.{key}",
             (outer, Entry(i, entry), inner, Entry(j, nested), key),
@@ -1008,7 +1008,7 @@ def unresolved(
         for i, entry in indexed(record, outer)
         for j, nested in indexed(entry, inner)
     ]
-    for where, place, value in references:
+    for where, place, value in cited:
         for index, name in items_of(value):
             if isinstance(name, str) and split_reference(name) is None and name not in known:
                 problems.append(

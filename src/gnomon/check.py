@@ -22,6 +22,8 @@ Workspace
 
 Functions
 ---------
+parse_file
+    Return the content of a YAML file, or the line that reports why it cannot be read.
 load_workspace
     Read the records of a directory tree, folder by folder.
 check_workspace
@@ -117,6 +119,17 @@ class Workspace:
         return git_states(self.files)
 
 
+def parse_file(path: Path) -> tuple[Any, str | None]:
+    """Return the content of a YAML file, or None and the line that reports why it cannot be read.
+
+    The line names the file and the error, so that a command lists each unreadable file apart.
+    """
+    try:
+        return yaml.safe_load(path.read_text(encoding="utf-8")), None
+    except (OSError, ValueError, yaml.YAMLError) as error:
+        return None, f"{path}: {error}"
+
+
 def load_workspace(root: Path) -> Workspace:
     """Read the records of a directory tree, folder by folder.
 
@@ -130,10 +143,9 @@ def load_workspace(root: Path) -> Workspace:
     for path in sorted(root.rglob("*.yml")):
         if any(part.startswith(".") for part in path.relative_to(root).parts):
             continue
-        try:
-            record = yaml.safe_load(path.read_text(encoding="utf-8"))
-        except (OSError, ValueError, yaml.YAMLError) as error:
-            failures.append(f"{path}: {error}")
+        record, failure = parse_file(path)
+        if failure is not None:
+            failures.append(failure)
             continue
         if not isinstance(record, Mapping) or "id" not in record or "type" not in record:
             continue
@@ -251,7 +263,7 @@ def _symbols(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     return v.unresolved(record, ctx.operators, external)
 
 
-def _structure(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
+def _structure(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
     """The checks of the declarations of a record that need no other record."""
     return (
         v.mistyped_symbols(record)
@@ -422,9 +434,8 @@ def check_workspace(workspace: Workspace) -> list[Located]:
             for run in checks:
                 try:
                     results = run(record, ctx)
-                except (
-                    Exception
-                ) as error:  # a malformed record must not stop the checks of the others
+                # pylint: disable-next=broad-exception-caught  # a malformed record must not stop the other checks
+                except Exception as error:
                     results = [
                         finding(
                             CHECK_FAILED,

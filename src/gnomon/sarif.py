@@ -100,6 +100,7 @@ def artifact_uri(located: Located) -> str:
 
 
 def _result(located: Located) -> dict[str, Any]:
+    """Return the SARIF result of one finding, placed in its file and its record."""
     found = located.finding
     result: dict[str, Any] = {
         "ruleId": found.rule.id,
