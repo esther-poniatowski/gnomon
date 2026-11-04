@@ -360,6 +360,49 @@ COMPLETENESS_INADMISSIBLE_VALUE = _rule(
     "A closed field holds a value that its vocabulary does not admit.",
 )
 
+# --- Derivations ----------------------------------------------------------------------------------
+
+DERIVATION_REPEATED_UNIT = _rule(
+    "derivation/repeated-unit", "Several units of a derivation share one identifier."
+)
+DERIVATION_UNKNOWN_UNIT = _rule(
+    "derivation/unknown-unit", "An identifier names no unit of the derivation of the expected kind."
+)
+DERIVATION_UNADMITTED_PAIR = _rule(
+    "derivation/unadmitted-pair",
+    "An interpretation assigns a kind of meaning that its item does not admit.",
+)
+DERIVATION_MISTYPED_GROUND = _rule(
+    "derivation/mistyped-ground",
+    "A warrant cites a property of another kind than structural or magnitude, or a diagnostic"
+    " interpretation cites no move and no posit.",
+)
+DERIVATION_CYCLE = _rule(
+    "derivation/cycle", "The moves of a derivation depend on one another in a cycle."
+)
+DERIVATION_RETROSPECTIVE_ORIENTATION = _rule(
+    "derivation/retrospective-orientation",
+    "An orientation cites an object that its own move yields, or that depends on that move.",
+)
+DERIVATION_UNORIENTED_MOVE = _rule(
+    "derivation/unoriented-move", "A non-routine move has no orientation."
+)
+DERIVATION_AMBIGUOUS_PURPOSE = _rule(
+    "derivation/ambiguous-purpose",
+    "An orientation states both or neither of the sought that it determines and the change that it"
+    " brings about.",
+)
+DERIVATION_FAILED_KERNEL = _rule(
+    "derivation/failed-kernel",
+    "A route from the premises to a consequence of the root sought avoids the declared kernel.",
+)
+DERIVATION_UNRECORDED_CONSEQUENCE = _rule(
+    "derivation/unrecorded-consequence", "A consequence of the root sought names no record."
+)
+DERIVATION_UNBOUND_SLOT = _rule(
+    "derivation/unbound-slot", "A slot is bound by no move, and the derivation ends in no impasse."
+)
+
 # --- Symbols and operators ------------------------------------------------------------------------
 
 VOCABULARY_MISTYPED_SYMBOL = _rule(
@@ -543,6 +586,14 @@ Place = tuple[Segment | Key | Entry, ...]
 IDENTIFIER_KEYS: Mapping[str, tuple[str, ...]] = {
     "steps": ("id",),
     "activities": ("id",),
+    "subordinate": ("id",),
+    "objects": ("id",),
+    "posits": ("id",),
+    "moves": ("id",),
+    "orientations": ("id",),
+    "interpretations": ("id",),
+    "segments": ("id",),
+    "consequences": ("id",),
     "restrictions": ("name", "of"),
 }
 

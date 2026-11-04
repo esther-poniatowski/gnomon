@@ -28,6 +28,7 @@ from dataclasses import dataclass, field
 from typing import Any, Iterable, Mapping
 
 from .completeness import demand_met, presupposition_denied, readable_obstacles
+from .derivations import exposed_units
 from .identifiers import split_reference
 from .itineraries import type_classes, type_holders
 from .statement import compose_statement, load_statement_registry
@@ -295,10 +296,19 @@ def exposure(records: Records) -> dict[str, Any]:
 
     A law marked ``posited``, ``fitted`` or ``measured`` exposes the answer directly. A law marked
     ``derived`` exposes it to the laws from which it descends, which the records do not yet state,
-    so the row says so instead of guessing them.
+    so the row says so instead of guessing them, unless a derivation names that law as its
+    consequence. A derivation named by the route of the answer, or recording the descent of a
+    derived law among its grounds, adds the units through which it exposes its consequences.
     """
-    rows = []
+    rows: list[dict[str, Any]] = []
+    recorded = {
+        str(consequence.get("record")): name
+        for name in _of_type(records, "derivation")
+        for consequence in records[name].get("consequences") or []
+        if isinstance(consequence, Mapping) and consequence.get("record")
+    }
     for key in _of_type(records, "answer"):
+        descents: list[str] = []
         for ground in records[key].get("grounds") or []:
             ref = ground.get("record") if isinstance(ground, Mapping) else None
             split = split_reference(ref) if isinstance(ref, str) else None
@@ -318,11 +328,53 @@ def exposure(records: Records) -> dict[str, Any]:
             warrant = str(law.get("warrant") or "")
             if warrant in ("posited", "fitted", "measured"):
                 rows.append({"answer": key, "law": ref, "warrant": warrant, "via": "direct"})
+            elif warrant == "derived" and ref in recorded:
+                descents.append(recorded[ref])
             elif warrant == "derived":
                 rows.append(
                     {"answer": key, "law": ref, "warrant": warrant, "via": "descent not recorded"}
                 )
+        route = records[key].get("route")
+        cited = route.get("derivations") if isinstance(route, Mapping) else None
+        rows += _derivation_exposure(key, [*(cited or []), *descents], records)
     return {**_header("exposure", "Exposure of each answer to revisable laws"), "exposures": rows}
+
+
+def _derivation_exposure(
+    answer: str, cited: Iterable[Any], records: Records
+) -> list[dict[str, str]]:
+    """Return the rows of exposure that the derivations cited by an answer add, as the exposure of
+    a derivation states: the posits not confirmed, the warrants not exact, the operations not exact
+    of the models on which a derivation runs, and the same units of each derivation that it uses.
+    """
+    rows: list[dict[str, str]] = []
+    seen: set[str] = set()
+    pending = [str(name) for name in cited if isinstance(name, str)]
+    while pending:
+        name = pending.pop(0)
+        derivation = records.get(name)
+        if name in seen or not isinstance(derivation, Mapping):
+            continue
+        seen.add(name)
+        via = f"derivation {name}"
+        rows += [
+            {"answer": answer, "law": f"{name}.{unit}", "warrant": reason, "via": via}
+            for unit, reason in exposed_units(derivation)
+        ]
+        for model in derivation.get("runs_on") or []:
+            for operation in (records.get(str(model)) or {}).get("operations") or []:
+                error = operation.get("error") if isinstance(operation, Mapping) else None
+                if error and error != "exact" and operation.get("id"):
+                    rows.append(
+                        {
+                            "answer": answer,
+                            "law": f"{model}.{operation['id']}",
+                            "warrant": f"{error} operation",
+                            "via": via,
+                        }
+                    )
+        pending += [str(used) for used in derivation.get("uses") or [] if isinstance(used, str)]
+    return rows
 
 
 def itinerary_progress(

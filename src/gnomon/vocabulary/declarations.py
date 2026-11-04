@@ -92,6 +92,7 @@ ID_UNITS: Mapping[str, tuple[str, ...]] = {
     "model": ("operations", "assumptions"),
     "answer": ("grounds", "abstractions"),
     "design": ("steps", "rules"),
+    "derivation": ("objects", "posits", "moves", "interpretations", "segments", "consequences"),
     "binding": ("feature_pairs", "condition_pairs"),
 }
 

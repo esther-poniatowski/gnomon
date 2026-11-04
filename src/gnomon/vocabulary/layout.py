@@ -9,6 +9,7 @@ import re
 from typing import Any, Mapping
 
 from ..findings import Entry, Place
+from ..identifiers import split_reference
 
 #: Blocks whose entries declare a symbol, per record kind. A background record declares its laws
 #: and relations over the quantities of the target system that it describes.
@@ -24,6 +25,7 @@ DECLARING: Mapping[str, tuple[str, ...]] = {
     "background": ("laws", "organization"),
     "phenomenon": ("index_sets", "observables", "manifestations", "scope_over_instances"),
     "model": ("constituents", "index_sets", "variables", "parameters", "laws", "organization"),
+    "derivation": ("slots",),
 }
 
 
@@ -39,6 +41,7 @@ RECORD_KINDS: frozenset[str] = frozenset(
         "model",
         "answer",
         "binding",
+        "derivation",
     }
 )
 
@@ -152,6 +155,7 @@ TYPE_PATH_FORMULA: Mapping[str, tuple[str, ...]] = {
         "aim_block.modal_knowledge.property",
     ),
     "model": ("operations[].regime", "operations[].bound"),
+    "derivation": ("objects[].expression",),
     "binding": (
         "feature_pairs[].exemplified",
         "condition_pairs[].model_condition",
@@ -401,7 +405,8 @@ def visible_records(
     An answer sees the records on which its route runs, and the question that it answers with the
     target system, the phenomenon and the backgrounds of that question; a model sees its parents
     and its background; a binding sees its model, its phenomenon and the target system of that
-    phenomenon. Any other record sees none through this function.
+    phenomenon; a derivation sees the records that hold its premises, the record that it serves and
+    the derivations whose consequences it uses. Any other record sees none through this function.
 
     >>> records = {"quest.a.b": {"subject": {"phenomenon": "phen.a.b"}},
     ...            "phen.a.b": {"id": "phen.a.b"}}
@@ -423,6 +428,14 @@ def visible_records(
         ]
     elif kind == "model":
         names = [*(record.get("derives_from") or []), record.get("background")]
+    elif kind == "derivation":
+        served = str(record.get("serves") or "")
+        split = split_reference(served)
+        names = [
+            *(record.get("runs_on") or []),
+            split[0] if split else served,
+            *(record.get("uses") or []),
+        ]
     elif kind == "binding":
         stated = record.get("target")
         target: Mapping[str, Any] = stated if isinstance(stated, Mapping) else {}

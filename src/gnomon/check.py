@@ -8,7 +8,8 @@ that it assesses. A reference may reach any record of the workspace, so a proble
 held in another folder.
 
 This module only orchestrates. Each check lives in the module that owns its rule:
-:mod:`gnomon.vocabulary`, :mod:`gnomon.completeness` or :mod:`gnomon.itineraries`. A generated
+:mod:`gnomon.vocabulary`, :mod:`gnomon.completeness`, :mod:`gnomon.itineraries` or
+:mod:`gnomon.derivations`. A generated
 record, such as the symbol table that ``gnomon vocabulary`` writes, is not checked, and neither is a
 template not yet filled, whose identifier is still the placeholder of its template: a researcher
 fills the records stage by stage, so a template of a later stage is listed apart, not reported.
@@ -43,6 +44,7 @@ import yaml
 from . import completeness as c
 from . import vocabulary as v
 from .answerability import malformed_answerability
+from .derivations import derivation_problems
 from .findings import CHECK_FAILED, Finding, finding
 from .history import StateReader, git_states
 from .itineraries import construct_record_kinds, itinerary_problems, type_classes, type_holders
@@ -253,7 +255,7 @@ def _symbols(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     kind = record.get("type")
     if kind in ("operators", "question"):
         external: Iterable[str] = ctx.symbols
-    elif kind in ("answer", "model", "binding"):
+    elif kind in ("answer", "model", "binding", "derivation"):
         external = [
             d.symbol
             for seen in v.visible_records(record, ctx.workspace.by_id)
@@ -389,6 +391,12 @@ def _problem(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     )
 
 
+def _derivation(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
+    """The units, the interpretations, the orientations, the kernel and the slots of a
+    derivation."""
+    return derivation_problems(record)
+
+
 def _itinerary(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The steps of an itinerary against the registries and the records that they name."""
     return itinerary_problems(
@@ -412,6 +420,7 @@ BY_KIND: Mapping[str, tuple[Check, ...]] = {
     "phenomenon": (_phenomenon,),
     "problem": (_problem,),
     "itinerary": (_itinerary,),
+    "derivation": (_derivation,),
 }
 
 

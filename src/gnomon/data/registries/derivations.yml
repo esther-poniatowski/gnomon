@@ -1,0 +1,39 @@
+# Registry of the rules that the checks of a derivation record read. The notes of the theory of
+# derivations own each rule (docs/adr/registries-as-source.md):
+# - the admitted pairs of item and kind of an interpretation:
+#   `docs/epistemology/objects/derivation/interpretation.md#^admitted-pairs`;
+# - the kinds of move that make a move non-routine:
+#   `docs/epistemology/objects/derivation/move.md#^non-routine`;
+# - the tests that confirm a posit:
+#   `docs/epistemology/objects/derivation/posit.md#^posit-confirmation`.
+# `tests/test_gnomon/test_derivations.py` checks that the kinds below are values of the vocabularies
+# of the derivation record.
+
+id: registry.derivations
+type: derivation-registry
+
+# The item of an interpretation is read from the unit that it interprets: an object of form
+# `object` or `expression`, a move (`transformation`), a feature of the calculation (`feature`),
+# or a segment or a consequence (`composite`).
+admitted_pairs:
+  object: [referential, process, structural, magnitude, analogical]
+  expression: [form, process, structural, magnitude, analogical]
+  transformation: [process, structural, magnitude, analogical]
+  feature: [diagnostic]
+  composite: [process, structural, variation, analogical]
+
+# The kinds of interpretation that the field `applies_because` of a warrant may cite.
+licensing_kinds: [structural, magnitude]
+
+# The units that the grounds of a diagnostic interpretation must include, by the field of the
+# record that holds them.
+diagnostic_grounds: [moves, posits]
+
+# The kinds of move that make a move non-routine. The other features of a non-routine move are
+# read from the record: a warrant that is not exact, a slot introduced or a posit used, the
+# declared kernel, and the import of the output of an act.
+non_routine_kinds: [take-limit, truncate, require-self-consistency, impose, match, import]
+
+# The tests that confirm a posit, with the standard that a computation must meet.
+confirming_tests: [exact, approximation]
+confirming_computation: certified
