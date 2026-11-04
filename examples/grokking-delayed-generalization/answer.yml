@@ -51,6 +51,7 @@ dependence:
 route:
   kind: derivation
   runs_on: [mod.grokking.effective-representation]
+  derivations: [derivation.grokking.delay-scale]
   pointer: "Liu et al., Towards understanding grokking: an effective theory of representation learning, NeurIPS 2022, https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
 
 domain: "source = addition and P > card(train)"

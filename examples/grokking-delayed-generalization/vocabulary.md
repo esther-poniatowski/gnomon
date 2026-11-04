@@ -17,6 +17,7 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `initial_state` | bg.delayed_generalization_networks.training-specification | laws | coord | initial state of the parameters |
 | `update` | bg.delayed_generalization_networks.training-specification | laws | coord | gradient-based update |
 | `update_state` | bg.delayed_generalization_networks.training-specification | laws | — | update of the optimizer state |
+| `a_mode` | derivation.grokking.delay-scale | slots | — |  |
 | `generalization_link` | mod.grokking.effective-representation | laws | step | structured representation supports held-out prediction |
 | `representation_flow` | mod.grokking.effective-representation | laws | step | effective relaxation of the representation |
 | `representation_time` | mod.grokking.effective-representation | laws | — | timescale of representation learning |

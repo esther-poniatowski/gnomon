@@ -37,6 +37,11 @@ symbols:
   block: laws
   signature: []
   name: update of the optimizer state
+- symbol: a_mode
+  declared_in: derivation.grokking.delay-scale
+  block: slots
+  signature: []
+  name: ''
 - symbol: generalization_link
   declared_in: mod.grokking.effective-representation
   block: laws

@@ -1,0 +1,238 @@
+# the derivation of the timescale law of the effective theory [liu2022], reconstructed from the
+# linear relaxation of the representation under the limit of a fast decoder
+
+_schema: gnomon:derivation@1
+title: "Scale of the delay from the slowest structured mode"
+id: derivation.grokking.delay-scale
+type: derivation
+status: provisional
+
+serves:
+runs_on:
+  - mod.grokking.effective-representation
+uses:
+
+sought:
+  id: delay-scale
+  statement: "the law that sets the scale of the delay after fitting"
+  type: law
+  condition: "in the linear relaxation of the effective theory, with the decoder in the limit decoder-step"
+
+subordinate:
+  - id: threshold-time
+    statement: "the time at which the quality of the representation reaches its threshold"
+    type: value-or-bound
+    condition: "the slowest structured mode has decayed by the factor that the closure fixes"
+    replaces:
+    reason:
+
+slots:
+  - symbol: a_mode
+    reading: "the amplitude of the representation along one eigenmode of the effective Hessian"
+    introduced_by: diagonalize
+
+objects:
+  - id: hessian
+    form: object
+    expression: "Hrep"
+    reading: "the effective Hessian of the normalized representation"
+  - id: modal-flow
+    form: expression
+    expression:
+    reading: "along each eigenmode of the effective Hessian, the amplitude a_mode relaxes on its own, at the rate eta_rep times the eigenvalue of that mode"
+  - id: mode-decay
+    form: expression
+    expression:
+    reading: "each amplitude decays exponentially at its own rate, and the amplitudes along the modes of zero rate stay constant"
+  - id: slowest-mode
+    form: expression
+    expression:
+    reading: "at long times, the departure of the representation from its structured state is carried by the slowest positive mode, which decays at the rate eta_rep times lambda3"
+  - id: crossing-time
+    form: object
+    expression:
+    reading: "the time at which the slowest positive mode has decayed by the factor that the closure fixes: the logarithm of that factor divided by eta_rep times lambda3"
+  - id: delay-law
+    form: expression
+    expression: "depends_on(delay_m, 1 / (lambda3 * eta_rep))"
+    reading: "the delay scales as the inverse of the slowest positive rate times the learning rate of the embedding"
+
+posits:
+  - id: quality-tracks-slow-mode
+    kind: closure
+    statement: "the quality of the representation reaches its threshold once the slowest positive mode has decayed by a fixed factor, the same for every value of the rates"
+    origin:
+      kind: source
+      ref: "Liu et al., NeurIPS 2022, where the time of representation learning is set by the first nonzero eigenvalue of the effective Hessian"
+    tests:
+
+moves:
+  - id: diagonalize
+    kind: transform
+    inputs: [mod.grokking.effective-representation.representation_flow, hessian]
+    outputs: [modal-flow]
+    binds:
+    warrant:
+      source: theorem
+      cites: "spectral theorem for a real symmetric matrix"
+      error: exact
+      regime:
+      applies_because: hessian-symmetric
+  - id: solve-modes
+    kind: solve
+    inputs: [modal-flow]
+    outputs: [mode-decay]
+    binds: [a_mode]
+    warrant:
+      source: theorem
+      cites: "solution of a linear differential equation with a constant coefficient"
+      error: exact
+      regime:
+      applies_because:
+  - id: slowest-dominates
+    kind: take-limit
+    inputs: [mode-decay]
+    outputs: [slowest-mode]
+    binds:
+    warrant:
+      source: approximation
+      cites: "dominance of the slowest positive mode of a stable linear relaxation"
+      error: controlled
+      regime: "times long compared with the inverse of the gap between lambda3 and the next positive rate"
+      applies_because: spectral-gap
+  - id: crossing
+    kind: solve
+    inputs: [slowest-mode, quality-tracks-slow-mode]
+    outputs: [crossing-time]
+    binds:
+    warrant:
+      source: definition
+      cites: "the decay of one exponential by a fixed factor"
+      error: exact
+      regime:
+      applies_because:
+  - id: keep-dependence
+    kind: transform
+    inputs: [crossing-time]
+    outputs: [delay-law]
+    binds:
+    warrant:
+      source: definition
+      cites: "the operator depends_on, which states a dependence up to a constant factor"
+      error: exact
+      regime:
+      applies_because:
+
+kernel: slowest-dominates
+
+orientations:
+  - id: find-the-law
+    of: relaxation
+    purpose: "to find the law that sets the scale of the delay"
+    determines: delay-scale
+    change:
+    occasion:
+    means: "the relaxation of a stable linear system along its eigenmodes"
+    alternatives:
+    provenance: reconstructed
+    expected_gain: "a law of the delay in terms of one spectral quantity"
+  - id: decouple-modes
+    of: diagonalize
+    purpose: "to decouple the relaxation of the representation into independent modes"
+    determines:
+    change: decouple
+    occasion: hessian-symmetric
+    means: "pass to the basis of the eigenvectors of the effective Hessian"
+    alternatives:
+      - move: "integrate the coupled linear flow numerically"
+        reason: losing-information
+    provenance: reconstructed
+    expected_gain: "one scalar equation per mode"
+  - id: isolate-slow-mode
+    of: slowest-dominates
+    purpose: "to isolate the mode that sets the long-time behavior of the representation"
+    determines:
+    change: isolate
+    occasion: spectral-gap
+    means: "take the limit of long times"
+    alternatives:
+      - move: "keep every positive mode and sum their decays"
+        reason: costlier
+    provenance: reconstructed
+    expected_gain: "one rate in place of the whole spectrum"
+  - id: time-the-crossing
+    of: crossing
+    purpose: "to determine the time at which the quality reaches its threshold"
+    determines: threshold-time
+    change:
+    occasion: symmetry-modes
+    means: "solve the decay of the slowest positive mode for the factor that the closure fixes"
+    alternatives:
+    provenance: reconstructed
+    expected_gain: "the delay as a time of relaxation"
+
+interpretations:
+  - id: hessian-symmetric
+    of: hessian
+    kind: structural
+    reading: "the effective Hessian is the Hessian of a scalar loss, so it is symmetric, and its eigenvectors form an orthogonal basis"
+    grounds: [mod.grokking.effective-representation.Hrep]
+  - id: symmetry-modes
+    of: mode-decay
+    kind: structural
+    reading: "the modes of zero rate move the embeddings along directions that leave the effective loss unchanged, so they do not change the quality, and the slowest structured mode is the first positive one"
+    grounds: [mod.grokking.effective-representation.lambda3]
+  - id: spectral-gap
+    of: mode-decay
+    kind: magnitude
+    reading: "at long times, the faster positive modes are smaller than the slowest one by a factor that decays at eta_rep times the gap between their rates"
+    grounds:
+  - id: memorization-limit
+    of: rate-divergence
+    kind: diagnostic
+    reading: "as lambda3 tends to zero, the delay diverges: the limit is singular, the representation never reaches the quality that generalization requires, and memorization persists"
+    grounds: [slowest-dominates]
+  - id: relaxation-process
+    of: relaxation
+    kind: process
+    reading: "the delay is the time that the slowest structured mode of the embeddings takes to relax, once the decoder has fitted the training set"
+    grounds: [mod.grokking.effective-representation.representation_flow]
+  - id: rate-variation
+    of: relaxation
+    kind: variation
+    reading: "when the learning rate of the embedding or the slowest positive rate doubles, the delay halves; when the slowest positive rate tends to zero, the delay diverges"
+    grounds:
+
+features:
+  - id: rate-divergence
+    kind: divergence
+    at: delay-law
+
+segments:
+  - id: relaxation
+    serves: delay-scale
+    moves: [diagonalize, solve-modes, slowest-dominates, crossing, keep-dependence]
+    inputs: [mod.grokking.effective-representation.representation_flow, hessian, quality-tracks-slow-mode]
+    outputs: [delay-law]
+    applies:
+    within:
+
+consequences:
+  - id: scale-law
+    answers: delay-scale
+    from: delay-law
+    record: mod.grokking.effective-representation.representation_time
+    gain: "the delay is read from one spectral quantity of the effective Hessian, and a vanishing rate predicts persistent memorization"
+    principle: rate-variation
+    pattern: "the slowest positive mode of a stable linear relaxation sets its time of relaxation"
+  - id: threshold-lemma
+    answers: threshold-time
+    from: crossing-time
+    record:
+    gain:
+    principle:
+    pattern:
+
+impasses:
+
+refutations:
