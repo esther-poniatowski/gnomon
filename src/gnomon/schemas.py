@@ -137,67 +137,67 @@ def head(key: str, field: Mapping[str, Any]) -> str:
     return f"{key}: {raw}" if raw not in (None, "") else f"{key}:"
 
 
-# pylint: disable-next=too-many-arguments,too-many-positional-arguments  # beyond the limit: see the task code-size
-def render_field(
-    key: str,
-    field: Mapping[str, Any],
-    indent: int,
-    options: Options,
-    out: list[str],
-    dash: bool = False,
-) -> None:
-    """Append the lines of one field, and of the fields that it holds, to ``out``."""
-    if field.get("x-blank"):
-        out.append("")
-    prefix = " " * indent + ("- " if dash else "")
-    inner = indent + 2 if dash else indent
-    comment = comment_of(field, options)
-    properties = field.get("properties")
-    items = field.get("items")
-    free = field.get("additionalProperties")
-    if isinstance(properties, Mapping) and field.get("x-template") in (None, ""):
-        out.append(line(prefix + key + ":", comment))
-        for name, child in properties.items():
-            render_field(name, child, inner + 2, options, out)
-    elif isinstance(items, Mapping) and field.get("x-template") in (None, ""):
-        out.append(line(prefix + key + ":", comment))
-        render_item(items, inner + 2, options, out)
-    elif isinstance(free, Mapping) and free.get("x-template-key"):
-        out.append(line(prefix + key + ":", comment))
-        out.append(
-            line(
-                " " * (inner + 2) + head(str(free["x-template-key"]), free),
-                comment_of(free, options),
-            )
-        )
-    else:
-        out.append(line(prefix + head(key, field), comment))
+class _TemplateLines:
+    """The lines of a template being rendered, and the vocabulary options that its comments list."""
 
+    def __init__(self, options: Options) -> None:
+        self.options = options
+        self.out: list[str] = []
 
-def render_item(items: Mapping[str, Any], indent: int, options: Options, out: list[str]) -> None:
-    """Append the lines of the one entry that a template list shows."""
-    properties = items.get("properties")
-    if isinstance(properties, Mapping) and properties:
-        for position, (name, child) in enumerate(properties.items()):
-            render_field(
-                name, child, indent + (2 if position else 0), options, out, dash=not position
+    def add_field(self, key: str, spec: Mapping[str, Any], indent: int, dash: bool = False) -> None:
+        """Append the lines of one field, and of the fields that it holds."""
+        if spec.get("x-blank"):
+            self.out.append("")
+        prefix = " " * indent + ("- " if dash else "")
+        inner = indent + 2 if dash else indent
+        comment = comment_of(spec, self.options)
+        properties = spec.get("properties")
+        items = spec.get("items")
+        free = spec.get("additionalProperties")
+        if isinstance(properties, Mapping) and spec.get("x-template") in (None, ""):
+            self.out.append(line(prefix + key + ":", comment))
+            for name, child in properties.items():
+                self.add_field(name, child, inner + 2)
+        elif isinstance(items, Mapping) and spec.get("x-template") in (None, ""):
+            self.out.append(line(prefix + key + ":", comment))
+            self.add_item(items, inner + 2)
+        elif isinstance(free, Mapping) and free.get("x-template-key"):
+            self.out.append(line(prefix + key + ":", comment))
+            self.out.append(
+                line(
+                    " " * (inner + 2) + head(str(free["x-template-key"]), free),
+                    comment_of(free, self.options),
+                )
             )
-    else:
-        out.append(
-            line(" " * indent + f"- {items.get('x-template', '')}", comment_of(items, options))
-        )
+        else:
+            self.out.append(line(prefix + head(key, spec), comment))
+
+    def add_item(self, items: Mapping[str, Any], indent: int) -> None:
+        """Append the lines of the one entry that a template list shows."""
+        properties = items.get("properties")
+        if isinstance(properties, Mapping) and properties:
+            for position, (name, child) in enumerate(properties.items()):
+                self.add_field(name, child, indent + (2 if position else 0), dash=not position)
+        else:
+            self.out.append(
+                line(
+                    " " * indent + f"- {items.get('x-template', '')}",
+                    comment_of(items, self.options),
+                )
+            )
 
 
 def render_template(kind: str, base: Mapping[str, Any], options: Options) -> str:
     """Return the template of a record type, opened by the binding to its contract and rendered from
     its base schema."""
-    out = [f"# {text}" if text else "#" for text in base.get("x-header") or []]
-    if out:
-        out.append("")
-    out.append(f"_schema: {identifier(kind, int(base.get('x-version', 1)))}")
-    for name, field in (base.get("properties") or {}).items():
-        render_field(name, field, 0, options, out)
-    return "\n".join(out) + "\n"
+    lines = _TemplateLines(options)
+    lines.out += [f"# {text}" if text else "#" for text in base.get("x-header") or []]
+    if lines.out:
+        lines.out.append("")
+    lines.out.append(f"_schema: {identifier(kind, int(base.get('x-version', 1)))}")
+    for name, spec in (base.get("properties") or {}).items():
+        lines.add_field(name, spec, 0)
+    return "\n".join(lines.out) + "\n"
 
 
 def overlay(field: Mapping[str, Any], options: Options) -> dict[str, Any] | None:

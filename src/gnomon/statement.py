@@ -27,7 +27,7 @@ compose_statement
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -130,7 +130,70 @@ def _restrictions(
     return words
 
 
-# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
+@dataclass
+class _Slots:
+    """The slots of the frame that the fields leave unfilled, in the order of the frame."""
+
+    gaps: list[str] = field(default_factory=list)
+
+    def fill(self, letter: str, value: str | None) -> str:
+        """Return the words of a slot, or its letter in brackets when it is unfilled."""
+        if value is None:
+            self.gaps.append(letter)
+            return f"[{letter}]"
+        return value
+
+
+def _domain_clause(domain: Mapping[str, Any], records: Records, words: Mapping[str, Any]) -> str:
+    """Return the clause of the restrictions and the limit of a domain, empty without them."""
+    restrictions = _restrictions(domain, records, words.get("restriction_kinds") or {})
+    limit = domain.get("limit")
+    expression = limit.get("expression") if isinstance(limit, Mapping) else None
+    clause = ""
+    if restrictions:
+        clause += " " + str(words.get("restrictions", "under {D}")).replace(
+            "{D}", _listed(restrictions, "and")
+        )
+    if expression:
+        clause += ", " + str(words.get("limit", "in the limit {L}")).replace("{L}", str(expression))
+    return clause
+
+
+def _interrogative_clause(
+    question: Mapping[str, Any], records: Records, words: Mapping[str, Any], slots: _Slots
+) -> str:
+    """Return the interrogative that the aim selects, with the phenomenon or the explicandum."""
+    subject, task = question.get("subject") or {}, question.get("task") or {}
+    aim = task.get("epistemic_aim")
+    interrogative = (words.get("interrogatives") or {}).get(aim)
+    if interrogative is None:
+        slots.gaps.append("aim")
+        interrogative = "[interrogative] {P}"
+    if aim == "explication":
+        explicandum = task.get("explicandum")
+        filled = None if is_unfilled(explicandum) else str(explicandum)
+        return str(interrogative).replace("{E}", slots.fill("E", filled))
+    return str(interrogative).replace(
+        "{P}", slots.fill("P", _named(subject.get("phenomenon"), records))
+    )
+
+
+def _contrast_clause(contrast: Mapping[str, Any], words: Mapping[str, Any], slots: _Slots) -> str:
+    """Return the connective that the locus selects, with the foils; empty for the locus `none`."""
+    connective = (words.get("contrasts") or {}).get(contrast.get("locus"))
+    if connective is None:
+        return " rather than " + slots.fill("X", None)
+    if not connective:
+        return ""
+    foils = [
+        str(f["name"])
+        for f in contrast.get("foil_set") or []
+        if isinstance(f, Mapping) and f.get("name")
+    ]
+    foil_words = _listed(foils, "or") if foils else str(words.get("default_foils") or "")
+    return " " + str(connective).replace("{X}", foil_words)
+
+
 def compose_statement(
     question: Mapping[str, Any], records: Records, registry: Mapping[str, Any] | None = None
 ) -> Statement:
@@ -149,60 +212,10 @@ def compose_statement(
     """
     words = registry if registry is not None else load_statement_registry()
     subject = question.get("subject") or {}
-    task = question.get("task") or {}
-    gaps: list[str] = []
-
-    def slot(letter: str, value: str | None) -> str:
-        if value is None:
-            gaps.append(letter)
-            return f"[{letter}]"
-        return value
-
-    system = slot("S", _named(subject.get("target_system"), records))
-    domain = subject.get("domain") or {}
-    restrictions = _restrictions(domain, records, words.get("restriction_kinds") or {})
-    limit = (
-        (domain.get("limit") or {}).get("expression")
-        if isinstance(domain.get("limit"), Mapping)
-        else None
-    )
-
-    aim = task.get("epistemic_aim")
-    interrogative = (words.get("interrogatives") or {}).get(aim)
-    if interrogative is None:
-        gaps.append("aim")
-        interrogative = "[interrogative] {P}"
-    if aim == "explication":
-        explicandum = task.get("explicandum")
-        item = {"{E}": slot("E", None if is_unfilled(explicandum) else str(explicandum))}
-    else:
-        item = {"{P}": slot("P", _named(subject.get("phenomenon"), records))}
-
-    contrast = subject.get("contrast") or {}
-    locus = contrast.get("locus")
-    connective = (words.get("contrasts") or {}).get(locus)
-    foils = [
-        str(f["name"])
-        for f in contrast.get("foil_set") or []
-        if isinstance(f, Mapping) and f.get("name")
-    ]
-    if connective is None:
-        connective = "rather than {X}"
-        foil_words = slot("X", None)
-    else:
-        foil_words = _listed(foils, "or") if foils else str(words.get("default_foils") or "")
-
+    slots = _Slots()
+    system = slots.fill("S", _named(subject.get("target_system"), records))
     text = str(words.get("system", "In {S}")).replace("{S}", system)
-    if restrictions:
-        text += " " + str(words.get("restrictions", "under {D}")).replace(
-            "{D}", _listed(restrictions, "and")
-        )
-    if limit:
-        text += ", " + str(words.get("limit", "in the limit {L}")).replace("{L}", str(limit))
-    clause = str(interrogative)
-    for key, value in item.items():
-        clause = clause.replace(key, value)
-    text += ", " + clause
-    if connective:
-        text += " " + connective.replace("{X}", foil_words)
-    return Statement(text + "?", tuple(gaps))
+    text += _domain_clause(subject.get("domain") or {}, records, words)
+    text += ", " + _interrogative_clause(question, records, words, slots)
+    text += _contrast_clause(subject.get("contrast") or {}, words, slots)
+    return Statement(text + "?", tuple(slots.gaps))

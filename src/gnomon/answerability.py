@@ -196,7 +196,54 @@ def derived(question: Mapping[str, Any], condition: str, records: Records) -> Co
     return None
 
 
-# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
+def _inputs_of(step: Mapping[str, Any]) -> list[str]:
+    """Return the references that the inputs of a step name."""
+    return [str(i.get("ref")) for i in step.get("inputs") or [] if isinstance(i, Mapping)]
+
+
+def _output_of(step: Mapping[str, Any]) -> str:
+    """Return the reference of the output of a step, empty when it names none."""
+    return str((step.get("output") or {}).get("ref") or "")
+
+
+def _spread(
+    steps: Mapping[str, Mapping[str, Any]], own: str, verdict: str, marked: set[str]
+) -> set[str]:
+    """Return the outputs of the steps that a verdict reaches in one itinerary.
+
+    A step is reached when its norm has the verdict, or when it takes as input a marked record, the
+    output of a reached step, or a reached step named in full by ``own`` and its identifier.
+    """
+    reached: set[str] = set()
+    products: set[str] = set()
+    changed = True
+    while changed:
+        changed = False
+        for name, step in steps.items():
+            if name in reached:
+                continue
+            upstream = any(
+                r in marked or r in products or (r.startswith(own) and r[len(own) :] in reached)
+                for r in _inputs_of(step)
+            )
+            if (step.get("norm") or {}).get("verdict") == verdict or upstream:
+                reached.add(name)
+                changed = True
+                if _output_of(step):
+                    products.add(_output_of(step))
+    return products
+
+
+def _awaiting(steps: Mapping[str, Mapping[str, Any]], own: str, records: Records) -> list[str]:
+    """Return the steps whose verdict is pending while their output record is stabilized."""
+    return [
+        f"{own}{name}"
+        for name, step in sorted(steps.items())
+        if (step.get("norm") or {}).get("verdict") == "pending"
+        and (records.get(_output_of(step)) or {}).get("status") == "stabilized"
+    ]
+
+
 def itinerary_state(records: Records) -> tuple[set[str], set[str], list[str]]:
     """Return the impeached records, the conditional records, and the steps whose norm awaits a new
     judgment.
@@ -214,41 +261,9 @@ def itinerary_state(records: Records) -> tuple[set[str], set[str], list[str]]:
         steps = {
             str(s.get("id")): s for s in itinerary.get("steps") or [] if isinstance(s, Mapping)
         }
-        bad_steps: set[str] = set()
-        open_steps: set[str] = set()
-        changed = True
-        while changed:
-            changed = False
-            for name, step in steps.items():
-                verdict = (step.get("norm") or {}).get("verdict")
-                refs = [
-                    str(i.get("ref")) for i in step.get("inputs") or [] if isinstance(i, Mapping)
-                ]
-                upstream_bad = any(
-                    r in impeached or (r.startswith(own) and r[len(own) :] in bad_steps)
-                    for r in refs
-                )
-                upstream_open = any(
-                    r in conditional or (r.startswith(own) and r[len(own) :] in open_steps)
-                    for r in refs
-                )
-                output = str((step.get("output") or {}).get("ref") or "")
-                if (verdict == "fail" or upstream_bad) and name not in bad_steps:
-                    bad_steps.add(name)
-                    changed = True
-                    if output:
-                        impeached.add(output)
-                if (verdict == "pending" or upstream_open) and name not in open_steps:
-                    open_steps.add(name)
-                    changed = True
-                    if output:
-                        conditional.add(output)
-        for name, step in sorted(steps.items()):
-            output = str((step.get("output") or {}).get("ref") or "")
-            if (step.get("norm") or {}).get("verdict") == "pending" and (
-                records.get(output) or {}
-            ).get("status") == "stabilized":
-                anew.append(f"{own}{name}")
+        impeached |= _spread(steps, own, "fail", impeached)
+        conditional |= _spread(steps, own, "pending", conditional)
+        anew += _awaiting(steps, own, records)
     return impeached, conditional - impeached, anew
 
 
@@ -290,7 +305,88 @@ def merge(diagnoses: list[Diagnosis]) -> Diagnosis:
     return merged
 
 
-# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
+@dataclass(frozen=True)
+class _Model:
+    """The model of answerability that the registry declares.
+
+    Attributes
+    ----------
+    order : list of str
+        The conditions, each listed after the conditions on which it depends.
+    deps : mapping
+        Per condition and route, the conditions on which it depends.
+    acting : mapping
+        Per condition, the activities that act on it, in the order of the registry.
+    """
+
+    order: list[str]
+    deps: Mapping[str, Mapping[str, list[str]]]
+    acting: Mapping[str, list[str]]
+
+
+@dataclass(frozen=True)
+class _Reach:
+    """What the readiness of an act reads: the registries, the local records and their state."""
+
+    acts: Mapping[str, Activity]
+    types: Mapping[str, Any]
+    local: Records
+    impeached: set[str]
+    conditional: set[str]
+
+
+def _model(registry: Mapping[str, Any]) -> _Model:
+    """Return the model of answerability that a registry declares, with hyphenated names."""
+    deps = {
+        str(k).replace(" ", "-"): {
+            route: [str(d).replace(" ", "-") for d in names] for route, names in (v or {}).items()
+        }
+        for k, v in (registry.get("dependencies") or {}).items()
+    }
+    acting: dict[str, list[str]] = {}
+    for entry in registry.get("activities") or []:
+        name = str(entry.get("condition")).replace(" ", "-")
+        if entry.get("id") not in acting.setdefault(name, []):
+            acting[name].append(str(entry.get("id")))
+    order = [str(name).replace(" ", "-") for name in registry.get("conditions") or []]
+    return _Model(order, deps, acting)
+
+
+def _route_diagnosis(
+    question: Mapping[str, Any], route: str, model: _Model, records: Records, reach: _Reach
+) -> RouteDiagnosis:
+    """Return the states, the open and the refuted conditions of a question on a route."""
+    applicable = conditions_on(route, model.deps)
+    if c.at(question, "task.epistemic_aim") == "explication":
+        # the explicandum is not a slot, so its definiteness is no condition and a
+        # dependency on it is void
+        applicable = {
+            k: [d for d in v if d != "definiteness"]
+            for k, v in applicable.items()
+            if k != "definiteness"
+        }
+    states: dict[str, ConditionState] = {}
+    for condition in (name for name in model.order if name in applicable):
+        states[condition] = (
+            asserted(question, condition, route)
+            or derived(question, condition, records)
+            or ConditionState(condition, "not-established", "default")
+        )
+    established = ConditionState("", "established", "default")
+    opened = {
+        condition: tuple(
+            readiness(reach.acts[a], reach.local, reach.types, reach.impeached, reach.conditional)
+            for a in model.acting.get(condition, [])
+            if a in reach.acts
+        )
+        for condition, state in states.items()
+        if state.state == "not-established"
+        and all(states.get(d, established).state == "established" for d in applicable[condition])
+    }
+    refuted = tuple(cond for cond, state in states.items() if state.state == "refuted")
+    return RouteDiagnosis(route, tuple(states.values()), opened, refuted)
+
+
 def diagnose(
     records: Records, registry: Mapping[str, Any] | None = None, local: Records | None = None
 ) -> Diagnosis:
@@ -306,23 +402,10 @@ def diagnose(
     >>> list(diagnosis.questions[0].routes[0].open)
     ['definiteness']
     """
-    registry = registry or answerability_registry()
-    dependencies = registry.get("dependencies") or {}
-    order = [str(name).replace(" ", "-") for name in registry.get("conditions") or []]
-    deps = {
-        str(k).replace(" ", "-"): {
-            route: [str(d).replace(" ", "-") for d in names] for route, names in (v or {}).items()
-        }
-        for k, v in dependencies.items()
-    }
-    acting: dict[str, list[str]] = {}
-    for entry in registry.get("activities") or []:
-        name = str(entry.get("condition")).replace(" ", "-")
-        if entry.get("id") not in acting.setdefault(name, []):
-            acting[name].append(str(entry.get("id")))
-    acts, types = activities(), product_types()
+    model = _model(registry or answerability_registry())
     local = records if local is None else local
     impeached, conditional, anew = itinerary_state(local)
+    reach = _Reach(activities(), product_types(), local, impeached, conditional)
     result = Diagnosis(
         impeached=impeached,
         conditional=conditional,
@@ -331,41 +414,11 @@ def diagnose(
     )
     for ident in sorted(i for i, r in local.items() if r.get("type") == "question"):
         question = local[ident]
-        routes = []
-        for route in routes_of(question):
-            applicable = conditions_on(route, deps)
-            if c.at(question, "task.epistemic_aim") == "explication":
-                # the explicandum is not a slot, so its definiteness is no condition and a
-                # dependency on it is void
-                applicable = {
-                    k: [d for d in v if d != "definiteness"]
-                    for k, v in applicable.items()
-                    if k != "definiteness"
-                }
-            states: dict[str, ConditionState] = {}
-            for condition in (name for name in order if name in applicable):
-                states[condition] = (
-                    asserted(question, condition, route)
-                    or derived(question, condition, records)
-                    or ConditionState(condition, "not-established", "default")
-                )
-            opened = {
-                condition: tuple(
-                    readiness(acts[a], local, types, impeached, conditional)
-                    for a in acting.get(condition, [])
-                    if a in acts
-                )
-                for condition, state in states.items()
-                if state.state == "not-established"
-                and all(
-                    states.get(d, ConditionState(d, "established", "default")).state
-                    == "established"
-                    for d in applicable[condition]
-                )
-            }
-            refuted = tuple(cond for cond, state in states.items() if state.state == "refuted")
-            routes.append(RouteDiagnosis(route, tuple(states.values()), opened, refuted))
-        result.questions.append(QuestionDiagnosis(ident, tuple(routes)))
+        routes = tuple(
+            _route_diagnosis(question, route, model, records, reach)
+            for route in routes_of(question)
+        )
+        result.questions.append(QuestionDiagnosis(ident, routes))
     return result
 
 
