@@ -1,12 +1,13 @@
 """Model of the conditions for obtaining an answer, checked against the notes that state it.
 
-The model lives in the registry ``src/gnomon/data/registries/answerability.yml``. These tests check that each quoted norm occurs in the
-note of its activity, that the dependency table of the conditions note states the model's dependencies
-route by route, that the activity map of the procedure note lists the model's activities, and that the
-dependencies are acyclic in the stated order. A last test checks the facts of the records that the
-worked example of the procedure cites; it reads the records, not the prose of the example.
-The dependency test reads the bold condition names of each route segment of a cell; qualifiers inside a
-segment, such as the topic and existence parts of soundness, are not checked.
+The model lives in the registry ``src/gnomon/data/registries/answerability.yml``. These tests check
+that each quoted norm occurs in the note of its activity, that the dependency table of the
+conditions note states the model's dependencies route by route, that the activity map of the
+procedure note lists the model's activities, and that the dependencies are acyclic in the stated
+order. A last test checks the facts of the records that the worked example of the procedure cites;
+it reads the records, not the prose of the example. The dependency test reads the bold condition
+names of each route segment of a cell; qualifiers inside a segment, such as the topic and existence
+parts of soundness, are not checked.
 """
 
 from __future__ import annotations
@@ -31,7 +32,8 @@ ROUTES = ("selection", "construction")
 
 
 def normalize(text: str) -> str:
-    """Reduce Markdown to plain words: link text kept, emphasis, code marks, math and citations dropped."""
+    """Reduce Markdown to plain words: link text kept, emphasis, code marks, math and citations
+    dropped."""
     text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
     text = re.sub(r"\[[a-z]+\d{4}[a-z_]*\]", "", text)
     text = re.sub(r"[*`$]", "", text)
@@ -75,7 +77,8 @@ def dependencies(condition: str, route: str) -> set[str]:
 
 
 def stated_dependencies(cell: str, route: str) -> set[str]:
-    """Bold condition names of a cell, keeping the segments unqualified or qualified by ``route``."""
+    """Bold condition names of a cell, keeping the segments unqualified or qualified by ``route``.
+    """
     names: set[str] = set()
     for segment in cell.split(";"):
         qualifier = re.match(r"\s*under (selection|construction)\b", segment)

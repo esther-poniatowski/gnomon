@@ -73,7 +73,8 @@ def cli_init(
     for path in written:
         typer.echo(f"{path}: written")
     typer.echo(
-        f"Fill the records in the order of {Path(directory) / '_index.md'}, then run: gnomon check {directory}"
+        f"Fill the records in the order of {Path(directory) / '_index.md'}, then run: gnomon check"
+        f" {directory}"
     )
 
 
@@ -81,7 +82,8 @@ def cli_init(
 def cli_validate(
     paths: list[str] = typer.Argument(..., help="Record files or directories to validate."),
 ) -> None:
-    """Validate each record against the contract that it names, skipping the kinds that have no schema."""
+    """Validate each record against the contract that it names, skipping the kinds that have no
+    schema."""
     from .schemas import record_errors, record_kinds
 
     files: list[Path] = []
@@ -124,7 +126,8 @@ def cli_check(
         None,
         "--output",
         "-o",
-        help="Write the report to this path instead of standard output; missing folders are created.",
+        help="Write the report to this path instead of standard output; missing folders are"
+        " created.",
     ),
 ) -> None:
     """Run every check on the records of a directory tree.
@@ -207,7 +210,8 @@ def cli_status(
     The state of each condition is read from the assertions of the question, else from a field that
     shows it, else it is not established. A condition is open when every condition on which it
     depends is established, and an act on it is ready when its required inputs exist unimpeached.
-    The command exits with status 1 when a file cannot be read, and 2 when the report cannot be written.
+    The command exits with status 1 when a file cannot be read, and 2 when the report cannot be
+    written.
     """
     from .answerability import as_document, diagnose, merge, render_text
     from .check import load_workspace
@@ -291,7 +295,8 @@ class OutputFormat(str, Enum):
 def _read_records(
     source: Path, tolerant: bool, pattern: str = "*.yml"
 ) -> tuple[dict[str, Mapping[str, Any]], dict[str, Path], list[str]]:
-    """Return the records of ``source`` keyed by identifier, the file of each, and the read failures.
+    """Return the records of ``source`` keyed by identifier, the file of each, and the read
+    failures.
 
     The files are those that ``pattern`` matches, such as ``**/*.yml`` for a whole tree. A later
     file carrying an identifier already read replaces the earlier one. When ``tolerant`` is
@@ -336,7 +341,8 @@ def cli_schemas(
         False, "--check", help="Report the stale generated files instead of writing them."
     ),
 ) -> None:
-    """Write the contracts and the templates generated from the base schemas and the vocabulary registry."""
+    """Write the contracts and the templates generated from the base schemas and the vocabulary
+    registry."""
     from .schemas import generated_files, stale_files
 
     if check:
@@ -358,8 +364,8 @@ def cli_itinerary(
         OutputFormat.text,
         "--format",
         "-f",
-        help="text prints one line per problem; sarif also writes a SARIF 2.1.0 log in the findings "
-        "profile of Elenchos, on standard output or at --output.",
+        help="text prints one line per problem; sarif also writes a SARIF 2.1.0 log in the"
+        " findings profile of Elenchos, on standard output or at --output.",
     ),
     output: Path | None = typer.Option(
         None,
@@ -398,7 +404,8 @@ def cli_itinerary(
             raise typer.Exit(code=1) from None
     records, files, unreadable = _read_records(source, tolerant=sarif)
     stopped = (
-        f"{len(unreadable)} record files could not be read, so the itineraries naming their records "
+        f"{len(unreadable)} record files could not be read, so the itineraries naming their records"
+        " "
         "were not fully checked"
         if unreadable
         else None
@@ -448,11 +455,11 @@ def cli_views(
 ) -> None:
     """Write the views of the state of an inquiry as YAML records, one file per view.
 
-    The views are the state of each problem, the open conditions and the ready acts, the exposure
-    of each answer, the progress of each itinerary, the maturity of each record, the question tree,
-    and the statement of each question composed from its fields. Each view holds no date and no absolute path, so two runs on unchanged records
-    write the same files. The command exits with status 1 when a file cannot be read, and 2 when a
-    view cannot be written.
+    The views are the state of each problem, the open conditions and the ready acts, the exposure of
+    each answer, the progress of each itinerary, the maturity of each record, the question tree, and
+    the statement of each question composed from its fields. Each view holds no date and no absolute
+    path, so two runs on unchanged records write the same files. The command exits with status 1
+    when a file cannot be read, and 2 when a view cannot be written.
     """
     from .answerability import as_document, diagnose, merge
     from .check import load_workspace

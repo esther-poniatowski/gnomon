@@ -220,7 +220,8 @@ class _Context:
         return self.workspace.by_id.get(str(ident), {}) if ident else {}
 
     def target_of(self, record: Mapping[str, Any]) -> Mapping[str, Any]:
-        """Return the target system that a record is stated against, through its question for an answer."""
+        """Return the target system that a record is stated against, through its question for an
+        answer."""
         upstream = v.upstream_of(record, self.workspace.by_id)
         if upstream:
             return upstream
@@ -340,7 +341,8 @@ def _answer(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 
 def _model(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
-    """The checks of a model: retired symbols, its operations and the requirements of its parents."""
+    """The checks of a model: retired symbols, its operations and the requirements of its parents.
+    """
     return (
         v.retired_in_use(record)
         + c.incomplete_operations(record)
@@ -426,7 +428,8 @@ def check_workspace(workspace: Workspace) -> list[Located]:
                     results = [
                         finding(
                             CHECK_FAILED,
-                            f"{run.__name__.strip('_')}: stopped on {type(error).__name__}: {error}",
+                            f"{run.__name__.strip('_')}: stopped on {type(error).__name__}:"
+                            f" {error}",
                             value=run.__name__,
                         )
                     ]

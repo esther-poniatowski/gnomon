@@ -129,7 +129,8 @@ def test_a_credence_outside_the_unit_interval_or_without_basis_is_reported() -> 
 
 
 def test_an_answer_status_outside_the_attitudes_is_reported() -> None:
-    """The former status `informally-backed` mixed an attitude with a support, and is now refused."""
+    """The former status `informally-backed` mixed an attitude with a support, and is now refused.
+    """
     record = {
         "type": "answer",
         "status": "informally-backed",
@@ -173,8 +174,10 @@ def test_a_placeholder_whose_type_does_not_fit_its_slot_is_reported() -> None:
         }
     }
     assert texts(unresolved_slots(question, {}, TYPES)) == [
-        "subject.target_system: the placeholder type 'phenomenon' does not fit the slot, which awaits 'system'",
-        "subject.phenomenon: the placeholder type 'system' does not fit the slot, which awaits 'phenomenon'",
+        "subject.target_system: the placeholder type 'phenomenon' does not fit the slot, which"
+        " awaits 'system'",
+        "subject.phenomenon: the placeholder type 'system' does not fit the slot, which awaits"
+        " 'phenomenon'",
     ]
     question["subject"] = {
         "target_system": {"placeholder": "system", "description": "networks of the benchmark"},
@@ -184,7 +187,8 @@ def test_a_placeholder_whose_type_does_not_fit_its_slot_is_reported() -> None:
 
 
 def test_the_dispositions_of_the_fixture_assessments() -> None:
-    """Each fixture assessment has a determinate disposition, and the cases with a failed test are not satisfied."""
+    """Each fixture assessment has a determinate disposition, and the cases with a failed test are
+    not satisfied."""
     root = EXAMPLES
     found = {}
     for path in sorted(root.glob("*/assessment.yml")):
@@ -194,7 +198,8 @@ def test_the_dispositions_of_the_fixture_assessments() -> None:
 
 
 def test_a_corrective_answer_that_passes_its_tests_is_corrective_rather_than_satisfied() -> None:
-    """A corrective answer shows that its question has no true direct answer, so it cannot satisfy it."""
+    """A corrective answer shows that its question has no true direct answer, so it cannot satisfy
+    it."""
     passing = {
         "tests": {
             "admissibility": {"product": {"verdict": "not-applicable"}},
@@ -222,7 +227,8 @@ def test_an_appraisal_is_reported_unless_the_answer_passes() -> None:
 
 
 def test_an_assessment_of_a_construct_holds_one_verdict_per_constraint() -> None:
-    """A construct is tested against the constraints of its problem; an answer against its question."""
+    """A construct is tested against the constraints of its problem; an answer against its question.
+    """
     records = {
         "prob.a": {
             "type": "problem",
@@ -246,7 +252,8 @@ def test_an_assessment_of_a_construct_holds_one_verdict_per_constraint() -> None
         "tests": {"constraints": [{"constraint": "stable"}]},
     }
     assert texts(misdirected_assessment(wrong, records, CONSTRUCTS)) == [
-        "against: quest.a is a question record, and an assessment of a model is made against a problem",
+        "against: quest.a is a question record, and an assessment of a model is made against a"
+        " problem",
     ]
     unknown = {
         "assesses": "mod.a",
@@ -294,7 +301,8 @@ def test_an_assessment_of_an_answer_keeps_its_two_levels_of_tests() -> None:
         },
     }
     assert texts(misdirected_assessment(misread, records, CONSTRUCTS)) == [
-        "against: prob.a is a problem record, and an assessment of an answer is made against a question",
+        "against: prob.a is a problem record, and an assessment of an answer is made against a"
+        " question",
         "tests.warrant: an assessment of an answer holds its tests of warrant",
         "tests.constraints: an assessment of an answer holds no verdict per constraint",
     ]
@@ -307,7 +315,8 @@ def test_an_assessment_of_an_answer_keeps_its_two_levels_of_tests() -> None:
 
 
 def test_a_problem_bounds_the_aim_and_the_request_of_its_questions() -> None:
-    """The associated question takes the request of the demand; each serving question an admitted aim."""
+    """The associated question takes the request of the demand; each serving question an admitted
+    aim."""
     problem = {
         "id": "prob.a",
         "type": "problem",
@@ -492,7 +501,8 @@ def test_the_stated_knowledge_obstacles_agree_with_the_records() -> None:
     records["ans.a"] = {"type": "answer", "answers": "quest.a", "status": "hypothesized"}
     assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == [
         "knowledge_obstacles: the problem states open-gap, which its records contradict",
-        "knowledge_obstacles: the records show unassessed-candidates, which the problem does not state",
+        "knowledge_obstacles: the records show unassessed-candidates, which the problem does not"
+        " state",
     ]
     problem["knowledge_obstacles"] = [
         {"obstacle": "unassessed-candidates"},
@@ -501,6 +511,8 @@ def test_the_stated_knowledge_obstacles_agree_with_the_records() -> None:
     assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == []
     records["ans.a"].update(status="accepted", erotetic_relation={"value": "corrective"})
     assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == [
-        "knowledge_obstacles: the records show unsound-presupposition, which the problem does not state",
-        "knowledge_obstacles: the problem states unassessed-candidates, which its records contradict",
+        "knowledge_obstacles: the records show unsound-presupposition, which the problem does not"
+        " state",
+        "knowledge_obstacles: the problem states unassessed-candidates, which its records"
+        " contradict",
     ]

@@ -274,7 +274,8 @@ PAIRED_TARGET: dict[str, Any] = {
 
 
 def test_an_influence_without_an_ordered_product_of_declared_kinds_is_reported() -> None:
-    """The order of the tuples gives the direction of an influence, so each place is a declared kind."""
+    """The order of the tuples gives the direction of an influence, so each place is a declared
+    kind."""
     record = {
         "type": "background",
         "organization": [
@@ -313,12 +314,14 @@ def test_an_interaction_whose_laws_name_no_quantity_of_both_endpoints_is_reporte
 
     assert misrouted_interactions(background("u = emit(z)"), PAIRED_TARGET) == []
     assert texts(misrouted_interactions(background("z = emit(z)"), PAIRED_TARGET)) == [
-        "organization.coupling: the laws stating it name no quantity indexed by every one of ['sub', 'sub']"
+        "organization.coupling: the laws stating it name no quantity indexed by every one of"
+        " ['sub', 'sub']"
     ]
 
 
 def test_an_unmarked_entry_naming_a_symbol_of_one_variant_is_reported() -> None:
-    """An entry without a variant holds of every member, so it cannot name what one variant alone carries."""
+    """An entry without a variant holds of every member, so it cannot name what one variant alone
+    carries."""
     target = {
         "type": "target-system",
         "variants": [{"symbol": "lattice"}],
@@ -350,7 +353,8 @@ def test_an_unmarked_entry_naming_a_symbol_of_one_variant_is_reported() -> None:
 
 
 def test_a_call_passing_other_than_the_arity_of_its_operator_is_reported() -> None:
-    """An operator whose signature lists its sets takes one argument per set; an open signature states none."""
+    """An operator whose signature lists its sets takes one argument per set; an open signature
+    states none."""
     record = {
         "type": "target-system",
         "operators": [
@@ -367,7 +371,8 @@ def test_a_call_passing_other_than_the_arity_of_its_operator_is_reported() -> No
 
 
 def test_a_quantity_that_no_other_field_mentions_is_reported(tmp_path: Path) -> None:
-    """Only a quantity meant to be reached is reported, and a generated symbol table does not reach it."""
+    """Only a quantity meant to be reached is reported, and a generated symbol table does not reach
+    it."""
     (tmp_path / "target-system.yml").write_text(
         yaml.safe_dump(
             {
@@ -631,7 +636,8 @@ def test_a_relation_of_the_organization_says_what_its_ends_are() -> None:
     ]
     record["organization"] = [{"symbol": "neither"}]
     assert texts(malformed_relations(record)) == [
-        "organization.neither: a relation runs between parts or between laws, and this one names neither"
+        "organization.neither: a relation runs between parts or between laws, and this one names"
+        " neither"
     ]
     record["organization"] = [{"symbol": "lone", "among": ["draw"]}]
     assert texts(malformed_relations(record)) == [
@@ -750,7 +756,8 @@ def test_a_record_field_is_read_apart_from_a_field_of_the_same_name() -> None:
 
 
 def test_two_fields_of_one_block_that_share_a_name_take_the_vocabulary_of_their_own_path() -> None:
-    """In an answer, the kind of an explanatory factor is closed, and a varied factor holds a symbol.
+    """In an answer, the kind of an explanatory factor is closed, and a varied factor holds a
+    symbol.
 
     Both fields are named ``factor`` inside the block ``aim_block``, so a lookup by block and name
     would check the symbol against the kinds of a factor.

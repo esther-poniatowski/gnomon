@@ -122,7 +122,8 @@ def routes_of(question: Mapping[str, Any]) -> tuple[str, ...]:
 def conditions_on(
     route: str, dependencies: Mapping[str, Mapping[str, list[str]]]
 ) -> dict[str, list[str]]:
-    """Return the conditions that apply on a route, each with the conditions on which it depends there."""
+    """Return the conditions that apply on a route, each with the conditions on which it depends
+    there."""
     return {
         condition: [*(table.get(BOTH) or []), *(table.get(route) or [])]
         for condition, table in dependencies.items()
@@ -196,12 +197,13 @@ def derived(question: Mapping[str, Any], condition: str, records: Records) -> Co
 
 
 def itinerary_state(records: Records) -> tuple[set[str], set[str], list[str]]:
-    """Return the impeached records, the conditional records, and the steps whose norm awaits a new judgment.
+    """Return the impeached records, the conditional records, and the steps whose norm awaits a new
+    judgment.
 
     A record is impeached when a step that produced it failed its norm, or took an impeached record
     or the output of an impeached step as input; a pending verdict propagates the same way and makes
-    its products conditional. A step whose verdict is pending while its record is stabilized awaits a
-    new judgment of its norm.
+    its products conditional. A step whose verdict is pending while its record is stabilized awaits
+    a new judgment of its norm.
     """
     impeached: set[str] = set()
     conditional: set[str] = set()
@@ -331,7 +333,8 @@ def diagnose(
         for route in routes_of(question):
             applicable = conditions_on(route, deps)
             if c.at(question, "task.epistemic_aim") == "explication":
-                # the explicandum is not a slot, so its definiteness is no condition and a dependency on it is void
+                # the explicandum is not a slot, so its definiteness is no condition and a
+                # dependency on it is void
                 applicable = {
                     k: [d for d in v if d != "definiteness"]
                     for k, v in applicable.items()
@@ -425,7 +428,8 @@ def as_document(diagnosis: Diagnosis) -> dict[str, Any]:
 
 
 def render_text(diagnosis: Diagnosis) -> str:
-    """Return the diagnosis as lines for a terminal: per question and route, the open and refuted conditions."""
+    """Return the diagnosis as lines for a terminal: per question and route, the open and refuted
+    conditions."""
     lines: list[str] = []
     for q in diagnosis.questions:
         for r in q.routes:
@@ -448,7 +452,8 @@ def render_text(diagnosis: Diagnosis) -> str:
     for rev in sorted(diagnosis.revisions, key=lambda x: x.step):
         if rev.to_review:
             lines.append(
-                f"review after the {rev.kind} of {rev.record} ({rev.step}): {', '.join(rev.to_review)}"
+                f"review after the {rev.kind} of {rev.record} ({rev.step}):"
+                f" {', '.join(rev.to_review)}"
             )
     for step in sorted(diagnosis.judge_anew):
         lines.append(f"judge anew the norm of {step}, whose record is stabilized")

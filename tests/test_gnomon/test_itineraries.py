@@ -1,9 +1,9 @@
 """Itineraries of inquiry, checked against the registries of activities and product types.
 
 The registries transcribe the taxonomy of epistemic activities, whose notes are the source of the
-content, so the first tests check the registries against those notes. The remaining tests plant
-one defect per check of :func:`gnomon.itineraries.itinerary_problems` in an itinerary that passes, and confirm
-that the check reports it for the intended reason.
+content, so the first tests check the registries against those notes. The remaining tests plant one
+defect per check of :func:`gnomon.itineraries.itinerary_problems` in an itinerary that passes, and
+confirm that the check reports it for the intended reason.
 """
 
 from __future__ import annotations
@@ -250,7 +250,8 @@ ITINERARY: dict[str, Any] = {
 
 
 def served(itinerary: dict[str, Any]) -> dict[str, Any]:
-    """Return the itinerary with a rationale that serves its problem on every step that states none."""
+    """Return the itinerary with a rationale that serves its problem on every step that states none.
+    """
     for step in itinerary.get("steps") or []:
         step.setdefault("rationale", {"serves": itinerary.get("addresses")})
     return itinerary
@@ -277,7 +278,8 @@ def test_an_unregistered_activity_is_reported() -> None:
 def test_input_types_that_do_not_fill_the_activity_are_reported() -> None:
     itinerary = planted(derive={"inputs": [{"type": "data", "ref": "phen.readout"}]})
     assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
-        "steps.derive: derivation takes one input of admitted-laws or model or target-claim, and the step gives 0",
+        "steps.derive: derivation takes one input of admitted-laws or model or target-claim, and"
+        " the step gives 0",
         "steps.derive: derivation takes no input of type data",
     ]
 
@@ -323,7 +325,8 @@ def test_an_input_reference_of_the_wrong_kind_or_to_nothing_is_reported() -> Non
 
 
 def unrecorded_design() -> dict[str, Any]:
-    """Return the product types with `design` held by no record, so that a planted case can reach that rule."""
+    """Return the product types with `design` held by no record, so that a planted case can reach
+    that rule."""
     types = dict(product_types())
     types["design"] = {**types["design"], "record": "to-create"}
     return types
@@ -332,16 +335,19 @@ def unrecorded_design() -> dict[str, Any]:
 def test_a_type_that_no_record_holds_is_reached_only_through_a_step() -> None:
     itinerary = planted(observe={"inputs": [{"type": "design", "ref": "quest.geometry"}]})
     assert texts(itinerary_problems(served(itinerary), RECORDS, types=unrecorded_design())) == [
-        "steps.observe: no record holds a design, so its input names a step, and quest.geometry is none"
+        "steps.observe: no record holds a design, so its input names a step, and quest.geometry is"
+        " none"
     ]
 
 
 def test_an_output_whose_value_the_activity_does_not_produce_is_reported() -> None:
-    """Experimental design outputs protocols; a design of the kind `method` comes from method design."""
+    """Experimental design outputs protocols; a design of the kind `method` comes from method
+    design."""
     records = {**RECORDS, "design.geometry.protocol": {"type": "design", "kind": "method"}}
     itinerary = planted(design={"output": {"type": "design", "ref": "design.geometry.protocol"}})
     assert texts(itinerary_problems(served(itinerary), records)) == [
-        "steps.design: design.geometry.protocol has the kind method, and experimental-design produces"
+        "steps.design: design.geometry.protocol has the kind method, and experimental-design"
+        " produces"
         " a design of the kind experiment or simulation-run"
     ]
     records["design.geometry.protocol"] = {"type": "design", "kind": "simulation-run"}
@@ -360,7 +366,8 @@ def test_a_norm_verdict_or_mode_outside_the_registries_is_reported() -> None:
         derive={"norm": {"test": "norm.simulation", "verdict": "likely"}, "mode": "inductive"}
     )
     assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
-        "steps.derive: the norm of derivation is norm.derivation, and the step names norm.simulation",
+        "steps.derive: the norm of derivation is norm.derivation, and the step names"
+        " norm.simulation",
         "steps.derive: 'likely' is no verdict",
         "steps.derive: derivation proceeds by deductive inference, and the step states inductive",
     ]
@@ -392,7 +399,8 @@ def test_a_itinerary_addressing_no_problem_or_question_and_a_repeated_step_are_r
 
 
 def test_the_type_of_a_record_follows_from_its_state() -> None:
-    """A schema is a question with a placeholder slot; commitment and status decide the other types."""
+    """A schema is a question with a placeholder slot; commitment and status decide the other types.
+    """
     records = {
         "quest.schema": {
             "type": "question",
@@ -454,7 +462,8 @@ def test_the_type_of_a_record_follows_from_its_state() -> None:
 
 
 def test_an_attitude_restricts_an_answer_only() -> None:
-    """A qualifier of attitude binds an answer; a model in the same slot, or an output, is unaffected."""
+    """A qualifier of attitude binds an answer; a model in the same slot, or an output, is
+    unaffected."""
     records = {
         "prob.a": {"type": "problem"},
         "mod.a": {"type": "model", "status": "provisional"},
@@ -491,7 +500,8 @@ def test_an_attitude_restricts_an_answer_only() -> None:
 
 
 def test_an_explanation_may_run_on_the_target_description() -> None:
-    """The input model of an explanation is optional: a route on the target description takes none."""
+    """The input model of an explanation is optional: a route on the target description takes none.
+    """
     records = {
         "prob.a": {"type": "problem"},
         "phen.a": {"type": "phenomenon"},
@@ -530,7 +540,8 @@ def test_an_explanation_may_run_on_the_target_description() -> None:
 
 
 def test_a_question_without_a_request_stays_a_schema() -> None:
-    """Identified slots make the possible answers definite; the request then fixes the direct answers."""
+    """Identified slots make the possible answers definite; the request then fixes the direct
+    answers."""
     question = {
         "type": "question",
         "subject": {"target_system": "system.a", "phenomenon": "phen.a"},
@@ -543,7 +554,8 @@ def test_a_question_without_a_request_stays_a_schema() -> None:
 
 
 def test_a_specified_record_still_holds_an_identified_subject() -> None:
-    """Commitment is cumulative for the identified subject, and strict for the target specification."""
+    """Commitment is cumulative for the identified subject, and strict for the target specification.
+    """
     specified = {"type": "target-system", "commitment": "specified"}
     identified = {"type": "target-system", "commitment": "identified"}
     assert {"identified-subject", "target-specification"} <= set(record_types(specified, TYPES))
@@ -576,8 +588,10 @@ def test_a_step_serves_a_question_or_a_problem_and_names_what_it_acts_on() -> No
         design={"rationale": {"serves": "mod.kernel", "acts_on": "access"}},
     )
     assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
-        "steps.derive: the rationale serves a question and names no condition or act among access, answer-type, "
-        "bridging, candidates, definiteness, discrimination, evaluation, obtaining, representation, soundness",
+        "steps.derive: the rationale serves a question and names no condition or act among access,"
+        " answer-type, "
+        "bridging, candidates, definiteness, discrimination, evaluation, obtaining, representation,"
+        " soundness",
         "steps.design: the rationale serves mod.kernel, which is no question or problem record",
     ]
 
@@ -616,7 +630,8 @@ def test_a_branch_names_a_condition_and_an_alternative_of_the_same_output() -> N
     assert texts(itinerary_problems(served(itinerary), RECORDS)) == [
         "steps.derive: the branch states no condition",
         "steps.derive: the branch names no step that produces consequence otherwise",
-        "steps.derive: derivation takes no input of its output type consequence, so it cannot repeat on it",
+        "steps.derive: derivation takes no input of its output type consequence, so it cannot"
+        " repeat on it",
     ]
 
 

@@ -1,10 +1,10 @@
 """
 Itineraries of inquiry, checked against the registries of epistemic activities and product types.
 
-An itinerary lists activity instances, its steps. Each step names a registered activity, the products
-that it takes and the product that it produces, each typed by the registry of product types, and
-the verdict of the norm that judges it. Two registries in package data declare what a step may
-state, so no check here reads a document:
+An itinerary lists activity instances, its steps. Each step names a registered activity, the
+products that it takes and the product that it produces, each typed by the registry of product
+types, and the verdict of the norm that judges it. Two registries in package data declare what a
+step may state, so no check here reads a document:
 
 - ``registries/activities.yml``: per activity, its family, its input and output types, its norm,
   its mode and its context;
@@ -50,7 +50,8 @@ EXTERNAL = "external pointer"
 #: The value of ``record`` for a type that no record kind holds yet.
 TO_CREATE = "to-create"
 
-#: The record kind whose status is an attitude, the only kind that an ``attitude`` qualifier restricts.
+#: The record kind whose status is an attitude, the only kind that an ``attitude`` qualifier
+#: restricts.
 ATTITUDE_HOLDER = "answer"
 
 
@@ -107,9 +108,9 @@ def slot(entry: Any) -> Slot:
 
     A bare type takes one record. A mapping names one type under ``type`` or alternatives under
     ``types``, and qualifies the number with ``several`` (two or more) or ``count`` (exactly that
-    many), and ``optional`` lets the step omit the input; a ``role`` leaves the type unchanged. An ``attitude``, one value or a list, restricts the
-    attitudes under which a referenced answer holds the type, since the attitude of a claim is an
-    attribute of the claim, not a type.
+    many), and ``optional`` lets the step omit the input; a ``role`` leaves the type unchanged. An
+    ``attitude``, one value or a list, restricts the attitudes under which a referenced answer holds
+    the type, since the attitude of a claim is an attribute of the claim, not a type.
 
     >>> slot("problem")
     Slot(types=frozenset({'problem'}), least=1, most=1, attitudes=frozenset())
@@ -139,7 +140,8 @@ def slot(entry: Any) -> Slot:
 
 
 def required_attitudes(act: Activity, kind: str) -> frozenset[str]:
-    """Return the attitudes under which a record must hold ``kind`` to enter ``act``; empty when any serves.
+    """Return the attitudes under which a record must hold ``kind`` to enter ``act``; empty when any
+    serves.
 
     An input of one type may fill several slots of an activity, so the attitudes of those slots are
     united, and a slot that names no attitude admits every attitude.
@@ -193,7 +195,8 @@ def type_classes(types: Mapping[str, Mapping[str, Any]] | None = None) -> dict[s
 
 
 def type_holders(types: Mapping[str, Mapping[str, Any]] | None = None) -> dict[str, frozenset[str]]:
-    """Return, per product type, the record kinds that hold it; a type that no record holds maps to none.
+    """Return, per product type, the record kinds that hold it; a type that no record holds maps to
+    none.
 
     >>> type_holders({"model": {"record": ["model"]}, "design": {"record": "to-create"}})
     {'model': frozenset({'model'}), 'design': frozenset()}
@@ -210,7 +213,8 @@ def construct_record_kinds(types: Mapping[str, Mapping[str, Any]] | None = None)
 
     >>> sorted(construct_record_kinds({"model": {"class": "construct", "record": ["model"]},
     ...                                "design": {"class": "construct", "record": "to-create"},
-    ...                                "verdict": {"class": "evaluative", "record": ["assessment"]}}))
+    ...                                "verdict": {"class": "evaluative",
+    ...                                            "record": ["assessment"]}}))
     ['model']
     """
     types = product_types() if types is None else types
@@ -229,7 +233,8 @@ def has_placeholder(question: Mapping[str, Any]) -> bool:
 
 
 def question_form(question: Mapping[str, Any]) -> str:
-    """Return ``question`` once every subject slot names a record and the request is fixed, else ``schema``.
+    """Return ``question`` once every subject slot names a record and the request is fixed, else
+    ``schema``.
 
     >>> question_form({"subject": {"phenomenon": "phen.a"}, "request": "one"})
     'question'
@@ -312,7 +317,8 @@ def malformed_registry(
     modes: Iterable[str],
     attitudes: Iterable[str] | None = None,
 ) -> list[Finding]:
-    """Return every activity that names a type, a mode, an attitude or a norm the registries do not admit.
+    """Return every activity that names a type, a mode, an attitude or a norm the registries do not
+    admit.
 
     The itinerary check trusts the activity registry, so the registry is itself checked: every input
     and output names a product type, every attitude that qualifies an input is an attitude of an
@@ -394,21 +400,25 @@ def itinerary_problems(
 ) -> list[Finding]:
     """Return every step of the itinerary that the registries or the records contradict.
 
-    The five conditions of the itinerary check, stated in the overview of the activity taxonomy, apply:
+    The five conditions of the itinerary check, stated in the overview of the activity taxonomy,
+    apply:
 
     - every step names a registered activity;
     - the input types of a step fill the inputs of its activity, in number as well as in type, and
       its output type is the output of that activity;
     - each input reference names a record that holds the input type in its present state, or at
-      the revision that the input names by ``as_of``, under an attitude that its slot admits, or a step producing that type, named in full by the identifier
-      of the itinerary followed by its own; a type held outside the records takes any pointer;
+      the revision that the input names by ``as_of``, under an attitude that its slot admits, or a
+      step producing that type, named in full by the identifier of the itinerary followed by its
+      own; a type held outside the records takes any pointer;
     - the references between steps form an acyclic graph;
-    - every verdict is admitted, and a verdict ``pass`` or ``fail`` states its evidence and its date.
+    - every verdict is admitted, and a verdict ``pass`` or ``fail`` states its evidence and its
+      date.
 
-    Five checks of the record fields complete them: the itinerary addresses a problem or a question; no
-    two steps share an identifier; an output reference, once given, names a record that holds the
+    Five checks of the record fields complete them: the itinerary addresses a problem or a question;
+    no two steps share an identifier; an output reference, once given, names a record that holds the
     output type; the norm of a step is the test of its activity, and a stated mode is its mode; the
-    rationale of a step serves a question or a problem, and names a condition when it serves a question.
+    rationale of a step serves a question or a problem, and names a condition when it serves a
+    question.
 
     Parameters
     ----------
@@ -489,7 +499,8 @@ def itinerary_problems(
                 found.append(
                     finding(
                         rules.ITINERARY_UNFILLED_INPUT,
-                        f"{where}: {act.id} takes {_describe(held)} of {' or '.join(sorted(held.types))},"
+                        f"{where}: {act.id} takes {_describe(held)} of"
+                        f" {' or '.join(sorted(held.types))},"
                         f" and the step gives {filled}",
                         *at,
                         "inputs",
@@ -531,7 +542,8 @@ def itinerary_problems(
                 found.append(
                     finding(
                         rules.ITINERARY_INPUT_WITHOUT_PRODUCER,
-                        f"{where}: no record holds a {kind}, so its input names a step, and {ref} is none",
+                        f"{where}: no record holds a {kind}, so its input names a step, and {ref}"
+                        " is none",
                         *given,
                     )
                 )
@@ -613,7 +625,8 @@ def itinerary_problems(
                 found.append(
                     finding(
                         rules.ITINERARY_UNCHANGED_STATE,
-                        f"{where}: the status of {product} is {earlier.get('status')} before and after the step",
+                        f"{where}: the status of {product} is {earlier.get('status')} before and"
+                        " after the step",
                         *at,
                         "output",
                         "before",
@@ -648,7 +661,8 @@ def itinerary_problems(
             found.append(
                 finding(
                     rules.ITINERARY_FOREIGN_NORM,
-                    f"{where}: the norm of {act.id} is {act.norm}, and the step names {norm.get('test')}",
+                    f"{where}: the norm of {act.id} is {act.norm}, and the step names"
+                    f" {norm.get('test')}",
                     *at,
                     "norm",
                     "test",
@@ -680,7 +694,8 @@ def itinerary_problems(
                 found.append(
                     finding(
                         rules.ITINERARY_UNJUSTIFIED_VERDICT,
-                        f"{where}: the verdict {norm.get('verdict')} states no date of judgment, written YYYY-MM-DD",
+                        f"{where}: the verdict {norm.get('verdict')} states no date of judgment,"
+                        " written YYYY-MM-DD",
                         *at,
                         "norm",
                         "judged",
@@ -692,7 +707,8 @@ def itinerary_problems(
             found.append(
                 finding(
                     rules.ITINERARY_UNSERVED,
-                    f"{where}: the rationale serves {rationale.get('serves')}, which is no question or problem record",
+                    f"{where}: the rationale serves {rationale.get('serves')}, which is no question"
+                    " or problem record",
                     *at,
                     "rationale",
                     "serves",
@@ -749,7 +765,8 @@ def itinerary_problems(
                 found.append(
                     finding(
                         rules.ITINERARY_MALFORMED_CONSTRUCTOR,
-                        f"{where}: {act.id} takes no input of its output type {act.output}, so it cannot repeat on it",
+                        f"{where}: {act.id} takes no input of its output type {act.output}, so it"
+                        " cannot repeat on it",
                         *at,
                         "iterate",
                     )
@@ -759,7 +776,8 @@ def itinerary_problems(
             found.append(
                 finding(
                     rules.ITINERARY_MISMATCHED_MODE,
-                    f"{where}: {act.id} proceeds by {act.mode} inference, and the step states {mode}",
+                    f"{where}: {act.id} proceeds by {act.mode} inference, and the step states"
+                    f" {mode}",
                     *at,
                     "mode",
                 )

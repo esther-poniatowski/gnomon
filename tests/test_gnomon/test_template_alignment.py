@@ -5,10 +5,10 @@ in ``src/gnomon/data/templates`` holds one key per specification. These tests ch
 two agree: every documented specification exists in its template, in the same order, and no
 template key is left undocumented.
 
-The association is lexical, so that the notes stay readable without the templates: the name of
-a row is the name of its key, or begins with it ("Domain of conditions" for ``domain``), and a
-nested specification is written "Parent: child" ("Tests: admissibility" for ``tests.admissibility``).
-A note holding two tables under the same header names each by the block anchor that precedes it.
+The association is lexical, so that the notes stay readable without the templates: the name of a row
+is the name of its key, or begins with it ("Domain of conditions" for ``domain``), and a nested
+specification is written "Parent: child" ("Tests: admissibility" for ``tests.admissibility``). A
+note holding two tables under the same header names each by the block anchor that precedes it.
 """
 
 from __future__ import annotations
@@ -145,7 +145,8 @@ def documented_keys(note: str, header: Header, paths: Sequence[str], prefix: str
     return keys
 
 
-# (label, note, table header, template, scope of the reverse check, prefix, keys documented elsewhere)
+# (label, note, table header, template, scope of the reverse check, prefix,
+#  keys documented elsewhere)
 PAIRS = [
     (
         "problem",
@@ -372,7 +373,8 @@ def test_the_operator_note_lists_the_registry():
 
 
 def test_every_canonical_operator_has_one_source_of_arity() -> None:
-    """An operator takes its arity from its signature, or states it; never both, and never from its template."""
+    """An operator takes its arity from its signature, or states it; never both, and never from its
+    template."""
     from gnomon.vocabulary import operator_arity
 
     operators = yaml.safe_load((REGISTRY / "operators.yml").read_text())["operators"]
@@ -385,7 +387,8 @@ def test_every_canonical_operator_has_one_source_of_arity() -> None:
 
 
 def test_no_operator_notation_doubles_a_backslash() -> None:
-    """A single-quoted YAML scalar keeps every backslash, so a doubled one reaches LaTeX as a line break."""
+    """A single-quoted YAML scalar keeps every backslash, so a doubled one reaches LaTeX as a line
+    break."""
     operators = yaml.safe_load((REGISTRY / "operators.yml").read_text())["operators"]
     doubled = [
         e["symbol"] for e in operators if re.search(r"\\\\[A-Za-z]", e.get("notation") or "")
@@ -540,7 +543,8 @@ def test_the_rows_required_for_a_kind_are_the_registry_entries_by_value(
 
 
 def test_the_status_pairs_of_the_specification_are_those_that_the_check_reads() -> None:
-    """Each target status admits, in the check, the types of feature pair that the specification lists."""
+    """Each target status admits, in the check, the types of feature pair that the specification
+    lists."""
     from gnomon.completeness import STATUS_PAIRS
 
     registry = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text(encoding="utf-8"))
@@ -558,8 +562,9 @@ def test_the_status_pairs_of_the_specification_are_those_that_the_check_reads() 
 def test_the_rows_required_for_a_root_or_a_derived_model_are_the_registry_entries_by_presence() -> (
     None
 ):
-    """A row required "for a root model" is one that the absence of parents imposes, and a row required
-    "for a derived model" one that their presence imposes; the field of the parents is not counted.
+    """A row required "for a root model" is one that the absence of parents imposes, and a row
+    required "for a derived model" one that their presence imposes; the field of the parents is not
+    counted.
     """
     paths = flatten(template("model.yml"))
     documented: dict[str, list[str]] = {"absent": [], "present": []}
@@ -649,7 +654,8 @@ TIERS = {
 
 @pytest.mark.parametrize("tier", sorted(TIERS))
 def test_the_criteria_of_the_note_are_the_tests_of_the_assessment(tier: str) -> None:
-    """Each criterion of the tables of a tier is one test of the template, in the order of the note."""
+    """Each criterion of the tables of a tier is one test of the template, in the order of the note.
+    """
     documented = [name for header, column in TIERS[tier] for name in criteria(header, column)]
     assert documented == list(template("assessment.yml")["tests"][tier])
 
@@ -678,14 +684,16 @@ def test_the_occurrence_table_of_the_phenomenon_note_is_the_registry() -> None:
 
 
 def test_the_laws_of_a_model_take_the_keys_of_the_laws_of_a_background() -> None:
-    """A model states its laws in background form, so its law entries carry every key of a background law."""
+    """A model states its laws in background form, so its law entries carry every key of a
+    background law."""
     model_keys = set(template("model.yml")["laws"][0])
     background_keys = set(template("background.yml")["laws"][0])
     assert background_keys <= model_keys, sorted(background_keys - model_keys)
 
 
 def test_the_aim_categories_of_the_note_are_the_registry() -> None:
-    """The registry declares, for each aim, the category that the Category column of the aim note states.
+    """The registry declares, for each aim, the category that the Category column of the aim note
+    states.
 
     An exploration takes its category from the origin of its equivalence criterion, so its cell
     names one category per origin.
@@ -703,7 +711,8 @@ def test_the_aim_categories_of_the_note_are_the_registry() -> None:
         aim = re.search(r"\(`([a-z-]+)`\)", cells[0])
         assert aim is not None, f"no aim value in {cells[0]!r}"
         by_origin = re.findall(
-            r"(answer content|conceptual work|mode of inquiry), when (?:its|the) (?:equivalence )?criterion is an (input|output)",
+            r"(answer content|conceptual work|mode of inquiry), when (?:its|the) (?:equivalence"
+            r" )?criterion is an (input|output)",
             cells[1],
         )
         documented[aim.group(1)] = (
@@ -737,7 +746,8 @@ def test_the_aims_admitted_by_each_type_of_result_are_those_of_the_demand_table(
 
 
 def test_the_identifier_of_each_template_has_the_segments_of_its_prefix() -> None:
-    """The prefix of a record identifier fixes its number of segments, so a resolver splits a reference alone."""
+    """The prefix of a record identifier fixes its number of segments, so a resolver splits a
+    reference alone."""
     from gnomon.identifiers import RECORD_SEGMENTS
 
     for path in sorted(TEMPLATES.glob("*.yml")):

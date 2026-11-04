@@ -28,7 +28,8 @@ from .vocabulary import references
 #: The kinds of revision that flag a dependent resting monotonically on the revised record.
 MONOTONIC_KINDS = frozenset({"retraction", "correction", "taxonomic-restructure"})
 
-#: The errors of an operation of a derived model that keep the model a deductive consequence of its parent.
+#: The errors of an operation of a derived model that keep the model a deductive consequence of
+#: its parent.
 EXACT = frozenset({"exact"})
 
 Records = Mapping[str, Mapping[str, Any]]
@@ -68,7 +69,8 @@ def rests_monotonically(record: Mapping[str, Any]) -> bool:
 
     >>> rests_monotonically({"type": "answer", "support": "formally-proven"})
     True
-    >>> rests_monotonically({"type": "model", "derives_from": ["mod.a"], "operations": [{"error": "uncontrolled"}]})
+    >>> rests_monotonically({"type": "model", "derives_from": ["mod.a"],
+    ...                      "operations": [{"error": "uncontrolled"}]})
     False
     """
     if record.get("type") == "answer":
@@ -80,7 +82,8 @@ def rests_monotonically(record: Mapping[str, Any]) -> bool:
 
 
 def revisions(records: Records, itineraries: Records | None = None) -> list[Revision]:
-    """Return each revision of the itineraries, with its flagged dependents and those still to review.
+    """Return each revision of the itineraries, with its flagged dependents and those still to
+    review.
 
     ``itineraries`` holds the records whose itineraries are read, such as the records of one
     problem, and defaults to ``records``; the dependents are sought in ``records``.

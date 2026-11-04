@@ -141,7 +141,8 @@ def render_tree(roots: Iterable[Node]) -> str:
     """Return the tree as indented text, one record per line.
 
     >>> print(render_tree([Node("prob.a.b", {"type": "problem", "title": "Delay"},
-    ...                         [Node("quest.a.c", {"type": "question", "status": "posed"})])]), end="")
+    ...                         [Node("quest.a.c",
+    ...                               {"type": "question", "status": "posed"})])]), end="")
     problem prob.a.b: Delay
       question quest.a.c [posed]
     """
@@ -159,10 +160,10 @@ def render_tree(roots: Iterable[Node]) -> str:
 
 # --- Views as generated records ------------------------------------------------------------------
 #
-# Each view below is a generated record: a mapping in a stable order, which `gnomon views` writes as
-# YAML, and which the schema of the view, in `data/views/`, declares for a renderer such as
-# Ekphrasis. Every cell of a table is a scalar, so that a renderer displays it as a table row; a tree
-# or a graph is stated by a table of nodes and a table of edges.
+# Each view below is a generated record: a mapping in a stable order, which `gnomon views` writes
+# as YAML, and which the schema of the view, in `data/views/`, declares for a renderer such as
+# Ekphrasis. Every cell of a table is a scalar, so that a renderer displays it as a table row; a
+# tree or a graph is stated by a table of nodes and a table of edges.
 
 #: The maturity that a record status states, for the records whose status is a maturity.
 MATURITIES = ("open", "provisional", "stabilized")
@@ -242,7 +243,8 @@ def problem_state(records: Records) -> dict[str, Any]:
 
 
 def next_act(diagnosis_document: Mapping[str, Any]) -> dict[str, Any]:
-    """Return the open conditions and the ready acts, flattened from the diagnosis of ``gnomon status``."""
+    """Return the open conditions and the ready acts, flattened from the diagnosis of ``gnomon
+    status``."""
     conditions, acts, refuted = [], [], []
     for question in diagnosis_document.get("questions") or []:
         for route in question["routes"]:
@@ -292,8 +294,8 @@ def exposure(records: Records) -> dict[str, Any]:
     """Return, for each answer, the revisable laws among its grounds, as the exposure rule states.
 
     A law marked ``posited``, ``fitted`` or ``measured`` exposes the answer directly. A law marked
-    ``derived`` exposes it to the laws from which it descends, which the records do not yet state, so
-    the row says so instead of guessing them.
+    ``derived`` exposes it to the laws from which it descends, which the records do not yet state,
+    so the row says so instead of guessing them.
     """
     rows = []
     for key in _of_type(records, "answer"):
@@ -406,7 +408,8 @@ def maturity_map(records: Records) -> dict[str, Any]:
 
 
 def question_tree_view(records: Records) -> dict[str, Any]:
-    """Return the question tree as a table of nodes and a table of edges, for a renderer of trees."""
+    """Return the question tree as a table of nodes and a table of edges, for a renderer of trees.
+    """
     nodes, edges = [], []
 
     def walk(node: Node, parent: str | None, depth: int) -> None:

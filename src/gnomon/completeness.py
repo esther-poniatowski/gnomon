@@ -115,7 +115,8 @@ def always_required(kind: str, source: Path | None = None) -> list[str]:
 
 
 def block_requirements(source: Path | None = None) -> dict[str, list[str]]:
-    """Return, per path of an aim block of an answer, the specifications that the block carries, relative to it."""
+    """Return, per path of an aim block of an answer, the specifications that the block carries,
+    relative to it."""
     return {
         str(block): list(paths or [])
         for block, paths in (_registry(source).get("by_block") or {}).items()
@@ -150,7 +151,8 @@ def commitment_requirements(
 ) -> list[str]:
     """Return what a record of ``kind`` carries at ``level``, the weaker levels included.
 
-    >>> table = {"identified": {"phenomenon": ["statement"]}, "specified": {"phenomenon": ["course"]}}
+    >>> table = {"identified": {"phenomenon": ["statement"]},
+    ...          "specified": {"phenomenon": ["course"]}}
     >>> commitment_requirements("phenomenon", "specified", table)
     ['statement', 'course']
     """
@@ -246,7 +248,8 @@ def unmet_commitment(
 def requirements_by_presence(
     source: Path | None = None,
 ) -> dict[str, dict[str, dict[str, list[str]]]]:
-    """Return, per record kind and field, the specifications that the presence and the absence of the field impose."""
+    """Return, per record kind and field, the specifications that the presence and the absence of
+    the field impose."""
     table = _registry(source).get("by_presence") or {}
     return {
         str(kind): {
@@ -262,7 +265,8 @@ def requirements_by_presence(
 def unmet_by_presence(
     record: Mapping[str, Any], table: Mapping[str, Mapping[str, Mapping[str, list[str]]]]
 ) -> list[Finding]:
-    """Return every specification that the presence or the absence of a field requires and the record lacks.
+    """Return every specification that the presence or the absence of a field requires and the
+    record lacks.
 
     >>> table = {"model": {"derives_from": {"present": ["operations"], "absent": ["laws"]}}}
     >>> [f.text for f in unmet_by_presence({"type": "model"}, table)]
@@ -332,8 +336,10 @@ def mismatched_occurrence(
     being one, and a capacity is a disposition, so neither takes an occurrence class. An empty
     field leaves the pair unfilled, and nothing is reported.
 
-    >>> table = {"regularity": ["not-applicable"], "particular-occurrence": ["state", "process", "event"]}
-    >>> [f.text for f in mismatched_occurrence({"category": "regularity", "occurrence": "event"}, table)]
+    >>> table = {"regularity": ["not-applicable"],
+    ...          "particular-occurrence": ["state", "process", "event"]}
+    >>> [f.text for f in mismatched_occurrence({"category": "regularity", "occurrence": "event"},
+    ...                                        table)]
     ['occurrence: event is no occurrence class of a regularity, which admits not-applicable']
     """
     category, occurrence = phenomenon.get("category"), phenomenon.get("occurrence")
@@ -347,7 +353,8 @@ def mismatched_occurrence(
     return [
         finding(
             rules.COMPLETENESS_MISMATCHED_OCCURRENCE,
-            f"occurrence: {occurrence} is no occurrence class of a {category}, which admits {' or '.join(admitted)}",
+            f"occurrence: {occurrence} is no occurrence class of a {category}, which admits"
+            f" {' or '.join(admitted)}",
             "occurrence",
         )
     ]
@@ -365,11 +372,12 @@ def unresolved_slots(
 ) -> list[Finding]:
     """Return every subject slot that holds neither an identified record nor a typed placeholder.
 
-    A slot of a question schema awaits an item of a type from a closed list, described in words,
-    and the type fits the slot: the target-system slot awaits a system, and the phenomenon slot a
-    phenomenon. A slot of a question names a record that fixes its referent, so the record exists, has the kind
-    the slot expects, and carries an identification. Both checks are decidable, and the stronger
-    level, a record whose declarations resolve, is checked by the resolution of its symbols.
+    A slot of a question schema awaits an item of a type from a closed list, described in words, and
+    the type fits the slot: the target-system slot awaits a system, and the phenomenon slot a
+    phenomenon. A slot of a question names a record that fixes its referent, so the record exists,
+    has the kind the slot expects, and carries an identification. Both checks are decidable, and the
+    stronger level, a record whose declarations resolve, is checked by the resolution of its
+    symbols.
 
     Parameters
     ----------
@@ -400,7 +408,8 @@ def unresolved_slots(
                 found.append(
                     finding(
                         rules.COMPLETENESS_MISFIT_PLACEHOLDER,
-                        f"{where}: the placeholder type {awaited!r} does not fit the slot, which awaits {SLOT_PLACEHOLDERS[slot]!r}",
+                        f"{where}: the placeholder type {awaited!r} does not fit the slot, which"
+                        f" awaits {SLOT_PLACEHOLDERS[slot]!r}",
                         *field,
                         "placeholder",
                     )
@@ -455,7 +464,8 @@ def unresolved_slots(
 def unresolved_question_references(
     question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
 ) -> list[Finding]:
-    """Return every problem, linked question and background that a question names and that is missing.
+    """Return every problem, linked question and background that a question names and that is
+    missing.
 
     A question names the problem it serves, the questions it is linked to with the shared record
     carrying the link, and the background records whose laws it admits. Each name resolves to a
@@ -615,7 +625,9 @@ def mismatched_request(
     question record that states it addresses the problem and carries the same request.
 
     >>> problem = {"id": "prob.a", "request": "one", "associated_question": "quest.a"}
-    >>> mismatched_request(problem, {"quest.a": {"type": "question", "addresses": "prob.a", "request": "one"}})
+    >>> mismatched_request(problem,
+    ...                    {"quest.a": {"type": "question", "addresses": "prob.a",
+    ...                                 "request": "one"}})
     []
     """
     named = problem.get("associated_question")
@@ -630,7 +642,8 @@ def mismatched_request(
         return [
             finding(
                 rules.COMPLETENESS_MISMATCHED_REQUEST,
-                f"associated_question: {named} is no question record addressing {problem.get('id')}",
+                f"associated_question: {named} is no question record addressing"
+                f" {problem.get('id')}",
                 "associated_question",
             )
         ]
@@ -654,11 +667,12 @@ def unbounded_aim(
     """Return the aim of a question that the type of result of its problem does not admit.
 
     The demand of a problem bounds the aim of each question that serves it. The bound reads the type
-    of result only: a condition that the demand table attaches to an aim, such as a closed background
-    for modal knowledge, is not checked.
+    of result only: a condition that the demand table attaches to an aim, such as a closed
+    background for modal knowledge, is not checked.
 
     >>> records = {"prob.a": {"type": "problem", "result_type": "explanation"}}
-    >>> texts = [f.text for f in unbounded_aim({"addresses": "prob.a", "task": {"epistemic_aim": "prediction"}},
+    >>> texts = [f.text for f in unbounded_aim({"addresses": "prob.a",
+    ...                                         "task": {"epistemic_aim": "prediction"}},
     ...                                        records, {"explanation": ["explanation"]})]
     >>> texts
     ['task.epistemic_aim: prediction does not serve a demand for explanation']
@@ -755,7 +769,8 @@ def demand_met(
 def presupposition_denied(
     problem: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
 ) -> bool | None:
-    """Return whether an accepted answer denies a presupposition of the associated question, or None when no question is named.
+    """Return whether an accepted answer denies a presupposition of the associated question, or None
+    when no question is named.
 
     A corrective answer denies a presupposition of the question that it answers, so an accepted
     corrective answer to the associated question puts the negation of a presupposition of that
@@ -834,7 +849,8 @@ def misstated_obstacles(
             found.append(
                 finding(
                     rules.COMPLETENESS_UNSTATED_OBSTACLE,
-                    f"knowledge_obstacles: the records show {name}, which the problem does not state",
+                    f"knowledge_obstacles: the records show {name}, which the problem does not"
+                    " state",
                     "knowledge_obstacles",
                     value=name,
                 )
@@ -968,7 +984,8 @@ def misdirected_assessment(
             found.append(
                 finding(
                     rules.COMPLETENESS_MISSHAPEN_TESTS,
-                    "tests.constraints: an assessment of a construct holds one verdict per constraint",
+                    "tests.constraints: an assessment of a construct holds one verdict per"
+                    " constraint",
                     "tests",
                     "constraints",
                 )
@@ -1005,7 +1022,8 @@ def misdirected_assessment(
         return [
             finding(
                 rules.COMPLETENESS_UNASSESSABLE_RECORD,
-                f"assesses: {assessed} is a {target.get('type')} record, neither an answer nor a construct",
+                f"assesses: {assessed} is a {target.get('type')} record, neither an answer nor a"
+                " construct",
                 "assesses",
             )
         ]
@@ -1018,7 +1036,8 @@ def misdirected_assessment(
             0,
             finding(
                 rules.COMPLETENESS_MISMATCHED_STANDARD,
-                f"against: {standard} is {kind}, and an assessment of {article} {assessed_kind} is made"
+                f"against: {standard} is {kind}, and an assessment of {article} {assessed_kind} is"
+                " made"
                 f" against a {expected}",
                 "against",
             ),
@@ -1171,13 +1190,17 @@ def contradictory_accuracy(question: Mapping[str, Any]) -> list[Finding]:
 
 
 def incomplete_operations(model: Mapping[str, Any]) -> list[Finding]:
-    """Return every operation of a derived model that lacks a field required by its kind or its error.
+    """Return every operation of a derived model that lacks a field required by its kind or its
+    error.
 
     A controlled error states its bound, an approximation states its regime, and a singular limit
     states the order of its limits, as the note on derived models requires.
 
-    >>> [f.text for f in incomplete_operations({"operations": [{"id": "near", "kind": "approximate", "error": "controlled"}]})]
-    ['operations.near: a controlled error states its bound', 'operations.near: an approximation states its regime']
+    >>> model = {"operations": [{"id": "near", "kind": "approximate", "error": "controlled"}]}
+    >>> for f in incomplete_operations(model):
+    ...     print(f.text)
+    operations.near: a controlled error states its bound
+    operations.near: an approximation states its regime
     """
     found: list[Finding] = []
     for index, entry in enumerate(model.get("operations") or []):
@@ -1210,14 +1233,16 @@ def incomplete_operations(model: Mapping[str, Any]) -> list[Finding]:
 def unclassified_operations(
     answer: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
 ) -> list[Finding]:
-    """Return every operation of a model on the route of the answer that no ground of the answer names.
+    """Return every operation of a model on the route of the answer that no ground of the answer
+    names.
 
     Only an answer classifies an assumption against its target, so each operation of a model on
     which its route runs is named by a ground, by the identifier of the operation or by a symbol
     that the operation yields: the removal of the noise as an idealization, a restriction as a
     condition, a posited law as a warrant.
 
-    >>> model = {"id": "mod.a.b", "type": "model", "operations": [{"id": "near", "yields": ["J"]}, {"id": "drop"}]}
+    >>> model = {"id": "mod.a.b", "type": "model",
+    ...          "operations": [{"id": "near", "yields": ["J"]}, {"id": "drop"}]}
     >>> answer = {"route": {"runs_on": ["mod.a.b"]}, "grounds": [{"record": "mod.a.b.J"}]}
     >>> [f.text for f in unclassified_operations(answer, {"mod.a.b": model})]
     ['operation drop of mod.a.b is named by no ground of the answer']
@@ -1239,7 +1264,8 @@ def unclassified_operations(
                     found.append(
                         finding(
                             rules.COMPLETENESS_UNCLASSIFIED_OPERATION,
-                            f"{label} {entry.get('id')} of {identifier} is named by no ground of the answer",
+                            f"{label} {entry.get('id')} of {identifier} is named by no ground of"
+                            " the answer",
                             "grounds",
                         )
                     )
@@ -1276,8 +1302,8 @@ def unbound_outputs(
 
 
 #: The types of feature pair that each target status of a factor admits, when the route runs on a
-#: model, as the status pairs of the answer specification (docs/specification/answer.md#^status-pairs)
-#: state them; an alignment test keeps the two equal.
+#: model, as the status pairs of the answer specification
+#: (docs/specification/answer.md#^status-pairs) state them; an alignment test keeps the two equal.
 STATUS_PAIRS: Mapping[str, frozenset[str]] = {
     "denoting": frozenset({"quantity", "component"}),
     "coarse-graining": frozenset({"pattern", "regime"}),
@@ -1294,7 +1320,8 @@ def mismatched_status_pairs(
     When the route runs on a model, the binding carries each factor onto the target through a pair
     of the type that its status requires, and a limit construct cites, as a ground with the role
     `warrant`, the argued pair that places the target in the class of its limit. A route on the
-    target needs no pair, since a factor stated over the symbols of the target denotes by declaration.
+    target needs no pair, since a factor stated over the symbols of the target denotes by
+    declaration.
 
     >>> records = {"mod.a.m": {"type": "model"},
     ...            "bind.a.b": {"feature_pairs": [{"id": "p", "type": "quantity"}]}}
@@ -1302,8 +1329,10 @@ def mismatched_status_pairs(
     ...           "aim_block": {"explanation": {"factors": [
     ...               {"id": "f", "target_status": "limit-construct", "pair": "bind.a.b.p"}]}}}
     >>> [f.text for f in mismatched_status_pairs(answer, records)]  # doctest: +NORMALIZE_WHITESPACE
-    ['factors.f: the status limit-construct requires a pair of type invariance-class, and bind.a.b.p is of type quantity',
-     'factors.f: no ground with the role warrant cites the pair bind.a.b.p that places the target in the class of the limit']
+    ['factors.f: the status limit-construct requires a pair of type invariance-class,
+      and bind.a.b.p is of type quantity',
+     'factors.f: no ground with the role warrant cites the pair bind.a.b.p that places the target
+      in the class of the limit']
     """
     on_model = any(
         (records.get(str(r)) or {}).get("type") == "model"
@@ -1381,7 +1410,8 @@ def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> l
         return [
             finding(
                 rules.COMPLETENESS_UNREALIZED_LINK,
-                "the question asks for a link, and the answer maps no quantity onto its realization",
+                "the question asks for a link, and the answer maps no quantity onto its"
+                " realization",
                 "claim",
                 "realizations",
             )
@@ -1402,14 +1432,16 @@ def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> l
 def unanchored_explicandum(
     question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
 ) -> list[Finding]:
-    """Return the explicandum of a question of explication that no explicandum of its problem anchors.
+    """Return the explicandum of a question of explication that no explicandum of its problem
+    anchors.
 
     The explicandum of such a question is not a slot: it enters through the use that a pointer of
     the problem anchors, so it names a term among the explicanda of the problem that the question
     addresses.
 
     >>> problem = {"explicanda": [{"term": "disentangled", "pointer": "doi:10.1000/a"}]}
-    >>> question = {"addresses": "prob.a.b", "task": {"epistemic_aim": "explication", "explicandum": "modular"}}
+    >>> question = {"addresses": "prob.a.b",
+    ...             "task": {"epistemic_aim": "explication", "explicandum": "modular"}}
     >>> [f.text for f in unanchored_explicandum(question, {"prob.a.b": problem})]
     ['task.explicandum: modular is no explicandum of prob.a.b']
     """
@@ -1450,7 +1482,8 @@ def unjustified_explanans_bound(question: Mapping[str, Any]) -> list[Finding]:
     return [
         finding(
             rules.COMPLETENESS_UNJUSTIFIED_EXPLANANS_BOUND,
-            "task.admissible_explanans states an axis, and no justification says why the answer is bound to it",
+            "task.admissible_explanans states an axis, and no justification says why the answer is"
+            " bound to it",
             "task",
             "admissible_explanans",
             "justification",
@@ -1471,7 +1504,8 @@ def unstated_standing(question: Mapping[str, Any]) -> list[Finding]:
     return [
         finding(
             rules.COMPLETENESS_UNSTATED_STANDING,
-            f"virtues[{index}].standing is unstated for {entry.get('virtue') or 'an unnamed virtue'}",
+            f"virtues[{index}].standing is unstated for"
+            f" {entry.get('virtue') or 'an unnamed virtue'}",
             "virtues",
             index,
             "standing",
@@ -1552,7 +1586,8 @@ def malformed_restrictions(question: Mapping[str, Any], variables: Iterable[str]
             found.append(
                 finding(
                     rules.COMPLETENESS_RESTRICTION_WITHOUT_VARIABLE,
-                    f"restrictions.{label}: states how it is held although it names no quantity that varies",
+                    f"restrictions.{label}: states how it is held although it names no quantity"
+                    " that varies",
                     *where,
                     "restriction",
                 )
@@ -1585,7 +1620,8 @@ def undecided_boundaries(record: Mapping[str, Any]) -> list[Finding]:
 
 
 def vocabularies(kind: str, source: Path | None = None) -> dict[str, frozenset[str]]:
-    """Return, per vocabulary of ``kind`` in the registry, the values it admits, keyed as the registry keys it."""
+    """Return, per vocabulary of ``kind`` in the registry, the values it admits, keyed as the
+    registry keys it."""
     registry = yaml.safe_load((source or VOCABULARY_REGISTRY).read_text(encoding="utf-8")) or {}
     fields = (registry.get("vocabularies") or {}).get(kind) or {}
     return {name: frozenset(entry["value"] for entry in values) for name, values in fields.items()}

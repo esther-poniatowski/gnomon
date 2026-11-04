@@ -38,7 +38,10 @@ __all__ = ["__version__", "data_path", "info"]
 
 def info() -> str:
     """Format diagnostic information on package and platform."""
-    return f"{__package__} {__version__} | Platform: {platform.system()} Python {platform.python_version()}"
+    return (
+        f"{__package__} {__version__} | Platform: {platform.system()}"
+        f" Python {platform.python_version()}"
+    )
 
 
 def data_path() -> Path:

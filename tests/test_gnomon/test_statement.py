@@ -54,8 +54,10 @@ def test_the_worked_explanation_composes_its_subject_domain_and_foils() -> None:
         records[record["id"]] = record
     composed = compose_statement(records["quest.grokking.explain_delay"], records)
     assert composed.text == (
-        "In finite neural networks and their training under algorithmic supervised task and overparameterized"
-        " architecture, what explains delayed generalization rather than immediate generalization or persistent"
+        "In finite neural networks and their training under algorithmic supervised task and"
+        " overparameterized"
+        " architecture, what explains delayed generalization rather than immediate generalization"
+        " or persistent"
         " memorization?"
     )
     assert composed.gaps == ()

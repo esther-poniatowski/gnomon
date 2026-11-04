@@ -161,7 +161,8 @@ def _recorded(
 
 @pytest.fixture(scope="module")
 def corpus_run() -> dict[str, list[list[Any]]]:
-    """Run ``check_workspace`` once on the worked inquiries, and return the results of each checker."""
+    """Run ``check_workspace`` once on the worked inquiries, and return the results of each checker.
+    """
     calls: dict[str, list[list[Any]]] = {name: [] for names in CHECKERS.values() for name in names}
     with pytest.MonkeyPatch.context() as patch:
         for module, names in CHECKERS.items():
@@ -176,7 +177,8 @@ def test_each_checker_runs_on_the_worked_inquiries_and_reports_nothing(
     name: str,
     corpus_run: dict[str, list[list[Any]]],
 ) -> None:
-    """A checker that the command never reaches is reported, as is any finding on the worked inquiries."""
+    """A checker that the command never reaches is reported, as is any finding on the worked
+    inquiries."""
     calls = corpus_run[name]
     assert calls, f"gnomon check never runs {name} on the worked inquiries"
     found: list[Finding] = [
@@ -254,7 +256,8 @@ def test_the_commands_exit_with_the_status_of_their_findings(planted: Path, tmp_
 
 
 def test_a_template_not_yet_filled_is_listed_apart_and_not_checked(tmp_path: Path) -> None:
-    """A researcher fills the records stage by stage, so the templates of later stages stay silent."""
+    """A researcher fills the records stage by stage, so the templates of later stages stay silent.
+    """
     folder = tmp_path / "my-problem"
     scaffold(folder, CORE_KINDS)
     workspace = load_workspace(tmp_path)

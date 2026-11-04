@@ -54,7 +54,8 @@ def enums(node: Mapping[str, Any], path: str = "") -> dict[str, list[Any]]:
 
 @pytest.mark.parametrize("kind", KINDS)
 def test_each_vocabulary_of_the_registry_is_bound_by_a_field_of_its_schema(kind: str) -> None:
-    """A vocabulary that no field binds is checked nowhere, since a field selects its vocabulary by path."""
+    """A vocabulary that no field binds is checked nowhere, since a field selects its vocabulary by
+    path."""
     record_type = schemas.load_base(kind)["properties"]["type"]["x-template"]
     bound = set(schemas.vocabulary_paths(schemas.load_base(kind)).values())
     assert set(schemas.vocabulary_options(record_type)) - bound == set()

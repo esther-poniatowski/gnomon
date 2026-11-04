@@ -85,7 +85,8 @@ ITINERARY_MISTYPED_RECORD_INPUT = _rule(
 )
 ITINERARY_UNADMITTED_ATTITUDE = _rule(
     "itinerary/unadmitted-attitude",
-    "An input names a record that holds its type under an attitude that the activity does not take.",
+    "An input names a record that holds its type under an attitude that the activity does not"
+    " take.",
 )
 ITINERARY_MISTYPED_OUTPUT = _rule(
     "itinerary/mistyped-output", "The output type of a step is not the output of its activity."
@@ -109,15 +110,18 @@ ITINERARY_UNREADABLE_STATE = _rule(
 )
 ITINERARY_UNCHANGED_STATE = _rule(
     "itinerary/unchanged-state",
-    "A change of knowledge state names no earlier revision, or the status of its record did not change.",
+    "A change of knowledge state names no earlier revision, or the status of its record did not"
+    " change.",
 )
 ITINERARY_MALFORMED_CONSTRUCTOR = _rule(
     "itinerary/malformed-constructor",
-    "A branch states no condition or no alternative of the same output, or an iteration cannot repeat.",
+    "A branch states no condition or no alternative of the same output, or an iteration cannot"
+    " repeat.",
 )
 ITINERARY_UNSERVED = _rule(
     "itinerary/unserved-step",
-    "A step states no rationale, or a rationale that serves no question or problem, or names no condition.",
+    "A step states no rationale, or a rationale that serves no question or problem, or names no"
+    " condition.",
 )
 ITINERARY_MISMATCHED_MODE = _rule(
     "itinerary/mismatched-mode",
@@ -129,11 +133,13 @@ ITINERARY_CYCLE = _rule("itinerary/cycle", "The references between the steps for
 
 ITINERARY_UNADMITTED_OUTPUT_VALUE = _rule(
     "itinerary/unadmitted-output-value",
-    "The output reference of a step names a record whose field holds a value that the activity does not produce.",
+    "The output reference of a step names a record whose field holds a value that the activity does"
+    " not produce.",
 )
 REGISTRY_UNKNOWN_OUTPUT_VALUE = _rule(
     "registry/unknown-output-value",
-    "An activity restricts a field of its output to a value that the vocabulary of that field does not admit.",
+    "An activity restricts a field of its output to a value that the vocabulary of that field does"
+    " not admit.",
 )
 REGISTRY_UNKNOWN_PRODUCT_TYPE = _rule(
     "registry/unknown-product-type",
@@ -232,11 +238,13 @@ COMPLETENESS_UNKNOWN_CONSTRAINT = _rule(
 )
 COMPLETENESS_MISMATCHED_REQUEST = _rule(
     "completeness/mismatched-request",
-    "The associated question of a problem is no question addressing it, or carries another request.",
+    "The associated question of a problem is no question addressing it, or carries another"
+    " request.",
 )
 COMPLETENESS_UNBOUNDED_AIM = _rule(
     "completeness/unbounded-aim",
-    "A question serves a problem under an aim that the type of result of the problem does not admit.",
+    "A question serves a problem under an aim that the type of result of the problem does not"
+    " admit.",
 )
 COMPLETENESS_UNSUPPORTED_SOLVED = _rule(
     "completeness/unsupported-solved",
@@ -248,11 +256,13 @@ COMPLETENESS_UNRECORDED_SOLUTION = _rule(
 )
 COMPLETENESS_UNSUPPORTED_DISSOLVED = _rule(
     "completeness/unsupported-dissolved",
-    "A problem is marked dissolved while no accepted answer denies a presupposition of its associated question.",
+    "A problem is marked dissolved while no accepted answer denies a presupposition of its"
+    " associated question.",
 )
 COMPLETENESS_UNRECORDED_DISSOLUTION = _rule(
     "completeness/unrecorded-dissolution",
-    "An accepted answer denies a presupposition of the associated question of a problem not marked dissolved.",
+    "An accepted answer denies a presupposition of the associated question of a problem not marked"
+    " dissolved.",
 )
 COMPLETENESS_UNSTATED_OBSTACLE = _rule(
     "completeness/unstated-obstacle",
@@ -297,7 +307,8 @@ COMPLETENESS_INCOMPLETE_OPERATION = _rule(
 )
 COMPLETENESS_UNCLASSIFIED_OPERATION = _rule(
     "completeness/unclassified-operation",
-    "An operation or an assumption of a model on which an answer runs is named by no ground of that answer.",
+    "An operation or an assumption of a model on which an answer runs is named by no ground of that"
+    " answer.",
 )
 COMPLETENESS_UNANCHORED_EXPLICANDUM = _rule(
     "completeness/unanchored-explicandum",
@@ -305,7 +316,8 @@ COMPLETENESS_UNANCHORED_EXPLICANDUM = _rule(
 )
 COMPLETENESS_MALFORMED_ANSWERABILITY = _rule(
     "completeness/malformed-answerability",
-    "An asserted state of a condition lacks its kind, its means or its pointers, or contradicts the records.",
+    "An asserted state of a condition lacks its kind, its means or its pointers, or contradicts the"
+    " records.",
 )
 COMPLETENESS_PREMATURE_APPRAISAL = _rule(
     "completeness/premature-appraisal",
@@ -567,7 +579,8 @@ def finding(
     ``value``, the offending content when several findings may share the place. The parts of the
     discriminator are joined by ``/``, each escaped as a pointer token.
 
-    >>> found = finding(VOCABULARY_UNRESOLVED, "t", "variables", Entry(0, {"symbol": "u"}), "signature", 1)
+    >>> found = finding(VOCABULARY_UNRESOLVED, "t", "variables", Entry(0, {"symbol": "u"}),
+    ...                 "signature", 1)
     >>> found.locus, found.discriminator
     ('/variables', 'u/signature/1')
     >>> finding(ITINERARY_CYCLE, "t", "steps", value="a -> b -> a").discriminator

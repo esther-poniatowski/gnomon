@@ -287,7 +287,8 @@ def entries(record: Mapping[str, Any], block: str) -> list[Mapping[str, Any]]:
 
 
 def indexed(record: Mapping[str, Any], block: str) -> list[tuple[int, Mapping[str, Any]]]:
-    """Return the entries of ``block`` with their index in the list, as :func:`entries` selects them."""
+    """Return the entries of ``block`` with their index in the list, as :func:`entries` selects
+    them."""
     value = record.get(block)
     return (
         [(i, e) for i, e in enumerate(value) if isinstance(e, Mapping)]
@@ -372,7 +373,8 @@ def mistyped_symbols(record: Mapping[str, Any]) -> list[Finding]:
                 found.append(
                     finding(
                         rules.VOCABULARY_MISTYPED_SYMBOL,
-                        f"{block}: {entry['symbol']!r} is {type(entry['symbol']).__name__}, not a symbol",
+                        f"{block}: {entry['symbol']!r} is {type(entry['symbol']).__name__}, not a"
+                        " symbol",
                         block,
                         Entry(index, entry),
                         "symbol",
@@ -569,7 +571,8 @@ def unselected_conditions(record: Mapping[str, Any]) -> list[Finding]:
                 found.append(
                     finding(
                         rules.VOCABULARY_UNSELECTED_CONDITION,
-                        f"manifestations.features.{feature.get('symbol')}: a condition without a selection rule",
+                        f"manifestations.features.{feature.get('symbol')}: a condition without a"
+                        " selection rule",
                         "manifestations",
                         Entry(position, entry),
                         "features",
@@ -659,9 +662,11 @@ ID_UNITS: Mapping[str, tuple[str, ...]] = {
 
 
 def units(record: Mapping[str, Any]) -> list[str]:
-    """Return the names by which a reference may reach a unit of the record: its symbols and the ids of its units.
+    """Return the names by which a reference may reach a unit of the record: its symbols and the ids
+    of its units.
 
-    >>> units({"type": "model", "laws": [{"symbol": "onset"}], "operations": [{"id": "drop-noise"}]})
+    >>> units({"type": "model", "laws": [{"symbol": "onset"}],
+    ...        "operations": [{"id": "drop-noise"}]})
     ['onset', 'drop-noise']
     """
     names = [entry.symbol for entry in declarations(record)]
@@ -707,15 +712,17 @@ def references(record: Mapping[str, Any]) -> list[tuple[tuple[str | int, ...], s
 def dangling_references(
     record: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
 ) -> list[Finding]:
-    """Return every reference to a record or to a unit that the records of the workspace do not declare.
+    """Return every reference to a record or to a unit that the records of the workspace do not
+    declare.
 
     A reference has the segments that the prefix of its kind fixes, to reach a whole record, or one
     more, to reach a unit: a symbol, or the identifier of a unit such as an operation or a pair. A
-    step of an itinerary is a unit that the itinerary check resolves, so it is left to that check, and
-    a placeholder of a template, such as ``quest.TOPIC.NAME``, names no record yet.
+    step of an itinerary is a unit that the itinerary check resolves, so it is left to that check,
+    and a placeholder of a template, such as ``quest.TOPIC.NAME``, names no record yet.
 
     >>> records = {"mod.a.m": {"type": "model", "laws": [{"symbol": "onset"}]}}
-    >>> [f.text for f in dangling_references({"record": "mod.a.m.onset", "other": "mod.a.x"}, records)]
+    >>> [f.text for f in dangling_references({"record": "mod.a.m.onset", "other": "mod.a.x"},
+    ...                                      records)]
     ['other: no record carries the identifier mod.a.x']
     """
     found = []
@@ -764,7 +771,8 @@ def dangling_references(
 def repeated_symbols(record: Mapping[str, Any]) -> list[Finding]:
     """Return every symbol that the record declares more than once.
 
-    >>> record = {"type": "target-system", "variables": [{"symbol": "x"}], "parameters": [{"symbol": "x"}]}
+    >>> record = {"type": "target-system", "variables": [{"symbol": "x"}],
+    ...           "parameters": [{"symbol": "x"}]}
     >>> [f.text for f in repeated_symbols(record)]
     ['x: declared more than once']
     """
@@ -847,7 +855,8 @@ def bound(text: str) -> set[str]:
 
 
 def formulas(record: Mapping[str, Any]) -> list[tuple[str, Place, str, frozenset[str]]]:
-    """Return every expression the record holds, with where it sits, its path and its type variables.
+    """Return every expression the record holds, with where it sits, its path and its type
+    variables.
 
     ``where`` names the field as the messages print it; the path reaches the expression itself,
     including its index when the field holds a list of expressions.
@@ -1210,7 +1219,8 @@ def unborne_variants(
         found.append(
             finding(
                 rules.VOCABULARY_UNBORNE_VARIANT,
-                f"variants.{symbol}: no declaration or law carries it, and its maturity admits no gap",
+                f"variants.{symbol}: no declaration or law carries it, and its maturity admits no"
+                " gap",
                 "variants",
                 Entry(index, variant),
             )
@@ -1341,8 +1351,9 @@ def interaction_graph(
     ...               "laws": [{"symbol": "transmit", "expression": "u = emit(z)"}],
     ...               "organization": [{"symbol": "coupling", "relates": "prod(sub, sub)",
     ...                                 "realized_by": ["transmit"]}]}
-    >>> interaction_graph(background, target)
-    [{'edge': 'coupling', 'sources': ['sub'], 'reach': 'sub', 'through': ['u'], 'tuples': 'prod(sub, sub)'}]
+    >>> interaction_graph(background, target)  # doctest: +NORMALIZE_WHITESPACE
+    [{'edge': 'coupling', 'sources': ['sub'], 'reach': 'sub', 'through': ['u'],
+      'tuples': 'prod(sub, sub)'}]
     """
     signatures = {
         d.symbol: d.signature for d in declarations(upstream or {}) + declarations(record)
@@ -1516,7 +1527,8 @@ def misrouted_interactions(
 
 
 #: Blocks whose declarations exist to be reached by another field. A manifestation, a source of
-#: variation, an observable or a feature is terminal: it states the phenomenon rather than serving it.
+#: variation, an observable or a feature is terminal: it states the phenomenon rather than
+#: serving it.
 REACHED: frozenset[str] = frozenset({"constituents", "index_sets", "variables", "parameters"})
 
 
@@ -1560,7 +1572,8 @@ def upstream_of(
 ) -> Mapping[str, Any]:
     """Return the target system that ``record`` is stated against, or an empty mapping.
 
-    >>> upstream_of({"type": "background", "describes": "system.a"}, {"system.a": {"id": "system.a"}})
+    >>> upstream_of({"type": "background", "describes": "system.a"},
+    ...             {"system.a": {"id": "system.a"}})
     {'id': 'system.a'}
     """
     field_name = UPSTREAM_FIELD.get(str(record.get("type", "")))
@@ -1578,7 +1591,8 @@ def visible_records(
     and its background; a binding sees its model, its phenomenon and the target system of that
     phenomenon. Any other record sees none through this function.
 
-    >>> records = {"quest.a.b": {"subject": {"phenomenon": "phen.a.b"}}, "phen.a.b": {"id": "phen.a.b"}}
+    >>> records = {"quest.a.b": {"subject": {"phenomenon": "phen.a.b"}},
+    ...            "phen.a.b": {"id": "phen.a.b"}}
     >>> [r.get("id") for r in visible_records({"type": "answer", "answers": "quest.a.b"}, records)]
     [None, 'phen.a.b']
     """
@@ -1662,8 +1676,10 @@ def as_data(problem: Problem) -> dict[str, Any]:
 def render_yaml(problem: Problem) -> str:
     """Return the vocabulary as the YAML the command writes."""
     header = (
-        "# Generated by `gnomon vocabulary` from the filled records. Edit a record, not this file.\n"
-        "# A symbol is unique within its record, so the same letter may return under another record.\n"
+        "# Generated by `gnomon vocabulary` from the filled records. Edit a record, not this"
+        " file.\n"
+        "# A symbol is unique within its record, so the same letter may return under another"
+        " record.\n"
     )
     return header + yaml.safe_dump(as_data(problem), sort_keys=False, allow_unicode=True, width=100)
 
@@ -1693,7 +1709,8 @@ def render_markdown(problem: Problem, index_path: str = "_index.md") -> str:
         "---",
         f"# Vocabulary of {problem.name}",
         "",
-        "Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, not this file.",
+        "Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, not this"
+        " file.",
         "",
         "## Symbols",
         "",
@@ -1717,8 +1734,10 @@ def render_markdown(problem: Problem, index_path: str = "_index.md") -> str:
             "",
             "## Directed interactions",
             "",
-            "The nodes are kinds, not identified members: which tuples are joined is fixed by a parameter"
-            " of a member model, and the last column says where to read it from. A tuple of three or"
+            "The nodes are kinds, not identified members: which tuples are joined is fixed by a"
+            " parameter"
+            " of a member model, and the last column says where to read it from. A tuple of three"
+            " or"
             " more carries a joint influence, which no pair of endpoints could state.",
             "",
             "| Sources | Edge | Reach | Through | Ordered tuples |",
@@ -1728,7 +1747,8 @@ def render_markdown(problem: Problem, index_path: str = "_index.md") -> str:
             through = ", ".join(f"`{c}`" for c in edge["through"]) or "—"
             sources = " · ".join(f"`{c}`" for c in edge["sources"]) or "—"
             lines.append(
-                f"| {sources} | `{edge['edge']}` | `{edge['reach']}` | {through} | `{edge['tuples']}` |"
+                f"| {sources} | `{edge['edge']}` | `{edge['reach']}` | {through} |"
+                f" `{edge['tuples']}` |"
             )
     lines += ["", "## Operators", ""]
     lines += [f"- Canonical: {', '.join(f'`{o}`' for o in data['operators']['canonical'])}."]
