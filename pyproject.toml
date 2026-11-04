@@ -64,6 +64,7 @@ where = ["src"]
 # Include non-Python data files shipped with the package
 [tool.setuptools.package-data]
 gnomon = [
+    "py.typed",   # PEP 561: the package ships its own type annotations
     "data/**/*.md",
     "data/**/*.yaml",
     "data/**/*.yml",
