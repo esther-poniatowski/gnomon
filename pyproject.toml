@@ -82,8 +82,8 @@ gnomon = "gnomon.cli:app"
 # --- Tool Configurations --------------------------------------------------------------------------
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "src/gnomon"]   # the second path holds the doctests of the package
 pythonpath = ["src"]   # the package is laid out under src/ and is not installed in every environment
 python_files = ["test_*.py"]
 python_functions = ["test_*"]
-addopts = "-v --tb=short"
+addopts = "-v --tb=short --doctest-modules"
