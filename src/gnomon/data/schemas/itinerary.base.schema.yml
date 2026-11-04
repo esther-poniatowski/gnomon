@@ -165,6 +165,19 @@ properties:
             that record holds the output type
           examples:
           - a `verdict` held by an assessment record
+        derivation:
+          type:
+          - string
+          - 'null'
+          x-template: derivation.TOPIC.NAME
+          x-kind: label
+          x-comment: optional; the derivation record that holds the reasoning of the step
+          title: derivation
+          description: The identifier of the derivation record that holds the reasoning of the step,
+            below the grain of its product; required once a step of the activity derivation passes its
+            norm.
+          examples:
+          - '`derivation.grokking.delay-scale`'
         norm:
           type:
           - object

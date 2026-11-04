@@ -114,6 +114,7 @@ steps:
     output:
       type: consequence
       ref: mod.grokking.effective-representation
+    derivation: derivation.grokking.delay-scale
     norm:
       test: norm.derivation
       verdict: pending

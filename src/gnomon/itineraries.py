@@ -752,9 +752,37 @@ def _mode(s: _Step) -> list[Finding]:
     return [finding(rules.ITINERARY_MISMATCHED_MODE, text, *s.at, "mode")]
 
 
+def _derivation(s: _Step) -> list[Finding]:
+    """Report a passed step of the activity derivation that names no derivation record, and a
+    derivation that records none of its consequences in the output record of the step."""
+    named = s.step.get("derivation")
+    norm = s.step.get("norm")
+    verdict = norm.get("verdict") if isinstance(norm, Mapping) else None
+    if not isinstance(named, str) or not named:
+        if s.act.id == "derivation" and verdict == "pass":
+            text = f"{s.where}: the step passes its norm and names no derivation record"
+            return [finding(rules.ITINERARY_UNRECORDED_DERIVATION, text, *s.at)]
+        return []
+    derivation = s.itinerary.records.get(named)
+    output = s.step.get("output")
+    made = output.get("ref") if isinstance(output, Mapping) else None
+    if not isinstance(derivation, Mapping) or not isinstance(made, str) or made.startswith("itin."):
+        return []
+    recorded = [
+        str(c.get("record"))
+        for c in derivation.get("consequences") or []
+        if isinstance(c, Mapping) and c.get("record")
+    ]
+    if any(r == made or r.startswith(made + ".") for r in recorded):
+        return []
+    text = f"{s.where}: {named} records none of its consequences in {made}, the output of the step"
+    return [finding(rules.ITINERARY_FOREIGN_DERIVATION, text, *s.at, "derivation", value=named)]
+
+
 #: The checks of a step whose activity is registered, in the order of their reports.
 STEP_CHECKS: tuple[Callable[[_Step], list[Finding]], ...] = (
     _output,
+    _derivation,
     _norm,
     _rationale,
     _constructors,
@@ -806,7 +834,8 @@ def itinerary_problems(
     no two steps share an identifier; an output reference, once given, names a record that holds the
     output type; the norm of a step is the test of its activity, and a stated mode is its mode; the
     rationale of a step serves a question or a problem, and names a condition when it serves a
-    question.
+    question. A step that names a derivation finds one of its consequences in its output record,
+    and a passed step of the activity derivation names its derivation.
 
     Parameters
     ----------

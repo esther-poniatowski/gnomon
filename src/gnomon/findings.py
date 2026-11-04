@@ -106,6 +106,15 @@ ITINERARY_UNJUSTIFIED_VERDICT = _rule(
     "itinerary/unjustified-verdict",
     "A judged verdict states no evidence, or no date of its judgment.",
 )
+ITINERARY_UNRECORDED_DERIVATION = _rule(
+    "itinerary/unrecorded-derivation",
+    "A step of the activity derivation passes its norm and names no derivation record.",
+)
+ITINERARY_FOREIGN_DERIVATION = _rule(
+    "itinerary/foreign-derivation",
+    "A step names a derivation that records none of its consequences in the output record of the"
+    " step.",
+)
 ITINERARY_UNREADABLE_STATE = _rule(
     "itinerary/unreadable-state", "An input names a record at a revision that cannot be read."
 )

@@ -200,3 +200,37 @@ def test_an_origin_records_the_descent_of_a_derived_law() -> None:
     assert not unrecorded_descents(record, {})
     rows = exposure({"mod.a.b": record, "ans.a.b": answer})["exposures"]
     assert [row["via"] for row in rows] == ["descent in its origin"]
+
+
+def _derive_step(folder: Path, change: Callable[[dict[str, Any]], None]) -> set[str]:
+    path = folder / "itinerary.yml"
+    itinerary = yaml.safe_load(path.read_text(encoding="utf-8"))
+    change(next(s for s in itinerary["steps"] if s["id"] == "derive"))
+    path.write_text(yaml.safe_dump(itinerary, sort_keys=False), encoding="utf-8")
+    return {located.finding.rule.id for located in check_workspace(load_workspace(folder))}
+
+
+def _passed_without_record(step: dict[str, Any]) -> None:
+    step.pop("derivation")
+    step["norm"].update(verdict="pass", evidence="each move cites its warrant", judged="2026-11-04")
+
+
+def _elsewhere(step: dict[str, Any]) -> None:
+    step["output"]["ref"] = "bg.delayed_generalization_networks.training-specification"
+
+
+@pytest.mark.parametrize(
+    ("change", "rule"),
+    [
+        (_passed_without_record, "itinerary/unrecorded-derivation"),
+        (_elsewhere, "itinerary/foreign-derivation"),
+    ],
+)
+def test_the_derive_step_and_its_derivation_agree(
+    change: Callable[[dict[str, Any]], None], rule: str, tmp_path: Path
+) -> None:
+    import shutil
+
+    folder = tmp_path / EXAMPLE.name
+    shutil.copytree(EXAMPLE, folder)
+    assert rule in _derive_step(folder, change)

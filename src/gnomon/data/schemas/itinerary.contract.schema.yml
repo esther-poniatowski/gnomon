@@ -29,6 +29,7 @@ properties:
         - activity
         - inputs
         - output
+        - derivation
         - norm
         - rationale
         - branch
