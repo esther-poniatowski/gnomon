@@ -17,7 +17,12 @@ import pytest
 import yaml
 
 from gnomon.check import check_workspace, load_workspace
-from gnomon.derivations import derivation_problems, exposed_units, load_registry
+from gnomon.derivations import (
+    derivation_problems,
+    exposed_units,
+    load_registry,
+    unrecorded_descents,
+)
 from gnomon.views import exposure
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -152,3 +157,37 @@ def test_the_view_follows_the_derivation_of_a_derived_law() -> None:
         "derivation derivation.grokking.delay-scale"
     )
     assert re.fullmatch(r"derivation .*", via["mod.grokking.effective-representation.decoder-step"])
+
+
+DERIVATIONS = sorted((ROOT / "examples").glob("*/derivation.yml"))
+
+
+@pytest.mark.parametrize("path", DERIVATIONS, ids=lambda p: p.parent.name)
+def test_every_worked_derivation_has_no_finding(path: Path) -> None:
+    assert not derivation_problems(yaml.safe_load(path.read_text(encoding="utf-8")))
+
+
+def test_a_derived_law_without_its_derivation_is_reported(tmp_path: Path) -> None:
+    import shutil
+
+    folder = tmp_path / "microbial-stable-coexistence"
+    shutil.copytree(ROOT / "examples" / folder.name, folder)
+    (folder / "derivation.yml").unlink()
+    found = [
+        located.finding.text
+        for located in check_workspace(load_workspace(folder))
+        if located.finding.rule.id == "derivation/unrecorded-descent"
+    ]
+    assert found == [
+        "laws.abundance_nonneg: the law is marked derived, and no derivation or origin records"
+        " its descent"
+    ]
+
+
+def test_an_origin_records_the_descent_of_a_derived_law() -> None:
+    law = {"symbol": "onset", "warrant": "derived", "origin": "https://doi.org/10.0/example"}
+    record = {"type": "model", "id": "mod.a.b", "laws": [law]}
+    answer = {"type": "answer", "grounds": [{"record": "mod.a.b.onset"}]}
+    assert not unrecorded_descents(record, {})
+    rows = exposure({"mod.a.b": record, "ans.a.b": answer})["exposures"]
+    assert [row["via"] for row in rows] == ["descent in its origin"]

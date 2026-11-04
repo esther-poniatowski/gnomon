@@ -1,0 +1,128 @@
+# the derivation of the invariance of the nonnegative abundances, from the factor form of the growth
+# laws of both variants
+
+_schema: gnomon:derivation@1
+title: "Nonnegative abundances from the factor form of growth"
+id: derivation.microbial.nonnegative-abundances
+type: derivation
+status: provisional
+
+serves: bg.microbial-formal-population-models.population-dynamics.abundance_nonneg
+runs_on:
+  - bg.microbial-formal-population-models.population-dynamics
+  - system.microbial-formal-population-models
+uses:
+
+sought:
+  id: nonnegative
+  statement: "no abundance becomes negative along a trajectory"
+  type: claim-truth
+  condition: "for every trajectory that starts with nonnegative abundances, in either variant"
+
+subordinate:
+  - id: face-invariance
+    statement: "the face on which one abundance vanishes is invariant"
+    type: claim-truth
+    condition: "under the growth law of either variant"
+    replaces:
+    reason:
+
+slots:
+
+objects:
+  - id: face-flow
+    form: expression
+    expression: "N = 0 implies diff(N, t) = 0"
+    reading: "where an abundance vanishes, its rate of change vanishes, in both variants"
+  - id: invariant-face
+    form: expression
+    expression:
+    reading: "a trajectory that starts with one abundance at zero keeps that abundance at zero"
+  - id: bound
+    form: expression
+    expression: "N >= 0"
+    reading: "no abundance becomes negative"
+
+posits:
+
+moves:
+  - id: vanishing-rate
+    kind: substitute
+    inputs: [bg.microbial-formal-population-models.population-dynamics.grow_resource, bg.microbial-formal-population-models.population-dynamics.grow_direct]
+    outputs: [face-flow]
+    binds:
+    warrant:
+      source: definition
+      cites: "substitution of a vanishing abundance in the growth law of each variant"
+      error: exact
+      regime:
+      applies_because:
+  - id: invariance
+    kind: apply-theorem
+    inputs: [face-flow]
+    outputs: [invariant-face]
+    binds:
+    warrant:
+      source: theorem
+      cites: "uniqueness of the solutions of a differential equation whose rate is locally Lipschitz"
+      error: exact
+      regime:
+      applies_because: factor-form
+  - id: no-crossing
+    kind: apply-theorem
+    inputs: [invariant-face, system.microbial-formal-population-models.N]
+    outputs: [bound]
+    binds:
+    warrant:
+      source: theorem
+      cites: "continuity of the trajectories: a change of sign of an abundance crosses the invariant face"
+      error: exact
+      regime:
+      applies_because:
+
+kernel: invariance
+
+orientations:
+  - id: show-face-invariance
+    of: invariance
+    purpose: "to show that no trajectory leaves the face on which an abundance vanishes"
+    determines: face-invariance
+    change:
+    occasion: factor-form
+    means: "apply the uniqueness of solutions to the trajectory that stays on the face"
+    alternatives:
+      - move: "solve the growth law in closed form"
+        reason: inapplicable
+    provenance: reconstructed
+    expected_gain: "the bound for every per-capita rate at once, with no solution of the dynamics"
+
+interpretations:
+  - id: factor-form
+    of: face-flow
+    kind: structural
+    reading: "each rate of change carries its own abundance as a factor, and the per-capita rates are smooth in the abundances, so the rate vanishes on the face and is locally Lipschitz"
+    grounds: [bg.microbial-formal-population-models.population-dynamics.grow_resource, bg.microbial-formal-population-models.population-dynamics.grow_direct]
+
+features:
+
+segments:
+
+consequences:
+  - id: bound-law
+    answers: nonnegative
+    from: bound
+    record: bg.microbial-formal-population-models.population-dynamics.abundance_nonneg
+    gain: "the bound holds for any per-capita rate, so it constrains no choice of interaction"
+    principle:
+    pattern: "a rate that carries its state as a factor leaves the face where the state vanishes invariant"
+  - id: face-lemma
+    answers: face-invariance
+    from: invariant-face
+    record:
+    gain:
+    principle:
+    pattern:
+
+impasses:
+
+refutations:
