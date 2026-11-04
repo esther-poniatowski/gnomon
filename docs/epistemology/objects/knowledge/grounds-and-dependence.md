@@ -45,6 +45,15 @@ Three properties of a ground reach the claims that rest on it. Each case is stat
 
 **The exposure rule.** A conclusion is exposed to revision through every law marked `posited`, `fitted` or `measured` among its grounds, and through every such law from which a derived law among its grounds descends. The set of these exposed laws is reported, not a degree. The test of law warrant among the [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction) checks each ground against the requirement of its role, and the exposure rule states the laws to which the conclusion stays exposed once that test passes. ^weakest-link
 
+A consequence established by a [derivation](../derivation/derivation.md) is exposed in addition through four further sources:
+
+- each posit of the derivation not [confirmed](../derivation/posit.md#^posit-confirmation);
+- each move whose warrant is not exact;
+- each non-exact operation of a model on which the derivation runs;
+- transitively, the exposure of each consequence of another derivation used by the derivation.
+
+^derivation-exposure
+
 The rule departs from the weakest-link principle of the theory of defeasible reasoning. Under that principle, in the absence of other arguments, the degree of justification that an argument confers on its conclusion is the minimum of the degrees of its premises and of the strengths of its reasons [pollock2001]. Pollock states the principle for degrees ordered on one scale, and rejects the probability calculus for them, since a conjunction of independent premises is less probable than each premise. The warrant of a law, by contrast, is a kind of provenance, not a degree. The values `posited`, `fitted` and `measured` are not ordered among themselves, and the value `derived` points to other laws instead of grading the law. Without an order, no law among the grounds is the weakest. Therefore, the method reports the exposed laws, and leaves to the researcher the judgment of how far each one threatens the conclusion.
 
 **A revision flags a dependent by its kind and by the warrant of the dependent.** A revision takes one of six kinds: a retraction, a narrowing or a generalization of the scope, a reorientation of the content within its scope, a taxonomic restructure, or a correction. A dependent rests on the revised record either monotonically, when its support is deductive, as for an answer formally proven or a model derived by exact operations, or defeasibly otherwise. A deductive conclusion survives every addition to its premises, whereas a defeasible conclusion can be defeated by new information [pollock1987]. A monotonic dependent is therefore flagged only by a retraction, a correction or a taxonomic restructure, which change or remove a premise. A defeasible dependent is flagged by every kind, since a change of scope or a reorientation brings evidence that may defeat it. The itinerary records the revision as a step, with its kind, and the review of each flagged dependent: pending, revised, unaffected or retracted. ^revision-kinds

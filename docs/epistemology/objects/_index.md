@@ -17,3 +17,4 @@ Defines the epistemic objects that an inquiry states, and the statuses that thos
 - [Answer and assessment](answer/_index.md): defines a candidate answer and the tests that decide whether it succeeds
 - [Statuses of epistemic objects](status/_index.md): places each epistemic object of an inquiry, and tells apart the statuses that those objects bear
 - [Concept](concept/_index.md): defines the concepts that a project uses to describe its objects, apart from their names
+- [Derivation](derivation/_index.md): states why a consequence holds and how it was reached, beyond the validity of each step

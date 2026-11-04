@@ -33,7 +33,8 @@ The method fixes the role of a unit by the kind of object that holds it and by t
 | Question | a request whose answers form a definite set, individuated by its direct answers | [question](../question/question.md) |
 | Definition | a concept with its gloss, a declaration of a quantity, or a key, each assessed for its adequacy rather than its truth | [concept](../concept/concept.md); [adequacy of a declaration](../../foundations/things-and-constructs.md#^declaration-adequacy) |
 | Plan | a design, which licenses an execution: a run that follows its steps and its rules on its inputs yields its output | [empirical activities](../../processes/activities/empirical-activities.md); [decision on the design record](../../../adr/design-record.md) |
-| Assumption | a ground of an answer with the role `assumption` or `idealization`, a law admitted in a background, the laws of a model, or a binding | [grounds and dependence](../knowledge/grounds-and-dependence.md#^ground-roles) |
+| Assumption | a ground of an answer with the role `assumption` or `idealization`, a law admitted in a background, the laws of a model, a binding, or a posit of a derivation | [grounds and dependence](../knowledge/grounds-and-dependence.md#^ground-roles) |
+| Derivation | a derivation, licensing the tracing of a consequence, or of an obstacle, back to its premises | [derivation](../derivation/derivation.md) |
 | Datum | a phenomenon, its data, or a ground with the role `datum` | [phenomenon](../subject/phenomenon.md) |
 | Candidate | an answer whose attitude is `entertained` or `hypothesized` | [claim and hypothesis](../../vocabulary/representations/claim-and-hypothesis.md#^attitude-support) |
 | Result | an answer accepted into $K$ | [acceptance](statuses-and-acceptance.md#^acceptance-act) |

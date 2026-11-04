@@ -54,7 +54,7 @@ A model may be derived from one or more parent models, such as a target system o
 - **An approximation describes the same system; an idealization introduces another one.** An approximation states the properties of the parent inexactly, whereas an idealization introduces a system whose properties approximate those of the parent [norton2012]. Therefore, an approximation states the regime in which it holds and the class of its error.
 - **An aggregation is consistent only if its interventions agree.** A coarse model must agree with the fine model on the interventions represented at both levels [rubenstein2017], so the closure posited by an aggregation is a claim that a binding or an answer can test.
 - **A singular limit states its order.** A limit is regular when the systems that approach it tend smoothly to the limit system, and singular when the limit system behaves qualitatively otherwise than every system near it [batterman2002]. Two singular limits may also fail to commute, so that taking them in a different order yields different systems [berry1994]. The operation then states the order in which its limits are taken.
-- **The error of an operation has four classes.** The class `exact` admits no error, `controlled` admits an error with a known bound, `uncontrolled` admits an error with no known bound, and `singular` admits an error that no bound can contain near the limit.
+- **The error of an operation has four classes.** The class `exact` admits no error, `controlled` admits an error with a known bound, `uncontrolled` admits an error with no known bound, and `singular` admits an error that no bound can contain near the limit. ^error-classes
 
 ## The binding
 
