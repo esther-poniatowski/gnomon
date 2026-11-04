@@ -36,7 +36,8 @@
 # Line length:
 #
 # The line length matches the one of `black.toml`, as the line length synchronization of that file
-# requires. The rule E501 stays unselected until the lines longer than the limit are wrapped.
+# requires. Black wraps the code, and the rule E501 reports the strings, the comments and the
+# docstrings that Black leaves longer than the limit.
 # ==================================================================================================
 
 target-version = "py312"
@@ -59,7 +60,6 @@ select = [
     "RUF",    # rules specific to Ruff
 ]
 ignore = [
-    "E501",   # see the note on the line length
     "UP035",  # the package imports its abstract types from `typing`
     "UP042",  # Typer reads the choices of a `str` enum, and `StrEnum` changes what `str()` returns
 ]
