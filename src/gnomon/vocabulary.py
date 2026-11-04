@@ -1134,7 +1134,7 @@ def interaction_graph(
     """
     signatures = {d.symbol: d.signature for d in declarations(upstream or {}) + declarations(record)}
     stated = {
-        str(law.get("symbol")): law.get("expression")
+        str(law.get("symbol")): str(law["expression"])
         for law in entries(record, "laws")
         if isinstance(law.get("expression"), str)
     }

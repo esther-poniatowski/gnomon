@@ -134,7 +134,7 @@ def test_a_check_that_fails_is_reported_and_the_others_still_run(planted: Path, 
 
     monkeypatch.setitem(check_module.BY_KIND, "binding", (broken,))
     found = check_workspace(load_workspace(planted))
-    assert any(x.finding.rule.id == "check/failed" and x.record.startswith("bind.") for x in found)
+    assert any(x.finding.rule.id == "check/failed" and (x.record or "").startswith("bind.") for x in found)
     assert any(x.finding.rule.id == "vocabulary/unresolved" for x in found)
 
 

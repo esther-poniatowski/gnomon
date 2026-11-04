@@ -151,7 +151,7 @@ class _Registries:
     """The registries that the checks read, loaded once per run."""
 
     canonical: frozenset[str] = field(default_factory=v.canonical_operators)
-    by_aim: dict[str, dict[str, list]] = field(default_factory=c.requirements_by_aim)
+    by_aim: dict[str, dict[str, list[str]]] = field(default_factory=c.requirements_by_aim)
     by_commitment: dict[str, dict[str, list[str]]] = field(default_factory=c.requirements_by_commitment)
     by_presence: dict[str, Any] = field(default_factory=c.requirements_by_presence)
     by_value: dict[str, Any] = field(default_factory=c.requirements_by_value)

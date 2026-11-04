@@ -88,7 +88,7 @@ def _registry(source: Path | None) -> dict[str, Any]:
     return yaml.safe_load((source or REQUIREMENT_REGISTRY).read_text(encoding="utf-8")) or {}
 
 
-def requirements_by_aim(source: Path | None = None) -> dict[str, dict[str, list]]:
+def requirements_by_aim(source: Path | None = None) -> dict[str, dict[str, list[str]]]:
     """Return, per epistemic aim, the paths its inquiry fixes and the ones it produces.
 
     Raises
@@ -570,10 +570,11 @@ def unbounded_aim(
     >>> texts
     ['task.epistemic_aim: prediction does not serve a demand for explanation']
     """
-    problem = records.get(question.get("addresses")) if isinstance(question.get("addresses"), str) else None
+    addresses = question.get("addresses")
+    problem = records.get(addresses) if isinstance(addresses, str) else None
     aim = at(question, "task.epistemic_aim")
     kind = (problem or {}).get("result_type")
-    if not aim or kind not in aims or aim in set(aims[kind]):
+    if not aim or not isinstance(kind, str) or kind not in aims or aim in set(aims[kind]):
         return []
     return [
         finding(rules.COMPLETENESS_UNBOUNDED_AIM,
@@ -828,8 +829,9 @@ def misdirected_assessment(
                     f"assesses: {assessed} is a {target.get('type')} record, neither an answer nor a construct",
                     "assesses")
         ]
-    if (against or {}).get("type") != expected:
-        kind = f"a {against['type']} record" if (against or {}).get("type") else "no record"
+    against_type = (against or {}).get("type")
+    if against_type != expected:
+        kind = f"a {against_type} record" if against_type else "no record"
         assessed_kind = str(target.get("type"))
         article = "an" if assessed_kind[:1] in "aeiou" else "a"
         found.insert(
@@ -912,7 +914,7 @@ def premature_appraisal(assessment: Mapping[str, Any]) -> list[Finding]:
 def unmet_by_aim(
     question: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],
-    required: Mapping[str, dict[str, list]],
+    required: Mapping[str, dict[str, list[str]]],
 ) -> list[Finding]:
     """Return every specification the aim of this question requires and the records leave open.
 

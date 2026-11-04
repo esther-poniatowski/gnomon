@@ -78,7 +78,8 @@ def kinds() -> list[str]:
 @lru_cache(maxsize=None)
 def load_base(kind: str) -> dict[str, Any]:
     """Return the base schema of a record type, read once; callers do not modify it."""
-    return yaml.safe_load(base_path(kind).read_text(encoding="utf-8"))
+    schema: dict[str, Any] = yaml.safe_load(base_path(kind).read_text(encoding="utf-8"))
+    return schema
 
 
 def vocabulary_options(kind: str, source: Path | None = None) -> dict[str, list[tuple[str, str]]]:
