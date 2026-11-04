@@ -7,11 +7,13 @@ dependencies:
   # Data manipulation and formats
   - pyyaml                 # YAML file handling
   - types-pyyaml           # type stubs for PyYAML
+  - jsonschema             # validation of records against their contracts
   # Development tools
   - black                  # code formatting
   - mypy                   # static type checking
   - mypy_extensions
   - pylint                 # code linting
+  - ruff                   # code linting
   - pyright                # static type analysis
   # Testing
   - pytest
