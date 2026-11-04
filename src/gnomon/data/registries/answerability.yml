@@ -55,7 +55,7 @@ activities:
   - {id: phenomenon-detection, condition: soundness, reason: it shows the topic presupposition,
      norm: "the feature is stable across independent procedures, replications included, and confounders and artefacts are controlled"}
   - {id: derivation, condition: soundness, reason: it derives an existence presupposition,
-     norm: "each deductive step is valid"}
+     norm: "each move is licensed by its warrant"}
   - {id: abduction, condition: candidates, reason: it proposes a candidate,
      norm: "the hypothesis is worth pursuing: it deserves testing, and its truth is not claimed"}
   - {id: induction, condition: candidates, reason: it proposes a candidate,
@@ -79,7 +79,7 @@ activities:
   - {id: fitting, condition: candidates, reason: it fixes the parameters of a candidate,
      norm: "the estimator and the uncertainty of each estimate are stated"}
   - {id: derivation, condition: candidates, reason: a derived law enters a candidate,
-     norm: "each deductive step is valid"}
+     norm: "each move is licensed by its warrant"}
   - {id: critique, condition: candidates, reason: it names objections to a candidate,
      norm: "each objection is named with its ground"}
   - {id: admissibility-check, condition: candidates, reason: it applies the admissibility tests that make up the condition,
@@ -91,7 +91,7 @@ activities:
   - {id: experimental-design, condition: discrimination, reason: its outcomes must discriminate the rivals,
      norm: "the possible outcomes discriminate the rival answers to the question: each rival predicts a different outcome"}
   - {id: derivation, condition: discrimination, reason: it gives the consequences of one candidate,
-     norm: "each deductive step is valid"}
+     norm: "each move is licensed by its warrant"}
   - {id: simulation, condition: discrimination, reason: it gives the consequences of one candidate,
      norm: "verification holds: the code solves the equations of the model"}
   - {id: model-prediction, condition: discrimination, reason: it gives the consequences of one candidate,
@@ -107,7 +107,7 @@ activities:
   - {id: operationalization, condition: access, reason: it states the procedure that obtains values,
      norm: "the procedure assigns values on a stated scale"}
   - {id: derivation, condition: bridging, reason: it derives a linking lemma,
-     norm: "each deductive step is valid"}
+     norm: "each move is licensed by its warrant"}
   - {id: background-appraisal, condition: bridging, reason: it admits an auxiliary law,
      norm: "each admitted law carries a warrant, an origin and a range"}
   - {id: operationalization, condition: bridging, reason: it states a scale, which a measurement model then validates,
