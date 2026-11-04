@@ -23,46 +23,51 @@ import yaml
 from gnomon.completeness import (
     admitted_values,
     always_required,
-    inadmissible_values,
     contradictory_accuracy,
+    inadmissible_values,
     requirements_by_aim,
     requirements_by_commitment,
-    unmet_by_aim,
-    unmet_commitment,
     undecided_boundaries,
     unjustified_explanans_bound,
+    unmet_by_aim,
+    unmet_commitment,
+    unmet_general,
     unrealized_link,
     unstated_standing,
-    unmet_general,
-)
-
-from gnomon.vocabulary import (
-    RECORD_KINDS,
-    canonical_operators,
-    declarations,
-    doubly_defined,
-    load_problem,
-    local_operators,
-    corrupted_notation,
-    misplaced_sharing,
-    split_expressions,
-    unfixed_parameters,
-    interaction_graph,
-    malformed_relations,
-    misattributed_appeals,
-    misnamed_variant,
-    unborne_variants,
-    overreaching_entries,
-    unselected_conditions,
-    unowned_quantities,
-    mistyped_symbols,
-    vacuous_shared,
-    render_markdown,
-    render_yaml,
-    unresolved,
-    upstream_of,
 )
 from gnomon.findings import texts
+from gnomon.vocabulary import (
+    RECORD_KINDS,
+    arities,
+    canonical_operators,
+    corrupted_notation,
+    declarations,
+    doubly_defined,
+    interaction_graph,
+    load_problem,
+    local_operators,
+    malformed_relations,
+    misattributed_appeals,
+    mismatched_arity,
+    misnamed_variant,
+    misplaced_sharing,
+    misrouted_interactions,
+    mistyped_symbols,
+    overreaching_declarations,
+    overreaching_entries,
+    render_markdown,
+    render_yaml,
+    split_expressions,
+    unborne_variants,
+    unfixed_parameters,
+    unordered_interactions,
+    unowned_quantities,
+    unresolved,
+    unselected_conditions,
+    unused_declarations,
+    upstream_of,
+    vacuous_shared,
+)
 
 from .paths import EXAMPLES, ROOT
 
@@ -221,6 +226,95 @@ def test_the_record_generates_a_directed_interaction_graph(
         for carrier in edge["through"]:
             assert carrier in declared, f"{name}: {carrier} is not declared"
         assert edge["tuples"], f"{name}: the edge {edge['edge']} names no ordered tuples"
+
+
+#: A target with one constituent kind, whose quantity ``u`` joins two members and ``z`` indexes one.
+PAIRED_TARGET: dict[str, Any] = {
+    "type": "target-system",
+    "constituents": [{"symbol": "sub"}],
+    "variables": [{"symbol": "u", "signature": ["sub", "sub", "t"]}, {"symbol": "z", "signature": ["sub", "t"]}],
+}
+
+
+def test_an_influence_without_an_ordered_product_of_declared_kinds_is_reported() -> None:
+    """The order of the tuples gives the direction of an influence, so each place is a declared kind."""
+    record = {"type": "background", "organization": [
+        {"symbol": "coupling", "relates": "prod(sub, sub)"},
+        {"symbol": "loose", "relates": "Aij"},
+        {"symbol": "stray", "relates": "prod(sub, pop)"},
+        {"symbol": "order", "among": ["a", "b"]},
+    ]}
+    assert texts(unordered_interactions(record, PAIRED_TARGET)) == [
+        "organization.loose: the relation names no ordered product of declared kinds",
+        "organization.stray: the relation names no ordered product of declared kinds",
+    ]
+    # the kinds stand in the target, so a relation read without it names no declared kind
+    assert len(unordered_interactions({"type": "background", "organization": record["organization"][:1]})) == 1
+
+
+def test_an_interaction_whose_laws_name_no_quantity_of_both_endpoints_is_reported() -> None:
+    """A law naming only a quantity of one member states a property of it, not an influence."""
+
+    def background(expression: str) -> dict[str, Any]:
+        return {"type": "background", "laws": [{"symbol": "transmit", "expression": expression}],
+                "organization": [{"symbol": "coupling", "relates": "prod(sub, sub)", "realized_by": ["transmit"]}]}
+
+    assert misrouted_interactions(background("u = emit(z)"), PAIRED_TARGET) == []
+    assert texts(misrouted_interactions(background("z = emit(z)"), PAIRED_TARGET)) == [
+        "organization.coupling: the laws stating it name no quantity indexed by every one of ['sub', 'sub']"
+    ]
+
+
+def test_an_unmarked_entry_naming_a_symbol_of_one_variant_is_reported() -> None:
+    """An entry without a variant holds of every member, so it cannot name what one variant alone carries."""
+    target = {
+        "type": "target-system",
+        "variants": [{"symbol": "lattice"}],
+        "constituents": [{"symbol": "cell"}, {"symbol": "site", "variant": "lattice"}],
+        "variables": [{"symbol": "u"}, {"symbol": "w", "variant": "lattice"}],
+        "laws": [{"symbol": "flow", "expression": "d_t(u) = -w"},
+                 {"symbol": "local", "expression": "d_t(w) = u", "variant": "lattice"}],
+        "external_systems": [{"symbol": "env", "shares": ["w"]}],
+    }
+    assert texts(overreaching_declarations(target)) == [
+        "laws.flow: w is carried only by the lattice variant",
+        "external_systems.env: w is carried only by the lattice variant",
+    ]
+    # a background reaches the variants of its target through the laws and the relations it states
+    background = {"type": "background", "laws": [{"symbol": "drag", "expression": "d_t(u) = -w"}],
+                  "organization": [{"symbol": "link", "relates": "prod(site, site)"},
+                                   {"symbol": "bulk", "relates": "prod(cell, cell)"}]}
+    assert texts(overreaching_declarations(background, target)) == [
+        "laws.drag: w is carried only by the lattice variant",
+        "organization.link: site is carried only by the lattice variant",
+    ]
+
+
+def test_a_call_passing_other_than_the_arity_of_its_operator_is_reported() -> None:
+    """An operator whose signature lists its sets takes one argument per set; an open signature states none."""
+    record = {
+        "type": "target-system",
+        "operators": [{"symbol": "ft", "signature": ["reals"]}, {"symbol": "lift", "signature": "reals"}],
+        "laws": [{"symbol": "y", "expression": "y = ft(u, v) + ft(u) + lift(u, v)"}],
+    }
+    taken = arities(record)
+    assert taken["ft"] == 1 and "lift" not in taken
+    assert texts(mismatched_arity(record, taken)) == ["laws.expression: ft takes 1 arguments and is passed 2"]
+
+
+def test_a_quantity_that_no_other_field_mentions_is_reported(tmp_path: Path) -> None:
+    """Only a quantity meant to be reached is reported, and a generated symbol table does not reach it."""
+    (tmp_path / "target-system.yml").write_text(yaml.safe_dump({
+        "id": "system.demo", "type": "target-system",
+        "variables": [{"name": "used", "symbol": "u"}, {"name": "stray", "symbol": "w"}],
+        "laws": [{"symbol": "decay", "expression": "d_t(u) = -u"}],
+    }), encoding="utf-8")
+    (tmp_path / "phenomenon.yml").write_text(yaml.safe_dump({
+        "id": "phen.demo.decay", "type": "phenomenon", "observables": [{"name": "terminal", "symbol": "obs"}],
+    }), encoding="utf-8")
+    (tmp_path / "vocabulary.yml").write_text("symbols: [w]\n", encoding="utf-8")
+    found = unused_declarations(tmp_path)
+    assert [(ident, f.text) for ident, f in found] == [("system.demo", "variables.w: declared and never used")]
 
 
 def test_a_shared_variable_naming_a_set_is_reported() -> None:
