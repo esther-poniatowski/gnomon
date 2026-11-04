@@ -18,7 +18,13 @@ from typer.testing import CliRunner
 
 from gnomon import __version__
 from gnomon.cli import app
-from gnomon.findings import ITINERARY_CYCLE, ITINERARY_UNADDRESSED, REGISTRY_FOREIGN_NORM, RULES, Finding
+from gnomon.findings import (
+    ITINERARY_CYCLE,
+    ITINERARY_UNADDRESSED,
+    REGISTRY_FOREIGN_NORM,
+    RULES,
+    Finding,
+)
 from gnomon.sarif import Located, sarif_log
 
 CYCLE = Finding(ITINERARY_CYCLE, ("steps",), "steps: a -> b -> a forms a cycle", "a -> b -> a")

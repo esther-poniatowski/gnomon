@@ -39,8 +39,8 @@ from typing import Any, Callable, Iterable, Mapping
 import yaml
 
 from . import completeness as c
-from .answerability import malformed_answerability
 from . import vocabulary as v
+from .answerability import malformed_answerability
 from .findings import CHECK_FAILED, Finding, finding
 from .history import StateReader, git_states
 from .itineraries import construct_record_kinds, itinerary_problems, type_classes, type_holders

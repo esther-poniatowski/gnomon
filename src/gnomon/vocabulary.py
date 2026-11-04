@@ -1279,7 +1279,7 @@ def misrouted_interactions(
             f" every one of {edge['sources'] + [edge['reach']]}",
             "organization", Entry(index, relation), "realized_by",
         )
-        for (index, relation), edge in zip(indexed(record, "organization"), interaction_graph(record, upstream))
+        for (index, relation), edge in zip(indexed(record, "organization"), interaction_graph(record, upstream), strict=True)
         if not edge["through"]
     ]
 #: Blocks whose declarations exist to be reached by another field. A manifestation, a source of

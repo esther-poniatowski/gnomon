@@ -10,28 +10,27 @@ planted case that fails for the intended reason. The worked inquiries are checke
 
 from __future__ import annotations
 
-
 import yaml
 
 from gnomon.completeness import (
     admitted_values,
     demand_met,
-    unsupported_outcome,
-    inadmissible_values,
     disposition,
+    inadmissible_values,
     malformed_credence,
-    premature_appraisal,
     misdirected_assessment,
     mismatched_occurrence,
     mismatched_request,
     misstated_obstacles,
-    result_aims,
-    unbounded_aim,
     occurrence_by_category,
     placeholder_types,
+    premature_appraisal,
+    result_aims,
+    unbounded_aim,
     unresolved_question_references,
     unresolved_slots,
     unstated_function_sense,
+    unsupported_outcome,
 )
 from gnomon.findings import texts
 from gnomon.itineraries import construct_record_kinds, type_classes, type_holders

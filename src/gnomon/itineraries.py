@@ -23,7 +23,6 @@ data/registries/product-types.yml : the types its inputs and output take.
 from __future__ import annotations
 
 import re
-
 from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -432,7 +431,7 @@ def itinerary_problems(
             continue
         inputs = [(i, item) for i, item in enumerate(step.get("inputs") or []) if isinstance(item, Mapping)]
         counts = Counter(str(item.get("type")) for _, item in inputs)
-        for index, held in enumerate(act.inputs):
+        for held in act.inputs:
             filled = sum(counts[t] for t in held.types)
             if not held.admits(filled):
                 found.append(
@@ -648,9 +647,9 @@ def cycles(edges: Mapping[str, set[str]]) -> list[list[str]]:
         state[node] = 1
         for nxt in sorted(edges.get(node, ())):
             if state.get(nxt) == 1:
-                found.append(path[path.index(nxt):] + [nxt] if nxt in path else [node, nxt])
+                found.append([*path[path.index(nxt):], nxt] if nxt in path else [node, nxt])
             elif nxt in edges and state.get(nxt) is None:
-                visit(nxt, path + [nxt])
+                visit(nxt, [*path, nxt])
         state[node] = 2
 
     for node in sorted(edges):

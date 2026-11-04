@@ -233,8 +233,8 @@ def exposure(records: Records) -> dict[str, Any]:
             if split is None:
                 continue
             owner, unit = split
-            law = next((l for l in (records.get(owner) or {}).get("laws") or []
-                        if isinstance(l, Mapping) and l.get("symbol") == unit), None)
+            law = next((entry for entry in (records.get(owner) or {}).get("laws") or []
+                        if isinstance(entry, Mapping) and entry.get("symbol") == unit), None)
             if law is None:
                 continue
             warrant = str(law.get("warrant") or "")

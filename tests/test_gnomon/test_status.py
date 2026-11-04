@@ -11,7 +11,13 @@ from typing import Any
 
 from typer.testing import CliRunner
 
-from gnomon.answerability import diagnose, itinerary_state, malformed_answerability, render_text, routes_of
+from gnomon.answerability import (
+    diagnose,
+    itinerary_state,
+    malformed_answerability,
+    render_text,
+    routes_of,
+)
 from gnomon.cli import app
 from gnomon.findings import texts
 

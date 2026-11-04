@@ -17,15 +17,15 @@ views : Write the views of the state of an inquiry as YAML records.
 """
 
 import json
-import os
 from enum import Enum
 from pathlib import Path, PurePosixPath
-from typing import Any, Mapping, Optional
+from typing import Any, Mapping
 
 import typer
 import yaml
 
-from . import info as pkg_info, __version__
+from . import __version__
+from . import info as pkg_info
 from .findings import Finding
 from .history import git_states
 from .itineraries import itinerary_problems
@@ -110,7 +110,7 @@ def cli_check(
         help="text prints one line per finding; yaml writes a stable report; sarif "
         "writes a SARIF 2.1.0 log in the findings profile of Elenchos.",
     ),
-    output: Optional[Path] = typer.Option(
+    output: Path | None = typer.Option(
         None, "--output", "-o",
         help="Write the report to this path instead of standard output; missing folders are created.",
     ),
@@ -171,7 +171,7 @@ def cli_status(
     output_format: StatusFormat = typer.Option(
         StatusFormat.text, "--format", "-f", help="text prints the open and refuted conditions; yaml writes the full diagnosis."
     ),
-    output: Optional[Path] = typer.Option(None, "--output", "-o", help="Write the report to this path instead of standard output."),
+    output: Path | None = typer.Option(None, "--output", "-o", help="Write the report to this path instead of standard output."),
 ) -> None:
     """List the open conditions of answerability of each question, and the acts that address them.
 
@@ -231,7 +231,7 @@ def cli_vocabulary(
         index_path = (source / "_index.md").resolve().relative_to(Path(root).resolve())
     except ValueError:
         typer.echo(f"{source} lies outside the workspace root {root}", err=True)
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=1) from None
     problem = load_problem(source)
     target = source / output
     target.write_text(render_yaml(problem), encoding="utf-8")
@@ -281,7 +281,7 @@ def _read_records(
     return records, files, failures
 
 
-def _write_log(log: dict[str, Any], output: Optional[Path]) -> None:
+def _write_log(log: dict[str, Any], output: Path | None) -> None:
     """Write ``log`` to ``output``, creating its folders, or to standard output when it is None."""
     text = json.dumps(log, indent=2, ensure_ascii=False) + "\n"
     if output is None:
@@ -320,7 +320,7 @@ def cli_itinerary(
         help="text prints one line per problem; sarif also writes a SARIF 2.1.0 log in the findings "
         "profile of Elenchos, on standard output or at --output.",
     ),
-    output: Optional[Path] = typer.Option(
+    output: Path | None = typer.Option(
         None, "--output", "-o",
         help="With --format sarif, write the log to this path instead of standard output; "
         "missing folders are created.",
@@ -385,7 +385,7 @@ def cli_itinerary(
 @app.command("views")
 def cli_views(
     directory: str = typer.Argument(..., help="Directory of records, read recursively; each folder is one problem."),
-    output: Optional[Path] = typer.Option(
+    output: Path | None = typer.Option(
         None, "--output", "-o", help="Folder receiving the views; the folder `views` of the directory by default."
     ),
 ) -> None:

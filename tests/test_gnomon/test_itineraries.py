@@ -15,15 +15,15 @@ from typing import Any
 import pytest
 import yaml
 
+from gnomon.findings import texts
 from gnomon.itineraries import (
     activities,
-    record_types,
-    product_types,
     cycles,
-    malformed_registry,
     itinerary_problems,
+    malformed_registry,
+    product_types,
+    record_types,
 )
-from gnomon.findings import texts
 
 from .paths import EXAMPLES, ROOT
 
@@ -144,7 +144,7 @@ def test_the_classes_of_the_product_types_are_those_of_the_inventory() -> None:
               "Evaluative types": "evaluative", "Types outside these classes": "other"}
     listed = {}
     for label, token in labels.items():
-        line = re.search(rf"^- \*\*{label}\*\*[^:]*: (.*)$", inventory, re.M)
+        line = re.search(rf"^- \*\*{label}\*\*[^:]*: (.*)$", inventory, re.MULTILINE)
         assert line is not None, f"the inventory lists no {label.lower()}"
         names = re.split(r", | and ", line.group(1).split(". ")[0].rstrip("."))
         listed.update({name.strip().replace(" ", "-"): token for name in names})

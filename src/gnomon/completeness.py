@@ -120,7 +120,7 @@ def block_requirements(source: Path | None = None) -> dict[str, list[str]]:
 
 def record_kinds(source: Path | None = None) -> list[str]:
     """Return every record kind the registry states a general requirement for."""
-    return sorted((_registry(source).get("always") or {}))
+    return sorted(_registry(source).get("always") or {})
 
 
 def requirements_by_commitment(source: Path | None = None) -> dict[str, dict[str, list[str]]]:

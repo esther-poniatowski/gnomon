@@ -24,7 +24,7 @@ gnomon.cli : the command ``schemas``, which writes or checks the generated files
 
 from __future__ import annotations
 
-from functools import lru_cache
+from functools import cache
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -75,7 +75,7 @@ def kinds() -> list[str]:
     return sorted(path.name.removesuffix(".base.schema.yml") for path in SCHEMAS.glob("*.base.schema.yml"))
 
 
-@lru_cache(maxsize=None)
+@cache
 def load_base(kind: str) -> dict[str, Any]:
     """Return the base schema of a record type, read once; callers do not modify it."""
     schema: dict[str, Any] = yaml.safe_load(base_path(kind).read_text(encoding="utf-8"))
@@ -280,7 +280,7 @@ def record_kinds() -> dict[str, str]:
     return {str(load_base(kind)["properties"]["type"]["x-template"]): kind for kind in kinds()}
 
 
-@lru_cache(maxsize=None)
+@cache
 def contract_validator(kind: str) -> Any:
     """Return the validator of the contract of a record type, which resolves the base schemas."""
     from jsonschema import Draft202012Validator

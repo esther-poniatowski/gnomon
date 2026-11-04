@@ -21,9 +21,9 @@ info() -> str
 data_path() -> Path
     Return the absolute path to the package data directory.
 """
-from importlib.metadata import version, PackageNotFoundError
-from pathlib import Path
 import platform
+from importlib.metadata import PackageNotFoundError, version
+from pathlib import Path
 
 try:
     if __package__ is None:  # erroneous script execution
@@ -32,7 +32,7 @@ try:
 except PackageNotFoundError:
     __version__ = "0.0.0+unknown"
 
-__all__ = ["info", "data_path", "__version__"]
+__all__ = ["__version__", "data_path", "info"]
 
 
 def info() -> str:

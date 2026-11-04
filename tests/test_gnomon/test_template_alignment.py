@@ -243,10 +243,10 @@ def test_no_key_of_the_template_is_undocumented(pair: tuple) -> None:
     assert not undocumented, f"{tpl}: {undocumented} appear in no row of {note}"
 
 
-def test_the_operator_note_lists_the_registry(): 
+def test_the_operator_note_lists_the_registry():
     """The registry is the source; the note documents it and must not drift from it."""
     note = (DOCS / "specification/expressions.md").read_text(encoding="utf-8")
-    bullet = re.search(r"- \*\*The canonical operators.*?\^operator-groups", note, re.S)
+    bullet = re.search(r"- \*\*The canonical operators.*?\^operator-groups", note, re.DOTALL)
     assert bullet is not None, "the note declares no canonical operators"
     documented = set(re.findall(r"`([A-Za-z_][A-Za-z_0-9]*)`", bullet.group(0)))
     declared = {e["symbol"] for e in yaml.safe_load((REGISTRY / "operators.yml").read_text())["operators"]}
@@ -455,14 +455,14 @@ def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
 
 def test_the_virtues_of_the_note_are_the_options_of_the_question() -> None:
     note = (DOCS / "epistemology/objects/task/epistemic-pragmatic-virtues.md").read_text(encoding="utf-8")
-    table = re.search(r"\| Virtue.*?\n\n", note, re.S)
+    table = re.search(r"\| Virtue.*?\n\n", note, re.DOTALL)
     assert table is not None, "no virtue table in the note"
     names = [
         name.split(" / ")[0].strip().lower().replace(" ", "-")
-        for name in re.findall(r"^\| \*\*([^|*]+)\*\*", table.group(0), re.M)
+        for name in re.findall(r"^\| \*\*([^|*]+)\*\*", table.group(0), re.MULTILINE)
     ]
     question = (TEMPLATES / "question.yml").read_text(encoding="utf-8")
-    options = re.search(r"^ *- virtue: *#(.*)$", question, re.M)
+    options = re.search(r"^ *- virtue: *#(.*)$", question, re.MULTILINE)
     assert options is not None, "no option list beside the virtues of the question"
     assert names == [opt.strip() for opt in options.group(1).split("|")]
 
