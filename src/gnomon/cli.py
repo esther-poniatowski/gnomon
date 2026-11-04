@@ -21,7 +21,7 @@ views : Write the views of the state of an inquiry as YAML records.
 import json
 from enum import Enum
 from pathlib import Path, PurePosixPath
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 
 import typer
 import yaml
@@ -34,6 +34,10 @@ from .itineraries import itinerary_problems
 from .sarif import Located, sarif_log
 from .views import question_tree, render_tree
 from .vocabulary import load_problem, render_markdown, render_yaml
+
+if TYPE_CHECKING:
+    from .answerability import Diagnosis
+    from .check import Workspace
 
 app = typer.Typer(add_completion=False, no_args_is_help=True)
 
@@ -104,6 +108,49 @@ def cli_validate(
     raise typer.Exit(code=1 if failed else 0)
 
 
+def _directory(directory: str) -> Path:
+    """Return the directory that a command reads, or exit with status 1 when there is none."""
+    source = Path(directory)
+    if not source.is_dir():
+        typer.echo(f"no such directory: {source}", err=True)
+        raise typer.Exit(code=1)
+    return source
+
+
+def _emit(text: str, output: Path | None, what: str) -> None:
+    """Write ``text`` to ``output``, creating its folders, or to standard output when it is None.
+
+    The command exits with status 2 when the file cannot be written; ``what`` names the file in the
+    message, such as ``report`` or ``log``.
+    """
+    if output is None:
+        typer.echo(text, nl=False)
+        return
+    try:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(text, encoding="utf-8")
+    except OSError as error:
+        typer.echo(f"cannot write the {what} {output}: {error}", err=True)
+        raise typer.Exit(code=2) from error
+
+
+def _diagnosis(source: Path) -> "tuple[Workspace, Diagnosis]":
+    """Return the workspace of a directory and the merged diagnosis of its problems.
+
+    The files that cannot be read are listed on standard error.
+    """
+    from .answerability import diagnose, merge
+    from .check import load_workspace
+
+    workspace = load_workspace(source)
+    for line in workspace.failures:
+        typer.echo(line, err=True)
+    diagnosis = merge(
+        [diagnose(workspace.by_id, local=problem.records) for problem in workspace.problems]
+    )
+    return workspace, diagnosis
+
+
 class CheckFormat(str, Enum):
     """The forms in which ``gnomon check`` reports its findings."""
 
@@ -113,7 +160,6 @@ class CheckFormat(str, Enum):
 
 
 @app.command("check")
-# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def cli_check(
     directory: str = typer.Argument(
         ..., help="Directory of records, read recursively; each folder is one problem."
@@ -141,51 +187,43 @@ def cli_check(
     report cannot be written.
     """
     from .check import check_workspace, load_workspace
-    from .report import render_yaml_report
 
-    source = Path(directory)
-    if not source.is_dir():
-        typer.echo(f"no such directory: {source}", err=True)
-        raise typer.Exit(code=1)
+    source = _directory(directory)
     workspace = load_workspace(source)
     found = check_workspace(workspace)
-    count = len(workspace.by_id)
     summary = (
-        f"{count} records checked in {len(workspace.problems)} folders, {len(found)} findings, "
-        f"{len(workspace.unfilled)} templates not yet filled"
+        f"{len(workspace.by_id)} records checked in {len(workspace.problems)} folders,"
+        f" {len(found)} findings, {len(workspace.unfilled)} templates not yet filled"
     )
     for line in workspace.failures:
         typer.echo(line, err=True)
-    if output_format is CheckFormat.TEXT:
-        text = (
-            "".join(f"{x.file}: {x.record}: {x.finding.rule.id}: {x.finding.text}\n" for x in found)
-            + summary
-            + "\n"
-        )
-    elif output_format is CheckFormat.YAML:
-        unfilled = [p.relative_to(source).as_posix() for p in workspace.unfilled]
-        text = render_yaml_report(found, source.name, count, unfilled)
-    else:
-        stopped = (
-            f"{len(workspace.failures)} record files could not be read"
-            if workspace.failures
-            else None
-        )
-        text = (
-            json.dumps(sarif_log(found, __version__, stopped), indent=2, ensure_ascii=False) + "\n"
-        )
-    if output is None:
-        typer.echo(text, nl=False)
-    else:
-        try:
-            output.parent.mkdir(parents=True, exist_ok=True)
-            output.write_text(text, encoding="utf-8")
-        except OSError as error:
-            typer.echo(f"cannot write the report {output}: {error}", err=True)
-            raise typer.Exit(code=2) from error
+    _emit(_check_report(workspace, found, source, output_format, summary), output, "report")
+    if output is not None:
         typer.echo(summary, err=True)
     if found or workspace.failures:
         raise typer.Exit(code=1)
+
+
+def _check_report(
+    workspace: "Workspace",
+    found: list[Located],
+    source: Path,
+    output_format: CheckFormat,
+    summary: str,
+) -> str:
+    """Return the report of ``gnomon check`` in the form that the command asks for."""
+    from .report import render_yaml_report
+
+    if output_format is CheckFormat.TEXT:
+        lines = [f"{x.file}: {x.record}: {x.finding.rule.id}: {x.finding.text}\n" for x in found]
+        return "".join(lines) + summary + "\n"
+    if output_format is CheckFormat.YAML:
+        unfilled = [p.relative_to(source).as_posix() for p in workspace.unfilled]
+        return render_yaml_report(found, source.name, len(workspace.by_id), unfilled)
+    stopped = (
+        f"{len(workspace.failures)} record files could not be read" if workspace.failures else None
+    )
+    return json.dumps(sarif_log(found, __version__, stopped), indent=2, ensure_ascii=False) + "\n"
 
 
 class StatusFormat(str, Enum):
@@ -216,19 +254,9 @@ def cli_status(
     The command exits with status 1 when a file cannot be read, and 2 when the report cannot be
     written.
     """
-    from .answerability import as_document, diagnose, merge, render_text
-    from .check import load_workspace
+    from .answerability import as_document, render_text
 
-    source = Path(directory)
-    if not source.is_dir():
-        typer.echo(f"no such directory: {source}", err=True)
-        raise typer.Exit(code=1)
-    workspace = load_workspace(source)
-    for line in workspace.failures:
-        typer.echo(line, err=True)
-    diagnosis = merge(
-        [diagnose(workspace.by_id, local=problem.records) for problem in workspace.problems]
-    )
+    workspace, diagnosis = _diagnosis(_directory(directory))
     if output_format is StatusFormat.YAML:
         text = (
             "# Generated by `gnomon status`. Edit the records, not this file.\n"
@@ -236,15 +264,7 @@ def cli_status(
         )
     else:
         text = render_text(diagnosis)
-    if output is None:
-        typer.echo(text, nl=False)
-    else:
-        try:
-            output.parent.mkdir(parents=True, exist_ok=True)
-            output.write_text(text, encoding="utf-8")
-        except OSError as error:
-            typer.echo(f"cannot write the report {output}: {error}", err=True)
-            raise typer.Exit(code=2) from error
+    _emit(text, output, "report")
     if workspace.failures:
         raise typer.Exit(code=1)
 
@@ -265,10 +285,7 @@ def cli_vocabulary(
     ),
 ) -> None:
     """Collect the symbols and operators of one problem into a table its author can consult."""
-    source = Path(directory)
-    if not source.is_dir():
-        typer.echo(f"no such directory: {source}", err=True)
-        raise typer.Exit(code=1)
+    source = _directory(directory)
     try:
         index_path = (source / "_index.md").resolve().relative_to(Path(root).resolve())
     except ValueError:
@@ -325,20 +342,6 @@ def _read_records(
     return records, files, failures
 
 
-def _write_log(log: dict[str, Any], output: Path | None) -> None:
-    """Write ``log`` to ``output``, creating its folders, or to standard output when it is None."""
-    text = json.dumps(log, indent=2, ensure_ascii=False) + "\n"
-    if output is None:
-        typer.echo(text, nl=False)
-        return
-    try:
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(text, encoding="utf-8")
-    except OSError as error:
-        typer.echo(f"cannot write the log {output}: {error}", err=True)
-        raise typer.Exit(code=2) from error
-
-
 @app.command("schemas")
 def cli_schemas(
     check: bool = typer.Option(
@@ -360,7 +363,6 @@ def cli_schemas(
 
 
 @app.command("itinerary")
-# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def cli_itinerary(
     directory: str = typer.Argument(
         ..., help="Directory holding the filled records of one problem."
@@ -393,61 +395,72 @@ def cli_itinerary(
     exits with status 1 when a problem is found or a record cannot be read, and with status 2 when
     the log cannot be written.
     """
-    source = Path(directory)
-    if not source.is_dir():
-        typer.echo(f"no such directory: {source}", err=True)
-        raise typer.Exit(code=1)
+    source = _directory(directory)
     sarif = output_format is OutputFormat.SARIF
     if output is not None and not sarif:
         raise typer.BadParameter("requires --format sarif", param_hint="--output")
-    folder = PurePosixPath(".")
-    if sarif:
-        try:
-            folder = PurePosixPath(source.resolve().relative_to(root.resolve()).as_posix())
-        except ValueError:
-            typer.echo(f"{source} lies outside the root {root}", err=True)
-            raise typer.Exit(code=1) from None
+    folder = _log_folder(source, root) if sarif else PurePosixPath(".")
     records, files, unreadable = _read_records(source, tolerant=sarif)
-    stopped = (
-        f"{len(unreadable)} record files could not be read, so the itineraries naming their records"
-        " "
-        "were not fully checked"
-        if unreadable
-        else None
-    )
+    checked, found, stopped = _check_itineraries(records, files, sarif)
+    if unreadable and stopped is None:
+        stopped = (
+            f"{len(unreadable)} record files could not be read, so the itineraries naming their"
+            " records were not fully checked"
+        )
+    _echo_itineraries(unreadable, found, checked, sarif and output is None)
+    if sarif:
+        located = [Located(p, folder / files[i].name, i) for i, p in found]
+        log = json.dumps(sarif_log(located, __version__, stopped), indent=2, ensure_ascii=False)
+        _emit(log + "\n", output, "log")
+    if found or stopped:
+        raise typer.Exit(code=1)
+
+
+def _echo_itineraries(
+    unreadable: list[str], found: list[tuple[str, Finding]], checked: int, to_stderr: bool
+) -> None:
+    """Print the files that cannot be read, one line per problem, and the count of problems.
+
+    The problems and the count go to standard error when the SARIF log takes standard output.
+    """
+    for line in unreadable:
+        typer.echo(line, err=True)
+    for identifier, problem in found:
+        typer.echo(f"{identifier}: {problem.text}", err=to_stderr)
+    typer.echo(f"{checked} itineraries checked, {len(found)} problems found", err=to_stderr)
+
+
+def _log_folder(source: Path, root: Path) -> PurePosixPath:
+    """Return the folder of ``source`` relative to ``root``, or exit with status 1 outside it."""
+    try:
+        return PurePosixPath(source.resolve().relative_to(root.resolve()).as_posix())
+    except ValueError:
+        typer.echo(f"{source} lies outside the root {root}", err=True)
+        raise typer.Exit(code=1) from None
+
+
+def _check_itineraries(
+    records: dict[str, Mapping[str, Any]], files: dict[str, Path], sarif: bool
+) -> tuple[int, list[tuple[str, Finding]], str | None]:
+    """Return the number of itineraries checked, their problems, and the error that stopped them.
+
+    An error of reading stops the check; with ``sarif`` it is returned for the log, and otherwise
+    it is raised.
+    """
     itineraries = [record for record in records.values() if record.get("type") == "itinerary"]
     found: list[tuple[str, Finding]] = []
     try:
         for itinerary in itineraries:
-            found += [
-                (str(itinerary["id"]), problem)
-                for problem in itinerary_problems(itinerary, records, states=git_states(files))
-            ]
+            problems = itinerary_problems(itinerary, records, states=git_states(files))
+            found += [(str(itinerary["id"]), problem) for problem in problems]
     except (OSError, ValueError, yaml.YAMLError) as error:
         if not sarif:
             raise
-        stopped = f"the check stopped on an error: {error}"
-    problems = [f"{identifier}: {problem.text}" for identifier, problem in found]
-    to_stderr = sarif and output is None
-    for line in unreadable:
-        typer.echo(line, err=True)
-    for line in problems:
-        typer.echo(line, err=to_stderr)
-    typer.echo(
-        f"{len(itineraries)} itineraries checked, {len(problems)} problems found", err=to_stderr
-    )
-    if sarif:
-        located = [
-            Located(problem, folder / files[identifier].name, identifier)
-            for identifier, problem in found
-        ]
-        _write_log(sarif_log(located, __version__, stopped), output)
-    if problems or stopped:
-        raise typer.Exit(code=1)
+        return len(itineraries), found, f"the check stopped on an error: {error}"
+    return len(itineraries), found, None
 
 
 @app.command("views")
-# pylint: disable-next=too-many-locals  # beyond the limit: see the task code-size
 def cli_views(
     directory: str = typer.Argument(
         ..., help="Directory of records, read recursively; each folder is one problem."
@@ -467,26 +480,18 @@ def cli_views(
     path, so two runs on unchanged records write the same files. The command exits with status 1
     when a file cannot be read, and 2 when a view cannot be written.
     """
-    from .answerability import as_document, diagnose, merge
-    from .check import load_workspace
+    from .answerability import as_document
     from .views import all_views
 
-    source = Path(directory)
-    if not source.is_dir():
-        typer.echo(f"no such directory: {source}", err=True)
-        raise typer.Exit(code=1)
-    workspace = load_workspace(source)
-    for line in workspace.failures:
-        typer.echo(line, err=True)
-    diagnosis = merge(
-        [diagnose(workspace.by_id, local=problem.records) for problem in workspace.problems]
-    )
+    source = _directory(directory)
+    workspace, diagnosis = _diagnosis(source)
     target = output if output is not None else source / "views"
+    views = all_views(
+        workspace.by_id, as_document(diagnosis), diagnosis.impeached, diagnosis.conditional
+    )
     try:
         target.mkdir(parents=True, exist_ok=True)
-        for name, view in all_views(
-            workspace.by_id, as_document(diagnosis), diagnosis.impeached, diagnosis.conditional
-        ).items():
+        for name, view in views.items():
             path = target / f"{name}.yml"
             path.write_text(
                 "# Generated by `gnomon views`. Edit the records, not this file.\n"
@@ -508,10 +513,7 @@ def cli_tree(
     ),
 ) -> None:
     """Print the question tree of a project, from its problems to the assessments of its answers."""
-    source = Path(directory)
-    if not source.is_dir():
-        typer.echo(f"no such directory: {source}", err=True)
-        raise typer.Exit(code=1)
+    source = _directory(directory)
     records, _, failures = _read_records(source, tolerant=True, pattern="**/*.yml")
     for failure in failures:
         typer.echo(failure, err=True)
@@ -528,3 +530,4 @@ def main_callback(
     if version:
         typer.echo(__version__)
         raise typer.Exit()
+
