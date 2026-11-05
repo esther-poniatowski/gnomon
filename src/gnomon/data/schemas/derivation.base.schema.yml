@@ -93,10 +93,12 @@ properties:
       - object
       - 'null'
     x-blank: true
-    x-comment: 'type and condition empty: open; type alone: typed; both: determinate'
+    x-comment: 'only when `serves` is empty; type and condition empty: open; type alone: typed; both:
+      determinate'
     title: Sought
-    description: 'The root sought: the unknown or the statement that the derivation seeks; its type and
-      its condition fix its degree of determinacy.'
+    description: 'The root sought of a derivation that serves no record: the unknown or the statement that
+      the derivation seeks; its type and its condition fix its degree of determinacy. A derivation that
+      serves a record reads its root sought from that record.'
     properties:
       id:
         type:
@@ -189,6 +191,7 @@ properties:
           examples:
             - the slowest structured mode has decayed by the factor that the closure fixes
         replaces:
+          x-units: [subordinate]
           type:
             - string
             - 'null'
@@ -239,6 +242,7 @@ properties:
           examples:
             - the amplitude of one eigenmode of the effective Hessian
         introduced_by:
+          x-units: [moves, posits]
           type:
             - string
             - 'null'
@@ -408,6 +412,7 @@ properties:
                 examples:
                   - numerical
               by:
+                x-units: [moves]
                 type:
                   - string
                   - 'null'
@@ -449,6 +454,7 @@ properties:
           examples:
             - take-limit
         inputs:
+          x-units: [objects, posits]
           type:
             - array
             - 'null'
@@ -463,6 +469,7 @@ properties:
             x-template: OBJECT-OR-PREMISE
             x-kind: label
         outputs:
+          x-units: [objects]
           type:
             - array
             - 'null'
@@ -477,6 +484,7 @@ properties:
             x-template: OBJECT-NAME
             x-kind: label
         binds:
+          x-units: [slots]
           type:
             - array
             - 'null'
@@ -540,6 +548,7 @@ properties:
               examples:
                 - times long compared with the inverse of the spectral gap
             applies_because:
+              x-units: [interpretations]
               type:
                 - string
                 - 'null'
@@ -552,6 +561,7 @@ properties:
               examples:
                 - spectral-gap
   kernel:
+    x-units: [moves]
     type:
       - string
       - 'null'
@@ -585,6 +595,7 @@ properties:
           examples:
             - isolate-slow-mode
         of:
+          x-units: [moves, segments]
           type:
             - string
             - 'null'
@@ -606,6 +617,7 @@ properties:
           examples:
             - to isolate the mode that sets the long-time behavior
         determines:
+          x-units: [sought, subordinate]
           type:
             - string
             - 'null'
@@ -625,6 +637,7 @@ properties:
           examples:
             - isolate
         occasion:
+          x-units: [interpretations]
           type:
             - string
             - 'null'
@@ -718,6 +731,7 @@ properties:
           examples:
             - spectral-gap
         of:
+          x-units: [objects, moves, features, segments, consequences]
           type:
             - string
             - 'null'
@@ -749,6 +763,7 @@ properties:
             - at long times the slowest positive mode dominates, the faster ones being smaller by an exponential
               factor
         grounds:
+          x-units: [objects, moves, posits, slots, features, segments, consequences]
           type:
             - array
             - 'null'
@@ -794,6 +809,7 @@ properties:
           examples:
             - zero-mode
         at:
+          x-units: [objects]
           type:
             - string
             - 'null'
@@ -825,17 +841,8 @@ properties:
           description: A descriptive identifier of the segment, unique within the record.
           examples:
             - relaxation
-        serves:
-          type:
-            - string
-            - 'null'
-          x-template: SOUGHT-NAME
-          x-kind: label
-          title: Serves
-          description: The identifier of the sought that the segment serves.
-          examples:
-            - delay-scale
         moves:
+          x-units: [moves]
           type:
             - array
             - 'null'
@@ -851,6 +858,7 @@ properties:
             x-template: MOVE-NAME
             x-kind: label
         inputs:
+          x-units: [objects, posits]
           type:
             - array
             - 'null'
@@ -865,6 +873,7 @@ properties:
             x-template: OBJECT-OR-PREMISE
             x-kind: label
         outputs:
+          x-units: [objects]
           type:
             - array
             - 'null'
@@ -888,6 +897,7 @@ properties:
           title: Applies
           description: The identifier of the design of kind method that the segment applies as a scheme.
         within:
+          x-units: [segments]
           type:
             - string
             - 'null'
@@ -919,16 +929,19 @@ properties:
           examples:
             - delay-law
         answers:
+          x-units: [sought, subordinate]
           type:
             - string
             - 'null'
           x-template: SOUGHT-NAME
           x-kind: label
           title: Answers
-          description: The identifier of the sought that the consequence answers.
+          description: The identifier of the sought that the consequence answers, or the record served for
+            the root sought of a derivation that serves one.
           examples:
             - delay-scale
         from:
+          x-units: [objects]
           type:
             - string
             - 'null'
@@ -944,9 +957,11 @@ properties:
             - 'null'
           x-template: RECORD.UNIT
           x-kind: label
-          x-comment: required for a consequence of the root sought; empty for a lemma
+          x-comment: required for a consequence of the root sought, unless the derivation serves the law or
+            the operation that states it; for a lemma, filled once the lemma holds beyond the derivation
           title: Record
-          description: The identifier of the law, the answer or the obligation that states the consequence.
+          description: The identifier of the law, the answer or the obligation that states the consequence;
+            a law named here is marked derived.
           examples:
             - mod.grokking.effective-representation.representation_time
         gain:
@@ -961,6 +976,7 @@ properties:
           examples:
             - the delay is read from one spectral quantity of the effective Hessian
         principle:
+          x-units: [interpretations]
           type:
             - string
             - 'null'
@@ -995,6 +1011,7 @@ properties:
       type: object
       properties:
         sought:
+          x-units: [sought, subordinate]
           type:
             - string
             - 'null'
@@ -1003,6 +1020,7 @@ properties:
           title: Sought
           description: The identifier of the sought left without answer.
         obstacle:
+          x-units: [interpretations]
           type:
             - string
             - 'null'
@@ -1017,11 +1035,12 @@ properties:
     x-blank: true
     x-comment: optional; one entry per refutation
     title: Refutations
-    description: The statements that the derivation shows to fail.
+    description: The statements that the derivation falsifies by a counterexample.
     items:
       type: object
       properties:
         target:
+          x-units: [posits, consequences]
           type:
             - string
             - 'null'
@@ -1029,21 +1048,16 @@ properties:
           x-kind: label
           title: Target
           description: The posit, the consequence or the claim refuted, by identifier.
-        form:
-          type:
-            - string
-            - 'null'
-          x-vocabulary: refutations.form
-          title: Form
-          description: Whether a counterexample or a refuting test refutes the target.
         by:
+          x-units: [objects]
           type:
             - string
             - 'null'
-          x-template: OBJECT-OR-POSIT
+          x-template: OBJECT-NAME
           x-kind: label
           title: By
-          description: The object that is the counterexample, or the posit whose test refutes it.
+          description: The object that is the counterexample; a refuting test of a posit is recorded among
+            the tests of that posit.
   maturity:
     type:
       - object

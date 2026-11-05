@@ -14,10 +14,6 @@ runs_on:
 uses:
 
 sought:
-  id: nonnegative
-  statement: "no abundance becomes negative along a trajectory"
-  type: claim-truth
-  condition: "for every trajectory that starts with nonnegative abundances, in either variant"
 
 subordinate:
   - id: face-invariance
@@ -59,7 +55,7 @@ moves:
       applies_because:
   - id: invariance
     kind: apply-theorem
-    inputs: [face-flow]
+    inputs: [face-flow, bg.microbial-formal-population-models.population-dynamics.regular_rates]
     outputs: [invariant-face]
     binds:
     warrant:
@@ -100,7 +96,7 @@ interpretations:
   - id: factor-form
     of: face-flow
     kind: structural
-    reading: "each rate of change carries its own abundance as a factor, and the per-capita rates are smooth in the abundances, so the rate vanishes on the face and is locally Lipschitz"
+    reading: "each rate of change carries its own abundance as a factor, so the rate of an abundance vanishes on the face where that abundance vanishes"
     grounds: [bg.microbial-formal-population-models.population-dynamics.grow_resource, bg.microbial-formal-population-models.population-dynamics.grow_direct]
 
 features:
@@ -109,9 +105,9 @@ segments:
 
 consequences:
   - id: bound-law
-    answers: nonnegative
+    answers: bg.microbial-formal-population-models.population-dynamics.abundance_nonneg
     from: bound
-    record: bg.microbial-formal-population-models.population-dynamics.abundance_nonneg
+    record:
     gain: "the bound holds for any per-capita rate, so it constrains no choice of interaction"
     principle:
     pattern: "a rate that carries its state as a factor leaves the face where the state vanishes invariant"

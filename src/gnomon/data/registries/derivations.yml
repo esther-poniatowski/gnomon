@@ -2,6 +2,9 @@
 # derivations own each rule (docs/adr/registries-as-source.md):
 # - the admitted pairs of item and kind of an interpretation:
 #   `docs/epistemology/objects/derivation/interpretation.md#^admitted-pairs`;
+# - the ground that each kind of interpretation cites, and the kind of interpretation that each field
+#   cites: `docs/epistemology/objects/derivation/interpretation.md`, the table of kinds and the
+#   single homes;
 # - the kinds of move that make a move non-routine:
 #   `docs/epistemology/objects/derivation/move.md#^non-routine`;
 # - the tests that confirm a posit:
@@ -14,7 +17,8 @@ type: derivation-registry
 
 # The item of an interpretation is read from the unit that it interprets: an object of form
 # `object` or `expression`, a move (`transformation`), a feature of the calculation (`feature`),
-# or a segment or a consequence (`composite`).
+# or a segment or a consequence (`composite`). A unit of another record, named by a dotted
+# reference, is an object or an expression, and admits the kinds of both.
 admitted_pairs:
   object: [referential, process, structural, magnitude, analogical]
   expression: [form, process, structural, magnitude, analogical]
@@ -22,16 +26,32 @@ admitted_pairs:
   feature: [diagnostic]
   composite: [process, structural, variation, analogical]
 
-# The kinds of interpretation that the field `applies_because` of a warrant may cite.
-licensing_kinds: [structural, magnitude]
+# The kinds of interpretation that a field may cite, by the path of the field: a warrant cites the
+# property that makes it apply, an impasse its obstacle, and a consequence its principle.
+cited_kinds:
+  moves.warrant.applies_because: [structural, magnitude]
+  impasses.obstacle: [diagnostic]
+  consequences.principle: [variation]
 
-# The units that the grounds of a diagnostic interpretation must include, by the field of the
-# record that holds them.
-diagnostic_grounds: [moves, posits]
+# The grounds that each kind of interpretation cites, by the list of the record that declares them,
+# or `reference` for a unit of another record. A kind listed with no class states its ground in
+# its reading: the shape of the expression for a form, a named property for a structure, and the
+# stated variation for a variation.
+ground_types:
+  referential: [reference, slots, objects]
+  form: []
+  process: [reference]
+  structural: []
+  magnitude: [reference, objects]
+  variation: []
+  analogical: [reference]
+  diagnostic: [moves, posits]
 
 # The kinds of move that make a move non-routine. The other features of a non-routine move are
-# read from the record: a warrant that is not exact, a slot introduced or a posit used, the
-# declared kernel, and the import of the output of an act.
+# read from the record: the declared kernel, a slot introduced or a posit used, an input that a
+# diagnostic interpretation reads or a route to the answer of a sought replacing one left by an
+# impasse, the import of the output of an act by a warrant of source `act-verdict`, and a warrant
+# that is not exact.
 non_routine_kinds: [take-limit, truncate, require-self-consistency, impose, match, import]
 
 # The tests that confirm a posit, with the standard that a computation must meet.

@@ -1,7 +1,9 @@
 # What a filled inquiry must carry. Source of truth for the checkers; the specification notes document
 # these requirements and are checked against this file.
 #
-# `always` lists the specifications every record of a kind carries, whatever the inquiry.
+# `always` lists the specifications every record of a kind carries, whatever the inquiry. A path
+# written `key[].field` bears on every entry of the list `key`, and a list with no entry imposes
+# nothing through it.
 # `by_block` lists the specifications that an aim block of an answer carries whenever the answer
 # holds that block, keyed by the path of the block; its paths are relative to the block.
 # `by_commitment` lists the specifications that a target system or a phenomenon carries at each
@@ -11,7 +13,8 @@
 # kind, the field and the value: a design of the kind `experiment` carries a protocol.
 # `by_presence` lists the specifications that the presence or the absence of a field imposes,
 # keyed by the record kind and the field: a root model, which names no parent, declares its
-# constituents, its variables and its laws, whereas a derived model states its operations.
+# constituents, its variables and its laws, whereas a derived model states its operations; a
+# derivation that serves no record declares its root sought.
 # `by_aim` adds the requirements that an epistemic aim imposes. Under `to_produce`, it lists the
 # general requirements that the inquiry itself produces: an inquiry that produces a phenomenon
 # cannot state that phenomenon in advance.
@@ -32,7 +35,17 @@ always:
   problem: [statement, kind, demand, result_type, request]
   concept: [gloss, kind, source]
   design: [kind, task, steps, output, stopping]
-  derivation: [runs_on, sought, objects, moves]
+  derivation:
+    - runs_on
+    - objects
+    - moves
+    - moves[].kind
+    - moves[].inputs
+    - moves[].outputs
+    - moves[].warrant.source
+    - moves[].warrant.error
+    - segments[].inputs
+    - segments[].outputs
   itinerary: [addresses, steps]
   answer: [claim, grounds, dependence, route, domain, status, support, modal_strength, erotetic_relation]
   binding: [model, target, asserter, feature_pairs, domain, grain, version]
@@ -60,6 +73,9 @@ by_presence:
     derives_from:
       present: [operations]
       absent: [constituents, variables, laws]
+  derivation:
+    serves:
+      absent: [sought]
 
 by_value:
   design:

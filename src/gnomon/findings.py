@@ -392,18 +392,22 @@ DERIVATION_UNADMITTED_PAIR = _rule(
 )
 DERIVATION_MISTYPED_GROUND = _rule(
     "derivation/mistyped-ground",
-    "A warrant cites a property of another kind than structural or magnitude, or a diagnostic"
-    " interpretation cites no move and no posit.",
+    "A field cites an interpretation of another kind than the field admits, or the grounds of an"
+    " interpretation cite no reference of the type that its kind requires.",
 )
 DERIVATION_CYCLE = _rule(
     "derivation/cycle", "The moves of a derivation depend on one another in a cycle."
 )
 DERIVATION_RETROSPECTIVE_ORIENTATION = _rule(
     "derivation/retrospective-orientation",
-    "An orientation cites an object that its own move yields, or that depends on that move.",
+    "An orientation cites an object that its own move or segment yields, or that depends on it.",
+)
+DERIVATION_RETROSPECTIVE_LICENSE = _rule(
+    "derivation/retrospective-license",
+    "A warrant cites a property of an object that its own move yields, or that depends on it.",
 )
 DERIVATION_UNORIENTED_MOVE = _rule(
-    "derivation/unoriented-move", "A non-routine move has no orientation."
+    "derivation/unoriented-move", "A non-routine move or a segment has no orientation."
 )
 DERIVATION_AMBIGUOUS_PURPOSE = _rule(
     "derivation/ambiguous-purpose",
@@ -432,7 +436,25 @@ DERIVATION_UNRECORDED_DESCENT = _rule(
     " published origin.",
 )
 DERIVATION_UNBOUND_SLOT = _rule(
-    "derivation/unbound-slot", "A slot is bound by no move, and the derivation ends in no impasse."
+    "derivation/unbound-slot",
+    "A slot is bound by no move, and no impasse stops the route that the slot opens.",
+)
+DERIVATION_BROKEN_BRIDGE = _rule(
+    "derivation/broken-bridge",
+    "A move of a segment takes an object that neither the segment takes nor its moves yield.",
+)
+DERIVATION_UNREACHED_CONSEQUENCE = _rule(
+    "derivation/unreached-consequence",
+    "A consequence is stated by an object that no move and no segment yields.",
+)
+DERIVATION_RESTATED_FACT = _rule(
+    "derivation/restated-fact",
+    "A derivation that serves a record restates its root sought, or names the record served again"
+    " as the record of a consequence.",
+)
+DERIVATION_UNDERIVED_RECORD = _rule(
+    "derivation/underived-record",
+    "The record of a consequence names a law that is not marked derived.",
 )
 
 # --- Dimensions -----------------------------------------------------------------------------------

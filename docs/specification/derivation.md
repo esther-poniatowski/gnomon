@@ -21,10 +21,10 @@ Three properties are read from other fields, so that no field restates them:
 
 | Specification | When it is required | Content | Examples |
 | ------------- | ------------------- | ------- | -------- |
-| Serves | when the derivation serves a question, a proof obligation, or a law or an operation stated in advance | the identifier of the record served; empty for a derivation that constructs its result | `quest.grokking.explain_delay` |
+| Serves | when the derivation serves a question, a proof obligation, or a law or an operation stated in advance | the identifier of the record served, from which the root sought is read; empty for a derivation that constructs its result | `quest.grokking.explain_delay` |
 | Runs on | always | the records that hold the premises: models, backgrounds, the target system or an answer | `mod.grokking.effective-representation` |
 | Uses | when the derivation uses the consequences of another derivation | one identifier per derivation used | `derivation.grokking.mode-spectrum` |
-| Sought | always | the root sought, with its identifier, its statement, its type and its condition | — |
+| Sought | when the derivation serves no record | the root sought, with its identifier, its statement, its type and its condition; a derivation that serves a record reads its root sought from that record and leaves this field empty | — |
 | Sought: id | with the sought | a descriptive identifier of the root sought | `delay-scale` |
 | Sought: statement | with the sought | the unknown or the statement sought, in one phrase | the law that sets the scale of the delay after fitting |
 | Sought: type | once the type of the unknown is known | `law` · `value-or-bound` · `object` · `classification` · `claim-truth` | `law` |
@@ -54,19 +54,19 @@ Three properties are read from other fields, so that no field restates them:
 | Posits: origin: ref | unless the origin is `none` | the step, the source or the scheme | Liu et al., NeurIPS 2022 |
 | Posits: tests | once a test is made | one entry per test, with its verdict | — |
 | Posits: tests: test | in each entry | `consistency` · `limit` · `exact` · `approximation` · `empirical` · `computation` | `empirical` |
-| Posits: tests: verdict | in each entry | `supports` · `refutes` | `supports` |
+| Posits: tests: verdict | in each entry | `supports` · `refutes`; a test that refutes is the refutation of its posit | `supports` |
 | Posits: tests: standard | for a computation | `certified` · `numerical` | `numerical` |
 | Posits: tests: by | in each entry | the move, the record or the source that carries the test | `mod.grokking.effective-representation.generalization_link` |
 | Moves | always | one entry per move stated: every [non-routine move](../epistemology/objects/derivation/move.md#^non-routine), and each routine move that no segment bridges | — |
 | Moves: id | in each entry | a descriptive identifier | `slowest-dominates` |
-| Moves: kind | in each entry | one of the [atomic kinds of move](../epistemology/objects/derivation/move.md) | `take-limit` |
-| Moves: inputs | in each entry | the objects, the posits or the premises taken | `mode-decay` |
-| Moves: outputs | in each entry | the objects yielded | `slowest-mode` |
+| Moves: kind | always, in each entry | one of the [atomic kinds of move](../epistemology/objects/derivation/move.md) | `take-limit` |
+| Moves: inputs | always, in each entry | the objects, the posits or the premises taken | `mode-decay` |
+| Moves: outputs | always, in each entry | the objects yielded | `slowest-mode` |
 | Moves: binds | when the move binds a slot | the symbols of the slots bound | `a_mode` |
 | Moves: warrant | in each entry | the license of the move | — |
-| Moves: warrant: source | in each entry | `definition` · `theorem` · `approximation` · `computation` · `act-verdict` | `approximation` |
+| Moves: warrant: source | always, in each entry | `definition` · `theorem` · `approximation` · `computation` · `act-verdict` | `approximation` |
 | Moves: warrant: cites | when a definition, a theorem, a record or a step licenses the move | the item cited | dominance of the slowest positive mode of a linear relaxation |
-| Moves: warrant: error | in each entry | `exact` · `controlled` · `uncontrolled` · `singular` | `controlled` |
+| Moves: warrant: error | always, in each entry | `exact` · `controlled` · `uncontrolled` · `singular` | `controlled` |
 | Moves: warrant: regime | when the error is not exact | the regime in which the warrant holds | times long compared with the inverse of the spectral gap |
 | Moves: warrant: applies because | when a property of the objects makes the warrant apply | the identifier of a structural or magnitude interpretation established before the move | `spectral-gap` |
 | Kernel | when the derivation has a kernel | the identifier of the move declared as kernel, which the kernel test checks | `slowest-dominates` |
@@ -88,42 +88,46 @@ Three properties are read from other fields, so that no field restates them:
 | Interpretations: of | in each entry | the identifier of the item interpreted | `mode-decay` |
 | Interpretations: kind | in each entry | `referential` · `form` · `process` · `structural` · `magnitude` · `variation` · `analogical` · `diagnostic` | `magnitude` |
 | Interpretations: reading | in each entry | the meaning assigned, in one sentence | at long times the slowest positive mode dominates |
-| Interpretations: grounds | when the kind requires a ground that the record can cite | the references of the type that the kind requires; for a diagnostic interpretation, the move or the posit whose failure it reveals | `mod.grokking.effective-representation.Hrep` |
+| Interpretations: grounds | when the kind requires a ground that the record can cite | the references of the type that the kind requires: a declared symbol for a referential meaning, a law for a process, an expression of the ordering for a magnitude, the known law or source for an analogy, and the move or the posit whose failure it reveals for a diagnostic interpretation | `mod.grokking.effective-representation.Hrep` |
 | Features of the calculation | when the calculation exhibits an event that a diagnostic interpretation reads | one entry per event | — |
 | Features: id | in each entry | a descriptive identifier | `zero-mode` |
 | Features: kind | in each entry | `divergence` · `secular-term` · `zero-mode` · `sign-change` · `crossing` | `zero-mode` |
 | Features: at | in each entry | the identifier of the object at which the event occurs | `mode-decay` |
 | Segments | when moves group under one idea, or when a segment bridges omitted moves | one entry per segment | — |
 | Segments: id | in each entry | a descriptive identifier | `relaxation` |
-| Segments: serves | in each entry | the identifier of the sought served | `delay-scale` |
 | Segments: moves | in each entry | the moves stated inside the segment | `diagonalize`, `slowest-dominates` |
-| Segments: inputs | in each entry | the objects or the premises consumed | `mod.grokking.effective-representation.representation_flow` |
-| Segments: outputs | in each entry | the objects produced | `delay-law` |
+| Segments: inputs | always, in each entry | the objects or the premises consumed | `mod.grokking.effective-representation.representation_flow` |
+| Segments: outputs | always, in each entry | the objects produced | `delay-law` |
 | Segments: applies | when the segment applies a scheme | the identifier of a design of kind `method` | `design.relaxation.slowest-mode` |
 | Segments: within | when the segment is nested | the identifier of the enclosing segment | `relaxation` |
 | Consequences | when the derivation establishes a statement | one entry per consequence; a consequence answering a subordinate sought is a lemma | — |
 | Consequences: id | in each entry | a descriptive identifier | `delay-law` |
-| Consequences: answers | in each entry | the identifier of the sought answered | `delay-scale` |
+| Consequences: answers | in each entry | the identifier of the sought answered, or the record served for the root sought of a derivation that serves one | `delay-scale` |
 | Consequences: from | in each entry | the identifier of the object that states the consequence | `delay-law` |
-| Consequences: record | for a consequence of the root sought | the law, the answer or the obligation that states it, as the [records of a consequence](../epistemology/processes/activities/model-analysis.md#^consequence-records) list them | `mod.grokking.effective-representation.representation_time` |
+| Consequences: record | for a consequence of the root sought, unless the derivation serves the law or the operation that states it; for a lemma, once it holds beyond the derivation | the law, the answer or the obligation that states it, as the [records of a consequence](../epistemology/processes/activities/model-analysis.md#^consequence-records) list them; a law named here is marked derived | `mod.grokking.effective-representation.representation_time` |
 | Consequences: gain | optional | the gain obtained | the delay is read from one spectral quantity of the effective Hessian |
 | Consequences: principle | optional | the identifier of the variation interpretation that names the property making the consequence hold | `rate-variation` |
 | Consequences: pattern | optional | the scheme applied, with the other problems within its reach | the slowest mode of a stable linear relaxation sets its relaxation time |
 | Impasses | when a sought stays without answer | one entry per impasse | — |
 | Impasses: sought | in each entry | the identifier of the sought left without answer | `crossing-time` |
 | Impasses: obstacle | in each entry | the identifier of the diagnostic interpretation that names the obstacle | `nonlinear-quality` |
-| Refutations | when the derivation shows a statement to fail | one entry per refutation | — |
+| Refutations | when a counterexample of the derivation shows a statement to fail | one entry per counterexample; a refuting test of a posit is recorded among the tests of the posit | — |
 | Refutations: target | in each entry | the posit, the consequence or the claim refuted | `quality-tracks-slow-mode` |
-| Refutations: form | in each entry | `counterexample` · `refuting-test` | `refuting-test` |
-| Refutations: by | in each entry | the object that is the counterexample, or the posit whose test refutes it | `quality-tracks-slow-mode` |
+| Refutations: by | in each entry | the object that is the counterexample | `slow-mode-counterexample` |
 
-The checks of a derivation read these fields as follows:
+The checks of a derivation read these fields as follows. This list is the one statement of the checks, and each rule carries the identifier that a finding reports: ^derivation-checks
 
-- every identifier named inside the record resolves to a unit of the record, and every dotted reference resolves to a record of the workspace;
-- each interpretation pairs its item with an admitted kind, a diagnostic interpretation cites a move or a posit among its grounds, and the field `applies_because` of a warrant names a structural or magnitude interpretation;
-- each orientation cites, through its occasion, only objects established before its move;
-- each non-routine move has an orientation, and each orientation states exactly one of `determines` and `change`;
-- the declared kernel lies on every route from the premises to each consequence of the root sought;
-- each consequence of the root sought names its record, and the moves form no cycle;
-- each move yields something that it does not take, and its outputs reach an outcome or an interpretation cited by the record;
-- no segment encloses itself, and no subordinate sought replaces itself, through a cycle.
+- every identifier named inside the record resolves to a unit of a list that its field admits, as the schema declares by the key `x-units`, and every dotted reference resolves to a record of the workspace (`derivation/unknown-unit`); no two units share an identifier (`derivation/repeated-unit`);
+- a derivation that serves a record neither declares a root sought nor names the record served as the record of a consequence (`derivation/restated-fact`);
+- each interpretation pairs its item with an admitted kind, a unit of another record being an object or an expression (`derivation/unadmitted-pair`);
+- a warrant cites a structural or magnitude interpretation, an impasse a diagnostic one, and a consequence a variation one as its principle, and the grounds of each interpretation cite a reference of the type that its kind requires (`derivation/mistyped-ground`);
+- the moves and the segments form no cycle (`derivation/cycle`), and no segment encloses itself, nor any subordinate sought replaces itself, through a cycle (`derivation/cyclic-nesting`);
+- the occasion of an orientation (`derivation/retrospective-orientation`) and the property that a warrant cites (`derivation/retrospective-license`) interpret only objects established before their move or segment;
+- each orientation states exactly one of `determines` and `change` (`derivation/ambiguous-purpose`), and each non-routine move and each segment has an orientation (`derivation/unoriented-move`);
+- each move of a segment takes only what the segment takes or what its moves yield (`derivation/broken-bridge`);
+- the declared kernel lies on every route from the premises to each consequence of the root sought (`derivation/failed-kernel`);
+- each consequence is stated by an object that a move or a segment yields (`derivation/unreached-consequence`);
+- each move yields something that it does not take, and its outputs reach an outcome, a test of a posit or an interpretation cited by the record (`derivation/idle-move`);
+- each consequence of the root sought names its record, unless the derivation serves the law or the operation stating it (`derivation/unrecorded-consequence`), and a law named as the record of a consequence is marked derived (`derivation/underived-record`);
+- each slot is bound by a move, unless an impasse stops the route that the slot opens (`derivation/unbound-slot`);
+- each law marked derived names a derivation stating it as a consequence, or a published origin (`derivation/unrecorded-descent`).

@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-11-04
-revised: 2026-11-04
+revised: 2026-11-05
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Derivation record
@@ -41,15 +41,15 @@ The record takes the prefix `derivation`, with three segments, and the contract 
 
 ## Defects that a check reports
 
-The proposals listed three conditions of adequacy and six named defects of a derivation. A check reports a defect only when the record states the units on which its verdict rests, as the [decision against inference at run time](no-run-time-inference.md) requires. The other defects need a judgment of relevance or of generality, so the norm of the act producing the derivation judges them. Amended on 2026-11-04.
+The proposals for the derivation framework, `docs/proposals/derivation-framework.md` at commit c5a1614, listed three conditions of adequacy and six named defects of a derivation. A check reports a defect only when the record states the units on which its verdict rests, as the [decision against inference at run time](no-run-time-inference.md) requires. The other defects need a judgment of relevance or of generality, so the norm of the act producing the derivation judges them. Amended on 2026-11-04.
 
 | Defect | Disposition |
 | ------ | ----------- |
-| A blind step: a warrant without a local reason | reported for a non-routine move without an orientation; a routine move needs none, since a segment bridges it |
+| A blind step: a warrant without a local reason | reported for a non-routine move or a segment without an orientation; a routine move needs none, since a segment bridges it |
 | An untyped transition: a move outside the vocabulary | reported by the closed vocabulary of the kinds of move |
-| A state ambiguity: the facts active at a step are unclear | prevented by the inputs and the outputs of each move, which must name units of the record |
+| A state ambiguity: the facts active at a step are unclear | prevented by the inputs and the outputs required of each move and each segment, which must name units of the record; reported for a move of a segment that takes what the segment neither takes nor yields, and for a consequence stated by an object that no move yields |
 | An idle step, or a spurious move that makes no progress | reported for a move that yields only what it takes, or whose outputs reach no outcome and no interpretation cited by the record |
-| Subgoals that do not form a well-founded tree | reported for segments that enclose one another, or soughts that replace one another, in a cycle |
+| Subgoals that do not form a well-founded order | reported for segments that enclose one another, or soughts that replace one another, in a cycle; the record links a subordinate sought to the sought that it replaces, not to the sought that it serves, so the check covers the order of replacement and of nesting only |
 | A warrant stated at the wrong generality | judged by the norm: the generality of a warrant is not read from its fields |
 | A reason without a contrastive alternative | judged by the norm: the alternatives of an orientation stay optional, since a move may have no salient rival |
 | A hidden obstacle, a teleological gap, or an avoidable detour | judged by the norm: each rests on the relevance of a move, or on a route that the record does not hold |
@@ -93,7 +93,7 @@ The kind meets the seven [conditions of admission](record-kind-admission.md#^adm
 
 - The record kinds gain `derivation`, with its specification, its base schema, its template and its contract.
 - The registries gain the closed vocabularies of the derivation: the kinds of move, of posit and of test, the intended changes of a purpose, the reasons for setting an alternative aside, and the items and kinds of interpretation with their admitted pairs.
-- The checks gain the kernel test, the order of information of the orientations, the admitted pairs and the ground types of the interpretations, the bridge of each segment, the idle moves, the cycles of nesting, and the exposure of a derivation.
+- The checks gain the rules listed in the [checks of a derivation](../specification/derivation.md#^derivation-checks), which is their one statement, and the exposure of a derivation.
 - A law marked `derived` names its descent: a derivation stating it as a consequence, or an origin holding the published derivation.
 - The norm of the activity `derivation` requires that each move is licensed by its warrant and that each posit is stated with its origin and its tests, as the [model analysis](../epistemology/processes/activities/model-analysis.md#^explicative-derivation) states.
 - The route of an answer, the obligations of an assessment and the step of an itinerary that produced a derivation point to derivation records; a passed step of the activity `derivation` names its record, whose consequences land in the output of the step.

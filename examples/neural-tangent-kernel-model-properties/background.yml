@@ -36,7 +36,7 @@ laws:
     role: state-constraint
     expression: "at_zero(flin) = at_zero(f)"
     reading: "The nonlinear and linearized trajectories begin with the same outputs."
-    warrant: derived
-    rests_on: "The law rests on the definition of the linearized model at the initial parameters."
+    warrant: posited
+    rests_on: "The law rests on the choice of the comparison: the linearized flow is started from the outputs of the network at initialization, which selects its unique solution."
 
 closure: complete

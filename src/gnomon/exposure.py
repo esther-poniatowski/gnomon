@@ -25,8 +25,6 @@ Exposure
 
 Functions
 ---------
-upstream
-    Return the moves, the segments and the inputs on which a set of objects of a derivation rests.
 answer_exposure
     Return the units that expose one answer.
 exposure_rows
@@ -38,10 +36,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
-from typing import Any, Iterable, Iterator, Mapping
+from typing import Any, Iterator, Mapping
 
 import yaml
 
+from .derivations import recorded_descents, upstream
 from .identifiers import split_reference
 
 Records = Mapping[str, Mapping[str, Any]]
@@ -98,51 +97,6 @@ def _by_id(record: Mapping[str, Any], name: str) -> dict[str, Mapping[str, Any]]
     return {str(e["id"]): e for e in _entries(record, name) if e.get("id")}
 
 
-def upstream(derivation: Mapping[str, Any], targets: Iterable[str]) -> tuple[set[str], set[str]]:
-    """Return the producers (moves and segments) on which a set of objects of a derivation rests,
-    and every input that they take, the objects of the record and the dotted premises alike.
-
-    A producer is upstream when it yields an object already needed; its inputs are then needed in
-    turn. A segment upstream brings the moves that it holds, since it bridges them.
-
-    >>> derivation = {"moves": [{"id": "a", "inputs": ["p"], "outputs": ["x"]},
-    ...                         {"id": "b", "inputs": ["x", "bg.a.b.law"], "outputs": ["y"]},
-    ...                         {"id": "c", "inputs": ["q"], "outputs": ["z"]}]}
-    >>> producers, needed = upstream(derivation, ["y"])
-    >>> sorted(producers), sorted(needed)
-    (['a', 'b'], ['bg.a.b.law', 'p', 'x', 'y'])
-    """
-    producers = {
-        **{
-            ident: (set(_names(m.get("inputs"))), set(_names(m.get("outputs"))))
-            for ident, m in _by_id(derivation, "moves").items()
-        },
-        **{
-            ident: (set(_names(s.get("inputs"))), set(_names(s.get("outputs"))))
-            for ident, s in _by_id(derivation, "segments").items()
-        },
-    }
-    held = {
-        ident: set(_names(s.get("moves"))) for ident, s in _by_id(derivation, "segments").items()
-    }
-    needed, used = set(targets), set()
-    changed = True
-    while changed:
-        changed = False
-        for ident, (ins, outs) in producers.items():
-            if ident not in used and outs & needed:
-                used.add(ident)
-                needed |= ins
-                changed = True
-        for ident in list(used):
-            for move in held.get(ident, set()) - used:
-                if move in producers:
-                    used.add(move)
-                    needed |= producers[move][0]
-                    changed = True
-    return used, needed
-
-
 def _mapping(value: Any) -> Mapping[str, Any]:
     """Return ``value`` when it is a mapping, and an empty mapping otherwise."""
     return value if isinstance(value, Mapping) else {}
@@ -150,8 +104,8 @@ def _mapping(value: Any) -> Mapping[str, Any]:
 
 def _posit_state(posit: Mapping[str, Any], refuted: bool) -> str | None:
     """Return the reason for which a posit exposes a consequence resting on it, or None when a
-    confirming test supports it and no refutation targets it."""
-    if refuted:
+    confirming test supports it and neither a refuting test nor a counterexample refutes it."""
+    if refuted or any(t.get("verdict") == "refutes" for t in _entries(posit, "tests")):
         return "refuted"
     confirming, certified = _confirming()
     confirmed = any(
@@ -172,13 +126,7 @@ class _Walk:
         self.records = records
         self.found: dict[tuple[str, str], Exposure] = {}
         self.visited: set[str] = set()
-        self.descents = {
-            str(c.get("record")): (ident, str(c.get("id")))
-            for ident, record in records.items()
-            if record.get("type") == "derivation"
-            for c in _entries(record, "consequences")
-            if c.get("record") and c.get("id")
-        }
+        self.descents = recorded_descents(records.values())
 
     def expose(self, unit: str, kind: str, reason: str, via: str) -> None:
         """Record one exposing unit, keeping the first path that reaches it."""
@@ -253,6 +201,23 @@ class _Walk:
         for ident in sorted(chosen & refuted):
             self.expose(f"{name}.{ident}", "consequence", "refuted", via)
         targets = {str(stated[c].get("from")) for c in chosen if stated[c].get("from")}
+        needed = self._units(name, record, targets, refuted)
+        for premise in sorted(n for n in needed if "." in n):
+            self.reference(premise, via)
+        for model in _names(record.get("runs_on")):
+            for operation in _entries(self.records.get(model) or {}, "operations"):
+                self.operation(model, operation, via)
+        for used in _names(record.get("uses")):
+            if used not in self.visited:
+                self.visited.add(used)
+                self.derivation(used, None)
+
+    def _units(
+        self, name: str, record: Mapping[str, Any], targets: set[str], refuted: set[str]
+    ) -> set[str]:
+        """Expose the moves and the posits of a derivation upstream of some objects, and return
+        every input that those objects rest on."""
+        via = f"derivation {name}"
         producers, needed = upstream(record, targets)
         moves = _by_id(record, "moves")
         for ident in sorted(producers & set(moves)):
@@ -264,15 +229,7 @@ class _Walk:
             state = _posit_state(posit, ident in refuted) if ident in needed else None
             if state:
                 self.expose(f"{name}.{ident}", "posit", state, via)
-        for premise in sorted(n for n in needed if "." in n):
-            self.reference(premise, via)
-        for model in _names(record.get("runs_on")):
-            for operation in _entries(self.records.get(model) or {}, "operations"):
-                self.operation(model, operation, via)
-        for used in _names(record.get("uses")):
-            if used not in self.visited:
-                self.visited.add(used)
-                self.derivation(used, None)
+        return needed
 
     def answer(self, name: str, via: str) -> None:
         """Walk an answer: its grounds, the derivations of its route, and its presuppositions."""

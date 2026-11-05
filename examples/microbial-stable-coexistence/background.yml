@@ -104,6 +104,14 @@ laws:
     reading: "The community holds at least two populations, so that coexistence can be posed as a question."
     warrant: posited
     rests_on: "The law restates the selection criterion of the class."
+  - name: "regular per-capita rates"
+    symbol: regular_rates
+    signature: []
+    role: admissibility
+    expression:
+    reading: "The per-capita rates Fr and Fd are locally Lipschitz in the abundances and the resources, so each growth law has a unique solution from each initial state."
+    warrant: posited
+    rests_on: "The class admits only smooth per-capita rates."
   - name: "invariance of nonnegative resources"
     symbol: pools_nonneg
     variant: resource_explicit

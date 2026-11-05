@@ -44,7 +44,12 @@ import yaml
 from . import completeness as c
 from . import vocabulary as v
 from .answerability import malformed_answerability
-from .derivations import derivation_problems, recorded_descents, unrecorded_descents
+from .derivations import (
+    derivation_problems,
+    recorded_descents,
+    underived_records,
+    unrecorded_descents,
+)
 from .dimensions import (
     FORMULA_BLOCKS,
     Scope,
@@ -224,7 +229,7 @@ class _Context:
         ]
 
     @cached_property
-    def descents(self) -> dict[str, str]:
+    def descents(self) -> dict[str, tuple[str, str]]:
         """The derivation that states each law of the workspace as a consequence."""
         return recorded_descents(self.workspace.by_id.values())
 
@@ -464,10 +469,10 @@ def _descent(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     return unrecorded_descents(record, ctx.descents)
 
 
-def _derivation(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
-    """The units, the interpretations, the orientations, the kernel and the slots of a
-    derivation."""
-    return derivation_problems(record)
+def _derivation(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
+    """The units, the interpretations, the orientations, the segments, the kernel, the slots and the
+    consequences of a derivation, and the laws that its consequences name."""
+    return derivation_problems(record) + underived_records(record, ctx.workspace.by_id)
 
 
 def _itinerary(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:

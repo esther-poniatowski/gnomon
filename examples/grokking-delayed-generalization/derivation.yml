@@ -186,7 +186,7 @@ interpretations:
     of: mode-decay
     kind: magnitude
     reading: "at long times, the faster positive modes are smaller than the slowest one by a factor that decays at eta_rep times the gap between their rates"
-    grounds:
+    grounds: [mod.grokking.effective-representation.lambda3]
   - id: memorization-limit
     of: rate-divergence
     kind: diagnostic
@@ -210,7 +210,6 @@ features:
 
 segments:
   - id: relaxation
-    serves: delay-scale
     moves: [diagonalize, solve-modes, slowest-dominates, crossing, keep-dependence]
     inputs: [mod.grokking.effective-representation.representation_flow, hessian, quality-tracks-slow-mode]
     outputs: [delay-law]

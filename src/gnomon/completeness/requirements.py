@@ -15,7 +15,7 @@ from typing import Any, Mapping
 import yaml
 
 from .. import findings as rules
-from ..findings import Finding, Rule, finding
+from ..findings import Entry, Finding, Rule, finding
 from .paths import REQUIREMENT_REGISTRY, at, is_unfilled, path_segments
 
 #: The levels of commitment of a target system or a phenomenon, weakest first.
@@ -111,15 +111,33 @@ def unmet_general(
     """Return every required specification the record leaves unfilled.
 
     A specification is unfilled when it is absent, null, an empty string, or an empty list or
-    mapping. The aim of the inquiry may produce a required specification, so the caller passes the
-    paths that aim produces: those may stay unfilled, since the inquiry supplies their values.
-    Each finding of ``rule`` lies at the unfilled path.
+    mapping. A path written ``key[].field`` bears on every entry of the list, so each entry leaving
+    the field unfilled is reported, and a list with no entry imposes nothing. The aim of the inquiry
+    may produce a required specification, so the caller passes the paths that aim produces: those
+    may stay unfilled, since the inquiry supplies their values. Each finding of ``rule`` lies at the
+    unfilled path.
+
+    >>> record = {"moves": [{"id": "a", "kind": "solve"}, {"id": "b"}]}
+    >>> [f.text for f in unmet_general(record, ["moves[].kind"])]
+    ['always required: moves[].kind']
+    >>> unmet_general({"moves": []}, ["moves[].kind"])
+    []
     """
     found = []
     for path in paths:
-        if path not in produced and is_unfilled(at(record, path)):
-            keys, field = path_segments(path)
-            found.append(finding(rule, f"{label}: {path}", *keys, value=field))
+        if path in produced:
+            continue
+        keys, field = path_segments(path)
+        if field is None:
+            if is_unfilled(at(record, path)):
+                found.append(finding(rule, f"{label}: {path}", *keys))
+            continue
+        entries = at(record, ".".join(str(k) for k in keys))
+        for i, entry in enumerate(entries if isinstance(entries, list) else []):
+            if isinstance(entry, Mapping) and is_unfilled(at(entry, field)):
+                found.append(
+                    finding(rule, f"{label}: {path}", *keys, Entry(i, entry), *field.split("."))
+                )
     return found
 
 

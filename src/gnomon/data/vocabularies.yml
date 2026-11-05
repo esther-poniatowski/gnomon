@@ -641,11 +641,6 @@ vocabularies:
     - value: zero-mode
     - value: sign-change
     - value: crossing
-    refutations.form:
-    - value: counterexample
-      name: a consequence of type object that falsifies the target
-    - value: refuting-test
-      name: a test whose result contradicts a posit
   operators:
     .status:
     - value: provisional

@@ -279,7 +279,6 @@ properties:
       propertyNames:
         enum:
         - id
-        - serves
         - moves
         - inputs
         - outputs
@@ -307,14 +306,7 @@ properties:
       propertyNames:
         enum:
         - target
-        - form
         - by
-      properties:
-        form:
-          enum:
-          - counterexample
-          - refuting-test
-          - null
 x-identifier: id
 propertyNames:
   enum:

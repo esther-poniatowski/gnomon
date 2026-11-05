@@ -15,7 +15,7 @@ runs_on:                         # the models, the backgrounds, the target syste
 uses:                            # optional; one entry per derivation whose consequences are used
   - derivation.TOPIC.NAME
 
-sought:                          # type and condition empty: open; type alone: typed; both: determinate
+sought:                          # only when `serves` is empty; type and condition empty: open; type alone: typed; both: determinate
   id: SOUGHT-NAME
   statement: "WHAT THE DERIVATION SEEKS"
   type:                          # law (a law over declared quantities) | value-or-bound (a value or a bound) | object (an object, such as a witness or a counterexample) | classification (a classification) | claim-truth (the truth of a stated claim: a problem to prove)
@@ -100,7 +100,6 @@ features:                        # optional; one entry per event of the calculat
 
 segments:                        # optional; one entry per group of moves under one idea
   - id: SEGMENT-NAME
-    serves: SOUGHT-NAME
     moves:
       - MOVE-NAME
     inputs:
@@ -114,7 +113,7 @@ consequences:                    # one entry per statement established
   - id: CONSEQUENCE-NAME
     answers: SOUGHT-NAME
     from: OBJECT-NAME
-    record: RECORD.UNIT          # required for a consequence of the root sought; empty for a lemma
+    record: RECORD.UNIT          # required for a consequence of the root sought, unless the derivation serves the law or the operation that states it; for a lemma, filled once the lemma holds beyond the derivation
     gain: "THE GAIN OBTAINED"    # optional
     principle: INTERPRETATION-NAME   # optional
     pattern: "THE PATTERN OF THE DERIVATION"   # optional
@@ -125,8 +124,7 @@ impasses:                        # optional; one entry per sought left without a
 
 refutations:                     # optional; one entry per refutation
   - target: UNIT-OR-RECORD
-    form:                        # counterexample (a consequence of type object that falsifies the target) | refuting-test (a test whose result contradicts a posit)
-    by: OBJECT-OR-POSIT
+    by: OBJECT-NAME
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
   FIELD.PATH: open
