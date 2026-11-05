@@ -20,7 +20,8 @@ from __future__ import annotations
 from typing import Any, Iterable, Iterator, Mapping
 
 from .. import findings as rules
-from ..dimensions import DERIVATIVE_RULES, Tree, parse_expression
+from ..dimensions import DERIVATIVE_RULES
+from ..expressions import Tree, parse_expression
 from ..findings import Finding, finding
 from .layout import formulas
 

@@ -20,13 +20,12 @@ import yaml
 from gnomon.check import check_workspace, load_workspace
 from gnomon.dimensions import (
     STATEMENT,
-    Tree,
     base_dimensions,
     declared_formulas,
     evaluate,
-    parse_expression,
     parse_formula,
 )
+from gnomon.expressions import Tree, parse_expression
 
 ROOT = Path(__file__).resolve().parents[2]
 CASE = ROOT / "examples" / "turbulence-anomalous-scaling"

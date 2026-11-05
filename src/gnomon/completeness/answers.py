@@ -9,7 +9,7 @@ from __future__ import annotations
 from typing import Any, Mapping
 
 from .. import findings as rules
-from ..dimensions import parse_expression
+from ..expressions import parse_expression
 from ..findings import Entry, Finding, finding, values_at
 from ..findings import where as place_of
 from ..identifiers import split_reference
