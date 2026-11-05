@@ -119,6 +119,7 @@ CHECKERS: dict[ModuleType, tuple[str, ...]] = {
         "unsupported_outcome",
         "misstated_obstacles",
         "inadmissible_values",
+        "misplaced_maturity",
     ),
     vocabulary: (
         "unresolved",

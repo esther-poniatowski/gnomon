@@ -558,6 +558,7 @@ def _every_record(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         v.malformed_identifier(record, ctx.prefixes)
         + v.dangling_references(record, ctx.workspace.by_id)
         + c.inadmissible_values(record, ctx.registries.admitted_values(str(record.get("type"))))
+        + c.misplaced_maturity(record)
     )
 
 

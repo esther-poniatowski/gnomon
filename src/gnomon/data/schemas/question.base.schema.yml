@@ -561,6 +561,14 @@ properties:
         items:
           type: object
           properties:
+            id:
+              type:
+              - string
+              - 'null'
+              x-template: OBLIGATION
+              x-kind: label
+              title: Id
+              description: a name unique within the question
             name:
               type:
               - string
@@ -568,7 +576,7 @@ properties:
               x-template: '"NAME OF THE OBLIGATION"'
               x-kind: markdown-line
               title: Name
-              description: The name of the record.
+              description: The name of the obligation.
             reading:
               type:
               - string

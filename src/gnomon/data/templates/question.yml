@@ -66,7 +66,8 @@ task:
       - target: phen.TOPIC.NAME.SYMBOL
         justification: "WHY THE QUESTION DEMANDS THAT THE ANSWER REPRODUCE THIS STRUCTURE"
   proof_obligations:             # fill when the answer must derive a statement rather than match a measurement
-    - name: "NAME OF THE OBLIGATION"
+    - id: OBLIGATION
+      name: "NAME OF THE OBLIGATION"
       reading: "THE IMPLICATION THAT THE ANSWER MUST ESTABLISH, IN WORDS"
       antecedent: ["EXPRESSION OVER DECLARED SYMBOLS"]
       consequent: ["EXPRESSION OVER DECLARED SYMBOLS"]

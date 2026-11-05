@@ -51,7 +51,7 @@ The field `_schema`, at the top of each template, names the contract followed by
 
 ## Mark the maturity of a field
 
-A field may be filled before the inquiry fixes it. The block `maturity` of a record marks such a field: its key is the path of the field, and its value is `open`, `provisional` or `stabilized`. For a field of one entry of a list, the path names the entry by its symbol. A marker `open` carries a comment naming one of the [three reasons for an open specification](../epistemology/objects/status/statuses-and-acceptance.md#^open-reasons): a result that the inquiry seeks, a decision of the author, or a value outside the type language. In the tipping-cascades inquiry, the phenomenon marks the value set of its observable `Z` in this way:
+A field may be filled before the inquiry fixes it. The block `maturity` of a record marks such a field: its key is the path of the field, and its value is `open`, `provisional` or `stabilized`. For a field of one entry of a list, the path names the entry by its symbol or its `id`, as the [form of a key](../specification/maturity.md#^maturity-keys) states. A marker `open` carries a comment naming one of the [three reasons for an open specification](../epistemology/objects/status/statuses-and-acceptance.md#^open-reasons): a result that the inquiry seeks, a decision of the author, or a value outside the type language. In the tipping-cascades inquiry, the phenomenon marks the value set of its observable `Z` in this way:
 
 ```yaml
 maturity:

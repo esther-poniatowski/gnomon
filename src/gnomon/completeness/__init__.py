@@ -66,6 +66,7 @@ from .assessments import (
     misdirected_assessment,
     premature_appraisal,
 )
+from .maturity import misplaced_maturity
 from .paths import (
     DATA,
     REQUIREMENT_REGISTRY,
@@ -160,6 +161,7 @@ __all__ = [
     "mismatched_occurrence",
     "mismatched_request",
     "mismatched_status_pairs",
+    "misplaced_maturity",
     "misstated_limit",
     "misstated_obstacles",
     "occurrence_by_category",

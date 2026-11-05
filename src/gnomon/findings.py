@@ -375,6 +375,10 @@ COMPLETENESS_ANONYMOUS_RESTRICTION = _rule(
     "completeness/anonymous-restriction",
     "A domain restriction names neither a quantity nor itself.",
 )
+COMPLETENESS_MISPLACED_MATURITY = _rule(
+    "completeness/misplaced-maturity",
+    "A key of the block `maturity` names no field of its record.",
+)
 COMPLETENESS_MISSTATED_LIMIT = _rule(
     "completeness/misstated-limit",
     "A domain limit is no relation `q -> v` whose left side is a variable or a parameter of the"

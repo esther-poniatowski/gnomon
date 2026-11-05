@@ -219,6 +219,7 @@ properties:
         items:
           propertyNames:
             enum:
+            - id
             - name
             - reading
             - antecedent

@@ -39,11 +39,13 @@ task:
     outputs_to_match: []
     structures_to_match: []
   proof_obligations:             # one obligation per direction; the inquiry asks for both
-    - name: "necessity of the constraint"
+    - id: necessity
+      name: "necessity of the constraint"
       reading: "Every member model with a feasible and locally stable equilibrium satisfies the proposed constraint."
       antecedent: ["mN > 0", "alpha < 0"]
       consequent:                # the constraint itself is the sought result
-    - name: "sufficiency of the constraint"
+    - id: sufficiency
+      name: "sufficiency of the constraint"
       reading: "Every member model that satisfies the proposed constraint has a feasible and locally stable equilibrium."
       antecedent:
       consequent: ["mN > 0", "alpha < 0"]
