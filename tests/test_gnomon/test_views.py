@@ -109,7 +109,11 @@ def test_every_view_of_the_worked_inquiries_follows_its_schema_and_is_stable(
     assert runner.invoke(app, ["views", str(EXAMPLES), "--output", str(first)]).exit_code == 0
     assert runner.invoke(app, ["views", str(EXAMPLES), "--output", str(second)]).exit_code == 0
     written = sorted(p.name for p in first.glob("*.yml"))
-    assert written == sorted(p.name.replace(".schema", "") for p in schemas.glob("*.schema.yml"))
+    assert written == sorted(
+        p.name.replace(".schema", "")
+        for p in schemas.glob("*.schema.yml")
+        if p.name != "vocabulary.schema.yml"
+    )
     for name in written:
         assert (first / name).read_text() == (second / name).read_text()
         view = yaml.safe_load((first / name).read_text())

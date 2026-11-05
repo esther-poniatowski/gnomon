@@ -117,7 +117,6 @@ from .table import (
     Problem,
     as_data,
     load_problem,
-    render_markdown,
     render_yaml,
     unused_declarations,
 )
@@ -189,7 +188,6 @@ __all__ = [
     "overreaching_entries",
     "reach",
     "references",
-    "render_markdown",
     "render_yaml",
     "repeated_symbols",
     "retired_in_use",

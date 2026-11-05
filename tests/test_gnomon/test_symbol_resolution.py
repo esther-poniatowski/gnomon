@@ -55,7 +55,6 @@ from gnomon.vocabulary import (
     mistyped_symbols,
     overreaching_declarations,
     overreaching_entries,
-    render_markdown,
     render_yaml,
     split_expressions,
     unborne_variants,
@@ -974,14 +973,6 @@ def test_a_problem_stores_its_vocabulary_as_a_record() -> None:
     assert data["type"] == "vocabulary"
     assert {e["symbol"] for e in data["symbols"]} == {d.symbol for d in problem.declarations}
     assert set(data["operators"]["canonical"]) == set(problem.canonical)
-
-
-def test_the_markdown_view_is_built_from_that_record() -> None:
-    problem = load_problem(PROBLEMS[0])
-    page = render_markdown(problem)
-    assert page.startswith("---")
-    assert "## Symbols" in page and "## Operators" in page
-    assert all(f"`{entry.symbol}`" in page for entry in problem.declarations)
 
 
 def test_an_empty_formula_is_skipped_and_open_is_an_unresolved_identifier() -> None:

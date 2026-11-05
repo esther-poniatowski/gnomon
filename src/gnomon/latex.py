@@ -130,6 +130,8 @@ def symbol_form(name: str, notations: Mapping[str, str] | None = None) -> str:
 
     >>> [symbol_form(n) for n in ("u", "lambda3", "eta_rep", "Ltrain", "theta0")]
     ['u', '\\\\lambda_{3}', '\\\\eta_{\\\\mathrm{rep}}', '\\\\mathrm{Ltrain}', '\\\\theta_{0}']
+    >>> symbol_form("initial_optimizer_state")
+    '\\\\mathrm{initial}_{\\\\mathrm{optimizer\\\\_state}}'
     >>> symbol_form("Ltrain", {"Ltrain": "L_{\\\\text{train}}"})
     'L_{\\\\text{train}}'
     """
@@ -149,7 +151,8 @@ def symbol_form(name: str, notations: Mapping[str, str] | None = None) -> str:
         head = f"\\mathrm{{{base}}}"
     subscripts = [index] if index else []
     if rest:
-        subscripts.append(f"\\mathrm{{{rest}}}")
+        escaped = rest.replace("_", "\\_")
+        subscripts.append(f"\\mathrm{{{escaped}}}")
     return head + (f"_{{{','.join(subscripts)}}}" if subscripts else "")
 
 

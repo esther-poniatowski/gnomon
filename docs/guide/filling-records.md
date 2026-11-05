@@ -56,10 +56,10 @@ gnomon check ./my-problem --format yaml --output ./my-problem/reports/check.yml
 
 ## Collect the symbols
 
-The symbols of a problem are declared in its records, under the rules of [symbols and expressions](../specification/expressions.md). Before a new quantity is named, the following command collects the symbols already declared, and writes a vocabulary record and a Markdown table into the folder:
+The symbols of a problem are declared in its records, under the rules of [symbols and expressions](../specification/expressions.md). Before a new quantity is named, the following command collects the symbols already declared, with their LaTeX forms, and writes the vocabulary record of the problem into the folder, a YAML view that a renderer displays:
 
 ```sh
-gnomon vocabulary ./my-problem --markdown
+gnomon vocabulary ./my-problem
 ```
 
 ## Check the itinerary

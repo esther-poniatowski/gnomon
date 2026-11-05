@@ -33,7 +33,7 @@ from .history import git_states
 from .itineraries import itinerary_problems
 from .sarif import Located, sarif_log
 from .views import question_tree, render_tree
-from .vocabulary import load_problem, render_markdown, render_yaml
+from .vocabulary import load_problem, render_yaml
 
 if TYPE_CHECKING:
     from .answerability import Diagnosis
@@ -277,26 +277,13 @@ def cli_vocabulary(
     output: str = typer.Option(
         "vocabulary.yml", "--output", "-o", help="Record written inside that directory."
     ),
-    markdown: bool = typer.Option(
-        False, "--markdown", "-m", help="Also build the Markdown view beside the record."
-    ),
-    root: str = typer.Option(
-        ".", "--root", "-r", help="Workspace root from which the Markdown view links its index."
-    ),
 ) -> None:
-    """Collect the symbols and operators of one problem into a table its author can consult."""
+    """Collect the symbols and operators of one problem into its vocabulary record, a YAML view
+    that a renderer displays through the schema ``gnomon:view.vocabulary@1``."""
     source = _directory(directory)
-    try:
-        index_path = (source / "_index.md").resolve().relative_to(Path(root).resolve())
-    except ValueError:
-        typer.echo(f"{source} lies outside the workspace root {root}", err=True)
-        raise typer.Exit(code=1) from None
     problem = load_problem(source)
     target = source / output
     target.write_text(render_yaml(problem), encoding="utf-8")
-    if markdown:
-        page = render_markdown(problem, index_path=index_path.as_posix())
-        (source / f"{target.stem}.md").write_text(page, encoding="utf-8")
     repeated = problem.collisions()
     typer.echo(
         f"{target}: {len(problem.declarations)} symbols, "

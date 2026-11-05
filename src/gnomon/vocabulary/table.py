@@ -1,6 +1,7 @@
 """
 The symbol table of a problem: the declarations collected from its records, those that nothing
-reaches, and the rendering of the table for its author.
+reaches, and the vocabulary record of the problem, a YAML view bound to the schema
+``gnomon:view.vocabulary@1`` that a renderer displays as the other views.
 """
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ import yaml
 
 from .. import findings as rules
 from ..findings import Finding, Key, finding
+from ..latex import declared_notations, symbol_form
 from .declarations import Declaration, declarations
 from .interactions import interaction_graph
 from .layout import upstream_of
@@ -36,6 +38,8 @@ class Problem:
         The operators the problem declares, each mapped to its name.
     interactions : list of dict
         The directed interaction graph its target system states, one entry per edge.
+    notations : dict
+        The LaTeX notation that each declared symbol states, empty when it states none.
     """
 
     name: str
@@ -43,6 +47,7 @@ class Problem:
     canonical: frozenset[str] = frozenset()
     local: dict[str, str] = field(default_factory=dict)
     interactions: list[dict[str, Any]] = field(default_factory=list)
+    notations: dict[str, str] = field(default_factory=dict)
 
     @property
     def operators(self) -> frozenset[str]:
@@ -110,6 +115,7 @@ def load_problem(directory: Path, registry: Path | None = None) -> Problem:
     ]
     records = [record for record in loaded if isinstance(record, Mapping)]
     by_id = {str(record["id"]): record for record in records if "id" in record}
+    problem.notations = declared_notations(r for r in records if r.get("type") != "operators")
     for record in records:
         problem.declarations.extend(declarations(record))
         problem.local.update(local_operators(record))
@@ -120,8 +126,10 @@ def load_problem(directory: Path, registry: Path | None = None) -> Problem:
 def as_data(problem: Problem) -> dict[str, Any]:
     """Return the vocabulary of a problem in the record form it is stored in."""
     return {
+        "_schema": "gnomon:view.vocabulary@1",
         "id": f"vocab.{problem.name}",
         "type": "vocabulary",
+        "title": f"Vocabulary of {problem.name}",
         "problem": problem.name,
         "generated_by": "gnomon vocabulary",
         "symbols": [
@@ -131,6 +139,7 @@ def as_data(problem: Problem) -> dict[str, Any]:
                 "block": entry.block,
                 "signature": list(entry.signature),
                 "name": entry.name,
+                "latex": symbol_form(entry.symbol, problem.notations),
             }
             for entry in sorted(problem.declarations, key=lambda d: (d.record, d.block, d.symbol))
         ],
@@ -154,82 +163,3 @@ def render_yaml(problem: Problem) -> str:
         " record.\n"
     )
     return header + yaml.safe_dump(as_data(problem), sort_keys=False, allow_unicode=True, width=100)
-
-
-def render_markdown(problem: Problem, index_path: str = "_index.md") -> str:
-    """Return the table an author reads, built from the same record.
-
-    Parameters
-    ----------
-    problem : Problem
-        The vocabulary of one problem.
-    index_path : str
-        Target of the frontmatter ``index`` link: the index of the folder holding the problem,
-        written from the root of the workspace, since notes link their parent index from there.
-
-    Returns
-    -------
-    str
-        The Markdown page, frontmatter included.
-    """
-    data = as_data(problem)
-    lines = [
-        "---",
-        "tags:",
-        "  - generated",
-        f'index: "[{problem.name}]({index_path})"',
-        "---",
-        f"# Vocabulary of {problem.name}",
-        "",
-        "Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, not this"
-        " file.",
-        "",
-        "## Symbols",
-        "",
-        "| Symbol | Declared in | Block | Signature | Gloss |",
-        "| --- | --- | --- | --- | --- |",
-    ]
-    for entry in data["symbols"]:
-        signature = ", ".join(entry["signature"]) or "—"
-        lines.append(
-            f"| `{entry['symbol']}` | {entry['declared_in']} | {entry['block'].replace('_', ' ')} "
-            f"| {signature} | {entry['name']} |"
-        )
-    if data["reused_across_records"]:
-        lines += ["", "## Symbols reused across records", ""]
-        lines += [
-            f"- `{s}` denotes a distinct quantity in {', '.join(r)}."
-            for s, r in data["reused_across_records"].items()
-        ]
-    if data["interactions"]:
-        lines += [
-            "",
-            "## Directed interactions",
-            "",
-            "The nodes are kinds, not identified members: which tuples are joined is fixed by a"
-            " parameter"
-            " of a member model, and the last column says where to read it from. A tuple of three"
-            " or"
-            " more carries a joint influence, which no pair of endpoints could state.",
-            "",
-            "| Sources | Edge | Reach | Through | Ordered tuples |",
-            "| --- | --- | --- | --- | --- |",
-        ]
-        for edge in data["interactions"]:
-            through = ", ".join(f"`{c}`" for c in edge["through"]) or "—"
-            sources = " · ".join(f"`{c}`" for c in edge["sources"]) or "—"
-            lines.append(
-                f"| {sources} | `{edge['edge']}` | `{edge['reach']}` | {through} |"
-                f" `{edge['tuples']}` |"
-            )
-    lines += ["", "## Operators", ""]
-    lines += [f"- Canonical: {', '.join(f'`{o}`' for o in data['operators']['canonical'])}."]
-    declared = data["operators"]["declared"]
-    lines += [
-        (
-            f"- Declared by this problem: {', '.join(f'`{o}` ({g})' for o, g in declared.items())}."
-            if declared
-            else "- This problem declares no operator of its own."
-        )
-    ]
-    return "\n".join(lines) + "\n"

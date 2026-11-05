@@ -102,7 +102,7 @@ The first command below creates the folder with its templates and an index in th
 ```sh
 gnomon init ./my-problem
 gnomon check ./my-problem
-gnomon vocabulary ./my-problem --markdown
+gnomon vocabulary ./my-problem
 ```
 
 Every command is specified in the [CLI reference](docs/guide/cli-reference.md).

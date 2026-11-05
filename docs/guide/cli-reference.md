@@ -118,10 +118,10 @@ gnomon status <directory> [--format text|yaml] [--output PATH]
 
 ## `vocabulary`
 
-An author choosing a symbol for a new quantity needs every symbol and operator that the records of one problem already declare. The `vocabulary` command collects them from the filled records of a problem folder into a vocabulary record, and optionally into a Markdown table beside it. Running it from the workspace root writes both files into the problem folder:
+An author choosing a symbol for a new quantity needs every symbol and operator that the records of one problem already declare. The `vocabulary` command collects them from the filled records of a problem folder into a vocabulary record, with the LaTeX form of each symbol. The record is a YAML view bound to the schema `gnomon:view.vocabulary@1` of the [view schemas](../../src/gnomon/data/views/_index.md), so a renderer displays it as it displays the other views. The command below writes it into the problem folder:
 
 ```sh
-gnomon vocabulary <directory> --markdown
+gnomon vocabulary <directory>
 ```
 
 | Argument      | Description                                      |
@@ -131,10 +131,8 @@ gnomon vocabulary <directory> --markdown
 | Option             | Default          | Description                                                                 |
 | ------------------ | ---------------- | --------------------------------------------------------------------------- |
 | `--output`, `-o`   | `vocabulary.yml` | Name of the vocabulary record written inside the problem folder.           |
-| `--markdown`, `-m` | off              | Also write the Markdown table, named after the record.                     |
-| `--root`, `-r`     | `.`              | Workspace root from which the table links the index of the problem folder. |
 
-**Output:** one line with the number of symbols, the number of operators that the problem declares, and the number of symbols reused across its records. The command exits with an error, before writing any file, when the problem folder does not exist or lies outside the workspace root.
+**Output:** one line with the number of symbols, the number of operators that the problem declares, and the number of symbols reused across its records. The command exits with an error, before writing any file, when the problem folder does not exist.
 
 ## `itinerary`
 

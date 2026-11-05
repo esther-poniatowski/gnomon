@@ -1,6 +1,6 @@
 # View schemas
 
-The schemas of this folder declare the views that `gnomon views` generates from the records of a workspace, so that a renderer such as Ekphrasis displays each view as a read-only form. Each schema binds the logical identifier `gnomon:view.<name>@<version>`, which the schema registry of the renderer maps to its file.
+The schemas of this folder declare the views that `gnomon views` generates from the records of a workspace, and the vocabulary that `gnomon vocabulary` generates for one problem, so that a renderer such as Ekphrasis displays each view as a read-only form. Every computed display is such a YAML view; no command writes a Markdown copy. Each schema binds the logical identifier `gnomon:view.<name>@<version>`, which the schema registry of the renderer maps to its file.
 
 - [State of each problem](problem-state.schema.yml): to read whether each problem is solved, which answers it holds, and which obstacles remain
 - [Open conditions and ready acts](next-act.schema.yml): to read which act comes next for each question
@@ -10,3 +10,4 @@ The schemas of this folder declare the views that `gnomon views` generates from 
 - [Question tree](question-tree.schema.yml): to read the problems, questions and answers of a project as one tree
 - [Statement of each question](question-statements.schema.yml): to compare the authored statement of each question with the statement composed from its fields
 - [LaTeX form of each expression](expressions.schema.yml): to read each expression of a record as typeset mathematics
+- [Vocabulary of a problem](vocabulary.schema.yml): to choose a new symbol without colliding with one that the records of a problem already declare
