@@ -65,6 +65,7 @@ from .findings import CHECK_FAILED, Finding, finding
 from .history import StateReader, git_states
 from .identifiers import PLACEHOLDER_SEGMENT
 from .itineraries import construct_record_kinds, itinerary_problems, type_classes, type_holders
+from .leftovers import strip_leftovers
 from .sarif import Located
 from .schemas import identifier_prefixes
 from .vocabulary.coordinates import foreign_coordinates
@@ -110,12 +111,16 @@ class Workspace:
         One line per file that could not be read or parsed.
     unfilled : tuple of Path
         The files whose record is still a template, which no check reads.
+    leftovers : dict
+        Per started record, the findings of the values that it still holds from its template; the
+        records of the problems are read without these values.
     """
 
     root: Path
     problems: tuple[Problem, ...]
     failures: tuple[str, ...] = ()
     unfilled: tuple[Path, ...] = ()
+    leftovers: Mapping[str, tuple[Finding, ...]] = field(default_factory=dict)
 
     @cached_property
     def by_id(self) -> dict[str, Mapping[str, Any]]:
@@ -151,11 +156,13 @@ def load_workspace(root: Path) -> Workspace:
 
     A file that does not parse is reported and skipped, so the other records are still checked. A
     file that holds no mapping with an identifier and a type is not a record, and a generated
-    record is left out.
+    record is left out. A started record is read without the values that it still holds from its
+    template, which the workspace keeps as findings.
     """
     folders: dict[Path, Problem] = {}
     failures: list[str] = []
     unfilled: list[Path] = []
+    leftovers: dict[str, tuple[Finding, ...]] = {}
     for path in sorted(root.rglob("*.yml")):
         if any(part.startswith(".") for part in path.relative_to(root).parts):
             continue
@@ -170,11 +177,17 @@ def load_workspace(root: Path) -> Workspace:
         if PLACEHOLDER_SEGMENT.search(str(record["id"])):
             unfilled.append(path)
             continue
+        cleaned, found = strip_leftovers(record)
         problem = folders.setdefault(path.parent, Problem(path.parent, {}, {}))
-        problem.records[str(record["id"])] = record
+        problem.records[str(record["id"])] = cleaned
         problem.files[str(record["id"])] = path
+        leftovers[str(record["id"])] = tuple(found)
     return Workspace(
-        root, tuple(folders[f] for f in sorted(folders)), tuple(failures), tuple(unfilled)
+        root,
+        tuple(folders[f] for f in sorted(folders)),
+        tuple(failures),
+        tuple(unfilled),
+        leftovers,
     )
 
 
@@ -551,6 +564,11 @@ def _itinerary(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     )
 
 
+def _leftovers(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
+    """The values that a started record still holds from its template."""
+    return list(ctx.workspace.leftovers.get(str(record.get("id")), ()))
+
+
 def _every_record(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The checks that every record undergoes: its identifier, its references and its closed
     values."""
@@ -589,7 +607,7 @@ def check_workspace(workspace: Workspace) -> list[Located]:
         ctx = _Context(problem, workspace, registries)
         for ident in sorted(problem.records):
             record = problem.records[ident]
-            checks: list[Check] = [_every_record, _requirements]
+            checks: list[Check] = [_leftovers, _every_record, _requirements]
             if record.get("type") in v.RECORD_KINDS:
                 checks += [
                     _symbols,

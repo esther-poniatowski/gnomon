@@ -70,7 +70,7 @@ A researcher needs to know, before an answer is assessed, whether the records of
 - the dimensional homogeneity of the laws and the conditions of a problem that declares a dimensional formula;
 - the presuppositions and the interventions of the claim of each answer.
 
-Each folder that holds records is checked as one problem, and a reference may reach a record of any folder. A generated record, such as a vocabulary, is not checked. A template not yet started, whose identifier is still the placeholder of its template, is listed apart and not checked, so a folder can be checked after each stage of filling.
+Each folder that holds records is checked as one problem, and a reference may reach a record of any folder. A generated record, such as a vocabulary, is not checked. A template not yet started, whose identifier is still the placeholder of its template, is listed apart and not checked, so a folder can be checked after each stage of filling. In a started record, every command reads a field that still holds its placeholder, or a block left as the template wrote it, as empty, and the check reports each such leftover once.
 
 ```sh
 gnomon check <directory> [--format text|yaml|sarif] [--output PATH]

@@ -375,6 +375,10 @@ COMPLETENESS_ANONYMOUS_RESTRICTION = _rule(
     "completeness/anonymous-restriction",
     "A domain restriction names neither a quantity nor itself.",
 )
+COMPLETENESS_TEMPLATE_LEFTOVER = _rule(
+    "completeness/template-leftover",
+    "A started record keeps a placeholder or an untouched block of its template.",
+)
 COMPLETENESS_MISPLACED_MATURITY = _rule(
     "completeness/misplaced-maturity",
     "A key of the block `maturity` names no field of its record.",

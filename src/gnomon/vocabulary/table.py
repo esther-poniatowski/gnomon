@@ -14,8 +14,9 @@ import yaml
 
 from .. import findings as rules
 from ..findings import Finding, Key, finding
-from ..identifiers import split_reference
+from ..identifiers import PLACEHOLDER_SEGMENT, split_reference
 from ..latex import declared_notations, symbol_form
+from ..leftovers import strip_leftovers
 from .declarations import Declaration, declarations
 from .interactions import interaction_graph
 from .layout import (
@@ -83,16 +84,18 @@ REACHED: frozenset[str] = frozenset({"constituents", "index_sets", "variables", 
 
 
 def problem_records(directory: Path) -> list[Mapping[str, Any]]:
-    """Return the records that fill the problem of ``directory``, leaving out the records of a
-    generated kind, such as its table ``vocabulary.yml``, since a check reads authored records
-    only."""
+    """Return the records that fill the problem of ``directory``, as the checks read them: the
+    records of a generated kind, such as its table ``vocabulary.yml``, and the templates not yet
+    started are left out, and a started record is read without its leftovers of the template."""
     loaded = [
         yaml.safe_load(path.read_text(encoding="utf-8")) for path in sorted(directory.glob("*.yml"))
     ]
     return [
-        record
+        strip_leftovers(record)[0]
         for record in loaded
-        if isinstance(record, Mapping) and record.get("type") not in GENERATED_KINDS
+        if isinstance(record, Mapping)
+        and record.get("type") not in GENERATED_KINDS
+        and not PLACEHOLDER_SEGMENT.search(str(record.get("id", "")))
     ]
 
 
@@ -170,7 +173,7 @@ def unused_declarations(directory: Path, registry: Path | None = None) -> list[t
 
 def load_problem(directory: Path, registry: Path | None = None) -> Problem:
     """Collect the vocabulary of the problem whose records fill ``directory``."""
-    problem = Problem(name=directory.name, canonical=canonical_operators(registry))
+    problem = Problem(name=directory.resolve().name, canonical=canonical_operators(registry))
     records = problem_records(directory)
     by_id = {str(record["id"]): record for record in records if "id" in record}
     problem.notations = declared_notations(r for r in records if r.get("type") != "operators")
