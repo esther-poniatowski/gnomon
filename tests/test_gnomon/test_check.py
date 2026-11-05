@@ -225,9 +225,9 @@ def test_the_report_is_stable_and_grouped_by_file(planted: Path) -> None:
 
 def test_the_scaffold_writes_the_templates_in_the_order_of_filling(tmp_path: Path) -> None:
     folder = tmp_path / "my-problem"
-    written = scaffold(folder, [*CORE_KINDS, "answer"])
+    outcome = scaffold(folder, [*CORE_KINDS, "answer"])
     order = list(template_entries())
-    names = [p.stem for p in written if p.suffix == ".yml"]
+    names = [p.stem for p in outcome.written]
     assert names == sorted(names, key=order.index) and set(names) == {*CORE_KINDS, "answer"}
     index = (folder / "_index.md").read_text(encoding="utf-8")
     assert (
@@ -239,11 +239,37 @@ def test_the_scaffold_never_overwrites_a_record_unless_forced(tmp_path: Path) ->
     folder = tmp_path / "my-problem"
     scaffold(folder, CORE_KINDS)
     (folder / "question.yml").write_text("filled\n", encoding="utf-8")
-    with pytest.raises(FileExistsError):
-        scaffold(folder, CORE_KINDS)
+    again = scaffold(folder, CORE_KINDS)
+    assert not again.written and again.index_state == "kept" and len(again.kept) == len(CORE_KINDS)
     assert (folder / "question.yml").read_text(encoding="utf-8") == "filled\n"
+    forced = scaffold(folder, CORE_KINDS, force=True)
+    assert len(forced.written) == len(CORE_KINDS) and forced.index_state == "written"
+    assert (folder / "question.yml").read_text(encoding="utf-8") != "filled\n"
     with pytest.raises(ValueError):
         scaffold(tmp_path / "other", ["nonsense"])
+
+
+def test_a_later_kind_joins_a_folder_that_holds_records(tmp_path: Path) -> None:
+    """The missing templates are written and registered under their stage, and every file and
+    every entry that the researcher wrote stays as it stands."""
+    folder = tmp_path / "my-problem"
+    scaffold(folder, CORE_KINDS)
+    (folder / "question.yml").write_text("filled\n", encoding="utf-8")
+    index = folder / "_index.md"
+    edited = (
+        index.read_text(encoding="utf-8") + "- [Second key](key-b.yml): pairs a second feature\n"
+    )
+    index.write_text(edited, encoding="utf-8")
+    outcome = scaffold(folder, [*CORE_KINDS, "answer", "binding"])
+    assert [p.name for p in outcome.written] == ["binding.yml", "answer.yml"]
+    assert outcome.index_state == "updated"
+    assert (folder / "question.yml").read_text(encoding="utf-8") == "filled\n"
+    text = index.read_text(encoding="utf-8")
+    assert "(key-b.yml)" in text and text.startswith(edited.split("\n## ", 1)[0])
+    stage = template_entries()["answer"].stage
+    assert text.index(f"## {stage}") < text.index("(answer.yml)")
+    assert text.count("(answer.yml)") == 1 and text.count("(binding.yml)") == 1
+    assert scaffold(folder, [*CORE_KINDS, "answer", "binding"]).index_state == "kept"
 
 
 def test_the_commands_exit_with_the_status_of_their_findings(planted: Path, tmp_path: Path) -> None:
@@ -254,7 +280,10 @@ def test_the_commands_exit_with_the_status_of_their_findings(planted: Path, tmp_
     )
     assert result.exit_code == 1 and (tmp_path / "r.yml").is_file()
     assert runner.invoke(app, ["init", str(tmp_path / "new")]).exit_code == 0
-    assert runner.invoke(app, ["init", str(tmp_path / "new")]).exit_code == 1
+    again = runner.invoke(app, ["init", str(tmp_path / "new"), "--with", "answer"])
+    assert again.exit_code == 0 and "answer.yml: written" in again.output
+    assert f"{len(CORE_KINDS)} existing files kept" in again.output
+    assert runner.invoke(app, ["init", str(tmp_path / "new"), "--with", "nonsense"]).exit_code == 1
 
 
 def test_a_template_not_yet_filled_is_listed_apart_and_not_checked(tmp_path: Path) -> None:

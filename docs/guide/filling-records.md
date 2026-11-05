@@ -20,7 +20,7 @@ The records of one research problem share one folder. The following command crea
 gnomon init ./my-problem
 ```
 
-The option `--with` adds a later record kind to a new folder, such as `--with answer --with assessment`. On a folder already holding records, the command refuses to write, and its option `--force` would overwrite the filled records. Therefore, a later record kind is added to such a folder by a copy of its template from the [record templates](../../src/gnomon/data/templates/_index.md). The header of each template names its specification note and states how many files of its kind a problem holds: for instance, one file per target system, per phenomenon or per candidate answer. A second file of one kind is a copy of its template, kept in the folder of the problem.
+A later record kind is added to the folder with the option `--with`, such as `--with answer --with assessment` once a candidate answer is in view. In a folder that already holds records, the command writes only the missing templates, and registers each of them in the index of the folder, under the heading of its stage. The header of each template names its specification note and states how many files of its kind a problem holds: for instance, one file per target system, per phenomenon or per candidate answer. A second file of one kind is a copy of its template, kept in the folder of the problem.
 
 ## Fill the records stage by stage
 

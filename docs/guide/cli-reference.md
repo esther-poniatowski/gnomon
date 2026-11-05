@@ -40,9 +40,11 @@ gnomon init <directory> [--with KIND]... [--force]
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `<directory>`      | Folder of the new problem, created when it does not exist.                                                                               |
 | `--with`, `-w`     | A further record kind to scaffold: `model`, `key`, `binding`, `answer`, `assessment`, `concept`, `design` or `derivation`; repeat it for several. |
-| `--force`          | Overwrite the files that already exist.                                                                                                  |
+| `--force`          | Overwrite the templates and the index that already exist.                                                                                |
 
-**Output:** one line per file written, then the next step. The command writes no file and exits with code 1 when one of the files exists and `--force` is not given, or when a kind has no template.
+In a folder that already holds records, the command writes only the missing templates, so a filled record is never overwritten. The command registers each new template in the existing index, under the heading of its stage, and keeps every other line of that index. The option `--force` writes every template and the index anew.
+
+**Output:** one line per template written, one line stating whether the index was `written`, `updated` or `kept`, the number of existing files kept, then the next step. The command exits with code 1 when a kind has no template.
 
 ## `validate`
 

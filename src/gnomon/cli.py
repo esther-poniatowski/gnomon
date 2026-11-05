@@ -60,24 +60,31 @@ def cli_init(
         help="A further record kind to scaffold, such as model, binding, key, answer, assessment, "
         "itinerary, concept, design or derivation; repeat the option for several.",
     ),
-    force: bool = typer.Option(False, "--force", help="Overwrite the files that already exist."),
+    force: bool = typer.Option(
+        False, "--force", help="Overwrite the templates and the index that already exist."
+    ),
 ) -> None:
     """Create the folder of a problem, with the record templates in the order of filling.
 
     The folder receives the templates of the problem, the target system, the background, the
     phenomenon, the question and the operators, the further kinds that ``--with`` names, and an
-    index listing them in the order of filling. The command exits with status 1 when a file exists
-    and ``--force`` is not given, or when a kind has no template.
+    index listing them in the order of filling. In a folder that already holds records, only the
+    missing templates are written, and each is registered in the existing index; ``--force``
+    overwrites every template and the index. The command exits with status 1 when a kind has no
+    template.
     """
     from .scaffold import CORE_KINDS, scaffold
 
     try:
-        written = scaffold(Path(directory), [*CORE_KINDS, *with_kinds], force)
-    except (FileExistsError, ValueError) as error:
+        outcome = scaffold(Path(directory), [*CORE_KINDS, *with_kinds], force)
+    except ValueError as error:
         typer.echo(str(error), err=True)
         raise typer.Exit(code=1) from error
-    for path in written:
+    for path in outcome.written:
         typer.echo(f"{path}: written")
+    typer.echo(f"{outcome.index}: {outcome.index_state}")
+    if outcome.kept:
+        typer.echo(f"{len(outcome.kept)} existing files kept")
     typer.echo(
         f"Fill the records in the order of {Path(directory) / '_index.md'}, then run: gnomon check"
         f" {directory}"

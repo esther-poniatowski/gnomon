@@ -183,7 +183,21 @@ The candidate answer is filled last, with the records supporting it. In the inqu
 - the [binding](../../examples/grokking-delayed-generalization/binding.yml) pairs the model with the phenomenon at the grain `qualitative`;
 - the [assessment](../../examples/grokking-delayed-generalization/assessment.yml), with the status `stabilized`, fails three tests of admissibility, the product, the scope and the grain, and three tests of warrant, the closure, the fidelity and the robustness.
 
-The templates of these record kinds are added to a folder already holding records by a copy from the [record templates](../../src/gnomon/data/templates/_index.md), as the [guide to filling the records](filling-records.md) states.
+The command `gnomon init` adds the templates of these record kinds to a folder through its option `--with`. In a folder already holding records, the command writes only the missing templates, as its run on the folder of stage 1 shows:
+
+```sh
+gnomon init ../my-problem --with answer --with assessment
+```
+
+```text
+../my-problem/answer.yml: written
+../my-problem/assessment.yml: written
+../my-problem/_index.md: updated
+7 existing files kept
+Fill the records in the order of ../my-problem/_index.md, then run: gnomon check ../my-problem
+```
+
+The two new templates are registered in the index of the folder, under the heading of the stage of candidate answers, and the seven existing files stay as they stand.
 
 Four steps record these acts:
 
