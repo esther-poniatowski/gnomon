@@ -1,15 +1,15 @@
 _schema: gnomon:question@1
 title: "Mathematical explanation of delayed generalization"
 statement: "Which mathematical properties of training finite overparameterized neural networks on algorithmic tasks explain delayed generalization? The contrast is with immediate generalization and with persistent memorization. An answer must also account for the duration of the delay and its variation across random initializations."
-id: quest.grokking.explain_delay
+id: quest.grokking.explain-delay
 type: question
 status: posed
 addresses: prob.grokking.delayed-generalization
 request: one
 subject:
-  target_system: system.delayed_generalization_networks
-  background: [bg.delayed_generalization_networks.training-specification]
-  phenomenon: phen.grokking.delayed_generalization
+  target_system: system.delayed-generalization-networks
+  background: [bg.delayed-generalization-networks.training-specification]
+  phenomenon: phen.grokking.delayed-generalization
   contrast:
     locus: other-outcome
     foil_set:
@@ -43,13 +43,13 @@ task:
   required_accuracy:
     standard: qualitative
     outputs_to_match:
-      - target: phen.grokking.delayed_generalization.crossing_order
+      - target: phen.grokking.delayed-generalization.crossing_order
         tolerance: null
         justification: "The explanandum is that fitting comes first, so an account that produces the opposite order addresses a different phenomenon."
-      - target: phen.grokking.delayed_generalization.delay
+      - target: phen.grokking.delayed-generalization.delay
         tolerance: null
         justification: "An account under which the delay vanishes in the regime where it is observed contradicts the phenomenon. Any candidate must therefore produce a strictly positive delay."
-      - target: phen.grokking.delayed_generalization.Pdelay
+      - target: phen.grokking.delayed-generalization.Pdelay
         tolerance: null
         justification: "The question asks why runs with distinct initializations generalize at different times, so an account must recover the whole distribution of durations: its qualitative spread and its censoring pattern. One representative duration does not answer the question."
     structures_to_match: []

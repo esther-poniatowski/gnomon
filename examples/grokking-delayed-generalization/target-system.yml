@@ -1,6 +1,6 @@
 _schema: gnomon:target-system@1
 title: "Finite neural networks and their training"
-id: system.delayed_generalization_networks
+id: system.delayed-generalization-networks
 type: target-system
 status: provisional
 commitment: specified

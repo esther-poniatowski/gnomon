@@ -249,7 +249,7 @@ properties:
             step acts: one of the eight conditions for obtaining an answer, the obtaining of the answer,
             or its evaluation'
           examples:
-          - '`quest.grokking.explain_delay`, acting on the candidates'
+          - '`quest.grokking.explain-delay`, acting on the candidates'
         branch:
           type:
           - object

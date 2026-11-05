@@ -56,7 +56,7 @@ properties:
       or a law or an operation of a derived model stated in advance; empty for a derivation that constructs
       its result.'
     examples:
-      - quest.grokking.explain_delay
+      - quest.grokking.explain-delay
   runs_on:
     type:
       - array

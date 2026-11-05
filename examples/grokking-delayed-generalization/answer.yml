@@ -4,7 +4,7 @@ _schema: gnomon:answer@1
 title: "Account of grokking through a structured representation that forms slowly"
 id: ans.grokking.slow-structured-representation
 type: answer
-answers: quest.grokking.explain_delay
+answers: quest.grokking.explain-delay
 
 claim:
   reading: "The decoder fits the training set first, and the embedding acquires the structure consistent with the task at the slowest positive rate of the effective dynamics; the delay scales as the inverse of that rate times the learning rate of the embedding, and a vanishing rate leaves persistent memorization."

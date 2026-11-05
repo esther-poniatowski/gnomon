@@ -33,7 +33,6 @@ check_workspace
 
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path, PurePosixPath
@@ -64,13 +63,12 @@ from .dimensions import (
 )
 from .findings import CHECK_FAILED, Finding, finding
 from .history import StateReader, git_states
+from .identifiers import PLACEHOLDER_SEGMENT
 from .itineraries import construct_record_kinds, itinerary_problems, type_classes, type_holders
 from .sarif import Located
+from .schemas import identifier_prefixes
 from .vocabulary.coordinates import foreign_coordinates
 from .vocabulary.layout import GENERATED_KINDS
-
-#: A segment of an identifier that is still the placeholder of a template, such as ``TOPIC``.
-PLACEHOLDER_SEGMENT = re.compile(r"(?:^|\.)[A-Z][A-Z0-9_]*(?:\.|$)")
 
 Records = Mapping[str, Mapping[str, Any]]
 
@@ -239,6 +237,11 @@ class _Context:
             for d in v.declarations(record):
                 found.setdefault(d.symbol, set()).update(d.signature)
         return found
+
+    @cached_property
+    def prefixes(self) -> dict[str, str]:
+        """The prefix of the identifiers of each record type, read from its base schema."""
+        return identifier_prefixes()
 
     @cached_property
     def indices(self) -> frozenset[str]:
@@ -549,9 +552,12 @@ def _itinerary(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 
 def _every_record(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
-    """The checks that every record undergoes: references and closed values."""
-    return v.dangling_references(record, ctx.workspace.by_id) + c.inadmissible_values(
-        record, ctx.registries.admitted_values(str(record.get("type")))
+    """The checks that every record undergoes: its identifier, its references and its closed
+    values."""
+    return (
+        v.malformed_identifier(record, ctx.prefixes)
+        + v.dangling_references(record, ctx.workspace.by_id)
+        + c.inadmissible_values(record, ctx.registries.admitted_values(str(record.get("type"))))
     )
 
 
@@ -608,7 +614,7 @@ def check_workspace(workspace: Workspace) -> list[Located]:
                         )
                     ]
                 found += [Located(f, file, ident) for f in results]
-        unused = v.unused_declarations(problem.folder)
+        unused = v.unused_declarations(problem.folder) + v.foreign_topics(problem.records)
         for ident, f in unused:
             if ident in problem.files:
                 found.append(

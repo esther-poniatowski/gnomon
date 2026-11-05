@@ -6,7 +6,7 @@ title: "Operators of the inquiry into delayed generalization"
 id: ops.delayed-generalization-networks
 type: operators
 status: provisional
-target_system: system.delayed_generalization_networks
+target_system: system.delayed-generalization-networks
 
 operators:
   - name: "the set of all subsets of a declared set"

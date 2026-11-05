@@ -30,6 +30,8 @@ from typing import Any, Mapping
 
 import yaml
 
+from .identifiers import RECORD_SEGMENTS, identifier_pattern
+
 DATA = Path(__file__).parent / "data"
 
 #: The folder of the base schemas and of their contracts.
@@ -262,6 +264,17 @@ def identifier(kind: str, version: int) -> str:
     return f"{NAMESPACE}:{kind}@{version}"
 
 
+def identifier_prefix(base: Mapping[str, Any]) -> str | None:
+    """Return the prefix of the identifiers of a record type, read from the placeholder of its
+    field ``id``, or None when the type declares no identifier.
+
+    >>> identifier_prefix({"properties": {"id": {"x-template": "quest.TOPIC.NAME"}}})
+    'quest'
+    """
+    template = ((base.get("properties") or {}).get("id") or {}).get("x-template")
+    return str(template).split(".", 1)[0] if template else None
+
+
 def contract(kind: str, base: Mapping[str, Any], options: Options) -> dict[str, Any]:
     """Return the contract of a record type: the base, the binding of ``_schema``, and its
     vocabularies."""
@@ -284,6 +297,9 @@ def contract(kind: str, base: Mapping[str, Any], options: Options) -> dict[str, 
         },
         "x-identifier": base.get("x-identifier", "id"),
     }
+    prefix = identifier_prefix(base)
+    if prefix in RECORD_SEGMENTS:
+        schema["properties"]["id"] = {"pattern": identifier_pattern(str(prefix))}
     added = overlay(base, options)
     if added and "properties" in added:
         schema["properties"].update(added["properties"])
@@ -307,6 +323,23 @@ def generated_files() -> dict[Path, str]:
         )
         files[TEMPLATES / f"{kind}.yml"] = render_template(kind, base, options)
     return files
+
+
+@cache
+def identifier_prefixes() -> dict[str, str]:
+    """Return the prefix of the identifiers of each record type that declares one, keyed by the
+    value of its field ``type``.
+
+    >>> identifier_prefixes()["target-system"], identifier_prefixes()["question"]
+    ('system', 'quest')
+    """
+    found: dict[str, str] = {}
+    for kind in kinds():
+        base = load_base(kind)
+        prefix = identifier_prefix(base)
+        if prefix:
+            found[str(base["properties"]["type"]["x-template"])] = prefix
+    return found
 
 
 def record_kinds() -> dict[str, str]:

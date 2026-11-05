@@ -458,7 +458,7 @@ def _passed_without_record(step: dict[str, Any]) -> None:
 
 
 def _elsewhere(step: dict[str, Any]) -> None:
-    step["output"]["ref"] = "bg.delayed_generalization_networks.training-specification"
+    step["output"]["ref"] = "bg.delayed-generalization-networks.training-specification"
 
 
 @pytest.mark.parametrize(

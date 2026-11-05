@@ -1,9 +1,9 @@
 _schema: gnomon:background@1
 title: "Admitted laws of the forward computation and of the training"
-id: bg.delayed_generalization_networks.training-specification
+id: bg.delayed-generalization-networks.training-specification
 type: background
 status: provisional
-describes: system.delayed_generalization_networks
+describes: system.delayed-generalization-networks
 
 laws:
   - name: "forward computation"

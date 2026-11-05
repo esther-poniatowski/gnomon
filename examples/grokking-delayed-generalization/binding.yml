@@ -9,7 +9,7 @@ status: provisional
 model: mod.grokking.effective-representation
 
 target:
-  phenomenon: phen.grokking.delayed_generalization
+  phenomenon: phen.grokking.delayed-generalization
   level: phenomenon
 
 asserter: "Liu, Kitouni, Nolte, Michaud, Tegmark and Williams, Towards understanding grokking: an effective theory of representation learning, NeurIPS 2022 [liu2022]"
@@ -19,22 +19,22 @@ feature_pairs:
     type: pattern
     mode: argued
     exemplified: "delay_m > 0"
-    imputed: phen.grokking.delayed_generalization.crossing_order
+    imputed: phen.grokking.delayed-generalization.crossing_order
   - id: delay-scale
     type: quantity
     mode: argued
     exemplified: "delay_m"
-    imputed: phen.grokking.delayed_generalization.delay
+    imputed: phen.grokking.delayed-generalization.delay
   - id: decoder-limit
     type: invariance-class
     mode: argued
     exemplified: "depends_on(delay_m, 1 / (lambda3 * eta_rep))"
-    imputed: phen.grokking.delayed_generalization.crossing_order
+    imputed: phen.grokking.delayed-generalization.crossing_order
   - id: learning-regime
     type: regime
     mode: argued
     exemplified: "lambda3 > 0"
-    imputed: phen.grokking.delayed_generalization.positive_delay
+    imputed: phen.grokking.delayed-generalization.positive_delay
 
 domain:
   - region: "algorithmic(source) and P > card(train)"

@@ -52,7 +52,7 @@ def test_the_worked_explanation_composes_its_subject_domain_and_foils() -> None:
     for path in (EXAMPLES / "grokking-delayed-generalization").glob("*.yml"):
         record = yaml.safe_load(path.read_text(encoding="utf-8"))
         records[record["id"]] = record
-    composed = compose_statement(records["quest.grokking.explain_delay"], records)
+    composed = compose_statement(records["quest.grokking.explain-delay"], records)
     assert composed.text == (
         "In finite neural networks and their training under algorithmic supervised task and"
         " overparameterized"

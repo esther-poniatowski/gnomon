@@ -29,7 +29,7 @@ gnomon tree ../grokking
 
 ```text
 problem prob.grokking.delayed-generalization: Delay between fitting and generalization [posed]
-  question quest.grokking.explain_delay: Mathematical explanation of delayed generalization [posed]
+  question quest.grokking.explain-delay: Mathematical explanation of delayed generalization [posed]
     answer ans.grokking.slow-structured-representation: Account of grokking through a structured representation that forms slowly [hypothesized]
       assessment assess.grokking.slow-structured-representation: Assessment of the account through a structured representation [stabilized]
 ```
@@ -162,12 +162,12 @@ gnomon status ../grokking
 ```
 
 ```text
-quest.grokking.explain_delay [selection]
+quest.grokking.explain-delay [selection]
   open definiteness: explication, explicit-definition, operationalization (missing concept), concept-revision (missing concept), delimitation, formalization, phenomenon-specification
   open candidates: abduction, induction, analogical-inference, causal-inference, decomposition-localization, model-analogy, de-idealization, idealization, abstraction, formalization, fitting, derivation, critique, admissibility-check, model-assembly (missing admitted-laws), result-retrieval
 judge anew the norm of itin.grokking.explain-delay.check, whose record is stabilized
 judge anew the norm of itin.grokking.explain-delay.test, whose record is stabilized
-impeached records: bg.delayed_generalization_networks.training-specification
+impeached records: bg.delayed-generalization-networks.training-specification
 ```
 
 The diagnosis follows the route of selection: candidates are proposed, and an obtained value selects one of them, as the [two routes to an answer](../epistemology/objects/question/conditions-of-answerability.md#^routes) define it. Each open condition lists the activities that act on it, and an activity marked as missing an input is not yet ready. The background record is impeached, since the step producing it failed. Therefore, the activity `model-assembly` lacks its admitted laws: the only record holding them is impeached. The two lines on norms to judge anew belong to stage 5.

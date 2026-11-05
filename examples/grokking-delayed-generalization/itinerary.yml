@@ -28,14 +28,14 @@ steps:
       - type: problem
         ref: itin.grokking.explain-delay.pose
     output:
-      type: question-schema       # the schema was raised to the question quest.grokking.explain_delay, so no record holds it now
+      type: question-schema       # the schema was raised to the question quest.grokking.explain-delay, so no record holds it now
     norm:
       test: norm.question-formulation
       verdict: pass
       evidence: "The aim, the requested relation and the modal strength type the answer space, and the contrast states the foils; the topic presupposed by the question is the phenomenon, whose evidential status is established."
       judged: "2026-10-27"
     rationale:
-      serves: quest.grokking.explain_delay
+      serves: quest.grokking.explain-delay
       acts_on: answer-type
     mode: non-inferential
   - id: identify
@@ -45,31 +45,31 @@ steps:
         ref: itin.grokking.explain-delay.formulate
     output:
       type: identified-subject
-      ref: phen.grokking.delayed_generalization
+      ref: phen.grokking.delayed-generalization
     norm:
       test: norm.subject-identification
       verdict: pass
       evidence: "The phenomenon was fixed by a definite description and pointers, at the commitment identified, so the slot of the question refers to it."
       judged: "2026-10-27"
     rationale:
-      serves: quest.grokking.explain_delay
+      serves: quest.grokking.explain-delay
       acts_on: definiteness
     mode: non-inferential
   - id: delimit
     activity: delimitation
     inputs:
       - type: question
-        ref: quest.grokking.explain_delay
+        ref: quest.grokking.explain-delay
       - type: identified-subject
         ref: itin.grokking.explain-delay.identify
     output:
       type: target-specification
-      ref: system.delayed_generalization_networks
+      ref: system.delayed-generalization-networks
     norm:
       test: norm.delimitation
       verdict: pending
     rationale:
-      serves: quest.grokking.explain_delay
+      serves: quest.grokking.explain-delay
       acts_on: definiteness
     mode: non-inferential
   - id: admit
@@ -79,21 +79,21 @@ steps:
         ref: "the definition of the class of trained networks"
     output:
       type: admitted-laws
-      ref: bg.delayed_generalization_networks.training-specification
+      ref: bg.delayed-generalization-networks.training-specification
     norm:
       test: norm.background-appraisal
       verdict: fail
       evidence: "No admitted law of the background states its origin or the range over which it is established."
       judged: "2026-10-27"
     rationale:
-      serves: quest.grokking.explain_delay
+      serves: quest.grokking.explain-delay
       acts_on: bridging
     mode: inductive
   - id: propose
     activity: abduction
     inputs:
       - type: phenomenon
-        ref: phen.grokking.delayed_generalization
+        ref: phen.grokking.delayed-generalization
     output:
       type: target-claim
       ref: ans.grokking.slow-structured-representation
@@ -103,7 +103,7 @@ steps:
       evidence: "The candidate proposes a mechanism, the slow formation of a structured representation, that would produce the delay, and its status hypothesized claims no truth for it."
       judged: "2026-10-27"
     rationale:
-      serves: quest.grokking.explain_delay
+      serves: quest.grokking.explain-delay
       acts_on: candidates
     mode: abductive
   - id: derive
@@ -119,7 +119,7 @@ steps:
       test: norm.derivation
       verdict: pending
     rationale:
-      serves: quest.grokking.explain_delay
+      serves: quest.grokking.explain-delay
       acts_on: candidates
     mode: deductive
   - id: check
@@ -128,7 +128,7 @@ steps:
       - type: target-claim
         ref: itin.grokking.explain-delay.propose
       - type: question
-        ref: quest.grokking.explain_delay
+        ref: quest.grokking.explain-delay
     output:
       type: verdict
       ref: assess.grokking.slow-structured-representation
@@ -136,7 +136,7 @@ steps:
       test: norm.admissibility-check
       verdict: pending
     rationale:
-      serves: quest.grokking.explain_delay
+      serves: quest.grokking.explain-delay
       acts_on: evaluation
     mode: non-inferential
   - id: test
@@ -147,7 +147,7 @@ steps:
       - type: consequence
         ref: itin.grokking.explain-delay.derive
       - type: data
-        ref: phen.grokking.delayed_generalization
+        ref: phen.grokking.delayed-generalization
     output:
       type: verdict
       ref: assess.grokking.slow-structured-representation
@@ -155,6 +155,6 @@ steps:
       test: norm.testing
       verdict: pending
     rationale:
-      serves: quest.grokking.explain_delay
+      serves: quest.grokking.explain-delay
       acts_on: evaluation
     mode: error-statistical

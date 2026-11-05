@@ -609,6 +609,16 @@ VOCABULARY_MISROUTED_INTERACTION = _rule(
 CHECK_FAILED = _rule(
     "check/failed", "A check stopped on an error, so the record was not fully checked."
 )
+VOCABULARY_MALFORMED_IDENTIFIER = _rule(
+    "vocabulary/malformed-identifier",
+    "A record identifier does not open on the prefix of its type, or a segment is not lowercase"
+    " words joined by hyphens.",
+)
+VOCABULARY_FOREIGN_TOPIC = _rule(
+    "vocabulary/foreign-topic",
+    "A record identifier carries another topic than its problem, or than the target system that"
+    " the record is stated against.",
+)
 VOCABULARY_UNKNOWN_RECORD = _rule(
     "vocabulary/unknown-record",
     "A reference names a record that no record of the workspace declares.",

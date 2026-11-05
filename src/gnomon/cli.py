@@ -96,22 +96,28 @@ def cli_validate(
     paths: list[str] = typer.Argument(..., help="Record files or directories to validate."),
 ) -> None:
     """Validate each record against the contract that it names, skipping the kinds that have no
-    schema."""
+    schema and the templates not yet started, whose identifier still holds a placeholder."""
+    from .identifiers import PLACEHOLDER_SEGMENT
     from .schemas import record_errors, record_kinds
 
     files: list[Path] = []
     for given in map(Path, paths):
         files += sorted(given.rglob("*.yml")) if given.is_dir() else [given]
-    known, failed, checked = record_kinds(), 0, 0
+    known, failed, checked, unfilled = record_kinds(), 0, 0, 0
     for path in files:
         record = yaml.safe_load(path.read_text(encoding="utf-8"))
         if not isinstance(record, dict) or record.get("type") not in known:
+            continue
+        if PLACEHOLDER_SEGMENT.search(str(record.get("id", ""))):
+            unfilled += 1
             continue
         checked += 1
         for message in record_errors(record):
             failed += 1
             typer.echo(f"{path}: {message}")
-    typer.echo(f"{checked} records checked, {failed} errors found")
+    typer.echo(
+        f"{checked} records checked, {failed} errors found, {unfilled} templates not yet filled"
+    )
     raise typer.Exit(code=1 if failed else 0)
 
 

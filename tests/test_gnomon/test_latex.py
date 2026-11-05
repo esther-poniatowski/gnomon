@@ -48,7 +48,7 @@ def test_the_view_holds_the_form_of_each_law_with_its_declared_notations() -> No
         r"\partial_{t} u + u \cdot \nabla_{x} u = -\nabla_{x} \mathrm{pr} + \nu \, \Delta_{x} u + f"
     )
     grokking = (
-        "bg.delayed_generalization_networks.training-specification",
+        "bg.delayed-generalization-networks.training-specification",
         "laws.update.expression",
     )
     assert r"\partial_{\mathrm{step}} \theta" in forms[grokking]

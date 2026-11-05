@@ -142,7 +142,9 @@ CHECKERS: dict[ModuleType, tuple[str, ...]] = {
         "unborne_variants",
         "overreaching_entries",
         "retired_in_use",
+        "malformed_identifier",
         "dangling_references",
+        "foreign_topics",
         "unused_declarations",
     ),
 }

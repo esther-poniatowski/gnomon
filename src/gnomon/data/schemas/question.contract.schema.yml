@@ -14,6 +14,8 @@ properties:
     description: The logical identifier of the contract that the record follows.
   type:
     const: question
+  id:
+    pattern: ^quest\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
   status:
     enum:
     - posed

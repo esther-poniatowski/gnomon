@@ -8,39 +8,39 @@ problem: grokking-delayed-generalization
 generated_by: gnomon vocabulary
 symbols:
 - symbol: forward
-  declared_in: bg.delayed_generalization_networks.training-specification
+  declared_in: bg.delayed-generalization-networks.training-specification
   block: laws
   signature: []
   name: forward computation
   latex: \mathrm{forward}
 - symbol: init_draw
-  declared_in: bg.delayed_generalization_networks.training-specification
+  declared_in: bg.delayed-generalization-networks.training-specification
   block: laws
   signature: []
   name: initialization draw
   latex: \mathrm{init}_{\mathrm{draw}}
 - symbol: initial_optimizer_state
-  declared_in: bg.delayed_generalization_networks.training-specification
+  declared_in: bg.delayed-generalization-networks.training-specification
   block: laws
   signature: []
   name: initial state of the optimizer
   latex: \mathrm{initial}_{\mathrm{optimizer\_state}}
 - symbol: initial_state
-  declared_in: bg.delayed_generalization_networks.training-specification
+  declared_in: bg.delayed-generalization-networks.training-specification
   block: laws
   signature:
   - coord
   name: initial state of the parameters
   latex: \mathrm{initial}_{\mathrm{state}}
 - symbol: update
-  declared_in: bg.delayed_generalization_networks.training-specification
+  declared_in: bg.delayed-generalization-networks.training-specification
   block: laws
   signature:
   - coord
   name: gradient-based update
   latex: \mathrm{update}
 - symbol: update_state
-  declared_in: bg.delayed_generalization_networks.training-specification
+  declared_in: bg.delayed-generalization-networks.training-specification
   block: laws
   signature: []
   name: update of the optimizer state
@@ -128,235 +128,235 @@ symbols:
   name: slowest positive rate of representation learning
   latex: \lambda_{3}
 - symbol: crossing_order
-  declared_in: phen.grokking.delayed_generalization
+  declared_in: phen.grokking.delayed-generalization
   block: manifestations
   signature: []
   name: order of the two crossing times
   latex: \mathrm{crossing}_{\mathrm{order}}
 - symbol: positive_delay
-  declared_in: phen.grokking.delayed_generalization
+  declared_in: phen.grokking.delayed-generalization
   block: manifestations
   signature: []
   name: strictly positive delay
   latex: \mathrm{positive}_{\mathrm{delay}}
 - symbol: delay_obs
-  declared_in: phen.grokking.delayed_generalization
+  declared_in: phen.grokking.delayed-generalization
   block: manifestations.features
   signature: []
   name: observed duration of the delay
   latex: \mathrm{delay}_{\mathrm{obs}}
 - symbol: Pdelay
-  declared_in: phen.grokking.delayed_generalization
+  declared_in: phen.grokking.delayed-generalization
   block: observables
   signature: []
   name: distribution of the delay across initialization draws
   latex: P_{\Delta t}
 - symbol: delay
-  declared_in: phen.grokking.delayed_generalization
+  declared_in: phen.grokking.delayed-generalization
   block: observables
   signature: []
   name: duration of the delay
   latex: \Delta t
 - symbol: tfit
-  declared_in: phen.grokking.delayed_generalization
+  declared_in: phen.grokking.delayed-generalization
   block: observables
   signature: []
   name: first crossing time of the training criterion
   latex: t_{\text{fit}}
 - symbol: tgen
-  declared_in: phen.grokking.delayed_generalization
+  declared_in: phen.grokking.delayed-generalization
   block: observables
   signature: []
   name: first crossing time of the generalization criterion
   latex: t_{\text{gen}}
 - symbol: init
-  declared_in: phen.grokking.delayed_generalization
+  declared_in: phen.grokking.delayed-generalization
   block: scope_over_instances
   signature: []
   name: initialization draw
   latex: \mathrm{init}
 - symbol: spec
-  declared_in: phen.grokking.delayed_generalization
+  declared_in: phen.grokking.delayed-generalization
   block: scope_over_instances
   signature: []
   name: training specification
   latex: \mathrm{spec}
 - symbol: no_delay
-  declared_in: quest.grokking.explain_delay
+  declared_in: quest.grokking.explain-delay
   block: foil_set
   signature: []
   name: immediate generalization
   latex: \mathrm{no}_{\mathrm{delay}}
 - symbol: no_generalization
-  declared_in: quest.grokking.explain_delay
+  declared_in: quest.grokking.explain-delay
   block: foil_set
   signature: []
   name: persistent memorization
   latex: \mathrm{no}_{\mathrm{generalization}}
 - symbol: coord
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: constituents
   signature: []
   name: coordinate of the trainable parameters
   latex: \mathrm{coord}
 - symbol: source
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: external_systems
   signature: []
   name: process that generates the task data
   latex: \mathrm{source}
 - symbol: step
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: index_sets
   signature: []
   name: training step
   latex: \mathrm{step}
 - symbol: test
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: index_sets
   signature: []
   name: held-out sample
   latex: \mathrm{test}
 - symbol: train
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: index_sets
   signature: []
   name: training sample
   latex: \mathrm{train}
 - symbol: Arch
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: 'specification of the architecture: a finite computation graph with activation functions and a
     task readout'
   latex: \mathrm{Arch}
 - symbol: P
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: number of coordinates of the trainable parameters
   latex: P
 - symbol: T
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: observation horizon in training steps
   latex: T
 - symbol: algorithmic
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: predicate selecting the admitted algorithmic supervised tasks
   latex: \mathrm{algorithmic}
 - symbol: data
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: space of labeled examples for the supervised task
   latex: \mathrm{data}
 - symbol: ell
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: task loss
   latex: \mathrm{ell}
 - symbol: eps_fit
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: near-zero threshold on the training loss
   latex: \varepsilon_{\text{fit}}
 - symbol: eps_gen
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: generalization threshold on the test loss
   latex: \varepsilon_{\text{gen}}
 - symbol: opt
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: specification of the gradient-based optimizer with its hyperparameters
   latex: \mathrm{opt}
 - symbol: opt_state
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: update rule for the auxiliary state of the optimizer
   latex: \mathrm{opt}_{\mathrm{state}}
 - symbol: p0
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: initialization distribution
   latex: p_{0}
 - symbol: proto
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: evaluation protocol fixing when the losses are read and how a crossing time is classified before
     the horizon
   latex: \mathrm{proto}
 - symbol: test_set
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: realized held-out set
   latex: \mathrm{test}_{\mathrm{set}}
 - symbol: theta0
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature:
   - coord
   name: initial parameter vector
   latex: \theta_0
 - symbol: train_set
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: realized training set
   latex: \mathrm{train}_{\mathrm{set}}
 - symbol: z0
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: parameters
   signature: []
   name: initial auxiliary state of the optimizer
   latex: z_{0}
 - symbol: Ltest
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: referenced
   signature: []
   name: ''
   latex: L_{\text{test}}
 - symbol: Ltrain
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: referenced
   signature: []
   name: ''
   latex: L_{\text{train}}
 - symbol: Ltest
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: variables
   signature:
   - step
   name: test loss
   latex: L_{\text{test}}
 - symbol: Ltrain
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: variables
   signature:
   - step
   name: training loss
   latex: L_{\text{train}}
 - symbol: pred
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: variables
   signature:
   - step
   name: prediction of the network, in the prediction space of the task readout
   latex: \mathrm{pred}
 - symbol: theta
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: variables
   signature:
   - coord
@@ -364,7 +364,7 @@ symbols:
   name: coordinate of the network parameters
   latex: \theta
 - symbol: z
-  declared_in: system.delayed_generalization_networks
+  declared_in: system.delayed-generalization-networks
   block: variables
   signature:
   - step

@@ -7,11 +7,11 @@ type: model
 status: provisional
 
 derives_from:
-  - system.delayed_generalization_networks
+  - system.delayed-generalization-networks
 operations:
   - id: toy-addition
     kind: restrict
-    acts_on: [system.delayed_generalization_networks.source, system.delayed_generalization_networks.Arch]
+    acts_on: [system.delayed-generalization-networks.source, system.delayed-generalization-networks.Arch]
     yields: [addition]
     regime: "source = addition"
     error: exact
@@ -19,14 +19,14 @@ operations:
     rests_on: "the toy addition task with a learned embedding table and a decoder, on which the effective theory is stated [liu2022]"
   - id: representation
     kind: aggregate
-    acts_on: [system.delayed_generalization_networks.theta]
+    acts_on: [system.delayed-generalization-networks.theta]
     yields: [Rrep, RQI, Hrep, lambda3]
     error: uncontrolled
     gain: "a coarse description of the embeddings, whose quality the index measures and whose relaxation the Hessian governs"
     rests_on: "the effective loss of the normalized representation, posited rather than derived from the training laws [liu2022]"
   - id: decoder-step
     kind: limit
-    acts_on: [system.delayed_generalization_networks.opt]
+    acts_on: [system.delayed-generalization-networks.opt]
     error: uncontrolled
     gain: "a closed linear relaxation of the representation, separated from the motion of the decoder"
     rests_on: "the limit of a decoder step infinitesimal relative to representation learning [liu2022]"

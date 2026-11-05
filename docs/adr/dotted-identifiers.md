@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-10-29
+revised: 2026-11-05
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Dotted identifiers
@@ -17,6 +17,8 @@ The [flat symbol table](flat-symbol-table.md) lets a reference from another reco
 ## Decision
 
 Every reference to a record, or to a unit of a record, is a uniform sequence of dots. The prefix of a record fixes how many segments its identifier holds: two for `system` and `ops`, three for the other record types. One further segment names a unit of the record by its own identifier: the `symbol` of a declared element, or the `id` of a unit without a symbol, such as a step of an itinerary. A step is named in this full form, inside and outside its itinerary.
+
+Each segment of a record identifier after its prefix is written in lowercase letters and digits, its words joined by hyphens, as in `quest.grokking.explain-delay`. The first of these segments is the topic of the record. A target system is named by its own topic. A background record or an operator record is stated against one target system, so it takes the topic of that system. Every other record of a problem takes the topic of the problem, as `prob.grokking.delayed-generalization` and `ans.grokking.slow-structured-representation` share the topic `grokking`. The segment naming a unit keeps the form of its unit: a symbol keeps the form of the [symbols](../specification/expressions.md), such as `eta_rep`. The contract of each record type carries the pattern of its identifiers, and `gnomon check` reports a malformed identifier and a foreign topic. Amended on 2026-11-05. ^identifier-form
 
 The decision amends only the reference form of the flat symbol table. Each record keeps one flat table, so one segment names any unit. The identifiers of registries, vocabularies and norms, such as `registry.activities` or `norm.derivation`, keep their own forms.
 

@@ -6,7 +6,7 @@ id: assess.grokking.slow-structured-representation
 type: assessment
 status: stabilized
 assesses: ans.grokking.slow-structured-representation
-against: quest.grokking.explain_delay
+against: quest.grokking.explain-delay
 
 tests:
   admissibility:

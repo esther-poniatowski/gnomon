@@ -175,7 +175,7 @@ def test_the_command_reports_the_diagnosis_of_the_worked_inquiries() -> None:
     )
     first = runner.invoke(app, ["status", str(EXAMPLES), "--format", "yaml"]).output
     assert first == runner.invoke(app, ["status", str(EXAMPLES), "--format", "yaml"]).output
-    assert "bg.delayed_generalization_networks.training-specification" in first
+    assert "bg.delayed-generalization-networks.training-specification" in first
 
 
 def test_a_question_of_explication_has_no_condition_of_definiteness() -> None:

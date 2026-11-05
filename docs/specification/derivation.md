@@ -21,7 +21,7 @@ Three properties are read from other fields, so that no field restates them:
 
 | Specification | When it is required | Content | Examples |
 | ------------- | ------------------- | ------- | -------- |
-| Serves | when the derivation serves a question, a proof obligation, or a law or an operation stated in advance | the identifier of the record served, from which the root sought is read; empty for a derivation that constructs its result | `quest.grokking.explain_delay` |
+| Serves | when the derivation serves a question, a proof obligation, or a law or an operation stated in advance | the identifier of the record served, from which the root sought is read; empty for a derivation that constructs its result | `quest.grokking.explain-delay` |
 | Runs on | always | the records that hold the premises: models, backgrounds, the target system or an answer | `mod.grokking.effective-representation` |
 | Uses | when the derivation uses the consequences of another derivation | one identifier per derivation used | `derivation.grokking.mode-spectrum` |
 | Sought | when the derivation serves no record | the root sought, with its identifier, its statement, its type and its condition; a derivation that serves a record reads its root sought from that record and leaves this field empty | — |

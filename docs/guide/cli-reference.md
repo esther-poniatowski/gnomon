@@ -48,7 +48,7 @@ In a folder that already holds records, the command writes only the missing temp
 
 ## `validate`
 
-Validate each record against the contract that its field `_schema` names, such as `gnomon:answer@1`. A record whose type has no schema, such as a generated vocabulary, is skipped. The command prints each violation with the path of its field, and exits with a nonzero code when any record breaks its contract.
+Validate each record against the contract that its field `_schema` names, such as `gnomon:answer@1`. A record whose type has no schema, such as a generated vocabulary, is skipped, and a template not yet started, whose identifier still holds its placeholder, is counted apart. The command prints each violation with the path of its field, then one line counting the records checked, the errors found and the templates not yet filled. The command exits with a nonzero code when any record breaks its contract.
 
 ```sh
 gnomon validate <paths...>

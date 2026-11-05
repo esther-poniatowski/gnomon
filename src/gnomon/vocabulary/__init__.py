@@ -24,6 +24,8 @@ operators
     Collect the operators that a formula may call, and check the arity of each call.
 structure
     Check the declarations of a record that read no other record.
+naming
+    Check the form of record identifiers and the topic shared by the records of a problem.
 resolution
     Resolve the identifiers of a record against the symbols and operators it can see.
 signatures
@@ -89,6 +91,7 @@ from .layout import (
     upstream_of,
     visible_records,
 )
+from .naming import foreign_topics, malformed_identifier
 from .operators import (
     DATA,
     OPERATOR_REGISTRY,
@@ -170,6 +173,7 @@ __all__ = [
     "declared_variants",
     "doubly_defined",
     "entries",
+    "foreign_topics",
     "formulas",
     "free_indices",
     "generic",
@@ -181,6 +185,7 @@ __all__ = [
     "joins",
     "load_problem",
     "local_operators",
+    "malformed_identifier",
     "malformed_relations",
     "misattributed_appeals",
     "mismatched_arity",
