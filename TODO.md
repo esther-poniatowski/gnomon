@@ -97,7 +97,7 @@ A researcher new to `gnomon` needs a procedure that leads, step by step, from a 
 - [x] Explain in the [guide to filling the records](docs/guide/filling-records.md) how to choose identifiers, what the field `_schema` names, how to mark the maturity of a field, and which specifications each level of commitment and each aim require. 🆔 guide-conventions
 - [x] Index the fields of every record in the generated [field index](docs/guide/field-index.md), registered in the [user guide](docs/guide/_index.md), in alphabetical order of their paths, nested paths included, each linked to the note that documents it and named by its row, since a table row carries no anchor. 🆔 field-index
 	- [ ] Decide whether the field index replaces the option lists of the specification notes and of the templates, as the [decision on one source per unit](docs/adr/one-source-per-unit.md#^vocabulary-copies) leaves open.
-	- [ ] Replace the 262 placeholder descriptions of the base schemas, such as "The name of the record.", which the field index displays, by the content of the row that documents each field.
+	- [x] Replace the 262 placeholder descriptions of the base schemas, such as "The name of the record.", which the field index displays, by the content of the row that documents each field.
 
 ## 7. Checks
 
