@@ -114,3 +114,32 @@ properties:
       quantities through which it acts, and its ordered tuples
     items:
       type: object
+      additionalProperties: false
+      required:
+      - edge
+      - sources
+      - reach
+      - through
+      - tuples
+      properties:
+        edge:
+          type: string
+          x-kind: label
+          title: Edge
+        sources:
+          type: array
+          items:
+            type: string
+          title: Sources
+        reach:
+          type: string
+          x-kind: label
+          title: Reach
+        through:
+          type: array
+          items:
+            type: string
+          title: Through
+        tuples:
+          type: string
+          title: Ordered tuples
