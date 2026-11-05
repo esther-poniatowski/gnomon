@@ -74,6 +74,6 @@ The kind meets the seven [conditions of admission](record-kind-admission.md#^adm
 - The record kinds gain `design`, with its [specification](../specification/design.md), its base schema and its contract.
 - The table of epistemic roles gains the role Plan, and the demand table gains the type of result `design`.
 - The product type `measurement-procedure` stays partial in the target-system record.
-- The activity `method-design` outputs a design of the kind `method`, and `experimental-design` outputs the protocols.
+- The activity `method-design` outputs a design of the kind `method`, and `experimental-design` outputs the protocols. The activity `scheme-design`, added on 2026-11-05, outputs a scheme as a design of the kind `method`, judged by the soundness of its conditions of application rather than by the termination of an execution.
 - The protocol is required for the kinds `experiment` and `simulation-run`, as the specification states and the requirements by value of the requirement registry declare.
 - The field `serves` becomes optional for the kind `method`, and the kind gains the field `applies_when`, so that the [derivation record](derivation-record.md) cites a scheme as a method.

@@ -85,6 +85,15 @@ activities:
     norm: norm.question-revision
     mode: non-inferential
     context: discovery
+  - id: task-specification
+    family: problem-posing
+    inputs:
+      - question
+      - problem
+    output: question
+    norm: norm.task-specification
+    mode: non-inferential
+    context: discovery
   - id: question-generation
     family: problem-posing
     inputs:
@@ -164,6 +173,18 @@ activities:
     output_values:
       kind: [method]
     norm: norm.method-design
+    mode: deductive
+    context: both
+  - id: scheme-design
+    family: empirical-activities
+    inputs:
+      - question
+      - type: model
+        optional: true
+    output: design
+    output_values:
+      kind: [method]
+    norm: norm.scheme-design
     mode: deductive
     context: both
   - id: observation
