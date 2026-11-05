@@ -10,7 +10,8 @@ from typing import Any, Mapping
 
 from .. import findings as rules
 from ..dimensions import parse_expression
-from ..findings import Entry, Finding, finding
+from ..findings import Entry, Finding, finding, values_at
+from ..findings import where as place_of
 from ..identifiers import split_reference
 from .paths import at, is_unfilled
 
@@ -286,6 +287,61 @@ def misheld_presuppositions(
                 value=holder,
             )
         )
+    return found
+
+
+#: The blocks whose entries are quantities that a condition may define, by their path in a record.
+CONDITIONED: tuple[tuple[str, ...], ...] = (
+    ("variables",),
+    ("parameters",),
+    ("observables",),
+    ("manifestations", "features"),
+)
+
+
+def misheld_existence(
+    record: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return the quantities defined by a condition whose field ``held_by`` names no statement
+    establishing a value that satisfies the condition: neither a law of a background or a model
+    nor a consequence of a derivation.
+
+    >>> record = {"id": "mod.a.b", "variables": [
+    ...     {"symbol": "r", "condition": "r = min(S)", "held_by": "concept.a.b"}]}
+    >>> [f.text for f in misheld_existence(record, {})]
+    ['variables.r.held_by: concept.a.b is no law and no consequence of a derivation']
+    """
+    found = []
+    for path in CONDITIONED:
+        for locus, entries in values_at(record, path[:1]):
+            for i, entry in enumerate(entries if isinstance(entries, list) else []):
+                if not isinstance(entry, Mapping):
+                    continue
+                if len(path) > 1:
+                    children = entry.get(path[1])
+                    targets = [
+                        ((*locus, Entry(i, entry), path[1], Entry(j, c)), c)
+                        for j, c in enumerate(children if isinstance(children, list) else [])
+                        if isinstance(c, Mapping)
+                    ]
+                else:
+                    targets = [((*locus, Entry(i, entry)), entry)]
+                for place, quantity in targets:
+                    holder = quantity.get("held_by")
+                    if not isinstance(holder, str) or not holder.strip():
+                        continue
+                    if _holds_statement(holder, record, records):
+                        continue
+                    found.append(
+                        finding(
+                            rules.COMPLETENESS_MISHELD_PRESUPPOSITION,
+                            f"{place_of(place)}.held_by: {holder} is no law and no consequence of a"
+                            " derivation",
+                            *place,
+                            "held_by",
+                            value=holder,
+                        )
+                    )
     return found
 
 

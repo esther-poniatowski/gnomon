@@ -385,6 +385,15 @@ properties:
           - 'null'
           title: Selects
           description: required with a condition
+        held_by:
+          type:
+          - string
+          - 'null'
+          x-template: RECORD.UNIT
+          x-kind: label
+          x-comment: optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
+          title: Held by
+          description: The law of a background or of a model, or the consequence of a derivation, that establishes a value satisfying the condition; empty while the existence that the condition presupposes is undischarged.
         reading:
           type:
           - string
@@ -608,6 +617,15 @@ properties:
                 - 'null'
                 title: Selects
                 description: required with a condition
+              held_by:
+                type:
+                - string
+                - 'null'
+                x-template: RECORD.UNIT
+                x-kind: label
+                x-comment: optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
+                title: Held by
+                description: The law of a background or of a model, or the consequence of a derivation, that establishes a value satisfying the condition; empty while the existence that the condition presupposes is undischarged.
               procedure:
                 type:
                 - string

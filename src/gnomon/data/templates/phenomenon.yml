@@ -49,6 +49,7 @@ observables:                     # functions of the system state that restate th
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived observable
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
     selects:                     # unique | any | all; required with a condition
+    held_by: RECORD.UNIT         # optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
     reading: "THE EXPRESSION IN WORDS"
     event:                       # fill when the observable is the time of an event; the observable's `expression` then states the event criterion
       origin: "EXPRESSION FIXING THE ORIGIN OF TIME"
@@ -75,6 +76,7 @@ manifestations:                  # one entry per form of the observables' behavi
         observed: "ONE ELEMENT OF THE VALUE SET"
         condition: "EXPRESSION THAT THE FEATURE SATISFIES"   # give when the measurement constrains the feature without fixing its value
         selects:                 # unique | any | all; required with a condition
+        held_by: RECORD.UNIT     # optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
         procedure: "THE FINDING THAT THE MEASUREMENT ESTABLISHES"   # only content beyond the name and the value set
         caveat: "THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION"
 

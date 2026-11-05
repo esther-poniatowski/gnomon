@@ -59,6 +59,7 @@ variables:                       # part of V: quantities that vary in the model
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # an expression over the symbols of the model, or a map other than the identity from quantities of the target
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
     selects:                     # unique | any | all; required with a condition
+    held_by: RECORD.UNIT         # optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
     reading: "THE EXPRESSION IN WORDS"
     shared: false                # true when one value holds for every tuple of the signature
 
@@ -74,6 +75,7 @@ parameters:                      # part of V: quantities that the model holds fi
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived parameter
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
     selects:                     # unique | any | all; required with a condition
+    held_by: RECORD.UNIT         # optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
     reading: "THE EXPRESSION IN WORDS"
     shared: false                # true when one value holds for every tuple of the signature
 

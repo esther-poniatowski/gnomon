@@ -28,7 +28,7 @@ A presupposition also differs from a ground of the role `condition`. A condition
 Each presupposition has one home among the records:
 
 - **The presuppositions of a question.** The question records them, in its field `presuppositions`, in its links of relation `presupposes`, or in the evidential status of its phenomenon, as the [question record](../../../specification/question.md) states. Every direct answer inherits them, so no claim restates them.
-- **The existence that a condition presupposes.** A quantity defined by a condition presupposes a value satisfying that condition, as the [presupposition of existence](../../../specification/expressions.md#^condition-presupposes-existence) states. Every claim naming the quantity inherits that existence, so no claim restates it.
+- **The existence that a condition presupposes.** A quantity defined by a condition presupposes a value satisfying that condition, as the [presupposition of existence](../../../specification/expressions.md#^condition-presupposes-existence) states. The quantity names the statement that holds that existence, and every claim naming the quantity inherits it, so no claim restates it.
 - **The further presuppositions of a claim.** A claim records the commitments that its own terms incur beyond the two homes above.
 - **A presupposition that another answer establishes.** A relation of kind `presupposes` links the answer to the answer that establishes the commitment.
 

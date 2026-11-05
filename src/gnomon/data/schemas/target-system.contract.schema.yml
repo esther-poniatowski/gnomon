@@ -116,6 +116,7 @@ properties:
         - expression
         - condition
         - selects
+        - held_by
         - reading
         - shared
       properties:
@@ -155,6 +156,7 @@ properties:
         - expression
         - condition
         - selects
+        - held_by
         - reading
         - shared
       properties:

@@ -66,6 +66,7 @@ from .findings import CHECK_FAILED, Finding, finding
 from .history import StateReader, git_states
 from .itineraries import construct_record_kinds, itinerary_problems, type_classes, type_holders
 from .sarif import Located
+from .vocabulary.coordinates import foreign_coordinates
 
 #: The kinds of record that a tool generates from the others, which no check reads.
 GENERATED_KINDS = frozenset({"vocabulary", "view"})
@@ -230,6 +231,31 @@ class _Context:
         return [
             d.symbol for record in self.problem.records.values() for d in v.declarations(record)
         ]
+
+    @cached_property
+    def signatures(self) -> dict[str, set[str]]:
+        """The indices of each symbol that a record of the problem declares, joined across the
+        records that declare it."""
+        found: dict[str, set[str]] = {}
+        for record in self.problem.records.values():
+            for d in v.declarations(record):
+                found.setdefault(d.symbol, set()).update(d.signature)
+        return found
+
+    @cached_property
+    def value_sets(self) -> dict[str, str]:
+        """The value set that a record of the problem declares for each symbol."""
+        found: dict[str, str] = {}
+        for record in self.problem.records.values():
+            for block in v.DECLARING.get(str(record.get("type", "")), ()):
+                for entry in record.get(block) or []:
+                    if (
+                        isinstance(entry, Mapping)
+                        and isinstance(entry.get("symbol"), str)
+                        and isinstance(entry.get("values"), str)
+                    ):
+                        found.setdefault(entry["symbol"], entry["values"])
+        return found
 
     @cached_property
     def descents(self) -> dict[str, tuple[str, str]]:
@@ -467,6 +493,14 @@ def _dimensions(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     )
 
 
+def _coordinates(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
+    """The coordinates of each derivative against the argument that it differentiates, and the
+    statements that hold the existence presupposed by the conditions of the quantities."""
+    return foreign_coordinates(
+        record, ctx.signatures, ctx.dimension_rules, ctx.value_sets
+    ) + c.misheld_existence(record, ctx.workspace.by_id)
+
+
 def _operators(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
     """The base scales of an operator record, against the base dimensions of the package."""
     return colliding_bases(record)
@@ -532,7 +566,7 @@ def check_workspace(workspace: Workspace) -> list[Located]:
             record = problem.records[ident]
             checks: list[Check] = [_every_record, _requirements]
             if record.get("type") in v.RECORD_KINDS:
-                checks += [_symbols, _structure, _against_target, _dimensions]
+                checks += [_symbols, _structure, _against_target, _dimensions, _coordinates]
             checks += list(BY_KIND.get(str(record.get("type")), ()))
             file = PurePosixPath(problem.files[ident].relative_to(workspace.root).as_posix())
             for run in checks:

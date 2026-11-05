@@ -339,8 +339,8 @@ COMPLETENESS_MISMATCHED_STATUS_PAIR = _rule(
 )
 COMPLETENESS_MISHELD_PRESUPPOSITION = _rule(
     "completeness/misheld-presupposition",
-    "A presupposition of a claim names as its holder neither a law of a background or a model nor"
-    " a consequence of a derivation.",
+    "A presupposition, of a claim or of the condition of a quantity, names as its holder neither a"
+    " law of a background or a model nor a consequence of a derivation.",
 )
 COMPLETENESS_INHERITED_PRESUPPOSITION = _rule(
     "completeness/inherited-presupposition",
@@ -543,6 +543,11 @@ VOCABULARY_MISMATCHED_ARITY = _rule(
 VOCABULARY_RETIRED_SYMBOL = _rule(
     "vocabulary/retired-symbol",
     "An expression of a derived model uses a symbol that one of its operations retires.",
+)
+VOCABULARY_FOREIGN_COORDINATES = _rule(
+    "vocabulary/foreign-coordinates",
+    "A derivative takes coordinates that index no quantity of its argument and occur nowhere in"
+    " it.",
 )
 VOCABULARY_UNRESOLVED = _rule(
     "vocabulary/unresolved", "A reference or a formula identifier resolves to no declaration."

@@ -44,11 +44,20 @@ import yaml
 
 from .derivations import recorded_descents, upstream
 from .identifiers import split_reference
+from .vocabulary import identifiers, upstream_of, visible_records
 
 Records = Mapping[str, Mapping[str, Any]]
 
 #: The registry of the rules of a derivation, which declares the tests confirming a posit.
 REGISTRY = Path(__file__).parent / "data" / "registries" / "derivations.yml"
+
+#: The blocks whose entries are quantities that a condition may define, by their path in a record.
+QUANTITY_PATHS: tuple[tuple[str, ...], ...] = (
+    ("variables",),
+    ("parameters",),
+    ("observables",),
+    ("manifestations", "features"),
+)
 
 #: The warrants of a law that expose a conclusion resting on it.
 REVISABLE_WARRANTS = frozenset({"posited", "fitted", "measured"})
@@ -121,6 +130,15 @@ def _entries(record: Mapping[str, Any], name: str) -> list[Mapping[str, Any]]:
     """Return the entries of a list of a record that are mappings."""
     found = record.get(name)
     return [item for item in found if isinstance(item, Mapping)] if isinstance(found, list) else []
+
+
+def _nested(record: Mapping[str, Any], path: tuple[str, ...]) -> list[Mapping[str, Any]]:
+    """Return the entries reached by a path of lists in a record, such as the features of each
+    manifestation."""
+    level: list[Mapping[str, Any]] = [record]
+    for key in path:
+        level = [entry for parent in level for entry in _entries(parent, key)]
+    return level
 
 
 def _names(value: Any) -> list[str]:
@@ -211,8 +229,41 @@ class _Walk:
             reason = f"{error} operation" if error else "operation error not stated"
             self.expose(f"{model}.{operation['id']}", "operation", reason, via)
 
+    def _conditioned(self, owner: str) -> dict[str, tuple[str, Mapping[str, Any]]]:
+        """Return the quantities defined by a condition that the expressions of a record may name,
+        each with the record that declares it: the record itself, the records that it sees, and
+        the target system that it is stated against."""
+        record = self.records.get(owner) or {}
+        seen = [record, *visible_records(record, self.records), upstream_of(record, self.records)]
+        found: dict[str, tuple[str, Mapping[str, Any]]] = {}
+        for other in seen:
+            for path in QUANTITY_PATHS:
+                for entry in _nested(other, path):
+                    if entry.get("condition") and isinstance(entry.get("symbol"), str):
+                        found.setdefault(entry["symbol"], (str(other.get("id")), entry))
+        return found
+
+    def existence(self, text: Any, owner: str, via: str) -> None:
+        """Walk the existence that the condition of each quantity named by an expression
+        presupposes: to the statement that holds it, or expose it while it stays undischarged."""
+        if not isinstance(text, str) or not text.strip():
+            return
+        quantities = self._conditioned(owner)
+        for name in sorted(identifiers(text) & set(quantities)):
+            declared, entry = quantities[name]
+            holder = entry.get("held_by")
+            if isinstance(holder, str) and holder.strip():
+                self.reference(holder, f"existence of {declared}.{name}")
+                continue
+            unique = " and uniqueness" if entry.get("selects") == "unique" else ""
+            self.expose(f"{declared}.{name}", "existence", f"existence{unique} not discharged", via)
+
     def law(self, reference: str, law: Mapping[str, Any], via: str) -> None:
-        """Walk a law: a revisable warrant exposes, and a derived law passes on to its descent."""
+        """Walk a law: a revisable warrant exposes, a derived law passes on to its descent, and the
+        quantities that it names pass on the existence that their conditions presuppose."""
+        split = split_reference(reference)
+        if split is not None:
+            self.existence(law.get("expression"), split[0], via)
         warrant = str(law.get("warrant") or "")
         if warrant in REVISABLE_WARRANTS:
             self.expose(reference, "law", warrant, via)
@@ -235,13 +286,7 @@ class _Walk:
         stated = _by_id(record, "consequences")
         chosen = set(stated) if consequences is None else consequences & set(stated)
         refuted = {str(r.get("target")) for r in _entries(record, "refutations") if r.get("target")}
-        for ident in sorted(chosen & refuted):
-            self.expose(f"{name}.{ident}", "consequence", "refuted", via)
-        for ident in sorted(chosen):
-            error, inexact = combined_error(record, ident)
-            if inexact:
-                reason = f"{error} error, within the regimes of {', '.join(inexact)}"
-                self.expose(f"{name}.{ident}", "consequence", reason, via)
+        self._consequences(name, record, chosen, refuted)
         targets = {str(stated[c].get("from")) for c in chosen if stated[c].get("from")}
         needed = self._units(name, record, targets, refuted)
         for premise in sorted(n for n in needed if "." in n):
@@ -253,6 +298,20 @@ class _Walk:
             if used not in self.visited:
                 self.visited.add(used)
                 self.derivation(used, None)
+
+    def _consequences(
+        self, name: str, record: Mapping[str, Any], chosen: set[str], refuted: set[str]
+    ) -> None:
+        """Expose the consequences of a derivation that a counterexample refutes, and those whose
+        moves carry an error that is not exact."""
+        via = f"derivation {name}"
+        for ident in sorted(chosen & refuted):
+            self.expose(f"{name}.{ident}", "consequence", "refuted", via)
+        for ident in sorted(chosen):
+            error, inexact = combined_error(record, ident)
+            if inexact:
+                reason = f"{error} error, within the regimes of {', '.join(inexact)}"
+                self.expose(f"{name}.{ident}", "consequence", reason, via)
 
     def _units(
         self, name: str, record: Mapping[str, Any], targets: set[str], refuted: set[str]
@@ -274,8 +333,11 @@ class _Walk:
         return needed
 
     def answer(self, name: str, via: str) -> None:
-        """Walk an answer: its grounds, the derivations of its route, and its presuppositions."""
+        """Walk an answer: its grounds, the derivations of its route and of the obligations that
+        its assessments settle, its presuppositions, and the existence that the quantities of its
+        claim presuppose."""
         record = self.records.get(name) or {}
+        self.obligations(name)
         for ground in _entries(record, "grounds"):
             if isinstance(ground.get("record"), str):
                 self.reference(str(ground["record"]), via)
@@ -283,13 +345,26 @@ class _Walk:
         for cited in _names(route.get("derivations") if isinstance(route, Mapping) else None):
             self.reference(cited, via)
         claim = record.get("claim")
-        for entry in _entries(claim if isinstance(claim, Mapping) else {}, "presuppositions"):
+        claim = claim if isinstance(claim, Mapping) else {}
+        self.existence(claim.get("expression"), name, "claim")
+        for entry in _entries(claim, "presuppositions"):
             self.presupposition(name, entry)
         for relation in _entries(record, "relations"):
             if relation.get("relation") == "presupposes" and isinstance(
                 relation.get("answer"), str
             ):
                 self.reference(str(relation["answer"]), f"answer {relation['answer']}")
+
+    def obligations(self, answer: str) -> None:
+        """Walk the derivations that settle the proof obligations of the assessments of an
+        answer; an obligation not yet passed supports nothing yet."""
+        for ident, assessment in sorted(self.records.items()):
+            if assessment.get("type") != "assessment" or assessment.get("assesses") != answer:
+                continue
+            for obligation in _entries(assessment, "obligations"):
+                derivation = obligation.get("derivation")
+                if obligation.get("verdict") == "pass" and isinstance(derivation, str):
+                    self.reference(derivation, f"assessment {ident}")
 
     def presupposition(self, answer: str, entry: Mapping[str, Any]) -> None:
         """Walk a presupposition: to the statement that holds it when one is named, and otherwise

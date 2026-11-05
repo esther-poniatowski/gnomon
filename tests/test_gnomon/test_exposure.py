@@ -118,3 +118,32 @@ def test_a_consequence_carries_the_least_favourable_error_upstream() -> None:
     move["warrant"]["error"] = "singular"
     found = {f.unit: f.reason for f in answer_exposure(records, ANSWER)}
     assert found[scale] == "singular error, within the regimes of slowest-dominates, solve-modes"
+
+
+LAMBDA = "mod.grokking.effective-representation.lambda3"
+
+
+def test_the_existence_that_a_condition_presupposes_exposes_the_answer() -> None:
+    records = _records()
+    found = {f.unit: (f.kind, f.reason) for f in answer_exposure(records, ANSWER)}
+    assert found[LAMBDA] == ("existence", "existence and uniqueness not discharged")
+    model = records["mod.grokking.effective-representation"]
+    entry = next(v for v in model["variables"] if v["symbol"] == "lambda3")
+    entry["held_by"] = FLOW
+    held = {f.unit: f.via for f in answer_exposure(records, ANSWER)}
+    assert LAMBDA not in held
+    assert held[FLOW] in ("direct", f"existence of {LAMBDA}")
+
+
+def test_a_settled_obligation_passes_on_the_exposure_of_its_derivation() -> None:
+    records = _records()
+    _derivation_only(records)
+    records[ANSWER]["grounds"] = []
+    records[ANSWER]["route"]["derivations"] = []
+    assessment = next(r for r in records.values() if r.get("type") == "assessment")
+    assessment["assesses"] = ANSWER
+    assessment["obligations"] = [{"verdict": "pending", "derivation": DERIVATION}]
+    assert f"{DERIVATION}.slowest-dominates" not in _units(records)
+    assessment["obligations"][0]["verdict"] = "pass"
+    found = {f.unit: f.via for f in answer_exposure(records, ANSWER)}
+    assert found[f"{DERIVATION}.slowest-dominates"] == f"derivation {DERIVATION}"

@@ -97,7 +97,7 @@ def test_interventions_name_a_design_or_a_quantity_of_a_model() -> None:
 def _exposure(records: dict[str, dict[str, Any]], holder: str | None) -> dict[str, str]:
     answer = records[ANSWER]
     answer["claim"]["presuppositions"] = [{"id": "p", "reading": "a commitment", "held_by": holder}]
-    return {f.unit: f.via for f in answer_exposure(records, ANSWER)}
+    return {f.unit: f.via for f in answer_exposure(records, ANSWER) if f.kind != "existence"}
 
 
 def test_a_presupposition_exposes_the_answer_until_a_statement_holds_it() -> None:

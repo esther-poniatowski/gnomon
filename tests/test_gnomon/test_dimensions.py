@@ -372,3 +372,60 @@ def test_a_jacobian_at_a_point_of_another_dimension_is_inhomogeneous() -> None:
     assert evaluation.violations == [
         ("inhomogeneous", "the point of jacobian has the formula T, and its coordinates L")
     ]
+
+
+ACTIVE = ROOT / "examples" / "active-matter-phase-exploration"
+GROKKING = ROOT / "examples" / "grokking-delayed-generalization"
+
+
+def _foreign(folder: Path) -> list[str]:
+    return [
+        located.finding.text
+        for located in check_workspace(load_workspace(folder))
+        if located.finding.rule.id == "vocabulary/foreign-coordinates"
+    ]
+
+
+def test_a_gradient_along_coordinates_outside_its_argument_is_reported(tmp_path: Path) -> None:
+    folder = tmp_path / GROKKING.name
+    shutil.copytree(GROKKING, folder)
+
+    def ill_posed(record: dict[str, Any]) -> None:
+        law = next(entry for entry in record["laws"] if entry["symbol"] == "update")
+        law["expression"] = "diff(theta, step) = opt(grad(Ltrain, theta), z)"
+
+    _edit("background.yml", ill_posed)(folder)
+    assert _foreign(folder) == [
+        "laws.expression: grad differentiates Ltrain along theta, which indexes no quantity of it"
+        " and occurs nowhere in it"
+    ]
+
+
+def test_the_coordinates_of_a_map_are_its_domain(tmp_path: Path) -> None:
+    folder = tmp_path / ACTIVE.name
+    shutil.copytree(ACTIVE, folder)
+    assert not _foreign(folder)
+
+    def other_domain(record: dict[str, Any]) -> None:
+        state = next(entry for entry in record["variables"] if entry["symbol"] == "u")
+        state["values"] = "reals"
+
+    _edit("target-system.yml", other_domain)(folder)
+    texts = _foreign(folder)
+    assert len(texts) == 1 and "whose values reals are not the domain of F, G" in texts[0], texts
+
+
+def test_an_existence_is_held_by_a_statement(tmp_path: Path) -> None:
+    folder = tmp_path / GROKKING.name
+    shutil.copytree(GROKKING, folder)
+
+    def concept(record: dict[str, Any]) -> None:
+        entry = next(v for v in record["variables"] if v["symbol"] == "lambda3")
+        entry["held_by"] = "mod.grokking.effective-representation.Hrep"
+
+    _edit("model.yml", concept)(folder)
+    texts = [located.finding.text for located in check_workspace(load_workspace(folder))]
+    assert (
+        "variables.lambda3.held_by: mod.grokking.effective-representation.Hrep is no law and no"
+        " consequence of a derivation" in texts
+    ), texts

@@ -10,6 +10,11 @@
 # states its `arity`, so that no arity is read from a template. `variadic: true` lets the last
 # argument repeat, and the arity is then the least number of arguments.
 #
+# The coordinates of a derivative take the type variable `C`, a factor of the domain `A` of its
+# argument, which the type language cannot state; the check of coordinates
+# (src/gnomon/vocabulary/coordinates.py) verifies that they index a quantity of the argument, occur
+# in it, or are the domain of a map that it names.
+#
 # `dimension` states how the operator combines the dimensional formulas of its arguments, as the
 # decision on the dimensional formula requires (docs/adr/dimensional-formula.md): `preserve` gives
 # the formula of the first argument, `product` adds the exponents of the arguments, `derivative`
@@ -177,34 +182,34 @@ operators:
 - symbol: jacobian
   kind: map
   dimension: derivative-at
-  name: the matrix of first derivatives of a map along the coordinates given, at a point
+  name: the linear map of first derivatives of a map along the coordinates given, at a point of the coordinates
   notation: '\operatorname{J}_{#2} #1 \big|_{#3}'
-  for_any: [A, S, m, n]
-  signature: ["maps(A, vectors(S, m))", "vectors(reals, n)", "vectors(reals, n)"]
-  values: "matrices(S, m, n)"
+  for_any: [A, C, T]
+  signature: ["maps(A, T)", "C", "C"]
+  values: "maps(C, T)"
 - symbol: grad
   kind: map
   dimension: derivative
   name: the gradient of a field along the coordinates given
   notation: '\nabla_{#2} #1'
-  for_any: [A, S, n]
-  signature: ["maps(A, S)", "vectors(reals, n)"]
-  values: "maps(A, vectors(S, n))"
+  for_any: [A, C, S]
+  signature: ["maps(A, S)", "C"]
+  values: "maps(A, maps(C, S))"
 - symbol: div
   kind: map
   dimension: derivative
   name: the divergence of a vector field along the coordinates given
   notation: '\nabla_{#2} \cdot #1'
-  for_any: [A, S, n]
-  signature: ["maps(A, vectors(S, n))", "vectors(reals, n)"]
-  values: "maps(A, S)"
+  for_any: [A, C]
+  signature: ["maps(A, C)", "C"]
+  values: "maps(A, reals)"
 - symbol: lap
   kind: map
   dimension: second-derivative
   name: the Laplacian of a field along the coordinates given
   notation: '\Delta_{#2} #1'
-  for_any: [A, S, n]
-  signature: ["maps(A, S)", "vectors(reals, n)"]
+  for_any: [A, C, S]
+  signature: ["maps(A, S)", "C"]
   values: "maps(A, S)"
 - symbol: infinity
   kind: constant

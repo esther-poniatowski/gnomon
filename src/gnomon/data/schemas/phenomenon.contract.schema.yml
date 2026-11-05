@@ -84,6 +84,7 @@ properties:
         - expression
         - condition
         - selects
+        - held_by
         - reading
         - event
         - estimator
@@ -155,6 +156,7 @@ properties:
               - observed
               - condition
               - selects
+              - held_by
               - procedure
               - caveat
             properties:
