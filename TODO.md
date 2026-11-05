@@ -93,7 +93,7 @@ The [decision on answers, models and bindings](docs/adr/answers-models-bindings.
 
 A researcher new to `gnomon` needs a procedure that leads, step by step, from a research problem to records that the checks accept.
 
-- [ ] Write a tutorial that walks through one worked inquiry stage by stage, from the problem to the assessment, with the itinerary step and the command of each stage. 🆔 tutorial
+- [x] Write a [tutorial](docs/guide/tutorial.md) that walks through one worked inquiry stage by stage, from the problem to the assessment, with the itinerary step and the command of each stage. 🆔 tutorial
 - [ ] Explain in the [guide to filling the records](docs/guide/filling-records.md) how to choose identifiers, what the field `_schema` names, how to mark the maturity of a field, and which specifications each level of commitment and each aim require. 🆔 guide-conventions
 - [ ] Index the fields of every record in one generated file, `docs/guide/field-index.md`, registered in the [user guide](docs/guide/_index.md), in alphabetical order of their paths, nested paths included, each linked to the anchor of the note that documents it. Generate the index from the schemas of the goal `record-schemas`, whose fields carry a title and a description. Once the index exists, decide whether it replaces the option lists of the specification notes and of the templates, as the [decision on one source per unit](docs/adr/one-source-per-unit.md#^vocabulary-copies) leaves open. ⏫ 🆔 field-index
 
