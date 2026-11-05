@@ -215,6 +215,8 @@ class Evaluation:
             return self._quantity(self.value(tree[1]), "a negation")
         if kind == "pow":
             return self._power(tree[1], tree[2])
+        if kind == "cmp" and tree[1] == "~":
+            return self._scaling(tree)
         return self._binary(tree)
 
     def _statement(self, value: Value, site: str) -> None:
@@ -232,7 +234,8 @@ class Evaluation:
         return value
 
     def _binary(self, tree: Tree) -> Value:
-        """Return the formula of a product, a quotient, a sum, a difference or a comparison."""
+        """Return the formula of a product, a quotient, a sum, a difference or a relation other than
+        a scaling."""
         kind, op = tree[0], tree[1]
         what = {"prod": "a product", "sum": "a sum"}.get(kind, f"the relation {op}")
         left = self._quantity(self.value(tree[2]), what)
@@ -252,6 +255,18 @@ class Evaluation:
         if kind == "cmp":
             return STATEMENT
         return left if isinstance(left, Mapping) else right
+
+    def _scaling(self, tree: Tree) -> Value:
+        """Return the statement of a scaling ``a ~ b``, whose sides are evaluated quietly for their
+        own defects: the prefactor absorbs any formula, so neither side leaves the relation
+        unchecked."""
+        self.quiet += 1
+        try:
+            for side in (tree[2], tree[3]):
+                self._quantity(self.value(side), "the relation ~")
+        finally:
+            self.quiet -= 1
+        return STATEMENT
 
     def _symbol(self, name: str) -> Value:
         """Return the formula of a declared symbol, recording it as missing when it states none; a

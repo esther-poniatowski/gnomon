@@ -1,6 +1,11 @@
 """
 The resolution of the identifiers of a record against the symbols and the operators that the
 record can see.
+
+A formula is resolved on its tree, so that each binder scopes the indices that it binds: an index
+ranged over a declared set must itself be declared, and a fresh index, written ``a1 in a``,
+resolves only inside the binder that introduces it. A field that holds an expression but a text
+that the grammar does not cover is reported as such, since its identifiers have no scope.
 """
 
 from __future__ import annotations
@@ -8,6 +13,7 @@ from __future__ import annotations
 from typing import Any, Iterable, Mapping
 
 from .. import findings as rules
+from ..expressions import Tree, children, parse_expression
 from ..findings import Entry, Finding, Place, finding
 from ..identifiers import split_reference
 from .declarations import declarations
@@ -18,7 +24,6 @@ from .layout import (
     TOLERANCE_NAMES,
     TYPE_PATH_REFERENCE,
     at_item,
-    binder_indices,
     entries,
     formulas,
     identifiers,
@@ -95,25 +100,71 @@ def _unresolved_references(record: Mapping[str, Any], known: set[str]) -> list[F
     return problems
 
 
+def unresolved_names(tree: Tree, reachable: frozenset[str], declared: frozenset[str]) -> list[str]:
+    """Return each name of a tree that resolves to nothing, in the order of the text.
+
+    A name resolves when it is reachable: declared, an operator, a type variable, or an index that
+    an enclosing binder binds. A binder index written alone, or restricted by a relation as in
+    ``t <= T``, ranges over a declared set, so it must itself be declared. An index written
+    ``a1 in a`` is a fresh name over the set ``a``: it resolves inside its binder, from the
+    restrictions that follow it to the arguments, and nowhere else.
+
+    >>> tree = parse_expression("norm_{a1 in a, a2 in S(a1)}( K(a1, a2) ) + a1")
+    >>> known = frozenset({"norm", "K", "S", "a"})
+    >>> unresolved_names(tree, known, known)
+    ['a1']
+    >>> unresolved_names(parse_expression("max_{t <= T}( E(t) )"), known | {"max", "E", "T"},
+    ...                  known)
+    ['t']
+    """
+    if tree[0] == "sym":
+        return [] if tree[1] in reachable else [str(tree[1])]
+    if tree[0] != "call":
+        return [
+            name
+            for child in children(tree)
+            for name in unresolved_names(child, reachable, declared)
+        ]
+    _, called, args, binds, restrictions = tree
+    found = [] if called in reachable else [str(called)]
+    inner = set(reachable)
+    for index, restriction in zip(binds, restrictions, strict=True):
+        fresh = restriction is not None and restriction[1] == "in"
+        if not fresh and index not in declared:
+            found.append(str(index))
+        if restriction is not None:
+            found += unresolved_names(restriction[3], frozenset(inner), declared)
+        inner.add(index)
+    for arg in args:
+        found += unresolved_names(arg, frozenset(inner), declared)
+    return found
+
+
 def _unresolved_identifiers(
     record: Mapping[str, Any], known: set[str], available: frozenset[str]
 ) -> list[Finding]:
-    """Return each identifier of a formula that names no symbol, bound index or operator, and each
+    """Return each identifier of a formula that names no symbol, bound index or operator, each
     index of a binder that names no declared symbol, since a binder ranges over a declared index
-    set."""
+    set, and each formula field whose text the grammar does not cover."""
     problems: list[Finding] = []
     for where, place, text, variables in formulas(record):
-        declared = known | available | variables
-        indices = binder_indices(text)
-        fresh = {name for name, introduced in indices if introduced}
-        ranged = {name for name, introduced in indices if not introduced}
-        reachable = declared | fresh | ranged
+        tree = parse_expression(text)
+        if tree is None:
+            problems.append(
+                finding(
+                    rules.VOCABULARY_UNPARSED_EXPRESSION,
+                    f"{where}: {text.strip()} is no expression of the grammar",
+                    *place,
+                )
+            )
+            continue
+        declared = frozenset(known | available | variables)
+        reachable = declared
         if where.startswith("task.required_accuracy.outputs_to_match[].tolerance"):
             reachable |= TOLERANCE_NAMES
         problems += [
             finding(rules.VOCABULARY_UNRESOLVED, f"{where} -> {name}", *place, value=name)
-            for name in sorted(identifiers(text) | ranged)
-            if name not in (declared if name in ranged else reachable)
+            for name in sorted(set(unresolved_names(tree, reachable, declared)))
         ]
     return problems
 

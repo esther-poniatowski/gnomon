@@ -8,6 +8,7 @@ from __future__ import annotations
 from typing import Any, Iterable, Mapping
 
 from .. import findings as rules
+from ..expressions import parse_expression
 from ..findings import Entry, Finding, finding
 from ..identifiers import split_reference
 from .paths import at, is_empty
@@ -424,6 +425,56 @@ def varying_symbols(
     if isinstance(course, Mapping):
         found |= {s for s in course.get("varies") or [] if isinstance(s, str)}
     return found
+
+
+def quantity_symbols(target: Mapping[str, Any]) -> set[str]:
+    """Return the symbols of the variables and the parameters of a target system.
+
+    >>> sorted(quantity_symbols({"variables": [{"symbol": "u"}], "parameters": [{"symbol": "Re"}],
+    ...                          "index_sets": [{"symbol": "t"}]}))
+    ['Re', 'u']
+    """
+    return {
+        e["symbol"]
+        for block in ("variables", "parameters")
+        for e in target.get(block) or []
+        if isinstance(e, Mapping) and isinstance(e.get("symbol"), str)
+    }
+
+
+def misstated_limit(question: Mapping[str, Any], quantities: Iterable[str]) -> list[Finding]:
+    """Return the domain limit of a question when it is no relation ``q -> v`` whose left side is
+    a variable or a parameter of the target system.
+
+    A limit states the value that one quantity of the target approaches, as ``Re -> infinity``, and
+    the question then concerns the limit system. A left side that names an index set, an operator
+    or an expression names no quantity that can approach a value. A text that the grammar does not
+    cover is reported by the resolution check, so it is not reported here.
+
+    >>> question = {"subject": {"domain": {"limit": {"expression": "Re -> infinity"}}}}
+    >>> misstated_limit(question, {"Re"})
+    []
+    >>> [f.text for f in misstated_limit(question, {"U"})]
+    ['subject.domain.limit.expression: Re is no variable or parameter of the target']
+    >>> question["subject"]["domain"]["limit"]["expression"] = "Re > 1000"
+    >>> [f.text for f in misstated_limit(question, {"Re"})]
+    ['subject.domain.limit.expression: Re > 1000 states no limit q -> v']
+    """
+    text = at(question, "subject.domain.limit.expression")
+    tree = parse_expression(text)
+    if tree is None:
+        return []
+    where = "subject.domain.limit.expression"
+    place = ("subject", "domain", "limit", "expression")
+    if tree[0] != "cmp" or tree[1] != "->":
+        message = f"{where}: {str(text).strip()} states no limit q -> v"
+    elif tree[2][0] != "sym":
+        message = f"{where}: the left side of the limit is no symbol"
+    elif tree[2][1] not in set(quantities):
+        message = f"{where}: {tree[2][1]} is no variable or parameter of the target"
+    else:
+        return []
+    return [finding(rules.COMPLETENESS_MISSTATED_LIMIT, message, *place)]
 
 
 def malformed_restrictions(question: Mapping[str, Any], variables: Iterable[str]) -> list[Finding]:

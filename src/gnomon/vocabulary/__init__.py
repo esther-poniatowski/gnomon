@@ -26,6 +26,10 @@ structure
     Check the declarations of a record that read no other record.
 resolution
     Resolve the identifiers of a record against the symbols and operators it can see.
+signatures
+    Check the signature of a defined quantity against the indices its definition leaves free.
+coordinates
+    Check the coordinates of a derivative against the argument that it differentiates.
 variants
     Check the entries that reach beyond the variants that bear them.
 interactions
@@ -74,8 +78,6 @@ from .layout import (
     WITHIN_ENTRY,
     WITHIN_MAPPING,
     along,
-    binder_indices,
-    bound,
     calls,
     entries,
     formulas,
@@ -100,7 +102,9 @@ from .resolution import (
     misattributed_appeals,
     retired_in_use,
     unresolved,
+    unresolved_names,
 )
+from .signatures import QUANTITY_BLOCKS, contradicted_signatures, free_indices
 from .structure import (
     corrupted_notation,
     doubly_defined,
@@ -141,6 +145,7 @@ __all__ = [
     "OPERATOR_REGISTRY",
     "PATH_FORMULA",
     "PATH_REFERENCE",
+    "QUANTITY_BLOCKS",
     "REACHED",
     "RECORD_KINDS",
     "REFERENCE",
@@ -156,10 +161,9 @@ __all__ = [
     "along",
     "arities",
     "as_data",
-    "binder_indices",
-    "bound",
     "calls",
     "canonical_operators",
+    "contradicted_signatures",
     "corrupted_notation",
     "dangling_references",
     "declarations",
@@ -167,6 +171,7 @@ __all__ = [
     "doubly_defined",
     "entries",
     "formulas",
+    "free_indices",
     "generic",
     "identifiers",
     "indexed",
@@ -198,6 +203,7 @@ __all__ = [
     "unordered_interactions",
     "unowned_quantities",
     "unresolved",
+    "unresolved_names",
     "unselected_conditions",
     "unused_declarations",
     "upstream_of",

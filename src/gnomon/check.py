@@ -243,6 +243,17 @@ class _Context:
         return found
 
     @cached_property
+    def indices(self) -> frozenset[str]:
+        """The symbols that the records of the problem declare as index sets or constituent kinds,
+        which are the indices that a quantity may take."""
+        return frozenset(
+            d.symbol
+            for record in self.problem.records.values()
+            for d in v.declarations(record)
+            if d.block in ("index_sets", "constituents")
+        )
+
+    @cached_property
     def value_sets(self) -> dict[str, str]:
         """The value set that a record of the problem declares for each symbol."""
         found: dict[str, str] = {}
@@ -404,6 +415,7 @@ def _question(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     records = {**ctx.workspace.by_id, **ctx.problem.records}
     return (
         c.malformed_restrictions(record, c.varying_symbols(target, phenomenon))
+        + c.misstated_limit(record, c.quantity_symbols(target))
         + c.unjustified_explanans_bound(record)
         + c.unstated_standing(record)
         + c.contradictory_accuracy(record)
@@ -501,6 +513,12 @@ def _coordinates(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     ) + c.misheld_existence(record, ctx.workspace.by_id)
 
 
+def _signatures(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
+    """The signature of each defined quantity against the indices that its definition leaves
+    free."""
+    return v.contradicted_signatures(record, ctx.indices)
+
+
 def _operators(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
     """The base scales of an operator record, against the base dimensions of the package."""
     return colliding_bases(record)
@@ -568,7 +586,14 @@ def check_workspace(workspace: Workspace) -> list[Located]:
             record = problem.records[ident]
             checks: list[Check] = [_every_record, _requirements]
             if record.get("type") in v.RECORD_KINDS:
-                checks += [_symbols, _structure, _against_target, _dimensions, _coordinates]
+                checks += [
+                    _symbols,
+                    _structure,
+                    _against_target,
+                    _dimensions,
+                    _coordinates,
+                    _signatures,
+                ]
             checks += list(BY_KIND.get(str(record.get("type")), ()))
             file = PurePosixPath(problem.files[ident].relative_to(workspace.root).as_posix())
             for run in checks:

@@ -44,7 +44,7 @@ observables:
     symbol: Z
     signature: []
     values:
-    expression: "sequence(sub, Tev)"
+    expression: "sequence_{sub}( Tev )"
     reading: "The sequence lists the subsystems that transition, ordered by their event times."
   - name: "joint law of the marked sequence of transitions"
     symbol: PZ

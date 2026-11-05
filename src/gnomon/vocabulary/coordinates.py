@@ -21,7 +21,7 @@ from typing import Any, Iterable, Iterator, Mapping
 
 from .. import findings as rules
 from ..dimensions import DERIVATIVE_RULES
-from ..expressions import Tree, parse_expression
+from ..expressions import Tree, names, parse_expression
 from ..findings import Finding, finding
 from .layout import formulas
 
@@ -40,24 +40,6 @@ def _derivatives(tree: Tree, rules_: Mapping[str, str]) -> Iterator[tuple[str, T
     for part in tree[1:]:
         if isinstance(part, tuple):
             yield from _derivatives(part, rules_)
-
-
-def _named(tree: Any) -> set[str]:
-    """Return the symbols and the names of the calls that a tree holds."""
-    if not isinstance(tree, tuple) or not tree:
-        return set()
-    if tree[0] == "sym":
-        return {str(tree[1])}
-    if tree[0] == "call":
-        found = {str(tree[1]), *(str(index) for index in tree[3])}
-        for arg in tree[2]:
-            found |= _named(arg)
-        return found
-    found = set()
-    for part in tree[1:]:
-        if isinstance(part, tuple):
-            found |= _named(part)
-    return found
 
 
 def domain(values: Any) -> str | None:
@@ -85,7 +67,7 @@ def _mismatch(
 ) -> str | None:
     """Return why coordinates fail the argument that a derivative differentiates, or None when
     they index a quantity of it, occur in it, or form the domain of a map that it names."""
-    named = _named(argument)
+    named = names(argument)
     if along in named or any(along in set(signatures.get(s, ())) for s in named):
         return None
     domains = {s: domain(value_sets.get(s)) for s in named if domain(value_sets.get(s))}

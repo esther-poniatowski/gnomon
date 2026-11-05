@@ -375,6 +375,11 @@ COMPLETENESS_ANONYMOUS_RESTRICTION = _rule(
     "completeness/anonymous-restriction",
     "A domain restriction names neither a quantity nor itself.",
 )
+COMPLETENESS_MISSTATED_LIMIT = _rule(
+    "completeness/misstated-limit",
+    "A domain limit is no relation `q -> v` whose left side is a variable or a parameter of the"
+    " target.",
+)
 COMPLETENESS_RESTRICTION_WITHOUT_VARIABLE = _rule(
     "completeness/restriction-without-variable",
     "A domain restriction states how it holds a quantity that does not vary along the course.",
@@ -560,6 +565,14 @@ VOCABULARY_FOREIGN_COORDINATES = _rule(
 )
 VOCABULARY_UNRESOLVED = _rule(
     "vocabulary/unresolved", "A reference or a formula identifier resolves to no declaration."
+)
+VOCABULARY_UNPARSED_EXPRESSION = _rule(
+    "vocabulary/unparsed-expression",
+    "A field that holds an expression holds a text that the expression grammar does not cover.",
+)
+VOCABULARY_CONTRADICTED_SIGNATURE = _rule(
+    "vocabulary/contradicted-signature",
+    "The definition of a quantity leaves free an index that its signature omits.",
 )
 VOCABULARY_OVERREACHING_ENTRY = _rule(
     "vocabulary/overreaching-entry",

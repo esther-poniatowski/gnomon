@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-09-24
-revised: 2026-10-29
+revised: 2026-11-05
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Expression syntax
@@ -40,7 +40,7 @@ A grammar defines the infix surface that authors write over an S-expression core
 
 ## Consequences
 
-- A signature becomes derivable from the expression that defines a quantity, rather than declared separately. Deriving the signature excludes a contradiction that the current check cannot detect: that check is lexical and cannot compare a declared signature with the defining expression, so a record may currently declare a signature that its own definition contradicts.
+- The free indices of the expression that defines a quantity are read from its tree, so a check compares them with the declared signature, as the [rule on free indices](../specification/expressions.md#^free-indices-form-signature) states. The comparison runs in one direction only, since the converse needs the result type of every operator.
 - The operator set stays open: an operator is a head symbol, so a problem that declares a new one needs no change to the grammar.
 - The renderer stays separate from the parser, because each operator carries a LaTeX template from which a renderer composes the printed form without reading the grammar.
-- The grammar remains to be written. Until it is, the lexical check resolves identifiers without parsing binders.
+- The parser of `src/gnomon/expressions.py` implements the grammar. Every check of an expression reads its tree, so each binder delimits the scope of its own indices, and a text outside the grammar is reported once. The grammar also holds the limit `->` and the scaling `~`, two relations defined in the [specification of expressions](../specification/expressions.md#^limit-and-scaling).

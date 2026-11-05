@@ -895,17 +895,17 @@ def test_a_binder_ranges_over_a_declared_index_set() -> None:
 
 
 def test_prose_left_in_a_value_set_is_reported() -> None:
-    """A value set is an expression, so a description left there resolves to nothing."""
+    """A value set is an expression, so a description left there is no expression of the grammar,
+    reported once rather than word by word."""
     record = {
         "type": "target-system",
         "parameters": [{"symbol": "nu", "values": "admissible body-force families"}],
     }
-    assert texts(unresolved(record, CANONICAL)) == [
-        "parameters.values -> admissible",
-        "parameters.values -> body",
-        "parameters.values -> families",
-        "parameters.values -> force",
+    found = unresolved(record, CANONICAL)
+    assert texts(found) == [
+        "parameters.values: admissible body-force families is no expression of the grammar"
     ]
+    assert [f.rule.id for f in found] == ["vocabulary/unparsed-expression"]
 
 
 def test_prose_in_a_nested_feature_value_set_is_reported() -> None:
@@ -915,9 +915,7 @@ def test_prose_in_a_nested_feature_value_set_is_reported() -> None:
         "manifestations": [{"features": [{"symbol": "a", "values": "prose left here"}]}],
     }
     assert texts(unresolved(record, CANONICAL)) == [
-        "manifestations.features.values -> here",
-        "manifestations.features.values -> left",
-        "manifestations.features.values -> prose",
+        "manifestations.features.values: prose left here is no expression of the grammar"
     ]
 
 

@@ -8,8 +8,8 @@ target_system: system.earth-tipping-subsystems
 operators:
   - name: "the ordered sequence of identities paired with their event times"
     symbol: sequence
-    notation: '\operatorname{seq}( #1, #2 )'
-    signature: [sub, "maps(sub, nonneg(reals))"]
+    notation: '\operatorname{seq}_{#0}( #1 )'
+    signature: ["nonneg(reals)"]   # a binder: the event time at each identity that it binds
     values:
 
 maturity:

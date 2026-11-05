@@ -5,9 +5,10 @@ An expression is written over declared symbols and the operators of the canonica
 problem, as the decision on the expression syntax fixes it. The parser turns it into a tree whose
 head names the construct, so that every check and every view reads one structure: a number, a
 string, a symbol, a call with its arguments, the indices that a binder binds and the restriction of
-each index, a connective, a
-negation, a power, a product, a sum or a comparison. Text that the grammar does not cover, such as
-prose, parses to no tree.
+each index, a connective, a negation, a power, a product, a sum or a relation. The relations are the
+comparisons, the membership ``x in S``, the limit ``m -> infinity``, which states the value that a
+quantity approaches, and the scaling ``S ~ r^z``, which holds up to a prefactor. Text that the
+grammar does not cover, such as prose, parses to no tree.
 
 Functions
 ---------
@@ -15,6 +16,12 @@ parse_expression
     Return the tree of an expression, or None when the text is not an expression.
 number
     Return the value of a tree built from numbers alone, or None.
+children
+    Return the subtrees of a tree.
+names
+    Return the symbols, the names of the calls and the binder indices that a tree holds.
+calls
+    Return each call of a tree with the number of its arguments.
 """
 
 from __future__ import annotations
@@ -26,13 +33,15 @@ from typing import Any, Callable
 
 TOKEN = re.compile(
     r"\s*(?:(?P<num>\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)|(?P<str>\"[^\"]*\")"
-    r"|(?P<name>[A-Za-z][A-Za-z0-9_]*)|(?P<op><=|>=|!=|==|[-+*/^=<>(),{}]))"
+    r"|(?P<name>[A-Za-z][A-Za-z0-9_]*)|(?P<op>->|<=|>=|!=|==|[-+*/^=<>(),{}~]))"
 )
 
 #: A tree of an expression: a tuple whose first item names the construct.
 Tree = tuple[Any, ...]
 
-COMPARISONS = frozenset({"=", "==", "!=", "<", "<=", ">", ">=", "in"})
+#: The relations written infix between two terms: the comparisons, the membership, the limit and
+#: the scaling.
+COMPARISONS = frozenset({"=", "==", "!=", "<", "<=", ">", ">=", "in", "->", "~"})
 
 
 def _tokens(text: str) -> list[tuple[str, str]] | None:
@@ -103,7 +112,7 @@ class _Parser:
         return self.comparison()
 
     def comparison(self) -> Tree:
-        """Parse an equation or an inequality."""
+        """Parse a relation: an equation, an inequality, a membership, a limit or a scaling."""
         left = self.additive()
         while self.peek() in COMPARISONS:
             op = self.take()[1]
@@ -205,6 +214,8 @@ def parse_expression(text: Any) -> Tree | None:
     ('call', 'mean', (('call', 'u', (('sym', 'x'),), (), ()),), ('x',), (None,))
     >>> parse_expression("max_{t <= T}( E(t) )")[4]
     (('cmp', '<=', ('sym', 't'), ('sym', 'T')),)
+    >>> parse_expression("Re -> infinity"), parse_expression("S ~ r^z")[1]
+    (('cmp', '->', ('sym', 'Re'), ('sym', 'infinity')), '~')
     >>> parse_expression("the state maps to tipped") is None
     True
     """
@@ -238,3 +249,43 @@ def number(tree: Tree) -> Fraction | None:
             return None
         return left * right if tree[1] == "*" else left / right
     return None
+
+
+def children(tree: Tree) -> list[Tree]:
+    """Return the subtrees of a tree: the arguments and the restrictions of a call, or the operands
+    of any other construct."""
+    if tree[0] == "call":
+        return [*tree[2], *(r for r in tree[4] if r is not None)]
+    return [part for part in tree[1:] if isinstance(part, tuple) and part]
+
+
+def names(tree: Tree) -> set[str]:
+    """Return the symbols, the names of the calls and the binder indices that a tree holds; the
+    connectives and the relations are signs of the grammar, so they are no names.
+
+    >>> sorted(names(parse_expression("mean_{x}( u(x) ) > 0 and not v")))
+    ['mean', 'u', 'v', 'x']
+    """
+    found: set[str] = set()
+    if tree[0] == "sym":
+        found.add(str(tree[1]))
+    elif tree[0] == "call":
+        found |= {str(tree[1]), *(str(index) for index in tree[3])}
+    for child in children(tree):
+        found |= names(child)
+    return found
+
+
+def calls(tree: Tree) -> list[tuple[str, int]]:
+    """Return each call of a tree, in the order of the text, with the number of its arguments; the
+    indices that a binder consumes are no arguments.
+
+    >>> calls(parse_expression("mean_{x, t}( u(a, x) * 2 ) = div(v, x)"))
+    [('mean', 1), ('u', 2), ('div', 2)]
+    """
+    found: list[tuple[str, int]] = []
+    if tree[0] == "call":
+        found.append((str(tree[1]), len(tree[2])))
+    for child in children(tree):
+        found += calls(child)
+    return found

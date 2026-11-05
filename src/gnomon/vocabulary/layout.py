@@ -8,6 +8,9 @@ from __future__ import annotations
 import re
 from typing import Any, Mapping
 
+from ..expressions import calls as tree_calls
+from ..expressions import names as tree_names
+from ..expressions import parse_expression
 from ..findings import Entry, Place
 from ..identifiers import split_reference
 
@@ -235,54 +238,31 @@ def at_item(place: Place, index: int | None) -> Place:
     return place if index is None else (*place, index)
 
 
-#: The words of the expression syntax that name no symbol and no operator: the membership of an
-#: element in a set, written ``x in S``.
+#: The words of the expression syntax that name no symbol and no operator, which the scan of a text
+#: outside the grammar skips: the membership of an element in a set, written ``x in S``.
 RESERVED = frozenset({"in"})
 
 
 def identifiers(text: str) -> set[str]:
-    """Return the identifiers occurring in an expression.
+    """Return the identifiers occurring in an expression: the names of its tree.
 
-    A binder is written ``op_{indices}``, so its token carries a trailing underscore that is
-    stripped before the operator vocabulary is consulted.
-
-    Quoted text is a literal, such as the member names of an enumeration, so it is removed
-    before the identifiers are read.
+    A text that the grammar does not cover keeps every word outside its quoted literals, so that a
+    check reading the identifiers of a malformed expression still reaches its symbols; the
+    resolution check reports the text itself.
 
     >>> sorted(identifiers("mean_{x}( u(x) )"))
     ['mean', 'u', 'x']
     >>> sorted(identifiers('enum("A", "B")'))
     ['enum']
+    >>> sorted(identifiers("S ~ ~ r_"))
+    ['S', 'r']
     """
+    tree = parse_expression(text)
+    if tree is not None:
+        return tree_names(tree)
     without_literals = re.sub(r"'[^']*'|\"[^\"]*\"", " ", text)
     found = {token.rstrip("_") for token in re.findall(r"[A-Za-z_][A-Za-z_0-9]*", without_literals)}
     return {token for token in found if token and token not in RESERVED}
-
-
-def binder_indices(text: str) -> list[tuple[str, bool]]:
-    """Return each index that a binder of the expression ranges over, with whether the binder
-    introduces it as a fresh name over a declared set, written ``a1 in a``. An index may carry a
-    restriction, as in ``t <= T``; its leading name is then the index.
-
-    >>> binder_indices("norm_{a1 in a, t <= T}( K(a1, t) )")
-    [('a1', True), ('t', False)]
-    """
-    found: list[tuple[str, bool]] = []
-    for group in re.findall(r"[A-Za-z_][A-Za-z_0-9]*_\{([^}]*)\}", text):
-        for item in group.split(","):
-            match = re.match(r"\s*([A-Za-z_][A-Za-z_0-9]*)\s*(.*)$", item)
-            if match:
-                found.append((match.group(1), bool(re.match(r"in\b", match.group(2)))))
-    return found
-
-
-def bound(text: str) -> set[str]:
-    """Return the indices a binder of the expression introduces.
-
-    >>> sorted(bound("mean_{x, t}( u )"))
-    ['t', 'x']
-    """
-    return {name for name, _ in binder_indices(text)}
 
 
 def formulas(record: Mapping[str, Any]) -> list[tuple[str, Place, str, frozenset[str]]]:
@@ -333,7 +313,8 @@ def formulas(record: Mapping[str, Any]) -> list[tuple[str, Place, str, frozenset
 
 
 def calls(text: str) -> list[tuple[str, int]]:
-    """Return each call an expression makes, with the number of arguments it passes.
+    """Return each call an expression makes, with the number of arguments it passes; a text that
+    the grammar does not cover makes none, since the resolution check reports it.
 
     A binder carries the indices it consumes between its name and its arguments, and those are
     not arguments: ``mean_{x, t}( u )`` calls ``mean`` with one.
@@ -343,22 +324,8 @@ def calls(text: str) -> list[tuple[str, int]]:
     >>> calls("mean_{x, t}( u(a, x) * 2 )")
     [('mean', 1), ('u', 2)]
     """
-    found: list[tuple[str, int]] = []
-    for match in re.finditer(r"([A-Za-z_]\w*)(_\{[^}]*\})?\s*\(", text):
-        depth, argument, empty = 1, 1, True
-        for character in text[match.end() :]:
-            if character == "(":
-                depth += 1
-            elif character == ")":
-                depth -= 1
-                if depth == 0:
-                    break
-            elif character == "," and depth == 1:
-                argument += 1
-            if not character.isspace():
-                empty = False
-        found.append((match.group(1), 0 if empty else argument))
-    return found
+    tree = parse_expression(text)
+    return [] if tree is None else tree_calls(tree)
 
 
 def generic(entry: Mapping[str, Any]) -> frozenset[str]:
