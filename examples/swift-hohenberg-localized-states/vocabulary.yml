@@ -97,6 +97,7 @@ operators:
   - infinity
   - intersect
   - interval
+  - interval_of
   - ints
   - jacobian
   - lap

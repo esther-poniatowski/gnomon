@@ -30,7 +30,7 @@ constituents:
 index_sets:
   - name: "training step"
     symbol: step
-    extent: "interval(nonneg(ints))"
+    extent: "interval_of(nonneg(ints))"
     structure: interval
   - name: "training sample"
     symbol: train

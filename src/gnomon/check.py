@@ -291,7 +291,7 @@ class _Context:
         return any(declares_formula(record) for record in self.problem.records.values())
 
     @cached_property
-    def arities(self) -> dict[str, int]:
+    def arities(self) -> dict[str, tuple[int, bool]]:
         """The number of arguments of each operator that the problem may use."""
         return v.arities(*self.problem.records.values())
 

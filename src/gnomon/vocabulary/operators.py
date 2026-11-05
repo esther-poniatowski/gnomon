@@ -76,7 +76,9 @@ def local_operators(record: Mapping[str, Any]) -> dict[str, str]:
     }
 
 
-def mismatched_arity(record: Mapping[str, Any], taken: Mapping[str, int]) -> list[Finding]:
+def mismatched_arity(
+    record: Mapping[str, Any], taken: Mapping[str, tuple[int, bool]]
+) -> list[Finding]:
     """Return every call passing a number of arguments its operator does not take.
 
     An operator states what it takes, so a call that passes more or fewer is reported. Only an
@@ -86,12 +88,16 @@ def mismatched_arity(record: Mapping[str, Any], taken: Mapping[str, int]) -> lis
     found = []
     for where, place, text, _ in formulas(record):
         for name, passed in calls(text):
-            expected = taken.get(name)
-            if expected is not None and passed != expected:
+            if name not in taken:
+                continue
+            expected, repeats = taken[name]
+            if passed < expected or (passed > expected and not repeats):
+                least = "at least " if repeats else ""
                 found.append(
                     finding(
                         rules.VOCABULARY_MISMATCHED_ARITY,
-                        f"{where}: {name} takes {expected} arguments and is passed {passed}",
+                        f"{where}: {name} takes {least}{expected} arguments and is passed"
+                        f" {passed}",
                         *place,
                         value=name,
                     )
@@ -99,14 +105,20 @@ def mismatched_arity(record: Mapping[str, Any], taken: Mapping[str, int]) -> lis
     return found
 
 
-def arities(*records: Mapping[str, Any], source: Path | None = None) -> dict[str, int]:
-    """Return the number of arguments each operator takes, where its signature says."""
+def arities(*records: Mapping[str, Any], source: Path | None = None) -> dict[str, tuple[int, bool]]:
+    """Return the number of arguments that each operator takes, and whether its last argument
+    repeats, from its signature or from its stated arity; an open signature states none."""
     registry = yaml.safe_load((source or OPERATOR_REGISTRY).read_text(encoding="utf-8"))
     found = {}
     for entry in list(registry.get("operators") or []) + [
         e for record in records for e in entries(record, "operators")
     ]:
         signature = entry.get("signature")
-        if isinstance(signature, list) and all(isinstance(s, str) for s in signature):
-            found[str(entry.get("symbol"))] = len(signature)
+        if signature is not None and not (
+            isinstance(signature, list) and all(isinstance(s, str) for s in signature)
+        ):
+            continue
+        arity = operator_arity(entry)
+        if arity is not None:
+            found[str(entry.get("symbol"))] = arity
     return found

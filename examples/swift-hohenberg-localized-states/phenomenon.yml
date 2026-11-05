@@ -51,7 +51,7 @@ manifestations:
         observed:
       - name: "intervals of linear stability along the branches"
         symbol: stability
-        values: "powerset(interval(reals))"
+        values: "powerset(interval_of(reals))"
         observed:
 
 scope_over_instances: []         # the signature of Uloc retains the dependence on the coefficients

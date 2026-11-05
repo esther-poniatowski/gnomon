@@ -14,7 +14,7 @@ constituents:
 index_sets:
   - name: "model time"
     symbol: time
-    extent: "interval(reals)"
+    extent: "interval_of(reals)"
     structure: continuum
   - name: "trajectory in the comparison"
     symbol: traj_case

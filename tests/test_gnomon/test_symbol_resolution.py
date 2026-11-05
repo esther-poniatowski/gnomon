@@ -364,9 +364,26 @@ def test_a_call_passing_other_than_the_arity_of_its_operator_is_reported() -> No
         "laws": [{"symbol": "y", "expression": "y = ft(u, v) + ft(u) + lift(u, v)"}],
     }
     taken = arities(record)
-    assert taken["ft"] == 1 and "lift" not in taken
+    assert taken["ft"] == (1, False) and "lift" not in taken
+    assert taken["interval"] == (2, False) and taken["enum"] == (1, True)
     assert texts(mismatched_arity(record, taken)) == [
         "laws.expression: ft takes 1 arguments and is passed 2"
+    ]
+
+
+def test_a_stated_arity_is_checked_and_a_variadic_operator_takes_more() -> None:
+    """An operator that states its arity rather than a signature is checked too, and the last
+    argument of a variadic operator repeats."""
+    record = {
+        "type": "target-system",
+        "index_sets": [
+            {"symbol": "t", "extent": "interval(reals)"},
+            {"symbol": "s", "extent": "prod(reals, reals, reals)"},
+            {"symbol": "k", "extent": "interval_of(reals)"},
+        ],
+    }
+    assert texts(mismatched_arity(record, arities(record))) == [
+        "index_sets.extent: interval takes 2 arguments and is passed 1"
     ]
 
 

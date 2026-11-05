@@ -26,7 +26,7 @@ subject:
     restrictions:
       - of: system.turbulence-incompressible-navier-stokes.u
         restriction: stationary
-        values: "subset(maps(prod(Om, interval(reals)), vectors(reals, 3)), stationary)"
+        values: "subset(maps(prod(Om, interval_of(reals)), vectors(reals, 3)), stationary)"
         justification: "The structure functions are means over positions and times, so a flow whose statistics still drift would mix two regimes in each mean."
     limit:
       expression: "Re -> infinity"

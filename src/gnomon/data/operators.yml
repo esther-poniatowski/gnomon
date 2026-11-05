@@ -81,9 +81,10 @@ operators:
 - symbol: dist
   kind: binder
   dimension: unchecked
-  name: the distribution formed over the indices it binds
+  name: the joint distribution of its arguments, formed over the indices it binds
   notation: '\mathbb{P}_{#0}( #1 )'
   arity: 1
+  variadic: true
 - symbol: implies
   kind: relation
   dimension: connective
@@ -270,9 +271,10 @@ operators:
 - symbol: prod
   kind: set
   dimension: unchecked
-  name: the product of two sets
+  name: the product of its sets
   notation: '#1 \times #2'
   arity: 2
+  variadic: true
 - symbol: enum
   kind: set
   dimension: unchecked
@@ -289,9 +291,15 @@ operators:
 - symbol: interval
   kind: set
   dimension: unchecked
-  name: an interval of an ordered set, or the interval between two bounds
+  name: the interval between two bounds
   notation: '[ #1, #2 ]'
   arity: 2
+- symbol: interval_of
+  kind: set
+  dimension: unchecked
+  name: an interval of an ordered set, with its bounds left unstated
+  notation: '\operatorname{Int}( #1 )'
+  arity: 1
 - symbol: maps
   kind: set
   dimension: unchecked

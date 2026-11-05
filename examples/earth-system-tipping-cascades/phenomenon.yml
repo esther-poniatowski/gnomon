@@ -24,7 +24,7 @@ occurrence: not-applicable
 index_sets:
   - name: "prediction horizon"
     symbol: H
-    extent: "interval(reals)"
+    extent: "interval_of(reals)"
     structure: interval
 
 observables:
