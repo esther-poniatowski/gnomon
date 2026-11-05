@@ -12,9 +12,10 @@ This list holds the goals of `gnomon` that span several parts of the project, gr
 
 The records represent each act of an inquiry as the act is taken, so that the course of research is tracked and the next act can be computed.
 
-- [ ] Represent every act of an inquiry operationally in its records: close the gaps of the graph of activities, keep each itinerary valid as the records change, and compute the next act. The second review of the records found that a restart of a project can be written but not fully tracked. 🆔 inquiry-records-round-2
-	- [ ] Close the gaps of the type graph of activities, as the [choice of the next act](docs/procedures/inquiry/next-act.md) marks them in its map from conditions to activities and in its tables of acts:
-		- [ ] develop a proof technique or an algorithm that gives access to a quantity, whose product the [record of a technique](docs/proposals/inquiry-records-round-2.md#record-of-a-technique) proposes; an algorithm and a proof technique are designs of kind `method`, as the [decision on design records](docs/adr/design-record.md) states.
+- [x] Represent every act of an inquiry operationally in its records: close the gaps of the graph of activities, keep each itinerary valid as the records change, and compute the next act. The second review of the records found that a restart of a project can be written but not fully tracked. 🆔 inquiry-records-round-2
+	- [x] Close the gaps of the type graph of activities, as the [choice of the next act](docs/procedures/inquiry/next-act.md) marks them in its map from conditions to activities and in its tables of acts:
+		- [x] develop a proof technique or an algorithm that gives access to a quantity: both are designs of kind `method`, as the [decision on design records](docs/adr/design-record.md) states, an algorithm made by `method-design` and a proof technique by `scheme-design`, whose norm is the soundness of its conditions of application.
+		- [x] fill and revise the fields of the epistemic task: `task-specification` fixes them once the subject is declared, and `question-revision` changes them after a failure, as the [problem-posing activities](docs/epistemology/processes/activities/problem-posing.md#^task-specification) state.
 
 ## 2. Global views
 
