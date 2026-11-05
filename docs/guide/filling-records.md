@@ -20,7 +20,7 @@ The records of one research problem share one folder. The following command crea
 gnomon init ./my-problem
 ```
 
-A later record kind is added to the folder with the option `--with`, such as `--with answer --with assessment` once a candidate answer is in view. The header of each template names its specification note and states how many files of its kind a problem holds: for instance, one file per target system, per phenomenon or per candidate answer. A second file of one kind is a copy of its template, kept in the folder of the problem.
+The option `--with` adds a later record kind to a new folder, such as `--with answer --with assessment`. On a folder already holding records, the command refuses to write, and its option `--force` would overwrite the filled records. Therefore, a later record kind is added to such a folder by a copy of its template from the [record templates](../../src/gnomon/data/templates/_index.md). The header of each template names its specification note and states how many files of its kind a problem holds: for instance, one file per target system, per phenomenon or per candidate answer. A second file of one kind is a copy of its template, kept in the folder of the problem.
 
 ## Fill the records stage by stage
 
@@ -48,7 +48,7 @@ The following command runs every check of `gnomon` on the folder, and prints one
 gnomon check ./my-problem
 ```
 
-A template left unfilled reports one finding per placeholder, so the count falls as the records are filled. A stable report, which can be kept beside the records and compared between two runs, is written in YAML:
+A template not yet started is counted among the templates not yet filled, and that count falls as the records are filled. A stable report, which can be kept beside the records and compared between two runs, is written in YAML:
 
 ```sh
 gnomon check ./my-problem --format yaml --output ./my-problem/reports/check.yml

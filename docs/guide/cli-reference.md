@@ -155,7 +155,7 @@ With `--format sarif`, the [findings output](../adr/findings-output.md#^command-
 
 ## `views`
 
-A researcher who proceeds by local increments needs the global state of the research. The `views` command writes seven views of a directory tree of records, each as a YAML record that a renderer such as Ekphrasis displays as a read-only form:
+A researcher who proceeds by local increments needs the global state of the research. The `views` command writes eight views of a directory tree of records, each as a YAML record that a renderer such as Ekphrasis displays as a read-only form:
 
 - the state of each problem: its demand met, its accepted answers and its candidates, and its obstacles, stated and shown;
 - the open conditions and the ready acts, the diagnosis of `gnomon status` as tables;
