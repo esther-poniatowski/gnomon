@@ -22,7 +22,7 @@ The records represent each act of an inquiry as the act is taken, so that the co
 A researcher who proceeds by local increments needs the global state of a project, which the views compute from the records.
 
 - [ ] Decide whether the Markdown table that `gnomon vocabulary --markdown` writes gives way to a render of its YAML record by Ekphrasis, as the views of `gnomon views` do. 🆔 vocabulary-view
-- [ ] Build the view of a filled inquiry record: typeset each expression in LaTeX from the notation that the [operator registry](src/gnomon/data/operators.yml) and the `operators.yml` of each problem already hold. The [syntax decision](docs/adr/expression-syntax.md) fixes the input notation; only the view of a vocabulary is built so far. 🆔 record-view
+- [x] Build the view of a filled inquiry record: typeset each expression in LaTeX from the notation that the [operator registry](src/gnomon/data/operators.yml) and the `operators.yml` of each problem already hold. The view `expressions` of `gnomon views` holds the form of each expression, composed by the [LaTeX module](src/gnomon/latex.py). 🆔 record-view
 
 ## 3. Research frameworks
 
