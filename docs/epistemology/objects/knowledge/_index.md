@@ -10,7 +10,9 @@ aliases:
 Defines the knowledge that an inquiry takes as given, and the dependence of its claims on one another.
 
 > [!WARNING] Notes with neighboring scopes
+> - A [ground](grounds-and-dependence.md) supports the truth of a claim, whereas a [presupposition](presupposition.md) supports the claim and its denial alike, so its failure leaves neither true.
 > - [Background](background.md) defines the laws admitted about one target, whereas the [state of an inquiry](../../foundations/inquiry-and-state.md#^state) defines the accepted knowledge $K$, and tells an admitted claim from an accepted one.
 
 - [Background](background.md): defines the laws admitted about a target system before any answer is sought
 - [Grounds and dependence](grounds-and-dependence.md): traces how a revision or a defeat of one claim reaches the claims that rest on it
+- [Presupposition of a claim](presupposition.md): tells the commitments that a claim takes for granted from its grounds, and tracks their discharge
