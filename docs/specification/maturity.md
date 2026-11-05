@@ -9,7 +9,7 @@ aliases:
 
 > [!QUESTION] Goal: how does a record mark the maturity of each of its fields?
 
-The field `maturity` is carried by the records of the following kinds: target system, background, phenomenon, question, operators, model, binding, key, answer, assessment and problem; the itinerary record does not carry it.
+The field `maturity` is carried by every record kind except the itinerary: target system, background, phenomenon, question, operators, model, binding, key, answer, assessment, problem, concept, design and derivation.
 
 Each specification may also carry its own maturity marker (open, provisional, or stabilized). A marker `open` carries a comment naming one of the [three reasons for an open specification](../epistemology/objects/status/statuses-and-acceptance.md#^open-reasons). A specification left unmarked takes the maturity that the status of its record states, for the records whose status is a maturity. In an answer, a problem or a question, whose status is an attitude or a stage, it takes the maturity `provisional`, as the [record attributes](../epistemology/objects/question/question.md#^record-attributes) state.
 

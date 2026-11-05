@@ -1,7 +1,7 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/itinerary.base.schema.yml
 title: Itinerary record
-description: The fields of a itinerary record, as the specification of the record documents them.
+description: The fields of an itinerary record, as the specification of the record documents them.
 type: object
 x-identifier: id
 x-version: 1

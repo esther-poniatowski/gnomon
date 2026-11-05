@@ -55,12 +55,15 @@ The **language** states the content of each record. Every declared quantity carr
 
 The vocabulary of the method is declared in [registries](src/gnomon/data/_index.md), written by hand and stored in package data. Each declaration is documented in a specification note, and a value whose meaning the theory defines is owned by its theory note, as the [decision on registries](docs/adr/registries-as-source.md) states.
 
-The language and the registries together serve one design goal: a record is **machine-checkable**. Four classes of defect are reported:
+The language and the registries together serve one design goal: a record is **machine-checkable**. A check reports these classes of defect:
 
 - a reference resolving to no declaration;
 - a field left empty although the epistemic aim requires a value;
 - a claim ranging beyond the members bearing it;
-- a step of an itinerary whose inputs or output do not match its activity.
+- a step of an itinerary whose inputs or output do not match its activity;
+- a derivation whose units, orientations, segments, kernel or consequences break its rules;
+- a law or a condition that is not dimensionally homogeneous;
+- a presupposition or an intervention of a claim that names no admissible record.
 
 Seven worked inquiries, from as many domains, exercise the method, and each records the limits of the method that it exposed.
 
@@ -77,13 +80,13 @@ Seven worked inquiries, from as many domains, exercise the method, and each reco
 - [x] Records each concept of a project with one meaning.
 - [x] Formalizes the decomposition of a question into subquestions.
 - [x] Generates the question tree of a project, from its problems to the assessments of its answers.
+- [x] Reports the open conditions of each question, and the acts ready to perform.
+- [x] Formalizes the derivation yielding an answer.
 - [ ] Scaffolds a research workspace from a standard template.
-- [ ] Reports the open conditions of each question, and the acts ready to perform.
 - [ ] Computes the comparison of a model with the data through its binding.
 - [ ] Composes the symbols of a notation from declared bases, modifiers and index sets, and generates their LaTeX macros.
 - [ ] Exports the units, the symbols and the relations of a project under the contract that `ekthesis` publishes.
 - [ ] Formalizes a definition.
-- [ ] Formalizes the derivation yielding an answer.
 - [ ] Derives the epistemic activities from a smaller set of primitive actions.
 
 The capabilities not yet available are recorded in the [project goals](TODO.md).

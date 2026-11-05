@@ -32,7 +32,7 @@ The view answers which act comes next. For each question, it lists the [open con
 
 **Literature.** None cited.
 
-**Bears on.** [`inquiry-views`](../../TODO.md), and `inquiry-records-round-2`, which holds the stub and the reference `as_of`.
+**Bears on.** [`inquiry-views`](../../TODO.md).
 
 ## Exposure of an answer
 

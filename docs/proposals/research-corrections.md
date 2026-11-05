@@ -22,4 +22,4 @@ The goal already requires the rationale of each step to name the question served
 
 **Literature.** None cited.
 
-**Bears on.** [`research-corrections`](../../TODO.md), and `inquiry-records-round-2`, which requires field paths that a program can read instead of prose.
+**Bears on.** [`research-corrections`](../../TODO.md).

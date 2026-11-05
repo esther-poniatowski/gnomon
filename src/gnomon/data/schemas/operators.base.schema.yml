@@ -1,7 +1,7 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/operators.base.schema.yml
 title: Operators record
-description: The fields of a operators record, as the specification of the record documents them.
+description: The fields of an operators record, as the specification of the record documents them.
 type: object
 x-identifier: id
 x-version: 1

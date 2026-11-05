@@ -55,7 +55,7 @@ route:
   runs_on: [RECORD]              # the target system, one model, or every model of a family, by identifier
   family_fidelity:               # per-member (one comparison per member, each of which must pass) | ensemble (one comparison of the ensemble of the family); fill for a family of models only
   derivations: [derivation.TOPIC.NAME]   # for a derivation or a proof; the derivation records on which the claim rests
-  pointer: "POINTER TO THE DERIVATION, THE CODE OR THE DATA"   # the internal steps of a derivation stay in the derivation
+  pointer: "POINTER TO THE CODE, THE DATA OR A PUBLISHED DERIVATION"   # a recorded derivation is named in `derivations`, and its internal steps stay in it
 
 domain: "EXPRESSION OVER DECLARED SYMBOLS"   # for a deductive route, implied by the grounds with the roles `assumption` and `condition` and by the range of each idealization, as the scope test judges; for a route on a model, within the domain of comparison of the binding
 

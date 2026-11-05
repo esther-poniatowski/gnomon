@@ -30,9 +30,9 @@ The records are filled in the five stages of the [order of specification](../epi
 2. the question schema: each question that serves the problem, typed before its terms are identified, with a placeholder in place of a target system or a phenomenon not yet recorded;
 3. the identified subject: the target system and the phenomenon at the commitment `identified`, each fixed by a definite description and pointers, as the [levels of commitment](../epistemology/objects/question/question.md#^commitment-levels) define it;
 4. the background and the specified subject: the admitted laws, and the formal declarations of a record raised to the commitment `specified` when an open condition of a question requires them;
-5. the candidate answers, with the models, the keys and the bindings on which they rest, and the assessment of each answer.
+5. the candidate answers, with the models, the keys and the bindings on which they rest, the derivations that establish their derived laws, and the assessment of each answer.
 
-Each stage takes the records of the earlier stages as given, and a change to an earlier record is made as a revision. The itinerary records each act of the inquiry as a step, from the statement of the problem on. A template not yet started keeps the placeholder identifier of its template, such as `quest.TOPIC.NAME`; the command `gnomon check` lists it apart and checks only the records already started, so the folder can be checked after each stage.
+Each stage takes the records of the earlier stages as given, and a change to an earlier record is made as a revision. A problem that uses dimensional analysis declares the dimensional formula of its quantities and index sets, with the base scales of its operator record. Its laws and conditions are then checked for homogeneity, as the [decision on the dimensional formula](../adr/dimensional-formula.md) states. The itinerary records each act of the inquiry as a step, from the statement of the problem on. A template not yet started keeps the placeholder identifier of its template, such as `quest.TOPIC.NAME`; the command `gnomon check` lists it apart and checks only the records already started, so the folder can be checked after each stage.
 
 ## Read the specification of each field
 

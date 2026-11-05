@@ -1,7 +1,7 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/answer.base.schema.yml
 title: Answer record
-description: The fields of a answer record, as the specification of the record documents them.
+description: The fields of an answer record, as the specification of the record documents them.
 type: object
 x-identifier: id
 x-version: 1
@@ -427,11 +427,12 @@ properties:
         type:
         - string
         - 'null'
-        x-template: '"POINTER TO THE DERIVATION, THE CODE OR THE DATA"'
+        x-template: '"POINTER TO THE CODE, THE DATA OR A PUBLISHED DERIVATION"'
         x-kind: markdown-line
-        x-comment: the internal steps of a derivation stay in the derivation
+        x-comment: a recorded derivation is named in `derivations`, and its internal steps stay in it
         title: Pointer
-        description: the internal steps of a derivation stay in the derivation
+        description: a pointer to the code, the data or a published derivation; a recorded derivation is
+          named in `derivations`, and its internal steps stay in it
     title: Route
     description: '`derivation` · `proof` · `simulation` · `estimation` · `measurement`, the records on
       which it runs (the target, one model, or a family of models), and a pointer to the derivation, the

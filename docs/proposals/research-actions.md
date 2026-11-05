@@ -66,6 +66,6 @@ Each constructor, and each schema treated as primitive, declares five parts: a t
 
 **Literature.** The precedents that the retired notes name: the inference rules of [proof theory](../references/proof-theory.md), the primitive instructions of a programming language, the typed tasks of a workflow system, and the morphisms of category-theoretic semantics.
 
-**Bears on.** [`research-actions`](../../TODO.md), and `inquiry-records-round-2` for the branches and fallbacks of an itinerary.
+**Bears on.** [`research-actions`](../../TODO.md).
 
 **Retired source.** `docs/design/3-aspect-specific/operation-schemas.md`, `docs/design/_backup/architecture-2-audit.md` and `docs/design/_backup/arguments-reasoning/primitive-operations.md`, at commit 9e138e2.

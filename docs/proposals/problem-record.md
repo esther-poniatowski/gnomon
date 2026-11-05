@@ -15,4 +15,4 @@ A statement can concern the criteria for applying a concept rather than the refe
 
 **Literature.** None cited.
 
-**Bears on.** [`problem-record`](../../TODO.md), and `inquiry-records-round-2`, which gives a question of explication a record form.
+**Bears on.** [`problem-record`](../../TODO.md).

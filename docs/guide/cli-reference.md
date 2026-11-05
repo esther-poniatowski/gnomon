@@ -63,7 +63,10 @@ A researcher needs to know, before an answer is assessed, whether the records of
 - the resolution of each symbol, operator and reference;
 - the specifications that each record kind, each aim and each level of commitment require;
 - the consistency between records, such as the classification of each operation of a model by a ground of the answer, the binding of an answer whose question names outputs to match, and the pair of each target status;
-- the steps of each itinerary.
+- the steps of each itinerary;
+- the rules of each derivation record, as the [checks of a derivation](../specification/derivation.md#^derivation-checks) state them, and the descent of each law marked derived;
+- the dimensional homogeneity of the laws and the conditions of a problem that declares a dimensional formula;
+- the presuppositions and the interventions of the claim of each answer.
 
 Each folder that holds records is checked as one problem, and a reference may reach a record of any folder. A generated record, such as a vocabulary, is not checked. A template not yet started, whose identifier is still the placeholder of its template, is listed apart and not checked, so a folder can be checked after each stage of filling.
 
