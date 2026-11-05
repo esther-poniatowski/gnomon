@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-10-30
+revised: 2026-11-05
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - One source per unit
@@ -53,5 +53,5 @@ The checks enforce the mechanical part of the rule: each identifier is declared 
 - A unit that another record must name receives an identifier, as the decision on dotted identifiers requires of idealizations, abstractions and explanans factors.
 - A check that compares a generated copy with its source stays admitted, such as the check of templates against their schemas.
 - Non-redundancy beyond identifiers rests on review, so the rule holds without a guarantee for prose fields.
-- The option lists of the templates are admitted copies of the vocabularies, since the alignment check compares each option with the [registry](registries-as-source.md). An option cell of a specification note becomes an admitted copy once it carries the token beside its gloss and the alignment check covers it; until then, the cells that state a gloss alone stand outside the rule. ^vocabulary-copies
-- A generated index of the fields of every record may later replace the option lists of the notes and of the templates. That choice stays open until the index exists.
+- The option lists of the templates are generated copies of the vocabularies, since `gnomon schemas` writes each template from the [registry](registries-as-source.md). An option cell of a specification note becomes an admitted copy once it carries the token beside its gloss and the alignment check covers it; until then, the cells that state a gloss alone stand outside the rule. ^vocabulary-copies
+- The [field index](../guide/field-index.md) does not replace the option lists of the notes and of the templates. The lists of the templates are generated, so they cannot drift. An option cell of a note is read within the explanation of its row, so a link to another page would interrupt that reading. Decided on 2026-11-05.
