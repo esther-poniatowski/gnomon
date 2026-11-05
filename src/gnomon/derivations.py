@@ -44,7 +44,7 @@ from __future__ import annotations
 
 from functools import cache
 from pathlib import Path
-from typing import Any, Iterable, Iterator, Mapping
+from typing import Any, Iterable, Mapping
 
 import yaml
 
@@ -803,33 +803,3 @@ def derivation_problems(record: Derivation) -> list[Finding]:
         *unrecorded_consequences(record),
         *unbound_slots(record),
     ]
-
-
-def exposed_units(record: Derivation) -> Iterator[tuple[str, str]]:
-    """Yield the units of a derivation that expose its consequences, each with its reason: the
-    posits that no test confirms, and the moves whose warrant is not exact.
-
-    >>> record = {"posits": [{"id": "p", "tests": [{"test": "empirical", "verdict": "supports"}]}],
-    ...           "moves": [{"id": "m", "warrant": {"error": "controlled"}}]}
-    >>> list(exposed_units(record))
-    [('p', 'posit not confirmed'), ('m', 'controlled warrant')]
-    """
-    reg = load_registry()
-    confirming = set(reg.get("confirming_tests") or [])
-    certified = reg.get("confirming_computation")
-    for _, posit in _entries(record, "posits"):
-        confirmed = any(
-            t.get("verdict") == "supports"
-            and (
-                t.get("test") in confirming
-                or (t.get("test") == "computation" and t.get("standard") == certified)
-            )
-            for _, t in _entries(posit, "tests")
-        )
-        if not confirmed and posit.get("id"):
-            yield str(posit["id"]), "posit not confirmed"
-    for _, move in _entries(record, "moves"):
-        warrant = _mapping(move.get("warrant"))
-        error = warrant.get("error")
-        if error and error != "exact" and move.get("id"):
-            yield str(move["id"]), f"{error} warrant"

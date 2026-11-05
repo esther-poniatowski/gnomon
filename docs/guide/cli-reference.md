@@ -158,7 +158,7 @@ A researcher who proceeds by local increments needs the global state of the rese
 
 - the state of each problem: its demand met, its accepted answers and its candidates, and its obstacles, stated and shown;
 - the open conditions and the ready acts, the diagnosis of `gnomon status` as tables;
-- the exposure of each answer to the revisable laws among its grounds;
+- the exposure of each answer: every revisable unit reached by walking its dependencies back, with its kind and the reason of the exposure;
 - the progress of each itinerary: its steps in the order of their dependencies, sound, conditional or impeached, with the edges between them;
 - the maturity of each record and of its marked fields;
 - the question tree, as nodes and edges;

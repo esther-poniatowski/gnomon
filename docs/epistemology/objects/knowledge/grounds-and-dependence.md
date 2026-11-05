@@ -45,14 +45,15 @@ Three properties of a ground reach the claims that rest on it. Each case is stat
 
 **The exposure rule.** A conclusion is exposed to revision through every law marked `posited`, `fitted` or `measured` among its grounds, and through every such law from which a derived law among its grounds descends. The set of these exposed laws is reported, not a degree. The test of law warrant among the [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction) checks each ground against the requirement of its role, and the exposure rule states the laws to which the conclusion stays exposed once that test passes. ^weakest-link
 
-A consequence established by a [derivation](../derivation/derivation.md) is exposed in addition through four further sources:
+A consequence established by a [derivation](../derivation/derivation.md) rests on the moves and the segments upstream of the object that states it, and on the inputs that they take. The consequence is exposed through five sources among them:
 
-- each posit of the derivation not [confirmed](../derivation/posit.md#^posit-confirmation);
-- each move whose warrant is not exact;
+- each posit among those inputs that no test [confirms](../derivation/posit.md#^posit-confirmation), or that a [refutation](../derivation/consequences-and-understanding.md#^refutation) targets;
+- each of those moves whose warrant is not exact;
+- each premise law among those inputs, under the exposure rule;
 - each non-exact operation of a model on which the derivation runs;
 - transitively, the exposure of each consequence of another derivation used by the derivation.
 
-^derivation-exposure
+A consequence that a refutation targets is exposed as refuted. A unit whose record does not state its state, such as a warrant that names no error, counts as exposed, so that an omitted field never lowers the exposure. ^derivation-exposure
 
 The rule departs from the weakest-link principle of the theory of defeasible reasoning. Under that principle, in the absence of other arguments, the degree of justification that an argument confers on its conclusion is the minimum of the degrees of its premises and of the strengths of its reasons [pollock2001]. Pollock states the principle for degrees ordered on one scale, and rejects the probability calculus for them, since a conjunction of independent premises is less probable than each premise. The warrant of a law, by contrast, is a kind of provenance, not a degree. The values `posited`, `fitted` and `measured` are not ordered among themselves, and the value `derived` points to other laws instead of grading the law. Without an order, no law among the grounds is the weakest. Therefore, the method reports the exposed laws, and leaves to the researcher the judgment of how far each one threatens the conclusion.
 

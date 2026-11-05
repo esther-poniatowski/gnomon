@@ -33,7 +33,7 @@ The activity `derivation` outputs a consequence. The [records of a consequence](
 
 **The record states the non-routine moves, and a segment bridges the others.** The [features of a non-routine move](../epistemology/objects/derivation/move.md#^non-routine) are read from the record, so no author exempts a move by calling it routine.
 
-**The exposure of a consequence extends to the parts of its derivation.** The [exposure of a derivation](../epistemology/objects/knowledge/grounds-and-dependence.md#^derivation-exposure) adds the posits not confirmed, the warrants and the operations not exact, and the exposure of each consequence of another derivation used. A tool computes that set by this declared rule, as the [admitted computations](no-run-time-inference.md#^admitted-computation) allow.
+**The exposure of a consequence extends to the parts of its derivation.** The [exposure of a derivation](../epistemology/objects/knowledge/grounds-and-dependence.md#^derivation-exposure) adds, for the moves and the segments upstream of each consequence, the posits not confirmed or refuted, the warrants and the operations not exact, the premise laws, and the exposure of each consequence of another derivation used. A unit whose state is not stated counts as exposed. A tool computes that set by walking the dependence back from the answer, under this declared rule, as the [admitted computations](no-run-time-inference.md#^admitted-computation) allow.
 
 **A derivation sees the symbol tables of the records holding its premises.** The [visible tables](flat-symbol-table.md#^visible-tables) gain a row for the derivation, and the slots of a derivation are declared in its own table.
 

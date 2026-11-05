@@ -1,0 +1,314 @@
+"""
+The exposure of an answer to revision, computed by walking its dependencies back to their sources.
+
+The exposure rule and the exposure of a derivation fix the content of the report: a conclusion is
+exposed through every revisable unit on which it rests, directly or through the units that it rests
+on in turn. This module walks that dependence from each answer:
+
+- a ground or a premise naming a law reaches the law, which exposes the answer by its warrant
+  ``posited``, ``fitted`` or ``measured``, and which a warrant ``derived`` passes on to its descent;
+- the descent of a derived law is the derivation that records the law as a consequence, walked back
+  from that consequence, or the published origin of the law when no derivation records it;
+- a consequence of a derivation rests on the moves and the segments upstream of the object stating
+  it, on the posits and the premises among their inputs, on the models on which the derivation runs,
+  and on the derivations that it uses;
+- a presupposition of a claim reaches the record that holds it, or exposes the answer while no
+  record holds it.
+
+The walk fails closed: a unit whose state the record does not state, such as a warrant that names
+no error, counts as exposed, so a record never lowers its exposure by omitting a field.
+
+Classes
+-------
+Exposure
+    One unit that exposes an answer, with its kind, its reason and the path that reaches it.
+
+Functions
+---------
+upstream
+    Return the moves, the segments and the inputs on which a set of objects of a derivation rests.
+answer_exposure
+    Return the units that expose one answer.
+exposure_rows
+    Return the units that expose each answer of a set of records.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from functools import cache
+from pathlib import Path
+from typing import Any, Iterable, Iterator, Mapping
+
+import yaml
+
+from .identifiers import split_reference
+
+Records = Mapping[str, Mapping[str, Any]]
+
+#: The registry of the rules of a derivation, which declares the tests confirming a posit.
+REGISTRY = Path(__file__).parent / "data" / "registries" / "derivations.yml"
+
+#: The warrants of a law that expose a conclusion resting on it.
+REVISABLE_WARRANTS = frozenset({"posited", "fitted", "measured"})
+
+
+@dataclass(frozen=True)
+class Exposure:
+    """One unit that exposes an answer: its reference, its kind, the reason of the exposure, and the
+    record through which the walk reaches it."""
+
+    unit: str
+    kind: str
+    reason: str
+    via: str
+
+    def row(self, answer: str) -> dict[str, str]:
+        """Return the row of the view of exposure for an answer."""
+        return {
+            "answer": answer,
+            "unit": self.unit,
+            "kind": self.kind,
+            "reason": self.reason,
+            "via": self.via,
+        }
+
+
+@cache
+def _confirming() -> tuple[frozenset[str], str | None]:
+    """Return the tests that confirm a posit and the standard of a confirming computation."""
+    registry: dict[str, Any] = yaml.safe_load(REGISTRY.read_text(encoding="utf-8")) or {}
+    return frozenset(registry.get("confirming_tests") or []), registry.get("confirming_computation")
+
+
+def _entries(record: Mapping[str, Any], name: str) -> list[Mapping[str, Any]]:
+    """Return the entries of a list of a record that are mappings."""
+    found = record.get(name)
+    return [item for item in found if isinstance(item, Mapping)] if isinstance(found, list) else []
+
+
+def _names(value: Any) -> list[str]:
+    """Return the identifiers that a field holds: one for a string, one per entry for a list."""
+    values = value if isinstance(value, list) else [value]
+    return [str(v) for v in values if isinstance(v, str) and v.strip()]
+
+
+def _by_id(record: Mapping[str, Any], name: str) -> dict[str, Mapping[str, Any]]:
+    """Return the entries of a list of a record, keyed by their identifier."""
+    return {str(e["id"]): e for e in _entries(record, name) if e.get("id")}
+
+
+def upstream(derivation: Mapping[str, Any], targets: Iterable[str]) -> tuple[set[str], set[str]]:
+    """Return the producers (moves and segments) on which a set of objects of a derivation rests,
+    and every input that they take, the objects of the record and the dotted premises alike.
+
+    A producer is upstream when it yields an object already needed; its inputs are then needed in
+    turn. A segment upstream brings the moves that it holds, since it bridges them.
+
+    >>> derivation = {"moves": [{"id": "a", "inputs": ["p"], "outputs": ["x"]},
+    ...                         {"id": "b", "inputs": ["x", "bg.a.b.law"], "outputs": ["y"]},
+    ...                         {"id": "c", "inputs": ["q"], "outputs": ["z"]}]}
+    >>> producers, needed = upstream(derivation, ["y"])
+    >>> sorted(producers), sorted(needed)
+    (['a', 'b'], ['bg.a.b.law', 'p', 'x', 'y'])
+    """
+    producers = {
+        **{
+            ident: (set(_names(m.get("inputs"))), set(_names(m.get("outputs"))))
+            for ident, m in _by_id(derivation, "moves").items()
+        },
+        **{
+            ident: (set(_names(s.get("inputs"))), set(_names(s.get("outputs"))))
+            for ident, s in _by_id(derivation, "segments").items()
+        },
+    }
+    held = {
+        ident: set(_names(s.get("moves"))) for ident, s in _by_id(derivation, "segments").items()
+    }
+    needed, used = set(targets), set()
+    changed = True
+    while changed:
+        changed = False
+        for ident, (ins, outs) in producers.items():
+            if ident not in used and outs & needed:
+                used.add(ident)
+                needed |= ins
+                changed = True
+        for ident in list(used):
+            for move in held.get(ident, set()) - used:
+                if move in producers:
+                    used.add(move)
+                    needed |= producers[move][0]
+                    changed = True
+    return used, needed
+
+
+def _mapping(value: Any) -> Mapping[str, Any]:
+    """Return ``value`` when it is a mapping, and an empty mapping otherwise."""
+    return value if isinstance(value, Mapping) else {}
+
+
+def _posit_state(posit: Mapping[str, Any], refuted: bool) -> str | None:
+    """Return the reason for which a posit exposes a consequence resting on it, or None when a
+    confirming test supports it and no refutation targets it."""
+    if refuted:
+        return "refuted"
+    confirming, certified = _confirming()
+    confirmed = any(
+        t.get("verdict") == "supports"
+        and (
+            t.get("test") in confirming
+            or (t.get("test") == "computation" and t.get("standard") == certified)
+        )
+        for t in _entries(posit, "tests")
+    )
+    return None if confirmed else "not confirmed"
+
+
+class _Walk:
+    """The walk of the dependence of one answer, which records each unit once."""
+
+    def __init__(self, records: Records) -> None:
+        self.records = records
+        self.found: dict[tuple[str, str], Exposure] = {}
+        self.visited: set[str] = set()
+        self.descents = {
+            str(c.get("record")): (ident, str(c.get("id")))
+            for ident, record in records.items()
+            if record.get("type") == "derivation"
+            for c in _entries(record, "consequences")
+            if c.get("record") and c.get("id")
+        }
+
+    def expose(self, unit: str, kind: str, reason: str, via: str) -> None:
+        """Record one exposing unit, keeping the first path that reaches it."""
+        self.found.setdefault((unit, reason), Exposure(unit, kind, reason, via))
+
+    def _law(self, reference: str) -> Mapping[str, Any] | None:
+        """Return the law that a reference names, or None when it names no law."""
+        split = split_reference(reference)
+        if split is None:
+            return None
+        owner, symbol = split
+        record = self.records.get(owner) or {}
+        return next((law for law in _entries(record, "laws") if law.get("symbol") == symbol), None)
+
+    def reference(self, reference: str, via: str) -> None:
+        """Walk a reference to a law, an answer, a derivation or one of its consequences."""
+        if reference in self.visited:
+            return
+        self.visited.add(reference)
+        target = self.records.get(reference)
+        if target is not None:
+            kind = target.get("type")
+            if kind == "answer":
+                self.answer(reference, f"answer {reference}")
+            elif kind == "derivation":
+                self.derivation(reference, None)
+            return
+        split = split_reference(reference)
+        if split is not None and (self.records.get(split[0]) or {}).get("type") == "derivation":
+            self.derivation(split[0], {split[1]})
+            return
+        law = self._law(reference)
+        if law is not None:
+            self.law(reference, law, via)
+        elif split is not None:
+            owner, ident = split
+            for operation in _entries(self.records.get(owner) or {}, "operations"):
+                if operation.get("id") == ident:
+                    self.operation(owner, operation, via)
+
+    def operation(self, model: str, operation: Mapping[str, Any], via: str) -> None:
+        """Expose an operation of a model whose error is not exact or is not stated."""
+        error = operation.get("error")
+        if error != "exact" and operation.get("id"):
+            reason = f"{error} operation" if error else "operation error not stated"
+            self.expose(f"{model}.{operation['id']}", "operation", reason, via)
+
+    def law(self, reference: str, law: Mapping[str, Any], via: str) -> None:
+        """Walk a law: a revisable warrant exposes, and a derived law passes on to its descent."""
+        warrant = str(law.get("warrant") or "")
+        if warrant in REVISABLE_WARRANTS:
+            self.expose(reference, "law", warrant, via)
+        elif warrant == "derived" and reference in self.descents:
+            name, consequence = self.descents[reference]
+            self.derivation(name, {consequence})
+        elif warrant == "derived" and law.get("origin"):
+            self.expose(reference, "law", "descent in its origin", via)
+        elif warrant == "derived":
+            self.expose(reference, "law", "descent not recorded", via)
+        elif not warrant:
+            self.expose(reference, "law", "warrant not stated", via)
+
+    def derivation(self, name: str, consequences: set[str] | None) -> None:
+        """Walk a derivation back from some of its consequences, or from all of them."""
+        record = self.records.get(name)
+        if not isinstance(record, Mapping):
+            return
+        via = f"derivation {name}"
+        stated = _by_id(record, "consequences")
+        chosen = set(stated) if consequences is None else consequences & set(stated)
+        refuted = {str(r.get("target")) for r in _entries(record, "refutations") if r.get("target")}
+        for ident in sorted(chosen & refuted):
+            self.expose(f"{name}.{ident}", "consequence", "refuted", via)
+        targets = {str(stated[c].get("from")) for c in chosen if stated[c].get("from")}
+        producers, needed = upstream(record, targets)
+        moves = _by_id(record, "moves")
+        for ident in sorted(producers & set(moves)):
+            error = _mapping(moves[ident].get("warrant")).get("error")
+            if error != "exact":
+                reason = f"{error} warrant" if error else "warrant error not stated"
+                self.expose(f"{name}.{ident}", "move", reason, via)
+        for ident, posit in sorted(_by_id(record, "posits").items()):
+            state = _posit_state(posit, ident in refuted) if ident in needed else None
+            if state:
+                self.expose(f"{name}.{ident}", "posit", state, via)
+        for premise in sorted(n for n in needed if "." in n):
+            self.reference(premise, via)
+        for model in _names(record.get("runs_on")):
+            for operation in _entries(self.records.get(model) or {}, "operations"):
+                self.operation(model, operation, via)
+        for used in _names(record.get("uses")):
+            if used not in self.visited:
+                self.visited.add(used)
+                self.derivation(used, None)
+
+    def answer(self, name: str, via: str) -> None:
+        """Walk an answer: its grounds, the derivations of its route, and its presuppositions."""
+        record = self.records.get(name) or {}
+        for ground in _entries(record, "grounds"):
+            if isinstance(ground.get("record"), str):
+                self.reference(str(ground["record"]), via)
+        route = record.get("route")
+        for cited in _names(route.get("derivations") if isinstance(route, Mapping) else None):
+            self.reference(cited, via)
+        claim = record.get("claim")
+        for entry in _entries(claim if isinstance(claim, Mapping) else {}, "presuppositions"):
+            self.presupposition(name, entry)
+
+    def presupposition(self, answer: str, entry: Mapping[str, Any]) -> None:
+        """Walk a presupposition: to its holder when one is named, else expose while it binds."""
+        unit = f"{answer}.claim.presuppositions.{entry.get('id') or '?'}"
+        strength, holder = entry.get("strength"), entry.get("held_by")
+        if not strength:
+            self.expose(unit, "presupposition", "strength not stated", "claim")
+        elif isinstance(holder, str) and holder.strip():
+            self.reference(holder, f"presupposition {entry.get('id')}")
+        elif strength != "local-role":
+            self.expose(unit, "presupposition", "not discharged", "claim")
+
+
+def answer_exposure(records: Records, answer: str) -> list[Exposure]:
+    """Return the units that expose one answer, in the order in which the walk reaches them."""
+    walk = _Walk(records)
+    walk.visited.add(answer)
+    walk.answer(answer, "direct")
+    return list(walk.found.values())
+
+
+def exposure_rows(records: Records) -> Iterator[dict[str, str]]:
+    """Yield one row per unit exposing each answer of a set of records."""
+    for name in sorted(n for n, r in records.items() if r.get("type") == "answer"):
+        for found in answer_exposure(records, name):
+            yield found.row(name)

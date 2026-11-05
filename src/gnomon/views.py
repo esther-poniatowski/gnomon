@@ -28,8 +28,7 @@ from dataclasses import dataclass, field
 from typing import Any, Iterable, Mapping
 
 from .completeness import demand_met, presupposition_denied, readable_obstacles
-from .derivations import exposed_units
-from .identifiers import split_reference
+from .exposure import exposure_rows
 from .itineraries import type_classes, type_holders
 from .statement import compose_statement, load_statement_registry
 
@@ -170,9 +169,9 @@ def render_tree(roots: Iterable[Node]) -> str:
 MATURITIES = ("open", "provisional", "stabilized")
 
 
-def _header(name: str, title: str) -> dict[str, Any]:
+def _header(name: str, title: str, version: int = 1) -> dict[str, Any]:
     return {
-        "_schema": f"gnomon:view.{name}@1",
+        "_schema": f"gnomon:view.{name}@{version}",
         "id": f"view.{name}",
         "type": "view",
         "title": title,
@@ -292,113 +291,12 @@ def next_act(diagnosis_document: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def exposure(records: Records) -> dict[str, Any]:
-    """Return, for each answer, the revisable laws among its grounds, as the exposure rule states.
-
-    A law marked ``posited``, ``fitted`` or ``measured`` exposes the answer directly. A law marked
-    ``derived`` exposes it to the laws from which it descends, which the records do not yet state,
-    so the row says so instead of guessing them, unless a derivation names that law as its
-    consequence. A derivation named by the route of the answer, or recording the descent of a
-    derived law among its grounds, adds the units through which it exposes its consequences.
-    """
-    rows: list[dict[str, Any]] = []
-    recorded = {
-        str(consequence.get("record")): name
-        for name in _of_type(records, "derivation")
-        for consequence in records[name].get("consequences") or []
-        if isinstance(consequence, Mapping) and consequence.get("record")
+    """Return, for each answer, the units that expose it to revision, as the exposure rule and the
+    exposure of a derivation state, computed by the walk of :mod:`gnomon.exposure`."""
+    return {
+        **_header("exposure", "Exposure of each answer to revision", version=2),
+        "exposures": list(exposure_rows(records)),
     }
-    for key in _of_type(records, "answer"):
-        descents: list[str] = []
-        for ground in records[key].get("grounds") or []:
-            ref = ground.get("record") if isinstance(ground, Mapping) else None
-            split = split_reference(ref) if isinstance(ref, str) else None
-            if split is None:
-                continue
-            owner, unit = split
-            law = next(
-                (
-                    entry
-                    for entry in (records.get(owner) or {}).get("laws") or []
-                    if isinstance(entry, Mapping) and entry.get("symbol") == unit
-                ),
-                None,
-            )
-            if law is None:
-                continue
-            warrant = str(law.get("warrant") or "")
-            if warrant in ("posited", "fitted", "measured"):
-                rows.append({"answer": key, "law": ref, "warrant": warrant, "via": "direct"})
-            elif warrant == "derived" and ref in recorded:
-                descents.append(recorded[ref])
-            elif warrant == "derived" and law.get("origin"):
-                rows.append(
-                    {"answer": key, "law": ref, "warrant": warrant, "via": "descent in its origin"}
-                )
-            elif warrant == "derived":
-                rows.append(
-                    {"answer": key, "law": ref, "warrant": warrant, "via": "descent not recorded"}
-                )
-        route = records[key].get("route")
-        cited = route.get("derivations") if isinstance(route, Mapping) else None
-        rows += _derivation_exposure(key, [*(cited or []), *descents], records)
-        rows += _presupposition_exposure(key, records[key])
-    return {**_header("exposure", "Exposure of each answer to revisable laws"), "exposures": rows}
-
-
-def _presupposition_exposure(answer: str, record: Mapping[str, Any]) -> list[dict[str, str]]:
-    """Return the rows of the presuppositions of a claim that no record holds, of the strength
-    provisional or axiom, as the discharge of a presupposition states."""
-    claim = record.get("claim")
-    entries = claim.get("presuppositions") if isinstance(claim, Mapping) else None
-    return [
-        {
-            "answer": answer,
-            "law": f"{answer}.claim.{entry.get('id')}",
-            "warrant": f"{entry.get('strength')} presupposition not discharged",
-            "via": "claim",
-        }
-        for entry in entries or []
-        if isinstance(entry, Mapping)
-        and entry.get("strength") in ("provisional", "axiom")
-        and not entry.get("held_by")
-    ]
-
-
-def _derivation_exposure(
-    answer: str, cited: Iterable[Any], records: Records
-) -> list[dict[str, str]]:
-    """Return the rows of exposure that the derivations cited by an answer add, as the exposure of
-    a derivation states: the posits not confirmed, the warrants not exact, the operations not exact
-    of the models on which a derivation runs, and the same units of each derivation that it uses.
-    """
-    rows: list[dict[str, str]] = []
-    seen: set[str] = set()
-    pending = [str(name) for name in cited if isinstance(name, str)]
-    while pending:
-        name = pending.pop(0)
-        derivation = records.get(name)
-        if name in seen or not isinstance(derivation, Mapping):
-            continue
-        seen.add(name)
-        via = f"derivation {name}"
-        rows += [
-            {"answer": answer, "law": f"{name}.{unit}", "warrant": reason, "via": via}
-            for unit, reason in exposed_units(derivation)
-        ]
-        for model in derivation.get("runs_on") or []:
-            for operation in (records.get(str(model)) or {}).get("operations") or []:
-                error = operation.get("error") if isinstance(operation, Mapping) else None
-                if error and error != "exact" and operation.get("id"):
-                    rows.append(
-                        {
-                            "answer": answer,
-                            "law": f"{model}.{operation['id']}",
-                            "warrant": f"{error} operation",
-                            "via": via,
-                        }
-                    )
-        pending += [str(used) for used in derivation.get("uses") or [] if isinstance(used, str)]
-    return rows
 
 
 def itinerary_progress(

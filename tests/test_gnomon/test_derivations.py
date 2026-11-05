@@ -1,4 +1,4 @@
-"""The checks of a derivation record, its registry, and the exposure that a derivation adds.
+"""The checks of a derivation record and its registry.
 
 The registry of derivations restates three rules of the theory notes, so its kinds are checked
 against the vocabularies of the record and its admitted pairs against the table of the note on
@@ -9,7 +9,6 @@ carries none.
 from __future__ import annotations
 
 import copy
-import re
 from pathlib import Path
 from typing import Any, Callable
 
@@ -19,11 +18,9 @@ import yaml
 from gnomon.check import check_workspace, load_workspace
 from gnomon.derivations import (
     derivation_problems,
-    exposed_units,
     load_registry,
     unrecorded_descents,
 )
-from gnomon.views import exposure
 
 ROOT = Path(__file__).resolve().parents[2]
 EXAMPLE = ROOT / "examples" / "grokking-delayed-generalization"
@@ -146,28 +143,6 @@ def test_each_check_fires_on_its_planted_defect(rule: str) -> None:
     assert rule in {f.rule.id for f in derivation_problems(record)}
 
 
-def test_exposure_reports_the_units_of_the_derivation() -> None:
-    record = worked()
-    assert list(exposed_units(record)) == [
-        ("quality-tracks-slow-mode", "posit not confirmed"),
-        ("slowest-dominates", "controlled warrant"),
-    ]
-    unit(record, "posits", "quality-tracks-slow-mode")["tests"] = [
-        {"test": "computation", "verdict": "supports", "standard": "certified"}
-    ]
-    assert [u for u, _ in exposed_units(record)] == ["slowest-dominates"]
-
-
-def test_the_view_follows_the_derivation_of_a_derived_law() -> None:
-    rows = exposure(load_workspace(EXAMPLE).by_id)["exposures"]
-    via = {row["law"]: row["via"] for row in rows}
-    assert "mod.grokking.effective-representation.representation_time" not in via
-    assert via["derivation.grokking.delay-scale.slowest-dominates"] == (
-        "derivation derivation.grokking.delay-scale"
-    )
-    assert re.fullmatch(r"derivation .*", via["mod.grokking.effective-representation.decoder-step"])
-
-
 DERIVATIONS = sorted((ROOT / "examples").glob("*/derivation.yml"))
 
 
@@ -195,11 +170,7 @@ def test_a_derived_law_without_its_derivation_is_reported(tmp_path: Path) -> Non
 
 def test_an_origin_records_the_descent_of_a_derived_law() -> None:
     law = {"symbol": "onset", "warrant": "derived", "origin": "https://doi.org/10.0/example"}
-    record = {"type": "model", "id": "mod.a.b", "laws": [law]}
-    answer = {"type": "answer", "grounds": [{"record": "mod.a.b.onset"}]}
-    assert not unrecorded_descents(record, {})
-    rows = exposure({"mod.a.b": record, "ans.a.b": answer})["exposures"]
-    assert [row["via"] for row in rows] == ["descent in its origin"]
+    assert not unrecorded_descents({"type": "model", "id": "mod.a.b", "laws": [law]}, {})
 
 
 def _derive_step(folder: Path, change: Callable[[dict[str, Any]], None]) -> set[str]:
