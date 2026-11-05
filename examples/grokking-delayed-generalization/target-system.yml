@@ -20,9 +20,6 @@ reference_class:
   selection_criteria: []         # membership not conditioned on an outcome; the inquiry restricts the domain to overparameterized networks instead
 
 constituents:
-  - name: "computational unit"
-    symbol: unit
-    extent: "range(Nu)"
   - name: "coordinate of the trainable parameters"
     symbol: coord
     extent: "range(P)"
@@ -84,11 +81,6 @@ variables:
     shared: false
 
 parameters:
-  - name: "number of computational units"
-    symbol: Nu
-    signature: []
-    values: "pos(ints)"
-    expression: null
   - name: "number of coordinates of the trainable parameters"
     symbol: P
     signature: []

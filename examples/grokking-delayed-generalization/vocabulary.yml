@@ -199,12 +199,6 @@ symbols:
   signature: []
   name: coordinate of the trainable parameters
   latex: \mathrm{coord}
-- symbol: unit
-  declared_in: system.delayed_generalization_networks
-  block: constituents
-  signature: []
-  name: computational unit
-  latex: \mathrm{unit}
 - symbol: source
   declared_in: system.delayed_generalization_networks
   block: external_systems
@@ -236,12 +230,6 @@ symbols:
   name: 'specification of the architecture: a finite computation graph with activation functions and a
     task readout'
   latex: \mathrm{Arch}
-- symbol: Nu
-  declared_in: system.delayed_generalization_networks
-  block: parameters
-  signature: []
-  name: number of computational units
-  latex: \mathrm{Nu}
 - symbol: P
   declared_in: system.delayed_generalization_networks
   block: parameters

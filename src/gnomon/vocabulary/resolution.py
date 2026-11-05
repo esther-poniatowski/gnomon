@@ -14,16 +14,15 @@ from typing import Any, Iterable, Mapping
 
 from .. import findings as rules
 from ..expressions import Tree, children, parse_expression
-from ..findings import Entry, Finding, Place, finding
+from ..findings import Entry, Finding, finding
 from ..identifiers import split_reference
 from .declarations import declarations
 from .layout import (
-    NESTED_REFERENCE,
     PATH_REFERENCE,
-    REFERENCE,
     TOLERANCE_NAMES,
     TYPE_PATH_REFERENCE,
     at_item,
+    cited,
     entries,
     formulas,
     identifiers,
@@ -63,31 +62,11 @@ def retired_in_use(record: Mapping[str, Any]) -> list[Finding]:
     )
 
 
-def _cited(record: Mapping[str, Any]) -> list[tuple[str, Place, Any]]:
-    """Return each field of a record that holds references, with its path and its field path."""
-    cited: list[tuple[str, Place, Any]] = [
-        (f"{block}.{key}", (block, Entry(i, entry), key), entry.get(key))
-        for block, key in REFERENCE
-        for i, entry in indexed(record, block)
-    ]
-    cited += [
-        (
-            f"{outer}.{inner}.{key}",
-            (outer, Entry(i, entry), inner, Entry(j, nested), key),
-            nested.get(key),
-        )
-        for outer, inner, key in NESTED_REFERENCE
-        for i, entry in indexed(record, outer)
-        for j, nested in indexed(entry, inner)
-    ]
-    return cited
-
-
 def _unresolved_references(record: Mapping[str, Any], known: set[str]) -> list[Finding]:
     """Return each reference of a record, in a field or at a path, that names no known symbol."""
     problems = [
         finding(rules.VOCABULARY_UNRESOLVED, f"{where} -> {name}", *at_item(place, index))
-        for where, place, value in _cited(record)
+        for where, place, value in cited(record)
         for index, name in items_of(value)
         if isinstance(name, str) and split_reference(name) is None and name not in known
     ]

@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-10-29
+revised: 2026-11-05
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Checks read records
@@ -39,6 +39,6 @@ A verdict on a record is produced by a checker run on that record. No field of a
 
 ## Consequences
 
-- A generated file placed beside the records, such as the table `vocabulary.yml` of a problem, is excluded from the inputs of every check. The count of unused declarations in `src/gnomon/vocabulary/table.py` already excludes that table.
+- A generated file placed beside the records, such as the table `vocabulary.yml` of a problem, is excluded from the inputs of every check. Both readers of records exclude it by its type, `vocabulary` or `view`, and not by the name of its file: the loader of the workspace, and the reader of one problem in `src/gnomon/vocabulary/table.py`.
 - A check that needs a derived structure, such as the graph of the [relations between records](closed-typed-relations.md#^relation-graph), builds that structure from the records at each run.
 - The decision excludes a field that certifies conformance to the checks. A field that names the agent who drafted or reviewed the content of a record is a separate question: the [decision on the knowledge interchange format](knowledge-interchange-format.md#^trust-fields-open) leaves the trust fields of the Open Knowledge Format to a later decision.

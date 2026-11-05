@@ -1,24 +1,34 @@
 """
-The symbol table of a problem: the declarations collected from its records, those that nothing
-reaches, and the vocabulary record of the problem, a YAML view bound to the schema
+The symbol table of a problem: the declarations collected from its records, those that no
+grammatical field reaches, and the vocabulary record of the problem, a YAML view bound to the schema
 ``gnomon:view.vocabulary@1`` that a renderer displays as the other views.
 """
 
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Iterable, Iterator, Mapping
 
 import yaml
 
 from .. import findings as rules
 from ..findings import Finding, Key, finding
+from ..identifiers import split_reference
 from ..latex import declared_notations, symbol_form
 from .declarations import Declaration, declarations
 from .interactions import interaction_graph
-from .layout import upstream_of
+from .layout import (
+    GENERATED_KINDS,
+    PATH_REFERENCE,
+    TYPE_PATH_REFERENCE,
+    cited,
+    formulas,
+    identifiers,
+    items_of,
+    reach,
+    upstream_of,
+)
 from .operators import canonical_operators, local_operators
 
 
@@ -72,48 +82,96 @@ class Problem:
 REACHED: frozenset[str] = frozenset({"constituents", "index_sets", "variables", "parameters"})
 
 
+def problem_records(directory: Path) -> list[Mapping[str, Any]]:
+    """Return the records that fill the problem of ``directory``, leaving out the records of a
+    generated kind, such as its table ``vocabulary.yml``, since a check reads authored records
+    only."""
+    loaded = [
+        yaml.safe_load(path.read_text(encoding="utf-8")) for path in sorted(directory.glob("*.yml"))
+    ]
+    return [
+        record
+        for record in loaded
+        if isinstance(record, Mapping) and record.get("type") not in GENERATED_KINDS
+    ]
+
+
+def _strings(node: Any) -> Iterator[str]:
+    """Yield every string value that a record holds, at any depth."""
+    if isinstance(node, str):
+        yield node
+    elif isinstance(node, Mapping):
+        for value in node.values():
+            yield from _strings(value)
+    elif isinstance(node, list):
+        for item in node:
+            yield from _strings(item)
+
+
+def symbol_uses(
+    records: Iterable[Mapping[str, Any]],
+) -> tuple[set[str], set[tuple[str, str]]]:
+    """Return the symbols that the grammatical fields of the records name: the bare symbols of the
+    expressions and of the reference fields, and each dotted identifier as its record and symbol.
+
+    A prose field is opaque, so a symbol named only in a reading or a name counts as no use.
+
+    >>> bare, dotted = symbol_uses([{"type": "phenomenon", "target_system": "system.a",
+    ...     "observables": [{"symbol": "E", "name": "energy E", "signature": ["t"],
+    ...                      "expression": "mean_{x}( u(x, t) )"}],
+    ...     "data": [{"measures": "system.a.nu"}]}])
+    >>> sorted(bare), sorted(dotted)
+    (['mean', 't', 'u', 'x'], [('system.a', 'nu')])
+    """
+    bare: set[str] = set()
+    dotted: set[tuple[str, str]] = set()
+    for record in records:
+        for _, _, text, _ in formulas(record):
+            bare |= identifiers(text)
+        for _, _, value in cited(record):
+            bare |= {name for _, name in items_of(value) if isinstance(name, str)}
+        for path in (*PATH_REFERENCE, *TYPE_PATH_REFERENCE.get(str(record.get("type", "")), ())):
+            bare |= {name for _, name in reach(record, path)}
+        dotted |= {named for text in _strings(record) if (named := split_reference(text))}
+    return bare, dotted
+
+
 def unused_declarations(directory: Path, registry: Path | None = None) -> list[tuple[str, Finding]]:
-    """Return every quantity the problem declares that no other field of it mentions.
+    """Return every quantity the problem declares that no grammatical field of it names.
 
     The declarations span the records of the problem, so each finding comes with the identifier of
     the record that declares the quantity.
 
     A declaration that nothing reaches is either a stray specification or the trace of a law the
-    record never wrote, and the two are told apart by reading. The count is lexical, as the
-    operator check is: a symbol occurring once occurs only at its own declaration.
+    record never wrote, and the two are told apart by reading. A use is read from the fields that
+    a grammar declares, as :func:`symbol_uses` collects them, since a prose field is opaque to
+    every tool.
 
     Only the blocks of :data:`REACHED` are reported. A manifestation or an observable is terminal
     by design, since a question reaches it from outside the problem or nothing reaches it at all.
     """
-    sources = [p for p in sorted(directory.glob("*.yml")) if p.name != "vocabulary.yml"]
-    text = " ".join(p.read_text(encoding="utf-8") for p in sources)
-    found = []
-    for declaration in load_problem(directory, registry).declarations:
-        if declaration.block not in REACHED:
-            continue
-        symbol = re.escape(declaration.symbol)
-        if len(re.findall(rf"(?<![\w.]){symbol}(?![\w])", text)) <= 1:
-            found.append(
-                (
-                    declaration.record,
-                    finding(
-                        rules.VOCABULARY_UNUSED_DECLARATION,
-                        f"{declaration.block}.{declaration.symbol}: declared and never used",
-                        declaration.block,
-                        Key(declaration.symbol),
-                    ),
-                )
-            )
-    return found
+    bare, dotted = symbol_uses(problem_records(directory))
+    return [
+        (
+            declaration.record,
+            finding(
+                rules.VOCABULARY_UNUSED_DECLARATION,
+                f"{declaration.block}.{declaration.symbol}: declared and never used",
+                declaration.block,
+                Key(declaration.symbol),
+            ),
+        )
+        for declaration in load_problem(directory, registry).declarations
+        if declaration.block in REACHED
+        and declaration.symbol not in bare
+        and (declaration.record, declaration.symbol) not in dotted
+    ]
 
 
 def load_problem(directory: Path, registry: Path | None = None) -> Problem:
     """Collect the vocabulary of the problem whose records fill ``directory``."""
     problem = Problem(name=directory.name, canonical=canonical_operators(registry))
-    loaded = [
-        yaml.safe_load(path.read_text(encoding="utf-8")) for path in sorted(directory.glob("*.yml"))
-    ]
-    records = [record for record in loaded if isinstance(record, Mapping)]
+    records = problem_records(directory)
     by_id = {str(record["id"]): record for record in records if "id" in record}
     problem.notations = declared_notations(r for r in records if r.get("type") != "operators")
     for record in records:

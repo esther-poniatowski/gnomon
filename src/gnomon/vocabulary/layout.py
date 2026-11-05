@@ -32,6 +32,11 @@ DECLARING: Mapping[str, tuple[str, ...]] = {
 }
 
 
+#: The record kinds that a tool generates from the others: a check reads none of them, as the
+#: decision on the inputs of checks states.
+GENERATED_KINDS: frozenset[str] = frozenset({"vocabulary", "view"})
+
+
 #: The record kinds the checkers read. A kind declaring no symbol still carries expressions, so
 #: this set is wider than the keys of :data:`DECLARING`.
 RECORD_KINDS: frozenset[str] = frozenset(
@@ -263,6 +268,27 @@ def identifiers(text: str) -> set[str]:
     without_literals = re.sub(r"'[^']*'|\"[^\"]*\"", " ", text)
     found = {token.rstrip("_") for token in re.findall(r"[A-Za-z_][A-Za-z_0-9]*", without_literals)}
     return {token for token in found if token and token not in RESERVED}
+
+
+def cited(record: Mapping[str, Any]) -> list[tuple[str, Place, Any]]:
+    """Return each field of a block of a record that holds references, with where it sits, its
+    path and its value."""
+    cited: list[tuple[str, Place, Any]] = [
+        (f"{block}.{key}", (block, Entry(i, entry), key), entry.get(key))
+        for block, key in REFERENCE
+        for i, entry in indexed(record, block)
+    ]
+    cited += [
+        (
+            f"{outer}.{inner}.{key}",
+            (outer, Entry(i, entry), inner, Entry(j, nested), key),
+            nested.get(key),
+        )
+        for outer, inner, key in NESTED_REFERENCE
+        for i, entry in indexed(record, outer)
+        for j, nested in indexed(entry, inner)
+    ]
+    return cited
 
 
 def formulas(record: Mapping[str, Any]) -> list[tuple[str, Place, str, frozenset[str]]]:

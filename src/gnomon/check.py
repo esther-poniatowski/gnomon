@@ -67,9 +67,7 @@ from .history import StateReader, git_states
 from .itineraries import construct_record_kinds, itinerary_problems, type_classes, type_holders
 from .sarif import Located
 from .vocabulary.coordinates import foreign_coordinates
-
-#: The kinds of record that a tool generates from the others, which no check reads.
-GENERATED_KINDS = frozenset({"vocabulary", "view"})
+from .vocabulary.layout import GENERATED_KINDS
 
 #: A segment of an identifier that is still the placeholder of a template, such as ``TOPIC``.
 PLACEHOLDER_SEGMENT = re.compile(r"(?:^|\.)[A-Z][A-Z0-9_]*(?:\.|$)")

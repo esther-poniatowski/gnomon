@@ -410,7 +410,51 @@ def test_a_quantity_that_no_other_field_mentions_is_reported(tmp_path: Path) -> 
         ),
         encoding="utf-8",
     )
-    (tmp_path / "vocabulary.yml").write_text("symbols: [w]\n", encoding="utf-8")
+    (tmp_path / "vocabulary.yml").write_text(
+        yaml.safe_dump(
+            {
+                "id": "vocab.demo",
+                "type": "vocabulary",
+                "symbols": [{"symbol": "w", "expression": "w"}],
+                "variables": [{"symbol": "ghost"}],
+            }
+        ),
+        encoding="utf-8",
+    )
+    found = unused_declarations(tmp_path)
+    assert [(ident, f.text) for ident, f in found] == [
+        ("system.demo", "variables.w: declared and never used")
+    ]
+    assert "ghost" not in load_problem(tmp_path).notations
+
+
+def test_a_quantity_named_only_in_prose_is_reported(tmp_path: Path) -> None:
+    """A prose field is opaque, so a symbol that only a name or a reading repeats is unused, and a
+    dotted reference from another record is a use."""
+    (tmp_path / "target-system.yml").write_text(
+        yaml.safe_dump(
+            {
+                "id": "system.demo",
+                "type": "target-system",
+                "variables": [
+                    {"name": "the variable w", "symbol": "w", "reading": "w decays"},
+                    {"name": "the variable v", "symbol": "v"},
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (tmp_path / "phenomenon.yml").write_text(
+        yaml.safe_dump(
+            {
+                "id": "phen.demo.decay",
+                "type": "phenomenon",
+                "target_system": "system.demo",
+                "data": [{"name": "record of v", "measures": "system.demo.v"}],
+            }
+        ),
+        encoding="utf-8",
+    )
     found = unused_declarations(tmp_path)
     assert [(ident, f.text) for ident, f in found] == [
         ("system.demo", "variables.w: declared and never used")
