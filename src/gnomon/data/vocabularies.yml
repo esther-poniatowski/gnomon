@@ -511,7 +511,7 @@ vocabularies:
       name: a dimensionless group dropped in a limit
     - value: incomplete-similarity
       name: a dimensionless group entering as a power of unknown exponent
-    origin.kind:
+    posits.type:
     - value: act
       name: a step of the itinerary
     - value: source
@@ -520,7 +520,7 @@ vocabularies:
       name: a design of kind method that prescribes the posit
     - value: none
       name: an insight that left no record
-    tests.kind:
+    posits.test:
     - value: consistency
       name: the neglected terms stay smaller than the terms kept
     - value: limit
@@ -533,10 +533,10 @@ vocabularies:
       name: a comparison of the consequence with data
     - value: computation
       name: a computation, certified or numerical, of the posited object
-    tests.verdict:
+    posits.verdict:
     - value: supports
     - value: refutes
-    tests.standard:
+    posits.standard:
     - value: certified
       name: a computation whose result is proved, such as interval arithmetic
     - value: numerical
@@ -580,7 +580,7 @@ vocabularies:
       name: computation
     - value: compare
       name: comparison
-    warrant.source:
+    moves.source:
     - value: definition
       name: a definition
     - value: theorem
@@ -591,7 +591,7 @@ vocabularies:
       name: a computation
     - value: act-verdict
       name: the verdict of the norm of an act whose output the move imports
-    warrant.error:
+    moves.error:
     - value: exact
       name: no error
     - value: controlled
@@ -608,7 +608,7 @@ vocabularies:
     - value: expose
     - value: close
     - value: match
-    alternatives.reason:
+    orientations.reason:
     - value: inapplicable
     - value: inconsistent
     - value: costlier
@@ -640,6 +640,10 @@ vocabularies:
     - value: refuting-test
       name: a test whose result contradicts a posit
   operators:
+    .status:
+    - value: provisional
+    - value: stabilized
+    - value: retracted
     operators.dimension:
     - value: preserve
       name: the formula of the first argument

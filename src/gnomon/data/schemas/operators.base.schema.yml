@@ -41,10 +41,9 @@ properties:
     - string
     - 'null'
     x-template: provisional
-    x-kind: label
-    x-comment: provisional | stabilized | retracted
+    x-vocabulary: .status
     title: Status
-    description: provisional | stabilized | retracted
+    description: The maturity of the record as a whole, or its retraction.
   target_system:
     type:
     - string

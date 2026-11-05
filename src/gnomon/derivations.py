@@ -809,7 +809,7 @@ def exposed_units(record: Derivation) -> Iterator[tuple[str, str]]:
     """Yield the units of a derivation that expose its consequences, each with its reason: the
     posits that no test confirms, and the moves whose warrant is not exact.
 
-    >>> record = {"posits": [{"id": "p", "tests": [{"kind": "empirical", "verdict": "supports"}]}],
+    >>> record = {"posits": [{"id": "p", "tests": [{"test": "empirical", "verdict": "supports"}]}],
     ...           "moves": [{"id": "m", "warrant": {"error": "controlled"}}]}
     >>> list(exposed_units(record))
     [('p', 'posit not confirmed'), ('m', 'controlled warrant')]
@@ -821,8 +821,8 @@ def exposed_units(record: Derivation) -> Iterator[tuple[str, str]]:
         confirmed = any(
             t.get("verdict") == "supports"
             and (
-                t.get("kind") in confirming
-                or (t.get("kind") == "computation" and t.get("standard") == certified)
+                t.get("test") in confirming
+                or (t.get("test") == "computation" and t.get("standard") == certified)
             )
             for _, t in _entries(posit, "tests")
         )

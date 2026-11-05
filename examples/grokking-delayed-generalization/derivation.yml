@@ -62,7 +62,7 @@ posits:
     kind: closure
     statement: "the quality of the representation reaches its threshold once the slowest positive mode has decayed by a fixed factor, the same for every value of the rates"
     origin:
-      kind: source
+      type: source
       ref: "Liu et al., NeurIPS 2022, where the time of representation learning is set by the first nonzero eigenvalue of the effective Hessian"
     tests:
 

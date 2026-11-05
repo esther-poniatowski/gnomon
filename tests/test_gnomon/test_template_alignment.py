@@ -613,6 +613,10 @@ def test_the_rows_required_for_a_root_or_a_derived_model_are_the_registry_entrie
         "model.yml",
         "binding.yml",
         "key.yml",
+        "concept.yml",
+        "design.yml",
+        "derivation.yml",
+        "operators.yml",
     ],
 )
 def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:

@@ -349,13 +349,13 @@ properties:
           title: Origin
           description: Where the guess came from.
           properties:
-            kind:
+            type:
               type:
                 - string
                 - 'null'
-              x-vocabulary: origin.kind
-              title: Kind
-              description: The kind of origin of the guess.
+              x-vocabulary: posits.type
+              title: Type
+              description: The type of origin of the guess.
               examples:
                 - source
             ref:
@@ -379,12 +379,12 @@ properties:
           items:
             type: object
             properties:
-              kind:
+              test:
                 type:
                   - string
                   - 'null'
-                x-vocabulary: tests.kind
-                title: Kind
+                x-vocabulary: posits.test
+                title: Test
                 description: The kind of test.
                 examples:
                   - empirical
@@ -392,7 +392,7 @@ properties:
                 type:
                   - string
                   - 'null'
-                x-vocabulary: tests.verdict
+                x-vocabulary: posits.verdict
                 title: Verdict
                 description: Whether the test supports or refutes the posit.
                 examples:
@@ -401,7 +401,7 @@ properties:
                 type:
                   - string
                   - 'null'
-                x-vocabulary: tests.standard
+                x-vocabulary: posits.standard
                 x-comment: computation only
                 title: Standard
                 description: For a computation, whether the computation is certified or numerical.
@@ -503,7 +503,7 @@ properties:
               type:
                 - string
                 - 'null'
-              x-vocabulary: warrant.source
+              x-vocabulary: moves.source
               title: Source
               description: The source of the license.
               examples:
@@ -523,7 +523,7 @@ properties:
               type:
                 - string
                 - 'null'
-              x-vocabulary: warrant.error
+              x-vocabulary: moves.error
               title: Class of error
               description: The class of the error that the move introduces.
               examples:
@@ -670,7 +670,7 @@ properties:
                 type:
                   - string
                   - 'null'
-                x-vocabulary: alternatives.reason
+                x-vocabulary: orientations.reason
                 title: Reason
                 description: The reason for setting the move aside.
                 examples:

@@ -64,8 +64,8 @@ def test_registry_kinds_are_vocabulary_values() -> None:
     assert set(registry["non_routine_kinds"]) <= values("moves.kind")
     assert set(registry["licensing_kinds"]) <= kinds
     assert {k for ks in registry["admitted_pairs"].values() for k in ks} <= kinds
-    assert set(registry["confirming_tests"]) <= values("tests.kind")
-    assert registry["confirming_computation"] in values("tests.standard")
+    assert set(registry["confirming_tests"]) <= values("posits.test")
+    assert registry["confirming_computation"] in values("posits.standard")
 
 
 def test_admitted_pairs_match_the_note() -> None:
@@ -153,7 +153,7 @@ def test_exposure_reports_the_units_of_the_derivation() -> None:
         ("slowest-dominates", "controlled warrant"),
     ]
     unit(record, "posits", "quality-tracks-slow-mode")["tests"] = [
-        {"kind": "computation", "verdict": "supports", "standard": "certified"}
+        {"test": "computation", "verdict": "supports", "standard": "certified"}
     ]
     assert [u for u, _ in exposed_units(record)] == ["slowest-dominates"]
 
