@@ -51,9 +51,11 @@ from __future__ import annotations
 from .answers import (
     STATUS_PAIRS,
     incomplete_operations,
+    misdirected_interventions,
     mismatched_status_pairs,
     unbound_outputs,
     unclassified_operations,
+    unheld_axioms,
 )
 from .assessments import (
     disposition,
@@ -145,6 +147,7 @@ __all__ = [
     "malformed_credence",
     "malformed_restrictions",
     "misdirected_assessment",
+    "misdirected_interventions",
     "mismatched_occurrence",
     "mismatched_request",
     "mismatched_status_pairs",
@@ -166,6 +169,7 @@ __all__ = [
     "unbounded_aim",
     "unclassified_operations",
     "undecided_boundaries",
+    "unheld_axioms",
     "unjustified_explanans_bound",
     "unmet_by_aim",
     "unmet_by_presence",

@@ -122,6 +122,81 @@ properties:
         title: Realizations
         description: fill when the question bounds the explanans to the link between two substrates; one
           entry per role
+      presuppositions:
+        type:
+        - array
+        - 'null'
+        items:
+          type: object
+          properties:
+            id:
+              type:
+              - string
+              - 'null'
+              x-template: PRESUPPOSITION-NAME
+              x-kind: label
+              title: Id
+              description: A descriptive identifier of the presupposition, unique within the record.
+              examples:
+              - '`positive-rate`'
+            statement:
+              type:
+              - string
+              - 'null'
+              x-template: '"WHAT THE CLAIM TAKES FOR GRANTED"'
+              x-kind: markdown-line
+              title: Statement
+              description: The commitment that the claim and its denial both require.
+              examples:
+              - a positive relaxation rate of the representation exists
+            expression:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+              x-kind: text
+              x-comment: optional
+              title: Expression
+              description: The presupposition in the expression syntax, such as an existence stated with
+                the binder `exists`.
+              examples:
+              - '`lambda3 > 0`'
+            strength:
+              type:
+              - string
+              - 'null'
+              x-vocabulary: claim.strength
+              title: Strength
+              description: 'The strength of the commitment: local-role · provisional · axiom.'
+              examples:
+              - provisional
+            held_by:
+              type:
+              - string
+              - 'null'
+              x-template: RECORD.UNIT
+              x-kind: label
+              x-comment: empty while undischarged; for an axiom, a background law or a concept
+              title: Held by
+              description: The law, the answer, the concept or the consequence of a derivation that holds
+                the presupposition; empty while it is undischarged.
+              examples:
+              - '`bg.turbulence.navier-stokes.momentum`'
+        x-comment: optional; one entry per commitment that the claim and its denial both require
+        title: Presuppositions
+        description: optional; one entry per commitment that the claim and its denial both require
+      interventions:
+        type:
+        - string
+        - 'null'
+        x-template: design.TOPIC.NAME
+        x-kind: label
+        x-comment: for a counterfactual claim; a design of kind experiment or simulation-run
+        title: Interventions
+        description: For a counterfactual claim, the design of kind experiment or simulation-run whose
+          protocol states the admissible interventions.
+        examples:
+        - '`design.mixture.subspace-ablation`'
     x-comment: over the symbols of the model on which the route runs, or over those of the target and
       the phenomenon when the route runs on the target
     title: Claim

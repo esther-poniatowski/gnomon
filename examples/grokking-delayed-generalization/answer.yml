@@ -9,6 +9,12 @@ answers: quest.grokking.explain_delay
 claim:
   reading: "The decoder fits the training set first, and the embedding acquires the structure consistent with the task at the slowest positive rate of the effective dynamics; the delay scales as the inverse of that rate times the learning rate of the embedding, and a vanishing rate leaves persistent memorization."
   expression: "delay_m > 0 and depends_on(delay_m, 1 / (lambda3 * eta_rep))"
+  presuppositions:
+    - id: positive-rate
+      statement: "the effective Hessian has a positive eigenvalue beyond the modes of zero rate, so that the slowest positive rate exists"
+      expression: "lambda3 > 0"
+      strength: provisional
+      held_by:
 
 grounds:
   - id: toy-task

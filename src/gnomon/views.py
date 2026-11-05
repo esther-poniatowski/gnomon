@@ -341,7 +341,27 @@ def exposure(records: Records) -> dict[str, Any]:
         route = records[key].get("route")
         cited = route.get("derivations") if isinstance(route, Mapping) else None
         rows += _derivation_exposure(key, [*(cited or []), *descents], records)
+        rows += _presupposition_exposure(key, records[key])
     return {**_header("exposure", "Exposure of each answer to revisable laws"), "exposures": rows}
+
+
+def _presupposition_exposure(answer: str, record: Mapping[str, Any]) -> list[dict[str, str]]:
+    """Return the rows of the presuppositions of a claim that no record holds, of the strength
+    provisional or axiom, as the discharge of a presupposition states."""
+    claim = record.get("claim")
+    entries = claim.get("presuppositions") if isinstance(claim, Mapping) else None
+    return [
+        {
+            "answer": answer,
+            "law": f"{answer}.claim.{entry.get('id')}",
+            "warrant": f"{entry.get('strength')} presupposition not discharged",
+            "via": "claim",
+        }
+        for entry in entries or []
+        if isinstance(entry, Mapping)
+        and entry.get("strength") in ("provisional", "axiom")
+        and not entry.get("held_by")
+    ]
 
 
 def _derivation_exposure(

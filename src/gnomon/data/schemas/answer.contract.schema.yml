@@ -21,6 +21,8 @@ properties:
       - expression
       - caveat
       - realizations
+      - presuppositions
+      - interventions
     properties:
       realizations:
         items:
@@ -30,6 +32,22 @@ properties:
             - realizes
             - by
             - reading
+      presuppositions:
+        items:
+          propertyNames:
+            enum:
+            - id
+            - statement
+            - expression
+            - strength
+            - held_by
+          properties:
+            strength:
+              enum:
+              - local-role
+              - provisional
+              - axiom
+              - null
   grounds:
     items:
       propertyNames:

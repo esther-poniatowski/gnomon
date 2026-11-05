@@ -394,6 +394,8 @@ def _answer(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         c.unclassified_operations(record, by_id)
         + c.unbound_outputs(record, ctx.record(record.get("answers")), by_id)
         + c.mismatched_status_pairs(record, by_id)
+        + c.unheld_axioms(record, by_id)
+        + c.misdirected_interventions(record, by_id)
     )
     for block, paths in ctx.registries.blocks.items():
         if c.at(record, block) is not None:

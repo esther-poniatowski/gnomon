@@ -97,4 +97,4 @@ The kind meets the seven [conditions of admission](record-kind-admission.md#^adm
 - A law marked `derived` names its descent: a derivation stating it as a consequence, or an origin holding the published derivation.
 - The norm of the activity `derivation` requires that each move is licensed by its warrant and that each posit is stated with its origin and its tests, as the [model analysis](../epistemology/processes/activities/model-analysis.md#^explicative-derivation) states.
 - The route of an answer, the obligations of an assessment and the step of an itinerary that produced a derivation point to derivation records; a passed step of the activity `derivation` names its record, whose consequences land in the output of the step.
-- The adopted entries of the [proposals for the derivation framework](../proposals/derivation-framework.md) are retired, and the entries not settled here stay open.
+- The adopted entries of the proposals for the derivation framework are retired; the entries left open are settled by the decision on the [content of a claim](claim-content.md), and the note of those proposals is retired.

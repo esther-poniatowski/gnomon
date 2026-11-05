@@ -52,6 +52,18 @@ operators:
   name: the limit as the indices it binds approach their stated value
   notation: '\lim_{#0} #1'
   arity: 1
+- symbol: forall
+  kind: binder
+  dimension: pure
+  name: the statement that its body holds for every value of the indices it binds
+  notation: '\forall #0 \, #1'
+  arity: 1
+- symbol: exists
+  kind: binder
+  dimension: pure
+  name: the statement that its body holds for some value of the indices it binds
+  notation: '\exists #0 \, #1'
+  arity: 1
 - symbol: norm
   kind: binder
   dimension: preserve

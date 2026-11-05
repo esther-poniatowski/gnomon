@@ -25,6 +25,13 @@ id: registry.vocabularies
 type: vocabulary-registry
 vocabularies:
   answer:
+    claim.strength:
+    - value: local-role
+      name: the way in which a term functions in the claim, which commits the claim alone
+    - value: provisional
+      name: a statement of the background, which commits the inquiry until a record holds it
+    - value: axiom
+      name: a statement of the whole corpus, held by a background law or a concept
     grounds.role:
     - value: assumption
     - value: idealization

@@ -16,7 +16,6 @@ Holds the candidate designs that await a decision, each note gathering the alter
 
 - [Proposals for research actions](research-actions.md): weighs whether the activities of the registry derive from a smaller set of constructors
 - [Proposals for the relation registry](relation-registry.md): weighs the forms of the relations that one registry declares between research units
-- [Proposals for the derivation framework](derivation-framework.md): weighs the formal objects that state a derivation, its steps and its results
 - [Proposals for the research corrections](research-corrections.md): weighs the record forms required by the corrections of the Mixture pilot
 - [Proposals for the definitions framework](definitions-framework.md): weighs the forms of the full definition object to which a concept record may link
 - [Proposals for the vocabulary records](vocabulary-records.md): weighs the schema of the concept record

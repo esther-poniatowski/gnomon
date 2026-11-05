@@ -1,6 +1,7 @@
 """
 The checks of an answer and of a derived model: the operations of the model, the outputs bound to
-the question, and the pairs that place each factor of an explanation.
+the question, the pairs that place each factor of an explanation, and the presuppositions and the
+interventions of a claim.
 """
 
 from __future__ import annotations
@@ -215,3 +216,89 @@ def mismatched_status_pairs(
                 )
             )
     return found
+
+
+def _claim(answer: Mapping[str, Any]) -> Mapping[str, Any]:
+    """Return the claim of an answer, or an empty mapping."""
+    claim = answer.get("claim")
+    return claim if isinstance(claim, Mapping) else {}
+
+
+def _holds_axiom(reference: Any, records: Mapping[str, Mapping[str, Any]]) -> bool:
+    """Tell whether a reference names a law of a background or a concept record."""
+    if not isinstance(reference, str) or not reference:
+        return False
+    if records.get(reference, {}).get("type") == "concept":
+        return True
+    split = split_reference(reference)
+    if split is None:
+        return False
+    owner = records.get(split[0], {})
+    return owner.get("type") == "background" and any(
+        isinstance(law, Mapping) and law.get("symbol") == split[1]
+        for law in owner.get("laws") or []
+    )
+
+
+def unheld_axioms(
+    answer: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return the presuppositions of the strength axiom that no background law and no concept
+    record holds, since an axiom is a commitment of the whole corpus.
+
+    >>> answer = {"claim": {"presuppositions": [{"id": "p", "strength": "axiom"}]}}
+    >>> [f.text for f in unheld_axioms(answer, {})]
+    ['claim.presuppositions.p: an axiom is held by a background law or a concept record']
+    """
+    found = []
+    for index, entry in enumerate(_claim(answer).get("presuppositions") or []):
+        if not isinstance(entry, Mapping) or entry.get("strength") != "axiom":
+            continue
+        if _holds_axiom(entry.get("held_by"), records):
+            continue
+        found.append(
+            finding(
+                rules.COMPLETENESS_UNHELD_AXIOM,
+                f"claim.presuppositions.{entry.get('id') or index}: an axiom is held by a"
+                " background law or a concept record",
+                "claim",
+                "presuppositions",
+                index,
+                "held_by",
+            )
+        )
+    return found
+
+
+def misdirected_interventions(
+    answer: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return a finding when the interventions of a counterfactual claim name no design of the
+    kind experiment or simulation-run whose protocol states an intervention.
+
+    >>> answer = {"claim": {"interventions": "design.a.b"}}
+    >>> records = {"design.a.b": {"type": "design", "kind": "method"}}
+    >>> [f.text for f in misdirected_interventions(answer, records)]
+    ['claim.interventions: design.a.b names no experiment or simulation run with an intervention']
+    """
+    named = _claim(answer).get("interventions")
+    if not isinstance(named, str) or not named or named not in records:
+        return []
+    design = records[named]
+    protocol = design.get("protocol")
+    intervention = protocol.get("intervention") if isinstance(protocol, Mapping) else None
+    if (
+        design.get("type") == "design"
+        and design.get("kind") in ("experiment", "simulation-run")
+        and not is_unfilled(intervention)
+    ):
+        return []
+    return [
+        finding(
+            rules.COMPLETENESS_MISDIRECTED_INTERVENTIONS,
+            f"claim.interventions: {named} names no experiment or simulation run with an"
+            " intervention",
+            "claim",
+            "interventions",
+        )
+    ]

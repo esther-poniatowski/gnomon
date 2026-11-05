@@ -337,6 +337,15 @@ COMPLETENESS_MISMATCHED_STATUS_PAIR = _rule(
     "completeness/mismatched-status-pair",
     "A factor of an explanation names no pair of the type that its target status requires.",
 )
+COMPLETENESS_UNHELD_AXIOM = _rule(
+    "completeness/unheld-axiom",
+    "A presupposition of the strength axiom is held by no background law and no concept record.",
+)
+COMPLETENESS_MISDIRECTED_INTERVENTIONS = _rule(
+    "completeness/misdirected-interventions",
+    "A claim names as its interventions no experiment and no simulation run that states an"
+    " intervention.",
+)
 COMPLETENESS_UNBOUND_OUTPUTS = _rule(
     "completeness/unbound-outputs",
     "An answer on a model cites no binding, although its question names outputs to match.",

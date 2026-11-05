@@ -141,6 +141,7 @@ PATH_REFERENCE: tuple[str, ...] = (
 TYPE_PATH_FORMULA: Mapping[str, tuple[str, ...]] = {
     "answer": (
         "claim.expression",
+        "claim.presuppositions[].expression",
         "claim.realizations[].by",
         "domain",
         "uncertainty[].expression",
