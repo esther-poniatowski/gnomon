@@ -105,7 +105,10 @@ def test_a_presupposition_exposes_the_answer_until_a_statement_holds_it() -> Non
     records[ANSWER]["grounds"] = []
     records[ANSWER]["route"]["derivations"] = []
     assert _exposure(records, None) == {f"{ANSWER}.claim.presuppositions.p": "claim"}
-    assert _exposure(records, POSITED) == {POSITED: "presupposition p"}
+    held_by_law = _exposure(records, POSITED)
+    assert held_by_law[POSITED] == "presupposition p"
+    operation = "mod.grokking.effective-representation.effective-law"
+    assert held_by_law == {POSITED: "presupposition p", operation: f"law {POSITED}"}
     held = _exposure(records, DERIVED)
     assert f"{ANSWER}.claim.presuppositions.p" not in held
     assert POSITED in held

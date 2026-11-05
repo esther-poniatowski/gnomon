@@ -503,3 +503,30 @@ def test_a_scheme_states_its_conditions_and_needs_no_stopping(tmp_path: Path) ->
     assert not any("stopping" in text for text in texts), texts
     texts = _rewrite(folder, "design.yml", lambda r: r.update(kind="method", applies_when=["x"]))
     assert any("stopping" in text for text in texts), texts
+
+
+def test_a_law_requires_units_on_which_it_may_rest(tmp_path: Path) -> None:
+    folder = tmp_path / EXAMPLE.name
+    shutil.copytree(EXAMPLE, folder)
+
+    def requirements(record: dict[str, Any]) -> None:
+        laws = {law["symbol"]: law for law in record["laws"]}
+        laws["representation_flow"]["requires"] = [
+            "mod.grokking.effective-representation.representation_flow",
+            "phen.grokking.delay",
+        ]
+        laws["representation_time"]["requires"] = [
+            "mod.grokking.effective-representation.representation_flow"
+        ]
+
+    texts = _rewrite(folder, "model.yml", requirements)
+    flow = "mod.grokking.effective-representation.representation_flow"
+    assert f"laws.representation_flow.requires: {flow} is the law itself" in texts, texts
+    assert (
+        "laws.representation_flow.requires: phen.grokking.delay is no unit on which a law may"
+        " rest" in texts
+    ), texts
+    assert (
+        "laws.representation_time.requires: the derivation derivation.grokking.delay-scale"
+        " records the premises of the law" in texts
+    ), texts

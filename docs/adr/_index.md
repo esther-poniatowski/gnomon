@@ -22,6 +22,7 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 - [Single field per fact](single-field-per-fact.md): tells a field that carries a fact from a field that restates that fact
 - [Grounds for a shared field](shared-field-grounds.md): decides whether a proposed field belongs in every record or in the case that raised it
 - [Content of a claim](claim-content.md): decides how a claim states its propositional content, its presuppositions and a conditional or counterfactual content
+- [Requirements of a law](law-requirements.md): decides how a law names the assumptions on which it rests, so that every record using the law inherits them
 - [Records neutral on existence](neutral-records-on-existence.md): bounds the presuppositions that a record may hold about the existence of the objects that it describes
 
 ## Sources and checks

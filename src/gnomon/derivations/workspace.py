@@ -68,7 +68,8 @@ def recorded_descents(records: Iterable[Mapping[str, Any]]) -> dict[str, tuple[s
 
 def unrecorded_descents(record: Mapping[str, Any], descents: Mapping[str, Any]) -> list[Finding]:
     """Return the laws marked ``derived`` whose descent is recorded nowhere: no derivation states
-    the law as a consequence, and the law names no published origin holding its derivation.
+    the law as a consequence, and the law names no published origin holding its derivation; and the
+    laws whose recorded derivation states the premises that they also list as required.
 
     >>> law = {"symbol": "bound", "warrant": "derived"}
     >>> [f.text for f in unrecorded_descents({"id": "bg.a.b", "laws": [law]}, {})]
@@ -78,9 +79,21 @@ def unrecorded_descents(record: Mapping[str, Any], descents: Mapping[str, Any]) 
     """
     found = []
     for i, law in entries(record, "laws"):
+        recorded = descents.get(f"{record.get('id')}.{law.get('symbol')}")
+        if recorded and law.get("requires"):
+            found.append(
+                finding(
+                    rules.DERIVATION_RESTATED_PREMISES,
+                    f"laws.{law.get('symbol') or i}.requires: the derivation {recorded[0]} records"
+                    " the premises of the law",
+                    "laws",
+                    Entry(i, law),
+                    "requires",
+                )
+            )
         if law.get("warrant") != "derived" or law.get("origin"):
             continue
-        if f"{record.get('id')}.{law.get('symbol')}" in descents:
+        if recorded:
             continue
         found.append(
             finding(

@@ -167,6 +167,7 @@ properties:
         - expression
         - reading
         - warrant
+        - requires
         - rests_on
         - origin
         - range

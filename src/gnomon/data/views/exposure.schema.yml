@@ -68,6 +68,7 @@ properties:
           - consequence
           - presupposition
           - existence
+          - assumption
           x-kind: label
           title: Kind
         reason:

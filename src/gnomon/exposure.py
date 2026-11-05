@@ -210,8 +210,7 @@ class _Walk:
                 self.derivation(reference, None)
             return
         split = split_reference(reference)
-        if split is not None and (self.records.get(split[0]) or {}).get("type") == "derivation":
-            self.derivation(split[0], {split[1]})
+        if split is not None and self._unit(reference, split, via):
             return
         law = self._law(reference)
         if law is not None:
@@ -221,6 +220,31 @@ class _Walk:
             for operation in _entries(self.records.get(owner) or {}, "operations"):
                 if operation.get("id") == ident:
                     self.operation(owner, operation, via)
+
+    def _unit(self, reference: str, split: tuple[str, str], via: str) -> bool:
+        """Walk a unit of a derivation or an assumption of a model, and tell whether the reference
+        names one."""
+        owner_record = self.records.get(split[0]) or {}
+        if owner_record.get("type") == "derivation":
+            posits = _by_id(owner_record, "posits")
+            if split[1] in posits:
+                refuted = split[1] in {
+                    str(r.get("target")) for r in _entries(owner_record, "refutations")
+                }
+                state = _posit_state(posits[split[1]], refuted)
+                if state:
+                    self.expose(reference, "posit", state, via)
+            else:
+                self.derivation(split[0], {split[1]})
+            return True
+        assumptions = _by_id(owner_record, "assumptions")
+        if split[1] in assumptions:
+            entry = assumptions[split[1]]
+            motive = entry.get("motive") or "unclassified"
+            removable = entry.get("removable") or "unknown"
+            self.expose(reference, "assumption", f"{motive} assumption, removable {removable}", via)
+            return True
+        return False
 
     def operation(self, model: str, operation: Mapping[str, Any], via: str) -> None:
         """Expose an operation of a model whose error is not exact or is not stated."""
@@ -264,6 +288,8 @@ class _Walk:
         split = split_reference(reference)
         if split is not None:
             self.existence(law.get("expression"), split[0], via)
+        for required in _names(law.get("requires")):
+            self.reference(required, f"law {reference}")
         warrant = str(law.get("warrant") or "")
         if warrant in REVISABLE_WARRANTS:
             self.expose(reference, "law", warrant, via)

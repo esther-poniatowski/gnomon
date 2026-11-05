@@ -290,6 +290,68 @@ def misheld_presuppositions(
     return found
 
 
+#: The units on which a law may rest, by the type of the record that holds them and its block.
+REQUIRABLE: Mapping[str, tuple[str, ...]] = {
+    "model": ("assumptions", "operations", "laws"),
+    "background": ("laws",),
+    "derivation": ("posits", "consequences"),
+}
+
+
+def _requirable(reference: str, records: Mapping[str, Mapping[str, Any]]) -> bool:
+    """Tell whether a reference names a unit on which a law may rest."""
+    split = split_reference(reference)
+    if split is None:
+        return False
+    owner = records.get(split[0], {})
+    for block in REQUIRABLE.get(str(owner.get("type")), ()):
+        for entry in owner.get(block) or []:
+            if isinstance(entry, Mapping) and split[1] in (entry.get("id"), entry.get("symbol")):
+                return True
+    return False
+
+
+def misdirected_requirements(
+    record: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return the units that a law requires and on which no law may rest, and the laws that
+    require themselves.
+
+    >>> records = {"mod.a.b": {"type": "model", "laws": [{"symbol": "flow"}]},
+    ...            "concept.a.b": {"type": "concept"}}
+    >>> law = {"symbol": "flow", "requires": ["concept.a.b", "mod.a.b.flow"]}
+    >>> for f in misdirected_requirements({"id": "mod.a.b", "laws": [law]}, records):
+    ...     print(f.text)
+    laws.flow.requires: concept.a.b is no unit on which a law may rest
+    laws.flow.requires: mod.a.b.flow is the law itself
+    """
+    found = []
+    for i, law in enumerate(record.get("laws") or []):
+        if not isinstance(law, Mapping):
+            continue
+        own = f"{record.get('id')}.{law.get('symbol')}"
+        for reference in law.get("requires") or []:
+            if not isinstance(reference, str) or not reference.strip():
+                continue
+            if reference == own:
+                text = f"{reference} is the law itself"
+            elif not _requirable(reference, records):
+                text = f"{reference} is no unit on which a law may rest"
+            else:
+                continue
+            found.append(
+                finding(
+                    rules.COMPLETENESS_MISDIRECTED_REQUIREMENT,
+                    f"laws.{law.get('symbol') or i}.requires: {text}",
+                    "laws",
+                    Entry(i, law),
+                    "requires",
+                    value=reference,
+                )
+            )
+    return found
+
+
 #: The blocks whose entries are quantities that a condition may define, by their path in a record.
 CONDITIONED: tuple[tuple[str, ...], ...] = (
     ("variables",),

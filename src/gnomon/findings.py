@@ -342,6 +342,11 @@ COMPLETENESS_MISHELD_PRESUPPOSITION = _rule(
     "A presupposition, of a claim or of the condition of a quantity, names as its holder neither a"
     " law of a background or a model nor a consequence of a derivation.",
 )
+COMPLETENESS_MISDIRECTED_REQUIREMENT = _rule(
+    "completeness/misdirected-requirement",
+    "A law requires a unit that is neither an assumption or an operation of a model, a law of a"
+    " background or a model, nor a posit or a consequence of a derivation, or requires itself.",
+)
 COMPLETENESS_INHERITED_PRESUPPOSITION = _rule(
     "completeness/inherited-presupposition",
     "A claim restates a presupposition of the question that its answer answers.",
@@ -439,6 +444,10 @@ DERIVATION_UNRECORDED_DESCENT = _rule(
     "derivation/unrecorded-descent",
     "A law marked derived names neither a derivation that states it as a consequence nor a"
     " published origin.",
+)
+DERIVATION_RESTATED_PREMISES = _rule(
+    "derivation/restated-premises",
+    "A law whose descent a derivation records also lists the units that it requires.",
 )
 DERIVATION_UNBOUND_SLOT = _rule(
     "derivation/unbound-slot",

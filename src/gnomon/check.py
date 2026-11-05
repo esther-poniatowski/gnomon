@@ -509,7 +509,9 @@ def _operators(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
 def _descent(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The laws of a model or a background marked derived, against the derivations that state
     them."""
-    return unrecorded_descents(record, ctx.descents)
+    return unrecorded_descents(record, ctx.descents) + c.misdirected_requirements(
+        record, ctx.workspace.by_id
+    )
 
 
 def _derivation(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:

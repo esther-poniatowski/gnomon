@@ -88,7 +88,9 @@ laws:                            # L: dependences linking the terms of the model
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
     reading: "THE LAW IN WORDS"
     warrant:                     # derived (from the laws of the background or of a parent, through the operations of the model) | posited | fitted | measured
-    rests_on: "THE LAWS, THE ASSUMPTION OR THE DATA THAT THE WARRANT REFERS TO"   # a law derived through an operation, such as a limit or an approximation, names that operation
+    requires:                    # optional; one entry per unit that the law rests on, by its dotted identifier
+      - RECORD.UNIT
+    rests_on: "WHAT THE WARRANT REFERS TO BEYOND THE UNITS REQUIRED"   # in words, only what `requires` cannot name, such as a source or a data set
     origin: "POINTER TO THE SOURCE OF THE LAW: A PUBLICATION, A DATA SET OR A DERIVATION"
     range: "EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE LAW IS ESTABLISHED"   # omit when the law is established across the whole model
 

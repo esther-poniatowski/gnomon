@@ -147,3 +147,31 @@ def test_a_settled_obligation_passes_on_the_exposure_of_its_derivation() -> None
     assessment["obligations"][0]["verdict"] = "pass"
     found = {f.unit: f.via for f in answer_exposure(records, ANSWER)}
     assert found[f"{DERIVATION}.slowest-dominates"] == f"derivation {DERIVATION}"
+
+
+MODEL = "mod.grokking.effective-representation"
+
+
+def test_a_law_passes_on_the_units_that_it_requires() -> None:
+    records = _records()
+    records[ANSWER]["grounds"] = [{"id": "g", "record": FLOW}]
+    records[ANSWER]["route"]["derivations"] = []
+    model = records[MODEL]
+    model["assumptions"] = [
+        {"id": "fast-decoder", "assumption": "the decoder fits first", "motive": "limit"}
+    ]
+    law = next(entry for entry in model["laws"] if entry["symbol"] == "representation_flow")
+    law["requires"] = [
+        f"{MODEL}.fast-decoder",
+        f"{MODEL}.effective-law",
+        f"{DERIVATION}.quality-tracks-slow-mode",
+    ]
+    found = {f.unit: (f.kind, f.reason, f.via) for f in answer_exposure(records, ANSWER)}
+    via = f"law {FLOW}"
+    assert found[f"{MODEL}.fast-decoder"] == (
+        "assumption",
+        "limit assumption, removable unknown",
+        via,
+    )
+    assert found[f"{MODEL}.effective-law"] == ("operation", "uncontrolled operation", via)
+    assert found[f"{DERIVATION}.quality-tracks-slow-mode"] == ("posit", "not confirmed", via)

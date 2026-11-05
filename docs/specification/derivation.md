@@ -130,4 +130,4 @@ The checks of a derivation read these fields as follows. This list is the one st
 - each move yields something that it does not take, and its outputs reach an outcome, a test of a posit or an interpretation cited by the record (`derivation/idle-move`);
 - each consequence of the root sought names its record, unless the derivation serves the law or the operation stating it (`derivation/unrecorded-consequence`), and a law named as the record of a consequence is marked derived (`derivation/underived-record`);
 - each slot is bound by a move, unless an impasse stops the route that the slot opens (`derivation/unbound-slot`);
-- each law marked derived names a derivation stating it as a consequence, or a published origin (`derivation/unrecorded-descent`).
+- each law marked derived names a derivation stating it as a consequence, or a published origin (`derivation/unrecorded-descent`), and a law whose descent a derivation records lists no units that it requires, since the derivation states its premises (`derivation/restated-premises`).

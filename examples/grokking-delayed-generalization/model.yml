@@ -104,7 +104,8 @@ laws:
     expression: "diff(Rrep, step) = -eta_rep * Hrep * (Rrep - Rstar)"
     reading: "The effective theory relaxes the departure of the normalized embedding geometry from its structured state along the modes of its Hessian."
     warrant: posited
-    rests_on: "The law rests on the operation effective-law, and on a published effective loss [liu2022]."
+    requires: [mod.grokking.effective-representation.effective-law]
+    rests_on: "A published effective loss of the representation [liu2022]."
     origin: "https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"
   - name: "timescale of representation learning"
     symbol: representation_time

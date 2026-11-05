@@ -663,15 +663,31 @@ properties:
           - 'null'
           title: Warrant
           description: The warrant of the record.
+        requires:
+          type:
+          - array
+          - 'null'
+          x-comment: optional; one entry per unit that the law rests on, by its dotted identifier
+          title: Requires
+          description: The units on which the law rests, each by its dotted identifier, an assumption or an
+            operation of a model, a law of a background or of a model, or a posit or a consequence of a
+            derivation; a law whose descent a derivation records leaves its premises to that derivation.
+          items:
+            type:
+            - string
+            - 'null'
+            x-template: RECORD.UNIT
+            x-kind: label
         rests_on:
           type:
           - string
           - 'null'
-          x-template: '"THE LAWS, THE ASSUMPTION OR THE DATA THAT THE WARRANT REFERS TO"'
+          x-template: '"WHAT THE WARRANT REFERS TO BEYOND THE UNITS REQUIRED"'
           x-kind: markdown-line
-          x-comment: a law derived through an operation, such as a limit or an approximation, names that operation
+          x-comment: in words, only what `requires` cannot name, such as a source or a data set
           title: Rests on
-          description: a law derived through an operation, such as a limit or an approximation, names that operation
+          description: What the warrant of the law refers to beyond the units that it requires, in words,
+            such as a source or a data set.
         origin:
           type:
           - string
