@@ -107,3 +107,14 @@ def test_the_view_states_the_kind_of_each_unit() -> None:
     assert kinds[f"{DERIVATION}.slowest-dominates"] == "move"
     assert kinds["mod.grokking.effective-representation.decoder-step"] == "operation"
     assert list(exposure_rows({})) == []
+
+
+def test_a_consequence_carries_the_least_favourable_error_upstream() -> None:
+    records = _records()
+    found = {f.unit: f.reason for f in answer_exposure(records, ANSWER)}
+    scale = f"{DERIVATION}.scale-law"
+    assert found[scale] == "controlled error, within the regimes of slowest-dominates"
+    move = next(m for m in records[DERIVATION]["moves"] if m["id"] == "solve-modes")
+    move["warrant"]["error"] = "singular"
+    found = {f.unit: f.reason for f in answer_exposure(records, ANSWER)}
+    assert found[scale] == "singular error, within the regimes of slowest-dominates, solve-modes"

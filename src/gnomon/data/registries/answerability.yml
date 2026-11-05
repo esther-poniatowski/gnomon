@@ -1,12 +1,13 @@
 # Registry of the conditions of answerability: their order, their dependencies on each route, and the
-# activities that act on each condition, with the norm that the note of each activity states. The notes
-# own these contents: `docs/epistemology/objects/question/conditions-of-answerability.md` the conditions
-# and their dependencies, `docs/procedures/inquiry/next-act.md` the map from conditions to activities
-# (docs/adr/registries-as-source.md). `gnomon status` reads this registry to compute the open conditions
-# of a question and the acts that address them, and `tests/test_gnomon/test_answerability_model.py`
-# checks that each quoted norm occurs in the note of its activity, that the dependency table of the
-# conditions note states the dependencies below route by route, and that the activity map of the
-# procedure note lists the activities below. The reasons are not checked; they justify each entry.
+# activities that act on each condition. The norm of each activity stays in the note of its family.
+# The notes own these contents: `docs/epistemology/objects/question/conditions-of-answerability.md`
+# the conditions and their dependencies, `docs/procedures/inquiry/next-act.md` the map from
+# conditions to activities (docs/adr/registries-as-source.md). `gnomon status` reads this registry to
+# compute the open conditions of a question and the acts that address them, and
+# `tests/test_gnomon/test_answerability_model.py` checks that each activity of the map has a norm in
+# the note of its family, that the dependency table of the conditions note states the dependencies
+# below route by route, and that the activity map of the procedure note lists the activities below.
+# The reasons are not checked; they justify each entry.
 
 id: registry.answerability
 type: answerability-registry
@@ -32,105 +33,55 @@ dependencies:
   bridging: {both: [access, answer type], selection: [discrimination]}
   representation: {both: [access, answer type]}
 
-# The activities that act on each condition, with the norm that the activity note states.
+# The activities that act on each condition. An activity that revises a refuted condition is listed
+# among the revisions of the procedure note, not here, since its operation assumes an earlier failure.
 activities:
-  - {id: explication, condition: definiteness, reason: it yields an exact concept,
-     norm: "the explicatum is similar to the explicandum, exact, fruitful and simple"}
-  - {id: explicit-definition, condition: definiteness, reason: it yields an eliminable definition,
-     norm: "eliminability: the new term can be replaced by its definition in every formula"}
-  - {id: operationalization, condition: definiteness, reason: it yields an operational criterion,
-     norm: "the procedure assigns values on a stated scale"}
-  - {id: concept-revision, condition: definiteness, reason: it revises a concept,
-     norm: "the revised concept covers the anomalous phenomenon and keeps the prior successes of the concept"}
-  - {id: delimitation, condition: definiteness, reason: it writes the formal declarations of the target,
-     norm: "every declared constituent and every shared variable occurs in at least one admissible answer type of the question"}
-  - {id: formalization, condition: definiteness, reason: it resolves the symbols of a model,
-     norm: "every symbol resolves to a declaration"}
-  - {id: phenomenon-specification, condition: definiteness, reason: it raises a phenomenon to commitment specified,
-     norm: "each observable is an expression over the declared quantities of the target"}
-  - {id: question-formulation, condition: answer type, reason: it types the answer space,
-     norm: "the answer space is typed, and the presuppositions of the question are stated"}
-  - {id: delimitation, condition: answer type, reason: it fixes the extent through the target,
-     norm: "every declared constituent and every shared variable occurs in at least one admissible answer type of the question"}
-  - {id: task-specification, condition: answer type, reason: it fixes the components of the epistemic task,
-     norm: "the epistemic aim is admitted by the type of result of the problem"}
-  - {id: question-revision, condition: answer type, reason: it changes a component of the epistemic task after a failure,
-     norm: "the revised question serves the problem of the original"}
-  - {id: phenomenon-detection, condition: soundness, reason: it shows the topic presupposition,
-     norm: "the feature is stable across independent procedures, replications included, and confounders and artefacts are controlled"}
-  - {id: derivation, condition: soundness, reason: it derives an existence presupposition,
-     norm: "each move is licensed by its warrant"}
-  - {id: abduction, condition: candidates, reason: it proposes a candidate,
-     norm: "the hypothesis is worth pursuing: it deserves testing, and its truth is not claimed"}
-  - {id: induction, condition: candidates, reason: it proposes a candidate,
-     norm: "the predicates of the generalization are projectible"}
-  - {id: analogical-inference, condition: candidates, reason: it proposes a candidate,
-     norm: "the similarities are relevant to the transferred property, and the known differences are not"}
-  - {id: causal-inference, condition: candidates, reason: it proposes a candidate,
-     norm: "the effect is identifiable: the stated assumptions and the data determine the target quantity uniquely"}
-  - {id: decomposition-localization, condition: candidates, reason: it proposes a candidate,
-     norm: "each component of the model maps onto a constituent of the target or onto a declared admissible part"}
-  - {id: model-analogy, condition: candidates, reason: it proposes or extends a candidate from a source model,
-     norm: "the mapping preserves the relations relevant to the phenomenon, and no known difference defeats the transfer"}
-  - {id: de-idealization, condition: candidates, reason: it corrects an idealized candidate,
-     norm: "a correction to the idealized result is known"}
-  - {id: idealization, condition: candidates, reason: it revises a candidate,
-     norm: "the motive is stated, and the condition of its kind holds"}
-  - {id: abstraction, condition: candidates, reason: it revises a candidate,
-     norm: "the omitted factors are named, and no claim of the answer bears on them"}
-  - {id: formalization, condition: candidates, reason: it states a candidate in declared symbols,
-     norm: "every symbol resolves to a declaration"}
-  - {id: fitting, condition: candidates, reason: it fixes the parameters of a candidate,
-     norm: "the estimator and the uncertainty of each estimate are stated"}
-  - {id: derivation, condition: candidates, reason: a derived law enters a candidate,
-     norm: "each move is licensed by its warrant"}
-  - {id: critique, condition: candidates, reason: it names objections to a candidate,
-     norm: "each objection is named with its ground"}
-  - {id: admissibility-check, condition: candidates, reason: it applies the admissibility tests that make up the condition,
-     norm: "each admissibility test is applied to the declared specifications, with its evidence"}
-  - {id: model-assembly, condition: candidates, reason: it builds a candidate model from the target and its admitted laws,
-     norm: "every law of the model is an admitted law or is derived from admitted laws"}
-  - {id: result-retrieval, condition: candidates, reason: it proposes an accepted result as a candidate,
-     norm: "the accepted claim has the answer type of the question"}
-  - {id: experimental-design, condition: discrimination, reason: its outcomes must discriminate the rivals,
-     norm: "the possible outcomes discriminate the rival answers to the question: each rival predicts a different outcome"}
-  - {id: derivation, condition: discrimination, reason: it gives the consequences of one candidate,
-     norm: "each move is licensed by its warrant"}
-  - {id: simulation, condition: discrimination, reason: it gives the consequences of one candidate,
-     norm: "verification holds: the code solves the equations of the model"}
-  - {id: model-prediction, condition: discrimination, reason: it gives the consequences of one candidate,
-     norm: "the values are derived from the model under the stated conditions of the target"}
-  - {id: thought-experiment, condition: discrimination, reason: it gives the consequences of one candidate,
-     norm: "the conclusion follows by an argument from the premises of the scenario"}
-  - {id: consequence-comparison, condition: discrimination, reason: it states where the consequences of rival candidates differ,
-     norm: "the consequences are derived under one set of conditions"}
-  - {id: experimental-design, condition: access, reason: its output, a design, fixes the procedure that obtains the quantity,
-     norm: "the possible outcomes discriminate the rival answers to the question"}
-  - {id: method-design, condition: access, reason: its output, a method, fixes the procedure that obtains the answer,
-     norm: "on every admissible input, an execution stops after finitely many steps"}
-  - {id: scheme-design, condition: access, reason: its output, a scheme, fixes the reasoning that obtains the answer,
-     norm: "under its conditions of application and given its posits, each step is licensed by a warrant and the steps yield the stated effect"}
-  - {id: operationalization, condition: access, reason: it states the procedure that obtains values,
-     norm: "the procedure assigns values on a stated scale"}
-  - {id: derivation, condition: bridging, reason: it derives a linking lemma,
-     norm: "each move is licensed by its warrant"}
-  - {id: background-appraisal, condition: bridging, reason: it admits an auxiliary law,
-     norm: "each admitted law carries a warrant, an origin and a range"}
-  - {id: operationalization, condition: bridging, reason: it states a scale, which a measurement model then validates,
-     norm: "the procedure assigns values on a stated scale"}
-  - {id: validation, condition: representation, reason: it judges the adequacy of a model for the purpose of the question,
-     norm: "the model is adequate for that purpose"}
-  - {id: robustness-analysis, condition: representation, reason: it checks a result across models,
-     norm: "the result holds across models whose auxiliary assumptions are independent"}
-  - {id: de-idealization, condition: representation, reason: it checks stability under a known correction,
-     norm: "each conclusion is shown to be stable under that correction or is corrected"}
-  - {id: transfer, condition: representation, reason: it licenses an extrapolation between classes,
-     norm: "structural similarity licenses the extrapolation"}
-  - {id: model-prediction, condition: representation, reason: it gives values of the model for the target,
-     norm: "the values are derived from the model under the stated conditions of the target"}
-  - {id: testing, condition: representation, reason: it tests a prediction of the model against the target,
-     norm: "the test is severe: it would probably have detected an error, had the hypothesis been false"}
-  - {id: binding, condition: representation, reason: it states the pairs through which a model is compared with its target,
-     norm: "the binding denotes the phenomenon"}
-  - {id: keying, condition: representation, reason: it states the map that converts a feature of the model into a feature of the target,
-     norm: "the key states its kind"}
+  - {id: explication, condition: definiteness, reason: it yields an exact concept}
+  - {id: explicit-definition, condition: definiteness, reason: it yields an eliminable definition}
+  - {id: operationalization, condition: definiteness, reason: it yields an operational criterion}
+  - {id: concept-revision, condition: definiteness, reason: it revises a concept}
+  - {id: delimitation, condition: definiteness, reason: it writes the formal declarations of the target}
+  - {id: formalization, condition: definiteness, reason: it resolves the symbols of a model}
+  - {id: phenomenon-specification, condition: definiteness, reason: it raises a phenomenon to commitment specified}
+  - {id: question-formulation, condition: answer type, reason: it types the answer space}
+  - {id: delimitation, condition: answer type, reason: it fixes the extent through the target}
+  - {id: task-specification, condition: answer type, reason: it states the components of the epistemic task over declared symbols}
+  - {id: phenomenon-detection, condition: soundness, reason: it shows the topic presupposition}
+  - {id: derivation, condition: soundness, reason: it derives an existence presupposition}
+  - {id: abduction, condition: candidates, reason: it proposes a candidate}
+  - {id: induction, condition: candidates, reason: it proposes a candidate}
+  - {id: analogical-inference, condition: candidates, reason: it proposes a candidate}
+  - {id: causal-inference, condition: candidates, reason: it proposes a candidate}
+  - {id: decomposition-localization, condition: candidates, reason: it proposes a candidate}
+  - {id: model-analogy, condition: candidates, reason: it proposes or extends a candidate from a source model}
+  - {id: de-idealization, condition: candidates, reason: it corrects an idealized candidate}
+  - {id: idealization, condition: candidates, reason: it revises a candidate}
+  - {id: abstraction, condition: candidates, reason: it revises a candidate}
+  - {id: formalization, condition: candidates, reason: it states a candidate in declared symbols}
+  - {id: fitting, condition: candidates, reason: it fixes the parameters of a candidate}
+  - {id: derivation, condition: candidates, reason: a derived law enters a candidate}
+  - {id: critique, condition: candidates, reason: it names objections to a candidate}
+  - {id: admissibility-check, condition: candidates, reason: it applies the admissibility tests that make up the condition}
+  - {id: model-assembly, condition: candidates, reason: it builds a candidate model from the target and its admitted laws}
+  - {id: result-retrieval, condition: candidates, reason: it proposes an accepted result as a candidate}
+  - {id: experimental-design, condition: discrimination, reason: its outcomes must discriminate the rivals}
+  - {id: derivation, condition: discrimination, reason: it gives the consequences of one candidate}
+  - {id: simulation, condition: discrimination, reason: it gives the consequences of one candidate}
+  - {id: model-prediction, condition: discrimination, reason: it gives the consequences of one candidate}
+  - {id: thought-experiment, condition: discrimination, reason: it gives the consequences of one candidate}
+  - {id: consequence-comparison, condition: discrimination, reason: it states where the consequences of rival candidates differ}
+  - {id: experimental-design, condition: access, reason: its output, a design, fixes the procedure that obtains the quantity}
+  - {id: method-design, condition: access, reason: its output, a method, fixes the procedure that obtains the answer}
+  - {id: scheme-design, condition: access, reason: its output, a scheme, fixes the reasoning that obtains the answer}
+  - {id: operationalization, condition: access, reason: it states the procedure that obtains values}
+  - {id: derivation, condition: bridging, reason: it derives a linking lemma}
+  - {id: background-appraisal, condition: bridging, reason: it admits an auxiliary law}
+  - {id: operationalization, condition: bridging, reason: it states a scale, which a measurement model then validates}
+  - {id: validation, condition: representation, reason: it judges the adequacy of a model for the purpose of the question}
+  - {id: robustness-analysis, condition: representation, reason: it checks a result across models}
+  - {id: de-idealization, condition: representation, reason: it checks stability under a known correction}
+  - {id: transfer, condition: representation, reason: it licenses an extrapolation between classes}
+  - {id: model-prediction, condition: representation, reason: it gives values of the model for the target}
+  - {id: testing, condition: representation, reason: it tests a prediction of the model against the target}
+  - {id: binding, condition: representation, reason: it states the pairs through which a model is compared with its target}
+  - {id: keying, condition: representation, reason: it states the map that converts a feature of the model into a feature of the target}

@@ -54,6 +54,11 @@ ground_types:
 # that is not exact.
 non_routine_kinds: [take-limit, truncate, require-self-consistency, impose, match, import]
 
+# The classes of error of a warrant, from the most to the least favourable: a consequence carries the
+# least favourable class among the moves upstream of it, as the explicative derivation states
+# (`docs/epistemology/processes/activities/model-analysis.md#^explicative-derivation`).
+error_order: [exact, controlled, uncontrolled, singular]
+
 # The tests that confirm a posit, with the standard that a computation must meet.
 confirming_tests: [exact, approximation]
 confirming_computation: certified

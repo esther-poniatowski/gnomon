@@ -105,8 +105,11 @@ def has_cycle(edges: Mapping[str, set[str]]) -> bool:
 
 
 @pytest.mark.parametrize("entry", MODEL["activities"], ids=lambda e: f"{e['id']}:{e['condition']}")
-def test_norm_quotation_occurs(entry: Mapping[str, Any]) -> None:
-    assert normalize(entry["norm"]) in activity_norms()[entry["id"]]
+def test_each_mapped_activity_has_a_norm(entry: Mapping[str, Any]) -> None:
+    """The norm of an activity lives in the note of its family alone, so the registry names the
+    activity and its condition, and quotes no norm."""
+    assert "norm" not in entry
+    assert activity_norms().get(entry["id"])
 
 
 def test_mapped_activities_exist_in_the_registry() -> None:

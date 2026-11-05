@@ -90,6 +90,7 @@ activities:
     inputs:
       - question
       - problem
+      - target-specification
     output: question
     norm: norm.task-specification
     mode: non-inferential

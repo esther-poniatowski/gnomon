@@ -25,6 +25,8 @@ Exposure
 
 Functions
 ---------
+combined_error
+    Return the class of error of a consequence of a derivation, and the moves that set it.
 answer_exposure
     Return the units that expose one answer.
 exposure_rows
@@ -78,6 +80,41 @@ def _confirming() -> tuple[frozenset[str], str | None]:
     """Return the tests that confirm a posit and the standard of a confirming computation."""
     registry: dict[str, Any] = yaml.safe_load(REGISTRY.read_text(encoding="utf-8")) or {}
     return frozenset(registry.get("confirming_tests") or []), registry.get("confirming_computation")
+
+
+@cache
+def _error_order() -> tuple[str, ...]:
+    """Return the classes of error of a warrant, from the most to the least favourable."""
+    registry: dict[str, Any] = yaml.safe_load(REGISTRY.read_text(encoding="utf-8")) or {}
+    return tuple(str(e) for e in registry.get("error_order") or [])
+
+
+def combined_error(record: Mapping[str, Any], consequence: str) -> tuple[str, list[str]]:
+    """Return the class of error that a consequence of a derivation carries, the least favourable
+    among the moves upstream of it, and those of its moves whose warrant is not exact, within whose
+    regimes the consequence holds. A warrant that states no error counts as the least favourable.
+
+    >>> derivation = {"moves": [{"id": "a", "inputs": ["p"], "outputs": ["x"],
+    ...                          "warrant": {"error": "controlled"}},
+    ...                         {"id": "b", "inputs": ["x"], "outputs": ["y"],
+    ...                          "warrant": {"error": "exact"}}],
+    ...               "consequences": [{"id": "c", "from": "y"}]}
+    >>> combined_error(derivation, "c")
+    ('controlled', ['a'])
+    """
+    order = _error_order()
+    stated = _by_id(record, "consequences").get(consequence) or {}
+    producers, _ = upstream(record, _names(stated.get("from")))
+    worst, inexact = 0, []
+    for ident, move in sorted(_by_id(record, "moves").items()):
+        if ident not in producers:
+            continue
+        error = _mapping(move.get("warrant")).get("error")
+        rank = order.index(error) if error in order else len(order)
+        if rank:
+            inexact.append(ident)
+        worst = max(worst, rank)
+    return (order[worst] if worst < len(order) else "not stated"), inexact
 
 
 def _entries(record: Mapping[str, Any], name: str) -> list[Mapping[str, Any]]:
@@ -200,6 +237,11 @@ class _Walk:
         refuted = {str(r.get("target")) for r in _entries(record, "refutations") if r.get("target")}
         for ident in sorted(chosen & refuted):
             self.expose(f"{name}.{ident}", "consequence", "refuted", via)
+        for ident in sorted(chosen):
+            error, inexact = combined_error(record, ident)
+            if inexact:
+                reason = f"{error} error, within the regimes of {', '.join(inexact)}"
+                self.expose(f"{name}.{ident}", "consequence", reason, via)
         targets = {str(stated[c].get("from")) for c in chosen if stated[c].get("from")}
         needed = self._units(name, record, targets, refuted)
         for premise in sorted(n for n in needed if "." in n):
