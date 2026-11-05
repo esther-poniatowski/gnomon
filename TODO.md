@@ -67,8 +67,8 @@ A researcher fills the templates and the checks read them, so the registries, th
 	- [x] Correct the article in the description of the base schemas of the answer, the assessment, the itinerary and the operator record, which read "The fields of a answer record".
 	- [ ] Correct the [itinerary specification](docs/specification/itinerary.md), which cites a design and a concept as product types without a record kind, whereas the [registry of product types](src/gnomon/data/registries/product-types.yml) maps both to records.
 - [ ] Apply the corrections of the Mixture pilot to the records: 🆔 research-corrections
-	- [ ] a list, on each law of the [model template](src/gnomon/data/templates/model.yml), of the identifiers of the assumptions that the law requires (`assumptions[].id`), since only an answer classifies an assumption as an idealization of its target;
-	- [ ] typed premises in place of the free string `rests_on` of the laws of the [model template](src/gnomon/data/templates/model.yml) and of the [background template](src/gnomon/data/templates/background.yml); a decision whether the output parts of a level, which `assembly-schema` cites, are answers of their own, since an answer now holds one typed claim;
+	- [x] typed premises on each law of the [model template](src/gnomon/data/templates/model.yml) and of the [background template](src/gnomon/data/templates/background.yml), in the field `requires`, as the [requirements of a law](docs/adr/law-requirements.md) state; the assumptions keep their own homes, and no record kind `assumption` is added;
+	- [ ] a decision whether the output parts of a level, which `assembly-schema` cites, are answers of their own, since an answer now holds one typed claim;
 	- [ ] the warrant `numerical`, the grade of an idealization, supersession of a retracted law, and the open parts of gaps excluded by a question;
 	- [ ] the verdicts `partial` and `unsupported`, identifiers on obligations, and verdicts per law that reference the step supplying their evidence;
 - [ ] Give each candidate change of the shared schema a review state: approved, declined or deferred. 🆔 trial-candidates
