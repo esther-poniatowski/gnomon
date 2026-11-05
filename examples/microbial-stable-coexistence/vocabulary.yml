@@ -76,6 +76,11 @@ symbols:
   - res
   - pop
   name: resource production
+- symbol: regular_rates
+  declared_in: bg.microbial-formal-population-models.population-dynamics
+  block: laws
+  signature: []
+  name: regular per-capita rates
 - symbol: size_bound
   declared_in: bg.microbial-formal-population-models.population-dynamics
   block: laws
@@ -308,6 +313,8 @@ operators:
   - drawn_from
   - empty
   - enum
+  - exists
+  - forall
   - ft
   - grad
   - implies

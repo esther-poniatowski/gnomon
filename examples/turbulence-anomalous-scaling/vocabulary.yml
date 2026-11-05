@@ -239,6 +239,8 @@ operators:
   - drawn_from
   - empty
   - enum
+  - exists
+  - forall
   - ft
   - grad
   - implies

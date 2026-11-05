@@ -22,6 +22,7 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `pairwise` | bg.microbial-formal-population-models.population-dynamics | laws | pop, pop | direct pairwise influence |
 | `pools_nonneg` | bg.microbial-formal-population-models.population-dynamics | laws | res | invariance of nonnegative resources |
 | `produce` | bg.microbial-formal-population-models.population-dynamics | laws | res, pop | resource production |
+| `regular_rates` | bg.microbial-formal-population-models.population-dynamics | laws | — | regular per-capita rates |
 | `size_bound` | bg.microbial-formal-population-models.population-dynamics | laws | — | community size |
 | `turnover` | bg.microbial-formal-population-models.population-dynamics | laws | res | evolution of the resources |
 | `drawdown` | bg.microbial-formal-population-models.population-dynamics | organization | — | resource drawdown |
@@ -79,5 +80,5 @@ The nodes are kinds, not identified members: which tuples are joined is fixed by
 
 ## Operators
 
-- Canonical: `abs`, `adjoint`, `and`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `not`, `or`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
+- Canonical: `abs`, `adjoint`, `and`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `exists`, `forall`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `not`, `or`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
 - Declared by this problem: `community_jacobian` (the Jacobian of the complete dynamics of the member model at a selected equilibrium), `equilibrium` (the predicate that a complete member state belongs to an equilibrium of the dynamics of the member model), `population_component` (the component of a complete member state that holds the population abundances).
