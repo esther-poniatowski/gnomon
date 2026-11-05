@@ -48,7 +48,7 @@ properties:
     x-template: provisional
     x-vocabulary: .status
     title: Status
-    description: The status of the record.
+    description: the maturity of the assessment record, taken by every field that the block `maturity` leaves unmarked
   assesses:
     type:
     - string
@@ -93,42 +93,42 @@ properties:
             x-template: '{verdict: pending, evidence: "DERIVATION, SIMULATION, MEASUREMENT OR COMPARISON
               THAT SETTLES THE TEST"}'
             title: Product
-            description: The product of the record.
+            description: the verdict on whether the claim is a direct answer of the type that the question fixes, with its evidence
           scope:
             type:
             - object
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
             title: Scope
-            description: The scope of the record.
+            description: the verdict on whether the domain of the claim covers the reference class restricted by the domain, with its evidence
           grain:
             type:
             - object
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
             title: Grain
-            description: The grain of the record.
+            description: the verdict on whether the claim specifies the observable at the grain of the question, with its evidence
           individuation:
             type:
             - object
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
             title: Individuation
-            description: The individuation of the record.
+            description: the verdict on whether each bearer of the model is a unit mapped from the constituents of the system, or a unit of the model alone, with its evidence
           binding:
             type:
             - object
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
             title: Binding
-            description: The binding of the record.
+            description: the verdict on whether the answer cites one binding of each model on which it runs to the phenomenon, with its evidence
           modal-strength:
             type:
             - object
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
             title: Modal-strength
-            description: The modal-strength of the record.
+            description: the verdict on whether the answer claims the modal strength that the question requests, with its evidence
           values:
             type:
             - object
@@ -220,28 +220,28 @@ properties:
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
             title: Phenomenon-established
-            description: The phenomenon-established of the record.
+            description: the verdict on whether the phenomenon is established before it is explained, with its evidence
           foil-evidence:
             type:
             - object
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
             title: Foil-evidence
-            description: The foil-evidence of the record.
+            description: the verdict on whether the evidence for the contrast comes from the foil itself, with its evidence
           law-warrant:
             type:
             - object
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
             title: Law-warrant
-            description: The law-warrant of the record.
+            description: the verdict on whether each ground meets what its role requires, with its evidence
           closure:
             type:
             - object
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
             title: Closure
-            description: The closure of the record.
+            description: the verdict on whether the route fits the target, as the closure of its admitted laws decides, with its evidence
           fidelity:
             type:
             - object
@@ -266,14 +266,14 @@ properties:
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
             title: Robustness
-            description: The robustness of the record.
+            description: the verdict on whether the claim survives each idealization among its grounds, with its evidence
           selection:
             type:
             - object
             - 'null'
             x-template: '{verdict: pending, evidence: ""}'
             title: Selection
-            description: The selection of the record.
+            description: the verdict on whether a claim about some members extends to the class after a check for selection bias, with its evidence
         title: warrant
         description: per criterion of the warrant table, a verdict with the evidence that settles it
         examples:
@@ -292,7 +292,7 @@ properties:
               x-template: '"NAME OF THE CONSTRAINT"'
               x-kind: markdown-line
               title: Constraint
-              description: The constraint of the record.
+              description: the name of the constraint of the problem that the entry judges
             verdict:
               type:
               - string
@@ -300,7 +300,7 @@ properties:
               x-template: pending
               x-kind: label
               title: Verdict
-              description: The verdict of the record.
+              description: 'the verdict on the constraint: pending, pass, fail or not-applicable'
             evidence:
               type:
               - string
@@ -308,7 +308,7 @@ properties:
               x-template: '""'
               x-kind: markdown-line
               title: Evidence
-              description: The evidence of the record.
+              description: the derivation, the simulation, the measurement or the comparison that settles the verdict
         x-comment: an assessment of a construct, in place of the two levels above; one entry per constraint
           of the problem
         title: constraints
@@ -334,7 +334,7 @@ properties:
           x-template: COMPARISON
           x-kind: label
           title: Id
-          description: The id of the record.
+          description: a name of the comparison, unique within the assessment, by which a verdict cites it
         binding:
           type:
           - string
@@ -342,7 +342,7 @@ properties:
           x-template: bind.TOPIC.NAME
           x-kind: label
           title: Binding
-          description: The binding of the record.
+          description: the identifier of the binding from which the comparison is computed
         version:
           type:
           - string
@@ -384,7 +384,7 @@ properties:
           x-template: pending
           x-vocabulary: obligations.verdict
           title: Verdict
-          description: The verdict of the record.
+          description: 'the verdict on the proof obligation: pending, pass, fail or not-applicable'
         evidence:
           type:
           - string
@@ -392,7 +392,7 @@ properties:
           x-template: '"THE DERIVATION OR THE COUNTEREXAMPLE THAT SETTLES THE IMPLICATION"'
           x-kind: markdown-line
           title: Evidence
-          description: The evidence of the record.
+          description: the derivation or the counterexample that settles the implication
         derivation:
           type:
           - string
@@ -422,7 +422,7 @@ properties:
           - string
           - 'null'
           title: Virtue
-          description: The virtue of the record.
+          description: the virtue that the entry appraises
         assessment:
           type:
           - string
@@ -430,7 +430,7 @@ properties:
           x-template: '"THE RESULT OF THE OPERATIONAL QUESTION OF THAT VIRTUE FOR THIS ANSWER"'
           x-kind: markdown-line
           title: Assessment
-          description: The assessment of the record.
+          description: the result of the operational question of that virtue for this answer
         preferred_over:
           type:
           - string

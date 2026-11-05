@@ -45,7 +45,7 @@ properties:
     x-template: provisional
     x-vocabulary: .status
     title: Status
-    description: The status of the record.
+    description: the maturity of the background record, taken by every field that the block `maturity` leaves unmarked
   describes:
     type:
     - string
@@ -71,7 +71,7 @@ properties:
           x-template: '"NAME OF THE LAW"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the law
         symbol:
           type:
           - string
@@ -79,7 +79,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the law, unique within the record
         variant:
           type:
           - string
@@ -103,7 +103,7 @@ properties:
           - string
           - 'null'
           title: Role
-          description: The role of the record.
+          description: 'the role of the law: evolution, input-output, measurement, state-constraint, distribution or admissibility'
         expression:
           type:
           - string
@@ -120,14 +120,14 @@ properties:
           x-template: '"THE LAW IN WORDS"'
           x-kind: markdown-line
           title: Reading
-          description: The reading of the record.
+          description: the law in words
         warrant:
           x-vocabulary: laws.warrant
           type:
           - string
           - 'null'
           title: Warrant
-          description: The warrant of the record.
+          description: 'the provenance of the law: derived from other admitted laws, posited, fitted or measured'
         requires:
           type:
           - array
@@ -220,7 +220,7 @@ properties:
           x-template: '"NAME OF THE RELATION"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the relation
         symbol:
           type:
           - string
@@ -228,7 +228,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the relation, unique within the record
         variant:
           type:
           - string

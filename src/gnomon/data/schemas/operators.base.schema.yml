@@ -51,7 +51,7 @@ properties:
     x-template: system.TOPIC
     x-kind: label
     title: Target system
-    description: The target system of the record.
+    description: the identifier of the target system whose formulas use the operators
   base_scales:
     x-blank: true
     type:
@@ -101,7 +101,7 @@ properties:
           x-template: '"THE QUANTITY THAT THE OPERATOR COMPUTES"'
           x-kind: markdown-line
           title: name
-          description: The name of the record.
+          description: the quantity that the operator computes
           examples:
           - '"the restriction of a field to a region"'
         symbol:
@@ -111,7 +111,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: symbol
-          description: The symbol of the record.
+          description: the symbol of the operator, unique within the record
           examples:
           - '`restrict`, `community_jacobian`, `ntk`'
         notation:
@@ -144,7 +144,7 @@ properties:
           - 'null'
           x-template: '["SET EXPRESSION OVER DECLARED SYMBOLS OR A TYPE VARIABLE"]'
           title: signature
-          description: The signature of the record.
+          description: the set of each argument of the operator, as a set expression over declared symbols or a type variable
           examples:
           - '`["maps(Om, pow(reals, 3))"]`'
         values:
@@ -154,7 +154,7 @@ properties:
           x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS OR A TYPE VARIABLE"'
           x-kind: text
           title: values
-          description: The values of the record.
+          description: the set of the values of the operator, as a set expression over declared symbols or a type variable
           examples:
           - '`"maps(Om, reals)"`; `reals`'
         dimension:
@@ -169,7 +169,7 @@ properties:
           examples:
           - '`pure-argument` for an exponential'
     title: Operators
-    description: The operators of the record.
+    description: the operators that the formulas of the problem use beyond the canonical set, one entry per operator
     examples:
     - the restriction of a field to a region; the Jacobian of a community at equilibrium; the empirical
       neural tangent kernel

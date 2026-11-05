@@ -43,7 +43,7 @@ properties:
     x-template: planned
     x-vocabulary: .status
     title: Status
-    description: The status of the record.
+    description: 'the stage of the itinerary: planned, in-progress, completed or abandoned'
   addresses:
     type:
     - string
@@ -141,7 +141,7 @@ properties:
               x-template: PRODUCT-TYPE
               x-kind: label
               title: Type
-              description: The type of the record.
+              description: the product type of the output, from the registry of product types
             ref:
               type:
               - string
@@ -199,7 +199,7 @@ properties:
               x-template: pending
               x-vocabulary: steps.verdict
               title: Verdict
-              description: The verdict of the record.
+              description: 'the verdict of the norm on the step: pass, fail or pending'
             evidence:
               type:
               - string

@@ -44,7 +44,7 @@ properties:
     x-template: quest.TOPIC.NAME
     x-kind: label
     title: Answers
-    description: The answers of the record.
+    description: the identifier of the question that the answer answers
   claim:
     x-blank: true
     type:
@@ -58,7 +58,7 @@ properties:
         x-template: '"THE CLAIM IN WORDS"'
         x-kind: markdown-line
         title: Reading
-        description: The reading of the record.
+        description: the claim in words
       expression:
         type:
         - string
@@ -75,7 +75,7 @@ properties:
         x-template: '"THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION"'
         x-kind: markdown-line
         title: Caveat
-        description: The caveat of the record.
+        description: the content of the claim that the record leaves unstated, and the reason for the omission
       realizations:
         type:
         - array
@@ -90,7 +90,7 @@ properties:
               x-template: MAPPING
               x-kind: label
               title: Id
-              description: The id of the record.
+              description: a name of the realization, unique within the answer
             realizes:
               type:
               - string
@@ -107,7 +107,7 @@ properties:
               x-template: '"EXPRESSION OVER THE SYMBOLS SPECIFIC TO THE SUBSTRATE"'
               x-kind: text
               title: By
-              description: The by of the record.
+              description: an expression over the symbols specific to the substrate that realizes the role
             reading:
               type:
               - string
@@ -220,14 +220,14 @@ properties:
           x-template: GROUND
           x-kind: label
           title: Id
-          description: The id of the record.
+          description: a name of the ground, unique within the answer
         role:
           x-vocabulary: grounds.role
           type:
           - string
           - 'null'
           title: Role
-          description: The role of the record.
+          description: 'the part that the ground plays for the claim: an assumption, an idealization, a condition, a datum, a warrant or a criterion'
         content:
           type:
           - string
@@ -235,7 +235,7 @@ properties:
           x-template: '"THE GROUND IN WORDS"'
           x-kind: markdown-line
           title: Content
-          description: The content of the record.
+          description: the ground in words
         record:
           type:
           - string
@@ -273,7 +273,7 @@ properties:
           - string
           - 'null'
           title: Motive
-          description: The motive of the record.
+          description: 'for an idealization, the reason for making it: tractability, isolation or a limit'
         gain:
           type:
           - string
@@ -281,7 +281,7 @@ properties:
           x-template: '"THE DERIVATION THAT THE IDEALIZATION MAKES POSSIBLE, OR THE FACTOR THAT IT EXPOSES"'
           x-kind: markdown-line
           title: Gain
-          description: The gain of the record.
+          description: for an idealization, the derivation that it makes possible, or the factor that it exposes
         range:
           type:
           - string
@@ -289,14 +289,14 @@ properties:
           x-template: '"EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE IDEALIZATION HOLDS"'
           x-kind: text
           title: Range
-          description: The range of the record.
+          description: for an idealization, an expression over declared symbols satisfied wherever the idealization holds
         removable:
           x-vocabulary: grounds.removable
           type:
           - string
           - 'null'
           title: Removable
-          description: The removable of the record.
+          description: 'for an idealization, whether its distortion can be removed: controlled, ineliminable or unknown'
     x-comment: what the claim depends on; one entry per ground
     title: Grounds
     description: 'what the claim depends on per ground, its content, its *role*: `assumption` · `idealization`
@@ -323,7 +323,7 @@ properties:
           x-template: ABSTRACTION
           x-kind: label
           title: Id
-          description: The id of the record.
+          description: a name of the abstraction, unique within the answer
         factor:
           type:
           - string
@@ -331,7 +331,7 @@ properties:
           x-template: '"THE FACTOR LEFT OUT"'
           x-kind: markdown-line
           title: Factor
-          description: The factor of the record.
+          description: the factor that the abstraction leaves out
     x-comment: factors of the target that the claim leaves out and claims nothing about; a reason that
       a factor makes no difference is a ground with the role `assumption`
     title: Abstractions
@@ -353,7 +353,7 @@ properties:
           - string
           - 'null'
           title: Kind
-          description: The kind of the record.
+          description: 'the form of the dependence: a minimal set of grounds, a sensitivity analysis or a robustness analysis'
         grounds:
           type:
           - array
@@ -398,7 +398,7 @@ properties:
         - string
         - 'null'
         title: Kind
-        description: The kind of the record.
+        description: 'how the answer is obtained: a derivation, a proof, a simulation, an estimation or a measurement'
       runs_on:
         type:
         - array
@@ -508,14 +508,14 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Of
-          description: The of of the record.
+          description: the symbol of the value whose uncertainty the entry states
         form:
           x-vocabulary: uncertainty.form
           type:
           - string
           - 'null'
           title: Form
-          description: The form of the record.
+          description: 'the form of the uncertainty: an interval, a distribution or a bound'
         expression:
           type:
           - string
@@ -523,7 +523,7 @@ properties:
           x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Expression
-          description: The expression of the record.
+          description: an expression over declared symbols stating the uncertainty
     x-comment: fill when the claim assigns a value; one entry per value
     title: Uncertainty
     description: the uncertainty of each value, as an interval, a distribution or a bound
@@ -553,7 +553,7 @@ properties:
         - string
         - 'null'
         title: Value
-        description: The value of the record.
+        description: 'how the answer stands to its question: complete, partial, corrective or reformulating'
       denies:
         type:
         - string
@@ -593,7 +593,7 @@ properties:
           x-template: bind.TOPIC.NAME
           x-kind: label
           title: Record
-          description: The record of the record.
+          description: the identifier of one binding of the model to the phenomenon of the question
         version:
           type:
           - string
@@ -601,7 +601,7 @@ properties:
           x-template: VERSION
           x-kind: label
           title: Version
-          description: The version of the record.
+          description: the version of that binding on which the claim rests
     x-comment: fill when the route runs on a model other than the target and the claim bears on the target;
       one entry per model
     title: Binding
@@ -630,7 +630,7 @@ properties:
         x-template: '"THE PROPERTY THAT THE MODEL MUST HAVE FOR THAT USE"'
         x-kind: markdown-line
         title: Property
-        description: The property of the record.
+        description: the property that the model must have for the declared use
     x-comment: fill in place of a binding when the claim bears only on a model or on a formal class
     title: Use
     description: the purpose of an answer whose claim bears on no target a use such as `tool`, `proof-of-principle`,
@@ -664,7 +664,7 @@ properties:
                   x-template: phen.TOPIC.NAME.SYMBOL
                   x-kind: label
                   title: Of
-                  description: The of of the record.
+                  description: the observable or the feature whose value the entry states
                 across:
                   type:
                   - string
@@ -700,7 +700,7 @@ properties:
             title: Values
             description: one entry per observable or feature that the request covers, per source of variation
         title: '`description`'
-        description: The `description` of the record.
+        description: 'the block for the aim `description`: the values or the characterization of the observables and the features of the phenomenon'
         examples:
         - the frequency and the spatial extent of the gamma oscillations during visual stimulation
       exploration:
@@ -719,7 +719,7 @@ properties:
                 - string
                 - 'null'
                 title: Origin
-                description: The origin of the record.
+                description: whether the space is an input fixed by the question or an output produced by the answer
               observables:
                 type:
                 - array
@@ -742,7 +742,7 @@ properties:
                       x-template: SYMBOL
                       x-kind: label
                       title: Factor
-                      description: The factor of the record.
+                      description: the symbol of the varied factor
                     range:
                       type:
                       - string
@@ -750,9 +750,9 @@ properties:
                       x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
                       x-kind: text
                       title: Range
-                      description: The range of the record.
+                      description: a set expression over declared symbols giving the range of the factor
                 title: Varied
-                description: The varied of the record.
+                description: the factors varied across the space, each with its range
             x-comment: the observables and the varied factors
             title: Space
             description: the observables and the varied factors
@@ -767,7 +767,7 @@ properties:
                 - string
                 - 'null'
                 title: Origin
-                description: The origin of the record.
+                description: whether the criterion is an input fixed by the question or an output produced by the answer
               expression:
                 type:
                 - string
@@ -775,7 +775,7 @@ properties:
                 x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
                 x-kind: text
                 title: Expression
-                description: The expression of the record.
+                description: an expression over declared symbols stating the equivalence criterion
               reading:
                 type:
                 - string
@@ -783,7 +783,7 @@ properties:
                 x-template: '"THE CRITERION IN WORDS"'
                 x-kind: markdown-line
                 title: Reading
-                description: The reading of the record.
+                description: the criterion in words
             x-comment: the equivalence criterion that partitions the space
             title: Criterion
             description: the equivalence criterion that partitions the space
@@ -801,7 +801,7 @@ properties:
                   x-template: CLASS
                   x-kind: label
                   title: Id
-                  description: The id of the record.
+                  description: a name of the class, unique within the answer
                 pattern:
                   type:
                   - string
@@ -809,7 +809,7 @@ properties:
                   x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
                   x-kind: text
                   title: Pattern
-                  description: The pattern of the record.
+                  description: an expression over declared symbols stating the pattern of the class
                 reading:
                   type:
                   - string
@@ -817,7 +817,7 @@ properties:
                   x-template: '"THE PATTERN IN WORDS"'
                   x-kind: markdown-line
                   title: Reading
-                  description: The reading of the record.
+                  description: the pattern in words
                 detection:
                   x-comment: the result of the detection criterion of the phenomenon
                   x-vocabulary: aim_block.detection
@@ -830,7 +830,7 @@ properties:
             title: Classes
             description: one entry per class found
         title: '`exploration`'
-        description: The `exploration` of the record.
+        description: 'the block for the aim `exploration`: the space explored, its equivalence criterion, and the classes found'
         examples:
         - the collective states of a network as the ratio of excitation to inhibition varies, partitioned
           by the sign of the leading eigenvalue (criterion as input)
@@ -878,7 +878,7 @@ properties:
             title: Outputs
             description: one entry per predicted output
         title: '`prediction`'
-        description: The `prediction` of the record.
+        description: 'the block for the aim `prediction`: per predicted output, the condition of the target under which it is predicted, and its value or distribution'
         examples:
         - the gamma power when the stimulus contrast doubles
       explanation:
@@ -929,7 +929,7 @@ properties:
                   x-template: '"THE PROPERTY THAT MAKES THE LAW, THE STRUCTURE OR THE DERIVATION RELEVANT"'
                   x-kind: markdown-line
                   title: Determinant
-                  description: The determinant of the record.
+                  description: the property that makes the law, the structure or the derivation relevant
             x-comment: one entry per dependence of the core that the explanation reads
             title: Explanatory claim
             description: 'the claim that named dependences of the core are explanatory: they make the
@@ -960,7 +960,7 @@ properties:
                   x-template: FACTOR
                   x-kind: label
                   title: Id
-                  description: The id of the record.
+                  description: a name of the factor, unique within the answer
                 name:
                   type:
                   - string
@@ -968,14 +968,14 @@ properties:
                   x-template: '"NAME OF THE FACTOR"'
                   x-kind: markdown-line
                   title: Name
-                  description: The name of the record.
+                  description: the words that designate the factor
                 factor:
                   x-vocabulary: aim_block.factor
                   type:
                   - string
                   - 'null'
                   title: Factor
-                  description: The factor of the record.
+                  description: 'the kind of the factor: a condition on a quantity, a property of a structure or of a law, or a feature of the organization'
                 holds:
                   type:
                   - string
@@ -1058,7 +1058,7 @@ properties:
                     OMISSION"'
                   x-kind: markdown-line
                   title: Caveat
-                  description: The caveat of the record.
+                  description: the content of the factor that the record leaves unstated, and the reason for the omission
                 target_status:
                   x-comment: empty under a declared use
                   x-vocabulary: aim_block.target_status
@@ -1092,7 +1092,7 @@ properties:
             - the synaptic delay exceeds its critical value (condition; denoting); the connectivity has
               rank two (property of a structure; coarse-graining)
         title: '`explanation`'
-        description: The `explanation` of the record.
+        description: 'the block for the aim `explanation`: the contrastive explanandum, the explanatory claim, the relation and the factors'
         examples:
         - the account of the oscillation by an inhibitory delay
       modal_knowledge:
@@ -1106,7 +1106,7 @@ properties:
             - string
             - 'null'
             title: Modality
-            description: The modality of the record.
+            description: 'the modal claim: possible, impossible or necessary'
           property:
             type:
             - string
@@ -1123,7 +1123,7 @@ properties:
             x-template: '"THE SPACE OF ALTERNATIVES THAT THE ADMITTED LAWS AND THE DOMAIN FIX"'
             x-kind: markdown-line
             title: Space
-            description: The space of the record.
+            description: the space of alternatives that the admitted laws and the domain fix
           witness:
             type:
             - string
@@ -1143,7 +1143,7 @@ properties:
             title: Proof
             description: for an impossibility or a necessity
         title: '`modal-knowledge`'
-        description: The `modal-knowledge` of the record.
+        description: 'the block for the aim `modal-knowledge`: the modal claim, the space of alternatives, and the witness or the proof'
         examples:
         - a network without inhibitory neurons that oscillates at gamma frequency (witness)
       model_properties:
@@ -1157,7 +1157,7 @@ properties:
             - string
             - 'null'
             title: Form
-            description: The form of the record.
+            description: 'the form of the property that the claim states, or of the counterexample: a derived law, a regime, a limit, a structural property or a counterexample'
           discharges:
             type:
             - array
@@ -1167,7 +1167,7 @@ properties:
             title: Discharges
             description: the proof obligations of the question that the consequence discharges, by name
         title: '`model-properties`'
-        description: The `model-properties` of the record.
+        description: 'the block for the aim `model-properties`: the form of the property or of the counterexample, with the proof obligations that it discharges'
         examples:
         - the uniqueness of the fixed point of a rate network below a critical gain
     x-comment: 'fill for a complete or a partial answer only: keep the block of the aim of the question,
@@ -1191,14 +1191,14 @@ properties:
           x-template: ans.TOPIC.NAME
           x-kind: label
           title: Answer
-          description: The answer of the record.
+          description: the identifier of the other answer
         relation:
           x-vocabulary: relations.relation
           type:
           - string
           - 'null'
           title: Relation
-          description: The relation of the record.
+          description: 'how this answer stands to the other: it supports, presupposes, tests, defeats or revises it'
     x-comment: fill when the answer bears on another answer; one entry per link
     title: Relations
     description: 'the links to other answers per link, the other answer and the relation: `supports` ·

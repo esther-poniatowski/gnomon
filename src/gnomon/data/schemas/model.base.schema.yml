@@ -47,7 +47,7 @@ properties:
     x-template: provisional
     x-vocabulary: .status
     title: Status
-    description: The status of the record.
+    description: the maturity of the model record, taken by every field that the block `maturity` leaves unmarked
   background:
     x-blank: true
     type:
@@ -174,7 +174,7 @@ properties:
           x-template: '"KIND OF UNIT"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the kind of unit that the constituent collects
         symbol:
           type:
           - string
@@ -182,7 +182,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the constituent, unique within the record
         notation:
           type:
           - string
@@ -210,7 +210,7 @@ properties:
           x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Extent
-          description: The extent of the record.
+          description: a set expression over declared symbols naming the members that the constituent collects
         map:
           type:
           - string
@@ -243,7 +243,7 @@ properties:
           x-template: '"NAME OF THE SET"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the index set
         symbol:
           type:
           - string
@@ -251,7 +251,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the index set, unique within the record
         notation:
           type:
           - string
@@ -279,14 +279,14 @@ properties:
           x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Extent
-          description: The extent of the record.
+          description: a set expression over declared symbols naming the members of the index set
         structure:
           x-vocabulary: index_sets.structure
           type:
           - string
           - 'null'
           title: Structure
-          description: The structure of the record.
+          description: 'the structure of the index set: a continuum, a discrete set or an interval'
         dimensional_formula:
           type:
           - string
@@ -321,7 +321,7 @@ properties:
           x-template: '"NAME OF THE VARIABLE"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the variable
         symbol:
           type:
           - string
@@ -329,7 +329,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the variable, unique within the record
         notation:
           type:
           - string
@@ -356,7 +356,7 @@ properties:
           - string
           - 'null'
           title: Determined
-          description: The determined of the record.
+          description: whether the model determines the variable (within) or receives it from outside
         signature:
           type:
           - array
@@ -372,14 +372,14 @@ properties:
           x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Values
-          description: The values of the record.
+          description: a set expression over declared symbols giving the values of the variable
         scale:
           x-vocabulary: variables.scale
           type:
           - string
           - 'null'
           title: Scale
-          description: The scale of the record.
+          description: 'the scale of measurement of the variable: nominal, ordinal, interval, ratio or absolute'
         dimensional_formula:
           type:
           - string
@@ -437,7 +437,7 @@ properties:
           x-template: '"THE EXPRESSION IN WORDS"'
           x-kind: text
           title: Reading
-          description: The reading of the record.
+          description: the expression of the variable in words
         shared:
           type:
           - boolean
@@ -468,7 +468,7 @@ properties:
           x-template: '"NAME OF THE PARAMETER"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the parameter
         symbol:
           type:
           - string
@@ -476,7 +476,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the parameter, unique within the record
         notation:
           type:
           - string
@@ -503,7 +503,7 @@ properties:
           - 'null'
           x-template: '[SYMBOL]'
           title: Signature
-          description: The signature of the record.
+          description: the indices that the parameter takes
         values:
           type:
           - string
@@ -511,14 +511,14 @@ properties:
           x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Values
-          description: The values of the record.
+          description: a set expression over declared symbols giving the values of the parameter
         scale:
           x-vocabulary: parameters.scale
           type:
           - string
           - 'null'
           title: Scale
-          description: The scale of the record.
+          description: 'the scale of measurement of the parameter: nominal, ordinal, interval, ratio or absolute'
         dimensional_formula:
           type:
           - string
@@ -574,7 +574,7 @@ properties:
           x-template: '"THE EXPRESSION IN WORDS"'
           x-kind: text
           title: Reading
-          description: The reading of the record.
+          description: the expression of the parameter in words
         shared:
           type:
           - boolean
@@ -605,7 +605,7 @@ properties:
           x-template: '"NAME OF THE LAW"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the law
         symbol:
           type:
           - string
@@ -613,7 +613,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the law, unique within the record
         variant:
           type:
           - string
@@ -639,7 +639,7 @@ properties:
           - string
           - 'null'
           title: Role
-          description: The role of the record.
+          description: 'the role of the law: evolution, input-output, measurement, state-constraint, distribution or admissibility'
         expression:
           type:
           - string
@@ -647,7 +647,7 @@ properties:
           x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Expression
-          description: The expression of the record.
+          description: an expression over declared symbols stating the law
         reading:
           type:
           - string
@@ -655,14 +655,14 @@ properties:
           x-template: '"THE LAW IN WORDS"'
           x-kind: markdown-line
           title: Reading
-          description: The reading of the record.
+          description: the law in words
         warrant:
           x-vocabulary: laws.warrant
           type:
           - string
           - 'null'
           title: Warrant
-          description: The warrant of the record.
+          description: 'the provenance of the law: derived from other laws, posited, fitted or measured'
         requires:
           type:
           - array
@@ -695,7 +695,7 @@ properties:
           x-template: '"POINTER TO THE SOURCE OF THE LAW: A PUBLICATION, A DATA SET OR A DERIVATION"'
           x-kind: markdown-line
           title: Origin
-          description: The origin of the record.
+          description: 'a pointer to the source of the law: a publication, a data set or a derivation'
         range:
           type:
           - string
@@ -726,7 +726,7 @@ properties:
           x-template: '"NAME OF THE RELATION"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the relation
         symbol:
           type:
           - string
@@ -734,7 +734,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the relation, unique within the record
         variant:
           type:
           - string
@@ -804,7 +804,7 @@ properties:
           x-template: ASSUMPTION
           x-kind: label
           title: Id
-          description: The id of the record.
+          description: a name of the assumption, unique within the record
         assumption:
           type:
           - string
@@ -812,14 +812,14 @@ properties:
           x-template: '"THE ASSUMPTION IN WORDS"'
           x-kind: markdown-line
           title: Assumption
-          description: The assumption of the record.
+          description: the assumption in words
         motive:
           x-vocabulary: assumptions.motive
           type:
           - string
           - 'null'
           title: Motive
-          description: The motive of the record.
+          description: 'the reason for making the assumption: tractability, isolation or a limit'
         gain:
           type:
           - string
@@ -827,14 +827,14 @@ properties:
           x-template: '"THE DERIVATION THAT THE ASSUMPTION MAKES POSSIBLE, OR THE FACTOR THAT IT EXPOSES"'
           x-kind: markdown-line
           title: Gain
-          description: The gain of the record.
+          description: the derivation that the assumption makes possible, or the factor that it exposes
         removable:
           x-vocabulary: assumptions.removable
           type:
           - string
           - 'null'
           title: Removable
-          description: The removable of the record.
+          description: 'whether the distortion of the assumption can be removed: controlled, ineliminable or unknown'
     x-comment: only the assumptions that the laws require, such as a limit; each answer that rests on
       the model classifies them relative to its target
     title: Assumptions of the laws

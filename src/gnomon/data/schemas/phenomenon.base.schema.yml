@@ -56,7 +56,7 @@ properties:
     x-template: provisional
     x-vocabulary: .status
     title: Status
-    description: The status of the record.
+    description: the maturity of the phenomenon record, taken by every field that the block `maturity` leaves unmarked
   commitment:
     x-vocabulary: .commitment
     type:
@@ -76,7 +76,7 @@ properties:
     x-template: system.TOPIC
     x-kind: label
     title: Target system
-    description: The target system of the record.
+    description: the identifier of the target system whose behavior the phenomenon states
   identification:
     x-blank: true
     type:
@@ -199,7 +199,7 @@ properties:
           x-template: '"NAME OF THE SET"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the index set
         symbol:
           type:
           - string
@@ -207,7 +207,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the index set, unique within the record
         notation:
           type:
           - string
@@ -233,14 +233,14 @@ properties:
           x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Extent
-          description: The extent of the record.
+          description: a set expression over declared symbols naming the members of the index set
         structure:
           x-vocabulary: index_sets.structure
           type:
           - string
           - 'null'
           title: Structure
-          description: The structure of the record.
+          description: 'the structure of the index set: a continuum, a discrete set or an interval'
         dimensional_formula:
           type:
           - string
@@ -285,7 +285,7 @@ properties:
           x-template: '"NAME OF THE OBSERVABLE"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the observable
         symbol:
           type:
           - string
@@ -293,7 +293,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the observable, unique within the record
         notation:
           type:
           - string
@@ -333,7 +333,7 @@ properties:
           x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Values
-          description: The values of the record.
+          description: a set expression over declared symbols giving the values of the observable
         scale:
           x-vocabulary: observables.scale
           type:
@@ -401,7 +401,7 @@ properties:
           x-template: '"THE EXPRESSION IN WORDS"'
           x-kind: text
           title: Reading
-          description: The reading of the record.
+          description: the expression of the observable in words
         event:
           type:
           - object
@@ -414,7 +414,7 @@ properties:
               x-template: '"EXPRESSION FIXING THE ORIGIN OF TIME"'
               x-kind: text
               title: Origin
-              description: The origin of the record.
+              description: an expression fixing the origin from which the clock of the event starts
             horizon:
               type:
               - string
@@ -422,14 +422,14 @@ properties:
               x-template: '"EXPRESSION FIXING THE END OF OBSERVATION"'
               x-kind: text
               title: Horizon
-              description: The horizon of the record.
+              description: an expression fixing the end of observation
             censoring:
               x-vocabulary: observables.censoring
               type:
               - string
               - 'null'
               title: Censoring
-              description: The censoring of the record.
+              description: 'the censoring of an event whose time is unknown: right, left, interval or none'
             reading:
               type:
               - string
@@ -437,7 +437,7 @@ properties:
               x-template: '"THE EVENT IN WORDS, AND THE VALUE RECORDED WHEN IT IS NOT OBSERVED"'
               x-kind: markdown-line
               title: Reading
-              description: The reading of the record.
+              description: the event in words, and the value recorded when it is not observed
           x-comment: fill when the observable is the time of an event; the observable's `expression` then
             states the event criterion
           title: event
@@ -458,7 +458,7 @@ properties:
               x-template: '"THE ESTIMATOR THAT COMPUTES THE VALUES FROM THE DATA"'
               x-kind: markdown-line
               title: Method
-              description: The method of the record.
+              description: the estimator that computes the values from the data
             data_version:
               type:
               - string
@@ -475,7 +475,7 @@ properties:
               x-template: '"THE UNCERTAINTY THAT THE ESTIMATOR REPORTS"'
               x-kind: markdown-line
               title: Uncertainty
-              description: The uncertainty of the record.
+              description: the uncertainty that the estimator reports
           x-comment: fill when the values are estimated from data; the estimates are computed from these
             entries, never recorded
           title: estimator
@@ -506,7 +506,7 @@ properties:
           x-template: '"NAME OF THE MANIFESTATION"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the manifestation
         symbol:
           type:
           - string
@@ -514,7 +514,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the manifestation, unique within the record
         variant:
           type:
           - string
@@ -532,7 +532,7 @@ properties:
           - string
           - 'null'
           title: Form
-          description: The form of the record.
+          description: 'the form of the manifestation: a value, a dependence, a functional form, a scaling or a relation'
         expression:
           type:
           - string
@@ -540,7 +540,7 @@ properties:
           x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Expression
-          description: The expression of the record.
+          description: an expression over the observables stating the manifestation
         reading:
           type:
           - string
@@ -564,7 +564,7 @@ properties:
                 x-template: '"NAME OF THE FEATURE"'
                 x-kind: markdown-line
                 title: Name
-                description: The name of the record.
+                description: the words that designate the feature
               symbol:
                 type:
                 - string
@@ -572,7 +572,7 @@ properties:
                 x-template: SYMBOL
                 x-kind: label
                 title: Symbol
-                description: The symbol of the record.
+                description: the symbol of the feature, unique within the record
               values:
                 type:
                 - string
@@ -580,7 +580,7 @@ properties:
                 x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
                 x-kind: text
                 title: Values
-                description: The values of the record.
+                description: a set expression over declared symbols giving the values that the feature can take
               dimensional_formula:
                 type:
                 - string
@@ -599,7 +599,7 @@ properties:
                 x-template: '"ONE ELEMENT OF THE VALUE SET"'
                 x-kind: markdown-line
                 title: Observed
-                description: The observed of the record.
+                description: the value of the feature observed, one element of its value set
               condition:
                 type:
                 - string
@@ -643,7 +643,7 @@ properties:
                   OMISSION"'
                 x-kind: markdown-line
                 title: Caveat
-                description: The caveat of the record.
+                description: the content of the feature that the record leaves unstated, and the reason for the omission
           x-comment: quantities of the form that characterize the behavior
           title: features
           description: per feature, "[symbol] ∈ [set expression]" with the value observed within that
@@ -673,7 +673,7 @@ properties:
           x-template: '"NAME OF THE SOURCE OF VARIATION"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the source of variation
         symbol:
           type:
           - string
@@ -681,7 +681,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the source of variation, unique within the record
         variant:
           type:
           - string
@@ -707,14 +707,14 @@ properties:
           - string
           - 'null'
           title: Source
-          description: The source of the record.
+          description: 'the kind of the source: a class member, a realization, random parameters, a random structure or a scenario'
         quantification:
           x-vocabulary: scope_over_instances.quantification
           type:
           - string
           - 'null'
           title: Quantification
-          description: The quantification of the record.
+          description: 'how the phenomenon ranges over the instances: a single instance, a typical instance, an ensemble summary, an ensemble distribution, or every member'
         conditional_on:
           type:
           - array
@@ -763,7 +763,7 @@ properties:
               x-template: '"NAME OF THE CONDITION"'
               x-kind: markdown-line
               title: Name
-              description: The name of the record.
+              description: the words that designate the precipitating condition
             variant:
               type:
               - string
@@ -782,7 +782,7 @@ properties:
               x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
               x-kind: text
               title: Expression
-              description: The expression of the record.
+              description: an expression over declared symbols stating the condition that must hold for the behavior to occur
             justification:
               type:
               - string
@@ -811,7 +811,7 @@ properties:
               x-template: '"NAME OF THE CONDITION"'
               x-kind: markdown-line
               title: Name
-              description: The name of the record.
+              description: the words that designate the inhibiting condition
             variant:
               type:
               - string
@@ -830,7 +830,7 @@ properties:
               x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
               x-kind: text
               title: Expression
-              description: The expression of the record.
+              description: an expression over declared symbols stating the condition that prevents the behavior
             justification:
               type:
               - string
@@ -847,7 +847,7 @@ properties:
               x-template: '"THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION"'
               x-kind: markdown-line
               title: Caveat
-              description: The caveat of the record.
+              description: the content of the condition that the record leaves unstated, and the reason for the omission
         x-comment: conditions that prevent the behavior
         title: inhibiting conditions
         description: per condition, an expression over declared symbols with a justification
@@ -867,7 +867,7 @@ properties:
               x-template: '"NAME OF THE CONDITION"'
               x-kind: markdown-line
               title: Name
-              description: The name of the record.
+              description: the words that designate the modulating condition
             variant:
               type:
               - string
@@ -927,7 +927,7 @@ properties:
               x-template: '"NAME OF THE CIRCUMSTANCE"'
               x-kind: markdown-line
               title: Name
-              description: The name of the record.
+              description: the words that designate the nonstandard circumstance
             variant:
               type:
               - string
@@ -946,7 +946,7 @@ properties:
               x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
               x-kind: text
               title: Expression
-              description: The expression of the record.
+              description: an expression over declared symbols stating the circumstance
             differentiation:
               type:
               - string
@@ -954,7 +954,7 @@ properties:
               x-template: '"WHY THE CIRCUMSTANCE IS UNUSUAL, AND HOW IT IS ARRANGED"'
               x-kind: markdown-line
               title: Differentiation
-              description: The differentiation of the record.
+              description: why the circumstance is unusual, and how it is arranged
         x-comment: circumstances that must be arranged for the behavior to occur
         title: nonstandard circumstances
         description: per circumstance, an expression over declared symbols, with a justification. The
@@ -975,7 +975,7 @@ properties:
               x-template: '"NAME OF THE BYPRODUCT"'
               x-kind: markdown-line
               title: Name
-              description: The name of the record.
+              description: the words that designate the byproduct
             variant:
               type:
               - string
@@ -994,7 +994,7 @@ properties:
               x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
               x-kind: text
               title: Expression
-              description: The expression of the record.
+              description: an expression over declared symbols stating the byproduct
             justification:
               type:
               - string
@@ -1078,7 +1078,7 @@ properties:
           x-template: '"NAME OF THE TEST"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the test
         variant:
           type:
           - string
@@ -1105,7 +1105,7 @@ properties:
           x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Expression
-          description: The expression of the record.
+          description: an expression over declared symbols stating the condition that a candidate pattern must satisfy
         procedure:
           type:
           - string
@@ -1145,7 +1145,7 @@ properties:
           x-template: '"POINTER TO A DATA SET, A RECORDING OR A DERIVATION"'
           x-kind: markdown-line
           title: Pointer
-          description: The pointer of the record.
+          description: a pointer to a data set, a recording or a derivation that establishes the phenomenon
         version:
           type:
           - string
@@ -1153,7 +1153,7 @@ properties:
           x-template: VERSION
           x-kind: label
           title: Version
-          description: The version of the record.
+          description: the version of the data
     x-comment: material that establishes the phenomenon
     title: Data
     description: per entry, "[pointer to a data set, a recording or a derivation]" that establishes the
@@ -1174,7 +1174,7 @@ properties:
           - string
           - 'null'
           title: Kind
-          description: The kind of the record.
+          description: 'the kind of the data model: an instrument model, a background simulation, an assimilation model or a reconstruction'
         source:
           type:
           - string
@@ -1191,7 +1191,7 @@ properties:
           x-template: '"WHAT THE MODEL DOES TO THE DATA"'
           x-kind: markdown-line
           title: Reading
-          description: The reading of the record.
+          description: what the model does to the data
     x-comment: fill when a model intervenes between the raw records and the data; one entry per model
     title: Data model
     description: 'the models through which the data are produced or processed before they establish the
@@ -1223,7 +1223,7 @@ properties:
           - string
           - 'null'
           title: Form
-          description: The form of the record.
+          description: 'the form of the error model: a distribution or a bound'
         expression:
           type:
           - string
@@ -1231,7 +1231,7 @@ properties:
           x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Expression
-          description: The expression of the record.
+          description: an expression over declared symbols stating the error model
     x-comment: fill when the values of the observables are compared with an answer; one entry per observable
       or per data set
     title: Observation error
@@ -1262,7 +1262,7 @@ properties:
           x-template: '"HOW THE PATTERN WAS SELECTED FROM THE DATA"'
           x-kind: markdown-line
           title: Procedure
-          description: The procedure of the record.
+          description: how the pattern was selected from the data
         set_aside:
           type:
           - string
@@ -1270,7 +1270,7 @@ properties:
           x-template: '"THE PATTERNS SET ASIDE"'
           x-kind: markdown-line
           title: Set aside
-          description: The set aside of the record.
+          description: the patterns set aside
         motivated_by:
           type:
           - string
@@ -1301,7 +1301,7 @@ properties:
           x-template: '"THE QUESTION OR THE KIND OF USE FOR WHICH THE DATA MODEL IS ADEQUATE"'
           x-kind: markdown-line
           title: Purpose
-          description: The purpose of the record.
+          description: the question or the kind of use for which the data model is adequate
         grounds:
           type:
           - string
@@ -1309,7 +1309,7 @@ properties:
           x-template: '"THE EVIDENCE OR THE ARGUMENT FOR THE ADEQUACY"'
           x-kind: markdown-line
           title: Grounds
-          description: The grounds of the record.
+          description: the evidence or the argument for the adequacy
     x-comment: fill when the record declares a data model; one entry per purpose
     title: Adequacy
     description: the purposes for which the data model is adequate per purpose, the question or the kind

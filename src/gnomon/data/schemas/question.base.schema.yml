@@ -165,7 +165,7 @@ properties:
             - string
             - 'null'
             title: Placeholder
-            description: The placeholder of the record.
+            description: 'in a question schema, the kind of record that the slot awaits: a system or a phenomenon'
           description:
             type:
             - string
@@ -173,7 +173,7 @@ properties:
             x-template: '"THE ITEM AWAITED BY THE SLOT"'
             x-kind: markdown-line
             title: Description
-            description: The description of the record.
+            description: in a question schema, the item awaited by the slot
         x-comment: a record identifier `phen.TOPIC.NAME`; in a question schema, the placeholder below
         title: Phenomenon $P$ (the explanandum, under the aim explanation)
         description: a record identifier `phen.TOPIC.NAME`; in a question schema, the placeholder below
@@ -209,7 +209,7 @@ properties:
                   x-template: '"NAME OF THE ALTERNATIVE"'
                   x-kind: markdown-line
                   title: Name
-                  description: The name of the record.
+                  description: the words that designate the foil
                 symbol:
                   type:
                   - string
@@ -217,14 +217,14 @@ properties:
                   x-template: SYMBOL
                   x-kind: label
                   title: Symbol
-                  description: The symbol of the record.
+                  description: the symbol of the foil, unique within the record
                 expression:
                   type:
                   - array
                   - 'null'
                   x-template: '["EXPRESSION OVER DECLARED SYMBOLS"]'
                   title: Expression
-                  description: The expression of the record.
+                  description: the expressions over the declared observables that hold in the case of the foil
                 reading:
                   type:
                   - string
@@ -262,7 +262,7 @@ properties:
             examples:
             - a recorded control network (observed); the same network trained on another task (counterfactual)
         title: Contrast class $X$
-        description: The contrast class $x$ of the record.
+        description: the fact and the foils that the question separates, with the status of the foils and their compatibility
         examples:
         - why spike rather than inactivity?
       domain:
@@ -328,7 +328,7 @@ properties:
                   x-template: '"WHY THE QUESTION IS PUT ONLY UNDER THE RESTRICTION"'
                   x-kind: markdown-line
                   title: Justification
-                  description: The justification of the record.
+                  description: why the question is put only under the restriction
             x-comment: one entry per restriction the question imposes on the specification
             title: Restrictions
             description: 'Per restriction: the quantity held and the value set that it is held to. When
@@ -351,7 +351,7 @@ properties:
                 x-template: '"SYMBOL -> LIMIT VALUE"'
                 x-kind: markdown-line
                 title: Expression
-                description: The expression of the record.
+                description: the limit, written `q -> v`, whose left side is a variable or a parameter of the target
               justification:
                 type:
                 - string
@@ -359,7 +359,7 @@ properties:
                 x-template: '"WHY THE QUESTION CONCERNS THE LIMIT SYSTEM"'
                 x-kind: markdown-line
                 title: Justification
-                description: The justification of the record.
+                description: why the question concerns the limit system
             x-comment: fill only when the question concerns the limit system itself
             title: Limit
             description: the expression "[quantity] → [limit value]", with a justification stating why
@@ -374,7 +374,7 @@ properties:
         examples:
         - in vitro slice, injected current between 0 and 500 pA
     title: Subject
-    description: The subject of the record.
+    description: 'the subject of the question: its phenomenon, its target system, its contrast and its domain'
   task:
     x-blank: true
     type:
@@ -387,7 +387,7 @@ properties:
         - string
         - 'null'
         title: Epistemic aim $A$
-        description: The epistemic aim $a$ of the record.
+        description: the kind of knowledge that the question seeks
       explicandum:
         type:
         - string
@@ -403,7 +403,7 @@ properties:
         - string
         - 'null'
         title: Requested relation $R$
-        description: The requested relation $r$ of the record.
+        description: the kind of relation between the explanans and the phenomenon that the question requests
       function_sense:
         x-comment: required when the requested relation is `functional`
         x-vocabulary: task.function_sense
@@ -418,7 +418,7 @@ properties:
         - string
         - 'null'
         title: Modal strength $\mu$
-        description: The modal strength $\mu$ of the record.
+        description: 'the modal strength that the answer must claim: actual, possible or necessary'
       admissible_explanans:
         type:
         - object
@@ -475,7 +475,7 @@ properties:
             - string
             - 'null'
             title: Standard
-            description: The standard of the record.
+            description: 'the standard of the comparison: qualitative, an order of magnitude, a numeric bound or structure only'
           outputs_to_match:
             type:
             - array
@@ -490,7 +490,7 @@ properties:
                   x-template: phen.TOPIC.NAME.SYMBOL
                   x-kind: label
                   title: Target
-                  description: The target of the record.
+                  description: the observable of the phenomenon that the answer must reproduce
                 tolerance:
                   type:
                   - object
@@ -512,7 +512,7 @@ properties:
                       x-template: '"EXPRESSION THAT THE METRIC MUST NOT EXCEED"'
                       x-kind: text
                       title: Bound
-                      description: The bound of the record.
+                      description: an expression that the metric must not exceed
                   x-comment: omit when the standard is `qualitative` or `structural-only`
                   title: Tolerance
                   description: omit when the standard is `qualitative` or `structural-only`
@@ -523,7 +523,7 @@ properties:
                   x-template: '"WHY THE QUESTION DEMANDS THAT THE ANSWER REPRODUCE THIS OUTPUT"'
                   x-kind: markdown-line
                   title: Justification
-                  description: The justification of the record.
+                  description: why the question demands that the answer reproduce this output
             x-comment: name only the target side; the answer reproduces each output
             title: Outputs to match
             description: name only the target side; the answer reproduces each output
@@ -541,7 +541,7 @@ properties:
                   x-template: phen.TOPIC.NAME.SYMBOL
                   x-kind: label
                   title: Target
-                  description: The target of the record.
+                  description: the feature or the manifestation of the phenomenon whose structure the answer must reproduce
                 justification:
                   type:
                   - string
@@ -549,11 +549,11 @@ properties:
                   x-template: '"WHY THE QUESTION DEMANDS THAT THE ANSWER REPRODUCE THIS STRUCTURE"'
                   x-kind: markdown-line
                   title: Justification
-                  description: The justification of the record.
+                  description: why the question demands that the answer reproduce this structure
             title: Structures to match
-            description: The structures to match of the record.
+            description: the structures of the phenomenon that the answer must reproduce, one entry per structure
         title: Required accuracy $\tau$
-        description: The required accuracy $\tau$ of the record.
+        description: the standard by which an answer is compared with the target, and the outputs and the structures that it must reproduce
       proof_obligations:
         type:
         - array
@@ -584,26 +584,26 @@ properties:
               x-template: '"THE IMPLICATION THAT THE ANSWER MUST ESTABLISH, IN WORDS"'
               x-kind: markdown-line
               title: Reading
-              description: The reading of the record.
+              description: the implication that the answer must establish, in words
             antecedent:
               type:
               - array
               - 'null'
               x-template: '["EXPRESSION OVER DECLARED SYMBOLS"]'
               title: Antecedent
-              description: The antecedent of the record.
+              description: the expressions over declared symbols that the implication assumes
             consequent:
               type:
               - array
               - 'null'
               x-template: '["EXPRESSION OVER DECLARED SYMBOLS"]'
               title: Consequent
-              description: The consequent of the record.
+              description: the expressions over declared symbols that the implication concludes
         x-comment: fill when the answer must derive a statement rather than match a measurement
         title: Proof obligations $\omega$
         description: fill when the answer must derive a statement rather than match a measurement
     title: Task
-    description: The task of the record.
+    description: 'the epistemic task of the question: its aim, its requested relation, its modal strength, its required accuracy and its proof obligations'
   virtues:
     x-blank: true
     type:
@@ -618,14 +618,14 @@ properties:
           - string
           - 'null'
           title: Virtue
-          description: The virtue of the record.
+          description: the virtue that the inquiry weighs
         standing:
           x-vocabulary: virtues.standing
           type:
           - string
           - 'null'
           title: Standing
-          description: The standing of the record.
+          description: whether the virtue is constitutive of an answer or preferred among answers
         justification:
           type:
           - string

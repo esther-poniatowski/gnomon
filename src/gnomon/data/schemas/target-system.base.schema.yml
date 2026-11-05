@@ -43,7 +43,7 @@ properties:
     x-template: provisional
     x-vocabulary: .status
     title: Status
-    description: The status of the record.
+    description: the maturity of the target-system record, taken by every field that the block `maturity` leaves unmarked
   commitment:
     x-vocabulary: .commitment
     type:
@@ -116,7 +116,7 @@ properties:
         x-template: '"KIND OF SYSTEM"'
         x-kind: markdown-line
         title: Name
-        description: The name of the record.
+        description: the kind of system that names the class
       projectibility:
         type:
         - object
@@ -128,7 +128,7 @@ properties:
             - string
             - 'null'
             title: Status
-            description: The status of the record.
+            description: 'whether a claim about some members holds of the class: assumed, tested or not claimed'
           evidence:
             type:
             - string
@@ -159,7 +159,7 @@ properties:
               x-template: '"NAME OF THE CRITERION"'
               x-kind: markdown-line
               title: Name
-              description: The name of the record.
+              description: the words that designate the criterion
             expression:
               type:
               - string
@@ -167,7 +167,7 @@ properties:
               x-template: '"EXPRESSION OVER DECLARED SYMBOLS THAT A MEMBER SATISFIES"'
               x-kind: text
               title: Expression
-              description: The expression of the record.
+              description: an expression over declared symbols that a member satisfies
             justification:
               type:
               - string
@@ -208,7 +208,7 @@ properties:
           x-template: '"NAME OF THE VARIANT"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the variant
         symbol:
           type:
           - string
@@ -216,7 +216,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the variant, unique within the record
         differentiation:
           type:
           - string
@@ -224,7 +224,7 @@ properties:
           x-template: '"THE DECLARATIONS THAT ONLY MEMBERS OF THIS VARIANT CARRY"'
           x-kind: markdown-line
           title: Differentiation
-          description: The differentiation of the record.
+          description: the declarations that only the members of this variant carry
         caveat:
           type:
           - string
@@ -232,7 +232,7 @@ properties:
           x-template: '"THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION"'
           x-kind: markdown-line
           title: Caveat
-          description: The caveat of the record.
+          description: the content of the variant that the record leaves unstated, and the reason for the omission
     x-comment: forms of a member that differ in their declarations; empty when a single form covers every
       member
     title: Variants
@@ -257,7 +257,7 @@ properties:
           x-template: '"KIND OF UNIT"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the kind of unit that the constituent collects
         symbol:
           type:
           - string
@@ -265,7 +265,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the constituent, unique within the record
         notation:
           type:
           - string
@@ -291,7 +291,7 @@ properties:
           x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Extent
-          description: The extent of the record.
+          description: a set expression over declared symbols naming the members that the constituent collects
     x-comment: empty for a field system that decomposes into no unit
     title: Constituents
     description: '"[symbol]", with its reading and the set expression that it collects'
@@ -312,7 +312,7 @@ properties:
           x-template: '"NAME OF THE SET"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the index set
         symbol:
           type:
           - string
@@ -320,7 +320,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the index set, unique within the record
         notation:
           type:
           - string
@@ -346,14 +346,14 @@ properties:
           x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Extent
-          description: The extent of the record.
+          description: a set expression over declared symbols naming the members of the index set
         structure:
           x-vocabulary: index_sets.structure
           type:
           - string
           - 'null'
           title: Structure
-          description: The structure of the record.
+          description: 'the structure of the index set: a continuum, a discrete set or an interval'
         dimensional_formula:
           type:
           - string
@@ -391,7 +391,7 @@ properties:
           x-template: '"NAME OF THE VARIABLE"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the variable
         symbol:
           type:
           - string
@@ -399,7 +399,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the variable, unique within the record
         notation:
           type:
           - string
@@ -452,7 +452,7 @@ properties:
           x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Values
-          description: The values of the record.
+          description: a set expression over declared symbols giving the values of the variable
         scale:
           x-vocabulary: variables.scale
           type:
@@ -519,7 +519,7 @@ properties:
           x-template: '"THE EXPRESSION IN WORDS"'
           x-kind: text
           title: Reading
-          description: The reading of the record.
+          description: the expression of the variable in words
         shared:
           type:
           - boolean
@@ -551,7 +551,7 @@ properties:
           x-template: '"NAME OF THE PARAMETER"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the parameter
         symbol:
           type:
           - string
@@ -559,7 +559,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the parameter, unique within the record
         notation:
           type:
           - string
@@ -602,14 +602,14 @@ properties:
           x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
           x-kind: text
           title: Values
-          description: The values of the record.
+          description: a set expression over declared symbols giving the values of the parameter
         scale:
           x-vocabulary: parameters.scale
           type:
           - string
           - 'null'
           title: Scale
-          description: The scale of the record.
+          description: 'the scale of measurement of the parameter: nominal, ordinal, interval, ratio or absolute'
         dimensional_formula:
           type:
           - string
@@ -665,7 +665,7 @@ properties:
           x-template: '"THE EXPRESSION IN WORDS"'
           x-kind: text
           title: Reading
-          description: The reading of the record.
+          description: the expression of the parameter in words
         shared:
           type:
           - boolean
@@ -697,7 +697,7 @@ properties:
           x-template: '"EXTERNAL SYSTEM"'
           x-kind: markdown-line
           title: Name
-          description: The name of the record.
+          description: the words that designate the external system
         symbol:
           type:
           - string
@@ -705,7 +705,7 @@ properties:
           x-template: SYMBOL
           x-kind: label
           title: Symbol
-          description: The symbol of the record.
+          description: the symbol of the external system, unique within the record
         variant:
           type:
           - string
@@ -732,7 +732,7 @@ properties:
           - 'null'
           x-template: '[SYMBOL]'
           title: Shares
-          description: The shares of the record.
+          description: the variables that the external system shares with the target
         constrains:
           type:
           - array
@@ -747,7 +747,7 @@ properties:
                 x-template: '"NAME OF THE CONSTRAINT"'
                 x-kind: markdown-line
                 title: Name
-                description: The name of the record.
+                description: the words that designate the constraint
               signature:
                 type:
                 - array
@@ -762,7 +762,7 @@ properties:
                 - string
                 - 'null'
                 title: Role
-                description: The role of the record.
+                description: the role of the constraint, among the six roles of a law
               expression:
                 type:
                 - string
@@ -770,7 +770,7 @@ properties:
                 x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
                 x-kind: text
                 title: Expression
-                description: The expression of the record.
+                description: an expression over declared symbols stating the constraint
               reading:
                 type:
                 - string
@@ -778,7 +778,7 @@ properties:
                 x-template: '"THE CONSTRAINT IN WORDS"'
                 x-kind: markdown-line
                 title: Reading
-                description: The reading of the record.
+                description: the constraint in words
           x-comment: constraints on the shared variables beyond their declared value sets; `[]` when there
             is none
           title: Constrains

@@ -45,7 +45,7 @@ properties:
     x-template: provisional
     x-vocabulary: .status
     title: Status
-    description: The status of the record.
+    description: the maturity of the key record, taken by every field that the block `maturity` leaves unmarked
   kind:
     x-blank: true
     x-vocabulary: .kind

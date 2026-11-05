@@ -8,6 +8,7 @@ contract writes the vocabularies of the registry.
 
 from __future__ import annotations
 
+import re
 from typing import Any, Mapping
 
 import pytest
@@ -32,6 +33,21 @@ def registry() -> Registry:
 
 def test_every_generated_file_equals_its_generated_form() -> None:
     assert stale_files() == []
+
+
+def test_no_field_describes_itself_by_a_placeholder() -> None:
+    """A description states what a field holds; the form "The X of the record." names the field
+    again and states nothing, so no base schema may carry it."""
+    from gnomon.fieldindex import _schema_fields  # pylint: disable=import-outside-toplevel
+
+    placeholder = re.compile(r"^The .* of the record\.$")
+    found = [
+        (kind, path)
+        for kind in KINDS
+        for path, node in _schema_fields(schemas.load_base(kind))
+        if placeholder.match(str(node.get("description") or ""))
+    ]
+    assert not found, found
 
 
 @pytest.mark.parametrize("kind", KINDS)
