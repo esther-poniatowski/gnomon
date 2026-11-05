@@ -312,8 +312,9 @@ def dump(document: Mapping[str, Any]) -> str:
     return yaml.safe_dump(dict(document), sort_keys=False, allow_unicode=True, width=100)
 
 
-def generated_files() -> dict[Path, str]:
-    """Return every file generated from the base schemas and the registry, with its content."""
+def schema_files() -> dict[Path, str]:
+    """Return the contracts and the templates generated from the base schemas and the registry,
+    with their content."""
     files: dict[Path, str] = {}
     for kind in kinds():
         base, options = load_base(kind), vocabulary_options(kind)
@@ -383,13 +384,4 @@ def record_errors(record: Mapping[str, Any]) -> list[str]:
         for error in sorted(
             validator.iter_errors(dict(record)), key=lambda e: list(map(str, e.absolute_path))
         )
-    ]
-
-
-def stale_files() -> list[Path]:
-    """Return every generated file whose content differs from its generated form."""
-    return [
-        path
-        for path, text in generated_files().items()
-        if not path.is_file() or path.read_text(encoding="utf-8") != text
     ]

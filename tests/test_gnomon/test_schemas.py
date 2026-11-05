@@ -16,6 +16,7 @@ from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
 from gnomon import schemas
+from gnomon.generated import stale_files
 
 KINDS = schemas.kinds()
 
@@ -30,7 +31,7 @@ def registry() -> Registry:
 
 
 def test_every_generated_file_equals_its_generated_form() -> None:
-    assert schemas.stale_files() == []
+    assert stale_files() == []
 
 
 @pytest.mark.parametrize("kind", KINDS)

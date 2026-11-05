@@ -349,8 +349,8 @@ def cli_schemas(
     ),
 ) -> None:
     """Write the contracts and the templates generated from the base schemas and the vocabulary
-    registry."""
-    from .schemas import generated_files, stale_files
+    registry, and the field index of the user guide."""
+    from .generated import generated_files, stale_files
 
     if check:
         stale = stale_files()

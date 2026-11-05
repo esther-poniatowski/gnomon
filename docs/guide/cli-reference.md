@@ -86,7 +86,7 @@ gnomon check <directory> [--format text|yaml|sarif] [--output PATH]
 
 ## `schemas`
 
-Write the contract of each record type and its template, generated from the base schemas in `src/gnomon/data/schemas/` and from the vocabulary registry. With `--check`, the command writes nothing, reports each generated file that differs from its generated form, and exits with a nonzero code when one does.
+Write the contract of each record type and its template, generated from the base schemas in `src/gnomon/data/schemas/` and from the vocabulary registry. In a checkout of the repository, the command also writes the [field index](field-index.md) of the user guide, from the same schemas and the specification notes. With `--check`, the command writes nothing, reports each generated file that differs from its generated form, and exits with a nonzero code when one does.
 
 ```sh
 gnomon schemas [--check]
