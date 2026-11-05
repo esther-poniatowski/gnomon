@@ -21,7 +21,7 @@ The activity `derivation` outputs a consequence. The [records of a consequence](
 - the [sought](../epistemology/objects/derivation/sought.md): a root sought read from the record served, or declared by the derivation when it serves no record, and the subordinate soughts set by the derivation; the type and the condition stated by a sought fix its degree of determinacy, so no field restates that degree;
 - the [posits](../epistemology/objects/derivation/posit.md), each with its kind, its origin and its tests;
 - the [moves](../epistemology/objects/derivation/move.md), each with its kind, its inputs and outputs, and its warrant, stating its source, the class of its error, its regime and the property that makes it apply;
-- the [orientations](../epistemology/objects/derivation/orientation.md) of the non-routine moves and of the segments, each with its purpose, and with its occasion, its means, its alternatives and its provenance when they apply;
+- the [orientations](../epistemology/objects/derivation/orientation.md) of the non-routine moves and of the segments, each with its purpose and its provenance, and with its occasion, its means and its alternatives when they apply;
 - the [interpretations](../epistemology/objects/derivation/interpretation.md), each with its item, its kind and its ground;
 - the [segments](../epistemology/objects/derivation/segment-and-scheme.md), each with its inputs, its outputs and the scheme applied, when a scheme applies;
 - the [outcomes](../epistemology/objects/derivation/consequences-and-understanding.md): each consequence named by the record that states it, each lemma kept in the derivation, each impasse with its diagnostic interpretation, and each refutation;
