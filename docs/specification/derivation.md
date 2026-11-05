@@ -98,7 +98,7 @@ Three properties are read from other fields, so that no field restates them:
 | Segments: moves | in each entry | the moves stated inside the segment | `diagonalize`, `slowest-dominates` |
 | Segments: inputs | always, in each entry | the objects or the premises consumed | `mod.grokking.effective-representation.representation_flow` |
 | Segments: outputs | always, in each entry | the objects produced | `delay-law` |
-| Segments: applies | when the segment applies a scheme | the identifier of a design of kind `method` | `design.relaxation.slowest-mode` |
+| Segments: applies | when the segment applies a scheme | the identifier of a design of kind `scheme` | `design.grokking.slowest-mode-relaxation` |
 | Segments: within | when the segment is nested | the identifier of the enclosing segment | `relaxation` |
 | Consequences | when the derivation establishes a statement | one entry per consequence; a consequence answering a subordinate sought is a lemma | — |
 | Consequences: id | in each entry | a descriptive identifier | `delay-law` |
@@ -124,7 +124,7 @@ The checks of a derivation read these fields as follows. This list is the one st
 - the moves and the segments form no cycle (`derivation/cycle`), and no segment encloses itself, nor any subordinate sought replaces itself, through a cycle (`derivation/cyclic-nesting`);
 - the occasion of an orientation (`derivation/retrospective-orientation`) and the property that a warrant cites (`derivation/retrospective-license`) interpret only objects established before their move or segment;
 - each orientation states exactly one of `determines` and `change` (`derivation/ambiguous-purpose`), and each non-routine move and each segment has an orientation (`derivation/unoriented-move`);
-- each move of a segment takes only what the segment takes or what its moves yield (`derivation/broken-bridge`);
+- each move of a segment takes only what the segment takes or what its moves yield (`derivation/broken-bridge`), and a segment applies a design of the kind `scheme` (`derivation/misapplied-scheme`);
 - the declared kernel lies on every route from the premises to each consequence of the root sought (`derivation/failed-kernel`);
 - each consequence is stated by an object that a move or a segment yields (`derivation/unreached-consequence`);
 - each move yields something that it does not take, and its outputs reach an outcome, a test of a posit or an interpretation cited by the record (`derivation/idle-move`);

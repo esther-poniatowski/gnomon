@@ -109,7 +109,7 @@ activities:
   - {id: method-design, condition: access, reason: its output, a method, fixes the procedure that obtains the answer,
      norm: "on every admissible input, an execution stops after finitely many steps"}
   - {id: scheme-design, condition: access, reason: its output, a scheme, fixes the reasoning that obtains the answer,
-     norm: "under its conditions of application, each step is licensed by a warrant and the steps yield the stated effect"}
+     norm: "under its conditions of application and given its posits, each step is licensed by a warrant and the steps yield the stated effect"}
   - {id: operationalization, condition: access, reason: it states the procedure that obtains values,
      norm: "the procedure assigns values on a stated scale"}
   - {id: derivation, condition: bridging, reason: it derives a linking lemma,

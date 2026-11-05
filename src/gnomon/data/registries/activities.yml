@@ -178,12 +178,13 @@ activities:
   - id: scheme-design
     family: empirical-activities
     inputs:
-      - question
+      - type: question
+        optional: true
       - type: model
         optional: true
     output: design
     output_values:
-      kind: [method]
+      kind: [scheme]
     norm: norm.scheme-design
     mode: deductive
     context: both

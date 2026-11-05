@@ -461,3 +461,32 @@ def test_the_derive_step_and_its_derivation_agree(
     folder = tmp_path / EXAMPLE.name
     shutil.copytree(EXAMPLE, folder)
     assert rule in _derive_step(folder, change)
+
+
+def _rewrite(folder: Path, name: str, change: Change) -> set[str]:
+    """Change one record of a copied example, and return the texts of the findings of a check."""
+    path = folder / name
+    record = yaml.safe_load(path.read_text(encoding="utf-8"))
+    change(record)
+    path.write_text(yaml.safe_dump(record, sort_keys=False), encoding="utf-8")
+    return {located.finding.text for located in check_workspace(load_workspace(folder))}
+
+
+def test_a_segment_applies_a_scheme(tmp_path: Path) -> None:
+    folder = tmp_path / EXAMPLE.name
+    shutil.copytree(EXAMPLE, folder)
+    texts = _rewrite(folder, "design.yml", lambda r: r.update(kind="method"))
+    assert (
+        "segments.relaxation.applies: design.grokking.slowest-mode-relaxation is no design of the"
+        " kind scheme" in texts
+    ), texts
+
+
+def test_a_scheme_states_its_conditions_and_needs_no_stopping(tmp_path: Path) -> None:
+    folder = tmp_path / EXAMPLE.name
+    shutil.copytree(EXAMPLE, folder)
+    texts = _rewrite(folder, "design.yml", lambda r: r.update(applies_when=None))
+    assert "kind scheme requires: applies_when" in " ".join(texts), texts
+    assert not any("stopping" in text for text in texts), texts
+    texts = _rewrite(folder, "design.yml", lambda r: r.update(kind="method", applies_when=["x"]))
+    assert any("stopping" in text for text in texts), texts

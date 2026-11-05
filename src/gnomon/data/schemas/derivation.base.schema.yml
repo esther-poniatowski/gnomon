@@ -895,7 +895,7 @@ properties:
           x-kind: label
           x-comment: optional
           title: Applies
-          description: The identifier of the design of kind method that the segment applies as a scheme.
+          description: The identifier of the design of kind scheme that the segment applies.
         within:
           x-units: [segments]
           type:

@@ -40,15 +40,15 @@ properties:
     x-blank: true
     x-vocabulary: .kind
     title: Kind
-    description: Whether the design plans an experiment on the target, a run of a simulation of a model, or a method that solves a task.
+    description: Whether the design plans an experiment on the target, a run of a simulation of a model, a method that solves a task, or a scheme that derivations apply.
     examples: [simulation-run]
   serves:
     type: [string, 'null']
     x-template: quest.TOPIC.NAME
     x-kind: label
-    x-comment: the question or the problem that the design serves; empty for a method stated apart from any problem
+    x-comment: the question or the problem that the design serves; optional for a method or a scheme
     title: Serves
-    description: The identifier of the question or the problem that the design serves; empty for a method stated apart from any problem, which is then a reusable scheme.
+    description: The identifier of the question or the problem that the design serves; optional for a method or a scheme that serves no single problem.
     examples: [quest.nonreciprocal-active-matter.phase-exploration]
   task:
     type: [string, 'null']
@@ -59,14 +59,37 @@ properties:
     examples: ['detect the phases of the lattice realization across the nonreciprocal coupling, at each system size']
   applies_when:
     type: [array, 'null']
-    x-comment: method only; one entry per condition of application, each a grammatical expression or a named property
+    x-comment: scheme only; one entry per condition of application, each a grammatical expression or a named property
     title: Conditions of application
-    description: The conditions under which the method applies, each a grammatical expression or a named property.
+    description: The conditions under which the scheme applies, each a grammatical expression or a named property.
     examples: [['the operator is self-adjoint', 'a small parameter separates two time scales']]
     items:
       type: [string, 'null']
       x-template: '"CONDITION OF APPLICATION"'
       x-kind: markdown-line
+  posits:
+    type: [array, 'null']
+    x-blank: true
+    x-comment: scheme only; one entry per posit that the scheme prescribes, such as an ansatz or a slow scale
+    title: Posits
+    description: The posits that the scheme prescribes, each stated as the form or the relation assumed.
+    items:
+      type: object
+      properties:
+        id:
+          type: [string, 'null']
+          x-template: POSIT-NAME
+          x-kind: label
+          title: Id
+          description: A descriptive identifier of the posit, unique within the record.
+          examples: [slow-scale]
+        statement:
+          type: [string, 'null']
+          x-template: '"THE FORM OR THE RELATION ASSUMED"'
+          x-kind: markdown-line
+          title: Statement
+          description: The form or the relation that the scheme assumes.
+          examples: ['the amplitude varies on a time scale slower than the period by a small parameter']
   inputs:
     type: [array, 'null']
     x-blank: true
@@ -154,9 +177,9 @@ properties:
   failure_modes:
     type: [array, 'null']
     x-blank: true
-    x-comment: one entry per way in which an execution can mislead; empty when none
+    x-comment: one entry per way in which an execution or an application can mislead; empty when none
     title: Failure modes
-    description: The ways in which an execution can yield a misleading output, each with the step or the rule that guards against it.
+    description: The ways in which an execution can yield a misleading output, or an application of a scheme can fail, each with the step or the rule that guards against it, and for a scheme with the situation that announces the failure and the patch that it calls for.
     items:
       type: object
       properties:
@@ -175,6 +198,22 @@ properties:
           title: Guard
           description: The identifier of the step or the rule that detects or prevents the failure.
           examples: [equilibrate]
+        situation:
+          type: [string, 'null']
+          x-template: '"THE SITUATION THAT ANNOUNCES THE FAILURE"'
+          x-kind: markdown-line
+          x-comment: scheme only; at the boundary of the conditions of application, or a failure of a posit
+          title: Situation
+          description: The situation that announces the failure, at the boundary of the conditions of application or where a posit fails.
+          examples: ['the gap between the two slowest rates closes']
+        patch:
+          type: [string, 'null']
+          x-template: '"THE PATCH THAT THE FAILURE CALLS FOR"'
+          x-kind: markdown-line
+          x-comment: scheme only
+          title: Patch
+          description: The change of the scheme that the failure calls for.
+          examples: ['keep every mode whose rate lies within the gap']
   protocol:
     type: [object, 'null']
     x-blank: true

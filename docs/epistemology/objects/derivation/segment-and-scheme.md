@@ -31,14 +31,14 @@ A **scheme** is a reusable way of deriving, such as:
 - a Lyapunov argument;
 - the proof technique of a problem.
 
-A scheme is a [design](../../../adr/design-record.md) of kind *method*, written by a researcher and cited by each derivation applying it. A method solving a task already holds every part of a way of working, from its inputs to its modes of failure.
+A scheme is a [design](../../../adr/design-record.md) of kind *scheme*, written by a researcher and cited by each derivation applying it. A scheme shares the inputs, the steps and the modes of failure of every design, and it adds the parts below, which a method lacks.
 
 A scheme states four parts:
 
 - the **conditions of application**: the situations admitting the scheme;
 - the **steps** and the **posits** prescribed by the scheme, such as the slow scale and the ansatz of a multiple-scale expansion;
 - the **effect** of a successful application: the type of consequence yielded;
-- the **modes of failure**, each with the situation announcing it and the patch required.
+- the **modes of failure**, each with the situation announcing it, at the boundary of the conditions of application or where a posit fails, and the patch required.
 
 Automated proof planning states its methods in the same form. A method specifies a tactic by two parts: the preconditions of the tactic, and the effects of its successful application. A planner composes methods by matching the preconditions of later tactics to the effects of earlier ones [bundy2002]. A critic has the form of a method. Its preconditions describe the situations leading a tactic to fail, and its instructions patch the failed proof in place of a tactic [bundy2002]. The modes of failure of a scheme play the part of these critics. ^scheme-form
 
@@ -59,7 +59,7 @@ A segment **applies** a scheme when its moves fill the steps of that scheme unde
 > - **Proposals:**
 > 	- the segment as the group of moves that serves one sought under one orientation;
 > 	- the inputs and the outputs of a segment, as the bridge over omitted moves;
-> 	- the scheme as a design of kind method, with its conditions of application, steps, posits, effect and modes of failure;
+> 	- the scheme as a design of kind scheme, with its conditions of application, steps, posits, effect and modes of failure;
 > 	- the modes of failure of a scheme, in the part of critics and of critical questions.
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).

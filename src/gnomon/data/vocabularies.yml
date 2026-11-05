@@ -468,6 +468,8 @@ vocabularies:
       name: a run of a simulation of a model
     - value: method
       name: a procedure that solves a task
+    - value: scheme
+      name: a reusable way of deriving, which the segments of derivations apply
   derivation:
     .status:
     - value: provisional
@@ -517,7 +519,7 @@ vocabularies:
     - value: source
       name: a published source
     - value: scheme
-      name: a design of kind method that prescribes the posit
+      name: a design of kind scheme that prescribes the posit
     - value: none
       name: an insight that left no record
     posits.test:

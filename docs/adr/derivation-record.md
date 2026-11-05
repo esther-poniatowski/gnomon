@@ -67,7 +67,7 @@ The kind meets the seven [conditions of admission](record-kind-admission.md#^adm
     - an answer holds one typed claim and its grounds, whereas a derivation holds intermediate objects and many moves, so an answer would hold those moves in prose;
     - an itinerary records acts, each judged by the norm of its activity, whereas a move produces no product, so a move recorded as an act would break the [criterion of the boundary](../epistemology/processes/units-of-work.md#^work-unit-criterion);
     - a model holds a system and its laws, whereas the moves of a derivation act on intermediate expressions;
-    - a design of kind `method` states a way of deriving apart from any derivation, whereas a derivation applies it to one problem;
+    - a design of kind `scheme` states a way of deriving apart from any derivation, whereas a derivation applies it to one problem;
 - **unitary epistemic role**: every derivation, whether it proves a stated claim or constructs an unknown result, licenses the same operation, tracing its outcomes to their premises.
 
 ## Constraints that decide the record

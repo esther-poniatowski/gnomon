@@ -45,7 +45,7 @@ posits:                          # optional; one entry per premise introduced on
     kind:                        # ansatz (a trial form, with parameters left undetermined) | closure (a relation closing an intermediate system of equations) | relevant-quantities (the quantities on which a relation depends) | complete-similarity (a dimensionless group dropped in a limit) | incomplete-similarity (a dimensionless group entering as a power of unknown exponent)
     statement: "WHAT THE DERIVATION ASSUMES"
     origin:
-      type:                      # act (a step of the itinerary) | source (a published source) | scheme (a design of kind method that prescribes the posit) | none (an insight that left no record)
+      type:                      # act (a step of the itinerary) | source (a published source) | scheme (a design of kind scheme that prescribes the posit) | none (an insight that left no record)
       ref: "STEP, SOURCE OR SCHEME"   # empty when the origin is none
     tests:                       # empty while no test is made
       - test:                    # consistency (the neglected terms stay smaller than the terms kept) | limit (the consequence recovers a known result in a limit) | exact (a proof that the posited form or relation holds) | approximation (a bound on the distance to the exact object) | empirical (a comparison of the consequence with data) | computation (a computation, certified or numerical, of the posited object)

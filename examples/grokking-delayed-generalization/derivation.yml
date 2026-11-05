@@ -213,7 +213,7 @@ segments:
     moves: [diagonalize, solve-modes, slowest-dominates, crossing, keep-dependence]
     inputs: [mod.grokking.effective-representation.representation_flow, hessian, quality-tracks-slow-mode]
     outputs: [delay-law]
-    applies:
+    applies: design.grokking.slowest-mode-relaxation
     within:
 
 consequences:

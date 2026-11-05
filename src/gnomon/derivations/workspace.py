@@ -1,9 +1,11 @@
 """
-The descent of the laws stated by derivations, across the records of a workspace.
+The checks of a derivation against the other records of a workspace: the descent of the laws that
+derivations state, and the schemes that their segments apply.
 
 A law marked ``derived`` descends from the premises of the derivation that states it as a
 consequence, or from the derivation published at its origin. A consequence of the root sought of a
-derivation that serves a law or an operation is stated by that record.
+derivation that serves a law or an operation is stated by that record. A segment applies a scheme,
+a design of the kind ``scheme``.
 
 Functions
 ---------
@@ -15,6 +17,8 @@ unrecorded_descents
     Return the laws marked derived whose descent is recorded nowhere.
 underived_records
     Return the consequences whose record names a law not marked derived.
+misapplied_schemes
+    Return the segments that apply a record other than a design of the kind scheme.
 """
 
 from __future__ import annotations
@@ -129,4 +133,37 @@ def underived_records(
                     value=str(target),
                 )
             )
+    return found
+
+
+def misapplied_schemes(
+    record: Derivation, records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return the segments whose field ``applies`` names a record other than a design of the kind
+    ``scheme``, since a segment applies a reusable way of deriving.
+
+    >>> records = {"design.a.b": {"type": "design", "kind": "method"}}
+    >>> derivation = {"segments": [{"id": "s", "applies": "design.a.b"}]}
+    >>> [f.text for f in misapplied_schemes(derivation, records)]
+    ['segments.s.applies: design.a.b is no design of the kind scheme']
+    """
+    found = []
+    for i, segment in entries(record, "segments"):
+        applied = segment.get("applies")
+        if not isinstance(applied, str) or not applied.strip() or applied not in records:
+            continue
+        design = records[applied]
+        if design.get("type") == "design" and design.get("kind") == "scheme":
+            continue
+        found.append(
+            finding(
+                rules.DERIVATION_MISAPPLIED_SCHEME,
+                f"segments.{segment.get('id') or i}.applies: {applied} is no design of the kind"
+                " scheme",
+                "segments",
+                Entry(i, segment),
+                "applies",
+                value=applied,
+            )
+        )
     return found

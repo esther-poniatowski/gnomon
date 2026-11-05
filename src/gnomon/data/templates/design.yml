@@ -9,11 +9,15 @@ id: design.TOPIC.NAME
 type: design
 status: provisional              # provisional | stabilized | retracted
 
-kind:                            # experiment (an intervention on the target) | simulation-run (a run of a simulation of a model) | method (a procedure that solves a task)
-serves: quest.TOPIC.NAME         # the question or the problem that the design serves; empty for a method stated apart from any problem
+kind:                            # experiment (an intervention on the target) | simulation-run (a run of a simulation of a model) | method (a procedure that solves a task) | scheme (a reusable way of deriving, which the segments of derivations apply)
+serves: quest.TOPIC.NAME         # the question or the problem that the design serves; optional for a method or a scheme
 task: "WHAT AN EXECUTION MUST ACHIEVE"
-applies_when:                    # method only; one entry per condition of application, each a grammatical expression or a named property
+applies_when:                    # scheme only; one entry per condition of application, each a grammatical expression or a named property
   - "CONDITION OF APPLICATION"
+
+posits:                          # scheme only; one entry per posit that the scheme prescribes, such as an ansatz or a slow scale
+  - id: POSIT-NAME
+    statement: "THE FORM OR THE RELATION ASSUMED"
 
 inputs:                          # one entry per object that an execution takes
   - name: "NAME OF THE INPUT"
@@ -30,9 +34,11 @@ rules:                           # one entry per admissible move or decision; em
 output: "WHAT AN EXECUTION YIELDS"
 stopping: "THE CONDITION UNDER WHICH AN EXECUTION STOPS"
 
-failure_modes:                   # one entry per way in which an execution can mislead; empty when none
+failure_modes:                   # one entry per way in which an execution or an application can mislead; empty when none
   - mode: "HOW AN EXECUTION CAN MISLEAD"
     guard: STEP-OR-RULE-NAME     # optional; the step or the rule that detects or prevents the failure
+    situation: "THE SITUATION THAT ANNOUNCES THE FAILURE"   # scheme only; at the boundary of the conditions of application, or a failure of a posit
+    patch: "THE PATCH THAT THE FAILURE CALLS FOR"   # scheme only
 
 protocol:                        # experiment and simulation-run only
   intervention: "THE QUANTITY THAT AN EXECUTION SETS, WITH ITS LEVELS"

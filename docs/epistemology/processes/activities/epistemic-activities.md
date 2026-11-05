@@ -120,7 +120,7 @@ The product types form a closed list. Each type classifies the epistemic objects
 | `concept` | a term with its definition or its explication | conceptual activities |
 | `measurement-procedure` | a procedure that assigns values to a quantity on a stated [scale](../../vocabulary/quantities/scale-and-level.md) | conceptual activities |
 | `classification` | a partition of systems into [classes](../../vocabulary/systems/kind-class-population.md) | conceptual activities |
-| `design` | a plan of observations, interventions or simulation runs, with their conditions, or a method that solves a task | empirical activities |
+| `design` | a plan of observations, interventions or simulation runs, with their conditions, a method that solves a task, or a scheme that derivations apply | empirical activities |
 | `data` | the recorded [values](../../vocabulary/quantities/variable-value-observable.md) of observables | empirical activities |
 | `phenomenon` | the behavior of a target that a question concerns, detected from data; only a phenomenon of the category *regularity* must be stable, as the note on [phenomena](../../vocabulary/regularities/pattern-and-phenomenon.md) states | empirical activities |
 | `target-specification` | the declared constituents and quantities of a [target](../../foundations/things-and-constructs.md) | model-building |

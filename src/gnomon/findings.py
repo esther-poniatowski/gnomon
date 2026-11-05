@@ -457,6 +457,10 @@ DERIVATION_RESTATED_FACT = _rule(
     "A derivation that serves a record restates its root sought, or names the record served again"
     " as the record of a consequence.",
 )
+DERIVATION_MISAPPLIED_SCHEME = _rule(
+    "derivation/misapplied-scheme",
+    "A segment applies a record other than a design of the kind scheme.",
+)
 DERIVATION_UNDERIVED_RECORD = _rule(
     "derivation/underived-record",
     "The record of a consequence names a law that is not marked derived.",

@@ -25,7 +25,14 @@ properties:
     - experiment
     - simulation-run
     - method
+    - scheme
     - null
+  posits:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - statement
   inputs:
     items:
       propertyNames:
@@ -50,6 +57,8 @@ properties:
         enum:
         - mode
         - guard
+        - situation
+        - patch
   protocol:
     propertyNames:
       enum:
@@ -68,6 +77,7 @@ propertyNames:
   - serves
   - task
   - applies_when
+  - posits
   - inputs
   - steps
   - rules

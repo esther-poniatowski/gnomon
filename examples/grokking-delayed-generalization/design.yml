@@ -1,0 +1,51 @@
+# the scheme that the derivation of the timescale law applies: the relaxation of a stable linear
+# flow, read from its slowest positive mode
+
+_schema: gnomon:design@1
+title: "Relaxation along the slowest positive mode"
+id: design.grokking.slowest-mode-relaxation
+type: design
+status: provisional
+
+kind: scheme
+serves:
+task: "derive the long-time behavior of a stable linear relaxation, and the time at which it crosses a threshold, from its slowest positive rate"
+
+applies_when:
+  - "the generator of the relaxation is symmetric, so that its eigenvectors form an orthogonal basis"
+  - "a finite gap separates the slowest positive rate from the next positive rate"
+
+posits:
+  - id: threshold-by-factor
+    statement: "the quantity of interest crosses its threshold once the slowest positive mode has decayed by a fixed factor"
+
+inputs:
+  - name: "linear relaxation"
+    description: "a linear flow of a state toward its equilibrium, with a symmetric generator"
+
+steps:
+  - id: diagonalize
+    act: "pass to the basis of the eigenvectors of the generator, so that each mode relaxes on its own"
+  - id: solve-modes
+    act: "solve the relaxation of each mode, which decays exponentially at its own rate"
+  - id: keep-slowest
+    act: "at times long compared with the inverse of the gap, keep the slowest positive mode"
+  - id: time-crossing
+    act: "solve the decay of the slowest positive mode for the factor that the posit fixes"
+
+rules:
+
+output: "the time of relaxation to the threshold, as the inverse of the slowest positive rate up to a constant factor"
+stopping:
+
+failure_modes:
+  - mode: "the slowest positive mode is read as dominant while faster modes still carry the departure from equilibrium"
+    guard: keep-slowest
+    situation: "the gap between the slowest and the next positive rate closes"
+    patch: "keep every mode whose rate lies within the gap, and sum their decays"
+  - mode: "the threshold time is read from one mode while the quantity of interest depends on several"
+    guard: time-crossing
+    situation: "the posit fails: the quantity of interest does not track the slowest positive mode alone"
+    patch: "derive the threshold from the whole quantity of interest, as a function of every mode"
+
+protocol:

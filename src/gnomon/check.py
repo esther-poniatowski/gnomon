@@ -46,6 +46,7 @@ from . import vocabulary as v
 from .answerability import malformed_answerability
 from .derivations import (
     derivation_problems,
+    misapplied_schemes,
     recorded_descents,
     underived_records,
     unrecorded_descents,
@@ -473,7 +474,12 @@ def _descent(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 def _derivation(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The units, the interpretations, the orientations, the segments, the kernel, the slots and the
     consequences of a derivation, and the laws that its consequences name."""
-    return derivation_problems(record) + underived_records(record, ctx.workspace.by_id)
+    by_id = ctx.workspace.by_id
+    return (
+        derivation_problems(record)
+        + underived_records(record, by_id)
+        + misapplied_schemes(record, by_id)
+    )
 
 
 def _itinerary(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:

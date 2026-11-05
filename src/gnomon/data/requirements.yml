@@ -34,7 +34,7 @@ always:
   background: [describes, laws, closure]
   problem: [statement, kind, demand, result_type, request]
   concept: [gloss, kind, source]
-  design: [kind, task, steps, output, stopping]
+  design: [kind, task, steps, output]
   derivation:
     - runs_on
     - objects
@@ -80,8 +80,10 @@ by_presence:
 by_value:
   design:
     kind:
-      experiment: [serves, protocol]
-      simulation-run: [serves, protocol]
+      experiment: [serves, protocol, stopping]
+      simulation-run: [serves, protocol, stopping]
+      method: [stopping]
+      scheme: [applies_when]
   phenomenon:
     evidential_status:
       absent: [search.scope, search.procedure]

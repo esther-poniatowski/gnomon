@@ -17,6 +17,7 @@ This case checks whether the framework can keep a temporal regularity apart from
 - [Question](question.yml): to know what an explanation must establish, and against which alternatives.
 - [Effective theory](model.yml): to read the model of representation learning that four operations derive from the target.
 - [Derivation](derivation.yml): to follow how the timescale law of the effective theory is constructed, move by move, with the orientation and the meaning of each step.
+- [Scheme of relaxation](design.yml): to read the reusable way of deriving that the derivation applies, with its conditions of application and its modes of failure.
 - [Binding](binding.yml): to read how the effective theory is paired with the delay and the crossing order of the phenomenon.
 - [Candidate answer](answer.yml): to examine a candidate explanation drawn from a published effective theory.
 - [Assessment](assessment.yml): to learn which tests the candidate passes or fails, and why.
