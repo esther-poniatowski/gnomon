@@ -37,17 +37,9 @@ properties:
           propertyNames:
             enum:
             - id
-            - statement
+            - reading
             - expression
-            - strength
             - held_by
-          properties:
-            strength:
-              enum:
-              - local-role
-              - provisional
-              - axiom
-              - null
   grounds:
     items:
       propertyNames:

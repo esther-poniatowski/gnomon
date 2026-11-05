@@ -337,14 +337,19 @@ COMPLETENESS_MISMATCHED_STATUS_PAIR = _rule(
     "completeness/mismatched-status-pair",
     "A factor of an explanation names no pair of the type that its target status requires.",
 )
-COMPLETENESS_UNHELD_AXIOM = _rule(
-    "completeness/unheld-axiom",
-    "A presupposition of the strength axiom is held by no background law and no concept record.",
+COMPLETENESS_MISHELD_PRESUPPOSITION = _rule(
+    "completeness/misheld-presupposition",
+    "A presupposition of a claim names as its holder neither a law of a background or a model nor"
+    " a consequence of a derivation.",
+)
+COMPLETENESS_INHERITED_PRESUPPOSITION = _rule(
+    "completeness/inherited-presupposition",
+    "A claim restates a presupposition of the question that its answer answers.",
 )
 COMPLETENESS_MISDIRECTED_INTERVENTIONS = _rule(
     "completeness/misdirected-interventions",
-    "A claim names as its interventions no experiment and no simulation run that states an"
-    " intervention.",
+    "An intervention of a counterfactual claim names neither an experiment or a simulation run"
+    " stating an intervention nor a quantity of a model.",
 )
 COMPLETENESS_UNBOUND_OUTPUTS = _rule(
     "completeness/unbound-outputs",

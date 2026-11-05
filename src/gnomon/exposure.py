@@ -12,8 +12,8 @@ on in turn. This module walks that dependence from each answer:
 - a consequence of a derivation rests on the moves and the segments upstream of the object stating
   it, on the posits and the premises among their inputs, on the models on which the derivation runs,
   and on the derivations that it uses;
-- a presupposition of a claim reaches the record that holds it, or exposes the answer while no
-  record holds it.
+- a presupposition of a claim reaches the statement that holds it, or exposes the answer while no
+  statement holds it, and a relation ``presupposes`` to another answer reaches that answer.
 
 The walk fails closed: a unit whose state the record does not state, such as a warrant that names
 no error, counts as exposed, so a record never lowers its exposure by omitting a field.
@@ -243,16 +243,20 @@ class _Walk:
         claim = record.get("claim")
         for entry in _entries(claim if isinstance(claim, Mapping) else {}, "presuppositions"):
             self.presupposition(name, entry)
+        for relation in _entries(record, "relations"):
+            if relation.get("relation") == "presupposes" and isinstance(
+                relation.get("answer"), str
+            ):
+                self.reference(str(relation["answer"]), f"answer {relation['answer']}")
 
     def presupposition(self, answer: str, entry: Mapping[str, Any]) -> None:
-        """Walk a presupposition: to its holder when one is named, else expose while it binds."""
-        unit = f"{answer}.claim.presuppositions.{entry.get('id') or '?'}"
-        strength, holder = entry.get("strength"), entry.get("held_by")
-        if not strength:
-            self.expose(unit, "presupposition", "strength not stated", "claim")
-        elif isinstance(holder, str) and holder.strip():
+        """Walk a presupposition: to the statement that holds it when one is named, and otherwise
+        expose the answer to it while it stays undischarged."""
+        holder = entry.get("held_by")
+        if isinstance(holder, str) and holder.strip():
             self.reference(holder, f"presupposition {entry.get('id')}")
-        elif strength != "local-role":
+        else:
+            unit = f"{answer}.claim.presuppositions.{entry.get('id') or '?'}"
             self.expose(unit, "presupposition", "not discharged", "claim")
 
 

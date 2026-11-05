@@ -61,9 +61,10 @@ variables:
     symbol: lambda3
     determined: within
     signature: []
-    values: "nonneg(reals)"
-    expression: "min(pos(re(spectrum(Hrep))))"
-    reading: "The variable gives the first nonzero relaxation rate of the effective dynamics of the representation."
+    values: "pos(reals)"
+    condition: "lambda3 = min(pos(re(spectrum(Hrep))))"
+    selects: unique
+    reading: "The variable gives the first nonzero relaxation rate of the effective dynamics of the representation. Its condition presupposes that the effective Hessian has a positive eigenvalue."
   - name: "delay between fitting and generalization in the model"
     symbol: delay_m
     determined: within

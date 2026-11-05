@@ -138,65 +138,66 @@ properties:
               title: Id
               description: A descriptive identifier of the presupposition, unique within the record.
               examples:
-              - '`positive-rate`'
-            statement:
+              - '`homogeneous-population`'
+            reading:
               type:
               - string
               - 'null'
               x-template: '"WHAT THE CLAIM TAKES FOR GRANTED"'
               x-kind: markdown-line
-              title: Statement
-              description: The commitment that the claim and its denial both require.
+              title: Reading
+              description: The commitment that the claim and every other direct answer of its question
+                take for granted.
               examples:
-              - a positive relaxation rate of the representation exists
+              - the units of the population share one transfer function
             expression:
               type:
               - string
               - 'null'
               x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
               x-kind: text
-              x-comment: optional
+              x-comment: optional; empty while the presupposition is not formalized
               title: Expression
-              description: The presupposition in the expression syntax, such as an existence stated with
-                the binder `exists`.
-              examples:
-              - '`lambda3 > 0`'
-            strength:
-              type:
-              - string
-              - 'null'
-              x-vocabulary: claim.strength
-              title: Strength
-              description: 'The strength of the commitment: local-role · provisional · axiom.'
-              examples:
-              - provisional
+              description: The presupposition in the expression syntax, over declared symbols.
             held_by:
               type:
               - string
               - 'null'
               x-template: RECORD.UNIT
               x-kind: label
-              x-comment: empty while undischarged; for an axiom, a background law or a concept
+              x-comment: empty while undischarged; a law of a background or a model, or a consequence
+                of a derivation
               title: Held by
-              description: The law, the answer, the concept or the consequence of a derivation that holds
-                the presupposition; empty while it is undischarged.
+              description: The law of a background or of a model, or the consequence of a derivation,
+                that establishes the presupposition; empty while it is undischarged. A presupposition
+                that another answer establishes is a relation `presupposes` to that answer.
               examples:
-              - '`bg.turbulence.navier-stokes.momentum`'
-        x-comment: optional; one entry per commitment that the claim and its denial both require
+              - '`bg.turbulence-incompressible-navier-stokes.navier-stokes.momentum`'
+        x-comment: optional; one entry per commitment that the claim takes for granted beyond the
+          presuppositions of its question and the existence that the conditions of its quantities
+          presuppose
         title: Presuppositions
-        description: optional; one entry per commitment that the claim and its denial both require
+        description: optional; one entry per commitment that the claim takes for granted beyond the
+          presuppositions of its question and the existence that the conditions of its quantities
+          presuppose
       interventions:
         type:
-        - string
+        - array
         - 'null'
-        x-template: design.TOPIC.NAME
-        x-kind: label
-        x-comment: for a counterfactual claim; a design of kind experiment or simulation-run
+        items:
+          type:
+          - string
+          - 'null'
+          x-template: REFERENCE
+          x-kind: label
+        x-comment: for a counterfactual claim, which naming them marks; one entry per intervention
+          admitted
         title: Interventions
-        description: For a counterfactual claim, the design of kind experiment or simulation-run whose
-          protocol states the admissible interventions.
+        description: For a counterfactual claim, the admissible interventions, each named by an
+          experiment or a simulation run whose protocol states it, or by the parameter or the
+          variable of a model that it sets; naming them marks the claim as counterfactual.
         examples:
-        - '`design.mixture.subspace-ablation`'
+        - - '`design.mixture.subspace-ablation`'
     x-comment: over the symbols of the model on which the route runs, or over those of the target and
       the phenomenon when the route runs on the target
     title: Claim

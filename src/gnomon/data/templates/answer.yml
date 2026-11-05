@@ -20,13 +20,13 @@ claim:                           # over the symbols of the model on which the ro
       realizes: SYMBOL           # a role, declared by the model independently of any substrate
       by: "EXPRESSION OVER THE SYMBOLS SPECIFIC TO THE SUBSTRATE"
       reading: "THE STRUCTURE THAT THE MAPPING PRESERVES"   # only content beyond the expression of `by`
-  presuppositions:               # optional; one entry per commitment that the claim and its denial both require
+  presuppositions:               # optional; one entry per commitment that the claim takes for granted beyond the presuppositions of its question and the existence that the conditions of its quantities presuppose
     - id: PRESUPPOSITION-NAME
-      statement: "WHAT THE CLAIM TAKES FOR GRANTED"
-      expression: "EXPRESSION OVER DECLARED SYMBOLS"   # optional
-      strength:                  # local-role (the way in which a term functions in the claim, which commits the claim alone) | provisional (a statement of the background, which commits the inquiry until a record holds it) | axiom (a statement of the whole corpus, held by a background law or a concept)
-      held_by: RECORD.UNIT       # empty while undischarged; for an axiom, a background law or a concept
-  interventions: design.TOPIC.NAME   # for a counterfactual claim; a design of kind experiment or simulation-run
+      reading: "WHAT THE CLAIM TAKES FOR GRANTED"
+      expression: "EXPRESSION OVER DECLARED SYMBOLS"   # optional; empty while the presupposition is not formalized
+      held_by: RECORD.UNIT       # empty while undischarged; a law of a background or a model, or a consequence of a derivation
+  interventions:                 # for a counterfactual claim, which naming them marks; one entry per intervention admitted
+    - REFERENCE
 
 grounds:                         # what the claim depends on; one entry per ground
   - id: GROUND

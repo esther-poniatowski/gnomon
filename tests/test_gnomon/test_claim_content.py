@@ -1,35 +1,46 @@
-"""The content of a claim: its presuppositions, its interventions, and the quantifier binders.
+"""The content of a claim: its presuppositions and its interventions.
 
-A presupposition of the strength axiom names a background law or a concept record, a counterfactual
-claim names an experiment or a simulation run that states an intervention, and an undischarged
-presupposition enters the view of exposure. Each rule is shown to fire on one planted defect.
+A presupposition of a claim is held by a law of a background or a model, or by a consequence of a
+derivation, and a presupposition that another answer holds is a relation ``presupposes``. A claim
+inherits the presuppositions of its question and does not restate them. An undischarged
+presupposition exposes the answer, and a held one passes on the exposure of its holder. The
+interventions of a counterfactual claim name experiments, simulation runs or quantities of a model.
+Each rule is shown on a planted case.
 """
 
 from __future__ import annotations
 
+import copy
 import shutil
-from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
 import yaml
 
 from gnomon.check import check_workspace, load_workspace
-from gnomon.completeness import misdirected_interventions, unheld_axioms
-from gnomon.dimensions import evaluate
-from gnomon.views import exposure
+from gnomon.completeness import (
+    inherited_presuppositions,
+    misdirected_interventions,
+    misheld_presuppositions,
+)
+from gnomon.exposure import answer_exposure
 
 ROOT = Path(__file__).resolve().parents[2]
 GROKKING = ROOT / "examples" / "grokking-delayed-generalization"
-LAW = "bg.nonreciprocal-active-matter.local-dynamics.evolve"
-DESIGN = "design.nonreciprocal-active-matter.coupling-sweep"
+ANSWER = "ans.grokking.slow-structured-representation"
+POSITED = "mod.grokking.effective-representation.representation_flow"
+DERIVED = "mod.grokking.effective-representation.representation_time"
+CONSEQUENCE = "derivation.grokking.delay-scale.scale-law"
 CONCEPT = "concept.microbial.stable-coexistence"
+DESIGN = "design.nonreciprocal-active-matter.coupling-sweep"
 
 
 def _records() -> dict[str, dict[str, Any]]:
-    """Return the records of the workspace of examples, keyed by identifier."""
+    """Return the records of every worked example, keyed by identifier, as records a test may
+    change."""
     return {
-        ident: dict(record) for ident, record in load_workspace(ROOT / "examples").by_id.items()
+        ident: copy.deepcopy(dict(record))
+        for ident, record in load_workspace(ROOT / "examples").by_id.items()
     }
 
 
@@ -37,45 +48,80 @@ def _answer(**claim: Any) -> dict[str, Any]:
     return {"type": "answer", "id": "ans.a.b", "claim": claim}
 
 
-def _axiom(held_by: str | None) -> dict[str, Any]:
-    return _answer(presuppositions=[{"id": "p", "strength": "axiom", "held_by": held_by}])
+def _held(holder: str | None) -> dict[str, Any]:
+    return _answer(presuppositions=[{"id": "p", "reading": "a commitment", "held_by": holder}])
 
 
-def test_an_axiom_is_held_by_a_background_law_or_a_concept() -> None:
+def test_a_presupposition_is_held_by_a_law_or_a_consequence() -> None:
     records = _records()
-    assert not unheld_axioms(_axiom(LAW), records)
-    assert not unheld_axioms(_axiom(CONCEPT), records)
-    assert [f.rule.id for f in unheld_axioms(_axiom(None), records)] == [
-        "completeness/unheld-axiom"
+    for holder in (POSITED, DERIVED, CONSEQUENCE):
+        assert not misheld_presuppositions(_held(holder), records), holder
+    for holder in (CONCEPT, ANSWER, "ans.a.b.claim", "free text"):
+        texts = [f.text for f in misheld_presuppositions(_held(holder), records)]
+        assert texts == [
+            f"claim.presuppositions.p.held_by: {holder} is no law and no consequence of a"
+            " derivation"
+        ], holder
+
+
+def test_an_undischarged_presupposition_needs_no_holder() -> None:
+    assert not misheld_presuppositions(_held(None), _records())
+
+
+def test_a_claim_does_not_restate_a_presupposition_of_its_question() -> None:
+    question = {
+        "type": "question",
+        "presuppositions": [{"id": "q", "reading": "a positive rate exists", "expression": "x>0"}],
+    }
+    restated = _answer(presuppositions=[{"id": "p", "expression": "x > 0"}])
+    assert [f.text for f in inherited_presuppositions(restated, question)] == [
+        "claim.presuppositions.p: the question presupposes it already, as q"
     ]
-    assert [f.rule.id for f in unheld_axioms(_axiom(DESIGN), records)] == [
-        "completeness/unheld-axiom"
-    ]
+    other = _answer(presuppositions=[{"id": "p", "expression": "y > 0"}])
+    assert not inherited_presuppositions(other, question)
 
 
-def test_a_provisional_commitment_needs_no_corpus_record() -> None:
-    answer = _answer(presuppositions=[{"id": "p", "strength": "provisional"}])
-    assert not unheld_axioms(answer, _records())
-
-
-def test_interventions_name_a_design_that_states_one() -> None:
+def test_interventions_name_a_design_or_a_quantity_of_a_model() -> None:
     records = _records()
-    assert not misdirected_interventions(_answer(interventions=DESIGN), records)
+    quantity = "mod.grokking.effective-representation.eta_rep"
+    assert not misdirected_interventions(_answer(interventions=[DESIGN, quantity]), records)
     records[DESIGN] = {**records[DESIGN], "kind": "method"}
-    assert [
-        f.rule.id for f in misdirected_interventions(_answer(interventions=DESIGN), records)
-    ] == ["completeness/misdirected-interventions"]
+    texts = [f.text for f in misdirected_interventions(_answer(interventions=[DESIGN]), records)]
+    assert texts == [
+        f"claim.interventions: {DESIGN} sets no intervention: no experiment or simulation run"
+        " stating one, and no quantity of a model"
+    ]
+    assert misdirected_interventions(_answer(interventions=[CONCEPT]), records)
 
 
-def test_an_undischarged_presupposition_enters_the_view_until_a_record_holds_it() -> None:
+def _exposure(records: dict[str, dict[str, Any]], holder: str | None) -> dict[str, str]:
+    answer = records[ANSWER]
+    answer["claim"]["presuppositions"] = [{"id": "p", "reading": "a commitment", "held_by": holder}]
+    return {f.unit: f.via for f in answer_exposure(records, ANSWER)}
+
+
+def test_a_presupposition_exposes_the_answer_until_a_statement_holds_it() -> None:
     records = _records()
-    via = [row["via"] for row in exposure(records)["exposures"]]
-    assert "claim" in via
-    answer = records["ans.grokking.slow-structured-representation"]
-    claim = dict(answer["claim"])
-    claim["presuppositions"] = [{**claim["presuppositions"][0], "held_by": LAW}]
-    records[answer["id"]] = {**answer, "claim": claim}
-    assert "claim" not in [row["via"] for row in exposure(records)["exposures"]]
+    records[ANSWER]["grounds"] = []
+    records[ANSWER]["route"]["derivations"] = []
+    assert _exposure(records, None) == {f"{ANSWER}.claim.presuppositions.p": "claim"}
+    assert _exposure(records, POSITED) == {POSITED: "presupposition p"}
+    held = _exposure(records, DERIVED)
+    assert f"{ANSWER}.claim.presuppositions.p" not in held
+    assert POSITED in held
+
+
+def test_a_relation_presupposes_passes_on_the_exposure_of_the_other_answer() -> None:
+    records = _records()
+    other: dict[str, Any] = {
+        "type": "answer",
+        "id": "ans.a.other",
+        "grounds": [],
+        "relations": [{"answer": ANSWER, "relation": "presupposes"}],
+    }
+    records[other["id"]] = other
+    units = {f.unit for f in answer_exposure(records, "ans.a.other")}
+    assert POSITED in units
 
 
 def test_an_undeclared_symbol_of_a_presupposition_is_reported(tmp_path: Path) -> None:
@@ -83,13 +129,9 @@ def test_an_undeclared_symbol_of_a_presupposition_is_reported(tmp_path: Path) ->
     shutil.copytree(GROKKING, folder)
     path = folder / "answer.yml"
     answer = yaml.safe_load(path.read_text(encoding="utf-8"))
-    answer["claim"]["presuppositions"][0]["expression"] = "lambda9 > 0"
+    answer["claim"]["presuppositions"] = [
+        {"id": "p", "reading": "a commitment", "expression": "lambda9 > 0"}
+    ]
     path.write_text(yaml.safe_dump(answer, sort_keys=False), encoding="utf-8")
     texts = [located.finding.text for located in check_workspace(load_workspace(folder))]
     assert any("lambda9" in text for text in texts), texts
-
-
-def test_a_quantified_statement_is_a_pure_number() -> None:
-    evaluation = evaluate("exists_{i}( lambda(i) > 0 )", {"lambda": {"T": Fraction(-1)}}, None)
-    assert evaluation is not None and evaluation.result == {}
-    assert not evaluation.violations

@@ -9,6 +9,7 @@ from __future__ import annotations
 from typing import Any, Mapping
 
 from .. import findings as rules
+from ..dimensions import parse_expression
 from ..findings import Entry, Finding, finding
 from ..identifiers import split_reference
 from .paths import at, is_unfilled
@@ -224,81 +225,165 @@ def _claim(answer: Mapping[str, Any]) -> Mapping[str, Any]:
     return claim if isinstance(claim, Mapping) else {}
 
 
-def _holds_axiom(reference: Any, records: Mapping[str, Mapping[str, Any]]) -> bool:
-    """Tell whether a reference names a law of a background or a concept record."""
-    if not isinstance(reference, str) or not reference:
-        return False
-    if records.get(reference, {}).get("type") == "concept":
-        return True
+def _holds_statement(
+    reference: str, answer: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> bool:
+    """Tell whether a reference names a statement that can hold a presupposition: a law of a
+    background or of a model, or a consequence of a derivation, other than the answer itself."""
     split = split_reference(reference)
-    if split is None:
+    if split is None or split[0] == answer.get("id"):
         return False
     owner = records.get(split[0], {})
-    return owner.get("type") == "background" and any(
-        isinstance(law, Mapping) and law.get("symbol") == split[1]
-        for law in owner.get("laws") or []
-    )
+    if owner.get("type") in ("background", "model"):
+        return any(
+            isinstance(law, Mapping) and law.get("symbol") == split[1]
+            for law in owner.get("laws") or []
+        )
+    if owner.get("type") == "derivation":
+        return any(
+            isinstance(c, Mapping) and c.get("id") == split[1]
+            for c in owner.get("consequences") or []
+        )
+    return False
 
 
-def unheld_axioms(
+def _presuppositions(record: Mapping[str, Any]) -> list[tuple[int, Mapping[str, Any]]]:
+    """Return the presuppositions that a question or the claim of an answer states, with their
+    indices."""
+    source = record.get("presuppositions") if record.get("type") == "question" else None
+    entries = source if source is not None else _claim(record).get("presuppositions")
+    return [(i, e) for i, e in enumerate(entries or []) if isinstance(e, Mapping)]
+
+
+def misheld_presuppositions(
     answer: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
 ) -> list[Finding]:
-    """Return the presuppositions of the strength axiom that no background law and no concept
-    record holds, since an axiom is a commitment of the whole corpus.
+    """Return the presuppositions of a claim whose holder states no statement: neither a law of a
+    background or a model nor a consequence of a derivation, or the answer itself. A presupposition
+    that another answer holds is a relation ``presupposes`` to that answer.
 
-    >>> answer = {"claim": {"presuppositions": [{"id": "p", "strength": "axiom"}]}}
-    >>> [f.text for f in unheld_axioms(answer, {})]
-    ['claim.presuppositions.p: an axiom is held by a background law or a concept record']
+    >>> held = [{"id": "p", "held_by": "ans.a.c"}]
+    >>> answer = {"id": "ans.a.b", "claim": {"presuppositions": held}}
+    >>> [f.text for f in misheld_presuppositions(answer, {})]
+    ['claim.presuppositions.p.held_by: ans.a.c is no law and no consequence of a derivation']
     """
     found = []
-    for index, entry in enumerate(_claim(answer).get("presuppositions") or []):
-        if not isinstance(entry, Mapping) or entry.get("strength") != "axiom":
+    for index, entry in _presuppositions(answer):
+        holder = entry.get("held_by")
+        if not isinstance(holder, str) or not holder.strip():
             continue
-        if _holds_axiom(entry.get("held_by"), records):
+        if _holds_statement(holder, answer, records):
             continue
         found.append(
             finding(
-                rules.COMPLETENESS_UNHELD_AXIOM,
-                f"claim.presuppositions.{entry.get('id') or index}: an axiom is held by a"
-                " background law or a concept record",
+                rules.COMPLETENESS_MISHELD_PRESUPPOSITION,
+                f"claim.presuppositions.{entry.get('id') or index}.held_by: {holder} is no law"
+                " and no consequence of a derivation",
                 "claim",
                 "presuppositions",
-                index,
+                Entry(index, entry),
                 "held_by",
+                value=holder,
             )
         )
     return found
 
 
+def _same(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
+    """Tell whether two presuppositions state one commitment: expressions with the same tree, or
+    the same reading when either is not formalized.
+
+    >>> _same({"expression": "x > 0"}, {"expression": "x>0"})
+    True
+    """
+    trees = parse_expression(left.get("expression")), parse_expression(right.get("expression"))
+    if None not in trees:
+        return trees[0] == trees[1]
+    a, b = left.get("reading"), right.get("reading")
+    return isinstance(a, str) and isinstance(b, str) and " ".join(a.split()) == " ".join(b.split())
+
+
+def inherited_presuppositions(
+    answer: Mapping[str, Any], question: Mapping[str, Any]
+) -> list[Finding]:
+    """Return the presuppositions of a claim that restate a presupposition of the question that the
+    answer answers, since every direct answer of a question inherits its presuppositions.
+
+    >>> question = {"type": "question", "presuppositions": [{"id": "q", "expression": "x > 0"}]}
+    >>> answer = {"claim": {"presuppositions": [{"id": "p", "expression": "x > 0"}]}}
+    >>> [f.text for f in inherited_presuppositions(answer, question)]
+    ['claim.presuppositions.p: the question presupposes it already, as q']
+    """
+    asked = _presuppositions(question) if question.get("type") == "question" else []
+    found = []
+    for index, entry in _presuppositions(answer):
+        twin = next((q for _, q in asked if _same(entry, q)), None)
+        if twin is not None:
+            found.append(
+                finding(
+                    rules.COMPLETENESS_INHERITED_PRESUPPOSITION,
+                    f"claim.presuppositions.{entry.get('id') or index}: the question presupposes it"
+                    f" already, as {twin.get('id')}",
+                    "claim",
+                    "presuppositions",
+                    Entry(index, entry),
+                )
+            )
+    return found
+
+
+def _sets_intervention(reference: str, records: Mapping[str, Mapping[str, Any]]) -> bool:
+    """Tell whether a reference names what an intervention sets: an experiment or a simulation run
+    whose protocol states its intervention, or a parameter or a variable of a model."""
+    design = records.get(reference)
+    if design is not None:
+        protocol = design.get("protocol")
+        intervention = protocol.get("intervention") if isinstance(protocol, Mapping) else None
+        return (
+            design.get("type") == "design"
+            and design.get("kind") in ("experiment", "simulation-run")
+            and not is_unfilled(intervention)
+        )
+    split = split_reference(reference)
+    if split is None:
+        return False
+    owner = records.get(split[0], {})
+    return owner.get("type") == "model" and any(
+        isinstance(q, Mapping) and q.get("symbol") == split[1]
+        for block in ("parameters", "variables")
+        for q in owner.get(block) or []
+    )
+
+
 def misdirected_interventions(
     answer: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
 ) -> list[Finding]:
-    """Return a finding when the interventions of a counterfactual claim name no design of the
-    kind experiment or simulation-run whose protocol states an intervention.
+    """Return the interventions of a counterfactual claim that name neither an experiment or a
+    simulation run stating an intervention nor a parameter or a variable of a model.
 
-    >>> answer = {"claim": {"interventions": "design.a.b"}}
+    >>> answer = {"claim": {"interventions": ["design.a.b"]}}
     >>> records = {"design.a.b": {"type": "design", "kind": "method"}}
-    >>> [f.text for f in misdirected_interventions(answer, records)]
-    ['claim.interventions: design.a.b names no experiment or simulation run with an intervention']
+    >>> for f in misdirected_interventions(answer, records):
+    ...     print(f.text)  # doctest: +NORMALIZE_WHITESPACE
+    claim.interventions: design.a.b sets no intervention: no experiment or simulation run stating
+    one, and no quantity of a model
     """
     named = _claim(answer).get("interventions")
-    if not isinstance(named, str) or not named or named not in records:
-        return []
-    design = records[named]
-    protocol = design.get("protocol")
-    intervention = protocol.get("intervention") if isinstance(protocol, Mapping) else None
-    if (
-        design.get("type") == "design"
-        and design.get("kind") in ("experiment", "simulation-run")
-        and not is_unfilled(intervention)
-    ):
-        return []
-    return [
-        finding(
-            rules.COMPLETENESS_MISDIRECTED_INTERVENTIONS,
-            f"claim.interventions: {named} names no experiment or simulation run with an"
-            " intervention",
-            "claim",
-            "interventions",
+    found = []
+    for index, reference in enumerate(named if isinstance(named, list) else []):
+        if not isinstance(reference, str) or not reference.strip():
+            continue
+        if _sets_intervention(reference, records):
+            continue
+        found.append(
+            finding(
+                rules.COMPLETENESS_MISDIRECTED_INTERVENTIONS,
+                f"claim.interventions: {reference} sets no intervention: no experiment or"
+                " simulation run stating one, and no quantity of a model",
+                "claim",
+                "interventions",
+                index,
+                value=reference,
+            )
         )
-    ]
+    return found
