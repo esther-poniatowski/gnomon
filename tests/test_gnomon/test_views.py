@@ -103,7 +103,7 @@ def test_every_view_of_the_worked_inquiries_follows_its_schema_and_is_stable(
     tmp_path: Path,
 ) -> None:
     """A renderer reads each view through its schema, and two runs write the same files."""
-    schemas = Path(__file__).resolve().parents[2] / "src/gnomon/data/views"
+    schemas = Path(__file__).resolve().parents[2] / "src/gnomon/data/schemas/views"
     runner = CliRunner()
     first, second = tmp_path / "a", tmp_path / "b"
     assert runner.invoke(app, ["views", str(EXAMPLES), "--output", str(first)]).exit_code == 0

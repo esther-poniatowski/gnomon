@@ -22,6 +22,15 @@ exports:
   - gnomon:problem@1
   - gnomon:question@1
   - gnomon:target-system@1
+  - gnomon:view.exposure@2
+  - gnomon:view.expressions@1
+  - gnomon:view.itinerary-progress@1
+  - gnomon:view.maturity@1
+  - gnomon:view.next-act@1
+  - gnomon:view.problem-state@1
+  - gnomon:view.question-statements@1
+  - gnomon:view.question-tree@1
+  - gnomon:view.vocabulary@1
 
 dependencies: []
 projects: []

@@ -18,7 +18,7 @@ from gnomon.vocabulary import load_problem, render_yaml
 from .paths import EXAMPLES, EXPECTED_CASES
 
 ROOT = Path(__file__).resolve().parents[2]
-VIEWS = ROOT / "src" / "gnomon" / "data" / "views"
+VIEWS = ROOT / "src" / "gnomon" / "data" / "schemas" / "views"
 
 
 def test_every_worked_example_folder_is_present() -> None:

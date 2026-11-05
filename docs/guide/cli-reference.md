@@ -118,7 +118,7 @@ gnomon status <directory> [--format text|yaml] [--output PATH]
 
 ## `vocabulary`
 
-An author choosing a symbol for a new quantity needs every symbol and operator that the records of one problem already declare. The `vocabulary` command collects them from the filled records of a problem folder into a vocabulary record, with the LaTeX form of each symbol. The record is a YAML view bound to the schema `gnomon:view.vocabulary@1` of the [view schemas](../../src/gnomon/data/views/_index.md), so a renderer displays it as it displays the other views. The command below writes it into the problem folder:
+An author choosing a symbol for a new quantity needs every symbol and operator that the records of one problem already declare. The `vocabulary` command collects them from the filled records of a problem folder into a vocabulary record, with the LaTeX form of each symbol. The record is a YAML view bound to the schema `gnomon:view.vocabulary@1` of the [view schemas](../../src/gnomon/data/schemas/views/_index.md), so a renderer displays it as it displays the other views. The command below writes it into the problem folder:
 
 ```sh
 gnomon vocabulary <directory>
@@ -175,7 +175,7 @@ gnomon views <directory> [--output DIR]
 | `<directory>`      | Directory of records, read recursively; each folder is one problem.                  |
 | `--output`, `-o`   | Folder receiving the views; the folder `views` of `<directory>` by default.          |
 
-**Output:** one file per view, named after the view, each declaring the schema `gnomon:view.<name>@<version>` of the [view schemas](../../src/gnomon/data/views/_index.md), which the schema registry of the renderer maps to its file. A view holds no date and no absolute path, so two runs on unchanged records write the same files, and `gnomon check` skips the views. The command exits with code 1 when a file cannot be read, and with code 2 when a view cannot be written.
+**Output:** one file per view, named after the view, each declaring the schema `gnomon:view.<name>@<version>` of the [view schemas](../../src/gnomon/data/schemas/views/_index.md), which the schema registry of the renderer maps to its file. A view holds no date and no absolute path, so two runs on unchanged records write the same files, and `gnomon check` skips the views. The command exits with code 1 when a file cannot be read, and with code 2 when a view cannot be written.
 
 ## `tree`
 
