@@ -91,6 +91,11 @@ symbols:
   signature:
   - step
   name: normalized learned representation
+- symbol: Rstar
+  declared_in: mod.grokking.effective-representation
+  block: variables
+  signature: []
+  name: structured representation
 - symbol: delay_m
   declared_in: mod.grokking.effective-representation
   block: variables
@@ -368,6 +373,7 @@ operators:
   - vectors
   declared:
     effective_loss: the effective loss on a learned representation
+    grad_parameter: the gradient of a loss with respect to the trainable parameters, at the current parameters
     powerset: the set of all subsets of a declared set
     representation: the learned representation extracted from a parameter trajectory
     representation_quality: the fraction of the relations consistent with the task that are realized by

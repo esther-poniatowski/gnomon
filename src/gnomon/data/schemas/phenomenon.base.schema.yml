@@ -246,6 +246,7 @@ properties:
           - string
           - 'null'
           x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
           x-kind: label
           x-comment: optional; the formula of the coordinate that the set indexes, such as L or T
           title: dimensional formula
@@ -347,6 +348,7 @@ properties:
           - string
           - 'null'
           x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
           x-kind: label
           x-comment: optional; a monomial such as M L T^-2, or 1 for a pure number
           title: dimensional formula
@@ -570,6 +572,17 @@ properties:
                 x-kind: text
                 title: Values
                 description: The values of the record.
+              dimensional_formula:
+                type:
+                - string
+                - 'null'
+                x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+                pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
+                x-kind: label
+                x-comment: optional; a monomial such as M L T^-2, or 1 for a pure number
+                title: dimensional formula
+                description: optional; a monomial over the base dimensions and the base scales of the
+                  problem, such as M L T^-2, or 1 for a pure number
               observed:
                 type:
                 - string

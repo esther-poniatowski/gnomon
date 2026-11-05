@@ -50,7 +50,7 @@ from __future__ import annotations
 from typing import Any, Mapping
 
 from .. import findings as rules
-from ..findings import Entry, Finding, finding
+from ..findings import Entry, Finding, finding, values_at, where
 from .graph import (
     REFERENCE,
     UNIT_LISTS,
@@ -70,8 +70,6 @@ from .graph import (
     root_sought,
     served_unit,
     units,
-    values_at,
-    where,
 )
 
 

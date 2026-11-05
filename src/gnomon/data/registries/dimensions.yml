@@ -7,6 +7,32 @@
 id: registry.dimensions
 type: dimension-registry
 
+# The fields whose expressions the check of homogeneity reads, by their path in a record: the laws
+# and their ranges, the conditions of the quantities, the constraints of the external systems, the
+# criteria of a reference class, the manifestations, conditions and criteria of a phenomenon, and the
+# regimes and bounds of the operations of a model. The expression that defines a quantity is read
+# apart, against the formula that the quantity declares.
+checked_fields:
+  - laws.expression
+  - laws.range
+  - variables.condition
+  - parameters.condition
+  - observables.condition
+  - external_systems.constrains.expression
+  - reference_class.selection_criteria.expression
+  - manifestations.expression
+  - manifestations.features.condition
+  - conditions_and_byproducts.precipitating.expression
+  - conditions_and_byproducts.inhibiting.expression
+  - conditions_and_byproducts.modulating.expression
+  - conditions_and_byproducts.nonstandard.expression
+  - conditions_and_byproducts.byproducts.expression
+  - detection_criterion.expression
+  - observation_error.expression
+  - search.scope
+  - operations.regime
+  - operations.bound
+
 base_dimensions:
   - symbol: M
     name: mass

@@ -235,6 +235,11 @@ def at_item(place: Place, index: int | None) -> Place:
     return place if index is None else (*place, index)
 
 
+#: The words of the expression syntax that name no symbol and no operator: the membership of an
+#: element in a set, written ``x in S``.
+RESERVED = frozenset({"in"})
+
+
 def identifiers(text: str) -> set[str]:
     """Return the identifiers occurring in an expression.
 
@@ -251,7 +256,24 @@ def identifiers(text: str) -> set[str]:
     """
     without_literals = re.sub(r"'[^']*'|\"[^\"]*\"", " ", text)
     found = {token.rstrip("_") for token in re.findall(r"[A-Za-z_][A-Za-z_0-9]*", without_literals)}
-    return {token for token in found if token}
+    return {token for token in found if token and token not in RESERVED}
+
+
+def binder_indices(text: str) -> list[tuple[str, bool]]:
+    """Return each index that a binder of the expression ranges over, with whether the binder
+    introduces it as a fresh name over a declared set, written ``a1 in a``. An index may carry a
+    restriction, as in ``t <= T``; its leading name is then the index.
+
+    >>> binder_indices("norm_{a1 in a, t <= T}( K(a1, t) )")
+    [('a1', True), ('t', False)]
+    """
+    found: list[tuple[str, bool]] = []
+    for group in re.findall(r"[A-Za-z_][A-Za-z_0-9]*_\{([^}]*)\}", text):
+        for item in group.split(","):
+            match = re.match(r"\s*([A-Za-z_][A-Za-z_0-9]*)\s*(.*)$", item)
+            if match:
+                found.append((match.group(1), bool(re.match(r"in\b", match.group(2)))))
+    return found
 
 
 def bound(text: str) -> set[str]:
@@ -260,10 +282,7 @@ def bound(text: str) -> set[str]:
     >>> sorted(bound("mean_{x, t}( u )"))
     ['t', 'x']
     """
-    found: set[str] = set()
-    for group in re.findall(r"[A-Za-z_][A-Za-z_0-9]*_\{([^}]*)\}", text):
-        found |= {name.strip() for name in group.split(",") if name.strip()}
-    return found
+    return {name for name, _ in binder_indices(text)}
 
 
 def formulas(record: Mapping[str, Any]) -> list[tuple[str, Place, str, frozenset[str]]]:

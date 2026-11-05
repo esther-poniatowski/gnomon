@@ -112,7 +112,7 @@ moves:
       regime:
       applies_because:
   - id: keep-dependence
-    kind: transform
+    kind: apply-theorem
     inputs: [crossing-time]
     outputs: [delay-law]
     binds:
@@ -187,11 +187,6 @@ interpretations:
     kind: magnitude
     reading: "at long times, the faster positive modes are smaller than the slowest one by a factor that decays at eta_rep times the gap between their rates"
     grounds: [mod.grokking.effective-representation.lambda3]
-  - id: memorization-limit
-    of: rate-divergence
-    kind: diagnostic
-    reading: "as lambda3 tends to zero, the delay diverges: the limit is singular, the representation never reaches the quality that generalization requires, and memorization persists"
-    grounds: [slowest-dominates]
   - id: relaxation-process
     of: relaxation
     kind: process
@@ -204,9 +199,6 @@ interpretations:
     grounds:
 
 features:
-  - id: rate-divergence
-    kind: divergence
-    at: delay-law
 
 segments:
   - id: relaxation

@@ -151,6 +151,7 @@ properties:
               - name
               - symbol
               - values
+              - dimensional_formula
               - observed
               - condition
               - selects

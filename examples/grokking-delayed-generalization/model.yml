@@ -44,6 +44,13 @@ variables:
     signature: [step]
     expression: "representation(theta)"
     reading: "The variable holds the normalized input embeddings extracted from the trained model."
+  - name: "structured representation"
+    symbol: Rstar
+    determined: within
+    signature: []
+    condition: "grad(effective_loss(Rstar), Rstar) = 0"
+    selects: any
+    reading: "The variable holds the normalized embeddings at a stationary point of the effective loss whose geometry realizes the structure consistent with the task."
   - name: "representation quality index"
     symbol: RQI
     determined: within
@@ -55,8 +62,8 @@ variables:
     symbol: Hrep
     determined: within
     signature: []
-    expression: "jacobian(grad(effective_loss(Rrep), Rrep), Rrep, Rrep)"
-    reading: "The variable is the Hessian of the normalized effective loss of the representation."
+    expression: "jacobian(grad(effective_loss(Rrep), Rrep), Rrep, Rstar)"
+    reading: "The variable is the Hessian of the normalized effective loss of the representation, at the structured representation."
   - name: "slowest positive rate of representation learning"
     symbol: lambda3
     determined: within
@@ -94,8 +101,8 @@ laws:
     symbol: representation_flow
     signature: [step]
     role: evolution
-    expression: "diff(Rrep, step) = -eta_rep * Hrep * Rrep"
-    reading: "The effective theory relaxes the normalized embedding geometry along the modes of its Hessian."
+    expression: "diff(Rrep, step) = -eta_rep * Hrep * (Rrep - Rstar)"
+    reading: "The effective theory relaxes the departure of the normalized embedding geometry from its structured state along the modes of its Hessian."
     warrant: posited
     rests_on: "The law rests on the operation effective-law, and on a published effective loss [liu2022]."
     origin: "https://proceedings.neurips.cc/paper_files/paper/2022/hash/dfc310e81992d2e4cedc09ac47eff13e-Abstract-Conference.html"

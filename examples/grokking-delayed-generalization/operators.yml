@@ -27,6 +27,10 @@ operators:
     symbol: effective_loss
     signature:
     values: reals
+  - name: "the gradient of a loss with respect to the trainable parameters, at the current parameters"
+    symbol: grad_parameter
+    signature:
+    values:
 
 maturity:
   operators.powerset.values: open  # outside the type language: a set of subsets
@@ -34,3 +38,5 @@ maturity:
   operators.representation.values: open  # outside the type language: heterogeneous computational objects without a common structural type
   operators.representation_quality.signature: open  # outside the type language: heterogeneous computational objects without a common structural type
   operators.effective_loss.signature: open  # outside the type language: heterogeneous computational objects without a common structural type
+  operators.grad_parameter.signature: open  # outside the type language: a loss over parameters indexed by a heterogeneous architecture
+  operators.grad_parameter.values: open  # outside the type language: a family of partial derivatives over the parameters

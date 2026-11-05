@@ -36,13 +36,13 @@ observables:
     symbol: Edrift
     signature: [m, t]
     values: "nonneg(reals)"
-    expression: "norm_{a1, a2}(K(a1, a2, t) - K0(a1, a2))"
+    expression: "norm_{a1 in a, a2 in a}(K(a1, a2, t) - K0(a1, a2))"
     reading: "The norm compares the empirical kernel during training with its initial value."
   - name: "discrepancy from the limiting kernel at initialization"
     symbol: Elimit
     signature: [m]
     values: "nonneg(reals)"
-    expression: "norm_{a1, a2}(K0(a1, a2) - Kinf(a1, a2))"
+    expression: "norm_{a1 in a, a2 in a}(K0(a1, a2) - Kinf(a1, a2))"
     reading: "The norm compares the initial empirical kernel with its deterministic limit at infinite width."
 
 manifestations:

@@ -52,10 +52,12 @@ from .derivations import (
     unrecorded_descents,
 )
 from .dimensions import (
-    FORMULA_BLOCKS,
     Scope,
     base_dimensions,
+    colliding_bases,
+    conflicting_formulas,
     declared_formulas,
+    declares_formula,
     dimension_problems,
     malformed_formulas,
     operator_rules,
@@ -258,13 +260,9 @@ class _Context:
 
     @cached_property
     def declares_formulas(self) -> bool:
-        """Whether some quantity or index set of the problem declares a dimensional formula."""
-        return any(
-            isinstance(entry, Mapping) and entry.get("dimensional_formula") is not None
-            for record in self.problem.records.values()
-            for block in FORMULA_BLOCKS
-            for entry in record.get(block) or []
-        )
+        """Whether some quantity, index set or feature of the problem declares a dimensional
+        formula."""
+        return any(declares_formula(record) for record in self.problem.records.values())
 
     @cached_property
     def arities(self) -> dict[str, int]:
@@ -462,7 +460,16 @@ def _dimensions(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         ctx.dimension_rules,
         ctx.declares_formulas,
     )
-    return malformed_formulas(record, ctx.bases) + dimension_problems(record, scope)
+    return (
+        malformed_formulas(record, ctx.bases)
+        + conflicting_formulas(record, [r for r in seen if r], ctx.bases)
+        + dimension_problems(record, scope)
+    )
+
+
+def _operators(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
+    """The base scales of an operator record, against the base dimensions of the package."""
+    return colliding_bases(record)
 
 
 def _descent(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
@@ -507,6 +514,7 @@ BY_KIND: Mapping[str, tuple[Check, ...]] = {
     "problem": (_problem,),
     "itinerary": (_itinerary,),
     "derivation": (_derivation,),
+    "operators": (_operators,),
 }
 
 

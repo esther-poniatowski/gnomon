@@ -71,6 +71,7 @@ manifestations:                  # one entry per form of the observables' behavi
       - name: "NAME OF THE FEATURE"
         symbol: SYMBOL
         values: "SET EXPRESSION OVER DECLARED SYMBOLS"
+        dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
         observed: "ONE ELEMENT OF THE VALUE SET"
         condition: "EXPRESSION THAT THE FEATURE SATISFIES"   # give when the measurement constrains the feature without fixing its value
         selects:                 # unique | any | all; required with a condition

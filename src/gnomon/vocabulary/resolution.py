@@ -18,7 +18,7 @@ from .layout import (
     TOLERANCE_NAMES,
     TYPE_PATH_REFERENCE,
     at_item,
-    bound,
+    binder_indices,
     entries,
     formulas,
     identifiers,
@@ -98,16 +98,22 @@ def _unresolved_references(record: Mapping[str, Any], known: set[str]) -> list[F
 def _unresolved_identifiers(
     record: Mapping[str, Any], known: set[str], available: frozenset[str]
 ) -> list[Finding]:
-    """Return each identifier of a formula that names no symbol, bound variable or operator."""
+    """Return each identifier of a formula that names no symbol, bound index or operator, and each
+    index of a binder that names no declared symbol, since a binder ranges over a declared index
+    set."""
     problems: list[Finding] = []
     for where, place, text, variables in formulas(record):
-        reachable = known | bound(text) | available | variables
+        declared = known | available | variables
+        indices = binder_indices(text)
+        fresh = {name for name, introduced in indices if introduced}
+        ranged = {name for name, introduced in indices if not introduced}
+        reachable = declared | fresh | ranged
         if where.startswith("task.required_accuracy.outputs_to_match[].tolerance"):
             reachable |= TOLERANCE_NAMES
         problems += [
             finding(rules.VOCABULARY_UNRESOLVED, f"{where} -> {name}", *place, value=name)
-            for name in sorted(identifiers(text))
-            if name not in reachable
+            for name in sorted(identifiers(text) | ranged)
+            if name not in (declared if name in ranged else reachable)
         ]
     return problems
 

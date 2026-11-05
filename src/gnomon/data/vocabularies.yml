@@ -656,8 +656,12 @@ vocabularies:
       name: a pure number, whatever the arguments
     - value: pure-argument
       name: a pure number, from pure arguments only
+    - value: statement
+      name: a statement, from quantities each checked on its own
+    - value: connective
+      name: a statement, from statements only
     - value: unchecked
-      name: the formula of the result stays undecided
+      name: the formula of the result stays undecided, as a declared waiver
   problem:
     .status:
     - value: posed

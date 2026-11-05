@@ -21,7 +21,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import Any, Iterable, Mapping
+from typing import Any, Iterable, Iterator, Mapping
 
 #: The form of a rule identifier: lowercase components separated by ``/``.
 RULE_ID = re.compile(r"[a-z0-9][a-z0-9._-]*(?:/[a-z0-9][a-z0-9._-]*)+")
@@ -487,7 +487,21 @@ DIMENSION_MISMATCHED_DEFINITION = _rule(
 )
 DIMENSION_UNCHECKED_LAW = _rule(
     "dimension/unchecked-law",
-    "In a problem that declares dimensional formulas, a law names a quantity without one.",
+    "In a problem that declares dimensional formulas, a statement names a quantity without one,"
+    " or an operator that states no rule of dimension.",
+)
+DIMENSION_MISTYPED_OPERAND = _rule(
+    "dimension/mistyped-operand",
+    "A connective takes a quantity, or a sum, a product, a comparison or a power takes a"
+    " statement.",
+)
+DIMENSION_CONFLICTING_FORMULA = _rule(
+    "dimension/conflicting-formula",
+    "Two records that one record sees declare different formulas for one symbol.",
+)
+DIMENSION_COLLIDING_BASE = _rule(
+    "dimension/colliding-base",
+    "A base scale of a problem takes the symbol of a base dimension of the package.",
 )
 
 # --- Symbols and operators ------------------------------------------------------------------------
@@ -662,6 +676,35 @@ class Entry:
 
     index: int
     item: Any
+
+
+#: One step of the locus of a value: a key, an index, or an entry given with its content.
+Part = Segment | Entry
+
+
+def values_at(
+    node: Any, path: tuple[str, ...], locus: tuple[Part, ...] = ()
+) -> Iterator[tuple[tuple[Part, ...], Any]]:
+    """Yield the value at a path of the record, with its locus, traversing every list on the way;
+    the value at the end of the path is yielded whole, a list included."""
+    if not path:
+        yield locus, node
+        return
+    if isinstance(node, list):
+        for i, item in enumerate(node):
+            if isinstance(item, Mapping):
+                yield from values_at(item, path, (*locus, Entry(i, item)))
+        return
+    if isinstance(node, Mapping):
+        yield from values_at(node.get(path[0]), path[1:], (*locus, path[0]))
+
+
+def where(locus: Iterable[Part]) -> str:
+    """Return the readable place of a locus, naming each entry by its identifier."""
+    return ".".join(
+        str(p.item.get("id") or p.item.get("symbol") or p.index) if isinstance(p, Entry) else str(p)
+        for p in locus
+    )
 
 
 #: A field path whose list entries are still given with their content, as :func:`finding` takes it.

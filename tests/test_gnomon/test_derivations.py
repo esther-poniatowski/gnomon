@@ -220,9 +220,22 @@ def _unbound_upper(record: dict[str, Any]) -> None:
     unit(record, "moves", "solve-modes")["binds"] = ["B"]
 
 
+def _diagnosis(record: dict[str, Any], grounds: list[str]) -> None:
+    """Plant a feature of the calculation and the diagnostic interpretation that reads it."""
+    record["features"] = [{"id": "stall", "kind": "divergence", "at": "crossing-time"}]
+    record["interpretations"].append(
+        {"id": "stalled", "of": "stall", "kind": "diagnostic", "reading": "x", "grounds": grounds}
+    )
+
+
+def _groundless_diagnosis(record: dict[str, Any]) -> None:
+    _diagnosis(record, [])
+
+
 def _impasse_elsewhere(record: dict[str, Any]) -> None:
     unit(record, "moves", "solve-modes")["binds"] = []
-    record["impasses"] = [{"sought": "threshold-time", "obstacle": "memorization-limit"}]
+    _diagnosis(record, ["slowest-dominates"])
+    record["impasses"] = [{"sought": "threshold-time", "obstacle": "stalled"}]
 
 
 #: Each planted defect of the worked derivation, with the rule that reports it and a fragment of
@@ -264,9 +277,9 @@ PLANTED: dict[str, tuple[Change, str, str]] = {
         "interpretations.hessian-symmetric: a premise admits no variation interpretation",
     ),
     "groundless diagnosis": (
-        _set("interpretations", "memorization-limit", "grounds", []),
+        _groundless_diagnosis,
         "derivation/mistyped-ground",
-        "interpretations.memorization-limit: a diagnostic interpretation cites no ground",
+        "interpretations.stalled: a diagnostic interpretation cites no ground",
     ),
     "groundless magnitude": (
         _set("interpretations", "spectral-gap", "grounds", []),

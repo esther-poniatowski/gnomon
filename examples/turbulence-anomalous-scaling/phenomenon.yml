@@ -24,22 +24,26 @@ occurrence: not-applicable
 index_sets:
   - name: "magnitude of the separation"
     symbol: rmag
+    dimensional_formula: "L"
     notation: '\lvert r \rvert'
     extent: "pos(reals)"
     structure: continuum
   - name: "direction of the separation, a unit vector"
     symbol: rdir
+    dimensional_formula: "1"
     notation: '\hat{r}'
     extent: "subset(vectors(reals, 3), norm_one)"
     structure: continuum
   - name: "order of the structure function"
     symbol: p
+    dimensional_formula: "1"
     extent: "pos(reals)"
     structure: continuum
 
 observables:
   - name: "velocity increment across a separation"
     symbol: du
+    dimensional_formula: "L T^-1"
     notation: '\delta u'
     signature: [x, t, rmag, rdir]
     values: "vectors(reals, 3)"
@@ -47,6 +51,7 @@ observables:
     reading: "The value gives the velocity difference between two points at a given separation and direction."
   - name: "longitudinal increment"
     symbol: duL
+    dimensional_formula: "L T^-1"
     notation: '\delta u_L'
     signature: [x, t, rmag, rdir]
     values: reals
@@ -54,6 +59,7 @@ observables:
     reading: "The value is the component of the increment along the separation."
   - name: "transverse increment"
     symbol: duT
+    dimensional_formula: "L T^-1"
     notation: '\delta u_T'
     signature: [x, t, rmag, rdir]
     values: "nonneg(reals)"
@@ -88,6 +94,7 @@ manifestations:
     features:
       - name: "longitudinal scaling exponents, one per order"
         symbol: zetaL
+        dimensional_formula: "1"
         values: "maps(pos(reals), reals)"
         observed:
         condition: "zetaL(4) != 4 / 3"
@@ -102,6 +109,7 @@ manifestations:
     features:
       - name: "transverse scaling exponents, one per order"
         symbol: zetaT
+        dimensional_formula: "1"
         values: "maps(pos(reals), reals)"
         observed:
         condition: "zetaT(4) != 4 / 3"

@@ -47,6 +47,8 @@ properties:
           - derivative-at
           - pure
           - pure-argument
+          - statement
+          - connective
           - unchecked
           - null
 x-identifier: id

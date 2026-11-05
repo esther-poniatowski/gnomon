@@ -16,8 +16,11 @@
 # divides the first argument by the second, `second-derivative` divides the first argument by the
 # square of the second, `derivative-at` divides the first argument by the second and requires the
 # point given third to share the formula of the second, `pure` yields a pure number whatever the arguments,
-# `pure-argument` requires pure arguments and yields a pure number, and `unchecked` leaves the
-# formula of the result undecided.
+# `pure-argument` requires pure arguments and yields a pure number, `statement` yields a statement
+# from quantities each checked on its own, `connective` yields a statement from statements only, and
+# `unchecked` leaves the formula of the result undecided, as a declared waiver. In a problem that
+# declares a dimensional formula, an operator that states no rule leaves its law unchecked, and the
+# check reports that law; the waiver `unchecked` is not reported.
 
 id: registry.operators
 type: operator-registry
@@ -54,13 +57,13 @@ operators:
   arity: 1
 - symbol: forall
   kind: binder
-  dimension: pure
+  dimension: connective
   name: the statement that its body holds for every value of the indices it binds
   notation: '\forall #0 \, #1'
   arity: 1
 - symbol: exists
   kind: binder
-  dimension: pure
+  dimension: connective
   name: the statement that its body holds for some value of the indices it binds
   notation: '\exists #0 \, #1'
   arity: 1
@@ -78,51 +81,51 @@ operators:
   arity: 1
 - symbol: implies
   kind: relation
-  dimension: pure
+  dimension: connective
   name: the implication between two statements
   notation: '#1 \Rightarrow #2'
   arity: 2
 - symbol: and
   kind: relation
-  dimension: pure
+  dimension: connective
   name: the conjunction of statements
   notation: '#1 \land #2'
   arity: 2
   variadic: true
 - symbol: or
   kind: relation
-  dimension: pure
+  dimension: connective
   name: the disjunction of statements
   notation: '#1 \lor #2'
   arity: 2
   variadic: true
 - symbol: not
   kind: relation
-  dimension: pure
+  dimension: connective
   name: the negation of a statement
   notation: '\lnot #1'
   arity: 1
 - symbol: depends_on
   kind: relation
-  dimension: pure
+  dimension: statement
   name: the dependence of one quantity on another
   notation: '\operatorname{dep}( #1, #2 )'
   arity: 2
 - symbol: increasing
   kind: relation
-  dimension: pure
+  dimension: statement
   name: the monotone increase of one quantity in another
   notation: '\operatorname{incr}( #1, #2 )'
   arity: 2
 - symbol: decreasing
   kind: relation
-  dimension: pure
+  dimension: statement
   name: the monotone decrease of one quantity in another
   notation: '\operatorname{decr}( #1, #2 )'
   arity: 2
 - symbol: drawn_from
   kind: relation
-  dimension: pure
+  dimension: statement
   name: the quantity is distributed as the law given
   notation: '#1 \sim #2'
   arity: 2

@@ -861,6 +861,23 @@ def test_a_formula_naming_an_undeclared_symbol_is_reported() -> None:
     assert texts(unresolved(record, CANONICAL)) == ["laws.expression -> f"]
 
 
+def test_a_binder_ranges_over_a_declared_index_set() -> None:
+    """A binder index names a declared index set, with or without a restriction, or a fresh name
+    introduced over a declared index set; any other index is reported."""
+    record = {
+        "type": "target-system",
+        "index_sets": [{"symbol": "x"}, {"symbol": "t"}],
+        "variables": [{"symbol": "u", "signature": ["x", "t"]}],
+        "parameters": [{"symbol": "T"}],
+        "laws": [
+            {"expression": "sum_{zz}( u ) = 0"},
+            {"expression": "max_{t <= T}( mean_{x}( u(x, t) ) ) = 0"},
+            {"expression": "mean_{x1 in x, x2 in x}( u(x1, t) * u(x2, t) ) = 0"},
+        ],
+    }
+    assert texts(unresolved(record, CANONICAL)) == ["laws.expression -> zz"]
+
+
 def test_prose_left_in_a_value_set_is_reported() -> None:
     """A value set is an expression, so a description left there resolves to nothing."""
     record = {

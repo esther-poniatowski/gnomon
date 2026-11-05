@@ -27,6 +27,7 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 | `Hrep` | mod.grokking.effective-representation | variables | — | effective Hessian of the representation |
 | `RQI` | mod.grokking.effective-representation | variables | step | representation quality index |
 | `Rrep` | mod.grokking.effective-representation | variables | step | normalized learned representation |
+| `Rstar` | mod.grokking.effective-representation | variables | — | structured representation |
 | `delay_m` | mod.grokking.effective-representation | variables | — | delay between fitting and generalization in the model |
 | `lambda3` | mod.grokking.effective-representation | variables | — | slowest positive rate of representation learning |
 | `crossing_order` | phen.grokking.delayed_generalization | manifestations | — | order of the two crossing times |
@@ -74,4 +75,4 @@ Built by `gnomon vocabulary --markdown` from `vocabulary.yml`. Edit a record, no
 ## Operators
 
 - Canonical: `abs`, `adjoint`, `and`, `bools`, `card`, `complex`, `decreasing`, `depends_on`, `diff`, `dist`, `div`, `dot`, `drawn_from`, `empty`, `enum`, `exists`, `forall`, `ft`, `grad`, `implies`, `increasing`, `infinity`, `intersect`, `interval`, `ints`, `jacobian`, `lap`, `limit`, `maps`, `matrices`, `max`, `mean`, `measures`, `min`, `nonneg`, `norm`, `not`, `or`, `pos`, `prod`, `range`, `re`, `reals`, `spectrum`, `subset`, `sum`, `union`, `vectors`.
-- Declared by this problem: `effective_loss` (the effective loss on a learned representation), `powerset` (the set of all subsets of a declared set), `representation` (the learned representation extracted from a parameter trajectory), `representation_quality` (the fraction of the relations consistent with the task that are realized by a learned representation).
+- Declared by this problem: `effective_loss` (the effective loss on a learned representation), `grad_parameter` (the gradient of a loss with respect to the trainable parameters, at the current parameters), `powerset` (the set of all subsets of a declared set), `representation` (the learned representation extracted from a parameter trajectory), `representation_quality` (the fraction of the relations consistent with the task that are realized by a learned representation).

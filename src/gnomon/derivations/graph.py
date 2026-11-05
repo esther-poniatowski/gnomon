@@ -28,11 +28,10 @@ from __future__ import annotations
 
 from functools import cache
 from pathlib import Path
-from typing import Any, Iterable, Iterator, Mapping
+from typing import Any, Iterable, Mapping
 
 import yaml
 
-from ..findings import Entry, Segment
 from ..identifiers import split_reference
 
 #: The registry of the rules of a derivation.
@@ -60,7 +59,6 @@ REFERENCE = "reference"
 Derivation = Mapping[str, Any]
 Producers = dict[str, tuple[set[str], set[str]]]
 Field = tuple[tuple[str, ...], tuple[str, ...], str]
-Part = Segment | Entry
 
 
 @cache
@@ -121,31 +119,6 @@ def names(value: Any) -> list[str]:
     """Return the identifiers that a field holds: one for a string, one per entry for a list."""
     values = value if isinstance(value, list) else [value]
     return [str(v) for v in values if isinstance(v, str) and v.strip()]
-
-
-def values_at(
-    node: Any, path: tuple[str, ...], locus: tuple[Part, ...] = ()
-) -> Iterator[tuple[tuple[Part, ...], Any]]:
-    """Yield the value at a path of the record, with its locus, traversing every list on the way;
-    the value at the end of the path is yielded whole, a list included."""
-    if not path:
-        yield locus, node
-        return
-    if isinstance(node, list):
-        for i, item in enumerate(node):
-            if isinstance(item, Mapping):
-                yield from values_at(item, path, (*locus, Entry(i, item)))
-        return
-    if isinstance(node, Mapping):
-        yield from values_at(node.get(path[0]), path[1:], (*locus, path[0]))
-
-
-def where(locus: Iterable[Part]) -> str:
-    """Return the readable place of a locus, naming each entry by its identifier."""
-    return ".".join(
-        str(p.item.get("id") or p.item.get("symbol") or p.index) if isinstance(p, Entry) else str(p)
-        for p in locus
-    )
 
 
 def root_sought(record: Derivation) -> str | None:

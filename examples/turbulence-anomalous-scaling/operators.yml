@@ -8,29 +8,34 @@ target_system: system.turbulence-incompressible-navier-stokes
 operators:
   - name: "whether a three-dimensional vector has unit Euclidean norm"
     symbol: norm_one
+    dimension: statement
     notation: '\lVert #1 \rVert_2 = 1'
     signature: ["vectors(reals, 3)"]
     values: bools
   - name: "the restriction of a field to a region"
     symbol: restrict
+    dimension: preserve
     notation: '#1|_{#2}'
     for_any: [A, S]
     signature: ["maps(A, S)", "regions(A)"]
     values: "maps(A, S)"
   - name: "the admissible regions of a space"
     symbol: regions
+    dimension: unchecked
     notation: '\operatorname{Reg}( #1 )'
     for_any: [S]
     signature: [S]
     values:
   - name: "the boundary of a spatial domain"
     symbol: boundary
+    dimension: unchecked
     notation: '\partial #1'
     for_any: [S]
     signature: ["regions(S)"]
     values: "regions(S)"
   - name: "whether the statistics of a field indexed by time are invariant under time translation"
     symbol: stationary
+    dimension: statement
     notation: '\operatorname{stationary}( #1 )'
     for_any: [A, T, S]
     signature: ["maps(prod(A, T), S)"]
