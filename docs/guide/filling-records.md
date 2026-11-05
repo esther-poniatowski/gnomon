@@ -34,6 +34,41 @@ The records are filled in the five stages of the [order of specification](../epi
 
 Each stage takes the records of the earlier stages as given, and a change to an earlier record is made as a revision. A problem that uses dimensional analysis declares the dimensional formula of its quantities and index sets, with the base scales of its operator record. Its laws and conditions are then checked for homogeneity, as the [decision on the dimensional formula](../adr/dimensional-formula.md) states. The itinerary records each act of the inquiry as a step, from the statement of the problem on. A template not yet started keeps the placeholder identifier of its template, such as `quest.TOPIC.NAME`; the command `gnomon check` lists it apart and checks only the records already started, so the folder can be checked after each stage.
 
+## Name each record
+
+Records reference one another by their identifiers, so an identifier is chosen once and kept. A record identifier opens on the prefix of its type, already written by its template, such as `quest` in `quest.TOPIC.NAME`. The placeholders after the prefix are replaced by segments of lowercase words joined by hyphens:
+
+- the first segment, the topic, is shared by the records of the problem, such as `grokking` in `prob.grokking.delayed-generalization` and `ans.grokking.slow-structured-representation`;
+- a target system takes a topic of its own, such as `system.delayed-generalization-networks`;
+- a background record or an operator record takes the topic of the target system named in its field `describes` or `target_system`, such as `bg.delayed-generalization-networks.training-specification`;
+- the second segment names the record within its topic, and the prefixes `system` and `ops` take no second segment.
+
+A field of another record names a unit of this record in two parts. The identifier of the record comes first, followed by the symbol of the unit, or by its `id` when the unit has no symbol, as in `phen.grokking.delayed-generalization.tgen`. The [decision on dotted identifiers](../adr/dotted-identifiers.md#^identifier-form) states the form, and `gnomon check` reports a malformed identifier and a topic foreign to the problem.
+
+## Keep the field `_schema`
+
+The field `_schema`, at the top of each template, names the contract followed by the record, such as `gnomon:question@1`: the type of the record and the version of its contract. The template writes it, and the researcher leaves it as written. The command `gnomon validate` checks each record against that contract, and Ekphrasis opens the record as a form through it, as the [decision on record schemas](../adr/record-schemas.md) states.
+
+## Mark the maturity of a field
+
+A field may be filled before the inquiry fixes it. The block `maturity` of a record marks such a field: its key is the path of the field, and its value is `open`, `provisional` or `stabilized`. For a field of one entry of a list, the path names the entry by its symbol. A marker `open` carries a comment naming one of the [three reasons for an open specification](../epistemology/objects/status/statuses-and-acceptance.md#^open-reasons): a result that the inquiry seeks, a decision of the author, or a value outside the type language. In the tipping-cascades inquiry, the phenomenon marks the value set of its observable `Z` in this way:
+
+```yaml
+maturity:
+  observables.Z.values: open  # outside the type language: a marked sequence of transitions
+```
+
+A field left unmarked takes the maturity that the status of its record implies, as the [maturity of a field](../specification/maturity.md) states. The command `gnomon views` lists the maturity of each marked field.
+
+## Find what a commitment and an aim require
+
+Some specifications are required only at a level of commitment or for an epistemic aim. The [requirement registry](../../src/gnomon/data/requirements.yml) lists them in two sections:
+
+- under `by_commitment`, the fields required of a target system or a phenomenon at the commitment `identified`, and in addition at `specified`;
+- under `by_aim`, the paths required by each aim of a question, and the paths produced by the inquiry itself, allowed to stay empty.
+
+For instance, the aim `explanation` requires the requested relation of the question, and a target system at the commitment `specified` declares its variables. The check reports a field missing at a commitment under the rule `completeness/unmet-commitment`, and a path missing for an aim under the rule `completeness/unmet-aim`. The specification notes state the same requirements in their column *When it is required*.
+
 ## Read the specification of each field
 
 The [specification](../specification/_index.md) documents each record kind in one note. Its tables state, row by row, the content of a field, the condition under which the field is required, and its admitted values. The question record is documented in four notes, all listed in the header of its template.
