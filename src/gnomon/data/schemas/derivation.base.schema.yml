@@ -353,11 +353,11 @@ properties:
           title: Origin
           description: Where the guess came from.
           properties:
-            type:
+            kind:
               type:
                 - string
                 - 'null'
-              x-vocabulary: posits.type
+              x-vocabulary: posits.origin.kind
               title: Type
               description: The type of origin of the guess.
               examples:
@@ -383,11 +383,11 @@ properties:
           items:
             type: object
             properties:
-              test:
+              kind:
                 type:
                   - string
                   - 'null'
-                x-vocabulary: posits.test
+                x-vocabulary: posits.tests.kind
                 title: Test
                 description: The kind of test.
                 examples:
@@ -396,7 +396,7 @@ properties:
                 type:
                   - string
                   - 'null'
-                x-vocabulary: posits.verdict
+                x-vocabulary: posits.tests.verdict
                 title: Verdict
                 description: Whether the test supports or refutes the posit.
                 examples:
@@ -405,7 +405,7 @@ properties:
                 type:
                   - string
                   - 'null'
-                x-vocabulary: posits.standard
+                x-vocabulary: posits.tests.standard
                 x-comment: computation only
                 title: Standard
                 description: For a computation, whether the computation is certified or numerical.

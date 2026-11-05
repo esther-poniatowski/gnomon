@@ -58,7 +58,7 @@ def test_a_move_without_an_error_counts_as_exposed() -> None:
 def test_a_refuted_posit_stays_exposed_whatever_its_tests() -> None:
     records = _records()
     posit = records[DERIVATION]["posits"][0]
-    posit["tests"] = [{"test": "computation", "verdict": "supports", "standard": "certified"}]
+    posit["tests"] = [{"kind": "computation", "verdict": "supports", "standard": "certified"}]
     assert f"{DERIVATION}.{posit['id']}" not in _units(records)
     records[DERIVATION]["refutations"] = [{"id": "r", "target": posit["id"]}]
     assert _units(records)[f"{DERIVATION}.{posit['id']}"] == "refuted"

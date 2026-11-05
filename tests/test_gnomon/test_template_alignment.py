@@ -20,6 +20,8 @@ from typing import Any, Iterable, Mapping, Sequence
 import pytest
 import yaml
 
+from gnomon.schemas import load_base, vocabulary_paths
+
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / "docs"
 TEMPLATES = ROOT / "src" / "gnomon" / "data" / "templates"
@@ -628,18 +630,26 @@ def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
         assert match is not None, option
         return match.group(0)
 
-    documented, block = {}, ""
+    kind = template(name)["type"]
+    bound = vocabulary_paths(load_base(kind))
+    documented: dict[str, list[str]] = {}
+    stack: list[tuple[int, str]] = []
     for line in (TEMPLATES / name).read_text(encoding="utf-8").splitlines():
         m = re.match(r"^(\s*)(- )?([a-z_]+):(.*)$", line)
         if not m:
             continue
-        if len(m.group(1)) == 0:
-            block = m.group(3)
+        depth = len(m.group(1)) + (2 if m.group(2) else 0)
+        while stack and stack[-1][0] >= depth:
+            stack.pop()
+        stack.append((depth, m.group(3)))
         found = vocab.search(m.group(4))
         if found:
-            key = f"{'' if len(m.group(1)) == 0 else block}.{m.group(3)}"
-            documented[key] = [head(option) for option in found.group(1).split(" | ")]
-    kind = template(name)["type"]
+            path = ".".join(field for _, field in stack)
+            key = bound[path]
+            options = [head(option) for option in found.group(1).split(" | ")]
+            assert (
+                documented.setdefault(key, options) == options
+            ), f"{name}: {key} differs at {path}"
     declared = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"][kind]
     assert set(documented) == set(declared), f"{name}: {set(documented) ^ set(declared)}"
     for key, options in documented.items():

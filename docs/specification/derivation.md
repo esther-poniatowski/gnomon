@@ -50,10 +50,10 @@ Three properties are read from other fields, so that no field restates them:
 | Posits: kind | in each entry | `ansatz` · `closure` · `relevant-quantities` · `complete-similarity` · `incomplete-similarity` | `closure` |
 | Posits: statement | in each entry | the form or the relation assumed | the quality reaches its threshold once the slowest mode has decayed by a fixed factor |
 | Posits: origin | in each entry | the source of the guess | — |
-| Posits: origin: type | in each entry | `act` · `source` · `scheme` · `none` | `source` |
+| Posits: origin: kind | in each entry | `act` · `source` · `scheme` · `none` | `source` |
 | Posits: origin: ref | unless the origin is `none` | the step, the source or the scheme | Liu et al., NeurIPS 2022 |
 | Posits: tests | once a test is made | one entry per test, with its verdict | — |
-| Posits: tests: test | in each entry | `consistency` · `limit` · `exact` · `approximation` · `empirical` · `computation` | `empirical` |
+| Posits: tests: kind | in each entry | `consistency` · `limit` · `exact` · `approximation` · `empirical` · `computation` | `empirical` |
 | Posits: tests: verdict | in each entry | `supports` · `refutes`; a test that refutes is the refutation of its posit | `supports` |
 | Posits: tests: standard | for a computation | `certified` · `numerical` | `numerical` |
 | Posits: tests: by | in each entry | the move, the record or the source that carries the test | `mod.grokking.effective-representation.generalization_link` |

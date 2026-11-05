@@ -148,8 +148,8 @@ def _posit_state(posit: Mapping[str, Any], refuted: bool) -> str | None:
     confirmed = any(
         t.get("verdict") == "supports"
         and (
-            t.get("test") in confirming
-            or (t.get("test") == "computation" and t.get("standard") == certified)
+            t.get("kind") in confirming
+            or (t.get("kind") == "computation" and t.get("standard") == certified)
         )
         for t in _entries(posit, "tests")
     )

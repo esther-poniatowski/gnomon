@@ -70,8 +70,8 @@ def test_registry_kinds_are_vocabulary_values() -> None:
     classes = {c for cs in registry["ground_types"].values() for c in cs}
     assert classes <= {"reference", "objects", "moves", "posits", "slots", "features"}
     assert {k for ks in registry["admitted_pairs"].values() for k in ks} <= kinds
-    assert set(registry["confirming_tests"]) <= values("posits.test")
-    assert registry["confirming_computation"] in values("posits.standard")
+    assert set(registry["confirming_tests"]) <= values("posits.tests.kind")
+    assert registry["confirming_computation"] in values("posits.tests.standard")
 
 
 #: The fields that name other records, by their dotted identifiers, rather than units of the record.
@@ -262,7 +262,7 @@ PLANTED: dict[str, tuple[Change, str, str]] = {
         "moves.solve-modes.binds: B names no unit among slots",
     ),
     "unknown tester": (
-        _set("posits", "quality-tracks-slow-mode", "tests", [{"test": "limit", "by": "ghost"}]),
+        _set("posits", "quality-tracks-slow-mode", "tests", [{"kind": "limit", "by": "ghost"}]),
         "derivation/unknown-unit",
         "posits.quality-tracks-slow-mode.tests.0.by: ghost names no unit among moves",
     ),
@@ -384,7 +384,7 @@ def test_a_move_carrying_a_test_of_a_posit_is_not_idle() -> None:
     record = worked()
     _detour(record)
     unit(record, "posits", "quality-tracks-slow-mode")["tests"] = [
-        {"test": "consistency", "verdict": "supports", "by": "detour"}
+        {"kind": "consistency", "verdict": "supports", "by": "detour"}
     ]
     assert "derivation/idle-move" not in {f.rule.id for f in derivation_problems(record)}
 

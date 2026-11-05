@@ -97,10 +97,10 @@ properties:
         origin:
           propertyNames:
             enum:
-            - type
+            - kind
             - ref
           properties:
-            type:
+            kind:
               enum:
               - act
               - source
@@ -111,12 +111,12 @@ properties:
           items:
             propertyNames:
               enum:
-              - test
+              - kind
               - verdict
               - standard
               - by
             properties:
-              test:
+              kind:
                 enum:
                 - consistency
                 - limit

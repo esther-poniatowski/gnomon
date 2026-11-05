@@ -1,7 +1,9 @@
-# The closed vocabularies of the inquiry records. A key names the block that encloses a field and
-# the field itself, and a key opening with a dot names a field of the record itself. The key only
-# names the vocabulary: the base schema of each record type binds a closed field to its vocabulary
-# through the keyword `x-vocabulary`, at the path of the field.
+# The closed vocabularies of the inquiry records. A key names the top-level block of a record and
+# the field, as `laws.role`; when two fields of one block share a name, the key adds the field that
+# encloses each of them, as `posits.kind` and `posits.origin.kind`. A key opening with a dot names a
+# field of the record itself. The key only names the vocabulary: the base schema of each record type
+# binds a closed field to its vocabulary through the keyword `x-vocabulary`, at the path of the
+# field.
 #
 # Source of truth for the checkers. A closed field holds one of its listed values, or stays empty
 # while it is not filled. The requirement registry decides whether an empty field is a gap.
@@ -513,7 +515,7 @@ vocabularies:
       name: a dimensionless group dropped in a limit
     - value: incomplete-similarity
       name: a dimensionless group entering as a power of unknown exponent
-    posits.type:
+    posits.origin.kind:
     - value: act
       name: a step of the itinerary
     - value: source
@@ -522,7 +524,7 @@ vocabularies:
       name: a design of kind scheme that prescribes the posit
     - value: none
       name: an insight that left no record
-    posits.test:
+    posits.tests.kind:
     - value: consistency
       name: the neglected terms stay smaller than the terms kept
     - value: limit
@@ -535,10 +537,10 @@ vocabularies:
       name: a comparison of the consequence with data
     - value: computation
       name: a computation, certified or numerical, of the posited object
-    posits.verdict:
+    posits.tests.verdict:
     - value: supports
     - value: refutes
-    posits.standard:
+    posits.tests.standard:
     - value: certified
       name: a computation whose result is proved, such as interval arithmetic
     - value: numerical
