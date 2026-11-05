@@ -29,8 +29,11 @@ from typing import Any, Iterable, Mapping
 
 from .completeness import demand_met, presupposition_denied, readable_obstacles
 from .exposure import exposure_rows
+from .findings import where as field_path
 from .itineraries import type_classes, type_holders
+from .latex import canonical_notations, declared_notations, to_latex
 from .statement import compose_statement, load_statement_registry
+from .vocabulary import formulas, upstream_of, visible_records
 
 Records = Mapping[str, Mapping[str, Any]]
 
@@ -428,6 +431,48 @@ def question_statements(records: Records) -> dict[str, Any]:
     return {**_header("question-statements", "Statement of each question"), "statements": rows}
 
 
+def expression_forms(records: Records) -> dict[str, Any]:
+    """Return the LaTeX form of each expression of each record, composed from the notations of
+    the symbols that the record sees and of the operators of its target system, as the module
+    :mod:`gnomon.latex` states."""
+    local: dict[str, dict[str, str]] = {}
+    for record in records.values():
+        if record.get("type") == "operators" and isinstance(record.get("target_system"), str):
+            ops = local.setdefault(str(record["target_system"]), {})
+            for op in record.get("operators") or []:
+                if isinstance(op, Mapping) and op.get("symbol") and op.get("notation"):
+                    ops.setdefault(str(op["symbol"]), str(op["notation"]))
+    rows: list[dict[str, str]] = []
+    for name in sorted(records):
+        record = records[name]
+        if record.get("type") in ("view", "vocabulary"):
+            continue
+        seen = [record, *visible_records(record, records), upstream_of(record, records)]
+        seen += [upstream_of(other, records) for other in seen]
+        targets = {str(r.get("id")) for r in seen if r and r.get("type") == "target-system"}
+        if isinstance(record.get("target_system"), str):
+            targets.add(str(record["target_system"]))
+        operators = dict(canonical_notations())
+        for target in sorted(targets):
+            operators.update(local.get(target, {}))
+        symbols = declared_notations(r for r in seen if r and r.get("type") != "operators")
+        for _, place, text, _ in formulas(record):
+            form = to_latex(text, operators, symbols)
+            if form is not None:
+                rows.append(
+                    {
+                        "record": name,
+                        "field": field_path(place),
+                        "expression": str(text),
+                        "latex": form,
+                    }
+                )
+    return {
+        **_header("expressions", "LaTeX form of each expression"),
+        "expressions": rows,
+    }
+
+
 def all_views(
     records: Records,
     diagnosis_document: Mapping[str, Any],
@@ -447,5 +492,6 @@ def all_views(
         maturity_map(records),
         question_tree_view(records),
         question_statements(records),
+        expression_forms(records),
     ]
     return {str(view["id"]).removeprefix("view."): view for view in built}

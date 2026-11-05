@@ -713,12 +713,20 @@ def values_at(
         yield from values_at(node.get(path[0]), path[1:], (*locus, path[0]))
 
 
-def where(locus: Iterable[Part]) -> str:
+def _segment_name(part: Segment | Key | Entry) -> str:
+    """Return the readable name of one step of a locus."""
+    if isinstance(part, Key):
+        return part.identifier
+    if isinstance(part, Entry):
+        if isinstance(part.item, Mapping):
+            return str(part.item.get("id") or part.item.get("symbol") or part.index)
+        return str(part.index)
+    return str(part)
+
+
+def where(locus: Iterable[Segment | Key | Entry]) -> str:
     """Return the readable place of a locus, naming each entry by its identifier."""
-    return ".".join(
-        str(p.item.get("id") or p.item.get("symbol") or p.index) if isinstance(p, Entry) else str(p)
-        for p in locus
-    )
+    return ".".join(_segment_name(part) for part in locus)
 
 
 #: A field path whose list entries are still given with their content, as :func:`finding` takes it.

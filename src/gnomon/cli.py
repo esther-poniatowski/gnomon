@@ -475,8 +475,9 @@ def cli_views(
     """Write the views of the state of an inquiry as YAML records, one file per view.
 
     The views are the state of each problem, the open conditions and the ready acts, the exposure of
-    each answer, the progress of each itinerary, the maturity of each record, the question tree, and
-    the statement of each question composed from its fields. Each view holds no date and no absolute
+    each answer, the progress of each itinerary, the maturity of each record, the question tree, the
+    statement of each question composed from its fields, and the LaTeX form of each expression. Each
+    view holds no date and no absolute
     path, so two runs on unchanged records write the same files. The command exits with status 1
     when a file cannot be read, and 2 when a view cannot be written.
     """

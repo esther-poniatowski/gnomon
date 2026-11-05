@@ -4,7 +4,8 @@ The expressions of the records: their tokens, their grammar, and the tree that a
 An expression is written over declared symbols and the operators of the canonical set or of a
 problem, as the decision on the expression syntax fixes it. The parser turns it into a tree whose
 head names the construct, so that every check and every view reads one structure: a number, a
-string, a symbol, a call with its arguments and the indices that a binder binds, a connective, a
+string, a symbol, a call with its arguments, the indices that a binder binds and the restriction of
+each index, a connective, a
 negation, a power, a product, a sum or a comparison. Text that the grammar does not cover, such as
 prose, parses to no tree.
 
@@ -153,27 +154,29 @@ class _Parser:
             return inner
         if kind != "name":
             raise ValueError(f"unexpected {text}")
-        name, binds = text, []
+        name, indices = text, []
         if name.endswith("_") and self.peek() == "{":
             name = name[:-1]
             self.take("{")
-            binds = self._list("}", self._index)
+            indices = self._list("}", self._index)
         if self.peek() == "(":
             self.take()
             args = self._list(")", self.expression)
-            return ("call", name, tuple(args), tuple(binds))
+            binds = tuple(index for index, _ in indices)
+            restrictions = tuple(restriction for _, restriction in indices)
+            return ("call", name, tuple(args), binds, restrictions)
         return ("sym", name)
 
-    def _index(self) -> str:
-        """Parse one index of a binder, with its restriction when it carries one, as in
-        ``t <= T`` or ``a1 in a``, and return the name of the index."""
+    def _index(self) -> tuple[str, Tree | None]:
+        """Parse one index of a binder with its restriction, as in ``t <= T`` or ``a1 in a``, and
+        return the name of the index and the comparison that restricts it, or None."""
         kind, name = self.take()
         if kind != "name":
             raise ValueError(f"expected an index, found {name}")
         if self.peek() in COMPARISONS:
-            self.take()
-            self.additive()
-        return name
+            op = self.take()[1]
+            return name, ("cmp", op, ("sym", name), self.additive())
+        return name, None
 
     def _list(self, closing: str, item: Callable[[], Any]) -> list[Any]:
         """Parse the items of a list separated by commas up to its closing token, so that two
@@ -199,7 +202,9 @@ def parse_expression(text: Any) -> Tree | None:
     >>> parse_expression("U * L / nu")
     ('prod', '/', ('prod', '*', ('sym', 'U'), ('sym', 'L')), ('sym', 'nu'))
     >>> parse_expression("mean_{x}( u(x) )")
-    ('call', 'mean', (('call', 'u', (('sym', 'x'),), ()),), ('x',))
+    ('call', 'mean', (('call', 'u', (('sym', 'x'),), (), ()),), ('x',), (None,))
+    >>> parse_expression("max_{t <= T}( E(t) )")[4]
+    (('cmp', '<=', ('sym', 't'), ('sym', 'T')),)
     >>> parse_expression("the state maps to tipped") is None
     True
     """

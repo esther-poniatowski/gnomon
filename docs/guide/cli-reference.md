@@ -165,7 +165,8 @@ A researcher who proceeds by local increments needs the global state of the rese
 - the progress of each itinerary: its steps in the order of their dependencies, sound, conditional or impeached, with the edges between them;
 - the maturity of each record and of its marked fields;
 - the question tree, as nodes and edges;
-- the statement of each question, authored and composed from its subject and its aim in the [statement frame](../epistemology/objects/subject/subject-of-inquiry.md#^question-statement), with the slots left unfilled by its fields.
+- the statement of each question, authored and composed from its subject and its aim in the [statement frame](../epistemology/objects/subject/subject-of-inquiry.md#^question-statement), with the slots left unfilled by its fields;
+- the LaTeX form of each expression of each record, composed from the notations of its symbols and of the operators of its target system.
 
 ```sh
 gnomon views <directory> [--output DIR]
@@ -176,7 +177,7 @@ gnomon views <directory> [--output DIR]
 | `<directory>`      | Directory of records, read recursively; each folder is one problem.                  |
 | `--output`, `-o`   | Folder receiving the views; the folder `views` of `<directory>` by default.          |
 
-**Output:** one file per view, named after the view, each declaring the schema `gnomon:view.<name>@1` of the [view schemas](../../src/gnomon/data/views/_index.md), which the schema registry of the renderer maps to its file. A view holds no date and no absolute path, so two runs on unchanged records write the same files, and `gnomon check` skips the views. The command exits with code 1 when a file cannot be read, and with code 2 when a view cannot be written.
+**Output:** one file per view, named after the view, each declaring the schema `gnomon:view.<name>@<version>` of the [view schemas](../../src/gnomon/data/views/_index.md), which the schema registry of the renderer maps to its file. A view holds no date and no absolute path, so two runs on unchanged records write the same files, and `gnomon check` skips the views. The command exits with code 1 when a file cannot be read, and with code 2 when a view cannot be written.
 
 ## `tree`
 
