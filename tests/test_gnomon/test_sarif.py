@@ -45,10 +45,13 @@ def test_a_complete_run_lists_every_rule_and_declares_its_success() -> None:
     driver = run["tool"]["driver"]
     assert (driver["name"], driver["version"]) == ("gnomon", "1.2.3")
     assert [rule["id"] for rule in driver["rules"]] == [rule.id for rule in RULES]
+    levels = {rule.id: rule.level for rule in RULES}
     assert all(
-        rule["shortDescription"]["text"] and rule["defaultConfiguration"] == {"level": "error"}
+        rule["shortDescription"]["text"]
+        and rule["defaultConfiguration"] == {"level": levels[rule["id"]]}
         for rule in driver["rules"]
     )
+    assert levels["completeness/unstated-domain"] == "warning"
     assert run["invocations"] == [{"executionSuccessful": True}]
     assert run["columnKind"] == "unicodeCodePoints"
     assert run["results"] == []

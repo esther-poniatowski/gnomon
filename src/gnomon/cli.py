@@ -195,25 +195,27 @@ def cli_check(
     """Run every check on the records of a directory tree.
 
     Each folder that holds records is checked as one problem, and a reference may reach a record of
-    any folder. The text output prints one line per finding and a count. The command exits with
-    status 1 when a finding is reported or a file cannot be read, and with status 2 when the
-    report cannot be written.
+    any folder. The text output prints one line per finding, a warning marked as such, and a count.
+    The command exits with status 1 when a finding of level error is reported or a file cannot be
+    read, and with status 2 when the report cannot be written; a warning fails no check.
     """
     from .check import check_workspace, load_workspace
 
     source = _directory(directory)
     workspace = load_workspace(source)
     found = check_workspace(workspace)
+    errors = [x for x in found if x.finding.rule.level == "error"]
     summary = (
         f"{len(workspace.by_id)} records checked in {len(workspace.problems)} folders,"
-        f" {len(found)} findings, {len(workspace.unfilled)} templates not yet filled"
+        f" {len(errors)} findings, {len(found) - len(errors)} warnings,"
+        f" {len(workspace.unfilled)} templates not yet filled"
     )
     for line in workspace.failures:
         typer.echo(line, err=True)
     _emit(_check_report(workspace, found, source, output_format, summary), output, "report")
     if output is not None:
         typer.echo(summary, err=True)
-    if found or workspace.failures:
+    if errors or workspace.failures:
         raise typer.Exit(code=1)
 
 
@@ -228,7 +230,11 @@ def _check_report(
     from .report import render_yaml_report
 
     if output_format is CheckFormat.TEXT:
-        lines = [f"{x.file}: {x.record}: {x.finding.rule.id}: {x.finding.text}\n" for x in found]
+        lines = [
+            f"{x.file}: {x.record}: {'warning: ' if x.finding.rule.level == 'warning' else ''}"
+            f"{x.finding.rule.id}: {x.finding.text}\n"
+            for x in found
+        ]
         return "".join(lines) + summary + "\n"
     if output_format is CheckFormat.YAML:
         unfilled = [p.relative_to(source).as_posix() for p in workspace.unfilled]

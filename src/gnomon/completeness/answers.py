@@ -505,3 +505,46 @@ def misdirected_interventions(
             )
         )
     return found
+
+
+#: The kinds of route that derive an answer from its grounds, which then imply its domain.
+DEDUCTIVE_ROUTES = frozenset({"derivation", "proof"})
+
+
+def unstated_domain(
+    answer: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return a warning when an answer states no domain while its route makes one meaningful.
+
+    The domain is never required. A deductive route implies it from the grounds of the answer, and
+    a route on a model bounds it by the domain of comparison of the binding, so in those two cases
+    the answer usually states it.
+
+    >>> records = {"mod.a.b": {"type": "model"}}
+    >>> [f.text for f in unstated_domain({"route": {"kind": "simulation", "runs_on": ["mod.a.b"]}},
+    ...                                  records)]
+    ['domain: not stated, although the route runs on the model mod.a.b']
+    >>> unstated_domain({"route": {"kind": "measurement", "runs_on": ["system.a"]}}, records)
+    []
+    """
+    if not is_unfilled(answer.get("domain")):
+        return []
+    stated = answer.get("route")
+    route: Mapping[str, Any] = stated if isinstance(stated, Mapping) else {}
+    kind = route.get("kind")
+    models = [
+        name
+        for name in route.get("runs_on") or []
+        if isinstance(name, str) and (records.get(name) or {}).get("type") == "model"
+    ]
+    if kind in DEDUCTIVE_ROUTES:
+        reason = f"the route is a {kind}"
+    elif models:
+        reason = f"the route runs on the model {models[0]}"
+    else:
+        return []
+    return [
+        finding(
+            rules.COMPLETENESS_UNSTATED_DOMAIN, f"domain: not stated, although {reason}", "domain"
+        )
+    ]

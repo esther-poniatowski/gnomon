@@ -43,7 +43,7 @@ gnomon check ../grokking
 ```
 
 ```text
-13 records checked in 1 folders, 0 findings, 0 templates not yet filled
+13 records checked in 1 folders, 0 findings, 0 warnings, 0 templates not yet filled
 ```
 
 The folder holds fourteen files of records, and the check skips the generated file `vocabulary.yml`, so thirteen records are checked. No finding is reported, so the records of the inquiry meet every check.
@@ -93,7 +93,7 @@ gnomon check ../my-problem
 ```
 
 ```text
-0 records checked in 0 folders, 0 findings, 7 templates not yet filled
+0 records checked in 0 folders, 0 findings, 0 warnings, 7 templates not yet filled
 ```
 
 The seven templates keep their placeholder identifiers, so the check lists them apart and checks none of them. Their count falls as the stages are filled.
@@ -215,7 +215,7 @@ gnomon check ../grokking
 
 ```text
 answer.yml: ans.grokking.slow-structured-representation: vocabulary/unresolved: aim_block.explanation.factors[].holds -> eta_rp
-13 records checked in 1 folders, 1 findings, 0 templates not yet filled
+13 records checked in 1 folders, 1 findings, 0 warnings, 0 templates not yet filled
 ```
 
 The line names the file, the record and the rule, then the path of the expression and the identifier that resolves to no declaration. The command exits with code 1. Restoring the symbol `eta_rep` returns the check to no finding.

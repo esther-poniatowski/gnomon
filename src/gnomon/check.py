@@ -453,6 +453,7 @@ def _answer(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         + c.misheld_presuppositions(record, by_id)
         + c.inherited_presuppositions(record, ctx.record(record.get("answers")))
         + c.misdirected_interventions(record, by_id)
+        + c.unstated_domain(record, by_id)
     )
     for block, paths in ctx.registries.blocks.items():
         if c.at(record, block) is not None:

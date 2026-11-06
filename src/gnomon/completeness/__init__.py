@@ -59,6 +59,7 @@ from .answers import (
     mismatched_status_pairs,
     unbound_outputs,
     unclassified_operations,
+    unstated_domain,
 )
 from .assessments import (
     disposition,
@@ -192,6 +193,7 @@ __all__ = [
     "unresolved_question_references",
     "unresolved_slots",
     "unstated_function_sense",
+    "unstated_domain",
     "unstated_standing",
     "unsupported_outcome",
     "varying_symbols",

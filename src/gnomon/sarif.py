@@ -34,7 +34,7 @@ TOOL_NAME = "gnomon"
 URI_BASE_ID = "SRCROOT"
 DISCRIMINATOR_KEY = "discriminator/v1"
 LEVEL = "error"
-"""Every finding of gnomon fails its check, so every rule and result has level error."""
+"""The level of a run that stopped early; a rule and its results carry the level of the rule."""
 
 # The characters of an RFC 3986 path segment kept as written, besides unreserved characters: the
 # sub-delimiters and ``@``. A colon is encoded, so that a first segment never reads as a scheme.
@@ -104,7 +104,7 @@ def _result(located: Located) -> dict[str, Any]:
     found = located.finding
     result: dict[str, Any] = {
         "ruleId": found.rule.id,
-        "level": LEVEL,
+        "level": found.rule.level,
         "message": {"text": found.text},
         "locations": [
             {
@@ -126,7 +126,7 @@ def invocation(stopped: str | None) -> dict[str, Any]:
         return {"executionSuccessful": True}
     return {
         "executionSuccessful": False,
-        "toolExecutionNotifications": [{"level": "error", "message": {"text": stopped}}],
+        "toolExecutionNotifications": [{"level": LEVEL, "message": {"text": stopped}}],
     }
 
 
@@ -143,7 +143,7 @@ def sarif_log(
         {
             "id": rule.id,
             "shortDescription": {"text": rule.description},
-            "defaultConfiguration": {"level": LEVEL},
+            "defaultConfiguration": {"level": rule.level},
         }
         for rule in RULES
     ]

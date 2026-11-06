@@ -52,6 +52,7 @@ def render_yaml_report(
     checked: my-problem
     records: 3
     findings: 0
+    warnings: 0
     unfilled:
     - my-problem/answer.yml
     by_rule: {}
@@ -66,6 +67,7 @@ def render_yaml_report(
                     {
                         "record": x.record,
                         "rule": x.finding.rule.id,
+                        "level": x.finding.rule.level,
                         "locus": x.finding.locus or "/",
                         **(
                             {"discriminator": x.finding.discriminator}
@@ -81,7 +83,8 @@ def render_yaml_report(
     document = {
         "checked": checked,
         "records": records,
-        "findings": len(found),
+        "findings": sum(1 for x in found if x.finding.rule.level == "error"),
+        "warnings": sum(1 for x in found if x.finding.rule.level == "warning"),
         "unfilled": sorted(unfilled),
         "by_rule": dict(sorted(Counter(x.finding.rule.id for x in found).items())),
         "files": files,

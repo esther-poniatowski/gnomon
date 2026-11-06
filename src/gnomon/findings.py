@@ -23,35 +23,46 @@ import re
 from dataclasses import dataclass
 from typing import Any, Iterable, Iterator, Mapping
 
+#: The levels of a rule: a defect that fails the check, or a warning that does not.
+LEVELS = ("error", "warning")
+
 #: The form of a rule identifier: lowercase components separated by ``/``.
 RULE_ID = re.compile(r"[a-z0-9][a-z0-9._-]*(?:/[a-z0-9][a-z0-9._-]*)+")
 
 
 @dataclass(frozen=True)
 class Rule:
-    """One kind of defect, with its stable identifier and a one-line description.
+    """One kind of defect, with its stable identifier, a one-line description and its level.
+
+    A rule of level ``error`` reports a defect, and its findings fail the check. A rule of level
+    ``warning`` reports a specification that the records usually state in a case they show,
+    without requiring it, so its findings never fail the check.
 
     Raises
     ------
     ValueError
-        If the identifier is not lowercase components separated by ``/``.
+        If the identifier is not lowercase components separated by ``/``, or the level is neither
+        ``error`` nor ``warning``.
     """
 
     # pylint: disable-next=disallowed-name  # the field mirrors the key `id` of a rule
     id: str
     description: str
+    level: str = "error"
 
     def __post_init__(self) -> None:
         if not RULE_ID.fullmatch(self.id):
             raise ValueError(f"malformed rule identifier: {self.id!r}")
+        if self.level not in LEVELS:
+            raise ValueError(f"unknown level of the rule {self.id}: {self.level!r}")
 
 
 _CATALOGUE: list[Rule] = []
 
 
-def _rule(identifier: str, description: str) -> Rule:
+def _rule(identifier: str, description: str, level: str = "error") -> Rule:
     """Declare one rule of the catalogue."""
-    rule = Rule(identifier, description)
+    rule = Rule(identifier, description, level)
     _CATALOGUE.append(rule)
     return rule
 
@@ -374,6 +385,11 @@ COMPLETENESS_RESTRICTION_CONTENT = _rule(
 COMPLETENESS_ANONYMOUS_RESTRICTION = _rule(
     "completeness/anonymous-restriction",
     "A domain restriction names neither a quantity nor itself.",
+)
+COMPLETENESS_UNSTATED_DOMAIN = _rule(
+    "completeness/unstated-domain",
+    "An answer whose route is deductive or runs on a model states no domain.",
+    "warning",
 )
 COMPLETENESS_TEMPLATE_LEFTOVER = _rule(
     "completeness/template-leftover",

@@ -83,7 +83,7 @@ The following command runs every check of `gnomon` on the folder, and prints one
 gnomon check ./my-problem
 ```
 
-A template not yet started is counted among the templates not yet filled, and that count falls as the records are filled. A stable report, which can be kept beside the records and compared between two runs, is written in YAML:
+A template not yet started is counted among the templates not yet filled, and that count falls as the records are filled. A line marked `warning:` reports a specification usually stated in the case shown, such as the domain of an answer whose route runs on a model; a warning fails no check. A stable report, which can be kept beside the records and compared between two runs, is written in YAML:
 
 ```sh
 gnomon check ./my-problem --format yaml --output ./my-problem/reports/check.yml

@@ -108,6 +108,7 @@ CHECKERS: dict[ModuleType, tuple[str, ...]] = {
         "unanchored_explicandum",
         "unclassified_operations",
         "unbound_outputs",
+        "unstated_domain",
         "mismatched_status_pairs",
         "incomplete_operations",
         "unmet_by_presence",

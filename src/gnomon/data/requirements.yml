@@ -47,7 +47,7 @@ always:
     - segments[].inputs
     - segments[].outputs
   itinerary: [addresses, steps]
-  answer: [claim, grounds, dependence, route, domain, status, support, modal_strength, erotetic_relation]
+  answer: [claim, grounds, dependence, route, status, support, modal_strength, erotetic_relation]
   binding: [model, target, asserter, feature_pairs, domain, grain, version]
   key: [kind, domain_and_codomain, expression, version]
   assessment: [assesses, against]
