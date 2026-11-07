@@ -144,3 +144,7 @@ The Mixture pilot of `geonexus` corrected several parts of the framework while s
 - [ ] Align the conventions of `gnomon` with those of `geonexus`, which the [documentation index of `geonexus`](https://github.com/esther-poniatowski/geonexus/blob/42d8a238991105b3c1640a69d5bfe27c8db703e0/docs/_index.md) registers. 🆔 geonexus-conventions
 	- [ ] Compare the two workspaces on frontmatter keys, conventional file types (task lists, dashboards, handoffs), and task syntax.
 	- [ ] Adopt the conventions retained, in this list first.
+- [ ] Generate the indexes of `gnomon` with a released version of Anagraphe, the index tool of the ecosystem. Then edit them through its Obsidian plugin. Anagraphe serves only the documentation, never the package. The subtasks wait on the task of Anagraphe that reads the entry fields of a YAML record from its top-level keys. 🆔 anagraphe-indexes
+	- [ ] Declare the policy of `gnomon` in `anagraphe.yml`. The record schemas, not the policy, fix the order of statuses and types.
+	- [ ] Move the goal clause of each entry from the index into its file, the clauses written under `index-goals` included. Decide which key of a YAML record holds that clause.
+	- [ ] Give each index of `examples/` one group that sorts its records by `type`, from the problem to the itinerary.
