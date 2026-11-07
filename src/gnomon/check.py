@@ -61,13 +61,13 @@ from .dimensions import (
     malformed_formulas,
     operator_rules,
 )
-from .findings import CHECK_FAILED, Finding, finding
+from .findings import CHECK_FAILED, CONTRACT_VIOLATION, Finding, finding
 from .history import StateReader, git_states
 from .identifiers import PLACEHOLDER_SEGMENT
 from .itineraries import construct_record_kinds, itinerary_problems, type_classes, type_holders
 from .leftovers import strip_leftovers
 from .sarif import Located
-from .schemas import identifier_prefixes
+from .schemas import contract_violations, field_path, identifier_prefixes
 from .vocabulary.coordinates import foreign_coordinates
 from .vocabulary.layout import GENERATED_KINDS
 
@@ -565,6 +565,28 @@ def _itinerary(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     )
 
 
+#: The kinds of contract violation that another rule reports: an unadmitted value, under
+#: `completeness/inadmissible-value`, and the form of an identifier, under
+#: `vocabulary/malformed-identifier`.
+REPORTED_ELSEWHERE = frozenset({("enum", None), ("pattern", ("id",))})
+
+
+def _contract(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
+    """The violations of the contract that a record names, read without its leftovers, except
+    those that another rule reports."""
+    return [
+        finding(
+            CONTRACT_VIOLATION,
+            f"{field_path(v.path) or '(record)'}: {v.message}",
+            *v.path,
+            value=v.keyword,
+        )
+        for v in contract_violations(record)
+        if (v.keyword, None) not in REPORTED_ELSEWHERE
+        and (v.keyword, v.path) not in REPORTED_ELSEWHERE
+    ]
+
+
 def _leftovers(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The values that a started record still holds from its template."""
     return list(ctx.workspace.leftovers.get(str(record.get("id")), ()))
@@ -608,7 +630,7 @@ def check_workspace(workspace: Workspace) -> list[Located]:
         ctx = _Context(problem, workspace, registries)
         for ident in sorted(problem.records):
             record = problem.records[ident]
-            checks: list[Check] = [_leftovers, _every_record, _requirements]
+            checks: list[Check] = [_leftovers, _contract, _every_record, _requirements]
             if record.get("type") in v.RECORD_KINDS:
                 checks += [
                     _symbols,

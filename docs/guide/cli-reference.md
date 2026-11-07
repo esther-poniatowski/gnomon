@@ -62,6 +62,7 @@ gnomon validate <paths...>
 
 A researcher needs to know, before an answer is assessed, whether the records of a problem hold the specifications that the method requires. The `check` command runs every check of `gnomon` on a directory tree:
 
+- the contract that each record names in its field `_schema`: the type of each field, the fields admitted, and their forms, each violation stated with its repair;
 - the resolution of each symbol, operator and reference;
 - the specifications that each record kind, each aim and each level of commitment require;
 - the consistency between records, such as the classification of each operation of a model by a ground of the answer, the binding of an answer whose question names outputs to match, and the pair of each target status;

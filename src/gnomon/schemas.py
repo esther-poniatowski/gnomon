@@ -24,9 +24,11 @@ gnomon.cli : the command ``schemas``, which writes or checks the generated files
 
 from __future__ import annotations
 
+import datetime
+from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 import yaml
 
@@ -349,6 +351,7 @@ def record_kinds() -> dict[str, str]:
 
 
 @cache
+@cache
 def contract_validator(kind: str) -> Any:
     """Return the validator of the contract of a record type, which resolves the base schemas."""
     # pylint: disable=import-outside-toplevel  # jsonschema loads only when a record is validated
@@ -364,24 +367,171 @@ def contract_validator(kind: str) -> Any:
     )
 
 
-def record_errors(record: Mapping[str, Any]) -> list[str]:
-    """Return every violation of the contract that a record names in its field ``_schema``.
+#: The words that name the types of JSON Schema in a message.
+TYPE_NAMES: Mapping[str, str] = {
+    "string": "text",
+    "array": "a list",
+    "object": "a mapping",
+    "number": "a number",
+    "integer": "a whole number",
+    "boolean": "true or false",
+    "null": "nothing",
+}
+
+
+@dataclass(frozen=True)
+class Violation:
+    """One violation of a contract, with the path of its field and a message that states the
+    repair.
+
+    Attributes
+    ----------
+    path : tuple
+        The keys and the list positions from the root of the record to the field.
+    keyword : str
+        The kind of the violation: ``type``, ``unknown-key``, ``enum``, ``required``,
+        ``pattern``, ``const``, ``contract``, or the keyword of JSON Schema otherwise.
+    message : str
+        The violation and its repair, in words.
+    """
+
+    path: tuple[Any, ...]
+    keyword: str
+    message: str
+
+
+def field_path(path: Sequence[Any]) -> str:
+    """Return the path of a field as the messages print it: keys joined by dots, positions in
+    brackets.
+
+    >>> field_path(("steps", 0, "norm", "judged"))
+    'steps[0].norm.judged'
+    """
+    text = ""
+    for part in path:
+        text += f"[{part}]" if isinstance(part, int) else (f".{part}" if text else str(part))
+    return text
+
+
+def _found_type(value: Any) -> str:
+    """Return the name of the type of a value, as a message prints it."""
+    if isinstance(value, bool):
+        return "true or false"
+    if isinstance(value, (int, float)):
+        return "a number"
+    if isinstance(value, list):
+        return "a list"
+    if isinstance(value, Mapping):
+        return "a mapping"
+    return "text" if isinstance(value, str) else type(value).__name__
+
+
+def _unknown_key(path: tuple[Any, ...], error: Any) -> Violation:
+    """A key that is no field of the mapping that holds it."""
+    admitted = ", ".join(str(v) for v in error.validator_value if v != "_schema")
+    message = f"{error.instance} is no field here; the fields admitted are {admitted}"
+    return Violation(path, "unknown-key", message)
+
+
+def _unadmitted(path: tuple[Any, ...], error: Any) -> Violation:
+    """A value outside the closed vocabulary of its field."""
+    admitted = ", ".join(str(v) for v in error.validator_value if v is not None)
+    message = f"{error.instance} is not admitted; the admitted values are {admitted}"
+    return Violation(path, "enum", message)
+
+
+def _mistyped(path: tuple[Any, ...], error: Any) -> Violation:
+    """A value of another type than the field admits; a date read from an unquoted text."""
+    value = error.instance
+    if isinstance(value, (datetime.date, datetime.datetime)):
+        message = f'a date written without quotes; write it in quotes, as "{value}"'
+        return Violation(path, "type", message)
+    wanted = error.validator_value
+    names = wanted if isinstance(wanted, list) else [wanted]
+    admitted = " or ".join(TYPE_NAMES.get(str(t), str(t)) for t in names if t != "null")
+    return Violation(
+        path, "type", f"holds {_found_type(value)} where the contract admits {admitted}"
+    )
+
+
+def _missing(path: tuple[Any, ...], error: Any) -> Violation:
+    """A required field absent from its mapping."""
+    held = error.instance if isinstance(error.instance, Mapping) else {}
+    missing = [name for name in error.validator_value if name not in held]
+    return Violation(path, "required", f"the field {', '.join(missing)} is required")
+
+
+#: The message of each kind of violation, keyed by the keyword of JSON Schema.
+READABLE: Mapping[str, Any] = {
+    "enum": _unadmitted,
+    "type": _mistyped,
+    "required": _missing,
+    "const": lambda path, error: Violation(path, "const", f"must be {error.validator_value}"),
+    "pattern": lambda path, error: Violation(
+        path, "pattern", f"{error.instance} does not have the required form"
+    ),
+}
+
+
+def _readable(error: Any) -> Violation:
+    """Return a violation of a contract in words, with its repair."""
+    path = tuple(error.absolute_path)
+    if error.validator == "enum" and "propertyNames" in error.schema_path:
+        return _unknown_key(path, error)
+    handler = READABLE.get(str(error.validator))
+    if handler is None:
+        return Violation(path, str(error.validator), str(error.message))
+    result: Violation = handler(path, error)
+    return result
+
+
+def contract_violations(record: Mapping[str, Any]) -> list[Violation]:
+    """Return every violation of the contract that a record names in its field ``_schema``,
+    each in words with its repair.
 
     A record names no contract, or a contract that `gnomon` does not publish, when its binding is
-    missing or unknown; each other error states the path of the field and the violated keyword.
+    missing or unknown.
+
+    >>> import datetime
+    >>> for v in contract_violations({"_schema": "gnomon:itinerary@1", "type": "itinerary",
+    ...     "steps": [{"norm": {"judged": datetime.date(2026, 11, 5)}}], "extra": 1}):
+    ...     print(field_path(v.path) or "(record)", v.keyword)
+    (record) unknown-key
+    steps[0].norm.judged type
     """
     named = record.get("_schema")
     published = {
         identifier(kind, int(load_base(kind).get("x-version", 1))): kind for kind in kinds()
     }
     if not named:
-        return ["_schema: the record names no contract"]
+        return [Violation(("_schema",), "contract", "the record names no contract")]
     if named not in published:
-        return [f"_schema: {named} is no contract of {NAMESPACE}"]
-    validator = contract_validator(published[named])
-    return [
-        f"{'.'.join(str(part) for part in error.absolute_path) or '(record)'}: {error.message}"
-        for error in sorted(
-            validator.iter_errors(dict(record)), key=lambda e: list(map(str, e.absolute_path))
+        return [Violation(("_schema",), "contract", f"{named} is no contract of {NAMESPACE}")]
+    kind = published[named]
+    validator = contract_validator(kind)
+    errors = sorted(
+        validator.iter_errors(dict(record)), key=lambda e: list(map(str, e.absolute_path))
+    )
+    found = [_readable(error) for error in errors]
+    prefix = identifier_prefix(load_base(kind))
+    if prefix in RECORD_SEGMENTS:
+        count = RECORD_SEGMENTS[str(prefix)] - 1
+        form = (
+            f"is not {prefix} followed by {count} segment{'s' if count > 1 else ''} of lowercase"
+            " words joined by hyphens"
         )
-    ]
+        found = [
+            (
+                Violation(v.path, v.keyword, f"{record.get('id')} {form}")
+                if v.keyword == "pattern" and v.path == ("id",)
+                else v
+            )
+            for v in found
+        ]
+    return found
+
+
+def record_errors(record: Mapping[str, Any]) -> list[str]:
+    """Return every violation of the contract that a record names, each as one line: the path of
+    the field, then the violation and its repair."""
+    return [f"{field_path(v.path) or '(record)'}: {v.message}" for v in contract_violations(record)]

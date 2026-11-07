@@ -386,6 +386,10 @@ COMPLETENESS_ANONYMOUS_RESTRICTION = _rule(
     "completeness/anonymous-restriction",
     "A domain restriction names neither a quantity nor itself.",
 )
+CONTRACT_VIOLATION = _rule(
+    "contract/violation",
+    "A record breaks the contract that its field `_schema` names: a type, a field or a form.",
+)
 COMPLETENESS_UNSTATED_DOMAIN = _rule(
     "completeness/unstated-domain",
     "An answer whose route is deductive or runs on a model states no domain.",

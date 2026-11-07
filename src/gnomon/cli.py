@@ -102,6 +102,9 @@ def cli_validate(
 
     files: list[Path] = []
     for given in map(Path, paths):
+        if not given.exists():
+            typer.echo(f"no such file or directory: {given}", err=True)
+            raise typer.Exit(code=1)
         files += sorted(given.rglob("*.yml")) if given.is_dir() else [given]
     known, failed, checked, unfilled = record_kinds(), 0, 0, 0
     for path in files:

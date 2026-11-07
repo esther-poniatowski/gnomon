@@ -43,9 +43,10 @@ def test_every_record_type_declares_the_prefix_of_its_identifiers() -> None:
 def test_the_contract_rejects_an_identifier_outside_the_grammar() -> None:
     record = {"_schema": "gnomon:question@1", "type": "question", "id": "quest.delay.explain_delay"}
     errors = record_errors(record)
-    assert len(errors) == 1 and errors[0].startswith(
-        "id: 'quest.delay.explain_delay' does not match"
-    )
+    assert errors == [
+        "id: quest.delay.explain_delay is not quest followed by 2 segments of lowercase words"
+        " joined by hyphens"
+    ]
     record["id"] = "quest.delay.explain-delay"
     assert not record_errors(record)
 

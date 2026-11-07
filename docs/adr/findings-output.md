@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-11-01
-revised: 2026-11-01
+revised: 2026-11-07
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Findings output
@@ -26,7 +26,7 @@ One check spans several records, `unused_declarations`, so it returns each findi
 
 ### Rules
 
-Each message format has one stable `ruleId` of the form `<area>/<kind>`, whose components match `[a-z0-9][a-z0-9._-]*`. The four areas are `itinerary`, `registry`, `completeness` and `vocabulary`, one per family of checks. The catalogue lives in `src/gnomon/findings.py`, together with a one-line description of each rule, and the driver of every log lists all of its rules. Every rule has level `error`, since every finding fails its check. Two formats that differ only by the block named in their prefix share one rule, such as the unselected condition of a quantity and of a feature. ^rule-catalogue
+Each message format has one stable `ruleId` of the form `<area>/<kind>`, whose components match `[a-z0-9][a-z0-9._-]*`. The areas are `itinerary`, `registry`, `completeness`, `vocabulary`, `derivation`, `dimension` and `contract`, one per family of checks, and `check` for a check that stopped on an error. The catalogue lives in `src/gnomon/findings.py`, together with a one-line description of each rule, and the driver of every log lists all of its rules. Every rule has level `error`, since every finding fails its check. Two formats that differ only by the block named in their prefix share one rule, such as the unselected condition of a quantity and of a feature. ^rule-catalogue
 
 ### Resource and locus
 

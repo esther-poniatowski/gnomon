@@ -124,12 +124,13 @@ def test_every_worked_record_follows_its_contract(path: Any, record: dict[str, A
 def test_a_record_that_breaks_its_contract_is_reported() -> None:
     record = {"_schema": "gnomon:problem@1", "type": "problem", "id": "prob.a.b", "status": "posed"}
     assert schemas.record_errors(record) == []
-    assert schemas.record_errors({**record, "status": "pending"})[0].startswith(
-        "status: 'pending' is not one of"
-    )
-    assert schemas.record_errors({**record, "type": "question"}) == ["type: 'problem' was expected"]
+    assert schemas.record_errors({**record, "status": "pending"}) == [
+        "status: pending is not admitted; the admitted values are posed, refined, solved,"
+        " dissolved, abandoned"
+    ]
+    assert schemas.record_errors({**record, "type": "question"}) == ["type: must be problem"]
     assert schemas.record_errors({**record, "statement": 3}) == [
-        "statement: 3 is not of type 'string', 'null'"
+        "statement: holds a number where the contract admits text"
     ]
     assert schemas.record_errors({"type": "problem"}) == ["_schema: the record names no contract"]
     assert schemas.record_errors({**record, "_schema": "gnomon:problem@9"}) == [
@@ -141,8 +142,8 @@ def test_a_key_that_the_contract_does_not_declare_is_reported() -> None:
     """A misspelled key would otherwise pass as an unknown field, at the root and at any depth."""
     record = {"_schema": "gnomon:concept@1", "type": "concept", "id": "concept.a.b"}
     assert schemas.record_errors({**record, "glos": "x"})[0].startswith(
-        "(record): 'glos' is not one of"
+        "(record): glos is no field here; the fields admitted are title, id,"
     )
     nested = {**record, "confusions": [{"with": "fixed point"}]}
-    assert schemas.record_errors(nested)[0].startswith("confusions.0: 'with' is not one of")
+    assert schemas.record_errors(nested)[0].startswith("confusions[0]: with is no field here")
     assert schemas.record_errors({**record, "confusions": [{"other": "fixed point"}]}) == []
