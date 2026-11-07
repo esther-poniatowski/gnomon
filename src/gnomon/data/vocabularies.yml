@@ -643,6 +643,17 @@ vocabularies:
     - value: provisional
     - value: stabilized
     - value: retracted
+    operators.kind:
+    - value: binder
+      name: consumes the indices that it binds
+    - value: map
+      name: maps its arguments to a value
+    - value: relation
+      name: states a relation between its arguments
+    - value: set
+      name: constructs a set
+    - value: constant
+      name: takes no argument
     operators.dimension:
     - value: preserve
       name: the formula of the first argument

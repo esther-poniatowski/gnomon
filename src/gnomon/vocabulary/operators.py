@@ -11,6 +11,7 @@ from typing import Any, Mapping
 import yaml
 
 from .. import findings as rules
+from ..expressions import Tree, children, parse_expression
 from ..findings import Finding, finding
 from .layout import calls, entries, formulas
 
@@ -121,4 +122,52 @@ def arities(*records: Mapping[str, Any], source: Path | None = None) -> dict[str
         arity = operator_arity(entry)
         if arity is not None:
             found[str(entry.get("symbol"))] = arity
+    return found
+
+
+def binder_operators(*records: Mapping[str, Any], source: Path | None = None) -> frozenset[str]:
+    """Return the operators of kind binder: those of the registry and those that the operator
+    record of a problem declares as binders."""
+    registry = yaml.safe_load((source or OPERATOR_REGISTRY).read_text(encoding="utf-8"))
+    return frozenset(
+        str(entry.get("symbol"))
+        for entry in list(registry.get("operators") or [])
+        + [e for record in records for e in entries(record, "operators")]
+        if entry.get("kind") == "binder"
+    )
+
+
+def _bound_calls(tree: Tree) -> list[tuple[str, tuple[str, ...]]]:
+    """Return each call of a tree that binds indices, with the indices that it binds."""
+    found = [(str(tree[1]), tuple(tree[3]))] if tree[0] == "call" and tree[3] else []
+    for child in children(tree):
+        found += _bound_calls(child)
+    return found
+
+
+def misused_binders(
+    record: Mapping[str, Any], operators: frozenset[str], binders: frozenset[str]
+) -> list[Finding]:
+    """Return every operator that a formula writes as a binder, ``op_{indices}(...)``, although its
+    kind is not binder.
+
+    >>> record = {"type": "phenomenon",
+    ...           "observables": [{"symbol": "T", "expression": "argmax_{w}( c(w) )"}]}
+    >>> [f.text for f in misused_binders(record, frozenset({"argmax", "max"}), frozenset({"max"}))]
+    ['observables.expression: argmax binds the indices w, but its kind is not binder']
+    """
+    found = []
+    for where, place, text, _ in formulas(record):
+        tree = parse_expression(text)
+        for name, bound in _bound_calls(tree) if tree is not None else []:
+            if name in operators and name not in binders:
+                found.append(
+                    finding(
+                        rules.VOCABULARY_MISUSED_BINDER,
+                        f"{where}: {name} binds the indices {', '.join(bound)}, but its kind is"
+                        " not binder",
+                        *place,
+                        value=name,
+                    )
+                )
     return found

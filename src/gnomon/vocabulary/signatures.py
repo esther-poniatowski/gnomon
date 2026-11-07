@@ -18,6 +18,10 @@ free_indices
     Return the indices that a tree leaves free, in the order of the text.
 contradicted_signatures
     Return each defined quantity whose definition leaves free an index that its signature omits.
+application_counts
+    Return the numbers of arguments to which each declared quantity may be applied.
+misapplied_quantities
+    Return each application of a quantity to a number of arguments that it does not take.
 """
 
 from __future__ import annotations
@@ -28,7 +32,7 @@ from .. import findings as rules
 from ..expressions import Tree, children, parse_expression
 from ..findings import Entry, Finding, finding
 from .coordinates import domain
-from .layout import identifiers, indexed
+from .layout import DECLARING, calls, entries, formulas, identifiers, indexed
 
 #: The blocks whose entries declare a quantity that an expression may define.
 QUANTITY_BLOCKS: tuple[str, ...] = ("variables", "parameters", "observables")
@@ -104,4 +108,89 @@ def contradicted_signatures(record: Mapping[str, Any], indices: Iterable[str]) -
                 for name in dict.fromkeys(free_indices(tree, known))
                 if name not in allowed
             ]
+    return found
+
+
+def _map_arities(values: Any) -> set[int]:
+    """Return the numbers of arguments of a value map ``maps(D, R)``: the factors of its domain,
+    at the top level and once nested products are flattened; none for any other value set.
+
+    >>> sorted(_map_arities("maps(prod(prod(a, b), c), reals)")), sorted(_map_arities("reals"))
+    ([2, 3], [])
+    """
+    stated = domain(values)
+    tree = parse_expression(stated) if stated else None
+    if tree is None:
+        return set()
+
+    def factors(node: Tree) -> list[Tree]:
+        if node[0] == "call" and node[1] == "prod":
+            return [leaf for arg in node[2] for leaf in factors(arg)]
+        return [node]
+
+    top = len(tree[2]) if tree[0] == "call" and tree[1] == "prod" else 1
+    return {top, len(factors(tree))}
+
+
+def application_counts(
+    records: Iterable[Mapping[str, Any]],
+) -> dict[str, frozenset[int] | None]:
+    """Return, per declared quantity, the numbers of arguments to which it may be applied: its
+    indices, or the arguments of its value map; None when a declaration leaves its values open, so
+    that its applications are not checked.
+
+    >>> application_counts([{"type": "target-system", "variables": [
+    ...     {"symbol": "u", "signature": ["x", "t"], "values": "reals"},
+    ...     {"symbol": "f", "signature": [], "values": "maps(prod(a, b), reals)"},
+    ...     {"symbol": "g", "signature": ["t"], "values": None}]}])
+    {'u': frozenset({2}), 'f': frozenset({0, 2}), 'g': None}
+    """
+    found: dict[str, frozenset[int] | None] = {}
+    for record in records:
+        for block in DECLARING.get(str(record.get("type", "")), ()):
+            for entry in entries(record, block):
+                symbol, signature = entry.get("symbol"), entry.get("signature")
+                if not isinstance(symbol, str) or not isinstance(signature, list):
+                    continue
+                values = entry.get("values")
+                counts: frozenset[int] | None = (
+                    None
+                    if not isinstance(values, str) or not values.strip()
+                    else frozenset({len(signature), *_map_arities(values)})
+                )
+                if symbol in found:
+                    known = found[symbol]
+                    counts = None if known is None or counts is None else known | counts
+                found[symbol] = counts
+    return found
+
+
+def misapplied_quantities(
+    record: Mapping[str, Any],
+    counts: Mapping[str, frozenset[int] | None],
+    operators: frozenset[str],
+) -> list[Finding]:
+    """Return each application of a declared quantity to a number of arguments that neither its
+    signature nor its value map takes.
+
+    >>> record = {"type": "phenomenon", "manifestations": [
+    ...     {"symbol": "m", "expression": "forall_{y}( tpeak(w, y) > 0 )"}]}
+    >>> [f.text for f in misapplied_quantities(record, {"tpeak": frozenset({1})}, frozenset())]
+    ['manifestations.expression: tpeak is applied to 2 arguments, where it takes 1']
+    """
+    found = []
+    for where, place, text, _ in formulas(record):
+        for name, passed in calls(text):
+            taken = counts.get(name)
+            if name in operators or taken is None or passed in taken:
+                continue
+            found.append(
+                finding(
+                    rules.VOCABULARY_MISMATCHED_INDICES,
+                    f"{where}: {name} is applied to {passed} arguments, where it takes"
+                    f" {' or '.join(str(n) for n in sorted(taken))}",
+                    *place,
+                    value=name,
+                )
+            )
     return found

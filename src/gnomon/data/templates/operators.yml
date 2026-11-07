@@ -17,6 +17,7 @@ base_scales:                     # optional; one entry per base scale that the d
 operators:
   - name: "THE QUANTITY THAT THE OPERATOR COMPUTES"
     symbol: SYMBOL
+    kind:                        # binder (consumes the indices that it binds) | map (maps its arguments to a value) | relation (states a relation between its arguments) | set (constructs a set) | constant (takes no argument); binder when the operator is written op_{indices} before its arguments
     notation: 'LATEX TEMPLATE'   # write #0 for the bound indices and #1 for each argument
     for_any: [SYMBOL]            # type variables the operator is general over, usable in `signature` and `values`; omit when the operator acts on declared sets alone
     signature: ["SET EXPRESSION OVER DECLARED SYMBOLS OR A TYPE VARIABLE"]

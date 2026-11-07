@@ -610,6 +610,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `operators` | Operators | the operators that the formulas of the problem use beyond the canonical set, one entry per operator | [Operators](../specification/operators.md) |
 | `operators[].dimension` | dimension | How the operator combines the dimensional formulas of its arguments; an operator that states no rule leaves the formula of its result undecided. | [Operators: dimension](../specification/operators.md) |
 | `operators[].for_any` | for any (type variables of the operator) | type variables the operator is general over, usable in `signature` and `values`; omit when the operator acts on declared sets alone | [Operators: for any (type variables of the operator)](../specification/operators.md) |
+| `operators[].kind` | kind | the kind of the operator; binder when it consumes the indices that it binds | [Operators: kind](../specification/operators.md) |
 | `operators[].name` | name | the quantity that the operator computes | [Operators: name](../specification/operators.md) |
 | `operators[].notation` | notation | write #0 for the bound indices and #1 for each argument | [Operators: notation](../specification/operators.md) |
 | `operators[].signature` | signature | the set of each argument of the operator, as a set expression over declared symbols or a type variable | [Operators: signature](../specification/operators.md) |

@@ -141,6 +141,8 @@ CHECKERS: dict[ModuleType, tuple[str, ...]] = {
         "misrouted_interactions",
         "misnamed_variant",
         "mismatched_arity",
+        "misused_binders",
+        "misapplied_quantities",
         "unborne_variants",
         "overreaching_entries",
         "retired_in_use",

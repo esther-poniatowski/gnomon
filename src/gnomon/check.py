@@ -252,6 +252,16 @@ class _Context:
         return found
 
     @cached_property
+    def applications(self) -> dict[str, frozenset[int] | None]:
+        """The numbers of arguments to which each quantity of the problem may be applied."""
+        return v.application_counts(self.problem.records.values())
+
+    @cached_property
+    def binders(self) -> frozenset[str]:
+        """The operators of kind binder that the records of the problem may use."""
+        return v.binder_operators(*self.problem.records.values())
+
+    @cached_property
     def prefixes(self) -> dict[str, str]:
         """The prefix of the identifiers of each record type, read from its base schema."""
         return identifier_prefixes()
@@ -400,6 +410,7 @@ def _against_target(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         + v.misrouted_interactions(record, upstream)
         + v.misnamed_variant(record, v.declared_variants(target))
         + v.mismatched_arity(record, ctx.arities)
+        + v.misused_binders(record, ctx.operators, ctx.binders)
         + v.unborne_variants(record, backgrounds)
     )
     if record.get("type") in ("phenomenon", "answer"):
@@ -531,7 +542,9 @@ def _coordinates(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 def _signatures(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The signature of each defined quantity against the indices that its definition leaves
     free."""
-    return v.contradicted_signatures(record, ctx.indices)
+    return v.contradicted_signatures(record, ctx.indices) + v.misapplied_quantities(
+        record, ctx.applications, ctx.operators
+    )
 
 
 def _operators(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:

@@ -96,9 +96,11 @@ from .operators import (
     DATA,
     OPERATOR_REGISTRY,
     arities,
+    binder_operators,
     canonical_operators,
     local_operators,
     mismatched_arity,
+    misused_binders,
     operator_arity,
 )
 from .resolution import (
@@ -107,7 +109,13 @@ from .resolution import (
     unresolved,
     unresolved_names,
 )
-from .signatures import QUANTITY_BLOCKS, contradicted_signatures, free_indices
+from .signatures import (
+    QUANTITY_BLOCKS,
+    application_counts,
+    contradicted_signatures,
+    free_indices,
+    misapplied_quantities,
+)
 from .structure import (
     corrupted_notation,
     doubly_defined,
@@ -162,8 +170,10 @@ __all__ = [
     "Declaration",
     "Problem",
     "along",
+    "application_counts",
     "arities",
     "as_data",
+    "binder_operators",
     "calls",
     "canonical_operators",
     "contradicted_signatures",
@@ -187,12 +197,14 @@ __all__ = [
     "local_operators",
     "malformed_identifier",
     "malformed_relations",
+    "misapplied_quantities",
     "misattributed_appeals",
     "mismatched_arity",
     "misnamed_variant",
     "misplaced_sharing",
     "misrouted_interactions",
     "mistyped_symbols",
+    "misused_binders",
     "operator_arity",
     "overreaching_declarations",
     "overreaching_entries",

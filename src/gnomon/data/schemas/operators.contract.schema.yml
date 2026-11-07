@@ -34,12 +34,21 @@ properties:
         enum:
         - name
         - symbol
+        - kind
         - notation
         - for_any
         - signature
         - values
         - dimension
       properties:
+        kind:
+          enum:
+          - binder
+          - map
+          - relation
+          - set
+          - constant
+          - null
         dimension:
           enum:
           - preserve

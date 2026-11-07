@@ -582,6 +582,15 @@ VOCABULARY_MISMATCHED_ARITY = _rule(
     "vocabulary/mismatched-arity",
     "A call passes a number of arguments that its operator does not take.",
 )
+VOCABULARY_MISUSED_BINDER = _rule(
+    "vocabulary/misused-binder",
+    "An operator binds indices, written `op_{indices}(...)`, although its kind is not binder.",
+)
+VOCABULARY_MISMATCHED_INDICES = _rule(
+    "vocabulary/mismatched-indices",
+    "A quantity is applied to a number of arguments that neither its signature nor its value map"
+    " takes.",
+)
 VOCABULARY_RETIRED_SYMBOL = _rule(
     "vocabulary/retired-symbol",
     "An expression of a derived model uses a symbol that one of its operations retires.",

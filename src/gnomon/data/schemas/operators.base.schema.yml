@@ -114,6 +114,14 @@ properties:
           description: the symbol of the operator, unique within the record
           examples:
           - '`restrict`, `community_jacobian`, `ntk`'
+        kind:
+          x-vocabulary: operators.kind
+          type:
+          - string
+          - 'null'
+          x-comment: binder when the operator is written op_{indices} before its arguments
+          title: kind
+          description: the kind of the operator; binder when it consumes the indices that it binds
         notation:
           type:
           - string
