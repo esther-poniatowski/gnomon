@@ -494,6 +494,8 @@ def test_an_accepted_corrective_answer_to_the_associated_question_dissolves_the_
 
 
 def test_the_stated_knowledge_obstacles_agree_with_the_records() -> None:
+    """A stated obstacle that the records contradict is reported; an obstacle that the records
+    show need not be stated."""
     problem = {
         "id": "prob.a",
         "type": "problem",
@@ -510,8 +512,6 @@ def test_the_stated_knowledge_obstacles_agree_with_the_records() -> None:
     records["ans.a"] = {"type": "answer", "answers": "quest.a", "status": "hypothesized"}
     assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == [
         "knowledge_obstacles: the problem states open-gap, which its records contradict",
-        "knowledge_obstacles: the records show unassessed-candidates, which the problem does not"
-        " state",
     ]
     problem["knowledge_obstacles"] = [
         {"obstacle": "unassessed-candidates"},
@@ -520,8 +520,8 @@ def test_the_stated_knowledge_obstacles_agree_with_the_records() -> None:
     assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == []
     records["ans.a"].update(status="accepted", erotetic_relation={"value": "corrective"})
     assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == [
-        "knowledge_obstacles: the records show unsound-presupposition, which the problem does not"
-        " state",
         "knowledge_obstacles: the problem states unassessed-candidates, which its records"
         " contradict",
     ]
+    problem["knowledge_obstacles"] = []
+    assert texts(misstated_obstacles(problem, records, CLASSES, HOLDERS)) == []

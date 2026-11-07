@@ -114,7 +114,7 @@ gnomon status <directory> [--format text|yaml] [--output PATH]
 | Argument or option | Description                                                                              |
 | ------------------ | ---------------------------------------------------------------------------------------- |
 | `<directory>`      | Directory of records, read recursively; each folder is one problem.                      |
-| `--format`, `-f`   | `text` (default), one line per open or refuted condition, or `yaml`, the full diagnosis. |
+| `--format`, `-f`   | `text` (default), per open condition its ready acts and the acts waiting for an input, and per refuted condition its revisions; or `yaml`, the full diagnosis. |
 | `--output`, `-o`   | File receiving the report instead of standard output; its missing folders are created.   |
 
 **Output:** the `yaml` report holds no date and no absolute path, so two runs on unchanged records write the same file. A state that the records do not show stays `not-established` until the researcher asserts it with pointers, so the diagnosis never replaces a judgment. The command exits with code 1 when a file cannot be read, and with code 2 when the report cannot be written.

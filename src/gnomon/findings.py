@@ -285,10 +285,6 @@ COMPLETENESS_UNRECORDED_DISSOLUTION = _rule(
     "An accepted answer denies a presupposition of the associated question of a problem not marked"
     " dissolved.",
 )
-COMPLETENESS_UNSTATED_OBSTACLE = _rule(
-    "completeness/unstated-obstacle",
-    "The records show a knowledge obstacle that the problem does not state.",
-)
 COMPLETENESS_UNSUPPORTED_OBSTACLE = _rule(
     "completeness/unsupported-obstacle",
     "The problem states a knowledge obstacle that its records contradict.",

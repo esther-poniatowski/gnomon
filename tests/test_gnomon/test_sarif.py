@@ -164,7 +164,9 @@ RECORDS: dict[str, dict[str, Any]] = {
     },
 }
 LINES = [
-    "itin.demo: steps.guess: intuition is no registered activity",
+    "itin.demo: steps.guess: intuition is no registered activity; did you mean induction or"
+    " integration or intervention? the activities are listed in"
+    " src/gnomon/data/registries/activities.yml",
     "1 itineraries checked, 1 problems found",
 ]
 
@@ -207,7 +209,7 @@ def test_the_command_writes_a_log_and_keeps_its_text_output(problem: Path, tmp_p
     assert run["invocations"] == [{"executionSuccessful": True}]
     (found,) = run["results"]
     assert found["ruleId"] == "itinerary/unknown-activity"
-    assert found["message"]["text"] == "steps.guess: intuition is no registered activity"
+    assert found["message"]["text"].startswith("steps.guess: intuition is no registered activity;")
     location = found["locations"][0]
     assert location["physicalLocation"]["artifactLocation"] == {
         "uri": "problems/demo/itinerary.yml",

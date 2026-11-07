@@ -272,7 +272,10 @@ def test_a_well_formed_itinerary_passes() -> None:
 def test_an_unregistered_activity_is_reported() -> None:
     assert texts(
         itinerary_problems(served(planted(derive={"activity": "intuition"})), RECORDS)
-    ) == ["steps.derive: intuition is no registered activity"]
+    ) == [
+        "steps.derive: intuition is no registered activity; did you mean induction or integration"
+        " or intervention? the activities are listed in src/gnomon/data/registries/activities.yml"
+    ]
 
 
 def test_input_types_that_do_not_fill_the_activity_are_reported() -> None:

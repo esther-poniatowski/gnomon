@@ -22,6 +22,7 @@ data/registries/product-types.yml : the types its inputs and output take.
 
 from __future__ import annotations
 
+import difflib
 import re
 from collections import Counter
 from dataclasses import dataclass, field
@@ -551,7 +552,19 @@ def _resolved_input(
             text = f"{s.where}: {ref} cannot be read at the revision {revision}"
             return None, [finding(rules.ITINERARY_UNREADABLE_STATE, text, *given, "as_of")]
     if record is None:
-        text = f"{s.where}: {ref} is neither a step nor a record"
+        own = s.itinerary.own
+        if isinstance(ref, str) and ref in s.itinerary.by_id:
+            text = (
+                f"{s.where}: {ref} names a step of this itinerary without its itinerary; write it"
+                f" in full, as {own}{ref}"
+            )
+        elif isinstance(ref, str) and "." not in ref:
+            text = (
+                f"{s.where}: {ref} is neither a step nor a record; a step is named in full, as"
+                f" {own}<step>"
+            )
+        else:
+            text = f"{s.where}: {ref} is neither a step nor a record"
         return None, [finding(rules.ITINERARY_UNRESOLVED_INPUT, text, *given)]
     return record, []
 
@@ -796,7 +809,12 @@ def _step_findings(
     """Check one step; return its findings and the steps that its inputs name."""
     act = acts.get(str(step.get("activity")))
     if act is None:
-        text = f"steps.{step.get('id')}: {step.get('activity')} is no registered activity"
+        close = difflib.get_close_matches(str(step.get("activity")), list(acts), n=3)
+        hint = f"did you mean {' or '.join(close)}? " if close else ""
+        text = (
+            f"steps.{step.get('id')}: {step.get('activity')} is no registered activity; {hint}the"
+            " activities are listed in src/gnomon/data/registries/activities.yml"
+        )
         place = ("steps", Entry(position, step), "activity")
         return [finding(rules.ITINERARY_UNKNOWN_ACTIVITY, text, *place)], set()
     s = _Step(context, position, step, act)

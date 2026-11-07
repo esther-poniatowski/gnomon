@@ -34,7 +34,7 @@ These failures follow from one organization: prose serves both to store the cont
 
 - represent the state of knowledge of an inquiry, each result with its maturity;
 - record the logic of the inquiry, that is, the dependencies through which results compose into answers;
-- guide the inquiry, by naming the next act that the current state and the target question call for;
+- guide the inquiry, by listing the open conditions addressable now, each with its ready acts, and leaving the choice to the researcher;
 - export the content of the inquiry, so that a presentation to a reader references the records instead of restating them.
 
 ### Advantages

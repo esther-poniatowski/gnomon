@@ -200,7 +200,11 @@ def misstated_obstacles(
     classes: Mapping[str, str],
     holders: Mapping[str, Iterable[str]],
 ) -> list[Finding]:
-    """Return every knowledge obstacle that the records decide and the problem states otherwise."""
+    """Return every knowledge obstacle that the problem states and its records contradict.
+
+    An obstacle that the records show, such as an open gap, need not be stated, since the views
+    compute it from the records; a stated obstacle that the records decide against is a stale claim.
+    """
     stated = {
         str(entry.get("obstacle"))
         for entry in problem.get("knowledge_obstacles") or []
@@ -208,17 +212,7 @@ def misstated_obstacles(
     }
     found = []
     for name, holds in readable_obstacles(problem, records, classes, holders).items():
-        if holds and name not in stated:
-            found.append(
-                finding(
-                    rules.COMPLETENESS_UNSTATED_OBSTACLE,
-                    f"knowledge_obstacles: the records show {name}, which the problem does not"
-                    " state",
-                    "knowledge_obstacles",
-                    value=name,
-                )
-            )
-        elif not holds and name in stated:
+        if not holds and name in stated:
             found.append(
                 finding(
                     rules.COMPLETENESS_UNSUPPORTED_OBSTACLE,

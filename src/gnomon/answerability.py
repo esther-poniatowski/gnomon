@@ -88,6 +88,7 @@ class RouteDiagnosis:
     states: tuple[ConditionState, ...]
     open: dict[str, tuple[Act, ...]]
     refuted: tuple[str, ...]
+    reasons: dict[str, str] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -384,7 +385,29 @@ def _route_diagnosis(
         and all(states.get(d, established).state == "established" for d in applicable[condition])
     }
     refuted = tuple(cond for cond, state in states.items() if state.state == "refuted")
-    return RouteDiagnosis(route, tuple(states.values()), opened, refuted)
+    reasons = (
+        {"candidates": _candidates_reason(question, records)} if "candidates" in opened else {}
+    )
+    return RouteDiagnosis(route, tuple(states.values()), opened, refuted, reasons)
+
+
+def _candidates_reason(question: Mapping[str, Any], records: Records) -> str:
+    """Return why the condition of candidates stays open: no answer recorded, or none of the
+    recorded answers passing the admissibility tests of an assessment.
+
+    >>> answer = {"type": "answer", "answers": "quest.a.b"}
+    >>> _candidates_reason({"id": "quest.a.b"}, {"ans.a.b": answer})
+    '1 answer recorded, none yet passes the admissibility tests of an assessment'
+    """
+    count = sum(
+        1
+        for r in records.values()
+        if r.get("type") == "answer" and r.get("answers") == question.get("id")
+    )
+    if not count:
+        return "no answer recorded yet"
+    noun = "answer" if count == 1 else "answers"
+    return f"{count} {noun} recorded, none yet passes the admissibility tests of an assessment"
 
 
 def diagnose(
@@ -482,22 +505,38 @@ def as_document(diagnosis: Diagnosis) -> dict[str, Any]:
     }
 
 
+def _acts_lines(acts_: tuple[Act, ...]) -> list[str]:
+    """Return the lines of the acts on one open condition: the ready acts, then those waiting for
+    an input, each with the input that it lacks."""
+    ready = [a.activity for a in acts_ if a.ready]
+    waiting = [f"{a.activity} ({'; '.join(a.missing)})" for a in acts_ if not a.ready]
+    if not ready and not waiting:
+        return ["    no registered activity acts on it"]
+    lines = [f"    ready: {', '.join(ready)}"] if ready else []
+    if waiting:
+        lines.append(f"    waiting for an input: {', '.join(waiting)}")
+    return lines
+
+
 def render_text(diagnosis: Diagnosis) -> str:
-    """Return the diagnosis as lines for a terminal: per question and route, the open and refuted
-    conditions."""
+    """Return the diagnosis as lines for a terminal: per question and route, each open condition
+    with its ready acts and the acts waiting for an input, and each refuted condition.
+
+    The open conditions are those whose dependencies are established, so each can be addressed now.
+    The choice among the ready acts is left to the researcher, as the choice of the next act states.
+    """
     lines: list[str] = []
+    if not diagnosis.questions:
+        lines.append("no question to diagnose: fill a question record that addresses the problem")
+    any_ready = False
     for q in diagnosis.questions:
         for r in q.routes:
             lines.append(f"{q.question} [{r.route}]")
             for cond, acts_ in r.open.items():
-                ready = (
-                    ", ".join(
-                        a.activity + ("" if a.ready else " (missing " + "; ".join(a.missing) + ")")
-                        for a in acts_
-                    )
-                    or "no registered activity"
-                )
-                lines.append(f"  open {cond}: {ready}")
+                reason = r.reasons.get(cond)
+                lines.append(f"  open {cond}" + (f": {reason}" if reason else ""))
+                lines += _acts_lines(acts_)
+                any_ready = any_ready or any(a.ready for a in acts_)
             for cond in r.refuted:
                 lines.append(f"  refuted {cond}: revise by {', '.join(REVISIONS)}")
             if not r.open and not r.refuted:
@@ -514,7 +553,12 @@ def render_text(diagnosis: Diagnosis) -> str:
         lines.append(f"judge anew the norm of {step}, whose record is stabilized")
     if diagnosis.impeached:
         lines.append(f"impeached records: {', '.join(sorted(diagnosis.impeached))}")
-    return "\n".join(lines) + ("\n" if lines else "")
+    if any_ready:
+        lines.append(
+            "each ready act can be taken now; the choice among them is the researcher's, as"
+            " docs/procedures/inquiry/next-act.md states"
+        )
+    return "\n".join(lines) + "\n"
 
 
 def malformed_answerability(question: Mapping[str, Any], records: Records) -> list[Finding]:

@@ -163,14 +163,19 @@ gnomon status ../grokking
 
 ```text
 quest.grokking.explain-delay [selection]
-  open definiteness: explication, explicit-definition, operationalization (missing concept), concept-revision (missing concept), delimitation, formalization, phenomenon-specification
-  open candidates: abduction, induction, analogical-inference, causal-inference, decomposition-localization, model-analogy, de-idealization, idealization, abstraction, formalization, fitting, derivation, critique, admissibility-check, model-assembly (missing admitted-laws), result-retrieval
+  open definiteness
+    ready: explication, explicit-definition, delimitation, formalization, phenomenon-specification
+    waiting for an input: operationalization (concept), concept-revision (concept)
+  open candidates: 1 answer recorded, none yet passes the admissibility tests of an assessment
+    ready: abduction, induction, analogical-inference, causal-inference, decomposition-localization, model-analogy, de-idealization, idealization, abstraction, formalization, fitting, derivation, critique, admissibility-check, result-retrieval
+    waiting for an input: model-assembly (admitted-laws)
 judge anew the norm of itin.grokking.explain-delay.check, whose record is stabilized
 judge anew the norm of itin.grokking.explain-delay.test, whose record is stabilized
 impeached records: bg.delayed-generalization-networks.training-specification
+each ready act can be taken now; the choice among them is the researcher's, as docs/procedures/inquiry/next-act.md states
 ```
 
-The diagnosis follows the route of selection: candidates are proposed, and an obtained value selects one of them, as the [two routes to an answer](../epistemology/objects/question/conditions-of-answerability.md#^routes) define it. Each open condition lists the activities that act on it, and an activity marked as missing an input is not yet ready. The background record is impeached, since the step producing it failed. Therefore, the activity `model-assembly` lacks its admitted laws: the only record holding them is impeached. The two lines on norms to judge anew belong to stage 5.
+The diagnosis follows the route of selection: candidates are proposed, and an obtained value selects one of them, as the [two routes to an answer](../epistemology/objects/question/conditions-of-answerability.md#^routes) define it. Each open condition can be addressed now, since its dependencies are established. Its activities are split into the ready ones and those waiting for an input, named in parentheses. The condition of candidates stays open until an assessment passes the admissibility tests of an answer. The background record is impeached, since the step producing it failed. Therefore, the activity `model-assembly` waits for its admitted laws: the only record holding them is impeached. The two lines on norms to judge anew belong to stage 5.
 
 ## Stage 5: propose, derive and assess a candidate answer
 
