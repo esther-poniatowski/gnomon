@@ -219,11 +219,11 @@ gnomon check ../grokking
 ```
 
 ```text
-answer.yml: ans.grokking.slow-structured-representation: vocabulary/unresolved: aim_block.explanation.factors[].holds -> eta_rp
+answer.yml: ans.grokking.slow-structured-representation: vocabulary/unresolved: aim_block.explanation.factors[].holds -> eta_rp; did you mean eta_rep?
 13 records checked in 1 folders, 1 findings, 0 warnings, 0 templates not yet filled
 ```
 
-The line names the file, the record and the rule, then the path of the expression and the identifier that resolves to no declaration. The command exits with code 1. Restoring the symbol `eta_rep` returns the check to no finding.
+The line names the file, the record and the rule, then the path of the expression, the identifier that resolves to no declaration, and the closest declared symbol. The command exits with code 1. Restoring the symbol `eta_rep` returns the check to no finding.
 
 The command `gnomon views` writes the state of the inquiry as YAML views that a renderer displays:
 

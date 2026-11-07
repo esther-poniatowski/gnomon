@@ -120,9 +120,9 @@ def test_a_closed_field_lies_at_its_full_path() -> None:
     }
     found = inadmissible_values(record, admitted)
     assert [f.text for f in found] == [
-        "status: wrong is not admitted",
-        "laws.inner.role: bad is not admitted",
-        "laws.inner.role: worse is not admitted",
+        "status: wrong is not admitted; the admitted values are draft",
+        "laws.inner.role: bad is not admitted; the admitted values are evolution",
+        "laws.inner.role: worse is not admitted; the admitted values are evolution",
     ]
     assert places(found) == [
         ("/status", ""),

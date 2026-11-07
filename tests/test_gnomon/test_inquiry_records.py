@@ -140,8 +140,10 @@ def test_an_answer_status_outside_the_attitudes_is_reported() -> None:
         "grounds": [{"role": "idealization", "removable": "partly"}],
     }
     assert texts(inadmissible_values(record, admitted_values("answer"))) == [
-        "status: informally-backed is not admitted",
-        "grounds.removable: partly is not admitted",
+        "status: informally-backed is not admitted; the admitted values are accepted,"
+        " entertained, hypothesized, retracted",
+        "grounds.removable: partly is not admitted; the admitted values are controlled,"
+        " ineliminable, unknown",
     ]
 
 

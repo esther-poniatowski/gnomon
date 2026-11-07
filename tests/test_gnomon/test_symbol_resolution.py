@@ -118,7 +118,7 @@ def test_a_reference_to_a_missing_record_or_unit_is_reported() -> None:
         "grounds": [{"record": "mod.a.m.drift"}],
     }
     assert texts(dangling_references(record, records)) == [
-        "route.runs_on.1: no record carries the identifier mod.a.x",
+        "route.runs_on.1: no record carries the identifier mod.a.x; did you mean mod.a.m?",
         "grounds.0.record: mod.a.m declares no unit drift",
     ]
 
@@ -800,10 +800,14 @@ def test_a_value_outside_its_vocabulary_is_reported() -> None:
         "laws": [{"role": "no-such-role"}, {"role": "state-constraint"}],
     }
     assert texts(inadmissible_values(record, admitted)) == [
-        "laws.role: no-such-role is not admitted"
+        "laws.role: no-such-role is not admitted; the admitted values are admissibility,"
+        " distribution, evolution, input-output, measurement, state-constraint"
     ]
     record["laws"][0]["role"] = "open"  # no longer a sentinel: an ordinary value, and not this one
-    assert texts(inadmissible_values(record, admitted)) == ["laws.role: open is not admitted"]
+    assert texts(inadmissible_values(record, admitted)) == [
+        "laws.role: open is not admitted; the admitted values are admissibility, distribution,"
+        " evolution, input-output, measurement, state-constraint"
+    ]
     record["laws"][0]["role"] = None  # an empty field holds no value, so no vocabulary bears on it
     assert inadmissible_values(record, admitted) == []
 
@@ -820,8 +824,8 @@ def test_a_record_field_is_read_apart_from_a_field_of_the_same_name() -> None:
     }
     record = {"status": "no-such-state", "terms": [{"status": "no-such-status"}]}
     assert texts(inadmissible_values(record, admitted)) == [
-        "status: no-such-state is not admitted",
-        "terms.status: no-such-status is not admitted",
+        "status: no-such-state is not admitted; the admitted values are draft",
+        "terms.status: no-such-status is not admitted; the admitted values are load-bearing",
     ]
 
 
@@ -843,7 +847,8 @@ def test_two_fields_of_one_block_that_share_a_name_take_the_vocabulary_of_their_
         },
     }
     assert texts(inadmissible_values(record, admitted)) == [
-        "aim_block.explanation.factors.factor: no-such-kind is not admitted",
+        "aim_block.explanation.factors.factor: no-such-kind is not admitted; the admitted values"
+        " are condition, law-property, organization, structural-property",
     ]
 
 
@@ -948,6 +953,7 @@ def test_prose_left_in_a_value_set_is_reported() -> None:
     found = unresolved(record, CANONICAL)
     assert texts(found) == [
         "parameters.values: admissible body-force families is no expression of the grammar"
+        ", which docs/specification/expressions.md states"
     ]
     assert [f.rule.id for f in found] == ["vocabulary/unparsed-expression"]
 
@@ -960,6 +966,7 @@ def test_prose_in_a_nested_feature_value_set_is_reported() -> None:
     }
     assert texts(unresolved(record, CANONICAL)) == [
         "manifestations.features.values: prose left here is no expression of the grammar"
+        ", which docs/specification/expressions.md states"
     ]
 
 
@@ -983,7 +990,8 @@ def test_an_operator_the_record_does_not_declare_is_reported() -> None:
     }
     assert texts(unresolved(record, CANONICAL)) == [
         "observables.expression -> J",
-        "observables.expression -> far_field",
+        "observables.expression -> far_field; an operator is declared in the operator record of"
+        " the problem",
     ]
     record["operators"] = [{"symbol": "far_field", "name": "the far-field limit of a profile"}]
     assert texts(unresolved(record, CANONICAL)) == ["observables.expression -> J"]

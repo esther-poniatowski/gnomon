@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from typing import Any, Mapping
 
 from .. import findings as rules
-from ..findings import Finding, finding
+from ..findings import Finding, close_match_hint, finding
 from ..identifiers import RECORD_SEGMENTS, split_reference
 from .layout import DECLARING, entries
 
@@ -159,7 +159,7 @@ def dangling_references(
     >>> records = {"mod.a.m": {"type": "model", "laws": [{"symbol": "onset"}]}}
     >>> [f.text for f in dangling_references({"record": "mod.a.m.onset", "other": "mod.a.x"},
     ...                                      records)]
-    ['other: no record carries the identifier mod.a.x']
+    ['other: no record carries the identifier mod.a.x; did you mean mod.a.m?']
     """
     found = []
     for path, text in references(record):
@@ -173,7 +173,8 @@ def dangling_references(
                 found.append(
                     finding(
                         rules.VOCABULARY_UNKNOWN_RECORD,
-                        f"{where}: no record carries the identifier {text}",
+                        f"{where}: no record carries the identifier {text}"
+                        f"{close_match_hint(text, records)}",
                         *path,
                         value=text,
                     )
@@ -187,7 +188,8 @@ def dangling_references(
             found.append(
                 finding(
                     rules.VOCABULARY_UNKNOWN_RECORD,
-                    f"{where}: no record carries the identifier {owner}",
+                    f"{where}: no record carries the identifier {owner}"
+                    f"{close_match_hint(owner, records)}",
                     *path,
                     value=text,
                 )

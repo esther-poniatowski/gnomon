@@ -19,6 +19,7 @@ gnomon.sarif : the writer of a findings log.
 
 from __future__ import annotations
 
+import difflib
 import re
 from dataclasses import dataclass
 from typing import Any, Iterable, Iterator, Mapping
@@ -827,6 +828,20 @@ def member(name: str | None, entry: Entry) -> Key | int:
         if isinstance(value, str) and value.strip():
             return Key(value)
     return entry.index
+
+
+#: The similarity above which a known name is suggested for a name that resolves to nothing.
+CLOSE_MATCH = 0.75
+
+
+def close_match_hint(name: str, candidates: Iterable[str]) -> str:
+    """Return a hint naming the known name closest to one that resolves to nothing, or nothing.
+
+    >>> close_match_hint("eta_rp", {"eta_rep", "lambda3"}), close_match_hint("eta_zzz", {"eta_rep"})
+    ('; did you mean eta_rep?', '')
+    """
+    close = difflib.get_close_matches(name, sorted(candidates), n=1, cutoff=CLOSE_MATCH)
+    return f"; did you mean {close[0]}?" if close else ""
 
 
 def finding(

@@ -164,9 +164,9 @@ def render_tree(roots: Iterable[Node]) -> str:
 # --- Views as generated records ------------------------------------------------------------------
 #
 # Each view below is a generated record: a mapping in a stable order, which `gnomon views` writes
-# as YAML, and which the schema of the view, in `data/schemas/views/`, declares for a renderer such as
-# Ekphrasis. Every cell of a table is a scalar, so that a renderer displays it as a table row; a
-# tree or a graph is stated by a table of nodes and a table of edges.
+# as YAML, and which the schema of the view, in `data/schemas/views/`, declares for a renderer
+# such as Ekphrasis. Every cell of a table is a scalar, so that a renderer displays it as a table
+# row; a tree or a graph is stated by a table of nodes and a table of edges.
 
 #: The maturity that a record status states, for the records whose status is a maturity.
 MATURITIES = ("open", "provisional", "stabilized")

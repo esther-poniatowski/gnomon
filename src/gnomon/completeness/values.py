@@ -75,7 +75,8 @@ def inadmissible_values(
                 found.append(
                     finding(
                         rules.COMPLETENESS_INADMISSIBLE_VALUE,
-                        f"{label}: {item} is not admitted",
+                        f"{label}: {item} is not admitted; the admitted values are"
+                        f" {', '.join(sorted(vocabulary))}",
                         *place,
                     )
                 )

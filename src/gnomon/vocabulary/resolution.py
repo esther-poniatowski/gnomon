@@ -14,7 +14,8 @@ from typing import Any, Iterable, Mapping
 
 from .. import findings as rules
 from ..expressions import Tree, children, parse_expression
-from ..findings import Entry, Finding, finding
+from ..expressions import calls as tree_calls
+from ..findings import Entry, Finding, close_match_hint, finding
 from ..identifiers import split_reference
 from .declarations import declarations
 from .layout import (
@@ -62,17 +63,36 @@ def retired_in_use(record: Mapping[str, Any]) -> list[Finding]:
     )
 
 
+#: The note that states the grammar of an expression, which a message about one points to.
+GRAMMAR_NOTE = "docs/specification/expressions.md"
+
+
+def _hint(name: str, candidates: Iterable[str], called: bool) -> str:
+    """Return the hint of an unresolved name: the closest declared name, or, for a name called as
+    an operator, where an operator is declared."""
+    found = close_match_hint(name, candidates)
+    if found or not called:
+        return found
+    return "; an operator is declared in the operator record of the problem"
+
+
 def _unresolved_references(record: Mapping[str, Any], known: set[str]) -> list[Finding]:
     """Return each reference of a record, in a field or at a path, that names no known symbol."""
     problems = [
-        finding(rules.VOCABULARY_UNRESOLVED, f"{where} -> {name}", *at_item(place, index))
+        finding(
+            rules.VOCABULARY_UNRESOLVED,
+            f"{where} -> {name}{close_match_hint(name, known)}",
+            *at_item(place, index),
+        )
         for where, place, value in cited(record)
         for index, name in items_of(value)
         if isinstance(name, str) and split_reference(name) is None and name not in known
     ]
     for path in (*PATH_REFERENCE, *TYPE_PATH_REFERENCE.get(str(record.get("type", "")), ())):
         problems += [
-            finding(rules.VOCABULARY_UNRESOLVED, f"{path} -> {name}", *at)
+            finding(
+                rules.VOCABULARY_UNRESOLVED, f"{path} -> {name}{close_match_hint(name, known)}", *at
+            )
             for at, name in reach(record, path)
             if name.strip() and split_reference(name) is None and name not in known
         ]
@@ -132,7 +152,8 @@ def _unresolved_identifiers(
             problems.append(
                 finding(
                     rules.VOCABULARY_UNPARSED_EXPRESSION,
-                    f"{where}: {text.strip()} is no expression of the grammar",
+                    f"{where}: {text.strip()} is no expression of the grammar, which"
+                    f" {GRAMMAR_NOTE} states",
                     *place,
                 )
             )
@@ -141,8 +162,14 @@ def _unresolved_identifiers(
         reachable = declared
         if where.startswith("task.required_accuracy.outputs_to_match[].tolerance"):
             reachable |= TOLERANCE_NAMES
+        called = {name for name, _ in tree_calls(tree)}
         problems += [
-            finding(rules.VOCABULARY_UNRESOLVED, f"{where} -> {name}", *place, value=name)
+            finding(
+                rules.VOCABULARY_UNRESOLVED,
+                f"{where} -> {name}{_hint(name, declared, name in called)}",
+                *place,
+                value=name,
+            )
             for name in sorted(set(unresolved_names(tree, reachable, declared)))
         ]
     return problems
