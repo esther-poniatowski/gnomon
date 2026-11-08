@@ -5,12 +5,14 @@ it weighs.
 
 from __future__ import annotations
 
+import re
 from typing import Any, Iterable, Mapping
 
 from .. import findings as rules
 from ..expressions import parse_expression
 from ..findings import Entry, Finding, finding
 from ..identifiers import split_reference
+from ..vocabulary.declarations import declarations
 from .paths import at, is_empty
 
 #: The accuracy standards that admit no stated tolerance: two state none, and `order-of-magnitude`
@@ -302,6 +304,72 @@ def contradictory_accuracy(question: Mapping[str, Any]) -> list[Finding]:
         for key in ("outputs_to_match", "structures_to_match")
         if accuracy.get(key)
     ]
+
+
+#: An identifier inside a factor: a bare symbol, or a dotted reference to a record or its unit.
+FACTOR_TOKEN = re.compile(r"[A-Za-z_][A-Za-z_0-9]*(?:\.[A-Za-z_][A-Za-z_0-9-]*)*")
+
+
+def _factor_tokens(factor: Mapping[str, Any]) -> set[str]:
+    """Return the identifiers that the content of an explanans factor names."""
+    texts = [factor.get("holds")]
+    for key in ("bears_on", "appeals_to", "through"):
+        value = factor.get(key)
+        texts += value if isinstance(value, list) else [value]
+    return {
+        token for text in texts if isinstance(text, str) for token in FACTOR_TOKEN.findall(text)
+    }
+
+
+def unlinked_explanans(
+    question: Mapping[str, Any],
+    answer: Mapping[str, Any],
+    records: Mapping[str, Mapping[str, Any]],
+) -> list[Finding]:
+    """Return each link ``explanans-from`` of the answered question that the answer leaves unmet.
+
+    The link bounds the admissible answers: each answer states an explanans factor over the
+    phenomenon that the link shares with the linked question, so that the factor names a symbol
+    declared by that phenomenon or a reference into its record. Each finding concerns the answer.
+
+    >>> question = {"links": [{"question": "quest.a.geometry", "relation": "explanans-from",
+    ...                        "via": "phen.a.geometry"}]}
+    >>> records = {"phen.a.geometry": {"type": "phenomenon", "observables": [{"symbol": "D"}]}}
+    >>> factor = {"id": "dim", "holds": "D > 3"}
+    >>> unlinked_explanans(question, {"aim_block": {"explanation": {"factors": [factor]}}}, records)
+    []
+    >>> [f.rule.id for f in unlinked_explanans(question, {}, records)]
+    ['completeness/unlinked-explanans']
+    """
+    factors = [
+        f for f in at(answer, "aim_block.explanation.factors") or [] if isinstance(f, Mapping)
+    ]
+    found = []
+    for link in question.get("links") or []:
+        if not isinstance(link, Mapping) or link.get("relation") != "explanans-from":
+            continue
+        via = str(link.get("via") or "")
+        phenomenon = records.get(via)
+        if not isinstance(phenomenon, Mapping):
+            continue
+        symbols = {d.symbol for d in declarations(phenomenon)}
+        if any(
+            token in symbols or token == via or token.startswith(f"{via}.")
+            for factor in factors
+            for token in _factor_tokens(factor)
+        ):
+            continue
+        found.append(
+            finding(
+                rules.COMPLETENESS_UNLINKED_EXPLANANS,
+                f"the question draws its explanans from {via} through {link.get('question')},"
+                " and no explanans factor of the answer names that phenomenon",
+                "aim_block",
+                "explanation",
+                "factors",
+            )
+        )
+    return found
 
 
 def unrealized_link(question: Mapping[str, Any], answer: Mapping[str, Any]) -> list[Finding]:

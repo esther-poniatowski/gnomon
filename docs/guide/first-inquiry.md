@@ -206,7 +206,7 @@ gnomon status pendulum
 quest.pendulum.explain-growth [selection]
   open definiteness
     ready: explication, explicit-definition
-    waiting for an input: operationalization (concept), concept-revision (concept; phenomenon), delimitation (question; identified-subject), formalization (model), phenomenon-specification (identified-subject; target-specification)
+    waiting for an input: operationalization (concept), concept-revision (concept; phenomenon), delimitation (question; identified-subject; admitted-laws), formalization (model), phenomenon-specification (identified-subject; target-specification)
   open candidates: no answer recorded yet
     waiting for an input: abduction (phenomenon), induction (data), analogical-inference (model; phenomenon), causal-inference (data; model), decomposition-localization (phenomenon; target-specification), model-analogy (model), de-idealization (model), idealization (model), abstraction (model), formalization (model), fitting (model; data), derivation (admitted-laws | model | target-claim), critique (model | target-claim), admissibility-check (model | target-claim; question), model-assembly (target-specification; admitted-laws), result-retrieval (question; target-claim)
 each ready act can be taken now; the choice among them is the researcher's, as docs/procedures/inquiry/next-act.md states
@@ -395,8 +395,8 @@ The command `gnomon status` now reads the answer among the records:
 ```text
 quest.pendulum.explain-growth [selection]
   open definiteness
-    ready: explication, explicit-definition, delimitation
-    waiting for an input: operationalization (concept), concept-revision (concept), formalization (model), phenomenon-specification (target-specification)
+    ready: explication, explicit-definition
+    waiting for an input: operationalization (concept), concept-revision (concept), delimitation (admitted-laws), formalization (model), phenomenon-specification (target-specification)
   open candidates: 1 answer recorded, none yet passes the admissibility tests of an assessment
     ready: abduction, derivation, critique, admissibility-check, result-retrieval
     waiting for an input: induction (data), analogical-inference (model), causal-inference (data; model), decomposition-localization (target-specification), model-analogy (model), de-idealization (model), idealization (model), abstraction (model), formalization (model), fitting (model; data), model-assembly (target-specification; admitted-laws)
@@ -406,7 +406,7 @@ each activity is defined in the note of its family, which docs/epistemology/proc
 
 Two conditions stay open:
 
-- definiteness, since the question asserts no state for it, and the definiteness of a term can be established only once its record reaches the commitment `specified`. The ready act `delimitation` writes the formal declarations of the target, as stage 4 does;
+- definiteness, since the question asserts no state for it, and the definiteness of a term can be established only once its record reaches the commitment `specified`. The act `delimitation` writes the formal declarations of the target, as stage 4 does, once a background record holds the admitted laws of the pendulum, an input of that act;
 - candidates, since one answer is recorded and no assessment of it passes the admissibility tests. The ready act `admissibility-check` produces those verdicts, in an assessment record added by `gnomon init pendulum --with assessment`.
 
 The choice between these acts is the researcher's, as the [choice of the next act](../procedures/inquiry/next-act.md) states. The command `gnomon tree` prints the chain of records built so far:

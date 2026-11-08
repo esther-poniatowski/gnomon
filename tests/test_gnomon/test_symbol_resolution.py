@@ -43,7 +43,6 @@ from gnomon.vocabulary import (
     corrupted_notation,
     declarations,
     doubly_defined,
-    interaction_graph,
     load_problem,
     local_operators,
     malformed_relations,
@@ -51,15 +50,16 @@ from gnomon.vocabulary import (
     mismatched_arity,
     misnamed_variant,
     misplaced_sharing,
-    misrouted_interactions,
+    misrouted_relations,
     mistyped_symbols,
     overreaching_declarations,
     overreaching_entries,
+    relation_graph,
     render_yaml,
     split_expressions,
     unborne_variants,
     unfixed_parameters,
-    unordered_interactions,
+    unordered_relations,
     unowned_quantities,
     unresolved,
     unselected_conditions,
@@ -233,7 +233,7 @@ def test_a_variant_named_in_prose_is_still_unborne() -> None:
 
 @pytest.mark.skipif(not CASES, reason="the expressivity fixtures are absent")
 @pytest.mark.parametrize("case", CASES or [("", {})], ids=IDS)
-def test_the_record_generates_a_directed_interaction_graph(
+def test_the_record_generates_a_directed_relation_graph(
     case: tuple[str, Mapping[str, Any]],
 ) -> None:
     """Every edge the record states resolves to declared nodes and declared carriers."""
@@ -252,7 +252,7 @@ def test_the_record_generates_a_directed_interaction_graph(
         for entry in source.get(block) or []
         if isinstance(entry, Mapping)
     }
-    for edge in interaction_graph(record, upstream):
+    for edge in relation_graph(record, upstream):
         assert edge["edge"] in relations, f"{name}: {edge['edge']} is no relation of the record"
         for endpoint in edge["sources"] + [edge["reach"]]:
             assert endpoint in kinds, f"{name}: {endpoint} is no constituent kind or index set"
@@ -284,22 +284,18 @@ def test_an_influence_without_an_ordered_product_of_declared_kinds_is_reported()
             {"symbol": "order", "among": ["a", "b"]},
         ],
     }
-    assert texts(unordered_interactions(record, PAIRED_TARGET)) == [
+    assert texts(unordered_relations(record, PAIRED_TARGET)) == [
         "organization.loose: the relation names no ordered product of declared kinds",
         "organization.stray: the relation names no ordered product of declared kinds",
     ]
     # the kinds stand in the target, so a relation read without it names no declared kind
     assert (
-        len(
-            unordered_interactions(
-                {"type": "background", "organization": record["organization"][:1]}
-            )
-        )
+        len(unordered_relations({"type": "background", "organization": record["organization"][:1]}))
         == 1
     )
 
 
-def test_an_interaction_whose_laws_name_no_quantity_of_both_endpoints_is_reported() -> None:
+def test_a_relation_whose_laws_name_no_quantity_of_both_endpoints_is_reported() -> None:
     """A law naming only a quantity of one member states a property of it, not an influence."""
 
     def background(expression: str) -> dict[str, Any]:
@@ -311,8 +307,8 @@ def test_an_interaction_whose_laws_name_no_quantity_of_both_endpoints_is_reporte
             ],
         }
 
-    assert misrouted_interactions(background("u = emit(z)"), PAIRED_TARGET) == []
-    assert texts(misrouted_interactions(background("z = emit(z)"), PAIRED_TARGET)) == [
+    assert misrouted_relations(background("u = emit(z)"), PAIRED_TARGET) == []
+    assert texts(misrouted_relations(background("z = emit(z)"), PAIRED_TARGET)) == [
         "organization.coupling: the laws stating it name no quantity indexed by every one of"
         " ['sub', 'sub']"
     ]

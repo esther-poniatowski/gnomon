@@ -433,7 +433,7 @@ vocabularies:
     - value: subquestion-of
       name: a part of an answer to the linked question answers this one
     - value: explanans-from
-      name: an explanans factor is the phenomenon of the linked question
+      name: each answer states an explanans factor over the phenomenon of the linked question
     - value: presupposes
       name: a true direct answer requires one to the linked question
     - value: enables

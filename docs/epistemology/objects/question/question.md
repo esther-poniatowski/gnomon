@@ -88,7 +88,7 @@ Two questions are **linked** when the answer to one bears on the other. A link n
 | Relation | This question … |
 | --- | --- |
 | `subquestion-of` | is answered by a part of an answer to the linked question; each of its answers, with the available premises, narrows the answers of the linked question, which is the second clause of erotetic implication [wisniewski2013] |
-| `explanans-from` | has an explanans factor that is the phenomenon of the linked question |
+| `explanans-from` | bounds its admissible answers: each answer states an explanans factor over the phenomenon of the linked question, the record shared through the link |
 | `presupposes` | has a true direct answer only if the linked question has a true direct answer |
 | `enables` | has an answer that establishes a condition of answerability of the linked question, without narrowing its answers |
 

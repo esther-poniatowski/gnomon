@@ -406,9 +406,9 @@ def _against_target(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         if r.get("type") == "background" and r.get("describes") == record.get("id")
     ]
     found = (
-        v.unordered_interactions(record, upstream)
+        v.unordered_relations(record, upstream)
         + v.overreaching_declarations(record, upstream)
-        + v.misrouted_interactions(record, upstream)
+        + v.misrouted_relations(record, upstream)
         + v.misnamed_variant(record, v.declared_variants(target))
         + v.mismatched_arity(record, ctx.arities)
         + v.misused_binders(record, ctx.operators, ctx.binders)
@@ -457,7 +457,8 @@ def _question(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 
 def _answer(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
-    """The checks of an answer: its operations, its block, its binding and its status pairs."""
+    """The checks of an answer: its operations, its block, its binding, its status pairs, and the
+    bounds that its question places on it."""
     by_id = ctx.workspace.by_id
     found = (
         c.unclassified_operations(record, by_id)
@@ -468,6 +469,11 @@ def _answer(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         + c.misdirected_interventions(record, by_id)
         + c.unstated_domain(record, by_id)
     )
+    question = ctx.record(record.get("answers"))
+    if question:
+        found += c.unrealized_link(question, record) + c.unlinked_explanans(
+            question, record, {**by_id, **ctx.problem.records}
+        )
     for block, paths in ctx.registries.blocks.items():
         if c.at(record, block) is not None:
             found += c.unmet_general(record, [f"{block}.{path}" for path in paths])

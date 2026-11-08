@@ -301,7 +301,7 @@ def cli_vocabulary(
     ),
 ) -> None:
     """Collect the symbols and operators of one problem into its vocabulary record, a YAML view
-    that a renderer displays through the schema ``gnomon:view.vocabulary@1``."""
+    that a renderer displays through the schema ``gnomon:view.vocabulary@2``."""
     source = _directory(directory)
     problem = load_problem(source)
     target = source / output

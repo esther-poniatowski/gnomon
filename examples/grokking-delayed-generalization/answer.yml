@@ -96,7 +96,7 @@ aim_block:
         pair: bind.grokking.effective-representation.decoder-limit
       - id: nonzero-mode
         name: "nonzero mode of representation learning"
-        factor: structural-property
+        factor: law-property
         holds: "card(pos(re(spectrum(Hrep)))) > 0"
         bears_on: [Hrep]
         through: [representation_flow, generalization_link]

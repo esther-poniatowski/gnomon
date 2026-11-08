@@ -13,10 +13,10 @@ from .declarations import declarations
 from .layout import entries, identifiers, indexed
 
 
-def interaction_graph(
+def relation_graph(
     record: Mapping[str, Any], upstream: Mapping[str, Any] | None = None
 ) -> list[dict[str, Any]]:
-    """Return the directed interaction graph the record states, one entry per relation.
+    """Return the directed relation graph the record states, one entry per relation.
 
     An edge is an entry of the organization: the ordered tuples the relation runs along, the reach
     last and every source before it, and the laws that state it. A tuple of three or more carries a
@@ -37,7 +37,7 @@ def interaction_graph(
     ...               "laws": [{"symbol": "transmit", "expression": "u = emit(z)"}],
     ...               "organization": [{"symbol": "coupling", "relates": "prod(sub, sub)",
     ...                                 "realized_by": ["transmit"]}]}
-    >>> interaction_graph(background, target)  # doctest: +NORMALIZE_WHITESPACE
+    >>> relation_graph(background, target)  # doctest: +NORMALIZE_WHITESPACE
     [{'edge': 'coupling', 'sources': ['sub'], 'reach': 'sub', 'through': ['u'],
       'tuples': 'prod(sub, sub)'}]
     """
@@ -87,7 +87,7 @@ def influence_places(influence: str) -> list[str]:
     )
 
 
-def unordered_interactions(
+def unordered_relations(
     record: Mapping[str, Any], upstream: Mapping[str, Any] | None = None
 ) -> list[Finding]:
     """Return every influence that names no ordered product of declared kinds.
@@ -110,7 +110,7 @@ def unordered_interactions(
         if not places or any(place not in kinds for place in places):
             found.append(
                 finding(
-                    rules.VOCABULARY_UNORDERED_INTERACTION,
+                    rules.VOCABULARY_UNORDERED_RELATION,
                     f"organization.{relation.get('symbol')}:"
                     " the relation names no ordered product of declared kinds",
                     "organization",
@@ -186,10 +186,10 @@ def joins(signature: list[str], endpoints: Sequence[Any]) -> bool:
     return True
 
 
-def misrouted_interactions(
+def misrouted_relations(
     record: Mapping[str, Any], upstream: Mapping[str, Any] | None = None
 ) -> list[Finding]:
-    """Return every interaction whose law names no quantity indexed by both its endpoints.
+    """Return every relation whose law names no quantity indexed by both its endpoints.
 
     An influence from one part to another is carried by something the ordered pair shares, so the
     law asserting it names a quantity taking both endpoints in its signature. A law naming only
@@ -198,7 +198,7 @@ def misrouted_interactions(
     # the graph holds one edge per entry of the organization, in the order of the entries
     return [
         finding(
-            rules.VOCABULARY_MISROUTED_INTERACTION,
+            rules.VOCABULARY_MISROUTED_RELATION,
             f"organization.{edge['edge']}: the laws stating it name no quantity indexed by"
             f" every one of {edge['sources'] + [edge['reach']]}",
             "organization",
@@ -206,7 +206,7 @@ def misrouted_interactions(
             "realized_by",
         )
         for (index, relation), edge in zip(
-            indexed(record, "organization"), interaction_graph(record, upstream), strict=True
+            indexed(record, "organization"), relation_graph(record, upstream), strict=True
         )
         if not edge["through"]
     ]

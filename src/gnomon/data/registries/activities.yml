@@ -245,6 +245,7 @@ activities:
     inputs:
       - question
       - identified-subject
+      - {type: admitted-laws, role: background}
     output: target-specification
     norm: norm.delimitation
     mode: non-inferential

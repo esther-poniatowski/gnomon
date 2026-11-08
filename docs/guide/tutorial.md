@@ -57,7 +57,7 @@ The [itinerary record](../../examples/grokking-delayed-generalization/itinerary.
 | 1. Problem | `problem.yml` | `pose` | `gnomon init` |
 | 2. Question schema | `question.yml` | `formulate` | `gnomon itinerary` |
 | 3. Identified subject | `phenomenon.yml` | `identify` | `gnomon validate` |
-| 4. Background and specified subject | `target-system.yml`, `background.yml`, `operators.yml` | `delimit`, `admit` | `gnomon vocabulary`, `gnomon status` |
+| 4. Background and specified subject | `target-system.yml`, `background.yml`, `operators.yml` | `admit`, `delimit` | `gnomon vocabulary`, `gnomon status` |
 | 5. Candidate answer | `answer.yml`, `model.yml`, `derivation.yml`, `design.yml`, `binding.yml`, `assessment.yml` | `propose`, `derive`, `check`, `test` | `gnomon check`, `gnomon views` |
 
 Once presented, a command also serves every later stage; in particular, the command `gnomon check` runs after each stage.
@@ -140,8 +140,8 @@ The target system and the background supply the formal declarations used by a ca
 
 Two steps record these acts:
 
-- the step `delimit`, an instance of the activity `delimitation`, outputs the target specification held by the target system; its verdict is `pending`;
-- the step `admit`, an instance of the activity `background-appraisal`, outputs the admitted laws held by the background record. Its norm failed on 2026-10-27, since no admitted law states its origin or the range over which it is established.
+- the step `admit`, an instance of the activity `background-appraisal`, outputs the admitted laws held by the background record. Its norm failed on 2026-10-27, since no admitted law states its origin or the range over which it is established;
+- the step `delimit`, an instance of the activity `delimitation`, takes those admitted laws, since the laws of evolution decide which declared quantities are parameters, and outputs the target specification held by the target system. Its verdict is `pending`.
 
 The command `gnomon vocabulary` lists the symbols already declared in the problem, so that a new quantity takes a free symbol:
 
@@ -164,19 +164,19 @@ gnomon status ../grokking
 ```text
 quest.grokking.explain-delay [selection]
   open definiteness
-    ready: explication, explicit-definition, delimitation, formalization, phenomenon-specification
-    waiting for an input: operationalization (concept), concept-revision (concept)
+    ready: explication, explicit-definition, formalization
+    waiting for an input: operationalization (concept), concept-revision (concept), delimitation (admitted-laws), phenomenon-specification (target-specification)
   open candidates: 1 answer recorded, none yet passes the admissibility tests of an assessment
-    ready: abduction, induction, analogical-inference, causal-inference, decomposition-localization, model-analogy, de-idealization, idealization, abstraction, formalization, fitting, derivation, critique, admissibility-check, result-retrieval
-    waiting for an input: model-assembly (admitted-laws)
+    ready: abduction, induction, analogical-inference, causal-inference, model-analogy, de-idealization, idealization, abstraction, formalization, fitting, derivation, critique, admissibility-check, result-retrieval
+    waiting for an input: decomposition-localization (target-specification), model-assembly (target-specification; admitted-laws)
 judge anew the norm of itin.grokking.explain-delay.check, whose record is stabilized
 judge anew the norm of itin.grokking.explain-delay.test, whose record is stabilized
-impeached records: bg.delayed-generalization-networks.training-specification
+impeached records: bg.delayed-generalization-networks.training-specification, system.delayed-generalization-networks
 each ready act can be taken now; the choice among them is the researcher's, as docs/procedures/inquiry/next-act.md states
 each activity is defined in the note of its family, which docs/epistemology/processes/activities/_index.md lists; a name in parentheses is the type of the missing input, which docs/epistemology/processes/activities/epistemic-activities.md defines
 ```
 
-The diagnosis follows the route of selection: candidates are proposed, and an obtained value selects one of them, as the [two routes to an answer](../epistemology/objects/question/conditions-of-answerability.md#^routes) define it. Each open condition can be addressed now, since its dependencies are established. Its activities are split into the ready ones and those waiting for an input, named in parentheses. The condition of candidates stays open until an assessment passes the admissibility tests of an answer. The background record is impeached, since the step producing it failed. Therefore, the activity `model-assembly` waits for its admitted laws: the only record holding them is impeached. The two lines on norms to judge anew belong to stage 5.
+The diagnosis follows the route of selection: candidates are proposed, and an obtained value selects one of them, as the [two routes to an answer](../epistemology/objects/question/conditions-of-answerability.md#^routes) define it. Each open condition can be addressed now, since its dependencies are established. Its activities are split into the ready ones and those waiting for an input, named in parentheses. The condition of candidates stays open until an assessment passes the admissibility tests of an answer. The background record is impeached, since the step producing it failed, and so is the target system, since the step `delimit` takes the admitted laws of that record. Therefore, the activities `delimitation` and `model-assembly` wait for admitted laws, and `phenomenon-specification` and `decomposition-localization` wait for a target specification: the only records holding them are impeached. The two lines on norms to judge anew belong to stage 5.
 
 ## Stage 5: propose, derive and assess a candidate answer
 
@@ -243,7 +243,7 @@ gnomon views ../grokking --output ../grokking-views
 ../grokking-views/expressions.yml: written
 ```
 
-Two of the eight views serve this stage. The view `itinerary-progress.yml` states the stage of the itinerary, `in-progress` here, and lists the steps with a state each: `impeached` when a failed norm lies upstream of the output of the step, `conditional` when a pending norm does, and `sound` otherwise. The step `admit` is impeached, and the steps `delimit`, `derive`, `check` and `test` are conditional. The view `exposure.yml` lists the revisable units supporting each answer. The candidate answer is exposed through eleven units. Seven belong to the model: three operations, two laws, and the existence of `lambda3` and of `Rstar`, two quantities fixed by a condition. Four belong to the derivation: two consequences, one move and one posit.
+Two of the eight views serve this stage. The view `itinerary-progress.yml` states the stage of the itinerary, `in-progress` here, and lists the steps with a state each: `impeached` when a failed norm lies upstream of the output of the step, `conditional` when a pending norm does, and `sound` otherwise. The steps `admit` and `delimit` are impeached, since `delimit` takes the laws that `admit` failed to warrant, and the steps `derive`, `check` and `test` are conditional. The view `exposure.yml` lists the revisable units supporting each answer. The candidate answer is exposed through eleven units. Seven belong to the model: three operations, two laws, and the existence of `lambda3` and of `Rstar`, two quantities fixed by a condition. Four belong to the derivation: two consequences, one move and one posit.
 
 ## What the itinerary leaves out
 

@@ -34,7 +34,7 @@ coordinates
     Check the coordinates of a derivative against the argument that it differentiates.
 variants
     Check the entries that reach beyond the variants that bear them.
-interactions
+relations
     Read the organization of a record as a directed graph, and check its relations.
 table
     Build and render the symbol table of a problem, and find the declarations unused.
@@ -55,14 +55,6 @@ from .declarations import (
     references,
     repeated_symbols,
     units,
-)
-from .interactions import (
-    influence_places,
-    interaction_graph,
-    joins,
-    malformed_relations,
-    misrouted_interactions,
-    unordered_interactions,
 )
 from .layout import (
     DECLARING,
@@ -102,6 +94,14 @@ from .operators import (
     mismatched_arity,
     misused_binders,
     operator_arity,
+)
+from .relations import (
+    influence_places,
+    joins,
+    malformed_relations,
+    misrouted_relations,
+    relation_graph,
+    unordered_relations,
 )
 from .resolution import (
     misattributed_appeals,
@@ -190,7 +190,6 @@ __all__ = [
     "identifiers",
     "indexed",
     "influence_places",
-    "interaction_graph",
     "items_of",
     "joins",
     "load_problem",
@@ -202,7 +201,7 @@ __all__ = [
     "mismatched_arity",
     "misnamed_variant",
     "misplaced_sharing",
-    "misrouted_interactions",
+    "misrouted_relations",
     "mistyped_symbols",
     "misused_binders",
     "operator_arity",
@@ -210,6 +209,7 @@ __all__ = [
     "overreaching_entries",
     "reach",
     "references",
+    "relation_graph",
     "render_yaml",
     "repeated_symbols",
     "retired_in_use",
@@ -217,7 +217,7 @@ __all__ = [
     "unborne_variants",
     "unfixed_parameters",
     "units",
-    "unordered_interactions",
+    "unordered_relations",
     "unowned_quantities",
     "unresolved",
     "unresolved_names",

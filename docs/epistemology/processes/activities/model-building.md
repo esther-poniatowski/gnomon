@@ -23,7 +23,7 @@ The activities of this family output a target specification, admitted laws, a [m
 
 | Activity | Inputs | Output | Mode | Context |
 | --- | --- | --- | --- | --- |
-| `delimitation` | `question`, `identified-subject` | `target-specification` | non-inferential | discovery |
+| `delimitation` | `question`, `identified-subject`, `admitted-laws` (the background) | `target-specification` | non-inferential | discovery |
 | `background-appraisal` | `source` | `admitted-laws` | inductive | justification |
 | `transfer` | `admitted-laws` (other class), `target-specification` | `admitted-laws` | analogical | justification |
 | `abstraction` | `model` | `model` | non-inferential | discovery |
@@ -41,7 +41,7 @@ The activities of this family output a target specification, admitted laws, a [m
 
 | Activity | Operation | The norm passes when |
 | --- | --- | --- |
-| `delimitation` | declare the [constituents, environment and structure](../../vocabulary/systems/system-constituent-environment.md) of the system that a question concerns | every declared constituent and every shared variable occurs in at least one admissible answer type of the question, that is, a type of the possible answers fixed by its typed slots [hamblin1958] |
+| `delimitation` | declare the [constituents, environment and structure](../../vocabulary/systems/system-constituent-environment.md) of the system that a question concerns | every declared constituent and every shared variable occurs in at least one admissible answer type of the question, that is, a type of the possible answers fixed by its typed slots [hamblin1958]; and each declared quantity takes the role that the [declaration rule](../../../specification/target-system.md#^declaration-rule) reads from the laws of evolution of the input background, a parameter when no such law changes it, a variable otherwise |
 | `background-appraisal` | admit laws about the target from sources | each admitted law carries a warrant, an origin and a range |
 | `transfer` | carry laws warranted for another class of systems over to the target | structural similarity licenses the extrapolation: the mechanism that supports each law in the source class operates in the target, undisrupted at the stages where the two classes may differ [steel2008] |
 | `abstraction` | omit factors of the target from the model | the omitted factors are named, and no claim of the answer bears on them [jones2005] [cartwright1989] |
@@ -59,7 +59,7 @@ The activities of this family output a target specification, admitted laws, a [m
 
 - **Assembly and decomposition-localization build a model from different starting points.** Decomposition-localization starts from a phenomenon and divides its behavior among parts [bechtel1993]. Assembly starts from the declared target and its admitted laws, as a model is built from the general principles of a theory [giere1988], so that a phenomenon can later be derived from the model rather than presupposed by it. ^model-assembly
 
-- **The norm of delimitation ranges over answer types.** Candidate answers are produced after delimitation, so a norm stated over them cannot be checked when the target is specified. The answer types of a question exist as soon as its slots are typed.
+- **The norm of delimitation ranges over answer types and admitted laws.** Candidate answers are produced after delimitation, so a norm stated over them cannot be checked when the target is specified. The answer types of a question exist as soon as its slots are typed. The role of a declared quantity, parameter or variable, follows from the laws of evolution of the background, so delimitation takes the admitted laws as an input. Both conditions of its norm are then decided over records that exist when the target is specified.
 - **Background appraisal and transfer share their output and differ in their norm.** Appraisal admits laws warranted for the class of the target, each with its warrant. Transfer admits laws warranted for another class, and its norm requires evidence that the supporting mechanism is shared [steel2008].
 - **Abstraction and idealization differ by the truth of their products.** The [truth test](../../vocabulary/representations/idealization-and-abstraction.md#^truth-test) decides between them.
 - **De-idealization outputs a model, so it belongs to this family.** A revision changes the attitude toward existing records, whereas de-idealization builds a new model. Removing an idealization often reformulates the model, instead of simply reversing the earlier distortion [knuuttila2019].

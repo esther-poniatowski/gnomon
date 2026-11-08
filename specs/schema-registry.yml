@@ -24,7 +24,7 @@ schemas:
   "gnomon:view.problem-state@1": "src/gnomon/data/schemas/views/problem-state.schema.yml"
   "gnomon:view.question-statements@1": "src/gnomon/data/schemas/views/question-statements.schema.yml"
   "gnomon:view.question-tree@1": "src/gnomon/data/schemas/views/question-tree.schema.yml"
-  "gnomon:view.vocabulary@1": "src/gnomon/data/schemas/views/vocabulary.schema.yml"
+  "gnomon:view.vocabulary@2": "src/gnomon/data/schemas/views/vocabulary.schema.yml"
 exports:
   - "gnomon:answer@1"
   - "gnomon:assessment@1"
@@ -49,7 +49,7 @@ exports:
   - "gnomon:view.problem-state@1"
   - "gnomon:view.question-statements@1"
   - "gnomon:view.question-tree@1"
-  - "gnomon:view.vocabulary@1"
+  - "gnomon:view.vocabulary@2"
 resources:
   "https://github.com/esther-poniatowski/gnomon/schemas/answer.base.schema.yml": "src/gnomon/data/schemas/answer.base.schema.yml"
   "https://github.com/esther-poniatowski/gnomon/schemas/answer.contract.schema.yml": "src/gnomon/data/schemas/answer.contract.schema.yml"

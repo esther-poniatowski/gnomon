@@ -661,7 +661,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `conditions_and_byproducts.precipitating[].variant` | Variant | symbol of the target variant carrying the entry; omit when every member of the class carries it | [Conditions and byproducts: precipitating conditions](../specification/phenomenon.md) |
 | `course` | Course | the ordered index along which the behavior unfolds: an index, a grain and the parameters of the target that vary along the course | [Course](../specification/phenomenon.md) |
 | `course.grain` | grain | an expression giving the shortest segment on which a predicate of the behavior is evaluated | [Course: grain](../specification/phenomenon.md) |
-| `course.index` | index | the symbol of an index set of the target or of this record: time, a training step, or an input parameter | [Course: index](../specification/phenomenon.md) |
+| `course.index` | index | the symbol of an index set of the target or of this record that orders states in time: time or a training step | [Course: index](../specification/phenomenon.md) |
 | `course.varies` | varies | the symbols of those parameters | [Course: varies](../specification/phenomenon.md) |
 | `data` | Data | per entry, "[pointer to a data set, a recording or a derivation]" that establishes the phenomenon, with its version | [Data](../specification/phenomenon.md) |
 | `data[].pointer` | Pointer | a pointer to a data set, a recording or a derivation that establishes the phenomenon | [Data](../specification/phenomenon.md) |

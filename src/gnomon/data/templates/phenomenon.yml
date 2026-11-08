@@ -21,7 +21,7 @@ identification:                  # fixes the referent before any observable is d
 category:                        # particular-occurrence (one token of a state, a process or an event) | regularity (an invariant across instances, required to be stable) | capacity (a disposition to yield outputs of a class given inputs of a class) | structural-property (a property of a structure, holding at each point of the course)
 
 course:                          # the ordered index along which the behavior unfolds
-  index: SYMBOL                  # an index set of the target or of this record: time, a training step or an input parameter
+  index: SYMBOL                  # an index set of the target or of this record that orders states in time: time or a training step
   grain: "EXPRESSION OVER DECLARED SYMBOLS"   # shortest length of a segment of the course; a predicate of the behavior is evaluated only on segments at least this long
   varies: [SYMBOL]               # parameters of the target that change along this course; empty when none does
 

@@ -25,9 +25,10 @@ VOCABULARY_REGISTRY = DATA / "vocabularies.yml"
 
 
 def is_empty(value: Any) -> bool:
-    """Return whether ``value`` leaves its field unfilled: absent, null, or an empty string.
+    """Return whether ``value`` leaves its field empty: absent, null, or a string of blanks.
 
-    An empty list or mapping is a value: it states that the block holds no entry.
+    The empty-value convention of the record templates (``data/templates/_index.md``) owns this
+    rule, under which an empty list or mapping is a value.
 
     >>> [is_empty(v) for v in (None, "", "  ", [], "open")]
     [True, True, True, False, False]
@@ -39,8 +40,8 @@ def is_unfilled(value: Any) -> bool:
     """Return whether a required specification is unfilled.
 
     A value is unfilled when it is empty, and a list or a mapping when every value that it holds is
-    unfilled, so that a required block whose fields are all empty fails its requirement as a missing
-    block does.
+    unfilled, as the empty-value convention of the record templates (``data/templates/_index.md``)
+    states.
 
     >>> [is_unfilled(v) for v in (None, [], {}, {"a": None, "b": [""]}, [{"a": ""}], {"a": "x"}, 0)]
     [True, True, True, True, True, False, False]

@@ -61,6 +61,8 @@ steps:
         ref: quest.grokking.explain-delay
       - type: identified-subject
         ref: itin.grokking.explain-delay.identify
+      - type: admitted-laws
+        ref: itin.grokking.explain-delay.admit
     output:
       type: target-specification
       ref: system.delayed-generalization-networks

@@ -1,7 +1,7 @@
 """
 The symbol table of a problem: the declarations collected from its records, those that no
 grammatical field reaches, and the vocabulary record of the problem, a YAML view bound to the schema
-``gnomon:view.vocabulary@1`` that a renderer displays as the other views.
+``gnomon:view.vocabulary@2`` that a renderer displays as the other views.
 """
 
 from __future__ import annotations
@@ -18,7 +18,6 @@ from ..identifiers import PLACEHOLDER_SEGMENT, split_reference
 from ..latex import declared_notations, symbol_form
 from ..leftovers import strip_leftovers
 from .declarations import Declaration, declarations
-from .interactions import interaction_graph
 from .layout import (
     GENERATED_KINDS,
     PATH_REFERENCE,
@@ -31,6 +30,7 @@ from .layout import (
     upstream_of,
 )
 from .operators import canonical_operators, local_operators
+from .relations import relation_graph
 
 
 @dataclass
@@ -47,8 +47,8 @@ class Problem:
         The operators the framework supplies.
     local : dict
         The operators the problem declares, each mapped to its name.
-    interactions : list of dict
-        The directed interaction graph its target system states, one entry per edge.
+    relations : list of dict
+        The directed relation graph its target system states, one entry per edge.
     notations : dict
         The LaTeX notation that each declared symbol states, empty when it states none.
     """
@@ -57,7 +57,7 @@ class Problem:
     declarations: list[Declaration] = field(default_factory=list)
     canonical: frozenset[str] = frozenset()
     local: dict[str, str] = field(default_factory=dict)
-    interactions: list[dict[str, Any]] = field(default_factory=list)
+    relations: list[dict[str, Any]] = field(default_factory=list)
     notations: dict[str, str] = field(default_factory=dict)
 
     @property
@@ -180,14 +180,14 @@ def load_problem(directory: Path, registry: Path | None = None) -> Problem:
     for record in records:
         problem.declarations.extend(declarations(record))
         problem.local.update(local_operators(record))
-        problem.interactions.extend(interaction_graph(record, upstream_of(record, by_id)))
+        problem.relations.extend(relation_graph(record, upstream_of(record, by_id)))
     return problem
 
 
 def as_data(problem: Problem) -> dict[str, Any]:
     """Return the vocabulary of a problem in the record form it is stored in."""
     return {
-        "_schema": "gnomon:view.vocabulary@1",
+        "_schema": "gnomon:view.vocabulary@2",
         "id": f"vocab.{problem.name}",
         "type": "vocabulary",
         "title": f"Vocabulary of {problem.name}",
@@ -211,7 +211,7 @@ def as_data(problem: Problem) -> dict[str, Any]:
             "canonical": sorted(problem.canonical),
             "declared": dict(sorted(problem.local.items())),
         },
-        "interactions": problem.interactions,
+        "relations": problem.relations,
     }
 
 

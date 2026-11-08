@@ -30,7 +30,7 @@ exports:
   - gnomon:view.problem-state@1
   - gnomon:view.question-statements@1
   - gnomon:view.question-tree@1
-  - gnomon:view.vocabulary@1
+  - gnomon:view.vocabulary@2
 
 dependencies: []
 projects: []

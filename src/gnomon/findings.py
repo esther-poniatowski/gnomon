@@ -419,6 +419,11 @@ COMPLETENESS_MISDIRECTED_RIVAL = _rule(
     "completeness/misdirected-rival",
     "The rival of a binding names neither another binding of the same target nor the complement.",
 )
+COMPLETENESS_UNLINKED_EXPLANANS = _rule(
+    "completeness/unlinked-explanans",
+    "An answer to a question that draws its explanans from a linked phenomenon states no factor"
+    " over that phenomenon.",
+)
 COMPLETENESS_EXCLUDED_EVENT = _rule(
     "completeness/excluded-event",
     "A restriction of the kind without-event names no excluded event, or a restriction of another"
@@ -642,8 +647,8 @@ VOCABULARY_MISNAMED_VARIANT = _rule(
     "vocabulary/misnamed-variant",
     "A variant mark names a variant that the target does not declare.",
 )
-VOCABULARY_UNORDERED_INTERACTION = _rule(
-    "vocabulary/unordered-interaction", "A relation names no ordered product of declared kinds."
+VOCABULARY_UNORDERED_RELATION = _rule(
+    "vocabulary/unordered-relation", "A relation names no ordered product of declared kinds."
 )
 VOCABULARY_RELATION_ENDS = _rule(
     "vocabulary/relation-ends",
@@ -655,8 +660,8 @@ VOCABULARY_SHORT_RELATION = _rule(
 VOCABULARY_UNKNOWN_RELATION_LAW = _rule(
     "vocabulary/unknown-relation-law", "A relation among laws names no law of the record."
 )
-VOCABULARY_MISROUTED_INTERACTION = _rule(
-    "vocabulary/misrouted-interaction",
+VOCABULARY_MISROUTED_RELATION = _rule(
+    "vocabulary/misrouted-relation",
     "The laws stating a relation name no quantity indexed by every one of its places.",
 )
 CHECK_FAILED = _rule(

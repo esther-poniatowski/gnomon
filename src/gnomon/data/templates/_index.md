@@ -54,11 +54,12 @@ A model is filled only when the route of an answer runs on a model other than th
 
 Each template is rendered by `gnomon schemas` from its base schema in the [record schemas](../schemas/_index.md) and from the vocabulary registry, so a field is changed in its base schema and an option in the registry, never in the template.
 
-Each template follows ten conventions of format:
+Each template follows eleven conventions of format:
 
 - each file is pure YAML, so that a slot carries its dependent fields as nested keys;
 - each closed field lists its options in lowercase, first in the comment of its line, written from the vocabulary registry;
 - a field stays empty while it is not filled, and the requirement registry decides whether an empty field is a gap or a product of the inquiry;
+- an absent key, a null value and a string of blanks leave a field empty, whereas an empty list or mapping is a value: it states that the block holds no entry. A required block is unfilled when every value held in it is empty, so an empty list fills no requirement. An optional field left empty states nothing, unless its specification row declares a default, such as the other values of the explanandum variable for an unstated foil set; ^empty-values
 - each field that holds prose starts as a placeholder consisting only of an UPPERCASE description of the expected content, and the text replacing it may contain formulas;
 - the guidance for filling a field stands in the comment of its line, as terse lowercase instructions that never restate the key: "optional", "omit when the target declares the quantity";
 - each value that holds prose consists of complete sentences, with an initial capital and a final period;
@@ -70,4 +71,4 @@ Each template follows ten conventions of format:
 Two conventions govern the names of fields:
 
 - each field is named after the distinction that it decides, so two fields of one record that decide different distinctions never share a name;
-- `status` names the standing of the whole record in every record kind, and its sense depends on the kind, as the [record attributes](../../../../docs/epistemology/objects/question/question.md#^record-attributes) state: the attitude toward its claim for an answer, the stage of its course for a problem, a question or an itinerary, and the maturity of the record or its retraction for any other record.
+- `status` names the standing of the whole record in every record kind, and its sense depends on the kind, as the [record attributes](../../../../docs/epistemology/objects/question/question.md#^record-attributes) state: the attitude toward its claim for an answer, the stage of its course for a problem or a question, and the maturity of the record or its retraction for any other record that carries a status. An itinerary carries none, since its stage is computed.

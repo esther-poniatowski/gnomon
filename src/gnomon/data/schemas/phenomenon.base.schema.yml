@@ -133,10 +133,10 @@ properties:
         - 'null'
         x-template: SYMBOL
         x-kind: label
-        x-comment: 'an index set of the target or of this record: time, a training step or an input parameter'
+        x-comment: 'an index set of the target or of this record that orders states in time: time or a training step'
         title: index
-        description: 'the symbol of an index set of the target or of this record: time, a training step,
-          or an input parameter'
+        description: 'the symbol of an index set of the target or of this record that orders states in
+          time: time or a training step'
         examples:
         - the training step; the time
       grain:
@@ -166,7 +166,7 @@ properties:
     title: Course
     description: 'the ordered index along which the behavior unfolds: an index, a grain and the parameters of the target that vary along the course'
     examples:
-    - the training steps of a network; the time of a flow; a stimulus parameter swept by the question
+    - the training steps of a network; the time of a flow
   occurrence:
     x-blank: true
     x-comment: '`not-applicable` for a regularity or a capacity, `state` for a structural property'
