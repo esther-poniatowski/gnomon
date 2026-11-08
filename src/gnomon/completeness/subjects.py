@@ -125,3 +125,38 @@ def undecided_boundaries(record: Mapping[str, Any]) -> list[Finding]:
         for index, entry in enumerate(record.get("external_systems") or [])
         if isinstance(entry, Mapping) and is_empty(entry.get("constrains"))
     ]
+
+
+def unbounded_censoring(phenomenon: Mapping[str, Any]) -> list[Finding]:
+    """Return each observable whose event time is censored on the left without a stated bound.
+
+    A left-censored time is known only to precede the first observation. The event states that
+    time in ``first_observation``, or leaves it empty when observation starts at the origin, which
+    then bounds the time.
+
+    >>> event = {"censoring": "left", "origin": None}
+    >>> [f.rule.id for f in unbounded_censoring({"observables": [{"symbol": "T", "event": event}]})]
+    ['completeness/unbounded-censoring']
+    >>> bounded = {**event, "origin": "t = 0"}
+    >>> unbounded_censoring({"observables": [{"symbol": "T", "event": bounded}]})
+    []
+    """
+    found: list[Finding] = []
+    for index, entry in enumerate(phenomenon.get("observables") or []):
+        if not isinstance(entry, Mapping) or not isinstance(entry.get("event"), Mapping):
+            continue
+        event = entry["event"]
+        if event.get("censoring") != "left":
+            continue
+        if is_empty(event.get("first_observation")) and is_empty(event.get("origin")):
+            found.append(
+                finding(
+                    rules.COMPLETENESS_UNBOUNDED_CENSORING,
+                    f"observables.{entry.get('symbol') or index}: the event time is censored on the"
+                    " left, and neither a first observation nor an origin bounds it",
+                    "observables",
+                    Entry(index, entry),
+                    "event",
+                )
+            )
+    return found

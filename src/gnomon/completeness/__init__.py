@@ -85,6 +85,7 @@ from .problems import (
     presupposition_denied,
     readable_obstacles,
     unsupported_outcome,
+    unsupported_question_dissolution,
 )
 from .questions import (
     SLOT_PLACEHOLDERS,
@@ -124,6 +125,7 @@ from .subjects import (
     mismatched_occurrence,
     occurrence_by_category,
     target_types_by_evidential_status,
+    unbounded_censoring,
     undecided_boundaries,
 )
 from .values import (
@@ -186,6 +188,7 @@ __all__ = [
     "unanchored_explicandum",
     "unbound_outputs",
     "unbounded_aim",
+    "unbounded_censoring",
     "unclassified_operations",
     "undecided_boundaries",
     "unjustified_explanans_bound",
@@ -201,6 +204,7 @@ __all__ = [
     "unstated_function_sense",
     "unstated_standing",
     "unsupported_outcome",
+    "unsupported_question_dissolution",
     "varying_symbols",
     "vocabularies",
 ]

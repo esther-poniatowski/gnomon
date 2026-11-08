@@ -416,6 +416,8 @@ vocabularies:
       name: the question was revised since it was first stated
     - value: answered
       name: acts of the researcher meet the demand of its minimal problem
+    - value: dissolved
+      name: an accepted answer denies a presupposition of the question
     - value: abandoned
       name: the researcher stops the inquiry with the question unanswered
     .request:
@@ -586,8 +588,8 @@ vocabularies:
     reference_class.status:
     - value: assumed
       name: the projection is adopted without a check that could refute it
-    - value: tested
-      name: the projection passed a check on members not used to obtain the claim
+    - value: checked
+      name: the projection passed a check on further members or on a shared mechanism
     - value: not-claimed
       name: no claim is carried from some members to the whole class
     index_sets.structure:
@@ -1052,15 +1054,6 @@ vocabularies:
     - value: lack-of-means
       name: every means considered was tried and failed
   itinerary:
-    .status:
-    - value: planned
-      name: the steps are written and no act has been carried out
-    - value: in-progress
-      name: some acts are carried out and the course continues
-    - value: completed
-      name: the addressed problem or question has ended other than by abandonment, and every act carried out is judged
-    - value: abandoned
-      name: the researcher stops the course before its problem or question ends
     steps.verdict:
     - value: pass
       name: the output meets the norm of the activity

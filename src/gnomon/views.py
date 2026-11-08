@@ -32,6 +32,7 @@ from .exposure import exposure_rows
 from .findings import where as field_path
 from .itineraries import type_classes, type_holders
 from .latex import canonical_notations, declared_notations, to_latex
+from .stages import itinerary_stage
 from .statement import compose_statement, load_statement_registry
 from .vocabulary import formulas, upstream_of, visible_records
 
@@ -171,6 +172,9 @@ def render_tree(roots: Iterable[Node]) -> str:
 #: The maturity that a record status states, for the records whose status is a maturity.
 MATURITIES = ("open", "provisional", "stabilized")
 
+#: The stages of a problem before it ends, posed or refined; a problem in either stage may close.
+OPEN_PROBLEM_STATUSES = ("posed", "refined")
+
 
 def _header(name: str, title: str, version: int = 1) -> dict[str, Any]:
     return {
@@ -219,7 +223,7 @@ def problem_state(records: Records) -> dict[str, Any]:
                     for a in answers
                     if records[a].get("status") in ("entertained", "hypothesized")
                 ),
-                "may_close": bool(met) and problem.get("status") == "posed",
+                "may_close": bool(met) and problem.get("status") in OPEN_PROBLEM_STATUSES,
             }
         )
         stated = {
@@ -354,7 +358,15 @@ def itinerary_progress(
             )
             edges += [{"itinerary": key, "from": parent, "to": name} for parent in after[name]]
     return {
-        **_header("itinerary-progress", "Progress of each itinerary"),
+        **_header("itinerary-progress", "Progress of each itinerary", version=2),
+        "itineraries": [
+            {
+                "itinerary": key,
+                "addresses": str(records[key].get("addresses") or ""),
+                "stage": itinerary_stage(records[key], records),
+            }
+            for key in _of_type(records, "itinerary")
+        ],
         "steps": steps_rows,
         "edges": edges,
     }

@@ -24,7 +24,7 @@ exports:
   - gnomon:target-system@1
   - gnomon:view.exposure@2
   - gnomon:view.expressions@1
-  - gnomon:view.itinerary-progress@1
+  - gnomon:view.itinerary-progress@2
   - gnomon:view.maturity@1
   - gnomon:view.next-act@1
   - gnomon:view.problem-state@1

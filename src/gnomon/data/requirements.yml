@@ -32,7 +32,7 @@ always:
   target-system: [commitment]
   phenomenon: [commitment]
   background: [describes, laws, closure]
-  problem: [statement, kind, demand, result_type, request]
+  problem: [statement, status, kind, demand, result_type, request]
   concept: [gloss, kind, source]
   design: [kind, task, steps, output]
   derivation:

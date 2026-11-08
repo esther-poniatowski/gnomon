@@ -410,6 +410,17 @@ properties:
               x-kind: text
               title: Origin
               description: an expression fixing the origin from which the clock of the event starts
+            first_observation:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION FIXING THE TIME OF THE FIRST OBSERVATION"'
+              x-kind: text
+              x-comment: required when the censoring is `left`, whose time it bounds; omit when observation
+                starts at the origin
+              title: First observation
+              description: required when the censoring is `left`, whose time it bounds; omit when observation
+                starts at the origin
             horizon:
               type:
               - string
@@ -436,8 +447,9 @@ properties:
           x-comment: fill when the observable is the time of an event; the observable's `expression` then
             states the event criterion
           title: event
-          description: the origin from which the clock starts, the horizon at which observation stops,
-            and the censoring (right · left · interval · none) for an event whose time is unknown
+          description: the origin from which the clock starts, the first observation that bounds a left-censored
+            time, the horizon at which observation stops, and the censoring (right · left · interval · none)
+            for an event whose time is unknown
           examples:
           - a generalization event observed up to a finite training horizon, right-censored when the criterion
             is never met

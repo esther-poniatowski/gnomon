@@ -452,6 +452,7 @@ def _question(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         + c.unmet_by_aim(record, reached, ctx.registries.by_aim)
         + malformed_answerability(record, records)
         + c.unanchored_explicandum(record, records)
+        + c.unsupported_question_dissolution(record, records)
     )
 
 
@@ -494,10 +495,12 @@ def _assessment(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 
 def _phenomenon(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
-    """The occurrence class of a phenomenon against its category, and its evidential status against
-    the type of its target system."""
-    return c.mismatched_occurrence(record, ctx.registries.occurrences) + c.mismatched_evidence(
-        record, ctx.target_of(record), ctx.registries.evidence
+    """The occurrence class of a phenomenon against its category, its evidential status against
+    the type of its target system, and the bound of each left-censored event time."""
+    return (
+        c.mismatched_occurrence(record, ctx.registries.occurrences)
+        + c.mismatched_evidence(record, ctx.target_of(record), ctx.registries.evidence)
+        + c.unbounded_censoring(record)
     )
 
 

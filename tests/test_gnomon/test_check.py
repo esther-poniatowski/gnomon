@@ -118,6 +118,8 @@ CHECKERS: dict[ModuleType, tuple[str, ...]] = {
         "mismatched_occurrence",
         "mismatched_request",
         "unsupported_outcome",
+        "unsupported_question_dissolution",
+        "unbounded_censoring",
         "misstated_obstacles",
         "inadmissible_values",
         "misplaced_maturity",

@@ -16,13 +16,6 @@ properties:
     const: itinerary
   id:
     pattern: ^itin\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
-  status:
-    enum:
-    - planned
-    - in-progress
-    - completed
-    - abandoned
-    - null
   steps:
     items:
       propertyNames:
@@ -141,6 +134,5 @@ propertyNames:
   - title
   - id
   - type
-  - status
   - addresses
   - steps

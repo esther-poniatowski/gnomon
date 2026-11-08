@@ -20,7 +20,7 @@ identification:                  # fixes the referent before any quantity is dec
 reference_class:                 # name only; the remaining specifications of the record generate the class
   name: "KIND OF SYSTEM"
   projectibility:                # whether a claim about some members can be projected onto the class
-    status:                      # assumed (the projection is adopted without a check that could refute it) | tested (the projection passed a check on members not used to obtain the claim) | not-claimed (no claim is carried from some members to the whole class)
+    status:                      # assumed (the projection is adopted without a check that could refute it) | checked (the projection passed a check on further members or on a shared mechanism) | not-claimed (no claim is carried from some members to the whole class)
     evidence: "THE TEST OR THE ARGUMENT THAT SUPPORTS PROJECTING THE CLAIM ONTO THE CLASS"   # omit when the status is `not-claimed`
   selection_criteria:            # fill only when membership depends on an outcome of the dynamics; put a restriction on prior values in the domain of the question that imposes it, since other questions may leave them free
     - name: "NAME OF THE CRITERION"

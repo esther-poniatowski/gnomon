@@ -31,7 +31,9 @@ Each status of the state qualifies one bearer along one axis. An axis is the que
 | test of an assessment | verdict of a test | whether the answer passes one test | `pass`, `fail`, `pending`, `not-applicable` | [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction) |
 | assessment | disposition | the outcome read from the verdicts of admissibility and warrant | `satisfied`, `not-satisfied`, `withheld`, `corrective` | [disposition](../answer/satisfaction-conditions.md#^disposition) |
 | assessment | credence | the strength of belief of the assessor in the answer, given all verdicts and the prior evidence | a degree, optional | [credence](../answer/satisfaction-conditions.md#^credence) |
-| problem | outcome | whether and how the problem ended | solved, dissolved, abandoned | [outcomes of a problem](../problem/epistemic-problem.md#^problem-outcomes) |
+| problem | stage and outcome | the stage of the problem before it ends, then whether and how it ended | `posed`, `refined`; `solved`, `dissolved`, `abandoned` | [stages](../problem/epistemic-problem.md#^problem-stages) and [outcomes](../problem/epistemic-problem.md#^problem-outcomes) of a problem |
+| question | stage and outcome | the stage of the question before it ends, then how it ended | `posed`, `refined`; `answered`, `dissolved`, `abandoned` | [stages of a question](../question/question.md#^question-stages) |
+| itinerary | stage, computed | the stage of the course, computed from the steps and from the addressed record | `planned`, `in-progress`, `concluded`, `abandoned` | [stages of an itinerary](../../processes/activities/epistemic-activities.md#^itinerary-stages) |
 | record | record status | the standing of the whole record, by kind of record | one vocabulary per kind of record | [record attributes](../question/question.md#^record-attributes) |
 
 Three groups of statuses are often merged:

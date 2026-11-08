@@ -10,6 +10,7 @@ import yaml
 from jsonschema import Draft202012Validator
 from typer.testing import CliRunner
 
+import gnomon.stages
 import gnomon.views
 from gnomon.cli import app
 from gnomon.views import question_tree, render_tree
@@ -150,3 +151,51 @@ def test_the_progress_of_an_itinerary_orders_its_steps_and_marks_impeachment() -
     assert [s["step"] for s in view["steps"]] == ["early", "late"]
     assert {s["state"] for s in view["steps"]} == {"impeached"}
     assert view["edges"] == [{"itinerary": "itin.a.b", "from": "early", "to": "late"}]
+
+
+def test_the_progress_reports_the_stage_of_each_itinerary() -> None:
+    view = gnomon.views.itinerary_progress(
+        {
+            "prob.a.b": {"type": "problem", "status": "posed"},
+            "itin.a.b": {
+                "type": "itinerary",
+                "addresses": "prob.a.b",
+                "steps": [{"id": "s", "output": {"ref": "mod.a"}, "norm": {"verdict": "pass"}}],
+            },
+        },
+        impeached=set(),
+        conditional=set(),
+    )
+    assert view["_schema"] == "gnomon:view.itinerary-progress@2"
+    assert view["itineraries"] == [
+        {"itinerary": "itin.a.b", "addresses": "prob.a.b", "stage": "in-progress"}
+    ]
+
+
+def test_an_itinerary_concludes_only_when_its_record_ends_and_every_act_is_judged() -> None:
+    done = {"id": "done", "output": {"ref": "ans.a"}, "norm": {"verdict": "fail"}}
+    waiting = {"id": "waiting", "output": {"ref": "ans.b"}, "norm": {"verdict": "pending"}}
+    branch = {"id": "branch", "norm": {"verdict": "pending"}}
+
+    def stage(status: str, *steps: dict[str, Any]) -> str:
+        records = {"quest.a": {"status": status}}
+        itinerary = {"addresses": "quest.a", "steps": list(steps)}
+        return gnomon.stages.itinerary_stage(itinerary, records)
+
+    assert stage("answered", done, branch) == "concluded"
+    assert stage("answered", done, waiting) == "in-progress"
+    assert stage("posed", done) == "in-progress"
+    assert stage("posed", branch) == "planned"
+    assert stage("abandoned", done) == "abandoned"
+
+
+def test_a_refined_problem_whose_demand_is_met_may_close(monkeypatch: Any) -> None:
+    monkeypatch.setattr(gnomon.views, "demand_met", lambda *args: True)
+    records = {
+        f"prob.a.{status}": {"type": "problem", "status": status}
+        for status in ("posed", "refined", "solved")
+    }
+    rows = {
+        row["problem"]: row["may_close"] for row in gnomon.views.problem_state(records)["problems"]
+    }
+    assert rows == {"prob.a.posed": True, "prob.a.refined": True, "prob.a.solved": False}

@@ -750,6 +750,26 @@ def test_a_match_listed_under_an_inapplicable_accuracy_is_reported() -> None:
     assert contradictory_accuracy(question) == []
 
 
+def test_a_tolerance_stated_under_a_standard_that_fixes_its_own_is_reported() -> None:
+    """The standard order-of-magnitude fixes its metric and bound, so a stated tolerance contradicts
+    it."""
+    entry = {
+        "target": "an exponent",
+        "tolerance": {"metric": "abs(answer - target)", "bound": "0.1"},
+    }
+    question = {
+        "task": {
+            "required_accuracy": {"standard": "order-of-magnitude", "outputs_to_match": [entry]}
+        }
+    }
+    assert texts(contradictory_accuracy(question)) == [
+        "task.required_accuracy.outputs_to_match: a tolerance is stated although the standard"
+        " order-of-magnitude admits none"
+    ]
+    question["task"]["required_accuracy"]["standard"] = "numeric-bound"
+    assert contradictory_accuracy(question) == []
+
+
 def test_the_requirement_table_is_read_from_the_registry() -> None:
     assert REQUIRED["exploration"]["required"] == ["phenomenon.detection_criterion"]
     assert REQUIRED["explanation"]["required"] == ["question.task.requested_relation"]

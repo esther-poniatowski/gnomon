@@ -56,7 +56,7 @@ properties:
           status:
             enum:
             - assumed
-            - tested
+            - checked
             - not-claimed
             - null
       selection_criteria:

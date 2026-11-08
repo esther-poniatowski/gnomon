@@ -124,7 +124,10 @@ def _restrictions(
             words.append(str(entry["name"]))
         elif entry.get("of"):
             phrase = kinds.get(str(entry.get("restriction") or "restricted"), "restricted {Q}")
-            words.append(phrase.replace("{Q}", _quantity(str(entry["of"]), records)))
+            event = str(entry.get("event") or "the excluded event")
+            words.append(
+                phrase.replace("{Q}", _quantity(str(entry["of"]), records)).replace("{X}", event)
+            )
         elif entry.get("expression"):
             words.append(str(entry["expression"]))
     return words

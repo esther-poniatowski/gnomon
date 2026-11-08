@@ -21,6 +21,7 @@ properties:
     - posed
     - refined
     - answered
+    - dissolved
     - abandoned
     - null
   request:
@@ -107,6 +108,7 @@ properties:
                 - name
                 - of
                 - restriction
+                - event
                 - values
                 - expression
                 - justification

@@ -2,7 +2,6 @@ _schema: gnomon:itinerary@1
 title: "Itinerary of the inquiry into delayed generalization"
 id: itin.grokking.explain-delay
 type: itinerary
-status: in-progress
 addresses: prob.grokking.delayed-generalization
 
 steps:

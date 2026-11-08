@@ -58,7 +58,7 @@ properties:
     x-template: posed
     x-vocabulary: .status
     title: Status
-    description: posed · refined · answered · abandoned
+    description: posed · refined · answered · dissolved · abandoned
     examples:
     - '`posed`, for a question not yet refined'
   addresses:
@@ -302,6 +302,15 @@ properties:
                   - 'null'
                   title: Restriction
                   description: only where the entry names a variable, since a parameter is already fixed
+                event:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"THE EVENT THAT THE ADMITTED COURSES EXCLUDE"'
+                  x-kind: markdown-line
+                  x-comment: required with the restriction `without-event`; omit otherwise
+                  title: Event
+                  description: required with the restriction `without-event`; omit otherwise
                 values:
                   type:
                   - string
@@ -332,7 +341,7 @@ properties:
             title: Restrictions
             description: 'Per restriction: the quantity held and the value set that it is held to. When
               no single quantity carries a restriction, the entry names it and states its defining expression.
-              A restriction on a variable also states its mode: `clamped` · `restricted` · `initial` ·
+              A restriction on a variable also states its mode, with the excluded event for `without-event`: `clamped` · `restricted` · `initial` ·
               `stationary` · `without-event`. Each restriction carries a justification stating why the
               question is put only within those bounds.'
             examples:
@@ -512,9 +521,9 @@ properties:
                       x-kind: text
                       title: Bound
                       description: an expression that the metric must not exceed
-                  x-comment: omit when the standard is `qualitative` or `structural-only`
+                  x-comment: omit when the standard is `qualitative`, `structural-only` or `order-of-magnitude`, which fixes its own
                   title: Tolerance
-                  description: omit when the standard is `qualitative` or `structural-only`
+                  description: omit when the standard is `qualitative`, `structural-only` or `order-of-magnitude`, which fixes its own
                 justification:
                   type:
                   - string

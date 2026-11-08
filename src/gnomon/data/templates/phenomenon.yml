@@ -53,6 +53,7 @@ observables:                     # functions of the system state that restate th
     reading: "THE EXPRESSION IN WORDS"
     event:                       # fill when the observable is the time of an event; the observable's `expression` then states the event criterion
       origin: "EXPRESSION FIXING THE ORIGIN OF TIME"
+      first_observation: "EXPRESSION FIXING THE TIME OF THE FIRST OBSERVATION"   # required when the censoring is `left`, whose time it bounds; omit when observation starts at the origin
       horizon: "EXPRESSION FIXING THE END OF OBSERVATION"
       censoring:                 # right (the event had not occurred by the horizon) | left (the event occurred before the first observation, at an unknown time) | interval (the event occurred between two observations, at an unknown time) | none (the time of the event is recorded)
       reading: "THE EVENT IN WORDS, AND THE VALUE RECORDED WHEN IT IS NOT OBSERVED"

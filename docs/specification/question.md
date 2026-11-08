@@ -15,7 +15,7 @@ The question record names the [problem](problem.md) that it addresses and the qu
 | ----- | ------------------- | ------- | ------- |
 | Title | always | a short name of the question, as a label | delay before generalization |
 | Statement | always | the question in words, restating its fields in the [statement frame](../epistemology/objects/subject/subject-of-inquiry.md#^question-statement); `gnomon views` composes the same frame from the fields, for comparison with this statement | "in overparameterized networks trained to fit their data, what produces the delay before generalization?" |
-| Status | always | posed · refined · answered · abandoned | `posed`, for a question not yet refined |
+| Status | always | posed · refined · answered · dissolved · abandoned, as the [stages of a question](../epistemology/objects/question/question.md#^question-stages) define them | `posed`, for a question not yet refined |
 | Addresses | when a problem record states the problem that the question serves | the identifier of one problem record | the problem of the delay before generalization |
 | Request | to make the record a question rather than a schema | how many possible answers a direct answer selects, and whether it claims completeness: one · all · over-a-parameter · decision, as the [request of a question](../epistemology/objects/question/question-specification.md#^question-request) defines them; the request of the problem that the question serves, when one exists | `one`, for a question that one explanatory account answers |
 | Links | when the answer to another question bears on this one | per link, the other question, the relation, and the record shared by the two questions | — |

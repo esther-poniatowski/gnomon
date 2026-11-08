@@ -36,14 +36,6 @@ properties:
     x-kind: label
     title: Record type
     description: The record type, which fixes the contract that the record follows.
-  status:
-    type:
-    - string
-    - 'null'
-    x-template: planned
-    x-vocabulary: .status
-    title: Status
-    description: 'the stage of the itinerary: planned, in-progress, completed or abandoned'
   addresses:
     type:
     - string

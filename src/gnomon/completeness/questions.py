@@ -13,6 +13,10 @@ from ..findings import Entry, Finding, finding
 from ..identifiers import split_reference
 from .paths import at, is_empty
 
+#: The accuracy standards that admit no stated tolerance: two state none, and `order-of-magnitude`
+#: fixes its own metric and bound.
+UNTOLERATED_STANDARDS = frozenset({"qualitative", "structural-only", "order-of-magnitude"})
+
 #: The subject slots of a question, each with the record kind its identifier names.
 SUBJECT_SLOTS: Mapping[str, str] = {"target_system": "target-system", "phenomenon": "phenomenon"}
 
@@ -264,10 +268,28 @@ def contradictory_accuracy(question: Mapping[str, Any]) -> list[Finding]:
 
     No aim decides whether an answer is matched against a measurement: an inquiry over a formal
     model class may match measured exponents, and one seeking a theorem may match nothing. The
-    rule is therefore a consistency between fields rather than a requirement of an aim.
+    rule is therefore a consistency between fields rather than a requirement of an aim. A standard
+    that states no tolerance, or fixes its own, as ``order-of-magnitude`` does, admits no stated
+    tolerance either.
     """
     accuracy = at(question, "task.required_accuracy") or {}
-    if accuracy.get("standard") != "not-applicable":
+    standard = accuracy.get("standard")
+    if standard in UNTOLERATED_STANDARDS:
+        return [
+            finding(
+                rules.COMPLETENESS_CONTRADICTORY_ACCURACY,
+                f"task.required_accuracy.outputs_to_match: a tolerance is stated although the"
+                f" standard {standard} admits none",
+                "task",
+                "required_accuracy",
+                "outputs_to_match",
+                Entry(index, entry),
+                "tolerance",
+            )
+            for index, entry in enumerate(accuracy.get("outputs_to_match") or [])
+            if isinstance(entry, Mapping) and not is_empty(entry.get("tolerance"))
+        ]
+    if standard != "not-applicable":
         return []
     return [
         finding(
@@ -486,6 +508,7 @@ def malformed_restrictions(question: Mapping[str, Any], variables: Iterable[str]
     quantity is held — clamped, initial, stationary, without an event — applies to something that
     varies, so an entry naming a fixed parameter states no such kind. A parameter that the course
     of the phenomenon lists as varying changes along that course, so it can be held like a variable.
+    A quantity held without an event names that event, and an entry of another kind names none.
 
     Parameters
     ----------
@@ -529,6 +552,20 @@ def malformed_restrictions(question: Mapping[str, Any], variables: Iterable[str]
                     " that varies",
                     *where,
                     "restriction",
+                )
+            )
+        if (entry.get("restriction") == "without-event") != bool(entry.get("event")):
+            found.append(
+                finding(
+                    rules.COMPLETENESS_EXCLUDED_EVENT,
+                    f"restrictions.{label}: "
+                    + (
+                        "the restriction without-event names no excluded event"
+                        if entry.get("restriction") == "without-event"
+                        else "names an event although its restriction is not without-event"
+                    ),
+                    *where,
+                    "event",
                 )
             )
     return found

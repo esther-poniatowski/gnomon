@@ -35,14 +35,14 @@ interrogatives:
   explication: "which criterion should define {E}"
 
 # The words of a restriction that names no entry of its own, per kind of restriction, `{Q}` being the
-# name that the record holding the quantity declares, else its symbol; a restriction of no kind is
-# written as `restricted`.
+# name that the record holding the quantity declares, else its symbol, and `{X}` the excluded event
+# that the entry states; a restriction of no kind is written as `restricted`.
 restriction_kinds:
   clamped: "clamped {Q}"
   restricted: "restricted {Q}"
   initial: "restricted initial {Q}"
   stationary: "stationary {Q}"
-  without-event: "{Q} without the excluded event"
+  without-event: "{Q} without {X}"
 
 # The connective of contrast per locus; a question whose locus is `none` states no contrast.
 contrasts:

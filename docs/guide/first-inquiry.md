@@ -95,7 +95,6 @@ _schema: gnomon:itinerary@1
 title: "Itinerary of the inquiry into the growth of the period"
 id: itin.pendulum.explain-growth
 type: itinerary
-status: in-progress
 addresses: prob.pendulum.period-growth
 
 steps:

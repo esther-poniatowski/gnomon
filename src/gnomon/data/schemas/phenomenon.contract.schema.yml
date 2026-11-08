@@ -110,6 +110,7 @@ properties:
           propertyNames:
             enum:
             - origin
+            - first_observation
             - horizon
             - censoring
             - reading

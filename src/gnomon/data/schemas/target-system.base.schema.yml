@@ -126,7 +126,7 @@ properties:
             - string
             - 'null'
             title: Status
-            description: 'whether a claim about some members holds of the class: assumed, tested or not claimed'
+            description: 'whether a claim about some members holds of the class: assumed, checked or not claimed'
           evidence:
             type:
             - string
@@ -138,7 +138,7 @@ properties:
             description: omit when the status is `not-claimed`
         x-comment: whether a claim about some members can be projected onto the class
         title: projectibility
-        description: 'whether a claim about some members holds of the class: assumed · tested · not-claimed, with the evidence for an assumed or a tested projection'
+        description: 'whether a claim about some members holds of the class: assumed · checked · not-claimed, with the evidence for an assumed or a checked projection'
         examples:
         - delayed generalization reported across several architectures (assumed); a theorem that quantifies
           over every member (not claimed)

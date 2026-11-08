@@ -282,13 +282,13 @@ COMPLETENESS_UNRECORDED_SOLUTION = _rule(
 )
 COMPLETENESS_UNSUPPORTED_DISSOLVED = _rule(
     "completeness/unsupported-dissolved",
-    "A problem is marked dissolved while no accepted answer denies a presupposition of its"
-    " associated question.",
+    "A problem or a question is marked dissolved while no accepted answer denies a presupposition"
+    " of the question, or of the associated question of the problem.",
 )
 COMPLETENESS_UNRECORDED_DISSOLUTION = _rule(
     "completeness/unrecorded-dissolution",
-    "An accepted answer denies a presupposition of the associated question of a problem not marked"
-    " dissolved.",
+    "An accepted answer denies a presupposition of a question not marked dissolved, or of the"
+    " associated question of a problem not marked dissolved.",
 )
 COMPLETENESS_UNSUPPORTED_OBSTACLE = _rule(
     "completeness/unsupported-obstacle",
@@ -313,7 +313,8 @@ COMPLETENESS_UNMET_AIM = _rule(
 )
 COMPLETENESS_CONTRADICTORY_ACCURACY = _rule(
     "completeness/contradictory-accuracy",
-    "A question lists a match while declaring that accuracy does not apply.",
+    "A question lists a match while declaring that accuracy does not apply, or states a tolerance"
+    " under a standard that admits none.",
 )
 COMPLETENESS_UNREALIZED_LINK = _rule(
     "completeness/unrealized-link",
@@ -408,6 +409,16 @@ COMPLETENESS_MISSTATED_LIMIT = _rule(
     "completeness/misstated-limit",
     "A domain limit is no relation `q -> v` whose left side is a variable or a parameter of the"
     " target.",
+)
+COMPLETENESS_UNBOUNDED_CENSORING = _rule(
+    "completeness/unbounded-censoring",
+    "An event time censored on the left states neither a first observation nor an origin that"
+    " bounds it.",
+)
+COMPLETENESS_EXCLUDED_EVENT = _rule(
+    "completeness/excluded-event",
+    "A restriction of the kind without-event names no excluded event, or a restriction of another"
+    " kind names one.",
 )
 COMPLETENESS_RESTRICTION_WITHOUT_VARIABLE = _rule(
     "completeness/restriction-without-variable",

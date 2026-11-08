@@ -449,7 +449,6 @@ Looks up each field of each record by its path, with its title, its description 
 | ---- | ----- | ----------- | ------------- |
 | `addresses` | Addresses | the identifier of one problem record or of one question record | [Addresses](../specification/itinerary.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
-| `status` | Status | the stage of the itinerary: planned, in-progress, completed or abandoned | — |
 | `steps` | Steps | one entry per activity instance, listed in any order | [Steps](../specification/itinerary.md) |
 | `steps[].activity` | activity | the identifier of one activity of the registry | [Steps: activity](../specification/itinerary.md) |
 | `steps[].branch` | branch | the condition under which the step is taken, and the step of the same output type taken otherwise | [Steps: branch](../specification/itinerary.md) |
@@ -715,8 +714,9 @@ Looks up each field of each record by its path, with its title, its description 
 | `observables[].estimator.data_version` | Data version | the version of the data on which the estimator runs | [Observables: estimator](../specification/phenomenon.md) |
 | `observables[].estimator.method` | Method | the estimator that computes the values from the data | [Observables: estimator](../specification/phenomenon.md) |
 | `observables[].estimator.uncertainty` | Uncertainty | the uncertainty that the estimator reports | [Observables: estimator](../specification/phenomenon.md) |
-| `observables[].event` | event | the origin from which the clock starts, the horizon at which observation stops, and the censoring (right · left · interval · none) for an event whose time is unknown | [Observables: event](../specification/phenomenon.md) |
+| `observables[].event` | event | the origin from which the clock starts, the first observation that bounds a left-censored time, the horizon at which observation stops, and the censoring (right · left · interval · none) for an event whose time is unknown | [Observables: event](../specification/phenomenon.md) |
 | `observables[].event.censoring` | Censoring | the censoring of the event time: right, left or interval, when the time is unknown, or none, when it is observed | [Observables: event](../specification/phenomenon.md) |
+| `observables[].event.first_observation` | First observation | required when the censoring is `left`, whose time it bounds; omit when observation starts at the origin | [Observables: event](../specification/phenomenon.md) |
 | `observables[].event.horizon` | Horizon | an expression fixing the end of observation | [Observables: event](../specification/phenomenon.md) |
 | `observables[].event.origin` | Origin | an expression fixing the origin from which the clock of the event starts | [Observables: event](../specification/phenomenon.md) |
 | `observables[].event.reading` | Reading | the event in words, and the value recorded when it is not observed | [Observables: event](../specification/phenomenon.md) |
@@ -789,7 +789,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `significance` | Significance | the consequences of a solution for other work | [Significance](../specification/problem.md) |
 | `sources` | Sources | per source, a pointer | [Sources](../specification/problem.md) |
 | `statement` | Statement | "[the result sought], [the obstacle to obtaining it]", as a reading | [Statement](../specification/problem.md) |
-| `status` | Status | the stage of the problem: posed, refined, solved, dissolved or abandoned | — |
+| `status` | Status | the stage of the problem: posed, refined, solved, dissolved or abandoned | [Status](../specification/problem.md) |
 | `title` | Title | A short name of the record, as a label. | — |
 | `type` | Record type | The record type, which fixes the contract that the record follows. | — |
 
@@ -822,7 +822,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `presuppositions[].reading` | Reading | the presupposition in words | [Presuppositions](../specification/question.md) |
 | `request` | Request | how many possible answers a direct answer selects, and whether it claims completeness: one · all · over-a-parameter · decision, as the request of a question defines them; the request of the problem that the question serves, when one exists | [Request](../specification/question.md) |
 | `statement` | Statement | the question in words, restating its fields in the statement frame | [Statement](../specification/question.md) |
-| `status` | Status | posed · refined · answered · abandoned | [Status](../specification/question.md) |
+| `status` | Status | posed · refined · answered · dissolved · abandoned | [Status](../specification/question.md) |
 | `subject` | Subject | the subject of the question: its phenomenon, its target system, its contrast and its domain | [Subject of a question](../specification/question-subject.md) |
 | `subject.background` | Background of $S$ | background records whose laws the question admits; empty when it admits none | [Background of](../specification/question-subject.md) |
 | `subject.contrast` | Contrast class $X$ | the fact and the foils that the question separates, with the status of the foils and their compatibility | [Contrast class](../specification/question-subject.md) |
@@ -838,7 +838,8 @@ Looks up each field of each record by its path, with its title, its description 
 | `subject.domain.limit` | Limit | the expression "[quantity] → [limit value]", with a justification stating why the question is about the limit system | [Limit](../specification/question-subject.md) |
 | `subject.domain.limit.expression` | Expression | the limit, written `q -> v`, whose left side is a variable or a parameter of the target | [Limit](../specification/question-subject.md) |
 | `subject.domain.limit.justification` | Justification | why the question concerns the limit system | [Limit](../specification/question-subject.md) |
-| `subject.domain.restrictions` | Restrictions | Per restriction: the quantity held and the value set that it is held to. When no single quantity carries a restriction, the entry names it and states its defining expression. A restriction on a variable also states its mode: `clamped` · `restricted` · `initial` · `stationary` · `without-event`. Each restriction carries a justification stating why the question is put only within those bounds. | [Restrictions](../specification/question-subject.md) |
+| `subject.domain.restrictions` | Restrictions | Per restriction: the quantity held and the value set that it is held to. When no single quantity carries a restriction, the entry names it and states its defining expression. A restriction on a variable also states its mode, with the excluded event for `without-event`: `clamped` · `restricted` · `initial` · `stationary` · `without-event`. Each restriction carries a justification stating why the question is put only within those bounds. | [Restrictions](../specification/question-subject.md) |
+| `subject.domain.restrictions[].event` | Event | required with the restriction `without-event`; omit otherwise | [Restrictions](../specification/question-subject.md) |
 | `subject.domain.restrictions[].expression` | Expression | replaces `values` when no single quantity carries the restriction | [Restrictions](../specification/question-subject.md) |
 | `subject.domain.restrictions[].justification` | Justification | why the question is put only under the restriction | [Restrictions](../specification/question-subject.md) |
 | `subject.domain.restrictions[].name` | Name | required when no quantity names the entry | [Restrictions](../specification/question-subject.md) |
@@ -869,7 +870,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `task.required_accuracy.outputs_to_match` | Outputs to match | name only the target side; the answer reproduces each output | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.outputs_to_match[].justification` | Justification | why the question demands that the answer reproduce this output | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.outputs_to_match[].target` | Target | the observable of the phenomenon that the answer must reproduce | [Required accuracy](../specification/question-task.md) |
-| `task.required_accuracy.outputs_to_match[].tolerance` | Tolerance | omit when the standard is `qualitative` or `structural-only` | [Required accuracy](../specification/question-task.md) |
+| `task.required_accuracy.outputs_to_match[].tolerance` | Tolerance | omit when the standard is `qualitative`, `structural-only` or `order-of-magnitude`, which fixes its own | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.outputs_to_match[].tolerance.bound` | Bound | an expression that the metric must not exceed | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.outputs_to_match[].tolerance.metric` | Metric | measure the difference between `answer` and `target` | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.standard` | Standard | how closely the answer must agree with the target: qualitative, an order of magnitude, a numeric bound or structure only, or not applicable when the answer is matched against no data of the target | [Required accuracy](../specification/question-task.md) |
@@ -938,9 +939,9 @@ Looks up each field of each record by its path, with its title, its description 
 | `parameters[].variant` | Variant | variant carrying the entry; omit when every member of the class carries it | [Parameters](../specification/target-system.md) |
 | `reference_class` | Reference class | a name, "[kind]", for the class that the other specifications generate | [Reference class](../specification/target-system.md) |
 | `reference_class.name` | Name | the kind of system that names the class | [Reference class](../specification/target-system.md) |
-| `reference_class.projectibility` | projectibility | whether a claim about some members holds of the class: assumed · tested · not-claimed, with the evidence for an assumed or a tested projection | [Reference class: projectibility](../specification/target-system.md) |
+| `reference_class.projectibility` | projectibility | whether a claim about some members holds of the class: assumed · checked · not-claimed, with the evidence for an assumed or a checked projection | [Reference class: projectibility](../specification/target-system.md) |
 | `reference_class.projectibility.evidence` | Evidence | omit when the status is `not-claimed` | [Reference class: projectibility](../specification/target-system.md) |
-| `reference_class.projectibility.status` | Status | whether a claim about some members holds of the class: assumed, tested or not claimed | [Reference class: projectibility](../specification/target-system.md) |
+| `reference_class.projectibility.status` | Status | whether a claim about some members holds of the class: assumed, checked or not claimed | [Reference class: projectibility](../specification/target-system.md) |
 | `reference_class.selection_criteria` | selection criteria | per criterion, the expression that a member satisfies, with a justification. The justification gives the reason for imposing the criterion and the inferences that it changes about the class | [Reference class: selection criteria](../specification/target-system.md) |
 | `reference_class.selection_criteria[].expression` | Expression | an expression over declared symbols that a member satisfies | [Reference class: selection criteria](../specification/target-system.md) |
 | `reference_class.selection_criteria[].justification` | Justification | also state how the selection affects the inferences the population supports | [Reference class: selection criteria](../specification/target-system.md) |

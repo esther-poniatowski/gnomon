@@ -172,6 +172,40 @@ def test_a_parameter_listed_as_varying_can_be_held() -> None:
     ]
 
 
+def test_a_restriction_without_an_event_names_the_event_and_no_other_does() -> None:
+    """The kind without-event requires the excluded event, and another kind admits none."""
+    question = {
+        "subject": {
+            "domain": {
+                "restrictions": [
+                    {"of": "n", "values": "pos(ints)", "restriction": "without-event"},
+                    {
+                        "of": "m",
+                        "values": "pos(ints)",
+                        "restriction": "without-event",
+                        "event": "the extinction of the population",
+                    },
+                    {
+                        "of": "x",
+                        "values": "reals",
+                        "restriction": "initial",
+                        "event": "a collision",
+                    },
+                ]
+            }
+        }
+    }
+    found = [
+        f
+        for f in malformed_restrictions(question, {"n", "m", "x"})
+        if f.rule.id == "completeness/excluded-event"
+    ]
+    assert [f.text for f in found] == [
+        "restrictions.n: the restriction without-event names no excluded event",
+        "restrictions.x: names an event although its restriction is not without-event",
+    ]
+
+
 def test_an_unresolved_symbol_lies_at_its_field_or_its_expression() -> None:
     """A reference lies at its item; a formula identifier is discriminated by its name."""
     record = {

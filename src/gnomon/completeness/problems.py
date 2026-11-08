@@ -224,6 +224,49 @@ def misstated_obstacles(
     return found
 
 
+def unsupported_question_dissolution(
+    question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return a status of a question that the accepted answers to it contradict.
+
+    An accepted corrective answer to a question denies one of its presuppositions, which dissolves
+    the question as it dissolves a problem whose associated question it is. The status
+    ``dissolved`` requires such an answer, and such an answer ends a question still posed or
+    refined.
+
+    >>> answer = {"type": "answer", "answers": "quest.a", "status": "accepted",
+    ...           "erotetic_relation": {"value": "corrective"}}
+    >>> [f.rule.id for f in unsupported_question_dissolution(
+    ...     {"id": "quest.a", "status": "posed"}, {"ans.a": answer})]
+    ['completeness/unrecorded-dissolution']
+    >>> [f.rule.id for f in unsupported_question_dissolution(
+    ...     {"id": "quest.a", "status": "dissolved"}, {})]
+    ['completeness/unsupported-dissolved']
+    """
+    name = question.get("id")
+    if not name:
+        return []
+    status = question.get("status")
+    denied = bool(presupposition_denied({"associated_question": name}, records))
+    if status == "dissolved" and not denied:
+        return [
+            finding(
+                rules.COMPLETENESS_UNSUPPORTED_DISSOLVED,
+                "status: dissolved, and no accepted answer denies a presupposition of the question",
+                "status",
+            )
+        ]
+    if denied and status in ("posed", "refined"):
+        return [
+            finding(
+                rules.COMPLETENESS_UNRECORDED_DISSOLUTION,
+                f"status: {status}, and an accepted answer denies a presupposition of the question",
+                "status",
+            )
+        ]
+    return []
+
+
 def unsupported_outcome(
     problem: Mapping[str, Any],
     records: Mapping[str, Mapping[str, Any]],
