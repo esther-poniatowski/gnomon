@@ -25,7 +25,7 @@ index_sets:
   - name: "prediction horizon"
     symbol: H
     extent: "interval_of(reals)"
-    structure: interval
+    structure: continuum
 
 observables:
   - name: "transition time of a subsystem"

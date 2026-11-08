@@ -44,5 +44,5 @@ One rule produced every retirement of the reorientation: each retired field or b
 | The two variable blocks | The key stating where the quantity is determined |
 | The interaction block | The law that asserts the interaction |
 
-- A block survives wherever its boundary carries a rule. The parameters stay apart from the variables because a parameter is held fixed while the dynamics run, so its signature holds no interval index; a phenomenon whose course changes a parameter lists it under `course.varies` instead.
+- A block survives wherever its boundary carries a rule. The parameters stay apart from the variables because a parameter is held fixed while the dynamics run, so its signature holds no index of evolution; a phenomenon whose course changes a parameter lists it under `course.varies` instead.
 - A record that states an interaction states it as a law, since a dependence of a growth law on a coefficient is falsifiable and expressible with the canonical relations.

@@ -15,7 +15,7 @@ index_sets:
   - name: "model time"
     symbol: time
     extent: "interval_of(reals)"
-    structure: continuum
+    structure: evolution
   - name: "trajectory in the comparison"
     symbol: traj_case
     extent: "enum(\"overshoot\", \"matched non-overshoot\")"

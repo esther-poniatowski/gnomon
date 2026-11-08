@@ -97,11 +97,11 @@ vocabularies:
       name: data on the target support the claim
     uncertainty.form:
     - value: interval
-      name: a range around the value, such as 40 ± 3 Hz
+      name: a range on both sides of the value, such as 40 ± 3 Hz
     - value: distribution
       name: a probability distribution over the value
     - value: bound
-      name: a limit that the value or its error does not exceed
+      name: a limit on one side of the value, such as an upper bound on its error
     .modal_strength:
     - value: actual
       name: the claim holds of the target system
@@ -198,7 +198,7 @@ vocabularies:
     - value: tests
       name: its claim, compared with the target, follows from the other
     - value: defeats
-      name: its claim, once accepted, removes a ground of the other
+      name: its claim, once accepted, denies a ground of the other or its application
     - value: revises
       name: it replaces the other answer, which stays unchanged
   assessment:
@@ -265,12 +265,12 @@ vocabularies:
     - value: not-applicable
       name: no occurrence class, as for a regularity or a capacity
     index_sets.structure:
+    - value: evolution
+      name: the index along which the state evolves, such as time or a training step
     - value: continuum
-      name: an uncountable set, such as a spatial domain
+      name: any other continuous index, such as space, a lag or a horizon
     - value: discrete-set
-      name: a set of separate members, such as labelled cases or samples
-    - value: interval
-      name: a contiguous range of an ordered set, such as a time axis
+      name: any other countable index, such as samples, sites or members
     observables.scale:
     - value: nominal
       name: values are labels, compared only for identity
@@ -346,9 +346,9 @@ vocabularies:
     - value: reported
       name: one data set or one study shows the behavior
     - value: predicted
-      name: a theory implies the behavior, which detection has not reached
+      name: a derivation asserts the behavior of a target with actual members, awaiting detection
     - value: derived
-      name: the behavior is obtained as a consequence of a model
+      name: a derivation establishes the behavior of a model or a target without actual members
     - value: absent
       name: a closed search found no instance
     - value: disproved
@@ -591,12 +591,12 @@ vocabularies:
     - value: not-claimed
       name: the claim covers every member directly, as a theorem does
     index_sets.structure:
+    - value: evolution
+      name: the index along which the state evolves, such as time or a training step
     - value: continuum
-      name: an uncountable set, such as a spatial domain
+      name: any other continuous index, such as space, a lag or a horizon
     - value: discrete-set
-      name: a set of separate members, such as labelled cases or samples
-    - value: interval
-      name: a contiguous range of an ordered set, such as a time axis
+      name: any other countable index, such as samples, sites or members
     variables.determined:
     - value: within
       name: its value is fixed inside the system
@@ -702,7 +702,7 @@ vocabularies:
     - value: system
       name: a complex object whose constituents are bound by relations
     - value: subtype-or-class
-      name: a collection of objects fixed by a membership condition
+      name: a collection fixed by a membership condition, a kind or a subclass included
     - value: property
       name: a feature that a bearer possesses, represented or not
     - value: process
@@ -1115,7 +1115,7 @@ vocabularies:
     - value: deductive
       name: the conclusion makes explicit what the premises contain
     - value: inductive
-      name: the step extends a regularity from observed to unobserved instances
+      name: the step concludes from observed instances to a claim beyond them
     - value: abductive
       name: the step proposes a hypothesis under which an observed fact is expected
     - value: analogical
@@ -1159,12 +1159,12 @@ vocabularies:
     - value: retracted
       name: the record is withdrawn, with all its specifications
     index_sets.structure:
+    - value: evolution
+      name: the index along which the state evolves, such as time or a training step
     - value: continuum
-      name: an uncountable set, such as a spatial domain
+      name: any other continuous index, such as space, a lag or a horizon
     - value: discrete-set
-      name: a set of separate members, such as labelled cases or samples
-    - value: interval
-      name: a contiguous range of an ordered set, such as a time axis
+      name: any other countable index, such as samples, sites or members
     variables.determined:
     - value: within
       name: its value is fixed inside the model

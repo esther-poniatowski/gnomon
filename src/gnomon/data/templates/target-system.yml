@@ -46,7 +46,7 @@ index_sets:                      # sets that index a quantity without being unit
     notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
     variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    structure:                   # continuum (an uncountable set, such as a spatial domain) | discrete-set (a set of separate members, such as labelled cases or samples) | interval (a contiguous range of an ordered set, such as a time axis)
+    structure:                   # evolution (the index along which the state evolves, such as time or a training step) | continuum (any other continuous index, such as space, a lag or a horizon) | discrete-set (any other countable index, such as samples, sites or members)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; the formula of the coordinate that the set indexes, such as L or T
 
 variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate variables determined `within`

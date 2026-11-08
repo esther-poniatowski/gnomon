@@ -25,7 +25,7 @@ Each status of the state qualifies one bearer along one axis. An axis is the que
 | law of a record | warrant of a law | the provenance of the law | `derived`, `posited`, `fitted`, `measured` | [background](../knowledge/background.md#^law-warrant) |
 | specification of a record | maturity | how far the specification has been revised, and whether further revision is expected | `open`, `provisional`, `stabilized` | [maturity](#^maturity) |
 | slot of a question | commitment | how far the slot fixes its referent | `placeholder`, `identified`, `specified` | [levels of commitment](../question/question.md#^commitment-levels) |
-| phenomenon | evidential status | the kind of evidence that the behavior occurs | `established`, `reported`, `predicted`, `derived` | [phenomenon](../subject/phenomenon.md) |
+| phenomenon | evidential status | the kind of evidence that the behavior occurs, or does not | `established`, `reported`, `predicted`, `derived`, `absent`, `disproved`, `undecided` | [phenomenon](../subject/phenomenon.md#^evidential-status) |
 | condition of answerability | state of a condition | whether the records show that the condition holds | `established`, `not established`, `refuted` | [states of a condition](../question/conditions-of-answerability.md#^condition-states) |
 | step of an itinerary | verdict of a norm | whether the output of the act meets the norm of its activity | `pass`, `fail`, `pending` | [attributes of an activity](../../processes/activities/epistemic-activities.md#^attribute-vocabularies) |
 | test of an assessment | verdict of a test | whether the answer passes one test | `pass`, `fail`, `pending`, `not-applicable` | [conditions of satisfaction](../answer/satisfaction-conditions.md#^conditions-satisfaction) |

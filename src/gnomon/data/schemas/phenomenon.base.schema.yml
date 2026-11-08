@@ -235,7 +235,7 @@ properties:
           - string
           - 'null'
           title: Structure
-          description: 'the structure of the index set: a continuum, a discrete set or an interval'
+          description: 'the role of the index set: the index along which the state evolves, or another index, continuous or countable'
         dimensional_formula:
           type:
           - string
@@ -379,7 +379,7 @@ properties:
           - string
           - 'null'
           title: Selects
-          description: required with a condition
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them'
         held_by:
           type:
           - string
@@ -424,7 +424,7 @@ properties:
               - string
               - 'null'
               title: Censoring
-              description: 'the censoring of an event whose time is unknown: right, left, interval or none'
+              description: 'the censoring of the event time: right, left or interval, when the time is unknown, or none, when it is observed'
             reading:
               type:
               - string
@@ -611,7 +611,7 @@ properties:
                 - string
                 - 'null'
                 title: Selects
-                description: required with a condition
+                description: 'the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them'
               held_by:
                 type:
                 - string
@@ -1010,8 +1010,7 @@ properties:
     - string
     - 'null'
     title: Evidential status
-    description: established across data sets or methods · reported · predicted · derived within a model
-      · absent from a closed search · disproved · undecided
+    description: 'established across data sets or methods · reported once · predicted, of a target with actual members · derived, of a model or of a target without actual members · absent from a closed search · disproved · undecided'
     examples:
     - gamma oscillations in V1, recorded across laboratories (established); a transition to chaos in mean-field
       theory (predicted); the stationary rate of a balanced network (derived)

@@ -28,7 +28,7 @@ index_sets:
   - name: "training step"
     symbol: step
     extent: "interval_of(nonneg(ints))"
-    structure: interval
+    structure: evolution
   - name: "training sample"
     symbol: train
     extent: train_set

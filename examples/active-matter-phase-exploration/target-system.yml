@@ -44,7 +44,7 @@ index_sets:
   - name: "time"
     symbol: t
     extent: "interval_of(reals)"
-    structure: interval
+    structure: evolution
 
 variables:
   - name: "local state of a species field"

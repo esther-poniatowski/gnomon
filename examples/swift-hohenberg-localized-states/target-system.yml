@@ -27,7 +27,7 @@ index_sets:
   - name: "time"
     symbol: t
     extent: "nonneg(reals)"
-    structure: interval
+    structure: evolution
 
 variables:
   - name: "amplitude field of the pattern"

@@ -208,6 +208,7 @@ class _Registries:
     slot_types: frozenset[str] = field(default_factory=c.placeholder_types)
     aims: dict[str, frozenset[str]] = field(default_factory=c.result_aims)
     occurrences: dict[str, list[str]] = field(default_factory=c.occurrence_by_category)
+    evidence: dict[str, list[str]] = field(default_factory=c.target_types_by_evidential_status)
     constructs: frozenset[str] = field(default_factory=construct_record_kinds)
     classes: dict[str, str] = field(default_factory=type_classes)
     holders: dict[str, frozenset[str]] = field(default_factory=type_holders)
@@ -493,8 +494,11 @@ def _assessment(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 
 def _phenomenon(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
-    """The occurrence class of a phenomenon against its category."""
-    return c.mismatched_occurrence(record, ctx.registries.occurrences)
+    """The occurrence class of a phenomenon against its category, and its evidential status against
+    the type of its target system."""
+    return c.mismatched_occurrence(record, ctx.registries.occurrences) + c.mismatched_evidence(
+        record, ctx.target_of(record), ctx.registries.evidence
+    )
 
 
 def _problem(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:

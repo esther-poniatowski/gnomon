@@ -33,7 +33,7 @@ index_sets:                      # only sets the observables introduce beyond th
     notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
     variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    structure:                   # continuum (an uncountable set, such as a spatial domain) | discrete-set (a set of separate members, such as labelled cases or samples) | interval (a contiguous range of an ordered set, such as a time axis)
+    structure:                   # evolution (the index along which the state evolves, such as time or a training step) | continuum (any other continuous index, such as space, a lag or a horizon) | discrete-set (any other countable index, such as samples, sites or members)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; the formula of the coordinate that the set indexes, such as L or T
 
 observables:                     # functions of the system state that restate the behavior
@@ -119,7 +119,7 @@ conditions_and_byproducts:       # put a factor the question varies among the in
       expression: "EXPRESSION OVER DECLARED SYMBOLS"
       justification: "WHY THE BYPRODUCT FALLS OUTSIDE THE PHENOMENON"   # only content beyond the expression
 
-evidential_status:               # established (the behavior is shown across data sets or methods) | reported (one data set or one study shows the behavior) | predicted (a theory implies the behavior, which detection has not reached) | derived (the behavior is obtained as a consequence of a model) | absent (a closed search found no instance) | disproved (a counterexample or a contradiction is established) | undecided (the occurrence is an open question that the inquiry tracks)
+evidential_status:               # established (the behavior is shown across data sets or methods) | reported (one data set or one study shows the behavior) | predicted (a derivation asserts the behavior of a target with actual members, awaiting detection) | derived (a derivation establishes the behavior of a model or a target without actual members) | absent (a closed search found no instance) | disproved (a counterexample or a contradiction is established) | undecided (the occurrence is an open question that the inquiry tracks)
 search:                          # fill when the evidential status is absent or disproved
   scope: "EXPRESSION OVER DECLARED SYMBOLS"   # the region of the members, conditions and courses that the search covered
   procedure: "THE PROCEDURES AND THE DATA SEARCHED, AND WHY THEY WOULD HAVE DETECTED THE BEHAVIOR"

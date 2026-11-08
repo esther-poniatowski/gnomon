@@ -62,7 +62,7 @@ The activities of this family output a [design](../../../specification/design.md
 
 ## Relations to the method
 
-- **The evidential status of a phenomenon records the outcome of detection.** A phenomenon may have the evidential status `established`, across data sets or methods; `reported`, once; `predicted`; or `derived`, within a model. The status therefore separates a phenomenon that detection has reached from one that a theory only predicts, independently of any account that explains it.
+- **The evidential status of a phenomenon records the outcome of detection.** A phenomenon may have the evidential status `established`, across data sets or methods; `reported`, once; `predicted`, when a derivation asserts it of a target with actual members; or `derived`, when a derivation asserts it of a model or of a target without actual members, as the [evidential status](../../objects/subject/phenomenon.md#^evidential-status) defines them. The status therefore separates a phenomenon that detection has reached from one that a theory only predicts, independently of any account that explains it.
 - **A law with the role *measurement* states the observation map of an instrument.** The law relates the reading of the instrument to a quantity of the target, so a measurement outcome is inferred through that law, as the model-based part of the norm of measurement requires.
 - **A clamped variable among the conditions held fixed records an intervention.** A [clamped state variable](../../objects/subject/domain.md) is removed from the dynamics and treated as an input, just as an intervention replaces the equation of its target variable.
 

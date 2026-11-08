@@ -350,7 +350,7 @@ properties:
           - string
           - 'null'
           title: Structure
-          description: 'the structure of the index set: a continuum, a discrete set or an interval'
+          description: 'the role of the index set: the index along which the state evolves, or another index, continuous or countable'
         dimensional_formula:
           type:
           - string
@@ -498,7 +498,7 @@ properties:
           - string
           - 'null'
           title: Selects
-          description: required with a condition
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them'
         held_by:
           type:
           - string
@@ -603,7 +603,7 @@ properties:
           - string
           - 'null'
           title: Scale
-          description: 'the scale of measurement of the parameter: nominal, ordinal, interval, ratio or absolute'
+          description: 'the scale of measurement of the parameter: nominal, ordinal, interval, ratio or absolute, or not applicable when the values form no scale'
         dimensional_formula:
           type:
           - string
@@ -642,7 +642,7 @@ properties:
           - string
           - 'null'
           title: Selects
-          description: required with a condition
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them'
         held_by:
           type:
           - string

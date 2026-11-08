@@ -28,7 +28,7 @@ index_sets:
   - name: "training time"
     symbol: t
     extent: "nonneg(reals)"
-    structure: interval
+    structure: evolution
 
 variables:
   - name: "trainable parameter vector"

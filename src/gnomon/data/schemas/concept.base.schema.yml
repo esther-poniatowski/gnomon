@@ -47,7 +47,7 @@ properties:
     type: [string, 'null']
     x-vocabulary: .kind
     title: Kind
-    description: Whether the concept names a system, a subtype or a class, a property, or a process.
+    description: 'The kind of entity that the concept represents: a system, a class, a kind or a subclass included, a property, or a process.'
     examples: [subtype-or-class]
   antagonist:
     type: [string, 'null']

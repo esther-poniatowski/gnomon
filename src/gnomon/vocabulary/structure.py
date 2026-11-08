@@ -127,15 +127,15 @@ def misplaced_sharing(record: Mapping[str, Any]) -> list[Finding]:
 
 
 def unfixed_parameters(record: Mapping[str, Any]) -> list[Finding]:
-    """Return every parameter whose signature runs along an interval index.
+    """Return every parameter whose signature runs along the index of evolution.
 
-    A parameter is held fixed while the phenomenon unfolds, so a quantity indexed by an ordered
-    continuum varies during the dynamics and is an exogenous variable instead.
+    A parameter is held fixed while the phenomenon unfolds, so a quantity indexed by the index
+    along which the state evolves varies during the dynamics and is an exogenous variable instead.
     """
     running = {
         e["symbol"]
         for e in entries(record, "index_sets")
-        if isinstance(e.get("symbol"), str) and e.get("structure") == "interval"
+        if isinstance(e.get("symbol"), str) and e.get("structure") == "evolution"
     }
     found = []
     for index, entry in indexed(record, "parameters"):

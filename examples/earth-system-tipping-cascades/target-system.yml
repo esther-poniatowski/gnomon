@@ -27,7 +27,7 @@ index_sets:
   - name: "time"
     symbol: t
     extent: "interval_of(reals)"
-    structure: interval
+    structure: evolution
 
 variables:
   - name: "physical state of a subsystem, in its empirically admissible state space"

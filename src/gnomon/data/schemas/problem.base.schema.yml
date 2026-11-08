@@ -81,9 +81,7 @@ properties:
     - string
     - 'null'
     title: Result type
-    description: 'the type of result of the demand, one of the rows of the demand table: phenomenon ·
-      consequence · target-claim · model · explanation · classification · concept · measurement-procedure
-      · knowledge-state-change · inter-theory-relation'
+    description: 'the type of result of the demand, one of the rows of the demand table: phenomenon · consequence · target-claim · model · explanation · classification · concept · measurement-procedure · design · knowledge-state-change · inter-theory-relation'
     examples:
     - '`explanation`, for an account of the delay'
   request:

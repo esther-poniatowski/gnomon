@@ -31,7 +31,8 @@ requirements
 values
     Check each closed field against the values of the vocabulary registry.
 subjects
-    Check the occurrence class of a phenomenon and the boundaries of a target system.
+    Check the occurrence class and the evidential status of a phenomenon, and the boundaries of a
+    target system.
 questions
     Check the slots, the references, the task and the domain of a question.
 assessments
@@ -119,8 +120,10 @@ from .requirements import (
     unmet_general,
 )
 from .subjects import (
+    mismatched_evidence,
     mismatched_occurrence,
     occurrence_by_category,
+    target_types_by_evidential_status,
     undecided_boundaries,
 )
 from .values import (
@@ -159,6 +162,7 @@ __all__ = [
     "misdirected_requirements",
     "misheld_existence",
     "misheld_presuppositions",
+    "mismatched_evidence",
     "mismatched_occurrence",
     "mismatched_request",
     "mismatched_status_pairs",
@@ -178,6 +182,7 @@ __all__ = [
     "requirements_by_presence",
     "requirements_by_value",
     "result_aims",
+    "target_types_by_evidential_status",
     "unanchored_explicandum",
     "unbound_outputs",
     "unbounded_aim",

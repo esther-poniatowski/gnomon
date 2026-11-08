@@ -196,6 +196,10 @@ COMPLETENESS_MISMATCHED_OCCURRENCE = _rule(
     "completeness/mismatched-occurrence",
     "A phenomenon takes an occurrence class that its category does not admit.",
 )
+COMPLETENESS_MISMATCHED_EVIDENCE = _rule(
+    "completeness/mismatched-evidence",
+    "A phenomenon takes an evidential status that the type of its target system does not admit.",
+)
 COMPLETENESS_UNADMITTED_PLACEHOLDER = _rule(
     "completeness/unadmitted-placeholder",
     "A subject slot holds a placeholder of a type not admitted.",
@@ -561,7 +565,7 @@ VOCABULARY_MISPLACED_SHARING = _rule(
 )
 VOCABULARY_UNFIXED_PARAMETER = _rule(
     "vocabulary/unfixed-parameter",
-    "A parameter is indexed by an interval, along which it would vary.",
+    "A parameter is indexed by the index of evolution, along which it would vary.",
 )
 VOCABULARY_DOUBLY_DEFINED = _rule(
     "vocabulary/doubly-defined", "A quantity carries both an expression and a condition."

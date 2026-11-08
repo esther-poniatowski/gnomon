@@ -97,9 +97,9 @@ properties:
       properties:
         structure:
           enum:
+          - evolution
           - continuum
           - discrete-set
-          - interval
           - null
   variables:
     items:

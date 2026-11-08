@@ -22,12 +22,12 @@ Belief revision names five operations on an epistemic state: expansion adds a cl
 A revision of content takes one kind or several:
 
 - `retraction`: a record that was once active is no longer pursued;
-- `scope_narrowing` and `scope_generalization`: the domain of a record shrinks or extends;
+- `scope-narrowing` and `scope-generalization`: the domain of a record shrinks or extends;
 - `reorientation`: the content is reframed without narrowing or generalizing, as when a question is reformulated;
-- `taxonomic_restructure`: the classification of a record changes, by renaming, regrouping, splitting or merging;
+- `taxonomic-restructure`: the classification of a record changes, by renaming, regrouping, splitting or merging;
 - `correction`: the content changes within its scope, as when an error of a proof is fixed.
 
-The sensitivity of a dependent follows from the warrant of the relation through which it rests on the revised record. A monotonic warrant is sensitive only to `retraction`, `correction` and `taxonomic_restructure`. A defeasible warrant is sensitive as well to the kinds that bring qualifying evidence: `scope_narrowing`, `scope_generalization` and `reorientation`. Each flagged dependent then records its state: `pending`, `revised`, `confirmed_unaffected` or `retracted`. The recorded state holds the judgment that the [decision on revision accountability](../adr/revision-accountability.md#^flag-not-edit) leaves to the researcher for each dependent.
+The sensitivity of a dependent follows from the warrant of the relation through which it rests on the revised record. A monotonic warrant is sensitive only to `retraction`, `correction` and `taxonomic-restructure`. A defeasible warrant is sensitive as well to the kinds that bring qualifying evidence: `scope-narrowing`, `scope-generalization` and `reorientation`. Each flagged dependent then records its state: `pending`, `revised`, `unaffected` or `retracted`. The recorded state holds the judgment that the [decision on revision accountability](../adr/revision-accountability.md#^flag-not-edit) leaves to the researcher for each dependent.
 
 **Literature.** None cited.
 

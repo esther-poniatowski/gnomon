@@ -66,7 +66,7 @@ support: unsupported             # unsupported (no proof and no evidence support
 
 uncertainty:                     # fill when the claim assigns a value; one entry per value
   - of: SYMBOL
-    form:                        # interval (a range around the value, such as 40 ± 3 Hz) | distribution (a probability distribution over the value) | bound (a limit that the value or its error does not exceed)
+    form:                        # interval (a range on both sides of the value, such as 40 ± 3 Hz) | distribution (a probability distribution over the value) | bound (a limit on one side of the value, such as an upper bound on its error)
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
 
 modal_strength:                  # actual (the claim holds of the target system) | possible (the claim is consistent with the admitted laws and the domain) | necessary (no alternative consistent with the admitted laws produces a foil); the strength that the answer claims, compared with the strength the question requests
@@ -146,7 +146,7 @@ aim_block:                       # fill for a complete or a partial answer only:
 
 relations:                       # fill when the answer bears on another answer; one entry per link
   - answer: ans.TOPIC.NAME
-    relation:                    # supports (its claim is a ground of the other answer) | presupposes (it is admissible only if the other answer is true) | tests (its claim, compared with the target, follows from the other) | defeats (its claim, once accepted, removes a ground of the other) | revises (it replaces the other answer, which stays unchanged)
+    relation:                    # supports (its claim is a ground of the other answer) | presupposes (it is admissible only if the other answer is true) | tests (its claim, compared with the target, follows from the other) | defeats (its claim, once accepted, denies a ground of the other or its application) | revises (it replaces the other answer, which stays unchanged)
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; a specification left out is provisional
   FIELD.PATH: open

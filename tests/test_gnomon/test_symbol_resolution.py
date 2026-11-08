@@ -479,7 +479,7 @@ def test_a_parameter_running_along_an_interval_is_reported() -> None:
     record = {
         "type": "target-system",
         "index_sets": [
-            {"symbol": "t", "structure": "interval"},
+            {"symbol": "t", "structure": "evolution"},
             {"symbol": "i", "structure": "discrete-set"},
         ],
         "parameters": [{"symbol": "f", "signature": ["t"]}, {"symbol": "w", "signature": ["i"]}],

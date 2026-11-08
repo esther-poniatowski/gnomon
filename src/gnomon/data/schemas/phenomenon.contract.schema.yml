@@ -66,9 +66,9 @@ properties:
       properties:
         structure:
           enum:
+          - evolution
           - continuum
           - discrete-set
-          - interval
           - null
   observables:
     items:

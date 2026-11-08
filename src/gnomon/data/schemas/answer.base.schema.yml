@@ -508,7 +508,7 @@ properties:
           - string
           - 'null'
           title: Form
-          description: 'the form of the uncertainty: an interval, a distribution or a bound'
+          description: 'the form of the uncertainty: an interval on both sides of the value, a distribution over it, or a bound on one side'
         expression:
           type:
           - string

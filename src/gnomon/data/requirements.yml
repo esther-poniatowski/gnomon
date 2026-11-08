@@ -98,6 +98,15 @@ occurrence_by_category:
   capacity: [not-applicable]
   structural-property: [state]
 
+# The target types that admit each evidential status obtained by derivation. A behavior derived for a
+# model or for a target without actual members is `derived`, since the derivation establishes it; a
+# behavior derived for a target with actual members is `predicted`, since it awaits detection. A
+# class of possible systems may hold actual members, so it admits both. A status left out admits
+# every target type.
+target_types_by_evidential_status:
+  derived: [possible-systems, hypothetical, no-external-target]
+  predicted: [particular, actual-systems, possible-systems]
+
 by_aim:
   description:
     required: []

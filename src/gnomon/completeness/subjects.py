@@ -1,6 +1,6 @@
 """
-The checks of the records of a subject: the occurrence class of a phenomenon, and the boundaries
-that a target system draws with its external systems.
+The checks of the records of a subject: the occurrence class and the evidential status of a
+phenomenon, and the boundaries that a target system draws with its external systems.
 """
 
 from __future__ import annotations
@@ -50,6 +50,55 @@ def mismatched_occurrence(
             f"occurrence: {occurrence} is no occurrence class of a {category}, which admits"
             f" {' or '.join(admitted)}",
             "occurrence",
+        )
+    ]
+
+
+def target_types_by_evidential_status(source: Path | None = None) -> dict[str, list[str]]:
+    """Return, per evidential status obtained by derivation, the target types that admit it."""
+    table = read_requirements(source).get("target_types_by_evidential_status") or {}
+    return {str(status): list(types or []) for status, types in table.items()}
+
+
+#: The repair named by a mismatched evidential status: the status that the target type admits.
+EVIDENCE_REPAIR: dict[str, str] = {
+    "derived": "a behavior derived for a target with actual members is predicted",
+    "predicted": "a behavior derived for a target without actual members is derived",
+}
+
+
+def mismatched_evidence(
+    phenomenon: Mapping[str, Any],
+    target: Mapping[str, Any],
+    table: Mapping[str, list[str]],
+) -> list[Finding]:
+    """Return the evidential status that the type of the target system does not admit.
+
+    A behavior obtained by derivation is `derived` when it is asserted of a model or of a target
+    without actual members, since the derivation establishes it, and `predicted` when it is
+    asserted of a target with actual members, since it awaits detection. An empty field, or a
+    target that states no type, leaves the pair unfilled, and nothing is reported.
+
+    >>> table = {"derived": ["no-external-target"], "predicted": ["particular"]}
+    >>> found = mismatched_evidence({"evidential_status": "derived"},
+    ...                             {"id": "system.flow", "target_type": "particular"}, table)
+    >>> for part in found[0].text.split("; "):
+    ...     print(part)
+    evidential_status: derived, whereas system.flow is of type particular
+    a behavior derived for a target with actual members is predicted
+    """
+    status, kind = phenomenon.get("evidential_status"), target.get("target_type")
+    if not isinstance(status, str) or not isinstance(kind, str) or is_empty(kind):
+        return []
+    if status not in table or kind in table[status]:
+        return []
+    return [
+        finding(
+            rules.COMPLETENESS_MISMATCHED_EVIDENCE,
+            f"evidential_status: {status}, whereas {target.get('id')} is of type {kind};"
+            f" {EVIDENCE_REPAIR.get(status, 'the target type does not admit the status')}",
+            "evidential_status",
+            value=status,
         )
     ]
 

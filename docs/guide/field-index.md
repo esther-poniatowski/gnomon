@@ -136,7 +136,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `type` | Record type | The record type, which fixes the contract that the record follows. | — |
 | `uncertainty` | Uncertainty | the uncertainty of each value, as an interval, a distribution or a bound | [Uncertainty](../specification/answer.md) |
 | `uncertainty[].expression` | Expression | an expression over declared symbols stating the uncertainty | [Uncertainty](../specification/answer.md) |
-| `uncertainty[].form` | Form | the form of the uncertainty: an interval, a distribution or a bound | [Uncertainty](../specification/answer.md) |
+| `uncertainty[].form` | Form | the form of the uncertainty: an interval on both sides of the value, a distribution over it, or a bound on one side | [Uncertainty](../specification/answer.md) |
 | `uncertainty[].of` | Of | the symbol of the value whose uncertainty the entry states | [Uncertainty](../specification/answer.md) |
 | `use` | Use | the purpose of an answer whose claim bears on no target: a use such as `tool`, `proof-of-principle`, `conceptual-exploration` or `understanding`, with the property that the model must have for that use | [Use](../specification/answer.md) |
 | `use.property` | Property | the property that the model must have for the declared use | [Use](../specification/answer.md) |
@@ -296,7 +296,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `definition` | Definition | A pointer to the full definition object of the concept, when one exists. | [Definition](../specification/concept.md) |
 | `gloss` | Gloss | One sentence that fixes the meaning of the concept, without asserting a claim about its instances. | [Gloss](../specification/concept.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
-| `kind` | Kind | Whether the concept names a system, a subtype or a class, a property, or a process. | [Kind](../specification/concept.md) |
+| `kind` | Kind | The kind of entity that the concept represents: a system, a class, a kind or a subclass included, a property, or a process. | [Kind](../specification/concept.md) |
 | `maturity` | Maturity | optional; one maturity per specification: open \| provisional \| stabilized; the record status applies to every specification left out | [Maturity of a field](../specification/maturity.md) |
 | `source` | Source | The note or the publication that states the concept and its grounds. | [Source](../specification/concept.md) |
 | `status` | Status | The maturity of the record as a whole, or its retraction. | — |
@@ -526,7 +526,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `index_sets[].extent` | Extent | a set expression over declared symbols naming the members of the index set | [Index sets](../specification/model.md) |
 | `index_sets[].name` | Name | the words that designate the index set | [Index sets](../specification/model.md) |
 | `index_sets[].notation` | Notation | only when the LaTeX form differs from the symbol | [Index sets](../specification/model.md) |
-| `index_sets[].structure` | Structure | the structure of the index set: a continuum, a discrete set or an interval | [Index sets](../specification/model.md) |
+| `index_sets[].structure` | Structure | the role of the index set: the index along which the state evolves, or another index, continuous or countable | [Index sets](../specification/model.md) |
 | `index_sets[].symbol` | Symbol | the symbol of the index set, unique within the record | [Index sets](../specification/model.md) |
 | `index_sets[].variant` | Variant | symbol of the target variant that the entry models; omit when the model stands for every member of the class | [Index sets](../specification/model.md) |
 | `laws` | Laws or structural relations $L$ | the dependences that link the terms $V$ | [Laws or structural relations](../specification/model.md) |
@@ -571,8 +571,8 @@ Looks up each field of each record by its path, with its title, its description 
 | `parameters[].name` | Name | the words that designate the parameter | [Parameters](../specification/model.md) |
 | `parameters[].notation` | Notation | only when the LaTeX form differs from the symbol | [Parameters](../specification/model.md) |
 | `parameters[].reading` | Reading | the expression of the parameter in words | [Parameters](../specification/model.md) |
-| `parameters[].scale` | Scale | the scale of measurement of the parameter: nominal, ordinal, interval, ratio or absolute | [Parameters](../specification/model.md) |
-| `parameters[].selects` | Selects | required with a condition | [Parameters](../specification/model.md) |
+| `parameters[].scale` | Scale | the scale of measurement of the parameter: nominal, ordinal, interval, ratio or absolute, or not applicable when the values form no scale | [Parameters](../specification/model.md) |
+| `parameters[].selects` | Selects | the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them | [Parameters](../specification/model.md) |
 | `parameters[].shared` | Shared | true when one value holds for every tuple of the signature | [Parameters](../specification/model.md) |
 | `parameters[].signature` | Signature | the indices that the parameter takes | [Parameters](../specification/model.md) |
 | `parameters[].symbol` | Symbol | the symbol of the parameter, unique within the record | [Parameters](../specification/model.md) |
@@ -590,8 +590,8 @@ Looks up each field of each record by its path, with its title, its description 
 | `variables[].name` | Name | the words that designate the variable | [Variables](../specification/model.md) |
 | `variables[].notation` | Notation | only when the LaTeX form differs from the symbol | [Variables](../specification/model.md) |
 | `variables[].reading` | Reading | the expression of the variable in words | [Variables](../specification/model.md) |
-| `variables[].scale` | Scale | the scale of measurement of the variable: nominal, ordinal, interval, ratio or absolute | [Variables](../specification/model.md) |
-| `variables[].selects` | Selects | required with a condition | [Variables](../specification/model.md) |
+| `variables[].scale` | Scale | the scale of measurement of the variable: nominal, ordinal, interval, ratio or absolute, or not applicable when the values form no scale | [Variables](../specification/model.md) |
+| `variables[].selects` | Selects | the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them | [Variables](../specification/model.md) |
 | `variables[].shared` | Shared | true when one value holds for every tuple of the signature | [Variables](../specification/model.md) |
 | `variables[].signature` | Signature | one constituent kind or index set per place; empty for the model as a whole | [Variables](../specification/model.md) |
 | `variables[].symbol` | Symbol | the symbol of the variable, unique within the record | [Variables](../specification/model.md) |
@@ -676,7 +676,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `detection_criterion[].name` | Name | the words that designate the test | [Detection criterion](../specification/phenomenon.md) |
 | `detection_criterion[].procedure` | Procedure | only content beyond the name of the test | [Detection criterion](../specification/phenomenon.md) |
 | `detection_criterion[].variant` | Variant | symbol of the target variant carrying the entry; omit when every member of the class carries it | [Detection criterion](../specification/phenomenon.md) |
-| `evidential_status` | Evidential status | established across data sets or methods · reported · predicted · derived within a model · absent from a closed search · disproved · undecided | [Evidential status](../specification/phenomenon.md) |
+| `evidential_status` | Evidential status | established across data sets or methods · reported once · predicted, of a target with actual members · derived, of a model or of a target without actual members · absent from a closed search · disproved · undecided | [Evidential status](../specification/phenomenon.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `identification` | Identification | what fixes the referent before any observable is declared: a definite description of the behavior, with pointers to the data, the results or the publications that report it | [Identification](../specification/phenomenon.md) |
 | `identification.description` | description | a noun phrase that picks out one behavior of the target | [Identification: description](../specification/phenomenon.md) |
@@ -686,7 +686,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `index_sets[].extent` | Extent | a set expression over declared symbols naming the members of the index set | [Index sets](../specification/phenomenon.md) |
 | `index_sets[].name` | Name | the words that designate the index set | [Index sets](../specification/phenomenon.md) |
 | `index_sets[].notation` | Notation | only when the LaTeX form differs from the symbol | [Index sets](../specification/phenomenon.md) |
-| `index_sets[].structure` | Structure | the structure of the index set: a continuum, a discrete set or an interval | [Index sets](../specification/phenomenon.md) |
+| `index_sets[].structure` | Structure | the role of the index set: the index along which the state evolves, or another index, continuous or countable | [Index sets](../specification/phenomenon.md) |
 | `index_sets[].symbol` | Symbol | the symbol of the index set, unique within the record | [Index sets](../specification/phenomenon.md) |
 | `index_sets[].variant` | Variant | variant carrying the entry; omit when every member of the class carries it | [Index sets](../specification/phenomenon.md) |
 | `manifestations` | Manifestations | per form, "[expression over the observables]" with its form: value · dependence · functional form · scaling · relation | [Manifestations](../specification/phenomenon.md) |
@@ -699,7 +699,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `manifestations[].features[].name` | Name | the words that designate the feature | [Manifestations: features](../specification/phenomenon.md) |
 | `manifestations[].features[].observed` | Observed | the value of the feature observed, one element of its value set | [Manifestations: features](../specification/phenomenon.md) |
 | `manifestations[].features[].procedure` | Procedure | only content beyond the name and the value set | [Manifestations: features](../specification/phenomenon.md) |
-| `manifestations[].features[].selects` | Selects | required with a condition | [Manifestations: features](../specification/phenomenon.md) |
+| `manifestations[].features[].selects` | Selects | the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them | [Manifestations: features](../specification/phenomenon.md) |
 | `manifestations[].features[].symbol` | Symbol | the symbol of the feature, unique within the record | [Manifestations: features](../specification/phenomenon.md) |
 | `manifestations[].features[].values` | Values | a set expression over declared symbols giving the values that the feature can take | [Manifestations: features](../specification/phenomenon.md) |
 | `manifestations[].form` | Form | the form of the manifestation: a value, a dependence, a functional form, a scaling or a relation | [Manifestations](../specification/phenomenon.md) |
@@ -716,7 +716,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `observables[].estimator.method` | Method | the estimator that computes the values from the data | [Observables: estimator](../specification/phenomenon.md) |
 | `observables[].estimator.uncertainty` | Uncertainty | the uncertainty that the estimator reports | [Observables: estimator](../specification/phenomenon.md) |
 | `observables[].event` | event | the origin from which the clock starts, the horizon at which observation stops, and the censoring (right · left · interval · none) for an event whose time is unknown | [Observables: event](../specification/phenomenon.md) |
-| `observables[].event.censoring` | Censoring | the censoring of an event whose time is unknown: right, left, interval or none | [Observables: event](../specification/phenomenon.md) |
+| `observables[].event.censoring` | Censoring | the censoring of the event time: right, left or interval, when the time is unknown, or none, when it is observed | [Observables: event](../specification/phenomenon.md) |
 | `observables[].event.horizon` | Horizon | an expression fixing the end of observation | [Observables: event](../specification/phenomenon.md) |
 | `observables[].event.origin` | Origin | an expression fixing the origin from which the clock of the event starts | [Observables: event](../specification/phenomenon.md) |
 | `observables[].event.reading` | Reading | the event in words, and the value recorded when it is not observed | [Observables: event](../specification/phenomenon.md) |
@@ -727,7 +727,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `observables[].reading` | Reading | the expression of the observable in words | [Observables](../specification/phenomenon.md) |
 | `observables[].reference` | Reference | for an observable the target already declares as a quantity, give only this reference | [Observables](../specification/phenomenon.md) |
 | `observables[].scale` | scale | nominal · ordinal · interval · ratio · absolute · not-applicable | [Observables: scale](../specification/phenomenon.md) |
-| `observables[].selects` | Selects | required with a condition | [Observables](../specification/phenomenon.md) |
+| `observables[].selects` | Selects | the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them | [Observables](../specification/phenomenon.md) |
 | `observables[].signature` | signature (indices $i$ and $t$) | the free indices of the definition: a constituent kind, an index set, time, a parameter, or a new index that it introduces | [Observables: signature (indices and )](../specification/phenomenon.md) |
 | `observables[].symbol` | Symbol | the symbol of the observable, unique within the record | [Observables](../specification/phenomenon.md) |
 | `observables[].values` | Values | a set expression over declared symbols giving the values of the observable | [Observables](../specification/phenomenon.md) |
@@ -785,7 +785,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `knowledge_obstacles[].pointers` | Pointers | the records or the publications that establish the obstacle | [Knowledge obstacles](../specification/problem.md) |
 | `maturity` | Maturity | optional; one maturity per field: open \| provisional \| stabilized; a field left out is provisional | [Maturity of a field](../specification/maturity.md) |
 | `request` | Request | one · all · over-a-parameter · decision, as the request of a demand defines them | [Request](../specification/problem.md) |
-| `result_type` | Result type | the type of result of the demand, one of the rows of the demand table: phenomenon · consequence · target-claim · model · explanation · classification · concept · measurement-procedure · knowledge-state-change · inter-theory-relation | [Result type](../specification/problem.md) |
+| `result_type` | Result type | the type of result of the demand, one of the rows of the demand table: phenomenon · consequence · target-claim · model · explanation · classification · concept · measurement-procedure · design · knowledge-state-change · inter-theory-relation | [Result type](../specification/problem.md) |
 | `significance` | Significance | the consequences of a solution for other work | [Significance](../specification/problem.md) |
 | `sources` | Sources | per source, a pointer | [Sources](../specification/problem.md) |
 | `statement` | Statement | "[the result sought], [the obstacle to obtaining it]", as a reading | [Statement](../specification/problem.md) |
@@ -832,8 +832,8 @@ Looks up each field of each record by its path, with its title, its description 
 | `subject.contrast.foil_set[].name` | Name | the words that designate the foil | [Foil set](../specification/question-subject.md) |
 | `subject.contrast.foil_set[].reading` | Reading | only content beyond the name and the expression | [Foil set](../specification/question-subject.md) |
 | `subject.contrast.foil_set[].symbol` | Symbol | the symbol of the foil, unique within the record | [Foil set](../specification/question-subject.md) |
-| `subject.contrast.foil_status` | Foil status | observed (a realized comparison case) · counterfactual | [Foil status](../specification/question-subject.md) |
-| `subject.contrast.locus` | Locus | other outcome (same system and conditions, other value of $P$) · other system ($P$ absent) · other condition (same system, different setting or intervention) | [Locus](../specification/question-subject.md) |
+| `subject.contrast.foil_status` | Foil status | observed (a realized comparison case) · counterfactual · not-applicable, for a question without a foil set | [Foil status](../specification/question-subject.md) |
+| `subject.contrast.locus` | Locus | other outcome (same system and conditions, other value of $P$) · other system ($P$ absent) · other condition (same system, different setting or intervention) · none, for a question that states no contrast | [Locus](../specification/question-subject.md) |
 | `subject.domain` | Domain of conditions $D$ | only restrictions of the a priori specification; assumptions of the analysis belong to the answer | [Domain of conditions](../specification/question-subject.md) |
 | `subject.domain.limit` | Limit | the expression "[quantity] → [limit value]", with a justification stating why the question is about the limit system | [Limit](../specification/question-subject.md) |
 | `subject.domain.limit.expression` | Expression | the limit, written `q -> v`, whose left side is a variable or a parameter of the target | [Limit](../specification/question-subject.md) |
@@ -872,7 +872,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `task.required_accuracy.outputs_to_match[].tolerance` | Tolerance | omit when the standard is `qualitative` or `structural-only` | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.outputs_to_match[].tolerance.bound` | Bound | an expression that the metric must not exceed | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.outputs_to_match[].tolerance.metric` | Metric | measure the difference between `answer` and `target` | [Required accuracy](../specification/question-task.md) |
-| `task.required_accuracy.standard` | Standard | how closely the answer must agree with the target: qualitative, an order of magnitude, a numeric bound or structure only | [Required accuracy](../specification/question-task.md) |
+| `task.required_accuracy.standard` | Standard | how closely the answer must agree with the target: qualitative, an order of magnitude, a numeric bound or structure only, or not applicable when the answer is matched against no data of the target | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.structures_to_match` | Structures to match | the structures of the phenomenon that the answer must reproduce, one entry per structure | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.structures_to_match[].justification` | Justification | why the question demands that the answer reproduce this structure | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.structures_to_match[].target` | Target | the feature or the manifestation of the phenomenon whose structure the answer must reproduce | [Required accuracy](../specification/question-task.md) |
@@ -916,7 +916,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `index_sets[].extent` | Extent | a set expression over declared symbols naming the members of the index set | [Index sets](../specification/target-system.md) |
 | `index_sets[].name` | Name | the words that designate the index set | [Index sets](../specification/target-system.md) |
 | `index_sets[].notation` | Notation | only when the LaTeX form differs from the symbol | [Index sets](../specification/target-system.md) |
-| `index_sets[].structure` | Structure | the structure of the index set: a continuum, a discrete set or an interval | [Index sets](../specification/target-system.md) |
+| `index_sets[].structure` | Structure | the role of the index set: the index along which the state evolves, or another index, continuous or countable | [Index sets](../specification/target-system.md) |
 | `index_sets[].symbol` | Symbol | the symbol of the index set, unique within the record | [Index sets](../specification/target-system.md) |
 | `index_sets[].variant` | Variant | variant carrying the entry; omit when every member of the class carries it | [Index sets](../specification/target-system.md) |
 | `maturity` | Maturity | optional; one maturity per specification: open \| provisional \| stabilized; the record status applies to every specification left out | [Maturity of a field](../specification/maturity.md) |
@@ -929,8 +929,8 @@ Looks up each field of each record by its path, with its title, its description 
 | `parameters[].notation` | Notation | only when the LaTeX form differs from the symbol | [Parameters](../specification/target-system.md) |
 | `parameters[].of` | Of | external system the entry characterizes; omit when the entry belongs to the target | [Parameters](../specification/target-system.md) |
 | `parameters[].reading` | Reading | the expression of the parameter in words | [Parameters](../specification/target-system.md) |
-| `parameters[].scale` | Scale | the scale of measurement of the parameter: nominal, ordinal, interval, ratio or absolute | [Parameters](../specification/target-system.md) |
-| `parameters[].selects` | Selects | required with a condition | [Parameters](../specification/target-system.md) |
+| `parameters[].scale` | Scale | the scale of measurement of the parameter: nominal, ordinal, interval, ratio or absolute, or not applicable when the values form no scale | [Parameters](../specification/target-system.md) |
+| `parameters[].selects` | Selects | the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them | [Parameters](../specification/target-system.md) |
 | `parameters[].shared` | Shared | true when one value holds for every tuple of the signature | [Parameters](../specification/target-system.md) |
 | `parameters[].signature` | Signature | one entry per place, e.g. two neurons for a connectivity weight | [Parameters](../specification/target-system.md) |
 | `parameters[].symbol` | Symbol | the symbol of the parameter, unique within the record | [Parameters](../specification/target-system.md) |
@@ -960,7 +960,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `variables[].of` | Of | external system the entry characterizes; omit when the entry belongs to the target | [Variables](../specification/target-system.md) |
 | `variables[].reading` | Reading | the expression of the variable in words | [Variables](../specification/target-system.md) |
 | `variables[].scale` | scale | the comparisons between values that carry meaning: nominal · ordinal · interval · ratio · absolute · not-applicable, for a variable and for a parameter alike | [Variables: scale](../specification/target-system.md) |
-| `variables[].selects` | Selects | required with a condition | [Variables](../specification/target-system.md) |
+| `variables[].selects` | Selects | the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them | [Variables](../specification/target-system.md) |
 | `variables[].shared` | Shared | true when one value holds for every tuple of the signature | [Variables](../specification/target-system.md) |
 | `variables[].signature` | Signature | one constituent kind or index set per place; empty for the system as a whole | [Variables](../specification/target-system.md) |
 | `variables[].symbol` | Symbol | the symbol of the variable, unique within the record | [Variables](../specification/target-system.md) |

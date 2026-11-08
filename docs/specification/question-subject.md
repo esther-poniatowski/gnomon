@@ -36,10 +36,10 @@ The grounds of the contrast fields are stated in the note on the [contrast](../e
 
 | Specification | When it is required | Options or frame | Examples | Source |
 | ------------- | ------------------- | ---------------- | -------- | ------ |
-| Locus | for a contrastive why-question | other outcome (same system and conditions, other value of $P$) · other system ($P$ absent) · other condition (same system, different setting or intervention) | synchronous rather than asynchronous activity (outcome); this network rather than a network without inhibitory neurons (system); a strong rather than a weak stimulus (condition) | [vanfraassen1980]; [lipton2004]; potential outcomes $Y_i(d)$ vs $Y_i(d')$ [lundberg2021] |
+| Locus | for a contrastive why-question | other outcome (same system and conditions, other value of $P$) · other system ($P$ absent) · other condition (same system, different setting or intervention) · none, for a question that states no contrast | synchronous rather than asynchronous activity (outcome); this network rather than a network without inhibitory neurons (system); a strong rather than a weak stimulus (condition) | [vanfraassen1980]; [lipton2004]; potential outcomes $Y_i(d)$ vs $Y_i(d')$ [lundberg2021] |
 | Foil set | for a contrastive why-question, with the other values of the explanandum variable as default | per foil, the expressions over the declared observables that hold in that case, with a reading | asynchronous activity (listed); every other oscillation frequency (rule) | [woodward2003] |
 | Compatibility | never stated on its own: the locus fixes it | exclusive · compatible (fact and foil co-occur in different systems) | synchronous versus asynchronous activity of one network (exclusive); Smith versus Jones contracting paresis (compatible) | [vanfraassen1980]; [lipton2004] |
-| Foil status | with a foil set | observed (a realized comparison case) · counterfactual | a recorded control network (observed); the same network trained on another task (counterfactual) | [lipton2004] |
+| Foil status | with a foil set | observed (a realized comparison case) · counterfactual · not-applicable, for a question without a foil set | a recorded control network (observed); the same network trained on another task (counterfactual) | [lipton2004] |
 
 - **A condition foil may reuse an entry of the conditions of $P$.** A condition foil (i.e. the same system in another setting) often names such an entry, for instance an inhibiting circumstance. The foil then refers to that entry, so the circumstance is described only once.
 
