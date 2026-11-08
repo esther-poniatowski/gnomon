@@ -1309,6 +1309,6 @@ vocabularies:
     - value: cross-validated
       name: each calibration datum is compared with a fit that omits it
     - value: bayesian
-      name: the compared values carry the posterior uncertainty of the fitted parameters
+      name: the comparison reports the ratio of marginal likelihoods against the declared rival
     - value: reused
       name: the data used for calibration are compared again without any correction

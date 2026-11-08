@@ -87,7 +87,7 @@ The [decision on answers, models and bindings](docs/adr/answers-models-bindings.
 - [ ] Revise the model design, following the [decision on answers, models and bindings](docs/adr/answers-models-bindings.md). Its [candidate formalisms](docs/proposals/model-design.md) await adoption or decline. 🆔 model-design
 	- [ ] Resolve the symbols of the key in the vocabulary check, as the [flat symbol table](docs/adr/flat-symbol-table.md#^visible-tables) resolves those of the model and the binding.
 	- [ ] Record a refined phenomenon as a derived phenomenon, leaving the original intact: state the rule in the [note on the phenomenon](docs/epistemology/objects/subject/phenomenon.md), which states none yet, and add to the [phenomenon template](src/gnomon/data/templates/phenomenon.yml) a field that names the phenomenon from which a refined one derives.
-	- [ ] Implement the computation of a comparison from the inputs that an assessment records, with the three [reports of a comparison](docs/epistemology/objects/answer/model-and-binding.md#^comparison-reports): commitment, calibration treatment and circularity.
+	- [ ] Implement the computation of a comparison from the inputs that an assessment records, with the three [reports of a comparison](docs/epistemology/objects/answer/model-and-binding.md#^comparison-reports): commitment, calibration treatment and circularity. Under the treatment `bayesian`, the calibration treatment includes the ratio of the marginal likelihood of the binding to that of its declared rival.
 
 ## 6. Guidance for researchers
 

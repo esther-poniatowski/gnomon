@@ -102,6 +102,7 @@ properties:
         - parameter
         - data_version
         - method
+        - prior
         - identifiable
   grain:
     enum:
@@ -129,6 +130,7 @@ propertyNames:
   - domain
   - structural_discrepancy
   - calibration_provenance
+  - rival
   - grain
   - version
   - maturity

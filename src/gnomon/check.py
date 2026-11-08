@@ -515,6 +515,11 @@ def _problem(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     )
 
 
+def _binding(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
+    """The rival that a binding declares for a Bayesian comparison."""
+    return c.misdirected_rival(record, {**ctx.workspace.by_id, **ctx.problem.records})
+
+
 #: The kinds of record whose quantities and laws carry dimensional formulas.
 DIMENSIONED_KINDS = frozenset({"target-system", "background", "phenomenon", "model"})
 
@@ -632,6 +637,7 @@ BY_KIND: Mapping[str, tuple[Check, ...]] = {
     "assessment": (_assessment,),
     "phenomenon": (_phenomenon,),
     "problem": (_problem,),
+    "binding": (_binding,),
     "itinerary": (_itinerary,),
     "derivation": (_derivation,),
     "operators": (_operators,),

@@ -50,7 +50,10 @@ calibration_provenance:          # fill when a pair carries a calibration parame
   - parameter: SYMBOL            # a parameter of the model
     data_version: VERSION        # the version of the data that fitted the parameter
     method: "THE METHOD OF FITTING"
+    prior: "THE PRIOR DISTRIBUTION OF THE PARAMETER, FIXED BEFORE THE DATA"   # required for a Bayesian calibration; the distribution fixed before the data that fit the parameter
     identifiable: false          # true when the data identify the parameter apart from the structural discrepancy
+
+rival: bind.TOPIC.NAME           # required for a Bayesian calibration; another binding of the same target, or `complement`
 
 grain:                           # quantitative (the pairs are compared by a metric) | qualitative (the pairs are compared by a match of patterns or regimes)
 

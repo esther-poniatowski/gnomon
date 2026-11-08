@@ -415,6 +415,10 @@ COMPLETENESS_UNBOUNDED_CENSORING = _rule(
     "An event time censored on the left states neither a first observation nor an origin that"
     " bounds it.",
 )
+COMPLETENESS_MISDIRECTED_RIVAL = _rule(
+    "completeness/misdirected-rival",
+    "The rival of a binding names neither another binding of the same target nor the complement.",
+)
 COMPLETENESS_EXCLUDED_EVENT = _rule(
     "completeness/excluded-event",
     "A restriction of the kind without-event names no excluded event, or a restriction of another"

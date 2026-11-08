@@ -349,6 +349,17 @@ properties:
           x-kind: markdown-line
           title: Method
           description: the method of fitting the calibration parameter
+        prior:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE PRIOR DISTRIBUTION OF THE PARAMETER, FIXED BEFORE THE DATA"'
+          x-kind: markdown-line
+          x-comment: required for a Bayesian calibration; the distribution fixed before the data that fit the
+            parameter
+          title: Prior
+          description: required for a Bayesian calibration; the distribution fixed before the data that fit
+            the parameter
         identifiable:
           type:
           - boolean
@@ -364,6 +375,17 @@ properties:
     examples:
     - the coupling strength, fitted by least squares to the session of day 1, not identifiable apart from
       the discrepancy
+  rival:
+    x-blank: true
+    type:
+    - string
+    - 'null'
+    x-template: bind.TOPIC.NAME
+    x-kind: label
+    x-comment: required for a Bayesian calibration; another binding of the same target, or `complement`
+    title: Rival
+    description: required for a Bayesian calibration; the binding against which the comparison reports
+      the ratio of marginal likelihoods, another binding of the same target, or `complement`
   grain:
     x-blank: true
     x-vocabulary: .grain

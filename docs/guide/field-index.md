@@ -244,6 +244,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `calibration_provenance[].identifiable` | Identifiable | true when the data identify the parameter apart from the structural discrepancy | [Calibration provenance](../specification/binding.md) |
 | `calibration_provenance[].method` | Method | the method of fitting the calibration parameter | [Calibration provenance](../specification/binding.md) |
 | `calibration_provenance[].parameter` | Parameter | a parameter of the model | [Calibration provenance](../specification/binding.md) |
+| `calibration_provenance[].prior` | Prior | required for a Bayesian calibration; the distribution fixed before the data that fit the parameter | [Calibration provenance](../specification/binding.md) |
 | `condition_pairs` | Condition pairs | per pair, a condition of the model, the condition of the target that it stands for, and the key; a parameter fitted to the data is marked as a *calibration parameter* | [Condition pairs](../specification/binding.md) |
 | `condition_pairs[].calibration` | Calibration | true for a parameter of the model fitted to the data | [Condition pairs](../specification/binding.md) |
 | `condition_pairs[].id` | Id | a name of the condition pair, unique within the binding | [Condition pairs](../specification/binding.md) |
@@ -266,6 +267,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `maturity` | Maturity | optional; one maturity per specification: open \| provisional \| stabilized; the record status applies to every specification left out | [Maturity of a field](../specification/maturity.md) |
 | `model` | Model | the model in use: the identifier of one model record | [Model](../specification/binding.md) |
+| `rival` | Rival | required for a Bayesian calibration; the binding against which the comparison reports the ratio of marginal likelihoods, another binding of the same target, or `complement` | [Rival](../specification/binding.md) |
 | `status` | Status | the maturity of the binding record, taken by every field that the block `maturity` leaves unmarked | — |
 | `structural_discrepancy` | Structural discrepancy | the model of the systematic difference between the output of the model at its best parameters and the value of the target, or a stated bound on it [kennedyohagan2001]; a discrepancy model fitted to data counts as calibration on those data, and the calibration provenance records it | [Structural discrepancy](../specification/binding.md) |
 | `structural_discrepancy[].expression` | Expression | an expression over declared symbols stating the discrepancy model or the bound | [Structural discrepancy](../specification/binding.md) |

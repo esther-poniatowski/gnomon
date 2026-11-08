@@ -120,6 +120,7 @@ CHECKERS: dict[ModuleType, tuple[str, ...]] = {
         "unsupported_outcome",
         "unsupported_question_dissolution",
         "unbounded_censoring",
+        "misdirected_rival",
         "misstated_obstacles",
         "inadmissible_values",
         "misplaced_maturity",

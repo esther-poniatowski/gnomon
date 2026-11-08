@@ -548,3 +548,48 @@ def unstated_domain(
             rules.COMPLETENESS_UNSTATED_DOMAIN, f"domain: not stated, although {reason}", "domain"
         )
     ]
+
+
+#: The value of ``rival`` that compares a binding with its complement instead of another binding.
+COMPLEMENT = "complement"
+
+
+def misdirected_rival(
+    binding: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return the rival of a binding when it names neither another binding of its target nor the
+    complement.
+
+    A Bayesian comparison reports the ratio of the marginal likelihood of the binding to that of
+    its rival, which must bind the same phenomenon, since a ratio across two targets compares
+    nothing. A rival that names no record at all is reported by the resolution of references.
+
+    >>> records = {"bind.a.x": {"type": "binding", "target": {"phenomenon": "phen.a.p"}},
+    ...            "bind.a.y": {"type": "binding", "target": {"phenomenon": "phen.a.q"}}}
+    >>> binding = {"id": "bind.a.z", "target": {"phenomenon": "phen.a.p"}, "rival": "bind.a.y"}
+    >>> [f.rule.id for f in misdirected_rival(binding, records)]
+    ['completeness/misdirected-rival']
+    >>> misdirected_rival({**binding, "rival": "bind.a.x"}, records)
+    []
+    """
+    rival = binding.get("rival")
+    if not rival or rival == COMPLEMENT:
+        return []
+    other = records.get(str(rival))
+    if other is None:
+        return []
+    own = at(binding, "target.phenomenon")
+    if (
+        other.get("type") == "binding"
+        and rival != binding.get("id")
+        and at(other, "target.phenomenon") == own
+    ):
+        return []
+    return [
+        finding(
+            rules.COMPLETENESS_MISDIRECTED_RIVAL,
+            f"rival: {rival} is not another binding of the phenomenon {own}",
+            "rival",
+            value=str(rival),
+        )
+    ]
