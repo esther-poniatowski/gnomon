@@ -52,6 +52,10 @@ REFUTING_STATUSES = frozenset({"absent", "disproved"})
 #: The activities that revise after a refuted condition, as the choice of the next act lists them.
 REVISIONS = ("question-revision", "problem-decomposition", "concept-revision")
 
+#: The notes that define the activities that the status names, and the types of their inputs.
+ACTIVITY_NOTES = "docs/epistemology/processes/activities/_index.md"
+PRODUCT_TYPE_NOTE = "docs/epistemology/processes/activities/epistemic-activities.md"
+
 Records = Mapping[str, Mapping[str, Any]]
 
 
@@ -528,7 +532,7 @@ def render_text(diagnosis: Diagnosis) -> str:
     lines: list[str] = []
     if not diagnosis.questions:
         lines.append("no question to diagnose: fill a question record that addresses the problem")
-    any_ready = False
+    any_ready = any_listed = False
     for q in diagnosis.questions:
         for r in q.routes:
             lines.append(f"{q.question} [{r.route}]")
@@ -537,6 +541,7 @@ def render_text(diagnosis: Diagnosis) -> str:
                 lines.append(f"  open {cond}" + (f": {reason}" if reason else ""))
                 lines += _acts_lines(acts_)
                 any_ready = any_ready or any(a.ready for a in acts_)
+                any_listed = any_listed or bool(acts_)
             for cond in r.refuted:
                 lines.append(f"  refuted {cond}: revise by {', '.join(REVISIONS)}")
             if not r.open and not r.refuted:
@@ -557,6 +562,12 @@ def render_text(diagnosis: Diagnosis) -> str:
         lines.append(
             "each ready act can be taken now; the choice among them is the researcher's, as"
             " docs/procedures/inquiry/next-act.md states"
+        )
+    if any_listed:
+        lines.append(
+            f"each activity is defined in the note of its family, which {ACTIVITY_NOTES} lists;"
+            f" a name in parentheses is the type of the missing input, which {PRODUCT_TYPE_NOTE}"
+            " defines"
         )
     return "\n".join(lines) + "\n"
 

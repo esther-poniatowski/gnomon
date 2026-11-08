@@ -173,6 +173,7 @@ judge anew the norm of itin.grokking.explain-delay.check, whose record is stabil
 judge anew the norm of itin.grokking.explain-delay.test, whose record is stabilized
 impeached records: bg.delayed-generalization-networks.training-specification
 each ready act can be taken now; the choice among them is the researcher's, as docs/procedures/inquiry/next-act.md states
+each activity is defined in the note of its family, which docs/epistemology/processes/activities/_index.md lists; a name in parentheses is the type of the missing input, which docs/epistemology/processes/activities/epistemic-activities.md defines
 ```
 
 The diagnosis follows the route of selection: candidates are proposed, and an obtained value selects one of them, as the [two routes to an answer](../epistemology/objects/question/conditions-of-answerability.md#^routes) define it. Each open condition can be addressed now, since its dependencies are established. Its activities are split into the ready ones and those waiting for an input, named in parentheses. The condition of candidates stays open until an assessment passes the admissibility tests of an answer. The background record is impeached, since the step producing it failed. Therefore, the activity `model-assembly` waits for its admitted laws: the only record holding them is impeached. The two lines on norms to judge anew belong to stage 5.
