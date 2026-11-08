@@ -195,3 +195,33 @@ def test_a_revision_of_one_law_flags_a_record_that_admits_its_whole_background()
     assert flagged_dependents("bg.a.b.law", "retraction", records) == {
         "mod.a.m": "background (defeasible)"
     }
+
+
+def test_the_links_of_a_question_are_checked_as_relations() -> None:
+    """A link names a question, never itself, states its relation, and passes through a record of
+    the kind that its relation admits."""
+    records: dict[str, dict[str, Any]] = {
+        "quest.a.p": {"id": "quest.a.p", "type": "question"},
+        "phen.a.g": {"id": "phen.a.g", "type": "phenomenon"},
+        "prob.a.p": {"id": "prob.a.p", "type": "problem"},
+    }
+
+    def rules(*links: dict[str, Any], addresses: str = "prob.a.p") -> list[str]:
+        question = {
+            "id": "quest.a.q",
+            "type": "question",
+            "addresses": addresses,
+            "links": list(links),
+        }
+        return [f.rule.id for f in relation_findings(question, {**records, "quest.a.q": question})]
+
+    link = {"question": "quest.a.p", "relation": "explanans-from", "via": "phen.a.g"}
+    assert rules(link) == []
+    assert rules({**link, "question": "phen.a.g"}) == ["relation/mistyped-end"]
+    assert rules({**link, "question": "quest.a.q"}) == ["relation/self"]
+    assert rules({**link, "via": "prob.a.p"}) == ["relation/mistyped-end"]
+    assert rules({"question": "phen.a.g"}) == [
+        "relation/misplaced-attribute",
+        "relation/mistyped-end",
+    ]
+    assert rules(link, addresses="quest.a.p") == ["relation/mistyped-end"]

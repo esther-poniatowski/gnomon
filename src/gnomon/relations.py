@@ -4,8 +4,7 @@ The graph of relations between research units, its checks, and the transmission 
 The relation registry declares each relation (:mod:`gnomon.relation_registry`). This module reads
 the edges that a record states: the entries of its lists of relations, the fields that the registry
 names, and every other reference in a field of an identifier or of an expression, which transmits a
-revision as a constitutive dependence. A reference in prose is no edge. The links of a question keep
-the checks of their ends in :func:`gnomon.completeness.unresolved_question_references`.
+revision as a constitutive dependence. A reference in prose is no edge.
 
 Functions
 ---------
@@ -106,9 +105,7 @@ def _entry_edges(record: Mapping[str, Any], ident: str, family: Mapping[str, Any
     for index, entry in enumerate(record.get(list_key) or []):
         if not isinstance(entry, Mapping):
             continue
-        declared = declared_relations.get(str(entry.get("relation")))
-        if declared is None:
-            continue
+        declared = declared_relations.get(str(entry.get("relation"))) or _undeclared(family)
         where = (list_key, Entry(index, entry))
         if declared.get("arity") == "set":
             members = tuple(str(m) for m in entry.get("members") or [] if isinstance(m, str))
@@ -117,10 +114,22 @@ def _entry_edges(record: Mapping[str, Any], ident: str, family: Mapping[str, Any
                 for m in members
             ]
         elif isinstance(entry.get(target_key), str):
-            found.append(
-                Edge(ident, str(entry["relation"]), entry[target_key], declared, where, entry)
-            )
+            relation = str(entry.get("relation") or "link")
+            found.append(Edge(ident, relation, entry[target_key], declared, where, entry))
     return found
+
+
+def _undeclared(family: Mapping[str, Any]) -> Mapping[str, Any]:
+    """Return the declaration of an entry whose relation is missing or unknown: its end may take
+    any kind that a relation of its list admits, and it transmits nothing."""
+    kinds_admitted = sorted(
+        {
+            kind
+            for declared in (family.get("relations") or {}).values()
+            for kind in declared.get("targets") or []
+        }
+    )
+    return {"targets": kinds_admitted, "flags": "none"}
 
 
 def edges(record: Mapping[str, Any]) -> list[Edge]:
@@ -169,6 +178,16 @@ def _attribute_findings(record: Mapping[str, Any], family: Mapping[str, Any]) ->
     for index, entry in enumerate(record.get(list_key) or []):
         if not isinstance(entry, Mapping):
             continue
+        if entry.get("relation") in (None, ""):
+            found.append(
+                finding(
+                    rules.RELATION_MISPLACED_ATTRIBUTE,
+                    f"{list_key}[{index}]: the entry names no relation",
+                    list_key,
+                    Entry(index, entry),
+                )
+            )
+            continue
         declared = (family.get("relations") or {}).get(str(entry.get("relation")))
         if declared is None:
             continue
@@ -205,8 +224,8 @@ def _attribute_findings(record: Mapping[str, Any], family: Mapping[str, Any]) ->
 
 def relation_findings(record: Mapping[str, Any], records: Records) -> list[Finding]:
     """Return the defects of the relations that one record states: an attribute that its relation
-    does not admit or lacks, an end of a kind that the relation does not admit, and a relation of
-    the record to itself.
+    does not admit or lacks, an end or an attribute naming a record of a kind that the relation
+    does not admit, and a relation of the record to itself.
 
     >>> records = {"ans.a.x": {"type": "answer"}, "quest.a.q": {"type": "question"}}
     >>> answer = {"id": "ans.a.x", "type": "answer",
@@ -218,8 +237,7 @@ def relation_findings(record: Mapping[str, Any], records: Records) -> list[Findi
     family = _family(kind)
     found = _attribute_findings(record, family) if family else []
     for edge in edges(record):
-        if kind == "question" and edge.where and edge.where[0] == "links":
-            continue
+        found += _attribute_kinds(edge, records)
         other = owner(edge.target, records)
         if other is None:
             continue
@@ -242,6 +260,25 @@ def relation_findings(record: Mapping[str, Any], records: Records) -> list[Findi
                     f"{edge.relation}: {edge.target} is a {records[other].get('type')}, not a"
                     f" {' or a '.join(targets)}",
                     *edge.where,
+                )
+            )
+    return found
+
+
+def _attribute_kinds(edge: Edge, records: Records) -> list[Finding]:
+    """Return each attribute of an entry that names a record of a kind it does not admit."""
+    found = []
+    for key, admitted in (edge.declared.get("attribute_targets") or {}).items():
+        named = edge.entry.get(key)
+        other = owner(named, records) if isinstance(named, str) else None
+        if other is not None and records[other].get("type") not in admitted:
+            found.append(
+                finding(
+                    rules.RELATION_MISTYPED_END,
+                    f"{edge.relation}: {key} {named} is a {records[other].get('type')}, not a"
+                    f" {' or a '.join(admitted)}",
+                    *edge.where,
+                    key,
                 )
             )
     return found

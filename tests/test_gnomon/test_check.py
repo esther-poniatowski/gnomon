@@ -101,7 +101,7 @@ CHECKERS: dict[ModuleType, tuple[str, ...]] = {
         "unstated_standing",
         "contradictory_accuracy",
         "unresolved_slots",
-        "unresolved_question_references",
+        "foreign_backgrounds",
         "unstated_function_sense",
         "unbounded_aim",
         "unmet_by_aim",

@@ -137,7 +137,8 @@ properties:
     type: array
     x-kind: table
     title: Revisions
-    description: per revision, its kind and the dependents still to review
+    description: per revision, its kind and the dependents still to review, each with the relation and
+      the warrant class that flag it
     items:
       type: object
       additionalProperties: false

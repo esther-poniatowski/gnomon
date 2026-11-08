@@ -24,6 +24,7 @@
 #   or `dependent` when the flagged record determines it;
 # - `attributes`: the keys that an entry admits beyond `relation` and its target, with `required`
 #   naming those that it must carry;
+# - `attribute_targets`: the record kinds that an attribute naming a record may take;
 # - `export`: the class of the contract of `ekthesis`, a map from a use to a class, or none;
 #   `reversed: true` exports the relation from its target to its source.
 
@@ -119,6 +120,8 @@ entries:
         warrant: non-inferential
         attributes: [via]
         required: [via]
+        attribute_targets:
+          via: [phenomenon]
       presupposes:
         name: it has a true direct answer only if the linked question has one
         targets: [question]
@@ -263,6 +266,11 @@ fields:
     addresses:
       name: serves the problem
       targets: [problem]
+      flags: source
+      warrant: non-inferential
+    subject.background:
+      name: admits the laws of the background
+      targets: [background]
       flags: source
       warrant: non-inferential
   concept:

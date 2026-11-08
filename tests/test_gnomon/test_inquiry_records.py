@@ -18,6 +18,7 @@ from gnomon.completeness import (
     admitted_values,
     demand_met,
     disposition,
+    foreign_backgrounds,
     inadmissible_values,
     malformed_credence,
     misdirected_assessment,
@@ -29,7 +30,6 @@ from gnomon.completeness import (
     premature_appraisal,
     result_aims,
     unbounded_aim,
-    unresolved_question_references,
     unresolved_slots,
     unstated_function_sense,
     unsupported_outcome,
@@ -75,36 +75,16 @@ def test_a_slot_without_an_identified_record_or_a_typed_placeholder_is_reported(
     ]
 
 
-def test_linked_questions_and_admitted_backgrounds_are_checked() -> None:
-    """Q2 takes its explanans from Q1 through the phenomenon both questions share."""
+def test_an_admitted_background_describes_the_target_of_the_question() -> None:
     records: dict[str, dict[str, Any]] = {
-        "prob.a": {"type": "problem"},
-        "quest.q1": {"type": "question", "id": "quest.q1"},
-        "phen.geometry": {"type": "phenomenon"},
         "bg.a": {"type": "background", "describes": "system.a"},
         "bg.b": {"type": "background", "describes": "system.b"},
     }
-    question = {
-        "id": "quest.q2",
-        "type": "question",
-        "addresses": "prob.a",
-        "links": [{"question": "quest.q1", "relation": "explanans-from", "via": "phen.geometry"}],
-        "subject": {"target_system": "system.a", "background": ["bg.a"]},
-    }
-    assert unresolved_question_references(question, records) == []
-    question.update(
-        addresses="quest.q1",
-        links=[{"question": "quest.q2"}, {"question": "phen.geometry", "via": "phen.none"}],
-        subject={"target_system": "system.a", "background": ["bg.b", "bg.z"]},
-    )
-    records["quest.q2"] = question
-    assert texts(unresolved_question_references(question, records)) == [
-        "addresses: quest.q1 is no problem record",
-        "links[0]: a question is linked to itself",
-        "links[1]: phen.geometry is no question record",
-        "links[1]: no record carries the identifier phen.none",
-        "subject.background: bg.b describes another target than system.a",
-        "subject.background: bg.z is no background record",
+    question = {"subject": {"target_system": "system.a", "background": ["bg.a"]}}
+    assert foreign_backgrounds(question, records) == []
+    question["subject"]["background"] = ["bg.b", "bg.z"]
+    assert texts(foreign_backgrounds(question, records)) == [
+        "subject.background: bg.b describes another target than system.a"
     ]
 
 

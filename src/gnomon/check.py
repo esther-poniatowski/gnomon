@@ -447,7 +447,7 @@ def _question(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         + c.unstated_standing(record)
         + c.contradictory_accuracy(record)
         + c.unresolved_slots(record, records, ctx.registries.slot_types)
-        + c.unresolved_question_references(record, records)
+        + c.foreign_backgrounds(record, records)
         + c.unstated_function_sense(record)
         + c.unbounded_aim(record, records, ctx.registries.aims)
         + c.unmet_by_aim(record, reached, ctx.registries.by_aim)

@@ -283,7 +283,10 @@ def next_act(diagnosis_document: Mapping[str, Any]) -> dict[str, Any]:
             "step": r["step"],
             "record": r["record"],
             "kind": r["kind"],
-            "to_review": _joined(r["to_review"]),
+            "to_review": ", ".join(
+                f"{d} via {r['reasons'][d]}" if d in (r.get("reasons") or {}) else d
+                for d in sorted(r["to_review"])
+            ),
         }
         for r in diagnosis_document.get("revisions") or []
     ]

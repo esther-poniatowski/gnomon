@@ -498,6 +498,7 @@ def as_document(diagnosis: Diagnosis) -> dict[str, Any]:
                 "kind": r.kind,
                 "flagged": list(r.flagged),
                 "to_review": list(r.to_review),
+                "reasons": {d: r.reasons[d] for d in r.flagged if d in r.reasons},
             }
             for r in sorted(diagnosis.revisions, key=lambda x: x.step)
         ],
@@ -520,6 +521,16 @@ def _acts_lines(acts_: tuple[Act, ...]) -> list[str]:
     if waiting:
         lines.append(f"    waiting for an input: {', '.join(waiting)}")
     return lines
+
+
+def _flag(dependent: str, reasons: Mapping[str, str]) -> str:
+    """Return a flagged dependent with the relation and the warrant class that flag it.
+
+    >>> _flag("ans.a", {"ans.a": "grounds[].record (defeasible)"})
+    'ans.a via grounds[].record (defeasible)'
+    """
+    reason = reasons.get(dependent)
+    return f"{dependent} via {reason}" if reason else dependent
 
 
 def render_text(diagnosis: Diagnosis) -> str:
@@ -552,7 +563,7 @@ def render_text(diagnosis: Diagnosis) -> str:
         if rev.to_review:
             lines.append(
                 f"review after the {rev.kind} of {rev.record} ({rev.step}):"
-                f" {', '.join(rev.to_review)}"
+                f" {', '.join(_flag(d, rev.reasons) for d in rev.to_review)}"
             )
     for step in sorted(diagnosis.judge_anew):
         lines.append(f"judge anew the norm of {step}, whose record is stabilized")

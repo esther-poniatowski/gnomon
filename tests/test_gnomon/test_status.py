@@ -226,4 +226,7 @@ def test_a_revision_flags_its_dependents_by_kind_and_warrant() -> None:
     assert reorient.flagged == ("ans.fitted",)
     assert reorient.reasons == {"ans.fitted": "grounds[].record (defeasible)"}
     assert retract.flagged == ("ans.fitted", "ans.proven") and retract.to_review == ("ans.fitted",)
-    assert "review after the retraction of bg.a.b" in render_text(diagnose(records))
+    assert (
+        "review after the retraction of bg.a.b (itin.a.b.retract): ans.fitted via grounds[].record"
+        " (defeasible)" in render_text(diagnose(records))
+    )

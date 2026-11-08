@@ -123,79 +123,31 @@ def unresolved_slots(
     return found
 
 
-def unresolved_question_references(
+def foreign_backgrounds(
     question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
 ) -> list[Finding]:
-    """Return every problem, linked question and background that a question names and that is
-    missing.
+    """Return each background admitted by a question that describes another target.
 
-    A question names the problem it serves, the questions it is linked to with the shared record
-    carrying the link, and the background records whose laws it admits. Each name resolves to a
-    record of the expected kind, and an admitted background describes the target of the question,
-    since its laws are stated over the quantities of that target.
+    An admitted background states its laws over the quantities of the target that it describes, so
+    it must describe the target of the question. A name that resolves to no record, or to a record
+    of another kind, is reported by the resolution of references and by the checks of relations.
+
+    >>> records = {"bg.a": {"type": "background", "describes": "system.b"}}
+    >>> question = {"subject": {"target_system": "system.a", "background": ["bg.a"]}}
+    >>> [f.text for f in foreign_backgrounds(question, records)]
+    ['subject.background: bg.a describes another target than system.a']
     """
-
-    def kind_of(identifier: Any) -> Any:
-        return (records.get(identifier) or {}).get("type") if isinstance(identifier, str) else None
-
-    found = []
-    addressed = question.get("addresses")
-    if addressed is not None and kind_of(addressed) != "problem":
-        found.append(
-            finding(
-                rules.COMPLETENESS_UNADDRESSED_PROBLEM,
-                f"addresses: {addressed} is no problem record",
-                "addresses",
-            )
-        )
-    for index, link in enumerate(question.get("links") or []):
-        if not isinstance(link, Mapping):
-            continue
-        other, via = link.get("question"), link.get("via")
-        if kind_of(other) != "question":
-            found.append(
-                finding(
-                    rules.COMPLETENESS_LINK_NOT_QUESTION,
-                    f"links[{index}]: {other} is no question record",
-                    "links",
-                    index,
-                    "question",
-                )
-            )
-        elif other == question.get("id"):
-            found.append(
-                finding(
-                    rules.COMPLETENESS_SELF_LINK,
-                    f"links[{index}]: a question is linked to itself",
-                    "links",
-                    index,
-                    "question",
-                )
-            )
-        if via is not None and kind_of(via) is None:
-            found.append(
-                finding(
-                    rules.COMPLETENESS_UNKNOWN_LINK_RECORD,
-                    f"links[{index}]: no record carries the identifier {via}",
-                    "links",
-                    index,
-                    "via",
-                )
-            )
     subject = question.get("subject") or {}
     target = subject.get("target_system")
+    found = []
     for index, name in enumerate(subject.get("background") or []):
-        if kind_of(name) != "background":
-            found.append(
-                finding(
-                    rules.COMPLETENESS_NOT_BACKGROUND,
-                    f"subject.background: {name} is no background record",
-                    "subject",
-                    "background",
-                    index,
-                )
-            )
-        elif isinstance(target, str) and records[name].get("describes") != target:
+        record = records.get(name) if isinstance(name, str) else None
+        if (
+            isinstance(record, Mapping)
+            and record.get("type") == "background"
+            and isinstance(target, str)
+            and record.get("describes") != target
+        ):
             found.append(
                 finding(
                     rules.COMPLETENESS_FOREIGN_BACKGROUND,

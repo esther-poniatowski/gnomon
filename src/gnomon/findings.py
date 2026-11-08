@@ -236,19 +236,6 @@ COMPLETENESS_UNIDENTIFIED_SLOT_RECORD = _rule(
     "completeness/unidentified-slot-record",
     "A subject slot names a record that carries no identification.",
 )
-COMPLETENESS_UNADDRESSED_PROBLEM = _rule(
-    "completeness/unaddressed-problem", "A question addresses no problem record."
-)
-COMPLETENESS_LINK_NOT_QUESTION = _rule(
-    "completeness/link-not-question", "A link of a question names no question record."
-)
-COMPLETENESS_SELF_LINK = _rule("completeness/self-link", "A question is linked to itself.")
-COMPLETENESS_UNKNOWN_LINK_RECORD = _rule(
-    "completeness/unknown-link-record", "A link of a question passes through no existing record."
-)
-COMPLETENESS_NOT_BACKGROUND = _rule(
-    "completeness/not-background", "A question admits a background that is no background record."
-)
 COMPLETENESS_FOREIGN_BACKGROUND = _rule(
     "completeness/foreign-background",
     "A question admits a background that describes another target than its own.",
