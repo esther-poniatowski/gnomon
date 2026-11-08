@@ -36,7 +36,7 @@ def test_an_open_condition_lists_its_ready_acts_apart_and_the_choice_is_left_ope
 def test_the_activities_and_the_input_types_named_are_pointed_to_their_definitions() -> None:
     """The status names activities and product types without defining them, so its last line
     names the notes that define them, and both notes exist."""
-    text =render_text(diagnose(load_workspace(EXAMPLES / CASE).by_id))
+    text = render_text(diagnose(load_workspace(EXAMPLES / CASE).by_id))
     last = text.rstrip().splitlines()[-1]
     assert last.startswith("each activity is defined in the note of its family")
     assert ACTIVITY_NOTES in last and PRODUCT_TYPE_NOTE in last
