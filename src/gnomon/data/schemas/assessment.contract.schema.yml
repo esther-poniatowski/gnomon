@@ -121,6 +121,7 @@ propertyNames:
   - status
   - assesses
   - against
+  - against_version
   - tests
   - comparisons
   - obligations

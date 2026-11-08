@@ -130,6 +130,10 @@ ITINERARY_FOREIGN_DERIVATION = _rule(
 ITINERARY_UNREADABLE_STATE = _rule(
     "itinerary/unreadable-state", "An input names a record at a revision that cannot be read."
 )
+ITINERARY_UNVERSIONED_QUESTION_REVISION = _rule(
+    "itinerary/unversioned-question-revision",
+    "A step revises a question whose version at the revision it read equals its present version.",
+)
 ITINERARY_UNCHANGED_STATE = _rule(
     "itinerary/unchanged-state",
     "A change of knowledge state names no earlier revision, or the status of its record did not"
@@ -423,6 +427,24 @@ COMPLETENESS_UNLINKED_EXPLANANS = _rule(
     "completeness/unlinked-explanans",
     "An answer to a question that draws its explanans from a linked phenomenon states no factor"
     " over that phenomenon.",
+)
+COMPLETENESS_VOID_ASSESSMENT = _rule(
+    "completeness/void-assessment",
+    "An assessment names an earlier version of its question, so its verdicts are void.",
+)
+COMPLETENESS_UNKNOWN_QUESTION_VERSION = _rule(
+    "completeness/unknown-question-version",
+    "An assessment names a version of its question later than the present one.",
+)
+COMPLETENESS_UNVERSIONED_ASSESSMENT = _rule(
+    "completeness/unversioned-assessment",
+    "An assessment of an answer names no version of its question, or an assessment of a construct"
+    " names one.",
+)
+COMPLETENESS_UNRECORDED_QUESTION_REVISION = _rule(
+    "completeness/unrecorded-question-revision",
+    "A question past its first version, or refined, is revised by no step of an itinerary.",
+    "warning",
 )
 COMPLETENESS_EXCLUDED_EVENT = _rule(
     "completeness/excluded-event",

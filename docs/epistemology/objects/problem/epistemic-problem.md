@@ -88,7 +88,7 @@ These propositions describe results, whereas the accepted knowledge holds only [
 
 The demand is **met**, written $\mathrm{Met}(\pi)$, once acts of the researcher settle the results that it demands, in the number and with the completeness that the request fixes. The acts depend on the class of the result and on the request, as the [solution of a problem](#^solution-claim) details: ^demand-met
 
-- for a result of a claim type, the researcher accepts the answers that state the demanded results, each on an assessment that finds it meeting $\Phi_1$, and meeting $\Phi^*$ when constraints on the set are stated;
+- for a result of a claim type, the researcher accepts the answers that state the demanded results, each on an assessment, made against the present version of its question, that finds it meeting $\Phi_1$, and meeting $\Phi^*$ when constraints on the set are stated;
 - for a result of a construct type, the records of the demanded constructs are `stabilized`, each with a satisfied assessment against $\Phi_1$, and against $\Phi^*$ when constraints on the set are stated;
 - under the request `decision`, the researcher settles every proposed candidate in view of its assessment: a claim is accepted or retracted, and the record of a construct is stabilized or retracted.
 

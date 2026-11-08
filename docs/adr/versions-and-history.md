@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-11-03
+revised: 2026-11-08
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Versions and history
@@ -18,15 +18,18 @@ The records of `gnomon` are files under git, which keeps every earlier state of 
 
 `gnomon` keeps no store of past versions of its records. The history of the repository, kept by git, holds every earlier state. ^git-keeps-history
 
-A record carries a version only if a reference must fix the state of that record, so that the referring record stays valid once the record is revised. ^version-where-pinned
+A record carries a version only if a reference must fix the state of that record, so that the referring record stays valid, or is reported void, once the record is revised. ^version-where-pinned
 
-Three references fix a state of their target: ^pinned-references
+Four references fix a state of their target: ^pinned-references
 
 - a reference to a binding or to a key, which names its [version](../specification/binding.md#^binding-version);
 - the root property `_schema` of a record, which names its schema at a version;
+- an assessment of an answer, which names by `against_version` the [version of the question](../specification/question.md#^question-version) against which its verdicts were made, so that a revision of the question reports those verdicts void, as the [rule on tests fixed before evaluation](../epistemology/objects/answer/satisfaction-conditions.md#^tests-fixed-before) requires. A revision of the repository was the other form weighed. It is discarded on three grounds. First, the file of a question also changes when its status or its answerability is updated, and marking a question `answered` follows a satisfied assessment, so a comparison of revisions would void the assessment that answers the question. Second, a revision is unreadable after a move of the file, a rewriting of the history or an export of the record, and on a clone without history. Third, two revisions cannot be compared without git, whereas two versions are compared by equality. A declared version leaves to the researcher the judgment that a change revises the specification, which the theory requires of a revision;
 - a step of an itinerary, which names the state of each record that it used, by `as_of`, a revision of the repository. A version of the record was the other form weighed. That form is discarded because a step may use a record of any kind, so it would require a version on every record, the option that the table below discards.
 
 Every other reference names its target at its current state. ^current-by-default
+
+A version and a revision serve two purposes. A version names a state of a record that a reference must find current, and a check compares two versions by equality. A revision of the repository locates the content of a state in the history, so that a check can read the content that a step used. The step that revises a question joins the two: its input names, by `as_of`, the revision at which the earlier version was read. ^version-and-revision
 
 ## Constraints that decide the versions
 
@@ -47,5 +50,6 @@ Every other reference names its target at its current state. ^current-by-default
 ## Consequences
 
 - The decision replaces the criterion of the retired design notes that excluded any version history, including its prohibition of references fixed to a past state.
-- The check of the itinerary reads a record named with `as_of` from the history of the repository, at that revision.
+- The check of the itinerary reads a record named with `as_of` from the history of the repository, at that revision. A revision so named must be reachable from the default branch, since a squash or a rebase of a branch removes its commits.
+- The check of an assessment compares its `against_version` with the version of its question, and reports the assessment void when they differ.
 - A new reference that must fix a state is added to the list of references that fix a state, with the reason that the referring record must stay valid.

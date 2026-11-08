@@ -72,6 +72,18 @@ properties:
     description: 'the record whose specifications fix which tests apply: for an answer, the identifier of one question, or the revised question that a reformulating answer names; for a construct, the identifier of its problem'
     examples:
     - why the network is synchronous rather than asynchronous
+  against_version:
+    type:
+    - string
+    - 'null'
+    pattern: ^[1-9][0-9]*$
+    x-template: '"1"'
+    x-kind: label
+    x-comment: the version of the question that the verdicts read; omit for a construct
+    title: Against version
+    description: the version of the question that the verdicts read; omit for a construct
+    examples:
+    - '`"1"`'
   tests:
     x-blank: true
     type:

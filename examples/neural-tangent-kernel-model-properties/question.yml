@@ -4,6 +4,7 @@ statement: "At fixed depth, as width tends to infinity, under which assumptions 
 id: quest.ntk.linearized-dynamics-validity
 type: question
 status: posed
+version: "1"
 request: all
 subject:
   target_system: system.ntk-gradient-flow

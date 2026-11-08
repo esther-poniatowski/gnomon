@@ -33,6 +33,7 @@ always:
   phenomenon: [commitment]
   background: [describes, laws, closure]
   problem: [statement, status, kind, demand, result_type, request]
+  question: [version]
   concept: [gloss, kind, source]
   design: [kind, task, steps, output]
   derivation:

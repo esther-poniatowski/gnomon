@@ -239,3 +239,113 @@ def premature_appraisal(assessment: Mapping[str, Any]) -> list[Finding]:
             "appraisal",
         )
     ]
+
+
+def _named(entry: Mapping[str, Any], block: str, key: str) -> Any:
+    """Return the value of a key in a block of an entry, or None when the block is no mapping."""
+    value = entry.get(block)
+    return value.get(key) if isinstance(value, Mapping) else None
+
+
+def _version(value: Any) -> int | None:
+    """Return a version label as a whole number, or None when it is no positive whole number."""
+    text = str(value) if value is not None else ""
+    return int(text) if text.isdigit() and int(text) > 0 else None
+
+
+def is_void(assessment: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]) -> bool:
+    """Return whether an assessment names a version of its question other than the present one.
+
+    A retracted assessment is never void, since it no longer bears on the question.
+
+    >>> records = {"quest.a": {"type": "question", "version": "2"}}
+    >>> is_void({"against": "quest.a", "against_version": "1"}, records)
+    True
+    >>> is_void({"against": "quest.a", "against_version": "2"}, records)
+    False
+    """
+    question = records.get(str(assessment.get("against")))
+    if not isinstance(question, Mapping) or question.get("type") != "question":
+        return False
+    if assessment.get("status") == "retracted" or question.get("version") is None:
+        return False
+    return str(assessment.get("against_version")) != str(question.get("version"))
+
+
+def misversioned_assessment(
+    assessment: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return the version that an assessment names when it does not match its question.
+
+    An assessment of an answer names the version of its question that its verdicts read, so that
+    a revision of the question reports those verdicts void; an assessment of a construct is made
+    against a problem, which carries no version.
+
+    >>> records = {"quest.a": {"type": "question", "version": "2"}, "ans.a": {"type": "answer"}}
+    >>> [f.rule.id for f in misversioned_assessment(
+    ...     {"assesses": "ans.a", "against": "quest.a", "against_version": "1"}, records)]
+    ['completeness/void-assessment']
+    >>> [f.rule.id for f in misversioned_assessment(
+    ...     {"assesses": "ans.a", "against": "quest.a"}, records)]
+    ['completeness/unversioned-assessment']
+    """
+    assessed = records.get(str(assessment.get("assesses")))
+    of_answer = isinstance(assessed, Mapping) and assessed.get("type") == "answer"
+    named, ident = assessment.get("against_version"), assessment.get("against")
+    if of_answer == (named is None):
+        text = (
+            f"against_version: the assessment names no version of {ident}"
+            if of_answer
+            else "against_version: an assessment of a construct is made against a problem"
+        )
+        return [finding(rules.COMPLETENESS_UNVERSIONED_ASSESSMENT, text, "against_version")]
+    question = records.get(str(ident))
+    read = _version(named)
+    present = _version(question.get("version")) if isinstance(question, Mapping) else None
+    if (
+        not of_answer
+        or assessment.get("status") == "retracted"
+        or read is None
+        or present is None
+        or read == present
+    ):
+        return []
+    if read > present:
+        text = f"against_version: {ident} is at version {present}, not yet at version {read}"
+        return [finding(rules.COMPLETENESS_UNKNOWN_QUESTION_VERSION, text, "against_version")]
+    text = (
+        f"against_version: read version {read} of {ident}, now at version {present}, so the"
+        f" verdicts are void; renew them against version {present} or retract the assessment"
+    )
+    return [finding(rules.COMPLETENESS_VOID_ASSESSMENT, text, "against_version")]
+
+
+def unrecorded_question_revision(
+    question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return a warning for a question revised without a step of an itinerary that records it.
+
+    A question past its first version, or refined, was revised, and every revision records its
+    trigger in a step: a step of the activity ``question-revision`` whose output is the question,
+    or a step whose ``revises`` names it.
+
+    >>> [f.rule.id for f in unrecorded_question_revision({"id": "quest.a", "version": "2"}, {})]
+    ['completeness/unrecorded-question-revision']
+    """
+    ident = question.get("id")
+    present = _version(question.get("version"))
+    if not ident or not ((present or 1) > 1 or question.get("status") == "refined"):
+        return []
+    for record in records.values():
+        if record.get("type") != "itinerary":
+            continue
+        for step in record.get("steps") or []:
+            if not isinstance(step, Mapping):
+                continue
+            if _named(step, "revises", "record") == ident or (
+                step.get("activity") == "question-revision"
+                and _named(step, "output", "ref") == ident
+            ):
+                return []
+    text = f"version: {ident} was revised, and no step of an itinerary records the revision"
+    return [finding(rules.COMPLETENESS_UNRECORDED_QUESTION_REVISION, text, "version")]

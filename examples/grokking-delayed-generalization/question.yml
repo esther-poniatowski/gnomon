@@ -4,6 +4,7 @@ statement: "Which mathematical properties of training finite overparameterized n
 id: quest.grokking.explain-delay
 type: question
 status: posed
+version: "1"
 addresses: prob.grokking.delayed-generalization
 request: one
 subject:

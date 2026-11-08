@@ -453,6 +453,7 @@ def _question(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         + malformed_answerability(record, records)
         + c.unanchored_explicandum(record, records)
         + c.unsupported_question_dissolution(record, records)
+        + c.unrecorded_question_revision(record, records)
     )
 
 
@@ -497,6 +498,7 @@ def _assessment(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         c.malformed_credence(record)
         + c.misdirected_assessment(record, records, ctx.registries.constructs)
         + c.premature_appraisal(record)
+        + c.misversioned_assessment(record, records)
     )
 
 

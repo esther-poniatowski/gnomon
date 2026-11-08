@@ -7,6 +7,7 @@ type: assessment
 status: stabilized
 assesses: ans.swift-hohenberg.snakes-ladders-catalogue
 against: quest.swift-hohenberg.localized-states-description
+against_version: "1"
 
 tests:
   admissibility:

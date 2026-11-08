@@ -123,6 +123,8 @@ CHECKERS: dict[ModuleType, tuple[str, ...]] = {
         "misdirected_rival",
         "unrealized_link",
         "unlinked_explanans",
+        "misversioned_assessment",
+        "unrecorded_question_revision",
         "misstated_obstacles",
         "inadmissible_values",
         "misplaced_maturity",

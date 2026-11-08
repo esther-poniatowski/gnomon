@@ -4,6 +4,7 @@ statement: "Across models of microbial communities, which constraints on interac
 id: quest.microbial.stable-coexistence-constraints
 type: question
 status: posed
+version: "1"
 request: all
 subject:
   target_system: system.microbial-formal-population-models

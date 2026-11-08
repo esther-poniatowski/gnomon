@@ -792,6 +792,40 @@ def _derivation(s: _Step) -> list[Finding]:
     return [finding(rules.ITINERARY_FOREIGN_DERIVATION, text, *s.at, "derivation", value=named)]
 
 
+def _question_version(s: _Step) -> list[Finding]:
+    """Check that a step revising a question reads it at an earlier version than the present one.
+
+    A revision of a question raises its version, so the state that the step read, at the revision
+    named by ``as_of``, holds an earlier version than the question holds now.
+    """
+    revised = str((_block(s.step, "revises") or {}).get("record") or "")
+    if s.act.id != "question-revision" and not revised.startswith("quest."):
+        return []
+    states, found = s.itinerary.states, []
+    for index, item in _inputs_of(s.step):
+        ref, revision = item.get("ref"), item.get("as_of")
+        present = s.itinerary.records.get(str(ref))
+        if item.get("type") != "question" or states is None or not revision or present is None:
+            continue
+        earlier = states(str(ref), str(revision))
+        if earlier is not None and str(earlier.get("version")) == str(present.get("version")):
+            text = (
+                f"{s.where}: {ref} holds version {present.get('version')} both at {revision} and"
+                " now, so the revision raised no version"
+            )
+            found.append(
+                finding(
+                    rules.ITINERARY_UNVERSIONED_QUESTION_REVISION,
+                    text,
+                    *s.at,
+                    "inputs",
+                    index,
+                    "as_of",
+                )
+            )
+    return found
+
+
 #: The checks of a step whose activity is registered, in the order of their reports.
 STEP_CHECKS: tuple[Callable[[_Step], list[Finding]], ...] = (
     _output,
@@ -800,6 +834,7 @@ STEP_CHECKS: tuple[Callable[[_Step], list[Finding]], ...] = (
     _rationale,
     _constructors,
     _mode,
+    _question_version,
 )
 
 

@@ -148,6 +148,7 @@ Looks up each field of each record by its path, with its title, its description 
 | Path | Title | Description | Documented in |
 | ---- | ----- | ----------- | ------------- |
 | `against` | Against | the record whose specifications fix which tests apply: for an answer, the identifier of one question, or the revised question that a reformulating answer names; for a construct, the identifier of its problem | [Against](../specification/assessment.md) |
+| `against_version` | Against version | the version of the question that the verdicts read; omit for a construct | [Against version](../specification/assessment.md) |
 | `appraisal` | Appraisal | per virtue, the assessment of this answer, and the candidates over which it is preferred once they have been appraised | [Appraisal](../specification/assessment.md) |
 | `appraisal[].assessment` | Assessment | the result of the operational question of that virtue for this answer | [Appraisal](../specification/assessment.md) |
 | `appraisal[].preferred_over` | Preferred over | fill when other candidates have been assessed | [Appraisal](../specification/assessment.md) |
@@ -881,6 +882,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `task.required_accuracy.structures_to_match[].target` | Target | the feature or the manifestation of the phenomenon whose structure the answer must reproduce | [Required accuracy](../specification/question-task.md) |
 | `title` | Title | A short name of the record, as a label. | [Title](../specification/question.md) |
 | `type` | Record type | The record type, which fixes the contract that the record follows. | — |
+| `version` | Version | the version of the specification of the question, raised by one at each revision of a field that fixes the answers or the tests | [Version](../specification/question.md) |
 | `virtues` | Virtues | one entry per virtue the inquiry weighs, under any epistemic aim | [Virtues of a question](../specification/question-virtues.md) |
 | `virtues[].justification` | Justification | also state the shortfall of an answer that lacks this virtue | [Virtues of a question](../specification/question-virtues.md) |
 | `virtues[].standing` | Standing | whether the virtue is constitutive of an answer or preferred among answers | [Virtues of a question](../specification/question-virtues.md) |

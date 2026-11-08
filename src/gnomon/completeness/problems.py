@@ -9,7 +9,7 @@ from typing import Any, Iterable, Mapping
 
 from .. import findings as rules
 from ..findings import Finding, finding
-from .assessments import disposition
+from .assessments import disposition, is_void
 from .paths import at
 
 
@@ -94,7 +94,7 @@ def demand_met(
     assessments = [r for r in records.values() if r.get("type") == "assessment"]
 
     def assessed(name: str) -> list[Mapping[str, Any]]:
-        return [a for a in assessments if a.get("assesses") == name]
+        return [a for a in assessments if a.get("assesses") == name and not is_void(a, records)]
 
     answers = {
         i: r

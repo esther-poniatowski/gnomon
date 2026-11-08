@@ -65,9 +65,12 @@ from .answers import (
 )
 from .assessments import (
     disposition,
+    is_void,
     malformed_credence,
     misdirected_assessment,
+    misversioned_assessment,
     premature_appraisal,
+    unrecorded_question_revision,
 )
 from .maturity import misplaced_maturity
 from .paths import (
@@ -159,6 +162,7 @@ __all__ = [
     "inherited_presuppositions",
     "is_empty",
     "is_unfilled",
+    "is_void",
     "malformed_credence",
     "malformed_restrictions",
     "misdirected_assessment",
@@ -174,6 +178,7 @@ __all__ = [
     "misplaced_maturity",
     "misstated_limit",
     "misstated_obstacles",
+    "misversioned_assessment",
     "occurrence_by_category",
     "path_segments",
     "placeholder_types",
@@ -202,6 +207,7 @@ __all__ = [
     "unmet_commitment",
     "unmet_general",
     "unrealized_link",
+    "unrecorded_question_revision",
     "unresolved_question_references",
     "unresolved_slots",
     "unstated_domain",

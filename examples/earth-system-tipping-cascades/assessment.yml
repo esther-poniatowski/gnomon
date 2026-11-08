@@ -7,6 +7,7 @@ type: assessment
 status: stabilized
 assesses: ans.earth-tipping-subsystems.four-element-overshoot-network
 against: quest.earth-tipping-subsystems.overshoot-sequence-forecast
+against_version: "1"
 
 tests:
   admissibility:

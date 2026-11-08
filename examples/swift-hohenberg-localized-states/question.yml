@@ -4,6 +4,7 @@ statement: "Across the admitted coefficient domain, what profile and bifurcation
 id: quest.swift-hohenberg.localized-states-description
 type: question
 status: posed
+version: "1"
 request: over-a-parameter
 subject:
   target_system: system.swift-hohenberg-localized-states

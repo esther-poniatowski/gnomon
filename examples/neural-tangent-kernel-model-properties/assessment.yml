@@ -7,6 +7,7 @@ type: assessment
 status: stabilized
 assesses: ans.ntk.uniform-linearization-theorem
 against: quest.ntk.linearized-dynamics-validity
+against_version: "1"
 
 tests:
   admissibility:

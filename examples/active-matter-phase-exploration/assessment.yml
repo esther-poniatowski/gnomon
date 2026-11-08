@@ -7,6 +7,7 @@ type: assessment
 status: stabilized
 assesses: ans.nonreciprocal-active-matter.exceptional-transition-catalogue
 against: quest.nonreciprocal-active-matter.phase-exploration
+against_version: "1"
 
 tests:
   admissibility:

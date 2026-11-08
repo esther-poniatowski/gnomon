@@ -316,6 +316,7 @@ propertyNames:
   - id
   - type
   - status
+  - version
   - addresses
   - request
   - links

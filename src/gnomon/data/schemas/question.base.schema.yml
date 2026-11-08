@@ -61,6 +61,19 @@ properties:
     description: posed · refined · answered · dissolved · abandoned
     examples:
     - '`posed`, for a question not yet refined'
+  version:
+    type:
+    - string
+    - 'null'
+    pattern: ^[1-9][0-9]*$
+    x-template: '"1"'
+    x-kind: label
+    x-comment: raise by one at each revision of a field that fixes the answers or the tests
+    title: Version
+    description: the version of the specification of the question, raised by one at each revision of a
+      field that fixes the answers or the tests
+    examples:
+    - '`"2"`, after the tolerance was revised'
   addresses:
     type:
     - string

@@ -4,6 +4,7 @@ statement: "At Re -> ∞, which mathematical constraints of statistically statio
 id: quest.turbulence.anomalous-scaling-constraints
 type: question
 status: posed
+version: "1"
 request: all
 subject:
   target_system: system.turbulence-incompressible-navier-stokes

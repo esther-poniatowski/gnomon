@@ -13,6 +13,7 @@ type: assessment
 status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
 assesses: ans.TOPIC.NAME         # the candidate answer, or the record of a construct that a problem demands
 against: quest.TOPIC.NAME        # the question of an answer, or the revised question that a reformulating answer names; the problem of a construct
+against_version: "1"             # the version of the question that the verdicts read; omit for a construct
 
 tests:                           # verdict: pending | pass | fail | not-applicable
   admissibility:                 # the tests of the core, then the tests of each aim block
