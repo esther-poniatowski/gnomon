@@ -377,9 +377,9 @@ class _Walk:
             self.presupposition(name, entry)
         for relation in _entries(record, "relations"):
             if relation.get("relation") == "presupposes" and isinstance(
-                relation.get("answer"), str
+                relation.get("target"), str
             ):
-                self.reference(str(relation["answer"]), f"answer {relation['answer']}")
+                self.reference(str(relation["target"]), f"answer {relation['target']}")
 
     def obligations(self, answer: str) -> None:
         """Walk the derivations that settle the proof obligations of the assessments of an

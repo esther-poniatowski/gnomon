@@ -120,7 +120,7 @@ def test_a_relation_presupposes_passes_on_the_exposure_of_the_other_answer() -> 
         "type": "answer",
         "id": "ans.a.other",
         "grounds": [],
-        "relations": [{"answer": ANSWER, "relation": "presupposes"}],
+        "relations": [{"target": ANSWER, "relation": "presupposes"}],
     }
     records[other["id"]] = other
     units = {f.unit for f in answer_exposure(records, "ans.a.other")}
