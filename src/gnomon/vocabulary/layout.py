@@ -273,12 +273,12 @@ def identifiers(text: str) -> set[str]:
 def cited(record: Mapping[str, Any]) -> list[tuple[str, Place, Any]]:
     """Return each field of a block of a record that holds references, with where it sits, its
     path and its value."""
-    cited: list[tuple[str, Place, Any]] = [
+    fields: list[tuple[str, Place, Any]] = [
         (f"{block}.{key}", (block, Entry(i, entry), key), entry.get(key))
         for block, key in REFERENCE
         for i, entry in indexed(record, block)
     ]
-    cited += [
+    fields += [
         (
             f"{outer}.{inner}.{key}",
             (outer, Entry(i, entry), inner, Entry(j, nested), key),
@@ -288,7 +288,7 @@ def cited(record: Mapping[str, Any]) -> list[tuple[str, Place, Any]]:
         for i, entry in indexed(record, outer)
         for j, nested in indexed(entry, inner)
     ]
-    return cited
+    return fields
 
 
 def formulas(record: Mapping[str, Any]) -> list[tuple[str, Place, str, frozenset[str]]]:
