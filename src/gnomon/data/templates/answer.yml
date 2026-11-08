@@ -51,7 +51,7 @@ dependence:                      # how the claim depends on its grounds; one ent
     result: "THE RESULT OF THE ANALYSIS"   # omit for a minimal sufficient set
 
 route:
-  kind:                          # derivation (a deduction by moves that each cite a warrant, approximations admitted) | proof (an exact deduction of the claim from its premises) | simulation (a numerical computation of the trajectories of a model) | estimation (values inferred from data by the estimator that the phenomenon states) | measurement (values assigned to a property, preserving its empirical relations)
+  kind:                          # derivation (a deduction in which some move has an inexact warrant or some posit lacks an exact confirmation) | proof (a deduction in which every move has an exact warrant and every posit an exact confirmation) | simulation (a numerical computation of the trajectories of a model) | estimation (values inferred from data by the estimator that the phenomenon states) | measurement (values assigned to a property, preserving its empirical relations)
   runs_on: [RECORD]              # the target system, one model, or every model of a family, by identifier
   family_fidelity:               # per-member (one comparison per member, each of which must pass) | ensemble (one comparison of the ensemble of the family); fill for a family of models only
   derivations: [derivation.TOPIC.NAME]   # for a derivation or a proof; the derivation records on which the claim rests
@@ -61,12 +61,12 @@ domain: "EXPRESSION OVER DECLARED SYMBOLS"   # for a deductive route, implied by
 
 variant: SYMBOL                  # symbol of the target variant this answer accounts for; omit when the answer covers every member of the class
 
-status: entertained              # entertained (considered as a candidate, not yet held for testing) | hypothesized (held provisionally while it is tested) | accepted (admitted into the accepted knowledge by an act of the researcher) | retracted (withdrawn by a decision of the researcher); the attitude taken toward the answer
-support: unsupported             # unsupported (no proof and no evidence supports the answer yet) | informal (support short of proof or empirical test, such as toy simulations) | formally-proven (a proof establishes the claim, such as a published theorem) | empirically-supported (data on the target support the claim); independent of the status; each law of the model keeps its own `warrant`
+status: entertained              # entertained (put forward as a candidate and not yet adopted for evaluation) | hypothesized (held provisionally while it is tested) | accepted (admitted into the accepted knowledge by an act of the researcher) | retracted (withdrawn by a decision of the researcher); the attitude taken toward the answer
+support: unsupported             # unsupported (nothing supports the claim yet, neither a proof nor data nor an informal argument) | informal (support short of proof or empirical test, such as toy simulations) | formally-proven (a proof derives the claim from its stated premises) | empirically-supported (the claim passed a test against data on the target); independent of the status; each law of the model keeps its own `warrant`
 
 uncertainty:                     # fill when the claim assigns a value; one entry per value
   - of: SYMBOL
-    form:                        # interval (a range on both sides of the value, such as 40 ± 3 Hz) | distribution (a probability distribution over the value) | bound (a limit on one side of the value, such as an upper bound on its error)
+    form:                        # interval (a range that contains the value with a stated probability, such as 40 ± 3 Hz at 95 %) | distribution (a probability distribution over the value) | bound (limits that the value or its error does not exceed, stated without a probability)
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
 
 modal_strength:                  # actual (the claim holds of the target system) | possible (the claim is consistent with the admitted laws and the domain) | necessary (no alternative consistent with the admitted laws produces a foil); the strength that the answer claims, compared with the strength the question requests

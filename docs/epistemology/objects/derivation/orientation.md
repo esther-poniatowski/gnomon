@@ -30,7 +30,25 @@ An orientation states five parts:
 - **alternatives**, the moves considered at that point and set aside, each with one of five reasons: inapplicable, inconsistent, costlier, losing information, or already tried without success;
 - **provenance**, contemporaneous when the orientation was written while the derivation was carried out, and reconstructed when it was written afterwards from a source.
 
-A reason of inconsistency concerns validity rather than strategy. The typed reason records that difference, so that the orientation does not present a constraint of validity as a choice.
+An intended change is stated by the difference between the objects taken by the move and the objects yielded by it. The seven changes differ as follows: ^intended-changes
+
+- **eliminate**: an item named by the purpose, a term of an expression or an unknown of a system, appears in the objects taken and is absent from the objects yielded, and the objects yielded keep every other item ("to eliminate the secular term at second order");
+- **decouple**: a system whose equations share unknowns is rewritten as subsystems that share no unknown, with the same solutions as the system taken ("to decouple the relaxation of the representation into independent modes");
+- **isolate**: among the components of an object, such as its modes, its terms or its scales, the objects yielded keep the components that determine a stated behavior in a stated regime, and set the others aside ("to isolate the mode that sets the long-time behavior");
+- **reduce**: a measure of the size of the objects at hand is smaller in the objects yielded than in the objects taken: the number of unknowns, of equations or of independent variables, or the order of an equation ("to reduce the relation to a relation between pure numbers");
+- **expose**: the object yielded is equivalent to the object taken, and its form shows a structure or a dependence not shown by the form of the object taken ("to expose the factor that each rate of change carries");
+- **close**: a system with fewer independent relations than unknowns receives a relation that brings the two counts to equality, such as a [closure posit](posit.md) ("to close the hierarchy of moments at second order");
+- **match**: two approximations of one object, each valid in its own region, are made to agree in a region in which both are valid, which fixes the constants left free by each approximation. The method of matched asymptotic expansions matches an inner and an outer expansion in this way [bender1999] ("to match the inner and the outer expansions").
+
+Each reason states why an alternative was set aside, by a comparison with the move chosen: ^alternative-reasons
+
+- **inapplicable**: a condition of application of the alternative fails for the objects at hand, such as the property that [makes its warrant apply](move.md#^applies-because) or a condition of application of its [scheme](segment-and-scheme.md), so the alternative cannot be carried out on them;
+- **inconsistent**: the alternative can be carried out on the objects at hand, and its result would contradict a premise, a posit, or the regime of a warrant used earlier in the derivation;
+- **costlier**: the alternative would reach the same end as the move chosen, with more moves, more computation, or a larger object to carry into the moves that follow;
+- **losing information**: the objects yielded by the alternative would lack a content required by the end, such as the dependence of a result on a parameter, so the end cannot be reached from them. In this sense, information is lost only when the discarded content is required by the end;
+- **already tried without success**: the alternative was carried out at this point in an earlier attempt, and that attempt did not reach the end.
+
+The first two reasons record a constraint of validity, and the last three a strategic choice. The typed reason records that difference, so that the orientation does not present a constraint of validity as a choice.
 
 ## Prospectivity
 
@@ -47,6 +65,10 @@ A reason of inconsistency concerns validity rather than strategy. The typed reas
 - **An orientation and a warrant answer two questions.** The warrant states why a move is admissible, and the orientation states why the move is relevant at that point.
 - **An orientation and an interpretation differ in their object.** An interpretation states the meaning of an item. An orientation states the next step of the derivation. A diagnostic interpretation often supplies the occasion of an orientation. Then, the orientation cites the interpretation rather than restating it.
 - **An orientation and the rationale of an act differ in their object**, as the [units of research work](../../processes/units-of-work.md) state.
+- **A change and a kind of move may share a token.** The kinds of move `eliminate` and `match` name the [transformation performed](move.md), whereas the changes `eliminate` and `match` name the state at which the move aims. A move of one kind can reach a change of another name: a solvability condition, imposed by a move of kind `impose`, eliminates a secular term.
+- **Isolating a component and exposing a structure differ in the part of the object that the move keeps.** A move that isolates yields a part of the object taken: the components that determine the behavior, without the others. A move that exposes yields an object equivalent to the object taken, in another form. A step that both rewrites an object and drops a part of it is two moves, since the [kinds of move](move.md) are atomic, and each move has its own change.
+- **Eliminating an item and reducing a size differ in the end that the purpose names.** When a move removes one named unknown, the count of unknowns also decreases. The change is `eliminate` when the end requires the absence of that item, and `reduce` when the end requires the smaller size.
+- **The change `reduce` concerns the size of the objects at hand.** A [reduction of one problem to another](../problem/epistemic-problem.md#^reduction) is a relation between two problems, and a reduction between theories is an epistemic activity. A move that reduces the size of its objects may also realize a reduction of problems, but the change records only the decrease of size.
 
 ---
 ## Sources
@@ -56,7 +78,8 @@ A reason of inconsistency concerns validity rather than strategy. The typed reas
 > 	- the schema of practical inference;
 > 	- the order of practical reasoning from end to means, and its reversal by the question "Why?";
 > 	- means–ends analysis, and the strategic rules of inquiry;
-> 	- plans as partial and hierarchical, as cited.
+> 	- plans as partial and hierarchical, as cited;
+> 	- the matching of two expansions in a region where both are valid.
 > - **Proposals:**
 > 	- the orientation as the prospective rationale of a move, with its five parts;
 > 	- the closed vocabulary of intended changes, and the typed reasons for setting an alternative aside;
@@ -66,6 +89,7 @@ A reason of inconsistency concerns validity rather than strategy. The typed reas
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
 - [anscombe1957] ◐ Anscombe, *Intention*, Basil Blackwell, 1957; the order of practical reasoning from end to means, the reverse order elicited by the question "Why?", and the series of answers to that question, checked through [Thompson, "Anscombe, Gertrude Elizabeth Margaret: intention", *Routledge Encyclopedia of Philosophy*](https://www.rep.routledge.com/articles/biographical/anscombe-gertrude-elizabeth-margaret-1919-2001/v-1/sections/intention-1)
+- [bender1999] ◐ [Bender & Orszag, *Advanced Mathematical Methods for Scientists and Engineers I: Asymptotic Methods and Perturbation Theory*, Springer, 1999](https://doi.org/10.1007/978-1-4757-3069-2), first published by McGraw-Hill, 1978; ch. 9, "Boundary-layer theory", pp. 419–483, the matching of an inner and an outer expansion, checked through the [chapter record](https://econpapers.repec.org/RePEc:spr:sprchp:978-1-4757-3069-2_9) and the [article on matched asymptotic expansions](https://en.wikipedia.org/wiki/Method_of_matched_asymptotic_expansions), which lists the book among its references without attributing the statement on the overlap region to it
 - [hamami2021] ◐ [Hamami & Morris, "Plans and planning in mathematical proofs", *The Review of Symbolic Logic* 14(4), 1030–1065, 2021](https://www.cambridge.org/core/journals/review-of-symbolic-logic/article/plans-and-planning-in-mathematical-proofs/6F84A9D231721E7B1B60056F5493D795); plans as partial and hierarchical, checked through the abstract and the [authors' copy](https://www.yacinhamami.com/wp-content/uploads/2019/12/Hamami-Morris-2019-Plans-and-Planning-in-Mathematical-Proofs.pdf)
 - [hintikka2007] ◐ [Hintikka, *Socratic Epistemology: Explorations of Knowledge-Seeking by Questioning*, Cambridge University Press, 2007](https://doi.org/10.1017/CBO9780511619298); definitory and strategic rules, p. 19, checked through its quotation in [Hamami, "An inquisitive formalization of interrogative inquiry"](https://projects.illc.uva.nl/inquisitivesemantics/assets/files/papers/Hamami2012_IMI.pdf)
 - [newell1972] ○ Newell & Simon, *Human Problem Solving*, Prentice-Hall, 1972; means–ends analysis

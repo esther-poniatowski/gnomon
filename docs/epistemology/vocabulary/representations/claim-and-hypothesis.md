@@ -50,12 +50,18 @@ Three kinds of expression are often confused. Each kind adds properties to the k
 
 The law statement of this table is a law in the lawhood sense. A [law of a record](../regularities/law.md#^law-of-a-record) is a general claim that need not support counterfactuals.
 
-The attitude and the support of a claim take values in two closed lists: ^attitude-support
+The attitude of a claim states the stance of the inquiry toward the claim, and its support states the grounds of the claim, independently of the attitude. Each takes its values in a closed list: ^attitude-support
 
-| Attribute | Content | Values |
+| Attribute | Value | The claim … |
 | --- | --- | --- |
-| Attitude | the stance of the inquiry toward the claim | `entertained`, `hypothesized`, `accepted`, `retracted` |
-| Support | the grounds of the claim, independent of the attitude | `unsupported`, `informal`, `formally-proven`, `empirically-supported` |
+| Attitude | `entertained` | is put forward as a candidate, and the researcher has not yet adopted it for evaluation. Therefore, the evaluation activities, whose signatures take a target claim held as `hypothesized`, do not take it |
+| Attitude | `hypothesized` | is held provisionally while it is tested |
+| Attitude | `accepted` | is admitted into the accepted knowledge $K$ by an act of the researcher |
+| Attitude | `retracted` | is withdrawn by a decision of the researcher |
+| Support | `unsupported` | has no support yet: neither a proof, nor a test against data on the target, nor an informal argument bears on it as a whole |
+| Support | `informal` | is supported by an argument or a computation that neither proves it nor tests it against data on the target, such as a simulation of a toy model, a heuristic argument or an analogy |
+| Support | `formally-proven` | is derived by a proof from its stated premises, such as the laws of a model and its posits. The proof establishes the claim only under those premises, so a formally proven claim can still fail of the target |
+| Support | `empirically-supported` | has passed a test that compares it, or a consequence of it, with data on the target |
 
 The other statuses of an inquiry, such as the warrant of a law or the evidential status of a phenomenon, qualify other bearers along other axes, as the [table of statuses](../../objects/status/statuses-and-acceptance.md#^status-axes) places them.
 

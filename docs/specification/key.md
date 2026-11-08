@@ -13,7 +13,7 @@ A key states one map between the two sides of a binding: an observation operator
 
 | Specification | When it is required | Content | Examples |
 | ------------- | ------------------- | ------- | -------- |
-| Kind | always | `observation-operator` · `unit-map` · `aggregation-map` · `qualitative-abstraction` | the forward model from population rates to a local field potential (observation operator); the conversion of the dimensionless time of a model to seconds (unit map) |
+| Kind | always | one of the [kinds of a key](../epistemology/objects/answer/model-and-binding.md#^key-kinds): `observation-operator` · `unit-map` · `aggregation-map` · `qualitative-abstraction` | the forward model from population rates to a local field potential (observation operator); the conversion of the dimensionless time of a model to seconds (unit map) |
 | Domain and codomain | always | the side of the model and the side of the target that the key connects, each as a set expression or a type | from the rates of two populations to one potential; from trajectories to the labels `oscillating` and `silent` |
 | Expression | always | an expression over the symbols of its domain, or a pointer to the procedure that computes the map | the mean over the neurons of a population; a threshold on the power in the gamma band |
 | Version | always | a version identifier | version 1 |

@@ -20,7 +20,7 @@ identification:                  # fixes the referent before any quantity is dec
 reference_class:                 # name only; the remaining specifications of the record generate the class
   name: "KIND OF SYSTEM"
   projectibility:                # whether a claim about some members can be projected onto the class
-    status:                      # assumed (the projection rests on reported evidence, without a check) | tested (a check against further members supports the projection) | not-claimed (the claim covers every member directly, as a theorem does)
+    status:                      # assumed (the projection is adopted without a check that could refute it) | tested (the projection passed a check on members not used to obtain the claim) | not-claimed (no claim is carried from some members to the whole class)
     evidence: "THE TEST OR THE ARGUMENT THAT SUPPORTS PROJECTING THE CLAIM ONTO THE CLASS"   # omit when the status is `not-claimed`
   selection_criteria:            # fill only when membership depends on an outcome of the dynamics; put a restriction on prior values in the domain of the question that imposes it, since other questions may leave them free
     - name: "NAME OF THE CRITERION"
@@ -58,7 +58,7 @@ variables:                       # quantities that vary while the phenomenon unf
     determined:                  # within (its value is fixed inside the system) | outside (its value varies but is set beyond the system)
     signature: [SYMBOL]          # one constituent kind or index set per place; empty for the system as a whole
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values form no scale, as maps or measures do)
+    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values are maps or measures, to which no scale type applies)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give when a map builds the quantity from declared symbols
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
@@ -75,7 +75,7 @@ parameters:                      # quantities held fixed while the phenomenon un
     variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
     signature: [SYMBOL, SYMBOL]   # one entry per place, e.g. two neurons for a connectivity weight
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values form no scale, as maps or measures do)
+    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values are maps or measures, to which no scale type applies)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived parameter
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity

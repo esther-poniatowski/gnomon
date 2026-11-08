@@ -44,7 +44,7 @@ observables:                     # functions of the system state that restate th
     variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
     signature: [SYMBOL]          # indices the observable still takes; empty for a scalar
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values form no scale, as maps or measures do)
+    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values are maps or measures, to which no scale type applies)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived observable
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
@@ -54,7 +54,7 @@ observables:                     # functions of the system state that restate th
     event:                       # fill when the observable is the time of an event; the observable's `expression` then states the event criterion
       origin: "EXPRESSION FIXING THE ORIGIN OF TIME"
       horizon: "EXPRESSION FIXING THE END OF OBSERVATION"
-      censoring:                 # right (the event had not occurred by the horizon) | left (the event occurred before the origin of observation) | interval (the event occurred between two observations, at an unknown time) | none (the time of the event is recorded)
+      censoring:                 # right (the event had not occurred by the horizon) | left (the event occurred before the first observation, at an unknown time) | interval (the event occurred between two observations, at an unknown time) | none (the time of the event is recorded)
       reading: "THE EVENT IN WORDS, AND THE VALUE RECORDED WHEN IT IS NOT OBSERVED"
     estimator:                   # fill when the values are estimated from data; the estimates are computed from these entries, never recorded
       method: "THE ESTIMATOR THAT COMPUTES THE VALUES FROM THE DATA"
@@ -138,7 +138,7 @@ data:                            # material that establishes the phenomenon
     version: VERSION
 
 data_model:                      # fill when a model intervenes between the raw records and the data; one entry per model
-  - kind:                        # instrument-model (how the apparatus turns the measured quantity into raw records) | background-simulation (a simulation of the signal expected without the behavior) | assimilation-model (combines records with a simulation to fill their gaps) | reconstruction (an inference of unrecorded values from the raw records)
+  - kind:                        # instrument-model (how the apparatus turns the measured quantity into raw records) | background-simulation (a simulation of the records that processes other than the behavior would produce) | assimilation-model (combines records with a simulation to fill their gaps) | reconstruction (an inference of a quantity that no apparatus recorded, from records of other quantities)
     source: RECORD               # the model record, or a pointer to the publication that states the model
     reading: "WHAT THE MODEL DOES TO THE DATA"
 

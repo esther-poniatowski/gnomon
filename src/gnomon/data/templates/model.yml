@@ -54,7 +54,7 @@ variables:                       # part of V: quantities that vary in the model
     determined:                  # within (its value is fixed inside the model) | outside (its value varies but is set beyond the model)
     signature: [SYMBOL]          # one constituent kind or index set per place; empty for the model as a whole
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values form no scale, as maps or measures do)
+    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values are maps or measures, to which no scale type applies)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # an expression over the symbols of the model, or a map other than the identity from quantities of the target
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
@@ -70,7 +70,7 @@ parameters:                      # part of V: quantities that the model holds fi
     variant: SYMBOL              # symbol of the target variant that the entry models; omit when the model stands for every member of the class
     signature: [SYMBOL]
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values form no scale, as maps or measures do)
+    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values are maps or measures, to which no scale type applies)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived parameter
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity

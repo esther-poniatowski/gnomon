@@ -63,9 +63,9 @@ vocabularies:
       name: an analysis across models that share the claimed structure
     route.kind:
     - value: derivation
-      name: a deduction by moves that each cite a warrant, approximations admitted
+      name: a deduction in which some move has an inexact warrant or some posit lacks an exact confirmation
     - value: proof
-      name: an exact deduction of the claim from its premises
+      name: a deduction in which every move has an exact warrant and every posit an exact confirmation
     - value: simulation
       name: a numerical computation of the trajectories of a model
     - value: estimation
@@ -79,7 +79,7 @@ vocabularies:
       name: one comparison of the ensemble of the family
     .status:
     - value: entertained
-      name: considered as a candidate, not yet held for testing
+      name: put forward as a candidate and not yet adopted for evaluation
     - value: hypothesized
       name: held provisionally while it is tested
     - value: accepted
@@ -88,20 +88,20 @@ vocabularies:
       name: withdrawn by a decision of the researcher
     .support:
     - value: unsupported
-      name: no proof and no evidence supports the answer yet
+      name: nothing supports the claim yet, neither a proof nor data nor an informal argument
     - value: informal
       name: support short of proof or empirical test, such as toy simulations
     - value: formally-proven
-      name: a proof establishes the claim, such as a published theorem
+      name: a proof derives the claim from its stated premises
     - value: empirically-supported
-      name: data on the target support the claim
+      name: the claim passed a test against data on the target
     uncertainty.form:
     - value: interval
-      name: a range on both sides of the value, such as 40 ± 3 Hz
+      name: "a range that contains the value with a stated probability, such as 40 \xB1 3 Hz at 95 %"
     - value: distribution
       name: a probability distribution over the value
     - value: bound
-      name: a limit on one side of the value, such as an upper bound on its error
+      name: limits that the value or its error does not exceed, stated without a probability
     .modal_strength:
     - value: actual
       name: the claim holds of the target system
@@ -283,7 +283,7 @@ vocabularies:
     - value: absolute
       name: a count, which admits no rescaling at all
     - value: not-applicable
-      name: the values form no scale, as maps or measures do
+      name: the values are maps or measures, to which no scale type applies
     observables.selects:
     - value: unique
       name: the record presupposes exactly one value satisfying the condition
@@ -302,7 +302,7 @@ vocabularies:
     - value: right
       name: the event had not occurred by the horizon
     - value: left
-      name: the event occurred before the origin of observation
+      name: the event occurred before the first observation, at an unknown time
     - value: interval
       name: the event occurred between two observations, at an unknown time
     - value: none
@@ -359,11 +359,11 @@ vocabularies:
     - value: instrument-model
       name: how the apparatus turns the measured quantity into raw records
     - value: background-simulation
-      name: a simulation of the signal expected without the behavior
+      name: a simulation of the records that processes other than the behavior would produce
     - value: assimilation-model
       name: combines records with a simulation to fill their gaps
     - value: reconstruction
-      name: an inference of unrecorded values from the raw records
+      name: an inference of a quantity that no apparatus recorded, from records of other quantities
     observation_error.form:
     - value: distribution
       name: a probability law of the error, such as a Gaussian
@@ -415,7 +415,7 @@ vocabularies:
     - value: refined
       name: the question was revised since it was first stated
     - value: answered
-      name: the researcher has settled the request on an obtained direct answer
+      name: acts of the researcher meet the demand of its minimal problem
     - value: abandoned
       name: the researcher stops the inquiry with the question unanswered
     .request:
@@ -461,13 +461,13 @@ vocabularies:
     - value: clamped
       name: a fixed value replaces the rule that determines the variable
     - value: restricted
-      name: the variable is held within a narrower set of values
+      name: the variable is held within a stated set of values, by no more specific mode
     - value: initial
       name: only the initial values of the variable are restricted
     - value: stationary
-      name: the variable is held to time-invariant states or statistics
+      name: the variable is held to courses whose law is invariant under shifts along the course
     - value: without-event
-      name: the variable is held to courses that exclude a named event
+      name: the variable is held to courses on which a stated event does not occur
     task.epistemic_aim:
     - value: description
       name: what structure the target system has
@@ -532,7 +532,7 @@ vocabularies:
     - value: qualitative
       name: agreement in kind with the target, with no tolerance
     - value: order-of-magnitude
-      name: values must agree up to a factor of about ten
+      name: the larger of the two values is at most ten times the smaller
     - value: numeric-bound
       name: a stated metric of the difference must not exceed a bound
     - value: structural-only
@@ -585,11 +585,11 @@ vocabularies:
       name: the model class itself is the object of study
     reference_class.status:
     - value: assumed
-      name: the projection rests on reported evidence, without a check
+      name: the projection is adopted without a check that could refute it
     - value: tested
-      name: a check against further members supports the projection
+      name: the projection passed a check on members not used to obtain the claim
     - value: not-claimed
-      name: the claim covers every member directly, as a theorem does
+      name: no claim is carried from some members to the whole class
     index_sets.structure:
     - value: evolution
       name: the index along which the state evolves, such as time or a training step
@@ -614,7 +614,7 @@ vocabularies:
     - value: absolute
       name: a count, which admits no rescaling at all
     - value: not-applicable
-      name: the values form no scale, as maps or measures do
+      name: the values are maps or measures, to which no scale type applies
     variables.selects:
     - value: unique
       name: the record presupposes exactly one value satisfying the condition
@@ -634,7 +634,7 @@ vocabularies:
     - value: absolute
       name: a count, which admits no rescaling at all
     - value: not-applicable
-      name: the values form no scale, as maps or measures do
+      name: the values are maps or measures, to which no scale type applies
     parameters.selects:
     - value: unique
       name: the record presupposes exactly one value satisfying the condition
@@ -863,26 +863,26 @@ vocabularies:
       name: no bound can contain the error near the limit
     orientations.change:
     - value: eliminate
-      name: an unwanted term or unknown removed from the expressions
+      name: a named term or unknown absent from the objects yielded, the other items kept
     - value: decouple
-      name: coupled equations split into independent ones
+      name: a coupled system rewritten as subsystems that share no unknown
     - value: isolate
-      name: the one component that governs the behavior singled out
+      name: the components that govern a stated behavior kept, the others set aside
     - value: reduce
-      name: fewer variables, equations or orders to handle than before
+      name: fewer unknowns, equations or independent variables, or an equation of lower order
     - value: expose
-      name: a hidden structure or dependence made explicit in an expression
+      name: an equivalent form that shows a structure or a dependence
     - value: close
-      name: an open system of equations completed by an added relation
+      name: a system with more unknowns than relations completed by an added relation
     - value: match
-      name: two expansions or solutions made to agree on their overlap
+      name: two approximations valid in separate regions made to agree where both are valid
     orientations.reason:
     - value: inapplicable
       name: the conditions of the move do not hold for these objects
     - value: inconsistent
-      name: the move would be invalid here, not merely less useful
+      name: the move can be carried out, and its result would contradict a premise or a posit
     - value: costlier
-      name: the move would reach the end at a greater cost
+      name: the move would reach the same end with more moves, computation or content to carry
     - value: losing-information
       name: the move would discard information needed by the end
     - value: tried-without-success
@@ -913,13 +913,13 @@ vocabularies:
     - value: divergence
       name: an expression grows without bound
     - value: secular-term
-      name: a correction term that grows with time and breaks the expansion
+      name: a correction term that grows without bound until it rivals a term of lower order
     - value: zero-mode
-      name: a mode of zero eigenvalue, whose amplitude stays constant
+      name: an eigenvector of eigenvalue zero of a linear operator of the calculation
     - value: sign-change
       name: a quantity or a coefficient passes through zero and changes sign
     - value: crossing
-      name: two quantities become equal, or one reaches a threshold
+      name: two quantities, or a quantity and a threshold, become equal
   operators:
     .status:
     - value: provisional
@@ -963,9 +963,9 @@ vocabularies:
   problem:
     .status:
     - value: posed
-      name: the demand and constraints are stated, not yet revised
+      name: the demand and constraints are stated, and no constraint has changed since
     - value: refined
-      name: the demand or constraints were revised since the problem was stated
+      name: constraints were added or revised since the problem was stated
     - value: solved
       name: the records show that the demand is met
     - value: dissolved
@@ -1058,9 +1058,9 @@ vocabularies:
     - value: in-progress
       name: some acts are carried out and the course continues
     - value: completed
-      name: the course of acts has reached its end
+      name: the addressed problem or question has ended other than by abandonment, and every act carried out is judged
     - value: abandoned
-      name: the course of acts was stopped before its end
+      name: the researcher stops the course before its problem or question ends
     steps.verdict:
     - value: pass
       name: the output meets the norm of the activity
@@ -1182,7 +1182,7 @@ vocabularies:
     - value: absolute
       name: a count, which admits no rescaling at all
     - value: not-applicable
-      name: the values form no scale, as maps or measures do
+      name: the values are maps or measures, to which no scale type applies
     variables.selects:
     - value: unique
       name: the record presupposes exactly one value satisfying the condition
@@ -1202,7 +1202,7 @@ vocabularies:
     - value: absolute
       name: a count, which admits no rescaling at all
     - value: not-applicable
-      name: the values form no scale, as maps or measures do
+      name: the values are maps or measures, to which no scale type applies
     parameters.selects:
     - value: unique
       name: the record presupposes exactly one value satisfying the condition
@@ -1265,11 +1265,11 @@ vocabularies:
     - value: pattern
       name: a spatial or temporal structure of the model, imputed to the target
     - value: regime
-      name: a labelled behavior of the model, imputed to the target
+      name: the class of behaviors of the model over a region of its parameters, imputed to the target
     - value: invariance-class
-      name: an invariance, or a universality class in which the target is placed
+      name: a class of systems that share an invariant, such as a symmetry or a universality class, in which the target is placed
     - value: modal-profile
-      name: the behaviors that a constraint makes possible or impossible for the target
+      name: the behaviors that a constraint makes impossible or necessary for the target
     - value: component
       name: a unit of the model alone and the part of the target that it denotes
     feature_pairs.mode:
@@ -1304,18 +1304,18 @@ vocabularies:
     - value: observation-operator
       name: carries a model state to the quantities that the data record
     - value: unit-map
-      name: converts the units of the model into those of the target
+      name: rescales a value of the model by a factor that expresses it in the units of the target
     - value: aggregation-map
       name: carries fine quantities onto coarse bearers, such as a population mean
     - value: qualitative-abstraction
-      name: carries trajectories or values onto qualitative labels
+      name: carries trajectories or values onto labels that name the classes of a partition
   comparison:
     .calibration_treatment:
     - value: excluded
       name: the data used for calibration contribute nothing to the verdict
     - value: cross-validated
-      name: calibration data are compared only after a fit that omits them
+      name: each calibration datum is compared with a fit that omits it
     - value: bayesian
-      name: the fit and the comparison share one posterior over the parameters
+      name: the compared values carry the posterior uncertainty of the fitted parameters
     - value: reused
       name: the data used for calibration are compared again without any correction

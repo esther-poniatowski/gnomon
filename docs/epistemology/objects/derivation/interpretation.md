@@ -25,6 +25,18 @@ Five kinds of item bear an interpretation:
 | **feature of the calculation** | an event exhibited by the calculation: a divergence, a secular term, a zero mode, a change of sign, a crossing | "the secular term signals a missing slow drift" |
 | **composite** | a segment, or a consequence with the moves supporting it | "this segment shows that the coupling between the two fields drives the instability" |
 
+A feature of the calculation is an event exhibited at one object of the calculation, as a variable or a parameter varies. Five events are distinguished: ^feature-kinds
+
+| Event | Definition | Example of a diagnostic reading |
+| --- | --- | --- |
+| **divergence** | an expression grows without bound in magnitude as a variable or a parameter approaches a value, finite or infinite | the outer expansion diverges as the distance to the wall vanishes, which marks a boundary layer |
+| **secular term** | a correction term of a perturbation expansion grows without bound with an independent variable, usually time, until it becomes as large as a term of lower order, so that the expansion ceases to be asymptotic there [bender1999] | the secular term signals a missing slow drift |
+| **zero mode** | a linear operator of the calculation has the eigenvalue zero, and a zero mode is an eigenvector for that eigenvalue | in a first-order linear flow, the amplitudes along the modes of zero rate stay constant, so they do not relax |
+| **change of sign** | a quantity or a coefficient passes through zero and takes the opposite sign | the decay rate of the perturbation changes sign, so the stability posited fails beyond that value of the parameter |
+| **crossing** | two quantities, neither identically zero, become equal, such as two eigenvalues or two rates, or a quantity reaches a threshold fixed by a premise | the slowest positive rate crosses the next one, so the gap that licensed the dominance of the slowest mode closes |
+
+The events exclude one another. A growth without bound that meets the definition of a secular term is recorded as a secular term, not as a divergence, and a passage of one quantity through zero is a change of sign, not a crossing.
+
 ## Kind of meaning
 
 Eight kinds of meaning differ by their content and by their ground:
@@ -88,8 +100,10 @@ The researcher judges whether the meaning is correct, as the [rule against infer
 > 	- meaning made with mathematics in physics, and symbolic forms;
 > 	- the variation of a characterizing property and the deformations of a proof, and the difficulties of countermathematicals;
 > 	- difference-making under intervention;
-> 	- the positive, negative and neutral analogy, and singular limits, as cited.
+> 	- the positive, negative and neutral analogy, and singular limits, as cited;
+> 	- secular terms in a perturbation expansion, as cited.
 > - **Proposals:**
+> 	- the five events of a feature of the calculation, and their precedence;
 > 	- the two axes of interpretation: the five kinds of item and the eight kinds of meaning, with the ground of each kind;
 > 	- the admitted pairs of item and kind;
 > 	- the three single homes: of a failure, of a licensing property, and of a referential meaning.
@@ -97,6 +111,7 @@ The researcher judges whether the meaning is correct, as the [rule against infer
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
 - [batterman2002] ○ [Batterman, *The Devil in the Details: Asymptotic Reasoning in Explanation, Reduction, and Emergence*, Oxford University Press, 2002](https://doi.org/10.1093/0195146476.001.0001); singular limits
+- [bender1999] ◐ [Bender & Orszag, *Advanced Mathematical Methods for Scientists and Engineers I: Asymptotic Methods and Perturbation Theory*, Springer, 1999](https://doi.org/10.1007/978-1-4757-3069-2), first published by McGraw-Hill, 1978; ch. 11, "Multiple-scale analysis", pp. 544–576, the secular term of a naive expansion, pp. 545–551, checked through the [chapter record](https://econpapers.repec.org/RePEc:spr:sprchp:978-1-4757-3069-2_11) and the [article on multiple-scale analysis](https://en.wikipedia.org/wiki/Multiple-scale_analysis), which cites those pages
 - [hesse1966] ○ [Hesse, *Models and Analogies in Science*, University of Notre Dame Press, 1966](https://philpapers.org/rec/REMAA); revised edition of the Sheed and Ward edition, London, 1963; positive, negative and neutral analogy
 - [mancosu2023] ◐ [Mancosu, Poggiolesi & Pincock, "Mathematical explanation", *The Stanford Encyclopedia of Philosophy*, revised 2023](https://plato.stanford.edu/entries/mathematics-explanation/); §2.2.1, the deformations of a proof under a variation of its characterizing property, and the countermathematicals that threaten counterfactual accounts
 - [redish2015] ◐ [Redish & Kuo, "Language of physics, language of math: disciplinary culture and dynamic epistemology", *Science & Education* 24(5–6), 561–590, 2015](https://doi.org/10.1007/s11191-015-9749-7); meaning made with mathematics in physics, checked through the [abstract](https://arxiv.org/abs/1409.6272)

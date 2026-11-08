@@ -10,6 +10,7 @@ aliases:
   - Observable
   - Parameter
   - Data
+  - Uncertainty
 ---
 # Variable, value, observable, parameter and data
 
@@ -36,6 +37,7 @@ A **variable** is an [attribute](../systems/property-attribute-predicate.md) for
 | Latent variable | statistics | a variable of a model, read directly by no observation function, whose values are inferred | — |
 | Parameter | statistics | an index $\theta$ of a family of distributions $\{\mathbb{P}_\theta\}$: fixed within one model of the family, varied across its models | [mccullagh2002] |
 | Data | philosophy of science | records of values produced by one experimental procedure and carrying the idiosyncrasies of that procedure | [bogen1988] |
+| Uncertainty | metrology | a parameter, associated with the result of a measurement, that characterizes the dispersion of the values that could reasonably be attributed to the measurand | [jcgm2008] |
 
 The three senses of *observable* answer different questions. The empiricist sense classifies entities by human perception. The physical sense names a quantity defined on the state. The control sense names a map from the state to the outputs, and adds a property of the whole system.
 
@@ -46,6 +48,10 @@ The three senses of *observable* answer different questions. The empiricist sens
 - **An observable is a variable with an observation map; a latent variable has none.** The distinction is relative to the instruments assumed. A membrane potential is observable under patch clamp and latent in a recording of spikes alone.
 - **A parameter, a state variable and an exogenous variable differ in role only.** The [role test](#^role-test) fixes the role of a declared quantity, relative to the course of one phenomenon.
 - **Data are not the values of the observable.** Data carry the noise, the artefacts and the procedure of one experiment. Data are separated from the phenomenon detected through them in the [vocabulary of phenomena](../regularities/pattern-and-phenomenon.md).
+- **The uncertainty of a value takes one of three forms, told apart by the probability that each states.** ^uncertainty-forms
+    - a **distribution** is a probability distribution over the values that could be attributed to the quantity, which describes the knowledge of that quantity [jcgm2008s1];
+    - an **interval** is a range of values that contains the value with a stated probability, its coverage probability. An expanded uncertainty $y\pm U$ gives a range on both sides of the estimate, whereas a one-sided interval extends to the boundary of the possible values [jcgm2008]. An interval summarizes a distribution without stating it in full [jcgm2008s1];
+    - a **bound** is a pair of limits, or a single limit, between which the value or its error lies with certainty: the bound states no probability, and no distribution between the limits. Such limits are bounds in the sense of the GUM, when the probability that the value lies outside them is essentially zero [jcgm2008]. The error of a controlled operation is stated by a bound, as the [classes of error](../../objects/answer/model-and-binding.md#^error-classes) state.
 
 ## Role test of a quantity
 
@@ -78,6 +84,8 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 
 - [bogen1988] ◐ [Bogen & Woodward, "Saving the phenomena", *Philosophical Review* 97(3), 303–352, 1988](https://doi.org/10.2307/2185445)
 - [bunge1977] ◐ [Bunge, *Treatise on Basic Philosophy*, vol. 3, *Ontology I: The Furniture of the World*, Reidel, 1977](https://doi.org/10.1007/978-94-010-9924-0); the state function and the lawful state space are introduced in ch. 3, "Thing", section "State"
+- [jcgm2008] ◐ [JCGM, *Evaluation of measurement data — Guide to the expression of uncertainty in measurement*, JCGM 100:2008](https://doi.org/10.59161/JCGM100-2008E); clauses 2.2.3, 2.3.5, 4.3.7, 6.2.1 and C.2.28, read in the text published by the BIPM
+- [jcgm2008s1] ◐ [JCGM, *Evaluation of measurement data — Supplement 1 to the "Guide to the expression of uncertainty in measurement" — Propagation of distributions using a Monte Carlo method*, JCGM 101:2008](https://doi.org/10.59161/JCGM101-2008); the introduction and clause 1, read in the text published by the BIPM
 - [kalman1960] ◐ [Kalman, "On the general theory of control systems", *IFAC Proceedings Volumes* 1(1), 491–502, 1960](https://doi.org/10.1016/S1474-6670(17)70094-8); Proceedings of the First IFAC Congress, Moscow
 - [kolmogorov1933] ◐ [Kolmogoroff, *Grundbegriffe der Wahrscheinlichkeitsrechnung*, Springer, 1933](https://doi.org/10.1007/978-3-642-49888-6)
 - [mccullagh2002] ◐ [McCullagh, "What is a statistical model?", *Annals of Statistics* 30(5), 1225–1310, 2002](https://doi.org/10.1214/aos/1035844977)

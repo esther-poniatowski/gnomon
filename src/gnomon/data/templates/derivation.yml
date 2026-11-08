@@ -76,12 +76,12 @@ orientations:                    # one entry per non-routine move and per segmen
     of: MOVE-OR-SEGMENT-NAME
     purpose: "TO …"
     determines: SOUGHT-NAME      # either this field or change
-    change:                      # eliminate (an unwanted term or unknown removed from the expressions) | decouple (coupled equations split into independent ones) | isolate (the one component that governs the behavior singled out) | reduce (fewer variables, equations or orders to handle than before) | expose (a hidden structure or dependence made explicit in an expression) | close (an open system of equations completed by an added relation) | match (two expansions or solutions made to agree on their overlap); either this field or determines
+    change:                      # eliminate (a named term or unknown absent from the objects yielded, the other items kept) | decouple (a coupled system rewritten as subsystems that share no unknown) | isolate (the components that govern a stated behavior kept, the others set aside) | reduce (fewer unknowns, equations or independent variables, or an equation of lower order) | expose (an equivalent form that shows a structure or a dependence) | close (a system with more unknowns than relations completed by an added relation) | match (two approximations valid in separate regions made to agree where both are valid); either this field or determines
     occasion: INTERPRETATION-NAME   # when the purpose does not follow from the sought alone
     means: "KIND OF MOVE, SCHEME OR ACT"   # optional
     alternatives:                # optional
       - move: "THE MOVE SET ASIDE"
-        reason:                  # inapplicable (the conditions of the move do not hold for these objects) | inconsistent (the move would be invalid here, not merely less useful) | costlier (the move would reach the end at a greater cost) | losing-information (the move would discard information needed by the end) | tried-without-success (the move was already attempted at this point and failed)
+        reason:                  # inapplicable (the conditions of the move do not hold for these objects) | inconsistent (the move can be carried out, and its result would contradict a premise or a posit) | costlier (the move would reach the same end with more moves, computation or content to carry) | losing-information (the move would discard information needed by the end) | tried-without-success (the move was already attempted at this point and failed)
     provenance:                  # contemporaneous (written while the derivation was carried out) | reconstructed (written afterwards from a source)
     expected_gain: "THE GAIN EXPECTED"   # optional
 
@@ -95,7 +95,7 @@ interpretations:                 # one entry per meaning that the record states
 
 features:                        # optional; one entry per event of the calculation
   - id: FEATURE-NAME
-    kind:                        # divergence (an expression grows without bound) | secular-term (a correction term that grows with time and breaks the expansion) | zero-mode (a mode of zero eigenvalue, whose amplitude stays constant) | sign-change (a quantity or a coefficient passes through zero and changes sign) | crossing (two quantities become equal, or one reaches a threshold)
+    kind:                        # divergence (an expression grows without bound) | secular-term (a correction term that grows without bound until it rivals a term of lower order) | zero-mode (an eigenvector of eigenvalue zero of a linear operator of the calculation) | sign-change (a quantity or a coefficient passes through zero and changes sign) | crossing (two quantities, or a quantity and a threshold, become equal)
     at: OBJECT-NAME
 
 segments:                        # optional; one entry per group of moves under one idea

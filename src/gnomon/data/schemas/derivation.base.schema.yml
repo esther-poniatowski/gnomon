@@ -685,7 +685,7 @@ properties:
                   - 'null'
                 x-vocabulary: orientations.reason
                 title: Reason
-                description: 'Why the move considered was set aside: a failure of validity, or a strategic disadvantage.'
+                description: 'Why the move considered was set aside: a constraint of validity, or a strategic disadvantage.'
                 examples:
                   - costlier
         provenance:

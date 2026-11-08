@@ -136,7 +136,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `type` | Record type | The record type, which fixes the contract that the record follows. | — |
 | `uncertainty` | Uncertainty | the uncertainty of each value, as an interval, a distribution or a bound | [Uncertainty](../specification/answer.md) |
 | `uncertainty[].expression` | Expression | an expression over declared symbols stating the uncertainty | [Uncertainty](../specification/answer.md) |
-| `uncertainty[].form` | Form | the form of the uncertainty: an interval on both sides of the value, a distribution over it, or a bound on one side | [Uncertainty](../specification/answer.md) |
+| `uncertainty[].form` | Form | the form of the uncertainty, told apart by the probability that it states | [Uncertainty](../specification/answer.md) |
 | `uncertainty[].of` | Of | the symbol of the value whose uncertainty the entry states | [Uncertainty](../specification/answer.md) |
 | `use` | Use | the purpose of an answer whose claim bears on no target: a use such as `tool`, `proof-of-principle`, `conceptual-exploration` or `understanding`, with the property that the model must have for that use | [Use](../specification/answer.md) |
 | `use.property` | Property | the property that the model must have for the declared use | [Use](../specification/answer.md) |
@@ -351,7 +351,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `orientations` | Orientations | The prospective rationale of each non-routine move and of each segment. | [Orientations](../specification/derivation.md) |
 | `orientations[].alternatives` | Alternatives | The moves considered at that point and set aside, each with its reason. | [Orientations: alternatives](../specification/derivation.md) |
 | `orientations[].alternatives[].move` | Move | The move set aside. | [Orientations: alternatives: move](../specification/derivation.md) |
-| `orientations[].alternatives[].reason` | Reason | Why the move considered was set aside: a failure of validity, or a strategic disadvantage. | [Orientations: alternatives: reason](../specification/derivation.md) |
+| `orientations[].alternatives[].reason` | Reason | Why the move considered was set aside: a constraint of validity, or a strategic disadvantage. | [Orientations: alternatives: reason](../specification/derivation.md) |
 | `orientations[].change` | Change | The intended change of state that the purpose brings about. | [Orientations: change](../specification/derivation.md) |
 | `orientations[].determines` | Determines | The identifier of the sought that the purpose determines. | [Orientations: determines](../specification/derivation.md) |
 | `orientations[].expected_gain` | Expected gain | The gain that the move is expected to bring. | [Orientations: expected gain](../specification/derivation.md) |

@@ -112,6 +112,8 @@ In words: the researcher has accepted what the existence of a result of the dema
 
 ## How a problem ends
 
+Until it ends, a problem is in one of two stages. A problem is `posed` once its demand and the constraints visible in its source are stated, as the norm of problematization requires, and as long as no constraint has been added or revised since. A problem is `refined` once a recorded act has added constraints or revised them since the statement, such as the constraints that constraint specification derives from the admitted laws. A refinement leaves the demand unchanged: the demand fixes the [associated question](#^associated-question), so a different demand states a different problem. ^problem-stages
+
 A problem ends in one of three ways, and the [problem record](../../../specification/problem.md) fixes their record values. Two of the three ways have a formal condition: ^problem-outcomes
 
 - **Solved**: the demand is met, $\mathrm{Met}(\pi)$. Whether the result enters $K$ depends on its type, as the [solution of a problem](#^solution-claim) states.

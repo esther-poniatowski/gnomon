@@ -55,6 +55,8 @@ Each sought of a derivation ends in an outcome of one of three kinds, so that on
 
 The epistemic role of a derivation is to license tracing a consequence, or an obstacle, back to its premises, as the [epistemic roles](../status/epistemic-objects.md#^unit-roles) state.
 
+**A proof is a derivation whose consequence no inexact move and no unconfirmed posit exposes.** A derivation reaches a consequence through moves, each licensed by a warrant with a [class of error](move.md), and through posits, each confirmed or not by its [tests](posit.md#^posit-confirmation). A consequence is established by a **proof** when every move upstream of it has an exact warrant, and every posit among its inputs is confirmed by an exact test or a certified computation. The consequence then follows from its premises alone, and no move and no posit enters its [exposure](../knowledge/grounds-and-dependence.md#^derivation-exposure). A consequence is established by an **approximate derivation** when some move upstream of it has a controlled, uncontrolled or singular warrant, or when some posit among its inputs lacks such a confirmation. The consequence then holds under the premise of propagation that the [explicative derivation](../../processes/activities/model-analysis.md#^explicative-derivation) states, within the conjunction of the regimes of its warrants, and it carries the least favourable class of error among them. Exactness relates a consequence to its premises, not to the target, so the premises of a proof may include idealizations. ^proof-and-derivation
+
 ---
 ## Sources
 
@@ -69,7 +71,8 @@ The epistemic role of a derivation is to license tracing a consequence, or an ob
 > 	- the three separate answers about each step: warrant, orientation and interpretations;
 > 	- the seven kinds of unit of a derivation;
 > 	- the construction of a result from posits by licensed moves, the guess staying with the act that produced it;
-> 	- the three outcomes, and the epistemic role of a derivation.
+> 	- the three outcomes, and the epistemic role of a derivation;
+> 	- a proof as a derivation whose consequence no inexact move and no unconfirmed posit exposes.
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 

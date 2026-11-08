@@ -101,7 +101,7 @@ Three kinds of content in the records fail the criterion, or bear on it only thr
 
 ## Distinctions
 
-- **A product type differs from an object.** The product types classify the inputs and the outputs of the activities, whereas the inventory classifies the contents of the state of an inquiry. An answer has a product type only under the attitude `hypothesized`, and the task, the virtues, the comparison and the itinerary have none.
+- **A product type differs from an object.** The product types classify the inputs and the outputs of the activities, whereas the inventory classifies the contents of the state of an inquiry. An answer has the product type `target-claim` under every attitude, and the task, the virtues, the comparison and the itinerary have none.
 - **An epistemic role differs from a product type.** The role states the reasoning that a unit licenses, whereas the type states which activity outputs it. A `target-claim` and an `explanation` share the role Candidate while they are not accepted.
 
 ---

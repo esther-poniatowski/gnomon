@@ -7,7 +7,7 @@ _schema: gnomon:itinerary@1
 title: "SHORT NAME OF THE ITINERARY"
 id: itin.TOPIC.NAME
 type: itinerary
-status: planned                  # planned (the steps are written and no act has been carried out) | in-progress (some acts are carried out and the course continues) | completed (the course of acts has reached its end) | abandoned (the course of acts was stopped before its end)
+status: planned                  # planned (the steps are written and no act has been carried out) | in-progress (some acts are carried out and the course continues) | completed (the addressed problem or question has ended other than by abandonment, and every act carried out is judged) | abandoned (the researcher stops the course before its problem or question ends)
 addresses: prob.TOPIC.NAME       # a problem, or a question `quest.TOPIC.NAME`
 
 steps:                           # one entry per activity instance; the steps may be listed in any order, and their references form an acyclic graph

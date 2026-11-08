@@ -10,7 +10,7 @@ title: "SHORT NAME OF THE QUESTION"
 statement: "THE QUESTION IN WORDS"   # restate the fields of the subject and the task; `gnomon views` composes the subject and the aim beside it
 id: quest.TOPIC.NAME
 type: question
-status: posed                    # posed (the question is stated and not yet revised) | refined (the question was revised since it was first stated) | answered (the researcher has settled the request on an obtained direct answer) | abandoned (the researcher stops the inquiry with the question unanswered)
+status: posed                    # posed (the question is stated and not yet revised) | refined (the question was revised since it was first stated) | answered (acts of the researcher meet the demand of its minimal problem) | abandoned (the researcher stops the inquiry with the question unanswered)
 addresses: prob.TOPIC.NAME       # the problem that the question serves; omit when no problem record exists
 request:                         # one (one result suffices, with no claim of completeness) | all (every result is required, with a claim of completeness) | over-a-parameter (one result for each value of a parameter) | decision (whether each candidate already proposed meets the constraints); the request of the problem that the question serves; empty while the record is a schema
 links:                           # questions linked to this question by one of four relations; empty when none
@@ -36,7 +36,7 @@ subject:
     restrictions:                # one entry per restriction the question imposes on the specification
       - name: "NAME OF THE RESTRICTION"   # required when no quantity names the entry
         of: system.TOPIC.SYMBOL   # quantity held; omit when no single quantity carries the restriction
-        restriction:             # clamped (a fixed value replaces the rule that determines the variable) | restricted (the variable is held within a narrower set of values) | initial (only the initial values of the variable are restricted) | stationary (the variable is held to time-invariant states or statistics) | without-event (the variable is held to courses that exclude a named event); only where the entry names a variable, since a parameter is already fixed
+        restriction:             # clamped (a fixed value replaces the rule that determines the variable) | restricted (the variable is held within a stated set of values, by no more specific mode) | initial (only the initial values of the variable are restricted) | stationary (the variable is held to courses whose law is invariant under shifts along the course) | without-event (the variable is held to courses on which a stated event does not occur); only where the entry names a variable, since a parameter is already fixed
         values: "SET EXPRESSION OVER DECLARED SYMBOLS"   # set the quantity is held to
         expression: "EXPRESSION OVER DECLARED SYMBOLS"   # replaces `values` when no single quantity carries the restriction
         justification: "WHY THE QUESTION IS PUT ONLY UNDER THE RESTRICTION"
@@ -55,7 +55,7 @@ task:
     substrate: null              # specific (explanans variables belong to the particular parts of one realization) | independent (explanans variables are shared by every realization of the system) | mapping (how the variables of the parts realize variables shared by all realizations)
     justification: "WHY THE ANSWER IS BOUND TO THESE VARIABLES"   # also state the shortfall of an answer that draws on other variables
   required_accuracy:
-    standard:                    # qualitative (agreement in kind with the target, with no tolerance) | order-of-magnitude (values must agree up to a factor of about ten) | numeric-bound (a stated metric of the difference must not exceed a bound) | structural-only (only structures of the target must correspond, with no values) | not-applicable (the answer is compared with no data of the target)
+    standard:                    # qualitative (agreement in kind with the target, with no tolerance) | order-of-magnitude (the larger of the two values is at most ten times the smaller) | numeric-bound (a stated metric of the difference must not exceed a bound) | structural-only (only structures of the target must correspond, with no values) | not-applicable (the answer is compared with no data of the target)
     outputs_to_match:            # name only the target side; the answer reproduces each output
       - target: phen.TOPIC.NAME.SYMBOL
         tolerance:               # omit when the standard is `qualitative` or `structural-only`

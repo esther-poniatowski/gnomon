@@ -29,6 +29,7 @@ The required accuracy $\tau$ fixes how closely the answer must match the target:
 
 - **The question owns the tolerance.** A discrepancy between a model and its target has three owners: the structural discrepancy belongs to the binding, the observation error to the data of the phenomenon, and the tolerance to the question, as the [owners of a discrepancy](../answer/model-and-binding.md#^discrepancy-owners) state. A tolerance fixed in the question before any candidate exists cannot be adjusted to the discrepancy that a fidelity test finds.
 - **The tolerance follows from the purpose of the question.** A model is adequate for a purpose, not in general [parker2020]. A question that needs only the regime of the target can therefore tolerate a value off by an order of magnitude, whereas a question that must discriminate between two candidate values needs a bound finer than their difference.
+- **The standard `order-of-magnitude` fixes both the metric and the bound of the tolerance.** In scientific usage, two quantities within about a factor of ten of each other are of the same order of magnitude [weisstein2026]. This method makes the factor exact: a value of the answer agrees with a value of the target when the larger of the two is at most ten times the smaller, that is, when the absolute decimal logarithm of their ratio does not exceed one. The criterion compares a ratio of values, so it applies only to positive values of a quantity on a ratio or an absolute [scale](../../vocabulary/quantities/scale-and-level.md), on which a ratio of values is meaningful. ^order-of-magnitude
 - **Accuracy is tested, not weighed.** An answer outside the tolerance fails its fidelity test, so predictive accuracy is not among the [virtues](epistemic-pragmatic-virtues.md) that rank admissible answers.
 
 ## Proof obligations
@@ -51,3 +52,4 @@ The proof obligations $\omega$ are the statements that the answer must derive. E
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
 - [parker2020] ◐ [Parker, "Model evaluation: an adequacy-for-purpose view", *Philosophy of Science* 87(3), 457–477, 2020](https://doi.org/10.1086/708691)
+- [weisstein2026] ◐ [Weisstein, "Order of magnitude", *MathWorld*, Wolfram Research, consulted 2026](https://mathworld.wolfram.com/OrderofMagnitude.html); two quantities within about a factor of 10 of each other are of the same order of magnitude
