@@ -20,7 +20,7 @@ from typing import Any, Iterable, Sequence
 import pytest
 import yaml
 
-from gnomon.schemas import load_base, vocabulary_paths
+from gnomon.schemas import load_base, vocabulary_options, vocabulary_paths
 from gnomon.specnotes import (
     DOCS,
     PAIRS,
@@ -346,6 +346,7 @@ def test_the_rows_required_for_a_root_or_a_derived_model_are_the_registry_entrie
 def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
     """The registry is the source; a template comment documents it and must not drift from it."""
     vocab = re.compile(r"#\s*([a-z][a-z-]*(?: \([^)]*\))?(?: \| [a-z][a-z-]*(?: \([^)]*\))?)+)")
+    single = re.compile(r"#\s*([a-z][a-z-]*(?: \([^)]*\))?)(?:;|$)")
 
     def head(option: str) -> str:
         match = re.match(r"[a-z-]+", option.strip())
@@ -364,18 +365,18 @@ def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
         while stack and stack[-1][0] >= depth:
             stack.pop()
         stack.append((depth, m.group(3)))
-        found = vocab.search(m.group(4))
+        path = ".".join(field for _, field in stack)
+        found = vocab.search(m.group(4)) or (single.search(m.group(4)) if path in bound else None)
         if found:
-            path = ".".join(field for _, field in stack)
             key = bound[path]
             options = [head(option) for option in found.group(1).split(" | ")]
             assert (
                 documented.setdefault(key, options) == options
             ), f"{name}: {key} differs at {path}"
-    declared = yaml.safe_load((REGISTRY / "vocabularies.yml").read_text())["vocabularies"][kind]
+    declared = vocabulary_options(kind)
     assert set(documented) == set(declared), f"{name}: {set(documented) ^ set(declared)}"
     for key, options in documented.items():
-        assert options == [e["value"] for e in declared[key]], f"{name} {key}: {options}"
+        assert options == [value for value, _ in declared[key]], f"{name} {key}: {options}"
 
 
 def test_the_virtues_of_the_note_are_the_options_of_the_question() -> None:

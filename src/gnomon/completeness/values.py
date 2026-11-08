@@ -12,6 +12,7 @@ import yaml
 
 from .. import findings as rules
 from ..findings import Entry, Finding, Place, finding
+from ..relation_registry import relation_vocabularies
 from ..schemas import kinds, load_base, vocabulary_paths
 from .paths import VOCABULARY_REGISTRY
 
@@ -33,7 +34,9 @@ def vocabularies(kind: str, source: Path | None = None) -> dict[str, frozenset[s
     registry keys it."""
     registry = yaml.safe_load((source or VOCABULARY_REGISTRY).read_text(encoding="utf-8")) or {}
     fields = (registry.get("vocabularies") or {}).get(kind) or {}
-    return {name: frozenset(entry["value"] for entry in values) for name, values in fields.items()}
+    values = {name: frozenset(entry["value"] for entry in found) for name, found in fields.items()}
+    relations = relation_vocabularies().get(kind, {})
+    return {**values, **{name: frozenset(t for t, _ in found) for name, found in relations.items()}}
 
 
 def admitted_values(kind: str, source: Path | None = None) -> dict[str, frozenset[str]]:

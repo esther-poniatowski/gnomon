@@ -433,6 +433,26 @@ COMPLETENESS_UNLINKED_EXPLANANS = _rule(
     "An answer to a question that draws its explanans from a linked phenomenon states no factor"
     " over that phenomenon.",
 )
+RELATION_MISTYPED_END = _rule(
+    "relation/mistyped-end",
+    "A relation names an end of a kind that its declaration does not admit.",
+)
+RELATION_SELF = _rule("relation/self", "A record is related to itself.")
+RELATION_CYCLE = _rule("relation/cycle", "A relation whose graph must stay acyclic forms a cycle.")
+RELATION_JUDGED_CYCLE = _rule(
+    "relation/judged-cycle",
+    "A relation forms a cycle, to be judged by whether its tests can fail.",
+    "warning",
+)
+RELATION_RESTATED = _rule(
+    "relation/restated",
+    "A symmetric relation or a relation of a set is stated twice, or its set is not minimal.",
+)
+RELATION_MISPLACED_ATTRIBUTE = _rule(
+    "relation/misplaced-attribute",
+    "A relation lacks an attribute or an end that it requires, or carries one that it does not"
+    " admit.",
+)
 COMPLETENESS_VOID_ASSESSMENT = _rule(
     "completeness/void-assessment",
     "An assessment names an earlier version of its question, so its verdicts are void.",

@@ -38,6 +38,17 @@ properties:
         - blocking_feature
         - risk
         - consequence
+  relations:
+    items:
+      propertyNames:
+        enum:
+        - relation
+        - members
+      properties:
+        relation:
+          enum:
+          - co-defined-with
+          - null
 x-identifier: id
 propertyNames:
   enum:
@@ -52,5 +63,6 @@ propertyNames:
   - broader
   - source
   - confusions
+  - relations
   - definition
   - maturity

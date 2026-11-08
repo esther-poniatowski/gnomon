@@ -144,9 +144,14 @@ aim_block:                       # fill for a complete or a partial answer only:
     form:                        # derived-law (a law that follows from the laws of the model) | regime (a qualitative behavior of the model over a range of parameters) | limit (the behavior of the model in a limit system) | structural-property (a property of the model structure, such as low rank) | counterexample (an instance that falsifies a stated property of the model)
     discharges: [OBLIGATION]     # the proof obligations of the question that the consequence discharges, by name
 
-relations:                       # fill when the answer bears on another answer; one entry per link
-  - answer: ans.TOPIC.NAME
-    relation:                    # supports (its claim is a ground of the other answer) | presupposes (it is admissible only if the other answer is true) | tests (its claim, compared with the target, follows from the other) | defeats (its claim, once accepted, denies a ground of the other or its application) | revises (it replaces the other answer, which stays unchanged)
+relations:                       # fill when the answer bears on another answer; one entry per relation, and one entry per set for a relation of a set
+  - relation:                    # supports (its claim is a ground of the other answer) | presupposes (it is admissible only if the other answer is true) | tests (its claim is a consequence of the other answer, compared with the target) | defeats (its claim, once accepted, denies a ground of the other answer or that one of its laws applies) | revises (it replaces the other answer over time, which stays unchanged) | incompatible-with (the claims of the set cannot all be true over the domain that they share) | contrasts-with (the two answers differ in a stated respect and may both hold)
+    target: ans.TOPIC.NAME       # the other answer, or one of its grounds by its dotted identifier; omit for a relation of a set
+    members: [ans.TOPIC.NAME]    # for a relation of a set, such as an incompatibility, the other members; omit otherwise
+    warrant:                     # optional, for `supports` and `tests` only
+      kind: MODE                 # a mode of inference, such as `deductive` or `abductive`
+      reading: "WHY THE CLAIM SUPPORTS OR TESTS THE OTHER"
+    respect: [SYMBOL]            # for `contrasts-with` only, the symbols named by both claims in which they differ
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; a specification left out is provisional
   FIELD.PATH: open

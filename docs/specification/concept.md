@@ -26,4 +26,5 @@ The gloss fixes a meaning without asserting anything about the instances of the 
 | Confusions: blocking feature | in each entry | the feature of one concept that the other lacks, which blocks their interchange | an attractor attracts the trajectories that start near it, whereas a saddle point is a fixed point that repels some of them |
 | Confusions: risk | in each entry | the shared feature that makes the two concepts easy to conflate | both are found as zeros of the vector field by the same root search |
 | Confusions: consequence | in each entry | the error that the inquiry commits when it conflates the two concepts | a saddle point is read as a state that the network stores |
+| Relations | when the concept is defined together with others | per set, the token `co-defined-with` and the other concepts of the set, under `members`, as the [co-definition](../epistemology/objects/knowledge/relations-between-units.md#^co-definition) defines it | two concepts of a theory defined each in terms of the other |
 | Definition | optional | a pointer to the full definition object of the concept | the note that defines attractors by their basin of attraction |

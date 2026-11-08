@@ -22,6 +22,10 @@ confusions:                      # one entry per concept with which this one ris
     risk: "THE SOURCE OF THE RISK OF CONFLATING THEM"
     consequence: "THE CONSEQUENCE OF CONFLATING THEM"
 
+relations:                       # fill when the concept is defined together with others; one entry per set
+  - relation:                    # co-defined-with (the definitions of the set depend on one another and are admitted together)
+    members: [concept.TOPIC.NAME]   # the other concepts of the set
+
 definition: "POINTER TO A FULL DEFINITION OBJECT"   # optional; omit until a full definition object exists
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out

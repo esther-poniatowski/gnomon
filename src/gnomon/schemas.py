@@ -33,6 +33,7 @@ from typing import Any, Mapping, Sequence
 import yaml
 
 from .identifiers import RECORD_SEGMENTS, identifier_pattern
+from .relation_registry import relation_vocabularies
 
 DATA = Path(__file__).parent / "data"
 
@@ -104,10 +105,11 @@ def vocabulary_options(kind: str, source: Path | None = None) -> dict[str, list[
     """
     registry = yaml.safe_load((source or VOCABULARY_REGISTRY).read_text(encoding="utf-8")) or {}
     fields = (registry.get("vocabularies") or {}).get(kind) or {}
-    return {
+    options = {
         name: [(str(entry["value"]), str(entry.get("name") or "")) for entry in values]
         for name, values in fields.items()
     }
+    return {**options, **relation_vocabularies().get(kind, {})}
 
 
 def comment_of(field: Mapping[str, Any], options: Options) -> str:

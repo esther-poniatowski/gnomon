@@ -1171,26 +1171,80 @@ properties:
     items:
       type: object
       properties:
-        answer:
-          type:
-          - string
-          - 'null'
-          x-template: ans.TOPIC.NAME
-          x-kind: label
-          title: Answer
-          description: the identifier of the other answer
         relation:
           x-vocabulary: relations.relation
           type:
           - string
           - 'null'
           title: Relation
-          description: 'how this answer stands to the other: it supports, presupposes, tests, defeats or revises it'
-    x-comment: fill when the answer bears on another answer; one entry per link
+          description: how this answer stands to the other answers, one relation of the relation registry
+        target:
+          type:
+          - string
+          - 'null'
+          x-template: ans.TOPIC.NAME
+          x-kind: label
+          x-comment: the other answer, or one of its grounds by its dotted identifier; omit for a relation
+            of a set
+          title: Target
+          description: the other answer, or one of its grounds by its dotted identifier; omit for a relation
+            of a set
+        members:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          x-template: '[ans.TOPIC.NAME]'
+          x-kind: label
+          x-comment: for a relation of a set, such as an incompatibility, the other members; omit otherwise
+          title: Members
+          description: for a relation of a set, such as an incompatibility, the other members; omit otherwise
+        warrant:
+          type:
+          - object
+          - 'null'
+          properties:
+            kind:
+              type:
+              - string
+              - 'null'
+              x-template: MODE
+              x-kind: label
+              x-comment: a mode of inference, such as `deductive` or `abductive`
+              title: Kind
+              description: a mode of inference, such as `deductive` or `abductive`
+            reading:
+              type:
+              - string
+              - 'null'
+              x-template: '"WHY THE CLAIM SUPPORTS OR TESTS THE OTHER"'
+              x-kind: markdown-line
+              title: Reading
+              description: why the claim supports or tests the other answer
+          x-comment: optional, for `supports` and `tests` only
+          title: Warrant
+          description: optional, for `supports` and `tests` only; the mode of inference of the link, with a
+            reading
+        respect:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          x-template: '[SYMBOL]'
+          x-kind: label
+          x-comment: for `contrasts-with` only, the symbols named by both claims in which they differ
+          title: Respect
+          description: for `contrasts-with` only, the symbols named by both claims in which they differ
+    x-comment: fill when the answer bears on another answer; one entry per relation, and one entry per
+      set for a relation of a set
     title: Relations
-    description: 'the links to other answers: per link, the other answer and the relation: `supports` · `presupposes` · `tests` · `defeats` · `revises`'
+    description: 'the relations to other answers, as the relation registry declares them: `supports` · `presupposes`
+      · `tests` · `defeats` · `revises` · `incompatible-with` · `contrasts-with`'
     examples:
-    - a prediction that tests an explanation (tests); a corrected account (revises)
+    - a prediction that tests an explanation (tests); a corrected account (revises); two accounts whose claims
+      cannot both hold (incompatible-with)
   maturity:
     x-blank: true
     type:

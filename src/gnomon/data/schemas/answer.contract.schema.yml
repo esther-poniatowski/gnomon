@@ -366,8 +366,11 @@ properties:
     items:
       propertyNames:
         enum:
-        - answer
         - relation
+        - target
+        - members
+        - warrant
+        - respect
       properties:
         relation:
           enum:
@@ -376,7 +379,14 @@ properties:
           - tests
           - defeats
           - revises
+          - incompatible-with
+          - contrasts-with
           - null
+        warrant:
+          propertyNames:
+            enum:
+            - kind
+            - reading
 x-identifier: id
 propertyNames:
   enum:

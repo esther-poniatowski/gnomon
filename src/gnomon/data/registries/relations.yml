@@ -1,0 +1,275 @@
+# The relations between research units, as the decision on the relation registry fixes
+# (`docs/adr/relation-registry.md`). The note on relations between research units owns their senses
+# (`docs/epistemology/objects/knowledge/relations-between-units.md`).
+#
+# Two families of relations are declared:
+# - `entries`: relations written as entries of a list of a record, whose token the entry names under
+#   `relation`. The tokens of each list are the closed values of its field, so the vocabulary
+#   registry does not list them. A binary entry names its `target`; a set entry names the other
+#   `members` of its set.
+# - `fields`: relations that a record states by a field of its own, named by its path, `[]` marking
+#   a list. A reference in a field of kind `label` or `text` that no declaration names transmits a
+#   revision as a constitutive dependence; a reference in prose transmits none.
+#
+# Each declaration states:
+# - `name`: the gloss of the relation;
+# - `targets`: the record kinds that its target may take, by the record that holds a referenced unit;
+# - `arity`: `binary` or `set`; a set relation is symmetric, and is written once, on one member;
+# - `symmetric`: whether the relation holds both ways; a symmetric relation is irreflexive;
+# - `cycles`: `forbidden`, `judged` or `admitted`, and `exempt: co-definition` where a declared
+#   co-definition admits a cycle among its members;
+# - `flags`: the end that a revision of the other end flags, `source` or `target`, `entry` for the
+#   record that holds the entry, or `none`;
+# - `warrant`: a mode of inference of `itinerary.steps.mode`, `entry` when the entry may state it,
+#   or `dependent` when the flagged record determines it;
+# - `attributes`: the keys that an entry admits beyond `relation` and its target, with `required`
+#   naming those that it must carry;
+# - `export`: the class of the contract of `ekthesis`, a map from a use to a class, or none;
+#   `reversed: true` exports the relation from its target to its source.
+
+id: registry.relations
+type: relation-registry
+
+# The class of each mode of inference, compared token by token with `itinerary.steps.mode`.
+warrant_classes:
+  deductive: monotonic
+  inductive: defeasible
+  abductive: defeasible
+  analogical: defeasible
+  error-statistical: defeasible
+  model-based: defeasible
+  non-inferential: constitutive
+
+# The kinds of revision of `itinerary.steps.revises.kind` that each class transmits.
+transmits:
+  monotonic: [retraction, scope-narrowing, correction, taxonomic-restructure]
+  constitutive: [retraction, scope-narrowing, reorientation, correction, taxonomic-restructure]
+  defeasible: [retraction, scope-narrowing, scope-generalization, reorientation, correction, taxonomic-restructure]
+  entry: [scope-narrowing, scope-generalization, reorientation, correction, taxonomic-restructure]
+
+entries:
+  answer:
+    list: relations
+    vocabulary: relations.relation
+    relations:
+      supports:
+        name: its claim is a ground of the other answer
+        targets: [answer]
+        cycles: judged
+        flags: target
+        warrant: entry
+        attributes: [warrant]
+        export: support
+      presupposes:
+        name: it is admissible only if the other answer is true
+        targets: [answer]
+        cycles: judged
+        flags: source
+        warrant: deductive
+      tests:
+        name: its claim is a consequence of the other answer, compared with the target
+        targets: [answer]
+        cycles: judged
+        flags: source
+        warrant: entry
+        attributes: [warrant]
+      defeats:
+        name: its claim, once accepted, denies a ground of the other answer or that one of its laws applies
+        targets: [answer]
+        cycles: admitted
+        flags: entry
+        export: incompatibility
+      revises:
+        name: it replaces the other answer over time, which stays unchanged
+        targets: [answer]
+        cycles: forbidden
+        flags: none
+      incompatible-with:
+        name: the claims of the set cannot all be true over the domain that they share
+        targets: [answer]
+        arity: set
+        flags: entry
+        export: incompatibility
+      contrasts-with:
+        name: the two answers differ in a stated respect and may both hold
+        targets: [answer]
+        symmetric: true
+        flags: entry
+        attributes: [respect]
+        required: [respect]
+        export: contrast
+  question:
+    list: links
+    vocabulary: links.relation
+    target_key: question
+    relations:
+      subquestion-of:
+        name: a part of an answer to the linked question answers this one
+        targets: [question]
+        cycles: forbidden
+        flags: source
+        warrant: non-inferential
+        attributes: [via]
+        export: elaboration
+      explanans-from:
+        name: each answer states an explanans factor over the phenomenon of the linked question
+        targets: [question]
+        cycles: admitted
+        flags: source
+        warrant: non-inferential
+        attributes: [via]
+        required: [via]
+      presupposes:
+        name: it has a true direct answer only if the linked question has one
+        targets: [question]
+        cycles: judged
+        flags: source
+        warrant: deductive
+        attributes: [via]
+      enables:
+        name: an answer to it establishes a condition of answerability of the linked question
+        targets: [question]
+        cycles: admitted
+        flags: target
+        warrant: inductive
+        attributes: [via]
+  concept:
+    list: relations
+    vocabulary: relations.relation
+    relations:
+      co-defined-with:
+        name: the definitions of the set depend on one another and are admitted together
+        targets: [concept]
+        arity: set
+        flags: entry
+
+fields:
+  answer:
+    answers:
+      name: answers the question
+      targets: [question]
+      flags: source
+      warrant: non-inferential
+      export: solutionhood
+      reversed: true
+    grounds[].record:
+      name: rests on the ground
+      targets: [model, background, binding, phenomenon, answer, target-system, derivation]
+      cycles: judged
+      flags: source
+      warrant: dependent
+    route.runs_on:
+      name: runs its route on the record
+      targets: [target-system, model]
+      flags: source
+      warrant: dependent
+    route.derivations:
+      name: rests on the derivation
+      targets: [derivation]
+      flags: source
+      warrant: dependent
+    binding[].record:
+      name: reaches the target through the binding
+      targets: [binding]
+      flags: source
+      warrant: model-based
+    claim.presuppositions[].held_by:
+      name: takes the presupposition as held by the unit
+      targets: [background, model, derivation, answer]
+      flags: source
+      warrant: dependent
+  assessment:
+    assesses:
+      name: holds the verdicts on the answer or the construct
+      flags: source
+      warrant: non-inferential
+    against:
+      name: applies the tests of the question or the problem
+      targets: [question, problem]
+      flags: source
+      warrant: non-inferential
+  binding:
+    model:
+      name: binds the model
+      targets: [model]
+      flags: source
+      warrant: model-based
+    target.phenomenon:
+      name: binds the phenomenon
+      targets: [phenomenon]
+      flags: source
+      warrant: model-based
+    feature_pairs[].key:
+      name: carries a feature through the key
+      targets: [key]
+      flags: source
+      warrant: model-based
+    rival:
+      name: is compared with the rival binding
+      targets: [binding]
+      flags: none
+  model:
+    derives_from:
+      name: derives from the parent model
+      targets: [model, target-system]
+      cycles: forbidden
+      flags: source
+      warrant: dependent
+    background:
+      name: admits the laws of the background
+      targets: [background]
+      flags: source
+      warrant: dependent
+    laws[].requires:
+      name: the law rests on the unit
+      cycles: judged
+      flags: source
+      warrant: dependent
+  background:
+    describes:
+      name: states laws about the target system
+      targets: [target-system]
+      flags: source
+      warrant: non-inferential
+    laws[].requires:
+      name: the law rests on the unit
+      cycles: judged
+      flags: source
+      warrant: dependent
+  derivation:
+    serves:
+      name: serves the question, the proof obligation or the law stated in advance
+      targets: [question, model, background]
+      flags: source
+      warrant: non-inferential
+    uses:
+      name: uses a consequence of the derivation
+      targets: [derivation]
+      cycles: judged
+      flags: source
+      warrant: dependent
+  phenomenon:
+    target_system:
+      name: is a behavior of the target system
+      targets: [target-system]
+      flags: source
+      warrant: non-inferential
+    pattern_selection[].motivated_by:
+      name: selects the pattern for the question
+      targets: [question]
+      flags: source
+      warrant: non-inferential
+  question:
+    addresses:
+      name: serves the problem
+      targets: [problem]
+      flags: source
+      warrant: non-inferential
+  concept:
+    broader:
+      name: is subsumed by the broader concept
+      targets: [concept]
+      cycles: forbidden
+      flags: source
+      warrant: non-inferential
+      export: elaboration

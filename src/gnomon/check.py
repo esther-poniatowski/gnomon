@@ -66,6 +66,7 @@ from .history import StateReader, git_states
 from .identifiers import PLACEHOLDER_SEGMENT
 from .itineraries import construct_record_kinds, itinerary_problems, type_classes, type_holders
 from .leftovers import strip_leftovers
+from .relations import relation_findings, workspace_relation_findings
 from .sarif import Located
 from .schemas import contract_violations, field_path, identifier_prefixes
 from .vocabulary.coordinates import foreign_coordinates
@@ -626,13 +627,14 @@ def _leftovers(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 
 def _every_record(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
-    """The checks that every record undergoes: its identifier, its references and its closed
-    values."""
+    """The checks that every record undergoes: its identifier, its references, its closed values
+    and the relations that it states."""
     return (
         v.malformed_identifier(record, ctx.prefixes)
         + v.dangling_references(record, ctx.workspace.by_id)
         + c.inadmissible_values(record, ctx.registries.admitted_values(str(record.get("type"))))
         + c.misplaced_maturity(record)
+        + relation_findings(record, ctx.workspace.by_id)
     )
 
 
@@ -690,7 +692,11 @@ def check_workspace(workspace: Workspace) -> list[Located]:
                         )
                     ]
                 found += [Located(f, file, ident) for f in results]
-        unused = v.unused_declarations(problem.folder) + v.foreign_topics(problem.records)
+        unused = (
+            v.unused_declarations(problem.folder)
+            + v.foreign_topics(problem.records)
+            + workspace_relation_findings(problem.records)
+        )
         for ident, f in unused:
             if ident in problem.files:
                 found.append(

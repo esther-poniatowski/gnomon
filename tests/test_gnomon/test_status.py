@@ -187,7 +187,7 @@ def test_a_question_of_explication_has_no_condition_of_definiteness() -> None:
 
 
 def test_a_revision_flags_its_dependents_by_kind_and_warrant() -> None:
-    """A proven answer is flagged by a retraction, not by a narrowing; a defeasible one by both."""
+    """A narrowing flags a proven answer and a defeasible one; a reorientation only the second."""
     from gnomon.propagation import revisions
 
     records: dict[str, dict[str, Any]] = {
@@ -209,6 +209,7 @@ def test_a_revision_flags_its_dependents_by_kind_and_warrant() -> None:
             "type": "itinerary",
             "steps": [
                 {"id": "narrow", "revises": {"record": "bg.a.b", "kind": "scope-narrowing"}},
+                {"id": "reorient", "revises": {"record": "bg.a.b", "kind": "reorientation"}},
                 {
                     "id": "retract",
                     "revises": {
@@ -220,7 +221,9 @@ def test_a_revision_flags_its_dependents_by_kind_and_warrant() -> None:
             ],
         },
     }
-    narrow, retract = revisions(records)
-    assert narrow.flagged == ("ans.fitted",) and narrow.to_review == ("ans.fitted",)
+    narrow, reorient, retract = revisions(records)
+    assert narrow.flagged == ("ans.fitted", "ans.proven")
+    assert reorient.flagged == ("ans.fitted",)
+    assert reorient.reasons == {"ans.fitted": "grounds[].record (defeasible)"}
     assert retract.flagged == ("ans.fitted", "ans.proven") and retract.to_review == ("ans.fitted",)
     assert "review after the retraction of bg.a.b" in render_text(diagnose(records))

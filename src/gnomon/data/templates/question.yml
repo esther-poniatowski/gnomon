@@ -16,7 +16,7 @@ addresses: prob.TOPIC.NAME       # the problem that the question serves; omit wh
 request:                         # one (one result suffices, with no claim of completeness) | all (every result is required, with a claim of completeness) | over-a-parameter (one result for each value of a parameter) | decision (whether each candidate already proposed meets the constraints); the request of the problem that the question serves; empty while the record is a schema
 links:                           # questions linked to this question by one of four relations; empty when none
   - question: quest.TOPIC.NAME
-    relation:                    # subquestion-of (a part of an answer to the linked question answers this one) | explanans-from (each answer states an explanans factor over the phenomenon of the linked question) | presupposes (a true direct answer requires one to the linked question) | enables (an answer establishes a condition of answerability of the linked question)
+    relation:                    # subquestion-of (a part of an answer to the linked question answers this one) | explanans-from (each answer states an explanans factor over the phenomenon of the linked question) | presupposes (it has a true direct answer only if the linked question has one) | enables (an answer to it establishes a condition of answerability of the linked question)
     via: phen.TOPIC.NAME         # the record shared by both questions, such as a phenomenon; omit when they share none
 subject:
   target_system: system.TOPIC    # a record identifier; in a question schema, a placeholder written as for `phenomenon`

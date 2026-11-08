@@ -121,9 +121,14 @@ Looks up each field of each record by its path, with its title, its description 
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `maturity` | Maturity | optional; one maturity per specification: open \| provisional \| stabilized; a specification left out is provisional | [Maturity of a field](../specification/maturity.md) |
 | `modal_strength` | Modal strength | the strength that the answer claims: actual · possible · necessary | [Modal strength](../specification/answer.md) |
-| `relations` | Relations | the links to other answers: per link, the other answer and the relation: `supports` · `presupposes` · `tests` · `defeats` · `revises` | [Relations](../specification/answer.md) |
-| `relations[].answer` | Answer | the identifier of the other answer | [Relations](../specification/answer.md) |
-| `relations[].relation` | Relation | how this answer stands to the other: it supports, presupposes, tests, defeats or revises it | [Relations](../specification/answer.md) |
+| `relations` | Relations | the relations to other answers, as the relation registry declares them: `supports` · `presupposes` · `tests` · `defeats` · `revises` · `incompatible-with` · `contrasts-with` | [Relations](../specification/answer.md) |
+| `relations[].members` | Members | for a relation of a set, such as an incompatibility, the other members; omit otherwise | [Relations](../specification/answer.md) |
+| `relations[].relation` | Relation | how this answer stands to the other answers, one relation of the relation registry | [Relations](../specification/answer.md) |
+| `relations[].respect` | Respect | for `contrasts-with` only, the symbols named by both claims in which they differ | [Relations](../specification/answer.md) |
+| `relations[].target` | Target | the other answer, or one of its grounds by its dotted identifier; omit for a relation of a set | [Relations](../specification/answer.md) |
+| `relations[].warrant` | Warrant | optional, for `supports` and `tests` only; the mode of inference of the link, with a reading | [Relations](../specification/answer.md) |
+| `relations[].warrant.kind` | Kind | a mode of inference, such as `deductive` or `abductive` | [Relations](../specification/answer.md) |
+| `relations[].warrant.reading` | Reading | why the claim supports or tests the other answer | [Relations](../specification/answer.md) |
 | `route` | Route | `derivation` · `proof` · `simulation` · `estimation` · `measurement`, the records on which it runs (the target, one model, or a family of models), and a pointer to the derivation, the code or the data | [Route](../specification/answer.md) |
 | `route.derivations` | Derivations | for a derivation or a proof; the derivation records on which the claim rests | [Route](../specification/answer.md) |
 | `route.family_fidelity` | Family fidelity | fill for a family of models only | [Route](../specification/answer.md) |
@@ -301,6 +306,9 @@ Looks up each field of each record by its path, with its title, its description 
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `kind` | Kind | The kind of entity that the concept represents: a system, a class, a kind or a subclass included, a property, or a process. | [Kind](../specification/concept.md) |
 | `maturity` | Maturity | optional; one maturity per specification: open \| provisional \| stabilized; the record status applies to every specification left out | [Maturity of a field](../specification/maturity.md) |
+| `relations` | Relations | the relations to other concepts: `co-defined-with`, for a set of concepts whose definitions depend on one another | [Relations](../specification/concept.md) |
+| `relations[].members` | Members | the other concepts of the set | [Relations](../specification/concept.md) |
+| `relations[].relation` | Relation | how this concept stands to the others, one relation of the relation registry | [Relations](../specification/concept.md) |
 | `source` | Source | The note or the publication that states the concept and its grounds. | [Source](../specification/concept.md) |
 | `status` | Status | The maturity of the record as a whole, or its retraction. | — |
 | `title` | Title | A short name of the record, as a label. | — |

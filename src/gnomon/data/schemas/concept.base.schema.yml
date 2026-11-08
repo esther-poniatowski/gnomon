@@ -117,6 +117,38 @@ properties:
           title: Consequence
           description: The error that the inquiry commits when it conflates the two concepts.
           examples: ['a saddle point is read as a state that the network stores']
+  relations:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        relation:
+          x-vocabulary: relations.relation
+          type:
+          - string
+          - 'null'
+          title: Relation
+          description: how this concept stands to the others, one relation of the relation registry
+        members:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          x-template: '[concept.TOPIC.NAME]'
+          x-kind: label
+          x-comment: the other concepts of the set
+          title: Members
+          description: the other concepts of the set
+    x-comment: fill when the concept is defined together with others; one entry per set
+    title: Relations
+    description: 'the relations to other concepts: `co-defined-with`, for a set of concepts whose definitions
+      depend on one another'
+    examples:
+    - two concepts of a theory defined each in terms of the other (co-defined-with)
   definition:
     type: [string, 'null']
     x-blank: true

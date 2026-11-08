@@ -190,17 +190,6 @@ vocabularies:
       name: a property of the model structure, such as low rank
     - value: counterexample
       name: an instance that falsifies a stated property of the model
-    relations.relation:
-    - value: supports
-      name: its claim is a ground of the other answer
-    - value: presupposes
-      name: it is admissible only if the other answer is true
-    - value: tests
-      name: its claim, compared with the target, follows from the other
-    - value: defeats
-      name: its claim, once accepted, denies a ground of the other or its application
-    - value: revises
-      name: it replaces the other answer, which stays unchanged
   assessment:
     .status:
     - value: provisional
@@ -429,15 +418,6 @@ vocabularies:
       name: one result for each value of a parameter
     - value: decision
       name: whether each candidate already proposed meets the constraints
-    links.relation:
-    - value: subquestion-of
-      name: a part of an answer to the linked question answers this one
-    - value: explanans-from
-      name: each answer states an explanans factor over the phenomenon of the linked question
-    - value: presupposes
-      name: a true direct answer requires one to the linked question
-    - value: enables
-      name: an answer establishes a condition of answerability of the linked question
     subject.placeholder:
     - value: system
       name: the slot awaits a target-system record
