@@ -7,7 +7,7 @@ _schema: gnomon:itinerary@1
 title: "SHORT NAME OF THE ITINERARY"
 id: itin.TOPIC.NAME
 type: itinerary
-status: planned                  # planned | in-progress | completed | abandoned
+status: planned                  # planned (the steps are written and no act has been carried out) | in-progress (some acts are carried out and the course continues) | completed (the course of acts has reached its end) | abandoned (the course of acts was stopped before its end)
 addresses: prob.TOPIC.NAME       # a problem, or a question `quest.TOPIC.NAME`
 
 steps:                           # one entry per activity instance; the steps may be listed in any order, and their references form an acyclic graph
@@ -24,12 +24,12 @@ steps:                           # one entry per activity instance; the steps ma
     derivation: derivation.TOPIC.NAME   # optional; the derivation record that holds the reasoning of the step
     norm:
       test: norm.ACTIVITY        # the test named by the activity registry for this activity
-      verdict: pending           # pass | fail | pending
+      verdict: pending           # pass (the output meets the norm of the activity) | fail (the output does not meet the norm of the activity) | pending (the norm has not been judged yet)
       evidence: "WHY THE PRODUCT MEETS THE NORM OR FAILS IT"   # fill with a verdict pass or fail, from the content of the products
       judged: DATE               # fill with a verdict pass or fail; the date of the last judgment, written YYYY-MM-DD
     rationale:
       serves: quest.TOPIC.NAME   # the question that the step serves, or the problem for a step that precedes any question
-      acts_on:                   # definiteness | answer-type | soundness | candidates | discrimination | access | bridging | representation | obtaining (the acts that obtain the answer once every condition of a route is established) | evaluation (the evaluation of an obtained answer)
+      acts_on:                   # definiteness (each term has a definition or a criterion adequate to its use) | answer-type (every component of the type of the direct answers is fixed) | soundness (the presuppositions of the question are true) | candidates (at least one proposed answer passes the admissibility tests) | discrimination (a quantity takes different values under the candidates and their alternatives) | access (an available procedure applies to the quantity or the demanded result) | bridging (an inference stated in advance links the quantity to the answer) | representation (the model used for access represents the target to the required accuracy) | obtaining (the acts that obtain the answer once every condition of a route is established) | evaluation (the evaluation of an obtained answer)
     branch:                      # optional; a step taken under a condition, with its alternative
       condition: "THE CONDITION UNDER WHICH THE STEP IS TAKEN"
       otherwise: STEP            # the step taken when the condition fails, which produces the same output type
@@ -40,5 +40,5 @@ steps:                           # one entry per activity instance; the steps ma
       kind:                      # retraction (the record is no longer pursued) | scope-narrowing (the domain of the record shrinks) | scope-generalization (the domain of the record extends) | reorientation (the content is reframed without changing its scope) | taxonomic-restructure (the classification of the record changes by renaming, regrouping, splitting or merging) | correction (the content changes within its scope, as when an error of a proof is fixed)
       reviews:                   # one entry per flagged dependent that the researcher has reviewed
         - dependent: RECORD
-          state:                 # pending | revised | unaffected | retracted
-    mode:                        # deductive | inductive | abductive | analogical | error-statistical | model-based | non-inferential
+          state:                 # pending (the researcher has not yet judged the flagged dependent) | revised (the dependent needed an adjustment, which was made) | unaffected (the dependent holds unchanged after the revision) | retracted (the dependent is withdrawn in turn)
+    mode:                        # deductive (the conclusion makes explicit what the premises contain) | inductive (the step extends a regularity from observed to unobserved instances) | abductive (the step proposes a hypothesis under which an observed fact is expected) | analogical (the step carries a property from a source along a mapping) | error-statistical (the verdict rests on agreement with data, judged by severity) | model-based (the step infers an outcome through a model of the instrument) | non-inferential (the step concludes nothing, as a formalization or an idealization)

@@ -10,7 +10,7 @@ _schema: gnomon:model@1
 title: "SHORT NAME OF THE MODEL"
 id: mod.TOPIC.NAME
 type: model
-status: provisional              # provisional | stabilized | retracted
+status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
 
 background: bg.TOPIC.NAME        # fill when a law of the model carries the warrant `derived`
 
@@ -23,7 +23,7 @@ operations:                      # fill for a derived model; one entry per opera
     yields: [SYMBOL]             # symbols of this model that realize the operation
     retires: [SYMBOL]            # symbols of a parent that this model no longer carries; empty when every symbol stays visible
     regime: "EXPRESSION OVER DECLARED SYMBOLS"   # the regime in which the operation holds; required for an approximation
-    error:                       # exact | controlled (a bound on the error is known) | uncontrolled (no bound on the error is known) | singular (no bound can contain the error near the limit)
+    error:                       # exact (no error) | controlled (a bound on the error is known) | uncontrolled (no bound on the error is known) | singular (no bound can contain the error near the limit)
     bound: "EXPRESSION OVER DECLARED SYMBOLS"   # required when the error is `controlled`
     order: "THE ORDER IN WHICH THE LIMITS ARE TAKEN"   # required for a singular limit, or for limits that do not commute
     gain: "THE DERIVATION OR THE FACTOR THAT THE OPERATION MAKES AVAILABLE"
@@ -43,7 +43,7 @@ index_sets:                      # only sets that the target does not declare
     notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
     variant: SYMBOL              # symbol of the target variant that the entry models; omit when the model stands for every member of the class
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    structure:                   # continuum | discrete-set | interval
+    structure:                   # continuum (an uncountable set, such as a spatial domain) | discrete-set (a set of separate members, such as labelled cases or samples) | interval (a contiguous range of an ordered set, such as a time axis)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; the formula of the coordinate that the set indexes, such as L or T
 
 variables:                       # part of V: quantities that vary in the model
@@ -54,11 +54,11 @@ variables:                       # part of V: quantities that vary in the model
     determined:                  # within (its value is fixed inside the model) | outside (its value varies but is set beyond the model)
     signature: [SYMBOL]          # one constituent kind or index set per place; empty for the model as a whole
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
+    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values form no scale, as maps or measures do)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # an expression over the symbols of the model, or a map other than the identity from quantities of the target
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
-    selects:                     # unique | any | all; required with a condition
+    selects:                     # unique (the record presupposes exactly one value satisfying the condition) | any (the claim holds of each value satisfying the condition) | all (the quantity is the set of values satisfying the condition); required with a condition
     held_by: RECORD.UNIT         # optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
     reading: "THE EXPRESSION IN WORDS"
     shared: false                # true when one value holds for every tuple of the signature
@@ -70,11 +70,11 @@ parameters:                      # part of V: quantities that the model holds fi
     variant: SYMBOL              # symbol of the target variant that the entry models; omit when the model stands for every member of the class
     signature: [SYMBOL]
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
+    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values form no scale, as maps or measures do)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived parameter
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
-    selects:                     # unique | any | all; required with a condition
+    selects:                     # unique (the record presupposes exactly one value satisfying the condition) | any (the claim holds of each value satisfying the condition) | all (the quantity is the set of values satisfying the condition); required with a condition
     held_by: RECORD.UNIT         # optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
     reading: "THE EXPRESSION IN WORDS"
     shared: false                # true when one value holds for every tuple of the signature
@@ -84,10 +84,10 @@ laws:                            # L: dependences linking the terms of the model
     symbol: SYMBOL
     variant: SYMBOL              # symbol of the target variant that the entry models; omit when the model stands for every member of the class
     signature: [SYMBOL]          # places the claim ranges over; empty for a claim about the model as a whole
-    role:                        # evolution | input-output | measurement | state-constraint | distribution | admissibility
+    role:                        # evolution (how the state changes along the course) | input-output (how one quantity is determined by others at the same point) | measurement (how an instrument registers the state) | state-constraint (which states may hold together, including at the start and at the boundary) | distribution (the law of a random quantity) | admissibility (a restriction on the parameters or the forms that a member may take)
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
     reading: "THE LAW IN WORDS"
-    warrant:                     # derived (from the laws of the background or of a parent, through the operations of the model) | posited | fitted | measured
+    warrant:                     # derived (from the laws of the background or of a parent, through the operations of the model) | posited (by a choice, admitted as a premise without acceptance) | fitted (by adjusting the parameters of the law to data) | measured (on the evidence of an instrument)
     requires:                    # optional; one entry per unit that the law rests on, by its dotted identifier
       - RECORD.UNIT
     rests_on: "WHAT THE WARRANT REFERS TO BEYOND THE UNITS REQUIRED"   # in words, only what `requires` cannot name, such as a source or a data set
@@ -108,7 +108,7 @@ assumptions:                     # only the assumptions that the laws require, s
     assumption: "THE ASSUMPTION IN WORDS"
     motive:                      # tractability (the undistorted system admits no analysis) | isolation (it removes a factor judged irrelevant) | limit (it exposes the behavior of a limit system)
     gain: "THE DERIVATION THAT THE ASSUMPTION MAKES POSSIBLE, OR THE FACTOR THAT IT EXPOSES"
-    removable:                   # controlled (a correction to the result is known) | ineliminable (the model cannot be stated without it) | unknown
+    removable:                   # controlled (a correction to the result is known) | ineliminable (the model cannot be stated without it) | unknown (neither a correction nor the ineliminability of the distortion is known)
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
   FIELD.PATH: open

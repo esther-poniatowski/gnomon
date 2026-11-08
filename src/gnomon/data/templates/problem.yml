@@ -8,11 +8,11 @@ title: "SHORT NAME OF THE PROBLEM"
 statement: "THE PROBLEM IN WORDS: THE RESULT SOUGHT, AND THE OBSTACLE TO OBTAINING IT"
 id: prob.TOPIC.NAME
 type: problem
-status: posed                    # posed | refined | solved | dissolved | abandoned
+status: posed                    # posed (the demand and constraints are stated, not yet revised) | refined (the demand or constraints were revised since the problem was stated) | solved (the records show that the demand is met) | dissolved (accepted knowledge denies a presupposition of the associated question) | abandoned (the researcher stops the inquiry with the problem still standing)
 kind:                            # empirical (the problem concerns the objects of a domain) | conceptual (the problem concerns the consistency of a theory or its fit with other theories)
 demand: "THE RESULT REQUIRED OF A SOLUTION"
-result_type:                     # phenomenon | consequence | target-claim | model | explanation | classification | concept | measurement-procedure | design | knowledge-state-change | inter-theory-relation
-request:                         # one | all | over-a-parameter | decision
+result_type:                     # phenomenon (a behavior of the target, detected from data) | consequence (a statement derived from a model or from admitted laws) | target-claim (a claim about the target, as opposed to a model) | model (a candidate representation of the target) | explanation (named factors account for a phenomenon by the requested relation) | classification (a partition of systems into classes, with its criteria) | concept (a term with its definition or its explication) | measurement-procedure (a procedure assigning values to a quantity on a stated scale) | design (a plan of observations or runs, a method or a scheme) | knowledge-state-change (a change of the attitude or status of existing records) | inter-theory-relation (a unification, reduction or integration between theories)
+request:                         # one (one result suffices, with no claim of completeness) | all (every result is required, with a claim of completeness) | over-a-parameter (one result for each value of a parameter) | decision (whether each candidate already proposed meets the constraints)
 associated_question: quest.TOPIC.NAME   # optional; the question record that states the associated question, whose request equals this one
 constraints:                     # conditions on every solution; empty when the demand alone delimits the solutions
   - name: "NAME OF THE CONSTRAINT"
@@ -25,11 +25,11 @@ sources:
   - "POINTER TO THE PUBLICATION, THE DATA OR THE ANOMALY THAT RAISES THE PROBLEM"
 significance: "THE CONSEQUENCES OF A SOLUTION FOR OTHER WORK"
 knowledge_obstacles:             # one entry per obstacle in the state of the knowledge about the associated question; empty when none
-  - obstacle:                    # open-gap | unassessed-candidates | conflict | unwarranted-claim | ill-defined-terms | unsound-presupposition
+  - obstacle:                    # open-gap (a result is lacking, and none is proposed) | unassessed-candidates (answers are proposed, and none is accepted) | conflict (accepted claims are inconsistent, or a datum is improbable under them) | unwarranted-claim (an accepted claim has weaker support than the demand requires) | ill-defined-terms (a term of the demand lacks the criterion to check answers) | unsound-presupposition (accepted knowledge denies a presupposition of the associated question)
     pointers: [RECORD.ID]        # the records or the publications that establish the obstacle
 answerability_obstacles:         # one entry per refuted condition of answerability of the associated question; empty when none
-  - condition:                   # definiteness | answer-type | discrimination | access | bridging | representation
-    refutation:                  # outright | lack-of-means
+  - condition:                   # definiteness (each term has a definition or a criterion adequate to its use) | answer-type (every component of the type of the direct answers is fixed) | discrimination (a quantity takes different values under the candidates and their alternatives) | access (an available procedure applies to the quantity or the demanded result) | bridging (an inference stated in advance links the quantity to the answer) | representation (the model used for access represents the target to the required accuracy)
+    refutation:                  # outright (an argument of impossibility shows that the condition fails) | lack-of-means (every means considered was tried and failed)
     pointers: [RECORD.ID]        # the records or the publications that establish the refutation
 
 maturity:                        # optional; one maturity per field: open | provisional | stabilized; a field left out is provisional

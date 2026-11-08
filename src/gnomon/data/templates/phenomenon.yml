@@ -9,7 +9,7 @@ title: "SHORT NAME OF THE PHENOMENON"
 statement: "THE PHENOMENON IN WORDS: THE BEARER AND ITS BEHAVIOR"   # a reading only: the signatures fix the bearer, the manifestations fix the behavior
 id: phen.TOPIC.NAME
 type: phenomenon
-status: provisional              # provisional | stabilized | retracted
+status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
 commitment:                      # identified (a definite description and pointers fix the referent) | specified (the record writes its observables and manifestations, and their symbols resolve)
 target_system: system.TOPIC
 
@@ -18,14 +18,14 @@ identification:                  # fixes the referent before any observable is d
   pointers:
     - "POINTER TO A DATA SET, A RESULT OR A PUBLICATION THAT FIXES THE REFERENT"
 
-category:                        # particular-occurrence | regularity | capacity | structural-property
+category:                        # particular-occurrence (one token of a state, a process or an event) | regularity (an invariant across instances, required to be stable) | capacity (a disposition to yield outputs of a class given inputs of a class) | structural-property (a property of a structure, holding at each point of the course)
 
 course:                          # the ordered index along which the behavior unfolds
   index: SYMBOL                  # an index set of the target or of this record: time, a training step or an input parameter
   grain: "EXPRESSION OVER DECLARED SYMBOLS"   # shortest length of a segment of the course; a predicate of the behavior is evaluated only on segments at least this long
   varies: [SYMBOL]               # parameters of the target that change along this course; empty when none does
 
-occurrence:                      # state | process | event | not-applicable; `not-applicable` for a regularity or a capacity, `state` for a structural property
+occurrence:                      # state (holds at every point of a segment, without change) | process (holds on every sub-segment longer than the grain, at no point) | event (holds of a segment and of none of its parts) | not-applicable (no occurrence class, as for a regularity or a capacity); `not-applicable` for a regularity or a capacity, `state` for a structural property
 
 index_sets:                      # only sets the observables introduce beyond those the target declares
   - name: "NAME OF THE SET"
@@ -33,7 +33,7 @@ index_sets:                      # only sets the observables introduce beyond th
     notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
     variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    structure:                   # continuum | discrete-set | interval
+    structure:                   # continuum (an uncountable set, such as a spatial domain) | discrete-set (a set of separate members, such as labelled cases or samples) | interval (a contiguous range of an ordered set, such as a time axis)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; the formula of the coordinate that the set indexes, such as L or T
 
 observables:                     # functions of the system state that restate the behavior
@@ -44,17 +44,17 @@ observables:                     # functions of the system state that restate th
     variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
     signature: [SYMBOL]          # indices the observable still takes; empty for a scalar
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
+    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values form no scale, as maps or measures do)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived observable
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
-    selects:                     # unique | any | all; required with a condition
+    selects:                     # unique (the record presupposes exactly one value satisfying the condition) | any (the claim holds of each value satisfying the condition) | all (the quantity is the set of values satisfying the condition); required with a condition
     held_by: RECORD.UNIT         # optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
     reading: "THE EXPRESSION IN WORDS"
     event:                       # fill when the observable is the time of an event; the observable's `expression` then states the event criterion
       origin: "EXPRESSION FIXING THE ORIGIN OF TIME"
       horizon: "EXPRESSION FIXING THE END OF OBSERVATION"
-      censoring:                 # right | left | interval | none
+      censoring:                 # right (the event had not occurred by the horizon) | left (the event occurred before the origin of observation) | interval (the event occurred between two observations, at an unknown time) | none (the time of the event is recorded)
       reading: "THE EVENT IN WORDS, AND THE VALUE RECORDED WHEN IT IS NOT OBSERVED"
     estimator:                   # fill when the values are estimated from data; the estimates are computed from these entries, never recorded
       method: "THE ESTIMATOR THAT COMPUTES THE VALUES FROM THE DATA"
@@ -65,7 +65,7 @@ manifestations:                  # one entry per form of the observables' behavi
   - name: "NAME OF THE MANIFESTATION"
     symbol: SYMBOL
     variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
-    form:                        # value | dependence | functional-form | scaling | relation
+    form:                        # value (an observable equals a stated label or number) | dependence (an observable varies with a condition or another quantity) | functional-form (an observable equals a stated expression in its indices) | scaling (one side varies as the other up to a prefactor) | relation (an implication or another logical link between conditions)
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
     reading: "THE MEANING OF THE EXPRESSION"   # only content beyond the name and the form
     features:                    # quantities of the form that characterize the behavior
@@ -75,7 +75,7 @@ manifestations:                  # one entry per form of the observables' behavi
         dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
         observed: "ONE ELEMENT OF THE VALUE SET"
         condition: "EXPRESSION THAT THE FEATURE SATISFIES"   # give when the measurement constrains the feature without fixing its value
-        selects:                 # unique | any | all; required with a condition
+        selects:                 # unique (the record presupposes exactly one value satisfying the condition) | any (the claim holds of each value satisfying the condition) | all (the quantity is the set of values satisfying the condition); required with a condition
         held_by: RECORD.UNIT     # optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
         procedure: "THE FINDING THAT THE MEASUREMENT ESTABLISHES"   # only content beyond the name and the value set
         caveat: "THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION"
@@ -85,8 +85,8 @@ scope_over_instances:            # one entry per source of variation across inst
     symbol: SYMBOL
     variant: SYMBOL              # symbol of the target variant carrying the entry; omit when every member of the class carries it
     over: [SYMBOL]               # declared quantities this source changes; empty when the instance itself varies
-    source:                      # class-member | realization | random-parameters | random-structure | scenario
-    quantification:              # single | typical | ensemble-summary | ensemble-distribution | universal
+    source:                      # class-member (instances are distinct members of the reference class) | realization (repeated runs of one system, such as trials or disorder samples) | random-parameters (instances are draws of the parameter values) | random-structure (instances are draws of the structure, such as an interaction architecture) | scenario (instances are prescribed scenarios, such as emission pathways)
+    quantification:              # single (the claim holds of one fixed instance) | typical (the claim holds of one representative instance) | ensemble-summary (the claim states one summary over instances, such as a mean) | ensemble-distribution (the claim states the distribution of a quantity over instances) | universal (the claim holds of every member of the admitted class)
     conditional_on: [SYMBOL]     # other sources held fixed while this one varies
     differentiation: "THE CONSEQUENCE OF THE VARIATION FOR THE CLAIM"   # only content beyond the name
 
@@ -119,7 +119,7 @@ conditions_and_byproducts:       # put a factor the question varies among the in
       expression: "EXPRESSION OVER DECLARED SYMBOLS"
       justification: "WHY THE BYPRODUCT FALLS OUTSIDE THE PHENOMENON"   # only content beyond the expression
 
-evidential_status:               # established | reported | predicted | derived | absent (a closed search found no instance) | disproved (a counterexample or a contradiction is established) | undecided (the occurrence is an open question that the inquiry tracks)
+evidential_status:               # established (the behavior is shown across data sets or methods) | reported (one data set or one study shows the behavior) | predicted (a theory implies the behavior, which detection has not reached) | derived (the behavior is obtained as a consequence of a model) | absent (a closed search found no instance) | disproved (a counterexample or a contradiction is established) | undecided (the occurrence is an open question that the inquiry tracks)
 search:                          # fill when the evidential status is absent or disproved
   scope: "EXPRESSION OVER DECLARED SYMBOLS"   # the region of the members, conditions and courses that the search covered
   procedure: "THE PROCEDURES AND THE DATA SEARCHED, AND WHY THEY WOULD HAVE DETECTED THE BEHAVIOR"
@@ -138,13 +138,13 @@ data:                            # material that establishes the phenomenon
     version: VERSION
 
 data_model:                      # fill when a model intervenes between the raw records and the data; one entry per model
-  - kind:                        # instrument-model | background-simulation | assimilation-model | reconstruction
+  - kind:                        # instrument-model (how the apparatus turns the measured quantity into raw records) | background-simulation (a simulation of the signal expected without the behavior) | assimilation-model (combines records with a simulation to fill their gaps) | reconstruction (an inference of unrecorded values from the raw records)
     source: RECORD               # the model record, or a pointer to the publication that states the model
     reading: "WHAT THE MODEL DOES TO THE DATA"
 
 observation_error:               # fill when the values of the observables are compared with an answer; one entry per observable or per data set
   - of: SYMBOL                   # an observable, or the pointer of a data set
-    form:                        # distribution | bound
+    form:                        # distribution (a probability law of the error, such as a Gaussian) | bound (a maximal size that the error does not exceed)
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
 
 pattern_selection:               # fill when the data admit other patterns than the one stated; one entry per selected pattern

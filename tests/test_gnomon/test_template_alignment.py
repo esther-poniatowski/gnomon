@@ -391,7 +391,7 @@ def test_the_virtues_of_the_note_are_the_options_of_the_question() -> None:
     question = (TEMPLATES / "question.yml").read_text(encoding="utf-8")
     options = re.search(r"^ *- virtue: *#(.*)$", question, re.MULTILINE)
     assert options is not None, "no option list beside the virtues of the question"
-    assert names == [opt.strip() for opt in options.group(1).split("|")]
+    assert names == [opt.split(" (")[0].strip() for opt in options.group(1).split("|")]
 
 
 def criteria(header: Header, column: int) -> list[str]:

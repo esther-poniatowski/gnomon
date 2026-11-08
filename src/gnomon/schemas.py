@@ -100,7 +100,7 @@ def vocabulary_options(kind: str, source: Path | None = None) -> dict[str, list[
 
     >>> options = vocabulary_options("answer")
     >>> options[".status"][0]
-    ('entertained', '')
+    ('entertained', 'considered as a candidate, not yet held for testing')
     """
     registry = yaml.safe_load((source or VOCABULARY_REGISTRY).read_text(encoding="utf-8")) or {}
     fields = (registry.get("vocabularies") or {}).get(kind) or {}

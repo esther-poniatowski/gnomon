@@ -8,9 +8,9 @@ _schema: gnomon:key@1
 title: "SHORT NAME OF THE KEY"
 id: key.TOPIC.NAME
 type: key
-status: provisional              # provisional | stabilized | retracted
+status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
 
-kind:                            # observation-operator | unit-map | aggregation-map | qualitative-abstraction
+kind:                            # observation-operator (carries a model state to the quantities that the data record) | unit-map (converts the units of the model into those of the target) | aggregation-map (carries fine quantities onto coarse bearers, such as a population mean) | qualitative-abstraction (carries trajectories or values onto qualitative labels)
 
 domain_and_codomain:             # the two sides that the key connects, each as a set expression or a type
   domain: "SET EXPRESSION OR TYPE"   # the side of the model

@@ -7,10 +7,10 @@ _schema: gnomon:concept@1
 title: "SHORT NAME OF THE CONCEPT"
 id: concept.TOPIC.NAME
 type: concept
-status: provisional              # provisional | stabilized | retracted
+status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
 
 gloss: "ONE SENTENCE THAT STATES THE MEANING OF THE CONCEPT"
-kind:                            # system | subtype-or-class | property | process
+kind:                            # system (a complex object whose constituents are bound by relations) | subtype-or-class (a collection of objects fixed by a membership condition) | property (a feature that a bearer possesses, represented or not) | process (a change along a course, holding over segments, never at a point)
 antagonist: concept.TOPIC.NAME   # property only, optional; the property opposed to this one
 broader: concept.TOPIC.NAME      # at most one; the broader concept, named in this direction only
 source: "POINTER TO THE NOTE THAT SOURCES THE CONCEPT"

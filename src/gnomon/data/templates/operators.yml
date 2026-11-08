@@ -7,7 +7,7 @@ _schema: gnomon:operators@1
 title: "SHORT NAME OF THE PROBLEM THAT THE OPERATORS SERVE"
 id: ops.TOPIC
 type: operators
-status: provisional              # provisional | stabilized | retracted
+status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
 target_system: system.TOPIC
 
 base_scales:                     # optional; one entry per base scale that the dimensional formulas of the problem may name

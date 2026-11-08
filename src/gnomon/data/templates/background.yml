@@ -8,7 +8,7 @@ _schema: gnomon:background@1
 title: "NAME OF THE BODY OF ADMITTED LAWS"
 id: bg.TOPIC.NAME
 type: background
-status: provisional              # provisional | stabilized | retracted
+status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
 describes: system.TOPIC
 
 laws:                            # behaviors of the components or of the system admitted a priori
@@ -19,7 +19,7 @@ laws:                            # behaviors of the components or of the system 
     role:                        # evolution (how the state changes along the course) | input-output (how one quantity is determined by others at the same point) | measurement (how an instrument registers the state) | state-constraint (which states may hold together, including at the start and at the boundary) | distribution (the law of a random quantity) | admissibility (a restriction on the parameters or the forms that a member may take)
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # the claim of the law: the only part of the entry that can be false of the system
     reading: "THE LAW IN WORDS"
-    warrant:                     # derived (from other admitted laws, in a limit or not, the range of the law stating the limit) | posited | fitted | measured
+    warrant:                     # derived (from other admitted laws, in a limit or not, the range of the law stating the limit) | posited (by a choice, admitted as a premise without acceptance) | fitted (by adjusting the parameters of the law to data) | measured (on the evidence of an instrument)
     requires:                    # optional; one entry per unit that the law rests on, by its dotted identifier
       - RECORD.UNIT
     rests_on: "WHAT THE WARRANT REFERS TO BEYOND THE UNITS REQUIRED"   # in words, only what `requires` cannot name, such as a source or a data set

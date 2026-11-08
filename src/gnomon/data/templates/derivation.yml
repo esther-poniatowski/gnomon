@@ -7,7 +7,7 @@ _schema: gnomon:derivation@1
 title: "SHORT NAME OF THE DERIVATION"
 id: derivation.TOPIC.NAME
 type: derivation
-status: provisional              # provisional | stabilized | retracted
+status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
 
 serves: quest.TOPIC.NAME         # optional; empty for a derivation that constructs its result
 runs_on:                         # the models, the backgrounds, the target system or the answer that hold the premises
@@ -49,7 +49,7 @@ posits:                          # optional; one entry per premise introduced on
       ref: "STEP, SOURCE OR SCHEME"   # empty when the origin is none
     tests:                       # empty while no test is made
       - kind:                    # consistency (the neglected terms stay smaller than the terms kept) | limit (the consequence recovers a known result in a limit) | exact (a proof that the posited form or relation holds) | approximation (a bound on the distance to the exact object) | empirical (a comparison of the consequence with data) | computation (a computation, certified or numerical, of the posited object)
-        verdict:                 # supports | refutes
+        verdict:                 # supports (the result of the test agrees with the posit) | refutes (the result contradicts the posit, which loses its support)
         standard:                # certified (a computation whose result is proved, such as interval arithmetic) | numerical (a computation with an error that no proof bounds); computation only
         by: "MOVE, RECORD OR SOURCE"
 
@@ -76,26 +76,26 @@ orientations:                    # one entry per non-routine move and per segmen
     of: MOVE-OR-SEGMENT-NAME
     purpose: "TO …"
     determines: SOUGHT-NAME      # either this field or change
-    change:                      # eliminate | decouple | isolate | reduce | expose | close | match; either this field or determines
+    change:                      # eliminate (an unwanted term or unknown removed from the expressions) | decouple (coupled equations split into independent ones) | isolate (the one component that governs the behavior singled out) | reduce (fewer variables, equations or orders to handle than before) | expose (a hidden structure or dependence made explicit in an expression) | close (an open system of equations completed by an added relation) | match (two expansions or solutions made to agree on their overlap); either this field or determines
     occasion: INTERPRETATION-NAME   # when the purpose does not follow from the sought alone
     means: "KIND OF MOVE, SCHEME OR ACT"   # optional
     alternatives:                # optional
       - move: "THE MOVE SET ASIDE"
-        reason:                  # inapplicable | inconsistent | costlier | losing-information | tried-without-success
+        reason:                  # inapplicable (the conditions of the move do not hold for these objects) | inconsistent (the move would be invalid here, not merely less useful) | costlier (the move would reach the end at a greater cost) | losing-information (the move would discard information needed by the end) | tried-without-success (the move was already attempted at this point and failed)
     provenance:                  # contemporaneous (written while the derivation was carried out) | reconstructed (written afterwards from a source)
     expected_gain: "THE GAIN EXPECTED"   # optional
 
 interpretations:                 # one entry per meaning that the record states
   - id: INTERPRETATION-NAME
     of: UNIT-NAME
-    kind:                        # referential | form | process | structural | magnitude | variation | analogical | diagnostic
+    kind:                        # referential (what the item denotes among declared symbols, not in the target) | form (a pattern of symbols in the item, read as a conceptual schema) | process (the mechanism or the relation that the item describes) | structural (the mathematical structure of the item, as a named property) | magnitude (the relative sizes of the parts of the item) | variation (how a consequence changes as an item varies in a declared family) | analogical (a known object of the same form, whose behavior transfers) | diagnostic (a failed move or posit, or a singular limit, that a feature reveals)
     reading: "THE MEANING ASSIGNED"
     grounds:                     # optional
       - REFERENCE
 
 features:                        # optional; one entry per event of the calculation
   - id: FEATURE-NAME
-    kind:                        # divergence | secular-term | zero-mode | sign-change | crossing
+    kind:                        # divergence (an expression grows without bound) | secular-term (a correction term that grows with time and breaks the expansion) | zero-mode (a mode of zero eigenvalue, whose amplitude stays constant) | sign-change (a quantity or a coefficient passes through zero and changes sign) | crossing (two quantities become equal, or one reaches a threshold)
     at: OBJECT-NAME
 
 segments:                        # optional; one entry per group of moves under one idea

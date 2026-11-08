@@ -10,7 +10,7 @@ _schema: gnomon:assessment@1
 title: "SHORT NAME OF THE ASSESSMENT"
 id: assess.TOPIC.NAME
 type: assessment
-status: provisional              # provisional | stabilized | retracted
+status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
 assesses: ans.TOPIC.NAME         # the candidate answer, or the record of a construct that a problem demands
 against: quest.TOPIC.NAME        # the question of an answer, or the revised question that a reformulating answer names; the problem of a construct
 
@@ -52,12 +52,12 @@ comparisons:                     # one entry per comparison that a verdict of fi
     data_version: VERSION        # the version of the data
 
 obligations:                     # one entry per proof obligation of the question, in the same order
-  - verdict: pending             # pending | pass | fail | not-applicable
+  - verdict: pending             # pending (no derivation or counterexample settles the obligation yet) | pass (a derivation establishes the implication) | fail (a counterexample shows that the implication does not hold) | not-applicable (no test applies to the obligation, as for a corrective answer)
     evidence: "THE DERIVATION OR THE COUNTEREXAMPLE THAT SETTLES THE IMPLICATION"
     derivation: derivation.TOPIC.NAME   # optional; the derivation record that settles the obligation
 
 appraisal:                       # one entry per `preferred` virtue of the question, only once no test of admissibility or of warrant fails or stays pending; the product test already settles each `constitutive` virtue
-  - virtue:                      # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability
+  - virtue:                      # unification (the account explains many phenomena through few common principles) | generality (the explanatory structure extends across cases or parameter regimes) | robustness (conclusions survive changes of parameters, assumptions or representation beyond the declared idealizations) | intelligibility (consequences can be recognized without the full calculation) | structural-transparency (the representation makes components, relations and dependencies salient) | economy (the purpose is achieved without unnecessary complexity) | tractability (the model can be analyzed or computed with available resources)
     assessment: "THE RESULT OF THE OPERATIONAL QUESTION OF THAT VIRTUE FOR THIS ANSWER"
     preferred_over: "THE CANDIDATES THAT THIS ANSWER OUTRANKS ON THAT VIRTUE"   # fill when other candidates have been assessed
 

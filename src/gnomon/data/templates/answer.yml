@@ -30,7 +30,7 @@ claim:                           # over the symbols of the model on which the ro
 
 grounds:                         # what the claim depends on; one entry per ground
   - id: GROUND
-    role:                        # assumption | idealization | condition | datum | warrant | criterion
+    role:                        # assumption (a premise asserted true of the target) | idealization (a premise known false of the target, which licenses the derivation) | condition (a restriction under which the claim holds) | datum (evidence drawn from a version of recorded or derived data) | warrant (a law or an argued pair licensing the step to the claim) | criterion (a standard fixed by the question, such as a tolerance)
     content: "THE GROUND IN WORDS"
     record: RECORD.UNIT          # the record or the unit that holds the ground: a law of the model or of the background, or an argued pair of a binding, for a warrant; a restriction of the domain; a criterion of the question; a phenomenon for a datum
     version: VERSION             # datum only: the version of the data
@@ -38,7 +38,7 @@ grounds:                         # what the claim depends on; one entry per grou
     motive:                      # tractability (the undistorted system admits no analysis) | isolation (it removes a factor judged irrelevant) | limit (it exposes the behavior of a limit system)
     gain: "THE DERIVATION THAT THE IDEALIZATION MAKES POSSIBLE, OR THE FACTOR THAT IT EXPOSES"
     range: "EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE IDEALIZATION HOLDS"
-    removable:                   # controlled (a correction to the idealized result is known) | ineliminable (the model cannot be stated without it) | unknown
+    removable:                   # controlled (a correction to the idealized result is known) | ineliminable (the model cannot be stated without it) | unknown (neither a correction nor the ineliminability of the distortion is known)
 
 abstractions:                    # factors of the target that the claim leaves out and claims nothing about; a reason that a factor makes no difference is a ground with the role `assumption`
   - id: ABSTRACTION
@@ -51,7 +51,7 @@ dependence:                      # how the claim depends on its grounds; one ent
     result: "THE RESULT OF THE ANALYSIS"   # omit for a minimal sufficient set
 
 route:
-  kind:                          # derivation | proof | simulation | estimation | measurement
+  kind:                          # derivation (a deduction by moves that each cite a warrant, approximations admitted) | proof (an exact deduction of the claim from its premises) | simulation (a numerical computation of the trajectories of a model) | estimation (values inferred from data by the estimator that the phenomenon states) | measurement (values assigned to a property, preserving its empirical relations)
   runs_on: [RECORD]              # the target system, one model, or every model of a family, by identifier
   family_fidelity:               # per-member (one comparison per member, each of which must pass) | ensemble (one comparison of the ensemble of the family); fill for a family of models only
   derivations: [derivation.TOPIC.NAME]   # for a derivation or a proof; the derivation records on which the claim rests
@@ -61,18 +61,18 @@ domain: "EXPRESSION OVER DECLARED SYMBOLS"   # for a deductive route, implied by
 
 variant: SYMBOL                  # symbol of the target variant this answer accounts for; omit when the answer covers every member of the class
 
-status: entertained              # entertained | hypothesized | accepted | retracted; the attitude taken toward the answer
-support: unsupported             # unsupported | informal | formally-proven | empirically-supported; independent of the status; each law of the model keeps its own `warrant`
+status: entertained              # entertained (considered as a candidate, not yet held for testing) | hypothesized (held provisionally while it is tested) | accepted (admitted into the accepted knowledge by an act of the researcher) | retracted (withdrawn by a decision of the researcher); the attitude taken toward the answer
+support: unsupported             # unsupported (no proof and no evidence supports the answer yet) | informal (support short of proof or empirical test, such as toy simulations) | formally-proven (a proof establishes the claim, such as a published theorem) | empirically-supported (data on the target support the claim); independent of the status; each law of the model keeps its own `warrant`
 
 uncertainty:                     # fill when the claim assigns a value; one entry per value
   - of: SYMBOL
-    form:                        # interval | distribution | bound
+    form:                        # interval (a range around the value, such as 40 ± 3 Hz) | distribution (a probability distribution over the value) | bound (a limit that the value or its error does not exceed)
     expression: "EXPRESSION OVER DECLARED SYMBOLS"
 
-modal_strength:                  # actual | possible | necessary; the strength that the answer claims, compared with the strength the question requests
+modal_strength:                  # actual (the claim holds of the target system) | possible (the claim is consistent with the admitted laws and the domain) | necessary (no alternative consistent with the admitted laws produces a foil); the strength that the answer claims, compared with the strength the question requests
 
 erotetic_relation:
-  value:                         # complete | partial | corrective | reformulating
+  value:                         # complete (a direct answer, conclusive under the answer conditions of the aim) | partial (narrows the direct answers without being conclusive) | corrective (shows that a presupposition of the question is false) | reformulating (answers a revised question, which it names)
   denies: "THE PRESUPPOSITION OF THE QUESTION THAT THE ANSWER SHOWS FALSE"   # corrective only
   revised_question: quest.TOPIC.NAME   # reformulating only: the question that the answer answers and is assessed against
 
@@ -81,7 +81,7 @@ binding:                         # fill when the route runs on a model other tha
     version: VERSION
 
 use:                             # fill in place of a binding when the claim bears only on a model or on a formal class
-  value:                         # tool | proof-of-principle | conceptual-exploration | understanding; a new use enters the vocabulary registry first
+  value:                         # tool (the model performs a stated task) | proof-of-principle (the model shows that a behavior can arise) | conceptual-exploration (the model serves to explore a class of models) | understanding (the model affords a grasp of explanatory, structural or modal relations); a new use enters the vocabulary registry first
   property: "THE PROPERTY THAT THE MODEL MUST HAVE FOR THAT USE"
 
 aim_block:                       # fill for a complete or a partial answer only: keep the block of the aim of the question, and delete the others
@@ -106,7 +106,7 @@ aim_block:                       # fill for a complete or a partial answer only:
       - id: CLASS
         pattern: "EXPRESSION OVER DECLARED SYMBOLS"
         reading: "THE PATTERN IN WORDS"
-        detection:               # pass | fail | pending; the result of the detection criterion of the phenomenon
+        detection:               # pass (the pattern meets the criterion and counts as a phenomenon) | fail (the pattern does not meet the criterion) | pending (the criterion has not yet been applied to the pattern); the result of the detection criterion of the phenomenon
   prediction:
     outputs:                     # one entry per predicted output
       - target: phen.TOPIC.NAME.SYMBOL   # one of the outputs to match that the required accuracy of the question names
@@ -118,7 +118,7 @@ aim_block:                       # fill for a complete or a partial answer only:
       - ground: GROUND           # the ground on which the claim depends
         explanatory: true        # false for a dependence that the explanation declares not explanatory
         determinant: "THE PROPERTY THAT MAKES THE LAW, THE STRUCTURE OR THE DERIVATION RELEVANT"
-    relation:                    # causal-intervention | causal-mechanistic | constitutive | functional | nomological | statistical | mathematical
+    relation:                    # causal-intervention (the explanandum changes when a factor is set by intervention) | causal-mechanistic (earlier entities outside the system produce the phenomenon by interactions) | constitutive (organized parts and activities of the system compose the phenomenon) | functional (a part contributes to a capacity or was selected for its effects) | nomological (the explanandum follows from a law) | statistical (the explanandum falls under a probabilistic regularity) | mathematical (a mathematical fact proves the explanandum or excludes its alternatives)
     factors:                     # E: one entry per explanatory factor
       - id: FACTOR
         name: "NAME OF THE FACTOR"
@@ -132,21 +132,21 @@ aim_block:                       # fill for a complete or a partial answer only:
         appeals_to: [SYMBOL]     # external systems drawn on, by declared symbol; empty when none
         procedure: "HOW THE FACTOR PRODUCES ITS EFFECT"   # only content beyond the chain `bears_on`, `through`, `produces`
         caveat: "THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION"
-        target_status:           # denoting | coarse-graining | limit-construct | structural-constraint; empty under a declared use
+        target_status:           # denoting (the factor denotes a quantity or a part of the target) | coarse-graining (the factor describes a target feature at a stated level) | limit-construct (the factor holds only in a limit system) | structural-constraint (the factor is a symmetry or bound that the target satisfies); empty under a declared use
         pair: bind.TOPIC.NAME.PAIR   # the feature pair of the binding that carries the status; omit when the route runs on the target
   modal_knowledge:
-    modality:                    # possible | impossible | necessary
+    modality:                    # possible (the property holds in some admitted alternative, shown by a witness) | impossible (the property holds in no admitted alternative, shown by proof) | necessary (the property holds in every admitted alternative, shown by proof)
     property: "EXPRESSION OVER DECLARED SYMBOLS"   # the property that the modal claim bears on
     space: "THE SPACE OF ALTERNATIVES THAT THE ADMITTED LAWS AND THE DOMAIN FIX"
     witness: RECORD              # for a possibility: the instance that witnesses it, such as a model
     proof: "POINTER TO THE PROOF OR TO THE EXHAUSTIVE EXCLUSION"   # for an impossibility or a necessity
   model_properties:
-    form:                        # derived-law | regime | limit | structural-property | counterexample
+    form:                        # derived-law (a law that follows from the laws of the model) | regime (a qualitative behavior of the model over a range of parameters) | limit (the behavior of the model in a limit system) | structural-property (a property of the model structure, such as low rank) | counterexample (an instance that falsifies a stated property of the model)
     discharges: [OBLIGATION]     # the proof obligations of the question that the consequence discharges, by name
 
 relations:                       # fill when the answer bears on another answer; one entry per link
   - answer: ans.TOPIC.NAME
-    relation:                    # supports | presupposes | tests | defeats | revises
+    relation:                    # supports (its claim is a ground of the other answer) | presupposes (it is admissible only if the other answer is true) | tests (its claim, compared with the target, follows from the other) | defeats (its claim, once accepted, removes a ground of the other) | revises (it replaces the other answer, which stays unchanged)
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; a specification left out is provisional
   FIELD.PATH: open

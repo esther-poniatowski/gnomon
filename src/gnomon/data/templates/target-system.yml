@@ -8,9 +8,9 @@ _schema: gnomon:target-system@1
 title: "NAME OF THE SYSTEM"
 id: system.TOPIC
 type: target-system
-status: provisional              # provisional | stabilized | retracted
+status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
 commitment:                      # identified (a definite description and pointers fix the referent) | specified (the record writes its declarations, and their symbols resolve)
-target_type:                     # particular | actual-systems | possible-systems | hypothetical | no-external-target
+target_type:                     # particular (one existing system, such as a recorded slice) | actual-systems (a class whose members exist, such as mouse V1 circuits) | possible-systems (a class of systems whose members need not exist) | hypothetical (one system that does not exist, such as an altered cortex) | no-external-target (the model class itself is the object of study)
 
 identification:                  # fixes the referent before any quantity is declared
   description: "A DEFINITE DESCRIPTION THAT PICKS OUT THE SYSTEM OR THE CLASS OF SYSTEMS"
@@ -20,7 +20,7 @@ identification:                  # fixes the referent before any quantity is dec
 reference_class:                 # name only; the remaining specifications of the record generate the class
   name: "KIND OF SYSTEM"
   projectibility:                # whether a claim about some members can be projected onto the class
-    status:                      # assumed | tested | not-claimed
+    status:                      # assumed (the projection rests on reported evidence, without a check) | tested (a check against further members supports the projection) | not-claimed (the claim covers every member directly, as a theorem does)
     evidence: "THE TEST OR THE ARGUMENT THAT SUPPORTS PROJECTING THE CLAIM ONTO THE CLASS"   # omit when the status is `not-claimed`
   selection_criteria:            # fill only when membership depends on an outcome of the dynamics; put a restriction on prior values in the domain of the question that imposes it, since other questions may leave them free
     - name: "NAME OF THE CRITERION"
@@ -46,7 +46,7 @@ index_sets:                      # sets that index a quantity without being unit
     notation: 'LATEX FORM OF THE SYMBOL'   # only when the LaTeX form differs from the symbol
     variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
     extent: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    structure:                   # continuum | discrete-set | interval
+    structure:                   # continuum (an uncountable set, such as a spatial domain) | discrete-set (a set of separate members, such as labelled cases or samples) | interval (a contiguous range of an ordered set, such as a time axis)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; the formula of the coordinate that the set indexes, such as L or T
 
 variables:                       # quantities that vary while the phenomenon unfolds; the state space is the product of the value sets of the non-aggregate variables determined `within`
@@ -58,11 +58,11 @@ variables:                       # quantities that vary while the phenomenon unf
     determined:                  # within (its value is fixed inside the system) | outside (its value varies but is set beyond the system)
     signature: [SYMBOL]          # one constituent kind or index set per place; empty for the system as a whole
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
+    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values form no scale, as maps or measures do)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give when a map builds the quantity from declared symbols
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
-    selects:                     # unique | any | all; required with a condition
+    selects:                     # unique (the record presupposes exactly one value satisfying the condition) | any (the claim holds of each value satisfying the condition) | all (the quantity is the set of values satisfying the condition); required with a condition
     held_by: RECORD.UNIT         # optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
     reading: "THE EXPRESSION IN WORDS"
     shared: false                # true when one value holds for every tuple of the signature
@@ -75,11 +75,11 @@ parameters:                      # quantities held fixed while the phenomenon un
     variant: SYMBOL              # variant carrying the entry; omit when every member of the class carries it
     signature: [SYMBOL, SYMBOL]   # one entry per place, e.g. two neurons for a connectivity weight
     values: "SET EXPRESSION OVER DECLARED SYMBOLS"
-    scale:                       # nominal | ordinal | interval | ratio | absolute | not-applicable
+    scale:                       # nominal (values are labels, compared only for identity) | ordinal (values are ordered, so ranks carry meaning) | interval (an arbitrary zero, so differences carry meaning) | ratio (a natural zero, so ratios of values carry meaning) | absolute (a count, which admits no rescaling at all) | not-applicable (the values form no scale, as maps or measures do)
     dimensional_formula: "MONOMIAL OVER BASE DIMENSIONS"   # optional; a monomial such as M L T^-2, or 1 for a pure number
     expression: "EXPRESSION OVER DECLARED SYMBOLS"   # give for a derived parameter
     condition: "EXPRESSION THAT THE QUANTITY SATISFIES"   # give when no map builds the quantity
-    selects:                     # unique | any | all; required with a condition
+    selects:                     # unique (the record presupposes exactly one value satisfying the condition) | any (the claim holds of each value satisfying the condition) | all (the quantity is the set of values satisfying the condition); required with a condition
     held_by: RECORD.UNIT         # optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
     reading: "THE EXPRESSION IN WORDS"
     shared: false                # true when one value holds for every tuple of the signature

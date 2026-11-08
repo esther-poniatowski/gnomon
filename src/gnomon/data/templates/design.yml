@@ -7,7 +7,7 @@ _schema: gnomon:design@1
 title: "SHORT NAME OF THE DESIGN"
 id: design.TOPIC.NAME
 type: design
-status: provisional              # provisional | stabilized | retracted
+status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
 
 kind:                            # experiment (an intervention on the target) | simulation-run (a run of a simulation of a model) | method (a procedure that solves a task) | scheme (a reusable way of deriving, which the segments of derivations apply)
 serves: quest.TOPIC.NAME         # the question or the problem that the design serves; optional for a method or a scheme

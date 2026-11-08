@@ -10,33 +10,33 @@ title: "SHORT NAME OF THE QUESTION"
 statement: "THE QUESTION IN WORDS"   # restate the fields of the subject and the task; `gnomon views` composes the subject and the aim beside it
 id: quest.TOPIC.NAME
 type: question
-status: posed                    # posed | refined | answered | abandoned
+status: posed                    # posed (the question is stated and not yet revised) | refined (the question was revised since it was first stated) | answered (the researcher has settled the request on an obtained direct answer) | abandoned (the researcher stops the inquiry with the question unanswered)
 addresses: prob.TOPIC.NAME       # the problem that the question serves; omit when no problem record exists
-request:                         # one | all | over-a-parameter | decision; the request of the problem that the question serves; empty while the record is a schema
+request:                         # one (one result suffices, with no claim of completeness) | all (every result is required, with a claim of completeness) | over-a-parameter (one result for each value of a parameter) | decision (whether each candidate already proposed meets the constraints); the request of the problem that the question serves; empty while the record is a schema
 links:                           # questions linked to this question by one of four relations; empty when none
   - question: quest.TOPIC.NAME
-    relation:                    # subquestion-of | explanans-from | presupposes | enables
+    relation:                    # subquestion-of (a part of an answer to the linked question answers this one) | explanans-from (an explanans factor is the phenomenon of the linked question) | presupposes (a true direct answer requires one to the linked question) | enables (an answer establishes a condition of answerability of the linked question)
     via: phen.TOPIC.NAME         # the record shared by both questions, such as a phenomenon; omit when they share none
 subject:
   target_system: system.TOPIC    # a record identifier; in a question schema, a placeholder written as for `phenomenon`
   background: [bg.TOPIC.NAME]    # background records whose laws the question admits; empty when it admits none
   phenomenon:                    # a record identifier `phen.TOPIC.NAME`; in a question schema, the placeholder below
-    placeholder:                 # system | phenomenon
+    placeholder:                 # system (the slot awaits a target-system record) | phenomenon (the slot awaits a record of a behavior of the target)
     description: "THE ITEM AWAITED BY THE SLOT"
   contrast:
-    locus:                       # other-outcome | other-system | other-condition | none
+    locus:                       # other-outcome (same system and conditions, another value of the phenomenon) | other-system (another system, in which the phenomenon is absent) | other-condition (same system, under a different setting or intervention) | none (the question states no contrast)
     foil_set:                    # default: the other values of the explanandum variable
       - name: "NAME OF THE ALTERNATIVE"
         symbol: SYMBOL
         expression: ["EXPRESSION OVER DECLARED SYMBOLS"]
         reading: "THE MEANING OF THE ALTERNATIVE"   # only content beyond the name and the expression
     compatibility: derived       # follows from the locus: `exclusive` for `other-outcome`, `compatible` otherwise
-    foil_status:                 # observed | counterfactual | not-applicable
+    foil_status:                 # observed (the foil case occurred and has been recorded) | counterfactual (the foil case never occurred and must first be produced) | not-applicable (the question states no foil set)
   domain:                        # only restrictions of the a priori specification; assumptions of the analysis belong to the answer
     restrictions:                # one entry per restriction the question imposes on the specification
       - name: "NAME OF THE RESTRICTION"   # required when no quantity names the entry
         of: system.TOPIC.SYMBOL   # quantity held; omit when no single quantity carries the restriction
-        restriction:             # clamped | restricted | initial | stationary | without-event; only where the entry names a variable, since a parameter is already fixed
+        restriction:             # clamped (a fixed value replaces the rule that determines the variable) | restricted (the variable is held within a narrower set of values) | initial (only the initial values of the variable are restricted) | stationary (the variable is held to time-invariant states or statistics) | without-event (the variable is held to courses that exclude a named event); only where the entry names a variable, since a parameter is already fixed
         values: "SET EXPRESSION OVER DECLARED SYMBOLS"   # set the quantity is held to
         expression: "EXPRESSION OVER DECLARED SYMBOLS"   # replaces `values` when no single quantity carries the restriction
         justification: "WHY THE QUESTION IS PUT ONLY UNDER THE RESTRICTION"
@@ -45,17 +45,17 @@ subject:
       justification: "WHY THE QUESTION CONCERNS THE LIMIT SYSTEM"
 
 task:
-  epistemic_aim:                 # description | exploration | prediction | explanation | modal-knowledge | model-properties | explication
+  epistemic_aim:                 # description (what structure the target system has) | exploration (what happens in the system as conditions vary) | prediction (what will occur under specified conditions) | explanation (why or how the phenomenon occurs) | modal-knowledge (what is possible, impossible, necessary or contingent) | model-properties (what follows from a theory or a model) | explication (which criterion should define a term)
   explicandum: "TERM OF AN EXPLICANDUM OF THE PROBLEM"   # explication only: the term of an explicandum that the problem addressed by the question names
-  requested_relation:            # causal-intervention | causal-mechanistic | constitutive | functional | nomological | statistical | mathematical | not-applicable
-  function_sense:                # causal-role | etiological; required when the requested relation is `functional`
-  modal_strength:                # actual | possible | necessary
+  requested_relation:            # causal-intervention (the explanandum changes when a factor is set by intervention) | causal-mechanistic (earlier entities outside the system produce the phenomenon by interactions) | constitutive (organized parts and activities of the system compose the phenomenon) | functional (a part contributes to a capacity or was selected for its effects) | nomological (the explanandum follows from a law) | statistical (the explanandum falls under a probabilistic regularity) | mathematical (a mathematical fact proves the explanandum or excludes its alternatives) | not-applicable (the answer relates no explanans to the explanandum)
+  function_sense:                # causal-role (the contribution of a part to a capacity of the system) | etiological (the effects for which the part was selected); required when the requested relation is `functional`
+  modal_strength:                # actual (the claim holds of the target system) | possible (the claim is consistent with the admitted laws and the domain) | necessary (no alternative consistent with the admitted laws produces a foil)
   admissible_explanans:          # optional; when null, proportionality bounds the answer
     compositional: [SYMBOL]      # constituent kinds or index sets whose parts may enter the explanans; empty for the system as a whole
-    substrate: null              # specific | independent | mapping
+    substrate: null              # specific (explanans variables belong to the particular parts of one realization) | independent (explanans variables are shared by every realization of the system) | mapping (how the variables of the parts realize variables shared by all realizations)
     justification: "WHY THE ANSWER IS BOUND TO THESE VARIABLES"   # also state the shortfall of an answer that draws on other variables
   required_accuracy:
-    standard:                    # qualitative | order-of-magnitude | numeric-bound | structural-only | not-applicable
+    standard:                    # qualitative (agreement in kind with the target, with no tolerance) | order-of-magnitude (values must agree up to a factor of about ten) | numeric-bound (a stated metric of the difference must not exceed a bound) | structural-only (only structures of the target must correspond, with no values) | not-applicable (the answer is compared with no data of the target)
     outputs_to_match:            # name only the target side; the answer reproduces each output
       - target: phen.TOPIC.NAME.SYMBOL
         tolerance:               # omit when the standard is `qualitative` or `structural-only`
@@ -73,7 +73,7 @@ task:
       consequent: ["EXPRESSION OVER DECLARED SYMBOLS"]
 
 virtues:                         # one entry per virtue the inquiry weighs, under any epistemic aim
-  - virtue:                      # unification | generality | robustness | intelligibility | structural-transparency | economy | tractability
+  - virtue:                      # unification (the account explains many phenomena through few common principles) | generality (the explanatory structure extends across cases or parameter regimes) | robustness (conclusions survive changes of parameters, assumptions or representation beyond the declared idealizations) | intelligibility (consequences can be recognized without the full calculation) | structural-transparency (the representation makes components, relations and dependencies salient) | economy (the purpose is achieved without unnecessary complexity) | tractability (the model can be analyzed or computed with available resources)
     standing:                    # constitutive (the product test applies it) | preferred (appraisal ranks on it)
     justification: "WHY THE INQUIRY WEIGHS THIS VIRTUE"   # also state the shortfall of an answer that lacks this virtue
 
@@ -87,10 +87,10 @@ construction:                    # fill when a procedure is named that would yie
   reading: "HOW THE PROCEDURE WOULD YIELD A DIRECT ANSWER"
 
 answerability:                   # one entry per condition whose state the inquiry asserts; a condition left out is not established
-  - condition:                   # definiteness | answer-type | soundness | candidates | discrimination | access | bridging | representation
-    route:                       # selection | construction | both
+  - condition:                   # definiteness (each term has a definition or a criterion adequate to its use) | answer-type (every component of the type of the direct answers is fixed) | soundness (the presuppositions of the question are true) | candidates (at least one proposed answer passes the admissibility tests) | discrimination (a quantity takes different values under the candidates and their alternatives) | access (an available procedure applies to the quantity or the demanded result) | bridging (an inference stated in advance links the quantity to the answer) | representation (the model used for access represents the target to the required accuracy)
+    route:                       # selection (a discriminating value singles out one proposed candidate) | construction (a named procedure would yield a direct answer when run) | both (the state holds on each of the two routes)
     term: SYMBOL-OR-RECORD       # definiteness only: the term whose definiteness is stated
-    state:                       # established | refuted
+    state:                       # established (the records show that the condition holds) | refuted (the records or the literature show that the condition fails)
     refutation:                  # outright (an argument of impossibility shows that the condition fails) | lack-of-means (every means considered was tried and failed); refuted only
     means:                       # lack-of-means only: every means considered, each tried and failed
       - "A MEANS CONSIDERED, TRIED AND FAILED"

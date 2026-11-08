@@ -74,6 +74,32 @@ def test_no_description_runs_the_gloss_of_its_row_into_the_content() -> None:
 
 
 @pytest.mark.parametrize("kind", KINDS)
+def test_every_admitted_value_carries_a_gloss(kind: str) -> None:
+    """The template lists each admitted value with its gloss, so that a value can be chosen from
+    the template line alone; a value without a gloss leaves the reader to find its definition."""
+    unglossed = [
+        f"{field}: {value}"
+        for field, values in schemas.vocabulary_options(kind).items()
+        for value, gloss in values
+        if not gloss.strip()
+    ]
+    assert not unglossed, unglossed
+
+
+@pytest.mark.parametrize("kind", KINDS)
+def test_no_gloss_holds_a_separator_of_the_template_comment(kind: str) -> None:
+    """A template comment separates the values by `|` and the guidance by `;`, so a gloss holding
+    either would split its value in two."""
+    found = [
+        f"{field}: {value}"
+        for field, values in schemas.vocabulary_options(kind).items()
+        for value, gloss in values
+        if "|" in gloss or ";" in gloss
+    ]
+    assert not found, found
+
+
+@pytest.mark.parametrize("kind", KINDS)
 def test_the_base_schema_and_the_contract_are_valid(kind: str) -> None:
     Draft202012Validator.check_schema(schemas.load_base(kind))
     Draft202012Validator.check_schema(

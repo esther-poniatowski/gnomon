@@ -29,11 +29,17 @@ vocabularies:
   answer:
     grounds.role:
     - value: assumption
+      name: a premise asserted true of the target
     - value: idealization
+      name: a premise known false of the target, which licenses the derivation
     - value: condition
+      name: a restriction under which the claim holds
     - value: datum
+      name: evidence drawn from a version of recorded or derived data
     - value: warrant
+      name: a law or an argued pair licensing the step to the claim
     - value: criterion
+      name: a standard fixed by the question, such as a tolerance
     grounds.motive:
     - value: tractability
       name: the undistorted system admits no analysis
@@ -47,6 +53,7 @@ vocabularies:
     - value: ineliminable
       name: the model cannot be stated without it
     - value: unknown
+      name: neither a correction nor the ineliminability of the distortion is known
     dependence.kind:
     - value: minimal-set
       name: grounds that suffice for the claim
@@ -56,10 +63,15 @@ vocabularies:
       name: an analysis across models that share the claimed structure
     route.kind:
     - value: derivation
+      name: a deduction by moves that each cite a warrant, approximations admitted
     - value: proof
+      name: an exact deduction of the claim from its premises
     - value: simulation
+      name: a numerical computation of the trajectories of a model
     - value: estimation
+      name: values inferred from data by the estimator that the phenomenon states
     - value: measurement
+      name: values assigned to a property, preserving its empirical relations
     route.family_fidelity:
     - value: per-member
       name: one comparison per member, each of which must pass
@@ -67,32 +79,54 @@ vocabularies:
       name: one comparison of the ensemble of the family
     .status:
     - value: entertained
+      name: considered as a candidate, not yet held for testing
     - value: hypothesized
+      name: held provisionally while it is tested
     - value: accepted
+      name: admitted into the accepted knowledge by an act of the researcher
     - value: retracted
+      name: withdrawn by a decision of the researcher
     .support:
     - value: unsupported
+      name: no proof and no evidence supports the answer yet
     - value: informal
+      name: support short of proof or empirical test, such as toy simulations
     - value: formally-proven
+      name: a proof establishes the claim, such as a published theorem
     - value: empirically-supported
+      name: data on the target support the claim
     uncertainty.form:
     - value: interval
+      name: a range around the value, such as 40 ± 3 Hz
     - value: distribution
+      name: a probability distribution over the value
     - value: bound
+      name: a limit that the value or its error does not exceed
     .modal_strength:
     - value: actual
+      name: the claim holds of the target system
     - value: possible
+      name: the claim is consistent with the admitted laws and the domain
     - value: necessary
+      name: no alternative consistent with the admitted laws produces a foil
     erotetic_relation.value:
     - value: complete
+      name: a direct answer, conclusive under the answer conditions of the aim
     - value: partial
+      name: narrows the direct answers without being conclusive
     - value: corrective
+      name: shows that a presupposition of the question is false
     - value: reformulating
+      name: answers a revised question, which it names
     use.value:
     - value: tool
+      name: the model performs a stated task
     - value: proof-of-principle
+      name: the model shows that a behavior can arise
     - value: conceptual-exploration
+      name: the model serves to explore a class of models
     - value: understanding
+      name: the model affords a grasp of explanatory, structural or modal relations
     aim_block.origin:
     - value: input
       name: fixed by the question
@@ -100,16 +134,26 @@ vocabularies:
       name: produced by the answer
     aim_block.detection:
     - value: pass
+      name: the pattern meets the criterion and counts as a phenomenon
     - value: fail
+      name: the pattern does not meet the criterion
     - value: pending
+      name: the criterion has not yet been applied to the pattern
     aim_block.relation:
     - value: causal-intervention
+      name: the explanandum changes when a factor is set by intervention
     - value: causal-mechanistic
+      name: earlier entities outside the system produce the phenomenon by interactions
     - value: constitutive
+      name: organized parts and activities of the system compose the phenomenon
     - value: functional
+      name: a part contributes to a capacity or was selected for its effects
     - value: nomological
+      name: the explanandum follows from a law
     - value: statistical
+      name: the explanandum falls under a probabilistic regularity
     - value: mathematical
+      name: a mathematical fact proves the explanandum or excludes its alternatives
     aim_block.factor:
     - value: condition
       name: on a quantity
@@ -121,48 +165,82 @@ vocabularies:
       name: of the arrangement, such as a feedback loop or a modular composition
     aim_block.target_status:
     - value: denoting
+      name: the factor denotes a quantity or a part of the target
     - value: coarse-graining
+      name: the factor describes a target feature at a stated level
     - value: limit-construct
+      name: the factor holds only in a limit system
     - value: structural-constraint
+      name: the factor is a symmetry or bound that the target satisfies
     aim_block.modality:
     - value: possible
+      name: the property holds in some admitted alternative, shown by a witness
     - value: impossible
+      name: the property holds in no admitted alternative, shown by proof
     - value: necessary
+      name: the property holds in every admitted alternative, shown by proof
     aim_block.form:
     - value: derived-law
+      name: a law that follows from the laws of the model
     - value: regime
+      name: a qualitative behavior of the model over a range of parameters
     - value: limit
+      name: the behavior of the model in a limit system
     - value: structural-property
+      name: a property of the model structure, such as low rank
     - value: counterexample
+      name: an instance that falsifies a stated property of the model
     relations.relation:
     - value: supports
+      name: its claim is a ground of the other answer
     - value: presupposes
+      name: it is admissible only if the other answer is true
     - value: tests
+      name: its claim, compared with the target, follows from the other
     - value: defeats
+      name: its claim, once accepted, removes a ground of the other
     - value: revises
+      name: it replaces the other answer, which stays unchanged
   assessment:
     .status:
     - value: provisional
+      name: the record is written and still under revision
     - value: stabilized
+      name: the inquiry expects no further revision of the record
     - value: retracted
+      name: the record is withdrawn, with all its specifications
     obligations.verdict:
     - value: pending
+      name: no derivation or counterexample settles the obligation yet
     - value: pass
+      name: a derivation establishes the implication
     - value: fail
+      name: a counterexample shows that the implication does not hold
     - value: not-applicable
+      name: no test applies to the obligation, as for a corrective answer
     appraisal.virtue:
     - value: unification
+      name: the account explains many phenomena through few common principles
     - value: generality
+      name: the explanatory structure extends across cases or parameter regimes
     - value: robustness
+      name: conclusions survive changes of parameters, assumptions or representation beyond the declared idealizations
     - value: intelligibility
+      name: consequences can be recognized without the full calculation
     - value: structural-transparency
+      name: the representation makes components, relations and dependencies salient
     - value: economy
+      name: the purpose is achieved without unnecessary complexity
     - value: tractability
+      name: the model can be analyzed or computed with available resources
   phenomenon:
     .status:
     - value: provisional
+      name: the record is written and still under revision
     - value: stabilized
+      name: the inquiry expects no further revision of the record
     - value: retracted
+      name: the record is withdrawn, with all its specifications
     .commitment:
     - value: identified
       name: a definite description and pointers fix the referent
@@ -170,61 +248,107 @@ vocabularies:
       name: the record writes its observables and manifestations, and their symbols resolve
     .category:
     - value: particular-occurrence
+      name: one token of a state, a process or an event
     - value: regularity
+      name: an invariant across instances, required to be stable
     - value: capacity
+      name: a disposition to yield outputs of a class given inputs of a class
     - value: structural-property
+      name: a property of a structure, holding at each point of the course
     .occurrence:
     - value: state
+      name: holds at every point of a segment, without change
     - value: process
+      name: holds on every sub-segment longer than the grain, at no point
     - value: event
+      name: holds of a segment and of none of its parts
     - value: not-applicable
+      name: no occurrence class, as for a regularity or a capacity
     index_sets.structure:
     - value: continuum
+      name: an uncountable set, such as a spatial domain
     - value: discrete-set
+      name: a set of separate members, such as labelled cases or samples
     - value: interval
+      name: a contiguous range of an ordered set, such as a time axis
     observables.scale:
     - value: nominal
+      name: values are labels, compared only for identity
     - value: ordinal
+      name: values are ordered, so ranks carry meaning
     - value: interval
+      name: an arbitrary zero, so differences carry meaning
     - value: ratio
+      name: a natural zero, so ratios of values carry meaning
     - value: absolute
+      name: a count, which admits no rescaling at all
     - value: not-applicable
+      name: the values form no scale, as maps or measures do
     observables.selects:
     - value: unique
+      name: the record presupposes exactly one value satisfying the condition
     - value: any
+      name: the claim holds of each value satisfying the condition
     - value: all
+      name: the quantity is the set of values satisfying the condition
     manifestations.selects:
     - value: unique
+      name: the record presupposes exactly one value satisfying the condition
     - value: any
+      name: the claim holds of each value satisfying the condition
     - value: all
+      name: the quantity is the set of values satisfying the condition
     observables.censoring:
     - value: right
+      name: the event had not occurred by the horizon
     - value: left
+      name: the event occurred before the origin of observation
     - value: interval
+      name: the event occurred between two observations, at an unknown time
     - value: none
+      name: the time of the event is recorded
     manifestations.form:
     - value: value
+      name: an observable equals a stated label or number
     - value: dependence
+      name: an observable varies with a condition or another quantity
     - value: functional-form
+      name: an observable equals a stated expression in its indices
     - value: scaling
+      name: one side varies as the other up to a prefactor
     - value: relation
+      name: an implication or another logical link between conditions
     scope_over_instances.source:
     - value: class-member
+      name: instances are distinct members of the reference class
     - value: realization
+      name: repeated runs of one system, such as trials or disorder samples
     - value: random-parameters
+      name: instances are draws of the parameter values
     - value: random-structure
+      name: instances are draws of the structure, such as an interaction architecture
     - value: scenario
+      name: instances are prescribed scenarios, such as emission pathways
     scope_over_instances.quantification:
     - value: single
+      name: the claim holds of one fixed instance
     - value: typical
+      name: the claim holds of one representative instance
     - value: ensemble-summary
+      name: the claim states one summary over instances, such as a mean
     - value: ensemble-distribution
+      name: the claim states the distribution of a quantity over instances
     - value: universal
+      name: the claim holds of every member of the admitted class
     .evidential_status:
     - value: established
+      name: the behavior is shown across data sets or methods
     - value: reported
+      name: one data set or one study shows the behavior
     - value: predicted
+      name: a theory implies the behavior, which detection has not reached
     - value: derived
+      name: the behavior is obtained as a consequence of a model
     - value: absent
       name: a closed search found no instance
     - value: disproved
@@ -233,12 +357,18 @@ vocabularies:
       name: the occurrence is an open question that the inquiry tracks
     data_model.kind:
     - value: instrument-model
+      name: how the apparatus turns the measured quantity into raw records
     - value: background-simulation
+      name: a simulation of the signal expected without the behavior
     - value: assimilation-model
+      name: combines records with a simulation to fill their gaps
     - value: reconstruction
+      name: an inference of unrecorded values from the raw records
     observation_error.form:
     - value: distribution
+      name: a probability law of the error, such as a Gaussian
     - value: bound
+      name: a maximal size that the error does not exceed
   question:
     presuppositions.part:
     - value: existence
@@ -247,20 +377,33 @@ vocabularies:
       name: the fact in question holds
     answerability.condition:
     - value: definiteness
+      name: each term has a definition or a criterion adequate to its use
     - value: answer-type
+      name: every component of the type of the direct answers is fixed
     - value: soundness
+      name: the presuppositions of the question are true
     - value: candidates
+      name: at least one proposed answer passes the admissibility tests
     - value: discrimination
+      name: a quantity takes different values under the candidates and their alternatives
     - value: access
+      name: an available procedure applies to the quantity or the demanded result
     - value: bridging
+      name: an inference stated in advance links the quantity to the answer
     - value: representation
+      name: the model used for access represents the target to the required accuracy
     answerability.route:
     - value: selection
+      name: a discriminating value singles out one proposed candidate
     - value: construction
+      name: a named procedure would yield a direct answer when run
     - value: both
+      name: the state holds on each of the two routes
     answerability.state:
     - value: established
+      name: the records show that the condition holds
     - value: refuted
+      name: the records or the literature show that the condition fails
     answerability.refutation:
     - value: outright
       name: an argument of impossibility shows that the condition fails
@@ -268,80 +411,134 @@ vocabularies:
       name: every means considered was tried and failed
     .status:
     - value: posed
+      name: the question is stated and not yet revised
     - value: refined
+      name: the question was revised since it was first stated
     - value: answered
+      name: the researcher has settled the request on an obtained direct answer
     - value: abandoned
+      name: the researcher stops the inquiry with the question unanswered
     .request:
     - value: one
+      name: one result suffices, with no claim of completeness
     - value: all
+      name: every result is required, with a claim of completeness
     - value: over-a-parameter
+      name: one result for each value of a parameter
     - value: decision
+      name: whether each candidate already proposed meets the constraints
     links.relation:
     - value: subquestion-of
+      name: a part of an answer to the linked question answers this one
     - value: explanans-from
+      name: an explanans factor is the phenomenon of the linked question
     - value: presupposes
+      name: a true direct answer requires one to the linked question
     - value: enables
+      name: an answer establishes a condition of answerability of the linked question
     subject.placeholder:
     - value: system
+      name: the slot awaits a target-system record
     - value: phenomenon
+      name: the slot awaits a record of a behavior of the target
     subject.locus:
     - value: other-outcome
+      name: same system and conditions, another value of the phenomenon
     - value: other-system
+      name: another system, in which the phenomenon is absent
     - value: other-condition
+      name: same system, under a different setting or intervention
     - value: none
+      name: the question states no contrast
     subject.foil_status:
     - value: observed
+      name: the foil case occurred and has been recorded
     - value: counterfactual
+      name: the foil case never occurred and must first be produced
     - value: not-applicable
+      name: the question states no foil set
     subject.restriction:
     - value: clamped
+      name: a fixed value replaces the rule that determines the variable
     - value: restricted
+      name: the variable is held within a narrower set of values
     - value: initial
+      name: only the initial values of the variable are restricted
     - value: stationary
+      name: the variable is held to time-invariant states or statistics
     - value: without-event
+      name: the variable is held to courses that exclude a named event
     task.epistemic_aim:
     - value: description
+      name: what structure the target system has
       category: answer-content
     - value: exploration
+      name: what happens in the system as conditions vary
       category:
         input: answer-content
         output: conceptual-work
     - value: prediction
+      name: what will occur under specified conditions
       category: answer-content
     - value: explanation
+      name: why or how the phenomenon occurs
       category: answer-content
     - value: modal-knowledge
+      name: what is possible, impossible, necessary or contingent
       category: answer-content
     - value: model-properties
+      name: what follows from a theory or a model
       category: answer-content
     - value: explication
+      name: which criterion should define a term
       category: conceptual-work
     task.requested_relation:
     - value: causal-intervention
+      name: the explanandum changes when a factor is set by intervention
     - value: causal-mechanistic
+      name: earlier entities outside the system produce the phenomenon by interactions
     - value: constitutive
+      name: organized parts and activities of the system compose the phenomenon
     - value: functional
+      name: a part contributes to a capacity or was selected for its effects
     - value: nomological
+      name: the explanandum follows from a law
     - value: statistical
+      name: the explanandum falls under a probabilistic regularity
     - value: mathematical
+      name: a mathematical fact proves the explanandum or excludes its alternatives
     - value: not-applicable
+      name: the answer relates no explanans to the explanandum
     task.function_sense:
     - value: causal-role
+      name: the contribution of a part to a capacity of the system
     - value: etiological
+      name: the effects for which the part was selected
     task.modal_strength:
     - value: actual
+      name: the claim holds of the target system
     - value: possible
+      name: the claim is consistent with the admitted laws and the domain
     - value: necessary
+      name: no alternative consistent with the admitted laws produces a foil
     task.substrate:
     - value: specific
+      name: explanans variables belong to the particular parts of one realization
     - value: independent
+      name: explanans variables are shared by every realization of the system
     - value: mapping
+      name: how the variables of the parts realize variables shared by all realizations
     task.standard:
     - value: qualitative
+      name: agreement in kind with the target, with no tolerance
     - value: order-of-magnitude
+      name: values must agree up to a factor of about ten
     - value: numeric-bound
+      name: a stated metric of the difference must not exceed a bound
     - value: structural-only
+      name: only structures of the target must correspond, with no values
     - value: not-applicable
+      name: the answer is compared with no data of the target
     virtues.standing:
     - value: constitutive
       name: the product test applies it
@@ -349,17 +546,27 @@ vocabularies:
       name: appraisal ranks on it
     virtues.virtue:
     - value: unification
+      name: the account explains many phenomena through few common principles
     - value: generality
+      name: the explanatory structure extends across cases or parameter regimes
     - value: robustness
+      name: conclusions survive changes of parameters, assumptions or representation beyond the declared idealizations
     - value: intelligibility
+      name: consequences can be recognized without the full calculation
     - value: structural-transparency
+      name: the representation makes components, relations and dependencies salient
     - value: economy
+      name: the purpose is achieved without unnecessary complexity
     - value: tractability
+      name: the model can be analyzed or computed with available resources
   target-system:
     .status:
     - value: provisional
+      name: the record is written and still under revision
     - value: stabilized
+      name: the inquiry expects no further revision of the record
     - value: retracted
+      name: the record is withdrawn, with all its specifications
     .commitment:
     - value: identified
       name: a definite description and pointers fix the referent
@@ -367,18 +574,29 @@ vocabularies:
       name: the record writes its declarations, and their symbols resolve
     .target_type:
     - value: particular
+      name: one existing system, such as a recorded slice
     - value: actual-systems
+      name: a class whose members exist, such as mouse V1 circuits
     - value: possible-systems
+      name: a class of systems whose members need not exist
     - value: hypothetical
+      name: one system that does not exist, such as an altered cortex
     - value: no-external-target
+      name: the model class itself is the object of study
     reference_class.status:
     - value: assumed
+      name: the projection rests on reported evidence, without a check
     - value: tested
+      name: a check against further members supports the projection
     - value: not-claimed
+      name: the claim covers every member directly, as a theorem does
     index_sets.structure:
     - value: continuum
+      name: an uncountable set, such as a spatial domain
     - value: discrete-set
+      name: a set of separate members, such as labelled cases or samples
     - value: interval
+      name: a contiguous range of an ordered set, such as a time axis
     variables.determined:
     - value: within
       name: its value is fixed inside the system
@@ -386,26 +604,44 @@ vocabularies:
       name: its value varies but is set beyond the system
     variables.scale:
     - value: nominal
+      name: values are labels, compared only for identity
     - value: ordinal
+      name: values are ordered, so ranks carry meaning
     - value: interval
+      name: an arbitrary zero, so differences carry meaning
     - value: ratio
+      name: a natural zero, so ratios of values carry meaning
     - value: absolute
+      name: a count, which admits no rescaling at all
     - value: not-applicable
+      name: the values form no scale, as maps or measures do
     variables.selects:
     - value: unique
+      name: the record presupposes exactly one value satisfying the condition
     - value: any
+      name: the claim holds of each value satisfying the condition
     - value: all
+      name: the quantity is the set of values satisfying the condition
     parameters.scale:
     - value: nominal
+      name: values are labels, compared only for identity
     - value: ordinal
+      name: values are ordered, so ranks carry meaning
     - value: interval
+      name: an arbitrary zero, so differences carry meaning
     - value: ratio
+      name: a natural zero, so ratios of values carry meaning
     - value: absolute
+      name: a count, which admits no rescaling at all
     - value: not-applicable
+      name: the values form no scale, as maps or measures do
     parameters.selects:
     - value: unique
+      name: the record presupposes exactly one value satisfying the condition
     - value: any
+      name: the claim holds of each value satisfying the condition
     - value: all
+      name: the quantity is the set of values satisfying the condition
     external_systems.role:
     - value: evolution
       name: how the state changes along the course
@@ -422,8 +658,11 @@ vocabularies:
   background:
     .status:
     - value: provisional
+      name: the record is written and still under revision
     - value: stabilized
+      name: the inquiry expects no further revision of the record
     - value: retracted
+      name: the record is withdrawn, with all its specifications
     laws.role:
     - value: evolution
       name: how the state changes along the course
@@ -441,8 +680,11 @@ vocabularies:
     - value: derived
       name: from other admitted laws, in a limit or not, the range of the law stating the limit
     - value: posited
+      name: by a choice, admitted as a premise without acceptance
     - value: fitted
+      name: by adjusting the parameters of the law to data
     - value: measured
+      name: on the evidence of an instrument
     .closure:
     - value: complete
       name: 'formal target: the laws define the system'
@@ -451,18 +693,28 @@ vocabularies:
   concept:
     .status:
     - value: provisional
+      name: the record is written and still under revision
     - value: stabilized
+      name: the inquiry expects no further revision of the record
     - value: retracted
+      name: the record is withdrawn, with all its specifications
     .kind:
     - value: system
+      name: a complex object whose constituents are bound by relations
     - value: subtype-or-class
+      name: a collection of objects fixed by a membership condition
     - value: property
+      name: a feature that a bearer possesses, represented or not
     - value: process
+      name: a change along a course, holding over segments, never at a point
   design:
     .status:
     - value: provisional
+      name: the record is written and still under revision
     - value: stabilized
+      name: the inquiry expects no further revision of the record
     - value: retracted
+      name: the record is withdrawn, with all its specifications
     .kind:
     - value: experiment
       name: an intervention on the target
@@ -475,8 +727,11 @@ vocabularies:
   derivation:
     .status:
     - value: provisional
+      name: the record is written and still under revision
     - value: stabilized
+      name: the inquiry expects no further revision of the record
     - value: retracted
+      name: the record is withdrawn, with all its specifications
     sought.type:
     - value: law
       name: a law over declared quantities
@@ -539,7 +794,9 @@ vocabularies:
       name: a computation, certified or numerical, of the posited object
     posits.tests.verdict:
     - value: supports
+      name: the result of the test agrees with the posit
     - value: refutes
+      name: the result contradicts the posit, which loses its support
     posits.tests.standard:
     - value: certified
       name: a computation whose result is proved, such as interval arithmetic
@@ -606,18 +863,30 @@ vocabularies:
       name: no bound can contain the error near the limit
     orientations.change:
     - value: eliminate
+      name: an unwanted term or unknown removed from the expressions
     - value: decouple
+      name: coupled equations split into independent ones
     - value: isolate
+      name: the one component that governs the behavior singled out
     - value: reduce
+      name: fewer variables, equations or orders to handle than before
     - value: expose
+      name: a hidden structure or dependence made explicit in an expression
     - value: close
+      name: an open system of equations completed by an added relation
     - value: match
+      name: two expansions or solutions made to agree on their overlap
     orientations.reason:
     - value: inapplicable
+      name: the conditions of the move do not hold for these objects
     - value: inconsistent
+      name: the move would be invalid here, not merely less useful
     - value: costlier
+      name: the move would reach the end at a greater cost
     - value: losing-information
+      name: the move would discard information needed by the end
     - value: tried-without-success
+      name: the move was already attempted at this point and failed
     orientations.provenance:
     - value: contemporaneous
       name: written while the derivation was carried out
@@ -625,24 +894,40 @@ vocabularies:
       name: written afterwards from a source
     interpretations.kind:
     - value: referential
+      name: what the item denotes among declared symbols, not in the target
     - value: form
+      name: a pattern of symbols in the item, read as a conceptual schema
     - value: process
+      name: the mechanism or the relation that the item describes
     - value: structural
+      name: the mathematical structure of the item, as a named property
     - value: magnitude
+      name: the relative sizes of the parts of the item
     - value: variation
+      name: how a consequence changes as an item varies in a declared family
     - value: analogical
+      name: a known object of the same form, whose behavior transfers
     - value: diagnostic
+      name: a failed move or posit, or a singular limit, that a feature reveals
     features.kind:
     - value: divergence
+      name: an expression grows without bound
     - value: secular-term
+      name: a correction term that grows with time and breaks the expansion
     - value: zero-mode
+      name: a mode of zero eigenvalue, whose amplitude stays constant
     - value: sign-change
+      name: a quantity or a coefficient passes through zero and changes sign
     - value: crossing
+      name: two quantities become equal, or one reaches a threshold
   operators:
     .status:
     - value: provisional
+      name: the record is written and still under revision
     - value: stabilized
+      name: the inquiry expects no further revision of the record
     - value: retracted
+      name: the record is withdrawn, with all its specifications
     operators.kind:
     - value: binder
       name: consumes the indices that it binds
@@ -678,10 +963,15 @@ vocabularies:
   problem:
     .status:
     - value: posed
+      name: the demand and constraints are stated, not yet revised
     - value: refined
+      name: the demand or constraints were revised since the problem was stated
     - value: solved
+      name: the records show that the demand is met
     - value: dissolved
+      name: accepted knowledge denies a presupposition of the associated question
     - value: abandoned
+      name: the researcher stops the inquiry with the problem still standing
     .kind:
     - value: empirical
       name: the problem concerns the objects of a domain
@@ -689,68 +979,112 @@ vocabularies:
       name: the problem concerns the consistency of a theory or its fit with other theories
     .result_type:
     - value: phenomenon
+      name: a behavior of the target, detected from data
       admits: [exploration, description]
     - value: consequence
+      name: a statement derived from a model or from admitted laws
       admits: [model-properties, modal-knowledge]
     - value: target-claim
+      name: a claim about the target, as opposed to a model
       admits: [prediction, modal-knowledge]
     - value: model
+      name: a candidate representation of the target
       admits: [description, explanation]
     - value: explanation
+      name: named factors account for a phenomenon by the requested relation
       admits: [explanation]
     - value: classification
+      name: a partition of systems into classes, with its criteria
       admits: [exploration, description]
     - value: concept
+      name: a term with its definition or its explication
       admits: [explication]
     - value: measurement-procedure
+      name: a procedure assigning values to a quantity on a stated scale
       admits: [explication]
     - value: design
+      name: a plan of observations or runs, a method or a scheme
       admits: []
     - value: knowledge-state-change
+      name: a change of the attitude or status of existing records
       admits: []
     - value: inter-theory-relation
+      name: a unification, reduction or integration between theories
       admits: []
     .request:
     - value: one
+      name: one result suffices, with no claim of completeness
     - value: all
+      name: every result is required, with a claim of completeness
     - value: over-a-parameter
+      name: one result for each value of a parameter
     - value: decision
+      name: whether each candidate already proposed meets the constraints
     knowledge_obstacles.obstacle:
     - value: open-gap
+      name: a result is lacking, and none is proposed
     - value: unassessed-candidates
+      name: answers are proposed, and none is accepted
     - value: conflict
+      name: accepted claims are inconsistent, or a datum is improbable under them
     - value: unwarranted-claim
+      name: an accepted claim has weaker support than the demand requires
     - value: ill-defined-terms
+      name: a term of the demand lacks the criterion to check answers
     - value: unsound-presupposition
+      name: accepted knowledge denies a presupposition of the associated question
     answerability_obstacles.condition:
     - value: definiteness
+      name: each term has a definition or a criterion adequate to its use
     - value: answer-type
+      name: every component of the type of the direct answers is fixed
     - value: discrimination
+      name: a quantity takes different values under the candidates and their alternatives
     - value: access
+      name: an available procedure applies to the quantity or the demanded result
     - value: bridging
+      name: an inference stated in advance links the quantity to the answer
     - value: representation
+      name: the model used for access represents the target to the required accuracy
     answerability_obstacles.refutation:
     - value: outright
+      name: an argument of impossibility shows that the condition fails
     - value: lack-of-means
+      name: every means considered was tried and failed
   itinerary:
     .status:
     - value: planned
+      name: the steps are written and no act has been carried out
     - value: in-progress
+      name: some acts are carried out and the course continues
     - value: completed
+      name: the course of acts has reached its end
     - value: abandoned
+      name: the course of acts was stopped before its end
     steps.verdict:
     - value: pass
+      name: the output meets the norm of the activity
     - value: fail
+      name: the output does not meet the norm of the activity
     - value: pending
+      name: the norm has not been judged yet
     steps.acts_on:
     - value: definiteness
+      name: each term has a definition or a criterion adequate to its use
     - value: answer-type
+      name: every component of the type of the direct answers is fixed
     - value: soundness
+      name: the presuppositions of the question are true
     - value: candidates
+      name: at least one proposed answer passes the admissibility tests
     - value: discrimination
+      name: a quantity takes different values under the candidates and their alternatives
     - value: access
+      name: an available procedure applies to the quantity or the demanded result
     - value: bridging
+      name: an inference stated in advance links the quantity to the answer
     - value: representation
+      name: the model used for access represents the target to the required accuracy
     - value: obtaining
       name: the acts that obtain the answer once every condition of a route is established
     - value: evaluation
@@ -770,17 +1104,28 @@ vocabularies:
       name: the content changes within its scope, as when an error of a proof is fixed
     steps.state:
     - value: pending
+      name: the researcher has not yet judged the flagged dependent
     - value: revised
+      name: the dependent needed an adjustment, which was made
     - value: unaffected
+      name: the dependent holds unchanged after the revision
     - value: retracted
+      name: the dependent is withdrawn in turn
     steps.mode:
     - value: deductive
+      name: the conclusion makes explicit what the premises contain
     - value: inductive
+      name: the step extends a regularity from observed to unobserved instances
     - value: abductive
+      name: the step proposes a hypothesis under which an observed fact is expected
     - value: analogical
+      name: the step carries a property from a source along a mapping
     - value: error-statistical
+      name: the verdict rests on agreement with data, judged by severity
     - value: model-based
+      name: the step infers an outcome through a model of the instrument
     - value: non-inferential
+      name: the step concludes nothing, as a formalization or an idealization
   model:
     operations.kind:
     - value: restrict
@@ -799,6 +1144,7 @@ vocabularies:
       name: a law or a definition posited beside those of the parent
     operations.error:
     - value: exact
+      name: no error
     - value: controlled
       name: a bound on the error is known
     - value: uncontrolled
@@ -807,12 +1153,18 @@ vocabularies:
       name: no bound can contain the error near the limit
     .status:
     - value: provisional
+      name: the record is written and still under revision
     - value: stabilized
+      name: the inquiry expects no further revision of the record
     - value: retracted
+      name: the record is withdrawn, with all its specifications
     index_sets.structure:
     - value: continuum
+      name: an uncountable set, such as a spatial domain
     - value: discrete-set
+      name: a set of separate members, such as labelled cases or samples
     - value: interval
+      name: a contiguous range of an ordered set, such as a time axis
     variables.determined:
     - value: within
       name: its value is fixed inside the model
@@ -820,39 +1172,66 @@ vocabularies:
       name: its value varies but is set beyond the model
     variables.scale:
     - value: nominal
+      name: values are labels, compared only for identity
     - value: ordinal
+      name: values are ordered, so ranks carry meaning
     - value: interval
+      name: an arbitrary zero, so differences carry meaning
     - value: ratio
+      name: a natural zero, so ratios of values carry meaning
     - value: absolute
+      name: a count, which admits no rescaling at all
     - value: not-applicable
+      name: the values form no scale, as maps or measures do
     variables.selects:
     - value: unique
+      name: the record presupposes exactly one value satisfying the condition
     - value: any
+      name: the claim holds of each value satisfying the condition
     - value: all
+      name: the quantity is the set of values satisfying the condition
     parameters.scale:
     - value: nominal
+      name: values are labels, compared only for identity
     - value: ordinal
+      name: values are ordered, so ranks carry meaning
     - value: interval
+      name: an arbitrary zero, so differences carry meaning
     - value: ratio
+      name: a natural zero, so ratios of values carry meaning
     - value: absolute
+      name: a count, which admits no rescaling at all
     - value: not-applicable
+      name: the values form no scale, as maps or measures do
     parameters.selects:
     - value: unique
+      name: the record presupposes exactly one value satisfying the condition
     - value: any
+      name: the claim holds of each value satisfying the condition
     - value: all
+      name: the quantity is the set of values satisfying the condition
     laws.role:
     - value: evolution
+      name: how the state changes along the course
     - value: input-output
+      name: how one quantity is determined by others at the same point
     - value: measurement
+      name: how an instrument registers the state
     - value: state-constraint
+      name: which states may hold together, including at the start and at the boundary
     - value: distribution
+      name: the law of a random quantity
     - value: admissibility
+      name: a restriction on the parameters or the forms that a member may take
     laws.warrant:
     - value: derived
       name: from the laws of the background or of a parent, through the operations of the model
     - value: posited
+      name: by a choice, admitted as a premise without acceptance
     - value: fitted
+      name: by adjusting the parameters of the law to data
     - value: measured
+      name: on the evidence of an instrument
     assumptions.motive:
     - value: tractability
       name: the undistorted system admits no analysis
@@ -866,11 +1245,15 @@ vocabularies:
     - value: ineliminable
       name: the model cannot be stated without it
     - value: unknown
+      name: neither a correction nor the ineliminability of the distortion is known
   binding:
     .status:
     - value: provisional
+      name: the record is written and still under revision
     - value: stabilized
+      name: the inquiry expects no further revision of the record
     - value: retracted
+      name: the record is withdrawn, with all its specifications
     target.level:
     - value: phenomenon
       name: compared with the observables that the phenomenon estimates
@@ -878,10 +1261,15 @@ vocabularies:
       name: compared with a version of the data through an observation operator
     feature_pairs.type:
     - value: quantity
+      name: a value of the model, imputed to a value of the target
     - value: pattern
+      name: a spatial or temporal structure of the model, imputed to the target
     - value: regime
+      name: a labelled behavior of the model, imputed to the target
     - value: invariance-class
+      name: an invariance, or a universality class in which the target is placed
     - value: modal-profile
+      name: the behaviors that a constraint makes possible or impossible for the target
     - value: component
       name: a unit of the model alone and the part of the target that it denotes
     feature_pairs.mode:
@@ -896,7 +1284,9 @@ vocabularies:
       name: outside the range of the calibration data
     structural_discrepancy.form:
     - value: model
+      name: a stated function or process describes the systematic difference
     - value: bound
+      name: only a maximum size of the systematic difference is stated
     .grain:
     - value: quantitative
       name: the pairs are compared by a metric
@@ -905,18 +1295,27 @@ vocabularies:
   key:
     .status:
     - value: provisional
+      name: the record is written and still under revision
     - value: stabilized
+      name: the inquiry expects no further revision of the record
     - value: retracted
+      name: the record is withdrawn, with all its specifications
     .kind:
     - value: observation-operator
+      name: carries a model state to the quantities that the data record
     - value: unit-map
+      name: converts the units of the model into those of the target
     - value: aggregation-map
+      name: carries fine quantities onto coarse bearers, such as a population mean
     - value: qualitative-abstraction
+      name: carries trajectories or values onto qualitative labels
   comparison:
     .calibration_treatment:
     - value: excluded
       name: the data used for calibration contribute nothing to the verdict
     - value: cross-validated
+      name: calibration data are compared only after a fit that omits them
     - value: bayesian
+      name: the fit and the comparison share one posterior over the parameters
     - value: reused
       name: the data used for calibration are compared again without any correction
