@@ -57,8 +57,7 @@ properties:
     x-kind: label
     x-comment: the candidate answer, or the record of a construct that a problem demands
     title: Assesses
-    description: the candidate answer or the construct whose verdicts this record holds the identifier
-      of one candidate answer, or of the record of a construct that a problem demands, such as a model
+    description: 'the candidate answer or the construct whose verdicts this record holds: the identifier of one candidate answer, or of the record of a construct that a problem demands, such as a model'
     examples:
     - the answer by inhibitory delay
   against:
@@ -70,9 +69,7 @@ properties:
     x-comment: the question of an answer, or the revised question that a reformulating answer names; the
       problem of a construct
     title: Against
-    description: the record whose specifications fix which tests apply for an answer, the identifier of
-      one question, or the revised question that a reformulating answer names; for a construct, the identifier
-      of its problem
+    description: 'the record whose specifications fix which tests apply: for an answer, the identifier of one question, or the revised question that a reformulating answer names; for a construct, the identifier of its problem'
     examples:
     - why the network is synchronous rather than asynchronous
   tests:
@@ -364,9 +361,7 @@ properties:
     x-comment: one entry per comparison that a verdict of fidelity reads; the metric and the tolerance
       are read from the question
     title: Comparisons
-    description: the inputs from which each comparison cited by a verdict is recomputed per comparison,
-      the binding and its version, and the version of the data; the metric and the tolerance are read
-      from the question
+    description: 'the inputs from which each comparison cited by a verdict is recomputed: per comparison, the binding and its version, and the version of the data; the metric and the tolerance are read from the question'
     examples:
     - version 2 of the binding of the rate model, with version 3 of the recordings
   obligations:

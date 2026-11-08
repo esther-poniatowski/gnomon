@@ -418,7 +418,7 @@ properties:
         - string
         - 'null'
         title: Modal strength $\mu$
-        description: 'the modal strength that the answer must claim: actual, possible or necessary'
+        description: 'how tightly the answer must bind the phenomenon: actual, possible or necessary'
       admissible_explanans:
         type:
         - object
@@ -475,7 +475,7 @@ properties:
             - string
             - 'null'
             title: Standard
-            description: 'the standard of the comparison: qualitative, an order of magnitude, a numeric bound or structure only'
+            description: 'how closely the answer must agree with the target: qualitative, an order of magnitude, a numeric bound or structure only'
           outputs_to_match:
             type:
             - array
@@ -618,7 +618,7 @@ properties:
           - string
           - 'null'
           title: Virtue
-          description: the virtue that the inquiry weighs
+          description: 'a quality of the answers, beyond the demands of the task, that the inquiry weighs'
         standing:
           x-vocabulary: virtues.standing
           type:
@@ -724,7 +724,7 @@ properties:
           - string
           - 'null'
           title: Condition
-          description: The condition whose state is stated.
+          description: 'the condition of answerability whose state the entry asserts'
         route:
           x-vocabulary: answerability.route
           type:
@@ -747,7 +747,7 @@ properties:
           - string
           - 'null'
           title: State
-          description: The state of the condition.
+          description: 'whether the records show that the condition holds or fails'
         refutation:
           x-vocabulary: answerability.refutation
           type:

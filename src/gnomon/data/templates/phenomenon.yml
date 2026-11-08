@@ -25,7 +25,7 @@ course:                          # the ordered index along which the behavior un
   grain: "EXPRESSION OVER DECLARED SYMBOLS"   # shortest length of a segment of the course; a predicate of the behavior is evaluated only on segments at least this long
   varies: [SYMBOL]               # parameters of the target that change along this course; empty when none does
 
-occurrence:                      # state | process | event | not-applicable; `not-applicable` for a capacity
+occurrence:                      # state | process | event | not-applicable; `not-applicable` for a regularity or a capacity, `state` for a structural property
 
 index_sets:                      # only sets the observables introduce beyond those the target declares
   - name: "NAME OF THE SET"

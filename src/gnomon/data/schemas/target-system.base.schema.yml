@@ -50,8 +50,7 @@ properties:
     - string
     - 'null'
     title: Commitment
-    description: 'how far the record fixes the target `identified`: a definite description and pointers
-      fix the referent · `specified`: the declarations are written and their symbols resolve'
+    description: 'how far the record fixes the target: `identified`: a definite description and pointers fix the referent · `specified`: the declarations are written and their symbols resolve'
     examples:
     - the networks of a benchmark named before any quantity is declared (identified); the same class with
       its units, quantities and value sets declared (specified)
@@ -98,8 +97,7 @@ properties:
         - the article that defines the model class; a recording session
     x-comment: fixes the referent before any quantity is declared
     title: Identification
-    description: what fixes the referent before any quantity is declared a definite description, with
-      pointers to the data, the results or the publications that fix the referent
+    description: 'what fixes the referent before any quantity is declared: a definite description, with pointers to the data, the results or the publications that fix the referent'
     examples:
     - the networks of the mixture-encoding benchmark, a class of possible systems that encompasses artificial
       and biological networks
@@ -140,8 +138,7 @@ properties:
             description: omit when the status is `not-claimed`
         x-comment: whether a claim about some members can be projected onto the class
         title: projectibility
-        description: whether a claim about some members holds of the class assumed · tested · not-claimed,
-          with the evidence for an assumed or a tested projection
+        description: 'whether a claim about some members holds of the class: assumed · tested · not-claimed, with the evidence for an assumed or a tested projection'
         examples:
         - delayed generalization reported across several architectures (assumed); a theorem that quantifies
           over every member (not claimed)
@@ -459,8 +456,7 @@ properties:
           - string
           - 'null'
           title: scale
-          description: the comparisons between values that carry meaning nominal · ordinal · interval
-            · ratio · absolute · not-applicable, for a variable and for a parameter alike
+          description: 'the comparisons between values that carry meaning: nominal · ordinal · interval · ratio · absolute · not-applicable, for a variable and for a parameter alike'
           examples:
           - the regime of a population, named by labels (nominal); a temperature in degrees Celsius (interval);
             a firing rate (ratio); a count of units (absolute)
@@ -531,9 +527,7 @@ properties:
     x-comment: quantities that vary while the phenomenon unfolds; the state space is the product of the
       value sets of the non-aggregate variables determined `within`
     title: Variables
-    description: what changes while the phenomenon unfolds per variable, its signature and its value set,
-      with a reading. The role test decides whether a quantity is a variable or a parameter. The value
-      sets of the variables that $S$ determines, aggregates excepted, form the state space of $S$
+    description: 'what changes while the phenomenon unfolds: per variable, its signature and its value set, with a reading. The role test decides whether a quantity is a variable or a parameter. The value sets of the variables that $S$ determines, aggregates excepted, form the state space of $S$'
     examples:
     - the membrane potential of each neuron (within); a prescribed warming trajectory (outside)
   parameters:

@@ -53,7 +53,7 @@ properties:
     x-template: system.TOPIC
     x-kind: label
     title: Describes
-    description: the target whose quantities the laws use the identifier of one target-system record
+    description: 'the target whose quantities the laws use: the identifier of one target-system record'
     examples:
     - the record of the trained networks; the record of the four tipping elements
   laws:
@@ -179,15 +179,7 @@ properties:
             minimal width
     x-comment: behaviors of the components or of the system admitted a priori
     title: Laws
-    description: 'known behaviors of the components or of the system an expression over the symbols that
-      the target declares, with its signature and the places that the claim ranges over (one entry each,
-      empty when the law concerns the system as a whole). Its warrant (derived from other admitted laws,
-      in a limit or not, posited, fitted or measured), with its grounds. Its role, one of six:<br>- evolution:
-      how the state changes along the course<br>- input-output: how one quantity is determined by others
-      at the same point<br>- measurement: how an instrument registers the state<br>- state-constraint:
-      which states may hold together, including at the start and at the boundary<br>- distribution: the
-      law of a random quantity<br>- admissibility: a restriction on the parameters or on the forms that
-      a member may take'
+    description: 'known behaviors of the components or of the system: an expression over the symbols that the target declares, with its signature and the places that the claim ranges over (one entry each, empty when the law concerns the system as a whole). Its warrant (derived from other admitted laws, in a limit or not, posited, fitted or measured), with its grounds. Its role, one of six:<br>- evolution: how the state changes along the course<br>- input-output: how one quantity is determined by others at the same point<br>- measurement: how an instrument registers the state<br>- state-constraint: which states may hold together, including at the start and at the boundary<br>- distribution: the law of a random quantity<br>- admissibility: a restriction on the parameters or on the forms that a member may take'
     examples:
     - '- the leaky integration of each neuron (one place, local, evolution)<br>- the gradient-descent
       learning rule (collective, evolution)<br>- the energy function on the state space (no place, state-constraint)<br>-
@@ -200,8 +192,7 @@ properties:
     - string
     - 'null'
     title: Closure (of the laws)
-    description: separates a formal target from an empirical one complete, for a formal target whose laws
-      define the system · partial, for an empirical target that may admit a rule independent of them
+    description: 'separates a formal target from an empirical one: complete, for a formal target whose laws define the system · partial, for an empirical target that may admit a rule independent of them'
     examples:
     - the Wilson–Cowan equations define the model (complete); a recorded circuit, where a plasticity rule
       may still be discovered (partial)

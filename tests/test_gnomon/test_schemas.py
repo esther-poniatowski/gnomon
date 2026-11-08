@@ -50,6 +50,29 @@ def test_no_field_describes_itself_by_a_placeholder() -> None:
     assert not found, found
 
 
+def test_no_description_runs_the_gloss_of_its_row_into_the_content() -> None:
+    """A row of a specification note may gloss its name, "Title — gloss", before its content. A
+    description that copies both separates them, since "the attitude taken toward the answer
+    entertained · hypothesized" reads the gloss and the values as one phrase."""
+    from gnomon.fieldindex import _schema_fields  # pylint: disable=import-outside-toplevel
+    from gnomon.specnotes import DOCS  # pylint: disable=import-outside-toplevel
+
+    glosses = {
+        line.split("|")[1].split(" — ", 1)[1].strip()
+        for note in (DOCS / "specification").glob("*.md")
+        for line in note.read_text(encoding="utf-8").splitlines()
+        if line.startswith("| ") and " — " in line.split("|")[1]
+    }
+    found = [
+        (kind, path)
+        for kind in KINDS
+        for path, node in _schema_fields(schemas.load_base(kind))
+        for gloss in glosses
+        if re.match(re.escape(gloss) + r" [^(]", str(node.get("description") or ""))
+    ]
+    assert glosses and not found, found
+
+
 @pytest.mark.parametrize("kind", KINDS)
 def test_the_base_schema_and_the_contract_are_valid(kind: str) -> None:
     Draft202012Validator.check_schema(schemas.load_base(kind))

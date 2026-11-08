@@ -211,7 +211,7 @@ properties:
           - string
           - 'null'
           title: Obstacle
-          description: 'the kind of the obstacle: an open gap, unassessed candidates, a conflict, an unwarranted claim, ill-defined terms or an unsound presupposition'
+          description: 'the state of the knowledge about the associated question that keeps the demand unmet: an open gap, unassessed candidates, a conflict, an unwarranted claim, ill-defined terms or an unsound presupposition'
         pointers:
           type:
           - array

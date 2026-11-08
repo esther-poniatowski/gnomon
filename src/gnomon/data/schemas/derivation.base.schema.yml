@@ -126,7 +126,7 @@ properties:
           - 'null'
         x-vocabulary: sought.type
         title: Type
-        description: The type of the unknown, once known; empty for an open sought.
+        description: 'What the unknown is to be: a law, a value or a bound, an object, a classification, or the truth of a claim; empty while the sought stays open.'
         examples:
           - law
       condition:
@@ -177,7 +177,7 @@ properties:
             - 'null'
           x-vocabulary: subordinate.type
           title: Type
-          description: The type of the unknown, once known; empty for an open sought.
+          description: 'What the unknown is to be: a law, a value or a bound, an object, a classification, or the truth of a claim; empty while the sought stays open.'
           examples:
             - value-or-bound
         condition:
@@ -332,7 +332,7 @@ properties:
             - 'null'
           x-vocabulary: posits.kind
           title: Kind
-          description: The kind of posit.
+          description: 'What the posit guesses: a trial form, a closing relation, the relevant quantities, or a similarity in a limit.'
           examples:
             - closure
         statement:
@@ -359,7 +359,7 @@ properties:
                 - 'null'
               x-vocabulary: posits.origin.kind
               title: Type
-              description: The type of origin of the guess.
+              description: 'Where the guess comes from: an act of the itinerary, a published source, a scheme, or no record.'
               examples:
                 - source
             ref:
@@ -389,7 +389,7 @@ properties:
                   - 'null'
                 x-vocabulary: posits.tests.kind
                 title: Test
-                description: The kind of test.
+                description: 'What the test checks against the posit: the consistency of neglected terms, a known limit, a proof, a bound, data, or a computation.'
                 examples:
                   - empirical
               verdict:
@@ -450,7 +450,7 @@ properties:
             - 'null'
           x-vocabulary: moves.kind
           title: Kind
-          description: The atomic kind of the move.
+          description: 'The atomic operation that the move performs on the objects it takes.'
           examples:
             - take-limit
         inputs:
@@ -513,7 +513,7 @@ properties:
                 - 'null'
               x-vocabulary: moves.source
               title: Source
-              description: The source of the license.
+              description: 'What licenses the move: a definition, a theorem, an approximation, a computation, or the verdict of an act.'
               examples:
                 - approximation
             cites:
@@ -533,7 +533,7 @@ properties:
                 - 'null'
               x-vocabulary: moves.error
               title: Class of error
-              description: The class of the error that the move introduces.
+              description: 'Whether the error introduced by the move is absent, bounded, unbounded, or singular near a limit.'
               examples:
                 - controlled
             regime:
@@ -685,7 +685,7 @@ properties:
                   - 'null'
                 x-vocabulary: orientations.reason
                 title: Reason
-                description: The reason for setting the move aside.
+                description: 'Why the move considered was set aside: a failure of validity, or a strategic disadvantage.'
                 examples:
                   - costlier
         provenance:
@@ -748,7 +748,7 @@ properties:
             - 'null'
           x-vocabulary: interpretations.kind
           title: Kind
-          description: The kind of meaning assigned.
+          description: 'Which content the reading assigns to its item, which fixes the ground that the interpretation must cite.'
           examples:
             - magnitude
         reading:
@@ -805,7 +805,7 @@ properties:
             - 'null'
           x-vocabulary: features.kind
           title: Kind
-          description: The kind of event.
+          description: 'Which event the calculation exhibits at the object, such as a divergence or a secular term.'
           examples:
             - zero-mode
         at:

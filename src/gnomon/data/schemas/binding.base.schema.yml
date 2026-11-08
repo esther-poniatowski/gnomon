@@ -56,7 +56,7 @@ properties:
     x-kind: label
     x-comment: the model in use
     title: Model
-    description: the model in use the identifier of one model record
+    description: 'the model in use: the identifier of one model record'
     examples:
     - the rate model of an excitatory and an inhibitory population
   target:
@@ -80,12 +80,9 @@ properties:
         - string
         - 'null'
         title: Level
-        description: 'the level at which the model is compared: `phenomenon`, with the observables that the phenomenon estimates, or `data`, with a version of the data'
+        description: 'what the model is compared with: the observables that the phenomenon estimates, or a version of the data'
     title: Target
-    description: 'the denotation of the phenomenon, and the level at which the model is compared the identifier
-      of one phenomenon, and the target level: `phenomenon`, when the model is compared with the observables
-      that the phenomenon estimates; `data`, when it is compared with a version of the data through an
-      observation operator'
+    description: 'the denotation of the phenomenon, and the level at which the model is compared: the identifier of one phenomenon, and the target level: `phenomenon`, when the model is compared with the observables that the phenomenon estimates; `data`, when it is compared with a version of the data through an observation operator'
     examples:
     - the gamma oscillations of the network (phenomenon); the recorded local field potentials, version
       3 (data)
@@ -97,7 +94,7 @@ properties:
     x-template: '"THE PERSON, THE GROUP OR THE PUBLICATION THAT LICENSES THE INFERENCES"'
     x-kind: markdown-line
     title: Asserter
-    description: the agent who licenses the inferences a person, a group or a publication
+    description: 'the agent who licenses the inferences: a person, a group or a publication'
     examples:
     - the authors of the answer; the publication that proposed the model
   feature_pairs:
@@ -122,7 +119,7 @@ properties:
           - string
           - 'null'
           title: Type
-          description: 'the type of the pair: a quantity, a pattern, a regime, an invariance class, a modal profile or a component'
+          description: 'the feature that the pair carries from the model to the target: a quantity, a pattern, a regime, an invariance class, a modal profile or a component'
         mode:
           x-vocabulary: feature_pairs.mode
           type:

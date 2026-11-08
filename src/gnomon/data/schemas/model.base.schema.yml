@@ -57,8 +57,7 @@ properties:
     x-kind: label
     x-comment: fill when a law of the model carries the warrant `derived`
     title: Background
-    description: the record from which the laws of the model are derived the identifier of one background
-      record
+    description: 'the record from which the laws of the model are derived: the identifier of one background record'
     examples:
     - the admitted training laws of the networks of a class
   derives_from:
@@ -92,7 +91,7 @@ properties:
           type: [string, 'null']
           x-vocabulary: operations.kind
           title: Kind
-          description: The kind of the operation, relative to the parent.
+          description: 'the relation of the derived model to its parent that the operation establishes'
           examples: [approximate]
         acts_on:
           type: [array, 'null']
@@ -127,7 +126,7 @@ properties:
           type: [string, 'null']
           x-vocabulary: operations.error
           title: Class of error
-          description: The class of the error that the operation introduces.
+          description: 'whether the operation introduces an error into the derived model, and whether that error has a known bound'
           examples: [controlled]
         bound:
           type: [string, 'null']

@@ -199,7 +199,7 @@ properties:
               x-template: pending
               x-vocabulary: steps.verdict
               title: Verdict
-              description: 'the verdict of the norm on the step: pass, fail or pending'
+              description: 'whether the output of the step meets the norm of its activity, or awaits judgment'
             evidence:
               type:
               - string
@@ -243,7 +243,7 @@ properties:
               - 'null'
               x-vocabulary: steps.acts_on
               title: Acts on
-              description: The condition or the act on which the step acts.
+              description: 'the condition for obtaining an answer that the step works on, or the obtaining or the evaluation of the answer'
           title: rationale
           description: 'the question that the step serves, or its problem, and the object on which the
             step acts: one of the eight conditions for obtaining an answer, the obtaining of the answer,
@@ -316,7 +316,7 @@ properties:
               - string
               - 'null'
               title: Kind
-              description: The kind of the revision.
+              description: 'how the revision changes the revised record: its retraction, its scope, its framing, its classification or its content'
             reviews:
               type:
               - array
@@ -338,7 +338,7 @@ properties:
                     - string
                     - 'null'
                     title: State
-                    description: The state of the review.
+                    description: 'the judgment of the researcher on a flagged dependent: whether it holds, was adjusted or was retracted, or awaits judgment'
               x-comment: one entry per flagged dependent that the researcher has reviewed
               title: Reviews
               description: one entry per flagged dependent that the researcher has reviewed
@@ -354,8 +354,7 @@ properties:
           - string
           - 'null'
           title: mode
-          description: deductive · inductive · abductive · analogical · error-statistical · model-based
-            · non-inferential, equal to the mode of the activity
+          description: 'the kind of inference that the step draws, equal to the mode that the registry gives its activity'
           examples:
           - '`abductive` for the step that proposes a candidate answer'
     x-comment: one entry per activity instance; the steps may be listed in any order, and their references

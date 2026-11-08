@@ -44,7 +44,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `aim_block.explanation.factors[].procedure` | Procedure | only content beyond the chain `bears_on`, `through`, `produces` | [Factors](../specification/answer.md) |
 | `aim_block.explanation.factors[].produces` | Produces | explanandum variable or manifestation the factor accounts for | [Factors](../specification/answer.md) |
 | `aim_block.explanation.factors[].separates` | Separates | foils ruled out, by their symbols in the foil set; empty where the contrast has no locus | [Factors](../specification/answer.md) |
-| `aim_block.explanation.factors[].target_status` | target status | `denoting` · `coarse-graining` · `limit-construct` · `structural-constraint`, as the target status of a factor states; not applicable under a declared use | [Factors: target status](../specification/answer.md) |
+| `aim_block.explanation.factors[].target_status` | target status | how the factor bears on the target, which decides the feature pair that the binding holds for it, and is not applicable under a declared use | [Factors: target status](../specification/answer.md) |
 | `aim_block.explanation.factors[].through` | Through | laws and relations carrying the effect from `bears_on` to the explanandum | [Factors](../specification/answer.md) |
 | `aim_block.explanation.factors[].under` | Under | the transformation group of an invariance stated by `holds`; omit for any other claim | [Factors](../specification/answer.md) |
 | `aim_block.explanation.relation` | Relation | the type of the relation, one of the requested relations | [Relation](../specification/answer.md) |
@@ -79,7 +79,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `aim_block.prediction.outputs[].target` | Target | one of the outputs to match that the required accuracy of the question names | [prediction](../specification/answer.md) |
 | `aim_block.prediction.outputs[].value` | Value | a value or a distribution | [prediction](../specification/answer.md) |
 | `answers` | Answers | the identifier of the question that the answer answers | — |
-| `binding` | Binding | the record through which the claim bears on the target per model, the identifier and the version of one binding of that model to the phenomenon of the question | [Binding](../specification/answer.md) |
+| `binding` | Binding | the record through which the claim bears on the target: per model, the identifier and the version of one binding of that model to the phenomenon of the question | [Binding](../specification/answer.md) |
 | `binding[].record` | Record | the identifier of one binding of the model to the phenomenon of the question | [Binding](../specification/answer.md) |
 | `binding[].version` | Version | the version of that binding on which the claim rests | [Binding](../specification/answer.md) |
 | `claim` | Claim | "[the claim of the answer]", as a reading, and, once formalized, an expression over declared symbols | [Claim](../specification/answer.md) |
@@ -97,17 +97,17 @@ Looks up each field of each record by its path, with its title, its description 
 | `claim.realizations[].id` | Id | a name of the realization, unique within the answer | [Claim](../specification/answer.md) |
 | `claim.realizations[].reading` | Reading | only content beyond the expression of `by` | [Claim](../specification/answer.md) |
 | `claim.realizations[].realizes` | Realizes | a role, declared by the model independently of any substrate | [Claim](../specification/answer.md) |
-| `dependence` | Dependence | how the claim depends on its grounds per entry, a minimal set of grounds that suffices for the claim; the result of a sensitivity analysis over one ground [saltelli2008]; or the result of a robustness analysis across models that share the claimed structure [weisberg2006] | [Dependence](../specification/answer.md) |
+| `dependence` | Dependence | how the claim depends on its grounds: per entry, a minimal set of grounds that suffices for the claim; the result of a sensitivity analysis over one ground [saltelli2008]; or the result of a robustness analysis across models that share the claimed structure [weisberg2006] | [Dependence](../specification/answer.md) |
 | `dependence[].grounds` | Grounds | grounds of this answer, by identifier | [Dependence](../specification/answer.md) |
 | `dependence[].kind` | Kind | the form of the dependence: a minimal set of grounds, a sensitivity analysis or a robustness analysis | [Dependence](../specification/answer.md) |
 | `dependence[].models` | Models | robustness only: the models compared | [Dependence](../specification/answer.md) |
 | `dependence[].result` | Result | omit for a minimal sufficient set | [Dependence](../specification/answer.md) |
 | `domain` | Domain | the systems and the conditions over which the claim holds | [Domain](../specification/answer.md) |
-| `erotetic_relation` | Erotetic relation | how the answer stands to its question `complete` · `partial` · `corrective` · `reformulating`, with the presupposition that a corrective answer denies, or the revised question that a reformulating answer answers | [Erotetic relation](../specification/answer.md) |
+| `erotetic_relation` | Erotetic relation | how the answer stands to its question: `complete` · `partial` · `corrective` · `reformulating`, with the presupposition that a corrective answer denies, or the revised question that a reformulating answer answers | [Erotetic relation](../specification/answer.md) |
 | `erotetic_relation.denies` | Denies | corrective only | [Erotetic relation](../specification/answer.md) |
 | `erotetic_relation.revised_question` | Revised question | reformulating only: the question that the answer answers and is assessed against | [Erotetic relation](../specification/answer.md) |
 | `erotetic_relation.value` | Value | how the answer stands to its question: complete, partial, corrective or reformulating | [Erotetic relation](../specification/answer.md) |
-| `grounds` | Grounds | what the claim depends on per ground, its content, its *role*: `assumption` · `idealization` · `condition` · `datum` · `warrant` · `criterion`, and the record that holds it. A ground with the role `idealization` also states the distortion that it introduces, its motive (tractability, isolation or limit), the gain that it provides, the range over which it holds, and whether it is removable (controlled, ineliminable or unknown) | [Grounds](../specification/answer.md) |
+| `grounds` | Grounds | what the claim depends on: per ground, its content, its *role*: `assumption` · `idealization` · `condition` · `datum` · `warrant` · `criterion`, and the record that holds it. A ground with the role `idealization` also states the distortion that it introduces, its motive (tractability, isolation or limit), the gain that it provides, the range over which it holds, and whether it is removable (controlled, ineliminable or unknown) | [Grounds](../specification/answer.md) |
 | `grounds[].content` | Content | the ground in words | [Grounds](../specification/answer.md) |
 | `grounds[].distortion` | Distortion | idealization only, as are the four keys below | [Grounds](../specification/answer.md) |
 | `grounds[].gain` | Gain | for an idealization, the derivation that it makes possible, or the factor that it exposes | [Grounds](../specification/answer.md) |
@@ -120,8 +120,8 @@ Looks up each field of each record by its path, with its title, its description 
 | `grounds[].version` | Version | datum only: the version of the data | [Grounds](../specification/answer.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `maturity` | Maturity | optional; one maturity per specification: open \| provisional \| stabilized; a specification left out is provisional | [Maturity of a field](../specification/maturity.md) |
-| `modal_strength` | Modal strength | the strength that the answer claims actual · possible · necessary | [Modal strength](../specification/answer.md) |
-| `relations` | Relations | the links to other answers per link, the other answer and the relation: `supports` · `presupposes` · `tests` · `defeats` · `revises` | [Relations](../specification/answer.md) |
+| `modal_strength` | Modal strength | the strength that the answer claims: actual · possible · necessary | [Modal strength](../specification/answer.md) |
+| `relations` | Relations | the links to other answers: per link, the other answer and the relation: `supports` · `presupposes` · `tests` · `defeats` · `revises` | [Relations](../specification/answer.md) |
 | `relations[].answer` | Answer | the identifier of the other answer | [Relations](../specification/answer.md) |
 | `relations[].relation` | Relation | how this answer stands to the other: it supports, presupposes, tests, defeats or revises it | [Relations](../specification/answer.md) |
 | `route` | Route | `derivation` · `proof` · `simulation` · `estimation` · `measurement`, the records on which it runs (the target, one model, or a family of models), and a pointer to the derivation, the code or the data | [Route](../specification/answer.md) |
@@ -130,15 +130,15 @@ Looks up each field of each record by its path, with its title, its description 
 | `route.kind` | Kind | how the answer is obtained: a derivation, a proof, a simulation, an estimation or a measurement | [Route](../specification/answer.md) |
 | `route.pointer` | Pointer | a pointer to the code, the data or a published derivation; a recorded derivation is named in `derivations`, and its internal steps stay in it | [Route](../specification/answer.md) |
 | `route.runs_on` | Runs on | the target system, one model, or every model of a family, by identifier | [Route](../specification/answer.md) |
-| `status` | Status | the attitude taken toward the answer entertained · hypothesized · accepted · retracted | [Status](../specification/answer.md) |
-| `support` | Support | the kind of evidence for the answer as a whole unsupported · informal · formally-proven · empirically-supported | [Support](../specification/answer.md) |
+| `status` | Status | the attitude taken toward the answer: entertained · hypothesized · accepted · retracted | [Status](../specification/answer.md) |
+| `support` | Support | the kind of evidence for the answer as a whole: unsupported · informal · formally-proven · empirically-supported | [Support](../specification/answer.md) |
 | `title` | Title | A short name of the record, as a label. | — |
 | `type` | Record type | The record type, which fixes the contract that the record follows. | — |
 | `uncertainty` | Uncertainty | the uncertainty of each value, as an interval, a distribution or a bound | [Uncertainty](../specification/answer.md) |
 | `uncertainty[].expression` | Expression | an expression over declared symbols stating the uncertainty | [Uncertainty](../specification/answer.md) |
 | `uncertainty[].form` | Form | the form of the uncertainty: an interval, a distribution or a bound | [Uncertainty](../specification/answer.md) |
 | `uncertainty[].of` | Of | the symbol of the value whose uncertainty the entry states | [Uncertainty](../specification/answer.md) |
-| `use` | Use | the purpose of an answer whose claim bears on no target a use such as `tool`, `proof-of-principle`, `conceptual-exploration` or `understanding`, with the property that the model must have for that use | [Use](../specification/answer.md) |
+| `use` | Use | the purpose of an answer whose claim bears on no target: a use such as `tool`, `proof-of-principle`, `conceptual-exploration` or `understanding`, with the property that the model must have for that use | [Use](../specification/answer.md) |
 | `use.property` | Property | the property that the model must have for the declared use | [Use](../specification/answer.md) |
 | `use.value` | Value | a new use enters the vocabulary registry first | [Use](../specification/answer.md) |
 | `variant` | Variant | the variant of the target that the answer accounts for, and one further variant for each of its parts with a narrower scope | [Variant](../specification/answer.md) |
@@ -147,13 +147,13 @@ Looks up each field of each record by its path, with its title, its description 
 
 | Path | Title | Description | Documented in |
 | ---- | ----- | ----------- | ------------- |
-| `against` | Against | the record whose specifications fix which tests apply for an answer, the identifier of one question, or the revised question that a reformulating answer names; for a construct, the identifier of its problem | [Against](../specification/assessment.md) |
+| `against` | Against | the record whose specifications fix which tests apply: for an answer, the identifier of one question, or the revised question that a reformulating answer names; for a construct, the identifier of its problem | [Against](../specification/assessment.md) |
 | `appraisal` | Appraisal | per virtue, the assessment of this answer, and the candidates over which it is preferred once they have been appraised | [Appraisal](../specification/assessment.md) |
 | `appraisal[].assessment` | Assessment | the result of the operational question of that virtue for this answer | [Appraisal](../specification/assessment.md) |
 | `appraisal[].preferred_over` | Preferred over | fill when other candidates have been assessed | [Appraisal](../specification/assessment.md) |
 | `appraisal[].virtue` | Virtue | the virtue that the entry appraises | [Appraisal](../specification/assessment.md) |
-| `assesses` | Assesses | the candidate answer or the construct whose verdicts this record holds the identifier of one candidate answer, or of the record of a construct that a problem demands, such as a model | [Assesses](../specification/assessment.md) |
-| `comparisons` | Comparisons | the inputs from which each comparison cited by a verdict is recomputed per comparison, the binding and its version, and the version of the data; the metric and the tolerance are read from the question | [Comparisons](../specification/assessment.md) |
+| `assesses` | Assesses | the candidate answer or the construct whose verdicts this record holds: the identifier of one candidate answer, or of the record of a construct that a problem demands, such as a model | [Assesses](../specification/assessment.md) |
+| `comparisons` | Comparisons | the inputs from which each comparison cited by a verdict is recomputed: per comparison, the binding and its version, and the version of the data; the metric and the tolerance are read from the question | [Comparisons](../specification/assessment.md) |
 | `comparisons[].binding` | Binding | the identifier of the binding from which the comparison is computed | [Comparisons](../specification/assessment.md) |
 | `comparisons[].data_version` | Data version | the version of the data | [Comparisons](../specification/assessment.md) |
 | `comparisons[].id` | Id | a name of the comparison, unique within the assessment, by which a verdict cites it | [Comparisons](../specification/assessment.md) |
@@ -205,10 +205,10 @@ Looks up each field of each record by its path, with its title, its description 
 
 | Path | Title | Description | Documented in |
 | ---- | ----- | ----------- | ------------- |
-| `closure` | Closure (of the laws) | separates a formal target from an empirical one complete, for a formal target whose laws define the system · partial, for an empirical target that may admit a rule independent of them | [Closure (of the laws)](../specification/background.md) |
-| `describes` | Describes | the target whose quantities the laws use the identifier of one target-system record | [Describes](../specification/background.md) |
+| `closure` | Closure (of the laws) | separates a formal target from an empirical one: complete, for a formal target whose laws define the system · partial, for an empirical target that may admit a rule independent of them | [Closure (of the laws)](../specification/background.md) |
+| `describes` | Describes | the target whose quantities the laws use: the identifier of one target-system record | [Describes](../specification/background.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
-| `laws` | Laws | known behaviors of the components or of the system an expression over the symbols that the target declares, with its signature and the places that the claim ranges over (one entry each, empty when the law concerns the system as a whole). Its warrant (derived from other admitted laws, in a limit or not, posited, fitted or measured), with its grounds. Its role, one of six:<br>- evolution: how the state changes along the course<br>- input-output: how one quantity is determined by others at the same point<br>- measurement: how an instrument registers the state<br>- state-constraint: which states may hold together, including at the start and at the boundary<br>- distribution: the law of a random quantity<br>- admissibility: a restriction on the parameters or on the forms that a member may take | [Laws](../specification/background.md) |
+| `laws` | Laws | known behaviors of the components or of the system: an expression over the symbols that the target declares, with its signature and the places that the claim ranges over (one entry each, empty when the law concerns the system as a whole). Its warrant (derived from other admitted laws, in a limit or not, posited, fitted or measured), with its grounds. Its role, one of six:<br>- evolution: how the state changes along the course<br>- input-output: how one quantity is determined by others at the same point<br>- measurement: how an instrument registers the state<br>- state-constraint: which states may hold together, including at the start and at the boundary<br>- distribution: the law of a random quantity<br>- admissibility: a restriction on the parameters or on the forms that a member may take | [Laws](../specification/background.md) |
 | `laws[].expression` | Expression | the claim of the law: the only part of the entry that can be false of the system | [Laws](../specification/background.md) |
 | `laws[].name` | Name | the words that designate the law | [Laws](../specification/background.md) |
 | `laws[].origin` | origin | a pointer to the publication, the data set or the derivation from which the law is taken | [Laws: origin](../specification/background.md) |
@@ -238,7 +238,7 @@ Looks up each field of each record by its path, with its title, its description 
 
 | Path | Title | Description | Documented in |
 | ---- | ----- | ----------- | ------------- |
-| `asserter` | Asserter | the agent who licenses the inferences a person, a group or a publication | [Asserter](../specification/binding.md) |
+| `asserter` | Asserter | the agent who licenses the inferences: a person, a group or a publication | [Asserter](../specification/binding.md) |
 | `calibration_provenance` | Calibration provenance | per calibration parameter, the version of the data that fitted it, the method of fitting, and whether the parameter is identifiable under the structural discrepancy [brynjarsdottir2014] | [Calibration provenance](../specification/binding.md) |
 | `calibration_provenance[].data_version` | Data version | the version of the data that fitted the parameter | [Calibration provenance](../specification/binding.md) |
 | `calibration_provenance[].identifiable` | Identifiable | true when the data identify the parameter apart from the structural discrepancy | [Calibration provenance](../specification/binding.md) |
@@ -261,19 +261,19 @@ Looks up each field of each record by its path, with its title, its description 
 | `feature_pairs[].key` | Key | computed pairs only | [Feature pairs](../specification/binding.md) |
 | `feature_pairs[].key_version` | Key version | the version of the key that carries the feature of the model onto the target | [Feature pairs](../specification/binding.md) |
 | `feature_pairs[].mode` | Mode | whether the pair is computed through a key or argued | [Feature pairs](../specification/binding.md) |
-| `feature_pairs[].type` | Type | the type of the pair: a quantity, a pattern, a regime, an invariance class, a modal profile or a component | [Feature pairs](../specification/binding.md) |
+| `feature_pairs[].type` | Type | the feature that the pair carries from the model to the target: a quantity, a pattern, a regime, an invariance class, a modal profile or a component | [Feature pairs](../specification/binding.md) |
 | `grain` | Grain | `quantitative`, when the pairs are compared by a metric · `qualitative`, when they are compared by a match of patterns or regimes | [Grain](../specification/binding.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `maturity` | Maturity | optional; one maturity per specification: open \| provisional \| stabilized; the record status applies to every specification left out | [Maturity of a field](../specification/maturity.md) |
-| `model` | Model | the model in use the identifier of one model record | [Model](../specification/binding.md) |
+| `model` | Model | the model in use: the identifier of one model record | [Model](../specification/binding.md) |
 | `status` | Status | the maturity of the binding record, taken by every field that the block `maturity` leaves unmarked | — |
 | `structural_discrepancy` | Structural discrepancy | the model of the systematic difference between the output of the model at its best parameters and the value of the target, or a stated bound on it [kennedyohagan2001]; a discrepancy model fitted to data counts as calibration on those data, and the calibration provenance records it | [Structural discrepancy](../specification/binding.md) |
 | `structural_discrepancy[].expression` | Expression | an expression over declared symbols stating the discrepancy model or the bound | [Structural discrepancy](../specification/binding.md) |
 | `structural_discrepancy[].form` | Form | whether the discrepancy is stated by a model or by a bound | [Structural discrepancy](../specification/binding.md) |
 | `structural_discrepancy[].pairs` | Pairs | the feature pairs that the discrepancy concerns | [Structural discrepancy](../specification/binding.md) |
 | `structural_discrepancy[].reading` | Reading | a discrepancy model fitted to data counts as calibration on those data | [Structural discrepancy](../specification/binding.md) |
-| `target` | Target | the denotation of the phenomenon, and the level at which the model is compared the identifier of one phenomenon, and the target level: `phenomenon`, when the model is compared with the observables that the phenomenon estimates; `data`, when it is compared with a version of the data through an observation operator | [Target](../specification/binding.md) |
-| `target.level` | Level | the level at which the model is compared: `phenomenon`, with the observables that the phenomenon estimates, or `data`, with a version of the data | [Target](../specification/binding.md) |
+| `target` | Target | the denotation of the phenomenon, and the level at which the model is compared: the identifier of one phenomenon, and the target level: `phenomenon`, when the model is compared with the observables that the phenomenon estimates; `data`, when it is compared with a version of the data through an observation operator | [Target](../specification/binding.md) |
+| `target.level` | Level | what the model is compared with: the observables that the phenomenon estimates, or a version of the data | [Target](../specification/binding.md) |
 | `target.phenomenon` | Phenomenon | the phenomenon that the binding denotes | [Target](../specification/binding.md) |
 | `title` | Title | A short name of the record, as a label. | — |
 | `type` | Record type | The record type, which fixes the contract that the record follows. | — |
@@ -318,7 +318,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `features` | Features of the calculation | The events that the calculation exhibits, which only a diagnostic interpretation reads. | [Features of the calculation](../specification/derivation.md) |
 | `features[].at` | At | The identifier of the object at which the event occurs. | [Features: at](../specification/derivation.md) |
 | `features[].id` | Identifier | A descriptive identifier of the feature, unique within the record. | [Features: id](../specification/derivation.md) |
-| `features[].kind` | Kind | The kind of event. | [Features: kind](../specification/derivation.md) |
+| `features[].kind` | Kind | Which event the calculation exhibits at the object, such as a divergence or a secular term. | [Features: kind](../specification/derivation.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `impasses` | Impasses | The obstacles left by the derivation, each leaving a sought without answer. | [Impasses](../specification/derivation.md) |
 | `impasses[].obstacle` | Obstacle | The identifier of the diagnostic interpretation that names the obstacle. | [Impasses: obstacle](../specification/derivation.md) |
@@ -326,7 +326,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `interpretations` | Interpretations | The meanings assigned to the items of the derivation, each with its ground. | [Interpretations](../specification/derivation.md) |
 | `interpretations[].grounds` | Grounds | The references on which the meaning rests, of the type that its kind requires. | [Interpretations: grounds](../specification/derivation.md) |
 | `interpretations[].id` | Identifier | A descriptive identifier of the interpretation, unique within the record. | [Interpretations: id](../specification/derivation.md) |
-| `interpretations[].kind` | Kind | The kind of meaning assigned. | [Interpretations: kind](../specification/derivation.md) |
+| `interpretations[].kind` | Kind | Which content the reading assigns to its item, which fixes the ground that the interpretation must cite. | [Interpretations: kind](../specification/derivation.md) |
 | `interpretations[].of` | Of | The identifier of the item interpreted: an object, a move, a feature, a segment or a consequence. | [Interpretations: of](../specification/derivation.md) |
 | `interpretations[].reading` | Reading | The meaning assigned, in one sentence. | [Interpretations: reading](../specification/derivation.md) |
 | `kernel` | Kernel | The identifier of the move declared as the kernel of the derivation. | [Kernel](../specification/derivation.md) |
@@ -335,14 +335,14 @@ Looks up each field of each record by its path, with its title, its description 
 | `moves[].binds` | Binds | The slots that the move binds, by symbol. | [Moves: binds](../specification/derivation.md) |
 | `moves[].id` | Identifier | A descriptive identifier of the move, unique within the record. | [Moves: id](../specification/derivation.md) |
 | `moves[].inputs` | Inputs | The objects, posits or premises that the move takes, by identifier. | [Moves: inputs](../specification/derivation.md) |
-| `moves[].kind` | Kind | The atomic kind of the move. | [Moves: kind](../specification/derivation.md) |
+| `moves[].kind` | Kind | The atomic operation that the move performs on the objects it takes. | [Moves: kind](../specification/derivation.md) |
 | `moves[].outputs` | Outputs | The objects that the move yields, by identifier. | [Moves: outputs](../specification/derivation.md) |
 | `moves[].warrant` | Warrant | What licenses the move: its source, the class of its error, its regime and the property that makes it apply. | [Moves: warrant](../specification/derivation.md) |
 | `moves[].warrant.applies_because` | Applies because | The identifier of the structural or magnitude interpretation that makes the warrant apply at this point. | [Moves: warrant: applies because](../specification/derivation.md) |
 | `moves[].warrant.cites` | Cites | The definition, the theorem, the record or the step that licenses the move. | [Moves: warrant: cites](../specification/derivation.md) |
-| `moves[].warrant.error` | Class of error | The class of the error that the move introduces. | [Moves: warrant: error](../specification/derivation.md) |
+| `moves[].warrant.error` | Class of error | Whether the error introduced by the move is absent, bounded, unbounded, or singular near a limit. | [Moves: warrant: error](../specification/derivation.md) |
 | `moves[].warrant.regime` | Regime | The regime in which the warrant holds, for an approximation, a limit or a truncation. | [Moves: warrant: regime](../specification/derivation.md) |
-| `moves[].warrant.source` | Source | The source of the license. | [Moves: warrant: source](../specification/derivation.md) |
+| `moves[].warrant.source` | Source | What licenses the move: a definition, a theorem, an approximation, a computation, or the verdict of an act. | [Moves: warrant: source](../specification/derivation.md) |
 | `objects` | Intermediate objects | The intermediate objects that the moves take and yield, cited by no other record. | [Objects](../specification/derivation.md) |
 | `objects[].expression` | Expression | The object, written in the expression syntax over the symbols that the derivation sees. | [Objects: expression](../specification/derivation.md) |
 | `objects[].form` | Form | Whether the object is a symbol, a quantity or a term, or an equation, an inequality or a condition. | [Objects: form](../specification/derivation.md) |
@@ -351,7 +351,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `orientations` | Orientations | The prospective rationale of each non-routine move and of each segment. | [Orientations](../specification/derivation.md) |
 | `orientations[].alternatives` | Alternatives | The moves considered at that point and set aside, each with its reason. | [Orientations: alternatives](../specification/derivation.md) |
 | `orientations[].alternatives[].move` | Move | The move set aside. | [Orientations: alternatives: move](../specification/derivation.md) |
-| `orientations[].alternatives[].reason` | Reason | The reason for setting the move aside. | [Orientations: alternatives: reason](../specification/derivation.md) |
+| `orientations[].alternatives[].reason` | Reason | Why the move considered was set aside: a failure of validity, or a strategic disadvantage. | [Orientations: alternatives: reason](../specification/derivation.md) |
 | `orientations[].change` | Change | The intended change of state that the purpose brings about. | [Orientations: change](../specification/derivation.md) |
 | `orientations[].determines` | Determines | The identifier of the sought that the purpose determines. | [Orientations: determines](../specification/derivation.md) |
 | `orientations[].expected_gain` | Expected gain | The gain that the move is expected to bring. | [Orientations: expected gain](../specification/derivation.md) |
@@ -363,14 +363,14 @@ Looks up each field of each record by its path, with its title, its description 
 | `orientations[].purpose` | Purpose | The end of the move, written as a goal: to determine an unknown, or to bring about a change. | [Orientations: purpose](../specification/derivation.md) |
 | `posits` | Posits | The premises that the derivation introduces on trial, each with its origin and its tests. | [Posits](../specification/derivation.md) |
 | `posits[].id` | Identifier | A descriptive identifier of the posit, unique within the record. | [Posits: id](../specification/derivation.md) |
-| `posits[].kind` | Kind | The kind of posit. | [Posits: kind](../specification/derivation.md) |
+| `posits[].kind` | Kind | What the posit guesses: a trial form, a closing relation, the relevant quantities, or a similarity in a limit. | [Posits: kind](../specification/derivation.md) |
 | `posits[].origin` | Origin | Where the guess came from. | [Posits: origin](../specification/derivation.md) |
-| `posits[].origin.kind` | Type | The type of origin of the guess. | [Posits: origin: kind](../specification/derivation.md) |
+| `posits[].origin.kind` | Type | Where the guess comes from: an act of the itinerary, a published source, a scheme, or no record. | [Posits: origin: kind](../specification/derivation.md) |
 | `posits[].origin.ref` | Reference | The act, the source or the scheme from which the guess came. | [Posits: origin: ref](../specification/derivation.md) |
 | `posits[].statement` | Statement | The form or the relation assumed. | [Posits: statement](../specification/derivation.md) |
 | `posits[].tests` | Tests | The tests of the posit, each with its verdict. | [Posits: tests](../specification/derivation.md) |
 | `posits[].tests[].by` | By | The move, the record or the source that carries the test. | [Posits: tests: by](../specification/derivation.md) |
-| `posits[].tests[].kind` | Test | The kind of test. | [Posits: tests: kind](../specification/derivation.md) |
+| `posits[].tests[].kind` | Test | What the test checks against the posit: the consistency of neglected terms, a known limit, a proof, a bound, data, or a computation. | [Posits: tests: kind](../specification/derivation.md) |
 | `posits[].tests[].standard` | Standard | For a computation, whether the computation is certified or numerical. | [Posits: tests: standard](../specification/derivation.md) |
 | `posits[].tests[].verdict` | Verdict | Whether the test supports or refutes the posit. | [Posits: tests: verdict](../specification/derivation.md) |
 | `refutations` | Refutations | The statements that the derivation falsifies by a counterexample. | [Refutations](../specification/derivation.md) |
@@ -393,7 +393,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `sought.condition` | Condition | The condition that the unknown must satisfy; empty for an open or a typed sought. | [Sought: condition](../specification/derivation.md) |
 | `sought.id` | Identifier | A descriptive identifier of the sought, unique within the record. | [Sought: id](../specification/derivation.md) |
 | `sought.statement` | Statement | The unknown or the statement sought, in one phrase. | [Sought: statement](../specification/derivation.md) |
-| `sought.type` | Type | The type of the unknown, once known; empty for an open sought. | [Sought: type](../specification/derivation.md) |
+| `sought.type` | Type | What the unknown is to be: a law, a value or a bound, an object, a classification, or the truth of a claim; empty while the sought stays open. | [Sought: type](../specification/derivation.md) |
 | `status` | Status | The maturity of the record as a whole, or its retraction. | — |
 | `subordinate` | Subordinate soughts | The soughts that the derivation sets for itself, each answered by a lemma or left at an impasse. | [Subordinate soughts](../specification/derivation.md) |
 | `subordinate[].condition` | Condition | The condition that the unknown must satisfy. | [Subordinate: condition](../specification/derivation.md) |
@@ -401,7 +401,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `subordinate[].reason` | Reason | The reason for the replacement. | [Subordinate: reason](../specification/derivation.md) |
 | `subordinate[].replaces` | Replaces | The identifier of the subordinate sought that this one replaces, when the earlier one proved ill-posed. | [Subordinate: replaces](../specification/derivation.md) |
 | `subordinate[].statement` | Statement | The unknown or the statement sought, in one phrase. | [Subordinate: statement](../specification/derivation.md) |
-| `subordinate[].type` | Type | The type of the unknown, once known; empty for an open sought. | [Subordinate: type](../specification/derivation.md) |
+| `subordinate[].type` | Type | What the unknown is to be: a law, a value or a bound, an object, a classification, or the truth of a claim; empty while the sought stays open. | [Subordinate: type](../specification/derivation.md) |
 | `title` | Title | A short name of the record, as a label. | — |
 | `type` | Record type | The record type, which fixes the contract that the record follows. | — |
 | `uses` | Uses | The derivations whose consequences the derivation uses, by identifier. | [Uses](../specification/derivation.md) |
@@ -463,25 +463,25 @@ Looks up each field of each record by its path, with its title, its description 
 | `steps[].inputs[].type` | Type | an identifier of the product-type registry | [Steps: inputs](../specification/itinerary.md) |
 | `steps[].iterate` | iterate | the criterion that ends the repetition of a step that takes its own output type as input | [Steps: iterate](../specification/itinerary.md) |
 | `steps[].iterate.until` | Until | the criterion that ends the repetition | [Steps: iterate](../specification/itinerary.md) |
-| `steps[].mode` | mode | deductive · inductive · abductive · analogical · error-statistical · model-based · non-inferential, equal to the mode of the activity | [Steps: mode](../specification/itinerary.md) |
+| `steps[].mode` | mode | the kind of inference that the step draws, equal to the mode that the registry gives its activity | [Steps: mode](../specification/itinerary.md) |
 | `steps[].norm` | norm | the test named by the registry for the activity, written `norm.<activity>`, its verdict: pass · fail · pending, and, once judged, the evidence and the date of the judgment | [Steps: norm](../specification/itinerary.md) |
 | `steps[].norm.evidence` | Evidence | why the product meets the norm or fails it | [Steps: norm](../specification/itinerary.md) |
 | `steps[].norm.judged` | Judged | the date of the last judgment of the verdict | [Steps: norm](../specification/itinerary.md) |
 | `steps[].norm.test` | Test | the test named by the activity registry for this activity | [Steps: norm](../specification/itinerary.md) |
-| `steps[].norm.verdict` | Verdict | the verdict of the norm on the step: pass, fail or pending | [Steps: norm](../specification/itinerary.md) |
+| `steps[].norm.verdict` | Verdict | whether the output of the step meets the norm of its activity, or awaits judgment | [Steps: norm](../specification/itinerary.md) |
 | `steps[].output` | output | the product type of the product, and the record that holds the product, given while that record holds the output type | [Steps: output](../specification/itinerary.md) |
 | `steps[].output.before` | Before | for a knowledge-state-change only, the revision of the repository before the change | [Steps: output](../specification/itinerary.md) |
 | `steps[].output.ref` | Ref | the record that holds the product; omit until that record exists | [Steps: output](../specification/itinerary.md) |
 | `steps[].output.type` | Type | the product type of the output, from the registry of product types | [Steps: output](../specification/itinerary.md) |
 | `steps[].rationale` | rationale | the question that the step serves, or its problem, and the object on which the step acts: one of the eight conditions for obtaining an answer, the obtaining of the answer, or its evaluation | [Steps: rationale](../specification/itinerary.md) |
-| `steps[].rationale.acts_on` | Acts on | The condition or the act on which the step acts. | [Steps: rationale](../specification/itinerary.md) |
+| `steps[].rationale.acts_on` | Acts on | the condition for obtaining an answer that the step works on, or the obtaining or the evaluation of the answer | [Steps: rationale](../specification/itinerary.md) |
 | `steps[].rationale.serves` | Serves | the question that the step serves, or the problem | [Steps: rationale](../specification/itinerary.md) |
 | `steps[].revises` | revises | the record that the step revises, the kind of the revision, and the review of each flagged dependent: pending · revised · unaffected · retracted | [Steps: revises](../specification/itinerary.md) |
-| `steps[].revises.kind` | Kind | The kind of the revision. | [Steps: revises](../specification/itinerary.md) |
+| `steps[].revises.kind` | Kind | how the revision changes the revised record: its retraction, its scope, its framing, its classification or its content | [Steps: revises](../specification/itinerary.md) |
 | `steps[].revises.record` | Record | the record that the step revises | [Steps: revises](../specification/itinerary.md) |
 | `steps[].revises.reviews` | Reviews | one entry per flagged dependent that the researcher has reviewed | [Steps: revises](../specification/itinerary.md) |
 | `steps[].revises.reviews[].dependent` | Dependent | a record that the revision flags | [Steps: revises](../specification/itinerary.md) |
-| `steps[].revises.reviews[].state` | State | The state of the review. | [Steps: revises](../specification/itinerary.md) |
+| `steps[].revises.reviews[].state` | State | the judgment of the researcher on a flagged dependent: whether it holds, was adjusted or was retracted, or awaits judgment | [Steps: revises](../specification/itinerary.md) |
 | `title` | Title | A short name of the record, as a label. | — |
 | `type` | Record type | The record type, which fixes the contract that the record follows. | — |
 
@@ -511,7 +511,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `assumptions[].id` | Id | a name of the assumption, unique within the record | [Assumptions of the laws](../specification/model.md) |
 | `assumptions[].motive` | Motive | the reason for making the assumption: tractability, isolation or a limit | [Assumptions of the laws](../specification/model.md) |
 | `assumptions[].removable` | Removable | whether the distortion of the assumption can be removed: controlled, ineliminable or unknown | [Assumptions of the laws](../specification/model.md) |
-| `background` | Background | the record from which the laws of the model are derived the identifier of one background record | [Background](../specification/model.md) |
+| `background` | Background | the record from which the laws of the model are derived: the identifier of one background record | [Background](../specification/model.md) |
 | `constituents` | Constituents $C$ | the units that the model treats as bearers | [Constituents](../specification/model.md) |
 | `constituents[].extent` | Extent | a set expression over declared symbols naming the members that the constituent collects | [Constituents](../specification/model.md) |
 | `constituents[].map` | Map | give for a unit defined from the target, such as a coarse-graining, a mode decomposition, an aggregation or a quotient by a symmetry; omit for a unit of the model alone | [Constituents](../specification/model.md) |
@@ -546,10 +546,10 @@ Looks up each field of each record by its path, with its title, its description 
 | `operations` | Operations | The typed operations that derive this model from its parents, in the order in which they are applied. | [Operations](../specification/model.md) |
 | `operations[].acts_on` | Acts on | The symbols of a parent on which the operation acts. | [Operations: acts on](../specification/model.md) |
 | `operations[].bound` | Bound | The bound on the error, for a controlled operation. | [Operations: bound](../specification/model.md) |
-| `operations[].error` | Class of error | The class of the error that the operation introduces. | [Operations: error class](../specification/model.md) |
+| `operations[].error` | Class of error | whether the operation introduces an error into the derived model, and whether that error has a known bound | [Operations: error class](../specification/model.md) |
 | `operations[].gain` | Gain | The derivation or the factor that the operation makes available. | [Operations: gain](../specification/model.md) |
 | `operations[].id` | Identifier | A descriptive identifier of the operation, unique within the record. | [Operations: id](../specification/model.md) |
-| `operations[].kind` | Kind | The kind of the operation, relative to the parent. | [Operations: kind](../specification/model.md) |
+| `operations[].kind` | Kind | the relation of the derived model to its parent that the operation establishes | [Operations: kind](../specification/model.md) |
 | `operations[].order` | Order | The order in which the limits of the operation are taken. | [Operations: order](../specification/model.md) |
 | `operations[].regime` | Regime | The regime in which the operation holds, as an expression over declared symbols. | [Operations: regime](../specification/model.md) |
 | `operations[].rests_on` | Rests on | The result, the limit or the source that justifies the operation. | [Operations: rests on](../specification/model.md) |
@@ -625,11 +625,11 @@ Looks up each field of each record by its path, with its title, its description 
 
 | Path | Title | Description | Documented in |
 | ---- | ----- | ----------- | ------------- |
-| `adequacy` | Adequacy | the purposes for which the data model is adequate per purpose, the question or the kind of use for which the data model is adequate, with its grounds | [Adequacy](../specification/phenomenon.md) |
+| `adequacy` | Adequacy | the purposes for which the data model is adequate: per purpose, the question or the kind of use for which the data model is adequate, with its grounds | [Adequacy](../specification/phenomenon.md) |
 | `adequacy[].grounds` | Grounds | the evidence or the argument for the adequacy | [Adequacy](../specification/phenomenon.md) |
 | `adequacy[].purpose` | Purpose | the question or the kind of use for which the data model is adequate | [Adequacy](../specification/phenomenon.md) |
 | `category` | Category | particular occurrence · regularity (effect) · capacity · structural property | [Category](../specification/phenomenon.md) |
-| `commitment` | Commitment | how far the record fixes the phenomenon `identified`: a definite description and pointers fix the referent · `specified`: the observables and the manifestations are written, and their symbols resolve | [Commitment](../specification/phenomenon.md) |
+| `commitment` | Commitment | how far the record fixes the phenomenon: `identified`: a definite description and pointers fix the referent · `specified`: the observables and the manifestations are written, and their symbols resolve | [Commitment](../specification/phenomenon.md) |
 | `conditions_and_byproducts` | Conditions and byproducts | put a factor the question varies among the indices or the scope entries instead | [Conditions and byproducts](../specification/phenomenon.md) |
 | `conditions_and_byproducts.byproducts` | byproducts | per byproduct, an expression over declared symbols with a justification that gives the reason for excluding it from the phenomenon | [Conditions and byproducts: byproducts](../specification/phenomenon.md) |
 | `conditions_and_byproducts.byproducts[].expression` | Expression | an expression over declared symbols stating the byproduct | [Conditions and byproducts: byproducts](../specification/phenomenon.md) |
@@ -658,14 +658,14 @@ Looks up each field of each record by its path, with its title, its description 
 | `conditions_and_byproducts.precipitating[].justification` | Justification | only content beyond the expression | [Conditions and byproducts: precipitating conditions](../specification/phenomenon.md) |
 | `conditions_and_byproducts.precipitating[].name` | Name | the words that designate the precipitating condition | [Conditions and byproducts: precipitating conditions](../specification/phenomenon.md) |
 | `conditions_and_byproducts.precipitating[].variant` | Variant | symbol of the target variant carrying the entry; omit when every member of the class carries it | [Conditions and byproducts: precipitating conditions](../specification/phenomenon.md) |
-| `course` | Course | the ordered index along which the behavior unfolds an index, a grain and the parameters of the target that vary along the course | [Course](../specification/phenomenon.md) |
+| `course` | Course | the ordered index along which the behavior unfolds: an index, a grain and the parameters of the target that vary along the course | [Course](../specification/phenomenon.md) |
 | `course.grain` | grain | an expression giving the shortest segment on which a predicate of the behavior is evaluated | [Course: grain](../specification/phenomenon.md) |
 | `course.index` | index | the symbol of an index set of the target or of this record: time, a training step, or an input parameter | [Course: index](../specification/phenomenon.md) |
 | `course.varies` | varies | the symbols of those parameters | [Course: varies](../specification/phenomenon.md) |
 | `data` | Data | per entry, "[pointer to a data set, a recording or a derivation]" that establishes the phenomenon, with its version | [Data](../specification/phenomenon.md) |
 | `data[].pointer` | Pointer | a pointer to a data set, a recording or a derivation that establishes the phenomenon | [Data](../specification/phenomenon.md) |
 | `data[].version` | Version | the version of the data | [Data](../specification/phenomenon.md) |
-| `data_model` | Data model | the models through which the data are produced or processed before they establish the phenomenon per model, its kind: instrument model · background simulation · assimilation model · reconstruction, and the model record or the publication that states it | [Data model](../specification/phenomenon.md) |
+| `data_model` | Data model | the models through which the data are produced or processed before they establish the phenomenon: per model, its kind: instrument model · background simulation · assimilation model · reconstruction, and the model record or the publication that states it | [Data model](../specification/phenomenon.md) |
 | `data_model[].kind` | Kind | the kind of the data model: an instrument model, a background simulation, an assimilation model or a reconstruction | [Data model](../specification/phenomenon.md) |
 | `data_model[].reading` | Reading | what the model does to the data | [Data model](../specification/phenomenon.md) |
 | `data_model[].source` | Source | the model record, or a pointer to the publication that states the model | [Data model](../specification/phenomenon.md) |
@@ -678,7 +678,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `detection_criterion[].variant` | Variant | symbol of the target variant carrying the entry; omit when every member of the class carries it | [Detection criterion](../specification/phenomenon.md) |
 | `evidential_status` | Evidential status | established across data sets or methods · reported · predicted · derived within a model · absent from a closed search · disproved · undecided | [Evidential status](../specification/phenomenon.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
-| `identification` | Identification | what fixes the referent before any observable is declared a definite description of the behavior, with pointers to the data, the results or the publications that report it | [Identification](../specification/phenomenon.md) |
+| `identification` | Identification | what fixes the referent before any observable is declared: a definite description of the behavior, with pointers to the data, the results or the publications that report it | [Identification](../specification/phenomenon.md) |
 | `identification.description` | description | a noun phrase that picks out one behavior of the target | [Identification: description](../specification/phenomenon.md) |
 | `identification.pointers` | pointers | per pointer, a data set, a result or a publication | [Identification: pointers](../specification/phenomenon.md) |
 | `index_sets` | Index sets | "[symbol]", with the set expression that it collects and its structure: continuum · discrete set · interval | [Index sets](../specification/phenomenon.md) |
@@ -736,13 +736,13 @@ Looks up each field of each record by its path, with its title, its description 
 | `observation_error[].expression` | Expression | an expression over declared symbols stating the error model | [Observation error](../specification/phenomenon.md) |
 | `observation_error[].form` | Form | the form of the error model: a distribution or a bound | [Observation error](../specification/phenomenon.md) |
 | `observation_error[].of` | Of | an observable, or the pointer of a data set | [Observation error](../specification/phenomenon.md) |
-| `occurrence` | Occurrence | the class of the occurrences that the phenomenon concerns state · process · event · not-applicable, for a capacity | [Occurrence](../specification/phenomenon.md) |
-| `pattern_selection` | Pattern selection | how the pattern stated by the manifestations was selected from the data the selection procedure, the patterns set aside, and the question that motivated the selection | [Pattern selection](../specification/phenomenon.md) |
+| `occurrence` | Occurrence | the class of the occurrences that the phenomenon concerns: state · process · event for a particular occurrence, state for a structural property, not-applicable for a regularity or a capacity | [Occurrence](../specification/phenomenon.md) |
+| `pattern_selection` | Pattern selection | how the pattern stated by the manifestations was selected from the data: the selection procedure, the patterns set aside, and the question that motivated the selection | [Pattern selection](../specification/phenomenon.md) |
 | `pattern_selection[].manifestation` | Manifestation | the manifestation whose pattern was selected | [Pattern selection](../specification/phenomenon.md) |
 | `pattern_selection[].motivated_by` | Motivated by | the question that motivated the selection | [Pattern selection](../specification/phenomenon.md) |
 | `pattern_selection[].procedure` | Procedure | how the pattern was selected from the data | [Pattern selection](../specification/phenomenon.md) |
 | `pattern_selection[].set_aside` | Set aside | the patterns set aside | [Pattern selection](../specification/phenomenon.md) |
-| `scope_over_instances` | Scope over instances (index $k$) | an instance is a member of the reference class of $S$, or one realization of a system (a trial, a random initialization, a disorder sample) per source of variation, the declared quantities that it varies and the other sources held fixed meanwhile. Each entry also records its source: class member · realization · parameter draw · structure draw · scenario. It records its quantification as well: single instance · typical instance · ensemble summary · ensemble distribution · universal, meaning every member of the admitted class | [Scope over instances (index )](../specification/phenomenon.md) |
+| `scope_over_instances` | Scope over instances (index $k$) | an instance is a member of the reference class of $S$, or one realization of a system (a trial, a random initialization, a disorder sample); per source of variation, the declared quantities that it varies and the other sources held fixed meanwhile. Each entry also records its source: class member · realization · parameter draw · structure draw · scenario. It records its quantification as well: single instance · typical instance · ensemble summary · ensemble distribution · universal, meaning every member of the admitted class | [Scope over instances (index )](../specification/phenomenon.md) |
 | `scope_over_instances[].conditional_on` | Conditional on | other sources held fixed while this one varies | [Scope over instances (index )](../specification/phenomenon.md) |
 | `scope_over_instances[].differentiation` | Differentiation | only content beyond the name | [Scope over instances (index )](../specification/phenomenon.md) |
 | `scope_over_instances[].name` | Name | the words that designate the source of variation | [Scope over instances (index )](../specification/phenomenon.md) |
@@ -781,7 +781,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `kind` | Kind | empirical, when the problem concerns the objects of a domain · conceptual, when it concerns the consistency of a theory or its fit with other theories | [Kind](../specification/problem.md) |
 | `knowledge_obstacles` | Knowledge obstacles | per obstacle, its value — open gap · unassessed candidates · conflict · unwarranted claim · ill-defined terms · unsound presupposition — and the records or the publications that establish it | [Knowledge obstacles](../specification/problem.md) |
-| `knowledge_obstacles[].obstacle` | Obstacle | the kind of the obstacle: an open gap, unassessed candidates, a conflict, an unwarranted claim, ill-defined terms or an unsound presupposition | [Knowledge obstacles](../specification/problem.md) |
+| `knowledge_obstacles[].obstacle` | Obstacle | the state of the knowledge about the associated question that keeps the demand unmet: an open gap, unassessed candidates, a conflict, an unwarranted claim, ill-defined terms or an unsound presupposition | [Knowledge obstacles](../specification/problem.md) |
 | `knowledge_obstacles[].pointers` | Pointers | the records or the publications that establish the obstacle | [Knowledge obstacles](../specification/problem.md) |
 | `maturity` | Maturity | optional; one maturity per field: open \| provisional \| stabilized; a field left out is provisional | [Maturity of a field](../specification/maturity.md) |
 | `request` | Request | one · all · over-a-parameter · decision, as the request of a demand defines them | [Request](../specification/problem.md) |
@@ -799,12 +799,12 @@ Looks up each field of each record by its path, with its title, its description 
 | ---- | ----- | ----------- | ------------- |
 | `addresses` | Addresses | the identifier of one problem record | [Addresses](../specification/question.md) |
 | `answerability` | Answerability | per condition asserted, its route, its state (established · refuted), how a refutation holds (outright · lack-of-means) with the means tried, and the pointers that show the state | [Answerability](../specification/question.md) |
-| `answerability[].condition` | Condition | The condition whose state is stated. | [Answerability](../specification/question.md) |
+| `answerability[].condition` | Condition | the condition of answerability whose state the entry asserts | [Answerability](../specification/question.md) |
 | `answerability[].means` | Means | every means considered, each tried and failed | [Answerability](../specification/question.md) |
 | `answerability[].pointers` | Pointers | the records, the steps or the publications that show the state | [Answerability](../specification/question.md) |
 | `answerability[].refutation` | Refutation | refuted only | [Answerability](../specification/question.md) |
 | `answerability[].route` | Route | The route on which the state holds. | [Answerability](../specification/question.md) |
-| `answerability[].state` | State | The state of the condition. | [Answerability](../specification/question.md) |
+| `answerability[].state` | State | whether the records show that the condition holds or fails | [Answerability](../specification/question.md) |
 | `answerability[].term` | Term | definiteness only: the term whose definiteness is stated | [Answerability](../specification/question.md) |
 | `construction` | Construction | the procedure named for the route of construction, and how it would yield a direct answer | [Construction](../specification/question.md) |
 | `construction.procedure` | Procedure | a design of kind method, or a pointer to the procedure | [Construction](../specification/question.md) |
@@ -857,7 +857,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `task.epistemic_aim` | Epistemic aim $A$ | the kind of knowledge that the question seeks | [Epistemic aim](../specification/question-task.md) |
 | `task.explicandum` | Explicandum | explication only: the term of an explicandum that the problem addressed by the question names, not a slot of the subject | [Explicandum](../specification/question-task.md) |
 | `task.function_sense` | Function sense | required when the requested relation is `functional` | [Function sense](../specification/question-task.md) |
-| `task.modal_strength` | Modal strength $\mu$ | the modal strength that the answer must claim: actual, possible or necessary | [Modal strength](../specification/question-task.md) |
+| `task.modal_strength` | Modal strength $\mu$ | how tightly the answer must bind the phenomenon: actual, possible or necessary | [Modal strength](../specification/question-task.md) |
 | `task.proof_obligations` | Proof obligations $\omega$ | fill when the answer must derive a statement rather than match a measurement | [Proof obligations](../specification/question-task.md) |
 | `task.proof_obligations[].antecedent` | Antecedent | the expressions over declared symbols that the implication assumes | [Proof obligations](../specification/question-task.md) |
 | `task.proof_obligations[].consequent` | Consequent | the expressions over declared symbols that the implication concludes | [Proof obligations](../specification/question-task.md) |
@@ -872,7 +872,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `task.required_accuracy.outputs_to_match[].tolerance` | Tolerance | omit when the standard is `qualitative` or `structural-only` | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.outputs_to_match[].tolerance.bound` | Bound | an expression that the metric must not exceed | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.outputs_to_match[].tolerance.metric` | Metric | measure the difference between `answer` and `target` | [Required accuracy](../specification/question-task.md) |
-| `task.required_accuracy.standard` | Standard | the standard of the comparison: qualitative, an order of magnitude, a numeric bound or structure only | [Required accuracy](../specification/question-task.md) |
+| `task.required_accuracy.standard` | Standard | how closely the answer must agree with the target: qualitative, an order of magnitude, a numeric bound or structure only | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.structures_to_match` | Structures to match | the structures of the phenomenon that the answer must reproduce, one entry per structure | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.structures_to_match[].justification` | Justification | why the question demands that the answer reproduce this structure | [Required accuracy](../specification/question-task.md) |
 | `task.required_accuracy.structures_to_match[].target` | Target | the feature or the manifestation of the phenomenon whose structure the answer must reproduce | [Required accuracy](../specification/question-task.md) |
@@ -881,13 +881,13 @@ Looks up each field of each record by its path, with its title, its description 
 | `virtues` | Virtues | one entry per virtue the inquiry weighs, under any epistemic aim | [Virtues of a question](../specification/question-virtues.md) |
 | `virtues[].justification` | Justification | also state the shortfall of an answer that lacks this virtue | [Virtues of a question](../specification/question-virtues.md) |
 | `virtues[].standing` | Standing | whether the virtue is constitutive of an answer or preferred among answers | [Virtues of a question](../specification/question-virtues.md) |
-| `virtues[].virtue` | Virtue | the virtue that the inquiry weighs | [Virtues of a question](../specification/question-virtues.md) |
+| `virtues[].virtue` | Virtue | a quality of the answers, beyond the demands of the task, that the inquiry weighs | [Virtues of a question](../specification/question-virtues.md) |
 
 ## `target-system`
 
 | Path | Title | Description | Documented in |
 | ---- | ----- | ----------- | ------------- |
-| `commitment` | Commitment | how far the record fixes the target `identified`: a definite description and pointers fix the referent · `specified`: the declarations are written and their symbols resolve | [Commitment](../specification/target-system.md) |
+| `commitment` | Commitment | how far the record fixes the target: `identified`: a definite description and pointers fix the referent · `specified`: the declarations are written and their symbols resolve | [Commitment](../specification/target-system.md) |
 | `constituents` | Constituents | "[symbol]", with its reading and the set expression that it collects | [Constituents](../specification/target-system.md) |
 | `constituents[].extent` | Extent | a set expression over declared symbols naming the members that the constituent collects | [Constituents](../specification/target-system.md) |
 | `constituents[].name` | Name | the kind of unit that the constituent collects | [Constituents](../specification/target-system.md) |
@@ -908,7 +908,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `external_systems[].symbol` | Symbol | the symbol of the external system, unique within the record | [External systems](../specification/target-system.md) |
 | `external_systems[].variant` | Variant | variant carrying the entry; omit when every member of the class carries it | [External systems](../specification/target-system.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
-| `identification` | Identification | what fixes the referent before any quantity is declared a definite description, with pointers to the data, the results or the publications that fix the referent | [Identification](../specification/target-system.md) |
+| `identification` | Identification | what fixes the referent before any quantity is declared: a definite description, with pointers to the data, the results or the publications that fix the referent | [Identification](../specification/target-system.md) |
 | `identification.description` | description | a noun phrase that picks out one system or one class of systems | [Identification: description](../specification/target-system.md) |
 | `identification.pointers` | pointers | per pointer, a data set, a result or a publication | [Identification: pointers](../specification/target-system.md) |
 | `index_sets` | Index sets | "[symbol]", with the set expression that it collects and its structure: continuum · discrete set · interval | [Index sets](../specification/target-system.md) |
@@ -938,7 +938,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `parameters[].variant` | Variant | variant carrying the entry; omit when every member of the class carries it | [Parameters](../specification/target-system.md) |
 | `reference_class` | Reference class | a name, "[kind]", for the class that the other specifications generate | [Reference class](../specification/target-system.md) |
 | `reference_class.name` | Name | the kind of system that names the class | [Reference class](../specification/target-system.md) |
-| `reference_class.projectibility` | projectibility | whether a claim about some members holds of the class assumed · tested · not-claimed, with the evidence for an assumed or a tested projection | [Reference class: projectibility](../specification/target-system.md) |
+| `reference_class.projectibility` | projectibility | whether a claim about some members holds of the class: assumed · tested · not-claimed, with the evidence for an assumed or a tested projection | [Reference class: projectibility](../specification/target-system.md) |
 | `reference_class.projectibility.evidence` | Evidence | omit when the status is `not-claimed` | [Reference class: projectibility](../specification/target-system.md) |
 | `reference_class.projectibility.status` | Status | whether a claim about some members holds of the class: assumed, tested or not claimed | [Reference class: projectibility](../specification/target-system.md) |
 | `reference_class.selection_criteria` | selection criteria | per criterion, the expression that a member satisfies, with a justification. The justification gives the reason for imposing the criterion and the inferences that it changes about the class | [Reference class: selection criteria](../specification/target-system.md) |
@@ -949,7 +949,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `target_type` | Target type | particular system · class of actual systems · class of possible systems · hypothetical system · no external target (the model class itself) | [Target type](../specification/target-system.md) |
 | `title` | Title | A short name of the record, as a label. | — |
 | `type` | Record type | The record type, which fixes the contract that the record follows. | — |
-| `variables` | Variables | what changes while the phenomenon unfolds per variable, its signature and its value set, with a reading. The role test decides whether a quantity is a variable or a parameter. The value sets of the variables that $S$ determines, aggregates excepted, form the state space of $S$ | [Variables](../specification/target-system.md) |
+| `variables` | Variables | what changes while the phenomenon unfolds: per variable, its signature and its value set, with a reading. The role test decides whether a quantity is a variable or a parameter. The value sets of the variables that $S$ determines, aggregates excepted, form the state space of $S$ | [Variables](../specification/target-system.md) |
 | `variables[].condition` | Condition | give when no map builds the quantity | [Variables](../specification/target-system.md) |
 | `variables[].determined` | determined (side of the boundary that sets the value) | within, when the system fixes its value, or outside, when it is set externally and still varies | [Variables: determined (side of the boundary that sets the value)](../specification/target-system.md) |
 | `variables[].dimensional_formula` | dimensional formula | optional; a monomial over the base dimensions and the base scales of the problem, such as M L T^-2, or 1 for a pure number | [Variables: dimensional formula](../specification/target-system.md) |
@@ -959,7 +959,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `variables[].notation` | Notation | only when the LaTeX form differs from the symbol | [Variables](../specification/target-system.md) |
 | `variables[].of` | Of | external system the entry characterizes; omit when the entry belongs to the target | [Variables](../specification/target-system.md) |
 | `variables[].reading` | Reading | the expression of the variable in words | [Variables](../specification/target-system.md) |
-| `variables[].scale` | scale | the comparisons between values that carry meaning nominal · ordinal · interval · ratio · absolute · not-applicable, for a variable and for a parameter alike | [Variables: scale](../specification/target-system.md) |
+| `variables[].scale` | scale | the comparisons between values that carry meaning: nominal · ordinal · interval · ratio · absolute · not-applicable, for a variable and for a parameter alike | [Variables: scale](../specification/target-system.md) |
 | `variables[].selects` | Selects | required with a condition | [Variables](../specification/target-system.md) |
 | `variables[].shared` | Shared | true when one value holds for every tuple of the signature | [Variables](../specification/target-system.md) |
 | `variables[].signature` | Signature | one constituent kind or index set per place; empty for the system as a whole | [Variables](../specification/target-system.md) |

@@ -63,9 +63,7 @@ properties:
     - string
     - 'null'
     title: Commitment
-    description: 'how far the record fixes the phenomenon `identified`: a definite description and pointers
-      fix the referent · `specified`: the observables and the manifestations are written, and their symbols
-      resolve'
+    description: 'how far the record fixes the phenomenon: `identified`: a definite description and pointers fix the referent · `specified`: the observables and the manifestations are written, and their symbols resolve'
     examples:
     - the geometry of the fixed points of the benchmark networks, named before any kernel is written (identified);
       the same geometry stated by a kernel over the inputs (specified)
@@ -108,8 +106,7 @@ properties:
         - the article that reports the phenomenon; a figure of a simulation study
     x-comment: fixes the referent before any observable is declared
     title: Identification
-    description: what fixes the referent before any observable is declared a definite description of the
-      behavior, with pointers to the data, the results or the publications that report it
+    description: 'what fixes the referent before any observable is declared: a definite description of the behavior, with pointers to the data, the results or the publications that report it'
     examples:
     - the delay between fitting and generalization reported for networks trained on algorithmic tasks
   category:
@@ -167,20 +164,18 @@ properties:
         - the weights of a network along training
     x-comment: the ordered index along which the behavior unfolds
     title: Course
-    description: the ordered index along which the behavior unfolds an index, a grain and the parameters
-      of the target that vary along the course
+    description: 'the ordered index along which the behavior unfolds: an index, a grain and the parameters of the target that vary along the course'
     examples:
     - the training steps of a network; the time of a flow; a stimulus parameter swept by the question
   occurrence:
     x-blank: true
-    x-comment: '`not-applicable` for a capacity'
+    x-comment: '`not-applicable` for a regularity or a capacity, `state` for a structural property'
     x-vocabulary: .occurrence
     type:
     - string
     - 'null'
     title: Occurrence
-    description: the class of the occurrences that the phenomenon concerns state · process · event · not-applicable,
-      for a capacity
+    description: 'the class of the occurrences that the phenomenon concerns: state · process · event for a particular occurrence, state for a structural property, not-applicable for a regularity or a capacity'
     examples:
     - the network sits at its fixed point (state); the turbulent flow (process); the first crossing of
       a loss threshold (event)
@@ -734,12 +729,7 @@ properties:
           description: only content beyond the name
     x-comment: one entry per source of variation across instances; empty when the phenomenon occurs once
     title: Scope over instances (index $k$)
-    description: 'an instance is a member of the reference class of $S$, or one realization of a system
-      (a trial, a random initialization, a disorder sample) per source of variation, the declared quantities
-      that it varies and the other sources held fixed meanwhile. Each entry also records its source: class
-      member · realization · parameter draw · structure draw · scenario. It records its quantification
-      as well: single instance · typical instance · ensemble summary · ensemble distribution · universal,
-      meaning every member of the admitted class'
+    description: 'an instance is a member of the reference class of $S$, or one realization of a system (a trial, a random initialization, a disorder sample); per source of variation, the declared quantities that it varies and the other sources held fixed meanwhile. Each entry also records its source: class member · realization · parameter draw · structure draw · scenario. It records its quantification as well: single instance · typical instance · ensemble summary · ensemble distribution · universal, meaning every member of the admitted class'
     examples:
     - the initialization draw, conditional on a fixed training specification (ensemble distribution);
       every model of the admitted class (universal)
@@ -1194,9 +1184,7 @@ properties:
           description: what the model does to the data
     x-comment: fill when a model intervenes between the raw records and the data; one entry per model
     title: Data model
-    description: 'the models through which the data are produced or processed before they establish the
-      phenomenon per model, its kind: instrument model · background simulation · assimilation model ·
-      reconstruction, and the model record or the publication that states it'
+    description: 'the models through which the data are produced or processed before they establish the phenomenon: per model, its kind: instrument model · background simulation · assimilation model · reconstruction, and the model record or the publication that states it'
     examples:
     - the forward model of the electrodes (instrument model); the reanalysis that fills the gaps of a
       temperature record (assimilation model)
@@ -1282,8 +1270,7 @@ properties:
           description: the question that motivated the selection
     x-comment: fill when the data admit other patterns than the one stated; one entry per selected pattern
     title: Pattern selection
-    description: how the pattern stated by the manifestations was selected from the data the selection
-      procedure, the patterns set aside, and the question that motivated the selection
+    description: 'how the pattern stated by the manifestations was selected from the data: the selection procedure, the patterns set aside, and the question that motivated the selection'
     examples:
     - the gamma band selected among the bands of the spectrum, for the question of synchrony
   adequacy:
@@ -1312,8 +1299,7 @@ properties:
           description: the evidence or the argument for the adequacy
     x-comment: fill when the record declares a data model; one entry per purpose
     title: Adequacy
-    description: the purposes for which the data model is adequate per purpose, the question or the kind
-      of use for which the data model is adequate, with its grounds
+    description: 'the purposes for which the data model is adequate: per purpose, the question or the kind of use for which the data model is adequate, with its grounds'
     examples:
     - adequate for the peak frequency, not for the phase of single neurons
   maturity:
