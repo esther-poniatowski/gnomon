@@ -9,6 +9,9 @@ aliases:
 
 The goal [`relation-registry`](../../TODO.md) declares, in one registry, the relations between research units, each with a warrant kind, and decides which relations transmit a revision. The [decision on answers, models and bindings](../adr/answers-models-bindings.md) already fixes the relations between answers: `supports`, `presupposes`, `tests`, `defeats`, and `revises` for the lineage of an answer.
 
+> [!IMPORTANT] Decision of 2026-11-08
+> The [decision on the relation registry](../adr/relation-registry.md) adopts, from the typed-relation discipline, the ends, the symmetry and the cycles, and declines transitivity and inverses, which no query reads. It adopts the relations of argumentation without a computed acceptance, the split between semantic and justificatory dependence as warrant classes, the locus of an attack by a dotted target, and the examples as relations. It declines the source-qualified assertions, citation intent as a source, the reified relation as a record, and the eight warrant kinds, which give way to the modes of inference. The relations between frameworks stay deferred.
+
 ## Typed-relation discipline
 
 Description Logics provide three disciplines for relations, each of which a check can apply when a record is written:

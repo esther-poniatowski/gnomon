@@ -48,6 +48,7 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 
 - [Versions and history](versions-and-history.md): tells where a reference fixes the state of its target, and where git alone keeps the history
 - [Revision accountability](revision-accountability.md): states the requirements that every mechanism recording a revision must meet
+- [Relation registry](relation-registry.md): decides which file declares the relations between research units, and how a revision travels along them
 
 ## Ecosystem ownership
 

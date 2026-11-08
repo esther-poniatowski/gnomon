@@ -16,3 +16,4 @@ Defines the knowledge that an inquiry takes as given, and the dependence of its 
 - [Background](background.md): defines the laws admitted about a target system before any answer is sought
 - [Grounds and dependence](grounds-and-dependence.md): traces how a revision or a defeat of one claim reaches the claims that rest on it
 - [Presupposition of a claim](presupposition.md): tells the commitments that a claim takes for granted from its grounds, and places each one in its record
+- [Relations between research units](relations-between-units.md): defines the relations that connect the units of an inquiry, and how a revision travels along them

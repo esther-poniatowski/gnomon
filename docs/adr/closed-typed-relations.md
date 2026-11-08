@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-10-29
+revised: 2026-11-08
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Closed typed relations
@@ -22,7 +22,7 @@ Each relation type declares the record types that its source and its target may 
 
 A relation is authored once, on its source record. A tool builds the graph of relations from the records at each run, and every query reads that graph: the units on which a unit depends, the units that rest on it, the units that no relation reaches, and the cycles that a relation forms. ^relation-graph
 
-The registry that gathers the relation types of every family of records, with their warrant kinds and the relations that transmit a revision, is decided under the goal `relation-registry` of the [project goals](../../TODO.md). ^relation-registry-open
+The registry that gathers the relation types of every family of records, with their warrant and their transmission of a revision, is fixed by the [decision on the relation registry](relation-registry.md#^one-relation-registry). ^relation-registry-open
 
 ## Constraints that decide the vocabulary
 
@@ -38,7 +38,7 @@ The registry that gathers the relation types of every family of records, with th
 | Free linking phrases that harden into types as the inquiry matures, as in concept maps | A relation is recorded before its type exists | One field holds values of two kinds. A relation without a declared type is stated in a reading until the registry admits its type, so the progression runs through the registry |
 | A vocabulary that each problem extends with relations of its own | Each problem names the relations that it needs | Two problems name one relation differently, so a query across problems misses one of them |
 | A store of relations outside the records, such as relational tables or a triple store | A standard query language over an indexed store | The store holds a second copy of each relation, which the [decision on the inputs of checks](checks-read-records.md#^records-are-source) excludes |
-| A record of its own for each relation, carrying its context and its status | A relation carries its own warrant and status | Deferred to the goal `relation-registry`, together with the warrant kinds, and subject to the [admission of a record kind](record-kind-admission.md#^admission-conditions) |
+| A record of its own for each relation, carrying its context and its status | A relation carries its own warrant and status | Declined by the [decision on the relation registry](relation-registry.md): the entry of a relation carries its warrant |
 | A closed vocabulary with typed ends, and a graph built from the records | Every relation is checked, and every query reads one structure | A relation outside the vocabulary waits for a change of the registry |
 
 ## Consequences

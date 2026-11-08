@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-29
-revised: 2026-11-03
+revised: 2026-11-08
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Revision accountability
@@ -22,7 +22,7 @@ Each revision propagates to its dependents. A tool follows the authored relation
 
 Propagation flags the dependents and never edits them. The researcher decides, for each dependent, whether it holds unchanged, needs an adjustment, or is retracted in turn. ^flag-not-edit
 
-A step of the itinerary records each revision, with its kind, and the review of each flagged dependent. A dependent is flagged by the kind of the revision and by the warrant on which it rests, as the [kinds of a revision](../epistemology/objects/knowledge/grounds-and-dependence.md#^revision-kinds) state. Every reference to the revised record transmits the revision until the goal `relation-registry` of the [project goals](../../TODO.md) decides which relations transmit it. ^mechanism-open
+A step of the itinerary records each revision, with its kind, and the review of each flagged dependent. A dependent is flagged by the kind of the revision and by the warrant on which it rests, as the [kinds of a revision](../epistemology/objects/knowledge/grounds-and-dependence.md#^revision-kinds) state. The revision travels along each relation that transmits it, by the warrant class of each edge, as the [decision on the relation registry](relation-registry.md#^edge-transmission) fixes. ^mechanism-open
 
 ## Constraints that decide the requirements
 

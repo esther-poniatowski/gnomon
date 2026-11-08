@@ -45,12 +45,14 @@ The [answer record](../../../specification/answer.md) documents each field of a 
 
 - **A link between two substrates is answered by a *mapping*.** A question that bounds the explanans to the [link between two substrates](../task/admissible-explanans.md) asks how a role is realized. Neither of the two descriptions alone answers that question: the description specific to one substrate states the events without the role that they play, and the description independent of any substrate states the role without its carrier. The model declares both descriptions, since each of them consists of quantities and laws. The claim of the answer then states, per mapping, which expression over one substrate realizes which role [marr1982] [bechtel2015]. Only the mapping is new, and it can be false, so it belongs to the claim rather than to the model. ^link-is-a-mapping
 
-- **Answers are linked by typed relations.** Five relations link one answer to another: ^answer-relations
+- **Answers are linked by typed relations.** Seven relations link one answer to others: ^answer-relations
     - `supports`: the claim of the answer is a ground of the other answer;
     - `presupposes`: the answer is admissible only if the other answer is true;
     - `tests`: the claim of the answer is a consequence of the other answer, compared with the target;
     - `defeats`: the claim of the answer, once accepted, denies a ground of the other answer, or denies that a law among its grounds applies, as the [relations of attack](../knowledge/grounds-and-dependence.md) define them;
-    - `revises`: the answer replaces the other answer over time. The earlier answer stays unchanged, and the relation records the lineage of the answer.
+    - `revises`: the answer replaces the other answer over time. The earlier answer stays unchanged, and the relation records the lineage of the answer;
+    - `incompatible-with`: the claims of a set of answers cannot all be true over their shared domain, as the [incompatibility](../knowledge/relations-between-units.md#^incompatibility) defines it;
+    - `contrasts-with`: the two answers differ in a stated respect and may both hold, as the [contrast](../knowledge/relations-between-units.md#^contrast) defines it.
 
 - **The route of an answer decides whether it needs a model record.** A route runs either on the *target description*, the target specification with its background and no stand-in, or on a model system. The [rule on models and bindings](model-and-binding.md#^when-a-binding) states, for each object on which a route can run, whether the answer needs a model record and a binding.
 

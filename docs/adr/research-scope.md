@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-30
-revised: 2026-11-02
+revised: 2026-11-08
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Research as the scope of gnomon
@@ -64,7 +64,7 @@ The records of `gnomon` fix the contents of research units. Therefore, an exposi
 - an evidence presents one unit as support for a claim, and requires that the export record that support;
 - an antithesis presents two units as incompatible, so that the reader favours one of them, and requires a recorded incompatibility.
 
-Therefore, the classes of the contract are the subject-matter classes, together with support and incompatibility. `gnomon` records support by the relation `supports` between answers, but it records no incompatibility yet, so the class of incompatibility waits on the goal `relation-registry`. `gnomon` maps each exported relation onto one of these classes. That mapping lets `ekthesis` read the classes only, without a code dependency on `gnomon`.
+Therefore, the classes of the contract are the subject-matter classes, together with support and incompatibility. `gnomon` records support by the relation `supports` between answers, and incompatibility by the relation `incompatible-with`, as the [decision on the relation registry](relation-registry.md) fixes. `gnomon` maps each exported relation onto one of these classes. That mapping lets `ekthesis` read the classes only, without a code dependency on `gnomon`.
 
 An artifact may rename a symbol to follow the convention of its venue. The renaming changes the printed form of the symbol but keeps its identifier, so every check of `gnomon` still resolves the symbol. From the symbol entries of the contract alone, `ekthesis` checks that no two symbols of one artifact print alike.
 
