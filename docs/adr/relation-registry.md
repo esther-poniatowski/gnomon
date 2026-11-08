@@ -23,7 +23,7 @@ Each relation declares: ^relation-declaration
 - the record kinds that its source and its target may take;
 - its arity, `binary` or `set`; a set relation is symmetric, holds of two or more members, and is written once, on one member;
 - whether it is symmetric and irreflexive;
-- its policy of cycles: forbidden, judged, or admitted, with the exemption of a declared co-definition;
+- its policy of cycles: forbidden, judged, or admitted, with the exemption of a declared co-definition, and the graph whose cycles are searched as a whole, such as the graph of claims;
 - the end that a revision flags, if any, and its warrant: a mode of inference, fixed by the relation, written on its entry, or read from the dependent;
 - its class in the contract of the export, or none.
 

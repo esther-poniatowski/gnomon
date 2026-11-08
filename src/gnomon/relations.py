@@ -22,6 +22,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from functools import lru_cache
+from itertools import pairwise
 from typing import Any, Mapping
 
 from . import findings as rules
@@ -316,30 +317,55 @@ def _restated(records: Records) -> list[tuple[str, Finding]]:
     return found
 
 
-def _cycles(records: Records) -> list[tuple[str, Finding]]:
-    """Return a cycle of each relation whose policy forbids or judges cycles."""
-    graphs: dict[str, dict[str, set[str]]] = {}
-    policies: dict[str, str] = {}
-    where: dict[tuple[str, str], tuple[Any, ...]] = {}
+@dataclass
+class _Graphs:
+    """The graphs of the relations whose cycles are forbidden or judged, keyed by graph."""
+
+    nodes: dict[str, dict[str, set[str]]] = field(default_factory=dict)
+    policies: dict[str, str] = field(default_factory=dict)
+    crossed: dict[tuple[str, str, str], str] = field(default_factory=dict)
+    where: dict[tuple[str, str], tuple[Any, ...]] = field(default_factory=dict)
+
+
+def _graphs(records: Records) -> _Graphs:
+    """Return the graphs of the relations whose policy forbids or judges cycles."""
+    found = _Graphs()
     for ident in sorted(records):
         for edge in edges(records[ident]):
             policy = edge.declared.get("cycles")
             other = owner(edge.target, records)
             if policy not in ("forbidden", "judged") or other is None or other == ident:
                 continue
-            graphs.setdefault(edge.relation, {}).setdefault(ident, set()).add(other)
-            policies[edge.relation] = str(policy)
-            where.setdefault((edge.relation, ident), edge.where)
+            graph = str(edge.declared.get("graph") or edge.relation)
+            found.nodes.setdefault(graph, {}).setdefault(ident, set()).add(other)
+            found.policies[graph] = str(policy)
+            found.crossed.setdefault((graph, ident, other), edge.relation)
+            found.where.setdefault((graph, ident), edge.where)
+    return found
+
+
+def _cycles(records: Records) -> list[tuple[str, Finding]]:
+    """Return a cycle of each graph whose policy forbids or judges cycles.
+
+    A relation that declares a graph, such as the graph of claims, joins the other relations of
+    that graph, so a cycle passing through several of them is found; a relation that declares
+    none forms a graph of its own. Each cycle names the relations that it crosses.
+    """
+    graphs = _graphs(records)
     found = []
-    for relation, graph in sorted(graphs.items()):
-        for cycle in _first_cycles(graph):
-            rule = (
-                rules.RELATION_CYCLE
-                if policies[relation] == "forbidden"
-                else rules.RELATION_JUDGED_CYCLE
+    for graph, nodes in sorted(graphs.nodes.items()):
+        for cycle in _first_cycles(nodes):
+            relations = sorted(
+                {
+                    graphs.crossed[(graph, a, b)]
+                    for a, b in pairwise(cycle)
+                    if (graph, a, b) in graphs.crossed
+                }
             )
-            text = f"{relation}: {' -> '.join(cycle)}"
-            found.append((cycle[0], finding(rule, text, *where[(relation, cycle[0])])))
+            forbidden = graphs.policies[graph] == "forbidden"
+            rule = rules.RELATION_CYCLE if forbidden else rules.RELATION_JUDGED_CYCLE
+            text = f"{graph}: {' -> '.join(cycle)}, through {', '.join(relations)}"
+            found.append((cycle[0], finding(rule, text, *graphs.where[(graph, cycle[0])])))
     return found
 
 

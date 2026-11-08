@@ -225,3 +225,47 @@ def test_the_links_of_a_question_are_checked_as_relations() -> None:
         "relation/mistyped-end",
     ]
     assert rules(link, addresses="quest.a.p") == ["relation/mistyped-end"]
+
+
+def test_a_cycle_through_several_relations_of_one_graph_is_found() -> None:
+    """An answer supports another, which rests on a model whose law requires the first: one cycle
+    of the graph of claims, through three relations."""
+    records: dict[str, dict[str, Any]] = {
+        "ans.a.x": {
+            "id": "ans.a.x",
+            "type": "answer",
+            "relations": [{"relation": "supports", "target": "ans.a.y"}],
+        },
+        "ans.a.y": {"id": "ans.a.y", "type": "answer", "grounds": [{"record": "mod.a.m.law"}]},
+        "mod.a.m": {
+            "id": "mod.a.m",
+            "type": "model",
+            "laws": [{"symbol": "law", "requires": ["ans.a.x"]}],
+        },
+    }
+    found = [f for _, f in workspace_relation_findings(records)]
+    assert [f.rule.id for f in found] == ["relation/judged-cycle"]
+    assert found[0].text == (
+        "claims: ans.a.x -> ans.a.y -> mod.a.m -> ans.a.x, through grounds[].record,"
+        " laws[].requires, supports"
+    )
+
+
+def test_the_relations_of_one_graph_share_a_policy_of_cycles() -> None:
+    from gnomon.relation_registry import load_relation_registry
+
+    registry = load_relation_registry()
+    declared = [
+        relation
+        for family in (registry.get("entries") or {}).values()
+        for relation in (family.get("relations") or {}).values()
+    ] + [
+        relation
+        for fields in (registry.get("fields") or {}).values()
+        for relation in fields.values()
+    ]
+    policies: dict[str, set[str]] = {}
+    for relation in declared:
+        if relation.get("graph"):
+            policies.setdefault(relation["graph"], set()).add(relation.get("cycles"))
+    assert policies and all(len(found) == 1 for found in policies.values()), policies

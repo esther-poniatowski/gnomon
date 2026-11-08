@@ -16,8 +16,9 @@
 # - `targets`: the record kinds that its target may take, by the record that holds a referenced unit;
 # - `arity`: `binary` or `set`; a set relation is symmetric, and is written once, on one member;
 # - `symmetric`: whether the relation holds both ways; a symmetric relation is irreflexive;
-# - `cycles`: `forbidden`, `judged` or `admitted`, and `exempt: co-definition` where a declared
-#   co-definition admits a cycle among its members;
+# - `cycles`: `forbidden`, `judged` or `admitted`;
+# - `graph`: the graph whose cycles are searched as a whole, such as the graph of `claims`; a
+#   relation that names none forms a graph of its own, and the relations of one graph share a policy;
 # - `flags`: the end that a revision of the other end flags, `source` or `target`, `entry` for the
 #   record that holds the entry, or `none`;
 # - `warrant`: a mode of inference of `itinerary.steps.mode`, `entry` when the entry may state it,
@@ -54,6 +55,7 @@ entries:
     vocabulary: relations.relation
     relations:
       supports:
+        graph: claims
         name: its claim is a ground of the other answer
         targets: [answer]
         cycles: judged
@@ -62,12 +64,14 @@ entries:
         attributes: [warrant]
         export: support
       presupposes:
+        graph: claims
         name: it is admissible only if the other answer is true
         targets: [answer]
         cycles: judged
         flags: source
         warrant: deductive
       tests:
+        graph: claims
         name: its claim is a consequence of the other answer, compared with the target
         targets: [answer]
         cycles: judged
@@ -156,6 +160,7 @@ fields:
       export: solutionhood
       reversed: true
     grounds[].record:
+      graph: claims
       name: rests on the ground
       targets: [model, background, binding, phenomenon, answer, target-system, derivation]
       cycles: judged
@@ -224,6 +229,7 @@ fields:
       flags: source
       warrant: dependent
     laws[].requires:
+      graph: claims
       name: the law rests on the unit
       cycles: judged
       flags: source
@@ -235,6 +241,7 @@ fields:
       flags: source
       warrant: non-inferential
     laws[].requires:
+      graph: claims
       name: the law rests on the unit
       cycles: judged
       flags: source
@@ -246,6 +253,7 @@ fields:
       flags: source
       warrant: non-inferential
     uses:
+      graph: claims
       name: uses a consequence of the derivation
       targets: [derivation]
       cycles: judged

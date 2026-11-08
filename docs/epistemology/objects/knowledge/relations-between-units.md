@@ -71,7 +71,7 @@ Each relation states whether its graph may hold a cycle:
 | `presupposes` between questions | judged | a mutual presupposition makes the two presuppositions equivalent |
 | `enables`, `defeats` | admitted | cycles between questions are resolved by iteration, and two answers may attack each other |
 
-A symmetric relation has no direction, so it holds no cycle; it is irreflexive, and it is written once for each pair or set. ^cycles
+The relations whose cycles are judged form one graph of claims, so a cycle is found when it passes through several of them, such as a support, a ground and the requirement of a law. A symmetric relation has no direction, so it holds no cycle; it is irreflexive, and it is written once for each pair or set. ^cycles
 
 ## Distinctions
 
