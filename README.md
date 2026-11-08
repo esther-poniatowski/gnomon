@@ -105,7 +105,7 @@ gnomon check ./my-problem
 gnomon vocabulary ./my-problem
 ```
 
-Every command is specified in the [CLI reference](docs/guide/cli-reference.md).
+The [tutorial starting an inquiry from an empty folder](docs/guide/first-inquiry.md) applies these commands to a first inquiry, record by record. Every command is specified in the [CLI reference](docs/guide/cli-reference.md).
 
 ---
 
