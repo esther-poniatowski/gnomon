@@ -549,8 +549,17 @@ def _resolved_input(
         states = s.itinerary.states
         record = states(ref, revision) if states is not None else None
         if record is None:
-            text = f"{s.where}: {ref} cannot be read at the revision {revision}"
-            return None, [finding(rules.ITINERARY_UNREADABLE_STATE, text, *given, "as_of")]
+            unavailable = getattr(states, "unavailable", None)
+            if callable(unavailable) and unavailable(ref, revision):
+                text = (
+                    f"{s.where}: the revision {revision} is absent from this clone, which lacks the"
+                    f" full history, so {ref} is not read at it"
+                )
+                rule = rules.ITINERARY_UNAVAILABLE_HISTORY
+            else:
+                text = f"{s.where}: {ref} cannot be read at the revision {revision}"
+                rule = rules.ITINERARY_UNREADABLE_STATE
+            return None, [finding(rule, text, *given, "as_of")]
     if record is None:
         own = s.itinerary.own
         if isinstance(ref, str) and ref in s.itinerary.by_id:

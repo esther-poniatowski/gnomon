@@ -134,6 +134,11 @@ ITINERARY_UNVERSIONED_QUESTION_REVISION = _rule(
     "itinerary/unversioned-question-revision",
     "A step revises a question whose version at the revision it read equals its present version.",
 )
+ITINERARY_UNAVAILABLE_HISTORY = _rule(
+    "itinerary/unavailable-history",
+    "An input names a revision absent from a clone that lacks the full history.",
+    "warning",
+)
 ITINERARY_UNCHANGED_STATE = _rule(
     "itinerary/unchanged-state",
     "A change of knowledge state names no earlier revision, or the status of its record did not"
