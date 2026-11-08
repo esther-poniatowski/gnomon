@@ -98,6 +98,14 @@ A researcher new to `gnomon` needs a procedure that leads, step by step, from a 
 - [x] Index the fields of every record in the generated [field index](docs/guide/field-index.md), registered in the [user guide](docs/guide/_index.md), in alphabetical order of their paths, nested paths included, each linked to the note that documents it and named by its row, since a table row carries no anchor. 🆔 field-index
 	- [x] Decide whether the field index replaces the option lists of the specification notes and of the templates (declined), as the [decision on one source per unit](docs/adr/one-source-per-unit.md#^vocabulary-copies) leaves open.
 	- [x] Replace the 262 placeholder descriptions of the base schemas, such as "The name of the record.", which the field index displays, by the content of the row that documents each field.
+- [ ] Publish the user-facing documentation as a site built by Sphinx. Sphinx reads the Markdown notes through `myst_parser`, as in the documentation of Anagraphe. Until then the notes stay without Sphinx, and the job `docs` is removed from the workflow of continuous integration. 🆔 docs-site
+	- [ ] Decide which folders the site reads. The guide and the specification serve the user, and a trial build of these two folders sends 180 of its 210 unresolved links into the epistemology and the procedures. The decisions, the proposals and the references serve the maintainers.
+	- [ ] Configure Sphinx in `docs/conf.py`, and limit the notes read by Sphinx to the chosen folders with `include_patterns`. A table of contents limits only the navigation, so Sphinx would still read every other note.
+	- [ ] Adapt the build to three forms of the notes in `conf.py`, leaving the notes unchanged:
+		- [ ] add a hidden table of contents to each `_index.md`;
+		- [ ] turn each block anchor `^id`, and each link `#^id`, into a MyST target;
+		- [ ] point each link that leaves the site to its file on GitHub.
+	- [ ] Restore the job `docs` of the workflow, running `sphinx-build -b html docs/ docs/_build/html`, and fail its build on any warning.
 
 ## 7. Checks
 
