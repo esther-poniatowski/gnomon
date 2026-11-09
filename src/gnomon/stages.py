@@ -18,8 +18,9 @@ from typing import Any, Mapping
 #: other than abandonment.
 CONCLUDING_STATUSES = frozenset({"solved", "dissolved", "answered"})
 
-#: The judged verdicts of a norm; ``pending`` is the verdict of a norm not yet judged.
-JUDGED_VERDICTS = frozenset({"pass", "fail"})
+#: The judged verdicts of a norm; ``pending`` is the verdict of a norm not yet judged, whereas an
+#: ``inconclusive`` norm was judged without being met or failed.
+JUDGED_VERDICTS = frozenset({"pass", "fail", "inconclusive"})
 
 #: The stages of an itinerary, in the order of its course.
 STAGES = ("planned", "in-progress", "concluded", "abandoned")

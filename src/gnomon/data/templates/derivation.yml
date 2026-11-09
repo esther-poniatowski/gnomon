@@ -49,7 +49,7 @@ posits:                          # optional; one entry per premise introduced on
       ref: "STEP, SOURCE OR SCHEME"   # empty when the origin is none
     tests:                       # empty while no test is made
       - kind:                    # consistency (the neglected terms stay smaller than the terms kept) | limit (the consequence recovers a known result in a limit) | exact (a proof that the posited form or relation holds) | approximation (a bound on the distance to the exact object) | empirical (a comparison of the consequence with data) | computation (a computation, certified or numerical, of the posited object)
-        verdict:                 # supports (the result of the test agrees with the posit) | refutes (the result contradicts the posit, which loses its support)
+        verdict:                 # supports (the result of the test agrees with the posit) | refutes (the result contradicts the posit, which loses its support) | inconclusive (the result neither agrees with the posit nor contradicts it)
         standard:                # certified (a computation whose result is proved, such as interval arithmetic) | numerical (a computation with an error that no proof bounds); computation only
         by: "MOVE, RECORD OR SOURCE"
 

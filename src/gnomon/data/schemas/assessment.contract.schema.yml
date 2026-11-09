@@ -81,12 +81,14 @@ properties:
         - verdict
         - evidence
         - derivation
+        - holds_on
       properties:
         verdict:
           enum:
           - pending
           - pass
           - fail
+          - inconclusive
           - not-applicable
           - null
   appraisal:

@@ -50,6 +50,7 @@ RECORD_KINDS: frozenset[str] = frozenset(
         "answer",
         "binding",
         "derivation",
+        "assessment",
     }
 )
 
@@ -165,6 +166,11 @@ TYPE_PATH_FORMULA: Mapping[str, tuple[str, ...]] = {
     ),
     "model": ("operations[].regime", "operations[].bound"),
     "derivation": ("objects[].expression",),
+    "assessment": (
+        "tests.admissibility.*.holds_on",
+        "tests.warrant.*.holds_on",
+        "obligations[].holds_on",
+    ),
     "binding": (
         "feature_pairs[].exemplified",
         "condition_pairs[].model_condition",
@@ -386,6 +392,12 @@ def reach(node: Any, path: str) -> list[tuple[Place, str]]:
     for step in path.split("."):
         key, listed = (step[:-2], True) if step.endswith("[]") else (step, False)
         nxt: list[tuple[Place, Any]] = []
+        if key == "*":
+            for place, held in found:
+                if isinstance(held, Mapping):
+                    nxt.extend(((*place, str(k)), v) for k, v in held.items() if v is not None)
+            found = nxt
+            continue
         for place, held in found:
             value = held.get(key) if isinstance(held, Mapping) else None
             if listed and isinstance(value, list):
@@ -419,7 +431,8 @@ def visible_records(
     target system, the phenomenon and the backgrounds of that question; a model sees its parents
     and its background; a binding sees its model, its phenomenon and the target system of that
     phenomenon; a derivation sees the records that hold its premises, the record that it serves and
-    the derivations whose consequences it uses. Any other record sees none through this function.
+    the derivations whose consequences it uses; an assessment sees the answer that it assesses and
+    the records that this answer sees. Any other record sees none through this function.
 
     >>> records = {"quest.a.b": {"subject": {"phenomenon": "phen.a.b"}},
     ...            "phen.a.b": {"id": "phen.a.b"}}
@@ -454,6 +467,10 @@ def visible_records(
         target: Mapping[str, Any] = stated if isinstance(stated, Mapping) else {}
         phenomenon = records.get(str(target.get("phenomenon")), {})
         names = [record.get("model"), target.get("phenomenon"), phenomenon.get("target_system")]
+    elif kind == "assessment":
+        assessed = records.get(str(record.get("assesses")), {})
+        if assessed.get("type") == "answer":
+            return [assessed, *visible_records(assessed, records)]
     found = [
         records[name]
         for name in dict.fromkeys(n for n in names if isinstance(n, str))

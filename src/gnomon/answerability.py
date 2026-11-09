@@ -112,6 +112,7 @@ class Diagnosis:
     impeached: set[str] = field(default_factory=set)
     conditional: set[str] = field(default_factory=set)
     judge_anew: list[str] = field(default_factory=list)
+    narrowings: list[dict[str, str]] = field(default_factory=list)
 
 
 def routes_of(question: Mapping[str, Any]) -> tuple[str, ...]:
@@ -211,13 +212,19 @@ def _output_of(step: Mapping[str, Any]) -> str:
     return str((step.get("output") or {}).get("ref") or "")
 
 
-def _spread(
-    steps: Mapping[str, Mapping[str, Any]], own: str, verdict: str, marked: set[str]
-) -> set[str]:
-    """Return the outputs of the steps that a verdict reaches in one itinerary.
+#: The verdicts of a norm that leave it unsettled: not judged yet, or judged without being met or
+#: failed.
+UNSETTLED = frozenset({"pending", "inconclusive"})
 
-    A step is reached when its norm has the verdict, or when it takes as input a marked record, the
-    output of a reached step, or a reached step named in full by ``own`` and its identifier.
+
+def _spread(
+    steps: Mapping[str, Mapping[str, Any]], own: str, verdicts: frozenset[str], marked: set[str]
+) -> set[str]:
+    """Return the outputs of the steps that a set of verdicts reaches in one itinerary.
+
+    A step is reached when its norm has one of the verdicts, or when it takes as input a marked
+    record, the output of a reached step, or a reached step named in full by ``own`` and its
+    identifier.
     """
     reached: set[str] = set()
     products: set[str] = set()
@@ -231,7 +238,7 @@ def _spread(
                 r in marked or r in products or (r.startswith(own) and r[len(own) :] in reached)
                 for r in _inputs_of(step)
             )
-            if (step.get("norm") or {}).get("verdict") == verdict or upstream:
+            if (step.get("norm") or {}).get("verdict") in verdicts or upstream:
                 reached.add(name)
                 changed = True
                 if _output_of(step):
@@ -240,11 +247,11 @@ def _spread(
 
 
 def _awaiting(steps: Mapping[str, Mapping[str, Any]], own: str, records: Records) -> list[str]:
-    """Return the steps whose verdict is pending while their output record is stabilized."""
+    """Return the steps whose norm is unsettled while their output record is stabilized."""
     return [
         f"{own}{name}"
         for name, step in sorted(steps.items())
-        if (step.get("norm") or {}).get("verdict") == "pending"
+        if (step.get("norm") or {}).get("verdict") in UNSETTLED
         and (records.get(_output_of(step)) or {}).get("status") == "stabilized"
     ]
 
@@ -254,9 +261,9 @@ def itinerary_state(records: Records) -> tuple[set[str], set[str], list[str]]:
     judgment.
 
     A record is impeached when a step that produced it failed its norm, or took an impeached record
-    or the output of an impeached step as input; a pending verdict propagates the same way and makes
-    its products conditional. A step whose verdict is pending while its record is stabilized awaits
-    a new judgment of its norm.
+    or the output of an impeached step as input; a pending or an inconclusive verdict propagates the
+    same way and makes its products conditional. A step whose norm is unsettled while its record is
+    stabilized awaits a new judgment of its norm.
     """
     impeached: set[str] = set()
     conditional: set[str] = set()
@@ -266,8 +273,8 @@ def itinerary_state(records: Records) -> tuple[set[str], set[str], list[str]]:
         steps = {
             str(s.get("id")): s for s in itinerary.get("steps") or [] if isinstance(s, Mapping)
         }
-        impeached |= _spread(steps, own, "fail", impeached)
-        conditional |= _spread(steps, own, "pending", conditional)
+        impeached |= _spread(steps, own, frozenset({"fail"}), impeached)
+        conditional |= _spread(steps, own, UNSETTLED, conditional)
         anew += _awaiting(steps, own, records)
     return impeached, conditional - impeached, anew
 
@@ -306,6 +313,7 @@ def merge(diagnoses: list[Diagnosis]) -> Diagnosis:
         merged.conditional |= d.conditional
         merged.judge_anew += d.judge_anew
         merged.revisions += [r for r in d.revisions if r not in merged.revisions]
+        merged.narrowings += [n for n in d.narrowings if n not in merged.narrowings]
     merged.questions.sort(key=lambda q: q.question)
     return merged
 
@@ -438,6 +446,7 @@ def diagnose(
         conditional=conditional,
         judge_anew=anew,
         revisions=revisions(records, itineraries=local),
+        narrowings=c.scope_narrowings({**records, **local}),
     )
     for ident in sorted(i for i, r in local.items() if r.get("type") == "question"):
         question = local[ident]
@@ -507,6 +516,7 @@ def as_document(diagnosis: Diagnosis) -> dict[str, Any]:
             "conditional": sorted(diagnosis.conditional),
             "judge_anew": sorted(diagnosis.judge_anew),
         },
+        "narrowings": sorted(diagnosis.narrowings, key=lambda n: (n["answer"], n["test"])),
     }
 
 
@@ -531,6 +541,30 @@ def _flag(dependent: str, reasons: Mapping[str, str]) -> str:
     """
     reason = reasons.get(dependent)
     return f"{dependent} via {reason}" if reason else dependent
+
+
+def _review_lines(diagnosis: Diagnosis) -> list[str]:
+    """Return the lines that follow the routes: the dependents to review after a revision, the
+    norms to judge anew, the narrowings of scope that failed tests propose, and the impeached
+    records."""
+    lines = [
+        f"review after the {rev.kind} of {rev.record} ({rev.step}):"
+        f" {', '.join(_flag(d, rev.reasons) for d in rev.to_review)}"
+        for rev in sorted(diagnosis.revisions, key=lambda x: x.step)
+        if rev.to_review
+    ]
+    lines += [
+        f"judge anew the norm of {step}, whose record is stabilized"
+        for step in sorted(diagnosis.judge_anew)
+    ]
+    lines += [
+        f"narrow the scope of {n['answer']} to {n['holds_on']}: {n['test']} of"
+        f" {n['assessment']} fails beyond it; revise the answer by scope-narrowing"
+        for n in sorted(diagnosis.narrowings, key=lambda n: (n["answer"], n["test"]))
+    ]
+    if diagnosis.impeached:
+        lines.append(f"impeached records: {', '.join(sorted(diagnosis.impeached))}")
+    return lines
 
 
 def render_text(diagnosis: Diagnosis) -> str:
@@ -559,16 +593,7 @@ def render_text(diagnosis: Diagnosis) -> str:
                 lines.append(
                     "  every condition is established: obtain the answer, then evaluate it"
                 )
-    for rev in sorted(diagnosis.revisions, key=lambda x: x.step):
-        if rev.to_review:
-            lines.append(
-                f"review after the {rev.kind} of {rev.record} ({rev.step}):"
-                f" {', '.join(_flag(d, rev.reasons) for d in rev.to_review)}"
-            )
-    for step in sorted(diagnosis.judge_anew):
-        lines.append(f"judge anew the norm of {step}, whose record is stabilized")
-    if diagnosis.impeached:
-        lines.append(f"impeached records: {', '.join(sorted(diagnosis.impeached))}")
+    lines += _review_lines(diagnosis)
     if any_ready:
         lines.append(
             "each ready act can be taken now; the choice among them is the researcher's, as"

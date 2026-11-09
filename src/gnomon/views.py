@@ -279,13 +279,23 @@ def next_act(diagnosis_document: Mapping[str, Any]) -> dict[str, Any]:
         }
         for r in diagnosis_document.get("revisions") or []
     ]
+    narrowings = [
+        {
+            "answer": n["answer"],
+            "holds_on": n["holds_on"],
+            "test": n["test"],
+            "assessment": n["assessment"],
+        }
+        for n in diagnosis_document.get("narrowings") or []
+    ]
     return {
-        **_header("next-act", "Open conditions and ready acts"),
+        **_header("next-act", "Open conditions and ready acts", version=2),
         "conditions": conditions,
         "acts": acts,
         "refuted": refuted,
         "revisions": revisions,
         "signals": signals,
+        "narrowings": narrowings,
     }
 
 

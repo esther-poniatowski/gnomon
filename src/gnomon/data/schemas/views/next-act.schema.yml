@@ -18,9 +18,10 @@ required:
 - refuted
 - revisions
 - signals
+- narrowings
 properties:
   _schema:
-    const: gnomon:view.next-act@1
+    const: gnomon:view.next-act@2
     title: Schema
   id:
     const: view.next-act
@@ -182,3 +183,33 @@ properties:
         signal:
           type: string
           title: Signal
+  narrowings:
+    type: array
+    x-kind: table
+    title: Narrowings of scope
+    description: per answer whose test fails beyond a subdomain that the test names, the scope-narrowing
+      revision that the failure proposes
+    items:
+      type: object
+      additionalProperties: false
+      required:
+      - answer
+      - holds_on
+      - test
+      - assessment
+      properties:
+        answer:
+          type: string
+          x-kind: label
+          title: Answer
+        holds_on:
+          type: string
+          title: Holds on
+        test:
+          type: string
+          x-kind: label
+          title: Test
+        assessment:
+          type: string
+          x-kind: label
+          title: Assessment

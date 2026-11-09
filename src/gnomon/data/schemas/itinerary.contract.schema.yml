@@ -58,6 +58,7 @@ properties:
               - pass
               - fail
               - pending
+              - inconclusive
               - null
         rationale:
           propertyNames:

@@ -487,6 +487,10 @@ COMPLETENESS_UNASSESSED_OBLIGATION = _rule(
     "A proof obligation of the question has no entry in an assessment made against it.",
     "warning",
 )
+COMPLETENESS_MISPLACED_HOLDS_ON = _rule(
+    "completeness/misplaced-holds-on",
+    "A test or an obligation that did not fail names a subdomain under holds_on.",
+)
 COMPLETENESS_EXCLUDED_EVENT = _rule(
     "completeness/excluded-event",
     "A restriction of the kind without-event names no excluded event, or a restriction of another"

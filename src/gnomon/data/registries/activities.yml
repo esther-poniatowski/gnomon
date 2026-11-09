@@ -18,7 +18,10 @@
 # `norm` names the test that judges an instance of the activity, and an itinerary records its verdict.
 # `mode` names the inference that the activity performs, from the modes listed under `itinerary` in
 # `../vocabularies.yml`. `context` states whether the activity serves discovery, justification,
-# or both.
+# or both. `commitment`, on an activity whose product is a commitment rather than a warranted
+# result, names its kind: `generation` adds a candidate or a tool, and `decision` fixes a choice,
+# as the terminal acts of the note on question decomposition state; the product of such a step is a
+# revisable assumption of every answer that rests on it.
 
 id: registry.activities
 type: activity-registry
@@ -95,6 +98,7 @@ activities:
     norm: norm.task-specification
     mode: non-inferential
     context: discovery
+    commitment: decision
   - id: question-generation
     family: problem-posing
     inputs:
@@ -119,6 +123,7 @@ activities:
     norm: norm.explicit-definition
     mode: deductive
     context: both
+    commitment: decision
   - id: explication
     family: conceptual-activities
     inputs:
@@ -127,6 +132,7 @@ activities:
     norm: norm.explication
     mode: non-inferential
     context: discovery
+    commitment: decision
   - id: operationalization
     family: conceptual-activities
     inputs:
@@ -135,6 +141,7 @@ activities:
     norm: norm.operationalization
     mode: non-inferential
     context: both
+    commitment: decision
   - id: classification
     family: conceptual-activities
     inputs:
@@ -153,6 +160,7 @@ activities:
     norm: norm.concept-revision
     mode: abductive
     context: discovery
+    commitment: generation
   - id: experimental-design
     family: empirical-activities
     inputs:
@@ -164,6 +172,7 @@ activities:
     norm: norm.experimental-design
     mode: deductive
     context: justification
+    commitment: generation
   - id: method-design
     family: empirical-activities
     inputs:
@@ -176,6 +185,7 @@ activities:
     norm: norm.method-design
     mode: deductive
     context: both
+    commitment: generation
   - id: scheme-design
     family: empirical-activities
     inputs:
@@ -189,6 +199,7 @@ activities:
     norm: norm.scheme-design
     mode: deductive
     context: both
+    commitment: generation
   - id: observation
     family: empirical-activities
     inputs:
@@ -250,6 +261,7 @@ activities:
     norm: norm.delimitation
     mode: non-inferential
     context: discovery
+    commitment: decision
   - id: background-appraisal
     family: model-building
     inputs:
@@ -275,6 +287,7 @@ activities:
     norm: norm.abstraction
     mode: non-inferential
     context: discovery
+    commitment: decision
   - id: idealization
     family: model-building
     inputs:
@@ -283,6 +296,7 @@ activities:
     norm: norm.idealization
     mode: non-inferential
     context: discovery
+    commitment: decision
   - id: de-idealization
     family: model-building
     inputs:
@@ -300,6 +314,7 @@ activities:
     norm: norm.decomposition-localization
     mode: abductive
     context: discovery
+    commitment: generation
   - id: model-assembly
     family: model-building
     inputs:
@@ -309,6 +324,7 @@ activities:
     norm: norm.model-assembly
     mode: non-inferential
     context: discovery
+    commitment: generation
   - id: model-analogy
     family: model-building
     inputs:
@@ -317,6 +333,7 @@ activities:
     norm: norm.model-analogy
     mode: analogical
     context: discovery
+    commitment: generation
   - id: formalization
     family: model-building
     inputs:
@@ -325,6 +342,7 @@ activities:
     norm: norm.formalization
     mode: non-inferential
     context: both
+    commitment: generation
   - id: fitting
     family: model-building
     inputs:
@@ -344,6 +362,7 @@ activities:
     norm: norm.binding
     mode: non-inferential
     context: justification
+    commitment: decision
   - id: keying
     family: model-building
     inputs:
@@ -353,6 +372,7 @@ activities:
     norm: norm.keying
     mode: non-inferential
     context: justification
+    commitment: decision
   - id: derivation
     family: model-analysis
     inputs:
@@ -412,6 +432,7 @@ activities:
     norm: norm.abduction
     mode: abductive
     context: discovery
+    commitment: generation
   - id: induction
     family: target-inference
     inputs:

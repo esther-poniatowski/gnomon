@@ -205,6 +205,8 @@ vocabularies:
       name: a derivation establishes the implication
     - value: fail
       name: a counterexample shows that the implication does not hold
+    - value: inconclusive
+      name: the derivation or the search was carried out and neither establishes nor refutes the implication
     - value: not-applicable
       name: no test applies to the obligation, as for a corrective answer
     appraisal.virtue:
@@ -786,6 +788,8 @@ vocabularies:
       name: the result of the test agrees with the posit
     - value: refutes
       name: the result contradicts the posit, which loses its support
+    - value: inconclusive
+      name: the result neither agrees with the posit nor contradicts it
     posits.tests.standard:
     - value: certified
       name: a computation whose result is proved, such as interval arithmetic
@@ -1048,6 +1052,8 @@ vocabularies:
       name: the output does not meet the norm of the activity
     - value: pending
       name: the norm has not been judged yet
+    - value: inconclusive
+      name: the norm was judged on the output, and the evidence neither meets nor fails it
     steps.acts_on:
     - value: definiteness
       name: each term has a definition or a criterion adequate to its use

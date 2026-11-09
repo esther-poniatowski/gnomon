@@ -27,7 +27,7 @@ exports:
   - gnomon:view.expressions@1
   - gnomon:view.itinerary-progress@2
   - gnomon:view.maturity@1
-  - gnomon:view.next-act@1
+  - gnomon:view.next-act@2
   - gnomon:view.problem-state@1
   - gnomon:view.question-statements@1
   - gnomon:view.question-tree@1

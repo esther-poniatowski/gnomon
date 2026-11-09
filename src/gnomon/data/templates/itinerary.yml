@@ -23,7 +23,7 @@ steps:                           # one entry per activity instance; the steps ma
     derivation: derivation.TOPIC.NAME   # optional; the derivation record that holds the reasoning of the step
     norm:
       test: norm.ACTIVITY        # the test named by the activity registry for this activity
-      verdict: pending           # pass (the output meets the norm of the activity) | fail (the output does not meet the norm of the activity) | pending (the norm has not been judged yet)
+      verdict: pending           # pass (the output meets the norm of the activity) | fail (the output does not meet the norm of the activity) | pending (the norm has not been judged yet) | inconclusive (the norm was judged on the output, and the evidence neither meets nor fails it)
       evidence: "WHY THE PRODUCT MEETS THE NORM OR FAILS IT"   # fill with a verdict pass or fail, from the content of the products
       judged: DATE               # fill with a verdict pass or fail; the date of the last judgment, written YYYY-MM-DD
     rationale:

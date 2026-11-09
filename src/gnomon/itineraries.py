@@ -96,6 +96,7 @@ class Activity:
     mode: str
     context: str
     output_values: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
+    commitment: str | None = None
 
 
 #: The form of the date of a judgment: YYYY-MM-DD.
@@ -177,6 +178,7 @@ def activities(source: Path | None = None) -> dict[str, Activity]:
                 str(name): tuple(str(value) for value in values or [])
                 for name, values in (entry.get("output_values") or {}).items()
             },
+            commitment=str(entry["commitment"]) if entry.get("commitment") else None,
         )
         for entry in registry.get("activities") or []
     }

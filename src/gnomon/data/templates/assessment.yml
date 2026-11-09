@@ -15,7 +15,7 @@ assesses: ans.TOPIC.NAME         # the candidate answer, or the record of a cons
 against: quest.TOPIC.NAME        # the question of an answer, or the revised question that a reformulating answer names; the problem of a construct
 against_version: "1"             # the version of the question that the verdicts read; omit for a construct
 
-tests:                           # verdict: pending | pass | fail | not-applicable
+tests:                           # verdict: pending | pass | fail | inconclusive | not-applicable; on a failed test, holds_on: the subdomain over which the evidence still supports the claim, as an expression over declared symbols
   admissibility:                 # the tests of the core, then the tests of each aim block
     product: {verdict: pending, evidence: "DERIVATION, SIMULATION, MEASUREMENT OR COMPARISON THAT SETTLES THE TEST"}
     scope: {verdict: pending, evidence: ""}
@@ -54,9 +54,10 @@ comparisons:                     # one entry per comparison that a verdict of fi
 
 obligations:                     # one entry per proof obligation of the question, named by its identifier
   - obligation: OBLIGATION
-    verdict: pending             # pending (no derivation or counterexample settles the obligation yet) | pass (a derivation establishes the implication) | fail (a counterexample shows that the implication does not hold) | not-applicable (no test applies to the obligation, as for a corrective answer)
+    verdict: pending             # pending (no derivation or counterexample settles the obligation yet) | pass (a derivation establishes the implication) | fail (a counterexample shows that the implication does not hold) | inconclusive (the derivation or the search was carried out and neither establishes nor refutes the implication) | not-applicable (no test applies to the obligation, as for a corrective answer)
     evidence: "THE DERIVATION OR THE COUNTEREXAMPLE THAT SETTLES THE IMPLICATION"
     derivation: derivation.TOPIC.NAME   # optional; the derivation record that settles the obligation
+    holds_on: "EXPRESSION OVER DECLARED SYMBOLS"   # fail only, optional; the subdomain over which the implication still holds
 
 appraisal:                       # one entry per `preferred` virtue of the question, only once no test of admissibility or of warrant fails or stays pending; the product test already settles each `constitutive` virtue
   - virtue:                      # unification (the account explains many phenomena through few common principles) | generality (the explanatory structure extends across cases or parameter regimes) | robustness (conclusions survive changes of parameters, assumptions or representation beyond the declared idealizations) | intelligibility (consequences can be recognized without the full calculation) | structural-transparency (the representation makes components, relations and dependencies salient) | economy (the purpose is achieved without unnecessary complexity) | tractability (the model can be analyzed or computed with available resources)

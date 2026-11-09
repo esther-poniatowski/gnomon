@@ -398,3 +398,94 @@ def mismatched_obligations(
                 text = f"obligations: the proof obligation {ident} of the question has no entry"
                 found.append(finding(rules.COMPLETENESS_UNASSESSED_OBLIGATION, text, "obligations"))
     return found
+
+
+def _judged_entries(
+    assessment: Mapping[str, Any],
+) -> list[tuple[tuple[Any, ...], Mapping[str, Any]]]:
+    """Return each test and each obligation of an assessment, with its path in the record."""
+    stated = assessment.get("tests")
+    tests: Mapping[str, Any] = stated if isinstance(stated, Mapping) else {}
+    found: list[tuple[tuple[Any, ...], Mapping[str, Any]]] = [
+        (("tests", level, name), entry)
+        for level in ("admissibility", "warrant")
+        for name, entry in (tests.get(level) or {}).items()
+        if isinstance(entry, Mapping)
+    ]
+    found += [
+        (("obligations", index), entry)
+        for index, entry in enumerate(assessment.get("obligations") or [])
+        if isinstance(entry, Mapping)
+    ]
+    return found
+
+
+def misplaced_holds_on(assessment: Mapping[str, Any]) -> list[Finding]:
+    """Return each subdomain ``holds_on`` stated on a test or an obligation that did not fail.
+
+    A test that passes holds over the whole domain of the claim, so only a failed test names the
+    subdomain over which its evidence still supports the claim.
+
+    >>> [f.rule.id for f in misplaced_holds_on(
+    ...     {"tests": {"warrant": {"fidelity": {"verdict": "pass", "holds_on": "g < 1"}}}})]
+    ['completeness/misplaced-holds-on']
+    """
+    found = []
+    for path, entry in _judged_entries(assessment):
+        if entry.get("holds_on") and entry.get("verdict") != "fail":
+            text = (
+                f"{'.'.join(str(p) for p in path)}: holds_on names a subdomain, and the verdict is"
+                f" {entry.get('verdict')}, not fail"
+            )
+            found.append(finding(rules.COMPLETENESS_MISPLACED_HOLDS_ON, text, *path, "holds_on"))
+    return found
+
+
+def scope_narrowings(records: Mapping[str, Mapping[str, Any]]) -> list[dict[str, str]]:
+    """Return the narrowings of scope that the failed tests of the assessments propose.
+
+    A test or an obligation that fails while naming, under ``holds_on``, the subdomain over which
+    its evidence still supports the claim proposes to revise the assessed answer by narrowing its
+    scope to that subdomain. The proposal is withdrawn once another answer revises the assessed
+    one, and it is never made by a retracted or a void assessment.
+
+    >>> records = {"asmt.a": {"type": "assessment", "assesses": "ans.a", "tests": {"warrant": {
+    ...     "fidelity": {"verdict": "fail", "holds_on": "g < 1"}}}}}
+    >>> scope_narrowings(records)  # doctest: +NORMALIZE_WHITESPACE
+    [{'assessment': 'asmt.a', 'answer': 'ans.a', 'test': 'tests.warrant.fidelity',
+      'holds_on': 'g < 1'}]
+    """
+    revised = {
+        str(entry.get("target"))
+        for record in records.values()
+        if record.get("type") == "answer"
+        for entry in record.get("relations") or []
+        if isinstance(entry, Mapping) and entry.get("relation") == "revises"
+    }
+    found = []
+    for ident in sorted(records):
+        assessment = records[ident]
+        answer = str(assessment.get("assesses") or "")
+        if (
+            assessment.get("type") != "assessment"
+            or assessment.get("status") == "retracted"
+            or is_void(assessment, records)
+            or answer in revised
+        ):
+            continue
+        for path, entry in _judged_entries(assessment):
+            if entry.get("verdict") == "fail" and entry.get("holds_on"):
+                where = (
+                    f"obligations.{entry.get('obligation') or path[1]}"
+                    if path[0] == "obligations"
+                    else ".".join(str(p) for p in path)
+                )
+                found.append(
+                    {
+                        "assessment": ident,
+                        "answer": answer,
+                        "test": where,
+                        "holds_on": str(entry["holds_on"]),
+                    }
+                )
+    return found

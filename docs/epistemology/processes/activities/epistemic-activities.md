@@ -40,7 +40,8 @@ An activity type is specified by its **signature**: ^activity-criterion
 - the **operation** that turns the inputs into the output;
 - the **norm**, a named test stating when the output is correct or adequate;
 - the **mode** of inference performed by the operation;
-- the **context** of the activity: discovery or justification.
+- the **context** of the activity: discovery or justification;
+- for an activity whose product is a commitment rather than a warranted result, the kind of that **commitment**: a generation adds a candidate or a tool, and a decision fixes a choice, as the [terminal acts](../inquiry/question-decomposition.md#^terminal-acts) state.
 
 Two activity types are distinct when they differ in their output type or in their norm. When two procedures share both, they are two methods for one activity type, such as two estimators implementing [fitting](model-building.md). A difference of inputs alone makes no new activity either: an activity may take alternative inputs under its one norm, such as an explication that takes a concept or the explicandum that a problem names. The activities are therefore primitive, each defined by its output and its norm, and the composition of activities belongs to the structure of an itinerary, not to the definition of an activity. ^primitive-activities
 
@@ -56,7 +57,7 @@ Three attributes take their values from closed lists: ^attribute-vocabularies
 
 | Attribute | Values | Assigned to |
 | --- | --- | --- |
-| Verdict of the norm | `pass`, `fail`, `pending` | each step of an itinerary |
+| Verdict of the norm | `pass`, `fail`, `inconclusive`, `pending` | each step of an itinerary |
 | Mode | `deductive`, `inductive`, `abductive`, `analogical`, `error-statistical`, `model-based`, `non-inferential` | each activity type |
 | Context | `discovery`, `justification`, `both` | each activity type |
 

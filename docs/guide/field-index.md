@@ -172,11 +172,12 @@ Looks up each field of each record by its path, with its title, its description 
 | `obligations` | Obligations | per obligation, its identifier, and a verdict with the derivation or the counterexample that settles it | [Obligations](../specification/assessment.md) |
 | `obligations[].derivation` | Derivation | The identifier of the derivation record that settles the obligation. | [Obligations](../specification/assessment.md) |
 | `obligations[].evidence` | Evidence | the derivation or the counterexample that settles the implication | [Obligations](../specification/assessment.md) |
+| `obligations[].holds_on` | Holds on | on a failed obligation, the subdomain over which the implication still holds | [Obligations](../specification/assessment.md) |
 | `obligations[].obligation` | Obligation | the identifier of the proof obligation of the question that the entry settles | [Obligations](../specification/assessment.md) |
-| `obligations[].verdict` | Verdict | the verdict on the proof obligation: pending, pass, fail or not-applicable | [Obligations](../specification/assessment.md) |
+| `obligations[].verdict` | Verdict | the verdict on the proof obligation: pending, pass, fail, inconclusive or not-applicable | [Obligations](../specification/assessment.md) |
 | `status` | Status | the maturity of the assessment record, taken by every field that the block `maturity` leaves unmarked | — |
-| `tests` | Tests | verdict: pending \| pass \| fail \| not-applicable | [Tests](../specification/assessment.md) |
-| `tests.admissibility` | admissibility | per criterion of the tests of the core and of the tests of the block of the aim of the question, a verdict — pending · pass · fail · not-applicable — with the evidence that settles it | [Tests: admissibility](../specification/assessment.md) |
+| `tests` | Tests | verdict: pending \| pass \| fail \| inconclusive \| not-applicable, with the evidence that settles it, and on a failed test the subdomain over which the evidence still supports the claim, under holds_on | [Tests](../specification/assessment.md) |
+| `tests.admissibility` | admissibility | per criterion of the tests of the core and of the tests of the block of the aim of the question, a verdict — pending · pass · fail · inconclusive · not-applicable — with the evidence that settles it | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.admissible-explanans` | Admissible-explanans | block of an explanation | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.binding` | Binding | the verdict on whether the answer cites one binding of each model on which it runs to the phenomenon, with its evidence | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.consequence` | Consequence | block of model properties | [Tests: admissibility](../specification/assessment.md) |
@@ -192,10 +193,10 @@ Looks up each field of each record by its path, with its title, its description 
 | `tests.admissibility.target-status` | Target-status | block of an explanation | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.values` | Values | block of a description | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.witness-or-proof` | Witness-or-proof | block of modal knowledge | [Tests: admissibility](../specification/assessment.md) |
-| `tests.constraints` | constraints | per constraint of the problem, its name and a verdict — pending · pass · fail · not-applicable — with the evidence that settles it | [Tests: constraints](../specification/assessment.md) |
+| `tests.constraints` | constraints | per constraint of the problem, its name and a verdict — pending · pass · fail · inconclusive · not-applicable — with the evidence that settles it | [Tests: constraints](../specification/assessment.md) |
 | `tests.constraints[].constraint` | Constraint | the name of the constraint of the problem that the entry judges | [Tests: constraints](../specification/assessment.md) |
 | `tests.constraints[].evidence` | Evidence | the derivation, the simulation, the measurement or the comparison that settles the verdict | [Tests: constraints](../specification/assessment.md) |
-| `tests.constraints[].verdict` | Verdict | the verdict on the constraint: pending, pass, fail or not-applicable | [Tests: constraints](../specification/assessment.md) |
+| `tests.constraints[].verdict` | Verdict | the verdict on the constraint: pending, pass, fail, inconclusive or not-applicable | [Tests: constraints](../specification/assessment.md) |
 | `tests.warrant` | warrant | per criterion of the warrant table, a verdict with the evidence that settles it | [Tests: warrant](../specification/assessment.md) |
 | `tests.warrant.adequacy-to-use` | Adequacy-to-use | replaces fidelity for an answer that declares its use | [Tests: warrant](../specification/assessment.md) |
 | `tests.warrant.closure` | Closure | the verdict on whether the route fits the target, as the closure of its admitted laws decides, with its evidence | [Tests: warrant](../specification/assessment.md) |
@@ -475,7 +476,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `steps[].iterate` | iterate | the criterion that ends the repetition of a step that takes its own output type as input | [Steps: iterate](../specification/itinerary.md) |
 | `steps[].iterate.until` | Until | the criterion that ends the repetition | [Steps: iterate](../specification/itinerary.md) |
 | `steps[].mode` | mode | the kind of inference that the step draws, equal to the mode that the registry gives its activity | [Steps: mode](../specification/itinerary.md) |
-| `steps[].norm` | norm | the test named by the registry for the activity, written `norm.<activity>`, its verdict: pass · fail · pending, and, once judged, the evidence and the date of the judgment | [Steps: norm](../specification/itinerary.md) |
+| `steps[].norm` | norm | the test named by the registry for the activity, written `norm.<activity>`, its verdict: pass · fail · inconclusive · pending, and, once judged, the evidence and the date of the judgment | [Steps: norm](../specification/itinerary.md) |
 | `steps[].norm.evidence` | Evidence | why the product meets the norm or fails it | [Steps: norm](../specification/itinerary.md) |
 | `steps[].norm.judged` | Judged | the date of the last judgment of the verdict | [Steps: norm](../specification/itinerary.md) |
 | `steps[].norm.test` | Test | the test named by the activity registry for this activity | [Steps: norm](../specification/itinerary.md) |

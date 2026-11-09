@@ -131,6 +131,7 @@ properties:
                 enum:
                 - supports
                 - refutes
+                - inconclusive
                 - null
               standard:
                 enum:

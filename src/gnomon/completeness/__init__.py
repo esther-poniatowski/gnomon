@@ -72,8 +72,10 @@ from .assessments import (
     malformed_credence,
     misdirected_assessment,
     mismatched_obligations,
+    misplaced_holds_on,
     misversioned_assessment,
     premature_appraisal,
+    scope_narrowings,
     unrecorded_question_revision,
 )
 from .levels import (
@@ -191,6 +193,7 @@ __all__ = [
     "mismatched_occurrence",
     "mismatched_request",
     "mismatched_status_pairs",
+    "misplaced_holds_on",
     "misplaced_maturity",
     "misstated_limit",
     "misstated_obstacles",
@@ -210,6 +213,7 @@ __all__ = [
     "requirements_by_presence",
     "requirements_by_value",
     "result_aims",
+    "scope_narrowings",
     "target_types_by_evidential_status",
     "unanchored_explicandum",
     "unbound_outputs",

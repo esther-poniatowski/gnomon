@@ -212,7 +212,7 @@ properties:
               description: the date of the last judgment of the verdict
           title: norm
           description: 'the test named by the registry for the activity, written `norm.<activity>`, its
-            verdict: pass · fail · pending, and, once judged, the evidence and the date of the judgment'
+            verdict: pass · fail · inconclusive · pending, and, once judged, the evidence and the date of the judgment'
           examples:
           - '`norm.testing`, pending until the assessment is stabilized'
         rationale:

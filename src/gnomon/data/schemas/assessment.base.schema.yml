@@ -213,7 +213,7 @@ properties:
         x-comment: the tests of the core, then the tests of each aim block
         title: admissibility
         description: per criterion of the tests of the core and of the tests of the block of the aim of
-          the question, a verdict — pending · pass · fail · not-applicable — with the evidence that settles
+          the question, a verdict — pending · pass · fail · inconclusive · not-applicable — with the evidence that settles
           it
         examples:
         - 'contrast: pass, by producing the asynchronous state in a simulation; admissible explanans:
@@ -309,7 +309,7 @@ properties:
               x-template: pending
               x-kind: label
               title: Verdict
-              description: 'the verdict on the constraint: pending, pass, fail or not-applicable'
+              description: 'the verdict on the constraint: pending, pass, fail, inconclusive or not-applicable'
             evidence:
               type:
               - string
@@ -321,13 +321,13 @@ properties:
         x-comment: an assessment of a construct, in place of the two levels above; one entry per constraint
           of the problem
         title: constraints
-        description: per constraint of the problem, its name and a verdict — pending · pass · fail · not-applicable
+        description: per constraint of the problem, its name and a verdict — pending · pass · fail · inconclusive · not-applicable
           — with the evidence that settles it
         examples:
         - 'a model that reproduces the delay within the tolerance of the problem: pass'
-    x-comment: 'verdict: pending | pass | fail | not-applicable'
+    x-comment: 'verdict: pending | pass | fail | inconclusive | not-applicable; on a failed test, holds_on: the subdomain over which the evidence still supports the claim, as an expression over declared symbols'
     title: Tests
-    description: 'verdict: pending | pass | fail | not-applicable'
+    description: 'verdict: pending | pass | fail | inconclusive | not-applicable, with the evidence that settles it, and on a failed test the subdomain over which the evidence still supports the claim, under holds_on'
   comparisons:
     x-blank: true
     type:
@@ -399,7 +399,7 @@ properties:
           x-template: pending
           x-vocabulary: obligations.verdict
           title: Verdict
-          description: 'the verdict on the proof obligation: pending, pass, fail or not-applicable'
+          description: 'the verdict on the proof obligation: pending, pass, fail, inconclusive or not-applicable'
         evidence:
           type:
           - string
@@ -417,6 +417,15 @@ properties:
           x-comment: optional; the derivation record that settles the obligation
           title: Derivation
           description: The identifier of the derivation record that settles the obligation.
+        holds_on:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: fail only, optional; the subdomain over which the implication still holds
+          title: Holds on
+          description: on a failed obligation, the subdomain over which the implication still holds
     x-comment: one entry per proof obligation of the question, named by its identifier
     title: Obligations
     description: per obligation, its identifier, and a verdict with the derivation or the counterexample that settles it

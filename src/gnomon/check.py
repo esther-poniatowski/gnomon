@@ -368,7 +368,7 @@ def _symbols(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     kind = record.get("type")
     if kind in ("operators", "question"):
         external: Iterable[str] = ctx.symbols
-    elif kind in ("answer", "model", "binding", "derivation"):
+    elif kind in ("answer", "model", "binding", "derivation", "assessment"):
         external = [
             d.symbol
             for seen in v.visible_records(record, ctx.workspace.by_id)
@@ -502,6 +502,7 @@ def _assessment(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         + c.premature_appraisal(record)
         + c.misversioned_assessment(record, records)
         + c.mismatched_obligations(record, records)
+        + c.misplaced_holds_on(record)
     )
 
 

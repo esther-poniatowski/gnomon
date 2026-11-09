@@ -110,7 +110,7 @@ A serving question is **terminal** when some procedure has all its inputs availa
 | Generation | abduction; construction of a model, an instrument or an algorithm | candidates; access |
 | Decision | stipulative definition, choice of an idealization, choice of a standard | definiteness; answer type |
 
-Acts of generation add candidates or tools and justify no answer, and acts of decision fix a commitment and establish no fact. An answer obtained by either is therefore recorded as a revisable assumption, and these assumptions are the first to re-examine when the served answer fails.
+Acts of generation add candidates or tools and justify no answer, and acts of decision fix a commitment and establish no fact. An answer obtained by either is therefore recorded as a revisable assumption, and these assumptions are the first to re-examine when the served answer fails. The registry of activities marks each activity whose product is such a commitment, so the record of a step already states the assumption, and the exposure of an answer lists first each product of a marked step on which the answer rests.
 
 **Analysis is followed by synthesis.** Working backward identifies necessary conditions, as the analysis of Pappus does before its synthesis [pappus1986], and the steps of analysis cannot always be reversed. A combination step therefore composes the answers of the serving questions into an answer to the served question, and a check confirms that the combination is valid, as the [necessity and joint sufficiency of the conditions](../../objects/question/conditions-of-answerability.md#^sufficiency) require. When the conditions hold and no answer follows, a condition is missing, most often a bridging assumption. ^synthesis
 

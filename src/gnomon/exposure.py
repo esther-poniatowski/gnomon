@@ -44,6 +44,7 @@ import yaml
 
 from .derivations import recorded_descents, upstream
 from .identifiers import split_reference
+from .itineraries import activities
 from .vocabulary import identifiers, upstream_of, visible_records
 
 Records = Mapping[str, Mapping[str, Any]]
@@ -182,10 +183,18 @@ class _Walk:
         self.found: dict[tuple[str, str], Exposure] = {}
         self.visited: set[str] = set()
         self.descents = recorded_descents(records.values())
+        self.commitments = commitments(records)
 
     def expose(self, unit: str, kind: str, reason: str, via: str) -> None:
         """Record one exposing unit, keeping the first path that reaches it."""
         self.found.setdefault((unit, reason), Exposure(unit, kind, reason, via))
+
+    def commitment(self, reference: str, via: str) -> None:
+        """Expose the product of a generation or a decision that a reference names or lies in."""
+        split = split_reference(reference)
+        for product in (reference, split[0] if split else None):
+            if product in self.commitments:
+                self.expose(product, "commitment", self.commitments[product], via)
 
     def _law(self, reference: str) -> Mapping[str, Any] | None:
         """Return the law that a reference names, or None when it names no law."""
@@ -201,6 +210,7 @@ class _Walk:
         if reference in self.visited:
             return
         self.visited.add(reference)
+        self.commitment(reference, via)
         target = self.records.get(reference)
         if target is not None:
             kind = target.get("type")
@@ -403,12 +413,42 @@ class _Walk:
             self.expose(unit, "presupposition", "not discharged", "claim")
 
 
+def commitments(records: Records) -> dict[str, str]:
+    """Return the products of the steps whose activity is a generation or a decision, each with the
+    reason of its exposure.
+
+    Such a product adds a candidate or a tool, or fixes a choice, and establishes no fact, so it is
+    a revisable assumption of every answer that rests on it, as the terminal acts of the note on
+    question decomposition state.
+    """
+    registered = activities()
+    found: dict[str, str] = {}
+    for itinerary in sorted(
+        (r for r in records.values() if r.get("type") == "itinerary"),
+        key=lambda r: str(r.get("id")),
+    ):
+        for step in _entries(itinerary, "steps"):
+            act = registered.get(str(step.get("activity")))
+            product = _mapping(step.get("output")).get("ref")
+            if act is not None and act.commitment and isinstance(product, str):
+                found.setdefault(
+                    product,
+                    f"{act.commitment} by {act.id}, step {itinerary.get('id')}.{step.get('id')}",
+                )
+    return found
+
+
 def answer_exposure(records: Records, answer: str) -> list[Exposure]:
-    """Return the units that expose one answer, in the order in which the walk reaches them."""
+    """Return the units that expose one answer: first the products of a generation or a decision,
+    the revisable assumptions to re-examine first, then the others in the order in which the walk
+    reaches them."""
     walk = _Walk(records)
     walk.visited.add(answer)
     walk.answer(answer, "direct")
-    return list(walk.found.values())
+    found = list(walk.found.values())
+    return [e for e in found if e.kind == "commitment"] + [
+        e for e in found if e.kind != "commitment"
+    ]
 
 
 def exposure_rows(records: Records) -> Iterator[dict[str, str]]:
