@@ -94,7 +94,21 @@ ID_UNITS: Mapping[str, tuple[str, ...]] = {
     "design": ("steps", "rules"),
     "derivation": ("objects", "posits", "moves", "interpretations", "segments", "consequences"),
     "binding": ("feature_pairs", "condition_pairs"),
+    "question": (
+        "presuppositions",
+        "excludes",
+        "task.proof_obligations",
+        "subject.domain.restrictions",
+    ),
 }
+
+
+def _block(record: Mapping[str, Any], path: str) -> list[Mapping[str, Any]]:
+    """Return the entries of the list at a dotted path of a record, or none when it holds none."""
+    node: Any = record
+    for key in path.split("."):
+        node = node.get(key) if isinstance(node, Mapping) else None
+    return [entry for entry in node if isinstance(entry, Mapping)] if isinstance(node, list) else []
 
 
 def units(record: Mapping[str, Any]) -> list[str]:
@@ -104,12 +118,14 @@ def units(record: Mapping[str, Any]) -> list[str]:
     >>> units({"type": "model", "laws": [{"symbol": "onset"}],
     ...        "operations": [{"id": "drop-noise"}]})
     ['onset', 'drop-noise']
+    >>> units({"type": "question", "subject": {"domain": {"restrictions": [{"id": "gain"}]}}})
+    ['gain']
     """
     names = [entry.symbol for entry in declarations(record)]
     names += [
         str(entry["id"])
         for block in ID_UNITS.get(str(record.get("type", "")), ())
-        for entry in entries(record, block)
+        for entry in _block(record, block)
         if entry.get("id")
     ]
     return names

@@ -501,6 +501,7 @@ def _assessment(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         + c.misdirected_assessment(record, records, ctx.registries.constructs)
         + c.premature_appraisal(record)
         + c.misversioned_assessment(record, records)
+        + c.mismatched_obligations(record, records)
     )
 
 

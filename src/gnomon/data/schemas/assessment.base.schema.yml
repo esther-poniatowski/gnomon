@@ -384,6 +384,14 @@ properties:
     items:
       type: object
       properties:
+        obligation:
+          type:
+          - string
+          - 'null'
+          x-template: OBLIGATION
+          x-kind: label
+          title: Obligation
+          description: the identifier of the proof obligation of the question that the entry settles
         verdict:
           type:
           - string
@@ -409,9 +417,9 @@ properties:
           x-comment: optional; the derivation record that settles the obligation
           title: Derivation
           description: The identifier of the derivation record that settles the obligation.
-    x-comment: one entry per proof obligation of the question, in the same order
+    x-comment: one entry per proof obligation of the question, named by its identifier
     title: Obligations
-    description: per obligation, a verdict with the derivation or the counterexample that settles it
+    description: per obligation, its identifier, and a verdict with the derivation or the counterexample that settles it
     examples:
     - 'the necessary direction: pass, by the derivation of Lemma 2; the sufficient direction: fail, by
       a counterexample'

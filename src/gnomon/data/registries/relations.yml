@@ -174,7 +174,7 @@ fields:
     grounds[].record:
       graph: claims
       name: rests on the ground
-      targets: [model, background, binding, phenomenon, answer, target-system, derivation]
+      targets: [model, background, binding, phenomenon, answer, target-system, derivation, question]
       cycles: judged
       flags: source
       warrant: dependent

@@ -52,8 +52,9 @@ comparisons:                     # one entry per comparison that a verdict of fi
     version: VERSION             # the version of the binding
     data_version: VERSION        # the version of the data
 
-obligations:                     # one entry per proof obligation of the question, in the same order
-  - verdict: pending             # pending (no derivation or counterexample settles the obligation yet) | pass (a derivation establishes the implication) | fail (a counterexample shows that the implication does not hold) | not-applicable (no test applies to the obligation, as for a corrective answer)
+obligations:                     # one entry per proof obligation of the question, named by its identifier
+  - obligation: OBLIGATION
+    verdict: pending             # pending (no derivation or counterexample settles the obligation yet) | pass (a derivation establishes the implication) | fail (a counterexample shows that the implication does not hold) | not-applicable (no test applies to the obligation, as for a corrective answer)
     evidence: "THE DERIVATION OR THE COUNTEREXAMPLE THAT SETTLES THE IMPLICATION"
     derivation: derivation.TOPIC.NAME   # optional; the derivation record that settles the obligation
 

@@ -38,6 +38,7 @@ units:
   answer:
     - {list: claim.presuppositions, key: id, kind: presupposition, statement: reading}
   question:
+    - {list: subject.domain.restrictions, key: id, kind: restriction, statement: name}
     - {list: presuppositions, key: id, kind: presupposition, statement: reading}
     - {list: excludes, key: id, kind: gap, statement: reading}
   binding:

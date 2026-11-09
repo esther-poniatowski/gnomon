@@ -42,7 +42,8 @@ subject:
     foil_status:                 # observed (the foil case occurred and has been recorded) | counterfactual (the foil case never occurred and must first be produced) | not-applicable (the question states no foil set)
   domain:                        # only restrictions of the a priori specification; assumptions of the analysis belong to the answer
     restrictions:                # one entry per restriction the question imposes on the specification
-      - name: "NAME OF THE RESTRICTION"   # required when no quantity names the entry
+      - id: RESTRICTION          # unique within the question; a ground with the role `condition` cites the restriction by it
+        name: "NAME OF THE RESTRICTION"   # required when no quantity names the entry
         of: system.TOPIC.SYMBOL   # quantity held; omit when no single quantity carries the restriction
         restriction:             # clamped (a fixed value replaces the rule that determines the variable) | restricted (the variable is held within a stated set of values, by no more specific mode) | initial (only the initial values of the variable are restricted) | stationary (the variable is held to courses whose law is invariant under shifts along the course) | without-event (the variable is held to courses on which a stated event does not occur); only where the entry names a variable, since a parameter is already fixed
         event: "THE EVENT THAT THE ADMITTED COURSES EXCLUDE"   # required with the restriction `without-event`; omit otherwise

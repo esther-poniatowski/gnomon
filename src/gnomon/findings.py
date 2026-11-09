@@ -478,6 +478,15 @@ COMPLETENESS_ANSWERED_WITH_OPEN_COMPONENT = _rule(
     "A question is marked answered while one of its subquestions is not settled.",
     "warning",
 )
+COMPLETENESS_MISMATCHED_OBLIGATION = _rule(
+    "completeness/mismatched-obligation",
+    "An obligation of an assessment names no proof obligation of its question, or names one twice.",
+)
+COMPLETENESS_UNASSESSED_OBLIGATION = _rule(
+    "completeness/unassessed-obligation",
+    "A proof obligation of the question has no entry in an assessment made against it.",
+    "warning",
+)
 COMPLETENESS_EXCLUDED_EVENT = _rule(
     "completeness/excluded-event",
     "A restriction of the kind without-event names no excluded event, or a restriction of another"

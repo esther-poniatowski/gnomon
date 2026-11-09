@@ -192,3 +192,23 @@ def test_the_command_needs_a_repository_and_refuses_failing_records(tmp_path: Pa
     assert not (folder / "export.yml").exists()
     assert runner.invoke(app, ["export", str(folder), "--allow-findings"]).exit_code == 0
     assert yaml.safe_load((folder / "export.yml").read_text())["findings_overridden"] is True
+
+
+def test_a_condition_ground_citing_a_restriction_is_exported() -> None:
+    records = _records()
+    records["quest.a.q"]["subject"] = {
+        "domain": {"restrictions": [{"id": "gain", "name": "a gain below one"}]}
+    }
+    records["ans.a.x"]["grounds"][4] = {
+        "id": "lost",
+        "role": "condition",
+        "record": "quest.a.q.gain",
+    }
+    export, dropped = build_export(records, "demo")
+    assert dropped == []
+    units = {u["id"]: u for u in export["units"]}
+    assert units["quest.a.q.gain"]["kind"] == "restriction"
+    conditions = {
+        (r["source"], r["target"]) for r in export["relations"] if r["class"] == "condition"
+    }
+    assert ("quest.a.q.gain", "ans.a.x") in conditions

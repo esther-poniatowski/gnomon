@@ -342,6 +342,15 @@ properties:
             items:
               type: object
               properties:
+                id:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: RESTRICTION
+                  x-kind: label
+                  x-comment: unique within the question; a ground with the role `condition` cites the restriction by it
+                  title: Id
+                  description: a name unique within the question, by which a ground cites the restriction
                 name:
                   type:
                   - string

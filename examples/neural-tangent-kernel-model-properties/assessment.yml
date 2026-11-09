@@ -56,11 +56,14 @@ tests:
       evidence: "Membership in the class of networks does not depend on whether the linearization succeeds."
 
 obligations:
-  - verdict: pass
+  - obligation: linearization
+    verdict: pass
     evidence: "The claim bounds max_{t} Eout by Bout for every training time, with m * Bout^2 <= Cout^2, so Bout vanishes at order m^(-1/2)."
-  - verdict: pass
+  - obligation: kernel-stability
+    verdict: pass
     evidence: "The claim bounds max_{t} Edrift by Bdrift for every training time, with m * Bdrift^2 <= Cdrift^2, so the drift vanishes as width grows."
-  - verdict: pass
+  - obligation: kernel-limit
+    verdict: pass
     evidence: "The claim bounds Elimit by Binit in probability over initialization, with m * Binit^2 <= Cinit^2."
 
 appraisal: []

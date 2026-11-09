@@ -8,7 +8,7 @@ from typing import Any, Iterable, Mapping
 
 from .. import findings as rules
 from ..findings import Entry, Finding, finding
-from .paths import is_unfilled
+from .paths import at, is_unfilled
 
 
 def malformed_credence(assessment: Mapping[str, Any]) -> list[Finding]:
@@ -349,3 +349,52 @@ def unrecorded_question_revision(
                 return []
     text = f"version: {ident} was revised, and no step of an itinerary records the revision"
     return [finding(rules.COMPLETENESS_UNRECORDED_QUESTION_REVISION, text, "version")]
+
+
+def mismatched_obligations(
+    assessment: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return each obligation of an assessment that names no proof obligation of its question, or
+    names one twice, and a warning for each proof obligation of the question left without an entry.
+
+    An entry names the obligation that it settles by the identifier of that obligation in the
+    question, so that an entry stays attached to its obligation when the question reorders them.
+
+    >>> question = {"type": "question", "task": {"proof_obligations": [{"id": "necessity"},
+    ...                                                                {"id": "sufficiency"}]}}
+    >>> assessment = {"against": "quest.a", "obligations": [{"obligation": "necessity"},
+    ...                                                     {"obligation": "necessity"},
+    ...                                                     {"obligation": "converse"}]}
+    >>> [f.rule.id for f in mismatched_obligations(assessment, {"quest.a": question})]
+    ... # doctest: +NORMALIZE_WHITESPACE
+    ['completeness/mismatched-obligation', 'completeness/mismatched-obligation',
+     'completeness/unassessed-obligation']
+    """
+    question = records.get(str(assessment.get("against")))
+    if not isinstance(question, Mapping) or question.get("type") != "question":
+        return []
+    declared = [
+        str(o.get("id"))
+        for o in at(question, "task.proof_obligations") or []
+        if isinstance(o, Mapping) and o.get("id")
+    ]
+    found, named = [], set()
+    for index, entry in enumerate(assessment.get("obligations") or []):
+        if not isinstance(entry, Mapping):
+            continue
+        ident = str(entry.get("obligation") or "")
+        if ident not in declared or ident in named:
+            reason = (
+                "is named twice" if ident in named else "is no proof obligation of the question"
+            )
+            text = f"obligations: {ident or 'an entry without identifier'} {reason}"
+            found.append(
+                finding(rules.COMPLETENESS_MISMATCHED_OBLIGATION, text, "obligations", index)
+            )
+        named.add(ident)
+    if assessment.get("status") != "retracted":
+        for ident in declared:
+            if ident not in named:
+                text = f"obligations: the proof obligation {ident} of the question has no entry"
+                found.append(finding(rules.COMPLETENESS_UNASSESSED_OBLIGATION, text, "obligations"))
+    return found

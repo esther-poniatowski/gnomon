@@ -169,9 +169,10 @@ Looks up each field of each record by its path, with its title, its description 
 | `credence.value` | value | a number between 0 and 1 | [Credence: value](../specification/assessment.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `maturity` | Maturity | optional; one maturity per specification: open \| provisional \| stabilized; the record status applies to every specification left out | [Maturity of a field](../specification/maturity.md) |
-| `obligations` | Obligations | per obligation, a verdict with the derivation or the counterexample that settles it | [Obligations](../specification/assessment.md) |
+| `obligations` | Obligations | per obligation, its identifier, and a verdict with the derivation or the counterexample that settles it | [Obligations](../specification/assessment.md) |
 | `obligations[].derivation` | Derivation | The identifier of the derivation record that settles the obligation. | [Obligations](../specification/assessment.md) |
 | `obligations[].evidence` | Evidence | the derivation or the counterexample that settles the implication | [Obligations](../specification/assessment.md) |
+| `obligations[].obligation` | Obligation | the identifier of the proof obligation of the question that the entry settles | [Obligations](../specification/assessment.md) |
 | `obligations[].verdict` | Verdict | the verdict on the proof obligation: pending, pass, fail or not-applicable | [Obligations](../specification/assessment.md) |
 | `status` | Status | the maturity of the assessment record, taken by every field that the block `maturity` leaves unmarked | — |
 | `tests` | Tests | verdict: pending \| pass \| fail \| not-applicable | [Tests](../specification/assessment.md) |
@@ -858,6 +859,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `subject.domain.restrictions` | Restrictions | Per restriction: the quantity held and the value set that it is held to. When no single quantity carries a restriction, the entry names it and states its defining expression. A restriction on a variable also states its mode, with the excluded event for `without-event`: `clamped` · `restricted` · `initial` · `stationary` · `without-event`. Each restriction carries a justification stating why the question is put only within those bounds. | [Restrictions](../specification/question-subject.md) |
 | `subject.domain.restrictions[].event` | Event | required with the restriction `without-event`; omit otherwise | [Restrictions](../specification/question-subject.md) |
 | `subject.domain.restrictions[].expression` | Expression | replaces `values` when no single quantity carries the restriction | [Restrictions](../specification/question-subject.md) |
+| `subject.domain.restrictions[].id` | Id | a name unique within the question, by which a ground cites the restriction | [Restrictions](../specification/question-subject.md) |
 | `subject.domain.restrictions[].justification` | Justification | why the question is put only under the restriction | [Restrictions](../specification/question-subject.md) |
 | `subject.domain.restrictions[].name` | Name | required when no quantity names the entry | [Restrictions](../specification/question-subject.md) |
 | `subject.domain.restrictions[].of` | Of | quantity held; omit when no single quantity carries the restriction | [Restrictions](../specification/question-subject.md) |

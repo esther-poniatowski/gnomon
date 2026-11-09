@@ -120,6 +120,7 @@ properties:
             items:
               propertyNames:
                 enum:
+                - id
                 - name
                 - of
                 - restriction
