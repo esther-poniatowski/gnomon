@@ -60,7 +60,7 @@ QUANTITY_PATHS: tuple[tuple[str, ...], ...] = (
 )
 
 #: The warrants of a law that expose a conclusion resting on it.
-REVISABLE_WARRANTS = frozenset({"posited", "fitted", "measured"})
+REVISABLE_WARRANTS = frozenset({"posited", "fitted", "measured", "computed"})
 
 
 @dataclass(frozen=True)

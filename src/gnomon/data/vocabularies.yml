@@ -672,6 +672,8 @@ vocabularies:
       name: by adjusting the parameters of the law to data
     - value: measured
       name: on the evidence of an instrument
+    - value: computed
+      name: by a numerical computation from the laws on which it rests, at sampled values and with a stated error
     .closure:
     - value: complete
       name: 'formal target: the laws define the system'
@@ -1210,6 +1212,8 @@ vocabularies:
       name: by adjusting the parameters of the law to data
     - value: measured
       name: on the evidence of an instrument
+    - value: computed
+      name: by a numerical computation from the laws on which it rests, at sampled values and with a stated error
     assumptions.motive:
     - value: tractability
       name: the undistorted system admits no analysis

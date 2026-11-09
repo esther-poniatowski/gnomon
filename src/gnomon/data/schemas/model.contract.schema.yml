@@ -189,6 +189,7 @@ properties:
           - posited
           - fitted
           - measured
+          - computed
           - null
   organization:
     items:

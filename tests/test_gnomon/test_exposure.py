@@ -175,3 +175,12 @@ def test_a_law_passes_on_the_units_that_it_requires() -> None:
     )
     assert found[f"{MODEL}.effective-law"] == ("operation", "uncontrolled operation", via)
     assert found[f"{DERIVATION}.quality-tracks-slow-mode"] == ("posit", "not confirmed", via)
+
+
+def test_a_computed_law_exposes_the_answer_that_rests_on_it() -> None:
+    law = {"symbol": "law", "warrant": "computed"}
+    records = {
+        "mod.a.b": {"type": "model", "id": "mod.a.b", "laws": [law]},
+        "ans.a.b": {"type": "answer", "id": "ans.a.b", "grounds": [{"record": "mod.a.b.law"}]},
+    }
+    assert _units(records, "ans.a.b") == {"mod.a.b.law": "computed"}

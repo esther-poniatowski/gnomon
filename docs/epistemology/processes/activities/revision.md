@@ -42,7 +42,7 @@ The activities of this family output a **change of knowledge state**: a change o
 ## Relations to the method
 
 - **A revision changes the attitude of an answer.** The content of the answer stays fixed, whereas the attitude of the inquiry toward it moves among entertaining, hypothesizing, accepting and retracting it. Accepting or retracting is a decision of the researcher, informed by the verdicts, the disposition and the credence of the assessment, as the [act of acceptance](../../objects/status/statuses-and-acceptance.md#^acceptance-act) states, and the revision records that decision.
-- **The warrant of a law fixes the order of revision.** When new evidence arrives, posited, fitted or measured laws are revised first, as the [warrant of a background law](../../objects/knowledge/background.md#^law-warrant) states.
+- **The warrant of a law fixes the order of revision.** When new evidence arrives, posited, fitted, measured or computed laws are revised first, as the [warrant of a background law](../../objects/knowledge/background.md#^law-warrant) states.
 - **Formal models of epistemic change are surveyed in this method.** The [formal models of belief change](../../../references/belief-revision-dynamic-epistemic-logic.md) state how an epistemic state changes under new information.
 
 The field that records the attitude of an answer is documented in the [answer record](../../../specification/answer.md).

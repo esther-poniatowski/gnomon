@@ -54,6 +54,7 @@ properties:
           - posited
           - fitted
           - measured
+          - computed
           - null
   closure:
     enum:
