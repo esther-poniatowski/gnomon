@@ -121,7 +121,7 @@ gnomon status <directory> [--format text|yaml] [--output PATH]
 
 ## `vocabulary`
 
-An author choosing a symbol for a new quantity needs every symbol and operator that the records of one problem already declare. The `vocabulary` command collects them from the filled records of a problem folder into a vocabulary record, with the LaTeX form of each symbol. The record is a YAML view bound to the schema `gnomon:view.vocabulary@1` of the [view schemas](../../src/gnomon/data/schemas/views/_index.md), so a renderer displays it as it displays the other views. The command below writes it into the problem folder:
+An author choosing a symbol for a new quantity needs every symbol and operator that the records of one problem already declare. The `vocabulary` command collects them from the filled records of a problem folder into a vocabulary record, with the LaTeX form of each symbol. The record is a YAML view bound to the schema `gnomon:view.vocabulary@2` of the [view schemas](../../src/gnomon/data/schemas/views/_index.md), so a renderer displays it as it displays the other views. The command below writes it into the problem folder:
 
 ```sh
 gnomon vocabulary <directory>
@@ -158,11 +158,12 @@ With `--format sarif`, the [findings output](../adr/findings-output.md#^command-
 
 ## `views`
 
-A researcher who proceeds by local increments needs the global state of the research. The `views` command writes eight views of a directory tree of records, each as a YAML record that a renderer such as Ekphrasis displays as a read-only form:
+A researcher who proceeds by local increments needs the global state of the research. The `views` command writes nine views of a directory tree of records, each as a YAML record that a renderer such as Ekphrasis displays as a read-only form:
 
 - the state of each problem: its demand met, its accepted answers and its candidates, and its obstacles, stated and shown;
 - the open conditions and the ready acts, the diagnosis of `gnomon status` as tables;
 - the exposure of each answer: every revisable unit reached by walking its dependencies back, with its kind and the reason of the exposure;
+- the assembly of each level, a problem or a decomposed question: its components, the parts of its answer and the parts settled, the citations between its questions, its gaps, its limits of validity and the parts that it leaves out;
 - the progress of each itinerary: its steps in the order of their dependencies, sound, conditional or impeached, with the edges between them;
 - the maturity of each record and of its marked fields;
 - the question tree, as nodes and edges;

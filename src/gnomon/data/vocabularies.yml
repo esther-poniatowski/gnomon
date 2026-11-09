@@ -359,6 +359,11 @@ vocabularies:
     - value: bound
       name: a maximal size that the error does not exceed
   question:
+    excludes.kind:
+    - value: deferred
+      name: left out at the present grain and taken up later, inside the demand
+    - value: out-of-scope
+      name: outside the demand of the question, which its revision removed
     presuppositions.part:
     - value: existence
       name: a result of the demanded type exists

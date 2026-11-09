@@ -46,6 +46,21 @@ properties:
           - presupposes
           - enables
           - null
+  excludes:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - kind
+        - question
+        - reading
+        - reason
+      properties:
+        kind:
+          enum:
+          - deferred
+          - out-of-scope
+          - null
   subject:
     propertyNames:
       enum:
@@ -320,6 +335,7 @@ propertyNames:
   - addresses
   - request
   - links
+  - excludes
   - subject
   - task
   - virtues

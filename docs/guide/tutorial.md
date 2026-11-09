@@ -236,6 +236,7 @@ gnomon views ../grokking --output ../grokking-views
 ../grokking-views/problem-state.yml: written
 ../grokking-views/next-act.yml: written
 ../grokking-views/exposure.yml: written
+../grokking-views/assembly.yml: written
 ../grokking-views/itinerary-progress.yml: written
 ../grokking-views/maturity.yml: written
 ../grokking-views/question-tree.yml: written
@@ -243,7 +244,7 @@ gnomon views ../grokking --output ../grokking-views
 ../grokking-views/expressions.yml: written
 ```
 
-Two of the eight views serve this stage. The view `itinerary-progress.yml` states the stage of the itinerary, `in-progress` here, and lists the steps with a state each: `impeached` when a failed norm lies upstream of the output of the step, `conditional` when a pending norm does, and `sound` otherwise. The steps `admit` and `delimit` are impeached, since `delimit` takes the laws that `admit` failed to warrant, and the steps `derive`, `check` and `test` are conditional. The view `exposure.yml` lists the revisable units supporting each answer. The candidate answer is exposed through eleven units. Seven belong to the model: three operations, two laws, and the existence of `lambda3` and of `Rstar`, two quantities fixed by a condition. Four belong to the derivation: two consequences, one move and one posit.
+Two of the nine views serve this stage. The view `itinerary-progress.yml` states the stage of the itinerary, `in-progress` here, and lists the steps with a state each: `impeached` when a failed norm lies upstream of the output of the step, `conditional` when a pending norm does, and `sound` otherwise. The steps `admit` and `delimit` are impeached, since `delimit` takes the laws that `admit` failed to warrant, and the steps `derive`, `check` and `test` are conditional. The view `exposure.yml` lists the revisable units supporting each answer. The candidate answer is exposed through eleven units. Seven belong to the model: three operations, two laws, and the existence of `lambda3` and of `Rstar`, two quantities fixed by a condition. Four belong to the derivation: two consequences, one move and one posit.
 
 ## What the itinerary leaves out
 

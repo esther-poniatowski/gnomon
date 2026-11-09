@@ -458,6 +458,21 @@ COMPLETENESS_UNRECORDED_QUESTION_REVISION = _rule(
     "A question past its first version, or refined, is revised by no step of an itinerary.",
     "warning",
 )
+COMPLETENESS_MISPLACED_EXCLUSION = _rule(
+    "completeness/misplaced-exclusion",
+    "A deferred part names a question that is no subquestion of its question, or a part out of"
+    " scope names one that still is.",
+)
+COMPLETENESS_EXCLUDED_ANSWERED = _rule(
+    "completeness/excluded-answered",
+    "A deferred subquestion holds an accepted answer, so its deferral is stale.",
+    "warning",
+)
+COMPLETENESS_ANSWERED_WITH_OPEN_COMPONENT = _rule(
+    "completeness/answered-with-open-component",
+    "A question is marked answered while one of its subquestions is not settled.",
+    "warning",
+)
 COMPLETENESS_EXCLUDED_EVENT = _rule(
     "completeness/excluded-event",
     "A restriction of the kind without-event names no excluded event, or a restriction of another"

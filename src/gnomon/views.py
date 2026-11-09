@@ -27,7 +27,14 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Iterable, Mapping
 
-from .completeness import demand_met, presupposition_denied, readable_obstacles
+from .assembly import assembly_tables
+from .completeness import (
+    demand_met,
+    narrowed,
+    presupposition_denied,
+    problem_questions,
+    readable_obstacles,
+)
 from .exposure import exposure_rows
 from .findings import where as field_path
 from .itineraries import type_classes, type_holders
@@ -62,22 +69,6 @@ class Node:
 
 def _of_type(records: Records, kind: str) -> list[str]:
     return sorted(key for key, record in records.items() if record.get("type") == kind)
-
-
-def narrowed(question: Mapping[str, Any]) -> list[str]:
-    """Return the questions that a question narrows, through its links ``subquestion-of``.
-
-    >>> narrowed({"links": [{"question": "quest.a.b", "relation": "subquestion-of"},
-    ...                     {"question": "quest.a.c", "relation": "presupposes"}]})
-    ['quest.a.b']
-    """
-    return [
-        str(link["question"])
-        for link in question.get("links") or []
-        if isinstance(link, Mapping)
-        and link.get("relation") == "subquestion-of"
-        and link.get("question")
-    ]
 
 
 def question_tree(records: Records) -> list[Node]:
@@ -125,10 +116,8 @@ def question_tree(records: Records) -> list[Node]:
         node = Node(key, records[key])
         node.children.extend(
             question(other)
-            for other in questions
+            for other in sorted(problem_questions(key, records))
             if other not in shown
-            and records[other].get("addresses") == key
-            and not narrowed(records[other])
         )
         node.children.extend(served(key))
         roots.append(node)
@@ -205,7 +194,7 @@ def problem_state(records: Records) -> dict[str, Any]:
     problems, obstacles = [], []
     for key in _of_type(records, "problem"):
         problem = records[key]
-        questions = {q for q in _of_type(records, "question") if records[q].get("addresses") == key}
+        questions = problem_questions(key, records)
         answers = [a for a in _of_type(records, "answer") if records[a].get("answers") in questions]
         met = demand_met(problem, records, classes, holders)
         problems.append(
@@ -307,6 +296,13 @@ def exposure(records: Records) -> dict[str, Any]:
         **_header("exposure", "Exposure of each answer to revision", version=2),
         "exposures": list(exposure_rows(records)),
     }
+
+
+def assembly(records: Records) -> dict[str, Any]:
+    """Return the assembly of each level: its components, parts, citations, gaps, limits and
+    excluded parts, as the decision on the assembly of a level states and the module
+    :mod:`gnomon.assembly` computes."""
+    return {**_header("assembly", "Assembly of each level"), **assembly_tables(records)}
 
 
 def itinerary_progress(
@@ -503,6 +499,7 @@ def all_views(
         problem_state(records),
         next_act(diagnosis_document),
         exposure(records),
+        assembly(records),
         itinerary_progress(records, impeached, conditional),
         maturity_map(records),
         question_tree_view(records),

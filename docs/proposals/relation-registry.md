@@ -70,16 +70,11 @@ The registry must decide whether two candidate answers to one question already s
 
 ## Semantic and justificatory dependence
 
-Two kinds of dependence link records. A record depends semantically on another when its statement cannot be interpreted without the other, as a theorem depends on the definitions of its terms. A record depends justificatorily on another when the other supports its claim, as a proof depends on its lemmas and its assumptions. The candidate vocabulary splits the relations into two strata:
-
-- the relations declared between records: `defines`, from a definition to a concept; `uses`, or `requires_for_interpretation` for a semantic dependence; `assumes`; `proves`, from a proof to a claim; `specializes` and `generalizes`; `exemplifies`; `contradicts` and `refutes`; and `addresses`, to a question;
-- the relations relative to an inquiry, which belong to an assembly and not to a record: `selected_for`, `load_bearing_for`, `bridge_for`, `deferred_in` and `ordered_before_in`.
-
-The split keeps a weak relation on the record and a strong one on the assembly. A record states once that it `addresses` a question, whereas its use as a part of the minimal answer of one inquiry is stated by the assembly of that inquiry.
+Two kinds of dependence link records. A record depends semantically on another when its statement cannot be interpreted without the other, as a theorem depends on the definitions of its terms. A record depends justificatorily on another when the other supports its claim, as a proof depends on its lemmas and its assumptions. The candidate vocabulary declares these relations between records: `defines`, from a definition to a concept; `uses`, or `requires_for_interpretation` for a semantic dependence; `assumes`; `proves`, from a proof to a claim; `specializes` and `generalizes`; `exemplifies`; `contradicts` and `refutes`; and `addresses`, to a question.
 
 **Literature.** None cited.
 
-**Bears on.** [`relation-registry`](../../TODO.md), and `assembly-schema` for the relations relative to an inquiry.
+**Bears on.** [`relation-registry`](../../TODO.md).
 
 **Retired source.** `docs/design/_backup/object-types-ontology/relations-graph-edges.md` and `docs/design/3-aspect-specific/semantic-relations.md`, at commit 9e138e2.
 

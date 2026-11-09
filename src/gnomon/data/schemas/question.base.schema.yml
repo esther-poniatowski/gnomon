@@ -139,6 +139,59 @@ properties:
     description: per link, the other question, the relation, and the record shared by the two questions
     examples:
     - —
+  excludes:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: PART
+          x-kind: label
+          title: Id
+          description: a name unique within the question
+        kind:
+          x-vocabulary: excludes.kind
+          type:
+          - string
+          - 'null'
+          title: Kind
+          description: deferred · out-of-scope
+        question:
+          type:
+          - string
+          - 'null'
+          x-template: quest.TOPIC.NAME
+          x-kind: label
+          x-comment: the question of the part, when the part is posed as one; omit otherwise
+          title: Question
+          description: the identifier of the question of the part
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE PART LEFT OUT, IN WORDS"'
+          x-kind: markdown-line
+          title: Reading
+          description: the part left out, in words
+        reason:
+          type:
+          - string
+          - 'null'
+          x-template: '"WHY THE PART IS LEFT OUT"'
+          x-kind: markdown-line
+          title: Reason
+          description: why the part is left out
+    x-comment: one entry per part of the answer that the question leaves out; a part out of scope raises the version, a deferred part does not
+    title: Excludes
+    description: per part left out, its kind, its question when one is posed, its reading and the reason
+    examples:
+    - the dependence on the noise level, deferred until the noiseless case is settled
   subject:
     type:
     - object

@@ -37,6 +37,9 @@ questions
     Check the slots, the references, the task and the domain of a question.
 assessments
     Check an assessment, and give the disposition of the record that it assesses.
+levels
+    Read the levels of a decomposition: the questions of a problem, the components of a question
+    and the parts that settle them, and check the exclusions of a question.
 problems
     Read the state of a problem: its demand, its presuppositions and its obstacles.
 answers
@@ -71,6 +74,13 @@ from .assessments import (
     misversioned_assessment,
     premature_appraisal,
     unrecorded_question_revision,
+)
+from .levels import (
+    Component,
+    components,
+    decomposition_findings,
+    narrowed,
+    problem_questions,
 )
 from .maturity import misplaced_maturity
 from .paths import (
@@ -149,12 +159,15 @@ __all__ = [
     "STATUS_PAIRS",
     "SUBJECT_SLOTS",
     "VOCABULARY_REGISTRY",
+    "Component",
     "admitted_values",
     "always_required",
     "at",
     "block_requirements",
     "commitment_requirements",
+    "components",
     "contradictory_accuracy",
+    "decomposition_findings",
     "demand_met",
     "disposition",
     "foreign_backgrounds",
@@ -180,11 +193,13 @@ __all__ = [
     "misstated_limit",
     "misstated_obstacles",
     "misversioned_assessment",
+    "narrowed",
     "occurrence_by_category",
     "path_segments",
     "placeholder_types",
     "premature_appraisal",
     "presupposition_denied",
+    "problem_questions",
     "quantity_symbols",
     "readable_obstacles",
     "record_kinds",

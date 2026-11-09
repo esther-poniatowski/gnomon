@@ -455,6 +455,7 @@ def _question(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         + c.unanchored_explicandum(record, records)
         + c.unsupported_question_dissolution(record, records)
         + c.unrecorded_question_revision(record, records)
+        + c.decomposition_findings(record, records)
     )
 
 

@@ -281,6 +281,11 @@ fields:
       targets: [background]
       flags: source
       warrant: non-inferential
+    excludes[].question:
+      name: leaves out the part that the question poses
+      targets: [question]
+      flags: none
+      warrant: non-inferential
   concept:
     broader:
       name: is subsumed by the broader concept

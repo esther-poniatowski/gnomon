@@ -22,6 +22,7 @@ exports:
   - gnomon:problem@1
   - gnomon:question@1
   - gnomon:target-system@1
+  - gnomon:view.assembly@1
   - gnomon:view.exposure@2
   - gnomon:view.expressions@1
   - gnomon:view.itinerary-progress@2

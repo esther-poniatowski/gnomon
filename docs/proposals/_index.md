@@ -23,5 +23,4 @@ Holds the candidate designs that await a decision, each note gathering the alter
 - [Proposals for the problem record](problem-record.md): weighs the extensions of the problem record
 - [Proposals for the classification method](classification-method.md): weighs the routes that build a taxonomic layer on a qualitative feature system
 - [Proposals for the model design](model-design.md): weighs the revisions of the model design
-- [Proposals for the assembly schema](assembly-schema.md): weighs the schema of the assembly of a level
 - [Proposals for the inquiry views](inquiry-views.md): weighs the views that present the state of an inquiry to a researcher

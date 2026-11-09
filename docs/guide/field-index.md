@@ -820,6 +820,12 @@ Looks up each field of each record by its path, with its title, its description 
 | `construction` | Construction | the procedure named for the route of construction, and how it would yield a direct answer | [Construction](../specification/question.md) |
 | `construction.procedure` | Procedure | a design of kind method, or a pointer to the procedure | [Construction](../specification/question.md) |
 | `construction.reading` | Reading | how the procedure would yield a direct answer | [Construction](../specification/question.md) |
+| `excludes` | Excludes | per part left out, its kind, its question when one is posed, its reading and the reason | [Excludes](../specification/question.md) |
+| `excludes[].id` | Id | a name unique within the question | [Excludes](../specification/question.md) |
+| `excludes[].kind` | Kind | deferred · out-of-scope | [Excludes](../specification/question.md) |
+| `excludes[].question` | Question | the identifier of the question of the part | [Excludes](../specification/question.md) |
+| `excludes[].reading` | Reading | the part left out, in words | [Excludes](../specification/question.md) |
+| `excludes[].reason` | Reason | why the part is left out | [Excludes](../specification/question.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `links` | Links | per link, the other question, the relation, and the record shared by the two questions | [Links](../specification/question.md) |
 | `links[].question` | question | the identifier of the other question record | [Links: question](../specification/question.md) |

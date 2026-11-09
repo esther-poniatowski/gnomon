@@ -10,6 +10,7 @@ from typing import Any, Iterable, Mapping
 from .. import findings as rules
 from ..findings import Finding, finding
 from .assessments import disposition, is_void
+from .levels import problem_questions
 from .paths import at
 
 
@@ -65,7 +66,7 @@ def demand_met(
     """Return whether the records meet the demand of a problem, or None when no rule applies.
 
     The demand is met once acts of the researcher settle the demanded results. For a result of a
-    claim type, an answer to a question that addresses the problem is accepted, gives a complete
+    claim type, an answer to a question of the problem is accepted, gives a complete
     answer, and holds a satisfied assessment; the number and the completeness that the request
     fixes are those of that direct answer. For a result of a construct type, a record that holds
     the type is stabilized, with a satisfied assessment against the problem. Under the request
@@ -88,9 +89,7 @@ def demand_met(
     klass = classes.get(str(kind))
     if klass not in ("claim", "construct"):
         return None
-    questions = {
-        i for i, r in records.items() if r.get("type") == "question" and r.get("addresses") == ident
-    }
+    questions = problem_questions(str(ident), records)
     assessments = [r for r in records.values() if r.get("type") == "assessment"]
 
     def assessed(name: str) -> list[Mapping[str, Any]]:
@@ -178,11 +177,7 @@ def readable_obstacles(
     met = demand_met(problem, records, classes, holders)
     if met is None or denied is None:
         return found
-    questions = {
-        i
-        for i, r in records.items()
-        if r.get("type") == "question" and r.get("addresses") == problem.get("id")
-    }
+    questions = problem_questions(str(problem.get("id")), records)
     answers = [
         r for r in records.values() if r.get("type") == "answer" and r.get("answers") in questions
     ]

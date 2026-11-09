@@ -114,6 +114,18 @@ Acts of generation add candidates or tools and justify no answer, and acts of de
 
 **Analysis is followed by synthesis.** Working backward identifies necessary conditions, and the steps of analysis cannot always be reversed. A combination step therefore composes the answers of the serving questions into an answer to the served question, and a check confirms that the combination is valid, as the [necessity and joint sufficiency of the conditions](../../objects/question/conditions-of-answerability.md#^sufficiency) require. When the conditions hold and no answer follows, a condition is missing, most often a bridging assumption. ^synthesis
 
+## The assembly of a level
+
+A *level* is a problem, or a question that other questions serve. The *assembly* of a level lists the units that compose it: its components, the parts of its answer, the citations between them, the dependencies still open, and its limits of validity. ^assembly-level
+
+**The parts of an answer are answers of their own.** An answer holds one typed claim, and each candidate answer answers one atomic question, as the [question](../../objects/question/question.md) states. Therefore, each claim that the answer to a level needs is the answer to one question linked to the level by `subquestion-of`. A component linked by `enables`, `presupposes` or `explanans-from` establishes a condition of the level or supplies a premise of it. Such a component supplies no part. A part that is not a claim, such as a definition or a model, is a record obtained by a step. The rationale of that step serves the component and acts on the condition of obtaining. ^parts-as-answers
+
+**The synthesis is an answer to the level.** The combination step of the [synthesis](#^synthesis) yields an answer to the level question, and each part supports that answer by the relation `supports`. A question whose demand is the conjunction of its parts also holds a synthesis, whose claim conjoins the parts. The acceptance of the synthesis is the act by which the researcher judges the parts jointly sufficient. A decomposition certifies erotetic implication, under which each part narrows the answers to the level. Joint sufficiency is a separate norm, that of the decomposition of a problem, as the [norms of problem posing](../activities/problem-posing.md) distinguish. Therefore, a count of settled parts meets no demand. ^synthesis-answer
+
+**A level states the parts that it leaves out.** The field `excludes` of the level question lists them, each of one of two kinds. A *deferred* part is left out at the present grain and taken up later. A deferred part stays inside the demand: its question keeps its link, and the part counts as open. A part *out of scope* lies outside the demand, since a [global revision](#^global-revision) of the question removed it. Therefore, a part out of scope is no component of the level. A deferral is relative to the level, since the deferred question may still serve other levels. Therefore, the deferral is stated on the level question, and never as a status of the deferred question. ^excluded-parts
+
+**The rest of the assembly is computed.** The components are read from the links, and the parts from the answers and the steps. The citations are read from the links between the questions of the level and from the relations between their answers. The limits of validity are read from the domain of the level question and from the scope of each accepted part. The view that reports them is stated in the [assembly view](../../../adr/assembly-of-a-level.md#^assembly-view). ^assembly-computed
+
 ## Revision during the inquiry
 
 **A serving question can correct the served question.** Its answer can show that a presupposition of the served question is false or that a term of it is ill defined. The served question is then reformulated before any answer is sought for it, a case that a strictly top-down tree cannot represent. ^revision
@@ -130,7 +142,14 @@ Acts of generation add candidates or tools and justify no answer, and acts of de
 
 The steps of a local revision are stated in the [procedure of decomposition](../../../procedures/inquiry/decomposing-a-question.md#^local-revision-steps).
 
-**Global revision.** A global reorganization is needed only when the served question itself is malformed. Three revisions turn a question $Q$ into a refined question $Q'$: a *disambiguation*, when $Q$ conflated two questions; a *restriction of scope*, when the conditions of answerability hold only under narrower conditions held fixed; and a *replacement of a concept*, when constructive work supplies a more precise notion. The relation between $Q$ and $Q'$ is stated, and the earlier serving questions are reassessed under $Q'$. The main question is re-examined at intervals for these three revisions. ^global-revision
+**Global revision.** A global reorganization is needed only when the served question itself is malformed. Four revisions turn a question $Q$ into a refined question $Q'$: ^global-revision
+
+- a *disambiguation*, when $Q$ conflated two questions;
+- a *restriction of scope*, when the conditions of answerability hold only under narrower conditions held fixed;
+- a *replacement of a concept*, when constructive work supplies a more precise notion;
+- a *removal of a part*, when a conjunct of the demand of $Q$ is put [out of scope](#^excluded-parts).
+
+A restriction of scope narrows the values that a quantity takes, whereas a removal of a part removes a claim from the demand. The relation between $Q$ and $Q'$ is stated, and the earlier serving questions are reassessed under $Q'$. The main question is re-examined at intervals for these four revisions.
 
 **Cycles between questions.** A condition of one question can depend on the answer to another, and two such dependencies in opposite directions form a cycle. Further decomposition cannot resolve the cycle, so it is resolved by iteration, under the conditions of [controlled iteration](specification-order.md#^controlled-iteration), as the [dependencies between conditions](../../objects/question/conditions-of-answerability.md#^condition-dependencies) state. ^cycles
 

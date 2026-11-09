@@ -5,6 +5,7 @@ The schemas of this folder declare the views that `gnomon views` generates from 
 - [State of each problem](problem-state.schema.yml): to read whether each problem is solved, which answers it holds, and which obstacles remain
 - [Open conditions and ready acts](next-act.schema.yml): to read which act comes next for each question
 - [Exposure of each answer](exposure.schema.yml): to read which revisable units each answer rests on
+- [Assembly of each level](assembly.schema.yml): to read what each level of an inquiry is assembled from, which parts are settled, and what remains open or left out
 - [Progress of each itinerary](itinerary-progress.schema.yml): to read how far each itinerary has advanced, and which steps a failed norm impeaches
 - [Maturity of each record](maturity.schema.yml): to read which parts of the research are settled
 - [Question tree](question-tree.schema.yml): to read the problems, questions and answers of a project as one tree

@@ -43,6 +43,7 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 - [Derivation record](derivation-record.md): decides which record holds the reasoning that establishes a consequence, and the parts of that record
 - [Concepts, glossaries and notations](concepts-glossaries-notations.md): decides how a concept, its names and its symbols are recorded
 - [Closed typed relations](closed-typed-relations.md): decides how a relation between records is typed and checked
+- [Assembly of a level](assembly-of-a-level.md): decides which records state the assembly of a level of an inquiry, and which part of it is authored
 
 ## Versions and revision
 

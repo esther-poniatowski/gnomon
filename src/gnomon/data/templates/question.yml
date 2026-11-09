@@ -18,6 +18,13 @@ links:                           # questions linked to this question by one of f
   - question: quest.TOPIC.NAME
     relation:                    # subquestion-of (a part of an answer to the linked question answers this one) | explanans-from (each answer states an explanans factor over the phenomenon of the linked question) | presupposes (it has a true direct answer only if the linked question has one) | enables (an answer to it establishes a condition of answerability of the linked question)
     via: phen.TOPIC.NAME         # the record shared by both questions, such as a phenomenon; omit when they share none
+
+excludes:                        # one entry per part of the answer that the question leaves out; a part out of scope raises the version, a deferred part does not
+  - id: PART
+    kind:                        # deferred (left out at the present grain and taken up later, inside the demand) | out-of-scope (outside the demand of the question, which its revision removed)
+    question: quest.TOPIC.NAME   # the question of the part, when the part is posed as one; omit otherwise
+    reading: "THE PART LEFT OUT, IN WORDS"
+    reason: "WHY THE PART IS LEFT OUT"
 subject:
   target_system: system.TOPIC    # a record identifier; in a question schema, a placeholder written as for `phenomenon`
   background: [bg.TOPIC.NAME]    # background records whose laws the question admits; empty when it admits none
