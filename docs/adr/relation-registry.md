@@ -23,9 +23,9 @@ Each relation declares: ^relation-declaration
 - the record kinds that its source and its target may take;
 - its arity, `binary` or `set`; a set relation is symmetric, holds of two or more members, and is written once, on one member;
 - whether it is symmetric and irreflexive;
-- its policy of cycles: forbidden, judged, or admitted, with the exemption of a declared co-definition, and the graph whose cycles are searched as a whole, such as the graph of claims;
+- its policy of cycles: forbidden, judged, or admitted, with the exemption of a declared co-definition, the graph whose cycles are searched as a whole, such as the graph of claims, and the end that depends on the other in that graph;
 - the end that a revision flags, if any, and its warrant: a mode of inference, fixed by the relation, written on its entry, or read from the dependent;
-- its class in the contract of the export, or none.
+- its class in the contract of the export, a class per use read from a key of its entry, or none, and the form of an elaboration.
 
 A relation stated by a field of its own, such as the question answered by an answer, keeps its field. The registry names that field by its path, and a test checks each path against the base schema. A reference in another field of an identifier or an expression transmits a revision as a constitutive dependence, and a reference in prose transmits none. A check builds the graph of relations from these fields and from the entries of `relations` and `links`. ^field-relations
 
@@ -54,5 +54,5 @@ The terms of the pilot resolve into the relations of `gnomon`: a rebuttal into `
 ## Consequences
 
 - This registry completes the [decision on closed typed relations](closed-typed-relations.md). The provisional rule of the [decision on revision accountability](revision-accountability.md), under which every reference transmits a revision, gives way to the transmission along each edge.
-- The relations `incompatible-with` and `defeats` fill the class of incompatibility of the export, left open by the [decision on the scope of gnomon](research-scope.md). An incompatible set of more than two members has no class of the contract yet.
+- The relation `incompatible-with` fills the class of incompatibility of the export, left open by the [decision on the scope of gnomon](research-scope.md). The relation `defeats` maps onto no class: an undermining or an undercutting defeater leaves the two claims jointly possible, so a recorded defeat licenses no antithesis, as the [decision on the research export](research-export.md) states. An incompatible set of more than two members is exported with its members, and licenses no antithesis between two of them, since its pairs are compatible.
 - A new family of rules, `relation/`, reports a mistyped end, a relation of a unit to itself, a forbidden cycle, a judged cycle, a symmetric relation stated twice, and an attribute that a relation does not admit.

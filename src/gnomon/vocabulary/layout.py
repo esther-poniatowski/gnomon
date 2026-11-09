@@ -34,7 +34,7 @@ DECLARING: Mapping[str, tuple[str, ...]] = {
 
 #: The record kinds that a tool generates from the others: a check reads none of them, as the
 #: decision on the inputs of checks states.
-GENERATED_KINDS: frozenset[str] = frozenset({"vocabulary", "view"})
+GENERATED_KINDS: frozenset[str] = frozenset({"export", "vocabulary", "view"})
 
 
 #: The record kinds the checkers read. A kind declaring no symbol still carries expressions, so

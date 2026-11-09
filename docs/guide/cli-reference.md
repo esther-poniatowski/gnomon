@@ -181,6 +181,23 @@ gnomon views <directory> [--output DIR]
 
 **Output:** one file per view, named after the view, each declaring the schema `gnomon:view.<name>@<version>` of the [view schemas](../../src/gnomon/data/schemas/views/_index.md), which the schema registry of the renderer maps to its file. A view holds no date and no absolute path, so two runs on unchanged records write the same files, and `gnomon check` skips the views. The command exits with code 1 when a file cannot be read, and with code 2 when a view cannot be written.
 
+## `export`
+
+An exposition that presents research units needs to verify each relation that it presents between them. The `export` command writes the units of a directory tree of records, and the relations between them, in the contract `ekthesis:export@1` that `ekthesis` reads. The repository is named by `repository.id` in the nearest `repository.yml`. The command below writes `export.yml` into the directory:
+
+```sh
+gnomon export <directory> [--output FILE] [--check] [--allow-findings]
+```
+
+| Argument or option | Description                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------- |
+| `<directory>`      | Directory of records, read recursively; each folder is one problem.                             |
+| `--output`, `-o`   | File receiving the export; `export.yml` in `<directory>` by default.                            |
+| `--check`          | Compare the committed export with a fresh generation, and write nothing.                        |
+| `--allow-findings` | Write the export although `gnomon check` reports an error, and record the override in the export. |
+
+**Output:** one file holding the units, each with its identifier, its kind and its statement, and the relations, each with its identifier, its class and its ends. A relation whose end is not an exported unit is dropped, and named on standard error. The export holds no date and no absolute path, and `gnomon check` skips it. The command exits with code 1 when no `repository.yml` names the repository, a file cannot be read, `gnomon check` reports an error without `--allow-findings`, or `--check` finds the export stale, and with code 2 when the export cannot be written. The [decision on the research export](../adr/research-export.md) states which relation maps onto which class.
+
 ## `tree`
 
 A researcher reading a project needs its questions and their answers at a glance. The `tree` command prints the question tree of a directory, read recursively, from its problems to the assessments of its answers.

@@ -19,6 +19,8 @@
 # - `cycles`: `forbidden`, `judged` or `admitted`;
 # - `graph`: the graph whose cycles are searched as a whole, such as the graph of `claims`; a
 #   relation that names none forms a graph of its own, and the relations of one graph share a policy;
+# - `dependent`: the end that depends on the other in the graph of cycles, the source by default, or
+#   `target` for a relation whose target rests on its source, such as `supports`;
 # - `flags`: the end that a revision of the other end flags, `source` or `target`, `entry` for the
 #   record that holds the entry, or `none`;
 # - `warrant`: a mode of inference of `itinerary.steps.mode`, `entry` when the entry may state it,
@@ -27,7 +29,9 @@
 #   naming those that it must carry;
 # - `attribute_targets`: the record kinds that an attribute naming a record may take;
 # - `export`: the class of the contract of `ekthesis`, a map from a use to a class, or none;
-#   `reversed: true` exports the relation from its target to its source.
+#   `export_use` names the key whose value is the use, read on the entry or on the item that holds
+#   the field; `export_form` names the form of an elaboration; `reversed: true` exports the
+#   relation from its target to its source.
 
 id: registry.relations
 type: relation-registry
@@ -59,6 +63,7 @@ entries:
         name: its claim is a ground of the other answer
         targets: [answer]
         cycles: judged
+        dependent: target
         flags: target
         warrant: entry
         attributes: [warrant]
@@ -83,7 +88,13 @@ entries:
         targets: [answer]
         cycles: admitted
         flags: entry
-        export: incompatibility
+      exemplifies:
+        name: its claim is an instance of the concept or of the more general answer
+        targets: [concept, answer]
+        cycles: forbidden
+        flags: source
+        warrant: non-inferential
+        export: instance
       revises:
         name: it replaces the other answer over time, which stays unchanged
         targets: [answer]
@@ -116,6 +127,7 @@ entries:
         warrant: non-inferential
         attributes: [via]
         export: elaboration
+        export_form: whole-part
       explanans-from:
         name: each answer states an explanans factor over the phenomenon of the linked question
         targets: [question]
@@ -166,6 +178,13 @@ fields:
       cycles: judged
       flags: source
       warrant: dependent
+      export:
+        assumption: support
+        warrant: support
+        datum: support
+        condition: condition
+      export_use: role
+      reversed: true
     route.runs_on:
       name: runs its route on the record
       targets: [target-system, model]
@@ -294,3 +313,4 @@ fields:
       flags: source
       warrant: non-inferential
       export: elaboration
+      export_form: generalization-specific

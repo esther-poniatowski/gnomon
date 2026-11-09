@@ -228,25 +228,27 @@ def test_the_links_of_a_question_are_checked_as_relations() -> None:
 
 
 def test_a_cycle_through_several_relations_of_one_graph_is_found() -> None:
-    """An answer supports another, which rests on a model whose law requires the first: one cycle
-    of the graph of claims, through three relations."""
+    """An answer supports another and rests on a model whose law requires the supported answer:
+    one cycle of the graph of claims, through three relations. Each edge runs from the dependent
+    end, so the supported answer depends on the supporting one."""
     records: dict[str, dict[str, Any]] = {
         "ans.a.x": {
             "id": "ans.a.x",
             "type": "answer",
             "relations": [{"relation": "supports", "target": "ans.a.y"}],
+            "grounds": [{"record": "mod.a.m.law"}],
         },
-        "ans.a.y": {"id": "ans.a.y", "type": "answer", "grounds": [{"record": "mod.a.m.law"}]},
+        "ans.a.y": {"id": "ans.a.y", "type": "answer"},
         "mod.a.m": {
             "id": "mod.a.m",
             "type": "model",
-            "laws": [{"symbol": "law", "requires": ["ans.a.x"]}],
+            "laws": [{"symbol": "law", "requires": ["ans.a.y"]}],
         },
     }
     found = [f for _, f in workspace_relation_findings(records)]
     assert [f.rule.id for f in found] == ["relation/judged-cycle"]
     assert found[0].text == (
-        "claims: ans.a.x -> ans.a.y -> mod.a.m -> ans.a.x, through grounds[].record,"
+        "claims: ans.a.x -> mod.a.m -> ans.a.y -> ans.a.x, through grounds[].record,"
         " laws[].requires, supports"
     )
 
@@ -269,3 +271,20 @@ def test_the_relations_of_one_graph_share_a_policy_of_cycles() -> None:
         if relation.get("graph"):
             policies.setdefault(relation["graph"], set()).add(relation.get("cycles"))
     assert policies and all(len(found) == 1 for found in policies.values()), policies
+
+
+def test_a_support_that_restates_a_ground_is_a_warning() -> None:
+    records = {
+        **RECORDS,
+        "ans.a.x": {
+            **RECORDS["ans.a.x"],
+            "relations": [{"relation": "supports", "target": "ans.a.y"}],
+        },
+    }
+    assert workspace_relation_findings(records) == []
+    records["ans.a.y"] = {
+        **RECORDS["ans.a.y"],
+        "grounds": [{"id": "part", "role": "warrant", "record": "ans.a.x"}],
+    }
+    found = [f for _, f in workspace_relation_findings(records)]
+    assert [(f.rule.id, f.rule.level) for f in found] == [("relation/restated-ground", "warning")]

@@ -484,11 +484,11 @@ def cli_views(
     """Write the views of the state of an inquiry as YAML records, one file per view.
 
     The views are the state of each problem, the open conditions and the ready acts, the exposure of
-    each answer, the progress of each itinerary, the maturity of each record, the question tree, the
-    statement of each question composed from its fields, and the LaTeX form of each expression. Each
-    view holds no date and no absolute
-    path, so two runs on unchanged records write the same files. The command exits with status 1
-    when a file cannot be read, and 2 when a view cannot be written.
+    each answer, the assembly of each level, the progress of each itinerary, the maturity of each
+    record, the question tree, the statement of each question composed from its fields, and the
+    LaTeX form of each expression. Each view holds no date and no absolute path, so two runs on
+    unchanged records write the same files. The command exits with status 1 when a file cannot be
+    read, and 2 when a view cannot be written.
     """
     from .answerability import as_document
     from .views import all_views
@@ -514,6 +514,77 @@ def cli_views(
         raise typer.Exit(code=2) from error
     if workspace.failures:
         raise typer.Exit(code=1)
+
+
+@app.command("export")
+def cli_export(
+    directory: str = typer.Argument(
+        ..., help="Directory of records, read recursively; each folder is one problem."
+    ),
+    output: Path | None = typer.Option(
+        None,
+        "--output",
+        "-o",
+        help="File receiving the export; `export.yml` in the directory by default.",
+    ),
+    check: bool = typer.Option(
+        False,
+        "--check",
+        help="Compare the committed export with a fresh generation, and write nothing.",
+    ),
+    allow_findings: bool = typer.Option(
+        False,
+        "--allow-findings",
+        help="Write the export although `gnomon check` reports an error, and record it there.",
+    ),
+) -> None:
+    """Write the export of the research units and their relations, in the contract of `ekthesis`.
+
+    The repository is named by `repository.id` in the nearest `repository.yml`. A relation whose end
+    is not an exported unit is dropped and listed on standard error. The command refuses to write
+    while `gnomon check` reports an error, unless `--allow-findings` is given. It exits with status
+    1 when the repository is not named, a file cannot be read, the check reports an error without
+    the override, or `--check` finds the export stale, and with status 2 when the export cannot be
+    written.
+    """
+    source = _directory(directory)
+    text, unread = _export_text(source, allow_findings)
+    target = output if output is not None else source / "export.yml"
+    if check:
+        current = target.read_text(encoding="utf-8") if target.is_file() else None
+        if current != text:
+            typer.echo(f"{target}: stale; run gnomon export", err=True)
+            raise typer.Exit(code=1)
+        typer.echo(f"{target}: current")
+        return
+    _emit(text, target, "export")
+    typer.echo(f"{target}: written")
+    if unread:
+        raise typer.Exit(code=1)
+
+
+def _export_text(source: Path, allow_findings: bool) -> tuple[str, bool]:
+    """Return the text of the export of a directory and whether a file could not be read, or exit
+    with status 1 when no repository is named or the check reports an error without the override.
+    """
+    from .check import check_workspace, load_workspace
+    from .export import build_export, render_export, repository_identifier
+
+    repository = repository_identifier(source)
+    if repository is None:
+        typer.echo(f"no repository.yml naming repository.id above {source}", err=True)
+        raise typer.Exit(code=1)
+    workspace = load_workspace(source)
+    for line in workspace.failures:
+        typer.echo(line, err=True)
+    errors = [x for x in check_workspace(workspace) if x.finding.rule.level == "error"]
+    if errors and not allow_findings:
+        typer.echo(f"gnomon check reports {len(errors)} errors; no export written", err=True)
+        raise typer.Exit(code=1)
+    export, dropped = build_export(workspace.by_id, repository, bool(errors))
+    for ident in dropped:
+        typer.echo(f"dropped: {ident}: an end is not an exported unit", err=True)
+    return render_export(export), bool(workspace.failures)
 
 
 @app.command("tree")

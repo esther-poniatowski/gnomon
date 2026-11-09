@@ -328,7 +328,8 @@ class _Graphs:
 
 
 def _graphs(records: Records) -> _Graphs:
-    """Return the graphs of the relations whose policy forbids or judges cycles."""
+    """Return the graphs of the relations whose policy forbids or judges cycles, each edge running
+    from the dependent end to the end on which it depends."""
     found = _Graphs()
     for ident in sorted(records):
         for edge in edges(records[ident]):
@@ -337,9 +338,12 @@ def _graphs(records: Records) -> _Graphs:
             if policy not in ("forbidden", "judged") or other is None or other == ident:
                 continue
             graph = str(edge.declared.get("graph") or edge.relation)
-            found.nodes.setdefault(graph, {}).setdefault(ident, set()).add(other)
+            dependent, dependence = ident, other
+            if edge.declared.get("dependent") == "target":
+                dependent, dependence = other, ident
+            found.nodes.setdefault(graph, {}).setdefault(dependent, set()).add(dependence)
             found.policies[graph] = str(policy)
-            found.crossed.setdefault((graph, ident, other), edge.relation)
+            found.crossed.setdefault((graph, dependent, dependence), edge.relation)
             found.where.setdefault((graph, ident), edge.where)
     return found
 
@@ -365,7 +369,8 @@ def _cycles(records: Records) -> list[tuple[str, Finding]]:
             forbidden = graphs.policies[graph] == "forbidden"
             rule = rules.RELATION_CYCLE if forbidden else rules.RELATION_JUDGED_CYCLE
             text = f"{graph}: {' -> '.join(cycle)}, through {', '.join(relations)}"
-            found.append((cycle[0], finding(rule, text, *graphs.where[(graph, cycle[0])])))
+            holder = next((n for n in cycle if (graph, n) in graphs.where), cycle[0])
+            found.append((holder, finding(rule, text, *graphs.where.get((graph, holder), ()))))
     return found
 
 
@@ -384,10 +389,26 @@ def _first_cycles(graph: Mapping[str, set[str]]) -> list[list[str]]:
     return found
 
 
+def _restated_grounds(records: Records) -> list[tuple[str, Finding]]:
+    """Return each relation ``supports`` whose target already names the supporting answer, or a
+    unit of it, as a ground: the two entries state one dependence twice."""
+    found = []
+    for ident in sorted(records):
+        for edge in edges(records[ident]):
+            if edge.relation != "supports":
+                continue
+            target = records.get(edge.target) or {}
+            grounds = [g for g in target.get("grounds") or [] if isinstance(g, Mapping)]
+            if any(_reaches(str(g.get("record") or ""), ident) for g in grounds):
+                text = f"supports: {edge.target} already names {ident} as a ground"
+                found.append((ident, finding(rules.RELATION_RESTATED_GROUND, text, *edge.where)))
+    return found
+
+
 def workspace_relation_findings(records: Records) -> list[tuple[str, Finding]]:
-    """Return the relations stated twice and the cycles across the records, each with the
-    identifier of the record where it is reported."""
-    return _restated(records) + _cycles(records)
+    """Return the relations stated twice, the supports that restate a ground, and the cycles across
+    the records, each with the identifier of the record where it is reported."""
+    return _restated(records) + _restated_grounds(records) + _cycles(records)
 
 
 EXACT = frozenset({"exact"})

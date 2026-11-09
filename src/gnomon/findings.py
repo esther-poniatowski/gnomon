@@ -435,6 +435,11 @@ RELATION_RESTATED = _rule(
     "relation/restated",
     "A symmetric relation or a relation of a set is stated twice, or its set is not minimal.",
 )
+RELATION_RESTATED_GROUND = _rule(
+    "relation/restated-ground",
+    "An answer supports another answer that already names it as a ground.",
+    "warning",
+)
 RELATION_MISPLACED_ATTRIBUTE = _rule(
     "relation/misplaced-attribute",
     "A relation lacks an attribute or an end that it requires, or carries one that it does not"

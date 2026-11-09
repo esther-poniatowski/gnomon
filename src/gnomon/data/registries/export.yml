@@ -1,0 +1,44 @@
+# The units that `gnomon export` publishes in the contract `ekthesis:export@1`, as the decision on
+# the research export fixes (`docs/adr/research-export.md`). The relation registry states which
+# relation maps onto which class of the contract.
+#
+# - `records`: per record kind, the kind of its unit in the contract and the path of its statement;
+#   a record kind left out is not exported as a unit, while its declared lists still are.
+# - `units`: per record kind, the lists of units inside a record: the path of the list, the key of
+#   an item that names its unit, the kind of the unit, and the key of its statement in the item;
+#   `via` reads the statement from the item of another list that the key `from` names.
+
+id: registry.export
+type: export-registry
+contract: ekthesis:export@1
+
+records:
+  problem: {kind: problem, statement: statement}
+  question: {kind: question, statement: statement}
+  answer: {kind: claim, statement: claim.reading}
+  concept: {kind: definition, statement: gloss}
+  phenomenon: {kind: phenomenon, statement: statement}
+  target-system: {kind: system, statement: title}
+  model: {kind: model, statement: title}
+  background: {kind: background, statement: title}
+  derivation: {kind: derivation, statement: title}
+  design: {kind: design, statement: task}
+
+units:
+  model:
+    - {list: operations, key: id, kind: operation, statement: gain}
+    - {list: laws, key: symbol, kind: law, statement: reading}
+    - {list: organization, key: symbol, kind: organization, statement: reading}
+    - {list: assumptions, key: id, kind: assumption, statement: assumption}
+  background:
+    - {list: laws, key: symbol, kind: law, statement: reading}
+    - {list: organization, key: symbol, kind: organization, statement: reading}
+  derivation:
+    - {list: consequences, key: id, kind: consequence, statement: reading, via: {list: objects, key: from}}
+  answer:
+    - {list: claim.presuppositions, key: id, kind: presupposition, statement: reading}
+  question:
+    - {list: presuppositions, key: id, kind: presupposition, statement: reading}
+    - {list: excludes, key: id, kind: gap, statement: reading}
+  binding:
+    - {list: feature_pairs, key: id, kind: feature-pair, statement: exemplified}
