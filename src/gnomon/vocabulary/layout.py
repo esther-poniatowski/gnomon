@@ -170,6 +170,7 @@ TYPE_PATH_FORMULA: Mapping[str, tuple[str, ...]] = {
         "tests.admissibility.*.holds_on",
         "tests.warrant.*.holds_on",
         "obligations[].holds_on",
+        "grounds[].holds_on",
     ),
     "binding": (
         "feature_pairs[].exemplified",

@@ -8,6 +8,7 @@ from typing import Any, Iterable, Mapping
 
 from .. import findings as rules
 from ..findings import Entry, Finding, finding
+from ..identifiers import split_reference
 from .paths import at, is_unfilled
 
 
@@ -413,8 +414,9 @@ def _judged_entries(
         if isinstance(entry, Mapping)
     ]
     found += [
-        (("obligations", index), entry)
-        for index, entry in enumerate(assessment.get("obligations") or [])
+        ((block, index), entry)
+        for block in ("grounds", "obligations")
+        for index, entry in enumerate(assessment.get(block) or [])
         if isinstance(entry, Mapping)
     ]
     return found
@@ -475,9 +477,10 @@ def scope_narrowings(records: Mapping[str, Mapping[str, Any]]) -> list[dict[str,
             continue
         for path, entry in _judged_entries(assessment):
             if entry.get("verdict") == "fail" and entry.get("holds_on"):
+                key = {"obligations": "obligation", "grounds": "ground"}.get(str(path[0]))
                 where = (
-                    f"obligations.{entry.get('obligation') or path[1]}"
-                    if path[0] == "obligations"
+                    f"{path[0]}.{entry.get(key) or path[1]}"
+                    if key
                     else ".".join(str(p) for p in path)
                 )
                 found.append(
@@ -488,4 +491,133 @@ def scope_narrowings(records: Mapping[str, Mapping[str, Any]]) -> list[dict[str,
                         "holds_on": str(entry["holds_on"]),
                     }
                 )
+    return found
+
+
+def _step(reference: str, records: Mapping[str, Mapping[str, Any]]) -> Mapping[str, Any] | None:
+    """Return the step of an itinerary that a reference ``itin.TOPIC.NAME.STEP`` names."""
+    split = split_reference(reference)
+    if split is None:
+        return None
+    itinerary = records.get(split[0]) or {}
+    if itinerary.get("type") != "itinerary":
+        return None
+    return next(
+        (
+            s
+            for s in itinerary.get("steps") or []
+            if isinstance(s, Mapping) and str(s.get("id")) == split[1]
+        ),
+        None,
+    )
+
+
+def _computed_laws(
+    answer: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[str]:
+    """Return the grounds of an answer that name a law marked ``computed``."""
+    found = []
+    for ground in answer.get("grounds") or []:
+        if not isinstance(ground, Mapping):
+            continue
+        split = split_reference(str(ground.get("record") or ""))
+        laws = (records.get(split[0]) or {}).get("laws") if split else None
+        if any(
+            isinstance(law, Mapping)
+            and split
+            and law.get("symbol") == split[1]
+            and law.get("warrant") == "computed"
+            for law in laws or []
+        ):
+            found.append(str(ground.get("id")))
+    return found
+
+
+def _entry_findings(
+    entries: list[tuple[int, Mapping[str, Any]]],
+    declared: set[str],
+    records: Mapping[str, Mapping[str, Any]],
+) -> list[Finding]:
+    """Return each entry that names an unknown or a repeated ground, or an unknown step, and each
+    pass that rests on a step whose norm is not met."""
+    found, named = [], set()
+    for index, entry in entries:
+        ident = str(entry.get("ground") or "")
+        if ident not in declared or ident in named:
+            reason = "is named twice" if ident in named else "is no ground of the assessed answer"
+            text = f"grounds: {ident or 'an entry without identifier'} {reason}"
+            found.append(finding(rules.COMPLETENESS_MISMATCHED_GROUND, text, "grounds", index))
+        named.add(ident)
+        reference = entry.get("step")
+        if not reference:
+            continue
+        step = _step(str(reference), records)
+        if step is None:
+            text = f"grounds: {ident}: {reference} names no step of an itinerary"
+            found.append(
+                finding(rules.COMPLETENESS_UNKNOWN_EVIDENCE_STEP, text, "grounds", index, "step")
+            )
+        elif entry.get("verdict") == "pass" and (step.get("norm") or {}).get("verdict") != "pass":
+            norm = (step.get("norm") or {}).get("verdict")
+            text = f"grounds: {ident} passes on the evidence of {reference}, whose norm is {norm}"
+            found.append(
+                finding(rules.COMPLETENESS_UNSETTLED_EVIDENCE, text, "grounds", index, "step")
+            )
+    return found
+
+
+def ground_verdict_findings(
+    assessment: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+) -> list[Finding]:
+    """Return the defects of the verdicts that an assessment gives ground by ground.
+
+    Each entry names a ground of the assessed answer and, when an act supplies its evidence, the
+    step of that act. The verdict of the test of law warrant agrees with the entries: it fails
+    once an entry fails, and it passes only when every entry passes or does not apply. A ground
+    that names a law marked ``computed`` has an entry that names the step of its computation.
+
+    >>> records = {"ans.a": {"type": "answer", "grounds": [{"id": "g", "record": "mod.a.m.l"}]},
+    ...            "mod.a.m": {"type": "model", "laws": [{"symbol": "l", "warrant": "computed"}]}}
+    >>> tests = {"warrant": {"law-warrant": {"verdict": "pass"}}}
+    >>> assessment = {"assesses": "ans.a", "tests": tests,
+    ...               "grounds": [{"ground": "g", "verdict": "fail"}]}
+    >>> [f.rule.id for f in ground_verdict_findings(assessment, records)]
+    ['completeness/disagreeing-law-warrant', 'completeness/untested-computed-law']
+    """
+    answer = records.get(str(assessment.get("assesses")))
+    if not isinstance(answer, Mapping) or answer.get("type") != "answer":
+        return []
+    entries = [
+        (i, e) for i, e in enumerate(assessment.get("grounds") or []) if isinstance(e, Mapping)
+    ]
+    declared = {str(g.get("id")) for g in answer.get("grounds") or [] if isinstance(g, Mapping)}
+    found = _entry_findings(entries, declared, records)
+    stated = at(assessment, "tests.warrant.law-warrant.verdict")
+    verdicts = [e.get("verdict") for _, e in entries]
+    if ("fail" in verdicts and stated != "fail") or (
+        stated == "pass" and any(v not in ("pass", "not-applicable") for v in verdicts)
+    ):
+        text = (
+            f"tests.warrant.law-warrant: the verdict {stated} disagrees with the verdicts of the"
+            f" grounds, {', '.join(sorted({str(v) for v in verdicts}))}"
+        )
+        found.append(
+            finding(
+                rules.COMPLETENESS_DISAGREEING_LAW_WARRANT,
+                text,
+                "tests",
+                "warrant",
+                "law-warrant",
+                "verdict",
+            )
+        )
+    if assessment.get("status") != "retracted":
+        stepped = {str(e.get("ground")) for _, e in entries if e.get("step")}
+        for ground in _computed_laws(answer, records):
+            if ground not in stepped:
+                text = (
+                    f"grounds: the ground {ground} names a computed law, and no entry names the"
+                    " step of its computation"
+                )
+                found.append(finding(rules.COMPLETENESS_UNTESTED_COMPUTED_LAW, text, "grounds"))
     return found

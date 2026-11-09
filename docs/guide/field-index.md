@@ -167,6 +167,12 @@ Looks up each field of each record by its path, with its title, its description 
 | `credence` | Credence | a number between 0 and 1, with the evidence and the prior from which it follows | [Credence](../specification/assessment.md) |
 | `credence.basis` | basis | the evidence and the prior from which the value follows | [Credence: basis](../specification/assessment.md) |
 | `credence.value` | value | a number between 0 and 1 | [Credence: value](../specification/assessment.md) |
+| `grounds` | Grounds | per ground of the answer judged one by one, its identifier, a verdict with its evidence, and the step of an itinerary that supplies the evidence | [Grounds](../specification/assessment.md) |
+| `grounds[].evidence` | Evidence | the derivation, the simulation, the measurement or the comparison that settles the verdict | [Grounds](../specification/assessment.md) |
+| `grounds[].ground` | Ground | the identifier of the ground of the assessed answer that the entry judges | [Grounds](../specification/assessment.md) |
+| `grounds[].holds_on` | Holds on | on a failed ground, the subdomain over which the ground still meets its role | [Grounds](../specification/assessment.md) |
+| `grounds[].step` | Step | the identifier of the step of an itinerary whose act supplies the evidence | [Grounds](../specification/assessment.md) |
+| `grounds[].verdict` | Verdict | the verdict on the ground: pending, pass, fail, inconclusive or not-applicable | [Grounds](../specification/assessment.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `maturity` | Maturity | optional; one maturity per specification: open \| provisional \| stabilized; the record status applies to every specification left out | [Maturity of a field](../specification/maturity.md) |
 | `obligations` | Obligations | per obligation, its identifier, and a verdict with the derivation or the counterexample that settles it | [Obligations](../specification/assessment.md) |

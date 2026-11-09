@@ -11,6 +11,7 @@ import yaml
 
 from gnomon.answerability import as_document, diagnose, itinerary_state, render_text
 from gnomon.check import check_workspace, load_workspace
+from gnomon.completeness import ground_verdict_findings
 from gnomon.exposure import answer_exposure
 from gnomon.stages import itinerary_stage
 from gnomon.views import next_act
@@ -123,3 +124,68 @@ def test_the_product_of_a_decision_or_a_generation_is_exposed_first() -> None:
     assert (found[0].unit, found[0].kind) == ("mod.a.m", "commitment")
     assert found[0].reason == "generation by model-assembly, step itin.a.i.build"
     assert ("mod.a.m.law", "law") in {(e.unit, e.kind) for e in found}
+
+
+def _per_ground(**entry: Any) -> dict[str, dict[str, Any]]:
+    """An answer resting on a computed law, an itinerary whose simulation obtained it, and an
+    assessment that judges the ground of that law."""
+    records: dict[str, dict[str, Any]] = {
+        "mod.a.m": {
+            "type": "model",
+            "id": "mod.a.m",
+            "laws": [{"symbol": "law", "warrant": "computed"}],
+        },
+        "ans.a.x": {
+            "type": "answer",
+            "id": "ans.a.x",
+            "grounds": [{"id": "flow", "role": "warrant", "record": "mod.a.m.law"}],
+        },
+        "itin.a.i": {
+            "type": "itinerary",
+            "id": "itin.a.i",
+            "steps": [{"id": "simulate", "activity": "simulation", "norm": {"verdict": "pass"}}],
+        },
+        "asmt.a.x": {
+            "type": "assessment",
+            "id": "asmt.a.x",
+            "assesses": "ans.a.x",
+            "tests": {"warrant": {"law-warrant": {"verdict": "pass"}}},
+            "grounds": [
+                {"ground": "flow", "verdict": "pass", "step": "itin.a.i.simulate", **entry}
+            ],
+        },
+    }
+    return records
+
+
+def _ground_rules(records: dict[str, dict[str, Any]]) -> list[str]:
+    return [f.rule.id for f in ground_verdict_findings(records["asmt.a.x"], records)]
+
+
+def test_a_ground_judged_on_the_step_of_its_computation_has_no_finding() -> None:
+    assert _ground_rules(_per_ground()) == []
+
+
+def test_an_unknown_ground_and_an_unknown_step_are_reported() -> None:
+    assert _ground_rules(_per_ground(ground="nope", step="itin.a.i.none")) == [
+        "completeness/mismatched-ground",
+        "completeness/unknown-evidence-step",
+        "completeness/untested-computed-law",
+    ]
+
+
+def test_a_pass_on_a_step_whose_norm_is_not_met_is_a_warning() -> None:
+    records = _per_ground()
+    records["itin.a.i"]["steps"][0]["norm"]["verdict"] = "inconclusive"
+    assert _ground_rules(records) == ["completeness/unsettled-evidence"]
+
+
+def test_the_test_of_law_warrant_agrees_with_the_verdicts_of_the_grounds() -> None:
+    assert _ground_rules(_per_ground(verdict="fail")) == ["completeness/disagreeing-law-warrant"]
+    records = _per_ground(verdict="fail", holds_on="g < 1")
+    records["asmt.a.x"]["tests"]["warrant"]["law-warrant"]["verdict"] = "fail"
+    assert _ground_rules(records) == []
+    narrowing = as_document(diagnose(records))["narrowings"]
+    assert [(n["answer"], n["test"], n["holds_on"]) for n in narrowing] == [
+        ("ans.a.x", "grounds.flow", "g < 1")
+    ]

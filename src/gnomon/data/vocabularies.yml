@@ -198,6 +198,17 @@ vocabularies:
       name: the inquiry expects no further revision of the record
     - value: retracted
       name: the record is withdrawn, with all its specifications
+    grounds.verdict:
+    - value: pending
+      name: no act has supplied the evidence that judges the ground yet
+    - value: pass
+      name: the ground meets what its role requires
+    - value: fail
+      name: the ground does not meet what its role requires
+    - value: inconclusive
+      name: the act was carried out, and its evidence neither meets nor fails the requirement
+    - value: not-applicable
+      name: no requirement applies to the ground
     obligations.verdict:
     - value: pending
       name: no derivation or counterexample settles the obligation yet

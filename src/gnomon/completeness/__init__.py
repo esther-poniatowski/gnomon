@@ -68,6 +68,7 @@ from .answers import (
 )
 from .assessments import (
     disposition,
+    ground_verdict_findings,
     is_void,
     malformed_credence,
     misdirected_assessment,
@@ -174,6 +175,7 @@ __all__ = [
     "demand_met",
     "disposition",
     "foreign_backgrounds",
+    "ground_verdict_findings",
     "inadmissible_values",
     "incomplete_operations",
     "inherited_presuppositions",

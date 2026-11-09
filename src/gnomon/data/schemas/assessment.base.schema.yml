@@ -376,6 +376,61 @@ properties:
     description: 'the inputs from which each comparison cited by a verdict is recomputed: per comparison, the binding and its version, and the version of the data; the metric and the tolerance are read from the question'
     examples:
     - version 2 of the binding of the rate model, with version 3 of the recordings
+  grounds:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        ground:
+          type:
+          - string
+          - 'null'
+          x-template: GROUND
+          x-kind: label
+          title: Ground
+          description: the identifier of the ground of the assessed answer that the entry judges
+        verdict:
+          type:
+          - string
+          - 'null'
+          x-template: pending
+          x-vocabulary: grounds.verdict
+          title: Verdict
+          description: 'the verdict on the ground: pending, pass, fail, inconclusive or not-applicable'
+        evidence:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE DERIVATION, SIMULATION, MEASUREMENT OR COMPARISON THAT SETTLES THE VERDICT"'
+          x-kind: markdown-line
+          title: Evidence
+          description: the derivation, the simulation, the measurement or the comparison that settles the verdict
+        step:
+          type:
+          - string
+          - 'null'
+          x-template: itin.TOPIC.NAME.STEP
+          x-kind: label
+          x-comment: the step of an itinerary whose act supplies the evidence; required for a law marked `computed`
+          title: Step
+          description: the identifier of the step of an itinerary whose act supplies the evidence
+        holds_on:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: fail only, optional; the subdomain over which the ground still meets its role
+          title: Holds on
+          description: on a failed ground, the subdomain over which the ground still meets its role
+    x-comment: fill to judge grounds of the answer one by one for the test of law warrant; one entry per ground judged, and the verdict of that test agrees with them
+    title: Grounds
+    description: per ground of the answer judged one by one, its identifier, a verdict with its evidence, and the step of an itinerary that supplies the evidence
+    examples:
+    - 'the law of the delay: pass, by the simulation of the step that compares it with the derived law'
   obligations:
     x-blank: true
     type:

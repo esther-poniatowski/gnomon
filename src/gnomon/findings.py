@@ -491,6 +491,29 @@ COMPLETENESS_MISPLACED_HOLDS_ON = _rule(
     "completeness/misplaced-holds-on",
     "A test or an obligation that did not fail names a subdomain under holds_on.",
 )
+COMPLETENESS_MISMATCHED_GROUND = _rule(
+    "completeness/mismatched-ground",
+    "A verdict on a ground of an assessment names no ground of the assessed answer, or names one"
+    " twice.",
+)
+COMPLETENESS_UNKNOWN_EVIDENCE_STEP = _rule(
+    "completeness/unknown-evidence-step",
+    "A verdict on a ground names a step that no itinerary holds.",
+)
+COMPLETENESS_UNSETTLED_EVIDENCE = _rule(
+    "completeness/unsettled-evidence",
+    "A ground passes on the evidence of a step whose norm is not met.",
+    "warning",
+)
+COMPLETENESS_DISAGREEING_LAW_WARRANT = _rule(
+    "completeness/disagreeing-law-warrant",
+    "The verdict of the test of law warrant disagrees with the verdicts given ground by ground.",
+)
+COMPLETENESS_UNTESTED_COMPUTED_LAW = _rule(
+    "completeness/untested-computed-law",
+    "A ground names a law marked computed, and no verdict on it names the step of its computation.",
+    "warning",
+)
 COMPLETENESS_EXCLUDED_EVENT = _rule(
     "completeness/excluded-event",
     "A restriction of the kind without-event names no excluded event, or a restriction of another"

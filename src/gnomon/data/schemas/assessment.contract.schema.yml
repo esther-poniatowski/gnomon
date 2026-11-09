@@ -73,6 +73,24 @@ properties:
         - binding
         - version
         - data_version
+  grounds:
+    items:
+      propertyNames:
+        enum:
+        - ground
+        - verdict
+        - evidence
+        - step
+        - holds_on
+      properties:
+        verdict:
+          enum:
+          - pending
+          - pass
+          - fail
+          - inconclusive
+          - not-applicable
+          - null
   obligations:
     items:
       propertyNames:
@@ -127,6 +145,7 @@ propertyNames:
   - against_version
   - tests
   - comparisons
+  - grounds
   - obligations
   - appraisal
   - credence

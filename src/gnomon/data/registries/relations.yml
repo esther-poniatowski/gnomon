@@ -215,6 +215,11 @@ fields:
       targets: [question, problem]
       flags: source
       warrant: non-inferential
+    grounds[].step:
+      name: rests the verdict on a ground on the evidence of the step
+      targets: [itinerary]
+      flags: source
+      warrant: dependent
   binding:
     model:
       name: binds the model

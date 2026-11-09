@@ -503,6 +503,7 @@ def _assessment(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         + c.misversioned_assessment(record, records)
         + c.mismatched_obligations(record, records)
         + c.misplaced_holds_on(record)
+        + c.ground_verdict_findings(record, records)
     )
 
 

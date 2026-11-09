@@ -52,6 +52,13 @@ comparisons:                     # one entry per comparison that a verdict of fi
     version: VERSION             # the version of the binding
     data_version: VERSION        # the version of the data
 
+grounds:                         # fill to judge grounds of the answer one by one for the test of law warrant; one entry per ground judged, and the verdict of that test agrees with them
+  - ground: GROUND
+    verdict: pending             # pending (no act has supplied the evidence that judges the ground yet) | pass (the ground meets what its role requires) | fail (the ground does not meet what its role requires) | inconclusive (the act was carried out, and its evidence neither meets nor fails the requirement) | not-applicable (no requirement applies to the ground)
+    evidence: "THE DERIVATION, SIMULATION, MEASUREMENT OR COMPARISON THAT SETTLES THE VERDICT"
+    step: itin.TOPIC.NAME.STEP   # the step of an itinerary whose act supplies the evidence; required for a law marked `computed`
+    holds_on: "EXPRESSION OVER DECLARED SYMBOLS"   # fail only, optional; the subdomain over which the ground still meets its role
+
 obligations:                     # one entry per proof obligation of the question, named by its identifier
   - obligation: OBLIGATION
     verdict: pending             # pending (no derivation or counterexample settles the obligation yet) | pass (a derivation establishes the implication) | fail (a counterexample shows that the implication does not hold) | inconclusive (the derivation or the search was carried out and neither establishes nor refutes the implication) | not-applicable (no test applies to the obligation, as for a corrective answer)
