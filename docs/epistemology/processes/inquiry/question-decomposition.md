@@ -14,7 +14,7 @@ aliases:
 
 A precise question does not fix the route to its answer. Decomposing the question supplies that route: it infers intermediate questions whose resolution is progress toward a justified answer, not an accumulation of related information. The method is a form of **regressive analysis**, in which a goal is reduced to the conditions under which it is attained, and each unmet condition becomes a subgoal. Regressive analysis has three classical formulations:
 
-- the analysis of Pappus, which Pólya reworked as working backward [polya1945];
+- the analysis of Pappus [pappus1986], which Pólya reworked as working backward [polya1945];
 - means–ends analysis, in the theory of problem solving of Newell and Simon [newell1972];
 - the erotetic logics, which break questions into questions: the interrogative model of Hintikka [hintikka1999] and the erotetic search scenarios of Wiśniewski [wisniewski2013].
 
@@ -112,7 +112,7 @@ A serving question is **terminal** when some procedure has all its inputs availa
 
 Acts of generation add candidates or tools and justify no answer, and acts of decision fix a commitment and establish no fact. An answer obtained by either is therefore recorded as a revisable assumption, and these assumptions are the first to re-examine when the served answer fails.
 
-**Analysis is followed by synthesis.** Working backward identifies necessary conditions, and the steps of analysis cannot always be reversed. A combination step therefore composes the answers of the serving questions into an answer to the served question, and a check confirms that the combination is valid, as the [necessity and joint sufficiency of the conditions](../../objects/question/conditions-of-answerability.md#^sufficiency) require. When the conditions hold and no answer follows, a condition is missing, most often a bridging assumption. ^synthesis
+**Analysis is followed by synthesis.** Working backward identifies necessary conditions, as the analysis of Pappus does before its synthesis [pappus1986], and the steps of analysis cannot always be reversed. A combination step therefore composes the answers of the serving questions into an answer to the served question, and a check confirms that the combination is valid, as the [necessity and joint sufficiency of the conditions](../../objects/question/conditions-of-answerability.md#^sufficiency) require. When the conditions hold and no answer follows, a condition is missing, most often a bridging assumption. ^synthesis
 
 ## The assembly of a level
 
@@ -163,6 +163,7 @@ Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-
 - [hintikka1999] ◐ [Hintikka, *Inquiry as Inquiry: A Logic of Scientific Discovery*, Jaakko Hintikka Selected Papers 5, Kluwer, 1999](https://doi.org/10.1007/978-94-015-9313-7); the interrogative model of inquiry
 - [hintikka2007] ◐ [Hintikka, *Socratic Epistemology: Explorations of Knowledge-Seeking by Questioning*, Cambridge University Press, 2007](https://doi.org/10.1017/CBO9780511619298); the desideratum of a question
 - [newell1972] ◐ Newell & Simon, *Human Problem Solving*, Prentice-Hall, 1972; means–ends analysis
+- [pappus1986] ◐ [Pappus of Alexandria, *Book 7 of the Collection*, ed. and trans. A. Jones, Sources in the History of Mathematics and Physical Sciences 8, Springer, 1986](https://doi.org/10.1007/978-1-4612-4908-5); the preface of Book 7, on analysis and synthesis
 - [polya1945] ◐ Pólya, *How to Solve It: A New Aspect of Mathematical Method*, Princeton University Press, 1945; working backward
 - [vanfraassen1980] ◐ [van Fraassen, *The Scientific Image*, Clarendon Press, 1980](https://doi.org/10.1093/0198244274.001.0001); ch. 5, read in its abridged reprint, "The pragmatic theory of explanation", in Pitt (ed.), *Theories of Explanation*, Oxford University Press, 1988, 136–155 ([PDF](https://www.fitelson.org/290/vanfraassen_pte.pdf))
 - [wisniewski2013] ◐ [Wiśniewski, *Questions, Inferences, and Scenarios*, Studies in Logic 46, College Publications, 2013](https://philpapers.org/rec/WINQIA); erotetic implication and erotetic search scenarios
