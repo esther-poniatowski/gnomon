@@ -23,6 +23,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e .
           pip install black pylint ruff mypy pytest pytest-cov types-PyYAML types-jsonschema
+      - name: Materialize the schema dependencies (kleisis)
+        run: |
+          pip install "kleisis @ git+https://github.com/esther-poniatowski/kleisis.git@eb5f9b9f36e6b1c2e4dddb41aa543a9114482ebc"
+          python -m kleisis materialize --root .
+          python -m kleisis check --root .
       - name: Check formatting (black)
         run: black --check --config config/tools/black.toml src/ tests/
       - name: Run linter (pylint)

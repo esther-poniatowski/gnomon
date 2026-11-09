@@ -7,7 +7,9 @@ import shutil
 from pathlib import Path
 from typing import Any
 
+import pytest
 import yaml
+from jsonschema import Draft202012Validator
 from typer.testing import CliRunner
 
 from gnomon.check import load_workspace
@@ -17,9 +19,25 @@ from gnomon.export import build_export, load_export_registry, render_export
 from gnomon.relation_registry import load_relation_registry
 from gnomon.schemas import load_base
 
-from .paths import EXAMPLES
+from .paths import EXAMPLES, ROOT
 
 GROKKING = EXAMPLES / "grokking-delayed-generalization"
+
+#: The contract of the export, which `ekthesis` publishes and `kleisis` materializes.
+CONTRACT = "ekthesis:export@1"
+
+
+def _contract() -> dict[str, Any]:
+    """Return the schema of the contract, materialized from its source at the pinned commit."""
+    registry = yaml.safe_load((ROOT / "specs" / "schema-registry.yml").read_text(encoding="utf-8"))
+    path = ROOT / registry["schemas"][CONTRACT]
+    assert path.is_file(), f"{path} is absent: run `python -m kleisis materialize --root .` first"
+    schema: dict[str, Any] = yaml.safe_load(path.read_text(encoding="utf-8"))
+    return schema
+
+
+def _errors(export: dict[str, Any]) -> list[str]:
+    return [error.message for error in Draft202012Validator(_contract()).iter_errors(export)]
 
 
 def _answer(name: str, **fields: Any) -> dict[str, Any]:
@@ -212,3 +230,31 @@ def test_a_condition_ground_citing_a_restriction_is_exported() -> None:
         (r["source"], r["target"]) for r in export["relations"] if r["class"] == "condition"
     }
     assert ("quest.a.q.gain", "ans.a.x") in conditions
+
+
+@pytest.mark.parametrize("example", sorted(p for p in EXAMPLES.iterdir() if p.is_dir()))
+def test_the_export_of_each_example_follows_the_contract(example: Path) -> None:
+    export, dropped = build_export(load_workspace(example).by_id, "demo")
+    assert _errors(export) == []
+    assert dropped == []
+
+
+def test_the_export_of_the_fixture_follows_the_contract() -> None:
+    assert _errors(build_export(_records(), "demo")[0]) == []
+
+
+def test_every_class_and_form_that_the_registry_exports_is_admitted_by_the_contract() -> None:
+    relation = _contract()["$defs"]["relation"]["properties"]
+    classes, forms = set(relation["class"]["enum"]), set(relation["form"]["enum"])
+    registry = load_relation_registry()
+    declared = [
+        d
+        for family in (registry.get("entries") or {}).values()
+        for d in (family.get("relations") or {}).values()
+    ] + [d for fields in (registry.get("fields") or {}).values() for d in fields.values()]
+    for d in declared:
+        exported = d.get("export")
+        named = set(exported.values()) if isinstance(exported, dict) else {exported} - {None}
+        assert named <= classes, d
+        if d.get("export_form"):
+            assert d["export_form"] in forms, d

@@ -70,4 +70,4 @@ A ground with the role `idealization` or `criterion` maps onto no class: an idea
 - The `export` property of the relation registry gains a reader.
 - The answer gains the relation `exemplifies`, and the note on [relations between research units](../epistemology/objects/knowledge/relations-between-units.md#^instance) defines it.
 - Each edge of the graph of claims runs from the unit that depends on the other, so a support stated beside the ground that it restates forms no cycle.
-- `gnomon` declares a schema dependency on `ekthesis:export@1` through `kleisis` once `ekthesis` is pushed. Then its tests validate each generated export against the materialized schema.
+- `gnomon` declares a schema dependency on `ekthesis:export@1` through `kleisis`, pinned at a commit of `ekthesis` in the [schema resources](../../specs/schema-resources.yml). The tests validate the export of each worked example against the materialized schema, and check that every class and form of the relation registry belongs to the contract.
