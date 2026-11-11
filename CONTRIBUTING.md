@@ -231,7 +231,7 @@ Contains dedicated configuration files for each development tool. This achieves 
 | `pylintrc.ini`        | Pylint                 | Linting rules (main code)         |
 | `ruff.toml`           | Ruff                   | Linting rules (main and test code)|
 | `pyrightconfig.json`  | Pyright                | Static type analysis overrides    |
-| `releaserc.toml`      | Python Semantic Release| Versioning and changelog           |
+| `releaserc.toml`      | Python Semantic Release| Versioning and release assets      |
 
 ### `config/dictionaries/` — Spell checking
 
