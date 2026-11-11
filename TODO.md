@@ -162,3 +162,13 @@ The Mixture pilot of `geonexus` corrected several parts of the framework while s
 	- [ ] Declare the policy of `gnomon` in `anagraphe.yml`. The record schemas, not the policy, fix the order of statuses and types.
 	- [ ] Move the goal clause of each entry from the index into its file, the clauses written under `index-goals` included. Decide which key of a YAML record holds that clause.
 	- [ ] Give each index of `examples/` one group that sorts its records by `type`, from the problem to the itinerary.
+- [ ] Align the command line of `gnomon` with the [command-line conventions of the ecosystem](https://github.com/esther-poniatowski/keystone/blob/main/docs/internals/cli-conventions.md), after the uncommitted changes of `src/gnomon/cli.py` are committed. 🆔 cli-conventions
+	- [ ] Retire the short form `-f` of `--format` in `check`, `status` and `itinerary`, and the short form `-y` of `init --yes`.
+	- [ ] Rename the option `--output` of `views` to `--output-dir`, without a short form, since it names a folder.
+	- [ ] Read the option `--output` of `vocabulary` as a path from the current folder, by default `<directory>/vocabulary.yml`, and write the file through `_emit`, so that a failed write exits with status 2.
+	- [ ] Let the option `--root` of `itinerary` read the environment variable `GNOMON_ROOT`.
+	- [ ] Exit with status 2, instead of 1, on four usage errors: a missing directory, a missing path given to `validate`, a log folder outside the root, and an unknown kind given to `init --with` or `--start-with`.
+	- [ ] Stop `init` with status 2 when the standard input is not a terminal and `--yes` is absent, instead of failing on its confirmation.
+	- [ ] Decide whether `init --force` keeps its confirmation, since `--force` already authorizes overwriting the outputs of `init`, which it backs up under `.gnomon-backup`.
+	- [ ] Decide whether `init` without `--force` may add entries to an existing `_index.md`, a scaffolded file that the researcher may have edited.
+	- [ ] Update the tests, the [command-line reference](docs/guide/cli-reference.md), the [tutorial](docs/guide/tutorial.md) and the changelog, and replace `--output` by `--output-dir` in the commands of the hand-off `.agent-work/ekphrasis-views/HANDOFF.md`.
