@@ -59,6 +59,16 @@ Each aim states three answer conditions: what counts as a direct answer, when th
 
 - **A conclusive answer can still fail.** The answer conditions fix the *form* of a settling answer. A prediction whose uncertainty lies within the required accuracy is conclusive, and it can still be false of the target, which the warrant test of fidelity decides.
 
+- **A direct answer can be stated in one sentence whose form follows the aim.** Three forms recur when the claim answers which factor sets a property, how several factors produce an effect, or which conditions select which outcome. Each form below fills the direct answer of its aim with the elements that the answer records: ^one-sentence-answers
+
+  | Aim, and form of the aim block | The question asks | Direct answer in one sentence |
+  | --- | --- | --- |
+  | `explanation`, with one factor and its path | which quantity sets a property | in [system], [quantity] determines [property], so [consequence] |
+  | `explanation`, with several factors | how an effect arises from several factors | [effect] factorizes into [part A], set by [factor X], and [part B], set by [factor Y] |
+  | `exploration`, or `model-properties` with the form `regime` | which conditions select which outcome | each outcome named in the question, with the condition that selects it |
+
+  When an answer states only that each outcome can occur, it leaves open which condition selects each outcome. Therefore, such an answer is `partial` under the [erotetic relation](../answer/answer-form.md#^erotetic-relation). Two further forms have no record yet. A relation between two accounts waits on the relations between frameworks, deferred by the [proposal on the relation registry](../../../proposals/relation-registry.md). Such a relation holds, for instance, when a model is the limit of a framework that also yields a new property. A claim that a property maximizes an objective under constraints waits on the task [`optimality-claim`](../../../../TODO.md).
+
 ## What is not an aim
 
 - **A change of accepted claims is not an aim.** A change of the [accepted knowledge](../../foundations/inquiry-and-state.md#^state) $K$ is the effect of [accepting or withdrawing an answer](../status/statuses-and-acceptance.md#^acceptance-act), an act of the researcher that no direct answer to a question performs. The activities of the [revision](../../processes/activities/revision.md) family carry out that change under their norm. A demand to withdraw one of two clashing claims, which a conflict generates among the [questions of each obstacle](../problem/problem-types.md#^obstacle-questions), therefore takes no aim: its result is the revision itself, and the verdicts on the clashing claims are its inputs. ^acceptance
@@ -77,6 +87,7 @@ Each aim states three answer conditions: what counts as a direct answer, when th
 > 	- a change of accepted claims kept outside the registry of aims, as the effect of an act of acceptance;
 > 	- understanding kept outside the registry of aims, as a dimension of appraisal or a declared use;
 > 	- the step of transfer to the target, through a binding, between the consequence of a model and a claim about the target.
+> 	- the one-sentence forms of a direct answer, taken from the abstract practice of `geonexus`, and the reading of an answer that omits the selecting condition as `partial`.
 
 Marks follow the [legend of reading marks](../../../../CONTRIBUTING.md#^reading-marks).
 
