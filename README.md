@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/python-%E2%89%A53.12-blue)](https://www.python.org/)
 [![License: GPL](https://img.shields.io/badge/License-GPL--3.0-yellow.svg)](https://opensource.org/licenses/GPL-3.0)
 
-Specifies a research inquiry as typed records, from the problem that it addresses to the assessment of its answers, checks those records against the method that they follow, and exports them for the tools that present research to readers.
+Specifies a research inquiry as typed records, from the problem that it addresses to the assessment of its answers, and checks those records against the method that they follow.
 
 Gnomon serves domain-competent researchers who are new to Gnomon and its epistemic vocabulary. A new inquiry begins with the [greenfield tutorial](docs/guide/first-inquiry.md). An active part of existing research begins with the [adoption guide](docs/guide/adopting-existing-research.md). Both routes use the same records and checks. The [capability-status guide](docs/guide/capabilities.md) states the current boundary of each route.
 
@@ -37,11 +37,11 @@ These failures follow from one organization: prose serves both to store the cont
 - represent the state of knowledge of an inquiry, each result with its maturity;
 - record the logic of the inquiry, that is, the dependencies through which results compose into answers;
 - guide the inquiry, by listing the open conditions addressable now, each with its ready acts, and leaving the choice to the researcher;
-- export the content of the inquiry, so that a presentation to a reader references the records instead of restating them.
+- keep the content of the inquiry in records, so that a presentation to a reader cites the records instead of restating them.
 
 ### Advantages
 
-`gnomon` replaces the documents by **records**. Each record holds one concern of an inquiry, under a stable identifier, and the records are linked by relations of closed and typed kinds. A presentation of that content to a reader, specified in [`ekthesis`](https://github.com/esther-poniatowski/ekthesis), references the records through their export, so the records stay the only source of the content. Three principles govern this design, each stated in an architecture decision:
+`gnomon` replaces the documents by **records**. Each record holds one concern of an inquiry, under a stable identifier, and the records are linked by relations of closed and typed kinds. A presentation of that content to a reader, specified in [`ekthesis`](https://github.com/esther-poniatowski/ekthesis), cites each record by its logical target, so the records stay the only source of the content. Three principles govern this design, each stated in an architecture decision:
 
 - [separation of concerns](docs/adr/research-scope.md) between research, which `gnomon` specifies, and its presentation to readers, which `ekthesis` specifies;
 - [one source](docs/adr/one-source-per-unit.md) for each unit of content;

@@ -93,20 +93,17 @@ def _register_unique(mapping: dict[str, str], key: str, path: PurePosixPath) -> 
 def _schema_sources(package_data: Path) -> list[tuple[Path, PurePosixPath]]:
     """Return each packaged schema with its provider-qualified destination."""
     owned_root = package_data / "schemas"
-    dependency = package_data / "resources" / "ekthesis-export.schema.yaml"
-    if not owned_root.is_dir() or not dependency.is_file():
+    if not owned_root.is_dir():
         raise ProvisioningError("the installed Gnomon package does not contain its schema closure")
     owned = sorted(
         source
         for source in owned_root.rglob("*")
         if source.name.endswith((".schema.yml", ".schema.yaml", ".schema.json"))
     )
-    sources = [
+    return [
         (source, PurePosixPath("gnomon") / source.relative_to(owned_root).as_posix())
         for source in owned
     ]
-    sources.append((dependency, PurePosixPath("ekthesis/export.schema.yaml")))
-    return sources
 
 
 def _provisioned_files(

@@ -1,14 +1,17 @@
 ---
 tags:
   - decision
-status: accepted
+status: deprecated
 created: 2026-11-09
-revised: 2026-11-09
+revised: 2026-11-11
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Research export
 ---
 # Research export
+
+> [!WARNING] Deprecated
+> On 2026-11-11, the decision of `geonexus` on [independent research and exposition tools](https://github.com/esther-poniatowski/geonexus/blob/269af033895ef4258724dfc779086d32826be631/docs/_decisions/independent-research-and-exposition.md) retires the research export, so that `gnomon` and `ekthesis` stay independent. An exposition cites a research unit by its logical target, and `gnomon` publishes no export. The command `gnomon export`, the registry `registries/export.yml`, the classes of the export in the [relation registry](relation-registry.md) and the schema dependency on `ekthesis:export@1` are removed. The relation `exemplifies` and the check `relation/restated-ground`, which this decision introduced, remain in force. The body below records the retired design.
 
 > [!QUESTION] Goal: which units and which relations does `gnomon` publish for an exposition, and how does it map them onto the classes of the contract that `ekthesis` publishes?
 

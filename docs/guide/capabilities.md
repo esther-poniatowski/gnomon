@@ -44,7 +44,6 @@ Each row states the usable boundary and the first guide or command to use.
 | Generate computed inquiry views | `supported` | Nine schema-bound views expose computed state without changing records | [Inquiry views](cli-reference.md#^cli-views) |
 | Compute the source identifier of a view | `supported` | Gnomon computes the identifier that a presentation tool can compare with the value stored in a view | [View source identifier](cli-reference.md#^cli-source-state) |
 | Typeset record expressions | `supported` | The expressions view derives LaTeX from symbols currently declared in Gnomon | [Inquiry views](cli-reference.md#^cli-views) |
-| Export research units and relations | `supported` | The export follows `ekthesis:export@1`, and check mode detects a file that differs from current records | [Research export](cli-reference.md#^cli-export) |
 | Inspect the installed package | `supported` | The root flag prints the package release; the info command also prints the operating system and Python release | [Package diagnostics](cli-reference.md#^cli-info) |
 | Compare a model with data | `planned` | Binding records hold inputs, but no command compares model outputs with data | [Model-design proposal](../proposals/model-design.md) |
 | Generate reusable notation macros | `planned` | The expressions view typesets current symbols, but no command generates reusable macros | [Notation ownership proposal](../proposals/vocabulary-records.md) |

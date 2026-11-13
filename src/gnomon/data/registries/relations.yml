@@ -27,11 +27,7 @@
 #   or `dependent` when the flagged record determines it;
 # - `attributes`: the keys that an entry admits beyond `relation` and its target, with `required`
 #   naming those that it must carry;
-# - `attribute_targets`: the record kinds that an attribute naming a record may take;
-# - `export`: the class of the contract of `ekthesis`, a map from a use to a class, or none;
-#   `export_use` names the key whose value is the use, read on the entry or on the item that holds
-#   the field; `export_form` names the form of an elaboration; `reversed: true` exports the
-#   relation from its target to its source.
+# - `attribute_targets`: the record kinds that an attribute naming a record may take.
 
 id: registry.relations
 type: relation-registry
@@ -67,7 +63,6 @@ entries:
         flags: target
         warrant: entry
         attributes: [warrant]
-        export: support
       presupposes:
         graph: claims
         name: it is admissible only if the other answer is true
@@ -94,7 +89,6 @@ entries:
         cycles: forbidden
         flags: source
         warrant: non-inferential
-        export: instance
       revises:
         name: it replaces the other answer over time, which stays unchanged
         targets: [answer]
@@ -105,7 +99,6 @@ entries:
         targets: [answer]
         arity: set
         flags: entry
-        export: incompatibility
       contrasts-with:
         name: the two answers differ in a stated respect and may both hold
         targets: [answer]
@@ -113,7 +106,6 @@ entries:
         flags: entry
         attributes: [respect]
         required: [respect]
-        export: contrast
   question:
     list: links
     vocabulary: links.relation
@@ -126,8 +118,6 @@ entries:
         flags: source
         warrant: non-inferential
         attributes: [via]
-        export: elaboration
-        export_form: whole-part
       explanans-from:
         name: each answer states an explanans factor over the phenomenon of the linked question
         targets: [question]
@@ -169,8 +159,6 @@ fields:
       targets: [question]
       flags: source
       warrant: non-inferential
-      export: solutionhood
-      reversed: true
     grounds[].record:
       graph: claims
       name: rests on the ground
@@ -178,13 +166,6 @@ fields:
       cycles: judged
       flags: source
       warrant: dependent
-      export:
-        assumption: support
-        warrant: support
-        datum: support
-        condition: condition
-      export_use: role
-      reversed: true
     route.runs_on:
       name: runs its route on the record
       targets: [target-system, model]
@@ -317,5 +298,3 @@ fields:
       cycles: forbidden
       flags: source
       warrant: non-inferential
-      export: elaboration
-      export_form: generalization-specific

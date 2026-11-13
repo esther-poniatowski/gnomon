@@ -3,12 +3,15 @@ tags:
   - decision
 status: accepted
 created: 2026-11-08
-revised: 2026-11-08
+revised: 2026-11-11
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Relation registry
 ---
 # Relation registry
+
+> [!WARNING] Amended
+> On 2026-11-11, the decision of `geonexus` on [independent research and exposition tools](https://github.com/esther-poniatowski/geonexus/blob/269af033895ef4258724dfc779086d32826be631/docs/_decisions/independent-research-and-exposition.md) retires the research export, together with the [decision on the research export](research-export.md). A declaration therefore states no class of the export: the properties `export`, `export_use`, `export_form` and `reversed` are removed from the registry. The passages below that name the export describe the retired design.
 
 > [!QUESTION] Goal: which file declares the relations between research units, what does each declaration state, and how does a revision travel along a relation?
 

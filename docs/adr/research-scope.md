@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-30
-revised: 2026-11-09
+revised: 2026-11-11
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Research as the scope of gnomon
@@ -18,6 +18,9 @@ aliases:
 
 > [!WARNING] Amended
 > On 2026-11-09, the [decision on the research export](research-export.md) fixes the export against the first version of the contract, `ekthesis:export@1`, which `ekthesis` publishes. That version carries units and relations and no symbol entry, since no check of `ekthesis` reads a symbol yet. Support is exported from the grounds of an answer by their role, as well as from `supports`, and a ground with the role `condition` is exported as a condition. The relation `exemplifies` is registered with the use `instance` alone, since `tests`, `defeats`, `incompatible-with` and the grounds of an answer already state the four other uses.
+
+> [!WARNING] Amended
+> On 2026-11-11, the decision of `geonexus` on [independent research and exposition tools](https://github.com/esther-poniatowski/geonexus/blob/269af033895ef4258724dfc779086d32826be631/docs/_decisions/independent-research-and-exposition.md) retires the research export and its contract `ekthesis:export@1`. An exposition cites a research unit by its logical target, and states the kind of each unit and the relations between units itself, so `ekthesis` no longer checks them against an export of `gnomon`. The passages below that give an export to `gnomon`, and the [decision on the research export](research-export.md), describe the retired design.
 
 > [!QUESTION] Goal: which tool specifies expositions, glossaries, audiences and project specifications, and which units does `gnomon` keep?
 

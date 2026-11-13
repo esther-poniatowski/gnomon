@@ -77,16 +77,5 @@ exports:
   - gnomon:view.vocabulary@2
   - gnomon:view.vocabulary@3
 
-dependencies:
-  - id: ekthesis
-    source:
-      kind: git
-      repository: https://github.com/esther-poniatowski/ekthesis.git
-      commit: be7f6a9d7b87364dd99e4f7aeec329e7963b5773
-      archive_roots:
-        - specs/schema-registry.yml
-        - src/ekthesis/data/schemas
-    registry: specs/schema-registry.yml
-    contracts:
-      - ekthesis:export@1
+dependencies: []
 projects: []

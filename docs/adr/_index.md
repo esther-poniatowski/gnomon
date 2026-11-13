@@ -55,7 +55,7 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 ## Ecosystem ownership
 
 - [Research as the scope of gnomon](research-scope.md): assigns research, exposition and record-presentation responsibilities across Gnomon, Ekthesis and Ekphrasis
-- [Research export](research-export.md): decides which units and relations `gnomon` publishes for an exposition, and how it maps them onto the classes of `ekthesis`
+- [Research export](research-export.md): records the retired export of research units to `ekthesis`, deprecated by the decision of `geonexus` on independent research and exposition tools
 - [Expositions as projections](expositions-as-projections.md): records the earlier placement of exposition in `gnomon`, superseded by the decision on research as the scope of gnomon
 - [Terminology, audience and project specifications](terminology-audience-project-specifications.md): places the mechanism of a notation, a glossary, an audience or a project specification apart from its instances
 - [Knowledge interchange format](knowledge-interchange-format.md): decides whether the Open Knowledge Format serves `gnomon` as a source format, a derived export or a source of trust fields

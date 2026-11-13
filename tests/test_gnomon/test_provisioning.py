@@ -7,11 +7,9 @@ import pytest
 import yaml
 from typer.testing import CliRunner
 
-from gnomon import data_path
 from gnomon.cli import app
 from gnomon.provisioning import ProvisioningError, provision_schemas
 
-ROOT = Path(__file__).parents[2]
 
 
 def _mapping(path: Path) -> dict[str, object]:
@@ -66,7 +64,6 @@ def test_provisioning_writes_a_complete_relocatable_registry(tmp_path: Path) -> 
     schemas = cast(dict[str, str], registry["schemas"])
     resources = cast(dict[str, str], registry["resources"])
     assert schemas["gnomon:problem@3"].startswith(".gnomon/schemas/")
-    assert schemas["ekthesis:export@1"].startswith(".gnomon/schemas/")
     assert result.schema_count >= len(schemas)
 
     contracts: dict[str, dict[str, object]] = {}
@@ -110,15 +107,6 @@ def test_provisioning_accepts_custom_vault_relative_locations(tmp_path: Path) ->
     assert all(
         path.startswith("shared/contracts/") for section in sections for path in section.values()
     )
-
-
-def test_packaged_dependency_matches_the_materialized_pinned_contract() -> None:
-    """The distributable Ekthesis contract is the exact contract materialized by Kleisis."""
-    materialized = ROOT / ".schema-resources/ekthesis/src/ekthesis/data/schemas/export.schema.yaml"
-    packaged = data_path() / "resources/ekthesis-export.schema.yaml"
-
-    assert materialized.is_file(), "run `python -m kleisis materialize --root .` first"
-    assert packaged.read_bytes() == materialized.read_bytes()
 
 
 @pytest.mark.parametrize(
@@ -174,18 +162,12 @@ def test_provisioning_rejects_an_incomplete_installed_closure(
     """An absolute reference without its identified resource makes provisioning fail."""
     package_data = tmp_path / "package-data"
     schemas = package_data / "schemas"
-    resources = package_data / "resources"
     schemas.mkdir(parents=True)
-    resources.mkdir()
     (schemas / "record.schema.yml").write_text(
         "$id: https://example.test/record.schema.yml\n"
         "properties:\n"
         "  _schema: {const: example:record@1}\n"
         "  field: {$ref: https://example.test/missing.schema.yml}\n",
-        encoding="utf-8",
-    )
-    (resources / "ekthesis-export.schema.yaml").write_text(
-        "$id: export.schema.yaml\nproperties:\n  _schema: {const: ekthesis:export@1}\n",
         encoding="utf-8",
     )
     monkeypatch.setattr("gnomon.provisioning.data_path", lambda: package_data)

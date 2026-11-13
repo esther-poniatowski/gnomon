@@ -88,7 +88,6 @@ A change is verified by the narrowest checks that exercise it. A change to a sha
 - **YAML integrity:** every template and every fixture parses, keeps its `id` and its `type`, and holds no uppercase placeholder.
 - **Reference integrity:** each identifier pointing to another record, and each Markdown link, resolves to one existing target.
 - **Downstream consistency:** a change to a requirement of the epistemic task updates every field of an answer or an assessment that reads that requirement.
-- **Contracts of other repositories:** the tests of the export read the contract `ekthesis:export@1`, which [Kleisis](https://github.com/esther-poniatowski/kleisis) materializes at the commit pinned in the [schema resources](specs/schema-resources.yml). Running `python -m kleisis materialize --root .` before the tests fetches it, as the continuous integration does.
 
 ## Owner of each contract
 
