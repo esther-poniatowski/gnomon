@@ -25,6 +25,8 @@ An inquiry is specified in five stages. Each stage takes the products of the ear
 | Background and specified subject | the admitted laws, and the formal declarations of the system, the phenomenon and the foils of the contrast, each written when a condition requires it | slots `specified`, on demand |
 | Candidate answers | the answers proposed to each question, and the models and bindings on which they rest, as products of the inquiry | — |
 
+^specification-stages
+
 The record that holds each product is documented in the [specification of the records](../../../specification/_index.md). The levels of commitment are defined in the note on [questions](../../objects/question/question.md#^commitment-levels). A change to an earlier stage, made after a later stage, is a revision. The [revision activities](../activities/revision.md) type that change.
 
 Two stages are read with a qualification:
@@ -54,6 +56,8 @@ The stage of the problem belongs to no layer: the problem supplies the demand fr
 **The model belongs to the background or to a model record, not to the subject.** Laws admitted in advance belong to the background. Constituents, laws and organizations proposed during the inquiry belong to a [model record](../../../specification/model.md#^model-record), which every answer that rests on it cites. A phenomenon can be identified without the theory that explains it [bogen1988] [hacking1983]. The study of mechanisms accordingly characterizes the phenomenon before it builds any schema of a mechanism [craver2013].
 
 **An inquiry starts from a problem, not from a question.** Dewey describes inquiry as starting from an indeterminate situation, which it first formulates as a problem [dewey1938]. The first object of an inquiry is a [problem](../../objects/problem/epistemic-problem.md): a demand that the accepted knowledge does not yet meet [nickles1981]. The questions are products of the stage of the question schema, derived from the problem, and they are typed before their terms are identified.
+
+When Gnomon adopts already-active research, its records may start from the current question schema. This entry point reports the available prior records. The inquiry still originates in its problem.
 
 ## The remaining dependency
 

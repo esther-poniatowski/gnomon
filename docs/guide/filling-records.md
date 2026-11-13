@@ -14,13 +14,21 @@ Leads a researcher from a research problem to a folder of records that the check
 
 ## Create the folder of a problem
 
-The records of one research problem share one folder. The following command creates that folder with the [record templates](../../src/gnomon/data/templates/_index.md) of the problem, its subject, its question and its operators, and with an index listing them in the order of filling:
+The records of one research problem share one folder. The following command creates that folder with a sparse problem and itinerary. The command also creates an index that lists both records:
 
 ```sh
 gnomon init ./my-problem
 ```
 
-A later record kind is added to the folder with the option `--with`, such as `--with answer --with assessment` once a candidate answer is in view. In a folder that already holds records, the command writes only the missing templates, and registers each of them in the index of the folder, under the heading of its stage. The header of each template names its specification note and states how many files of its kind a problem holds: for instance, one file per target system, per phenomenon or per candidate answer. A second file of one kind is a copy of its template, kept in the folder of the problem.
+The option `--with` adds a sparse record kind when required for the current inquiry. For example, the argument `--with question` adds the first question. The arguments `--with answer --with assessment` add the records needed to state and assess a candidate. In an existing folder, the command writes only missing records, and the index registers each one under its stage. Optional branches remain absent, so Ekphrasis places them behind *+ Add a field*. For source-based authoring, `--full-template` writes the [complete commented templates](../../src/gnomon/data/templates/_index.md). A problem may hold one file per target system, phenomenon or candidate answer. To create another record of the same kind, copy its complete template to the problem folder and register it in the index.
+
+## Distinguish editable records
+
+Inquiry records are the only files that hold authored research. Researchers create inquiry records with `gnomon init` or Ekphrasis. Alternatively, researchers can copy a canonical template. Researchers may edit these records in Ekphrasis or in a source editor. By contrast, every other file belongs to one of three non-editable classes:
+
+- The files under `.gnomon/schemas` and the schema registry are package resources. Leave them unchanged and rerun `gnomon setup` when the installed contracts change.
+- The views written by `gnomon views` or `gnomon vocabulary` are generated results. Ekphrasis presents these views as read-only. Regenerate them after an authored record changes.
+- The canonical templates in the Gnomon package or repository define the copies created by `gnomon init`. The option `--full-template` places an editable copy inside the inquiry folder.
 
 ## Fill the records stage by stage
 
@@ -32,7 +40,7 @@ The records are filled in the five stages of the [order of specification](../epi
 4. the background and the specified subject: the admitted laws, and the formal declarations of a record raised to the commitment `specified` when an open condition of a question requires them;
 5. the candidate answers, with the models, the keys and the bindings on which they rest, the derivations that establish their derived laws, and the assessment of each answer.
 
-Each stage takes the records of the earlier stages as given, and a change to an earlier record is made as a revision. A problem that uses dimensional analysis declares the dimensional formula of its quantities and index sets, with the base scales of its operator record. Its laws and conditions are then checked for homogeneity, as the [decision on the dimensional formula](../adr/dimensional-formula.md) states. The itinerary records each act of the inquiry as a step, from the statement of the problem on. A template not yet started keeps the placeholder identifier of its template, such as `quest.TOPIC.NAME`; the command `gnomon check` lists it apart and checks only the records already started, so the folder can be checked after each stage. In a started record, a field still holding its placeholder, or a block left as the template wrote it, is read as empty. The check reports each such leftover once, under the rule `completeness/template-leftover`, to be filled or deleted.
+Each stage takes the records of the earlier stages as given, and a change to an earlier record is made as a revision. A problem that uses dimensional analysis declares the dimensional formula of its quantities and index sets, with the base scales of its operator record. Its laws and conditions are then checked for homogeneity, as the [decision on the dimensional formula](../adr/dimensional-formula.md) states. The itinerary records each act of the inquiry as a step, from the statement of the problem on. A record not yet started keeps the placeholder identifier projected from its template, such as `quest.TOPIC.NAME`; the command `gnomon check` lists it apart and checks only the records already started, so the folder can be checked after each stage. In a started full template, a field still holding its placeholder, or a block left as the template wrote it, is read as empty. The check reports each such leftover once, under the rule `completeness/template-leftover`, to be filled or deleted.
 
 ## Name each record
 
@@ -47,7 +55,7 @@ A field of another record names a unit of this record in two parts. The identifi
 
 ## Keep the field `_schema`
 
-The field `_schema`, at the top of each template, names the contract followed by the record, such as `gnomon:question@1`: the type of the record and the version of its contract. The template writes it, and the researcher leaves it as written. The command `gnomon validate` checks each record against that contract, and Ekphrasis opens the record as a form through it, as the [decision on record schemas](../adr/record-schemas.md) states.
+The field `_schema`, at the top of each template, names the contract followed by the record, such as `gnomon:question@3`: the type of the record and the version of its contract. The template writes it, and the researcher leaves it as written. The command `gnomon validate` checks each record against that contract, and Ekphrasis opens the record as a form through it, as the [decision on record schemas](../adr/record-schemas.md) states.
 
 ## Mark the maturity of a field
 

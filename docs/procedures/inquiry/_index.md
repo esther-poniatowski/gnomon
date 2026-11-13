@@ -11,4 +11,5 @@ Guides the conduct of an inquiry as a whole, once its questions and their condit
 
 - [Choosing the next act](next-act.md): finds the next act of research from the records of an inquiry, once a problem is stated
 - [Decomposing a question](decomposing-a-question.md): conducts the decomposition of a question into the questions that serve it, as the inquiry proceeds
+- [Promoting selected external research](promoting-external-research.md): places only the external units that an active inquiry must inspect
 - [Restarting from existing results](restarting-from-results.md): specifies an inquiry for a project whose results precede any explicit question

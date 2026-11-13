@@ -17,6 +17,7 @@ A model is a system studied as a stand-in for a target: laws relate quantities t
 
 | Element | When it is required | Content | Constraint on the element | Examples |
 | ------- | ------------------- | ------- | ------------------------- | -------- |
+| Sources | when an existing note, publication, model or data set supplies the model | per source, a provenance pointer that leaves the content external and makes no evidential claim | — | a section of a research note that states the model |
 | Background — the record from which the laws of the model are derived | when a law of the model carries the warrant `derived` | the identifier of one [background record](../epistemology/objects/knowledge/background.md) | — | the admitted training laws of the networks of a class |
 | Derives from | for a derived model | the identifiers of its parents: the target system, or other models | a root model, which no operation derives, names no parent | the target system of the grokking networks |
 | Operations | for a derived model | one entry per operation, in the order applied, typed as the [derived models](../epistemology/objects/answer/model-and-binding.md#^derived-models) define the kinds | each symbol of the model is declared in a parent, defined over visible symbols, or yielded by an operation | the expansion of an active field near onset |

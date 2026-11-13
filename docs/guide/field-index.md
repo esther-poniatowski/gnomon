@@ -135,6 +135,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `route.kind` | Kind | how the answer is obtained: a derivation, a proof, a simulation, an estimation or a measurement | [Route](../specification/answer.md) |
 | `route.pointer` | Pointer | a pointer to the code, the data or a published derivation; a recorded derivation is named in `derivations`, and its internal steps stay in it | [Route](../specification/answer.md) |
 | `route.runs_on` | Runs on | the target system, one model, or every model of a family, by identifier | [Route](../specification/answer.md) |
+| `sources` | Sources | per source, a provenance pointer to existing material from which the answer was adopted; the content stays external and the pointer makes no evidential claim | [Sources](../specification/answer.md) |
 | `status` | Status | the attitude taken toward the answer: entertained · hypothesized · accepted · retracted | [Status](../specification/answer.md) |
 | `support` | Support | the kind of evidence for the answer as a whole: unsupported · informal · formally-proven · empirically-supported | [Support](../specification/answer.md) |
 | `title` | Title | A short name of the record, as a label. | — |
@@ -185,33 +186,102 @@ Looks up each field of each record by its path, with its title, its description 
 | `tests` | Tests | verdict: pending \| pass \| fail \| inconclusive \| not-applicable, with the evidence that settles it, and on a failed test the subdomain over which the evidence still supports the claim, under holds_on | [Tests](../specification/assessment.md) |
 | `tests.admissibility` | admissibility | per criterion of the tests of the core and of the tests of the block of the aim of the question, a verdict — pending · pass · fail · inconclusive · not-applicable — with the evidence that settles it | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.admissible-explanans` | Admissible-explanans | block of an explanation | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.admissible-explanans.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.admissible-explanans.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.admissible-explanans.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.binding` | Binding | the verdict on whether the answer cites one binding of each model on which it runs to the phenomenon, with its evidence | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.binding.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.binding.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.binding.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.consequence` | Consequence | block of model properties | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.consequence.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.consequence.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.consequence.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.contrast` | Contrast | block of an explanation | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.contrast.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.contrast.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.contrast.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.grain` | Grain | the verdict on whether the claim specifies the observable at the grain of the question, with its evidence | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.grain.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.grain.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.grain.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.individuation` | Individuation | the verdict on whether each bearer of the model is a unit mapped from the constituents of the system, or a unit of the model alone, with its evidence | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.individuation.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.individuation.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.individuation.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.modal-strength` | Modal-strength | the verdict on whether the answer claims the modal strength that the question requests, with its evidence | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.modal-strength.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.modal-strength.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.modal-strength.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.outputs` | Outputs | block of a prediction | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.outputs.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.outputs.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.outputs.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.product` | Product | the verdict on whether the claim is a direct answer of the type that the question fixes, with its evidence | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.product.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.product.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.product.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.relation` | Relation | block of an explanation | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.relation.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.relation.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.relation.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.scope` | Scope | the verdict on whether the domain of the claim covers the reference class restricted by the domain, with its evidence | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.scope.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.scope.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.scope.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.space` | Space | block of an exploration | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.space.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.space.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.space.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.target-status` | Target-status | block of an explanation | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.target-status.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.target-status.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.target-status.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.values` | Values | block of a description | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.values.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.values.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.values.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.admissibility.witness-or-proof` | Witness-or-proof | block of modal knowledge | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.witness-or-proof.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.witness-or-proof.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: admissibility](../specification/assessment.md) |
+| `tests.admissibility.witness-or-proof.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: admissibility](../specification/assessment.md) |
 | `tests.constraints` | constraints | per constraint of the problem, its name and a verdict — pending · pass · fail · inconclusive · not-applicable — with the evidence that settles it | [Tests: constraints](../specification/assessment.md) |
 | `tests.constraints[].constraint` | Constraint | the name of the constraint of the problem that the entry judges | [Tests: constraints](../specification/assessment.md) |
 | `tests.constraints[].evidence` | Evidence | the derivation, the simulation, the measurement or the comparison that settles the verdict | [Tests: constraints](../specification/assessment.md) |
 | `tests.constraints[].verdict` | Verdict | the verdict on the constraint: pending, pass, fail, inconclusive or not-applicable | [Tests: constraints](../specification/assessment.md) |
 | `tests.warrant` | warrant | per criterion of the warrant table, a verdict with the evidence that settles it | [Tests: warrant](../specification/assessment.md) |
 | `tests.warrant.adequacy-to-use` | Adequacy-to-use | replaces fidelity for an answer that declares its use | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.adequacy-to-use.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.adequacy-to-use.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.adequacy-to-use.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: warrant](../specification/assessment.md) |
 | `tests.warrant.closure` | Closure | the verdict on whether the route fits the target, as the closure of its admitted laws decides, with its evidence | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.closure.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.closure.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.closure.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: warrant](../specification/assessment.md) |
 | `tests.warrant.fidelity` | Fidelity | name the comparisons that the verdict reads, and how each of their three reports bears on it | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.fidelity.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.fidelity.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.fidelity.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: warrant](../specification/assessment.md) |
 | `tests.warrant.foil-evidence` | Foil-evidence | the verdict on whether the evidence for the contrast comes from the foil itself, with its evidence | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.foil-evidence.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.foil-evidence.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.foil-evidence.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: warrant](../specification/assessment.md) |
 | `tests.warrant.law-warrant` | Law-warrant | the verdict on whether each ground meets what its role requires, with its evidence | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.law-warrant.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.law-warrant.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.law-warrant.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: warrant](../specification/assessment.md) |
 | `tests.warrant.phenomenon-established` | Phenomenon-established | the verdict on whether the phenomenon is established before it is explained, with its evidence | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.phenomenon-established.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.phenomenon-established.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.phenomenon-established.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: warrant](../specification/assessment.md) |
 | `tests.warrant.robustness` | Robustness | the verdict on whether the claim survives each idealization among its grounds, with its evidence | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.robustness.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.robustness.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.robustness.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: warrant](../specification/assessment.md) |
 | `tests.warrant.selection` | Selection | the verdict on whether a claim about some members extends to the class after a check for selection bias, with its evidence | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.selection.evidence` | Evidence | The derivation, simulation, measurement or comparison that settles the verdict. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.selection.holds_on` | Holds on | The subdomain over which the evidence still supports the claim after a failed test. | [Tests: warrant](../specification/assessment.md) |
+| `tests.warrant.selection.verdict` | Verdict | The result of applying the criterion to the assessed claim. | [Tests: warrant](../specification/assessment.md) |
 | `title` | Title | A short name of the record, as a label. | — |
 | `type` | Record type | The record type, which fixes the contract that the record follows. | — |
 
@@ -466,6 +536,25 @@ Looks up each field of each record by its path, with its title, its description 
 
 | Path | Title | Description | Documented in |
 | ---- | ----- | ----------- | ------------- |
+| `act_appraisals` | Act appraisals | the judgments used before choosing a ready act: the question and route, the criteria and their scales, and per act its available means and values | [Act appraisals](../specification/itinerary.md) |
+| `act_appraisals[].acts` | Acts | the ready acts considered, with their available means and researcher-authored judgments | [Act appraisals: acts](../specification/itinerary.md) |
+| `act_appraisals[].acts[].activity` | Activity | the identifier of one ready activity being appraised | [Act appraisals: acts](../specification/itinerary.md) |
+| `act_appraisals[].acts[].acts_on` | Acts on | the open condition, obtaining or evaluation addressed by the act | [Act appraisals: acts](../specification/itinerary.md) |
+| `act_appraisals[].acts[].available_means` | Available means | the instruments, data, methods and resources currently available for this act | [Act appraisals: acts](../specification/itinerary.md) |
+| `act_appraisals[].acts[].id` | Identifier | a name unique within the appraisal, used by the computed comparison | [Act appraisals: acts](../specification/itinerary.md) |
+| `act_appraisals[].acts[].judgments` | Judgments | the researcher's value and basis for each criterion applied to this act | [Act appraisals: acts](../specification/itinerary.md) |
+| `act_appraisals[].acts[].judgments[].basis` | Basis | the evidence or estimate on which the researcher assigns the value | [Act appraisals: acts](../specification/itinerary.md) |
+| `act_appraisals[].acts[].judgments[].criterion` | Criterion | the identifier of one criterion declared by this appraisal | [Act appraisals: acts](../specification/itinerary.md) |
+| `act_appraisals[].acts[].judgments[].value` | Value | one value from the declared scale of the criterion | [Act appraisals: acts](../specification/itinerary.md) |
+| `act_appraisals[].criteria` | Criteria | the criteria supplied by the researcher, each with its ordered scale and preferred direction | [Act appraisals: criteria](../specification/itinerary.md) |
+| `act_appraisals[].criteria[].id` | Identifier | a name unique within the appraisal, used by each judgment of this criterion | [Act appraisals: criteria](../specification/itinerary.md) |
+| `act_appraisals[].criteria[].preferred` | Preferred direction | whether a higher or lower value on the scale is preferred | [Act appraisals: criteria](../specification/itinerary.md) |
+| `act_appraisals[].criteria[].question` | Question | the property of an act that the criterion judges | [Act appraisals: criteria](../specification/itinerary.md) |
+| `act_appraisals[].criteria[].scale` | Scale | the admitted judgments, ordered from less to more of the named property | [Act appraisals: criteria](../specification/itinerary.md) |
+| `act_appraisals[].id` | Identifier | a name unique within the itinerary, by which a later comparison identifies this appraisal | [Act appraisals](../specification/itinerary.md) |
+| `act_appraisals[].question` | Question | the question whose ready acts are appraised | [Act appraisals](../specification/itinerary.md) |
+| `act_appraisals[].route` | Route | the route of the question on which the appraised acts occur | [Act appraisals](../specification/itinerary.md) |
+| `act_appraisals[].rule` | Comparison rule | the declared rule that compares the judgments without supplying a weight or another researcher judgment | [Act appraisals](../specification/itinerary.md) |
 | `addresses` | Addresses | the identifier of one problem record or of one question record | [Addresses](../specification/itinerary.md) |
 | `id` | Identifier | The identifier of the record, in the dotted form whose prefix names the record type. | — |
 | `steps` | Steps | one entry per activity instance, listed in any order | [Steps](../specification/itinerary.md) |
@@ -596,6 +685,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `parameters[].symbol` | Symbol | the symbol of the parameter, unique within the record | [Parameters](../specification/model.md) |
 | `parameters[].values` | Values | a set expression over declared symbols giving the values of the parameter | [Parameters](../specification/model.md) |
 | `parameters[].variant` | Variant | symbol of the target variant that the entry models; omit when the model stands for every member of the class | [Parameters](../specification/model.md) |
+| `sources` | Sources | per source, a provenance pointer to existing material from which the model was adopted; the content stays external and the pointer makes no evidential claim | [Sources](../specification/model.md) |
 | `status` | Status | the maturity of the model record, taken by every field that the block `maturity` leaves unmarked | — |
 | `title` | Title | A short name of the record, as a label. | — |
 | `type` | Record type | The record type, which fixes the contract that the record follows. | — |
@@ -806,7 +896,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `request` | Request | one · all · over-a-parameter · decision, as the request of a demand defines them | [Request](../specification/problem.md) |
 | `result_type` | Result type | the type of result of the demand, one of the rows of the demand table: phenomenon · consequence · target-claim · model · explanation · classification · concept · measurement-procedure · design · knowledge-state-change · inter-theory-relation | [Result type](../specification/problem.md) |
 | `significance` | Significance | the consequences of a solution for other work | [Significance](../specification/problem.md) |
-| `sources` | Sources | per source, a pointer | [Sources](../specification/problem.md) |
+| `sources` | Sources | per source, a pointer to existing material or an anomaly that raises the problem, without importing or classifying its content | [Sources](../specification/problem.md) |
 | `statement` | Statement | "[the result sought], [the obstacle to obtaining it]", as a reading | [Statement](../specification/problem.md) |
 | `status` | Status | the stage of the problem: posed, refined, solved, dissolved or abandoned | [Status](../specification/problem.md) |
 | `title` | Title | A short name of the record, as a label. | — |
@@ -846,6 +936,7 @@ Looks up each field of each record by its path, with its title, its description 
 | `presuppositions[].part` | Part | The part of soundness to which the presupposition belongs. | [Presuppositions](../specification/question.md) |
 | `presuppositions[].reading` | Reading | the presupposition in words | [Presuppositions](../specification/question.md) |
 | `request` | Request | how many possible answers a direct answer selects, and whether it claims completeness: one · all · over-a-parameter · decision, as the request of a question defines them; the request of the problem that the question serves, when one exists | [Request](../specification/question.md) |
+| `sources` | Sources | per source, a pointer to existing material that states or motivates the question, without importing or classifying its content | [Sources](../specification/question.md) |
 | `statement` | Statement | the question in words, restating its fields in the statement frame | [Statement](../specification/question.md) |
 | `status` | Status | posed · refined · answered · dissolved · abandoned | [Status](../specification/question.md) |
 | `subject` | Subject | the subject of the question: its phenomenon, its target system, its contrast and its domain | [Subject of a question](../specification/question-subject.md) |
@@ -876,6 +967,8 @@ Looks up each field of each record by its path, with its title, its description 
 | `subject.phenomenon.description` | Description | in a question schema, the item awaited by the slot | [Phenomenon (the explanandum, under the aim explanation)](../specification/question-subject.md) |
 | `subject.phenomenon.placeholder` | Placeholder | in a question schema, the kind of record that the slot awaits: a system or a phenomenon | [Phenomenon (the explanandum, under the aim explanation)](../specification/question-subject.md) |
 | `subject.target_system` | Target system $S$ | a record identifier; in a question schema, a placeholder written as for `phenomenon` | [Target system](../specification/question-subject.md) |
+| `subject.target_system.description` | Description | in a question schema, the item awaited by the slot | [Target system](../specification/question-subject.md) |
+| `subject.target_system.placeholder` | Placeholder | in a question schema, the kind of record that the slot awaits: a system or a phenomenon | [Target system](../specification/question-subject.md) |
 | `task` | Task | the epistemic task of the question: its aim, its requested relation, its modal strength, its required accuracy and its proof obligations | [Epistemic task of a question](../specification/question-task.md) |
 | `task.admissible_explanans` | Admissible explanans $\lambda$ | optional; when null, proportionality bounds the answer | [Admissible explanans](../specification/question-task.md) |
 | `task.admissible_explanans.compositional` | Compositional level | the constituents of the target system · their sub-parts · aggregates of them | [Compositional level](../specification/question-task.md) |

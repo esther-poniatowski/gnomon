@@ -10,7 +10,7 @@ aliases:
 The goal [`inquiry-views`](../../TODO.md) generates views of the state of an inquiry from its records, beside the question tree that `gnomon tree` already prints.
 
 > [!IMPORTANT] Decision of 2026-11-03
-> The five views below and the question tree are adopted. The command `gnomon views` writes each as a generated YAML record, which a renderer such as Ekphrasis displays as a read-only form through its [view schema](../../src/gnomon/data/schemas/views/_index.md). A tree or a graph is stated by a table of nodes and a table of edges, and its picture awaits a renderer of trees and graphs in Ekphrasis. The exposure through a derived law is reported as a descent not yet recorded, until the laws state their premises. Each view is computed from authored records by a declared rule and is never authored, as the [boundary of computation](../adr/no-run-time-inference.md#^admitted-computation) admits. Each entry below names the question that the view answers for the researcher, the records that it reads, and the functions of the [completeness module](../../src/gnomon/completeness/__init__.py) or of the theory from which it is computed.
+> The five views below and the operational inquiry graph are adopted. The command `gnomon views` writes each as a generated YAML record, which Ekphrasis displays as a read-only form through its [view schema](../../src/gnomon/data/schemas/views/_index.md). The graph connects typed products through typed activity instances and opens on the route of the starting problem. The command `gnomon tree` separately retains the textual question hierarchy. A derived law passes exposure to its recorded descent. When no derivation records that descent, the view reports the law with reason `descent in its origin` when an origin is present, and `descent not recorded` otherwise. Each view is computed from authored records by a declared rule and is never authored, as the [boundary of computation](../adr/no-run-time-inference.md#^admitted-computation) admits. Each entry below names the question that the view answers for the researcher, the records that it reads, and the functions of the [completeness module](../../src/gnomon/completeness/__init__.py) or of the theory from which it is computed.
 
 ## State of each problem
 
@@ -36,15 +36,17 @@ The view answers which act comes next. For each question, it lists the [open con
 
 ## Exposure of an answer
 
-The view answers to which revisable laws an accepted result stays exposed. For each answer, it follows the grounds, and the derived laws back to the laws from which they descend, and reports the set of laws marked `posited`, `fitted` or `measured`, as the [exposure rule](../epistemology/objects/knowledge/grounds-and-dependence.md#^weakest-link) states. The set is reported without a degree, since the warrants of laws are not ordered. Grouped by law, the same computation shows which results a revision of one law would reach.
+The view identifies the units under which each answer remains revisable. The same view shows which answers reach one shared exposing unit. To [compute exposure](../../src/gnomon/exposure.py), Gnomon walks the dependencies stated by the records under the [exposure rule](../epistemology/objects/knowledge/grounds-and-dependence.md#^weakest-link). For every reported pair, the table states the unit kind, reason and recorded route. The graph connects each answer directly to every exposing unit that the walk reaches. Selecting an answer shows its exposing units. Selecting a shared unit shows its incident answers.
+
+The graph is bipartite: answer nodes connect directly to exposing-unit nodes. The graph does not reproduce Gnomon's intermediate steps. An edge does not assert a direct dependency, a causal relation, a degree of exposure or an order of warrants. When the walk produces no row for an answer, the graph omits that answer. A researcher cannot treat the omitted answer as stable. Each table row states why Gnomon reported the answer–unit pair. The same row records the route. ^exposure-view-model
 
 **Literature.** The exposure rule departs from the weakest-link principle of Pollock, as its note states.
 
-**Bears on.** [`inquiry-views`](../../TODO.md), and `assembly-schema`, which keeps the query of the laws to which an answer is exposed.
+**Bears on.** [`inquiry-views`](../../TODO.md) and [`assembly-schema`](../../TODO.md).
 
 ## Progress of an itinerary
 
-The view answers how far an itinerary has advanced. For each itinerary, it lists the steps in the order of their dependencies, with the verdict of each norm, `pass`, `fail` or `pending`, and the record that holds each output. A step downstream of a failed norm is shown as impeached, as the readiness of an act defines impeachment.
+The itinerary-progress view reports two results. First, it reports the stage reached by each itinerary. Second, it reports whether each expected output remains usable. Its dependency graph represents each step once. The graph separates recorded outputs from outputs not yet recorded. The graph assigns one of three usability states to every recorded output: `sound`, `conditional` or `impeached`. The graph assigns `not-produced` to an expected output without a record. The graph identifies every displayed step that originates a conditional or impeached state. For an origin outside the displayed steps, the graph adds an explicit source node.
 
 **Literature.** None cited.
 

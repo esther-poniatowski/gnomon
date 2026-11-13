@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-10-30
-revised: 2026-11-08
+revised: 2026-11-09
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Research as the scope of gnomon
@@ -53,6 +53,24 @@ Under this test, the units divide as follows:
     - the binding of a project to its glossary, its notation and its audiences.
 - **The export of `gnomon` carries** each fact of a research record that a check of an exposition needs, so that `ekthesis` runs that check from the contract.
 - **The `repository.yml` of a project holds** the identity of that project.
+
+### Record interaction through Ekphrasis
+
+Ekphrasis and `ekthesis` have separate responsibilities. The project `ekthesis` specifies an exposition. Ekphrasis presents and edits the research records that Gnomon specifies. The Gnomon–Ekphrasis interface divides responsibility as follows: ^ekphrasis-boundary
+
+| Responsibility | Gnomon | Ekphrasis |
+| --- | --- | --- |
+| Meanings and shapes of research records | owns | reads |
+| Epistemic vocabularies and requirements | owns | displays |
+| Checks across records | owns | invokes and locates |
+| Inquiry diagnoses and generated view data | owns and computes | renders |
+| Form controls and progressive disclosure | supplies schema metadata | owns |
+| Creation of later records | owns each sparse record and its inquiry-index entry | creates the schema-derived instance and invokes a configured producer command |
+| Field help and issue navigation | supplies canonical content | owns presentation |
+| Scientific and epistemic judgments | records researcher-authored judgments and does not infer them | does not infer them |
+| YAML records | treats as the canonical source | edits while preserving unrelated content |
+
+The [four interface result classes](findings-output.md#^interface-result-classes) keep software conformance and computed diagnoses distinct from researcher-authored judgments. The [record-schema decision](record-schemas.md#^ekphrasis-schema-interface) defines the generated contract. Through this contract, Ekphrasis receives Gnomon's record shapes and field guidance.
 
 `gnomon` emits its units, their symbols and their relations as a generated export. `ekthesis` publishes the contract of that export. That contract fixes three kinds of entry:
 

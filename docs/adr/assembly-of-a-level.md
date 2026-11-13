@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-11-09
-revised: 2026-11-09
+revised: 2026-11-13
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Assembly of a level
@@ -16,7 +16,7 @@ A level of an inquiry is a problem, or a question that other questions serve. Th
 
 ## Decision
 
-The assembly of a level is a computed view, `gnomon:view.assembly@1`, and no record kind. An assembly fails five of the seven [conditions of admission](record-kind-admission.md#^admission-conditions): ^assembly-view
+The assembly of a level is a computed view, `gnomon:view.assembly@3`, and no record kind. An assembly fails five of the seven [conditions of admission](record-kind-admission.md#^admission-conditions): ^assembly-view
 
 - its identity depends on its level;
 - no other record cites it;
@@ -41,6 +41,8 @@ The view computes each table by a declared rule, which reports a value and adds 
 - `excluded`: the entries of `excludes`.
 
 A component is settled once an accepted answer to it, or a stabilized construct obtained for it, holds a satisfied assessment against the present version of its question.
+
+The graph connects each level to its components and each component to its parts. Each record has one node even when it serves more than one role or level. The tables retain citation provenance, counts and gaps. The tables also list limits and exclusions. In the complex Obsidian fixture, combining the component edges with every citation made the graph unreadable. Ekphrasis cannot declare the citation layer hidden initially. Therefore, the graph omits citations. The graph makes no claim about joint sufficiency or causation. Its edges encode no chronological, proof, or reading order.
 
 The exposure of each part is not repeated: the [exposure view](../../src/gnomon/data/schemas/views/exposure.schema.yml) reports it by answer.
 
@@ -73,7 +75,7 @@ Three checks read the decomposition of a question: ^decomposition-checks
 
 ## Consequences
 
-- The view `gnomon:view.assembly@1` joins the views of `gnomon views`, and its schema joins the exports of the [schema resources](../../specs/schema-resources.yml).
-- The question schema gains the optional field `excludes`, and the question contract stays at version 1, since an optional field leaves every valid record valid.
+- The view `gnomon:view.assembly@3` joins the views of `gnomon views`, and its schema joins the exports of the [schema resources](../../specs/schema-resources.yml). The retained contract `@2` preserves the table-only view.
+- The question schema gained the optional field `excludes` while the contract remained at version 1 under the rule then in force. That rule considered only whether old documents remained valid. This expansion predates the prospective [schema compatibility decision](schema-contract-compatibility.md) and remains compatibility debt; changing the question contract requires its own transition.
 - The demand met, the obstacles and the answers of a problem read only the questions of the problem, so an answer to a subquestion that also names the problem no longer meets its demand.
 - The [global revisions of a question](../epistemology/processes/inquiry/question-decomposition.md#^global-revision) include the removal of a part.

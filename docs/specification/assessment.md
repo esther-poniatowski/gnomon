@@ -33,6 +33,8 @@ The verdicts of the tests and the appraisal are kept outside the answer, in one 
 
 - **A verdict of `not-applicable` is a *result*.** The record marks a test removed by an empty specification as `not-applicable`, instead of leaving it pending. A reader can then tell an untested candidate from a fully assessed one.
 
+- **A verdict of `pending` is unresolved research state.** The value records that the researcher has not yet made the judgment. It is valid content rather than a missing field, an invalid value or a warning. The assessment schema declares this distinction for form clients; the client does not infer it from the spelling of the value.
+
 ---
 ## Sources
 

@@ -32,7 +32,7 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 - [Record schemas](record-schemas.md): locates the file that declares the shape of a record, for validation and for rendering in Ekphrasis
 - [Records as the only input of checks](checks-read-records.md): bounds the files that a check may read
 - [No inference at run time](no-run-time-inference.md): divides the values that a tool computes from the judgments that the researcher authors
-- [Findings output](findings-output.md): fixes the rule, the resource and the locus under which a check reports a defect to the gate
+- [Findings output](findings-output.md): distinguishes the authority of interface results and fixes how a check reports a defect to the gate
 
 ## Record kinds and relations
 
@@ -48,12 +48,13 @@ Records the decisions that later work on `gnomon` must respect, so that a reader
 ## Versions and revision
 
 - [Versions and history](versions-and-history.md): tells where a reference fixes the state of its target, and where git alone keeps the history
+- [Schema contract compatibility](schema-contract-compatibility.md): decides when a schema contract changes version and when an earlier contract may retire
 - [Revision accountability](revision-accountability.md): states the requirements that every mechanism recording a revision must meet
 - [Relation registry](relation-registry.md): decides which file declares the relations between research units, and how a revision travels along them
 
 ## Ecosystem ownership
 
-- [Research as the scope of gnomon](research-scope.md): decides whether a record, a check or a note belongs to `gnomon` or to `ekthesis`
+- [Research as the scope of gnomon](research-scope.md): assigns research, exposition and record-presentation responsibilities across Gnomon, Ekthesis and Ekphrasis
 - [Research export](research-export.md): decides which units and relations `gnomon` publishes for an exposition, and how it maps them onto the classes of `ekthesis`
 - [Expositions as projections](expositions-as-projections.md): records the earlier placement of exposition in `gnomon`, superseded by the decision on research as the scope of gnomon
 - [Terminology, audience and project specifications](terminology-audience-project-specifications.md): places the mechanism of a notation, a glossary, an audience or a project specification apart from its instances

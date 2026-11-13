@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-11-04
-revised: 2026-11-05
+revised: 2026-11-09
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Derivation record
@@ -37,7 +37,7 @@ The activity `derivation` outputs a consequence. The [records of a consequence](
 
 **A derivation sees the symbol tables of the records holding its premises.** The [visible tables](flat-symbol-table.md#^visible-tables) gain a row for the derivation, and the slots of a derivation are declared in its own table.
 
-The record takes the prefix `derivation`, with three segments, and the contract `gnomon:derivation@1`.
+The record takes the prefix `derivation`, with three segments, and the contract `gnomon:derivation@2`.
 
 ## Defects that a check reports
 

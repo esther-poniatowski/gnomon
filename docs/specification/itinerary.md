@@ -15,6 +15,9 @@ The itinerary record lists the steps of an inquiry. Each step instantiates one [
 | Specification | When it is required | Options or frame | Examples | Source |
 | ------------- | ------------------- | ---------------- | -------- | ------ |
 | Addresses | always | the identifier of one problem record or of one question record | the problem of the delay before generalization | — |
+| Act appraisals | before choosing among ready acts | per appraisal, a unique identifier, the question and route, and the declared comparison rule | `ordinal-dominance` | [ordinal dominance](../epistemology/processes/inquiry/choice-of-act.md#^ordinal-dominance) |
+| Act appraisals: criteria | with every appraisal | per criterion, a unique identifier, the property judged, its ordered scale and its preferred direction | feasibility ordered from unavailable to feasible, with higher preferred | [ranking criteria](../epistemology/processes/inquiry/choice-of-act.md#^ranking-criteria) |
+| Act appraisals: acts | with every appraisal | per act, a unique identifier, its activity, open condition, available means, and one grounded value for every criterion | cost `low`, because the act needs no new data | [ordinal dominance](../epistemology/processes/inquiry/choice-of-act.md#^ordinal-dominance) |
 | Steps | always | one entry per activity instance, listed in any order | posing the problem, formulating the question, testing the candidate answer | [activity taxonomy](../epistemology/processes/activities/epistemic-activities.md) |
 | Steps: id | with every step | a name unique within the itinerary, by which a later step refers to the output of this one | `pose`; `test` | — |
 | Steps: activity | with every step | the identifier of one activity of the registry | `abduction`; `testing` | — |
@@ -30,11 +33,14 @@ The itinerary record lists the steps of an inquiry. Each step instantiates one [
 
 - **The stage of an itinerary is computed, not recorded.** The view `itinerary-progress` of `gnomon views` reports, per itinerary, the addressed record and the stage: planned · in-progress · concluded · abandoned. The stage follows from the steps and from the status of the addressed record, as the [stages of an itinerary](../epistemology/processes/activities/epistemic-activities.md#^itinerary-stages) define it, so the record holds no field for it.
 
-- **The command `gnomon itinerary` checks the steps and the fields of an itinerary.** An itinerary must meet the [conditions of a well-formed itinerary](../epistemology/processes/activities/epistemic-activities.md#^itinerary-check), read on the fields of its steps. These conditions and the conditions on the fields below compare types and identifiers only, so the check is decidable. The type of a referenced record follows from its kind, from its present state, and from the fields that hold the type, which the [registry of product types](../../src/gnomon/data/registries/product-types.yml) names: a question with a placeholder slot holds a `question-schema`, and a model holds a `consequence` only through a law marked `derived`. A target system at commitment `specified` holds a `target-specification`, and also an `identified-subject`. The command also checks six fields of the record: ^record-checks
+- **An act appraisal records judgments before selecting an act.** The researcher declares each criterion, scale, preferred direction and grounded value. Gnomon supplies none of these judgments. The declared rule `ordinal-dominance` compares only their order. The next-act view displays every input, each pairwise relation and all undominated acts. Several undominated acts remain an unresolved choice. ^act-appraisals
+
+- **The command `gnomon itinerary` checks the steps and the fields of an itinerary.** An itinerary must meet the [conditions of a well-formed itinerary](../epistemology/processes/activities/epistemic-activities.md#^itinerary-check), read on the fields of its steps. These conditions and the conditions on the fields below compare types and identifiers only, so the check is decidable. The type of a referenced record follows from its kind, from its present state, and from the fields that hold the type, which the [registry of product types](../../src/gnomon/data/registries/product-types.yml) names: a question with a placeholder slot holds a `question-schema`, and a model holds a `consequence` only through a law marked `derived`. A target system at commitment `specified` holds a `target-specification`, and also an `identified-subject`. The command also checks seven parts of the record: ^record-checks
 
     - the itinerary addresses a problem record or a question record;
     - the activity of each step is an identifier of the activity registry;
     - no two steps share an identifier;
+    - every act appraisal has unique identifiers and one grounded value from each criterion scale per act;
     - an output reference, once given, names a record that holds the output type in its present state;
     - the norm of a step is the test of its activity, and a stated mode is the mode of the activity;
     - the verdict of each step is `pass`, `fail`, `inconclusive` or `pending`, and a verdict other than `pending` states its evidence and the date of its judgment;
@@ -47,6 +53,8 @@ The itinerary record lists the steps of an inquiry. Each step instantiates one [
 - The [requested relation](../epistemology/objects/task/requested-relation.md) of the epistemic task selects one of the candidate relations between an explanans and the phenomenon, so the test `norm.explanation` reads that field.
 
 - **The product-type registry states the coverage of each type by the records.** Each type carries a status: `exists`, when the type is held in full by a kind of record; `partial`, when a record holds part of the type; `to-create`, when no kind of record holds the type yet. The [table of product types](../epistemology/processes/activities/epistemic-activities.md#^product-types) lists the types, and the registry alone states their coverage. ^type-coverage
+
+- **An activity may restrict values in its output record.** The activity-registry mapping `output_values` assigns admitted values to field paths of every record kind that can hold the output type. A step satisfies the restriction when its output record holds one of those values at each mapped path. ^activity-output-values
 
 - **A product of a type without a record kind is reached through a step.** The product types are derived from the taxonomy of activities, so some types have no record kind yet, such as an inter-theory relation. An itinerary can take such a product as an input only as the output of one of its own steps. A `source`, by contrast, stays outside the records, so its reference is a pointer, left unresolved by the check.
 

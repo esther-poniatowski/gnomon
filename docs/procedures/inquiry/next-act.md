@@ -17,9 +17,11 @@ The criteria by which an act is chosen are stated in the theory of the [choice o
 2. **Diagnosis.** State each [condition for obtaining an answer](../../epistemology/objects/question/conditions-of-answerability.md) of each question in one of its three states, `established`, `not established` or `refuted`, and find the [open conditions](../../epistemology/processes/inquiry/choice-of-act.md#^open-condition).
 3. **Acts.** Map each open condition to the registered activities that act on it, or turn it into a new question. Map each refuted condition to a [revision](../../epistemology/processes/inquiry/choice-of-act.md#^refuted-condition). Once every condition of a route is in the state `established`, the acts that obtain the answer come next, followed by the [evaluation](../../epistemology/objects/question/conditions-of-answerability.md#^evaluation) of the answer.
 4. **Readiness.** Keep the [ready act instances](../../epistemology/processes/inquiry/choice-of-act.md#^ready-act): those whose inputs exist and are unimpeached.
-5. **Ranking.** Choose among the acts kept, by the [ranking criteria](../../epistemology/processes/inquiry/choice-of-act.md#^ranking-criteria).
+5. **Ranking.** Record an [act appraisal](../../specification/itinerary.md#^act-appraisals), generate the next-act view, then inspect the comparison from the supplied criteria.
 
 Each step either returns a determinate output or presents alternatives, between which the researcher chooses, as the list of [choices left to the researcher](../../epistemology/processes/inquiry/choice-of-act.md#^researcher-choices) states. The activity map of the acts on each condition is checked against the [registry of the conditions](../../../src/gnomon/data/registries/answerability.yml) by a [test](../../../tests/test_gnomon/test_answerability_model.py), which also checks each quoted norm against the note of its activity.
+
+An act appraisal precedes the selected itinerary step. Its criteria state an ordered scale and whether higher or lower values are preferred. Each considered act records the available means, a value on each scale and the basis for that value. Feasibility, cost and expected discrimination are therefore authored judgments. The declared rule establishes only the relations entailed by those judgments.
 
 ## The questions to diagnose
 
@@ -71,11 +73,13 @@ The revisions of each refuted condition are listed in the theory of the [choice 
 
 ## Readiness of an act
 
-The criteria of [readiness](../../epistemology/processes/inquiry/choice-of-act.md#^ready-act) are applied to each act instance found among the acts on each condition. Readiness reads only the steps that the itinerary records: a record whose producing step is absent from the itinerary carries no verdict that readiness could read.
+The criteria of [readiness](../../epistemology/processes/inquiry/choice-of-act.md#^ready-act) are applied to every registered activity mapped to an open condition. The diagnosis retains the complete mapped set and marks each activity as ready or waiting for an input. Readiness does not remove an activity because another is ready or appears preferable. It reads only the steps that the itinerary records: a record whose producing step is absent from the itinerary carries no verdict that readiness could read.
+
+The diagnosis also states the registered inputs, output type and possible storage locations of each activity. An activity *may unblock* a waiting activity when its output type fills one of the missing input slots. This relation promises no result: the first activity must pass its norm, and another product of the same type may fill the slot.
 
 ## Ranking
 
-The ready acts are ranked by the [ranking criteria](../../epistemology/processes/inquiry/choice-of-act.md#^ranking-criteria), after the test of relevance removes the decorative ones. The order fixed by a rule, such as the order of the acts that follow a negative verdict, or the repair of a failed step before the act that rests on it, precedes the ranking.
+The `status` command stops before ranking and returns the complete mapped set. The `views` command applies [ordinal dominance](../../epistemology/processes/inquiry/choice-of-act.md#^ordinal-dominance) only to valid appraisals that declare that rule. The next-act view displays the rule, criteria, judgments, pairwise relations and undominated acts. One undominated act determines the selection under this rule. Several undominated acts remain unresolved. The order fixed by a rule, such as repairing a failed step before an act that rests on it, precedes this comparison.
 
 ## The acts named in practice
 

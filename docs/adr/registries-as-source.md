@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-09-25
-revised: 2026-10-31
+revised: 2026-11-10
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Registries as source
@@ -22,7 +22,7 @@ A filled inquiry draws on three vocabularies, and each vocabulary has a single a
 
 ## Decision
 
-Package data declares every closed vocabulary, every requirement of an epistemic aim and every canonical operator. The specification notes document those declarations, and the alignment check reads a note against its registry.
+Package data declares every closed vocabulary, every named validation scope with its incremental requirement set, every requirement of an epistemic aim and every canonical operator. The specification notes document those declarations, and the alignment check reads a note against its registry.
 
 A value whose meaning a theory note defines is owned, as to that meaning, by that note: an epistemic aim with its category and its answer conditions, an epistemic activity with its signature and its norm, a product type, or a value of a status of the state. Such meaning would hold under any format of the records, so it belongs to the theory by the [test that separates theory from specification](../../CONTRIBUTING.md#theory-and-specification). A registry declares the identifier of the value, and the token fields that a check compares with the theory, such as the category of an aim. A registry holds no prose copy of the theory, by the [rule of one source](one-source-per-unit.md#^generated-copies-only). Therefore, package data holds no prose answer condition of an aim. ^concept-ownership
 
@@ -45,5 +45,7 @@ A value whose meaning a theory note defines is owned, as to that meaning, by tha
 
 - A value outside its vocabulary is reported, and so is a template comment whose option list drifts from the registry.
 - An epistemic aim requires a specification to be filled and never a value that the specification takes. The inquiry judges which value is correct, and a rule reaching inside a field is a consistency between fields.
+- The requirements registry orders validation scopes independently of workspace contents, because those contents do not distinguish an intended stopping point from a missing later-stage record.
+- Each validation scope inherits earlier cumulative requirements. A checkpoint record applies only at its named scope. A required or activated record continues to read its ordinary requirements from the existing registry tables.
 - The specification notes document the registries and own no vocabulary, so a designer who adds an option edits the registry and the note in the same change.
 - A change to a value whose meaning the theory defines, such as a new aim or a new activity, starts in its theory note, and the registry declares it in the same change. The tests of template alignment and of itineraries report a drift of the identifiers and of the token fields in either direction.

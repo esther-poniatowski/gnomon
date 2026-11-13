@@ -64,11 +64,11 @@ Once presented, a command also serves every later stage; in particular, the comm
 
 ## Stage 1: pose the problem
 
-The problem states what a solution must deliver. The [problem record](../../examples/grokking-delayed-generalization/problem.yml) demands that a solution name the determinants of the delay, derive its duration from them, and cover its variation across random initializations. Its two constraints require consistency with the admitted training laws, and the separation of delayed generalization from two foils: immediate generalization and persistent memorization.
+The [problem-record fields](../specification/problem.md) state what a solution must deliver. In the worked [problem record](../../examples/grokking-delayed-generalization/problem.yml), the demand requires a solution to name the determinants of the delay, derive its duration from them, and cover its variation across random initializations. Its two constraints require consistency with the admitted training laws, and the separation of delayed generalization from two foils: immediate generalization and persistent memorization.
 
 The step `pose` records the act. The step instantiates the activity `problematization`, takes as input the source that reports the delay, and outputs the problem record. Its norm passed on 2026-10-27, with the evidence that each explicandum of the problem points to its source.
 
-A new problem starts from the templates written by `gnomon init`. The inquiry cannot show this command, since its folder already holds its records, so the command runs on a new folder. There, the command writes the itinerary, opened with the problem, the templates of the first four stages, and an index that lists them in the order of filling:
+A new problem starts from the sparse records written by `gnomon init`. The inquiry cannot show this command, since its folder already holds its records, so the command runs on a new folder. There, the command writes the itinerary, the problem and an index that lists both records in the order of filling:
 
 ```sh
 gnomon init ../my-problem
@@ -77,11 +77,6 @@ gnomon init ../my-problem
 ```text
 ../my-problem/itinerary.yml: written
 ../my-problem/problem.yml: written
-../my-problem/question.yml: written
-../my-problem/target-system.yml: written
-../my-problem/phenomenon.yml: written
-../my-problem/background.yml: written
-../my-problem/operators.yml: written
 ../my-problem/_index.md: written
 Fill the records in the order of ../my-problem/_index.md, then run: gnomon check ../my-problem
 ```
@@ -93,14 +88,14 @@ gnomon check ../my-problem
 ```
 
 ```text
-0 records checked in 0 folders, 0 findings, 0 warnings, 7 templates not yet filled
+0 records checked in 0 folders, 0 findings, 0 warnings, 2 templates not yet filled
 ```
 
-The seven templates keep their placeholder identifiers, so the check lists them apart and checks none of them. Their count falls as the stages are filled.
+The two sparse records keep the placeholder identifiers projected from their templates. Therefore, the check lists them apart and does not check them. The option `--with` adds another sparse record when the inquiry requires it.
 
 ## Stage 2: type the question
 
-The question types the answer that the problem demands, before its terms are identified. The [question record](../../examples/grokking-delayed-generalization/question.yml) serves the problem as its associated question. Its task fixes the aim `explanation`, the requested relation `mathematical` and the modal strength `actual`, and its contrast names the two foils of the problem.
+The worked [question record](../../examples/grokking-delayed-generalization/question.yml) first serves as a [question schema](../epistemology/objects/question/question.md#^question-schema), which types the answer before the subject slots name records. Its task fixes the aim `explanation`, the requested relation `mathematical` and the modal strength `actual`, and its contrast names the two foils of the problem.
 
 The step `formulate` records the act. The step instantiates the activity `question-formulation`, and takes the problem by the full identifier of the step that produced it, `itin.grokking.explain-delay.pose`. Its output states the type `question-schema` without a record: the schema became the question once its slots were identified, so no record holds the schema any longer.
 
@@ -114,15 +109,15 @@ gnomon itinerary ../grokking
 1 itineraries checked, 0 problems found
 ```
 
-For the step `formulate`, this result means two things. Its input names a step whose output type, `problem`, is the input type of the activity `question-formulation`. Its declared output type, `question-schema`, is the output type of that activity. A defect would print one line, prefixed with the identifier of the itinerary, and the command would exit with code 1.
+For the step `formulate`, this result means two things. Its input names a step whose output type, `problem`, is the input type of the activity `question-formulation`. Its declared output type, `question-schema`, is the output type of that activity. If the command found a defect, its line would state the itinerary identifier, rule identifier and message. The command would exit with code 1. The rule identifier can be passed to the `gnomon explain` command.
 
 ## Stage 3: identify the subject
 
-The subject fixes the object of the question, so that each slot of the question refers to a record. The [phenomenon record](../../examples/grokking-delayed-generalization/phenomenon.yml) fixes the regularity through six observables. Two are references to the training and test losses declared by the target. The four others are declared by the phenomenon: the first crossing times of the training and the generalization criteria, `tfit` and `tgen`, the delay between them, `delay`, and its distribution across initialization draws, `Pdelay`. The evidential status of the phenomenon is `established`, and its commitment `specified` also meets the commitment `identified` required by the question, as the [levels of commitment](../epistemology/objects/question/question.md#^commitment-levels) define them.
+The [subject of a question](../epistemology/objects/subject/subject-of-inquiry.md) identifies its object through records. In this inquiry, the [phenomenon record](../../examples/grokking-delayed-generalization/phenomenon.yml) fixes the regularity through six observables. Two are references to the training and test losses declared by the target. The four others are declared by the phenomenon: the first crossing times of the training and the generalization criteria, `tfit` and `tgen`, the delay between them, `delay`, and its distribution across initialization draws, `Pdelay`. The evidential status of the phenomenon is `established`, and its commitment `specified` also meets the commitment `identified` required by the question, as the [levels of commitment](../epistemology/objects/question/question.md#^commitment-levels) define them.
 
 The step `identify` records the act. The step instantiates the activity `subject-identification`, takes the question schema produced by the step `formulate`, and outputs the identified subject, held by the phenomenon record. Its norm passed on 2026-10-27.
 
-The command `gnomon validate` checks each record against the contract that its field `_schema` names, such as `gnomon:phenomenon@1`:
+The command `gnomon validate` checks each record against the contract that its field `_schema` names, such as `gnomon:phenomenon@2`:
 
 ```sh
 gnomon validate ../grokking
@@ -132,7 +127,7 @@ gnomon validate ../grokking
 13 records checked, 0 errors found
 ```
 
-For this stage, the result means that the phenomenon record fits the contract `gnomon:phenomenon@1`: for instance, its commitment and its evidential status take admitted values. A contract reads one record at a time, so only the command `gnomon check` compares the records with one another.
+For this stage, the result means that the phenomenon record fits the contract `gnomon:phenomenon@2`: for instance, its commitment and its evidential status take admitted values. A contract reads one record at a time, so only the command `gnomon check` compares the records with one another.
 
 ## Stage 4: specify the target and admit the background
 
@@ -176,7 +171,7 @@ each ready act can be taken now; the choice among them is the researcher's, as d
 each activity is defined in the note of its family, which docs/epistemology/processes/activities/_index.md lists; a name in parentheses is the type of the missing input, which docs/epistemology/processes/activities/epistemic-activities.md defines
 ```
 
-The diagnosis follows the route of selection: candidates are proposed, and an obtained value selects one of them, as the [two routes to an answer](../epistemology/objects/question/conditions-of-answerability.md#^routes) define it. Each open condition can be addressed now, since its dependencies are established. Its activities are split into the ready ones and those waiting for an input, named in parentheses. The condition of candidates stays open until an assessment passes the admissibility tests of an answer. The background record is impeached, since the step producing it failed, and so is the target system, since the step `delimit` takes the admitted laws of that record. Therefore, the activities `delimitation` and `model-assembly` wait for admitted laws, and `phenomenon-specification` and `decomposition-localization` wait for a target specification: the only records holding them are impeached. The two lines on norms to judge anew belong to stage 5.
+Read this diagnosis through the [procedure for choosing the next act](../procedures/inquiry/next-act.md). In this inquiry, the selection route remains open because no assessment passes the admissibility tests of an answer. The background record is impeached because the step producing it failed, and the target system is impeached because the step `delimit` takes the admitted laws of that record. Therefore, the activities `delimitation` and `model-assembly` wait for admitted laws, while `phenomenon-specification` and `decomposition-localization` wait for a target specification: the only records holding those inputs are impeached. The two lines on norms to judge anew belong to stage 5.
 
 ## Stage 5: propose, derive and assess a candidate answer
 
@@ -189,7 +184,7 @@ The candidate answer is filled last, with the records supporting it. In the inqu
 - the [binding](../../examples/grokking-delayed-generalization/binding.yml) pairs the model with the phenomenon at the grain `qualitative`;
 - the [assessment](../../examples/grokking-delayed-generalization/assessment.yml), with the status `stabilized`, fails three tests of admissibility, the product, the scope and the grain, and three tests of warrant, the closure, the fidelity and the robustness.
 
-The command `gnomon init` adds the templates of these record kinds to a folder through its option `--with`. In a folder already holding records, the command writes only the missing templates, as its run on the folder of stage 1 shows:
+The command `gnomon init` adds sparse records of these kinds to a folder through its option `--with`. In a folder already holding records, the command writes only the missing records, as its run on the folder of stage 1 shows:
 
 ```sh
 gnomon init ../my-problem --with answer --with assessment
@@ -199,11 +194,11 @@ gnomon init ../my-problem --with answer --with assessment
 ../my-problem/answer.yml: written
 ../my-problem/assessment.yml: written
 ../my-problem/_index.md: updated
-7 existing files kept
+2 existing files kept
 Fill the records in the order of ../my-problem/_index.md, then run: gnomon check ../my-problem
 ```
 
-The two new templates are registered in the index of the folder, under the heading of the stage of candidate answers, and the seven existing files stay as they stand.
+The index registers the two new records under the candidate-answer stage. The index leaves the two starting files unchanged.
 
 Four steps record these acts:
 
@@ -239,12 +234,12 @@ gnomon views ../grokking --output ../grokking-views
 ../grokking-views/assembly.yml: written
 ../grokking-views/itinerary-progress.yml: written
 ../grokking-views/maturity.yml: written
-../grokking-views/question-tree.yml: written
+../grokking-views/inquiry-graph.yml: written
 ../grokking-views/question-statements.yml: written
 ../grokking-views/expressions.yml: written
 ```
 
-Two of the nine views serve this stage. The view `itinerary-progress.yml` states the stage of the itinerary, `in-progress` here, and lists the steps with a state each: `impeached` when a failed norm lies upstream of the output of the step, `conditional` when a pending norm does, and `sound` otherwise. The steps `admit` and `delimit` are impeached, since `delimit` takes the laws that `admit` failed to warrant, and the steps `derive`, `check` and `test` are conditional. The view `exposure.yml` lists the revisable units supporting each answer. The candidate answer is exposed through eleven units. Seven belong to the model: three operations, two laws, and the existence of `lambda3` and of `Rstar`, two quantities fixed by a condition. Four belong to the derivation: two consequences, one move and one posit.
+Two of the nine views serve this stage. Under the [propagation of itinerary verdicts](../epistemology/processes/inquiry/choice-of-act.md#^itinerary-verdict-propagation), the steps `admit` and `delimit` are impeached because `delimit` takes the laws that `admit` failed to warrant, while the steps `derive`, `check` and `test` are conditional. The view `exposure.yml` lists the revisable units supporting each answer. The candidate answer is exposed through eleven units. Seven belong to the model: three operations, two laws, and the existence of `lambda3` and of `Rstar`, two quantities fixed by a condition. Four belong to the derivation: two consequences, one move and one posit.
 
 ## What the itinerary leaves out
 

@@ -36,6 +36,10 @@ Documents the fields of each record of an inquiry: the content that a researcher
 - [Answer record](answer.md): fills the record of a candidate answer, its core and its aim block
 - [Assessment record](assessment.md): records the verdicts of the tests that a candidate answer passes or fails
 
+## Validation
+
+- [Validation scopes](validation-scopes.md): selects the completion point against which a partial inquiry is checked
+
 ## Itinerary and language
 
 - [Itinerary record](itinerary.md): records the steps of an inquiry so that each step can be checked

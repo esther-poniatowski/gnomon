@@ -3,7 +3,7 @@ tags:
   - decision
 status: accepted
 created: 2026-11-02
-revised: 2026-11-05
+revised: 2026-11-09
 index: "[Architecture decisions](docs/adr/_index.md)"
 aliases:
   - Design record
@@ -35,7 +35,7 @@ The activity `experimental-design` outputs a design, which the activities of obs
 
 **The procedure that assigns the values of a quantity stays apart.** That procedure keeps the role Definition and stays in the target-system record.
 
-The record takes the prefix `design`, with three segments, and the contract `gnomon:design@1`.
+The record takes the prefix `design`, with three segments, and the contract `gnomon:design@2`.
 
 ## Conditions of admission
 
