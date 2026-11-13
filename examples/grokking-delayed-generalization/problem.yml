@@ -1,4 +1,4 @@
-_schema: gnomon:problem@1
+_schema: gnomon:problem@2
 title: "Delay between fitting and generalization"
 statement: "Overparameterized networks trained on algorithmic tasks fit their training data long before their test loss falls. No account yet states what produces this delay, what fixes its duration, and why the duration varies across random initializations."
 id: prob.grokking.delayed-generalization

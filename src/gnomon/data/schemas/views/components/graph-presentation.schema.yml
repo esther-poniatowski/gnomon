@@ -1,0 +1,111 @@
+# The portable presentation profile embedded once in a generated graph.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/views/components/graph-presentation.schema.yml
+title: Graph presentation profile
+description: Safe semantic presentation defaults that a generic renderer may apply or override locally.
+type: object
+readOnly: true
+additionalProperties: false
+required:
+- profile
+- version
+- layouts
+- categories
+- node_kinds
+- edge_kinds
+properties:
+  profile:
+    type: string
+    pattern: '^[a-z][a-z0-9-]*$'
+    title: Profile
+  version:
+    type: integer
+    minimum: 1
+    title: Profile version
+  layouts:
+    type: object
+    additionalProperties: false
+    required: [recommended, compatible]
+    properties:
+      recommended:
+        type: string
+        pattern: '^[a-z][a-z0-9-]*$'
+        title: Recommended layout
+      compatible:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        title: Compatible layouts
+        items:
+          type: string
+          pattern: '^[a-z][a-z0-9-]*$'
+  categories:
+    type: array
+    minItems: 1
+    title: Category defaults
+    items:
+      $ref: '#/$defs/category'
+  node_kinds:
+    type: array
+    title: Node-kind defaults
+    items:
+      $ref: '#/$defs/node-kind'
+  edge_kinds:
+    type: array
+    title: Edge-kind defaults
+    items:
+      $ref: '#/$defs/edge-kind'
+$defs:
+  token:
+    type: string
+    pattern: '^[a-z][a-z0-9-]*$'
+  category:
+    type: object
+    additionalProperties: false
+    required: [id, title, shape, marker, style]
+    properties:
+      id:
+        $ref: '#/$defs/token'
+      title:
+        type: string
+        minLength: 1
+      shape:
+        $ref: '#/$defs/token'
+      marker:
+        type: string
+        minLength: 1
+      style:
+        $ref: '#/$defs/token'
+  node-kind:
+    type: object
+    additionalProperties: false
+    required: [id, category, title, icon, marker, style]
+    properties:
+      id:
+        $ref: '#/$defs/token'
+      category:
+        $ref: '#/$defs/token'
+      title:
+        type: string
+        minLength: 1
+      icon:
+        $ref: '#/$defs/token'
+      marker:
+        type: string
+        minLength: 1
+      style:
+        $ref: '#/$defs/token'
+  edge-kind:
+    type: object
+    additionalProperties: false
+    required: [id, title, layer, style]
+    properties:
+      id:
+        $ref: '#/$defs/token'
+      title:
+        type: string
+        minLength: 1
+      layer:
+        $ref: '#/$defs/token'
+      style:
+        $ref: '#/$defs/token'

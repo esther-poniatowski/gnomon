@@ -1,5 +1,4 @@
-"""
-Itineraries of inquiry, checked against the registries of epistemic activities and product types.
+"""Itineraries of inquiry, checked against the registries of epistemic activities and product types.
 
 An itinerary lists activity instances, its steps. Each step names a registered activity, the
 products that it takes and the product that it produces, each typed by the registry of product
@@ -20,6 +19,9 @@ data/registries/activities.yml : the activities a step may instantiate.
 data/registries/product-types.yml : the types its inputs and output take.
 """
 
+# The activity contract and its validation rules form one cohesive public module.
+# pylint: disable=too-many-lines
+
 from __future__ import annotations
 
 import difflib
@@ -32,6 +34,7 @@ from typing import Any, Callable, Iterable, Mapping
 import yaml
 
 from . import findings as rules
+from .act_comparisons import appraisal_findings
 from .findings import Entry, Finding, Key, finding
 
 DATA = Path(__file__).parent / "data"
@@ -138,9 +141,19 @@ def slot(entry: Any) -> Slot:
         [attitude] if isinstance(attitude, str) else (str(value) for value in attitude)
     )
     if entry.get("several"):
-        return Slot(types, least=0 if entry.get("optional") else 2, most=None, attitudes=attitudes)
+        return Slot(
+            types,
+            least=0 if entry.get("optional") else 2,
+            most=None,
+            attitudes=attitudes,
+        )
     count = int(entry.get("count", 1))
-    return Slot(types, least=0 if entry.get("optional") else count, most=count, attitudes=attitudes)
+    return Slot(
+        types,
+        least=0 if entry.get("optional") else count,
+        most=count,
+        attitudes=attitudes,
+    )
 
 
 def required_attitudes(act: Activity, kind: str) -> frozenset[str]:
@@ -193,13 +206,17 @@ def product_types(source: Path | None = None) -> dict[str, Mapping[str, Any]]:
     return {str(entry["id"]): entry for entry in registry.get("product_types") or []}
 
 
-def type_classes(types: Mapping[str, Mapping[str, Any]] | None = None) -> dict[str, str]:
+def type_classes(
+    types: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, str]:
     """Return the class of each product type, as the inventory of epistemic objects sorts it."""
     types = product_types() if types is None else types
     return {name: str(entry.get("class")) for name, entry in types.items()}
 
 
-def type_holders(types: Mapping[str, Mapping[str, Any]] | None = None) -> dict[str, frozenset[str]]:
+def type_holders(
+    types: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, frozenset[str]]:
     """Return, per product type, the record kinds that hold it; a type that no record holds maps to
     none.
 
@@ -208,12 +225,14 @@ def type_holders(types: Mapping[str, Mapping[str, Any]] | None = None) -> dict[s
     """
     types = product_types() if types is None else types
     return {
-        name: frozenset(entry["record"]) if isinstance(entry.get("record"), list) else frozenset()
+        name: (frozenset(entry["record"]) if isinstance(entry.get("record"), list) else frozenset())
         for name, entry in types.items()
     }
 
 
-def construct_record_kinds(types: Mapping[str, Mapping[str, Any]] | None = None) -> frozenset[str]:
+def construct_record_kinds(
+    types: Mapping[str, Mapping[str, Any]] | None = None,
+) -> frozenset[str]:
     """Return the record kinds that hold a product of a construct type.
 
     >>> sorted(construct_record_kinds({"model": {"class": "construct", "record": ["model"]},
@@ -664,7 +683,13 @@ def _output_record(s: _Step, product: str, made: Any) -> list[Finding]:
                 f" a {act.output} of the {name} {' or '.join(admitted)}"
             )
             found.append(
-                finding(rules.ITINERARY_UNADMITTED_OUTPUT_VALUE, text, *s.at, "output", "ref")
+                finding(
+                    rules.ITINERARY_UNADMITTED_OUTPUT_VALUE,
+                    text,
+                    *s.at,
+                    "output",
+                    "ref",
+                )
             )
     return found
 
@@ -696,7 +721,10 @@ def _norm(s: _Step) -> list[Finding]:
         found.append(finding(rules.ITINERARY_FOREIGN_NORM, text, *s.at, "norm", "test"))
     if verdict not in s.itinerary.closed["verdict"]:
         text = f"{s.where}: {verdict!r} is no verdict"
-        return [*found, finding(rules.ITINERARY_UNKNOWN_VERDICT, text, *s.at, "norm", "verdict")]
+        return [
+            *found,
+            finding(rules.ITINERARY_UNKNOWN_VERDICT, text, *s.at, "norm", "verdict"),
+        ]
     if verdict == "pending":
         return found
     evidence = norm.get("evidence")
@@ -744,19 +772,37 @@ def _constructors(s: _Step) -> list[Finding]:
         if not _stated(branch, "condition"):
             text = f"{s.where}: the branch states no condition"
             found.append(
-                finding(rules.ITINERARY_MALFORMED_CONSTRUCTOR, text, *s.at, "branch", "condition")
+                finding(
+                    rules.ITINERARY_MALFORMED_CONSTRUCTOR,
+                    text,
+                    *s.at,
+                    "branch",
+                    "condition",
+                )
             )
         if other is None or ((other.get("output") or {}).get("type")) != act.output:
             text = f"{s.where}: the branch names no step that produces {act.output} otherwise"
             found.append(
-                finding(rules.ITINERARY_MALFORMED_CONSTRUCTOR, text, *s.at, "branch", "otherwise")
+                finding(
+                    rules.ITINERARY_MALFORMED_CONSTRUCTOR,
+                    text,
+                    *s.at,
+                    "branch",
+                    "otherwise",
+                )
             )
     iterate = _block(s.step, "iterate")
     if iterate is not None:
         if not _stated(iterate, "until"):
             text = f"{s.where}: the iteration states no criterion of termination"
             found.append(
-                finding(rules.ITINERARY_MALFORMED_CONSTRUCTOR, text, *s.at, "iterate", "until")
+                finding(
+                    rules.ITINERARY_MALFORMED_CONSTRUCTOR,
+                    text,
+                    *s.at,
+                    "iterate",
+                    "until",
+                )
             )
         if act.output not in {t for held in act.inputs for t in held.types}:
             text = (
@@ -778,7 +824,8 @@ def _mode(s: _Step) -> list[Finding]:
 
 def _derivation(s: _Step) -> list[Finding]:
     """Report a passed step of the activity derivation that names no derivation record, and a
-    derivation that records none of its consequences in the output record of the step."""
+    derivation that records none of its consequences in the output record of the step.
+    """
     named = s.step.get("derivation")
     norm = s.step.get("norm")
     verdict = norm.get("verdict") if isinstance(norm, Mapping) else None
@@ -850,7 +897,10 @@ STEP_CHECKS: tuple[Callable[[_Step], list[Finding]], ...] = (
 
 
 def _step_findings(
-    context: _Itinerary, position: int, step: Mapping[str, Any], acts: Mapping[str, Activity]
+    context: _Itinerary,
+    position: int,
+    step: Mapping[str, Any],
+    acts: Mapping[str, Activity],
 ) -> tuple[list[Finding], set[str]]:
     """Check one step; return its findings and the steps that its inputs name."""
     act = acts.get(str(step.get("activity")))
@@ -927,7 +977,9 @@ def itinerary_problems(
         own=f"{itinerary.get('id')}.",
         closed={name: _closed(f"steps.{name}") for name in ("verdict", "mode", "acts_on")},
     )
-    found = _unaddressed(itinerary, records) + _repeated_steps(steps)
+    found = (
+        _unaddressed(itinerary, records) + _repeated_steps(steps) + appraisal_findings(itinerary)
+    )
     edges: dict[str, set[str]] = {name: set() for name in context.by_id}
     for position, step in steps:
         step_found, named = _step_findings(context, position, step, acts)

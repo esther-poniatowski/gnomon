@@ -1,0 +1,49 @@
+# Retained version 1 contract for key. Do not edit.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/key.v1.contract.schema.yml
+title: Key record contract
+description: The record type `key`, bound to `gnomon:key@1`, with its closed vocabularies.
+allOf:
+- $ref: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/key.v1.base.schema.yml
+required:
+- _schema
+properties:
+  _schema:
+    const: gnomon:key@1
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  type:
+    const: key
+  id:
+    pattern: ^key\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+  status:
+    enum:
+    - provisional
+    - stabilized
+    - retracted
+    - null
+  kind:
+    enum:
+    - observation-operator
+    - unit-map
+    - aggregation-map
+    - qualitative-abstraction
+    - null
+  domain_and_codomain:
+    propertyNames:
+      enum:
+      - domain
+      - codomain
+x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - kind
+  - domain_and_codomain
+  - expression
+  - version
+  - maturity

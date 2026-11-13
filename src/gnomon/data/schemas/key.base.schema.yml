@@ -4,7 +4,7 @@ title: Key record
 description: The fields of a key record, as the specification of the record documents them.
 type: object
 x-identifier: id
-x-version: 1
+x-version: 2
 x-header:
 - 'specification: `docs/specification/key.md`; one file per map shared by bindings'
 - a key carries one side of a binding onto the other; the bindings that use it reference it by identifier
@@ -119,6 +119,7 @@ properties:
     - object
     - 'null'
     additionalProperties:
+      x-vocabulary: .maturity
       x-template-key: FIELD.PATH
       x-template: open
     x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record

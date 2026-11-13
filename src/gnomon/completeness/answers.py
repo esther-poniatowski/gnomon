@@ -35,8 +35,16 @@ def incomplete_operations(model: Mapping[str, Any]) -> list[Finding]:
             continue
         name = entry.get("id")
         required = [
-            ("bound", entry.get("error") == "controlled", "a controlled error states its bound"),
-            ("regime", entry.get("kind") == "approximate", "an approximation states its regime"),
+            (
+                "bound",
+                entry.get("error") == "controlled",
+                "a controlled error states its bound",
+            ),
+            (
+                "regime",
+                entry.get("kind") == "approximate",
+                "an approximation states its regime",
+            ),
             (
                 "order",
                 entry.get("kind") == "limit" and entry.get("error") == "singular",
@@ -84,7 +92,10 @@ def unclassified_operations(
         model = records.get(str(identifier)) or {}
         if model.get("type") != "model":
             continue
-        for block, label in (("operations", "operation"), ("assumptions", "assumption")):
+        for block, label in (
+            ("operations", "operation"),
+            ("assumptions", "assumption"),
+        ):
             for entry in model.get(block) or []:
                 units = [entry.get("id"), *(entry.get("yields") or [])]
                 if not any(f"{identifier}.{unit}" in named for unit in units if unit):
@@ -100,7 +111,9 @@ def unclassified_operations(
 
 
 def unbound_outputs(
-    answer: Mapping[str, Any], question: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
+    answer: Mapping[str, Any],
+    question: Mapping[str, Any],
+    records: Mapping[str, Mapping[str, Any]],
 ) -> list[Finding]:
     """Return the missing binding of an answer on a model whose question names outputs to match.
 
@@ -230,7 +243,8 @@ def _holds_statement(
     reference: str, answer: Mapping[str, Any], records: Mapping[str, Mapping[str, Any]]
 ) -> bool:
     """Tell whether a reference names a statement that can hold a presupposition: a law of a
-    background or of a model, or a consequence of a derivation, other than the answer itself."""
+    background or of a model, or a consequence of a derivation, other than the answer itself.
+    """
     split = split_reference(reference)
     if split is None or split[0] == answer.get("id"):
         return False
@@ -306,7 +320,10 @@ def _requirable(reference: str, records: Mapping[str, Mapping[str, Any]]) -> boo
     owner = records.get(split[0], {})
     for block in REQUIRABLE.get(str(owner.get("type")), ()):
         for entry in owner.get(block) or []:
-            if isinstance(entry, Mapping) and split[1] in (entry.get("id"), entry.get("symbol")):
+            if isinstance(entry, Mapping) and split[1] in (
+                entry.get("id"),
+                entry.get("symbol"),
+            ):
                 return True
     return False
 
@@ -545,7 +562,9 @@ def unstated_domain(
         return []
     return [
         finding(
-            rules.COMPLETENESS_UNSTATED_DOMAIN, f"domain: not stated, although {reason}", "domain"
+            rules.COMPLETENESS_UNSTATED_DOMAIN,
+            f"domain: not stated, although {reason}",
+            "domain",
         )
     ]
 

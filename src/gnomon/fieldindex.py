@@ -28,7 +28,12 @@ from typing import Any, Mapping
 import yaml
 
 from .schemas import kinds, load_base, render_template, vocabulary_options
-from .specnotes import DOCS, PAIRS, flatten, resolve, row_slugs, table_rows
+from .specnotes import (
+    DOCS,
+    documented_fields,
+    field_documentation,
+    flatten,
+)
 
 #: The file of the field index, in the user guide.
 INDEX_PATH = Path("guide") / "field-index.md"
@@ -74,37 +79,9 @@ def _schema_fields(
     return found
 
 
-def row_label(cell: str) -> str:
-    """Return the name of a row as plain words: its links, emphasis, mathematics and gloss removed.
-
-    >>> row_label("**[Domain of conditions](../x.md) $D$** — the conditions held fixed")
-    'Domain of conditions'
-    """
-    text = cell.split(" — ")[0]
-    text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
-    text = re.sub(r"\$[^$]*\$", "", text)
-    return re.sub(r"\s+", " ", re.sub(r"[*`]", "", text)).strip()
-
-
 def _documented(kind: str, paths: list[str], docs: Path) -> dict[str, tuple[str, str | None]]:
     """Return, per key path of a record type, the note and the row that document it."""
-    found: dict[str, tuple[str, str | None]] = {}
-    for _, note, header, template, _, prefix, elsewhere in PAIRS:
-        if template != f"{kind}.yml":
-            continue
-        for cell in table_rows(note, header, docs):
-            key = resolve(row_slugs(cell), paths, prefix)
-            if key is not None:
-                found.setdefault(key, (note, row_label(cell)))
-        for key, other in elsewhere.items():
-            found.setdefault(key, (other, None))
-    return found
-
-
-def _parent(path: str) -> str:
-    """Return the path of the parent of a field, or the empty path at the root."""
-    head = path.rsplit(".", 1)[0] if "." in path else ""
-    return head.removesuffix("[]")
+    return documented_fields(kind, paths, docs)
 
 
 def _documentation(
@@ -113,19 +90,7 @@ def _documentation(
     """Return the note and the row that document a field: its own, else those of its nearest
     documented parent, else the note of its first documented child, named by the part of its row
     before the colon, as "Tests" for the row "Tests: admissibility"."""
-    probe = path
-    while probe and probe not in documented:
-        probe = _parent(probe)
-    if probe:
-        return documented[probe]
-    child = next(
-        (key for key in documented if key.startswith((path + ".", path + "[]."))),
-        None,
-    )
-    if child is None:
-        return None, None
-    note, row = documented[child]
-    return note, (row.split(": ")[0] if row else None)
+    return field_documentation(path, documented)
 
 
 def index_fields(docs: Path = DOCS) -> dict[str, list[Field]]:

@@ -4,7 +4,7 @@ title: Operators record
 description: The fields of an operators record, as the specification of the record documents them.
 type: object
 x-identifier: id
-x-version: 1
+x-version: 2
 x-header:
 - 'specification: `docs/specification/operators.md`; one file per problem'
 - declare only operators beyond the framework's canonical set that the problem's records use
@@ -187,6 +187,7 @@ properties:
     - object
     - 'null'
     additionalProperties:
+      x-vocabulary: .maturity
       x-template-key: FIELD.PATH
       x-template: open
     x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record

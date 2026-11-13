@@ -2,21 +2,213 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/itinerary.contract.schema.yml
 title: Itinerary record contract
-description: The record type `itinerary`, bound to `gnomon:itinerary@1`, with its closed vocabularies.
+description: The record type `itinerary`, bound to `gnomon:itinerary@3`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/itinerary.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:itinerary@1
+    const: gnomon:itinerary@3
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: itinerary
+    examples:
+    - itinerary
   id:
     pattern: ^itin\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - itin.topic.name
+  title:
+    examples:
+    - SHORT NAME OF THE ITINERARY
+  addresses:
+    description: 'the identifier of one problem record or of one question record
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+  act_appraisals:
+    description: 'the judgments used before choosing a ready act: the question and route, the criteria
+      and their scales, and per act its available means and values
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+    items:
+      propertyNames:
+        enum:
+        - id
+        - question
+        - route
+        - rule
+        - criteria
+        - acts
+      properties:
+        id:
+          description: 'a name unique within the itinerary, by which a later comparison identifies this
+            appraisal
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+        question:
+          description: 'the question whose ready acts are appraised
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+          examples:
+          - quest.TOPIC.NAME
+        route:
+          description: 'the route of the question on which the appraised acts occur
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+          enum:
+          - selection
+          - construction
+          - null
+        rule:
+          description: 'the declared rule that compares the judgments without supplying a weight or another
+            researcher judgment
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+          enum:
+          - ordinal-dominance
+          - null
+        criteria:
+          description: 'the criteria supplied by the researcher, each with its ordered scale and preferred
+            direction
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+          items:
+            propertyNames:
+              enum:
+              - id
+              - question
+              - scale
+              - preferred
+            properties:
+              id:
+                description: 'a name unique within the appraisal, used by each judgment of this criterion
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              question:
+                description: 'the property of an act that the criterion judges
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              scale:
+                description: 'the admitted judgments, ordered from less to more of the named property
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                items:
+                  examples:
+                  - LEVEL
+              preferred:
+                description: 'whether a higher or lower value on the scale is preferred
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                enum:
+                - higher
+                - lower
+                - null
+        acts:
+          description: 'the ready acts considered, with their available means and researcher-authored
+            judgments
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+          items:
+            propertyNames:
+              enum:
+              - id
+              - activity
+              - acts_on
+              - available_means
+              - judgments
+            properties:
+              id:
+                description: 'a name unique within the appraisal, used by the computed comparison
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                examples:
+                - ACT
+              activity:
+                description: 'the identifier of one ready activity being appraised
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                examples:
+                - ACTIVITY
+              acts_on:
+                description: 'the open condition, obtaining or evaluation addressed by the act
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                enum:
+                - definiteness
+                - answer-type
+                - soundness
+                - candidates
+                - discrimination
+                - access
+                - bridging
+                - representation
+                - obtaining
+                - evaluation
+                - null
+              available_means:
+                description: 'the instruments, data, methods and resources currently available for this
+                  act
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                items:
+                  examples:
+                  - AVAILABLE INSTRUMENT, DATASET, METHOD OR RESOURCE
+              judgments:
+                description: 'the researcher''s value and basis for each criterion applied to this act
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                items:
+                  propertyNames:
+                    enum:
+                    - criterion
+                    - value
+                    - basis
+                  properties:
+                    criterion:
+                      description: 'the identifier of one criterion declared by this appraisal
+
+
+                        [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                      examples:
+                      - CRITERION
+                    value:
+                      description: 'one value from the declared scale of the criterion
+
+
+                        [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                      examples:
+                      - LEVEL
+                    basis:
+                      description: 'the evidence or estimate on which the researcher assigns the value
+
+
+                        [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                      examples:
+                      - WHY THIS VALUE APPLIES TO THIS ACT
   steps:
+    description: 'one entry per activity instance, listed in any order
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
     items:
       propertyNames:
         enum:
@@ -32,20 +224,100 @@ properties:
         - revises
         - mode
       properties:
+        id:
+          description: 'a name unique within the itinerary, by which a later step refers to the output
+            of this one
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+        activity:
+          description: 'the identifier of one activity of the registry
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
         inputs:
+          description: 'per input, its product type and a reference: a record identifier, the full identifier
+            of the step that produces the input, or a pointer for a `source`
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
           items:
             propertyNames:
               enum:
               - type
               - ref
               - as_of
+            properties:
+              type:
+                description: 'an identifier of the product-type registry
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                examples:
+                - PRODUCT-TYPE
+              ref:
+                description: 'a record identifier, the identifier of the step that produces the input,
+                  or a pointer for a `source`
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                examples:
+                - RECORD-OR-STEP
+              as_of:
+                description: 'the revision of the repository at which the step read the record
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                examples:
+                - REVISION
         output:
+          description: 'the product type of the product, and the record that holds the product, given
+            while that record holds the output type
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
           propertyNames:
             enum:
             - type
             - ref
             - before
+          properties:
+            type:
+              description: 'the product type of the output, from the registry of product types
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - PRODUCT-TYPE
+            ref:
+              description: 'the record that holds the product; omit until that record exists
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - RECORD
+            before:
+              description: 'for a knowledge-state-change only, the revision of the repository before the
+                change
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - REVISION
+        derivation:
+          description: 'The identifier of the derivation record that holds the reasoning of the step,
+            below the grain of its product; required once a step of the activity derivation passes its
+            norm.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
         norm:
+          description: 'the test named by the registry for the activity, written `norm.<activity>`, its
+            verdict: pass · fail · inconclusive · pending, and, once judged, the evidence and the date
+            of the judgment
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
           propertyNames:
             enum:
             - test
@@ -53,20 +325,65 @@ properties:
             - evidence
             - judged
           properties:
+            test:
+              description: 'the test named by the activity registry for this activity
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - norm.ACTIVITY
             verdict:
+              description: 'whether the output of the step meets the norm of its activity, or awaits judgment
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - pending
               enum:
               - pass
               - fail
               - pending
               - inconclusive
               - null
+            evidence:
+              description: 'why the product meets the norm or fails it
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - WHY THE PRODUCT MEETS THE NORM OR FAILS IT
+            judged:
+              description: 'the date of the last judgment of the verdict
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - DATE
         rationale:
+          description: 'the question that the step serves, or its problem, and the object on which the
+            step acts: one of the eight conditions for obtaining an answer, the obtaining of the answer,
+            or its evaluation
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
           propertyNames:
             enum:
             - serves
             - acts_on
           properties:
+            serves:
+              description: 'the question that the step serves, or the problem
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - quest.TOPIC.NAME
             acts_on:
+              description: 'the condition for obtaining an answer that the step works on, or the obtaining
+                or the evaluation of the answer
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
               enum:
               - definiteness
               - answer-type
@@ -80,22 +397,72 @@ properties:
               - evaluation
               - null
         branch:
+          description: 'the condition under which the step is taken, and the step of the same output type
+            taken otherwise
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
           propertyNames:
             enum:
             - condition
             - otherwise
+          properties:
+            condition:
+              description: 'the condition under which the step is taken
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - THE CONDITION UNDER WHICH THE STEP IS TAKEN
+            otherwise:
+              description: 'the step taken when the condition fails, which produces the same output type
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - STEP
         iterate:
+          description: 'the criterion that ends the repetition of a step that takes its own output type
+            as input
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
           propertyNames:
             enum:
             - until
+          properties:
+            until:
+              description: 'the criterion that ends the repetition
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - THE CRITERION THAT ENDS THE REPETITION
         revises:
+          description: 'the record that the step revises, the kind of the revision, and the review of
+            each flagged dependent: pending · revised · unaffected · retracted
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
           propertyNames:
             enum:
             - record
             - kind
             - reviews
           properties:
+            record:
+              description: 'the record that the step revises
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+              examples:
+              - RECORD
             kind:
+              description: 'how the revision changes the revised record: its retraction, its scope, its
+                framing, its classification or its content
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
               enum:
               - retraction
               - scope-narrowing
@@ -105,13 +472,29 @@ properties:
               - correction
               - null
             reviews:
+              description: 'one entry per flagged dependent that the researcher has reviewed
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
               items:
                 propertyNames:
                   enum:
                   - dependent
                   - state
                 properties:
+                  dependent:
+                    description: 'a record that the revision flags
+
+
+                      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
+                    examples:
+                    - RECORD
                   state:
+                    description: 'the judgment of the researcher on a flagged dependent: whether it holds,
+                      was adjusted or was retracted, or awaits judgment
+
+
+                      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
                     enum:
                     - pending
                     - revised
@@ -119,6 +502,11 @@ properties:
                     - retracted
                     - null
         mode:
+          description: 'the kind of inference that the step draws, equal to the mode that the registry
+            gives its activity
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/itinerary.md).'
           enum:
           - deductive
           - inductive
@@ -136,4 +524,5 @@ propertyNames:
   - id
   - type
   - addresses
+  - act_appraisals
   - steps

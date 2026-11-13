@@ -1,4 +1,4 @@
-_schema: gnomon:phenomenon@1
+_schema: gnomon:phenomenon@2
 title: "Feasible and dynamically stable coexistence"
 statement: "The microbial populations of a member model can possess an equilibrium at which every abundance is positive and to which they return after sufficiently small perturbations of the state."
 id: phen.microbial.stable-coexistence

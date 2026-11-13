@@ -132,12 +132,14 @@ from .requirements import (
     requirements_by_aim,
     requirements_by_commitment,
     requirements_by_presence,
+    requirements_by_scope,
     requirements_by_value,
     unmet_by_aim,
     unmet_by_presence,
     unmet_by_value,
     unmet_commitment,
     unmet_general,
+    validation_scopes,
 )
 from .subjects import (
     mismatched_evidence,
@@ -213,6 +215,7 @@ __all__ = [
     "requirements_by_aim",
     "requirements_by_commitment",
     "requirements_by_presence",
+    "requirements_by_scope",
     "requirements_by_value",
     "result_aims",
     "scope_narrowings",
@@ -238,6 +241,7 @@ __all__ = [
     "unstated_standing",
     "unsupported_outcome",
     "unsupported_question_dissolution",
+    "validation_scopes",
     "varying_symbols",
     "vocabularies",
 ]

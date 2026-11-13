@@ -29,6 +29,10 @@ load_workspace
     Read the records of a directory tree, folder by folder.
 check_workspace
     Run every check on a workspace and return its findings, each placed in its file and record.
+check_workspace_result
+    Classify current findings and future work for one optional validation scope.
+future_record_requirements
+    Return absent record kinds required after one validation scope.
 """
 
 from __future__ import annotations
@@ -61,16 +65,38 @@ from .dimensions import (
     malformed_formulas,
     operator_rules,
 )
-from .findings import CHECK_FAILED, CONTRACT_VIOLATION, Finding, finding
+from .findings import (
+    CHECK_FAILED,
+    CONTRACT_VIOLATION,
+    Finding,
+    finding,
+)
 from .history import StateReader, git_states
 from .identifiers import PLACEHOLDER_SEGMENT
-from .itineraries import construct_record_kinds, itinerary_problems, type_classes, type_holders
+from .itineraries import (
+    construct_record_kinds,
+    itinerary_problems,
+    type_classes,
+    type_holders,
+)
 from .leftovers import strip_leftovers
 from .relations import relation_findings, workspace_relation_findings
 from .sarif import Located
 from .schemas import contract_violations, field_path, identifier_prefixes
+from .scope_classification import (
+    CheckResult,
+    FutureWork,
+    classify_scope,
+    scope_path_findings,
+    validate_scope,
+)
+from .scope_classification import (
+    future_record_requirements as classify_future_record_requirements,
+)
 from .vocabulary.coordinates import foreign_coordinates
 from .vocabulary.layout import GENERATED_KINDS
+
+__all__ = ["FutureWork"]
 
 Records = Mapping[str, Mapping[str, Any]]
 
@@ -213,6 +239,8 @@ class _Registries:
     constructs: frozenset[str] = field(default_factory=construct_record_kinds)
     classes: dict[str, str] = field(default_factory=type_classes)
     holders: dict[str, frozenset[str]] = field(default_factory=type_holders)
+    scopes: tuple[str, ...] = field(default_factory=c.validation_scopes)
+    by_scope: dict[str, dict[str, Any]] = field(default_factory=c.requirements_by_scope)
     admitted: dict[str, dict[str, frozenset[str]]] = field(default_factory=dict)
 
     def admitted_values(self, kind: str) -> dict[str, frozenset[str]]:
@@ -224,11 +252,12 @@ class _Registries:
 
 @dataclass(frozen=True)
 class _Context:
-    """What a check of one record may read: its problem, the workspace and the registries."""
+    """What a check may read: its problem, workspace, registries and completion scope."""
 
     problem: Problem
     workspace: Workspace
     registries: _Registries
+    scope: str | None
 
     @cached_property
     def operators(self) -> frozenset[str]:
@@ -479,7 +508,11 @@ def _answer(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
         )
     for block, paths in ctx.registries.blocks.items():
         if c.at(record, block) is not None:
-            found += c.unmet_general(record, [f"{block}.{path}" for path in paths])
+            found += c.unmet_general(
+                record,
+                [f"{block}.{path}" for path in paths],
+                controlled_by=tuple(block.split(".")),
+            )
     return found
 
 
@@ -558,7 +591,8 @@ def _dimensions(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 
 def _coordinates(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The coordinates of each derivative against the argument that it differentiates, and the
-    statements that hold the existence presupposed by the conditions of the quantities."""
+    statements that hold the existence presupposed by the conditions of the quantities.
+    """
     return foreign_coordinates(
         record, ctx.signatures, ctx.dimension_rules, ctx.value_sets
     ) + c.misheld_existence(record, ctx.workspace.by_id)
@@ -599,14 +633,24 @@ def _derivation(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
 def _itinerary(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     """The steps of an itinerary against the registries and the records that they name."""
     return itinerary_problems(
-        record, {**ctx.workspace.by_id, **ctx.problem.records}, states=ctx.workspace.states
+        record,
+        {**ctx.workspace.by_id, **ctx.problem.records},
+        states=ctx.workspace.states,
     )
 
 
-#: The kinds of contract violation that another rule reports: an unadmitted value, under
-#: `completeness/inadmissible-value`, and the form of an identifier, under
-#: `vocabulary/malformed-identifier`.
-REPORTED_ELSEWHERE = frozenset({("enum", None), ("pattern", ("id",))})
+#: Contract violations reported by a rule that does not depend on the record vocabulary.
+REPORTED_ELSEWHERE = frozenset({("pattern", ("id",))})
+
+
+def _reported_elsewhere(violation: Any, record: Mapping[str, Any]) -> bool:
+    """Return whether another checker owns this exact contract violation."""
+    if (violation.keyword, violation.path) in REPORTED_ELSEWHERE:
+        return True
+    if violation.keyword != "enum":
+        return False
+    path = ".".join(str(part) for part in violation.path if not isinstance(part, int))
+    return path in c.admitted_values(str(record.get("type") or ""))
 
 
 def _contract(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
@@ -620,8 +664,7 @@ def _contract(record: Mapping[str, Any], _ctx: _Context) -> list[Finding]:
             value=v.keyword,
         )
         for v in contract_violations(record)
-        if (v.keyword, None) not in REPORTED_ELSEWHERE
-        and (v.keyword, v.path) not in REPORTED_ELSEWHERE
+        if not _reported_elsewhere(v, record)
     ]
 
 
@@ -642,6 +685,21 @@ def _every_record(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
     )
 
 
+def _scope_paths(record: Mapping[str, Any], ctx: _Context) -> list[Finding]:
+    """Delegate explicit scope requirements to the scoped classifier."""
+    return scope_path_findings(
+        record,
+        ctx.problem,
+        ctx.workspace,
+        ctx.registries,
+        ctx.scope,
+    )
+
+
+#: Checks that remain active independently of the selected completion scope.
+_INTEGRITY_CHECKS: tuple[Check, ...] = (_contract, _every_record)
+
+
 #: The checks of each kind of record, in the order of their reports.
 BY_KIND: Mapping[str, tuple[Check, ...]] = {
     "question": (_question,),
@@ -658,19 +716,45 @@ BY_KIND: Mapping[str, tuple[Check, ...]] = {
 }
 
 
-def check_workspace(workspace: Workspace) -> list[Located]:
-    """Run every check on a workspace and return its findings, each placed in its file and record.
+def check_workspace_result(workspace: Workspace, *, scope: str | None = None) -> CheckResult:
+    """Return current findings and later work for one optional validation scope.
 
-    The findings follow the order of the folders, then of the records within a folder, then of the
-    checks, so that two runs on unchanged records report the same list.
+    Without a scope, every existing check remains current and no future work is computed. With a
+    scope, integrity and consistency findings remain current, while missing content first required
+    by a later scope becomes a computed diagnosis.
+
+    Raises
+    ------
+    ValueError
+        If ``scope`` is not a validation scope declared by the requirement registry.
     """
     registries = _Registries()
+    validate_scope(scope, registries)
+    raw = _run_checks(workspace, registries, scope)
+    return classify_scope(workspace, registries, scope, raw)
+
+
+def check_workspace(workspace: Workspace, *, scope: str | None = None) -> list[Located]:
+    """Return the findings that are current at one optional validation scope."""
+    return list(check_workspace_result(workspace, scope=scope).findings)
+
+
+def future_record_requirements(workspace: Workspace, *, scope: str) -> tuple[FutureWork, ...]:
+    """Return absent record kinds required after one validation scope."""
+    registries = _Registries()
+    return classify_future_record_requirements(workspace, registries, scope)
+
+
+def _run_checks(workspace: Workspace, registries: _Registries, scope: str | None) -> list[Located]:
+    """Run the check pipeline before scoped completion findings are partitioned."""
     found: list[Located] = []
     for problem in workspace.problems:
-        ctx = _Context(problem, workspace, registries)
+        ctx = _Context(problem, workspace, registries, scope)
         for ident in sorted(problem.records):
             record = problem.records[ident]
-            checks: list[Check] = [_leftovers, _contract, _every_record, _requirements]
+            checks: list[Check] = [_leftovers, *_INTEGRITY_CHECKS, _requirements]
+            if scope is not None:
+                checks.append(_scope_paths)
             if record.get("type") in v.RECORD_KINDS:
                 checks += [
                     _symbols,

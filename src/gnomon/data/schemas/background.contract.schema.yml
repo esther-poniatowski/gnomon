@@ -2,27 +2,53 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/background.contract.schema.yml
 title: Background record contract
-description: The record type `background`, bound to `gnomon:background@1`, with its closed vocabularies.
+description: The record type `background`, bound to `gnomon:background@2`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/background.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:background@1
+    const: gnomon:background@2
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: background
+    examples:
+    - background
   id:
     pattern: ^bg\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - bg.topic.name
+  title:
+    examples:
+    - NAME OF THE BODY OF ADMITTED LAWS
   status:
+    examples:
+    - provisional
     enum:
     - provisional
     - stabilized
     - retracted
     - null
+  describes:
+    description: 'the target whose quantities the laws use: the identifier of one target-system record
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
   laws:
+    description: 'known behaviors of the components or of the system: an expression over the symbols that
+      the target declares, with its signature and the places that the claim ranges over (one entry each,
+      empty when the law concerns the system as a whole). Its warrant (derived from other admitted laws,
+      in a limit or not, posited, fitted or measured), with its grounds. Its role, one of six:<br>- evolution:
+      how the state changes along the course<br>- input-output: how one quantity is determined by others
+      at the same point<br>- measurement: how an instrument registers the state<br>- state-constraint:
+      which states may hold together, including at the start and at the boundary<br>- distribution: the
+      law of a random quantity<br>- admissibility: a restriction on the parameters or on the forms that
+      a member may take
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
     items:
       propertyNames:
         enum:
@@ -39,7 +65,43 @@ properties:
         - origin
         - range
       properties:
+        name:
+          description: 'the words that designate the law
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - NAME OF THE LAW
+        symbol:
+          description: 'the symbol of the law, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - SYMBOL
+        variant:
+          description: 'variant of the target governed by the law; omit when the law governs every member
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - SYMBOL
+        signature:
+          description: 'one entry per place of the claim; empty for a claim about the system as a whole
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - &id001
+            - SYMBOL
+          items:
+            examples: *id001
         role:
+          description: 'the role of the law: evolution, input-output, measurement, state-constraint, distribution
+            or admissibility
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
           enum:
           - evolution
           - input-output
@@ -48,7 +110,26 @@ properties:
           - distribution
           - admissibility
           - null
+        expression:
+          description: 'the claim of the law: the only part of the entry that can be false of the system
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
+        reading:
+          description: 'the law in words
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - THE LAW IN WORDS
         warrant:
+          description: 'the provenance of the law: derived from other admitted laws, posited, fitted or
+            measured
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
           enum:
           - derived
           - posited
@@ -56,12 +137,54 @@ properties:
           - measured
           - computed
           - null
+        requires:
+          description: 'The units on which the law rests, each by its dotted identifier, an assumption
+            or an operation of a model, a law of a background or of a model, or a posit or a consequence
+            of a derivation; a law whose descent a derivation records leaves its premises to that derivation.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          items:
+            examples:
+            - RECORD.UNIT
+        rests_on:
+          description: 'What the warrant of the law refers to beyond the units that it requires, in words,
+            such as a source or a data set.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - WHAT THE WARRANT REFERS TO BEYOND THE UNITS REQUIRED
+        origin:
+          description: 'a pointer to the publication, the data set or the derivation from which the law
+            is taken
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+        range:
+          description: 'an expression over declared symbols that bounds the conditions under which the
+            law is established
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
   closure:
+    description: 'separates a formal target from an empirical one: complete, for a formal target whose
+      laws define the system · partial, for an empirical target that may admit a rule independent of them
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
     enum:
     - complete
     - partial
     - null
   organization:
+    description: 'per relation, its tuples and its laws. The tuples take the form `prod(source, reach)`
+      or `subset(prod(source, reach), adjacency)`. A directed relation puts the reach last, and a joint
+      one has three or more components. When the ends are laws, the relation names the laws that it orders,
+      with the reach last
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
     items:
       propertyNames:
         enum:
@@ -72,6 +195,77 @@ properties:
         - relates
         - among
         - realized_by
+      properties:
+        name:
+          description: 'the words that designate the relation
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - NAME OF THE RELATION
+        symbol:
+          description: 'the symbol of the relation, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - SYMBOL
+        variant:
+          description: 'variant carrying the entry; omit when every member of the class carries it
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - SYMBOL
+        reading:
+          description: 'only content beyond the relation and the laws
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - THE ARRANGEMENT IN WORDS
+        relates:
+          description: 'for a relation among parts: the connected tuples, reach last
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - prod(SOURCE, REACH), or subset(prod(SOURCE, REACH), ADJACENCY)
+        among:
+          description: 'for a relation among laws: the laws, reach last; fill exactly one of `relates`
+            and `among`
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - &id002
+            - SYMBOL
+          items:
+            examples: *id002
+        realized_by:
+          description: 'laws stating a relation among parts; the parts are read from their expressions
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/background.md).'
+          examples:
+          - &id003
+            - SYMBOL
+          items:
+            examples: *id003
+  maturity:
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
 propertyNames:
   enum:

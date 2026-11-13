@@ -4,7 +4,7 @@ title: Answer record
 description: The fields of an answer record, as the specification of the record documents them.
 type: object
 x-identifier: id
-x-version: 1
+x-version: 3
 x-header:
 - 'specification: `docs/specification/answer.md`; one file per candidate answer to one atomic question'
 - 'the model on which the route runs: `model.yml`; its relation to the phenomenon: `binding.yml`'
@@ -45,6 +45,18 @@ properties:
     x-kind: label
     title: Answers
     description: the identifier of the question that the answer answers
+  sources:
+    type: array
+    minItems: 1
+    items:
+      type: string
+      minLength: 1
+      x-template: '"POINTER TO AN EXISTING NOTE, PUBLICATION, MODEL OR DATA SET"'
+      x-kind: markdown-line
+    title: Sources
+    description: per source, a provenance pointer to existing material from which the answer was adopted; the content stays external and the pointer makes no evidential claim
+    examples:
+    - a section of a research note that states the answer
   claim:
     x-blank: true
     type:
@@ -1195,8 +1207,8 @@ properties:
           - 'null'
           items:
             type: string
+            x-kind: label
           x-template: '[ans.TOPIC.NAME]'
-          x-kind: label
           x-comment: for a relation of a set, such as an incompatibility, the other members; omit otherwise
           title: Members
           description: for a relation of a set, such as an incompatibility, the other members; omit otherwise
@@ -1232,8 +1244,8 @@ properties:
           - 'null'
           items:
             type: string
+            x-kind: label
           x-template: '[SYMBOL]'
-          x-kind: label
           x-comment: for `contrasts-with` only, the symbols named by both claims in which they differ
           title: Respect
           description: for `contrasts-with` only, the symbols named by both claims in which they differ
@@ -1251,6 +1263,7 @@ properties:
     - object
     - 'null'
     additionalProperties:
+      x-vocabulary: .maturity
       x-template-key: FIELD.PATH
       x-template: open
     x-comment: 'optional; one maturity per specification: open | provisional | stabilized; a specification

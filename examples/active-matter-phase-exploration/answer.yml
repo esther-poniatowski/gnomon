@@ -1,6 +1,6 @@
 # tests the answer form against an exploratory inquiry; the route runs on a model derived from the target, a formal class
 
-_schema: gnomon:answer@1
+_schema: gnomon:answer@3
 title: "Catalogue of exceptional phase transitions"
 id: ans.nonreciprocal-active-matter.exceptional-transition-catalogue
 type: answer

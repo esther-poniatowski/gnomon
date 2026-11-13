@@ -1,0 +1,528 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/itinerary.v2.base.schema.yml
+title: Itinerary record
+description: The fields of an itinerary record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 2
+x-header:
+- 'specification: `docs/specification/itinerary.md`; one file per itinerary of inquiry'
+- 'activities: `src/gnomon/data/registries/activities.yml`; product types: `src/gnomon/data/registries/product-types.yml`'
+- each step instantiates one registered activity; its inputs and its output take the types fixed by the
+  activity
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+properties:
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"SHORT NAME OF THE ITINERARY"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: itin.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: itinerary
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  addresses:
+    type:
+    - string
+    - 'null'
+    x-template: prob.TOPIC.NAME
+    x-kind: label
+    x-comment: a problem, or a question `quest.TOPIC.NAME`
+    title: Addresses
+    description: the identifier of one problem record or of one question record
+    examples:
+    - the problem of the delay before generalization
+  act_appraisals:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: APPRAISAL
+          x-kind: label
+          title: Identifier
+          description: a name unique within the itinerary, by which a later comparison identifies
+            this appraisal
+          examples:
+          - '`first-ready-acts`; `candidate-tests`'
+        question:
+          type:
+          - string
+          - 'null'
+          x-template: quest.TOPIC.NAME
+          x-kind: label
+          title: Question
+          description: the question whose ready acts are appraised
+        route:
+          type:
+          - string
+          - 'null'
+          x-vocabulary: act_appraisals.route
+          title: Route
+          description: the route of the question on which the appraised acts occur
+        criteria:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              id:
+                type:
+                - string
+                - 'null'
+                x-template: CRITERION
+                x-kind: label
+                title: Identifier
+                description: a name unique within the appraisal, used by each judgment of this
+                  criterion
+                examples:
+                - '`feasibility`; `cost`; `expected-discrimination`'
+              question:
+                type:
+                - string
+                - 'null'
+                x-template: '"WHAT PROPERTY OF AN ACT IS JUDGED"'
+                x-kind: markdown-line
+                title: Question
+                description: the property of an act that the criterion judges
+                examples:
+                - how likely the act is to finish with the available means
+              scale:
+                type:
+                - array
+                - 'null'
+                minItems: 2
+                items:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: LEVEL
+                  x-kind: label
+                title: Scale
+                description: the admitted judgments, ordered from less to more of the named property
+                examples:
+                - [low, medium, high]
+              preferred:
+                type:
+                - string
+                - 'null'
+                x-vocabulary: act_appraisals.criteria.preferred
+                title: Preferred direction
+                description: whether a higher or lower value on the scale is preferred
+          x-comment: one entry per criterion; state the scale before judging any act
+          title: Criteria
+          description: the criteria supplied by the researcher, each with its ordered scale and
+            preferred direction
+        acts:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              activity:
+                type:
+                - string
+                - 'null'
+                x-template: ACTIVITY
+                x-kind: label
+                x-comment: an identifier of the activity registry
+                title: Activity
+                description: the identifier of one ready activity being appraised
+              acts_on:
+                type:
+                - string
+                - 'null'
+                x-vocabulary: steps.acts_on
+                title: Acts on
+                description: the open condition, obtaining or evaluation addressed by the act
+              available_means:
+                type:
+                - array
+                - 'null'
+                items:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"AVAILABLE INSTRUMENT, DATASET, METHOD OR RESOURCE"'
+                  x-kind: markdown-line
+                title: Available means
+                description: the instruments, data, methods and resources currently available for
+                  this act
+              judgments:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: object
+                  properties:
+                    criterion:
+                      type:
+                      - string
+                      - 'null'
+                      x-template: CRITERION
+                      x-kind: label
+                      title: Criterion
+                      description: the identifier of one criterion declared by this appraisal
+                    value:
+                      type:
+                      - string
+                      - 'null'
+                      x-template: LEVEL
+                      x-kind: label
+                      title: Value
+                      description: one value from the declared scale of the criterion
+                    basis:
+                      type:
+                      - string
+                      - 'null'
+                      x-template: '"WHY THIS VALUE APPLIES TO THIS ACT"'
+                      x-kind: markdown-line
+                      title: Basis
+                      description: the evidence or estimate on which the researcher assigns the
+                        value
+                x-comment: one entry per declared criterion
+                title: Judgments
+                description: the researcher's value and basis for each criterion applied to this act
+          x-comment: one entry per ready act considered in the appraisal
+          title: Acts
+          description: the ready acts considered, with their available means and researcher-authored
+            judgments
+    x-comment: optional; one entry per comparison considered before an act becomes a step
+    title: Act appraisals
+    description: 'the judgments used before choosing a ready act: the question and route, the criteria
+      and their scales, and per act its available means and values'
+    examples:
+    - the feasibility, cost and expected discrimination of the ready acts for one question
+  steps:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: STEP
+          x-kind: label
+          title: id
+          description: a name unique within the itinerary, by which a later step refers to the output
+            of this one
+          examples:
+          - '`pose`; `test`'
+        activity:
+          type:
+          - string
+          - 'null'
+          x-template: ACTIVITY
+          x-kind: label
+          x-comment: an identifier of the activity registry
+          title: activity
+          description: the identifier of one activity of the registry
+          examples:
+          - '`abduction`; `testing`'
+        inputs:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              type:
+                type:
+                - string
+                - 'null'
+                x-template: PRODUCT-TYPE
+                x-kind: label
+                x-comment: an identifier of the product-type registry
+                title: Type
+                description: an identifier of the product-type registry
+              ref:
+                type:
+                - string
+                - 'null'
+                x-template: RECORD-OR-STEP
+                x-kind: label
+                x-comment: a record identifier, the identifier of the step that produces the input, or
+                  a pointer for a `source`
+                title: Ref
+                description: a record identifier, the identifier of the step that produces the input,
+                  or a pointer for a `source`
+              as_of:
+                type:
+                - string
+                - 'null'
+                x-template: REVISION
+                x-kind: label
+                x-comment: optional; the revision of the repository at which the step read the record;
+                  omit to read the record in its present state
+                title: As of
+                description: the revision of the repository at which the step read the record
+          x-comment: one entry per input of the activity
+          title: inputs
+          description: 'per input, its product type and a reference: a record identifier, the full identifier
+            of the step that produces the input, or a pointer for a `source`'
+          examples:
+          - a `target-claim` produced by the step `itin.grokking.explain-delay.propose`; the `data` of
+            a phenomenon record
+        output:
+          type:
+          - object
+          - 'null'
+          properties:
+            type:
+              type:
+              - string
+              - 'null'
+              x-template: PRODUCT-TYPE
+              x-kind: label
+              title: Type
+              description: the product type of the output, from the registry of product types
+            ref:
+              type:
+              - string
+              - 'null'
+              x-template: RECORD
+              x-kind: label
+              x-comment: the record that holds the product; omit until that record exists
+              title: Ref
+              description: the record that holds the product; omit until that record exists
+            before:
+              type:
+              - string
+              - 'null'
+              x-template: REVISION
+              x-kind: label
+              x-comment: for a knowledge-state-change only, the revision of the repository before the change
+              title: Before
+              description: for a knowledge-state-change only, the revision of the repository before the change
+          title: output
+          description: the product type of the product, and the record that holds the product, given while
+            that record holds the output type
+          examples:
+          - a `verdict` held by an assessment record
+        derivation:
+          type:
+          - string
+          - 'null'
+          x-template: derivation.TOPIC.NAME
+          x-kind: label
+          x-comment: optional; the derivation record that holds the reasoning of the step
+          title: derivation
+          description: The identifier of the derivation record that holds the reasoning of the step,
+            below the grain of its product; required once a step of the activity derivation passes its
+            norm.
+          examples:
+          - '`derivation.grokking.delay-scale`'
+        norm:
+          type:
+          - object
+          - 'null'
+          properties:
+            test:
+              type:
+              - string
+              - 'null'
+              x-template: norm.ACTIVITY
+              x-kind: label
+              x-comment: the test named by the activity registry for this activity
+              title: Test
+              description: the test named by the activity registry for this activity
+            verdict:
+              type:
+              - string
+              - 'null'
+              x-template: pending
+              x-vocabulary: steps.verdict
+              x-rules:
+              - {check: unresolved-value, value: pending}
+              title: Verdict
+              description: 'whether the output of the step meets the norm of its activity, or awaits judgment'
+            evidence:
+              type:
+              - string
+              - 'null'
+              x-template: '"WHY THE PRODUCT MEETS THE NORM OR FAILS IT"'
+              x-kind: markdown-line
+              x-comment: fill with a verdict pass or fail, from the content of the products
+              title: Evidence
+              description: why the product meets the norm or fails it
+            judged:
+              type:
+              - string
+              - 'null'
+              x-template: DATE
+              x-kind: label
+              x-comment: fill with a verdict pass or fail; the date of the last judgment, written YYYY-MM-DD
+              title: Judged
+              description: the date of the last judgment of the verdict
+          title: norm
+          description: 'the test named by the registry for the activity, written `norm.<activity>`, its
+            verdict: pass · fail · inconclusive · pending, and, once judged, the evidence and the date of the judgment'
+          examples:
+          - '`norm.testing`, pending until the assessment is stabilized'
+        rationale:
+          type:
+          - object
+          - 'null'
+          properties:
+            serves:
+              type:
+              - string
+              - 'null'
+              x-template: quest.TOPIC.NAME
+              x-kind: label
+              x-comment: the question that the step serves, or the problem for a step that precedes any question
+              title: Serves
+              description: the question that the step serves, or the problem
+            acts_on:
+              type:
+              - string
+              - 'null'
+              x-vocabulary: steps.acts_on
+              title: Acts on
+              description: 'the condition for obtaining an answer that the step works on, or the obtaining or the evaluation of the answer'
+          title: rationale
+          description: 'the question that the step serves, or its problem, and the object on which the
+            step acts: one of the eight conditions for obtaining an answer, the obtaining of the answer,
+            or its evaluation'
+          examples:
+          - '`quest.grokking.explain-delay`, acting on the candidates'
+        branch:
+          type:
+          - object
+          - 'null'
+          properties:
+            condition:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE CONDITION UNDER WHICH THE STEP IS TAKEN"'
+              x-kind: markdown-line
+              title: Condition
+              description: the condition under which the step is taken
+            otherwise:
+              type:
+              - string
+              - 'null'
+              x-template: STEP
+              x-kind: label
+              x-comment: the step taken when the condition fails, which produces the same output type
+              title: Otherwise
+              description: the step taken when the condition fails, which produces the same output type
+          x-comment: optional; a step taken under a condition, with its alternative
+          title: branch
+          description: the condition under which the step is taken, and the step of the same output type
+            taken otherwise
+          examples:
+          - a simulation taken when no closed form is found, otherwise the derivation
+        iterate:
+          type:
+          - object
+          - 'null'
+          properties:
+            until:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE CRITERION THAT ENDS THE REPETITION"'
+              x-kind: markdown-line
+              title: Until
+              description: the criterion that ends the repetition
+          x-comment: optional; a step repeated on its own output until the criterion holds
+          title: iterate
+          description: the criterion that ends the repetition of a step that takes its own output type
+            as input
+          examples:
+          - a fitting repeated until the residuals fall below the tolerance of the question
+        revises:
+          type:
+          - object
+          - 'null'
+          properties:
+            record:
+              type:
+              - string
+              - 'null'
+              x-template: RECORD
+              x-kind: label
+              title: Record
+              description: the record that the step revises
+            kind:
+              x-vocabulary: steps.kind
+              type:
+              - string
+              - 'null'
+              title: Kind
+              description: 'how the revision changes the revised record: its retraction, its scope, its framing, its classification or its content'
+            reviews:
+              type:
+              - array
+              - 'null'
+              items:
+                type: object
+                properties:
+                  dependent:
+                    type:
+                    - string
+                    - 'null'
+                    x-template: RECORD
+                    x-kind: label
+                    title: Dependent
+                    description: a record that the revision flags
+                  state:
+                    x-vocabulary: steps.state
+                    type:
+                    - string
+                    - 'null'
+                    title: State
+                    description: 'the judgment of the researcher on a flagged dependent: whether it holds, was adjusted or was retracted, or awaits judgment'
+              x-comment: one entry per flagged dependent that the researcher has reviewed
+              title: Reviews
+              description: one entry per flagged dependent that the researcher has reviewed
+          x-comment: optional; a step that revises a record, with the kind of the revision
+          title: revises
+          description: 'the record that the step revises, the kind of the revision, and the review of each
+            flagged dependent: pending · revised · unaffected · retracted'
+          examples:
+          - the retraction of a background law, with the answers resting on it reviewed one by one
+        mode:
+          x-vocabulary: steps.mode
+          type:
+          - string
+          - 'null'
+          title: mode
+          description: 'the kind of inference that the step draws, equal to the mode that the registry gives its activity'
+          examples:
+          - '`abductive` for the step that proposes a candidate answer'
+    x-comment: one entry per activity instance; the steps may be listed in any order, and their references
+      form an acyclic graph
+    title: Steps
+    description: one entry per activity instance, listed in any order
+    examples:
+    - posing the problem, formulating the question, testing the candidate answer

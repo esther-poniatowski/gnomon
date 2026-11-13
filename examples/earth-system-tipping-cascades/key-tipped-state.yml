@@ -1,6 +1,6 @@
 # a qualitative abstraction shared by the bindings of the network: the regime of a subsystem read from the state of its element
 
-_schema: gnomon:key@1
+_schema: gnomon:key@2
 title: "Tipped state of an element"
 id: key.earth-tipping-subsystems.tipped-state
 type: key

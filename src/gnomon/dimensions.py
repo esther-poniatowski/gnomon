@@ -45,7 +45,11 @@ QUANTITY_BLOCKS: tuple[str, ...] = ("variables", "parameters", "observables")
 
 #: The blocks whose entries may carry a dimensional formula: the quantities, the index sets, whose
 #: formula a derivative along the index divides by, and the features of a manifestation.
-FORMULA_BLOCKS: tuple[str, ...] = (*QUANTITY_BLOCKS, "index_sets", "manifestations.features")
+FORMULA_BLOCKS: tuple[str, ...] = (
+    *QUANTITY_BLOCKS,
+    "index_sets",
+    "manifestations.features",
+)
 
 
 #: A dimensional formula: the exponent of each base dimension; empty for a pure number.
@@ -223,7 +227,10 @@ class Evaluation:
         """Report a quantity where a statement is required."""
         if isinstance(value, Mapping):
             self.violations.append(
-                ("mistyped-operand", f"{site} takes a quantity of formula {show(value)}")
+                (
+                    "mistyped-operand",
+                    f"{site} takes a quantity of formula {show(value)}",
+                )
             )
 
     def _quantity(self, value: Value, site: str) -> Value:
@@ -249,7 +256,10 @@ class Evaluation:
         if isinstance(left, Mapping) and isinstance(right, Mapping) and left != right:
             sides = "the terms of a sum" if kind == "sum" else f"the sides of {op}"
             self.violations.append(
-                ("inhomogeneous", f"{sides} have the formulas {show(left)} and {show(right)}")
+                (
+                    "inhomogeneous",
+                    f"{sides} have the formulas {show(left)} and {show(right)}",
+                )
             )
             return STATEMENT if kind == "cmp" else None
         if kind == "cmp":
@@ -320,7 +330,10 @@ class Evaluation:
             for v in values:
                 if isinstance(v, Mapping) and v:
                     self.violations.append(
-                        ("impure-argument", f"the argument of {name} has the formula {show(v)}")
+                        (
+                            "impure-argument",
+                            f"the argument of {name} has the formula {show(v)}",
+                        )
                     )
             return PURE
         if rule == "pure":
@@ -329,7 +342,8 @@ class Evaluation:
 
     def _derivative(self, name: str, rule: str, values: list[Value]) -> Value:
         """Return the formula of a derivative: the function divided by its coordinates, once or
-        twice, with the point of evaluation, when given, sharing the formula of the coordinates."""
+        twice, with the point of evaluation, when given, sharing the formula of the coordinates.
+        """
         if len(values) < 2:
             return None
         if rule == "derivative-at" and len(values) >= 3:
@@ -349,8 +363,15 @@ class Evaluation:
 
     def _argument(self, tree: Tree, rule: str | None, position: int) -> Value:
         """Return the formula of an argument, counting its missing formulas only where the rule
-        of the operator uses that argument: a connective and a relation use each argument."""
-        used = rule in ("product", "pure-argument", "connective", "statement", *DERIVATIVE_RULES)
+        of the operator uses that argument: a connective and a relation use each argument.
+        """
+        used = rule in (
+            "product",
+            "pure-argument",
+            "connective",
+            "statement",
+            *DERIVATIVE_RULES,
+        )
         used = used or (rule == "preserve" and position == 0)
         if used:
             return self.value(tree)
@@ -421,7 +442,9 @@ def checked_fields(source: Path | None = None) -> tuple[tuple[str, ...], ...]:
     return tuple(tuple(str(path).split(".")) for path in loaded.get("checked_fields") or [])
 
 
-def formula_entries(record: Mapping[str, Any]) -> list[tuple[tuple[Any, ...], Mapping[str, Any]]]:
+def formula_entries(
+    record: Mapping[str, Any],
+) -> list[tuple[tuple[Any, ...], Mapping[str, Any]]]:
     """Return each entry of a record that may carry a dimensional formula, with its locus.
 
     >>> record = {"manifestations": [{"symbol": "m", "features": [{"symbol": "z"}]}]}

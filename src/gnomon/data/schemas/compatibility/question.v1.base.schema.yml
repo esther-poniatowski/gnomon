@@ -1,0 +1,883 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/question.v1.base.schema.yml
+title: Question record
+description: The fields of a question record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/question.md`, `docs/specification/question-subject.md`, `docs/specification/question-task.md`,
+  `docs/specification/question-virtues.md`; one file per question'
+- 'commitment of the slots: `docs/epistemology/objects/question/question.md`'
+- 'symbols and expressions: `docs/specification/expressions.md`'
+- 'name a quantity of another record by source identifier and symbol: `system.TOPIC.SYMBOL`'
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+- fix the question before evaluating any candidate answer
+properties:
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"SHORT NAME OF THE QUESTION"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+    examples:
+    - delay before generalization
+  statement:
+    type:
+    - string
+    - 'null'
+    x-template: '"THE QUESTION IN WORDS"'
+    x-kind: markdown-line
+    x-comment: restate the fields of the subject and the task; `gnomon views` composes the subject and the aim beside it
+    title: Statement
+    description: the question in words, restating its fields in the statement frame
+    examples:
+    - '"in overparameterized networks trained to fit their data, what produces the delay before generalization?"'
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: quest.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: question
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+    - string
+    - 'null'
+    x-template: posed
+    x-vocabulary: .status
+    title: Status
+    description: posed · refined · answered · dissolved · abandoned
+    examples:
+    - '`posed`, for a question not yet refined'
+  version:
+    type:
+    - string
+    - 'null'
+    pattern: ^[1-9][0-9]*$
+    x-template: '"1"'
+    x-kind: label
+    x-comment: raise by one at each revision of a field that fixes the answers or the tests
+    title: Version
+    description: the version of the specification of the question, raised by one at each revision of a
+      field that fixes the answers or the tests
+    examples:
+    - '`"2"`, after the tolerance was revised'
+  addresses:
+    type:
+    - string
+    - 'null'
+    x-template: prob.TOPIC.NAME
+    x-kind: label
+    x-comment: the problem that the question serves; omit when no problem record exists
+    title: Addresses
+    description: the identifier of one problem record
+    examples:
+    - the problem of the delay before generalization
+  request:
+    x-comment: the request of the problem that the question serves; empty while the record is a schema
+    x-vocabulary: .request
+    type:
+    - string
+    - 'null'
+    title: Request
+    description: 'how many possible answers a direct answer selects, and whether it claims completeness:
+      one · all · over-a-parameter · decision, as the request of a question defines them; the request
+      of the problem that the question serves, when one exists'
+    examples:
+    - '`one`, for a question that one explanatory account answers'
+  links:
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        question:
+          type:
+          - string
+          - 'null'
+          x-template: quest.TOPIC.NAME
+          x-kind: label
+          title: question
+          description: the identifier of the other question record
+          examples:
+          - the question that describes the representation geometry of a network
+        relation:
+          x-vocabulary: links.relation
+          type:
+          - string
+          - 'null'
+          title: relation
+          description: subquestion-of · explanans-from · presupposes · enables
+          examples:
+          - '`explanans-from`, for a question that explains a readout capacity by that geometry'
+        via:
+          type:
+          - string
+          - 'null'
+          x-template: phen.TOPIC.NAME
+          x-kind: label
+          x-comment: the record shared by both questions, such as a phenomenon; omit when they share none
+          title: via
+          description: the identifier of the shared record, such as a phenomenon
+          examples:
+          - the phenomenon record of the geometry
+    x-comment: questions linked to this question by one of four relations; empty when none
+    title: Links
+    description: per link, the other question, the relation, and the record shared by the two questions
+    examples:
+    - —
+  excludes:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: PART
+          x-kind: label
+          title: Id
+          description: a name unique within the question
+        kind:
+          x-vocabulary: excludes.kind
+          type:
+          - string
+          - 'null'
+          title: Kind
+          description: deferred · out-of-scope
+        question:
+          type:
+          - string
+          - 'null'
+          x-template: quest.TOPIC.NAME
+          x-kind: label
+          x-comment: the question of the part, when the part is posed as one; omit otherwise
+          title: Question
+          description: the identifier of the question of the part
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE PART LEFT OUT, IN WORDS"'
+          x-kind: markdown-line
+          title: Reading
+          description: the part left out, in words
+        reason:
+          type:
+          - string
+          - 'null'
+          x-template: '"WHY THE PART IS LEFT OUT"'
+          x-kind: markdown-line
+          title: Reason
+          description: why the part is left out
+    x-comment: one entry per part of the answer that the question leaves out; a part out of scope raises the version, a deferred part does not
+    title: Excludes
+    description: per part left out, its kind, its question when one is posed, its reading and the reason
+    examples:
+    - the dependence on the noise level, deferred until the noiseless case is settled
+  subject:
+    type:
+    - object
+    - 'null'
+    properties:
+      target_system:
+        type:
+        - string
+        - object
+        - 'null'
+        x-template: system.TOPIC
+        x-kind: label
+        x-comment: a record identifier; in a question schema, a placeholder written as for `phenomenon`
+        title: Target system $S$
+        description: a record identifier; in a question schema, a placeholder written as for `phenomenon`
+        examples:
+        - neuron
+      background:
+        type:
+        - array
+        - 'null'
+        x-template: '[bg.TOPIC.NAME]'
+        x-comment: background records whose laws the question admits; empty when it admits none
+        title: Background of $S$
+        description: background records whose laws the question admits; empty when it admits none
+        examples:
+        - the leaky integration of each neuron, admitted with the network
+      phenomenon:
+        type:
+        - string
+        - object
+        - 'null'
+        properties:
+          placeholder:
+            x-vocabulary: subject.placeholder
+            type:
+            - string
+            - 'null'
+            title: Placeholder
+            description: 'in a question schema, the kind of record that the slot awaits: a system or a phenomenon'
+          description:
+            type:
+            - string
+            - 'null'
+            x-template: '"THE ITEM AWAITED BY THE SLOT"'
+            x-kind: markdown-line
+            title: Description
+            description: in a question schema, the item awaited by the slot
+        x-comment: a record identifier `phen.TOPIC.NAME`; in a question schema, the placeholder below
+        title: Phenomenon $P$ (the explanandum, under the aim explanation)
+        description: a record identifier `phen.TOPIC.NAME`; in a question schema, the placeholder below
+        examples:
+        - firing rate
+      contrast:
+        type:
+        - object
+        - 'null'
+        properties:
+          locus:
+            x-vocabulary: subject.locus
+            type:
+            - string
+            - 'null'
+            title: Locus
+            description: 'other outcome (same system and conditions, other value of $P$) · other system ($P$ absent) · other condition (same system, different setting or intervention) · none, for a question that states no contrast'
+            examples:
+            - synchronous rather than asynchronous activity (outcome); this network rather than a network
+              without inhibitory neurons (system); a strong rather than a weak stimulus (condition)
+          foil_set:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              properties:
+                name:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"NAME OF THE ALTERNATIVE"'
+                  x-kind: markdown-line
+                  title: Name
+                  description: the words that designate the foil
+                symbol:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: SYMBOL
+                  x-kind: label
+                  title: Symbol
+                  description: the symbol of the foil, unique within the record
+                expression:
+                  type:
+                  - array
+                  - 'null'
+                  x-template: '["EXPRESSION OVER DECLARED SYMBOLS"]'
+                  title: Expression
+                  description: the expressions over the declared observables that hold in the case of the foil
+                reading:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"THE MEANING OF THE ALTERNATIVE"'
+                  x-kind: markdown-line
+                  x-comment: only content beyond the name and the expression
+                  title: Reading
+                  description: only content beyond the name and the expression
+            x-comment: 'default: the other values of the explanandum variable'
+            title: Foil set
+            description: per foil, the expressions over the declared observables that hold in that case,
+              with a reading
+            examples:
+            - asynchronous activity (listed); every other oscillation frequency (rule)
+          compatibility:
+            type:
+            - string
+            - 'null'
+            x-template: derived
+            x-kind: label
+            x-comment: 'follows from the locus: `exclusive` for `other-outcome`, `compatible` otherwise'
+            title: Compatibility
+            description: exclusive · compatible (fact and foil co-occur in different systems)
+            examples:
+            - synchronous versus asynchronous activity of one network (exclusive); Smith versus Jones
+              contracting paresis (compatible)
+          foil_status:
+            x-vocabulary: subject.foil_status
+            type:
+            - string
+            - 'null'
+            title: Foil status
+            description: 'observed (a realized comparison case) · counterfactual · not-applicable, for a question without a foil set'
+            examples:
+            - a recorded control network (observed); the same network trained on another task (counterfactual)
+        title: Contrast class $X$
+        description: the fact and the foils that the question separates, with the status of the foils and their compatibility
+        examples:
+        - why spike rather than inactivity?
+      domain:
+        type:
+        - object
+        - 'null'
+        properties:
+          restrictions:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              properties:
+                id:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: RESTRICTION
+                  x-kind: label
+                  x-comment: unique within the question; a ground with the role `condition` cites the restriction by it
+                  title: Id
+                  description: a name unique within the question, by which a ground cites the restriction
+                name:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"NAME OF THE RESTRICTION"'
+                  x-kind: markdown-line
+                  x-comment: required when no quantity names the entry
+                  title: Name
+                  description: required when no quantity names the entry
+                of:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: system.TOPIC.SYMBOL
+                  x-kind: label
+                  x-comment: quantity held; omit when no single quantity carries the restriction
+                  title: Of
+                  description: quantity held; omit when no single quantity carries the restriction
+                restriction:
+                  x-comment: only where the entry names a variable, since a parameter is already fixed
+                  x-vocabulary: subject.restriction
+                  type:
+                  - string
+                  - 'null'
+                  title: Restriction
+                  description: only where the entry names a variable, since a parameter is already fixed
+                event:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"THE EVENT THAT THE ADMITTED COURSES EXCLUDE"'
+                  x-kind: markdown-line
+                  x-comment: required with the restriction `without-event`; omit otherwise
+                  title: Event
+                  description: required with the restriction `without-event`; omit otherwise
+                values:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+                  x-kind: text
+                  x-comment: set the quantity is held to
+                  title: Values
+                  description: set the quantity is held to
+                expression:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+                  x-kind: text
+                  x-comment: replaces `values` when no single quantity carries the restriction
+                  title: Expression
+                  description: replaces `values` when no single quantity carries the restriction
+                justification:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"WHY THE QUESTION IS PUT ONLY UNDER THE RESTRICTION"'
+                  x-kind: markdown-line
+                  title: Justification
+                  description: why the question is put only under the restriction
+            x-comment: one entry per restriction the question imposes on the specification
+            title: Restrictions
+            description: 'Per restriction: the quantity held and the value set that it is held to. When
+              no single quantity carries a restriction, the entry names it and states its defining expression.
+              A restriction on a variable also states its mode, with the excluded event for `without-event`: `clamped` · `restricted` · `initial` ·
+              `stationary` · `without-event`. Each restriction carries a justification stating why the
+              question is put only within those bounds.'
+            examples:
+            - connection probability between 0.05 and 0.2; the velocity field held stationary; more trainable
+              parameters than training examples
+          limit:
+            type:
+            - object
+            - 'null'
+            properties:
+              expression:
+                type:
+                - string
+                - 'null'
+                x-template: '"SYMBOL -> LIMIT VALUE"'
+                x-kind: markdown-line
+                title: Expression
+                description: the limit, written `q -> v`, whose left side is a variable or a parameter of the target
+              justification:
+                type:
+                - string
+                - 'null'
+                x-template: '"WHY THE QUESTION CONCERNS THE LIMIT SYSTEM"'
+                x-kind: markdown-line
+                title: Justification
+                description: why the question concerns the limit system
+            x-comment: fill only when the question concerns the limit system itself
+            title: Limit
+            description: the expression "[quantity] → [limit value]", with a justification stating why
+              the question is about the limit system
+            examples:
+            - network width → ∞ (kernel regime); number of spins $N\to\infty$ (thermodynamic limit)
+        x-comment: only restrictions of the a priori specification; assumptions of the analysis belong
+          to the answer
+        title: Domain of conditions $D$
+        description: only restrictions of the a priori specification; assumptions of the analysis belong
+          to the answer
+        examples:
+        - in vitro slice, injected current between 0 and 500 pA
+    title: Subject
+    description: 'the subject of the question: its phenomenon, its target system, its contrast and its domain'
+  task:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      epistemic_aim:
+        x-vocabulary: task.epistemic_aim
+        type:
+        - string
+        - 'null'
+        title: Epistemic aim $A$
+        description: the kind of knowledge that the question seeks
+      explicandum:
+        type:
+        - string
+        - 'null'
+        x-template: '"TERM OF AN EXPLICANDUM OF THE PROBLEM"'
+        x-kind: label
+        x-comment: 'explication only: the term of an explicandum that the problem addressed by the question names'
+        title: Explicandum
+        description: 'explication only: the term of an explicandum that the problem addressed by the question names, not a slot of the subject'
+      requested_relation:
+        x-vocabulary: task.requested_relation
+        type:
+        - string
+        - 'null'
+        title: Requested relation $R$
+        description: the kind of relation between the explanans and the phenomenon that the question requests
+      function_sense:
+        x-comment: required when the requested relation is `functional`
+        x-vocabulary: task.function_sense
+        type:
+        - string
+        - 'null'
+        title: Function sense
+        description: required when the requested relation is `functional`
+      modal_strength:
+        x-vocabulary: task.modal_strength
+        type:
+        - string
+        - 'null'
+        title: Modal strength $\mu$
+        description: 'how tightly the answer must bind the phenomenon: actual, possible or necessary'
+      admissible_explanans:
+        type:
+        - object
+        - 'null'
+        properties:
+          compositional:
+            type:
+            - array
+            - 'null'
+            x-template: '[SYMBOL]'
+            x-comment: constituent kinds or index sets whose parts may enter the explanans; empty for
+              the system as a whole
+            title: Compositional level
+            description: the constituents of the target system · their sub-parts · aggregates of them
+            examples:
+            - channel · neuron · circuit · population
+          substrate:
+            x-template: 'null'
+            x-vocabulary: task.substrate
+            type:
+            - string
+            - 'null'
+            title: Substrate dependence
+            description: 'substrate-specific (variables of the particular parts) · substrate-independent
+              (variables shared by every realization: functional roles, universality classes) · mapping
+              (how substrate-specific variables realize substrate-independent ones)'
+            examples:
+            - membrane potentials of identified neurons (specific) · an error signal on any carrier, or
+              the universality class of a phase transition (independent) · how a circuit implements context-dependent
+              gating (mapping)
+          justification:
+            type:
+            - string
+            - 'null'
+            x-template: '"WHY THE ANSWER IS BOUND TO THESE VARIABLES"'
+            x-kind: markdown-line
+            x-comment: also state the shortfall of an answer that draws on other variables
+            title: Justification
+            description: one clause that carries no commitment already held by the axes
+            examples:
+            - '"the forecast names when each subsystem transitions, so the explanans must resolve each
+              of them individually"'
+        x-comment: optional; when null, proportionality bounds the answer
+        title: Admissible explanans $\lambda$
+        description: optional; when null, proportionality bounds the answer
+      required_accuracy:
+        type:
+        - object
+        - 'null'
+        properties:
+          standard:
+            x-vocabulary: task.standard
+            type:
+            - string
+            - 'null'
+            title: Standard
+            description: 'how closely the answer must agree with the target: qualitative, an order of magnitude, a numeric bound or structure only, or not applicable when the answer is matched against no data of the target'
+          outputs_to_match:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              properties:
+                target:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: phen.TOPIC.NAME.SYMBOL
+                  x-kind: label
+                  title: Target
+                  description: the observable of the phenomenon that the answer must reproduce
+                tolerance:
+                  type:
+                  - object
+                  - 'null'
+                  properties:
+                    metric:
+                      type:
+                      - string
+                      - 'null'
+                      x-template: '"EXPRESSION OVER `answer` AND `target`"'
+                      x-kind: text
+                      x-comment: measure the difference between `answer` and `target`
+                      title: Metric
+                      description: measure the difference between `answer` and `target`
+                    bound:
+                      type:
+                      - string
+                      - 'null'
+                      x-template: '"EXPRESSION THAT THE METRIC MUST NOT EXCEED"'
+                      x-kind: text
+                      title: Bound
+                      description: an expression that the metric must not exceed
+                  x-comment: omit when the standard is `qualitative`, `structural-only` or `order-of-magnitude`, which fixes its own
+                  title: Tolerance
+                  description: omit when the standard is `qualitative`, `structural-only` or `order-of-magnitude`, which fixes its own
+                justification:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"WHY THE QUESTION DEMANDS THAT THE ANSWER REPRODUCE THIS OUTPUT"'
+                  x-kind: markdown-line
+                  title: Justification
+                  description: why the question demands that the answer reproduce this output
+            x-comment: name only the target side; the answer reproduces each output
+            title: Outputs to match
+            description: name only the target side; the answer reproduces each output
+          structures_to_match:
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              properties:
+                target:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: phen.TOPIC.NAME.SYMBOL
+                  x-kind: label
+                  title: Target
+                  description: the feature or the manifestation of the phenomenon whose structure the answer must reproduce
+                justification:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"WHY THE QUESTION DEMANDS THAT THE ANSWER REPRODUCE THIS STRUCTURE"'
+                  x-kind: markdown-line
+                  title: Justification
+                  description: why the question demands that the answer reproduce this structure
+            title: Structures to match
+            description: the structures of the phenomenon that the answer must reproduce, one entry per structure
+        title: Required accuracy $\tau$
+        description: the standard by which an answer is compared with the target, and the outputs and the structures that it must reproduce
+      proof_obligations:
+        type:
+        - array
+        - 'null'
+        items:
+          type: object
+          properties:
+            id:
+              type:
+              - string
+              - 'null'
+              x-template: OBLIGATION
+              x-kind: label
+              title: Id
+              description: a name unique within the question
+            name:
+              type:
+              - string
+              - 'null'
+              x-template: '"NAME OF THE OBLIGATION"'
+              x-kind: markdown-line
+              title: Name
+              description: The name of the obligation.
+            reading:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE IMPLICATION THAT THE ANSWER MUST ESTABLISH, IN WORDS"'
+              x-kind: markdown-line
+              title: Reading
+              description: the implication that the answer must establish, in words
+            antecedent:
+              type:
+              - array
+              - 'null'
+              x-template: '["EXPRESSION OVER DECLARED SYMBOLS"]'
+              title: Antecedent
+              description: the expressions over declared symbols that the implication assumes
+            consequent:
+              type:
+              - array
+              - 'null'
+              x-template: '["EXPRESSION OVER DECLARED SYMBOLS"]'
+              title: Consequent
+              description: the expressions over declared symbols that the implication concludes
+        x-comment: fill when the answer must derive a statement rather than match a measurement
+        title: Proof obligations $\omega$
+        description: fill when the answer must derive a statement rather than match a measurement
+    title: Task
+    description: 'the epistemic task of the question: its aim, its requested relation, its modal strength, its required accuracy and its proof obligations'
+  virtues:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        virtue:
+          x-vocabulary: virtues.virtue
+          type:
+          - string
+          - 'null'
+          title: Virtue
+          description: 'a quality of the answers, beyond the demands of the task, that the inquiry weighs'
+        standing:
+          x-vocabulary: virtues.standing
+          type:
+          - string
+          - 'null'
+          title: Standing
+          description: whether the virtue is constitutive of an answer or preferred among answers
+        justification:
+          type:
+          - string
+          - 'null'
+          x-template: '"WHY THE INQUIRY WEIGHS THIS VIRTUE"'
+          x-kind: markdown-line
+          x-comment: also state the shortfall of an answer that lacks this virtue
+          title: Justification
+          description: also state the shortfall of an answer that lacks this virtue
+    x-comment: one entry per virtue the inquiry weighs, under any epistemic aim
+    title: Virtues
+    description: one entry per virtue the inquiry weighs, under any epistemic aim
+  presuppositions:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: PRESUPPOSITION
+          x-kind: label
+          title: Id
+          description: a name unique within the question
+        part:
+          x-vocabulary: presuppositions.part
+          type:
+          - string
+          - 'null'
+          title: Part
+          description: The part of soundness to which the presupposition belongs.
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE PRESUPPOSITION IN WORDS"'
+          x-kind: markdown-line
+          title: Reading
+          description: the presupposition in words
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: optional; empty while the presupposition is not formalized
+          title: Expression
+          description: optional; empty while the presupposition is not formalized
+    x-comment: fill for a presupposition that neither a link `presupposes` nor the evidential status of the phenomenon states; one entry per presupposition
+    title: Presuppositions
+    description: per presupposition, its part of soundness (existence · topic), its reading and, once formalized, its expression
+    examples:
+    - a stable fixed point exists for every admitted gain (existence)
+  construction:
+    type:
+    - object
+    - 'null'
+    properties:
+        procedure:
+          type:
+          - string
+          - 'null'
+          x-template: RECORD-OR-POINTER
+          x-kind: label
+          x-comment: a design of kind method, or a pointer to the procedure
+          title: Procedure
+          description: a design of kind method, or a pointer to the procedure
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"HOW THE PROCEDURE WOULD YIELD A DIRECT ANSWER"'
+          x-kind: markdown-line
+          title: Reading
+          description: how the procedure would yield a direct answer
+    x-comment: fill when a procedure is named that would yield a direct answer; the route of construction is then diagnosed
+    title: Construction
+    description: the procedure named for the route of construction, and how it would yield a direct answer
+    examples:
+    - an algorithm that enumerates the fixed points of the network at each gain
+  answerability:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        condition:
+          x-vocabulary: answerability.condition
+          type:
+          - string
+          - 'null'
+          title: Condition
+          description: 'the condition of answerability whose state the entry asserts'
+        route:
+          x-vocabulary: answerability.route
+          type:
+          - string
+          - 'null'
+          title: Route
+          description: The route on which the state holds.
+        term:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL-OR-RECORD
+          x-kind: label
+          x-comment: 'definiteness only: the term whose definiteness is stated'
+          title: Term
+          description: 'definiteness only: the term whose definiteness is stated'
+        state:
+          x-vocabulary: answerability.state
+          type:
+          - string
+          - 'null'
+          title: State
+          description: 'whether the records show that the condition holds or fails'
+        refutation:
+          x-vocabulary: answerability.refutation
+          type:
+          - string
+          - 'null'
+          x-comment: refuted only
+          title: Refutation
+          description: refuted only
+        means:
+          type:
+          - array
+          - 'null'
+          items:
+            type:
+            - string
+            - 'null'
+            x-template: '"A MEANS CONSIDERED, TRIED AND FAILED"'
+          x-comment: 'lack-of-means only: every means considered, each tried and failed'
+          title: Means
+          description: every means considered, each tried and failed
+        pointers:
+          type:
+          - array
+          - 'null'
+          items:
+            type:
+            - string
+            - 'null'
+            x-template: RECORD-OR-POINTER
+          x-comment: the records, the steps or the publications that show the state
+          title: Pointers
+          description: the records, the steps or the publications that show the state
+    x-comment: one entry per condition whose state the inquiry asserts; a condition left out is not established
+    title: Answerability
+    description: per condition asserted, its route, its state (established · refuted), how a refutation holds (outright · lack-of-means) with the means tried, and the pointers that show the state
+    examples:
+    - access refuted for lack of means, after a mean-field derivation and a simulation both failed
+  maturity:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    additionalProperties:
+      x-template-key: FIELD.PATH
+      x-template: open
+    x-comment: 'optional; one maturity per field: open | provisional | stabilized; a field left out is
+      provisional'
+    title: Maturity
+    description: 'optional; one maturity per field: open | provisional | stabilized; a field left out
+      is provisional'

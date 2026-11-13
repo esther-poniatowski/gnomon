@@ -1,7 +1,7 @@
 # the derivation of the invariance of the nonnegative abundances, from the factor form of the growth
 # laws of both variants
 
-_schema: gnomon:derivation@1
+_schema: gnomon:derivation@2
 title: "Nonnegative abundances from the factor form of growth"
 id: derivation.microbial.nonnegative-abundances
 type: derivation

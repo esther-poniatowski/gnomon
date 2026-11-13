@@ -7,9 +7,16 @@ import copy
 from typing import Any
 
 from gnomon.assembly import assembly_tables
-from gnomon.completeness import components, demand_met, problem_questions, readable_obstacles
+from gnomon.assembly_graph import assembly_graph
+from gnomon.completeness import (
+    components,
+    demand_met,
+    problem_questions,
+    readable_obstacles,
+)
 from gnomon.completeness.levels import decomposition_findings, settled
 from gnomon.itineraries import type_classes, type_holders
+from gnomon.views import assembly
 
 PASSED = {"tests": {"admissibility": {"scope": {"verdict": "pass"}}}}
 
@@ -47,7 +54,8 @@ def _assessment(name: str, version: str = "1") -> dict[str, Any]:
 
 def _records() -> dict[str, dict[str, Any]]:
     """A goal question decomposed into three parts, one deferred, served by an enabling question,
-    with a synthesis answer that the accepted parts support, and one part out of scope."""
+    with a synthesis answer that the accepted parts support, and one part out of scope.
+    """
     goal = {
         "type": "question",
         "id": "quest.a.goal",
@@ -175,8 +183,18 @@ def test_each_citation_names_the_edge_or_the_link_that_states_it() -> None:
         "grounds[].record",
         "ans.a.gain -> ans.a.geometry",
     ) in cited
-    assert ("quest.a.geometry", "quest.a.goal", "supports", "ans.a.geometry -> ans.a.goal") in cited
-    assert ("quest.a.reduced", "quest.a.goal", "enables", "quest.a.reduced links") in cited
+    assert (
+        "quest.a.geometry",
+        "quest.a.goal",
+        "supports",
+        "ans.a.geometry -> ans.a.goal",
+    ) in cited
+    assert (
+        "quest.a.reduced",
+        "quest.a.goal",
+        "enables",
+        "quest.a.reduced links",
+    ) in cited
 
 
 def test_the_limits_are_listed_and_never_combined() -> None:
@@ -186,6 +204,41 @@ def test_the_limits_are_listed_and_never_combined() -> None:
         ("domain", "g < 2"),
         ("out-of-scope", "the course of learning"),
     } <= limits
+
+
+def test_the_assembly_graph_connects_levels_components_and_parts() -> None:
+    records = _records()
+    graph = assembly_graph(records, assembly_tables(records))
+    nodes = {node["id"]: node for node in graph["nodes"]}
+    edges = {
+        (edge["source"], edge["target"], edge["kind"], edge["label"]): edge
+        for edge in graph["edges"]
+    }
+
+    assert nodes["quest.a.goal"]["roles"] == ["level", "component"]
+    assert any(state.endswith(": deferred") for state in nodes["quest.a.noise"]["assembly_states"])
+    assert (
+        "quest.a.goal",
+        "quest.a.gain",
+        "assembly-component",
+        "has subquestion",
+    ) in edges
+    assert (
+        "quest.a.gain",
+        "ans.a.gain",
+        "assembly-part",
+        "answered by",
+    ) in edges
+    assert nodes["ans.a.gain"]["status_axis"] == "Attitude"
+    assert not any(edge["kind"] == "assembly-citation" for edge in graph["edges"])
+    assert assembly_tables(records)["citations"]
+
+
+def test_the_assembly_view_presents_the_graph_before_its_tables() -> None:
+    view = assembly(_records(), state="sha256:" + "0" * 64)
+
+    assert view["_schema"] == "gnomon:view.assembly@3"
+    assert list(view).index("graph") < list(view).index("levels")
 
 
 def test_a_well_placed_decomposition_has_no_finding() -> None:

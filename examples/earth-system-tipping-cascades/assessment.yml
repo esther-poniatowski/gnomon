@@ -1,6 +1,6 @@
 # negative for a forecast from a stylized network, which supplies no value of the requested laws for the actual Earth system
 
-_schema: gnomon:assessment@1
+_schema: gnomon:assessment@2
 title: "Assessment of the overshoot forecast from a network of four elements"
 id: assess.earth-tipping-subsystems.four-element-overshoot-network
 type: assessment

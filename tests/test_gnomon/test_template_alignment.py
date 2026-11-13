@@ -20,6 +20,7 @@ from typing import Any, Iterable, Sequence
 import pytest
 import yaml
 
+from gnomon.completeness import requirements_by_scope, validation_scopes
 from gnomon.schemas import load_base, vocabulary_options, vocabulary_paths
 from gnomon.specnotes import (
     DOCS,
@@ -138,6 +139,36 @@ def test_no_operator_notation_doubles_a_backslash() -> None:
     assert not doubled, f"notations that double a backslash before a command: {doubled}"
 
 
+def test_the_validation_scope_note_lists_the_requirement_registry_in_order() -> None:
+    """The registry supplies the identifiers; the note states the completion points they name."""
+    note = (DOCS / "specification/validation-scopes.md").read_text(encoding="utf-8")
+    documented = tuple(re.findall(r"^\| `([a-z]+(?:-[a-z]+)*)` \|", note, re.MULTILINE))
+    assert documented == validation_scopes(), "validation scopes differ or appear out of order"
+
+
+def test_every_scoped_requirement_path_exists_in_its_record_template() -> None:
+    """A scope may change when a field is due, but it cannot introduce another field vocabulary."""
+    for scope, entry in requirements_by_scope().items():
+        tables = [entry.get(key) or {} for key in ("required", "on_demand", "settled")]
+        for key in ("by_aim", "by_candidate", "when_record_present"):
+            tables.extend((entry.get(key) or {}).values())
+        for table in tables:
+            for kind, scoped_paths in table.items():
+                paths = flatten(template(f"{kind}.yml"))
+                absent = [path for path in scoped_paths if path not in paths]
+                assert not absent, f"{scope}: {kind} has no template paths {absent}"
+
+
+def test_every_record_kind_named_by_a_scope_has_a_template() -> None:
+    for scope, entry in requirements_by_scope().items():
+        kinds = set(entry.get("checkpoint_records") or [])
+        kinds.update(entry.get("required_records") or [])
+        kinds.update(entry.get("activate_when_present") or [])
+        kinds.update((entry.get("required_unless_aim") or {}).keys())
+        missing = [kind for kind in sorted(kinds) if not (TEMPLATES / f"{kind}.yml").is_file()]
+        assert not missing, f"{scope}: record kinds without templates: {missing}"
+
+
 def test_the_aim_note_lists_the_requirement_registry() -> None:
     """Each row of the aim table states what the registry declares for that aim."""
     note = (DOCS / "specification/question-task.md").read_text(encoding="utf-8")
@@ -172,9 +203,27 @@ REQUIREMENT_CELLS = {
 # (registry entry, note, table header, template, prefix): a record kind is read under `always` and
 # `by_commitment`, and the path of an aim block under `by_block`.
 REQUIREMENT_TABLES = [
-    ("target-system", "specification/target-system.md", "| Specification", "target-system.yml", ""),
-    ("phenomenon", "specification/phenomenon.md", "| Specification", "phenomenon.yml", ""),
-    ("background", "specification/background.md", "| Specification", "background.yml", ""),
+    (
+        "target-system",
+        "specification/target-system.md",
+        "| Specification",
+        "target-system.yml",
+        "",
+    ),
+    (
+        "phenomenon",
+        "specification/phenomenon.md",
+        "| Specification",
+        "phenomenon.yml",
+        "",
+    ),
+    (
+        "background",
+        "specification/background.md",
+        "| Specification",
+        "background.yml",
+        "",
+    ),
     ("problem", "specification/problem.md", "| Specification", "problem.yml", ""),
     ("itinerary", "specification/itinerary.md", "| Specification", "itinerary.yml", ""),
     ("answer", "specification/answer.md", "| Element", "answer.yml", ""),
@@ -203,7 +252,13 @@ REQUIREMENT_TABLES = [
     ),
     ("concept", "specification/concept.md", "| Specification", "concept.yml", ""),
     ("design", "specification/design.md", "| Specification", "design.yml", ""),
-    ("derivation", "specification/derivation.md", "| Specification", "derivation.yml", ""),
+    (
+        "derivation",
+        "specification/derivation.md",
+        "| Specification",
+        "derivation.yml",
+        "",
+    ),
 ]
 
 
@@ -231,7 +286,11 @@ def test_the_requirement_rows_of_a_note_are_the_registry_entries(
                 documented[section].append(key[len(prefix) + 1 :] if prefix else key)
     registry = yaml.safe_load((REGISTRY / "requirements.yml").read_text())
     if entry in (registry.get("by_block") or {}):
-        declared = {"always": registry["by_block"][entry], "identified": [], "specified": []}
+        declared = {
+            "always": registry["by_block"][entry],
+            "identified": [],
+            "specified": [],
+        }
     else:
         declared = {
             "always": registry["always"].get(entry, []),
@@ -313,7 +372,10 @@ def test_the_rows_required_for_a_root_or_a_derived_model_are_the_registry_entrie
     documented: dict[str, list[str]] = {"absent": [], "present": []}
     for line in table_lines("specification/model.md", "| Element"):
         cells = [c.strip() for c in line.strip("|").split("|")]
-        for opening, state in (("for a root model", "absent"), ("for a derived model", "present")):
+        for opening, state in (
+            ("for a root model", "absent"),
+            ("for a derived model", "present"),
+        ):
             if len(cells) > 1 and cells[1].lower().startswith(opening):
                 key = resolve(row_slugs(cells[0]), paths, "")
                 assert key is not None, f"no key of model.yml answers to the row {cells[0]!r}"
@@ -358,14 +420,15 @@ def test_the_option_lists_of_a_template_are_the_registry(name: str) -> None:
     documented: dict[str, list[str]] = {}
     stack: list[tuple[int, str]] = []
     for line in (TEMPLATES / name).read_text(encoding="utf-8").splitlines():
-        m = re.match(r"^(\s*)(- )?([a-z_]+):(.*)$", line)
+        m = re.match(r"^(\s*)(- )?([A-Za-z_][A-Za-z0-9_.-]*):(.*)$", line)
         if not m:
             continue
         depth = len(m.group(1)) + (2 if m.group(2) else 0)
         while stack and stack[-1][0] >= depth:
             stack.pop()
         stack.append((depth, m.group(3)))
-        path = ".".join(field for _, field in stack)
+        fields = [field for _, field in stack]
+        path = ".".join(fields[:-1]) + "[]" if fields[-1] == "FIELD.PATH" else ".".join(fields)
         found = vocab.search(m.group(4)) or (single.search(m.group(4)) if path in bound else None)
         if found:
             key = bound[path]
@@ -406,7 +469,10 @@ def criteria(header: Header, column: int) -> list[str]:
 #: The tables of tests of each tier: the tests of the core and of each aim block for admissibility,
 #: and the table of the warrant level. The column holds the name of the criterion.
 TIERS: dict[str, list[tuple[Header, int]]] = {
-    "admissibility": [(("admissibility-per-block", "| Criterion"), 0), ("| Aim block |", 1)],
+    "admissibility": [
+        (("admissibility-per-block", "| Criterion"), 0),
+        ("| Aim block |", 1),
+    ],
     "warrant": [(("warrant-through-binding", "| Criterion"), 0)],
 }
 
@@ -431,7 +497,8 @@ def test_the_occurrence_table_of_the_phenomenon_note_is_the_registry() -> None:
     """The note documents which occurrence classes each category admits; the registry decides."""
     note = (DOCS / "specification/phenomenon.md").read_text(encoding="utf-8")
     section = re.search(
-        r"\| Category \| Admitted occurrence \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)", note
+        r"\| Category \| Admitted occurrence \|[^\n]*\n\|[^\n]*\n((?:\|[^\n]*\n)+)",
+        note,
     )
     assert section is not None, "the note carries no table of occurrence classes"
     documented = {}
@@ -487,7 +554,8 @@ def test_the_aims_admitted_by_each_type_of_result_are_those_of_the_demand_table(
     """The registry declares, per type of result, the aims that the demand table admits."""
     documented: dict[str, set[str]] = {}
     for line in table_lines(
-        "epistemology/objects/problem/problem-types.md", "| Type of result | Admissible aims |"
+        "epistemology/objects/problem/problem-types.md",
+        "| Type of result | Admissible aims |",
     ):
         cells = [cell.strip() for cell in line.strip("|").split("|")]
         kinds = re.findall(r"`([a-z-]+)`", cells[0].split(":")[0])

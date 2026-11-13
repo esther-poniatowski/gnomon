@@ -8,30 +8,74 @@ paths:
 
 exports:
   - gnomon:answer@1
+  - gnomon:answer@2
+  - gnomon:answer@3
   - gnomon:assessment@1
+  - gnomon:assessment@2
   - gnomon:background@1
+  - gnomon:background@2
   - gnomon:binding@1
+  - gnomon:binding@2
   - gnomon:concept@1
+  - gnomon:concept@2
   - gnomon:design@1
+  - gnomon:design@2
   - gnomon:derivation@1
+  - gnomon:derivation@2
   - gnomon:itinerary@1
+  - gnomon:itinerary@2
+  - gnomon:itinerary@3
   - gnomon:key@1
+  - gnomon:key@2
   - gnomon:model@1
+  - gnomon:model@2
+  - gnomon:model@3
   - gnomon:operators@1
+  - gnomon:operators@2
   - gnomon:phenomenon@1
+  - gnomon:phenomenon@2
   - gnomon:problem@1
+  - gnomon:problem@2
+  - gnomon:problem@3
   - gnomon:question@1
+  - gnomon:question@2
+  - gnomon:question@3
   - gnomon:target-system@1
+  - gnomon:target-system@2
   - gnomon:view.assembly@1
+  - gnomon:view.assembly@2
+  - gnomon:view.assembly@3
   - gnomon:view.exposure@2
+  - gnomon:view.exposure@3
+  - gnomon:view.exposure@4
+  - gnomon:view.exposure@5
+  - gnomon:view.exposure@6
   - gnomon:view.expressions@1
+  - gnomon:view.expressions@2
+  - gnomon:view.inquiry-graph@1
   - gnomon:view.itinerary-progress@2
+  - gnomon:view.itinerary-progress@3
+  - gnomon:view.itinerary-progress@4
   - gnomon:view.maturity@1
+  - gnomon:view.maturity@2
   - gnomon:view.next-act@2
+  - gnomon:view.next-act@3
+  - gnomon:view.next-act@4
+  - gnomon:view.next-act@5
+  - gnomon:view.next-act@6
+  - gnomon:view.next-act@7
+  - gnomon:view.next-act@8
   - gnomon:view.problem-state@1
+  - gnomon:view.problem-state@2
+  - gnomon:view.problem-state@3
   - gnomon:view.question-statements@1
+  - gnomon:view.question-statements@2
+  - gnomon:view.question-statements@3
   - gnomon:view.question-tree@1
+  - gnomon:view.question-tree@2
+  - gnomon:view.question-tree@3
   - gnomon:view.vocabulary@2
+  - gnomon:view.vocabulary@3
 
 dependencies:
   - id: ekthesis

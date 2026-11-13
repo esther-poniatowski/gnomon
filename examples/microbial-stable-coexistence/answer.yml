@@ -1,6 +1,6 @@
 # tests whether the records separate sufficiency from necessity and from the scope of a subclass; the route runs on the target, a formal class
 
-_schema: gnomon:answer@1
+_schema: gnomon:answer@3
 title: "Theorem that feasibility implies stability in consumer-resource models"
 id: ans.microbial.feasibility-implies-stability
 type: answer

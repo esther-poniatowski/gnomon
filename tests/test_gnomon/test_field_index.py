@@ -9,8 +9,21 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import yaml
+
 from gnomon.fieldindex import field_index, index_fields
-from gnomon.specnotes import RECORD_FIELDS
+from gnomon.schemas import (
+    load_base,
+    render_template,
+    schema_field_paths,
+    vocabulary_options,
+)
+from gnomon.specnotes import (
+    RECORD_FIELDS,
+    documentation_notes,
+    documentation_target,
+    flatten,
+)
 
 
 def test_only_the_fields_that_identify_a_record_have_no_documentation() -> None:
@@ -21,6 +34,31 @@ def test_only_the_fields_that_identify_a_record_have_no_documentation() -> None:
         if field.note is None
     }
     assert undocumented and all(path in RECORD_FIELDS for _, path in undocumented), undocumented
+
+
+def test_schema_targets_follow_the_field_index_association() -> None:
+    """The form link and the generated index resolve every field to the same canonical note."""
+    mismatches = []
+    for kind, fields in index_fields().items():
+        base, options = load_base(kind), vocabulary_options(kind)
+        paths = flatten(yaml.safe_load(render_template(kind, base, options)))
+        notes = documentation_notes(kind, paths, schema_field_paths(base))
+        mismatches += [
+            (kind, field.path, field.note, notes.get(field.path))
+            for field in fields
+            if field.note != notes.get(field.path)
+        ]
+    assert not mismatches, mismatches
+
+
+def test_public_targets_do_not_contain_a_local_path() -> None:
+    target = documentation_target("specification/question-task.md")
+
+    assert target == (
+        "https://github.com/esther-poniatowski/gnomon/blob/main/docs/"
+        "specification/question-task.md"
+    )
+    assert "/Users/" not in target
 
 
 def test_a_field_of_a_list_entry_takes_the_row_of_its_list() -> None:

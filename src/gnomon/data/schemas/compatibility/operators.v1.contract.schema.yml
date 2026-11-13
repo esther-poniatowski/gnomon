@@ -1,0 +1,76 @@
+# Retained version 1 contract for operators. Do not edit.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/operators.v1.contract.schema.yml
+title: Operators record contract
+description: The record type `operators`, bound to `gnomon:operators@1`, with its closed vocabularies.
+allOf:
+- $ref: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/operators.v1.base.schema.yml
+required:
+- _schema
+properties:
+  _schema:
+    const: gnomon:operators@1
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  type:
+    const: operators
+  id:
+    pattern: ^ops\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+  status:
+    enum:
+    - provisional
+    - stabilized
+    - retracted
+    - null
+  base_scales:
+    items:
+      propertyNames:
+        enum:
+        - symbol
+        - name
+  operators:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - kind
+        - notation
+        - for_any
+        - signature
+        - values
+        - dimension
+      properties:
+        kind:
+          enum:
+          - binder
+          - map
+          - relation
+          - set
+          - constant
+          - null
+        dimension:
+          enum:
+          - preserve
+          - product
+          - derivative
+          - second-derivative
+          - derivative-at
+          - pure
+          - pure-argument
+          - statement
+          - connective
+          - unchecked
+          - null
+x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - target_system
+  - base_scales
+  - operators
+  - maturity

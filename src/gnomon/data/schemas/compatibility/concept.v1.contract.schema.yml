@@ -1,0 +1,68 @@
+# Retained version 1 contract for concept. Do not edit.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/concept.v1.contract.schema.yml
+title: Concept record contract
+description: The record type `concept`, bound to `gnomon:concept@1`, with its closed vocabularies.
+allOf:
+- $ref: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/concept.v1.base.schema.yml
+required:
+- _schema
+properties:
+  _schema:
+    const: gnomon:concept@1
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  type:
+    const: concept
+  id:
+    pattern: ^concept\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+  status:
+    enum:
+    - provisional
+    - stabilized
+    - retracted
+    - null
+  kind:
+    enum:
+    - system
+    - subtype-or-class
+    - property
+    - process
+    - null
+  confusions:
+    items:
+      propertyNames:
+        enum:
+        - other
+        - axis
+        - blocking_feature
+        - risk
+        - consequence
+  relations:
+    items:
+      propertyNames:
+        enum:
+        - relation
+        - members
+      properties:
+        relation:
+          enum:
+          - co-defined-with
+          - null
+x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - gloss
+  - kind
+  - antagonist
+  - broader
+  - source
+  - confusions
+  - relations
+  - definition
+  - maturity

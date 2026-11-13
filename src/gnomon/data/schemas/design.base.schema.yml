@@ -4,7 +4,7 @@ title: Design record
 description: The fields of a design record, as the specification of the record documents them.
 type: object
 x-identifier: id
-x-version: 1
+x-version: 2
 x-header:
 - 'specification: `docs/specification/design.md`; one file per design'
 - 'decision: `docs/adr/design-record.md`'
@@ -252,5 +252,6 @@ properties:
       status applies to every specification left out'
     additionalProperties:
       type: [string, 'null']
+      x-vocabulary: .maturity
       x-template-key: FIELD.PATH
       x-template: open

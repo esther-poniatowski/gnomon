@@ -3,11 +3,33 @@
 # each step instantiates one registered activity; its inputs and its output take the types fixed by the activity
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 
-_schema: gnomon:itinerary@1
+_schema: gnomon:itinerary@3
 title: "SHORT NAME OF THE ITINERARY"
 id: itin.TOPIC.NAME
 type: itinerary
 addresses: prob.TOPIC.NAME       # a problem, or a question `quest.TOPIC.NAME`
+
+act_appraisals:                  # optional; one entry per comparison considered before an act becomes a step
+  - id: APPRAISAL
+    question: quest.TOPIC.NAME
+    route:                       # selection (the route that selects an answer from candidates) | construction (the route that obtains an answer through a stated procedure)
+    rule:                        # ordinal-dominance (one act dominates another only when it is no worse on every criterion and better on at least one)
+    criteria:                    # one entry per criterion; state the scale before judging any act
+      - id: CRITERION
+        question: "WHAT PROPERTY OF AN ACT IS JUDGED"
+        scale:
+          - LEVEL
+        preferred:               # higher (a higher value on the declared scale is preferred) | lower (a lower value on the declared scale is preferred)
+    acts:                        # one entry per ready act considered in the appraisal
+      - id: ACT
+        activity: ACTIVITY       # an identifier of the activity registry
+        acts_on:                 # definiteness (each term has a definition or a criterion adequate to its use) | answer-type (every component of the type of the direct answers is fixed) | soundness (the presuppositions of the question are true) | candidates (at least one proposed answer passes the admissibility tests) | discrimination (a quantity takes different values under the candidates and their alternatives) | access (an available procedure applies to the quantity or the demanded result) | bridging (an inference stated in advance links the quantity to the answer) | representation (the model used for access represents the target to the required accuracy) | obtaining (the acts that obtain the answer once every condition of a route is established) | evaluation (the evaluation of an obtained answer)
+        available_means:
+          - "AVAILABLE INSTRUMENT, DATASET, METHOD OR RESOURCE"
+        judgments:               # one entry per declared criterion
+          - criterion: CRITERION
+            value: LEVEL
+            basis: "WHY THIS VALUE APPLIES TO THIS ACT"
 
 steps:                           # one entry per activity instance; the steps may be listed in any order, and their references form an acyclic graph
   - id: STEP

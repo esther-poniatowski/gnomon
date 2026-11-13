@@ -1,0 +1,62 @@
+# The shared coverage block of a view selected through `gnomon views --scope`.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/views/components/coverage.schema.yml
+title: Coverage at the selected completion target
+description: The authored records that Gnomon reads for the selected view and each absent record kind required at a subsequent completion target.
+type: object
+readOnly: true
+additionalProperties: false
+required:
+- scope
+- authored_records
+- later_record_kinds
+properties:
+  scope:
+    type: string
+    x-kind: label
+    title: Selected completion target
+  authored_records:
+    type: array
+    x-kind: table
+    title: Authored records included
+    description: each started authored record that Gnomon reads to generate the view
+    items:
+      type: object
+      additionalProperties: false
+      required:
+      - record
+      - kind
+      properties:
+        record:
+          type: string
+          x-kind: label
+          title: Record
+        kind:
+          type: string
+          x-kind: label
+          title: Kind
+  later_record_kinds:
+    type: array
+    x-kind: table
+    title: Absent later record kinds
+    description: each absent record kind required after the selected completion target
+    items:
+      type: object
+      additionalProperties: false
+      required:
+      - due_scope
+      - kind
+      - expected_file
+      properties:
+        due_scope:
+          type: string
+          x-kind: label
+          title: Due completion target
+        kind:
+          type: string
+          x-kind: label
+          title: Record kind
+        expected_file:
+          type: string
+          x-kind: label
+          title: Expected file

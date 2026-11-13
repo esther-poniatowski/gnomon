@@ -1,6 +1,6 @@
 # rests on the effective theory of representation learning [liu2022]; the route runs on a derived model, bound to the phenomenon
 
-_schema: gnomon:answer@1
+_schema: gnomon:answer@3
 title: "Account of grokking through a structured representation that forms slowly"
 id: ans.grokking.slow-structured-representation
 type: answer

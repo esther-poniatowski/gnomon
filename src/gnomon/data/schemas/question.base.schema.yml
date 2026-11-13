@@ -4,7 +4,7 @@ title: Question record
 description: The fields of a question record, as the specification of the record documents them.
 type: object
 x-identifier: id
-x-version: 1
+x-version: 3
 x-header:
 - 'specification: `docs/specification/question.md`, `docs/specification/question-subject.md`, `docs/specification/question-task.md`,
   `docs/specification/question-virtues.md`; one file per question'
@@ -13,6 +13,22 @@ x-header:
 - 'name a quantity of another record by source identifier and symbol: `system.TOPIC.SYMBOL`'
 - replace every UPPERCASE placeholder; leave a field empty while it is not filled
 - fix the question before evaluating any candidate answer
+x-subject-placeholder-properties: &subject-placeholder-properties
+  placeholder:
+    x-vocabulary: subject.placeholder
+    type:
+    - string
+    - 'null'
+    title: Placeholder
+    description: 'in a question schema, the kind of record that the slot awaits: a system or a phenomenon'
+  description:
+    type:
+    - string
+    - 'null'
+    x-template: '"THE ITEM AWAITED BY THE SLOT"'
+    x-kind: markdown-line
+    title: Description
+    description: in a question schema, the item awaited by the slot
 properties:
   title:
     type:
@@ -85,6 +101,20 @@ properties:
     description: the identifier of one problem record
     examples:
     - the problem of the delay before generalization
+  sources:
+    type:
+    - array
+    - 'null'
+    items:
+      type:
+      - string
+      - 'null'
+      x-template: '"POINTER TO AN EXISTING NOTE, PUBLICATION, MODEL OR DATA SET"'
+      x-kind: markdown-line
+    title: Sources
+    description: per source, a pointer to existing material that states or motivates the question, without importing or classifying its content
+    examples:
+    - a section of a research note that states the question
   request:
     x-comment: the request of the problem that the question serves; empty while the record is a schema
     x-vocabulary: .request
@@ -202,8 +232,7 @@ properties:
         - string
         - object
         - 'null'
-        x-template: system.TOPIC
-        x-kind: label
+        properties: *subject-placeholder-properties
         x-comment: a record identifier; in a question schema, a placeholder written as for `phenomenon`
         title: Target system $S$
         description: a record identifier; in a question schema, a placeholder written as for `phenomenon`
@@ -224,22 +253,7 @@ properties:
         - string
         - object
         - 'null'
-        properties:
-          placeholder:
-            x-vocabulary: subject.placeholder
-            type:
-            - string
-            - 'null'
-            title: Placeholder
-            description: 'in a question schema, the kind of record that the slot awaits: a system or a phenomenon'
-          description:
-            type:
-            - string
-            - 'null'
-            x-template: '"THE ITEM AWAITED BY THE SLOT"'
-            x-kind: markdown-line
-            title: Description
-            description: in a question schema, the item awaited by the slot
+        properties: *subject-placeholder-properties
         x-comment: a record identifier `phen.TOPIC.NAME`; in a question schema, the placeholder below
         title: Phenomenon $P$ (the explanandum, under the aim explanation)
         description: a record identifier `phen.TOPIC.NAME`; in a question schema, the placeholder below
@@ -874,6 +888,7 @@ properties:
     - object
     - 'null'
     additionalProperties:
+      x-vocabulary: .maturity
       x-template-key: FIELD.PATH
       x-template: open
     x-comment: 'optional; one maturity per field: open | provisional | stabilized; a field left out is

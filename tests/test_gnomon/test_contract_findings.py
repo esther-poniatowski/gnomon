@@ -10,6 +10,7 @@ from __future__ import annotations
 import shutil
 from pathlib import Path
 
+import pytest
 from typer.testing import CliRunner
 
 from gnomon.check import check_workspace, load_workspace
@@ -48,6 +49,40 @@ def test_a_key_that_is_no_field_is_reported(tmp_path: Path) -> None:
 def test_an_unadmitted_value_is_reported_once(tmp_path: Path) -> None:
     texts = _planted(tmp_path, "problem.yml", "status: posed", "status: pending")
     assert [t.split(" ")[0] for t in texts] == ["completeness/inadmissible-value"]
+
+
+def test_version_2_reports_an_invalid_maturity_value(tmp_path: Path) -> None:
+    texts = _planted(
+        tmp_path,
+        "problem.yml",
+        "_schema: gnomon:problem@2",
+        "_schema: gnomon:problem@2\nmaturity:\n  statement: banana",
+    )
+    assert any(
+        text.startswith(
+            "contract/violation maturity.statement: banana is not admitted; the admitted values"
+        )
+        for text in texts
+    )
+
+
+def test_version_1_retains_unrestricted_maturity_values(tmp_path: Path) -> None:
+    texts = _planted(
+        tmp_path,
+        "problem.yml",
+        "_schema: gnomon:problem@2",
+        "_schema: gnomon:problem@1\nmaturity:\n  statement: banana",
+    )
+    assert not any("maturity.statement" in text for text in texts)
+
+
+@pytest.mark.parametrize("yaml_value", ["!!binary YQ==", "!!set {open: null}", ".inf"])
+def test_safe_yaml_values_outside_json_reach_the_contract_checker(
+    tmp_path: Path, yaml_value: str
+) -> None:
+    """Digest generation must not hide a contract violation for a safe-YAML value."""
+    texts = _planted(tmp_path, "problem.yml", "status: posed", f"status: {yaml_value}")
+    assert any(text.startswith("contract/violation status:") for text in texts)
 
 
 def test_validate_reports_a_missing_path(tmp_path: Path) -> None:

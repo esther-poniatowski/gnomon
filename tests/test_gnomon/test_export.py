@@ -50,6 +50,7 @@ def _records() -> dict[str, dict[str, Any]]:
             "type": "model",
             "id": "mod.a.m",
             "title": "model",
+            "sources": ["notes/model.md#selected-unit"],
             "laws": [{"symbol": "flow", "reading": "the flow law"}],
             "operations": [{"id": "toy", "gain": "a tractable task"}],
         },
@@ -59,7 +60,12 @@ def _records() -> dict[str, dict[str, Any]]:
             "feature_pairs": [{"id": "limit", "exemplified": "x > 0"}],
         },
         {"type": "concept", "id": "concept.a.c", "gloss": "a concept"},
-        {"type": "concept", "id": "concept.a.d", "gloss": "a narrower", "broader": "concept.a.c"},
+        {
+            "type": "concept",
+            "id": "concept.a.d",
+            "gloss": "a narrower",
+            "broader": "concept.a.c",
+        },
         {"type": "question", "id": "quest.a.q", "statement": "why?", "version": "2"},
         {
             "type": "question",
@@ -69,6 +75,7 @@ def _records() -> dict[str, dict[str, Any]]:
         },
         _answer(
             "x",
+            sources=["notes/answer.md#selected-unit"],
             answers="quest.a.q",
             claim={"reading": "x holds"},
             grounds=[
@@ -147,6 +154,13 @@ def test_units_carry_the_lists_of_a_record_and_its_supersession() -> None:
     assert units["quest.a.q"]["version"] == "2"
 
 
+def test_originating_source_pointers_remain_authored_record_metadata() -> None:
+    export, _ = build_export(_records(), "demo")
+
+    assert all("sources" not in unit for unit in export["units"])
+    assert _errors(export) == []
+
+
 def test_two_runs_write_the_same_bytes() -> None:
     first = render_export(build_export(_records(), "demo")[0])
     assert first == render_export(build_export(_records(), "demo")[0])
@@ -187,7 +201,9 @@ def _workspace(tmp_path: Path) -> Path:
     return tmp_path / "grokking"
 
 
-def test_the_command_writes_a_current_export_that_no_check_reads(tmp_path: Path) -> None:
+def test_the_command_writes_a_current_export_that_no_check_reads(
+    tmp_path: Path,
+) -> None:
     folder = _workspace(tmp_path)
     runner = CliRunner()
     assert runner.invoke(app, ["export", str(folder)]).exit_code == 0
@@ -199,7 +215,9 @@ def test_the_command_writes_a_current_export_that_no_check_reads(tmp_path: Path)
     assert runner.invoke(app, ["export", str(folder), "--check"]).exit_code == 1
 
 
-def test_the_command_needs_a_repository_and_refuses_failing_records(tmp_path: Path) -> None:
+def test_the_command_needs_a_repository_and_refuses_failing_records(
+    tmp_path: Path,
+) -> None:
     runner = CliRunner()
     shutil.copytree(GROKKING, tmp_path / "bare")
     assert runner.invoke(app, ["export", str(tmp_path / "bare")]).exit_code == 1

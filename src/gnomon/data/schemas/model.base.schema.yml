@@ -4,7 +4,7 @@ title: Model record
 description: The fields of a model record, as the specification of the record documents them.
 type: object
 x-identifier: id
-x-version: 1
+x-version: 3
 x-header:
 - 'specification: `docs/specification/model.md`; one file per model, which several answers can ground'
 - 'symbols and expressions: `docs/specification/expressions.md`'
@@ -48,6 +48,18 @@ properties:
     x-vocabulary: .status
     title: Status
     description: the maturity of the model record, taken by every field that the block `maturity` leaves unmarked
+  sources:
+    type: array
+    minItems: 1
+    items:
+      type: string
+      minLength: 1
+      x-template: '"POINTER TO AN EXISTING NOTE, PUBLICATION, MODEL OR DATA SET"'
+      x-kind: markdown-line
+    title: Sources
+    description: per source, a provenance pointer to existing material from which the model was adopted; the content stays external and the pointer makes no evidential claim
+    examples:
+    - a section of a research note that states the model
   background:
     x-blank: true
     type:
@@ -847,6 +859,7 @@ properties:
     - object
     - 'null'
     additionalProperties:
+      x-vocabulary: .maturity
       x-template-key: FIELD.PATH
       x-template: open
     x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record

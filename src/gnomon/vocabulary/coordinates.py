@@ -66,7 +66,8 @@ def _mismatch(
     value_sets: Mapping[str, str],
 ) -> str | None:
     """Return why coordinates fail the argument that a derivative differentiates, or None when
-    they index a quantity of it, occur in it, or form the domain of a map that it names."""
+    they index a quantity of it, occur in it, or form the domain of a map that it names.
+    """
     named = names(argument)
     if along in named or any(along in set(signatures.get(s, ())) for s in named):
         return None

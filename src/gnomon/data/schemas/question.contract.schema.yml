@@ -2,21 +2,39 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/question.contract.schema.yml
 title: Question record contract
-description: The record type `question`, bound to `gnomon:question@1`, with its closed vocabularies.
+description: The record type `question`, bound to `gnomon:question@3`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/question.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:question@1
+    const: gnomon:question@3
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: question
+    examples:
+    - question
   id:
     pattern: ^quest\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - quest.topic.name
+  title:
+    description: 'A short name of the record, as a label.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+  statement:
+    description: 'the question in words, restating its fields in the statement frame
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
   status:
+    description: 'posed · refined · answered · dissolved · abandoned
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
     enum:
     - posed
     - refined
@@ -24,7 +42,33 @@ properties:
     - dissolved
     - abandoned
     - null
+  version:
+    description: 'the version of the specification of the question, raised by one at each revision of
+      a field that fixes the answers or the tests
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+  addresses:
+    description: 'the identifier of one problem record
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+  sources:
+    description: 'per source, a pointer to existing material that states or motivates the question, without
+      importing or classifying its content
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+    items:
+      examples:
+      - POINTER TO AN EXISTING NOTE, PUBLICATION, MODEL OR DATA SET
   request:
+    description: 'how many possible answers a direct answer selects, and whether it claims completeness:
+      one · all · over-a-parameter · decision, as the request of a question defines them; the request
+      of the problem that the question serves, when one exists
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
     enum:
     - one
     - all
@@ -32,6 +76,10 @@ properties:
     - decision
     - null
   links:
+    description: 'per link, the other question, the relation, and the record shared by the two questions
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
     items:
       propertyNames:
         enum:
@@ -39,14 +87,32 @@ properties:
         - relation
         - via
       properties:
+        question:
+          description: 'the identifier of the other question record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
         relation:
+          description: 'subquestion-of · explanans-from · presupposes · enables
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
           enum:
           - subquestion-of
           - explanans-from
           - presupposes
           - enables
           - null
+        via:
+          description: 'the identifier of the shared record, such as a phenomenon
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
   excludes:
+    description: 'per part left out, its kind, its question when one is posed, its reading and the reason
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
     items:
       propertyNames:
         enum:
@@ -56,12 +122,49 @@ properties:
         - reading
         - reason
       properties:
+        id:
+          description: 'a name unique within the question
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+          examples:
+          - PART
         kind:
+          description: 'deferred · out-of-scope
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
           enum:
           - deferred
           - out-of-scope
           - null
+        question:
+          description: 'the identifier of the question of the part
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+          examples:
+          - quest.TOPIC.NAME
+        reading:
+          description: 'the part left out, in words
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+          examples:
+          - THE PART LEFT OUT, IN WORDS
+        reason:
+          description: 'why the part is left out
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+          examples:
+          - WHY THE PART IS LEFT OUT
   subject:
+    description: 'the subject of the question: its phenomenon, its target system, its contrast and its
+      domain
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
     propertyNames:
       enum:
       - target_system
@@ -70,18 +173,74 @@ properties:
       - contrast
       - domain
     properties:
-      phenomenon:
+      target_system:
+        description: 'a record identifier; in a question schema, a placeholder written as for `phenomenon`
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
         propertyNames:
           enum:
           - placeholder
           - description
         properties:
           placeholder:
+            description: 'in a question schema, the kind of record that the slot awaits: a system or a
+              phenomenon
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
             enum:
             - system
             - phenomenon
             - null
+          description:
+            description: 'in a question schema, the item awaited by the slot
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+            examples:
+            - THE ITEM AWAITED BY THE SLOT
+      background:
+        description: 'background records whose laws the question admits; empty when it admits none
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+        items:
+          examples:
+          - bg.TOPIC.NAME
+      phenomenon:
+        description: 'a record identifier `phen.TOPIC.NAME`; in a question schema, the placeholder below
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+        propertyNames:
+          enum:
+          - placeholder
+          - description
+        properties:
+          placeholder:
+            description: 'in a question schema, the kind of record that the slot awaits: a system or a
+              phenomenon
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+            enum:
+            - system
+            - phenomenon
+            - null
+          description:
+            description: 'in a question schema, the item awaited by the slot
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+            examples:
+            - THE ITEM AWAITED BY THE SLOT
       contrast:
+        description: 'the fact and the foils that the question separates, with the status of the foils
+          and their compatibility
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
         propertyNames:
           enum:
           - locus
@@ -90,6 +249,12 @@ properties:
           - foil_status
         properties:
           locus:
+            description: 'other outcome (same system and conditions, other value of $P$) · other system
+              ($P$ absent) · other condition (same system, different setting or intervention) · none,
+              for a question that states no contrast
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
             enum:
             - other-outcome
             - other-system
@@ -97,6 +262,11 @@ properties:
             - none
             - null
           foil_set:
+            description: 'per foil, the expressions over the declared observables that hold in that case,
+              with a reading
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
             items:
               propertyNames:
                 enum:
@@ -104,19 +274,75 @@ properties:
                 - symbol
                 - expression
                 - reading
+              properties:
+                name:
+                  description: 'the words that designate the foil
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                  examples:
+                  - NAME OF THE ALTERNATIVE
+                symbol:
+                  description: 'the symbol of the foil, unique within the record
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                  examples:
+                  - SYMBOL
+                expression:
+                  description: 'the expressions over the declared observables that hold in the case of
+                    the foil
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                  examples:
+                  - &id001
+                    - EXPRESSION OVER DECLARED SYMBOLS
+                  items:
+                    examples: *id001
+                reading:
+                  description: 'only content beyond the name and the expression
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                  examples:
+                  - THE MEANING OF THE ALTERNATIVE
+          compatibility:
+            description: 'exclusive · compatible (fact and foil co-occur in different systems)
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
           foil_status:
+            description: 'observed (a realized comparison case) · counterfactual · not-applicable, for
+              a question without a foil set
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
             enum:
             - observed
             - counterfactual
             - not-applicable
             - null
       domain:
+        description: 'only restrictions of the a priori specification; assumptions of the analysis belong
+          to the answer
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
         propertyNames:
           enum:
           - restrictions
           - limit
         properties:
           restrictions:
+            description: 'Per restriction: the quantity held and the value set that it is held to. When
+              no single quantity carries a restriction, the entry names it and states its defining expression.
+              A restriction on a variable also states its mode, with the excluded event for `without-event`:
+              `clamped` · `restricted` · `initial` · `stationary` · `without-event`. Each restriction
+              carries a justification stating why the question is put only within those bounds.
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
             items:
               propertyNames:
                 enum:
@@ -129,7 +355,32 @@ properties:
                 - expression
                 - justification
               properties:
+                id:
+                  description: 'a name unique within the question, by which a ground cites the restriction
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                  examples:
+                  - RESTRICTION
+                name:
+                  description: 'required when no quantity names the entry
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                  examples:
+                  - NAME OF THE RESTRICTION
+                of:
+                  description: 'quantity held; omit when no single quantity carries the restriction
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                  examples:
+                  - system.TOPIC.SYMBOL
                 restriction:
+                  description: 'only where the entry names a variable, since a parameter is already fixed
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
                   enum:
                   - clamped
                   - restricted
@@ -137,12 +388,66 @@ properties:
                   - stationary
                   - without-event
                   - null
+                event:
+                  description: 'required with the restriction `without-event`; omit otherwise
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                  examples:
+                  - THE EVENT THAT THE ADMITTED COURSES EXCLUDE
+                values:
+                  description: 'set the quantity is held to
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                  examples:
+                  - SET EXPRESSION OVER DECLARED SYMBOLS
+                expression:
+                  description: 'replaces `values` when no single quantity carries the restriction
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                  examples:
+                  - EXPRESSION OVER DECLARED SYMBOLS
+                justification:
+                  description: 'why the question is put only under the restriction
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                  examples:
+                  - WHY THE QUESTION IS PUT ONLY UNDER THE RESTRICTION
           limit:
+            description: 'the expression "[quantity] → [limit value]", with a justification stating why
+              the question is about the limit system
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
             propertyNames:
               enum:
               - expression
               - justification
+            properties:
+              expression:
+                description: 'the limit, written `q -> v`, whose left side is a variable or a parameter
+                  of the target
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                examples:
+                - SYMBOL -> LIMIT VALUE
+              justification:
+                description: 'why the question concerns the limit system
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-subject.md).'
+                examples:
+                - WHY THE QUESTION CONCERNS THE LIMIT SYSTEM
   task:
+    description: 'the epistemic task of the question: its aim, its requested relation, its modal strength,
+      its required accuracy and its proof obligations
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
     propertyNames:
       enum:
       - epistemic_aim
@@ -155,6 +460,10 @@ properties:
       - proof_obligations
     properties:
       epistemic_aim:
+        description: 'the kind of knowledge that the question seeks
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
         enum:
         - description
         - exploration
@@ -164,7 +473,20 @@ properties:
         - model-properties
         - explication
         - null
+      explicandum:
+        description: 'explication only: the term of an explicandum that the problem addressed by the question
+          names, not a slot of the subject
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+        examples:
+        - TERM OF AN EXPLICANDUM OF THE PROBLEM
       requested_relation:
+        description: 'the kind of relation between the explanans and the phenomenon that the question
+          requests
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
         enum:
         - causal-intervention
         - causal-mechanistic
@@ -176,30 +498,66 @@ properties:
         - not-applicable
         - null
       function_sense:
+        description: 'required when the requested relation is `functional`
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
         enum:
         - causal-role
         - etiological
         - null
       modal_strength:
+        description: 'how tightly the answer must bind the phenomenon: actual, possible or necessary
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
         enum:
         - actual
         - possible
         - necessary
         - null
       admissible_explanans:
+        description: 'optional; when null, proportionality bounds the answer
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
         propertyNames:
           enum:
           - compositional
           - substrate
           - justification
         properties:
+          compositional:
+            description: 'the constituents of the target system · their sub-parts · aggregates of them
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+            items:
+              examples:
+              - SYMBOL
           substrate:
+            description: 'substrate-specific (variables of the particular parts) · substrate-independent
+              (variables shared by every realization: functional roles, universality classes) · mapping
+              (how substrate-specific variables realize substrate-independent ones)
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
             enum:
             - specific
             - independent
             - mapping
             - null
+          justification:
+            description: 'one clause that carries no commitment already held by the axes
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
       required_accuracy:
+        description: 'the standard by which an answer is compared with the target, and the outputs and
+          the structures that it must reproduce
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
         propertyNames:
           enum:
           - standard
@@ -207,6 +565,12 @@ properties:
           - structures_to_match
         properties:
           standard:
+            description: 'how closely the answer must agree with the target: qualitative, an order of
+              magnitude, a numeric bound or structure only, or not applicable when the answer is matched
+              against no data of the target
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
             enum:
             - qualitative
             - order-of-magnitude
@@ -215,6 +579,10 @@ properties:
             - not-applicable
             - null
           outputs_to_match:
+            description: 'name only the target side; the answer reproduces each output
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
             items:
               propertyNames:
                 enum:
@@ -222,18 +590,77 @@ properties:
                 - tolerance
                 - justification
               properties:
+                target:
+                  description: 'the observable of the phenomenon that the answer must reproduce
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+                  examples:
+                  - phen.TOPIC.NAME.SYMBOL
                 tolerance:
+                  description: 'omit when the standard is `qualitative`, `structural-only` or `order-of-magnitude`,
+                    which fixes its own
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
                   propertyNames:
                     enum:
                     - metric
                     - bound
+                  properties:
+                    metric:
+                      description: 'measure the difference between `answer` and `target`
+
+
+                        [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+                      examples:
+                      - EXPRESSION OVER `answer` AND `target`
+                    bound:
+                      description: 'an expression that the metric must not exceed
+
+
+                        [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+                      examples:
+                      - EXPRESSION THAT THE METRIC MUST NOT EXCEED
+                justification:
+                  description: 'why the question demands that the answer reproduce this output
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+                  examples:
+                  - WHY THE QUESTION DEMANDS THAT THE ANSWER REPRODUCE THIS OUTPUT
           structures_to_match:
+            description: 'the structures of the phenomenon that the answer must reproduce, one entry per
+              structure
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
             items:
               propertyNames:
                 enum:
                 - target
                 - justification
+              properties:
+                target:
+                  description: 'the feature or the manifestation of the phenomenon whose structure the
+                    answer must reproduce
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+                  examples:
+                  - phen.TOPIC.NAME.SYMBOL
+                justification:
+                  description: 'why the question demands that the answer reproduce this structure
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+                  examples:
+                  - WHY THE QUESTION DEMANDS THAT THE ANSWER REPRODUCE THIS STRUCTURE
       proof_obligations:
+        description: 'fill when the answer must derive a statement rather than match a measurement
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
         items:
           propertyNames:
             enum:
@@ -242,7 +669,53 @@ properties:
             - reading
             - antecedent
             - consequent
+          properties:
+            id:
+              description: 'a name unique within the question
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+              examples:
+              - OBLIGATION
+            name:
+              description: 'The name of the obligation.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+              examples:
+              - NAME OF THE OBLIGATION
+            reading:
+              description: 'the implication that the answer must establish, in words
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+              examples:
+              - THE IMPLICATION THAT THE ANSWER MUST ESTABLISH, IN WORDS
+            antecedent:
+              description: 'the expressions over declared symbols that the implication assumes
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+              examples:
+              - &id002
+                - EXPRESSION OVER DECLARED SYMBOLS
+              items:
+                examples: *id002
+            consequent:
+              description: 'the expressions over declared symbols that the implication concludes
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-task.md).'
+              examples:
+              - &id003
+                - EXPRESSION OVER DECLARED SYMBOLS
+              items:
+                examples: *id003
   virtues:
+    description: 'one entry per virtue the inquiry weighs, under any epistemic aim
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-virtues.md).'
     items:
       propertyNames:
         enum:
@@ -251,6 +724,10 @@ properties:
         - justification
       properties:
         virtue:
+          description: 'a quality of the answers, beyond the demands of the task, that the inquiry weighs
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-virtues.md).'
           enum:
           - unification
           - generality
@@ -261,11 +738,27 @@ properties:
           - tractability
           - null
         standing:
+          description: 'whether the virtue is constitutive of an answer or preferred among answers
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-virtues.md).'
           enum:
           - constitutive
           - preferred
           - null
+        justification:
+          description: 'also state the shortfall of an answer that lacks this virtue
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question-virtues.md).'
+          examples:
+          - WHY THE INQUIRY WEIGHS THIS VIRTUE
   presuppositions:
+    description: 'per presupposition, its part of soundness (existence · topic), its reading and, once
+      formalized, its expression
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
     items:
       propertyNames:
         enum:
@@ -274,17 +767,66 @@ properties:
         - reading
         - expression
       properties:
+        id:
+          description: 'a name unique within the question
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+          examples:
+          - PRESUPPOSITION
         part:
+          description: 'The part of soundness to which the presupposition belongs.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
           enum:
           - existence
           - topic
           - null
+        reading:
+          description: 'the presupposition in words
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+          examples:
+          - THE PRESUPPOSITION IN WORDS
+        expression:
+          description: 'optional; empty while the presupposition is not formalized
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
   construction:
+    description: 'the procedure named for the route of construction, and how it would yield a direct answer
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
     propertyNames:
       enum:
       - procedure
       - reading
+    properties:
+      procedure:
+        description: 'a design of kind method, or a pointer to the procedure
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+        examples:
+        - RECORD-OR-POINTER
+      reading:
+        description: 'how the procedure would yield a direct answer
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+        examples:
+        - HOW THE PROCEDURE WOULD YIELD A DIRECT ANSWER
   answerability:
+    description: 'per condition asserted, its route, its state (established · refuted), how a refutation
+      holds (outright · lack-of-means) with the means tried, and the pointers that show the state
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
     items:
       propertyNames:
         enum:
@@ -297,6 +839,10 @@ properties:
         - pointers
       properties:
         condition:
+          description: 'the condition of answerability whose state the entry asserts
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
           enum:
           - definiteness
           - answer-type
@@ -308,22 +854,97 @@ properties:
           - representation
           - null
         route:
+          description: 'The route on which the state holds.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
           enum:
           - selection
           - construction
           - both
           - null
+        term:
+          description: 'definiteness only: the term whose definiteness is stated
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+          examples:
+          - SYMBOL-OR-RECORD
         state:
+          description: 'whether the records show that the condition holds or fails
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
           enum:
           - established
           - refuted
           - null
         refutation:
+          description: 'refuted only
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
           enum:
           - outright
           - lack-of-means
           - null
+        means:
+          description: 'every means considered, each tried and failed
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+          items:
+            examples:
+            - A MEANS CONSIDERED, TRIED AND FAILED
+        pointers:
+          description: 'the records, the steps or the publications that show the state
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/question.md).'
+          items:
+            examples:
+            - RECORD-OR-POINTER
+  maturity:
+    description: 'optional; one maturity per field: open | provisional | stabilized; a field left out
+      is provisional
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
+x-rules:
+- check: required-when
+  field: task.required_accuracy.outputs_to_match
+  when:
+    field: task.epistemic_aim
+    equals: prediction
+- check: required-when
+  field: task.requested_relation
+  when:
+    field: task.epistemic_aim
+    equals: explanation
+- check: required-when
+  field: task.modal_strength
+  when:
+    field: task.epistemic_aim
+    equals: modal-knowledge
+- check: required-when
+  field: task.proof_obligations
+  when:
+    field: task.epistemic_aim
+    equals: modal-knowledge
+- check: required-when
+  field: task.explicandum
+  when:
+    field: task.epistemic_aim
+    equals: explication
 propertyNames:
   enum:
   - _schema
@@ -334,6 +955,7 @@ propertyNames:
   - status
   - version
   - addresses
+  - sources
   - request
   - links
   - excludes

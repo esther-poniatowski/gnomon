@@ -1,4 +1,4 @@
-_schema: gnomon:phenomenon@1
+_schema: gnomon:phenomenon@2
 title: "Stationary localized states organized by homoclinic snaking"
 statement: "Stationary solutions of the generalized Swift-Hohenberg equation form patterned states localized within the homogeneous background."
 id: phen.swift-hohenberg.localized-states

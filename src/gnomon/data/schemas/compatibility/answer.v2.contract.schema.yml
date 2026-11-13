@@ -1,0 +1,422 @@
+# Retained version 2 contract generated from the version 2 answer base schema and vocabulary registry.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/answer.v2.contract.schema.yml
+title: Answer record contract
+description: The record type `answer`, bound to `gnomon:answer@2`, with its closed vocabularies.
+allOf:
+- $ref: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/answer.v2.base.schema.yml
+required:
+- _schema
+properties:
+  _schema:
+    const: gnomon:answer@2
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  type:
+    const: answer
+  id:
+    pattern: ^ans\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+  claim:
+    propertyNames:
+      enum:
+      - reading
+      - expression
+      - caveat
+      - realizations
+      - presuppositions
+      - interventions
+    properties:
+      realizations:
+        items:
+          propertyNames:
+            enum:
+            - id
+            - realizes
+            - by
+            - reading
+      presuppositions:
+        items:
+          propertyNames:
+            enum:
+            - id
+            - reading
+            - expression
+            - held_by
+  grounds:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - role
+        - content
+        - record
+        - version
+        - distortion
+        - motive
+        - gain
+        - range
+        - removable
+      properties:
+        role:
+          enum:
+          - assumption
+          - idealization
+          - condition
+          - datum
+          - warrant
+          - criterion
+          - null
+        motive:
+          enum:
+          - tractability
+          - isolation
+          - limit
+          - null
+        removable:
+          enum:
+          - controlled
+          - ineliminable
+          - unknown
+          - null
+  abstractions:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - factor
+  dependence:
+    items:
+      propertyNames:
+        enum:
+        - kind
+        - grounds
+        - models
+        - result
+      properties:
+        kind:
+          enum:
+          - minimal-set
+          - sensitivity
+          - robustness
+          - null
+  route:
+    propertyNames:
+      enum:
+      - kind
+      - runs_on
+      - family_fidelity
+      - derivations
+      - pointer
+    properties:
+      kind:
+        enum:
+        - derivation
+        - proof
+        - simulation
+        - estimation
+        - measurement
+        - null
+      family_fidelity:
+        enum:
+        - per-member
+        - ensemble
+        - null
+  status:
+    enum:
+    - entertained
+    - hypothesized
+    - accepted
+    - retracted
+    - null
+  support:
+    enum:
+    - unsupported
+    - informal
+    - formally-proven
+    - empirically-supported
+    - null
+  uncertainty:
+    items:
+      propertyNames:
+        enum:
+        - of
+        - form
+        - expression
+      properties:
+        form:
+          enum:
+          - interval
+          - distribution
+          - bound
+          - null
+  modal_strength:
+    enum:
+    - actual
+    - possible
+    - necessary
+    - null
+  erotetic_relation:
+    propertyNames:
+      enum:
+      - value
+      - denies
+      - revised_question
+    properties:
+      value:
+        enum:
+        - complete
+        - partial
+        - corrective
+        - reformulating
+        - null
+  binding:
+    items:
+      propertyNames:
+        enum:
+        - record
+        - version
+  use:
+    propertyNames:
+      enum:
+      - value
+      - property
+    properties:
+      value:
+        enum:
+        - tool
+        - proof-of-principle
+        - conceptual-exploration
+        - understanding
+        - null
+  aim_block:
+    propertyNames:
+      enum:
+      - description
+      - exploration
+      - prediction
+      - explanation
+      - modal_knowledge
+      - model_properties
+    properties:
+      description:
+        propertyNames:
+          enum:
+          - values
+        properties:
+          values:
+            items:
+              propertyNames:
+                enum:
+                - of
+                - across
+                - data_version
+                - value
+      exploration:
+        propertyNames:
+          enum:
+          - space
+          - criterion
+          - classes
+        properties:
+          space:
+            propertyNames:
+              enum:
+              - origin
+              - observables
+              - varied
+            properties:
+              origin:
+                enum:
+                - input
+                - output
+                - null
+              varied:
+                items:
+                  propertyNames:
+                    enum:
+                    - factor
+                    - range
+          criterion:
+            propertyNames:
+              enum:
+              - origin
+              - expression
+              - reading
+            properties:
+              origin:
+                enum:
+                - input
+                - output
+                - null
+          classes:
+            items:
+              propertyNames:
+                enum:
+                - id
+                - pattern
+                - reading
+                - detection
+              properties:
+                detection:
+                  enum:
+                  - pass
+                  - fail
+                  - pending
+                  - null
+      prediction:
+        propertyNames:
+          enum:
+          - outputs
+        properties:
+          outputs:
+            items:
+              propertyNames:
+                enum:
+                - target
+                - condition
+                - value
+      explanation:
+        propertyNames:
+          enum:
+          - contrastive_explanandum
+          - explanatory_claim
+          - relation
+          - factors
+        properties:
+          explanatory_claim:
+            items:
+              propertyNames:
+                enum:
+                - ground
+                - explanatory
+                - determinant
+          relation:
+            enum:
+            - causal-intervention
+            - causal-mechanistic
+            - constitutive
+            - functional
+            - nomological
+            - statistical
+            - mathematical
+            - null
+          factors:
+            items:
+              propertyNames:
+                enum:
+                - id
+                - name
+                - factor
+                - holds
+                - under
+                - bears_on
+                - through
+                - produces
+                - separates
+                - appeals_to
+                - procedure
+                - caveat
+                - target_status
+                - pair
+              properties:
+                factor:
+                  enum:
+                  - condition
+                  - structural-property
+                  - law-property
+                  - organization
+                  - null
+                target_status:
+                  enum:
+                  - denoting
+                  - coarse-graining
+                  - limit-construct
+                  - structural-constraint
+                  - null
+      modal_knowledge:
+        propertyNames:
+          enum:
+          - modality
+          - property
+          - space
+          - witness
+          - proof
+        properties:
+          modality:
+            enum:
+            - possible
+            - impossible
+            - necessary
+            - null
+      model_properties:
+        propertyNames:
+          enum:
+          - form
+          - discharges
+        properties:
+          form:
+            enum:
+            - derived-law
+            - regime
+            - limit
+            - structural-property
+            - counterexample
+            - null
+  relations:
+    items:
+      propertyNames:
+        enum:
+        - relation
+        - target
+        - members
+        - warrant
+        - respect
+      properties:
+        relation:
+          enum:
+          - supports
+          - presupposes
+          - tests
+          - defeats
+          - exemplifies
+          - revises
+          - incompatible-with
+          - contrasts-with
+          - null
+        warrant:
+          propertyNames:
+            enum:
+            - kind
+            - reading
+  maturity:
+    additionalProperties:
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
+x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - answers
+  - claim
+  - grounds
+  - abstractions
+  - dependence
+  - route
+  - domain
+  - variant
+  - status
+  - support
+  - uncertainty
+  - modal_strength
+  - erotetic_relation
+  - binding
+  - use
+  - aim_block
+  - relations
+  - maturity

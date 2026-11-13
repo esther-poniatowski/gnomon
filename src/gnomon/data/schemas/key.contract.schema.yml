@@ -2,27 +2,40 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/key.contract.schema.yml
 title: Key record contract
-description: The record type `key`, bound to `gnomon:key@1`, with its closed vocabularies.
+description: The record type `key`, bound to `gnomon:key@2`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/key.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:key@1
+    const: gnomon:key@2
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: key
+    examples:
+    - key
   id:
     pattern: ^key\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - key.topic.name
+  title:
+    examples:
+    - SHORT NAME OF THE KEY
   status:
+    examples:
+    - provisional
     enum:
     - provisional
     - stabilized
     - retracted
     - null
   kind:
+    description: '`observation-operator` · `unit-map` · `aggregation-map` · `qualitative-abstraction`
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/key.md).'
     enum:
     - observation-operator
     - unit-map
@@ -30,10 +43,55 @@ properties:
     - qualitative-abstraction
     - null
   domain_and_codomain:
+    description: 'the side of the model and the side of the target that the key connects, each as a set
+      expression or a type
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/key.md).'
     propertyNames:
       enum:
       - domain
       - codomain
+    properties:
+      domain:
+        description: 'the side of the model
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/key.md).'
+        examples:
+        - SET EXPRESSION OR TYPE
+      codomain:
+        description: 'the side of the target
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/key.md).'
+        examples:
+        - SET EXPRESSION OR TYPE
+  expression:
+    description: 'an expression over the symbols of its domain, or a pointer to the procedure that computes
+      the map
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/key.md).'
+  version:
+    description: 'a version identifier
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/key.md).'
+  maturity:
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
 propertyNames:
   enum:

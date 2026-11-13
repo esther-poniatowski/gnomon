@@ -2,37 +2,83 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/phenomenon.contract.schema.yml
 title: Phenomenon record contract
-description: The record type `phenomenon`, bound to `gnomon:phenomenon@1`, with its closed vocabularies.
+description: The record type `phenomenon`, bound to `gnomon:phenomenon@2`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/phenomenon.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:phenomenon@1
+    const: gnomon:phenomenon@2
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: phenomenon
+    examples:
+    - phenomenon
   id:
     pattern: ^phen\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - phen.topic.name
+  title:
+    examples:
+    - SHORT NAME OF THE PHENOMENON
+  statement:
+    description: '"[bearer of the phenomenon] [its behavior]", as a reading
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
   status:
+    examples:
+    - provisional
     enum:
     - provisional
     - stabilized
     - retracted
     - null
   commitment:
+    description: 'how far the record fixes the phenomenon: `identified`: a definite description and pointers
+      fix the referent · `specified`: the observables and the manifestations are written, and their symbols
+      resolve
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     enum:
     - identified
     - specified
     - null
+  target_system:
+    examples:
+    - system.TOPIC
   identification:
+    description: 'what fixes the referent before any observable is declared: a definite description of
+      the behavior, with pointers to the data, the results or the publications that report it
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     propertyNames:
       enum:
       - description
       - pointers
+    properties:
+      description:
+        description: 'a noun phrase that picks out one behavior of the target
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+      pointers:
+        description: 'per pointer, a data set, a result or a publication
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+        items:
+          examples:
+          - POINTER TO A DATA SET, A RESULT OR A PUBLICATION THAT FIXES THE REFERENT
   category:
+    description: 'particular occurrence · regularity (effect) · capacity · structural property
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     enum:
     - particular-occurrence
     - regularity
@@ -40,12 +86,43 @@ properties:
     - structural-property
     - null
   course:
+    description: 'the ordered index along which the behavior unfolds: an index, a grain and the parameters
+      of the target that vary along the course
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     propertyNames:
       enum:
       - index
       - grain
       - varies
+    properties:
+      index:
+        description: 'the symbol of an index set of the target or of this record that orders states in
+          time: time or a training step
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+      grain:
+        description: 'an expression giving the shortest segment on which a predicate of the behavior is
+          evaluated
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+      varies:
+        description: 'the symbols of those parameters
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+        items:
+          examples:
+          - SYMBOL
   occurrence:
+    description: 'the class of the occurrences that the phenomenon concerns: state · process · event for
+      a particular occurrence, state for a structural property, not-applicable for a regularity or a capacity
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     enum:
     - state
     - process
@@ -53,6 +130,11 @@ properties:
     - not-applicable
     - null
   index_sets:
+    description: '"[symbol]", with the set expression that it collects and its structure: continuum ·
+      discrete set · interval
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     items:
       propertyNames:
         enum:
@@ -64,13 +146,65 @@ properties:
         - structure
         - dimensional_formula
       properties:
+        name:
+          description: 'the words that designate the index set
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - NAME OF THE SET
+        symbol:
+          description: 'the symbol of the index set, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SYMBOL
+        notation:
+          description: 'only when the LaTeX form differs from the symbol
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - LATEX FORM OF THE SYMBOL
+        variant:
+          description: 'variant carrying the entry; omit when every member of the class carries it
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SYMBOL
+        extent:
+          description: 'a set expression over declared symbols naming the members of the index set
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SET EXPRESSION OVER DECLARED SYMBOLS
         structure:
+          description: 'the role of the index set: the index along which the state evolves, or another
+            index, continuous or countable
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
           enum:
           - evolution
           - continuum
           - discrete-set
           - null
+        dimensional_formula:
+          description: 'optional; the dimensional formula of the coordinate that the index set collects,
+            such as L for a spatial domain or T for a time axis, so that a derivative along the index
+            is checked
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
   observables:
+    description: 'a reference to a quantity that the target declares, or "[symbol] ∈ [set expression]"
+      with a reading naming it in words
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     items:
       propertyNames:
         enum:
@@ -91,7 +225,63 @@ properties:
         - event
         - estimator
       properties:
+        reference:
+          description: 'for an observable the target already declares as a quantity, give only this reference
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - system.TOPIC.SYMBOL
+        name:
+          description: 'the words that designate the observable
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - NAME OF THE OBSERVABLE
+        symbol:
+          description: 'the symbol of the observable, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SYMBOL
+        notation:
+          description: 'only when the LaTeX form differs from the symbol
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - LATEX FORM OF THE SYMBOL
+        variant:
+          description: 'symbol of the target variant carrying the entry; omit when every member of the
+            class carries it
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SYMBOL
+        signature:
+          description: 'the free indices of the definition: a constituent kind, an index set, time, a
+            parameter, or a new index that it introduces
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          items:
+            examples:
+            - SYMBOL
+        values:
+          description: 'a set expression over declared symbols giving the values of the observable
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SET EXPRESSION OVER DECLARED SYMBOLS
         scale:
+          description: 'nominal · ordinal · interval · ratio · absolute · not-applicable
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
           enum:
           - nominal
           - ordinal
@@ -100,13 +290,59 @@ properties:
           - absolute
           - not-applicable
           - null
+        dimensional_formula:
+          description: 'optional; a monomial over the base dimensions and the base scales of the problem,
+            such as M L T^-2, or 1 for a pure number
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+        expression:
+          description: '"[expression over declared symbols]", whose binders consume the indices that it
+            aggregates
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+        condition:
+          description: 'give when no map builds the quantity
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - EXPRESSION THAT THE QUANTITY SATISFIES
         selects:
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy:
+            the unique value, any value, or all of them
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
           enum:
           - unique
           - any
           - all
           - null
+        held_by:
+          description: 'The law of a background or of a model, or the consequence of a derivation, that
+            establishes a value satisfying the condition; empty while the existence that the condition
+            presupposes is undischarged.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - RECORD.UNIT
+        reading:
+          description: 'the expression of the observable in words
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - THE EXPRESSION IN WORDS
         event:
+          description: 'the origin from which the clock starts, the first observation that bounds a left-censored
+            time, the horizon at which observation stops, and the censoring (right · left · interval ·
+            none) for an event whose time is unknown
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
           propertyNames:
             enum:
             - origin
@@ -115,20 +351,87 @@ properties:
             - censoring
             - reading
           properties:
+            origin:
+              description: 'an expression fixing the origin from which the clock of the event starts
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - EXPRESSION FIXING THE ORIGIN OF TIME
+            first_observation:
+              description: 'required when the censoring is `left`, whose time it bounds; omit when observation
+                starts at the origin
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - EXPRESSION FIXING THE TIME OF THE FIRST OBSERVATION
+            horizon:
+              description: 'an expression fixing the end of observation
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - EXPRESSION FIXING THE END OF OBSERVATION
             censoring:
+              description: 'the censoring of the event time: right, left or interval, when the time is
+                unknown, or none, when it is observed
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
               enum:
               - right
               - left
               - interval
               - none
               - null
+            reading:
+              description: 'the event in words, and the value recorded when it is not observed
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - THE EVENT IN WORDS, AND THE VALUE RECORDED WHEN IT IS NOT OBSERVED
         estimator:
+          description: 'the estimator that computes the values from the data, the version of the data
+            on which it runs, and the uncertainty that it reports; the estimates themselves are computed
+            from these entries, not recorded
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
           propertyNames:
             enum:
             - method
             - data_version
             - uncertainty
+          properties:
+            method:
+              description: 'the estimator that computes the values from the data
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - THE ESTIMATOR THAT COMPUTES THE VALUES FROM THE DATA
+            data_version:
+              description: 'the version of the data on which the estimator runs
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - VERSION
+            uncertainty:
+              description: 'the uncertainty that the estimator reports
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - THE UNCERTAINTY THAT THE ESTIMATOR REPORTS
   manifestations:
+    description: 'per form, "[expression over the observables]" with its form: value · dependence · functional
+      form · scaling · relation
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     items:
       propertyNames:
         enum:
@@ -140,7 +443,34 @@ properties:
         - reading
         - features
       properties:
+        name:
+          description: 'the words that designate the manifestation
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - NAME OF THE MANIFESTATION
+        symbol:
+          description: 'the symbol of the manifestation, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SYMBOL
+        variant:
+          description: 'symbol of the target variant carrying the entry; omit when every member of the
+            class carries it
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SYMBOL
         form:
+          description: 'the form of the manifestation: a value, a dependence, a functional form, a scaling
+            or a relation
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
           enum:
           - value
           - dependence
@@ -148,7 +478,26 @@ properties:
           - scaling
           - relation
           - null
+        expression:
+          description: 'an expression over the observables stating the manifestation
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
+        reading:
+          description: 'only content beyond the name and the form
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - THE MEANING OF THE EXPRESSION
         features:
+          description: 'per feature, "[symbol] ∈ [set expression]" with the value observed within that
+            set
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
           items:
             propertyNames:
               enum:
@@ -163,13 +512,95 @@ properties:
               - procedure
               - caveat
             properties:
+              name:
+                description: 'the words that designate the feature
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+                examples:
+                - NAME OF THE FEATURE
+              symbol:
+                description: 'the symbol of the feature, unique within the record
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+                examples:
+                - SYMBOL
+              values:
+                description: 'a set expression over declared symbols giving the values that the feature
+                  can take
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+                examples:
+                - SET EXPRESSION OVER DECLARED SYMBOLS
+              dimensional_formula:
+                description: 'optional; a monomial over the base dimensions and the base scales of the
+                  problem, such as M L T^-2, or 1 for a pure number
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+                examples:
+                - MONOMIAL OVER BASE DIMENSIONS
+              observed:
+                description: 'the value of the feature observed, one element of its value set
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+                examples:
+                - ONE ELEMENT OF THE VALUE SET
+              condition:
+                description: 'give when the measurement constrains the feature without fixing its value
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+                examples:
+                - EXPRESSION THAT THE FEATURE SATISFIES
               selects:
+                description: 'the reading of a quantity fixed by a condition that several values may satisfy:
+                  the unique value, any value, or all of them
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
                 enum:
                 - unique
                 - any
                 - all
                 - null
+              held_by:
+                description: 'The law of a background or of a model, or the consequence of a derivation,
+                  that establishes a value satisfying the condition; empty while the existence that the
+                  condition presupposes is undischarged.
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+                examples:
+                - RECORD.UNIT
+              procedure:
+                description: 'only content beyond the name and the value set
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+                examples:
+                - THE FINDING THAT THE MEASUREMENT ESTABLISHES
+              caveat:
+                description: 'the content of the feature that the record leaves unstated, and the reason
+                  for the omission
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+                examples:
+                - THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION
   scope_over_instances:
+    description: 'an instance is a member of the reference class of $S$, or one realization of a system
+      (a trial, a random initialization, a disorder sample); per source of variation, the declared quantities
+      that it varies and the other sources held fixed meanwhile. Each entry also records its source: class
+      member · realization · parameter draw · structure draw · scenario. It records its quantification
+      as well: single instance · typical instance · ensemble summary · ensemble distribution · universal,
+      meaning every member of the admitted class
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     items:
       propertyNames:
         enum:
@@ -182,7 +613,44 @@ properties:
         - conditional_on
         - differentiation
       properties:
+        name:
+          description: 'the words that designate the source of variation
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - NAME OF THE SOURCE OF VARIATION
+        symbol:
+          description: 'the symbol of the source of variation, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SYMBOL
+        variant:
+          description: 'symbol of the target variant carrying the entry; omit when every member of the
+            class carries it
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SYMBOL
+        over:
+          description: 'declared quantities this source changes; empty when the instance itself varies
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - &id001
+            - SYMBOL
+          items:
+            examples: *id001
         source:
+          description: 'the kind of the source: a class member, a realization, random parameters, a random
+            structure or a scenario
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
           enum:
           - class-member
           - realization
@@ -191,6 +659,11 @@ properties:
           - scenario
           - null
         quantification:
+          description: 'how the phenomenon ranges over the instances: a single instance, a typical instance,
+            an ensemble summary, an ensemble distribution, or every member
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
           enum:
           - single
           - typical
@@ -198,7 +671,28 @@ properties:
           - ensemble-distribution
           - universal
           - null
+        conditional_on:
+          description: 'other sources held fixed while this one varies
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - &id002
+            - SYMBOL
+          items:
+            examples: *id002
+        differentiation:
+          description: 'only content beyond the name
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - THE CONSEQUENCE OF THE VARIATION FOR THE CLAIM
   conditions_and_byproducts:
+    description: 'put a factor the question varies among the indices or the scope entries instead
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     propertyNames:
       enum:
       - precipitating
@@ -208,6 +702,10 @@ properties:
       - byproducts
     properties:
       precipitating:
+        description: 'per condition, an expression over declared symbols with a justification
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
         items:
           propertyNames:
             enum:
@@ -215,7 +713,42 @@ properties:
             - variant
             - expression
             - justification
+          properties:
+            name:
+              description: 'the words that designate the precipitating condition
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - NAME OF THE CONDITION
+            variant:
+              description: 'symbol of the target variant carrying the entry; omit when every member of
+                the class carries it
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - SYMBOL
+            expression:
+              description: 'an expression over declared symbols stating the condition that must hold for
+                the behavior to occur
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - EXPRESSION OVER DECLARED SYMBOLS
+            justification:
+              description: 'only content beyond the expression
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - WHY THE CONDITION TRIGGERS THE BEHAVIOR
       inhibiting:
+        description: 'per condition, an expression over declared symbols with a justification
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
         items:
           propertyNames:
             enum:
@@ -224,7 +757,52 @@ properties:
             - expression
             - justification
             - caveat
+          properties:
+            name:
+              description: 'the words that designate the inhibiting condition
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - NAME OF THE CONDITION
+            variant:
+              description: 'symbol of the target variant carrying the entry; omit when every member of
+                the class carries it
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - SYMBOL
+            expression:
+              description: 'an expression over declared symbols stating the condition that prevents the
+                behavior
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - EXPRESSION OVER DECLARED SYMBOLS
+            justification:
+              description: 'only content beyond the expression
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - WHY THE CONDITION PREVENTS THE BEHAVIOR
+            caveat:
+              description: 'the content of the condition that the record leaves unstated, and the reason
+                for the omission
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION
       modulating:
+        description: 'per condition, the relation that it induces, as an expression naming the affected
+          feature and the controlling quantity. An entry names the regime when the relation holds only
+          there. Each condition carries a reading
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
         items:
           propertyNames:
             enum:
@@ -233,7 +811,49 @@ properties:
             - expression
             - reading
             - effect
+          properties:
+            name:
+              description: 'the words that designate the modulating condition
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - NAME OF THE CONDITION
+            variant:
+              description: 'symbol of the target variant carrying the entry; omit when every member of
+                the class carries it
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - SYMBOL
+            expression:
+              description: 'give when the modulation holds in a single regime only
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - EXPRESSION THAT FIXES THE REGIME OF THE MODULATION
+            reading:
+              description: 'only content beyond the `effect`
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - THE MEANING OF THE MODULATION
+            effect:
+              description: 'relate the modulating factor to the affected feature
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - RELATION OVER DECLARED SYMBOLS
       nonstandard:
+        description: 'per circumstance, an expression over declared symbols, with a justification. The
+          justification names the unusual feature and the procedure that produces the circumstance
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
         items:
           propertyNames:
             enum:
@@ -241,7 +861,42 @@ properties:
             - variant
             - expression
             - differentiation
+          properties:
+            name:
+              description: 'the words that designate the nonstandard circumstance
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - NAME OF THE CIRCUMSTANCE
+            variant:
+              description: 'symbol of the target variant carrying the entry; omit when every member of
+                the class carries it
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - SYMBOL
+            expression:
+              description: 'an expression over declared symbols stating the circumstance
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - EXPRESSION OVER DECLARED SYMBOLS
+            differentiation:
+              description: 'why the circumstance is unusual, and how it is arranged
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - WHY THE CIRCUMSTANCE IS UNUSUAL, AND HOW IT IS ARRANGED
       byproducts:
+        description: 'per byproduct, an expression over declared symbols with a justification that gives
+          the reason for excluding it from the phenomenon
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
         items:
           propertyNames:
             enum:
@@ -249,7 +904,43 @@ properties:
             - variant
             - expression
             - justification
+          properties:
+            name:
+              description: 'the words that designate the byproduct
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - NAME OF THE BYPRODUCT
+            variant:
+              description: 'symbol of the target variant carrying the entry; omit when every member of
+                the class carries it
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - SYMBOL
+            expression:
+              description: 'an expression over declared symbols stating the byproduct
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - EXPRESSION OVER DECLARED SYMBOLS
+            justification:
+              description: 'only content beyond the expression
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+              examples:
+              - WHY THE BYPRODUCT FALLS OUTSIDE THE PHENOMENON
   evidential_status:
+    description: 'established across data sets or methods · reported once · predicted, of a target with
+      actual members · derived, of a model or of a target without actual members · absent from a closed
+      search · disproved · undecided
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     enum:
     - established
     - reported
@@ -260,12 +951,46 @@ properties:
     - undecided
     - null
   search:
+    description: 'the search behind a negative status, its scope and procedure for an absence, its counterexample
+      for a disproof
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     propertyNames:
       enum:
       - scope
       - procedure
       - counterexample
+    properties:
+      scope:
+        description: 'the region of the members, conditions and courses that the search covered
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+        examples:
+        - EXPRESSION OVER DECLARED SYMBOLS
+      procedure:
+        description: 'the procedures and the data searched, and why they would have detected the behavior
+          within the scope
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+        examples:
+        - THE PROCEDURES AND THE DATA SEARCHED, AND WHY THEY WOULD HAVE DETECTED THE BEHAVIOR
+      counterexample:
+        description: 'the record or the publication that establishes the counterexample or the contradiction
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+        examples:
+        - RECORD-OR-POINTER
   detection_criterion:
+    description: 'per test, the condition that a candidate pattern must satisfy to count as established.
+      The test also names the sources of variation across which the pattern must hold, and the external
+      systems of the target that bound its conclusions
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     items:
       propertyNames:
         enum:
@@ -275,13 +1000,90 @@ properties:
         - expression
         - procedure
         - limited_by
+      properties:
+        name:
+          description: 'the words that designate the test
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - NAME OF THE TEST
+        variant:
+          description: 'symbol of the target variant carrying the entry; omit when every member of the
+            class carries it
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SYMBOL
+        across:
+          description: 'sources of variation the test must hold across
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - &id003
+            - SYMBOL
+          items:
+            examples: *id003
+        expression:
+          description: 'an expression over declared symbols stating the condition that a candidate pattern
+            must satisfy
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
+        procedure:
+          description: 'only content beyond the name of the test
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - HOW THE TEST IS CARRIED OUT
+        limited_by:
+          description: 'external systems of the target whose reach bounds what the test can establish
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - &id004
+            - SYMBOL
+          items:
+            examples: *id004
   data:
+    description: 'per entry, "[pointer to a data set, a recording or a derivation]" that establishes the
+      phenomenon, with its version
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     items:
       propertyNames:
         enum:
         - pointer
         - version
+      properties:
+        pointer:
+          description: 'a pointer to a data set, a recording or a derivation that establishes the phenomenon
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - POINTER TO A DATA SET, A RECORDING OR A DERIVATION
+        version:
+          description: 'the version of the data
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - VERSION
   data_model:
+    description: 'the models through which the data are produced or processed before they establish the
+      phenomenon: per model, its kind: instrument model · background simulation · assimilation model ·
+      reconstruction, and the model record or the publication that states it
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     items:
       propertyNames:
         enum:
@@ -290,13 +1092,36 @@ properties:
         - reading
       properties:
         kind:
+          description: 'the kind of the data model: an instrument model, a background simulation, an assimilation
+            model or a reconstruction
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
           enum:
           - instrument-model
           - background-simulation
           - assimilation-model
           - reconstruction
           - null
+        source:
+          description: 'the model record, or a pointer to the publication that states the model
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - RECORD
+        reading:
+          description: 'what the model does to the data
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - WHAT THE MODEL DOES TO THE DATA
   observation_error:
+    description: 'per observable or per data set, an error model: a distribution or a bound
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     items:
       propertyNames:
         enum:
@@ -304,12 +1129,35 @@ properties:
         - form
         - expression
       properties:
+        of:
+          description: 'an observable, or the pointer of a data set
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SYMBOL
         form:
+          description: 'the form of the error model: a distribution or a bound
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
           enum:
           - distribution
           - bound
           - null
+        expression:
+          description: 'an expression over declared symbols stating the error model
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
   pattern_selection:
+    description: 'how the pattern stated by the manifestations was selected from the data: the selection
+      procedure, the patterns set aside, and the question that motivated the selection
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     items:
       propertyNames:
         enum:
@@ -317,12 +1165,75 @@ properties:
         - procedure
         - set_aside
         - motivated_by
+      properties:
+        manifestation:
+          description: 'the manifestation whose pattern was selected
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - SYMBOL
+        procedure:
+          description: 'how the pattern was selected from the data
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - HOW THE PATTERN WAS SELECTED FROM THE DATA
+        set_aside:
+          description: 'the patterns set aside
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - THE PATTERNS SET ASIDE
+        motivated_by:
+          description: 'the question that motivated the selection
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - quest.TOPIC.NAME
   adequacy:
+    description: 'the purposes for which the data model is adequate: per purpose, the question or the
+      kind of use for which the data model is adequate, with its grounds
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
     items:
       propertyNames:
         enum:
         - purpose
         - grounds
+      properties:
+        purpose:
+          description: 'the question or the kind of use for which the data model is adequate
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - THE QUESTION OR THE KIND OF USE FOR WHICH THE DATA MODEL IS ADEQUATE
+        grounds:
+          description: 'the evidence or the argument for the adequacy
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/phenomenon.md).'
+          examples:
+          - THE EVIDENCE OR THE ARGUMENT FOR THE ADEQUACY
+  maturity:
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
 propertyNames:
   enum:

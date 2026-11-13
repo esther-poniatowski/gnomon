@@ -1,0 +1,177 @@
+# Presentation defaults for the generic operational graph. The graph generator reads these values;
+# Ekphrasis receives only the resulting generic graph roles and contains no Gnomon identifiers.
+# Category presentation preserves the common form of products, activities, and sources. A node-kind
+# entry may replace the category marker without changing that form. Icon and style values are safe
+# identifiers for a later portable presentation contract; the current renderer uses the marker.
+
+id: registry.graph-presentation
+type: graph-presentation-registry
+
+profile:
+  id: gnomon-operational
+  version: 3
+
+layouts:
+  recommended: layered-directed
+  compatible: [layered-directed, force-directed, compact-network]
+
+categories:
+  product:
+    title: Research product
+    shape: rectangle
+    marker: "◆"
+    style: product
+  activity:
+    title: Research activity
+    shape: capsule
+    marker: "⚙"
+    style: activity
+  source:
+    title: External source
+    shape: dashed
+    marker: "↗"
+    style: source
+
+node_kinds:
+  problem:
+    category: product
+    title: Problem
+    icon: circle-alert
+    marker: "!"
+    style: problem
+  question:
+    category: product
+    title: Question
+    icon: circle-help
+    marker: "?"
+    style: question
+  answer:
+    category: product
+    title: Answer
+    icon: lightbulb
+    marker: "✦"
+    style: answer
+  assessment:
+    category: product
+    title: Assessment
+    icon: clipboard-check
+    marker: "⚖"
+    style: assessment
+  law:
+    category: product
+    title: Law
+    icon: book-open
+    marker: "§"
+    style: law
+  move:
+    category: product
+    title: Derivation move
+    icon: route
+    marker: "→"
+    style: move
+  posit:
+    category: product
+    title: Posit
+    icon: circle-dot
+    marker: "◉"
+    style: posit
+  operation:
+    category: product
+    title: Operation
+    icon: settings
+    marker: "⚙"
+    style: operation
+  consequence:
+    category: product
+    title: Consequence
+    icon: git-branch
+    marker: "⊢"
+    style: consequence
+  presupposition:
+    category: product
+    title: Presupposition
+    icon: circle-help
+    marker: "?"
+    style: presupposition
+  existence:
+    category: product
+    title: Existence condition
+    icon: circle-dashed
+    marker: "∃"
+    style: existence
+  assumption:
+    category: product
+    title: Assumption
+    icon: bookmark
+    marker: "A"
+    style: assumption
+  commitment:
+    category: product
+    title: Commitment
+    icon: pin
+    marker: "◆"
+    style: commitment
+  external-origin:
+    category: source
+    title: External origin
+    icon: external-link
+    marker: "↗"
+    style: external-origin
+
+edge_kinds:
+  addresses:
+    title: addressed by
+    layer: inquiry
+    style: inquiry
+  subquestion-of:
+    title: has subquestion
+    layer: inquiry
+    style: inquiry
+  answers:
+    title: answered by
+    layer: inquiry
+    style: inquiry
+  assesses:
+    title: assessed by
+    layer: inquiry
+    style: inquiry
+  serves:
+    title: served by design
+    layer: inquiry
+    style: inquiry
+  takes:
+    title: input
+    layer: provenance
+    style: input
+  produces:
+    title: output
+    layer: provenance
+    style: output
+  step-dependency:
+    title: supplies
+    layer: dependency
+    style: dependency
+  impeaches:
+    title: impeaches
+    layer: state-origin
+    style: impeachment
+  conditions:
+    title: conditions
+    layer: state-origin
+    style: condition
+  exposed-by:
+    title: exposed by
+    layer: exposure
+    style: exposure
+  assembly-component:
+    title: component
+    layer: assembly
+    style: composition
+  assembly-part:
+    title: part
+    layer: assembly
+    style: composition
+  assembly-citation:
+    title: citation
+    layer: citation
+    style: citation

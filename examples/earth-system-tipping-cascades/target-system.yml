@@ -1,4 +1,4 @@
-_schema: gnomon:target-system@1
+_schema: gnomon:target-system@2
 title: "Coupled tipping elements of the actual Earth system"
 id: system.earth-tipping-subsystems
 type: target-system

@@ -1,6 +1,6 @@
 # a model derived from the target by two operations: an idealization that removes the noise, and an approximation near onset
 
-_schema: gnomon:model@1
+_schema: gnomon:model@3
 title: "Deterministic linearization near onset"
 id: mod.nonreciprocal-active-matter.near-onset
 type: model

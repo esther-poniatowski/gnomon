@@ -4,7 +4,7 @@ title: Derivation record
 description: The fields of a derivation record, as the specification of the record documents them.
 type: object
 x-identifier: id
-x-version: 1
+x-version: 2
 x-header:
   - 'specification: `docs/specification/derivation.md`; one file per derivation'
   - 'decision: `docs/adr/derivation-record.md`'
@@ -1072,5 +1072,6 @@ properties:
       type:
         - string
         - 'null'
+      x-vocabulary: .maturity
       x-template-key: FIELD.PATH
       x-template: open

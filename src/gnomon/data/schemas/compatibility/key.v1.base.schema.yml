@@ -1,0 +1,128 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/key.v1.base.schema.yml
+title: Key record
+description: The fields of a key record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/key.md`; one file per map shared by bindings'
+- a key carries one side of a binding onto the other; the bindings that use it reference it by identifier
+  and version
+- a map that also defines a bearer of a model is stated once, in the model, and the key references that
+  definition
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+- specifications follow the order of the specification note
+properties:
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"SHORT NAME OF THE KEY"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: key.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: key
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+    - string
+    - 'null'
+    x-template: provisional
+    x-vocabulary: .status
+    title: Status
+    description: the maturity of the key record, taken by every field that the block `maturity` leaves unmarked
+  kind:
+    x-blank: true
+    x-vocabulary: .kind
+    type:
+    - string
+    - 'null'
+    title: Kind
+    description: '`observation-operator` · `unit-map` · `aggregation-map` · `qualitative-abstraction`'
+    examples:
+    - the forward model from population rates to a local field potential (observation operator); the conversion
+      of the dimensionless time of a model to seconds (unit map)
+  domain_and_codomain:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      domain:
+        type:
+        - string
+        - 'null'
+        x-template: '"SET EXPRESSION OR TYPE"'
+        x-kind: text
+        x-comment: the side of the model
+        title: Domain
+        description: the side of the model
+      codomain:
+        type:
+        - string
+        - 'null'
+        x-template: '"SET EXPRESSION OR TYPE"'
+        x-kind: text
+        x-comment: the side of the target
+        title: Codomain
+        description: the side of the target
+    x-comment: the two sides that the key connects, each as a set expression or a type
+    title: Domain and codomain
+    description: the side of the model and the side of the target that the key connects, each as a set
+      expression or a type
+    examples:
+    - from the rates of two populations to one potential; from trajectories to the labels `oscillating`
+      and `silent`
+  expression:
+    x-blank: true
+    type:
+    - string
+    - 'null'
+    x-template: '"EXPRESSION OVER THE SYMBOLS OF THE DOMAIN, OR A POINTER TO THE PROCEDURE THAT COMPUTES
+      THE MAP"'
+    x-kind: text
+    title: Expression
+    description: an expression over the symbols of its domain, or a pointer to the procedure that computes
+      the map
+    examples:
+    - the mean over the neurons of a population; a threshold on the power in the gamma band
+  version:
+    x-blank: true
+    type:
+    - string
+    - 'null'
+    x-template: VERSION
+    x-kind: label
+    x-comment: a version identifier; a revised map is a new version
+    title: Version
+    description: a version identifier
+    examples:
+    - version 1
+  maturity:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    additionalProperties:
+      x-template-key: FIELD.PATH
+      x-template: open
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'

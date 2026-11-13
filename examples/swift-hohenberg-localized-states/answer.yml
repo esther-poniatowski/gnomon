@@ -1,6 +1,6 @@
 # tests description at an incomplete grain of reporting; the route runs on the target, a formal equation
 
-_schema: gnomon:answer@1
+_schema: gnomon:answer@3
 title: "Snakes-and-ladders catalogue of localized states"
 id: ans.swift-hohenberg.snakes-ladders-catalogue
 type: answer

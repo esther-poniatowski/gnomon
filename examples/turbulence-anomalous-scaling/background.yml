@@ -1,4 +1,4 @@
-_schema: gnomon:background@1
+_schema: gnomon:background@2
 title: "The incompressible Navier–Stokes equations and their admitted inputs"
 id: bg.turbulence-incompressible-navier-stokes.navier-stokes
 type: background

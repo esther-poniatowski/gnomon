@@ -1,6 +1,6 @@
 # a map of units shared by the bindings of the network: the prescribed warming of the model onto the global mean warming of the target
 
-_schema: gnomon:key@1
+_schema: gnomon:key@2
 title: "Warming of the model onto global warming"
 id: key.earth-tipping-subsystems.warming
 type: key

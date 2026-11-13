@@ -1,6 +1,6 @@
 # binds the stylized network of four tipping elements to the transition sequences of the Earth system, at quantitative grain
 
-_schema: gnomon:binding@1
+_schema: gnomon:binding@2
 title: "Four-element network to transition sequences"
 id: bind.earth-tipping-subsystems.four-element-network
 type: binding

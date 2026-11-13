@@ -108,7 +108,8 @@ def mismatched_arity(
 
 def arities(*records: Mapping[str, Any], source: Path | None = None) -> dict[str, tuple[int, bool]]:
     """Return the number of arguments that each operator takes, and whether its last argument
-    repeats, from its signature or from its stated arity; an open signature states none."""
+    repeats, from its signature or from its stated arity; an open signature states none.
+    """
     registry = yaml.safe_load((source or OPERATOR_REGISTRY).read_text(encoding="utf-8"))
     found = {}
     for entry in list(registry.get("operators") or []) + [

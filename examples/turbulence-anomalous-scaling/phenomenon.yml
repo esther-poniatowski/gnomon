@@ -1,4 +1,4 @@
-_schema: gnomon:phenomenon@1
+_schema: gnomon:phenomenon@2
 title: "Scale dependence of the distributions of velocity increments"
 statement: "Ordered pairs of spatial locations in statistically stationary flow realizations have joint longitudinal and transverse velocity increments. The probability distribution of these increments varies with the magnitude and the orientation of the separation."
 id: phen.turbulence.velocity-increment-distributions

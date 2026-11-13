@@ -1,6 +1,6 @@
 # negative for an exploration that derives a catalogue on a reduced model and omits the search and the persistence results
 
-_schema: gnomon:assessment@1
+_schema: gnomon:assessment@2
 title: "Assessment of the catalogue of exceptional phase transitions"
 id: assess.nonreciprocal-active-matter.exceptional-transition-catalogue
 type: assessment

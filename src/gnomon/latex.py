@@ -231,7 +231,7 @@ class _Renderer:  # pylint: disable=too-few-public-methods  # one entry point, `
         """Return the indices of a binder, each with its restriction."""
         restrictions = tree[4] if len(tree) > 4 else (None,) * len(tree[3])
         return ", ".join(
-            self.form(restriction) if restriction else symbol_form(str(index), self.symbols)
+            (self.form(restriction) if restriction else symbol_form(str(index), self.symbols))
             for index, restriction in zip(tree[3], restrictions, strict=False)
         )
 
@@ -252,7 +252,8 @@ class _Renderer:  # pylint: disable=too-few-public-methods  # one entry point, `
 
     def _fill(self, template: str, tree: Tree) -> str:
         """Return a template filled with the indices and the arguments of a call; the last
-        placeholder takes every remaining argument, joined as the template joins the last two."""
+        placeholder takes every remaining argument, joined as the template joins the last two.
+        """
         args = tree[2]
         slots = sorted({int(n) for n in re.findall(r"#(\d)", template) if n != "0"})
         count = max(slots) if slots else 0
@@ -270,7 +271,8 @@ class _Renderer:  # pylint: disable=too-few-public-methods  # one entry point, `
 
     def _slot(self, template: str, position: int, taken: Any, separator: str) -> str:
         """Return the form that fills one placeholder of a template: the arguments that it takes,
-        in parentheses when the template neither delimits them nor lets them bind loosely."""
+        in parentheses when the template neither delimits them nor lets them bind loosely.
+        """
         placed = template.index(f"#{position}")
         opening = template[:placed].rstrip()
         least = 0 if opening.endswith(DELIMITED) else PRECEDENCE["prod"]

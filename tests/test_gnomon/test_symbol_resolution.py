@@ -25,8 +25,10 @@ from gnomon.completeness import (
     always_required,
     contradictory_accuracy,
     inadmissible_values,
+    record_kinds,
     requirements_by_aim,
     requirements_by_commitment,
+    requirements_by_scope,
     undecided_boundaries,
     unjustified_explanans_bound,
     unmet_by_aim,
@@ -34,6 +36,7 @@ from gnomon.completeness import (
     unmet_general,
     unrealized_link,
     unstated_standing,
+    validation_scopes,
 )
 from gnomon.findings import texts
 from gnomon.vocabulary import (
@@ -148,7 +151,10 @@ def test_a_factor_appeals_to_a_declared_external_system() -> None:
         "aim_block": {
             "explanation": {
                 "factors": [
-                    {"holds": "a linear decoder reads the outputs", "appeals_to": ["decoder"]}
+                    {
+                        "holds": "a linear decoder reads the outputs",
+                        "appeals_to": ["decoder"],
+                    }
                 ]
             }
         },
@@ -303,7 +309,11 @@ def test_a_relation_whose_laws_name_no_quantity_of_both_endpoints_is_reported() 
             "type": "background",
             "laws": [{"symbol": "transmit", "expression": expression}],
             "organization": [
-                {"symbol": "coupling", "relates": "prod(sub, sub)", "realized_by": ["transmit"]}
+                {
+                    "symbol": "coupling",
+                    "relates": "prod(sub, sub)",
+                    "realized_by": ["transmit"],
+                }
             ],
         }
 
@@ -390,7 +400,10 @@ def test_a_quantity_that_no_other_field_mentions_is_reported(tmp_path: Path) -> 
             {
                 "id": "system.demo",
                 "type": "target-system",
-                "variables": [{"name": "used", "symbol": "u"}, {"name": "stray", "symbol": "w"}],
+                "variables": [
+                    {"name": "used", "symbol": "u"},
+                    {"name": "stray", "symbol": "w"},
+                ],
                 "laws": [{"symbol": "decay", "expression": "d_t(u) = -u"}],
             }
         ),
@@ -478,7 +491,10 @@ def test_a_parameter_running_along_an_interval_is_reported() -> None:
             {"symbol": "t", "structure": "evolution"},
             {"symbol": "i", "structure": "discrete-set"},
         ],
-        "parameters": [{"symbol": "f", "signature": ["t"]}, {"symbol": "w", "signature": ["i"]}],
+        "parameters": [
+            {"symbol": "f", "signature": ["t"]},
+            {"symbol": "w", "signature": ["i"]},
+        ],
     }
     assert texts(unfixed_parameters(record)) == ["parameters.f: held fixed yet indexed by ['t']"]
 
@@ -556,7 +572,10 @@ def test_a_design_carries_what_its_kind_requires() -> None:
     )
     assert unmet_by_value(design, table) == []
     bare = {key: value for key, value in design.items() if key != "protocol"}
-    assert texts(unmet_by_value(bare, table)) == ["kind simulation-run requires: protocol"]
+    found = unmet_by_value(bare, table)
+    assert texts(found) == ["kind simulation-run requires: protocol"]
+    assert [item.path for item in found] == [("protocol",)]
+    assert [item.controlled_by for item in found] == [("kind",)]
     assert unmet_by_value({**bare, "kind": "method"}, table) == []
 
 
@@ -570,13 +589,22 @@ def test_a_record_lacking_what_its_commitment_requires_is_reported() -> None:
     }
     assert unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT) == []
     phenomenon["commitment"] = "specified"
-    assert texts(unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT)) == [
+    found = unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT)
+    assert texts(found) == [
         "commitment specified requires: category",
         "commitment specified requires: course",
         "commitment specified requires: occurrence",
         "commitment specified requires: manifestations",
         "commitment specified requires: evidential_status",
     ]
+    assert [item.path for item in found] == [
+        ("category",),
+        ("course",),
+        ("occurrence",),
+        ("manifestations",),
+        ("evidential_status",),
+    ]
+    assert {item.controlled_by for item in found} == {("commitment",)}
     del phenomenon["identification"]
     phenomenon["commitment"] = "identified"
     assert texts(unmet_commitment(phenomenon, REQUIRED_BY_COMMITMENT)) == [
@@ -755,7 +783,10 @@ def test_a_tolerance_stated_under_a_standard_that_fixes_its_own_is_reported() ->
     }
     question = {
         "task": {
-            "required_accuracy": {"standard": "order-of-magnitude", "outputs_to_match": [entry]}
+            "required_accuracy": {
+                "standard": "order-of-magnitude",
+                "outputs_to_match": [entry],
+            }
         }
     }
     assert texts(contradictory_accuracy(question)) == [
@@ -780,6 +811,112 @@ def test_the_requirement_table_is_read_from_the_registry() -> None:
     assert always_required("background") == ["describes", "laws", "closure"]
 
 
+def test_the_validation_scopes_are_read_in_inquiry_order() -> None:
+    assert validation_scopes() == (
+        "problem-posed",
+        "question-typed",
+        "subject-identified",
+        "subject-specified",
+        "candidate-proposed",
+        "candidate-assessed",
+    )
+
+
+def test_each_validation_scope_declares_only_its_incremental_requirements() -> None:
+    scoped = requirements_by_scope()
+    assert scoped["problem-posed"]["checkpoint_records"] == ["problem"]
+    assert "task.epistemic_aim" in scoped["question-typed"]["required"]["question"]
+    assert scoped["question-typed"]["minimum_subject_slots"] == "typed"
+    assert scoped["subject-identified"]["required_unless_aim"] == {"phenomenon": ["exploration"]}
+    assert scoped["subject-identified"]["minimum_commitment"] == {
+        "target-system": "identified",
+        "phenomenon": "identified",
+    }
+    assert scoped["subject-specified"]["on_demand_commitment"] == {
+        "target-system": "specified",
+        "phenomenon": "specified",
+    }
+    assert scoped["candidate-proposed"]["candidate"] == "proposed"
+    assert scoped["candidate-assessed"]["candidate"] == "assessed"
+    assert scoped["candidate-assessed"]["settled"] == {"assessment": ["tests"]}
+    assert "draft" not in scoped
+
+
+def test_the_scope_sets_classify_every_registered_requirement_group() -> None:
+    scoped = requirements_by_scope()
+    activated = {
+        kind
+        for entry in scoped.values()
+        for key in ("checkpoint_records", "required_records", "activate_when_present")
+        for kind in entry.get(key) or []
+    }
+    activated.update(
+        kind for entry in scoped.values() for kind in (entry.get("required_unless_aim") or {})
+    )
+    assert set(record_kinds()) <= activated
+
+    universal = {
+        f"{kind}.{path}"
+        for entry in scoped.values()
+        for key in ("required", "on_demand")
+        for kind, paths in (entry.get(key) or {}).items()
+        for path in paths
+    }
+    for aim, declaration in requirements_by_aim().items():
+        conditional = {
+            f"{kind}.{path}"
+            for entry in scoped.values()
+            for kind, paths in ((entry.get("by_aim") or {}).get(aim) or {}).items()
+            for path in paths
+        }
+        declared = set(declaration["required"])
+        assert declared == conditional | (declared & universal), f"{aim} is not fully classified"
+
+
+@pytest.mark.parametrize(
+    ("entry", "message"),
+    [
+        ("unknown: true", "unknown clauses"),
+        ("required_records: [problem, problem]", "repeats"),
+        (
+            "by_aim:\n      absent:\n        question: [task.epistemic_aim]",
+            "unknown aims",
+        ),
+        ("minimum_commitment:\n      phenomenon: sketched", "unknown commitment level"),
+        ("candidate: drafted", "unknown candidate state"),
+    ],
+)
+def test_an_invalid_scope_requirement_clause_is_reported(
+    tmp_path: Path, entry: str, message: str
+) -> None:
+    source = tmp_path / "requirements.yml"
+    source.write_text(
+        "validation_scopes: [problem-posed]\n"
+        "by_aim:\n  description:\n    required: []\n    to_produce: []\n"
+        f"by_scope:\n  problem-posed:\n    {entry}\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match=message):
+        requirements_by_scope(source)
+
+
+@pytest.mark.parametrize(
+    ("declaration", "message"),
+    [
+        ("[]", "declares no validation scope"),
+        ("[problem-posed, ProblemTyped]", "malformed validation scope identifiers"),
+        ("[problem-posed, problem-posed]", "duplicate validation scopes"),
+    ],
+)
+def test_an_invalid_validation_scope_registry_is_reported(
+    tmp_path: Path, declaration: str, message: str
+) -> None:
+    source = tmp_path / "requirements.yml"
+    source.write_text(f"validation_scopes: {declaration}\n", encoding="utf-8")
+    with pytest.raises(ValueError, match=message):
+        validation_scopes(source)
+
+
 def test_a_registry_naming_an_unknown_level_is_reported(tmp_path: Path) -> None:
     source = tmp_path / "requirements.yml"
     source.write_text(
@@ -792,16 +929,25 @@ def test_a_registry_naming_an_unknown_level_is_reported(tmp_path: Path) -> None:
 def test_an_inquiry_leaving_a_required_specification_open_is_reported() -> None:
     """A prediction compares an output against a measurement, so it fixes what must match."""
     question = {
-        "task": {"epistemic_aim": "prediction", "required_accuracy": {"outputs_to_match": []}}
+        "task": {
+            "epistemic_aim": "prediction",
+            "required_accuracy": {"outputs_to_match": []},
+        }
     }
     records: dict[str, dict[str, Any]] = {
         "question": question,
         "phenomenon": {"manifestations": []},
     }
-    assert texts(unmet_by_aim(question, records, REQUIRED)) == [
+    found = unmet_by_aim(question, records, REQUIRED)
+    assert texts(found) == [
         "prediction requires phenomenon.manifestations",
         "prediction requires question.task.required_accuracy.outputs_to_match",
     ]
+    assert [(item.path, item.discriminator) for item in found] == [
+        (("task", "epistemic_aim"), "phenomenon.manifestations"),
+        (("task", "required_accuracy", "outputs_to_match"), ""),
+    ]
+    assert {item.controlled_by for item in found} == {("task", "epistemic_aim")}
 
 
 def test_a_value_outside_its_vocabulary_is_reported() -> None:
@@ -923,7 +1069,8 @@ def test_a_registry_declaring_no_operator_is_reported(tmp_path: Path) -> None:
     """Reading fails loudly when the registry carries no operator."""
     empty = tmp_path / "operators.yml"
     empty.write_text(
-        "id: registry.operators\ntype: operator-registry\noperators: []\n", encoding="utf-8"
+        "id: registry.operators\ntype: operator-registry\noperators: []\n",
+        encoding="utf-8",
     )
     with pytest.raises(ValueError, match="declares no operator"):
         canonical_operators(empty)
@@ -1045,6 +1192,9 @@ def test_an_empty_formula_is_skipped_and_open_is_an_unresolved_identifier() -> N
     """With no sentinel left, `open` in an expression is a word that resolves to no declaration."""
     record = {
         "type": "target-system",
-        "parameters": [{"symbol": "nu", "values": None}, {"symbol": "mu", "values": "open"}],
+        "parameters": [
+            {"symbol": "nu", "values": None},
+            {"symbol": "mu", "values": "open"},
+        ],
     }
     assert texts(unresolved(record, CANONICAL)) == ["parameters.values -> open"]

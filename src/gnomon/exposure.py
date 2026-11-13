@@ -160,7 +160,8 @@ def _mapping(value: Any) -> Mapping[str, Any]:
 
 def _posit_state(posit: Mapping[str, Any], refuted: bool) -> str | None:
     """Return the reason for which a posit exposes a consequence resting on it, or None when a
-    confirming test supports it and neither a refuting test nor a counterexample refutes it."""
+    confirming test supports it and neither a refuting test nor a counterexample refutes it.
+    """
     if refuted or any(t.get("verdict") == "refutes" for t in _entries(posit, "tests")):
         return "refuted"
     confirming, certified = _confirming()
@@ -203,7 +204,10 @@ class _Walk:
             return None
         owner, symbol = split
         record = self.records.get(owner) or {}
-        return next((law for law in _entries(record, "laws") if law.get("symbol") == symbol), None)
+        return next(
+            (law for law in _entries(record, "laws") if law.get("symbol") == symbol),
+            None,
+        )
 
     def reference(self, reference: str, via: str) -> None:
         """Walk a reference to a law, an answer, a derivation or one of its consequences."""
@@ -252,7 +256,12 @@ class _Walk:
             entry = assumptions[split[1]]
             motive = entry.get("motive") or "unclassified"
             removable = entry.get("removable") or "unknown"
-            self.expose(reference, "assumption", f"{motive} assumption, removable {removable}", via)
+            self.expose(
+                reference,
+                "assumption",
+                f"{motive} assumption, removable {removable}",
+                via,
+            )
             return True
         return False
 
@@ -268,7 +277,11 @@ class _Walk:
         each with the record that declares it: the record itself, the records that it sees, and
         the target system that it is stated against."""
         record = self.records.get(owner) or {}
-        seen = [record, *visible_records(record, self.records), upstream_of(record, self.records)]
+        seen = [
+            record,
+            *visible_records(record, self.records),
+            upstream_of(record, self.records),
+        ]
         found: dict[str, tuple[str, Mapping[str, Any]]] = {}
         for other in seen:
             for path in QUANTITY_PATHS:
@@ -279,7 +292,8 @@ class _Walk:
 
     def existence(self, text: Any, owner: str, via: str) -> None:
         """Walk the existence that the condition of each quantity named by an expression
-        presupposes: to the statement that holds it, or expose it while it stays undischarged."""
+        presupposes: to the statement that holds it, or expose it while it stays undischarged.
+        """
         if not isinstance(text, str) or not text.strip():
             return
         quantities = self._conditioned(owner)
@@ -290,11 +304,17 @@ class _Walk:
                 self.reference(holder, f"existence of {declared}.{name}")
                 continue
             unique = " and uniqueness" if entry.get("selects") == "unique" else ""
-            self.expose(f"{declared}.{name}", "existence", f"existence{unique} not discharged", via)
+            self.expose(
+                f"{declared}.{name}",
+                "existence",
+                f"existence{unique} not discharged",
+                via,
+            )
 
     def law(self, reference: str, law: Mapping[str, Any], via: str) -> None:
         """Walk a law: a revisable warrant exposes, a derived law passes on to its descent, and the
-        quantities that it names pass on the existence that their conditions presuppose."""
+        quantities that it names pass on the existence that their conditions presuppose.
+        """
         split = split_reference(reference)
         if split is not None:
             self.existence(law.get("expression"), split[0], via)

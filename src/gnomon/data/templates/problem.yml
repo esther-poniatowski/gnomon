@@ -3,7 +3,7 @@
 # the questions serving this problem name it in their field `addresses`
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 
-_schema: gnomon:problem@1
+_schema: gnomon:problem@3
 title: "SHORT NAME OF THE PROBLEM"
 statement: "THE PROBLEM IN WORDS: THE RESULT SOUGHT, AND THE OBSTACLE TO OBTAINING IT"
 id: prob.TOPIC.NAME
@@ -22,7 +22,7 @@ explicanda:                      # terms used in the statement before any record
   - term: "TERM AS USED IN THE STATEMENT"
     pointer: "POINTER TO THE DATA, THE RESULT OR THE PUBLICATION THAT FIXES THE USE OF THE TERM"
 sources:
-  - "POINTER TO THE PUBLICATION, THE DATA OR THE ANOMALY THAT RAISES THE PROBLEM"
+  - "POINTER TO AN EXISTING NOTE, PUBLICATION, MODEL, DATA SET OR ANOMALY THAT RAISES THE PROBLEM"
 significance: "THE CONSEQUENCES OF A SOLUTION FOR OTHER WORK"
 knowledge_obstacles:             # one entry per obstacle in the state of the knowledge about the associated question; empty when none
   - obstacle:                    # open-gap (a result is lacking, and none is proposed) | unassessed-candidates (answers are proposed, and none is accepted) | conflict (accepted claims are inconsistent, or a datum is improbable under them) | unwarranted-claim (an accepted claim has weaker support than the demand requires) | ill-defined-terms (a term of the demand lacks the criterion to check answers) | unsound-presupposition (accepted knowledge denies a presupposition of the associated question)
@@ -33,4 +33,4 @@ answerability_obstacles:         # one entry per refuted condition of answerabil
     pointers: [RECORD.ID]        # the records or the publications that establish the refutation
 
 maturity:                        # optional; one maturity per field: open | provisional | stabilized; a field left out is provisional
-  FIELD.PATH: open
+  FIELD.PATH: open               # open (not fixed and still expected from the inquiry or the author) | provisional (written and still under revision) | stabilized (no further revision expected in the current state)

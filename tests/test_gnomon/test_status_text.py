@@ -12,7 +12,12 @@ from pathlib import Path
 
 from typer.testing import CliRunner
 
-from gnomon.answerability import ACTIVITY_NOTES, PRODUCT_TYPE_NOTE, diagnose, render_text
+from gnomon.answerability import (
+    ACTIVITY_NOTES,
+    PRODUCT_TYPE_NOTE,
+    diagnose,
+    render_text,
+)
 from gnomon.check import load_workspace
 from gnomon.cli import app
 
@@ -28,7 +33,7 @@ def test_no_question_is_said_rather_than_printing_nothing() -> None:
 def test_an_open_condition_lists_its_ready_acts_apart_and_the_choice_is_left_open() -> None:
     text = render_text(diagnose(load_workspace(EXAMPLES / CASE).by_id))
     assert "  open definiteness\n    ready: explication" in text
-    assert "    waiting for an input: operationalization (concept)" in text
+    assert "    waiting for concept: operationalization; requires concept" in text
     assert "open candidates: 1 answer recorded, none yet passes the admissibility tests" in text
     assert "as docs/procedures/inquiry/next-act.md states\n" in text
 
@@ -39,6 +44,7 @@ def test_the_activities_and_the_input_types_named_are_pointed_to_their_definitio
     text = render_text(diagnose(load_workspace(EXAMPLES / CASE).by_id))
     last = text.rstrip().splitlines()[-1]
     assert last.startswith("each activity is defined in the note of its family")
+    assert "each name after 'waiting for' is a missing input type" in last
     assert ACTIVITY_NOTES in last and PRODUCT_TYPE_NOTE in last
     assert (ROOT / ACTIVITY_NOTES).is_file() and (ROOT / PRODUCT_TYPE_NOTE).is_file()
 

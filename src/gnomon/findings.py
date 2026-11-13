@@ -17,6 +17,9 @@ See Also
 gnomon.sarif : the writer of a findings log.
 """
 
+# The finding catalogue remains one registry so rule identities and their guidance cannot drift.
+# pylint: disable=too-many-lines
+
 from __future__ import annotations
 
 import difflib
@@ -24,8 +27,16 @@ import re
 from dataclasses import dataclass
 from typing import Any, Iterable, Iterator, Mapping
 
+from .rule_guidance import load_rule_guidance, validate_guidance_coverage
+
 #: The levels of a rule: a defect that fails the check, or a warning that does not.
 LEVELS = ("error", "warning")
+
+#: The result classes emitted by checks; diagnoses and verdicts use other interface classes.
+CONTRACT_VALIDATION = "contract validation"
+METHOD_CONFORMANCE_FINDING = "method-conformance finding"
+COMPUTED_INQUIRY_DIAGNOSIS = "computed inquiry diagnosis"
+FINDING_RESULT_CLASSES = (CONTRACT_VALIDATION, METHOD_CONFORMANCE_FINDING)
 
 #: The form of a rule identifier: lowercase components separated by ``/``.
 RULE_ID = re.compile(r"[a-z0-9][a-z0-9._-]*(?:/[a-z0-9][a-z0-9._-]*)+")
@@ -33,37 +44,64 @@ RULE_ID = re.compile(r"[a-z0-9][a-z0-9._-]*(?:/[a-z0-9][a-z0-9._-]*)+")
 
 @dataclass(frozen=True)
 class Rule:
-    """One kind of defect, with its stable identifier, a one-line description and its level.
+    """One kind of defect, with its stable identifier and interface metadata.
 
     A rule of level ``error`` reports a defect, and its findings fail the check. A rule of level
     ``warning`` reports a specification that the records usually state in a case they show,
     without requiring it, so its findings never fail the check.
 
+    ``result_class`` distinguishes contract validation from method-conformance findings. Published
+    catalogue entries supply ``repair_condition`` and ``documentation_target``; standalone rules
+    may omit them.
+
     Raises
     ------
     ValueError
-        If the identifier is not lowercase components separated by ``/``, or the level is neither
-        ``error`` nor ``warning``.
+        If the identifier is malformed, the level is unknown, or the result class is not emitted
+        by the checks.
     """
 
     # pylint: disable-next=disallowed-name  # the field mirrors the key `id` of a rule
     id: str
     description: str
     level: str = "error"
+    result_class: str = METHOD_CONFORMANCE_FINDING
+    repair_condition: str | None = None
+    documentation_target: str | None = None
 
     def __post_init__(self) -> None:
         if not RULE_ID.fullmatch(self.id):
             raise ValueError(f"malformed rule identifier: {self.id!r}")
         if self.level not in LEVELS:
             raise ValueError(f"unknown level of the rule {self.id}: {self.level!r}")
+        if self.result_class not in FINDING_RESULT_CLASSES:
+            raise ValueError(f"unknown result class of the rule {self.id}: {self.result_class!r}")
 
 
 _CATALOGUE: list[Rule] = []
+_GUIDANCE = load_rule_guidance()
 
 
-def _rule(identifier: str, description: str, level: str = "error") -> Rule:
+def _rule(
+    identifier: str,
+    description: str,
+    level: str = "error",
+    *,
+    result_class: str = METHOD_CONFORMANCE_FINDING,
+) -> Rule:
     """Declare one rule of the catalogue."""
-    rule = Rule(identifier, description, level)
+    try:
+        guidance = _GUIDANCE[identifier]
+    except KeyError as error:
+        raise ValueError(f"published rule {identifier!r} has no repair guidance") from error
+    rule = Rule(
+        identifier,
+        description,
+        level,
+        result_class,
+        guidance.repair_condition,
+        guidance.documentation_target,
+    )
     _CATALOGUE.append(rule)
     return rule
 
@@ -82,19 +120,22 @@ ITINERARY_UNFILLED_INPUT = _rule(
     "The inputs of a step do not fill an input of its activity in number.",
 )
 ITINERARY_UNACCEPTED_INPUT = _rule(
-    "itinerary/unaccepted-input", "A step gives an input of a type that its activity does not take."
+    "itinerary/unaccepted-input",
+    "A step gives an input of a type that its activity does not take.",
 )
 ITINERARY_MISTYPED_STEP_INPUT = _rule(
     "itinerary/mistyped-step-input", "An input names a step that produces another type."
 )
 ITINERARY_INPUT_WITHOUT_PRODUCER = _rule(
-    "itinerary/input-without-producer", "An input of a type that no record holds names no step."
+    "itinerary/input-without-producer",
+    "An input of a type that no record holds names no step.",
 )
 ITINERARY_UNRESOLVED_INPUT = _rule(
     "itinerary/unresolved-input", "An input names neither a step nor a record."
 )
 ITINERARY_MISTYPED_RECORD_INPUT = _rule(
-    "itinerary/mistyped-record-input", "An input names a record that does not hold its type."
+    "itinerary/mistyped-record-input",
+    "An input names a record that does not hold its type.",
 )
 ITINERARY_UNADMITTED_ATTITUDE = _rule(
     "itinerary/unadmitted-attitude",
@@ -102,7 +143,8 @@ ITINERARY_UNADMITTED_ATTITUDE = _rule(
     " take.",
 )
 ITINERARY_MISTYPED_OUTPUT = _rule(
-    "itinerary/mistyped-output", "The output type of a step is not the output of its activity."
+    "itinerary/mistyped-output",
+    "The output type of a step is not the output of its activity.",
 )
 ITINERARY_MISTYPED_OUTPUT_RECORD = _rule(
     "itinerary/mistyped-output-record",
@@ -128,7 +170,8 @@ ITINERARY_FOREIGN_DERIVATION = _rule(
     " step.",
 )
 ITINERARY_UNREADABLE_STATE = _rule(
-    "itinerary/unreadable-state", "An input names a record at a revision that cannot be read."
+    "itinerary/unreadable-state",
+    "An input names a record at a revision that cannot be read.",
 )
 ITINERARY_UNVERSIONED_QUESTION_REVISION = _rule(
     "itinerary/unversioned-question-revision",
@@ -159,6 +202,11 @@ ITINERARY_MISMATCHED_MODE = _rule(
     "The mode of a step is not admitted, or not the mode of its activity.",
 )
 ITINERARY_CYCLE = _rule("itinerary/cycle", "The references between the steps form a cycle.")
+ITINERARY_MALFORMED_APPRAISAL = _rule(
+    "itinerary/malformed-appraisal",
+    "An act appraisal lacks the identifiers, ordered values, or grounded judgments required by"
+    " its comparison rule.",
+)
 
 # --- Activity registry ----------------------------------------------------------------------------
 
@@ -181,10 +229,12 @@ REGISTRY_UNADMITTED_ATTITUDE = _rule(
     "An activity qualifies an input by an attitude that the vocabulary of answers does not admit.",
 )
 REGISTRY_UNADMITTED_MODE = _rule(
-    "registry/unadmitted-mode", "An activity proceeds by a mode that the vocabulary does not admit."
+    "registry/unadmitted-mode",
+    "An activity proceeds by a mode that the vocabulary does not admit.",
 )
 REGISTRY_FOREIGN_NORM = _rule(
-    "registry/foreign-norm", "The norm of an activity is not the test named after that activity."
+    "registry/foreign-norm",
+    "The norm of an activity is not the test named after that activity.",
 )
 
 # --- Completeness and consistency of records ------------------------------------------------------
@@ -192,6 +242,10 @@ REGISTRY_FOREIGN_NORM = _rule(
 COMPLETENESS_UNMET_REQUIREMENT = _rule(
     "completeness/unmet-requirement",
     "A record leaves unfilled a specification that it always carries.",
+)
+COMPLETENESS_UNMET_SCOPE = _rule(
+    "completeness/unmet-scope",
+    "An inquiry leaves unmet a record, field or state required by its selected validation scope.",
 )
 COMPLETENESS_UNMET_COMMITMENT = _rule(
     "completeness/unmet-commitment",
@@ -226,7 +280,8 @@ COMPLETENESS_UNRESOLVED_SLOT = _rule(
     "A subject slot holds neither a record identifier nor a placeholder.",
 )
 COMPLETENESS_UNKNOWN_SLOT_RECORD = _rule(
-    "completeness/unknown-slot-record", "A subject slot names an identifier that no record carries."
+    "completeness/unknown-slot-record",
+    "A subject slot names an identifier that no record carries.",
 )
 COMPLETENESS_MISTYPED_SLOT_RECORD = _rule(
     "completeness/mistyped-slot-record",
@@ -241,7 +296,8 @@ COMPLETENESS_FOREIGN_BACKGROUND = _rule(
     "A question admits a background that describes another target than its own.",
 )
 COMPLETENESS_UNKNOWN_ASSESSED = _rule(
-    "completeness/unknown-assessed", "An assessment assesses a record that does not exist."
+    "completeness/unknown-assessed",
+    "An assessment assesses a record that does not exist.",
 )
 COMPLETENESS_UNASSESSABLE_RECORD = _rule(
     "completeness/unassessable-record",
@@ -252,7 +308,8 @@ COMPLETENESS_MISMATCHED_STANDARD = _rule(
     "An assessment is made against a record of the wrong kind for what it assesses.",
 )
 COMPLETENESS_MISSHAPEN_TESTS = _rule(
-    "completeness/misshapen-tests", "The tests of an assessment do not fit what it assesses."
+    "completeness/misshapen-tests",
+    "The tests of an assessment do not fit what it assesses.",
 )
 COMPLETENESS_UNKNOWN_CONSTRAINT = _rule(
     "completeness/unknown-constraint",
@@ -298,7 +355,8 @@ COMPLETENESS_MALFORMED_CREDENCE = _rule(
     "completeness/malformed-credence", "A credence holds neither a value nor a basis."
 )
 COMPLETENESS_CREDENCE_OUT_OF_RANGE = _rule(
-    "completeness/credence-out-of-range", "The value of a credence is no number between 0 and 1."
+    "completeness/credence-out-of-range",
+    "The value of a credence is no number between 0 and 1.",
 )
 COMPLETENESS_CREDENCE_WITHOUT_BASIS = _rule(
     "completeness/credence-without-basis", "A credence states no basis."
@@ -374,7 +432,8 @@ COMPLETENESS_UNJUSTIFIED_EXPLANANS_BOUND = _rule(
     "The bound on the explanans states an axis without a justification.",
 )
 COMPLETENESS_UNSTATED_STANDING = _rule(
-    "completeness/unstated-standing", "A virtue that the question weighs states no standing."
+    "completeness/unstated-standing",
+    "A virtue that the question weighs states no standing.",
 )
 COMPLETENESS_RESTRICTION_CONTENT = _rule(
     "completeness/restriction-content",
@@ -387,6 +446,7 @@ COMPLETENESS_ANONYMOUS_RESTRICTION = _rule(
 CONTRACT_VIOLATION = _rule(
     "contract/violation",
     "A record breaks the contract that its field `_schema` names: a type, a field or a form.",
+    result_class=CONTRACT_VALIDATION,
 )
 COMPLETENESS_UNSTATED_DOMAIN = _rule(
     "completeness/unstated-domain",
@@ -538,7 +598,8 @@ DERIVATION_REPEATED_UNIT = _rule(
     "derivation/repeated-unit", "Several units of a derivation share one identifier."
 )
 DERIVATION_UNKNOWN_UNIT = _rule(
-    "derivation/unknown-unit", "An identifier names no unit of the derivation of the expected kind."
+    "derivation/unknown-unit",
+    "An identifier names no unit of the derivation of the expected kind.",
 )
 DERIVATION_UNADMITTED_PAIR = _rule(
     "derivation/unadmitted-pair",
@@ -573,7 +634,8 @@ DERIVATION_FAILED_KERNEL = _rule(
     "A route from the premises to a consequence of the root sought avoids the declared kernel.",
 )
 DERIVATION_UNRECORDED_CONSEQUENCE = _rule(
-    "derivation/unrecorded-consequence", "A consequence of the root sought names no record."
+    "derivation/unrecorded-consequence",
+    "A consequence of the root sought names no record.",
 )
 DERIVATION_IDLE_MOVE = _rule(
     "derivation/idle-move",
@@ -664,10 +726,12 @@ VOCABULARY_MISTYPED_SYMBOL = _rule(
     "A symbol was read by YAML as a value of another type than a string.",
 )
 VOCABULARY_SPLIT_EXPRESSION = _rule(
-    "vocabulary/split-expression", "An expression was split into fragments by the serializer."
+    "vocabulary/split-expression",
+    "An expression was split into fragments by the serializer.",
 )
 VOCABULARY_CORRUPTED_NOTATION = _rule(
-    "vocabulary/corrupted-notation", "A notation holds a control character left by an escape."
+    "vocabulary/corrupted-notation",
+    "A notation holds a control character left by an escape.",
 )
 VOCABULARY_MISPLACED_SHARING = _rule(
     "vocabulary/misplaced-sharing",
@@ -678,13 +742,16 @@ VOCABULARY_UNFIXED_PARAMETER = _rule(
     "A parameter is indexed by the index of evolution, along which it would vary.",
 )
 VOCABULARY_DOUBLY_DEFINED = _rule(
-    "vocabulary/doubly-defined", "A quantity carries both an expression and a condition."
+    "vocabulary/doubly-defined",
+    "A quantity carries both an expression and a condition.",
 )
 VOCABULARY_UNOWNED_QUANTITY = _rule(
-    "vocabulary/unowned-quantity", "A quantity names an owner that is no declared external system."
+    "vocabulary/unowned-quantity",
+    "A quantity names an owner that is no declared external system.",
 )
 VOCABULARY_UNSELECTED_CONDITION = _rule(
-    "vocabulary/unselected-condition", "A quantity fixed by a condition states no selection rule."
+    "vocabulary/unselected-condition",
+    "A quantity fixed by a condition states no selection rule.",
 )
 VOCABULARY_VACUOUS_SHARED = _rule(
     "vocabulary/vacuous-shared", "A quantity marks `shared` while taking no signature."
@@ -712,7 +779,8 @@ VOCABULARY_FOREIGN_COORDINATES = _rule(
     " it.",
 )
 VOCABULARY_UNRESOLVED = _rule(
-    "vocabulary/unresolved", "A reference or a formula identifier resolves to no declaration."
+    "vocabulary/unresolved",
+    "A reference or a formula identifier resolves to no declaration.",
 )
 VOCABULARY_UNPARSED_EXPRESSION = _rule(
     "vocabulary/unparsed-expression",
@@ -727,7 +795,8 @@ VOCABULARY_OVERREACHING_ENTRY = _rule(
     "An entry asserts of every member what only the members of one variant carry.",
 )
 VOCABULARY_MISATTRIBUTED_APPEAL = _rule(
-    "vocabulary/misattributed-appeal", "A factor appeals to something that is no external system."
+    "vocabulary/misattributed-appeal",
+    "A factor appeals to something that is no external system.",
 )
 VOCABULARY_UNBORNE_VARIANT = _rule(
     "vocabulary/unborne-variant",
@@ -738,7 +807,8 @@ VOCABULARY_MISNAMED_VARIANT = _rule(
     "A variant mark names a variant that the target does not declare.",
 )
 VOCABULARY_UNORDERED_RELATION = _rule(
-    "vocabulary/unordered-relation", "A relation names no ordered product of declared kinds."
+    "vocabulary/unordered-relation",
+    "A relation names no ordered product of declared kinds.",
 )
 VOCABULARY_RELATION_ENDS = _rule(
     "vocabulary/relation-ends",
@@ -748,7 +818,8 @@ VOCABULARY_SHORT_RELATION = _rule(
     "vocabulary/short-relation", "A relation among laws orders fewer than two of them."
 )
 VOCABULARY_UNKNOWN_RELATION_LAW = _rule(
-    "vocabulary/unknown-relation-law", "A relation among laws names no law of the record."
+    "vocabulary/unknown-relation-law",
+    "A relation among laws names no law of the record.",
 )
 VOCABULARY_MISROUTED_RELATION = _rule(
     "vocabulary/misrouted-relation",
@@ -772,7 +843,8 @@ VOCABULARY_UNKNOWN_RECORD = _rule(
     "A reference names a record that no record of the workspace declares.",
 )
 VOCABULARY_UNKNOWN_UNIT = _rule(
-    "vocabulary/unknown-unit", "A reference names a unit that its record does not declare."
+    "vocabulary/unknown-unit",
+    "A reference names a unit that its record does not declare.",
 )
 VOCABULARY_REPEATED_SYMBOL = _rule(
     "vocabulary/repeated-symbol", "A record declares one symbol more than once."
@@ -784,6 +856,7 @@ VOCABULARY_UNUSED_DECLARATION = _rule(
 
 #: Every rule a check of gnomon can report, in the order of declaration.
 RULES: tuple[Rule, ...] = tuple(_CATALOGUE)
+validate_guidance_coverage((rule.id for rule in RULES), _GUIDANCE)
 
 
 # --- Findings and their locus ---------------------------------------------------------------------
@@ -806,12 +879,16 @@ class Finding:
     discriminator : str
         What separates two findings of one rule at one locus, derived from this finding alone;
         empty when the locus suffices.
+    controlled_by : tuple of str or int or None
+        Field whose authored value or presence activates this finding; None when the finding is
+        independent or its controller is not a field of the same record.
     """
 
     rule: Rule
     path: tuple[Segment, ...]
     text: str
     discriminator: str = ""
+    controlled_by: tuple[Segment, ...] | None = None
 
     @property
     def locus(self) -> str:
@@ -959,7 +1036,11 @@ def close_match_hint(name: str, candidates: Iterable[str]) -> str:
 
 
 def finding(
-    rule: Rule, text: str, *segments: Segment | Key | Entry, value: str | None = None
+    rule: Rule,
+    text: str,
+    *segments: Segment | Key | Entry,
+    value: str | None = None,
+    controlled_by: tuple[Segment, ...] | None = None,
 ) -> Finding:
     """Return the finding of ``rule`` at the field path ``segments``.
 
@@ -989,7 +1070,13 @@ def finding(
         name = resolved if isinstance(resolved, str) else None
     if value is not None:
         parts.append(value)
-    return Finding(rule, tuple(path), text, "/".join(token(part) for part in parts))
+    return Finding(
+        rule,
+        tuple(path),
+        text,
+        "/".join(token(part) for part in parts),
+        controlled_by,
+    )
 
 
 def texts(findings: Iterable[Finding]) -> list[str]:

@@ -8,3 +8,4 @@ The registries of this folder declare the epistemic activities, the products tha
 - [Words of the statement frame](statements.yml): to find the words of each clause of the statement frame.
 - [Rules of a derivation](derivations.yml): to find the admitted pairs of an interpretation, the kinds of a non-routine move and the tests that confirm a posit.
 - [Base dimensions](dimensions.yml): to find the base dimensions that a dimensional formula may name.
+- [Graph presentation](graph-presentation.yml): selects category, kind and relation defaults for generated graphs

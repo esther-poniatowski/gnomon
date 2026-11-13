@@ -2,34 +2,74 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/concept.contract.schema.yml
 title: Concept record contract
-description: The record type `concept`, bound to `gnomon:concept@1`, with its closed vocabularies.
+description: The record type `concept`, bound to `gnomon:concept@2`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/concept.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:concept@1
+    const: gnomon:concept@2
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: concept
+    examples:
+    - concept
   id:
     pattern: ^concept\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - concept.topic.name
+  title:
+    examples:
+    - SHORT NAME OF THE CONCEPT
   status:
+    examples:
+    - provisional
     enum:
     - provisional
     - stabilized
     - retracted
     - null
+  gloss:
+    description: 'One sentence that fixes the meaning of the concept, without asserting a claim about
+      its instances.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
   kind:
+    description: 'The kind of entity that the concept represents: a system, a class, a kind or a subclass
+      included, a property, or a process.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
     enum:
     - system
     - subtype-or-class
     - property
     - process
     - null
+  antagonist:
+    description: 'The concept of the opposed property, for a concept of the kind property.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
+  broader:
+    description: 'The broader concept that this one specializes, named from the narrower concept only.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
+  source:
+    description: 'The note or the publication that states the concept and its grounds.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
   confusions:
+    description: 'The concepts with which this one risks being conflated, each with the distinction that
+      separates them.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
     items:
       propertyNames:
         enum:
@@ -38,7 +78,38 @@ properties:
         - blocking_feature
         - risk
         - consequence
+      properties:
+        other:
+          description: 'The concept, or the term in use, with which this one risks being conflated.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
+        axis:
+          description: 'The axis along which the two concepts differ.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
+        blocking_feature:
+          description: 'The feature of one concept that the other lacks, which blocks their interchange.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
+        risk:
+          description: 'The shared feature that makes the two concepts easy to conflate.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
+        consequence:
+          description: 'The error that the inquiry commits when it conflates the two concepts.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
   relations:
+    description: 'the relations to other concepts: `co-defined-with`, for a set of concepts whose definitions
+      depend on one another
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
     items:
       propertyNames:
         enum:
@@ -46,9 +117,44 @@ properties:
         - members
       properties:
         relation:
+          description: 'how this concept stands to the others, one relation of the relation registry
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
           enum:
           - co-defined-with
           - null
+        members:
+          description: 'the other concepts of the set
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
+          examples:
+          - &id001
+            - concept.TOPIC.NAME
+          items:
+            examples: *id001
+  definition:
+    description: 'A pointer to the full definition object of the concept, when one exists.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/concept.md).'
+    examples:
+    - POINTER TO A FULL DEFINITION OBJECT
+  maturity:
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
 propertyNames:
   enum:

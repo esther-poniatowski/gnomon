@@ -2,21 +2,45 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/answer.contract.schema.yml
 title: Answer record contract
-description: The record type `answer`, bound to `gnomon:answer@1`, with its closed vocabularies.
+description: The record type `answer`, bound to `gnomon:answer@3`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/answer.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:answer@1
+    const: gnomon:answer@3
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: answer
+    examples:
+    - answer
   id:
     pattern: ^ans\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - ans.topic.name
+  title:
+    examples:
+    - SHORT NAME OF THE CANDIDATE ANSWER
+  answers:
+    examples:
+    - quest.TOPIC.NAME
+  sources:
+    description: 'per source, a provenance pointer to existing material from which the answer was adopted;
+      the content stays external and the pointer makes no evidential claim
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+    items:
+      examples:
+      - POINTER TO AN EXISTING NOTE, PUBLICATION, MODEL OR DATA SET
   claim:
+    description: '"[the claim of the answer]", as a reading, and, once formalized, an expression over
+      declared symbols
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     propertyNames:
       enum:
       - reading
@@ -26,7 +50,34 @@ properties:
       - presuppositions
       - interventions
     properties:
+      reading:
+        description: 'the claim in words
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+        examples:
+        - THE CLAIM IN WORDS
+      expression:
+        description: 'empty while the claim is not formalized, with a caveat naming the gap
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+        examples:
+        - EXPRESSION OVER DECLARED SYMBOLS
+      caveat:
+        description: 'the content of the claim that the record leaves unstated, and the reason for the
+          omission
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+        examples:
+        - THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION
       realizations:
+        description: 'fill when the question bounds the explanans to the link between two substrates;
+          one entry per role
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         items:
           propertyNames:
             enum:
@@ -34,7 +85,42 @@ properties:
             - realizes
             - by
             - reading
+          properties:
+            id:
+              description: 'a name of the realization, unique within the answer
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+              examples:
+              - MAPPING
+            realizes:
+              description: 'a role, declared by the model independently of any substrate
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+              examples:
+              - SYMBOL
+            by:
+              description: 'an expression over the symbols specific to the substrate that realizes the
+                role
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+              examples:
+              - EXPRESSION OVER THE SYMBOLS SPECIFIC TO THE SUBSTRATE
+            reading:
+              description: 'only content beyond the expression of `by`
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+              examples:
+              - THE STRUCTURE THAT THE MAPPING PRESERVES
       presuppositions:
+        description: 'optional; one entry per commitment that the claim takes for granted beyond the presuppositions
+          of its question and the existence that the conditions of its quantities presuppose
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         items:
           propertyNames:
             enum:
@@ -42,7 +128,51 @@ properties:
             - reading
             - expression
             - held_by
+          properties:
+            id:
+              description: 'A descriptive identifier of the presupposition, unique within the record.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+            reading:
+              description: 'The commitment that the claim and every other direct answer of its question
+                take for granted.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+            expression:
+              description: 'The presupposition in the expression syntax, over declared symbols.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+              examples:
+              - EXPRESSION OVER DECLARED SYMBOLS
+            held_by:
+              description: 'The law of a background or of a model, or the consequence of a derivation,
+                that establishes the presupposition; empty while it is undischarged. A presupposition
+                that another answer establishes is a relation `presupposes` to that answer.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+      interventions:
+        description: 'For a counterfactual claim, the admissible interventions, each named by an experiment
+          or a simulation run whose protocol states it, or by the parameter or the variable of a model
+          that it sets; naming them marks the claim as counterfactual.
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+        items:
+          examples:
+          - REFERENCE
   grounds:
+    description: 'what the claim depends on: per ground, its content, its *role*: `assumption` · `idealization`
+      · `condition` · `datum` · `warrant` · `criterion`, and the record that holds it. A ground with the
+      role `idealization` also states the distortion that it introduces, its motive (tractability, isolation
+      or limit), the gain that it provides, the range over which it holds, and whether it is removable
+      (controlled, ineliminable or unknown)
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     items:
       propertyNames:
         enum:
@@ -57,7 +187,19 @@ properties:
         - range
         - removable
       properties:
+        id:
+          description: 'a name of the ground, unique within the answer
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - GROUND
         role:
+          description: 'the part that the ground plays for the claim: an assumption, an idealization,
+            a condition, a datum, a warrant or a criterion
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
           enum:
           - assumption
           - idealization
@@ -66,25 +208,105 @@ properties:
           - warrant
           - criterion
           - null
+        content:
+          description: 'the ground in words
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - THE GROUND IN WORDS
+        record:
+          description: 'the record or the unit that holds the ground: a law of the model or of the background,
+            or an argued pair of a binding, for a warrant; a restriction of the domain; a criterion of
+            the question; a phenomenon for a datum
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - RECORD.UNIT
+        version:
+          description: 'datum only: the version of the data
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - VERSION
+        distortion:
+          description: 'idealization only, as are the four keys below
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - THE DISTORTION OF THE TARGET THAT THE IDEALIZATION INTRODUCES
         motive:
+          description: 'for an idealization, the reason for making it: tractability, isolation or a limit
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
           enum:
           - tractability
           - isolation
           - limit
           - null
+        gain:
+          description: 'for an idealization, the derivation that it makes possible, or the factor that
+            it exposes
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - THE DERIVATION THAT THE IDEALIZATION MAKES POSSIBLE, OR THE FACTOR THAT IT EXPOSES
+        range:
+          description: 'for an idealization, an expression over declared symbols satisfied wherever the
+            idealization holds
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE IDEALIZATION HOLDS
         removable:
+          description: 'for an idealization, whether its distortion can be removed: controlled, ineliminable
+            or unknown
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
           enum:
           - controlled
           - ineliminable
           - unknown
           - null
   abstractions:
+    description: 'per factor, the factor left out
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     items:
       propertyNames:
         enum:
         - id
         - factor
+      properties:
+        id:
+          description: 'a name of the abstraction, unique within the answer
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - ABSTRACTION
+        factor:
+          description: 'the factor that the abstraction leaves out
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - THE FACTOR LEFT OUT
   dependence:
+    description: 'how the claim depends on its grounds: per entry, a minimal set of grounds that suffices
+      for the claim; the result of a sensitivity analysis over one ground [saltelli2008]; or the result
+      of a robustness analysis across models that share the claimed structure [weisberg2006]
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     items:
       propertyNames:
         enum:
@@ -94,12 +316,50 @@ properties:
         - result
       properties:
         kind:
+          description: 'the form of the dependence: a minimal set of grounds, a sensitivity analysis or
+            a robustness analysis
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
           enum:
           - minimal-set
           - sensitivity
           - robustness
           - null
+        grounds:
+          description: 'grounds of this answer, by identifier
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - &id001
+            - GROUND
+          items:
+            examples: *id001
+        models:
+          description: 'robustness only: the models compared
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - &id002
+            - mod.TOPIC.NAME
+          items:
+            examples: *id002
+        result:
+          description: 'omit for a minimal sufficient set
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - THE RESULT OF THE ANALYSIS
   route:
+    description: '`derivation` · `proof` · `simulation` · `estimation` · `measurement`, the records on
+      which it runs (the target, one model, or a family of models), and a pointer to the derivation, the
+      code or the data
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     propertyNames:
       enum:
       - kind
@@ -109,6 +369,11 @@ properties:
       - pointer
     properties:
       kind:
+        description: 'how the answer is obtained: a derivation, a proof, a simulation, an estimation or
+          a measurement
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         enum:
         - derivation
         - proof
@@ -116,12 +381,59 @@ properties:
         - estimation
         - measurement
         - null
+      runs_on:
+        description: 'the target system, one model, or every model of a family, by identifier
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+        examples:
+        - &id003
+          - RECORD
+        items:
+          examples: *id003
       family_fidelity:
+        description: 'fill for a family of models only
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         enum:
         - per-member
         - ensemble
         - null
+      derivations:
+        description: 'for a derivation or a proof; the derivation records on which the claim rests
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+        examples:
+        - &id004
+          - derivation.TOPIC.NAME
+        items:
+          examples: *id004
+      pointer:
+        description: 'a pointer to the code, the data or a published derivation; a recorded derivation
+          is named in `derivations`, and its internal steps stay in it
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+        examples:
+        - POINTER TO THE CODE, THE DATA OR A PUBLISHED DERIVATION
+  domain:
+    description: 'the systems and the conditions over which the claim holds
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+  variant:
+    description: 'the variant of the target that the answer accounts for, and one further variant for
+      each of its parts with a narrower scope
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
   status:
+    description: 'the attitude taken toward the answer: entertained · hypothesized · accepted · retracted
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     enum:
     - entertained
     - hypothesized
@@ -129,6 +441,11 @@ properties:
     - retracted
     - null
   support:
+    description: 'the kind of evidence for the answer as a whole: unsupported · informal · formally-proven
+      · empirically-supported
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     enum:
     - unsupported
     - informal
@@ -136,6 +453,10 @@ properties:
     - empirically-supported
     - null
   uncertainty:
+    description: 'the uncertainty of each value, as an interval, a distribution or a bound
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     items:
       propertyNames:
         enum:
@@ -143,19 +464,47 @@ properties:
         - form
         - expression
       properties:
+        of:
+          description: 'the symbol of the value whose uncertainty the entry states
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - SYMBOL
         form:
+          description: 'the form of the uncertainty, told apart by the probability that it states
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
           enum:
           - interval
           - distribution
           - bound
           - null
+        expression:
+          description: 'an expression over declared symbols stating the uncertainty
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
   modal_strength:
+    description: 'the strength that the answer claims: actual · possible · necessary
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     enum:
     - actual
     - possible
     - necessary
     - null
   erotetic_relation:
+    description: 'how the answer stands to its question: `complete` · `partial` · `corrective` · `reformulating`,
+      with the presupposition that a corrective answer denies, or the revised question that a reformulating
+      answer answers
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     propertyNames:
       enum:
       - value
@@ -163,32 +512,91 @@ properties:
       - revised_question
     properties:
       value:
+        description: 'how the answer stands to its question: complete, partial, corrective or reformulating
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         enum:
         - complete
         - partial
         - corrective
         - reformulating
         - null
+      denies:
+        description: 'corrective only
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+        examples:
+        - THE PRESUPPOSITION OF THE QUESTION THAT THE ANSWER SHOWS FALSE
+      revised_question:
+        description: 'reformulating only: the question that the answer answers and is assessed against
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+        examples:
+        - quest.TOPIC.NAME
   binding:
+    description: 'the record through which the claim bears on the target: per model, the identifier and
+      the version of one binding of that model to the phenomenon of the question
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     items:
       propertyNames:
         enum:
         - record
         - version
+      properties:
+        record:
+          description: 'the identifier of one binding of the model to the phenomenon of the question
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - bind.TOPIC.NAME
+        version:
+          description: 'the version of that binding on which the claim rests
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - VERSION
   use:
+    description: 'the purpose of an answer whose claim bears on no target: a use such as `tool`, `proof-of-principle`,
+      `conceptual-exploration` or `understanding`, with the property that the model must have for that
+      use
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     propertyNames:
       enum:
       - value
       - property
     properties:
       value:
+        description: 'a new use enters the vocabulary registry first
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         enum:
         - tool
         - proof-of-principle
         - conceptual-exploration
         - understanding
         - null
+      property:
+        description: 'the property that the model must have for the declared use
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+        examples:
+        - THE PROPERTY THAT THE MODEL MUST HAVE FOR THAT USE
   aim_block:
+    description: 'the block of the aim of the question
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     propertyNames:
       enum:
       - description
@@ -199,11 +607,20 @@ properties:
       - model_properties
     properties:
       description:
+        description: 'the block for the aim `description`: the values or the characterization of the observables
+          and the features of the phenomenon
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         propertyNames:
           enum:
           - values
         properties:
           values:
+            description: 'one entry per observable or feature that the request covers, per source of variation
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
             items:
               propertyNames:
                 enum:
@@ -211,7 +628,43 @@ properties:
                 - across
                 - data_version
                 - value
+              properties:
+                of:
+                  description: 'the observable or the feature whose value the entry states
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - phen.TOPIC.NAME.SYMBOL
+                across:
+                  description: 'the source of variation of the phenomenon whose quantification the value
+                    takes; omit for a single instance
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - SYMBOL
+                data_version:
+                  description: 'for a value that the estimator of the phenomenon computes: the version
+                    of the data on which it runs
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - VERSION
+                value:
+                  description: 'only for a characterization that no estimator computes
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - EXPRESSION OVER DECLARED SYMBOLS
       exploration:
+        description: 'the block for the aim `exploration`: the space explored, its equivalence criterion,
+          and the classes found
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         propertyNames:
           enum:
           - space
@@ -219,6 +672,10 @@ properties:
           - classes
         properties:
           space:
+            description: 'the observables and the varied factors
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
             propertyNames:
               enum:
               - origin
@@ -226,17 +683,55 @@ properties:
               - varied
             properties:
               origin:
+                description: 'whether the space is an input fixed by the question or an output produced
+                  by the answer
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
                 enum:
                 - input
                 - output
                 - null
+              observables:
+                description: 'of the phenomenon
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                examples:
+                - &id005
+                  - SYMBOL
+                items:
+                  examples: *id005
               varied:
+                description: 'the factors varied across the space, each with its range
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
                 items:
                   propertyNames:
                     enum:
                     - factor
                     - range
+                  properties:
+                    factor:
+                      description: 'the symbol of the varied factor
+
+
+                        [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                      examples:
+                      - SYMBOL
+                    range:
+                      description: 'a set expression over declared symbols giving the range of the factor
+
+
+                        [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                      examples:
+                      - SET EXPRESSION OVER DECLARED SYMBOLS
           criterion:
+            description: 'the equivalence criterion that partitions the space
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
             propertyNames:
               enum:
               - origin
@@ -244,11 +739,34 @@ properties:
               - reading
             properties:
               origin:
+                description: 'whether the criterion is an input fixed by the question or an output produced
+                  by the answer
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
                 enum:
                 - input
                 - output
                 - null
+              expression:
+                description: 'an expression over declared symbols stating the equivalence criterion
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                examples:
+                - EXPRESSION OVER DECLARED SYMBOLS
+              reading:
+                description: 'the criterion in words
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                examples:
+                - THE CRITERION IN WORDS
           classes:
+            description: 'one entry per class found
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
             items:
               propertyNames:
                 enum:
@@ -257,25 +775,87 @@ properties:
                 - reading
                 - detection
               properties:
+                id:
+                  description: 'a name of the class, unique within the answer
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - CLASS
+                pattern:
+                  description: 'an expression over declared symbols stating the pattern of the class
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - EXPRESSION OVER DECLARED SYMBOLS
+                reading:
+                  description: 'the pattern in words
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - THE PATTERN IN WORDS
                 detection:
+                  description: 'the result of the detection criterion of the phenomenon
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
                   enum:
                   - pass
                   - fail
                   - pending
                   - null
       prediction:
+        description: 'the block for the aim `prediction`: per predicted output, the condition of the target
+          under which it is predicted, and its value or distribution
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         propertyNames:
           enum:
           - outputs
         properties:
           outputs:
+            description: 'one entry per predicted output
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
             items:
               propertyNames:
                 enum:
                 - target
                 - condition
                 - value
+              properties:
+                target:
+                  description: 'one of the outputs to match that the required accuracy of the question
+                    names
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - phen.TOPIC.NAME.SYMBOL
+                condition:
+                  description: 'the condition of the target under which the output is predicted
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - EXPRESSION OVER DECLARED SYMBOLS
+                value:
+                  description: 'a value or a distribution
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - EXPRESSION OVER DECLARED SYMBOLS
       explanation:
+        description: 'the block for the aim `explanation`: the contrastive explanandum, the explanatory
+          claim, the relation and the factors
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         propertyNames:
           enum:
           - contrastive_explanandum
@@ -283,14 +863,51 @@ properties:
           - relation
           - factors
         properties:
+          contrastive_explanandum:
+            description: 'the fact and the foils that the explanation separates, read from the contrast
+              of the question, or the fact alone when its locus is `none`
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
           explanatory_claim:
+            description: 'the claim that named dependences of the core are explanatory: they make the
+              difference between the fact and its foils, or they make the fact arise
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
             items:
               propertyNames:
                 enum:
                 - ground
                 - explanatory
                 - determinant
+              properties:
+                ground:
+                  description: 'the ground on which the claim depends
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - GROUND
+                explanatory:
+                  description: 'false for a dependence that the explanation declares not explanatory
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - true
+                determinant:
+                  description: 'the property that makes the law, the structure or the derivation relevant
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - THE PROPERTY THAT MAKES THE LAW, THE STRUCTURE OR THE DERIVATION RELEVANT
           relation:
+            description: 'the type of the relation, one of the requested relations
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
             enum:
             - causal-intervention
             - causal-mechanistic
@@ -301,6 +918,14 @@ properties:
             - mathematical
             - null
           factors:
+            description: 'per factor, its claim: a *condition* on a quantity, a *property* of a structure
+              or of a law, or a feature of the *organization*; the element on which it bears; the laws
+              and relations that carry its effect; the explanandum variable or manifestation that it accounts
+              for; the foils that it rules out; the external systems on which it draws; and, in `procedure`,
+              only the steps that the chain from the factor to the phenomenon leaves unstated
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
             items:
               propertyNames:
                 enum:
@@ -319,21 +944,137 @@ properties:
                 - target_status
                 - pair
               properties:
+                id:
+                  description: 'a name of the factor, unique within the answer
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - FACTOR
+                name:
+                  description: 'the words that designate the factor
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - NAME OF THE FACTOR
                 factor:
+                  description: 'the kind of the factor: a condition on a quantity, a property of a structure
+                    or of a law, or a feature of the organization
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
                   enum:
                   - condition
                   - structural-property
                   - law-property
                   - organization
                   - null
+                holds:
+                  description: 'empty while the claim is unformalized, with a caveat naming the gap
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - EXPRESSION OVER DECLARED SYMBOLS THAT STATES THE CLAIM OF THE FACTOR
+                under:
+                  description: 'the transformation group of an invariance stated by `holds`; omit for
+                    any other claim
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - SET EXPRESSION OVER DECLARED SYMBOLS
+                bears_on:
+                  description: 'elements the factor applies to as a property or condition; one entry per
+                    element, so a family spans several entries
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - &id006
+                    - SYMBOL
+                  items:
+                    examples: *id006
+                through:
+                  description: 'laws and relations carrying the effect from `bears_on` to the explanandum
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - &id007
+                    - SYMBOL
+                  items:
+                    examples: *id007
+                produces:
+                  description: 'explanandum variable or manifestation the factor accounts for
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - SYMBOL
+                separates:
+                  description: 'foils ruled out, by their symbols in the foil set; empty where the contrast
+                    has no locus
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - &id008
+                    - SYMBOL
+                  items:
+                    examples: *id008
+                appeals_to:
+                  description: 'external systems drawn on, by declared symbol; empty when none
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - &id009
+                    - SYMBOL
+                  items:
+                    examples: *id009
+                procedure:
+                  description: 'only content beyond the chain `bears_on`, `through`, `produces`
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - HOW THE FACTOR PRODUCES ITS EFFECT
+                caveat:
+                  description: 'the content of the factor that the record leaves unstated, and the reason
+                    for the omission
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION
                 target_status:
+                  description: 'how the factor bears on the target, which decides the feature pair that
+                    the binding holds for it, and is not applicable under a declared use
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
                   enum:
                   - denoting
                   - coarse-graining
                   - limit-construct
                   - structural-constraint
                   - null
+                pair:
+                  description: 'the feature pair of the binding that carries the status; omit when the
+                    route runs on the target
+
+
+                    [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+                  examples:
+                  - bind.TOPIC.NAME.PAIR
       modal_knowledge:
+        description: 'the block for the aim `modal-knowledge`: the modal claim, the space of alternatives,
+          and the witness or the proof
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         propertyNames:
           enum:
           - modality
@@ -343,18 +1084,60 @@ properties:
           - proof
         properties:
           modality:
+            description: 'the modal claim: possible, impossible or necessary
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
             enum:
             - possible
             - impossible
             - necessary
             - null
+          property:
+            description: 'the property that the modal claim bears on
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+            examples:
+            - EXPRESSION OVER DECLARED SYMBOLS
+          space:
+            description: 'the space of alternatives that the admitted laws and the domain fix
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+            examples:
+            - THE SPACE OF ALTERNATIVES THAT THE ADMITTED LAWS AND THE DOMAIN FIX
+          witness:
+            description: 'for a possibility: the instance that witnesses it, such as a model
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+            examples:
+            - RECORD
+          proof:
+            description: 'for an impossibility or a necessity
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+            examples:
+            - POINTER TO THE PROOF OR TO THE EXHAUSTIVE EXCLUSION
       model_properties:
+        description: 'the block for the aim `model-properties`: the form of the property or of the counterexample,
+          with the proof obligations that it discharges
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
         propertyNames:
           enum:
           - form
           - discharges
         properties:
           form:
+            description: 'the form of the property that the claim states, or of the counterexample: a
+              derived law, a regime, a limit, a structural property or a counterexample
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
             enum:
             - derived-law
             - regime
@@ -362,7 +1145,22 @@ properties:
             - structural-property
             - counterexample
             - null
+          discharges:
+            description: 'the proof obligations of the question that the consequence discharges, by name
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+            examples:
+            - &id010
+              - OBLIGATION
+            items:
+              examples: *id010
   relations:
+    description: 'the relations to other answers, as the relation registry declares them: `supports` ·
+      `presupposes` · `tests` · `defeats` · `revises` · `incompatible-with` · `contrasts-with`
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
     items:
       propertyNames:
         enum:
@@ -373,6 +1171,10 @@ properties:
         - respect
       properties:
         relation:
+          description: 'how this answer stands to the other answers, one relation of the relation registry
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
           enum:
           - supports
           - presupposes
@@ -383,11 +1185,73 @@ properties:
           - incompatible-with
           - contrasts-with
           - null
+        target:
+          description: 'the other answer, or one of its grounds by its dotted identifier; omit for a relation
+            of a set
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - ans.TOPIC.NAME
+        members:
+          description: 'for a relation of a set, such as an incompatibility, the other members; omit otherwise
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - &id011
+            - ans.TOPIC.NAME
+          items:
+            examples: *id011
         warrant:
+          description: 'optional, for `supports` and `tests` only; the mode of inference of the link,
+            with a reading
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
           propertyNames:
             enum:
             - kind
             - reading
+          properties:
+            kind:
+              description: 'a mode of inference, such as `deductive` or `abductive`
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+              examples:
+              - MODE
+            reading:
+              description: 'why the claim supports or tests the other answer
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+              examples:
+              - WHY THE CLAIM SUPPORTS OR TESTS THE OTHER
+        respect:
+          description: 'for `contrasts-with` only, the symbols named by both claims in which they differ
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/answer.md).'
+          examples:
+          - &id012
+            - SYMBOL
+          items:
+            examples: *id012
+  maturity:
+    description: 'optional; one maturity per specification: open | provisional | stabilized; a specification
+      left out is provisional
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
 propertyNames:
   enum:
@@ -396,6 +1260,7 @@ propertyNames:
   - id
   - type
   - answers
+  - sources
   - claim
   - grounds
   - abstractions

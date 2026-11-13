@@ -1,0 +1,136 @@
+# Retained version 1 contract for binding. Do not edit.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/binding.v1.contract.schema.yml
+title: Binding record contract
+description: The record type `binding`, bound to `gnomon:binding@1`, with its closed vocabularies.
+allOf:
+- $ref: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/binding.v1.base.schema.yml
+required:
+- _schema
+properties:
+  _schema:
+    const: gnomon:binding@1
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  type:
+    const: binding
+  id:
+    pattern: ^bind\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+  status:
+    enum:
+    - provisional
+    - stabilized
+    - retracted
+    - null
+  target:
+    propertyNames:
+      enum:
+      - phenomenon
+      - level
+    properties:
+      level:
+        enum:
+        - phenomenon
+        - data
+        - null
+  feature_pairs:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - type
+        - mode
+        - exemplified
+        - imputed
+        - key
+        - key_version
+      properties:
+        type:
+          enum:
+          - quantity
+          - pattern
+          - regime
+          - invariance-class
+          - modal-profile
+          - component
+          - null
+        mode:
+          enum:
+          - computed
+          - argued
+          - null
+  condition_pairs:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - model_condition
+        - target_condition
+        - key
+        - key_version
+        - calibration
+  domain:
+    items:
+      propertyNames:
+        enum:
+        - region
+        - kind
+      properties:
+        kind:
+          enum:
+          - interpolation
+          - extrapolation
+          - null
+  structural_discrepancy:
+    items:
+      propertyNames:
+        enum:
+        - pairs
+        - form
+        - expression
+        - reading
+      properties:
+        form:
+          enum:
+          - model
+          - bound
+          - null
+  calibration_provenance:
+    items:
+      propertyNames:
+        enum:
+        - parameter
+        - data_version
+        - method
+        - prior
+        - identifiable
+  grain:
+    enum:
+    - quantitative
+    - qualitative
+    - null
+  version:
+    propertyNames:
+      enum:
+      - label
+      - committed
+x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - model
+  - target
+  - asserter
+  - feature_pairs
+  - condition_pairs
+  - domain
+  - structural_discrepancy
+  - calibration_provenance
+  - rival
+  - grain
+  - version
+  - maturity

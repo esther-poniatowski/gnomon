@@ -24,7 +24,7 @@ from pathlib import PurePosixPath
 from typing import Any, Sequence
 from urllib.parse import quote
 
-from .findings import RULES, Finding
+from .findings import COMPUTED_INQUIRY_DIAGNOSIS, RULES, Finding, pointer
 
 SARIF_VERSION = "2.1.0"
 SARIF_SCHEMA = (
@@ -33,6 +33,8 @@ SARIF_SCHEMA = (
 TOOL_NAME = "gnomon"
 URI_BASE_ID = "SRCROOT"
 DISCRIMINATOR_KEY = "discriminator/v1"
+VALIDATION_SCOPE_PROPERTY = "gnomon/validationScope"
+CONTROLLING_DECISION_PROPERTY = "gnomon/controllingDecision"
 LEVEL = "error"
 """The level of a run that stopped early; a rule and its results carry the level of the rule."""
 
@@ -99,9 +101,42 @@ def artifact_uri(located: Located) -> str:
     return quote(located.file.as_posix(), safe=_URI_SAFE)
 
 
+def issue_contract(located: Located) -> dict[str, Any]:
+    """Return the format-independent interface fields of one located finding.
+
+    Optional catalogue guidance remains explicit as ``None`` so a consumer can distinguish a rule
+    without authored guidance from a transport that omitted the fields.
+    """
+    found = located.finding
+    return {
+        "source_file": str(located.file),
+        "record_identifier": located.record,
+        "field_path": found.locus or "/",
+        "result_class": found.rule.result_class,
+        "rule": found.rule.id,
+        "severity": found.rule.level,
+        "explanation": found.text,
+        "repair_condition": found.rule.repair_condition,
+        "documentation_target": found.rule.documentation_target,
+        **(
+            {"controlled_by": pointer(found.controlled_by)}
+            if found.controlled_by is not None
+            else {}
+        ),
+    }
+
+
 def _result(located: Located) -> dict[str, Any]:
     """Return the SARIF result of one finding, placed in its file and its record."""
     found = located.finding
+    issue = issue_contract(located)
+    properties = {"resultClass": issue["result_class"]}
+    if issue["repair_condition"] is not None:
+        properties["repairCondition"] = issue["repair_condition"]
+    if issue["documentation_target"] is not None:
+        properties["documentationTarget"] = issue["documentation_target"]
+    if found.controlled_by is not None:
+        properties[CONTROLLING_DECISION_PROPERTY] = pointer(found.controlled_by)
     result: dict[str, Any] = {
         "ruleId": found.rule.id,
         "level": found.rule.level,
@@ -109,11 +144,15 @@ def _result(located: Located) -> dict[str, Any]:
         "locations": [
             {
                 "physicalLocation": {
-                    "artifactLocation": {"uri": artifact_uri(located), "uriBaseId": URI_BASE_ID}
+                    "artifactLocation": {
+                        "uri": artifact_uri(located),
+                        "uriBaseId": URI_BASE_ID,
+                    }
                 },
                 "logicalLocations": [{"name": logical_name(located)}],
             }
         ],
+        "properties": properties,
     }
     if found.discriminator:
         result["partialFingerprints"] = {DISCRIMINATOR_KEY: found.discriminator}
@@ -130,8 +169,46 @@ def invocation(stopped: str | None) -> dict[str, Any]:
     }
 
 
+def _validation_context(
+    findings: Sequence[Located], stopped: str | None, scope: str | None
+) -> list[dict[str, str]]:
+    """Return the completion target and the bounded meaning of a clean, complete run."""
+    contexts: list[dict[str, str]] = []
+    if scope is not None:
+        contexts.append(
+            {
+                "label": "Completion target",
+                "value": scope,
+                "description": (
+                    "Gnomon checks completeness through this scope. Content first required by a "
+                    "later scope remains future work."
+                ),
+                "resultClass": COMPUTED_INQUIRY_DIAGNOSIS,
+                "documentationTarget": (
+                    "docs/specification/validation-scopes.md#^ordered-validation-scopes"
+                ),
+            }
+        )
+    if stopped is None and not findings:
+        contexts.append(
+            {
+                "label": "Clean result",
+                "value": "structural and method conformance only",
+                "description": (
+                    "The check establishes no truth, warrant or acceptance for the research claims."
+                ),
+                "documentationTarget": "docs/adr/findings-output.md#^interface-result-classes",
+            }
+        )
+    return contexts
+
+
 def sarif_log(
-    findings: Sequence[Located], version: str, stopped: str | None = None
+    findings: Sequence[Located],
+    version: str,
+    stopped: str | None = None,
+    *,
+    scope: str | None = None,
 ) -> dict[str, Any]:
     """Return the log of one run of gnomon of ``version``, with one result per finding.
 
@@ -147,15 +224,17 @@ def sarif_log(
         }
         for rule in RULES
     ]
+    run: dict[str, Any] = {
+        "tool": {"driver": {"name": TOOL_NAME, "version": version, "rules": rules}},
+        "invocations": [invocation(stopped)],
+        "columnKind": "unicodeCodePoints",
+        "results": [_result(located) for located in findings],
+    }
+    contexts = _validation_context(findings, stopped, scope)
+    if contexts:
+        run["properties"] = {VALIDATION_SCOPE_PROPERTY: contexts}
     return {
         "version": SARIF_VERSION,
         "$schema": SARIF_SCHEMA,
-        "runs": [
-            {
-                "tool": {"driver": {"name": TOOL_NAME, "version": version, "rules": rules}},
-                "invocations": [invocation(stopped)],
-                "columnKind": "unicodeCodePoints",
-                "results": [_result(located) for located in findings],
-            }
-        ],
+        "runs": [run],
     }

@@ -2,38 +2,84 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/binding.contract.schema.yml
 title: Binding record contract
-description: The record type `binding`, bound to `gnomon:binding@1`, with its closed vocabularies.
+description: The record type `binding`, bound to `gnomon:binding@2`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/binding.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:binding@1
+    const: gnomon:binding@2
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: binding
+    examples:
+    - binding
   id:
     pattern: ^bind\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - bind.topic.name
+  title:
+    examples:
+    - SHORT NAME OF THE BINDING
   status:
+    examples:
+    - provisional
     enum:
     - provisional
     - stabilized
     - retracted
     - null
+  model:
+    description: 'the model in use: the identifier of one model record
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
   target:
+    description: 'the denotation of the phenomenon, and the level at which the model is compared: the
+      identifier of one phenomenon, and the target level: `phenomenon`, when the model is compared with
+      the observables that the phenomenon estimates; `data`, when it is compared with a version of the
+      data through an observation operator
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
     propertyNames:
       enum:
       - phenomenon
       - level
     properties:
+      phenomenon:
+        description: 'the phenomenon that the binding denotes
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+        examples:
+        - phen.TOPIC.NAME
       level:
+        description: 'what the model is compared with: the observables that the phenomenon estimates,
+          or a version of the data
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
         enum:
         - phenomenon
         - data
         - null
+  asserter:
+    description: 'the agent who licenses the inferences: a person, a group or a publication
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
   feature_pairs:
+    description: 'per pair, a feature that the model exemplifies and the feature of the target to which
+      it is imputed, typed: `quantity` · `pattern` · `regime` · `invariance-class` (an invariance or a
+      universality class) · `modal-profile` · `component` (a unit of the model and the constituent or
+      the admissible part of the target that it denotes); the mode of the pair, `computed` or `argued`;
+      and, for a computed pair, the key that carries the one onto the other
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
     items:
       propertyNames:
         enum:
@@ -45,7 +91,19 @@ properties:
         - key
         - key_version
       properties:
+        id:
+          description: 'a name of the feature pair, unique within the binding
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - PAIR
         type:
+          description: 'the feature that the pair carries from the model to the target: a quantity, a
+            pattern, a regime, an invariance class, a modal profile or a component
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
           enum:
           - quantity
           - pattern
@@ -55,11 +113,51 @@ properties:
           - component
           - null
         mode:
+          description: 'whether the pair is computed through a key or argued
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
           enum:
           - computed
           - argued
           - null
+        exemplified:
+          description: 'an expression over the symbols of the model stating the feature that the model
+            exemplifies
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - EXPRESSION OVER THE SYMBOLS OF THE MODEL
+        imputed:
+          description: 'the feature of the target, by the symbol that the phenomenon declares; for a component
+            pair, the constituent that the target system declares or the part that the admissible explanans
+            admits
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - phen.TOPIC.NAME.SYMBOL
+        key:
+          description: 'computed pairs only
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - key.TOPIC.NAME
+        key_version:
+          description: 'the version of the key that carries the feature of the model onto the target
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - VERSION
   condition_pairs:
+    description: 'per pair, a condition of the model, the condition of the target that it stands for,
+      and the key; a parameter fitted to the data is marked as a *calibration parameter*
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
     items:
       propertyNames:
         enum:
@@ -69,19 +167,87 @@ properties:
         - key
         - key_version
         - calibration
+      properties:
+        id:
+          description: 'a name of the condition pair, unique within the binding
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - PAIR
+        model_condition:
+          description: 'an expression over the symbols of the model stating a condition of the model
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - EXPRESSION OVER THE SYMBOLS OF THE MODEL
+        target_condition:
+          description: 'an expression over the symbols of the target stating the condition that the model
+            condition stands for
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - EXPRESSION OVER THE SYMBOLS OF THE TARGET
+        key:
+          description: 'the identifier of the key that carries the one condition onto the other
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - key.TOPIC.NAME
+        key_version:
+          description: 'the version of that key
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - VERSION
+        calibration:
+          description: 'true for a parameter of the model fitted to the data
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - false
   domain:
+    description: 'the conditions of the target over which the pairs are asserted, each region marked as
+      *interpolation*, within the range of the calibration data, or *extrapolation*, outside it
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
     items:
       propertyNames:
         enum:
         - region
         - kind
       properties:
+        region:
+          description: 'an expression over declared symbols stating a region of the conditions of the
+            target
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
         kind:
+          description: 'whether the region lies within the range of the calibration data (interpolation)
+            or outside it (extrapolation)
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
           enum:
           - interpolation
           - extrapolation
           - null
   structural_discrepancy:
+    description: 'the model of the systematic difference between the output of the model at its best parameters
+      and the value of the target, or a stated bound on it [kennedyohagan2001]; a discrepancy model fitted
+      to data counts as calibration on those data, and the calibration provenance records it
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
     items:
       propertyNames:
         enum:
@@ -90,12 +256,45 @@ properties:
         - expression
         - reading
       properties:
+        pairs:
+          description: 'the feature pairs that the discrepancy concerns
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - &id001
+            - PAIR
+          items:
+            examples: *id001
         form:
+          description: 'whether the discrepancy is stated by a model or by a bound
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
           enum:
           - model
           - bound
           - null
+        expression:
+          description: 'an expression over declared symbols stating the discrepancy model or the bound
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
+        reading:
+          description: 'a discrepancy model fitted to data counts as calibration on those data
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - THE SYSTEMATIC DIFFERENCE BETWEEN THE MODEL AT ITS BEST PARAMETERS AND THE TARGET
   calibration_provenance:
+    description: 'per calibration parameter, the version of the data that fitted it, the method of fitting,
+      and whether the parameter is identifiable under the structural discrepancy [brynjarsdottir2014]
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
     items:
       propertyNames:
         enum:
@@ -104,16 +303,99 @@ properties:
         - method
         - prior
         - identifiable
+      properties:
+        parameter:
+          description: 'a parameter of the model
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - SYMBOL
+        data_version:
+          description: 'the version of the data that fitted the parameter
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - VERSION
+        method:
+          description: 'the method of fitting the calibration parameter
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - THE METHOD OF FITTING
+        prior:
+          description: 'required for a Bayesian calibration; the distribution fixed before the data that
+            fit the parameter
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - THE PRIOR DISTRIBUTION OF THE PARAMETER, FIXED BEFORE THE DATA
+        identifiable:
+          description: 'true when the data identify the parameter apart from the structural discrepancy
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+          examples:
+          - false
+  rival:
+    description: 'required for a Bayesian calibration; the binding against which the comparison reports
+      the ratio of marginal likelihoods, another binding of the same target, or `complement`
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+    examples:
+    - bind.TOPIC.NAME
   grain:
+    description: '`quantitative`, when the pairs are compared by a metric · `qualitative`, when they are
+      compared by a match of patterns or regimes
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
     enum:
     - quantitative
     - qualitative
     - null
   version:
+    description: 'a version identifier, and the time at which the binding was committed
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
     propertyNames:
       enum:
       - label
       - committed
+    properties:
+      label:
+        description: 'a version identifier
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+        examples:
+        - VERSION
+      committed:
+        description: 'the time at which this version of the binding was committed
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/binding.md).'
+        examples:
+        - TIME AT WHICH THIS VERSION WAS COMMITTED
+  maturity:
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
 propertyNames:
   enum:

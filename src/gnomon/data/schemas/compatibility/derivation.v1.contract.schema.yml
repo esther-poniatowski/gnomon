@@ -1,0 +1,338 @@
+# Retained version 1 contract for derivation. Do not edit.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/derivation.v1.contract.schema.yml
+title: Derivation record contract
+description: The record type `derivation`, bound to `gnomon:derivation@1`, with its closed vocabularies.
+allOf:
+- $ref: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/derivation.v1.base.schema.yml
+required:
+- _schema
+properties:
+  _schema:
+    const: gnomon:derivation@1
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  type:
+    const: derivation
+  id:
+    pattern: ^derivation\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+  status:
+    enum:
+    - provisional
+    - stabilized
+    - retracted
+    - null
+  sought:
+    propertyNames:
+      enum:
+      - id
+      - statement
+      - type
+      - condition
+    properties:
+      type:
+        enum:
+        - law
+        - value-or-bound
+        - object
+        - classification
+        - claim-truth
+        - null
+  subordinate:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - statement
+        - type
+        - condition
+        - replaces
+        - reason
+      properties:
+        type:
+          enum:
+          - law
+          - value-or-bound
+          - object
+          - classification
+          - claim-truth
+          - null
+  slots:
+    items:
+      propertyNames:
+        enum:
+        - symbol
+        - reading
+        - introduced_by
+  objects:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - form
+        - expression
+        - reading
+      properties:
+        form:
+          enum:
+          - object
+          - expression
+          - null
+  posits:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - kind
+        - statement
+        - origin
+        - tests
+      properties:
+        kind:
+          enum:
+          - ansatz
+          - closure
+          - relevant-quantities
+          - complete-similarity
+          - incomplete-similarity
+          - null
+        origin:
+          propertyNames:
+            enum:
+            - kind
+            - ref
+          properties:
+            kind:
+              enum:
+              - act
+              - source
+              - scheme
+              - none
+              - null
+        tests:
+          items:
+            propertyNames:
+              enum:
+              - kind
+              - verdict
+              - standard
+              - by
+            properties:
+              kind:
+                enum:
+                - consistency
+                - limit
+                - exact
+                - approximation
+                - empirical
+                - computation
+                - null
+              verdict:
+                enum:
+                - supports
+                - refutes
+                - inconclusive
+                - null
+              standard:
+                enum:
+                - certified
+                - numerical
+                - null
+  moves:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - kind
+        - inputs
+        - outputs
+        - binds
+        - warrant
+      properties:
+        kind:
+          enum:
+          - substitute
+          - transform
+          - rescale
+          - eliminate
+          - expand
+          - truncate
+          - take-limit
+          - estimate
+          - solve
+          - impose
+          - require-self-consistency
+          - match
+          - apply-theorem
+          - split-cases
+          - induct
+          - derive-contradiction
+          - compute
+          - import
+          - compare
+          - null
+        warrant:
+          propertyNames:
+            enum:
+            - source
+            - cites
+            - error
+            - regime
+            - applies_because
+          properties:
+            source:
+              enum:
+              - definition
+              - theorem
+              - approximation
+              - computation
+              - act-verdict
+              - null
+            error:
+              enum:
+              - exact
+              - controlled
+              - uncontrolled
+              - singular
+              - null
+  orientations:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - of
+        - purpose
+        - determines
+        - change
+        - occasion
+        - means
+        - alternatives
+        - provenance
+        - expected_gain
+      properties:
+        change:
+          enum:
+          - eliminate
+          - decouple
+          - isolate
+          - reduce
+          - expose
+          - close
+          - match
+          - null
+        alternatives:
+          items:
+            propertyNames:
+              enum:
+              - move
+              - reason
+            properties:
+              reason:
+                enum:
+                - inapplicable
+                - inconsistent
+                - costlier
+                - losing-information
+                - tried-without-success
+                - null
+        provenance:
+          enum:
+          - contemporaneous
+          - reconstructed
+          - null
+  interpretations:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - of
+        - kind
+        - reading
+        - grounds
+      properties:
+        kind:
+          enum:
+          - referential
+          - form
+          - process
+          - structural
+          - magnitude
+          - variation
+          - analogical
+          - diagnostic
+          - null
+  features:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - kind
+        - at
+      properties:
+        kind:
+          enum:
+          - divergence
+          - secular-term
+          - zero-mode
+          - sign-change
+          - crossing
+          - null
+  segments:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - moves
+        - inputs
+        - outputs
+        - applies
+        - within
+  consequences:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - answers
+        - from
+        - record
+        - gain
+        - principle
+        - pattern
+  impasses:
+    items:
+      propertyNames:
+        enum:
+        - sought
+        - obstacle
+  refutations:
+    items:
+      propertyNames:
+        enum:
+        - target
+        - by
+x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - serves
+  - runs_on
+  - uses
+  - sought
+  - subordinate
+  - slots
+  - objects
+  - posits
+  - moves
+  - kernel
+  - orientations
+  - interpretations
+  - features
+  - segments
+  - consequences
+  - impasses
+  - refutations
+  - maturity

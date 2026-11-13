@@ -19,17 +19,23 @@ from typer.testing import CliRunner
 from gnomon import __version__
 from gnomon.cli import app
 from gnomon.findings import (
+    COMPUTED_INQUIRY_DIAGNOSIS,
+    CONTRACT_VALIDATION,
     ITINERARY_CYCLE,
     ITINERARY_UNADDRESSED,
+    METHOD_CONFORMANCE_FINDING,
     REGISTRY_FOREIGN_NORM,
     RULES,
     Finding,
+    Rule,
 )
 from gnomon.sarif import Located, sarif_log
 
 CYCLE = Finding(ITINERARY_CYCLE, ("steps",), "steps: a -> b -> a forms a cycle", "a -> b -> a")
 UNADDRESSED = Finding(
-    ITINERARY_UNADDRESSED, ("addresses",), "addresses: x is no problem or question record"
+    ITINERARY_UNADDRESSED,
+    ("addresses",),
+    "addresses: x is no problem or question record",
 )
 FILE = PurePosixPath("problems/demo/itinerary.yml")
 
@@ -55,12 +61,51 @@ def test_a_complete_run_lists_every_rule_and_declares_its_success() -> None:
     assert run["invocations"] == [{"executionSuccessful": True}]
     assert run["columnKind"] == "unicodeCodePoints"
     assert run["results"] == []
+    assert run["properties"]["gnomon/validationScope"] == [
+        {
+            "label": "Clean result",
+            "value": "structural and method conformance only",
+            "description": (
+                "The check establishes no truth, warrant or acceptance for the research claims."
+            ),
+            "documentationTarget": "docs/adr/findings-output.md#^interface-result-classes",
+        }
+    ]
+
+
+def test_a_scoped_run_publishes_its_completion_target() -> None:
+    run = run_of(sarif_log([], "1.2.3", scope="question-typed"))
+
+    assert run["properties"]["gnomon/validationScope"] == [
+        {
+            "label": "Completion target",
+            "value": "question-typed",
+            "description": (
+                "Gnomon checks completeness through this scope. Content first required by a later "
+                "scope remains future work."
+            ),
+            "resultClass": COMPUTED_INQUIRY_DIAGNOSIS,
+            "documentationTarget": (
+                "docs/specification/validation-scopes.md#^ordered-validation-scopes"
+            ),
+        },
+        {
+            "label": "Clean result",
+            "value": "structural and method conformance only",
+            "description": (
+                "The check establishes no truth, warrant or acceptance for the research claims."
+            ),
+            "documentationTarget": "docs/adr/findings-output.md#^interface-result-classes",
+        },
+    ]
 
 
 def test_a_failed_run_declares_an_error_notification() -> None:
     run = run_of(
         sarif_log(
-            [Located(UNADDRESSED, FILE, "itin.demo")], "1.2.3", stopped="a file was unreadable"
+            [Located(UNADDRESSED, FILE, "itin.demo")],
+            "1.2.3",
+            stopped="a file was unreadable",
         )
     )
     assert run["invocations"] == [
@@ -74,9 +119,21 @@ def test_a_failed_run_declares_an_error_notification() -> None:
     assert len(run["results"]) == 1
 
 
+def test_a_stopped_run_without_findings_never_claims_a_clean_result() -> None:
+    run = run_of(sarif_log([], "1.2.3", stopped="a file was unreadable"))
+
+    assert "properties" not in run
+
+
 def test_a_result_holds_its_rule_message_and_two_locations() -> None:
     run = run_of(
-        sarif_log([Located(CYCLE, FILE, "itin.demo"), Located(UNADDRESSED, FILE, "itin.demo")], "1")
+        sarif_log(
+            [
+                Located(CYCLE, FILE, "itin.demo"),
+                Located(UNADDRESSED, FILE, "itin.demo"),
+            ],
+            "1",
+        )
     )
     cycle, unaddressed = run["results"]
     assert cycle == {
@@ -95,12 +152,49 @@ def test_a_result_holds_its_rule_message_and_two_locations() -> None:
             }
         ],
         "partialFingerprints": {"discriminator/v1": "a -> b -> a"},
+        "properties": {
+            "resultClass": METHOD_CONFORMANCE_FINDING,
+            "repairCondition": "The input references between steps form a directed acyclic graph.",
+            "documentationTarget": (
+                "docs/epistemology/processes/activities/epistemic-activities.md#^itinerary-check"
+            ),
+        },
     }
     assert "partialFingerprints" not in unaddressed
     assert unaddressed["locations"][0]["logicalLocations"] == [{"name": "id:itin.demo#/addresses"}]
     for result in run["results"]:
         assert not {"suppressions", "fingerprints", "baselineState"} & set(result)
         assert "region" not in result["locations"][0]["physicalLocation"]
+
+
+def test_a_result_carries_optional_repair_and_documentation_metadata() -> None:
+    rule = Rule(
+        "test/broken-value",
+        "A value is broken.",
+        result_class=CONTRACT_VALIDATION,
+        repair_condition="The value satisfies its declared type.",
+        documentation_target="docs/specification/value.md",
+    )
+    found = Finding(rule, ("value",), "value: expected an integer")
+    result = run_of(sarif_log([Located(found, FILE, "itin.demo")], "1"))["results"][0]
+    assert result["properties"] == {
+        "resultClass": CONTRACT_VALIDATION,
+        "repairCondition": "The value satisfies its declared type.",
+        "documentationTarget": "docs/specification/value.md",
+    }
+
+
+def test_a_result_names_the_decision_controlling_it() -> None:
+    found = Finding(
+        ITINERARY_UNADDRESSED,
+        ("task", "requested_relation"),
+        "the relation is missing",
+        controlled_by=("task", "epistemic_aim"),
+    )
+
+    result = run_of(sarif_log([Located(found, FILE, "quest.demo")], "1"))["results"][0]
+
+    assert result["properties"]["gnomon/controllingDecision"] == "/task/epistemic_aim"
 
 
 def test_the_whole_record_takes_the_resource_alone() -> None:
@@ -164,7 +258,8 @@ RECORDS: dict[str, dict[str, Any]] = {
     },
 }
 LINES = [
-    "itin.demo: steps.guess: intuition is no registered activity; did you mean induction or"
+    "itin.demo: itinerary/unknown-activity: steps.guess: intuition is no registered activity;"
+    " did you mean induction or"
     " integration or intervention? the activities are listed in"
     " src/gnomon/data/registries/activities.yml",
     "1 itineraries checked, 1 problems found",
@@ -253,7 +348,15 @@ def test_an_unreadable_record_declares_a_failed_run(problem: Path, tmp_path: Pat
 
 def test_a_folder_outside_the_root_is_refused(problem: Path, tmp_path: Path) -> None:
     result = CliRunner().invoke(
-        app, ["itinerary", str(problem), "--format", "sarif", "--root", str(tmp_path / "elsewhere")]
+        app,
+        [
+            "itinerary",
+            str(problem),
+            "--format",
+            "sarif",
+            "--root",
+            str(tmp_path / "elsewhere"),
+        ],
     )
     assert result.exit_code == 1
     assert "outside the root" in result.stderr

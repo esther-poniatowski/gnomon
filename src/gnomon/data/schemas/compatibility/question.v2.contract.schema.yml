@@ -1,0 +1,353 @@
+# Retained version 2 contract for question. Do not edit.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/question.v2.contract.schema.yml
+title: Question record contract
+description: The record type `question`, bound to `gnomon:question@2`, with its closed vocabularies.
+allOf:
+- $ref: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/question.v2.base.schema.yml
+required:
+- _schema
+properties:
+  _schema:
+    const: gnomon:question@2
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  type:
+    const: question
+  id:
+    pattern: ^quest\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+  status:
+    enum:
+    - posed
+    - refined
+    - answered
+    - dissolved
+    - abandoned
+    - null
+  request:
+    enum:
+    - one
+    - all
+    - over-a-parameter
+    - decision
+    - null
+  links:
+    items:
+      propertyNames:
+        enum:
+        - question
+        - relation
+        - via
+      properties:
+        relation:
+          enum:
+          - subquestion-of
+          - explanans-from
+          - presupposes
+          - enables
+          - null
+  excludes:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - kind
+        - question
+        - reading
+        - reason
+      properties:
+        kind:
+          enum:
+          - deferred
+          - out-of-scope
+          - null
+  subject:
+    propertyNames:
+      enum:
+      - target_system
+      - background
+      - phenomenon
+      - contrast
+      - domain
+    properties:
+      phenomenon:
+        propertyNames:
+          enum:
+          - placeholder
+          - description
+        properties:
+          placeholder:
+            enum:
+            - system
+            - phenomenon
+            - null
+      contrast:
+        propertyNames:
+          enum:
+          - locus
+          - foil_set
+          - compatibility
+          - foil_status
+        properties:
+          locus:
+            enum:
+            - other-outcome
+            - other-system
+            - other-condition
+            - none
+            - null
+          foil_set:
+            items:
+              propertyNames:
+                enum:
+                - name
+                - symbol
+                - expression
+                - reading
+          foil_status:
+            enum:
+            - observed
+            - counterfactual
+            - not-applicable
+            - null
+      domain:
+        propertyNames:
+          enum:
+          - restrictions
+          - limit
+        properties:
+          restrictions:
+            items:
+              propertyNames:
+                enum:
+                - id
+                - name
+                - of
+                - restriction
+                - event
+                - values
+                - expression
+                - justification
+              properties:
+                restriction:
+                  enum:
+                  - clamped
+                  - restricted
+                  - initial
+                  - stationary
+                  - without-event
+                  - null
+          limit:
+            propertyNames:
+              enum:
+              - expression
+              - justification
+  task:
+    propertyNames:
+      enum:
+      - epistemic_aim
+      - explicandum
+      - requested_relation
+      - function_sense
+      - modal_strength
+      - admissible_explanans
+      - required_accuracy
+      - proof_obligations
+    properties:
+      epistemic_aim:
+        enum:
+        - description
+        - exploration
+        - prediction
+        - explanation
+        - modal-knowledge
+        - model-properties
+        - explication
+        - null
+      requested_relation:
+        enum:
+        - causal-intervention
+        - causal-mechanistic
+        - constitutive
+        - functional
+        - nomological
+        - statistical
+        - mathematical
+        - not-applicable
+        - null
+      function_sense:
+        enum:
+        - causal-role
+        - etiological
+        - null
+      modal_strength:
+        enum:
+        - actual
+        - possible
+        - necessary
+        - null
+      admissible_explanans:
+        propertyNames:
+          enum:
+          - compositional
+          - substrate
+          - justification
+        properties:
+          substrate:
+            enum:
+            - specific
+            - independent
+            - mapping
+            - null
+      required_accuracy:
+        propertyNames:
+          enum:
+          - standard
+          - outputs_to_match
+          - structures_to_match
+        properties:
+          standard:
+            enum:
+            - qualitative
+            - order-of-magnitude
+            - numeric-bound
+            - structural-only
+            - not-applicable
+            - null
+          outputs_to_match:
+            items:
+              propertyNames:
+                enum:
+                - target
+                - tolerance
+                - justification
+              properties:
+                tolerance:
+                  propertyNames:
+                    enum:
+                    - metric
+                    - bound
+          structures_to_match:
+            items:
+              propertyNames:
+                enum:
+                - target
+                - justification
+      proof_obligations:
+        items:
+          propertyNames:
+            enum:
+            - id
+            - name
+            - reading
+            - antecedent
+            - consequent
+  virtues:
+    items:
+      propertyNames:
+        enum:
+        - virtue
+        - standing
+        - justification
+      properties:
+        virtue:
+          enum:
+          - unification
+          - generality
+          - robustness
+          - intelligibility
+          - structural-transparency
+          - economy
+          - tractability
+          - null
+        standing:
+          enum:
+          - constitutive
+          - preferred
+          - null
+  presuppositions:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - part
+        - reading
+        - expression
+      properties:
+        part:
+          enum:
+          - existence
+          - topic
+          - null
+  construction:
+    propertyNames:
+      enum:
+      - procedure
+      - reading
+  answerability:
+    items:
+      propertyNames:
+        enum:
+        - condition
+        - route
+        - term
+        - state
+        - refutation
+        - means
+        - pointers
+      properties:
+        condition:
+          enum:
+          - definiteness
+          - answer-type
+          - soundness
+          - candidates
+          - discrimination
+          - access
+          - bridging
+          - representation
+          - null
+        route:
+          enum:
+          - selection
+          - construction
+          - both
+          - null
+        state:
+          enum:
+          - established
+          - refuted
+          - null
+        refutation:
+          enum:
+          - outright
+          - lack-of-means
+          - null
+  maturity:
+    additionalProperties:
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
+x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - statement
+  - id
+  - type
+  - status
+  - version
+  - addresses
+  - request
+  - links
+  - excludes
+  - subject
+  - task
+  - virtues
+  - presuppositions
+  - construction
+  - answerability
+  - maturity

@@ -9,13 +9,28 @@ case and read the locus and the discriminator of the finding it yields.
 from __future__ import annotations
 
 import copy
+from pathlib import Path
 from typing import Any
 
 import pytest
 
-from gnomon.completeness import inadmissible_values, malformed_restrictions, unstated_standing
+from gnomon.completeness import (
+    inadmissible_values,
+    malformed_restrictions,
+    unstated_standing,
+)
 from gnomon.findings import RULE_ID, RULES, Rule, pointer
-from gnomon.itineraries import activities, itinerary_problems, malformed_registry, product_types
+from gnomon.itineraries import (
+    activities,
+    itinerary_problems,
+    malformed_registry,
+    product_types,
+)
+from gnomon.rule_guidance import (
+    RuleGuidance,
+    load_rule_guidance,
+    validate_guidance_coverage,
+)
 from gnomon.vocabulary import doubly_defined, misnamed_variant, unresolved
 
 from .test_itineraries import ITINERARY, RECORDS, served
@@ -51,6 +66,39 @@ def test_the_catalogue_holds_one_well_formed_rule_per_identifier() -> None:
     assert all(rule.description.strip() for rule in RULES)
     with pytest.raises(ValueError, match="malformed rule identifier"):
         Rule("Itinerary/Cycle", "an uppercase identifier")
+    with pytest.raises(ValueError, match="unknown result class"):
+        Rule("test/rule", "A test rule.", result_class="scientific verdict")
+
+
+def test_every_catalogue_rule_has_guidance_with_a_resolving_target() -> None:
+    root = Path(__file__).parents[2]
+    guidance = load_rule_guidance()
+    validate_guidance_coverage((rule.id for rule in RULES), guidance)
+    assert all(rule.repair_condition and rule.documentation_target for rule in RULES)
+    for rule in RULES:
+        target, separator, fragment = str(rule.documentation_target).partition("#")
+        document = root / target
+        assert document.is_file(), rule.id
+        if separator:
+            assert fragment in document.read_text(encoding="utf-8"), rule.id
+
+
+def test_guidance_loader_rejects_an_incomplete_entry(tmp_path: Path) -> None:
+    source = tmp_path / "guidance.yml"
+    source.write_text(
+        "rules:\n  test/rule:\n    repair_condition: The value is valid.\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="must contain exactly"):
+        load_rule_guidance(source)
+
+
+def test_guidance_coverage_rejects_missing_and_unknown_rules() -> None:
+    guidance = {"test/known": RuleGuidance("The value is valid.", "docs/specification/_index.md")}
+    with pytest.raises(ValueError, match=r"missing=\['test/missing'\]"):
+        validate_guidance_coverage(["test/known", "test/missing"], guidance)
+    with pytest.raises(ValueError, match=r"unknown=\['test/known'\]"):
+        validate_guidance_coverage([], guidance)
 
 
 def test_an_entry_of_a_keyed_list_is_named_by_its_identifier() -> None:
@@ -86,7 +134,10 @@ def test_an_identifier_is_escaped_in_the_discriminator() -> None:
 
 def test_an_entry_of_an_unkeyed_list_keeps_its_index() -> None:
     question = {
-        "virtues": [{"virtue": "economy", "standing": "preferred"}, {"virtue": "tractability"}]
+        "virtues": [
+            {"virtue": "economy", "standing": "preferred"},
+            {"virtue": "tractability"},
+        ]
     }
     assert places(unstated_standing(question)) == [("/virtues/1/standing", "")]
 
@@ -110,7 +161,10 @@ def test_a_cycle_and_a_repeated_step_are_discriminated_by_their_content() -> Non
 
 def test_a_closed_field_lies_at_its_full_path() -> None:
     """The message names the top-level block and the field alone; the locus keeps every level."""
-    admitted = {"laws.inner.role": frozenset({"evolution"}), "status": frozenset({"draft"})}
+    admitted = {
+        "laws.inner.role": frozenset({"evolution"}),
+        "status": frozenset({"draft"}),
+    }
     record = {
         "status": "wrong",
         "laws": [
@@ -155,7 +209,10 @@ def test_a_parameter_listed_as_varying_can_be_held() -> None:
     """A parameter that the course lists as varying is held like a variable; a fixed one is not."""
     from gnomon.completeness import varying_symbols
 
-    target = {"variables": [{"symbol": "x"}], "parameters": [{"symbol": "w"}, {"symbol": "k"}]}
+    target = {
+        "variables": [{"symbol": "x"}],
+        "parameters": [{"symbol": "w"}, {"symbol": "k"}],
+    }
     question = {
         "subject": {
             "domain": {
@@ -231,7 +288,10 @@ def test_an_unresolved_symbol_lies_at_its_field_or_its_expression() -> None:
 
 
 def test_a_misnamed_variant_lies_at_its_mark() -> None:
-    nested = {"laws": [{"symbol": "f", "variant": "absent"}], "c": {"d": [{"variant": "gone"}]}}
+    nested = {
+        "laws": [{"symbol": "f", "variant": "absent"}],
+        "c": {"d": [{"variant": "gone"}]},
+    }
     found = misnamed_variant(nested, {"direct"})
     assert [f.text for f in found] == ["laws.variant -> absent", "c.d.variant -> gone"]
     assert places(found) == [("/laws", "f/variant"), ("/c/d/0/variant", "")]

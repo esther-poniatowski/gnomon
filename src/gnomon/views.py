@@ -2,9 +2,9 @@
 Views generated from the records of a project, which present the state of its inquiry.
 
 A view is computed from authored records by a declared rule, and is never authored itself, as
-the boundary of computation of the decision against inference at run time admits. The question
-tree is the first view: it replaces a research root record, which would restate the problems and
-the questions of a project.
+the boundary of computation of the decision against inference at run time admits. The operational
+inquiry graph connects research products through their activities. The textual question tree
+remains a separate hierarchy inspection command.
 
 The question tree reads four relations that the records state:
 
@@ -24,10 +24,13 @@ gnomon.cli : the command ``tree``, which prints the tree of a directory of recor
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
-from typing import Any, Iterable, Mapping
+from typing import Any
 
+from .act_comparisons import comparisons as act_comparisons
 from .assembly import assembly_tables
+from .assembly_graph import assembly_graph
 from .completeness import (
     demand_met,
     narrowed,
@@ -36,9 +39,14 @@ from .completeness import (
     readable_obstacles,
 )
 from .exposure import exposure_rows
+from .exposure_graph import exposure_graph
 from .findings import where as field_path
+from .inquiry_graph import inquiry_graph
 from .itineraries import type_classes, type_holders
+from .itinerary_progress import itinerary_progress_graph
 from .latex import canonical_notations, declared_notations, to_latex
+from .schemas import shared_vocabulary_options
+from .source_state import source_state as records_source_state
 from .stages import itinerary_stage
 from .statement import compose_statement, load_statement_registry
 from .vocabulary import formulas, upstream_of, visible_records
@@ -159,20 +167,26 @@ def render_tree(roots: Iterable[Node]) -> str:
 # row; a tree or a graph is stated by a table of nodes and a table of edges.
 
 #: The maturity that a record status states, for the records whose status is a maturity.
-MATURITIES = ("open", "provisional", "stabilized")
+MATURITIES = tuple(value for value, _ in shared_vocabulary_options()[".maturity"])
 
 #: The stages of a problem before it ends, posed or refined; a problem in either stage may close.
 OPEN_PROBLEM_STATUSES = ("posed", "refined")
 
 
-def _header(name: str, title: str, version: int = 1) -> dict[str, Any]:
+def _header(name: str, title: str, source_state: str, version: int) -> dict[str, Any]:
     return {
         "_schema": f"gnomon:view.{name}@{version}",
         "id": f"view.{name}",
         "type": "view",
         "title": title,
         "generated_by": "gnomon views",
+        "source_state": source_state,
     }
+
+
+def _source_state(records: Records, supplied: str | None) -> str:
+    """Return the supplied shared state, or compute it for a directly built view."""
+    return supplied if supplied is not None else records_source_state(records)
 
 
 def _joined(values: Iterable[Any]) -> str:
@@ -183,7 +197,7 @@ def _undetermined(value: bool | None) -> str:
     return "undetermined" if value is None else ("yes" if value else "no")
 
 
-def problem_state(records: Records) -> dict[str, Any]:
+def problem_state(records: Records, *, state: str | None = None) -> dict[str, Any]:
     """Return the state of each problem: its demand met, its answers and its obstacles.
 
     The demand met, the obstacles that the records show and a denied presupposition are computed by
@@ -232,33 +246,65 @@ def problem_state(records: Records) -> dict[str, Any]:
                 }
             )
     return {
-        **_header("problem-state", "State of each problem"),
+        **_header("problem-state", "State of each problem", _source_state(records, state), 3),
         "problems": problems,
         "obstacles": obstacles,
     }
 
 
-def next_act(diagnosis_document: Mapping[str, Any]) -> dict[str, Any]:
-    """Return the open conditions and the ready acts, flattened from the diagnosis of ``gnomon
-    status``."""
-    conditions, acts, refuted = [], [], []
+def next_act(
+    diagnosis_document: Mapping[str, Any],
+    source_state: str,
+    records: Records | None = None,
+) -> dict[str, Any]:
+    """Return the conditions and acts from the diagnosis of ``gnomon status``.
+
+    Each open condition separates the activities available now from the input requirements that
+    must be satisfied before its other activities can run.
+    """
+    conditions, open_conditions, refuted = [], [], []
     for question in diagnosis_document.get("questions") or []:
         for route in question["routes"]:
             where = {"question": question["question"], "route": route["route"]}
             conditions += [
-                {**where, "condition": c["condition"], "state": c["state"], "source": c["source"]}
+                {
+                    **where,
+                    "condition": c["condition"],
+                    "state": c["state"],
+                    "source": c["source"],
+                }
                 for c in route["conditions"]
             ]
-            acts += [
+            open_conditions += [
                 {
                     **where,
                     "condition": o["condition"],
-                    "activity": a["activity"],
-                    "ready": a["ready"],
-                    "missing": "; ".join(a.get("missing") or []),
+                    "required_predecessors": [
+                        {
+                            "activity": a["activity"],
+                            "missing_inputs": a.get("missing") or [],
+                            "required_inputs": a.get("required_inputs") or [],
+                            "output_type": a.get("output_type") or "",
+                            "produces_in": a.get("produces_in") or [],
+                            "may_unblock": a.get("may_unblock") or [],
+                        }
+                        for a in o["acts"]
+                        if not a["ready"]
+                    ],
+                    "ready_acts": [
+                        {
+                            "activity": a["activity"],
+                            "required_inputs": a.get("required_inputs") or [],
+                            "output_type": a.get("output_type") or "",
+                            "produces_in": a.get("produces_in") or [],
+                            "may_unblock": a.get("may_unblock") or [],
+                            "conditional": bool(a.get("conditional")),
+                        }
+                        for a in o["acts"]
+                        if a["ready"]
+                    ],
                 }
                 for o in route["open"]
-                for a in o["acts"]
             ]
             refuted += [{**where, "condition": r["condition"]} for r in route["refuted"]]
     itineraries = diagnosis_document.get("itineraries") or {}
@@ -289,9 +335,10 @@ def next_act(diagnosis_document: Mapping[str, Any]) -> dict[str, Any]:
         for n in diagnosis_document.get("narrowings") or []
     ]
     return {
-        **_header("next-act", "Open conditions and ready acts", version=2),
+        **_header("next-act", "Open conditions and ready acts", source_state, 8),
         "conditions": conditions,
-        "acts": acts,
+        "open_conditions": open_conditions,
+        "comparisons": act_comparisons(records or {}),
         "refuted": refuted,
         "revisions": revisions,
         "signals": signals,
@@ -299,75 +346,49 @@ def next_act(diagnosis_document: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
-def exposure(records: Records) -> dict[str, Any]:
+def exposure(records: Records, *, state: str | None = None) -> dict[str, Any]:
     """Return, for each answer, the units that expose it to revision, as the exposure rule and the
     exposure of a derivation state, computed by the walk of :mod:`gnomon.exposure`."""
+    rows = list(exposure_rows(records))
     return {
-        **_header("exposure", "Exposure of each answer to revision", version=2),
-        "exposures": list(exposure_rows(records)),
+        **_header(
+            "exposure",
+            "Exposure of each answer to revision",
+            _source_state(records, state),
+            6,
+        ),
+        "graph": exposure_graph(records, rows),
+        "exposures": rows,
     }
 
 
-def assembly(records: Records) -> dict[str, Any]:
+def assembly(records: Records, *, state: str | None = None) -> dict[str, Any]:
     """Return the assembly of each level: its components, parts, citations, gaps, limits and
     excluded parts, as the decision on the assembly of a level states and the module
     :mod:`gnomon.assembly` computes."""
-    return {**_header("assembly", "Assembly of each level"), **assembly_tables(records)}
+    tables = assembly_tables(records)
+    return {
+        **_header("assembly", "Assembly of each level", _source_state(records, state), 3),
+        "graph": assembly_graph(records, tables),
+        **tables,
+    }
 
 
 def itinerary_progress(
-    records: Records, impeached: set[str], conditional: set[str]
+    records: Records,
+    impeached: set[str],
+    conditional: set[str],
+    *,
+    state: str | None = None,
 ) -> dict[str, Any]:
-    """Return the steps of each itinerary in the order of their dependencies, with their verdicts.
-
-    A step is ``impeached`` when a failed norm lies upstream of its output, ``conditional`` when a
-    pending one does, and ``sound`` otherwise. The edges between steps are listed for a renderer of
-    graphs.
-    """
-    steps_rows, edges = [], []
-    for key in _of_type(records, "itinerary"):
-        own = f"{key}."
-        steps = {
-            str(s.get("id")): s for s in records[key].get("steps") or [] if isinstance(s, Mapping)
-        }
-        after = {
-            name: sorted(
-                {
-                    str(i.get("ref"))[len(own) :]
-                    for i in s.get("inputs") or []
-                    if isinstance(i, Mapping) and str(i.get("ref")).startswith(own)
-                }
-                & set(steps)
-            )
-            for name, s in steps.items()
-        }
-        order: list[str] = []
-        while len(order) < len(steps):
-            ready = [
-                n for n in sorted(steps) if n not in order and all(p in order for p in after[n])
-            ]
-            order += ready or [n for n in sorted(steps) if n not in order][:1]
-        for name in order:
-            step = steps[name]
-            output = str((step.get("output") or {}).get("ref") or "")
-            state = (
-                "impeached"
-                if output in impeached
-                else "conditional" if output in conditional else "sound"
-            )
-            steps_rows.append(
-                {
-                    "itinerary": key,
-                    "step": name,
-                    "activity": str(step.get("activity") or ""),
-                    "verdict": str((step.get("norm") or {}).get("verdict") or ""),
-                    "output": output,
-                    "state": state,
-                }
-            )
-            edges += [{"itinerary": key, "from": parent, "to": name} for parent in after[name]]
+    """Return each itinerary stage and its complete output-usability dependency graph."""
     return {
-        **_header("itinerary-progress", "Progress of each itinerary", version=2),
+        **_header(
+            "itinerary-progress",
+            "Progress of each itinerary",
+            _source_state(records, state),
+            4,
+        ),
         "itineraries": [
             {
                 "itinerary": key,
@@ -376,12 +397,11 @@ def itinerary_progress(
             }
             for key in _of_type(records, "itinerary")
         ],
-        "steps": steps_rows,
-        "edges": edges,
+        "graph": itinerary_progress_graph(records, impeached, conditional),
     }
 
 
-def maturity_map(records: Records) -> dict[str, Any]:
+def maturity_map(records: Records, *, state: str | None = None) -> dict[str, Any]:
     """Return the maturity of the marked fields of each record, and the default of each record.
 
     A field left unmarked takes the maturity that the status of its record states, when that status
@@ -402,10 +422,13 @@ def maturity_map(records: Records) -> dict[str, Any]:
         )
         for path, value in sorted((record.get("maturity") or {}).items()):
             rows.append({"record": key, "field": str(path), "maturity": str(value)})
-    return {**_header("maturity", "Maturity of each record"), "fields": rows}
+    return {
+        **_header("maturity", "Maturity of each record", _source_state(records, state), 2),
+        "fields": rows,
+    }
 
 
-def question_tree_view(records: Records) -> dict[str, Any]:
+def question_tree_view(records: Records, *, state: str | None = None) -> dict[str, Any]:
     """Return the question tree as a table of nodes and a table of edges, for a renderer of
     trees."""
     nodes, edges = [], []
@@ -427,10 +450,27 @@ def question_tree_view(records: Records) -> dict[str, Any]:
 
     for root in question_tree(records):
         walk(root, None, 0)
-    return {**_header("question-tree", "Question tree"), "nodes": nodes, "edges": edges}
+    return {
+        **_header("question-tree", "Question tree", _source_state(records, state), 3),
+        "nodes": nodes,
+        "edges": edges,
+    }
 
 
-def question_statements(records: Records) -> dict[str, Any]:
+def inquiry_graph_view(records: Records, *, state: str | None = None) -> dict[str, Any]:
+    """Return the operational inquiry graph of products, activities, and typed relations."""
+    return {
+        **_header(
+            "inquiry-graph",
+            "Operational inquiry graph",
+            _source_state(records, state),
+            1,
+        ),
+        "graph": inquiry_graph(records),
+    }
+
+
+def question_statements(records: Records, *, state: str | None = None) -> dict[str, Any]:
     """Return, for each question and question schema, its authored statement beside the one composed
     from its fields, with the slots of the frame that the fields leave unfilled."""
     registry = load_statement_registry()
@@ -449,10 +489,20 @@ def question_statements(records: Records) -> dict[str, Any]:
                 "gaps": ", ".join(composed.gaps),
             }
         )
-    return {**_header("question-statements", "Statement of each question"), "statements": rows}
+    return {
+        **_header(
+            "question-statements",
+            "Statement of each question",
+            _source_state(records, state),
+            3,
+        ),
+        "statements": rows,
+    }
 
 
-def expression_forms(records: Records) -> dict[str, Any]:
+# Expression rendering combines the visible record closure, local operators and canonical notation.
+# pylint: disable-next=too-many-locals
+def expression_forms(records: Records, *, state: str | None = None) -> dict[str, Any]:
     """Return the LaTeX form of each expression of each record, composed from the notations of
     the symbols that the record sees and of the operators of its target system, as the module
     :mod:`gnomon.latex` states."""
@@ -489,7 +539,12 @@ def expression_forms(records: Records) -> dict[str, Any]:
                     }
                 )
     return {
-        **_header("expressions", "LaTeX form of each expression"),
+        **_header(
+            "expressions",
+            "LaTeX form of each expression",
+            _source_state(records, state),
+            2,
+        ),
         "expressions": rows,
     }
 
@@ -505,15 +560,16 @@ def all_views(
     The diagnosis of the conditions of answerability, and the impeached and conditional records of
     the itineraries, are computed by the caller, which reads them per problem.
     """
+    state = records_source_state(records)
     built = [
-        problem_state(records),
-        next_act(diagnosis_document),
-        exposure(records),
-        assembly(records),
-        itinerary_progress(records, impeached, conditional),
-        maturity_map(records),
-        question_tree_view(records),
-        question_statements(records),
-        expression_forms(records),
+        problem_state(records, state=state),
+        next_act(diagnosis_document, state, records),
+        exposure(records, state=state),
+        assembly(records, state=state),
+        itinerary_progress(records, impeached, conditional, state=state),
+        maturity_map(records, state=state),
+        inquiry_graph_view(records, state=state),
+        question_statements(records, state=state),
+        expression_forms(records, state=state),
     ]
     return {str(view["id"]).removeprefix("view."): view for view in built}

@@ -35,6 +35,11 @@ import yaml
 
 from . import completeness as c
 from . import findings as rules
+from .activity_consequences import (
+    ActivityConsequence,
+    activities_unblocked_by,
+    activity_consequences,
+)
 from .findings import Entry, Finding, finding
 from .itineraries import Activity, activities, holds, product_types
 from .propagation import Revision, revisions
@@ -197,7 +202,10 @@ def derived(question: Mapping[str, Any], condition: str, records: Records) -> Co
                 ]
                 if verdicts and all(v in ("pass", "not-applicable") for v in verdicts):
                     return ConditionState(
-                        condition, "established", "derived", (str(assessment.get("id")),)
+                        condition,
+                        "established",
+                        "derived",
+                        (str(assessment.get("id")),),
                     )
     return None
 
@@ -218,7 +226,10 @@ UNSETTLED = frozenset({"pending", "inconclusive"})
 
 
 def _spread(
-    steps: Mapping[str, Mapping[str, Any]], own: str, verdicts: frozenset[str], marked: set[str]
+    steps: Mapping[str, Mapping[str, Any]],
+    own: str,
+    verdicts: frozenset[str],
+    marked: set[str],
 ) -> set[str]:
     """Return the outputs of the steps that a set of verdicts reaches in one itinerary.
 
@@ -365,8 +376,31 @@ def _model(registry: Mapping[str, Any]) -> _Model:
     return _Model(order, deps, acting)
 
 
+def _acts_on(condition: str, model: _Model, reach: _Reach) -> tuple[Act, ...]:
+    """Return every registered activity mapped to a condition, annotated by readiness.
+
+    Readiness classifies an applicable activity as ready or waiting for an input. It does not
+    select a preferred activity or remove one because another activity is ready.
+    """
+    return tuple(
+        readiness(
+            reach.acts[activity],
+            reach.local,
+            reach.types,
+            reach.impeached,
+            reach.conditional,
+        )
+        for activity in model.acting.get(condition, [])
+        if activity in reach.acts
+    )
+
+
 def _route_diagnosis(
-    question: Mapping[str, Any], route: str, model: _Model, records: Records, reach: _Reach
+    question: Mapping[str, Any],
+    route: str,
+    model: _Model,
+    records: Records,
+    reach: _Reach,
 ) -> RouteDiagnosis:
     """Return the states, the open and the refuted conditions of a question on a route."""
     applicable = conditions_on(route, model.deps)
@@ -387,11 +421,7 @@ def _route_diagnosis(
         )
     established = ConditionState("", "established", "default")
     opened = {
-        condition: tuple(
-            readiness(reach.acts[a], reach.local, reach.types, reach.impeached, reach.conditional)
-            for a in model.acting.get(condition, [])
-            if a in reach.acts
-        )
+        condition: _acts_on(condition, model, reach)
         for condition, state in states.items()
         if state.state == "not-established"
         and all(states.get(d, established).state == "established" for d in applicable[condition])
@@ -423,7 +453,9 @@ def _candidates_reason(question: Mapping[str, Any], records: Records) -> str:
 
 
 def diagnose(
-    records: Records, registry: Mapping[str, Any] | None = None, local: Records | None = None
+    records: Records,
+    registry: Mapping[str, Any] | None = None,
+    local: Records | None = None,
 ) -> Diagnosis:
     """Return the diagnosis of every question of a set of records.
 
@@ -458,8 +490,36 @@ def diagnose(
     return result
 
 
+def _act_document(
+    act: Act,
+    route: RouteDiagnosis,
+    consequences: Mapping[str, ActivityConsequence],
+) -> dict[str, Any]:
+    """Return one act with the consequence derived from the activity registries."""
+    consequence = consequences[act.activity]
+    waiting = (
+        (candidate.activity, candidate.missing)
+        for acts_ in route.open.values()
+        for candidate in acts_
+        if not candidate.ready
+    )
+    return {
+        "activity": act.activity,
+        "ready": act.ready,
+        "required_inputs": list(consequence.required_inputs),
+        "output_type": consequence.output_type,
+        "produces_in": list(consequence.produces_in),
+        "may_unblock": list(
+            activities_unblocked_by(consequence.output_type, waiting, excluding=act.activity)
+        ),
+        **({"missing": list(act.missing)} if act.missing else {}),
+        **({"conditional": True} if act.conditional else {}),
+    }
+
+
 def as_document(diagnosis: Diagnosis) -> dict[str, Any]:
     """Return the diagnosis as a mapping in a stable order, for a YAML report."""
+    consequences = activity_consequences()
     return {
         "questions": [
             {
@@ -479,15 +539,7 @@ def as_document(diagnosis: Diagnosis) -> dict[str, Any]:
                         "open": [
                             {
                                 "condition": cond,
-                                "acts": [
-                                    {
-                                        "activity": a.activity,
-                                        "ready": a.ready,
-                                        **({"missing": list(a.missing)} if a.missing else {}),
-                                        **({"conditional": True} if a.conditional else {}),
-                                    }
-                                    for a in acts_
-                                ],
+                                "acts": [_act_document(a, r, consequences) for a in acts_],
                             }
                             for cond, acts_ in r.open.items()
                         ],
@@ -520,17 +572,49 @@ def as_document(diagnosis: Diagnosis) -> dict[str, Any]:
     }
 
 
-def _acts_lines(acts_: tuple[Act, ...]) -> list[str]:
-    """Return the lines of the acts on one open condition: the ready acts, then those waiting for
-    an input, each with the input that it lacks."""
-    ready = [a.activity for a in acts_ if a.ready]
-    waiting = [f"{a.activity} ({'; '.join(a.missing)})" for a in acts_ if not a.ready]
-    if not ready and not waiting:
+def _act_effect(
+    act: Act,
+    route: RouteDiagnosis,
+    consequences: Mapping[str, ActivityConsequence],
+) -> str:
+    """Return the inputs, output location and possible downstream acts of one activity."""
+    consequence = consequences[act.activity]
+    waiting = (
+        (candidate.activity, candidate.missing)
+        for acts_ in route.open.values()
+        for candidate in acts_
+        if not candidate.ready
+    )
+    unblocks = activities_unblocked_by(consequence.output_type, waiting, excluding=act.activity)
+    required = "; ".join(consequence.required_inputs) or "no input"
+    locations = "; ".join(consequence.produces_in)
+    effect = (
+        f"requires {required}; if its norm passes, "
+        f"produces {consequence.output_type} in {locations}"
+    )
+    if unblocks:
+        effect += f" and may unblock {', '.join(unblocks)}"
+    return effect
+
+
+def _acts_lines(
+    acts_: tuple[Act, ...],
+    route: RouteDiagnosis,
+    consequences: Mapping[str, ActivityConsequence],
+) -> list[str]:
+    """Return ready acts before waiting acts, with each act's operative consequence."""
+    ordered = [a for a in acts_ if a.ready] + [a for a in acts_ if not a.ready]
+    if not ordered:
         return ["    no registered activity acts on it"]
-    lines = [f"    ready: {', '.join(ready)}"] if ready else []
-    if waiting:
-        lines.append(f"    waiting for an input: {', '.join(waiting)}")
-    return lines
+    return [
+        (
+            f"    {'ready, conditional' if act.ready and act.conditional else 'ready'}: "
+            if act.ready
+            else f"    waiting for {'; '.join(act.missing)}: "
+        )
+        + f"{act.activity}; {_act_effect(act, route, consequences)}"
+        for act in ordered
+    ]
 
 
 def _flag(dependent: str, reasons: Mapping[str, str]) -> str:
@@ -574,6 +658,7 @@ def render_text(diagnosis: Diagnosis) -> str:
     The open conditions are those whose dependencies are established, so each can be addressed now.
     The choice among the ready acts is left to the researcher, as the choice of the next act states.
     """
+    consequences = activity_consequences()
     lines: list[str] = []
     if not diagnosis.questions:
         lines.append("no question to diagnose: fill a question record that addresses the problem")
@@ -584,7 +669,7 @@ def render_text(diagnosis: Diagnosis) -> str:
             for cond, acts_ in r.open.items():
                 reason = r.reasons.get(cond)
                 lines.append(f"  open {cond}" + (f": {reason}" if reason else ""))
-                lines += _acts_lines(acts_)
+                lines += _acts_lines(acts_, r, consequences)
                 any_ready = any_ready or any(a.ready for a in acts_)
                 any_listed = any_listed or bool(acts_)
             for cond in r.refuted:
@@ -602,7 +687,7 @@ def render_text(diagnosis: Diagnosis) -> str:
     if any_listed:
         lines.append(
             f"each activity is defined in the note of its family, which {ACTIVITY_NOTES} lists;"
-            f" a name in parentheses is the type of the missing input, which {PRODUCT_TYPE_NOTE}"
+            f" each name after 'waiting for' is a missing input type, which {PRODUCT_TYPE_NOTE}"
             " defines"
         )
     return "\n".join(lines) + "\n"

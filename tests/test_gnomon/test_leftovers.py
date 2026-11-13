@@ -50,13 +50,16 @@ def test_a_placeholder_in_a_filled_entry_becomes_empty() -> None:
     }
     cleaned, found = strip_leftovers(record)
     assert cleaned["laws"][0]["expression"] is None and cleaned["variables"][0]["symbol"] == "DGMT"
-    assert [f.text.split(":")[0] for f in found] == ["laws[0].expression", "variables[0].name"]
+    assert [f.text.split(":")[0] for f in found] == [
+        "laws[0].expression",
+        "variables[0].name",
+    ]
 
 
 def _started(tmp_path: Path) -> Path:
     """Return a new folder whose problem and question carry an identifier and nothing else."""
     folder = tmp_path / "flu"
-    scaffold(folder, CORE_KINDS)
+    scaffold(folder, [*CORE_KINDS, "question"])
     for name, placeholder, ident in (
         ("problem.yml", "prob.TOPIC.NAME", "prob.flu.winter-peak"),
         ("question.yml", "quest.TOPIC.NAME", "quest.flu.winter-timing"),
@@ -69,11 +72,16 @@ def _started(tmp_path: Path) -> Path:
     return folder
 
 
-def test_a_leftover_is_reported_instead_of_being_read_as_content(tmp_path: Path) -> None:
+def test_a_leftover_is_reported_instead_of_being_read_as_content(
+    tmp_path: Path,
+) -> None:
     _started(tmp_path)
     rules = [x.finding.rule.id for x in check_workspace(load_workspace(tmp_path))]
     assert "completeness/template-leftover" in rules
-    assert not {"vocabulary/unparsed-expression", "completeness/misplaced-maturity"} & set(rules)
+    assert not {
+        "vocabulary/unparsed-expression",
+        "completeness/misplaced-maturity",
+    } & set(rules)
 
 
 def test_an_untouched_block_opens_no_route(tmp_path: Path) -> None:

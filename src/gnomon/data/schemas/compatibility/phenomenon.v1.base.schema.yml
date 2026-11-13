@@ -1,0 +1,1328 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/phenomenon.v1.base.schema.yml
+title: Phenomenon record
+description: The fields of a phenomenon record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/phenomenon.md`; one file per phenomenon of one target system'
+- 'symbols and expressions: `docs/specification/expressions.md`'
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+- specifications follow the order of the specification note
+- 'exploratory question: leave the statement, the category, the occurrence and the evidential status empty,
+  since the inquiry produces them; fill the candidate observables, the varied indices and the detection
+  criterion'
+properties:
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"SHORT NAME OF THE PHENOMENON"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  statement:
+    type:
+    - string
+    - 'null'
+    x-template: '"THE PHENOMENON IN WORDS: THE BEARER AND ITS BEHAVIOR"'
+    x-kind: markdown-line
+    x-comment: 'a reading only: the signatures fix the bearer, the manifestations fix the behavior'
+    title: Statement
+    description: '"[bearer of the phenomenon] [its behavior]", as a reading'
+    examples:
+    - '"the excitatory population oscillates at gamma frequency"'
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: phen.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: phenomenon
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+    - string
+    - 'null'
+    x-template: provisional
+    x-vocabulary: .status
+    title: Status
+    description: the maturity of the phenomenon record, taken by every field that the block `maturity` leaves unmarked
+  commitment:
+    x-vocabulary: .commitment
+    type:
+    - string
+    - 'null'
+    title: Commitment
+    description: 'how far the record fixes the phenomenon: `identified`: a definite description and pointers fix the referent · `specified`: the observables and the manifestations are written, and their symbols resolve'
+    examples:
+    - the geometry of the fixed points of the benchmark networks, named before any kernel is written (identified);
+      the same geometry stated by a kernel over the inputs (specified)
+  target_system:
+    type:
+    - string
+    - 'null'
+    x-template: system.TOPIC
+    x-kind: label
+    title: Target system
+    description: the identifier of the target system whose behavior the phenomenon states
+  identification:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      description:
+        type:
+        - string
+        - 'null'
+        x-template: '"A DEFINITE DESCRIPTION THAT PICKS OUT THE BEHAVIOR"'
+        x-kind: markdown-line
+        title: description
+        description: a noun phrase that picks out one behavior of the target
+        examples:
+        - the stationary localized states of the equation, with the branches that organize them
+      pointers:
+        type:
+        - array
+        - 'null'
+        items:
+          type:
+          - string
+          - 'null'
+          x-template: '"POINTER TO A DATA SET, A RESULT OR A PUBLICATION THAT FIXES THE REFERENT"'
+        title: pointers
+        description: per pointer, a data set, a result or a publication
+        examples:
+        - the article that reports the phenomenon; a figure of a simulation study
+    x-comment: fixes the referent before any observable is declared
+    title: Identification
+    description: 'what fixes the referent before any observable is declared: a definite description of the behavior, with pointers to the data, the results or the publications that report it'
+    examples:
+    - the delay between fitting and generalization reported for networks trained on algorithmic tasks
+  category:
+    x-blank: true
+    x-vocabulary: .category
+    type:
+    - string
+    - 'null'
+    title: Category
+    description: particular occurrence · regularity (effect) · capacity · structural property
+    examples:
+    - the burst recorded at $t=12$ s (particular occurrence); gamma power increases with stimulus contrast
+      (regularity); gating inputs by context (capacity); a low-dimensional representation (structural
+      property)
+  course:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      index:
+        type:
+        - string
+        - 'null'
+        x-template: SYMBOL
+        x-kind: label
+        x-comment: 'an index set of the target or of this record that orders states in time: time or a training step'
+        title: index
+        description: 'the symbol of an index set of the target or of this record that orders states in
+          time: time or a training step'
+        examples:
+        - the training step; the time
+      grain:
+        type:
+        - string
+        - 'null'
+        x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+        x-kind: text
+        x-comment: shortest length of a segment of the course; a predicate of the behavior is evaluated
+          only on segments at least this long
+        title: grain
+        description: an expression giving the shortest segment on which a predicate of the behavior is
+          evaluated
+        examples:
+        - one training step; one turnover time of the largest eddies
+      varies:
+        type:
+        - array
+        - 'null'
+        x-template: '[SYMBOL]'
+        x-comment: parameters of the target that change along this course; empty when none does
+        title: varies
+        description: the symbols of those parameters
+        examples:
+        - the weights of a network along training
+    x-comment: the ordered index along which the behavior unfolds
+    title: Course
+    description: 'the ordered index along which the behavior unfolds: an index, a grain and the parameters of the target that vary along the course'
+    examples:
+    - the training steps of a network; the time of a flow
+  occurrence:
+    x-blank: true
+    x-comment: '`not-applicable` for a regularity or a capacity, `state` for a structural property'
+    x-vocabulary: .occurrence
+    type:
+    - string
+    - 'null'
+    title: Occurrence
+    description: 'the class of the occurrences that the phenomenon concerns: state · process · event for a particular occurrence, state for a structural property, not-applicable for a regularity or a capacity'
+    examples:
+    - the network sits at its fixed point (state); the turbulent flow (process); the first crossing of
+      a loss threshold (event)
+  index_sets:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE SET"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the index set
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the index set, unique within the record
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: variant carrying the entry; omit when every member of the class carries it
+          title: Variant
+          description: variant carrying the entry; omit when every member of the class carries it
+        extent:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Extent
+          description: a set expression over declared symbols naming the members of the index set
+        structure:
+          x-vocabulary: index_sets.structure
+          type:
+          - string
+          - 'null'
+          title: Structure
+          description: 'the role of the index set: the index along which the state evolves, or another index, continuous or countable'
+        dimensional_formula:
+          type:
+          - string
+          - 'null'
+          x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
+          x-kind: label
+          x-comment: optional; the formula of the coordinate that the set indexes, such as L or T
+          title: dimensional formula
+          description: optional; the dimensional formula of the coordinate that the index set collects,
+            such as L for a spatial domain or T for a time axis, so that a derivative along the index is
+            checked
+          examples:
+          - '`L` for a spatial domain; `T` for a time axis'
+    x-comment: only sets the observables introduce beyond those the target declares
+    title: Index sets
+    description: '"[symbol]", with the set expression that it collects and its structure: continuum ·
+      discrete set · interval'
+    examples:
+    - the separation and the lag of a correlation; the order of a structure function; a prediction horizon
+  observables:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        reference:
+          type:
+          - string
+          - 'null'
+          x-template: system.TOPIC.SYMBOL
+          x-kind: label
+          x-comment: for an observable the target already declares as a quantity, give only this reference
+          title: Reference
+          description: for an observable the target already declares as a quantity, give only this reference
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE OBSERVABLE"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the observable
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the observable, unique within the record
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant carrying the entry; omit when every member of the class
+            carries it
+          title: Variant
+          description: symbol of the target variant carrying the entry; omit when every member of the
+            class carries it
+        signature:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: indices the observable still takes; empty for a scalar
+          title: signature (indices $i$ and $t$)
+          description: 'the free indices of the definition: a constituent kind, an index set, time, a
+            parameter, or a new index that it introduces'
+          examples:
+          - the spike phase of each neuron over time (two indices); a correlation over separation and
+            lag (two indices); a stationary rate (none)
+        values:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Values
+          description: a set expression over declared symbols giving the values of the observable
+        scale:
+          x-vocabulary: observables.scale
+          type:
+          - string
+          - 'null'
+          title: scale
+          description: nominal · ordinal · interval · ratio · absolute · not-applicable
+          examples:
+          - a regime label (nominal); a delay counted in training steps (ratio)
+        dimensional_formula:
+          type:
+          - string
+          - 'null'
+          x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
+          x-kind: label
+          x-comment: optional; a monomial such as M L T^-2, or 1 for a pure number
+          title: dimensional formula
+          description: optional; a monomial over the base dimensions and the base scales of the problem,
+            such as M L T^-2, or 1 for a pure number
+          examples:
+          - '`M L T^-2` for a force; `T` for a delay; `1` for a fraction'
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: give for a derived observable
+          title: expression
+          description: '"[expression over declared symbols]", whose binders consume the indices that it
+            aggregates'
+          examples:
+          - the mean of the constituent rates; the minimum abundance $\min_i N_i$; the delay $t_{gen}-t_{fit}$
+        condition:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION THAT THE QUANTITY SATISFIES"'
+          x-kind: text
+          x-comment: give when no map builds the quantity
+          title: Condition
+          description: give when no map builds the quantity
+        selects:
+          x-comment: required with a condition
+          x-vocabulary: observables.selects
+          type:
+          - string
+          - 'null'
+          title: Selects
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them'
+        held_by:
+          type:
+          - string
+          - 'null'
+          x-template: RECORD.UNIT
+          x-kind: label
+          x-comment: optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
+          title: Held by
+          description: The law of a background or of a model, or the consequence of a derivation, that establishes a value satisfying the condition; empty while the existence that the condition presupposes is undischarged.
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE EXPRESSION IN WORDS"'
+          x-kind: text
+          title: Reading
+          description: the expression of the observable in words
+        event:
+          type:
+          - object
+          - 'null'
+          properties:
+            origin:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION FIXING THE ORIGIN OF TIME"'
+              x-kind: text
+              title: Origin
+              description: an expression fixing the origin from which the clock of the event starts
+            first_observation:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION FIXING THE TIME OF THE FIRST OBSERVATION"'
+              x-kind: text
+              x-comment: required when the censoring is `left`, whose time it bounds; omit when observation
+                starts at the origin
+              title: First observation
+              description: required when the censoring is `left`, whose time it bounds; omit when observation
+                starts at the origin
+            horizon:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION FIXING THE END OF OBSERVATION"'
+              x-kind: text
+              title: Horizon
+              description: an expression fixing the end of observation
+            censoring:
+              x-vocabulary: observables.censoring
+              type:
+              - string
+              - 'null'
+              title: Censoring
+              description: 'the censoring of the event time: right, left or interval, when the time is unknown, or none, when it is observed'
+            reading:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE EVENT IN WORDS, AND THE VALUE RECORDED WHEN IT IS NOT OBSERVED"'
+              x-kind: markdown-line
+              title: Reading
+              description: the event in words, and the value recorded when it is not observed
+          x-comment: fill when the observable is the time of an event; the observable's `expression` then
+            states the event criterion
+          title: event
+          description: the origin from which the clock starts, the first observation that bounds a left-censored
+            time, the horizon at which observation stops, and the censoring (right · left · interval · none)
+            for an event whose time is unknown
+          examples:
+          - a generalization event observed up to a finite training horizon, right-censored when the criterion
+            is never met
+        estimator:
+          type:
+          - object
+          - 'null'
+          properties:
+            method:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE ESTIMATOR THAT COMPUTES THE VALUES FROM THE DATA"'
+              x-kind: markdown-line
+              title: Method
+              description: the estimator that computes the values from the data
+            data_version:
+              type:
+              - string
+              - 'null'
+              x-template: VERSION
+              x-kind: label
+              x-comment: the version of the data on which the estimator runs
+              title: Data version
+              description: the version of the data on which the estimator runs
+            uncertainty:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE UNCERTAINTY THAT THE ESTIMATOR REPORTS"'
+              x-kind: markdown-line
+              title: Uncertainty
+              description: the uncertainty that the estimator reports
+          x-comment: fill when the values are estimated from data; the estimates are computed from these
+            entries, never recorded
+          title: estimator
+          description: the estimator that computes the values from the data, the version of the data on
+            which it runs, and the uncertainty that it reports; the estimates themselves are computed
+            from these entries, not recorded
+          examples:
+          - the peak of the power spectrum, estimated by Welch's method on version 3 of the recordings,
+            with a bootstrap interval
+    x-comment: functions of the system state that restate the behavior
+    title: Observables
+    description: a reference to a quantity that the target declares, or "[symbol] ∈ [set expression]"
+      with a reading naming it in words
+    examples:
+    - $Y$ = the regime of the population activity, with values "asynchronous" and "synchronous"
+  manifestations:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE MANIFESTATION"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the manifestation
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the manifestation, unique within the record
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant carrying the entry; omit when every member of the class
+            carries it
+          title: Variant
+          description: symbol of the target variant carrying the entry; omit when every member of the
+            class carries it
+        form:
+          x-vocabulary: manifestations.form
+          type:
+          - string
+          - 'null'
+          title: Form
+          description: 'the form of the manifestation: a value, a dependence, a functional form, a scaling or a relation'
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Expression
+          description: an expression over the observables stating the manifestation
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE MEANING OF THE EXPRESSION"'
+          x-kind: text
+          x-comment: only content beyond the name and the form
+          title: Reading
+          description: only content beyond the name and the form
+        features:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              name:
+                type:
+                - string
+                - 'null'
+                x-template: '"NAME OF THE FEATURE"'
+                x-kind: markdown-line
+                title: Name
+                description: the words that designate the feature
+              symbol:
+                type:
+                - string
+                - 'null'
+                x-template: SYMBOL
+                x-kind: label
+                title: Symbol
+                description: the symbol of the feature, unique within the record
+              values:
+                type:
+                - string
+                - 'null'
+                x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+                x-kind: text
+                title: Values
+                description: a set expression over declared symbols giving the values that the feature can take
+              dimensional_formula:
+                type:
+                - string
+                - 'null'
+                x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+                pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
+                x-kind: label
+                x-comment: optional; a monomial such as M L T^-2, or 1 for a pure number
+                title: dimensional formula
+                description: optional; a monomial over the base dimensions and the base scales of the
+                  problem, such as M L T^-2, or 1 for a pure number
+              observed:
+                type:
+                - string
+                - 'null'
+                x-template: '"ONE ELEMENT OF THE VALUE SET"'
+                x-kind: markdown-line
+                title: Observed
+                description: the value of the feature observed, one element of its value set
+              condition:
+                type:
+                - string
+                - 'null'
+                x-template: '"EXPRESSION THAT THE FEATURE SATISFIES"'
+                x-kind: text
+                x-comment: give when the measurement constrains the feature without fixing its value
+                title: Condition
+                description: give when the measurement constrains the feature without fixing its value
+              selects:
+                x-comment: required with a condition
+                x-vocabulary: manifestations.selects
+                type:
+                - string
+                - 'null'
+                title: Selects
+                description: 'the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them'
+              held_by:
+                type:
+                - string
+                - 'null'
+                x-template: RECORD.UNIT
+                x-kind: label
+                x-comment: optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
+                title: Held by
+                description: The law of a background or of a model, or the consequence of a derivation, that establishes a value satisfying the condition; empty while the existence that the condition presupposes is undischarged.
+              procedure:
+                type:
+                - string
+                - 'null'
+                x-template: '"THE FINDING THAT THE MEASUREMENT ESTABLISHES"'
+                x-kind: markdown-line
+                x-comment: only content beyond the name and the value set
+                title: Procedure
+                description: only content beyond the name and the value set
+              caveat:
+                type:
+                - string
+                - 'null'
+                x-template: '"THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE
+                  OMISSION"'
+                x-kind: markdown-line
+                title: Caveat
+                description: the content of the feature that the record leaves unstated, and the reason for the omission
+          x-comment: quantities of the form that characterize the behavior
+          title: features
+          description: per feature, "[symbol] ∈ [set expression]" with the value observed within that
+            set
+          examples:
+          - the amplitude, the frequency and the phase of an oscillation; the exponents of a scaling law
+    x-comment: one entry per form of the observables' behavior
+    title: Manifestations
+    description: 'per form, "[expression over the observables]" with its form: value · dependence · functional
+      form · scaling · relation'
+    examples:
+    - $Y$ is "synchronous" (value); gamma power increases with contrast (dependence); $m(t)=A\sin(2\pi
+      f t+\varphi)$ (functional form); $S_p(r)\sim r^{\zeta_p}$ (scaling); feasibility implies local stability
+      (relation)
+  scope_over_instances:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE SOURCE OF VARIATION"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the source of variation
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the source of variation, unique within the record
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant carrying the entry; omit when every member of the class
+            carries it
+          title: Variant
+          description: symbol of the target variant carrying the entry; omit when every member of the
+            class carries it
+        over:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: declared quantities this source changes; empty when the instance itself varies
+          title: Over
+          description: declared quantities this source changes; empty when the instance itself varies
+        source:
+          x-vocabulary: scope_over_instances.source
+          type:
+          - string
+          - 'null'
+          title: Source
+          description: 'the kind of the source: a class member, a realization, random parameters, a random structure or a scenario'
+        quantification:
+          x-vocabulary: scope_over_instances.quantification
+          type:
+          - string
+          - 'null'
+          title: Quantification
+          description: 'how the phenomenon ranges over the instances: a single instance, a typical instance, an ensemble summary, an ensemble distribution, or every member'
+        conditional_on:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: other sources held fixed while this one varies
+          title: Conditional on
+          description: other sources held fixed while this one varies
+        differentiation:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE CONSEQUENCE OF THE VARIATION FOR THE CLAIM"'
+          x-kind: markdown-line
+          x-comment: only content beyond the name
+          title: Differentiation
+          description: only content beyond the name
+    x-comment: one entry per source of variation across instances; empty when the phenomenon occurs once
+    title: Scope over instances (index $k$)
+    description: 'an instance is a member of the reference class of $S$, or one realization of a system (a trial, a random initialization, a disorder sample); per source of variation, the declared quantities that it varies and the other sources held fixed meanwhile. Each entry also records its source: class member · realization · parameter draw · structure draw · scenario. It records its quantification as well: single instance · typical instance · ensemble summary · ensemble distribution · universal, meaning every member of the admitted class'
+    examples:
+    - the initialization draw, conditional on a fixed training specification (ensemble distribution);
+      every model of the admitted class (universal)
+  conditions_and_byproducts:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      precipitating:
+        type:
+        - array
+        - 'null'
+        items:
+          type: object
+          properties:
+            name:
+              type:
+              - string
+              - 'null'
+              x-template: '"NAME OF THE CONDITION"'
+              x-kind: markdown-line
+              title: Name
+              description: the words that designate the precipitating condition
+            variant:
+              type:
+              - string
+              - 'null'
+              x-template: SYMBOL
+              x-kind: label
+              x-comment: symbol of the target variant carrying the entry; omit when every member of the
+                class carries it
+              title: Variant
+              description: symbol of the target variant carrying the entry; omit when every member of
+                the class carries it
+            expression:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+              x-kind: text
+              title: Expression
+              description: an expression over declared symbols stating the condition that must hold for the behavior to occur
+            justification:
+              type:
+              - string
+              - 'null'
+              x-template: '"WHY THE CONDITION TRIGGERS THE BEHAVIOR"'
+              x-kind: markdown-line
+              x-comment: only content beyond the expression
+              title: Justification
+              description: only content beyond the expression
+        x-comment: conditions required for the behavior to occur
+        title: precipitating conditions
+        description: per condition, an expression over declared symbols with a justification
+        examples:
+        - a visual stimulus is presented
+      inhibiting:
+        type:
+        - array
+        - 'null'
+        items:
+          type: object
+          properties:
+            name:
+              type:
+              - string
+              - 'null'
+              x-template: '"NAME OF THE CONDITION"'
+              x-kind: markdown-line
+              title: Name
+              description: the words that designate the inhibiting condition
+            variant:
+              type:
+              - string
+              - 'null'
+              x-template: SYMBOL
+              x-kind: label
+              x-comment: symbol of the target variant carrying the entry; omit when every member of the
+                class carries it
+              title: Variant
+              description: symbol of the target variant carrying the entry; omit when every member of
+                the class carries it
+            expression:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+              x-kind: text
+              title: Expression
+              description: an expression over declared symbols stating the condition that prevents the behavior
+            justification:
+              type:
+              - string
+              - 'null'
+              x-template: '"WHY THE CONDITION PREVENTS THE BEHAVIOR"'
+              x-kind: markdown-line
+              x-comment: only content beyond the expression
+              title: Justification
+              description: only content beyond the expression
+            caveat:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION"'
+              x-kind: markdown-line
+              title: Caveat
+              description: the content of the condition that the record leaves unstated, and the reason for the omission
+        x-comment: conditions that prevent the behavior
+        title: inhibiting conditions
+        description: per condition, an expression over declared symbols with a justification
+        examples:
+        - feedforward inhibition is raised past the threshold that suppresses the oscillation
+      modulating:
+        type:
+        - array
+        - 'null'
+        items:
+          type: object
+          properties:
+            name:
+              type:
+              - string
+              - 'null'
+              x-template: '"NAME OF THE CONDITION"'
+              x-kind: markdown-line
+              title: Name
+              description: the words that designate the modulating condition
+            variant:
+              type:
+              - string
+              - 'null'
+              x-template: SYMBOL
+              x-kind: label
+              x-comment: symbol of the target variant carrying the entry; omit when every member of the
+                class carries it
+              title: Variant
+              description: symbol of the target variant carrying the entry; omit when every member of
+                the class carries it
+            expression:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION THAT FIXES THE REGIME OF THE MODULATION"'
+              x-kind: text
+              x-comment: give when the modulation holds in a single regime only
+              title: Expression
+              description: give when the modulation holds in a single regime only
+            reading:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE MEANING OF THE MODULATION"'
+              x-kind: markdown-line
+              x-comment: only content beyond the `effect`
+              title: Reading
+              description: only content beyond the `effect`
+            effect:
+              type:
+              - string
+              - 'null'
+              x-template: '"RELATION OVER DECLARED SYMBOLS"'
+              x-kind: markdown-line
+              x-comment: relate the modulating factor to the affected feature
+              title: Effect
+              description: relate the modulating factor to the affected feature
+        x-comment: conditions that change a feature of the behavior but not its occurrence
+        title: modulating conditions
+        description: per condition, the relation that it induces, as an expression naming the affected
+          feature and the controlling quantity. An entry names the regime when the relation holds only
+          there. Each condition carries a reading
+        examples:
+        - a higher stimulus contrast increases the gamma power and shifts its peak frequency upward
+      nonstandard:
+        type:
+        - array
+        - 'null'
+        items:
+          type: object
+          properties:
+            name:
+              type:
+              - string
+              - 'null'
+              x-template: '"NAME OF THE CIRCUMSTANCE"'
+              x-kind: markdown-line
+              title: Name
+              description: the words that designate the nonstandard circumstance
+            variant:
+              type:
+              - string
+              - 'null'
+              x-template: SYMBOL
+              x-kind: label
+              x-comment: symbol of the target variant carrying the entry; omit when every member of the
+                class carries it
+              title: Variant
+              description: symbol of the target variant carrying the entry; omit when every member of
+                the class carries it
+            expression:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+              x-kind: text
+              title: Expression
+              description: an expression over declared symbols stating the circumstance
+            differentiation:
+              type:
+              - string
+              - 'null'
+              x-template: '"WHY THE CIRCUMSTANCE IS UNUSUAL, AND HOW IT IS ARRANGED"'
+              x-kind: markdown-line
+              title: Differentiation
+              description: why the circumstance is unusual, and how it is arranged
+        x-comment: circumstances that must be arranged for the behavior to occur
+        title: nonstandard circumstances
+        description: per circumstance, an expression over declared symbols, with a justification. The
+          justification names the unusual feature and the procedure that produces the circumstance
+        examples:
+        - a slice preparation under carbachol
+      byproducts:
+        type:
+        - array
+        - 'null'
+        items:
+          type: object
+          properties:
+            name:
+              type:
+              - string
+              - 'null'
+              x-template: '"NAME OF THE BYPRODUCT"'
+              x-kind: markdown-line
+              title: Name
+              description: the words that designate the byproduct
+            variant:
+              type:
+              - string
+              - 'null'
+              x-template: SYMBOL
+              x-kind: label
+              x-comment: symbol of the target variant carrying the entry; omit when every member of the
+                class carries it
+              title: Variant
+              description: symbol of the target variant carrying the entry; omit when every member of
+                the class carries it
+            expression:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+              x-kind: text
+              title: Expression
+              description: an expression over declared symbols stating the byproduct
+            justification:
+              type:
+              - string
+              - 'null'
+              x-template: '"WHY THE BYPRODUCT FALLS OUTSIDE THE PHENOMENON"'
+              x-kind: markdown-line
+              x-comment: only content beyond the expression
+              title: Justification
+              description: only content beyond the expression
+        x-comment: further effects of the behavior outside the phenomenon
+        title: byproducts
+        description: per byproduct, an expression over declared symbols with a justification that gives
+          the reason for excluding it from the phenomenon
+        examples:
+        - the metabolic cost of the sustained spiking
+    x-comment: put a factor the question varies among the indices or the scope entries instead
+    title: Conditions and byproducts
+    description: put a factor the question varies among the indices or the scope entries instead
+  evidential_status:
+    x-blank: true
+    x-vocabulary: .evidential_status
+    type:
+    - string
+    - 'null'
+    title: Evidential status
+    description: 'established across data sets or methods · reported once · predicted, of a target with actual members · derived, of a model or of a target without actual members · absent from a closed search · disproved · undecided'
+    examples:
+    - gamma oscillations in V1, recorded across laboratories (established); a transition to chaos in mean-field
+      theory (predicted); the stationary rate of a balanced network (derived)
+  search:
+    type:
+    - object
+    - 'null'
+    properties:
+      scope:
+        type:
+        - string
+        - 'null'
+        x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+        x-kind: text
+        x-comment: the region of the members, conditions and courses that the search covered
+        title: Scope
+        description: the region of the members, conditions and courses that the search covered
+      procedure:
+        type:
+        - string
+        - 'null'
+        x-template: '"THE PROCEDURES AND THE DATA SEARCHED, AND WHY THEY WOULD HAVE DETECTED THE BEHAVIOR"'
+        x-kind: markdown-line
+        title: Procedure
+        description: the procedures and the data searched, and why they would have detected the behavior
+          within the scope
+      counterexample:
+        type:
+        - string
+        - 'null'
+        x-template: RECORD-OR-POINTER
+        x-kind: label
+        title: Counterexample
+        description: the record or the publication that establishes the counterexample or the contradiction
+    x-comment: fill when the evidential status is absent or disproved
+    title: Search
+    description: the search behind a negative status, its scope and procedure for an absence, its counterexample
+      for a disproof
+    examples:
+    - the recordings of three laboratories across the full range of contrast, which would have shown a peak
+      of gamma power (absent)
+  detection_criterion:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE TEST"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the test
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant carrying the entry; omit when every member of the class
+            carries it
+          title: Variant
+          description: symbol of the target variant carrying the entry; omit when every member of the
+            class carries it
+        across:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: sources of variation the test must hold across
+          title: Across
+          description: sources of variation the test must hold across
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Expression
+          description: an expression over declared symbols stating the condition that a candidate pattern must satisfy
+        procedure:
+          type:
+          - string
+          - 'null'
+          x-template: '"HOW THE TEST IS CARRIED OUT"'
+          x-kind: markdown-line
+          x-comment: only content beyond the name of the test
+          title: Procedure
+          description: only content beyond the name of the test
+        limited_by:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: external systems of the target whose reach bounds what the test can establish
+          title: Limited by
+          description: external systems of the target whose reach bounds what the test can establish
+    x-comment: conditions a candidate pattern must satisfy to count as established
+    title: Detection criterion
+    description: per test, the condition that a candidate pattern must satisfy to count as established.
+      The test also names the sources of variation across which the pattern must hold, and the external
+      systems of the target that bound its conclusions
+    examples:
+    - a pattern counts as established when it recurs across instances and across recording methods
+  data:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        pointer:
+          type:
+          - string
+          - 'null'
+          x-template: '"POINTER TO A DATA SET, A RECORDING OR A DERIVATION"'
+          x-kind: markdown-line
+          title: Pointer
+          description: a pointer to a data set, a recording or a derivation that establishes the phenomenon
+        version:
+          type:
+          - string
+          - 'null'
+          x-template: VERSION
+          x-kind: label
+          title: Version
+          description: the version of the data
+    x-comment: material that establishes the phenomenon
+    title: Data
+    description: per entry, "[pointer to a data set, a recording or a derivation]" that establishes the
+      phenomenon, with its version
+    examples:
+    - a recording session, version 3; a published figure; the derivation of a stationary rate
+  data_model:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        kind:
+          x-vocabulary: data_model.kind
+          type:
+          - string
+          - 'null'
+          title: Kind
+          description: 'the kind of the data model: an instrument model, a background simulation, an assimilation model or a reconstruction'
+        source:
+          type:
+          - string
+          - 'null'
+          x-template: RECORD
+          x-kind: label
+          x-comment: the model record, or a pointer to the publication that states the model
+          title: Source
+          description: the model record, or a pointer to the publication that states the model
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"WHAT THE MODEL DOES TO THE DATA"'
+          x-kind: markdown-line
+          title: Reading
+          description: what the model does to the data
+    x-comment: fill when a model intervenes between the raw records and the data; one entry per model
+    title: Data model
+    description: 'the models through which the data are produced or processed before they establish the phenomenon: per model, its kind: instrument model · background simulation · assimilation model · reconstruction, and the model record or the publication that states it'
+    examples:
+    - the forward model of the electrodes (instrument model); the reanalysis that fills the gaps of a
+      temperature record (assimilation model)
+  observation_error:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        of:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: an observable, or the pointer of a data set
+          title: Of
+          description: an observable, or the pointer of a data set
+        form:
+          x-vocabulary: observation_error.form
+          type:
+          - string
+          - 'null'
+          title: Form
+          description: 'the form of the error model: a distribution or a bound'
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Expression
+          description: an expression over declared symbols stating the error model
+    x-comment: fill when the values of the observables are compared with an answer; one entry per observable
+      or per data set
+    title: Observation error
+    description: 'per observable or per data set, an error model: a distribution or a bound'
+    examples:
+    - a Gaussian error of 2 Hz on the peak frequency
+  pattern_selection:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        manifestation:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: the manifestation whose pattern was selected
+          title: Manifestation
+          description: the manifestation whose pattern was selected
+        procedure:
+          type:
+          - string
+          - 'null'
+          x-template: '"HOW THE PATTERN WAS SELECTED FROM THE DATA"'
+          x-kind: markdown-line
+          title: Procedure
+          description: how the pattern was selected from the data
+        set_aside:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE PATTERNS SET ASIDE"'
+          x-kind: markdown-line
+          title: Set aside
+          description: the patterns set aside
+        motivated_by:
+          type:
+          - string
+          - 'null'
+          x-template: quest.TOPIC.NAME
+          x-kind: label
+          x-comment: the question that motivated the selection
+          title: Motivated by
+          description: the question that motivated the selection
+    x-comment: fill when the data admit other patterns than the one stated; one entry per selected pattern
+    title: Pattern selection
+    description: 'how the pattern stated by the manifestations was selected from the data: the selection procedure, the patterns set aside, and the question that motivated the selection'
+    examples:
+    - the gamma band selected among the bands of the spectrum, for the question of synchrony
+  adequacy:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        purpose:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE QUESTION OR THE KIND OF USE FOR WHICH THE DATA MODEL IS ADEQUATE"'
+          x-kind: markdown-line
+          title: Purpose
+          description: the question or the kind of use for which the data model is adequate
+        grounds:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE EVIDENCE OR THE ARGUMENT FOR THE ADEQUACY"'
+          x-kind: markdown-line
+          title: Grounds
+          description: the evidence or the argument for the adequacy
+    x-comment: fill when the record declares a data model; one entry per purpose
+    title: Adequacy
+    description: 'the purposes for which the data model is adequate: per purpose, the question or the kind of use for which the data model is adequate, with its grounds'
+    examples:
+    - adequate for the peak frequency, not for the phase of single neurons
+  maturity:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    additionalProperties:
+      x-template-key: FIELD.PATH
+      x-template: open
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'

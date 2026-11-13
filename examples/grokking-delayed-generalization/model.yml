@@ -1,6 +1,6 @@
 # the effective theory of representation learning [liu2022], derived from the target by four operations
 
-_schema: gnomon:model@1
+_schema: gnomon:model@3
 title: "Effective theory of representation learning"
 id: mod.grokking.effective-representation
 type: model

@@ -1,0 +1,812 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/target-system.v1.base.schema.yml
+title: Target system record
+description: The fields of a target-system record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/target-system.md`; one file per target system'
+- 'symbols and expressions: `docs/specification/expressions.md`'
+- 'the admitted laws, their closure and the organization: `background.yml`, one or more records per target'
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+- specifications follow the order of the specification note
+properties:
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"NAME OF THE SYSTEM"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: system.TOPIC
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: target-system
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+    - string
+    - 'null'
+    x-template: provisional
+    x-vocabulary: .status
+    title: Status
+    description: the maturity of the target-system record, taken by every field that the block `maturity` leaves unmarked
+  commitment:
+    x-vocabulary: .commitment
+    type:
+    - string
+    - 'null'
+    title: Commitment
+    description: 'how far the record fixes the target: `identified`: a definite description and pointers fix the referent · `specified`: the declarations are written and their symbols resolve'
+    examples:
+    - the networks of a benchmark named before any quantity is declared (identified); the same class with
+      its units, quantities and value sets declared (specified)
+  target_type:
+    x-vocabulary: .target_type
+    type:
+    - string
+    - 'null'
+    title: Target type
+    description: particular system · class of actual systems · class of possible systems · hypothetical
+      system · no external target (the model class itself)
+    examples:
+    - this recorded slice (particular); layer 2/3 circuits of mouse V1 (actual class); all balanced excitatory–inhibitory
+      networks (possible class); a cortex without inhibitory neurons (hypothetical); the Wilson–Cowan
+      model (no external target)
+  identification:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      description:
+        type:
+        - string
+        - 'null'
+        x-template: '"A DEFINITE DESCRIPTION THAT PICKS OUT THE SYSTEM OR THE CLASS OF SYSTEMS"'
+        x-kind: markdown-line
+        title: description
+        description: a noun phrase that picks out one system or one class of systems
+        examples:
+        - the four tipping elements of the actual Earth system named by the record
+      pointers:
+        type:
+        - array
+        - 'null'
+        items:
+          type:
+          - string
+          - 'null'
+          x-template: '"POINTER TO A DATA SET, A RESULT OR A PUBLICATION THAT FIXES THE REFERENT"'
+        title: pointers
+        description: per pointer, a data set, a result or a publication
+        examples:
+        - the article that defines the model class; a recording session
+    x-comment: fixes the referent before any quantity is declared
+    title: Identification
+    description: 'what fixes the referent before any quantity is declared: a definite description, with pointers to the data, the results or the publications that fix the referent'
+    examples:
+    - the networks of the mixture-encoding benchmark, a class of possible systems that encompasses artificial
+      and biological networks
+  reference_class:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    properties:
+      name:
+        type:
+        - string
+        - 'null'
+        x-template: '"KIND OF SYSTEM"'
+        x-kind: markdown-line
+        title: Name
+        description: the kind of system that names the class
+      projectibility:
+        type:
+        - object
+        - 'null'
+        properties:
+          status:
+            x-vocabulary: reference_class.status
+            type:
+            - string
+            - 'null'
+            title: Status
+            description: 'whether a claim about some members holds of the class: assumed, checked or not claimed'
+          evidence:
+            type:
+            - string
+            - 'null'
+            x-template: '"THE TEST OR THE ARGUMENT THAT SUPPORTS PROJECTING THE CLAIM ONTO THE CLASS"'
+            x-kind: markdown-line
+            x-comment: omit when the status is `not-claimed`
+            title: Evidence
+            description: omit when the status is `not-claimed`
+        x-comment: whether a claim about some members can be projected onto the class
+        title: projectibility
+        description: 'whether a claim about some members holds of the class: assumed · checked · not-claimed, with the evidence for an assumed or a checked projection'
+        examples:
+        - delayed generalization reported across several architectures (assumed); a theorem that quantifies
+          over every member (not claimed)
+      selection_criteria:
+        type:
+        - array
+        - 'null'
+        items:
+          type: object
+          properties:
+            name:
+              type:
+              - string
+              - 'null'
+              x-template: '"NAME OF THE CRITERION"'
+              x-kind: markdown-line
+              title: Name
+              description: the words that designate the criterion
+            expression:
+              type:
+              - string
+              - 'null'
+              x-template: '"EXPRESSION OVER DECLARED SYMBOLS THAT A MEMBER SATISFIES"'
+              x-kind: text
+              title: Expression
+              description: an expression over declared symbols that a member satisfies
+            justification:
+              type:
+              - string
+              - 'null'
+              x-template: '"THE REASON FOR THIS SELECTION"'
+              x-kind: markdown-line
+              x-comment: also state how the selection affects the inferences the population supports
+              title: Justification
+              description: also state how the selection affects the inferences the population supports
+        x-comment: fill only when membership depends on an outcome of the dynamics; put a restriction
+          on prior values in the domain of the question that imposes it, since other questions may leave
+          them free
+        title: selection criteria
+        description: per criterion, the expression that a member satisfies, with a justification. The
+          justification gives the reason for imposing the criterion and the inferences that it changes
+          about the class
+        examples:
+        - convergence for trained networks
+    x-comment: name only; the remaining specifications of the record generate the class
+    title: Reference class
+    description: a name, "[kind]", for the class that the other specifications generate
+    examples:
+    - excitatory–inhibitory networks with $10^3$–$10^5$ neurons and sparse random connectivity (formal);
+      the members that reached zero training error (formal, with a selection criterion); layer 2/3 of
+      adult mouse V1 (empirical)
+  variants:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE VARIANT"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the variant
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the variant, unique within the record
+        differentiation:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE DECLARATIONS THAT ONLY MEMBERS OF THIS VARIANT CARRY"'
+          x-kind: markdown-line
+          title: Differentiation
+          description: the declarations that only the members of this variant carry
+        caveat:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION"'
+          x-kind: markdown-line
+          title: Caveat
+          description: the content of the variant that the record leaves unstated, and the reason for the omission
+    x-comment: forms of a member that differ in their declarations; empty when a single form covers every
+      member
+    title: Variants
+    description: per variant, a name and a symbol. An entry carried by only some members names its variant
+      (e.g. a declaration, a law, a relation, an external system). An unmarked entry holds for the whole
+      class
+    examples:
+    - consumer models with explicit resource pools or with direct interaction coefficients; lattice and
+      continuum realizations of one field theory
+  constituents:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"KIND OF UNIT"'
+          x-kind: markdown-line
+          title: Name
+          description: the kind of unit that the constituent collects
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the constituent, unique within the record
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: variant carrying the entry; omit when every member of the class carries it
+          title: Variant
+          description: variant carrying the entry; omit when every member of the class carries it
+        extent:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Extent
+          description: a set expression over declared symbols naming the members that the constituent collects
+    x-comment: empty for a field system that decomposes into no unit
+    title: Constituents
+    description: '"[symbol]", with its reading and the set expression that it collects'
+    examples:
+    - $N$ Ising spins; $N$ neurons; none, for an Eulerian field
+  index_sets:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE SET"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the index set
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the index set, unique within the record
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: variant carrying the entry; omit when every member of the class carries it
+          title: Variant
+          description: variant carrying the entry; omit when every member of the class carries it
+        extent:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Extent
+          description: a set expression over declared symbols naming the members of the index set
+        structure:
+          x-vocabulary: index_sets.structure
+          type:
+          - string
+          - 'null'
+          title: Structure
+          description: 'the role of the index set: the index along which the state evolves, or another index, continuous or countable'
+        dimensional_formula:
+          type:
+          - string
+          - 'null'
+          x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
+          x-kind: label
+          x-comment: optional; the formula of the coordinate that the set indexes, such as L or T
+          title: dimensional formula
+          description: optional; the dimensional formula of the coordinate that the index set collects,
+            such as L for a spatial domain or T for a time axis, so that a derivative along the index is
+            checked
+          examples:
+          - '`L` for a spatial domain; `T` for a time axis'
+    x-comment: sets that index a quantity without being units, such as a continuum, a lattice or a sample
+      space
+    title: Index sets
+    description: '"[symbol]", with the set expression that it collects and its structure: continuum ·
+      discrete set · interval'
+    examples:
+    - the spatial domain $\Omega$ of an Eulerian field; the time axis; the sample space of a disorder
+      realization
+  variables:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE VARIABLE"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the variable
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the variable, unique within the record
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        of:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: external system the entry characterizes; omit when the entry belongs to the target
+          title: Of
+          description: external system the entry characterizes; omit when the entry belongs to the target
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: variant carrying the entry; omit when every member of the class carries it
+          title: Variant
+          description: variant carrying the entry; omit when every member of the class carries it
+        determined:
+          x-vocabulary: variables.determined
+          type:
+          - string
+          - 'null'
+          title: determined (side of the boundary that sets the value)
+          description: within, when the system fixes its value, or outside, when it is set externally
+            and still varies
+          examples:
+          - a population abundance (within); a body force applied to the flow (outside)
+        signature:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: one constituent kind or index set per place; empty for the system as a whole
+          title: Signature
+          description: one constituent kind or index set per place; empty for the system as a whole
+        values:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Values
+          description: a set expression over declared symbols giving the values of the variable
+        scale:
+          x-vocabulary: variables.scale
+          type:
+          - string
+          - 'null'
+          title: scale
+          description: 'the comparisons between values that carry meaning: nominal · ordinal · interval · ratio · absolute · not-applicable, for a variable and for a parameter alike'
+          examples:
+          - the regime of a population, named by labels (nominal); a temperature in degrees Celsius (interval);
+            a firing rate (ratio); a count of units (absolute)
+        dimensional_formula:
+          type:
+          - string
+          - 'null'
+          x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
+          x-kind: label
+          x-comment: optional; a monomial such as M L T^-2, or 1 for a pure number
+          title: dimensional formula
+          description: optional; a monomial over the base dimensions and the base scales of the problem,
+            such as M L T^-2, or 1 for a pure number
+          examples:
+          - '`M L T^-2` for a force; `T` for a delay; `1` for a fraction'
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: give when a map builds the quantity from declared symbols
+          title: Expression
+          description: give when a map builds the quantity from declared symbols
+        condition:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION THAT THE QUANTITY SATISFIES"'
+          x-kind: text
+          x-comment: give when no map builds the quantity
+          title: Condition
+          description: give when no map builds the quantity
+        selects:
+          x-comment: required with a condition
+          x-vocabulary: variables.selects
+          type:
+          - string
+          - 'null'
+          title: Selects
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them'
+        held_by:
+          type:
+          - string
+          - 'null'
+          x-template: RECORD.UNIT
+          x-kind: label
+          x-comment: optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
+          title: Held by
+          description: The law of a background or of a model, or the consequence of a derivation, that establishes a value satisfying the condition; empty while the existence that the condition presupposes is undischarged.
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE EXPRESSION IN WORDS"'
+          x-kind: text
+          title: Reading
+          description: the expression of the variable in words
+        shared:
+          type:
+          - boolean
+          - 'null'
+          x-template: 'false'
+          x-comment: true when one value holds for every tuple of the signature
+          title: Shared
+          description: true when one value holds for every tuple of the signature
+    x-comment: quantities that vary while the phenomenon unfolds; the state space is the product of the
+      value sets of the non-aggregate variables determined `within`
+    title: Variables
+    description: 'what changes while the phenomenon unfolds: per variable, its signature and its value set, with a reading. The role test decides whether a quantity is a variable or a parameter. The value sets of the variables that $S$ determines, aggregates excepted, form the state space of $S$'
+    examples:
+    - the membrane potential of each neuron (within); a prescribed warming trajectory (outside)
+  parameters:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE PARAMETER"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the parameter
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the parameter, unique within the record
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        of:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: external system the entry characterizes; omit when the entry belongs to the target
+          title: Of
+          description: external system the entry characterizes; omit when the entry belongs to the target
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: variant carrying the entry; omit when every member of the class carries it
+          title: Variant
+          description: variant carrying the entry; omit when every member of the class carries it
+        signature:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL, SYMBOL]'
+          x-comment: one entry per place, e.g. two neurons for a connectivity weight
+          title: Signature
+          description: one entry per place, e.g. two neurons for a connectivity weight
+        values:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Values
+          description: a set expression over declared symbols giving the values of the parameter
+        scale:
+          x-vocabulary: parameters.scale
+          type:
+          - string
+          - 'null'
+          title: Scale
+          description: 'the scale of measurement of the parameter: nominal, ordinal, interval, ratio or absolute, or not applicable when the values form no scale'
+        dimensional_formula:
+          type:
+          - string
+          - 'null'
+          x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
+          x-kind: label
+          x-comment: optional; a monomial such as M L T^-2, or 1 for a pure number
+          title: dimensional formula
+          description: optional; a monomial over the base dimensions and the base scales of the problem,
+            such as M L T^-2, or 1 for a pure number
+          examples:
+          - '`M L T^-2` for a force; `T` for a delay; `1` for a fraction'
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: give for a derived parameter
+          title: Expression
+          description: give for a derived parameter
+        condition:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION THAT THE QUANTITY SATISFIES"'
+          x-kind: text
+          x-comment: give when no map builds the quantity
+          title: Condition
+          description: give when no map builds the quantity
+        selects:
+          x-comment: required with a condition
+          x-vocabulary: parameters.selects
+          type:
+          - string
+          - 'null'
+          title: Selects
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them'
+        held_by:
+          type:
+          - string
+          - 'null'
+          x-template: RECORD.UNIT
+          x-kind: label
+          x-comment: optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
+          title: Held by
+          description: The law of a background or of a model, or the consequence of a derivation, that establishes a value satisfying the condition; empty while the existence that the condition presupposes is undischarged.
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE EXPRESSION IN WORDS"'
+          x-kind: text
+          title: Reading
+          description: the expression of the parameter in words
+        shared:
+          type:
+          - boolean
+          - 'null'
+          x-template: 'false'
+          x-comment: true when one value holds for every tuple of the signature
+          title: Shared
+          description: true when one value holds for every tuple of the signature
+    x-comment: quantities held fixed while the phenomenon unfolds
+    title: Parameters
+    description: '"[symbol] ∈ [set expression]", with its reading and the signature that it takes, one
+      entry per place. A flag states whether one value is shared by every tuple. The set is written without
+      restriction, because a restriction of it belongs to $D$'
+    examples:
+    - the position of a site (one place); the connectivity weight between two neurons (two places, each
+      arbitrary); the activation function (one place, shared); the number of units (no place)
+  external_systems:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXTERNAL SYSTEM"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the external system
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the external system, unique within the record
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: variant carrying the entry; omit when every member of the class carries it
+          title: Variant
+          description: variant carrying the entry; omit when every member of the class carries it
+        class:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: candidates for the external system, as a reference class for the target; empty where
+            the record fixes no class
+          title: Class
+          description: candidates for the external system, as a reference class for the target; empty
+            where the record fixes no class
+        shares:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          title: Shares
+          description: the variables that the external system shares with the target
+        constrains:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              name:
+                type:
+                - string
+                - 'null'
+                x-template: '"NAME OF THE CONSTRAINT"'
+                x-kind: markdown-line
+                title: Name
+                description: the words that designate the constraint
+              signature:
+                type:
+                - array
+                - 'null'
+                x-template: '[SYMBOL]'
+                x-comment: places the claim ranges over; empty for a claim about the system as a whole
+                title: Signature
+                description: places the claim ranges over; empty for a claim about the system as a whole
+              role:
+                x-vocabulary: external_systems.role
+                type:
+                - string
+                - 'null'
+                title: Role
+                description: the role of the constraint, among the six roles of a law
+              expression:
+                type:
+                - string
+                - 'null'
+                x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+                x-kind: text
+                title: Expression
+                description: an expression over declared symbols stating the constraint
+              reading:
+                type:
+                - string
+                - 'null'
+                x-template: '"THE CONSTRAINT IN WORDS"'
+                x-kind: markdown-line
+                title: Reading
+                description: the constraint in words
+          x-comment: constraints on the shared variables beyond their declared value sets; `[]` when there
+            is none
+          title: Constrains
+          description: constraints on the shared variables beyond their declared value sets; `[]` when
+            there is none
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE INPUT THAT THE EXTERNAL SYSTEM SUPPLIES OR THE CONSTRAINT THAT IT IMPOSES"'
+          x-kind: markdown-line
+          x-comment: only content beyond the shared variables
+          title: Reading
+          description: only content beyond the shared variables
+    x-comment: the variables shared with these systems form the target's boundary
+    title: External systems
+    description: 'per external system, its symbol, its class, the variables that it shares and its constraints.
+      A constraint restricts the shared variables beyond their declared value sets. Each constraint takes
+      the fields of a law: its name, the places that its claim ranges over, its role among the six of
+      a law, its expression and a reading. The field is never left empty: the list `[]` states that the
+      external system imposes no constraint'
+    examples:
+    - a generator of inputs from low-dimensional latent variables [goldt2020]; a linear decoder reading
+      the outputs; a task environment in closed loop; a heat bath at fixed temperature
+  maturity:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    additionalProperties:
+      x-template-key: FIELD.PATH
+      x-template: open
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'

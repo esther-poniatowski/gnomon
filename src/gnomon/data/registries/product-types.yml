@@ -34,7 +34,7 @@ product_types:
     class: other
     record: external pointer
     status: exists
-    note: "A pointer to a publication, a data set or an observation, held by the sources of a problem and the pointers of an identification."
+    note: "A pointer to an existing note, publication, model, data set or observation, held by the sources of a problem or question and the pointers of an identification."
   - id: problem
     class: other
     record: [problem]

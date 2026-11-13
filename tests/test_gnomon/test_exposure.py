@@ -84,16 +84,28 @@ def test_a_posit_exposes_only_the_consequences_resting_on_it() -> None:
 def test_a_law_without_a_warrant_counts_as_exposed() -> None:
     records = {
         "mod.a.b": {"type": "model", "id": "mod.a.b", "laws": [{"symbol": "law"}]},
-        "ans.a.b": {"type": "answer", "id": "ans.a.b", "grounds": [{"record": "mod.a.b.law"}]},
+        "ans.a.b": {
+            "type": "answer",
+            "id": "ans.a.b",
+            "grounds": [{"record": "mod.a.b.law"}],
+        },
     }
     assert _units(records, "ans.a.b") == {"mod.a.b.law": "warrant not stated"}
 
 
 def test_an_origin_records_the_descent_of_a_derived_law() -> None:
-    law = {"symbol": "onset", "warrant": "derived", "origin": "https://doi.org/10.0/example"}
+    law = {
+        "symbol": "onset",
+        "warrant": "derived",
+        "origin": "https://doi.org/10.0/example",
+    }
     records = {
         "mod.a.b": {"type": "model", "id": "mod.a.b", "laws": [law]},
-        "ans.a.b": {"type": "answer", "id": "ans.a.b", "grounds": [{"record": "mod.a.b.onset"}]},
+        "ans.a.b": {
+            "type": "answer",
+            "id": "ans.a.b",
+            "grounds": [{"record": "mod.a.b.onset"}],
+        },
     }
     assert _units(records, "ans.a.b") == {"mod.a.b.onset": "descent in its origin"}
     law.pop("origin")
@@ -102,10 +114,11 @@ def test_an_origin_records_the_descent_of_a_derived_law() -> None:
 
 def test_the_view_states_the_kind_of_each_unit() -> None:
     view = exposure(load_workspace(GROKKING).by_id)
-    assert view["_schema"] == "gnomon:view.exposure@2"
+    assert view["_schema"] == "gnomon:view.exposure@6"
     kinds = {row["unit"]: row["kind"] for row in view["exposures"]}
     assert kinds[f"{DERIVATION}.slowest-dominates"] == "move"
     assert kinds["mod.grokking.effective-representation.decoder-step"] == "operation"
+    assert view["graph"]["edges"]
     assert list(exposure_rows({})) == []
 
 
@@ -158,7 +171,11 @@ def test_a_law_passes_on_the_units_that_it_requires() -> None:
     records[ANSWER]["route"]["derivations"] = []
     model = records[MODEL]
     model["assumptions"] = [
-        {"id": "fast-decoder", "assumption": "the decoder fits first", "motive": "limit"}
+        {
+            "id": "fast-decoder",
+            "assumption": "the decoder fits first",
+            "motive": "limit",
+        }
     ]
     law = next(entry for entry in model["laws"] if entry["symbol"] == "representation_flow")
     law["requires"] = [
@@ -173,14 +190,26 @@ def test_a_law_passes_on_the_units_that_it_requires() -> None:
         "limit assumption, removable unknown",
         via,
     )
-    assert found[f"{MODEL}.effective-law"] == ("operation", "uncontrolled operation", via)
-    assert found[f"{DERIVATION}.quality-tracks-slow-mode"] == ("posit", "not confirmed", via)
+    assert found[f"{MODEL}.effective-law"] == (
+        "operation",
+        "uncontrolled operation",
+        via,
+    )
+    assert found[f"{DERIVATION}.quality-tracks-slow-mode"] == (
+        "posit",
+        "not confirmed",
+        via,
+    )
 
 
 def test_a_computed_law_exposes_the_answer_that_rests_on_it() -> None:
     law = {"symbol": "law", "warrant": "computed"}
     records = {
         "mod.a.b": {"type": "model", "id": "mod.a.b", "laws": [law]},
-        "ans.a.b": {"type": "answer", "id": "ans.a.b", "grounds": [{"record": "mod.a.b.law"}]},
+        "ans.a.b": {
+            "type": "answer",
+            "id": "ans.a.b",
+            "grounds": [{"record": "mod.a.b.law"}],
+        },
     }
     assert _units(records, "ans.a.b") == {"mod.a.b.law": "computed"}

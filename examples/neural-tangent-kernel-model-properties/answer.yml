@@ -1,6 +1,6 @@
 # positive fixture for answer and assessment; the route runs on the target, a formal class, so no model and no binding
 
-_schema: gnomon:answer@1
+_schema: gnomon:answer@3
 title: "Theorem of uniform linearization under neural tangent parameterization"
 id: ans.ntk.uniform-linearization-theorem
 type: answer

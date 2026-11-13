@@ -1,4 +1,4 @@
-_schema: gnomon:phenomenon@1
+_schema: gnomon:phenomenon@2
 title: "Transition sequences under warming trajectories"
 statement: "The selected tipping elements of the actual Earth system are coupled and undergo ordered regime transitions. The identities and event times of these transitions depend on the prescribed warming trajectory and on the interactions among subsystems."
 id: phen.earth-tipping-subsystems.transition-sequences

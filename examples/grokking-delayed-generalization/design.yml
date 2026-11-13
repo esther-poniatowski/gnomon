@@ -1,7 +1,7 @@
 # the scheme that the derivation of the timescale law applies: the relaxation of a stable linear
 # flow, read from its slowest positive mode
 
-_schema: gnomon:design@1
+_schema: gnomon:design@2
 title: "Relaxation along the slowest positive mode"
 id: design.grokking.slowest-mode-relaxation
 type: design

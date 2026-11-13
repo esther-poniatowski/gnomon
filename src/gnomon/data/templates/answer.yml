@@ -5,11 +5,13 @@
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # record test verdicts in an assessment file
 
-_schema: gnomon:answer@1
+_schema: gnomon:answer@3
 title: "SHORT NAME OF THE CANDIDATE ANSWER"
 id: ans.TOPIC.NAME
 type: answer
 answers: quest.TOPIC.NAME
+sources:
+  - "POINTER TO AN EXISTING NOTE, PUBLICATION, MODEL OR DATA SET"
 
 claim:                           # over the symbols of the model on which the route runs, or over those of the target and the phenomenon when the route runs on the target
   reading: "THE CLAIM IN WORDS"
@@ -154,4 +156,4 @@ relations:                       # fill when the answer bears on another answer;
     respect: [SYMBOL]            # for `contrasts-with` only, the symbols named by both claims in which they differ
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; a specification left out is provisional
-  FIELD.PATH: open
+  FIELD.PATH: open               # open (not fixed and still expected from the inquiry or the author) | provisional (written and still under revision) | stabilized (no further revision expected in the current state)

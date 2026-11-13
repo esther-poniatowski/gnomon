@@ -1,0 +1,856 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/model.v1.base.schema.yml
+title: Model record
+description: The fields of a model record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/model.md`; one file per model, which several answers can ground'
+- 'symbols and expressions: `docs/specification/expressions.md`'
+- declare the constituents, index sets, variables and parameters in target-system form, and the laws and
+  organization in background form
+- 'no entry refers to one question, and no quantity enters by reference to a target quantity: a binding
+  relates the model to its target'
+- 'name a symbol of the target by source identifier and symbol: `system.TOPIC.SYMBOL`'
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+- specifications follow the order of the specification note
+properties:
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"SHORT NAME OF THE MODEL"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: mod.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: model
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+    - string
+    - 'null'
+    x-template: provisional
+    x-vocabulary: .status
+    title: Status
+    description: the maturity of the model record, taken by every field that the block `maturity` leaves unmarked
+  background:
+    x-blank: true
+    type:
+    - string
+    - 'null'
+    x-template: bg.TOPIC.NAME
+    x-kind: label
+    x-comment: fill when a law of the model carries the warrant `derived`
+    title: Background
+    description: 'the record from which the laws of the model are derived: the identifier of one background record'
+    examples:
+    - the admitted training laws of the networks of a class
+  derives_from:
+    x-blank: true
+    type: [array, 'null']
+    x-comment: fill for a derived model; the target system or the models that the operations act on
+    title: Derives from
+    description: The parent models, such as a target system or another model, from which the operations derive this model.
+    items:
+      type: [string, 'null']
+      x-template: mod.TOPIC.NAME
+      x-kind: label
+    examples:
+    - [system.grokking]
+  operations:
+    type: [array, 'null']
+    x-comment: fill for a derived model; one entry per operation, in the order applied
+    title: Operations
+    description: The typed operations that derive this model from its parents, in the order in which they are applied.
+    items:
+      type: object
+      properties:
+        id:
+          type: [string, 'null']
+          x-template: OPERATION-NAME
+          x-kind: label
+          title: Identifier
+          description: A descriptive identifier of the operation, unique within the record.
+          examples: [weak-amplitude]
+        kind:
+          type: [string, 'null']
+          x-vocabulary: operations.kind
+          title: Kind
+          description: 'the relation of the derived model to its parent that the operation establishes'
+          examples: [approximate]
+        acts_on:
+          type: [array, 'null']
+          x-template: '[SYMBOL]'
+          x-comment: symbols of a parent, written `RECORD.SYMBOL`
+          title: Acts on
+          description: The symbols of a parent on which the operation acts.
+          examples: [[system.grokking.u]]
+        yields:
+          type: [array, 'null']
+          x-template: '[SYMBOL]'
+          x-comment: symbols of this model that realize the operation
+          title: Yields
+          description: The symbols of this model that realize the operation.
+          examples: [[A]]
+        retires:
+          type: [array, 'null']
+          x-template: '[SYMBOL]'
+          x-comment: symbols of a parent that this model no longer carries; empty when every symbol stays visible
+          title: Retires
+          description: The symbols of a parent that this model no longer carries.
+          examples: [[system.grokking.u]]
+        regime:
+          type: [string, 'null']
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: the regime in which the operation holds; required for an approximation
+          title: Regime
+          description: The regime in which the operation holds, as an expression over declared symbols.
+          examples: ['A << 1']
+        error:
+          type: [string, 'null']
+          x-vocabulary: operations.error
+          title: Class of error
+          description: 'whether the operation introduces an error into the derived model, and whether that error has a known bound'
+          examples: [controlled]
+        bound:
+          type: [string, 'null']
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: required when the error is `controlled`
+          title: Bound
+          description: The bound on the error, for a controlled operation.
+          examples: ['O(A^2)']
+        order:
+          type: [string, 'null']
+          x-template: '"THE ORDER IN WHICH THE LIMITS ARE TAKEN"'
+          x-kind: markdown-line
+          x-comment: required for a singular limit, or for limits that do not commute
+          title: Order
+          description: The order in which the limits of the operation are taken.
+          examples: ['the width to infinity before the time to infinity']
+        gain:
+          type: [string, 'null']
+          x-template: '"THE DERIVATION OR THE FACTOR THAT THE OPERATION MAKES AVAILABLE"'
+          x-kind: markdown-line
+          title: Gain
+          description: The derivation or the factor that the operation makes available.
+          examples: ['the amplitude equation of the pattern near onset']
+        rests_on:
+          type: [string, 'null']
+          x-template: '"THE RESULT, THE LIMIT OR THE SOURCE THAT JUSTIFIES THE OPERATION"'
+          x-kind: markdown-line
+          title: Rests on
+          description: The result, the limit or the source that justifies the operation.
+          examples: ['the expansion near the onset of instability']
+  constituents:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"KIND OF UNIT"'
+          x-kind: markdown-line
+          title: Name
+          description: the kind of unit that the constituent collects
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the constituent, unique within the record
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        extent:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Extent
+          description: a set expression over declared symbols naming the members that the constituent collects
+        map:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER THE CONSTITUENTS DECLARED FOR THE TARGET"'
+          x-kind: text
+          x-comment: give for a unit defined from the target, such as a coarse-graining, a mode decomposition,
+            an aggregation or a quotient by a symmetry; omit for a unit of the model alone
+          title: Map
+          description: give for a unit defined from the target, such as a coarse-graining, a mode decomposition,
+            an aggregation or a quotient by a symmetry; omit for a unit of the model alone
+    x-comment: 'C: the units that the model treats as bearers'
+    title: Constituents $C$
+    description: the units that the model treats as bearers
+    examples:
+    - the slow eigenmodes of the connectivity (defined by a map); the four tipping elements of a box model
+      of the Earth system (units of the model alone)
+  index_sets:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE SET"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the index set
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the index set, unique within the record
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        extent:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Extent
+          description: a set expression over declared symbols naming the members of the index set
+        structure:
+          x-vocabulary: index_sets.structure
+          type:
+          - string
+          - 'null'
+          title: Structure
+          description: 'the role of the index set: the index along which the state evolves, or another index, continuous or countable'
+        dimensional_formula:
+          type:
+          - string
+          - 'null'
+          x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
+          x-kind: label
+          x-comment: optional; the formula of the coordinate that the set indexes, such as L or T
+          title: dimensional formula
+          description: optional; the dimensional formula of the coordinate that the index set collects,
+            such as L for a spatial domain or T for a time axis, so that a derivative along the index is
+            checked
+          examples:
+          - '`L` for a spatial domain; `T` for a time axis'
+    x-comment: only sets that the target does not declare
+    title: Index sets
+    description: the set, its extent and its structure, in the format of a target system
+    examples:
+    - a coarse-grained scale; a mode number
+  variables:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE VARIABLE"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the variable
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the variable, unique within the record
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        determined:
+          x-vocabulary: variables.determined
+          type:
+          - string
+          - 'null'
+          title: Determined
+          description: whether the model determines the variable (within) or receives it from outside
+        signature:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: one constituent kind or index set per place; empty for the model as a whole
+          title: Signature
+          description: one constituent kind or index set per place; empty for the model as a whole
+        values:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Values
+          description: a set expression over declared symbols giving the values of the variable
+        scale:
+          x-vocabulary: variables.scale
+          type:
+          - string
+          - 'null'
+          title: Scale
+          description: 'the scale of measurement of the variable: nominal, ordinal, interval, ratio or absolute, or not applicable when the values form no scale'
+        dimensional_formula:
+          type:
+          - string
+          - 'null'
+          x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
+          x-kind: label
+          x-comment: optional; a monomial such as M L T^-2, or 1 for a pure number
+          title: dimensional formula
+          description: optional; a monomial over the base dimensions and the base scales of the problem,
+            such as M L T^-2, or 1 for a pure number
+          examples:
+          - '`M L T^-2` for a force; `T` for a delay; `1` for a fraction'
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: an expression over the symbols of the model, or a map other than the identity from
+            quantities of the target
+          title: Expression
+          description: an expression over the symbols of the model, or a map other than the identity from
+            quantities of the target
+        condition:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION THAT THE QUANTITY SATISFIES"'
+          x-kind: text
+          x-comment: give when no map builds the quantity
+          title: Condition
+          description: give when no map builds the quantity
+        selects:
+          x-comment: required with a condition
+          x-vocabulary: variables.selects
+          type:
+          - string
+          - 'null'
+          title: Selects
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them'
+        held_by:
+          type:
+          - string
+          - 'null'
+          x-template: RECORD.UNIT
+          x-kind: label
+          x-comment: optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
+          title: Held by
+          description: The law of a background or of a model, or the consequence of a derivation, that establishes a value satisfying the condition; empty while the existence that the condition presupposes is undischarged.
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE EXPRESSION IN WORDS"'
+          x-kind: text
+          title: Reading
+          description: the expression of the variable in words
+        shared:
+          type:
+          - boolean
+          - 'null'
+          x-template: 'false'
+          x-comment: true when one value holds for every tuple of the signature
+          title: Shared
+          description: true when one value holds for every tuple of the signature
+    x-comment: 'part of V: quantities that vary in the model'
+    title: Variables
+    description: 'per variable, its own symbol, signature and value set, and its construction: an expression
+      over the symbols of the model, or a map other than the identity from the quantities that the target
+      declares'
+    examples:
+    - the population rate; the overlap with a stored pattern
+  parameters:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE PARAMETER"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the parameter
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the parameter, unique within the record
+        notation:
+          type:
+          - string
+          - 'null'
+          x-template: '''LATEX FORM OF THE SYMBOL'''
+          x-kind: label
+          x-comment: only when the LaTeX form differs from the symbol
+          title: Notation
+          description: only when the LaTeX form differs from the symbol
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        signature:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          title: Signature
+          description: the indices that the parameter takes
+        values:
+          type:
+          - string
+          - 'null'
+          x-template: '"SET EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Values
+          description: a set expression over declared symbols giving the values of the parameter
+        scale:
+          x-vocabulary: parameters.scale
+          type:
+          - string
+          - 'null'
+          title: Scale
+          description: 'the scale of measurement of the parameter: nominal, ordinal, interval, ratio or absolute, or not applicable when the values form no scale'
+        dimensional_formula:
+          type:
+          - string
+          - 'null'
+          x-template: '"MONOMIAL OVER BASE DIMENSIONS"'
+          pattern: '^(1|(1 */ *)?[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?(( *[*/] *| +)[A-Za-z][A-Za-z0-9_]*(\^(-?[0-9]+|\(-?[0-9]+(/[0-9]+)?\)))?)*)$'
+          x-kind: label
+          x-comment: optional; a monomial such as M L T^-2, or 1 for a pure number
+          title: dimensional formula
+          description: optional; a monomial over the base dimensions and the base scales of the problem,
+            such as M L T^-2, or 1 for a pure number
+          examples:
+          - '`M L T^-2` for a force; `T` for a delay; `1` for a fraction'
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          x-comment: give for a derived parameter
+          title: Expression
+          description: give for a derived parameter
+        condition:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION THAT THE QUANTITY SATISFIES"'
+          x-kind: text
+          x-comment: give when no map builds the quantity
+          title: Condition
+          description: give when no map builds the quantity
+        selects:
+          x-comment: required with a condition
+          x-vocabulary: parameters.selects
+          type:
+          - string
+          - 'null'
+          title: Selects
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy: the unique value, any value, or all of them'
+        held_by:
+          type:
+          - string
+          - 'null'
+          x-template: RECORD.UNIT
+          x-kind: label
+          x-comment: optional, with a condition; the law or the consequence of a derivation that establishes a value satisfying the condition
+          title: Held by
+          description: The law of a background or of a model, or the consequence of a derivation, that establishes a value satisfying the condition; empty while the existence that the condition presupposes is undischarged.
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE EXPRESSION IN WORDS"'
+          x-kind: text
+          title: Reading
+          description: the expression of the parameter in words
+        shared:
+          type:
+          - boolean
+          - 'null'
+          x-template: 'false'
+          x-comment: true when one value holds for every tuple of the signature
+          title: Shared
+          description: true when one value holds for every tuple of the signature
+    x-comment: 'part of V: quantities that the model holds fixed while the phenomenon unfolds; a binding
+      marks those it calibrates'
+    title: Parameters
+    description: the same content as for a variable, for each quantity that the model holds fixed while
+      the phenomenon unfolds
+    examples:
+    - the coupling strength; the adaptation timescale
+  laws:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE LAW"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the law
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the law, unique within the record
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        signature:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: places the claim ranges over; empty for a claim about the model as a whole
+          title: Signature
+          description: places the claim ranges over; empty for a claim about the model as a whole
+        role:
+          x-vocabulary: laws.role
+          type:
+          - string
+          - 'null'
+          title: Role
+          description: 'the role of the law: evolution, input-output, measurement, state-constraint, distribution or admissibility'
+        expression:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+          x-kind: text
+          title: Expression
+          description: an expression over declared symbols stating the law
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE LAW IN WORDS"'
+          x-kind: markdown-line
+          title: Reading
+          description: the law in words
+        warrant:
+          x-vocabulary: laws.warrant
+          type:
+          - string
+          - 'null'
+          title: Warrant
+          description: 'the provenance of the law: derived from other laws, posited, fitted or measured'
+        requires:
+          type:
+          - array
+          - 'null'
+          x-comment: optional; one entry per unit that the law rests on, by its dotted identifier
+          title: Requires
+          description: The units on which the law rests, each by its dotted identifier, an assumption or an
+            operation of a model, a law of a background or of a model, or a posit or a consequence of a
+            derivation; a law whose descent a derivation records leaves its premises to that derivation.
+          items:
+            type:
+            - string
+            - 'null'
+            x-template: RECORD.UNIT
+            x-kind: label
+        rests_on:
+          type:
+          - string
+          - 'null'
+          x-template: '"WHAT THE WARRANT REFERS TO BEYOND THE UNITS REQUIRED"'
+          x-kind: markdown-line
+          x-comment: in words, only what `requires` cannot name, such as a source or a data set
+          title: Rests on
+          description: What the warrant of the law refers to beyond the units that it requires, in words,
+            such as a source or a data set.
+        origin:
+          type:
+          - string
+          - 'null'
+          x-template: '"POINTER TO THE SOURCE OF THE LAW: A PUBLICATION, A DATA SET OR A DERIVATION"'
+          x-kind: markdown-line
+          title: Origin
+          description: 'a pointer to the source of the law: a publication, a data set or a derivation'
+        range:
+          type:
+          - string
+          - 'null'
+          x-template: '"EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE LAW IS ESTABLISHED"'
+          x-kind: text
+          x-comment: omit when the law is established across the whole model
+          title: Range
+          description: omit when the law is established across the whole model
+    x-comment: 'L: dependences linking the terms of the model, in background form'
+    title: Laws or structural relations $L$
+    description: the dependences that link the terms $V$
+    examples:
+    - the mean-field rate equations (derived through a mean-field limit); the stability condition that follows from them
+      (derived); a transfer function obtained from recordings (fitted)
+  organization:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE RELATION"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the relation
+        symbol:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          title: Symbol
+          description: the symbol of the relation, unique within the record
+        variant:
+          type:
+          - string
+          - 'null'
+          x-template: SYMBOL
+          x-kind: label
+          x-comment: symbol of the target variant that the entry models; omit when the model stands for
+            every member of the class
+          title: Variant
+          description: symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+        reading:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE ARRANGEMENT IN WORDS"'
+          x-kind: markdown-line
+          x-comment: only content beyond the relation and the laws
+          title: Reading
+          description: only content beyond the relation and the laws
+        relates:
+          type:
+          - string
+          - 'null'
+          x-template: '"prod(SOURCE, REACH), or subset(prod(SOURCE, REACH), ADJACENCY)"'
+          x-kind: markdown-line
+          x-comment: 'for a relation among parts: the connected tuples, reach last'
+          title: Relates
+          description: 'for a relation among parts: the connected tuples, reach last'
+        among:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: 'for a relation among laws: the laws, reach last; fill exactly one of `relates` and
+            `among`'
+          title: Among
+          description: 'for a relation among laws: the laws, reach last; fill exactly one of `relates`
+            and `among`'
+        realized_by:
+          type:
+          - array
+          - 'null'
+          x-template: '[SYMBOL]'
+          x-comment: laws stating a relation among parts; the parts are read from their expressions
+          title: Realized by
+          description: laws stating a relation among parts; the parts are read from their expressions
+    x-comment: 'O: relations among parts and laws whose arrangement produces the behavior, in background
+      form'
+    title: Organization $O$
+    description: per relation, the tuples that it connects and the laws that state it, in the format of
+      a background record
+    examples:
+    - a delayed feedback loop, in which excitation drives inhibition and is suppressed in return
+  assumptions:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: ASSUMPTION
+          x-kind: label
+          title: Id
+          description: a name of the assumption, unique within the record
+        assumption:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE ASSUMPTION IN WORDS"'
+          x-kind: markdown-line
+          title: Assumption
+          description: the assumption in words
+        motive:
+          x-vocabulary: assumptions.motive
+          type:
+          - string
+          - 'null'
+          title: Motive
+          description: 'the reason for making the assumption: tractability, isolation or a limit'
+        gain:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE DERIVATION THAT THE ASSUMPTION MAKES POSSIBLE, OR THE FACTOR THAT IT EXPOSES"'
+          x-kind: markdown-line
+          title: Gain
+          description: the derivation that the assumption makes possible, or the factor that it exposes
+        removable:
+          x-vocabulary: assumptions.removable
+          type:
+          - string
+          - 'null'
+          title: Removable
+          description: 'whether the distortion of the assumption can be removed: controlled, ineliminable or unknown'
+    x-comment: only the assumptions that the laws require, such as a limit; each answer that rests on
+      the model classifies them relative to its target
+    title: Assumptions of the laws
+    description: per assumption, its motive, the gain that it provides, and whether it is removable, as
+      the rule on idealizations defines them
+    examples:
+    - 'the mean-field limit, which closes the rate equations (motive: limit; controlled)'
+  maturity:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    additionalProperties:
+      x-template-key: FIELD.PATH
+      x-template: open
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'

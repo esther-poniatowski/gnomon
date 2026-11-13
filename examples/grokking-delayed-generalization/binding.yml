@@ -1,6 +1,6 @@
 # binds the effective theory of representation learning to the phenomenon of delayed generalization, at qualitative grain
 
-_schema: gnomon:binding@1
+_schema: gnomon:binding@2
 title: "Effective representation to delayed generalization"
 id: bind.grokking.effective-representation
 type: binding

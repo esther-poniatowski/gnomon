@@ -39,5 +39,28 @@ def test_the_vocabulary_of_each_example_is_its_generated_form(name: str) -> None
     text = (folder / "vocabulary.yml").read_text(encoding="utf-8")
     assert text == render_yaml(load_problem(folder))
     schema = yaml.safe_load((VIEWS / "vocabulary.schema.yml").read_text(encoding="utf-8"))
-    errors = [e.message for e in Draft202012Validator(schema).iter_errors(yaml.safe_load(text))]
+    view = yaml.safe_load(text)
+    errors = [e.message for e in Draft202012Validator(schema).iter_errors(view)]
     assert not errors, errors
+    missing_state = {**view}
+    missing_state.pop("source_state")
+    previous = {**view, "_schema": "gnomon:view.vocabulary@2"}
+    previous.pop("source_state")
+    previous_schema = yaml.safe_load(
+        (VIEWS / "compatibility/vocabulary.v2.schema.yml").read_text(encoding="utf-8")
+    )
+    current_rejections = [
+        e.message for e in Draft202012Validator(schema).iter_errors(missing_state)
+    ]
+    predecessor_rejections = [
+        e.message for e in Draft202012Validator(previous_schema).iter_errors(view)
+    ]
+    assert current_rejections == ["'source_state' is a required property"]
+    assert (
+        "Additional properties are not allowed ('source_state' was unexpected)"
+        in predecessor_rejections
+    )
+    previous_errors = [
+        e.message for e in Draft202012Validator(previous_schema).iter_errors(previous)
+    ]
+    assert not previous_errors, previous_errors

@@ -1,6 +1,5 @@
-"""
-The levels of a decomposition: the questions of a problem, the components of a question, the parts
-that settle a component, and the parts that a question excludes.
+"""The levels of a decomposition: the questions of a problem, the components of a question, the
+parts that settle a component, and the parts that a question excludes.
 
 A level is a problem, or a question that other questions serve. The questions of a problem are the
 questions that address it and narrow no other question, as the question tree shows them: a
@@ -26,6 +25,9 @@ A part that a level leaves out is stated in its field ``excludes``, of one of tw
 ``deferred`` part stays inside the demand: its component keeps its link and counts as open. An
 ``out-of-scope`` part lies outside the demand, so it is no component.
 """
+
+# The itinerary traversal mirrors the graph traversal but produces a different domain result.
+# pylint: disable=duplicate-code
 
 from __future__ import annotations
 
@@ -209,7 +211,8 @@ def construct_parts(question: str, records: Records) -> list[str]:
 
 def settled(question: str, records: Records) -> bool:
     """Return whether a component is settled: an accepted answer to it, or a stabilized construct
-    obtained for it, holds a satisfied assessment against the present version of its question."""
+    obtained for it, holds a satisfied assessment against the present version of its question.
+    """
     accepted = [a for a in answers_to(question, records) if records[a].get("status") == "accepted"]
     built = [
         c for c in construct_parts(question, records) if records[c].get("status") == "stabilized"
@@ -259,7 +262,13 @@ def misplaced_exclusions(question: Mapping[str, Any], records: Records) -> list[
         else:
             continue
         found.append(
-            finding(rules.COMPLETENESS_MISPLACED_EXCLUSION, text, "excludes", index, "question")
+            finding(
+                rules.COMPLETENESS_MISPLACED_EXCLUSION,
+                text,
+                "excludes",
+                index,
+                "question",
+            )
         )
     return found
 
@@ -284,7 +293,13 @@ def stale_deferrals(question: Mapping[str, Any], records: Records) -> list[Findi
                 f" {', '.join(accepted)}"
             )
             found.append(
-                finding(rules.COMPLETENESS_EXCLUDED_ANSWERED, text, "excludes", index, "question")
+                finding(
+                    rules.COMPLETENESS_EXCLUDED_ANSWERED,
+                    text,
+                    "excludes",
+                    index,
+                    "question",
+                )
             )
     return found
 

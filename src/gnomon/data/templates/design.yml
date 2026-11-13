@@ -3,7 +3,7 @@
 # a step, a rule or a mode of failure is named by a descriptive identifier, never by a number
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 
-_schema: gnomon:design@1
+_schema: gnomon:design@2
 title: "SHORT NAME OF THE DESIGN"
 id: design.TOPIC.NAME
 type: design
@@ -46,4 +46,4 @@ protocol:                        # experiment and simulation-run only
   observation: "THE OBSERVABLE RECORDED"
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
-  FIELD.PATH: open
+  FIELD.PATH: open               # open (not fixed and still expected from the inquiry or the author) | provisional (written and still under revision) | stabilized (no further revision expected in the current state)

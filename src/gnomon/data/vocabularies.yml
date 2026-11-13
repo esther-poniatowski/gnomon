@@ -25,6 +25,14 @@
 
 id: registry.vocabularies
 type: vocabulary-registry
+shared_vocabularies:
+  .maturity:
+  - value: open
+    name: not fixed and still expected from the inquiry or the author
+  - value: provisional
+    name: written and still under revision
+  - value: stabilized
+    name: no further revision expected in the current state
 vocabularies:
   answer:
     grounds.role:
@@ -198,6 +206,17 @@ vocabularies:
       name: the inquiry expects no further revision of the record
     - value: retracted
       name: the record is withdrawn, with all its specifications
+    tests.verdict:
+    - value: pending
+      name: no act has supplied evidence that settles the test yet
+    - value: pass
+      name: the assessed claim meets the criterion
+    - value: fail
+      name: the assessed claim does not meet the criterion
+    - value: inconclusive
+      name: the evidence neither meets nor fails the criterion
+    - value: not-applicable
+      name: the specification of the question makes the test inapplicable
     grounds.verdict:
     - value: pending
       name: no act has supplied the evidence that judges the ground yet
@@ -1056,6 +1075,19 @@ vocabularies:
     - value: lack-of-means
       name: every means considered was tried and failed
   itinerary:
+    act_appraisals.rule:
+    - value: ordinal-dominance
+      name: one act dominates another only when it is no worse on every criterion and better on at least one
+    act_appraisals.route:
+    - value: selection
+      name: the route that selects an answer from candidates
+    - value: construction
+      name: the route that obtains an answer through a stated procedure
+    act_appraisals.criteria.preferred:
+    - value: higher
+      name: a higher value on the declared scale is preferred
+    - value: lower
+      name: a lower value on the declared scale is preferred
     steps.verdict:
     - value: pass
       name: the output meets the norm of the activity

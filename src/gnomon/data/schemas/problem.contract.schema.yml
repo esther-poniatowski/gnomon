@@ -2,21 +2,39 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/problem.contract.schema.yml
 title: Problem record contract
-description: The record type `problem`, bound to `gnomon:problem@1`, with its closed vocabularies.
+description: The record type `problem`, bound to `gnomon:problem@3`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/problem.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:problem@1
+    const: gnomon:problem@3
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: problem
+    examples:
+    - problem
   id:
     pattern: ^prob\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - prob.topic.name
+  title:
+    examples:
+    - SHORT NAME OF THE PROBLEM
+  statement:
+    description: '"[the result sought], [the obstacle to obtaining it]", as a reading
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
   status:
+    description: 'the stage of the problem: posed, refined, solved, dissolved or abandoned
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
+    examples:
+    - posed
     enum:
     - posed
     - refined
@@ -25,11 +43,27 @@ properties:
     - abandoned
     - null
   kind:
+    description: 'empirical, when the problem concerns the objects of a domain · conceptual, when it concerns
+      the consistency of a theory or its fit with other theories
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
     enum:
     - empirical
     - conceptual
     - null
+  demand:
+    description: '"[the result required of a solution]"
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
   result_type:
+    description: 'the type of result of the demand, one of the rows of the demand table: phenomenon ·
+      consequence · target-claim · model · explanation · classification · concept · measurement-procedure
+      · design · knowledge-state-change · inter-theory-relation
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
     enum:
     - phenomenon
     - consequence
@@ -44,26 +78,104 @@ properties:
     - inter-theory-relation
     - null
   request:
+    description: 'one · all · over-a-parameter · decision, as the request of a demand defines them
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
     enum:
     - one
     - all
     - over-a-parameter
     - decision
     - null
+  associated_question:
+    description: 'the identifier of that question record, whose request equals the request of the problem
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
   constraints:
+    description: 'per constraint, a name, the condition that a solution must satisfy, and the source that
+      imposes it: a result, an admitted law or a publication
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
     items:
       propertyNames:
         enum:
         - name
         - statement
         - source
+      properties:
+        name:
+          description: 'the words that designate the constraint
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
+          examples:
+          - NAME OF THE CONSTRAINT
+        statement:
+          description: 'the condition that a solution must satisfy
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
+          examples:
+          - THE CONDITION ON A SOLUTION
+        source:
+          description: 'a pointer to the result, the background law or the publication that imposes the
+            condition
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
+          examples:
+          - POINTER TO THE RESULT, THE BACKGROUND LAW OR THE PUBLICATION THAT IMPOSES THE CONDITION
   explicanda:
+    description: 'per term, the term as used and a pointer to the data, the result or the publication
+      that fixes its use
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
     items:
       propertyNames:
         enum:
         - term
         - pointer
+      properties:
+        term:
+          description: 'the term as used in the statement of the problem
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
+          examples:
+          - TERM AS USED IN THE STATEMENT
+        pointer:
+          description: 'a pointer to the data, the result or the publication that fixes the use of the
+            term
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
+          examples:
+          - POINTER TO THE DATA, THE RESULT OR THE PUBLICATION THAT FIXES THE USE OF THE TERM
+  sources:
+    description: 'per source, a pointer to existing material or an anomaly that raises the problem, without
+      importing or classifying its content
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
+    items:
+      examples:
+      - POINTER TO AN EXISTING NOTE, PUBLICATION, MODEL, DATA SET OR ANOMALY THAT RAISES THE PROBLEM
+  significance:
+    description: 'the consequences of a solution for other work
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
   knowledge_obstacles:
+    description: 'per obstacle, its value — open gap · unassessed candidates · conflict · unwarranted
+      claim · ill-defined terms · unsound presupposition — and the records or the publications that establish
+      it
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
     items:
       propertyNames:
         enum:
@@ -71,6 +183,12 @@ properties:
         - pointers
       properties:
         obstacle:
+          description: 'the state of the knowledge about the associated question that keeps the demand
+            unmet: an open gap, unassessed candidates, a conflict, an unwarranted claim, ill-defined terms
+            or an unsound presupposition
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
           enum:
           - open-gap
           - unassessed-candidates
@@ -79,7 +197,23 @@ properties:
           - ill-defined-terms
           - unsound-presupposition
           - null
+        pointers:
+          description: 'the records or the publications that establish the obstacle
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
+          examples:
+          - &id001
+            - RECORD.ID
+          items:
+            examples: *id001
   answerability_obstacles:
+    description: 'per obstacle, the condition — definiteness · answer type · discrimination · access ·
+      bridging · representation —, its refutation — outright · lack of means — and the records or the
+      publications that establish it
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
     items:
       propertyNames:
         enum:
@@ -88,6 +222,11 @@ properties:
         - pointers
       properties:
         condition:
+          description: 'the condition of answerability that the obstacle refutes: definiteness, answer
+            type, discrimination, access, bridging or representation
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
           enum:
           - definiteness
           - answer-type
@@ -97,10 +236,38 @@ properties:
           - representation
           - null
         refutation:
+          description: 'how the condition is refuted: outright, or by a lack of means
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
           enum:
           - outright
           - lack-of-means
           - null
+        pointers:
+          description: 'the records or the publications that establish the refutation
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/problem.md).'
+          examples:
+          - &id002
+            - RECORD.ID
+          items:
+            examples: *id002
+  maturity:
+    description: 'optional; one maturity per field: open | provisional | stabilized; a field left out
+      is provisional
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
 propertyNames:
   enum:

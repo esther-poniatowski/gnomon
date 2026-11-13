@@ -2,27 +2,66 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/derivation.contract.schema.yml
 title: Derivation record contract
-description: The record type `derivation`, bound to `gnomon:derivation@1`, with its closed vocabularies.
+description: The record type `derivation`, bound to `gnomon:derivation@2`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/derivation.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:derivation@1
+    const: gnomon:derivation@2
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: derivation
+    examples:
+    - derivation
   id:
     pattern: ^derivation\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - derivation.topic.name
+  title:
+    examples:
+    - SHORT NAME OF THE DERIVATION
   status:
+    examples:
+    - provisional
     enum:
     - provisional
     - stabilized
     - retracted
     - null
+  serves:
+    description: 'The identifier of the record that the derivation serves: a question, a proof obligation,
+      or a law or an operation of a derived model stated in advance; empty for a derivation that constructs
+      its result.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+  runs_on:
+    description: 'The records whose laws, assumptions or claims are the premises of the derivation, by
+      identifier.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+    items:
+      examples:
+      - RECORD
+  uses:
+    description: 'The derivations whose consequences the derivation uses, by identifier.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+    items:
+      examples:
+      - derivation.TOPIC.NAME
   sought:
+    description: 'The root sought of a derivation that serves no record: the unknown or the statement
+      that the derivation seeks; its type and its condition fix its degree of determinacy. A derivation
+      that serves a record reads its root sought from that record.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     propertyNames:
       enum:
       - id
@@ -30,7 +69,22 @@ properties:
       - type
       - condition
     properties:
+      id:
+        description: 'A descriptive identifier of the sought, unique within the record.
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+      statement:
+        description: 'The unknown or the statement sought, in one phrase.
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
       type:
+        description: 'What the unknown is to be: a law, a value or a bound, an object, a classification,
+          or the truth of a claim; empty while the sought stays open.
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
         enum:
         - law
         - value-or-bound
@@ -38,7 +92,17 @@ properties:
         - classification
         - claim-truth
         - null
+      condition:
+        description: 'The condition that the unknown must satisfy; empty for an open or a typed sought.
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
   subordinate:
+    description: 'The soughts that the derivation sets for itself, each answered by a lemma or left at
+      an impasse.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
@@ -49,7 +113,22 @@ properties:
         - replaces
         - reason
       properties:
+        id:
+          description: 'A descriptive identifier of the sought, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        statement:
+          description: 'The unknown or the statement sought, in one phrase.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
         type:
+          description: 'What the unknown is to be: a law, a value or a bound, an object, a classification,
+            or the truth of a claim; empty while the sought stays open.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           enum:
           - law
           - value-or-bound
@@ -57,14 +136,58 @@ properties:
           - classification
           - claim-truth
           - null
+        condition:
+          description: 'The condition that the unknown must satisfy.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        replaces:
+          description: 'The identifier of the subordinate sought that this one replaces, when the earlier
+            one proved ill-posed.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          examples:
+          - SOUGHT-NAME
+        reason:
+          description: 'The reason for the replacement.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          examples:
+          - WHY THE EARLIER SOUGHT WAS ILL-POSED
   slots:
+    description: 'The symbols introduced by a move or a posit, and bound later by a move.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
         - symbol
         - reading
         - introduced_by
+      properties:
+        symbol:
+          description: 'The symbol of the slot, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        reading:
+          description: 'What the slot stands for.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        introduced_by:
+          description: 'The identifier of the move or the posit that introduces the slot.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
   objects:
+    description: 'The intermediate objects that the moves take and yield, cited by no other record.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
@@ -73,12 +196,37 @@ properties:
         - expression
         - reading
       properties:
+        id:
+          description: 'A descriptive identifier of the object, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
         form:
+          description: 'Whether the object is a symbol, a quantity or a term, or an equation, an inequality
+            or a condition.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           enum:
           - object
           - expression
           - null
+        expression:
+          description: 'The object, written in the expression syntax over the symbols that the derivation
+            sees.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        reading:
+          description: 'The object stated in one phrase.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
   posits:
+    description: 'The premises that the derivation introduces on trial, each with its origin and its tests.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
@@ -88,7 +236,17 @@ properties:
         - origin
         - tests
       properties:
+        id:
+          description: 'A descriptive identifier of the posit, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
         kind:
+          description: 'What the posit guesses: a trial form, a closing relation, the relevant quantities,
+            or a similarity in a limit.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           enum:
           - ansatz
           - closure
@@ -96,20 +254,43 @@ properties:
           - complete-similarity
           - incomplete-similarity
           - null
+        statement:
+          description: 'The form or the relation assumed.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
         origin:
+          description: 'Where the guess came from.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           propertyNames:
             enum:
             - kind
             - ref
           properties:
             kind:
+              description: 'Where the guess comes from: an act of the itinerary, a published source, a
+                scheme, or no record.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
               enum:
               - act
               - source
               - scheme
               - none
               - null
+            ref:
+              description: 'The act, the source or the scheme from which the guess came.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
         tests:
+          description: 'The tests of the posit, each with its verdict.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           items:
             propertyNames:
               enum:
@@ -119,6 +300,11 @@ properties:
               - by
             properties:
               kind:
+                description: 'What the test checks against the posit: the consistency of neglected terms,
+                  a known limit, a proof, a bound, data, or a computation.
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
                 enum:
                 - consistency
                 - limit
@@ -128,17 +314,35 @@ properties:
                 - computation
                 - null
               verdict:
+                description: 'Whether the test supports or refutes the posit.
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
                 enum:
                 - supports
                 - refutes
                 - inconclusive
                 - null
               standard:
+                description: 'For a computation, whether the computation is certified or numerical.
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
                 enum:
                 - certified
                 - numerical
                 - null
+              by:
+                description: 'The move, the record or the source that carries the test.
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
   moves:
+    description: 'The steps that the record states: every non-routine move, and the routine moves that
+      no segment bridges.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
@@ -149,7 +353,16 @@ properties:
         - binds
         - warrant
       properties:
+        id:
+          description: 'A descriptive identifier of the move, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
         kind:
+          description: 'The atomic operation that the move performs on the objects it takes.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           enum:
           - substitute
           - transform
@@ -171,7 +384,36 @@ properties:
           - import
           - compare
           - null
+        inputs:
+          description: 'The objects, posits or premises that the move takes, by identifier.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          items:
+            examples:
+            - OBJECT-OR-PREMISE
+        outputs:
+          description: 'The objects that the move yields, by identifier.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          items:
+            examples:
+            - OBJECT-NAME
+        binds:
+          description: 'The slots that the move binds, by symbol.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          items:
+            examples:
+            - SYMBOL
         warrant:
+          description: 'What licenses the move: its source, the class of its error, its regime and the
+            property that makes it apply.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           propertyNames:
             enum:
             - source
@@ -181,6 +423,11 @@ properties:
             - applies_because
           properties:
             source:
+              description: 'What licenses the move: a definition, a theorem, an approximation, a computation,
+                or the verdict of an act.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
               enum:
               - definition
               - theorem
@@ -188,14 +435,45 @@ properties:
               - computation
               - act-verdict
               - null
+            cites:
+              description: 'The definition, the theorem, the record or the step that licenses the move.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
             error:
+              description: 'Whether the error introduced by the move is absent, bounded, unbounded, or
+                singular near a limit.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
               enum:
               - exact
               - controlled
               - uncontrolled
               - singular
               - null
+            regime:
+              description: 'The regime in which the warrant holds, for an approximation, a limit or a
+                truncation.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+            applies_because:
+              description: 'The identifier of the structural or magnitude interpretation that makes the
+                warrant apply at this point.
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+  kernel:
+    description: 'The identifier of the move declared as the kernel of the derivation.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
   orientations:
+    description: 'The prospective rationale of each non-routine move and of each segment.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
@@ -210,7 +488,34 @@ properties:
         - provenance
         - expected_gain
       properties:
+        id:
+          description: 'A descriptive identifier of the orientation, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        of:
+          description: 'The identifier of the move or the segment that the orientation selects.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        purpose:
+          description: 'The end of the move, written as a goal: to determine an unknown, or to bring about
+            a change.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        determines:
+          description: 'The identifier of the sought that the purpose determines.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          examples:
+          - SOUGHT-NAME
         change:
+          description: 'The intended change of state that the purpose brings about.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           enum:
           - eliminate
           - decouple
@@ -220,14 +525,38 @@ properties:
           - close
           - match
           - null
+        occasion:
+          description: 'The identifier of the interpretation that makes the purpose relevant now.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        means:
+          description: 'The kind of move, the scheme or the act that the purpose calls for.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
         alternatives:
+          description: 'The moves considered at that point and set aside, each with its reason.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           items:
             propertyNames:
               enum:
               - move
               - reason
             properties:
+              move:
+                description: 'The move set aside.
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
               reason:
+                description: 'Why the move considered was set aside: a constraint of validity, or a strategic
+                  disadvantage.
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
                 enum:
                 - inapplicable
                 - inconsistent
@@ -236,11 +565,25 @@ properties:
                 - tried-without-success
                 - null
         provenance:
+          description: 'Whether the orientation was written while the derivation was carried out, or reconstructed
+            afterwards from a source.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           enum:
           - contemporaneous
           - reconstructed
           - null
+        expected_gain:
+          description: 'The gain that the move is expected to bring.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
   interpretations:
+    description: 'The meanings assigned to the items of the derivation, each with its ground.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
@@ -250,7 +593,23 @@ properties:
         - reading
         - grounds
       properties:
+        id:
+          description: 'A descriptive identifier of the interpretation, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        of:
+          description: 'The identifier of the item interpreted: an object, a move, a feature, a segment
+            or a consequence.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
         kind:
+          description: 'Which content the reading assigns to its item, which fixes the ground that the
+            interpretation must cite.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           enum:
           - referential
           - form
@@ -261,7 +620,24 @@ properties:
           - analogical
           - diagnostic
           - null
+        reading:
+          description: 'The meaning assigned, in one sentence.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        grounds:
+          description: 'The references on which the meaning rests, of the type that its kind requires.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          items:
+            examples:
+            - REFERENCE
   features:
+    description: 'The events that the calculation exhibits, which only a diagnostic interpretation reads.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
@@ -269,7 +645,17 @@ properties:
         - kind
         - at
       properties:
+        id:
+          description: 'A descriptive identifier of the feature, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
         kind:
+          description: 'Which event the calculation exhibits at the object, such as a divergence or a
+            secular term.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
           enum:
           - divergence
           - secular-term
@@ -277,7 +663,17 @@ properties:
           - sign-change
           - crossing
           - null
+        at:
+          description: 'The identifier of the object at which the event occurs.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
   segments:
+    description: 'The groups of contiguous moves that serve one sought under one idea, each bridging the
+      moves that it omits.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
@@ -287,7 +683,56 @@ properties:
         - outputs
         - applies
         - within
+      properties:
+        id:
+          description: 'A descriptive identifier of the segment, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        moves:
+          description: 'The moves stated inside the segment, by identifier.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          items:
+            examples:
+            - MOVE-NAME
+        inputs:
+          description: 'The objects or premises that the segment consumes.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          items:
+            examples:
+            - OBJECT-OR-PREMISE
+        outputs:
+          description: 'The objects that the segment produces.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          items:
+            examples:
+            - OBJECT-NAME
+        applies:
+          description: 'The identifier of the design of kind scheme that the segment applies.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          examples:
+          - design.TOPIC.NAME
+        within:
+          description: 'The identifier of the segment that encloses this one.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          examples:
+          - SEGMENT-NAME
   consequences:
+    description: 'The statements that the derivation establishes; a consequence answering a subordinate
+      sought is a lemma.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
@@ -298,18 +743,110 @@ properties:
         - gain
         - principle
         - pattern
+      properties:
+        id:
+          description: 'A descriptive identifier of the consequence, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        answers:
+          description: 'The identifier of the sought that the consequence answers, or the record served
+            for the root sought of a derivation that serves one.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        from:
+          description: 'The identifier of the object that states the consequence.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        record:
+          description: 'The identifier of the law, the answer or the obligation that states the consequence;
+            a law named here is marked derived.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        gain:
+          description: 'The gain that the derivation actually brought.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        principle:
+          description: 'The identifier of the variation interpretation that names the property making
+            the consequence hold.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+        pattern:
+          description: 'The scheme applied, with the other problems within its reach.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
   impasses:
+    description: 'The obstacles left by the derivation, each leaving a sought without answer.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
         - sought
         - obstacle
+      properties:
+        sought:
+          description: 'The identifier of the sought left without answer.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          examples:
+          - SOUGHT-NAME
+        obstacle:
+          description: 'The identifier of the diagnostic interpretation that names the obstacle.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          examples:
+          - INTERPRETATION-NAME
   refutations:
+    description: 'The statements that the derivation falsifies by a counterexample.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
     items:
       propertyNames:
         enum:
         - target
         - by
+      properties:
+        target:
+          description: 'The posit, the consequence or the claim refuted, by identifier.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          examples:
+          - UNIT-OR-RECORD
+        by:
+          description: 'The object that is the counterexample; a refuting test of a posit is recorded
+            among the tests of that posit.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/derivation.md).'
+          examples:
+          - OBJECT-NAME
+  maturity:
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
 propertyNames:
   enum:

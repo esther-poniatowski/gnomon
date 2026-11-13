@@ -1,0 +1,532 @@
+rules:
+  itinerary/unaddressed:
+    repair_condition: The itinerary addresses an existing problem or question record.
+    documentation_target: docs/specification/itinerary.md
+  itinerary/repeated-step:
+    repair_condition: Every step has an identifier unique within the itinerary.
+    documentation_target: docs/specification/itinerary.md
+  itinerary/unknown-activity:
+    repair_condition: Every step names an activity declared in the activity registry.
+    documentation_target: docs/specification/itinerary.md
+  itinerary/unfilled-input:
+    repair_condition: The step supplies every input of its activity in the number declared by the activity signature.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^activity-criterion
+  itinerary/unaccepted-input:
+    repair_condition: Every input type of the step is admitted by the signature of its activity.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^activity-criterion
+  itinerary/mistyped-step-input:
+    repair_condition: A step input names a producing step whose output type equals the declared input type.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^itinerary-check
+  itinerary/input-without-producer:
+    repair_condition: An input type held by no record names, in full, a step that produces that type.
+    documentation_target: docs/specification/itinerary.md
+  itinerary/unresolved-input:
+    repair_condition: Each input reference names an existing record or the full identifier of an existing step.
+    documentation_target: docs/specification/itinerary.md
+  itinerary/mistyped-record-input:
+    repair_condition: A record input holds the declared product type in the state read by the step.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^itinerary-check
+  itinerary/unadmitted-attitude:
+    repair_condition: An answer used as input has an attitude admitted by the corresponding input of the activity.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^target-claim-type
+  itinerary/mistyped-output:
+    repair_condition: The output type stated by the step equals the output type of its activity.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^itinerary-check
+  itinerary/mistyped-output-record:
+    repair_condition: The record named as output holds the output type stated by the step.
+    documentation_target: docs/specification/itinerary.md
+  itinerary/foreign-norm:
+    repair_condition: The norm of the step names the test declared for its activity.
+    documentation_target: docs/specification/itinerary.md
+  itinerary/unknown-verdict:
+    repair_condition: The verdict is one of `pass`, `fail`, `inconclusive` or `pending`.
+    documentation_target: docs/specification/itinerary.md#^verdict-judgment
+  itinerary/unjustified-verdict:
+    repair_condition: A verdict other than `pending` states its evidence and its judgment date in `YYYY-MM-DD` form.
+    documentation_target: docs/specification/itinerary.md#^verdict-judgment
+  itinerary/unrecorded-derivation:
+    repair_condition: A passed step of the activity `derivation` names the derivation record that holds its reasoning.
+    documentation_target: docs/specification/itinerary.md
+  itinerary/foreign-derivation:
+    repair_condition: A derivation named by a step records a consequence in the output record of that step.
+    documentation_target: docs/specification/itinerary.md
+  itinerary/unreadable-state:
+    repair_condition: The revision named by `as_of` identifies a readable state of the referenced record.
+    documentation_target: docs/specification/itinerary.md#^record-versions
+  itinerary/unversioned-question-revision:
+    repair_condition: A question revision raises the question version above the version read at the earlier revision.
+    documentation_target: docs/specification/question.md#^question-version
+  itinerary/unavailable-history:
+    repair_condition: The revision named by `as_of` is present in the reachable history of the clone.
+    documentation_target: docs/adr/versions-and-history.md#^git-keeps-history
+  itinerary/unchanged-state:
+    repair_condition: A knowledge-state change names a readable earlier revision at which the record has a different status.
+    documentation_target: docs/specification/itinerary.md
+  itinerary/malformed-constructor:
+    repair_condition: A branch states a condition and an alternative with the same output type; an iteration states a termination criterion and repeats an activity that accepts its output type.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^itinerary-constructors
+  itinerary/unserved-step:
+    repair_condition: The rationale serves an existing problem or question and, for a question, names an admitted condition or act.
+    documentation_target: docs/specification/itinerary.md
+  itinerary/mismatched-mode:
+    repair_condition: A stated mode equals the admitted mode declared for the activity.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^attribute-vocabularies
+  itinerary/cycle:
+    repair_condition: The input references between steps form a directed acyclic graph.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^itinerary-check
+  itinerary/malformed-appraisal:
+    repair_condition: Every compared act has a unique identifier, available means, and one grounded value from each declared criterion scale.
+    documentation_target: docs/specification/itinerary.md#^act-appraisals
+  itinerary/unadmitted-output-value:
+    repair_condition: The output record holds, in every constrained field, a value declared under `output_values` for the activity.
+    documentation_target: docs/specification/itinerary.md#^activity-output-values
+  registry/unknown-output-value:
+    repair_condition: Every value under `output_values` is admitted by the corresponding field vocabulary of a record kind that holds the output type.
+    documentation_target: docs/specification/itinerary.md#^activity-output-values
+  registry/unknown-product-type:
+    repair_condition: Every input and output of an activity names a declared product type.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^product-types
+  registry/unadmitted-attitude:
+    repair_condition: Every attitude qualifying an activity input is an admitted attitude of an answer.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^target-claim-type
+  registry/unadmitted-mode:
+    repair_condition: The mode of every activity belongs to the closed vocabulary of inference modes.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^attribute-vocabularies
+  registry/foreign-norm:
+    repair_condition: The norm of an activity is named `norm.<activity-id>`.
+    documentation_target: docs/epistemology/processes/activities/epistemic-activities.md#^activity-criterion
+  completeness/unmet-requirement:
+    repair_condition: Every specification that the record always carries has a non-empty value.
+    documentation_target: docs/specification/_index.md
+  completeness/unmet-scope:
+    repair_condition: Every record, field and state required by the selected validation scope is present.
+    documentation_target: docs/specification/validation-scopes.md#^scope-requirement-sets
+  completeness/unmet-commitment:
+    repair_condition: Every specification required by the record's level of commitment has a non-empty value.
+    documentation_target: docs/specification/_index.md
+  completeness/unmet-by-value:
+    repair_condition: Every specification required by the value of another field has a non-empty value.
+    documentation_target: docs/specification/_index.md
+  completeness/mismatched-occurrence:
+    repair_condition: The occurrence class is admitted for the phenomenon category.
+    documentation_target: docs/specification/phenomenon.md
+  completeness/mismatched-evidence:
+    repair_condition: The evidential status is admitted for the type of the target system.
+    documentation_target: docs/specification/phenomenon.md
+  completeness/unadmitted-placeholder:
+    repair_condition: The placeholder takes a type admitted for the subject slot.
+    documentation_target: docs/specification/question-subject.md
+  completeness/misfit-placeholder:
+    repair_condition: The placeholder type matches the record kind awaited by the subject slot.
+    documentation_target: docs/specification/question-subject.md
+  completeness/undescribed-placeholder:
+    repair_condition: The placeholder states what the unresolved subject slot awaits.
+    documentation_target: docs/specification/question-subject.md
+  completeness/unresolved-slot:
+    repair_condition: The subject slot names an existing record or states a typed placeholder.
+    documentation_target: docs/specification/question-subject.md
+  completeness/unknown-slot-record:
+    repair_condition: The subject slot names an identifier carried by a record in the workspace.
+    documentation_target: docs/specification/question-subject.md
+  completeness/mistyped-slot-record:
+    repair_condition: The subject slot names a record of the kind that the slot admits.
+    documentation_target: docs/specification/question-subject.md
+  completeness/unidentified-slot-record:
+    repair_condition: The record named by the subject slot carries the identification required for that slot.
+    documentation_target: docs/specification/question-subject.md
+  completeness/foreign-background:
+    repair_condition: Every admitted background describes the target system of the question.
+    documentation_target: docs/specification/question-subject.md
+  completeness/unknown-assessed:
+    repair_condition: The assessment names a record that exists in the workspace.
+    documentation_target: docs/specification/assessment.md
+  completeness/unassessable-record:
+    repair_condition: The assessment names a candidate answer or a construct demanded by the problem.
+    documentation_target: docs/specification/assessment.md
+  completeness/mismatched-standard:
+    repair_condition: The assessment applies the standard admitted for the kind of record assessed.
+    documentation_target: docs/specification/assessment.md
+  completeness/misshapen-tests:
+    repair_condition: The assessment carries exactly the test blocks required for the kind of record assessed.
+    documentation_target: docs/specification/assessment.md
+  completeness/unknown-constraint:
+    repair_condition: Every constraint named by an assessment verdict is declared by the assessed problem.
+    documentation_target: docs/specification/assessment.md
+  completeness/mismatched-request:
+    repair_condition: The associated question addresses the problem and carries the same request.
+    documentation_target: docs/specification/problem.md
+  completeness/unbounded-aim:
+    repair_condition: The question's epistemic aim is admitted for the result type demanded by the problem.
+    documentation_target: docs/specification/question-task.md
+  completeness/unsupported-solved:
+    repair_condition: A problem is marked solved only when its records meet its demand.
+    documentation_target: docs/specification/problem.md
+  completeness/unrecorded-solution:
+    repair_condition: A problem whose records meet its demand is marked solved.
+    documentation_target: docs/specification/problem.md
+  completeness/unsupported-dissolved:
+    repair_condition: A problem or question is marked dissolved only when an accepted answer denies one of its presuppositions.
+    documentation_target: docs/specification/problem.md
+  completeness/unrecorded-dissolution:
+    repair_condition: A question, and its associated problem, are marked dissolved when an accepted answer denies a presupposition.
+    documentation_target: docs/specification/problem.md
+  completeness/unsupported-obstacle:
+    repair_condition: Every stated knowledge obstacle is supported by the current records.
+    documentation_target: docs/specification/problem.md
+  completeness/unstated-function-sense:
+    repair_condition: A question requesting a functional relation states the intended sense of function.
+    documentation_target: docs/specification/question-task.md
+  completeness/malformed-credence:
+    repair_condition: A credence states both its numerical value and its basis.
+    documentation_target: docs/specification/assessment.md
+  completeness/credence-out-of-range:
+    repair_condition: The credence value is a number between zero and one inclusive.
+    documentation_target: docs/specification/assessment.md
+  completeness/credence-without-basis:
+    repair_condition: The credence states the evidence and prior from which its value follows.
+    documentation_target: docs/specification/assessment.md
+  completeness/unmet-aim:
+    repair_condition: The inquiry fills every specification required by the epistemic aim, except a specification that the inquiry itself produces.
+    documentation_target: docs/specification/question-task.md
+  completeness/contradictory-accuracy:
+    repair_condition: The required-accuracy block contains only matches and tolerances admitted by its standard.
+    documentation_target: docs/specification/question-task.md
+  completeness/unrealized-link:
+    repair_condition: An answer to a mapping question states at least one realization of a requested role.
+    documentation_target: docs/specification/answer.md#^claim-realizations
+  completeness/incomplete-realization:
+    repair_condition: Every realization names both the role realized and the expression of that role in the symbols of the substrate.
+    documentation_target: docs/specification/answer.md#^claim-realizations
+  completeness/incomplete-operation:
+    repair_condition: Every derived-model operation fills the fields required by its kind and class of error.
+    documentation_target: docs/specification/model.md
+  completeness/unclassified-operation:
+    repair_condition: Every operation or assumption used by the answer is classified by one of its grounds.
+    documentation_target: docs/specification/answer.md
+  completeness/unanchored-explicandum:
+    repair_condition: The explicandum names a term anchored by an explicandum of the problem.
+    documentation_target: docs/specification/question-task.md
+  completeness/malformed-answerability:
+    repair_condition: Every asserted condition state names its route, kind when required, means, and supporting pointers, and agrees with the records.
+    documentation_target: docs/specification/question.md
+  completeness/premature-appraisal:
+    repair_condition: An assessment appraises an answer only after its admissibility and warrant tests pass.
+    documentation_target: docs/specification/assessment.md
+  completeness/mismatched-status-pair:
+    repair_condition: Every explanatory factor cites a binding pair whose type is required by the factor's target status.
+    documentation_target: docs/specification/answer.md
+  completeness/misheld-presupposition:
+    repair_condition: Every presupposition names as its holder a law of a background or model, or a consequence of a derivation.
+    documentation_target: docs/adr/claim-content.md
+  completeness/misdirected-requirement:
+    repair_condition: Every law requirement names an admitted unit other than the law itself.
+    documentation_target: docs/adr/law-requirements.md
+  completeness/inherited-presupposition:
+    repair_condition: An answer claim does not repeat a presupposition already stated by its question.
+    documentation_target: docs/adr/claim-content.md
+  completeness/misdirected-interventions:
+    repair_condition: Every intervention of a counterfactual claim names a design that states the intervention or a quantity of a model.
+    documentation_target: docs/adr/claim-content.md
+  completeness/unbound-outputs:
+    repair_condition: An answer on a model cites a binding whenever its question names outputs to match.
+    documentation_target: docs/specification/answer.md
+  completeness/unjustified-explanans-bound:
+    repair_condition: Every stated axis of the admissible explanans carries a justification.
+    documentation_target: docs/specification/question-task.md
+  completeness/unstated-standing:
+    repair_condition: Every virtue states whether its standing is constitutive or preferred.
+    documentation_target: docs/specification/question-virtues.md
+  completeness/restriction-content:
+    repair_condition: Every domain restriction states exactly one of a value set and a defining expression.
+    documentation_target: docs/specification/question-subject.md
+  completeness/anonymous-restriction:
+    repair_condition: Every domain restriction names either the quantity restricted or the restriction itself.
+    documentation_target: docs/specification/question-subject.md
+  contract/violation:
+    repair_condition: The record satisfies the types, fields and forms declared by the contract named in `_schema`.
+    documentation_target: docs/adr/record-schemas.md
+  completeness/unstated-domain:
+    repair_condition: An answer with a deductive route or a route on a model states the domain over which its claim holds.
+    documentation_target: docs/specification/answer.md
+  completeness/template-leftover:
+    repair_condition: Every placeholder and untouched template block is either replaced with research content or removed when optional.
+    documentation_target: docs/guide/filling-records.md
+  completeness/misplaced-maturity:
+    repair_condition: Every key in the `maturity` block names a field declared by the record.
+    documentation_target: docs/specification/maturity.md
+  completeness/misstated-limit:
+    repair_condition: A domain limit is written as `q -> v`, where `q` is a variable or parameter of the target.
+    documentation_target: docs/specification/question-subject.md
+  completeness/unbounded-censoring:
+    repair_condition: A left-censored event time states a first observation or an origin that bounds it.
+    documentation_target: docs/specification/phenomenon.md
+  completeness/misdirected-rival:
+    repair_condition: The rival of a Bayesian binding names another binding of the same target or `complement`.
+    documentation_target: docs/specification/binding.md
+  completeness/unlinked-explanans:
+    repair_condition: An answer whose explanans comes from a linked phenomenon states a factor over that phenomenon.
+    documentation_target: docs/specification/answer.md
+  completeness/void-assessment:
+    repair_condition: The assessment is renewed against the current question version or retracted.
+    documentation_target: docs/specification/assessment.md
+  completeness/unknown-question-version:
+    repair_condition: The assessment names an existing version no later than the current version of its question.
+    documentation_target: docs/specification/assessment.md
+  completeness/unversioned-assessment:
+    repair_condition: An answer assessment names the version of its question, while a construct assessment names no question version.
+    documentation_target: docs/specification/assessment.md
+  completeness/unrecorded-question-revision:
+    repair_condition: Every question revision raises its version and is recorded by a question-revision step in an itinerary.
+    documentation_target: docs/specification/question.md
+  completeness/misplaced-exclusion:
+    repair_condition: A deferred part names a subquestion, while an out-of-scope part does not name a subquestion still inside the question.
+    documentation_target: docs/specification/question.md
+  completeness/excluded-answered:
+    repair_condition: A deferred subquestion with an accepted answer is no longer marked deferred.
+    documentation_target: docs/specification/question.md
+  completeness/answered-with-open-component:
+    repair_condition: A question is marked answered only when every subquestion is settled.
+    documentation_target: docs/specification/question.md
+  completeness/mismatched-obligation:
+    repair_condition: Each assessment obligation names one distinct proof obligation declared by the question.
+    documentation_target: docs/specification/assessment.md
+  completeness/unassessed-obligation:
+    repair_condition: The assessment contains one verdict for every proof obligation declared by the question.
+    documentation_target: docs/specification/assessment.md
+  completeness/misplaced-holds-on:
+    repair_condition: Only a failed test, ground or obligation states the subdomain under `holds_on`.
+    documentation_target: docs/specification/assessment.md
+  completeness/mismatched-ground:
+    repair_condition: Each ground verdict names one distinct ground of the assessed answer.
+    documentation_target: docs/specification/assessment.md
+  completeness/unknown-evidence-step:
+    repair_condition: Every evidence step named by a ground verdict exists in an itinerary.
+    documentation_target: docs/specification/assessment.md
+  completeness/unsettled-evidence:
+    repair_condition: A ground passes only on evidence from a step whose norm is met.
+    documentation_target: docs/specification/assessment.md
+  completeness/disagreeing-law-warrant:
+    repair_condition: The verdict of the law-warrant test agrees with the verdicts recorded for the individual grounds.
+    documentation_target: docs/specification/assessment.md
+  completeness/untested-computed-law:
+    repair_condition: Every assessed ground that names a computed law cites the itinerary step that computed it.
+    documentation_target: docs/specification/assessment.md
+  completeness/excluded-event:
+    repair_condition: A restriction of kind `without-event` names the excluded event, and every other restriction omits that field.
+    documentation_target: docs/specification/question-subject.md
+  completeness/restriction-without-variable:
+    repair_condition: A restriction states how a quantity is held only when that quantity varies along the course.
+    documentation_target: docs/specification/question-subject.md
+  completeness/undecided-boundary:
+    repair_condition: Every external system states its constraints, using an empty list when it imposes none.
+    documentation_target: docs/specification/target-system.md
+  completeness/inadmissible-value:
+    repair_condition: Every closed field holds a value declared by its bound vocabulary.
+    documentation_target: docs/adr/registries-as-source.md
+  check/failed:
+    repair_condition: The underlying read or checker error is removed, and the check completes over the record.
+    documentation_target: docs/guide/cli-reference.md#^cli-check-recovery
+  relation/mistyped-end:
+    repair_condition: Every relation end and every record-valued attribute names a record kind admitted by its relation declaration.
+    documentation_target: docs/adr/relation-registry.md#^relation-declaration
+  relation/self:
+    repair_condition: The other end of every authored relation differs from the record that states it.
+    documentation_target: docs/adr/relation-registry.md#^relation-declaration
+  relation/cycle:
+    repair_condition: Every relation graph whose cycle policy is forbidden is acyclic.
+    documentation_target: docs/epistemology/objects/knowledge/relations-between-units.md#^cycles
+  relation/judged-cycle:
+    repair_condition: Every cycle governed by the judged policy contains a test that can fail, or the cycle is removed.
+    documentation_target: docs/epistemology/objects/knowledge/relations-between-units.md#^cycles
+  relation/restated:
+    repair_condition: Each symmetric relation or set relation is stated once, and each declared set is minimal.
+    documentation_target: docs/epistemology/objects/knowledge/relations-between-units.md#^arity
+  relation/restated-ground:
+    repair_condition: A dependence already stated as a ground of an answer is not repeated as a `supports` relation.
+    documentation_target: docs/adr/research-export.md
+  relation/misplaced-attribute:
+    repair_condition: Each relation entry names its relation and required end, carries every required attribute, and carries no undeclared attribute.
+    documentation_target: docs/adr/relation-registry.md#^relation-declaration
+  derivation/repeated-unit:
+    repair_condition: Every unit of the derivation has an identifier unique within that derivation.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/unknown-unit:
+    repair_condition: Every identifier inside the derivation resolves to an admitted unit kind, and every dotted identifier resolves in the workspace.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/unadmitted-pair:
+    repair_condition: Every interpretation pairs its item with a kind admitted for that item.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/mistyped-ground:
+    repair_condition: Every field cites an interpretation of its admitted kind, and every interpretation ground cites the reference type required by that kind.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/cycle:
+    repair_condition: The dependency graph formed by the moves and segments is acyclic.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/retrospective-orientation:
+    repair_condition: The occasion of an orientation interprets only an object established before the selected move or segment.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/retrospective-license:
+    repair_condition: A warrant applies because of a property established before the move that the warrant licenses.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/unoriented-move:
+    repair_condition: Every non-routine move and every segment has an orientation.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/ambiguous-purpose:
+    repair_condition: Each orientation states exactly one of the sought that it determines and the change that it brings about.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/failed-kernel:
+    repair_condition: Every route from the premises to a consequence of the root sought crosses the declared kernel.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/unrecorded-consequence:
+    repair_condition: Each consequence of the root sought names its record unless the derivation serves the law or operation that states it.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/idle-move:
+    repair_condition: Each move yields something beyond its inputs, and its outputs reach an outcome, a posit test, or an interpretation cited by the record.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/cyclic-nesting:
+    repair_condition: Segments do not enclose one another through a cycle, and subordinate soughts do not replace one another through a cycle.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/unrecorded-descent:
+    repair_condition: Each law marked `derived` names a derivation that states it as a consequence, or names a published origin.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/restated-premises:
+    repair_condition: A law whose descent is recorded by a derivation leaves its `requires` list empty because the derivation states its premises.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/unbound-slot:
+    repair_condition: Every slot is bound by a move unless an impasse stops the route opened by that slot.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/broken-bridge:
+    repair_condition: Each move of a segment takes only an input of the segment or an object yielded by one of its moves.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/unreached-consequence:
+    repair_condition: Every consequence is stated by an object yielded by a move or a segment.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/restated-fact:
+    repair_condition: A derivation that serves a record declares no root sought and does not repeat the served record as the record of a consequence.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/misapplied-scheme:
+    repair_condition: Every segment that applies a scheme names a design record whose kind is `scheme`.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  derivation/underived-record:
+    repair_condition: A law named as the record of a consequence is marked `derived`.
+    documentation_target: docs/specification/derivation.md#^derivation-checks
+  dimension/malformed-formula:
+    repair_condition: Every dimensional formula is a monomial over the package base dimensions and the problem's declared base scales.
+    documentation_target: docs/adr/dimensional-formula.md
+  dimension/inhomogeneous:
+    repair_condition: The terms of each sum and the two sides of each equation, inequality, or limit have the same dimensional formula.
+    documentation_target: docs/adr/dimensional-formula.md
+  dimension/impure-argument:
+    repair_condition: Every exponent and every argument of an operator requiring a pure number has dimensional formula `1`.
+    documentation_target: docs/adr/dimensional-formula.md
+  dimension/mismatched-definition:
+    repair_condition: The expression defining a quantity has the dimensional formula declared for that quantity.
+    documentation_target: docs/adr/dimensional-formula.md
+  dimension/unchecked-law:
+    repair_condition: Each quantity named by a checked statement declares a dimensional formula, and each operator declares a dimension rule or the explicit `unchecked` waiver.
+    documentation_target: docs/adr/dimensional-formula.md
+  dimension/mistyped-operand:
+    repair_condition: Connectives take statements, while sums, products, comparisons, and powers take quantities rather than statements.
+    documentation_target: docs/adr/dimensional-formula.md
+  dimension/conflicting-formula:
+    repair_condition: Every visible declaration of one symbol assigns it the same dimensional formula.
+    documentation_target: docs/adr/dimensional-formula.md
+  dimension/colliding-base:
+    repair_condition: Each base scale declared by a problem uses a symbol distinct from every package base dimension.
+    documentation_target: docs/adr/dimensional-formula.md
+  vocabulary/mistyped-symbol:
+    repair_condition: Every symbol is parsed as a string; YAML keyword-like symbols are quoted or renamed.
+    documentation_target: docs/specification/expressions.md#^quote-serializer-keywords
+  vocabulary/split-expression:
+    repair_condition: Every compound expression inside a list is quoted so that the serializer preserves it as one string.
+    documentation_target: docs/specification/expressions.md#^quote-compound-values
+  vocabulary/corrupted-notation:
+    repair_condition: Every notation preserves its intended LaTeX text without control characters, using single quotes when it contains backslashes.
+    documentation_target: docs/specification/expressions.md#^notation-renders-in-latex
+  vocabulary/misplaced-sharing:
+    repair_condition: Each external system shares only a variable or parameter declared by the record.
+    documentation_target: docs/specification/target-system.md#^external-parameters
+  vocabulary/unfixed-parameter:
+    repair_condition: A quantity indexed by an evolution index is declared as a variable rather than as a parameter.
+    documentation_target: docs/specification/target-system.md#^index-roles
+  vocabulary/doubly-defined:
+    repair_condition: Each quantity is introduced by either an expression or a condition, never both.
+    documentation_target: docs/specification/expressions.md#^condition-presupposes-existence
+  vocabulary/unowned-quantity:
+    repair_condition: Every quantity carrying an owner names an external system declared by the record.
+    documentation_target: docs/specification/target-system.md#^external-parameters
+  vocabulary/unselected-condition:
+    repair_condition: Every quantity fixed by a condition selects `unique`, `any`, or `all`.
+    documentation_target: docs/specification/expressions.md#^condition-presupposes-existence
+  vocabulary/vacuous-shared:
+    repair_condition: The marker `shared` appears only on a quantity with a non-empty signature.
+    documentation_target: docs/specification/target-system.md#^places
+  vocabulary/mismatched-arity:
+    repair_condition: Every operator call passes the number of arguments declared by the operator, including its variadic allowance.
+    documentation_target: docs/specification/expressions.md#^operator-arity
+  vocabulary/misused-binder:
+    repair_condition: Only an operator declared as a binder is written with bound indices.
+    documentation_target: docs/specification/expressions.md#^binder-consumes-several
+  vocabulary/mismatched-indices:
+    repair_condition: Every quantity call passes either the number of indices in its signature or an admitted number of arguments of its value map.
+    documentation_target: docs/specification/expressions.md#^applied-quantity
+  vocabulary/retired-symbol:
+    repair_condition: No expression of a derived model uses a parent symbol that one of its operations retires.
+    documentation_target: docs/specification/model.md
+  vocabulary/foreign-coordinates:
+    repair_condition: Each derivative coordinate indexes a quantity of its argument, occurs in that argument, or has a value set matching the domain of a map named by the argument.
+    documentation_target: docs/specification/expressions.md
+  vocabulary/unresolved:
+    repair_condition: Every reference and every identifier in a parsed expression resolves to a visible declaration.
+    documentation_target: docs/specification/expressions.md#^resolution-on-the-tree
+  vocabulary/unparsed-expression:
+    repair_condition: Every field designated as an expression conforms to the expression grammar.
+    documentation_target: docs/adr/expression-syntax.md
+  vocabulary/contradicted-signature:
+    repair_condition: Every free index of a quantity's defining expression appears in its signature or in the domain of its value map.
+    documentation_target: docs/specification/expressions.md#^free-indices-form-signature
+  vocabulary/overreaching-entry:
+    repair_condition: An entry that names a symbol carried by one variant is marked with that variant, directly or through its answer.
+    documentation_target: docs/specification/target-system.md#^variants
+  vocabulary/misattributed-appeal:
+    repair_condition: Each explanatory factor in `appeals_to` names an external system declared by the target.
+    documentation_target: docs/specification/answer.md#^explanation-fields
+  vocabulary/unborne-variant:
+    repair_condition: Each declared variant is carried by a declaration or law, unless its maturity explicitly marks the missing carrier as open.
+    documentation_target: docs/specification/target-system.md#^unborne-variant
+  vocabulary/misnamed-variant:
+    repair_condition: Every variant marker names a variant declared by the target system.
+    documentation_target: docs/specification/target-system.md#^variants
+  vocabulary/unordered-relation:
+    repair_condition: Every organization relation between parts names an ordered product of at least two declared constituent kinds or index sets.
+    documentation_target: docs/specification/background.md
+  vocabulary/relation-ends:
+    repair_condition: Every organization relation names either the parts it connects or the laws it orders, but not both.
+    documentation_target: docs/specification/background.md
+  vocabulary/short-relation:
+    repair_condition: Every organization relation among laws orders at least two laws.
+    documentation_target: docs/specification/background.md
+  vocabulary/unknown-relation-law:
+    repair_condition: Every law named by an organization relation is declared in the same record.
+    documentation_target: docs/specification/background.md
+  vocabulary/misrouted-relation:
+    repair_condition: The laws realizing an organization relation name a quantity indexed by every constituent kind or index set listed under `places`.
+    documentation_target: docs/specification/background.md
+  vocabulary/malformed-identifier:
+    repair_condition: Each record identifier begins with the prefix of its type and uses lowercase hyphenated words in every topic and name segment.
+    documentation_target: docs/adr/dotted-identifiers.md#^identifier-form
+  vocabulary/foreign-topic:
+    repair_condition: Each record uses the topic of its problem, or the topic of its target system when the record is stated directly against that target.
+    documentation_target: docs/adr/dotted-identifiers.md#^identifier-form
+  vocabulary/unknown-record:
+    repair_condition: Every dotted record reference names a record declared in the workspace.
+    documentation_target: docs/adr/dotted-identifiers.md#^identifier-form
+  vocabulary/unknown-unit:
+    repair_condition: Every dotted unit reference names a symbol or unit identifier declared by its record.
+    documentation_target: docs/adr/dotted-identifiers.md#^identifier-form
+  vocabulary/repeated-symbol:
+    repair_condition: Each symbol is declared at most once within a record.
+    documentation_target: docs/specification/expressions.md
+  vocabulary/unused-declaration:
+    repair_condition: Each declared quantity is referenced by another grammatical field of its problem, or is removed when it carries no required typed content.
+    documentation_target: docs/adr/shared-field-grounds.md

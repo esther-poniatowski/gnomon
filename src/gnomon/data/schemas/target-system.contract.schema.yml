@@ -2,32 +2,51 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/target-system.contract.schema.yml
 title: Target system record contract
-description: The record type `target-system`, bound to `gnomon:target-system@1`, with its closed vocabularies.
+description: The record type `target-system`, bound to `gnomon:target-system@2`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/target-system.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:target-system@1
+    const: gnomon:target-system@2
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: target-system
+    examples:
+    - target-system
   id:
     pattern: ^system\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - system.topic
+  title:
+    examples:
+    - NAME OF THE SYSTEM
   status:
+    examples:
+    - provisional
     enum:
     - provisional
     - stabilized
     - retracted
     - null
   commitment:
+    description: 'how far the record fixes the target: `identified`: a definite description and pointers
+      fix the referent · `specified`: the declarations are written and their symbols resolve
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
     enum:
     - identified
     - specified
     - null
   target_type:
+    description: 'particular system · class of actual systems · class of possible systems · hypothetical
+      system · no external target (the model class itself)
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
     enum:
     - particular
     - actual-systems
@@ -36,37 +55,118 @@ properties:
     - no-external-target
     - null
   identification:
+    description: 'what fixes the referent before any quantity is declared: a definite description, with
+      pointers to the data, the results or the publications that fix the referent
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
     propertyNames:
       enum:
       - description
       - pointers
+    properties:
+      description:
+        description: 'a noun phrase that picks out one system or one class of systems
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+      pointers:
+        description: 'per pointer, a data set, a result or a publication
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+        items:
+          examples:
+          - POINTER TO A DATA SET, A RESULT OR A PUBLICATION THAT FIXES THE REFERENT
   reference_class:
+    description: 'a name, "[kind]", for the class that the other specifications generate
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
     propertyNames:
       enum:
       - name
       - projectibility
       - selection_criteria
     properties:
+      name:
+        description: 'the kind of system that names the class
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+        examples:
+        - KIND OF SYSTEM
       projectibility:
+        description: 'whether a claim about some members holds of the class: assumed · checked · not-claimed,
+          with the evidence for an assumed or a checked projection
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
         propertyNames:
           enum:
           - status
           - evidence
         properties:
           status:
+            description: 'whether a claim about some members holds of the class: assumed, checked or not
+              claimed
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
             enum:
             - assumed
             - checked
             - not-claimed
             - null
+          evidence:
+            description: 'omit when the status is `not-claimed`
+
+
+              [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+            examples:
+            - THE TEST OR THE ARGUMENT THAT SUPPORTS PROJECTING THE CLAIM ONTO THE CLASS
       selection_criteria:
+        description: 'per criterion, the expression that a member satisfies, with a justification. The
+          justification gives the reason for imposing the criterion and the inferences that it changes
+          about the class
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
         items:
           propertyNames:
             enum:
             - name
             - expression
             - justification
+          properties:
+            name:
+              description: 'the words that designate the criterion
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+              examples:
+              - NAME OF THE CRITERION
+            expression:
+              description: 'an expression over declared symbols that a member satisfies
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+              examples:
+              - EXPRESSION OVER DECLARED SYMBOLS THAT A MEMBER SATISFIES
+            justification:
+              description: 'also state how the selection affects the inferences the population supports
+
+
+                [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+              examples:
+              - THE REASON FOR THIS SELECTION
   variants:
+    description: 'per variant, a name and a symbol. An entry carried by only some members names its variant
+      (e.g. a declaration, a law, a relation, an external system). An unmarked entry holds for the whole
+      class
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
     items:
       propertyNames:
         enum:
@@ -74,7 +174,41 @@ properties:
         - symbol
         - differentiation
         - caveat
+      properties:
+        name:
+          description: 'the words that designate the variant
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - NAME OF THE VARIANT
+        symbol:
+          description: 'the symbol of the variant, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        differentiation:
+          description: 'the declarations that only the members of this variant carry
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - THE DECLARATIONS THAT ONLY MEMBERS OF THIS VARIANT CARRY
+        caveat:
+          description: 'the content of the variant that the record leaves unstated, and the reason for
+            the omission
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - THE CONTENT THAT THE RECORD LEAVES UNSTATED HERE, AND THE REASON FOR THE OMISSION
   constituents:
+    description: '"[symbol]", with its reading and the set expression that it collects
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
     items:
       propertyNames:
         enum:
@@ -83,7 +217,49 @@ properties:
         - notation
         - variant
         - extent
+      properties:
+        name:
+          description: 'the kind of unit that the constituent collects
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - KIND OF UNIT
+        symbol:
+          description: 'the symbol of the constituent, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        notation:
+          description: 'only when the LaTeX form differs from the symbol
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - LATEX FORM OF THE SYMBOL
+        variant:
+          description: 'variant carrying the entry; omit when every member of the class carries it
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        extent:
+          description: 'a set expression over declared symbols naming the members that the constituent
+            collects
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SET EXPRESSION OVER DECLARED SYMBOLS
   index_sets:
+    description: '"[symbol]", with the set expression that it collects and its structure: continuum ·
+      discrete set · interval
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
     items:
       propertyNames:
         enum:
@@ -95,13 +271,66 @@ properties:
         - structure
         - dimensional_formula
       properties:
+        name:
+          description: 'the words that designate the index set
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - NAME OF THE SET
+        symbol:
+          description: 'the symbol of the index set, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        notation:
+          description: 'only when the LaTeX form differs from the symbol
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - LATEX FORM OF THE SYMBOL
+        variant:
+          description: 'variant carrying the entry; omit when every member of the class carries it
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        extent:
+          description: 'a set expression over declared symbols naming the members of the index set
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SET EXPRESSION OVER DECLARED SYMBOLS
         structure:
+          description: 'the role of the index set: the index along which the state evolves, or another
+            index, continuous or countable
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
           enum:
           - evolution
           - continuum
           - discrete-set
           - null
+        dimensional_formula:
+          description: 'optional; the dimensional formula of the coordinate that the index set collects,
+            such as L for a spatial domain or T for a time axis, so that a derivative along the index
+            is checked
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
   variables:
+    description: 'what changes while the phenomenon unfolds: per variable, its signature and its value
+      set, with a reading. The role test decides whether a quantity is a variable or a parameter. The
+      value sets of the variables that $S$ determines, aggregates excepted, form the state space of $S$
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
     items:
       propertyNames:
         enum:
@@ -122,12 +351,74 @@ properties:
         - reading
         - shared
       properties:
+        name:
+          description: 'the words that designate the variable
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - NAME OF THE VARIABLE
+        symbol:
+          description: 'the symbol of the variable, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        notation:
+          description: 'only when the LaTeX form differs from the symbol
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - LATEX FORM OF THE SYMBOL
+        of:
+          description: 'external system the entry characterizes; omit when the entry belongs to the target
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        variant:
+          description: 'variant carrying the entry; omit when every member of the class carries it
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
         determined:
+          description: 'within, when the system fixes its value, or outside, when it is set externally
+            and still varies
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
           enum:
           - within
           - outside
           - null
+        signature:
+          description: 'one constituent kind or index set per place; empty for the system as a whole
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - &id001
+            - SYMBOL
+          items:
+            examples: *id001
+        values:
+          description: 'a set expression over declared symbols giving the values of the variable
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SET EXPRESSION OVER DECLARED SYMBOLS
         scale:
+          description: 'the comparisons between values that carry meaning: nominal · ordinal · interval
+            · ratio · absolute · not-applicable, for a variable and for a parameter alike
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
           enum:
           - nominal
           - ordinal
@@ -136,13 +427,67 @@ properties:
           - absolute
           - not-applicable
           - null
+        dimensional_formula:
+          description: 'optional; a monomial over the base dimensions and the base scales of the problem,
+            such as M L T^-2, or 1 for a pure number
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+        expression:
+          description: 'give when a map builds the quantity from declared symbols
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
+        condition:
+          description: 'give when no map builds the quantity
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - EXPRESSION THAT THE QUANTITY SATISFIES
         selects:
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy:
+            the unique value, any value, or all of them
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
           enum:
           - unique
           - any
           - all
           - null
+        held_by:
+          description: 'The law of a background or of a model, or the consequence of a derivation, that
+            establishes a value satisfying the condition; empty while the existence that the condition
+            presupposes is undischarged.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - RECORD.UNIT
+        reading:
+          description: 'the expression of the variable in words
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - THE EXPRESSION IN WORDS
+        shared:
+          description: 'true when one value holds for every tuple of the signature
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - false
   parameters:
+    description: '"[symbol] ∈ [set expression]", with its reading and the signature that it takes, one
+      entry per place. A flag states whether one value is shared by every tuple. The set is written without
+      restriction, because a restriction of it belongs to $D$
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
     items:
       propertyNames:
         enum:
@@ -162,7 +507,65 @@ properties:
         - reading
         - shared
       properties:
+        name:
+          description: 'the words that designate the parameter
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - NAME OF THE PARAMETER
+        symbol:
+          description: 'the symbol of the parameter, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        notation:
+          description: 'only when the LaTeX form differs from the symbol
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - LATEX FORM OF THE SYMBOL
+        of:
+          description: 'external system the entry characterizes; omit when the entry belongs to the target
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        variant:
+          description: 'variant carrying the entry; omit when every member of the class carries it
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        signature:
+          description: 'one entry per place, e.g. two neurons for a connectivity weight
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - &id002
+            - SYMBOL
+            - SYMBOL
+          items:
+            examples: *id002
+        values:
+          description: 'a set expression over declared symbols giving the values of the parameter
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SET EXPRESSION OVER DECLARED SYMBOLS
         scale:
+          description: 'the scale of measurement of the parameter: nominal, ordinal, interval, ratio or
+            absolute, or not applicable when the values form no scale
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
           enum:
           - nominal
           - ordinal
@@ -171,13 +574,69 @@ properties:
           - absolute
           - not-applicable
           - null
+        dimensional_formula:
+          description: 'optional; a monomial over the base dimensions and the base scales of the problem,
+            such as M L T^-2, or 1 for a pure number
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+        expression:
+          description: 'give for a derived parameter
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
+        condition:
+          description: 'give when no map builds the quantity
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - EXPRESSION THAT THE QUANTITY SATISFIES
         selects:
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy:
+            the unique value, any value, or all of them
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
           enum:
           - unique
           - any
           - all
           - null
+        held_by:
+          description: 'The law of a background or of a model, or the consequence of a derivation, that
+            establishes a value satisfying the condition; empty while the existence that the condition
+            presupposes is undischarged.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - RECORD.UNIT
+        reading:
+          description: 'the expression of the parameter in words
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - THE EXPRESSION IN WORDS
+        shared:
+          description: 'true when one value holds for every tuple of the signature
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - false
   external_systems:
+    description: 'per external system, its symbol, its class, the variables that it shares and its constraints.
+      A constraint restricts the shared variables beyond their declared value sets. Each constraint takes
+      the fields of a law: its name, the places that its claim ranges over, its role among the six of
+      a law, its expression and a reading. The field is never left empty: the list `[]` states that the
+      external system imposes no constraint
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
     items:
       propertyNames:
         enum:
@@ -189,7 +648,51 @@ properties:
         - constrains
         - reading
       properties:
+        name:
+          description: 'the words that designate the external system
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - EXTERNAL SYSTEM
+        symbol:
+          description: 'the symbol of the external system, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        variant:
+          description: 'variant carrying the entry; omit when every member of the class carries it
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SYMBOL
+        class:
+          description: 'candidates for the external system, as a reference class for the target; empty
+            where the record fixes no class
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - SET EXPRESSION OVER DECLARED SYMBOLS
+        shares:
+          description: 'the variables that the external system shares with the target
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - &id003
+            - SYMBOL
+          items:
+            examples: *id003
         constrains:
+          description: 'constraints on the shared variables beyond their declared value sets; `[]` when
+            there is none
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
           items:
             propertyNames:
               enum:
@@ -199,7 +702,28 @@ properties:
               - expression
               - reading
             properties:
+              name:
+                description: 'the words that designate the constraint
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+                examples:
+                - NAME OF THE CONSTRAINT
+              signature:
+                description: 'places the claim ranges over; empty for a claim about the system as a whole
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+                examples:
+                - &id004
+                  - SYMBOL
+                items:
+                  examples: *id004
               role:
+                description: 'the role of the constraint, among the six roles of a law
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
                 enum:
                 - evolution
                 - input-output
@@ -208,6 +732,41 @@ properties:
                 - distribution
                 - admissibility
                 - null
+              expression:
+                description: 'an expression over declared symbols stating the constraint
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+                examples:
+                - EXPRESSION OVER DECLARED SYMBOLS
+              reading:
+                description: 'the constraint in words
+
+
+                  [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+                examples:
+                - THE CONSTRAINT IN WORDS
+        reading:
+          description: 'only content beyond the shared variables
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/target-system.md).'
+          examples:
+          - THE INPUT THAT THE EXTERNAL SYSTEM SUPPLIES OR THE CONSTRAINT THAT IT IMPOSES
+  maturity:
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
 propertyNames:
   enum:

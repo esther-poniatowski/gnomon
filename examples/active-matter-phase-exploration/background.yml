@@ -1,4 +1,4 @@
-_schema: gnomon:background@1
+_schema: gnomon:background@2
 title: "Local stochastic laws of the two-species dynamics"
 id: bg.nonreciprocal-active-matter.local-dynamics
 type: background

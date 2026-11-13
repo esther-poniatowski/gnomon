@@ -13,6 +13,7 @@ from gnomon.answerability import as_document, diagnose, itinerary_state, render_
 from gnomon.check import check_workspace, load_workspace
 from gnomon.completeness import ground_verdict_findings
 from gnomon.exposure import answer_exposure
+from gnomon.source_state import source_state
 from gnomon.stages import itinerary_stage
 from gnomon.views import next_act
 
@@ -72,7 +73,7 @@ def _narrowed() -> dict[str, dict[str, Any]]:
 def test_a_failed_test_with_holds_on_proposes_a_scope_narrowing() -> None:
     diagnosis = diagnose(_narrowed())
     assert "narrow the scope of ans.a.x to g < 1" in render_text(diagnosis)
-    rows = next_act(as_document(diagnosis))["narrowings"]
+    rows = next_act(as_document(diagnosis), source_state(_narrowed()))["narrowings"]
     assert rows == [
         {
             "answer": "ans.a.x",
@@ -118,7 +119,11 @@ def test_the_product_of_a_decision_or_a_generation_is_exposed_first() -> None:
             "id": "mod.a.m",
             "laws": [{"symbol": "law", "warrant": "posited"}],
         },
-        "ans.a.b": {"type": "answer", "id": "ans.a.b", "grounds": [{"record": "mod.a.m.law"}]},
+        "ans.a.b": {
+            "type": "answer",
+            "id": "ans.a.b",
+            "grounds": [{"record": "mod.a.m.law"}],
+        },
     }
     found = answer_exposure(records, "ans.a.b")
     assert (found[0].unit, found[0].kind) == ("mod.a.m", "commitment")
@@ -143,7 +148,13 @@ def _per_ground(**entry: Any) -> dict[str, dict[str, Any]]:
         "itin.a.i": {
             "type": "itinerary",
             "id": "itin.a.i",
-            "steps": [{"id": "simulate", "activity": "simulation", "norm": {"verdict": "pass"}}],
+            "steps": [
+                {
+                    "id": "simulate",
+                    "activity": "simulation",
+                    "norm": {"verdict": "pass"},
+                }
+            ],
         },
         "asmt.a.x": {
             "type": "assessment",
@@ -151,7 +162,12 @@ def _per_ground(**entry: Any) -> dict[str, dict[str, Any]]:
             "assesses": "ans.a.x",
             "tests": {"warrant": {"law-warrant": {"verdict": "pass"}}},
             "grounds": [
-                {"ground": "flow", "verdict": "pass", "step": "itin.a.i.simulate", **entry}
+                {
+                    "ground": "flow",
+                    "verdict": "pass",
+                    "step": "itin.a.i.simulate",
+                    **entry,
+                }
             ],
         },
     }

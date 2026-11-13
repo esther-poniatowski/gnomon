@@ -4,7 +4,7 @@ title: Itinerary record
 description: The fields of an itinerary record, as the specification of the record documents them.
 type: object
 x-identifier: id
-x-version: 1
+x-version: 3
 x-header:
 - 'specification: `docs/specification/itinerary.md`; one file per itinerary of inquiry'
 - 'activities: `src/gnomon/data/registries/activities.yml`; product types: `src/gnomon/data/registries/product-types.yml`'
@@ -47,6 +47,191 @@ properties:
     description: the identifier of one problem record or of one question record
     examples:
     - the problem of the delay before generalization
+  act_appraisals:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          x-template: APPRAISAL
+          x-kind: label
+          title: Identifier
+          description: a name unique within the itinerary, by which a later comparison identifies
+            this appraisal
+          examples:
+          - '`first-ready-acts`; `candidate-tests`'
+        question:
+          type:
+          - string
+          - 'null'
+          x-template: quest.TOPIC.NAME
+          x-kind: label
+          title: Question
+          description: the question whose ready acts are appraised
+        route:
+          type:
+          - string
+          - 'null'
+          x-vocabulary: act_appraisals.route
+          title: Route
+          description: the route of the question on which the appraised acts occur
+        rule:
+          type:
+          - string
+          - 'null'
+          x-vocabulary: act_appraisals.rule
+          title: Comparison rule
+          description: the declared rule that compares the judgments without supplying a weight
+            or another researcher judgment
+        criteria:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              id:
+                type:
+                - string
+                - 'null'
+                x-template: CRITERION
+                x-kind: label
+                title: Identifier
+                description: a name unique within the appraisal, used by each judgment of this
+                  criterion
+                examples:
+                - '`feasibility`; `cost`; `expected-discrimination`'
+              question:
+                type:
+                - string
+                - 'null'
+                x-template: '"WHAT PROPERTY OF AN ACT IS JUDGED"'
+                x-kind: markdown-line
+                title: Question
+                description: the property of an act that the criterion judges
+                examples:
+                - how likely the act is to finish with the available means
+              scale:
+                type:
+                - array
+                - 'null'
+                minItems: 2
+                items:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: LEVEL
+                  x-kind: label
+                title: Scale
+                description: the admitted judgments, ordered from less to more of the named property
+                examples:
+                - [low, medium, high]
+              preferred:
+                type:
+                - string
+                - 'null'
+                x-vocabulary: act_appraisals.criteria.preferred
+                title: Preferred direction
+                description: whether a higher or lower value on the scale is preferred
+          x-comment: one entry per criterion; state the scale before judging any act
+          title: Criteria
+          description: the criteria supplied by the researcher, each with its ordered scale and
+            preferred direction
+        acts:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              id:
+                type:
+                - string
+                - 'null'
+                x-template: ACT
+                x-kind: label
+                title: Identifier
+                description: a name unique within the appraisal, used by the computed comparison
+              activity:
+                type:
+                - string
+                - 'null'
+                x-template: ACTIVITY
+                x-kind: label
+                x-comment: an identifier of the activity registry
+                title: Activity
+                description: the identifier of one ready activity being appraised
+              acts_on:
+                type:
+                - string
+                - 'null'
+                x-vocabulary: steps.acts_on
+                title: Acts on
+                description: the open condition, obtaining or evaluation addressed by the act
+              available_means:
+                type:
+                - array
+                - 'null'
+                items:
+                  type:
+                  - string
+                  - 'null'
+                  x-template: '"AVAILABLE INSTRUMENT, DATASET, METHOD OR RESOURCE"'
+                  x-kind: markdown-line
+                title: Available means
+                description: the instruments, data, methods and resources currently available for
+                  this act
+              judgments:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: object
+                  properties:
+                    criterion:
+                      type:
+                      - string
+                      - 'null'
+                      x-template: CRITERION
+                      x-kind: label
+                      title: Criterion
+                      description: the identifier of one criterion declared by this appraisal
+                    value:
+                      type:
+                      - string
+                      - 'null'
+                      x-template: LEVEL
+                      x-kind: label
+                      title: Value
+                      description: one value from the declared scale of the criterion
+                    basis:
+                      type:
+                      - string
+                      - 'null'
+                      x-template: '"WHY THIS VALUE APPLIES TO THIS ACT"'
+                      x-kind: markdown-line
+                      title: Basis
+                      description: the evidence or estimate on which the researcher assigns the
+                        value
+                x-comment: one entry per declared criterion
+                title: Judgments
+                description: the researcher's value and basis for each criterion applied to this act
+          x-comment: one entry per ready act considered in the appraisal
+          title: Acts
+          description: the ready acts considered, with their available means and researcher-authored
+            judgments
+    x-comment: optional; one entry per comparison considered before an act becomes a step
+    title: Act appraisals
+    description: 'the judgments used before choosing a ready act: the question and route, the criteria
+      and their scales, and per act its available means and values'
+    examples:
+    - the feasibility, cost and expected discrimination of the ready acts for one question
   steps:
     x-blank: true
     type:
@@ -190,6 +375,8 @@ properties:
               - 'null'
               x-template: pending
               x-vocabulary: steps.verdict
+              x-rules:
+              - {check: unresolved-value, value: pending}
               title: Verdict
               description: 'whether the output of the step meets the norm of its activity, or awaits judgment'
             evidence:

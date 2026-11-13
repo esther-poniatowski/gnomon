@@ -1,4 +1,4 @@
-_schema: gnomon:question@1
+_schema: gnomon:question@2
 title: "Mathematical explanation of delayed generalization"
 statement: "Which mathematical properties of training finite overparameterized neural networks on algorithmic tasks explain delayed generalization? The contrast is with immediate generalization and with persistent memorization. An answer must also account for the duration of the delay and its variation across random initializations."
 id: quest.grokking.explain-delay

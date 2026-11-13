@@ -6,7 +6,7 @@
 # give `not-applicable` to a test whose specification is empty in the question
 # fill the appraisal for one answer at a time; name another candidate only when one exists
 
-_schema: gnomon:assessment@1
+_schema: gnomon:assessment@2
 title: "SHORT NAME OF THE ASSESSMENT"
 id: assess.TOPIC.NAME
 type: assessment
@@ -17,7 +17,10 @@ against_version: "1"             # the version of the question that the verdicts
 
 tests:                           # verdict: pending | pass | fail | inconclusive | not-applicable; on a failed test, holds_on: the subdomain over which the evidence still supports the claim, as an expression over declared symbols
   admissibility:                 # the tests of the core, then the tests of each aim block
-    product: {verdict: pending, evidence: "DERIVATION, SIMULATION, MEASUREMENT OR COMPARISON THAT SETTLES THE TEST"}
+    product:
+      verdict: pending           # pending (no act has supplied evidence that settles the test yet) | pass (the assessed claim meets the criterion) | fail (the assessed claim does not meet the criterion) | inconclusive (the evidence neither meets nor fails the criterion) | not-applicable (the specification of the question makes the test inapplicable)
+      evidence: "DERIVATION, SIMULATION, MEASUREMENT OR COMPARISON THAT SETTLES THE TEST"
+      holds_on: "EXPRESSION OVER DECLARED SYMBOLS"
     scope: {verdict: pending, evidence: ""}
     grain: {verdict: pending, evidence: ""}
     individuation: {verdict: pending, evidence: ""}
@@ -76,4 +79,4 @@ credence:                        # optional; the degree of belief that the asses
   basis: "THE EVIDENCE AND THE PRIOR THAT FIX THE VALUE"
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
-  FIELD.PATH: open
+  FIELD.PATH: open               # open (not fixed and still expected from the inquiry or the author) | provisional (written and still under revision) | stabilized (no further revision expected in the current state)

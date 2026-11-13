@@ -1,0 +1,197 @@
+# Retained version 1 contract for itinerary. Do not edit.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/itinerary.v1.contract.schema.yml
+title: Itinerary record contract
+description: The record type `itinerary`, bound to `gnomon:itinerary@1`, with its closed vocabularies.
+allOf:
+- $ref: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/itinerary.v1.base.schema.yml
+required:
+- _schema
+properties:
+  _schema:
+    const: gnomon:itinerary@1
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  type:
+    const: itinerary
+    examples:
+    - itinerary
+  id:
+    pattern: ^itin\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - itin.TOPIC.NAME
+  title:
+    examples:
+    - SHORT NAME OF THE ITINERARY
+  steps:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - activity
+        - inputs
+        - output
+        - derivation
+        - norm
+        - rationale
+        - branch
+        - iterate
+        - revises
+        - mode
+      properties:
+        inputs:
+          items:
+            propertyNames:
+              enum:
+              - type
+              - ref
+              - as_of
+            properties:
+              type:
+                examples:
+                - PRODUCT-TYPE
+              ref:
+                examples:
+                - RECORD-OR-STEP
+              as_of:
+                examples:
+                - REVISION
+        output:
+          propertyNames:
+            enum:
+            - type
+            - ref
+            - before
+          properties:
+            type:
+              examples:
+              - PRODUCT-TYPE
+            ref:
+              examples:
+              - RECORD
+            before:
+              examples:
+              - REVISION
+        norm:
+          propertyNames:
+            enum:
+            - test
+            - verdict
+            - evidence
+            - judged
+          properties:
+            test:
+              examples:
+              - norm.ACTIVITY
+            verdict:
+              examples:
+              - pending
+              enum:
+              - pass
+              - fail
+              - pending
+              - inconclusive
+              - null
+            evidence:
+              examples:
+              - WHY THE PRODUCT MEETS THE NORM OR FAILS IT
+            judged:
+              examples:
+              - DATE
+        rationale:
+          propertyNames:
+            enum:
+            - serves
+            - acts_on
+          properties:
+            serves:
+              examples:
+              - quest.TOPIC.NAME
+            acts_on:
+              enum:
+              - definiteness
+              - answer-type
+              - soundness
+              - candidates
+              - discrimination
+              - access
+              - bridging
+              - representation
+              - obtaining
+              - evaluation
+              - null
+        branch:
+          propertyNames:
+            enum:
+            - condition
+            - otherwise
+          properties:
+            condition:
+              examples:
+              - THE CONDITION UNDER WHICH THE STEP IS TAKEN
+            otherwise:
+              examples:
+              - STEP
+        iterate:
+          propertyNames:
+            enum:
+            - until
+          properties:
+            until:
+              examples:
+              - THE CRITERION THAT ENDS THE REPETITION
+        revises:
+          propertyNames:
+            enum:
+            - record
+            - kind
+            - reviews
+          properties:
+            record:
+              examples:
+              - RECORD
+            kind:
+              enum:
+              - retraction
+              - scope-narrowing
+              - scope-generalization
+              - reorientation
+              - taxonomic-restructure
+              - correction
+              - null
+            reviews:
+              items:
+                propertyNames:
+                  enum:
+                  - dependent
+                  - state
+                properties:
+                  dependent:
+                    examples:
+                    - RECORD
+                  state:
+                    enum:
+                    - pending
+                    - revised
+                    - unaffected
+                    - retracted
+                    - null
+        mode:
+          enum:
+          - deductive
+          - inductive
+          - abductive
+          - analogical
+          - error-statistical
+          - model-based
+          - non-inferential
+          - null
+x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - addresses
+  - steps

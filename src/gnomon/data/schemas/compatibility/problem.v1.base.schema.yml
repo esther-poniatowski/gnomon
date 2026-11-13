@@ -1,0 +1,279 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/problem.v1.base.schema.yml
+title: Problem record
+description: The fields of a problem record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/problem.md`; one file per research problem'
+- 'theory: `docs/epistemology/objects/problem/epistemic-problem.md`, `docs/epistemology/objects/problem/problem-types.md`'
+- the questions serving this problem name it in their field `addresses`
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+properties:
+  title:
+    type:
+    - string
+    - 'null'
+    x-template: '"SHORT NAME OF THE PROBLEM"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  statement:
+    type:
+    - string
+    - 'null'
+    x-template: '"THE PROBLEM IN WORDS: THE RESULT SOUGHT, AND THE OBSTACLE TO OBTAINING IT"'
+    x-kind: markdown-line
+    title: Statement
+    description: '"[the result sought], [the obstacle to obtaining it]", as a reading'
+    examples:
+    - '"overparameterized networks fit their training data long before they generalize, and no account
+      states what produces the delay"'
+  id:
+    type:
+    - string
+    - 'null'
+    x-template: prob.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type:
+    - string
+    - 'null'
+    x-template: problem
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type:
+    - string
+    - 'null'
+    x-template: posed
+    x-vocabulary: .status
+    title: Status
+    description: 'the stage of the problem: posed, refined, solved, dissolved or abandoned'
+  kind:
+    x-vocabulary: .kind
+    type:
+    - string
+    - 'null'
+    title: Kind
+    description: empirical, when the problem concerns the objects of a domain · conceptual, when it concerns
+      the consistency of a theory or its fit with other theories
+    examples:
+    - the delay before generalization (empirical); two accounts of representation that assign incompatible
+      roles to one quantity (conceptual)
+  demand:
+    type:
+    - string
+    - 'null'
+    x-template: '"THE RESULT REQUIRED OF A SOLUTION"'
+    x-kind: markdown-line
+    title: Demand
+    description: '"[the result required of a solution]"'
+    examples:
+    - an account that names the determinants of the delay and derives its duration from them
+  result_type:
+    x-vocabulary: .result_type
+    type:
+    - string
+    - 'null'
+    title: Result type
+    description: 'the type of result of the demand, one of the rows of the demand table: phenomenon · consequence · target-claim · model · explanation · classification · concept · measurement-procedure · design · knowledge-state-change · inter-theory-relation'
+    examples:
+    - '`explanation`, for an account of the delay'
+  request:
+    x-vocabulary: .request
+    type:
+    - string
+    - 'null'
+    title: Request
+    description: one · all · over-a-parameter · decision, as the request of a demand defines them
+    examples:
+    - '`one`, when one account suffices'
+  associated_question:
+    type:
+    - string
+    - 'null'
+    x-template: quest.TOPIC.NAME
+    x-kind: label
+    x-comment: optional; the question record that states the associated question, whose request equals
+      this one
+    title: Associated question
+    description: the identifier of that question record, whose request equals the request of the problem
+    examples:
+    - the question why the network generalizes late
+  constraints:
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          x-template: '"NAME OF THE CONSTRAINT"'
+          x-kind: markdown-line
+          title: Name
+          description: the words that designate the constraint
+        statement:
+          type:
+          - string
+          - 'null'
+          x-template: '"THE CONDITION ON A SOLUTION"'
+          x-kind: markdown-line
+          title: Statement
+          description: the condition that a solution must satisfy
+        source:
+          type:
+          - string
+          - 'null'
+          x-template: '"POINTER TO THE RESULT, THE BACKGROUND LAW OR THE PUBLICATION THAT IMPOSES THE
+            CONDITION"'
+          x-kind: markdown-line
+          title: Source
+          description: a pointer to the result, the background law or the publication that imposes the condition
+    x-comment: conditions on every solution; empty when the demand alone delimits the solutions
+    title: Constraints
+    description: 'per constraint, a name, the condition that a solution must satisfy, and the source that
+      imposes it: a result, an admitted law or a publication'
+    examples:
+    - a solution derives the delay from the admitted training laws; a solution separates delayed generalization
+      from persistent memorization
+  explicanda:
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        term:
+          type:
+          - string
+          - 'null'
+          x-template: '"TERM AS USED IN THE STATEMENT"'
+          x-kind: markdown-line
+          title: Term
+          description: the term as used in the statement of the problem
+        pointer:
+          type:
+          - string
+          - 'null'
+          x-template: '"POINTER TO THE DATA, THE RESULT OR THE PUBLICATION THAT FIXES THE USE OF THE TERM"'
+          x-kind: markdown-line
+          title: Pointer
+          description: a pointer to the data, the result or the publication that fixes the use of the term
+    x-comment: terms used in the statement before any record fixes their sense
+    title: Explicanda
+    description: per term, the term as used and a pointer to the data, the result or the publication that
+      fixes its use
+    examples:
+    - '"generalization", pointing to the threshold on the test loss'
+  sources:
+    type:
+    - array
+    - 'null'
+    items:
+      type:
+      - string
+      - 'null'
+      x-template: '"POINTER TO THE PUBLICATION, THE DATA OR THE ANOMALY THAT RAISES THE PROBLEM"'
+    title: Sources
+    description: per source, a pointer
+    examples:
+    - the article that reports the delay
+  significance:
+    type:
+    - string
+    - 'null'
+    x-template: '"THE CONSEQUENCES OF A SOLUTION FOR OTHER WORK"'
+    x-kind: markdown-line
+    title: Significance
+    description: the consequences of a solution for other work
+    examples:
+    - whether the time to generalize can be predicted from the early training
+  knowledge_obstacles:
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        obstacle:
+          x-vocabulary: knowledge_obstacles.obstacle
+          type:
+          - string
+          - 'null'
+          title: Obstacle
+          description: 'the state of the knowledge about the associated question that keeps the demand unmet: an open gap, unassessed candidates, a conflict, an unwarranted claim, ill-defined terms or an unsound presupposition'
+        pointers:
+          type:
+          - array
+          - 'null'
+          x-template: '[RECORD.ID]'
+          x-comment: the records or the publications that establish the obstacle
+          title: Pointers
+          description: the records or the publications that establish the obstacle
+    x-comment: one entry per obstacle in the state of the knowledge about the associated question; empty
+      when none
+    title: Knowledge obstacles
+    description: per obstacle, its value — open gap · unassessed candidates · conflict · unwarranted claim
+      · ill-defined terms · unsound presupposition — and the records or the publications that establish
+      it
+    examples:
+    - unassessed candidates, pointing to the one proposed account of the delay
+  answerability_obstacles:
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        condition:
+          x-vocabulary: answerability_obstacles.condition
+          type:
+          - string
+          - 'null'
+          title: Condition
+          description: 'the condition of answerability that the obstacle refutes: definiteness, answer type, discrimination, access, bridging or representation'
+        refutation:
+          x-vocabulary: answerability_obstacles.refutation
+          type:
+          - string
+          - 'null'
+          title: Refutation
+          description: 'how the condition is refuted: outright, or by a lack of means'
+        pointers:
+          type:
+          - array
+          - 'null'
+          x-template: '[RECORD.ID]'
+          x-comment: the records or the publications that establish the refutation
+          title: Pointers
+          description: the records or the publications that establish the refutation
+    x-comment: one entry per refuted condition of answerability of the associated question; empty when
+      none
+    title: Answerability obstacles
+    description: per obstacle, the condition — definiteness · answer type · discrimination · access ·
+      bridging · representation —, its refutation — outright · lack of means — and the records or the
+      publications that establish it
+    examples:
+    - access refuted for lack of means, when no algorithm considered enumerates the fixed points in the
+      available time
+  maturity:
+    x-blank: true
+    type:
+    - object
+    - 'null'
+    additionalProperties:
+      x-template-key: FIELD.PATH
+      x-template: open
+    x-comment: 'optional; one maturity per field: open | provisional | stabilized; a field left out is
+      provisional'
+    title: Maturity
+    description: 'optional; one maturity per field: open | provisional | stabilized; a field left out
+      is provisional'

@@ -1,4 +1,4 @@
-_schema: gnomon:question@1
+_schema: gnomon:question@2
 title: "Exploration of phases across size and dimension"
 statement: "Which macroscopic phases occur in spatially extended stochastic models of two species with nonreciprocal couplings as their control parameters vary? Does each detected phase persist for finite L in each selected spatial dimension, and does it survive as L -> infinity?"
 id: quest.nonreciprocal-active-matter.phase-exploration

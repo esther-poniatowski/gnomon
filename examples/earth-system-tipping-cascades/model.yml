@@ -1,6 +1,6 @@
 # a stylized model of four tipping elements [wunderling2023]; its elements are units of the model alone, which a binding carries onto the subsystems
 
-_schema: gnomon:model@1
+_schema: gnomon:model@3
 title: "Network of four tipping elements"
 id: mod.earth-tipping-subsystems.four-element-network
 type: model

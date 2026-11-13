@@ -4,7 +4,7 @@ title: Problem record
 description: The fields of a problem record, as the specification of the record documents them.
 type: object
 x-identifier: id
-x-version: 1
+x-version: 3
 x-header:
 - 'specification: `docs/specification/problem.md`; one file per research problem'
 - 'theory: `docs/epistemology/objects/problem/epistemic-problem.md`, `docs/epistemology/objects/problem/problem-types.md`'
@@ -181,11 +181,11 @@ properties:
       type:
       - string
       - 'null'
-      x-template: '"POINTER TO THE PUBLICATION, THE DATA OR THE ANOMALY THAT RAISES THE PROBLEM"'
+      x-template: '"POINTER TO AN EXISTING NOTE, PUBLICATION, MODEL, DATA SET OR ANOMALY THAT RAISES THE PROBLEM"'
     title: Sources
-    description: per source, a pointer
+    description: per source, a pointer to existing material or an anomaly that raises the problem, without importing or classifying its content
     examples:
-    - the article that reports the delay
+    - a section of a research note that states the unresolved demand
   significance:
     type:
     - string
@@ -270,6 +270,7 @@ properties:
     - object
     - 'null'
     additionalProperties:
+      x-vocabulary: .maturity
       x-template-key: FIELD.PATH
       x-template: open
     x-comment: 'optional; one maturity per field: open | provisional | stabilized; a field left out is

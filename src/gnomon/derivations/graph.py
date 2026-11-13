@@ -87,7 +87,11 @@ def internal_fields(source: Path | None = None) -> tuple[Field, ...]:
             if sub.get("x-units"):
                 template = sub.get("x-template") or mapping(sub.get("items")).get("x-template")
                 found.append(
-                    (here, tuple(str(u) for u in sub["x-units"]), str(template or "").strip('"'))
+                    (
+                        here,
+                        tuple(str(u) for u in sub["x-units"]),
+                        str(template or "").strip('"'),
+                    )
                 )
             walk(sub, here)
             if isinstance(sub.get("items"), Mapping):
@@ -222,7 +226,8 @@ def enclosing(record: Derivation, unit: str) -> set[str]:
 
 def downstream(record: Derivation, unit: str) -> set[str]:
     """Return the objects that a move or a segment yields, with the outputs of the segments that
-    enclose it, and every object that depends on them through the producers of the record."""
+    enclose it, and every object that depends on them through the producers of the record.
+    """
     producers = producers_of(record)
     starts = {unit} | enclosing(record, unit)
     reached: set[str] = set().union(*(producers.get(s, (set(), set()))[1] for s in starts))

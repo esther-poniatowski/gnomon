@@ -25,26 +25,34 @@ gnomon.cli : the command ``schemas``, which writes or checks the generated files
 from __future__ import annotations
 
 import datetime
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any
 
 import yaml
 
 from .identifiers import RECORD_SEGMENTS, identifier_pattern
 from .relation_registry import relation_vocabularies
+from .specnotes import DOCS, documentation_notes, documentation_target, flatten
 
 DATA = Path(__file__).parent / "data"
 
 #: The folder of the base schemas and of their contracts.
 SCHEMAS = DATA / "schemas"
 
+#: The retained contracts that current consumers must continue to resolve.
+COMPATIBILITY = SCHEMAS / "compatibility"
+
 #: The folder of the templates, rendered from the base schemas.
 TEMPLATES = DATA / "templates"
 
 #: The registry declaring the values each closed field admits.
 VOCABULARY_REGISTRY = DATA / "vocabularies.yml"
+
+#: Generated map from record fields to their canonical documentation notes.
+FIELD_DOCUMENTATION = DATA / "field-documentation.yml"
 
 #: The namespace of the logical identifiers of the contracts.
 NAMESPACE = "gnomon"
@@ -96,6 +104,22 @@ def load_base(kind: str) -> dict[str, Any]:
     return schema
 
 
+def _options(entries: Mapping[str, Any]) -> dict[str, list[tuple[str, str]]]:
+    """Return normalized vocabulary entries, keyed by their field key."""
+    return {
+        name: [(str(entry["value"]), str(entry.get("name") or "")) for entry in values]
+        for name, values in entries.items()
+    }
+
+
+def shared_vocabulary_options(
+    source: Path | None = None,
+) -> dict[str, list[tuple[str, str]]]:
+    """Return the vocabularies shared by several record types."""
+    registry = yaml.safe_load((source or VOCABULARY_REGISTRY).read_text(encoding="utf-8")) or {}
+    return _options(registry.get("shared_vocabularies") or {})
+
+
 def vocabulary_options(kind: str, source: Path | None = None) -> dict[str, list[tuple[str, str]]]:
     """Return, per field of a record type, its admitted values with their glosses.
 
@@ -105,11 +129,15 @@ def vocabulary_options(kind: str, source: Path | None = None) -> dict[str, list[
     """
     registry = yaml.safe_load((source or VOCABULARY_REGISTRY).read_text(encoding="utf-8")) or {}
     fields = (registry.get("vocabularies") or {}).get(kind) or {}
-    options = {
-        name: [(str(entry["value"]), str(entry.get("name") or "")) for entry in values]
-        for name, values in fields.items()
+    bound = set(vocabulary_paths(load_base(kind)).values()) if kind in kinds() else set()
+    shared = {
+        key: values for key, values in shared_vocabulary_options(source).items() if key in bound
     }
-    return {**options, **relation_vocabularies().get(kind, {})}
+    return {
+        **shared,
+        **_options(fields),
+        **relation_vocabularies().get(kind, {}),
+    }
 
 
 def comment_of(field: Mapping[str, Any], options: Options) -> str:
@@ -206,32 +234,68 @@ def render_template(kind: str, base: Mapping[str, Any], options: Options) -> str
     return "\n".join(lines.out) + "\n"
 
 
-def overlay(field: Mapping[str, Any], options: Options) -> dict[str, Any] | None:
-    """Return the constraints that a contract adds to a field, deep: the values of its vocabulary,
-    and the keys that an object may hold.
+def _initial_annotations(
+    field: Mapping[str, Any],
+    options: Options,
+    documentation: Callable[[str], str | None] | None,
+    path: str,
+) -> tuple[dict[str, Any], Any]:
+    """Return the direct annotations of one field and its parsed template value."""
+    added: dict[str, Any] = {}
+    target = documentation(path) if documentation and path else None
+    description = field.get("description")
+    if target and isinstance(description, str):
+        added["description"] = f"{description}\n\n[Read the canonical specification]({target})."
+    template = field.get("x-template")
+    template_value = yaml.safe_load(template) if isinstance(template, str) else template
+    if template not in (None, "") and not field.get("examples"):
+        added["examples"] = [template_value]
+    vocabulary = field.get("x-vocabulary")
+    if vocabulary:
+        added["enum"] = [value for value, _ in options[str(vocabulary)]] + [None]
+    return added, template_value
+
+
+def overlay(
+    field: Mapping[str, Any],
+    options: Options,
+    documentation: Callable[[str], str | None] | None = None,
+    path: str = "",
+) -> dict[str, Any] | None:
+    """Return the annotations and constraints that a contract adds to a field, recursively.
+
+    A field with a template value but no authored example receives that value as its standard JSON
+    Schema example. The value is parsed as YAML because ``x-template`` stores the YAML source that
+    the generated template writes. Authored examples remain authoritative.
+
+    The constraints comprise the values of each vocabulary and the keys that an object may hold.
 
     The keys are closed by ``propertyNames``, since each subschema of ``allOf`` is validated alone,
     so ``additionalProperties`` in the contract would reject the keys that the base declares.
     """
-    added: dict[str, Any] = {}
-    vocabulary = field.get("x-vocabulary")
-    if vocabulary:
-        added["enum"] = [value for value, _ in options[str(vocabulary)]] + [None]
+    added, template_value = _initial_annotations(field, options, documentation, path)
     declared = field.get("properties")
     if isinstance(declared, Mapping) and declared:
         added["propertyNames"] = {"enum": list(declared)}
-    nested = {
-        name: sub
-        for name, child in (field.get("properties") or {}).items()
-        if (sub := overlay(child, options))
-    }
+    nested = {}
+    for name, child in (field.get("properties") or {}).items():
+        child_path = f"{path}.{name}" if path else str(name)
+        if sub := overlay(child, options, documentation, child_path):
+            nested[name] = sub
     if nested:
         added["properties"] = nested
     items = field.get("items")
-    if isinstance(items, Mapping) and (sub := overlay(items, options)):
-        added["items"] = sub
+    item_annotations = (
+        overlay(items, options, documentation, f"{path}[]") if isinstance(items, Mapping) else None
+    )
+    if isinstance(template_value, list) and template_value:
+        item_annotations = dict(item_annotations or {})
+        if not isinstance(items, Mapping) or not items.get("examples"):
+            item_annotations.setdefault("examples", template_value)
+    if item_annotations:
+        added["items"] = item_annotations
     free = field.get("additionalProperties")
-    if isinstance(free, Mapping) and (sub := overlay(free, options)):
+    if isinstance(free, Mapping) and (sub := overlay(free, options, documentation, f"{path}{{}}")):
         added["additionalProperties"] = sub
     return added or None
 
@@ -258,9 +322,59 @@ def vocabulary_paths(base: Mapping[str, Any]) -> dict[str, str]:
         items = node.get("items")
         if isinstance(items, Mapping):
             walk(items, path)
+        free = node.get("additionalProperties")
+        if isinstance(free, Mapping):
+            if free.get("x-vocabulary"):
+                bound[f"{'.'.join(path)}[]"] = str(free["x-vocabulary"])
+            walk(free, path)
 
     walk(base, ())
     return bound
+
+
+def schema_field_paths(base: Mapping[str, Any]) -> list[str]:
+    """Return every named field path of a schema, marking list entries with ``[]``."""
+    found: list[str] = []
+
+    def walk(node: Mapping[str, Any], prefix: str) -> None:
+        for name, child in (node.get("properties") or {}).items():
+            path = f"{prefix}.{name}" if prefix else str(name)
+            found.append(path)
+            walk(child, path)
+            items = child.get("items")
+            if isinstance(items, Mapping):
+                walk(items, f"{path}[]")
+
+    walk(base, "")
+    return found
+
+
+def live_documentation_notes(
+    kind: str, base: Mapping[str, Any], options: Options
+) -> dict[str, str]:
+    """Return field documentation derived from the specification notes in a checkout."""
+    paths = flatten(yaml.safe_load(render_template(kind, base, options)))
+    return documentation_notes(kind, paths, schema_field_paths(base))
+
+
+def load_documentation_registry(
+    source: Path | None = None,
+) -> dict[str, dict[str, str]]:
+    """Return the packaged field-documentation map, keyed by record kind and field path."""
+    document = yaml.safe_load((source or FIELD_DOCUMENTATION).read_text(encoding="utf-8"))
+    return {
+        str(kind): {str(path): str(note) for path, note in fields.items()}
+        for kind, fields in (document or {}).items()
+    }
+
+
+def field_documentation_notes(
+    kind: str, base: Mapping[str, Any], options: Options
+) -> dict[str, str]:
+    """Return field documentation from its notes in a checkout, else from package data."""
+    if DOCS.is_dir():
+        return live_documentation_notes(kind, base, options)
+    return load_documentation_registry().get(kind, {})
 
 
 def identifier(kind: str, version: int) -> str:
@@ -279,7 +393,58 @@ def identifier_prefix(base: Mapping[str, Any]) -> str | None:
     return str(template).split(".", 1)[0] if template else None
 
 
-def contract(kind: str, base: Mapping[str, Any], options: Options) -> dict[str, Any]:
+def identifier_example(prefix: str) -> str:
+    """Return a valid illustrative record identifier for ``prefix``.
+
+    The prefix registry fixes the number of segments. The example uses ordinary lowercase values,
+    rather than the uppercase placeholders reserved for unfilled source templates.
+
+    >>> identifier_example("system")
+    'system.topic'
+    >>> identifier_example("prob")
+    'prob.topic.name'
+    """
+    return ".".join([prefix, "topic", *(["name"] * (RECORD_SEGMENTS[prefix] - 2))])
+
+
+def question_aim_rules(base: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Return form rules for question fields required by an epistemic aim.
+
+    The requirement registry may also name fields of a phenomenon or another record. Such a
+    dependency cannot be checked by a rule over one question instance, so only paths within the
+    question contract are published here. A rule is omitted when its root field is absent from the
+    supplied base, which keeps partial schema fixtures self-contained.
+    """
+    # Import after schema initialization: completeness.maturity depends on this module.
+    # pylint: disable=import-outside-toplevel
+    from .completeness.requirements import requirements_by_aim
+
+    properties = base.get("properties") or {}
+    record_type = (properties.get("type") or {}).get("x-template")
+    if record_type != "question":
+        return []
+    rules: list[dict[str, Any]] = []
+    for aim, declaration in requirements_by_aim().items():
+        for path in declaration["required"]:
+            owner, separator, field = path.partition(".")
+            if owner != "question" or not separator or field.split(".", 1)[0] not in properties:
+                continue
+            rules.append(
+                {
+                    "check": "required-when",
+                    "field": field,
+                    "when": {"field": "task.epistemic_aim", "equals": aim},
+                }
+            )
+    return rules
+
+
+def contract(
+    kind: str,
+    base: Mapping[str, Any],
+    options: Options,
+    field_notes: Mapping[str, str] | None = None,
+) -> dict[str, Any]:
     """Return the contract of a record type: the base, the binding of ``_schema``, and its
     vocabularies."""
     version = int(base.get("x-version", 1))
@@ -304,9 +469,27 @@ def contract(kind: str, base: Mapping[str, Any], options: Options) -> dict[str, 
     prefix = identifier_prefix(base)
     if prefix in RECORD_SEGMENTS:
         schema["properties"]["id"] = {"pattern": identifier_pattern(str(prefix))}
-    added = overlay(base, options)
-    if added and "properties" in added:
-        schema["properties"].update(added["properties"])
+    notes = (
+        field_notes if field_notes is not None else field_documentation_notes(kind, base, options)
+    )
+    added: dict[str, Any] = (
+        overlay(
+            base,
+            options,
+            lambda path: documentation_target(notes[path]) if path in notes else None,
+        )
+        or {}
+    )
+    if "properties" in added:
+        for name, annotations in added["properties"].items():
+            schema["properties"][name] = {
+                **schema["properties"].get(name, {}),
+                **annotations,
+            }
+    if prefix in RECORD_SEGMENTS:
+        schema["properties"]["id"]["examples"] = [identifier_example(str(prefix))]
+    if aim_rules := question_aim_rules(base):
+        schema["x-rules"] = aim_rules
     schema["propertyNames"] = {"enum": ["_schema", *(base.get("properties") or {})]}
     return schema
 
@@ -320,13 +503,20 @@ def schema_files() -> dict[Path, str]:
     """Return the contracts and the templates generated from the base schemas and the registry,
     with their content."""
     files: dict[Path, str] = {}
+    notes_by_kind: dict[str, dict[str, str]] = {}
     for kind in kinds():
         base, options = load_base(kind), vocabulary_options(kind)
+        notes_by_kind[kind] = field_documentation_notes(kind, base, options)
         files[contract_path(kind)] = (
             f"# Generated by `gnomon schemas` from `{kind}.base.schema.yml` and the vocabulary"
-            " registry. Edit those, not this file.\n" + dump(contract(kind, base, options))
+            " registry. Edit those, not this file.\n"
+            + dump(contract(kind, base, options, notes_by_kind[kind]))
         )
         files[TEMPLATES / f"{kind}.yml"] = render_template(kind, base, options)
+    files[FIELD_DOCUMENTATION] = (
+        "# Generated by `gnomon schemas` from the specification notes and base schemas.\n"
+        "# Edit those sources, not this file.\n" + dump(notes_by_kind)
+    )
     return files
 
 
@@ -354,17 +544,34 @@ def record_kinds() -> dict[str, str]:
 
 @cache
 @cache
-def contract_validator(kind: str) -> Any:
-    """Return the validator of the contract of a record type, which resolves the base schemas."""
+def published_contracts() -> dict[str, dict[str, Any]]:
+    """Return current and retained record contracts, keyed by logical identifier."""
+    paths = [contract_path(kind) for kind in kinds()]
+    paths += sorted(COMPATIBILITY.glob("*.contract.schema.yml"))
+    contracts = [yaml.safe_load(path.read_text(encoding="utf-8")) for path in paths]
+    return {str(document["properties"]["_schema"]["const"]): document for document in contracts}
+
+
+@cache
+def contract_validator(contract_id: str) -> Any:
+    """Return a validator for a current kind or a published logical contract identifier."""
     # pylint: disable=import-outside-toplevel  # jsonschema loads only when a record is validated
     from jsonschema import Draft202012Validator
     from referencing import Registry, Resource
 
-    resources = [
-        (load_base(name)["$id"], Resource.from_contents(load_base(name))) for name in kinds()
+    named = (
+        contract_id
+        if contract_id.startswith(f"{NAMESPACE}:")
+        else identifier(contract_id, int(load_base(contract_id).get("x-version", 1)))
+    )
+    bases = [load_base(name) for name in kinds()]
+    bases += [
+        yaml.safe_load(path.read_text(encoding="utf-8"))
+        for path in sorted(COMPATIBILITY.glob("*.base.schema.yml"))
     ]
+    resources = [(base["$id"], Resource.from_contents(base)) for base in bases]
     return Draft202012Validator(
-        yaml.safe_load(contract_path(kind).read_text(encoding="utf-8")),
+        published_contracts()[named],
         registry=Registry().with_resources(resources),
     )
 
@@ -503,16 +710,18 @@ def contract_violations(record: Mapping[str, Any]) -> list[Violation]:
     """
     named = record.get("_schema")
     published = {
-        identifier(kind, int(load_base(kind).get("x-version", 1))): kind for kind in kinds()
+        logical_id: str(contract["properties"]["type"]["const"])
+        for logical_id, contract in published_contracts().items()
     }
     if not named:
         return [Violation(("_schema",), "contract", "the record names no contract")]
     if named not in published:
         return [Violation(("_schema",), "contract", f"{named} is no contract of {NAMESPACE}")]
     kind = published[named]
-    validator = contract_validator(kind)
+    validator = contract_validator(str(named))
     errors = sorted(
-        validator.iter_errors(dict(record)), key=lambda e: list(map(str, e.absolute_path))
+        validator.iter_errors(dict(record)),
+        key=lambda e: list(map(str, e.absolute_path)),
     )
     found = [_readable(error) for error in errors]
     prefix = identifier_prefix(load_base(kind))

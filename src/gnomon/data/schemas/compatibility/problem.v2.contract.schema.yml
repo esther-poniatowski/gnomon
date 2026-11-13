@@ -1,0 +1,131 @@
+# Retained version 2 contract for problem. Do not edit.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/problem.v2.contract.schema.yml
+title: Problem record contract
+description: The record type `problem`, bound to `gnomon:problem@2`, with its closed vocabularies.
+allOf:
+- $ref: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/problem.v2.base.schema.yml
+required:
+- _schema
+properties:
+  _schema:
+    const: gnomon:problem@2
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  type:
+    const: problem
+  id:
+    pattern: ^prob\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+  status:
+    enum:
+    - posed
+    - refined
+    - solved
+    - dissolved
+    - abandoned
+    - null
+  kind:
+    enum:
+    - empirical
+    - conceptual
+    - null
+  result_type:
+    enum:
+    - phenomenon
+    - consequence
+    - target-claim
+    - model
+    - explanation
+    - classification
+    - concept
+    - measurement-procedure
+    - design
+    - knowledge-state-change
+    - inter-theory-relation
+    - null
+  request:
+    enum:
+    - one
+    - all
+    - over-a-parameter
+    - decision
+    - null
+  constraints:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - statement
+        - source
+  explicanda:
+    items:
+      propertyNames:
+        enum:
+        - term
+        - pointer
+  knowledge_obstacles:
+    items:
+      propertyNames:
+        enum:
+        - obstacle
+        - pointers
+      properties:
+        obstacle:
+          enum:
+          - open-gap
+          - unassessed-candidates
+          - conflict
+          - unwarranted-claim
+          - ill-defined-terms
+          - unsound-presupposition
+          - null
+  answerability_obstacles:
+    items:
+      propertyNames:
+        enum:
+        - condition
+        - refutation
+        - pointers
+      properties:
+        condition:
+          enum:
+          - definiteness
+          - answer-type
+          - discrimination
+          - access
+          - bridging
+          - representation
+          - null
+        refutation:
+          enum:
+          - outright
+          - lack-of-means
+          - null
+  maturity:
+    additionalProperties:
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
+x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - statement
+  - id
+  - type
+  - status
+  - kind
+  - demand
+  - result_type
+  - request
+  - associated_question
+  - constraints
+  - explicanda
+  - sources
+  - significance
+  - knowledge_obstacles
+  - answerability_obstacles
+  - maturity

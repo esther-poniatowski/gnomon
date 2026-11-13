@@ -1,0 +1,229 @@
+# Retained version 1 contract for target-system. Do not edit.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/target-system.v1.contract.schema.yml
+title: Target system record contract
+description: The record type `target-system`, bound to `gnomon:target-system@1`, with its closed vocabularies.
+allOf:
+- $ref: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/target-system.v1.base.schema.yml
+required:
+- _schema
+properties:
+  _schema:
+    const: gnomon:target-system@1
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  type:
+    const: target-system
+  id:
+    pattern: ^system\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+  status:
+    enum:
+    - provisional
+    - stabilized
+    - retracted
+    - null
+  commitment:
+    enum:
+    - identified
+    - specified
+    - null
+  target_type:
+    enum:
+    - particular
+    - actual-systems
+    - possible-systems
+    - hypothetical
+    - no-external-target
+    - null
+  identification:
+    propertyNames:
+      enum:
+      - description
+      - pointers
+  reference_class:
+    propertyNames:
+      enum:
+      - name
+      - projectibility
+      - selection_criteria
+    properties:
+      projectibility:
+        propertyNames:
+          enum:
+          - status
+          - evidence
+        properties:
+          status:
+            enum:
+            - assumed
+            - checked
+            - not-claimed
+            - null
+      selection_criteria:
+        items:
+          propertyNames:
+            enum:
+            - name
+            - expression
+            - justification
+  variants:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - differentiation
+        - caveat
+  constituents:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - variant
+        - extent
+  index_sets:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - variant
+        - extent
+        - structure
+        - dimensional_formula
+      properties:
+        structure:
+          enum:
+          - evolution
+          - continuum
+          - discrete-set
+          - null
+  variables:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - of
+        - variant
+        - determined
+        - signature
+        - values
+        - scale
+        - dimensional_formula
+        - expression
+        - condition
+        - selects
+        - held_by
+        - reading
+        - shared
+      properties:
+        determined:
+          enum:
+          - within
+          - outside
+          - null
+        scale:
+          enum:
+          - nominal
+          - ordinal
+          - interval
+          - ratio
+          - absolute
+          - not-applicable
+          - null
+        selects:
+          enum:
+          - unique
+          - any
+          - all
+          - null
+  parameters:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - notation
+        - of
+        - variant
+        - signature
+        - values
+        - scale
+        - dimensional_formula
+        - expression
+        - condition
+        - selects
+        - held_by
+        - reading
+        - shared
+      properties:
+        scale:
+          enum:
+          - nominal
+          - ordinal
+          - interval
+          - ratio
+          - absolute
+          - not-applicable
+          - null
+        selects:
+          enum:
+          - unique
+          - any
+          - all
+          - null
+  external_systems:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - symbol
+        - variant
+        - class
+        - shares
+        - constrains
+        - reading
+      properties:
+        constrains:
+          items:
+            propertyNames:
+              enum:
+              - name
+              - signature
+              - role
+              - expression
+              - reading
+            properties:
+              role:
+                enum:
+                - evolution
+                - input-output
+                - measurement
+                - state-constraint
+                - distribution
+                - admissibility
+                - null
+x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - commitment
+  - target_type
+  - identification
+  - reference_class
+  - variants
+  - constituents
+  - index_sets
+  - variables
+  - parameters
+  - external_systems
+  - maturity

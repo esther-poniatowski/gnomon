@@ -12,12 +12,14 @@ from typing import Any
 from typer.testing import CliRunner
 
 from gnomon.answerability import (
+    answerability_registry,
     diagnose,
     itinerary_state,
     malformed_answerability,
     render_text,
     routes_of,
 )
+from gnomon.check import load_workspace
 from gnomon.cli import app
 from gnomon.findings import texts
 
@@ -39,7 +41,11 @@ def test_an_asserted_state_opens_the_conditions_that_depend_on_it() -> None:
         "id": "quest.a.b",
         "type": "question",
         "answerability": [
-            {"condition": "definiteness", "state": "established", "pointers": ["phen.a.b"]},
+            {
+                "condition": "definiteness",
+                "state": "established",
+                "pointers": ["phen.a.b"],
+            },
             {
                 "condition": "access",
                 "route": "construction",
@@ -78,8 +84,16 @@ def test_the_route_of_construction_is_diagnosed_once_a_procedure_is_named() -> N
 
 def test_a_negative_phenomenon_refutes_soundness() -> None:
     records: dict[str, dict[str, Any]] = {
-        "quest.a.b": {"id": "quest.a.b", "type": "question", "subject": {"phenomenon": "phen.a.b"}},
-        "phen.a.b": {"id": "phen.a.b", "type": "phenomenon", "evidential_status": "absent"},
+        "quest.a.b": {
+            "id": "quest.a.b",
+            "type": "question",
+            "subject": {"phenomenon": "phen.a.b"},
+        },
+        "phen.a.b": {
+            "id": "phen.a.b",
+            "type": "phenomenon",
+            "evidential_status": "absent",
+        },
     }
     assert states(diagnose(records))["soundness"] == "refuted"
 
@@ -108,12 +122,42 @@ def test_an_act_is_ready_only_when_its_required_inputs_exist() -> None:
     )
 
 
+def test_every_activity_on_an_open_condition_is_retained_before_comparison() -> None:
+    """Readiness annotates every mapped activity; it never selects a preferred subset."""
+    records = load_workspace(EXAMPLES / "grokking-delayed-generalization").by_id
+    found = diagnose(records)
+    mapped: dict[str, list[str]] = {}
+    for entry in answerability_registry()["activities"]:
+        mapped.setdefault(str(entry["condition"]).replace(" ", "-"), []).append(entry["id"])
+
+    listed = [
+        act
+        for question in found.questions
+        for route in question.routes
+        for condition, acts in route.open.items()
+        for act in acts
+        if act.activity in mapped[condition]
+    ]
+    for question in found.questions:
+        for route in question.routes:
+            for condition, acts in route.open.items():
+                assert [act.activity for act in acts] == mapped[condition]
+
+    assert len([act for act in listed if act.ready]) > 1
+    assert any(not act.ready for act in listed)
+
+
 def test_impeachment_and_pending_verdicts_propagate_along_an_itinerary() -> None:
     itinerary = {
         "id": "itin.a.b",
         "type": "itinerary",
         "steps": [
-            {"id": "admit", "inputs": [], "output": {"ref": "bg.a.b"}, "norm": {"verdict": "fail"}},
+            {
+                "id": "admit",
+                "inputs": [],
+                "output": {"ref": "bg.a.b"},
+                "norm": {"verdict": "fail"},
+            },
             {
                 "id": "derive",
                 "inputs": [{"ref": "bg.a.b"}],
@@ -173,14 +217,24 @@ def test_the_command_reports_the_diagnosis_of_the_worked_inquiries() -> None:
         text.exit_code == 0
         and "judge anew the norm of itin.grokking.explain-delay.check" in text.output
     )
+    assert "if its norm passes, produces" in text.output
+    assert "may unblock" in text.output
     first = runner.invoke(app, ["status", str(EXAMPLES), "--format", "yaml"]).output
     assert first == runner.invoke(app, ["status", str(EXAMPLES), "--format", "yaml"]).output
     assert "bg.delayed-generalization-networks.training-specification" in first
+    assert "required_inputs:" in first
+    assert "output_type:" in first
+    assert "produces_in:" in first
+    assert "may_unblock:" in first
 
 
 def test_a_question_of_explication_has_no_condition_of_definiteness() -> None:
     """Its explicandum is not a slot, so a dependency on its definiteness is void."""
-    question = {"id": "quest.a.b", "type": "question", "task": {"epistemic_aim": "explication"}}
+    question = {
+        "id": "quest.a.b",
+        "type": "question",
+        "task": {"epistemic_aim": "explication"},
+    }
     found = diagnose({"quest.a.b": question})
     assert "definiteness" not in states(found)
     assert "answer-type" in found.questions[0].routes[0].open
@@ -208,8 +262,14 @@ def test_a_revision_flags_its_dependents_by_kind_and_warrant() -> None:
             "id": "itin.a.b",
             "type": "itinerary",
             "steps": [
-                {"id": "narrow", "revises": {"record": "bg.a.b", "kind": "scope-narrowing"}},
-                {"id": "reorient", "revises": {"record": "bg.a.b", "kind": "reorientation"}},
+                {
+                    "id": "narrow",
+                    "revises": {"record": "bg.a.b", "kind": "scope-narrowing"},
+                },
+                {
+                    "id": "reorient",
+                    "revises": {"record": "bg.a.b", "kind": "reorientation"},
+                },
                 {
                     "id": "retract",
                     "revises": {

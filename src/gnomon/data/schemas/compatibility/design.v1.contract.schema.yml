@@ -1,0 +1,90 @@
+# Retained version 1 contract for design. Do not edit.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/design.v1.contract.schema.yml
+title: Design record contract
+description: The record type `design`, bound to `gnomon:design@1`, with its closed vocabularies.
+allOf:
+- $ref: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/design.v1.base.schema.yml
+required:
+- _schema
+properties:
+  _schema:
+    const: gnomon:design@1
+    title: Schema
+    description: The logical identifier of the contract that the record follows.
+  type:
+    const: design
+  id:
+    pattern: ^design\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+  status:
+    enum:
+    - provisional
+    - stabilized
+    - retracted
+    - null
+  kind:
+    enum:
+    - experiment
+    - simulation-run
+    - method
+    - scheme
+    - null
+  posits:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - statement
+  inputs:
+    items:
+      propertyNames:
+        enum:
+        - name
+        - description
+  steps:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - act
+  rules:
+    items:
+      propertyNames:
+        enum:
+        - id
+        - rule
+  failure_modes:
+    items:
+      propertyNames:
+        enum:
+        - mode
+        - guard
+        - situation
+        - patch
+  protocol:
+    propertyNames:
+      enum:
+      - intervention
+      - control
+      - observation
+x-identifier: id
+propertyNames:
+  enum:
+  - _schema
+  - title
+  - id
+  - type
+  - status
+  - kind
+  - serves
+  - task
+  - applies_when
+  - posits
+  - inputs
+  - steps
+  - rules
+  - output
+  - stopping
+  - failure_modes
+  - protocol
+  - maturity

@@ -23,9 +23,93 @@
 # the aim of the inquiry may stay empty.
 # A requirement names a field path. An aim fixes what an answer must deliver, never which value
 # a field takes, so no entry constrains a value.
+# `validation_scopes` orders the named completion targets against which a partial inquiry can be
+# checked. `by_scope` states the requirements added at each target. A scope inherits every earlier
+# entry. `checkpoint_records` requires a record only at that exact checkpoint. `required_records`
+# activates the ordinary requirements of a record kind and requires such a record at that and
+# every later checkpoint. `activate_when_present` activates ordinary requirements without requiring
+# a record. `required`
+# adds field paths not already stated by the ordinary tables. `by_aim`, `by_candidate` and
+# `when_record_present` condition those additions. `on_demand` applies only where an open condition
+# requires the stronger commitment. `settled` names a block whose applicable verdicts may no longer
+# be pending.
 
 id: registry.requirements
 type: requirement-registry
+
+validation_scopes:
+  - problem-posed
+  - question-typed
+  - subject-identified
+  - subject-specified
+  - candidate-proposed
+  - candidate-assessed
+
+by_scope:
+  problem-posed:
+    checkpoint_records: [problem]
+  question-typed:
+    required_records: [question]
+    activate_when_present: [itinerary]
+    minimum_subject_slots: typed
+    required:
+      question:
+        - statement
+        - status
+        - subject.target_system
+        - subject.phenomenon
+        - subject.contrast.locus
+        - task.epistemic_aim
+        - task.modal_strength
+        - task.required_accuracy.standard
+    when_record_present:
+      problem:
+        question: [addresses]
+    by_aim:
+      explanation:
+        question: [task.requested_relation]
+      modal-knowledge:
+        question: [task.proof_obligations]
+      explication:
+        question: [task.explicandum]
+  subject-identified:
+    required_records: [target-system]
+    required_unless_aim:
+      phenomenon: [exploration]
+    minimum_subject_slots: identified
+    minimum_commitment:
+      target-system: identified
+      phenomenon: identified
+  subject-specified:
+    activate_when_present: [background, operators]
+    on_demand:
+      target-system: [variables]
+      phenomenon: [category, course, occurrence, manifestations, evidential_status]
+    on_demand_commitment:
+      target-system: specified
+      phenomenon: specified
+    by_aim:
+      exploration:
+        phenomenon: [detection_criterion]
+      prediction:
+        phenomenon: [manifestations]
+        question: [task.required_accuracy.outputs_to_match]
+  candidate-proposed:
+    activate_when_present: [answer, binding, concept, derivation, design, key, model]
+    candidate: proposed
+    by_candidate:
+      answer:
+        question: [request]
+  candidate-assessed:
+    activate_when_present: [assessment]
+    candidate: assessed
+    by_candidate:
+      answer:
+        assessment: [against_version, tests.admissibility, tests.warrant]
+      construct:
+        assessment: [tests.constraints]
+    settled:
+      assessment: [tests]
 
 always:
   operators: [operators]

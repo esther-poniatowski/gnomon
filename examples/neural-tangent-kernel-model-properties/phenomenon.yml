@@ -1,4 +1,4 @@
-_schema: gnomon:phenomenon@1
+_schema: gnomon:phenomenon@2
 title: "Convergence toward neural tangent dynamics"
 statement: "As width increases in network families under neural tangent parameterization, the empirical kernel and the output trajectory approach the linearized dynamics governed by the initial kernel. Both quantities converge only under suitable assumptions on regularity and scaling."
 id: phen.ntk.linearized-dynamics

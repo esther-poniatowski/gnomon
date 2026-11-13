@@ -29,10 +29,23 @@ from typing import Any, Mapping, Sequence
 #: The folder of the documentation, beside the package in a checkout of the repository.
 DOCS = Path(__file__).resolve().parents[2] / "docs"
 
+#: Public location of the documentation read by researchers outside a source checkout.
+DOCUMENTATION_BASE_URI = "https://github.com/esther-poniatowski/gnomon/blob/main/docs"
+
 
 # Fields that identify a record rather than specify an inquiry, so no note documents them.
 RECORD_FIELDS = frozenset(
-    {"_schema", "id", "type", "title", "status", "answers", "target_system", "phenomenon", "name"}
+    {
+        "_schema",
+        "id",
+        "type",
+        "title",
+        "status",
+        "answers",
+        "target_system",
+        "phenomenon",
+        "name",
+    }
 )
 
 # Keys documented in another note than the one under test, with the note that documents them.
@@ -123,11 +136,13 @@ def table_lines(note: str, header: Header, docs: Path = DOCS) -> list[str]:
     after = 0
     if anchor:
         after = next(
-            (i for i, line in enumerate(lines) if line.rstrip().endswith(f"^{anchor}")), -1
+            (i for i, line in enumerate(lines) if line.rstrip().endswith(f"^{anchor}")),
+            -1,
         )
         assert after >= 0, f"no block anchor ^{anchor} in {note}"
     start = next(
-        (i for i, line in enumerate(lines) if i >= after and line.startswith(opening)), None
+        (i for i, line in enumerate(lines) if i >= after and line.startswith(opening)),
+        None,
     )
     assert start is not None, f"no table opening with {opening!r} in {note}"
     end = start
@@ -275,7 +290,15 @@ PAIRS: list[Pair] = [
         "aim_block.explanation",
         {},
     ),
-    ("model", "specification/model.md", "| Element", "model.yml", None, "", ELSEWHERE_MATURITY),
+    (
+        "model",
+        "specification/model.md",
+        "| Element",
+        "model.yml",
+        None,
+        "",
+        ELSEWHERE_MATURITY,
+    ),
     (
         "binding",
         "specification/binding.md",
@@ -330,5 +353,82 @@ PAIRS: list[Pair] = [
         "",
         ELSEWHERE_MATURITY,
     ),
-    ("itinerary", "specification/itinerary.md", "| Specification", "itinerary.yml", None, "", {}),
+    (
+        "itinerary",
+        "specification/itinerary.md",
+        "| Specification",
+        "itinerary.yml",
+        None,
+        "",
+        {},
+    ),
 ]
+
+
+def row_label(cell: str) -> str:
+    """Return the name of a specification row as plain words."""
+    text = cell.split(" — ")[0]
+    text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
+    text = re.sub(r"\$[^$]*\$", "", text)
+    return re.sub(r"\s+", " ", re.sub(r"[*`]", "", text)).strip()
+
+
+def documented_fields(
+    kind: str, paths: Sequence[str], docs: Path = DOCS
+) -> dict[str, tuple[str, str | None]]:
+    """Return the note and row that directly document each resolved field of ``kind``."""
+    found: dict[str, tuple[str, str | None]] = {}
+    for _, note, header, template, _, prefix, elsewhere in PAIRS:
+        if template != f"{kind}.yml":
+            continue
+        for cell in table_rows(note, header, docs):
+            key = resolve(row_slugs(cell), paths, prefix)
+            if key is not None:
+                found.setdefault(key, (note, row_label(cell)))
+        for key, other in elsewhere.items():
+            found.setdefault(key, (other, None))
+    return found
+
+
+def field_documentation(
+    path: str, documented: Mapping[str, tuple[str, str | None]]
+) -> tuple[str | None, str | None]:
+    """Return the nearest specification note and row that document ``path``."""
+    probe = path
+    while probe and probe not in documented:
+        head = probe.rsplit(".", 1)[0] if "." in probe else ""
+        probe = head.removesuffix("[]")
+    if probe:
+        return documented[probe]
+    child = next(
+        (key for key in documented if key.startswith((path + ".", path + "[]."))),
+        None,
+    )
+    if child is None:
+        return None, None
+    note, row = documented[child]
+    return note, (row.split(": ")[0] if row else None)
+
+
+def documentation_notes(
+    kind: str,
+    resolution_paths: Sequence[str],
+    field_paths: Sequence[str] | None = None,
+    docs: Path = DOCS,
+) -> dict[str, str]:
+    """Return the canonical note of each documented schema field.
+
+    ``resolution_paths`` are the concrete paths of the generated template, used to resolve table
+    rows. ``field_paths`` may include deeper schema fields that inherit the resolved row.
+    """
+    direct = documented_fields(kind, resolution_paths, docs)
+    return {
+        path: note
+        for path in field_paths or resolution_paths
+        if (note := field_documentation(path, direct)[0]) is not None
+    }
+
+
+def documentation_target(note: str) -> str:
+    """Return the public canonical target of a documentation note."""
+    return f"{DOCUMENTATION_BASE_URI}/{note}"

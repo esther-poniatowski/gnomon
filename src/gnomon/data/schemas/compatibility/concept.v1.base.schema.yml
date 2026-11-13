@@ -1,0 +1,171 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/esther-poniatowski/gnomon/schemas/compatibility/concept.v1.base.schema.yml
+title: Concept record
+description: The fields of a concept record, as the specification of the record documents them.
+type: object
+x-identifier: id
+x-version: 1
+x-header:
+- 'specification: `docs/specification/concept.md`; one file per concept of the research'
+- 'theory: `docs/epistemology/objects/concept/concept.md`'
+- a concept of another project is referenced by its identifier, never copied
+- replace every UPPERCASE placeholder; leave a field empty while it is not filled
+properties:
+  title:
+    type: [string, 'null']
+    x-template: '"SHORT NAME OF THE CONCEPT"'
+    x-kind: markdown-line
+    title: Title
+    description: A short name of the record, as a label.
+  id:
+    type: [string, 'null']
+    x-template: concept.TOPIC.NAME
+    x-kind: label
+    title: Identifier
+    description: The identifier of the record, in the dotted form whose prefix names the record type.
+  type:
+    type: [string, 'null']
+    x-template: concept
+    x-kind: label
+    title: Record type
+    description: The record type, which fixes the contract that the record follows.
+  status:
+    type: [string, 'null']
+    x-template: provisional
+    x-vocabulary: .status
+    title: Status
+    description: The maturity of the record as a whole, or its retraction.
+  gloss:
+    type: [string, 'null']
+    x-blank: true
+    x-template: '"ONE SENTENCE THAT STATES THE MEANING OF THE CONCEPT"'
+    x-kind: markdown-line
+    title: Gloss
+    description: One sentence that fixes the meaning of the concept, without asserting a claim about its instances.
+    examples: ['an invariant set of a dynamical system that attracts every trajectory starting near it']
+  kind:
+    type: [string, 'null']
+    x-vocabulary: .kind
+    title: Kind
+    description: 'The kind of entity that the concept represents: a system, a class, a kind or a subclass included, a property, or a process.'
+    examples: [subtype-or-class]
+  antagonist:
+    type: [string, 'null']
+    x-template: concept.TOPIC.NAME
+    x-kind: label
+    x-comment: property only, optional; the property opposed to this one
+    title: Antagonist
+    description: The concept of the opposed property, for a concept of the kind property.
+    examples: [concept.dynamics.unstable]
+  broader:
+    type: [string, 'null']
+    x-template: concept.TOPIC.NAME
+    x-kind: label
+    x-comment: at most one; the broader concept, named in this direction only
+    title: Broader concept
+    description: The broader concept that this one specializes, named from the narrower concept only.
+    examples: [concept.dynamics.invariant-set]
+  source:
+    type: [string, 'null']
+    x-template: '"POINTER TO THE NOTE THAT SOURCES THE CONCEPT"'
+    x-kind: markdown-line
+    title: Source
+    description: The note or the publication that states the concept and its grounds.
+    examples: ['the chapter of a textbook on dynamical systems that defines the concept']
+  confusions:
+    type: [array, 'null']
+    x-blank: true
+    x-comment: one entry per concept with which this one risks being conflated; empty when none
+    title: Confusions
+    description: The concepts with which this one risks being conflated, each with the distinction that separates them.
+    items:
+      type: object
+      properties:
+        other:
+          type: [string, 'null']
+          x-template: concept.TOPIC.NAME
+          x-kind: label
+          x-comment: the other concept, or a term in use when no record states it
+          title: Other concept
+          description: The concept, or the term in use, with which this one risks being conflated.
+          examples: [concept.dynamics.fixed-point]
+        axis:
+          type: [string, 'null']
+          x-template: '"THE AXIS ALONG WHICH THE TWO CONCEPTS DIFFER"'
+          x-kind: markdown-line
+          title: Axis of difference
+          description: The axis along which the two concepts differ.
+          examples: ['the stability of the set']
+        blocking_feature:
+          type: [string, 'null']
+          x-template: '"THE FEATURE THAT BLOCKS THEIR INTERCHANGE"'
+          x-kind: markdown-line
+          title: Blocking feature
+          description: The feature of one concept that the other lacks, which blocks their interchange.
+          examples: ['the attraction of the trajectories that start near the set']
+        risk:
+          type: [string, 'null']
+          x-template: '"THE SOURCE OF THE RISK OF CONFLATING THEM"'
+          x-kind: markdown-line
+          title: Source of the risk
+          description: The shared feature that makes the two concepts easy to conflate.
+          examples: ['both are found as zeros of the vector field by the same root search']
+        consequence:
+          type: [string, 'null']
+          x-template: '"THE CONSEQUENCE OF CONFLATING THEM"'
+          x-kind: markdown-line
+          title: Consequence
+          description: The error that the inquiry commits when it conflates the two concepts.
+          examples: ['a saddle point is read as a state that the network stores']
+  relations:
+    x-blank: true
+    type:
+    - array
+    - 'null'
+    items:
+      type: object
+      properties:
+        relation:
+          x-vocabulary: relations.relation
+          type:
+          - string
+          - 'null'
+          title: Relation
+          description: how this concept stands to the others, one relation of the relation registry
+        members:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          x-template: '[concept.TOPIC.NAME]'
+          x-kind: label
+          x-comment: the other concepts of the set
+          title: Members
+          description: the other concepts of the set
+    x-comment: fill when the concept is defined together with others; one entry per set
+    title: Relations
+    description: 'the relations to other concepts: `co-defined-with`, for a set of concepts whose definitions
+      depend on one another'
+    examples:
+    - two concepts of a theory defined each in terms of the other (co-defined-with)
+  definition:
+    type: [string, 'null']
+    x-blank: true
+    x-template: '"POINTER TO A FULL DEFINITION OBJECT"'
+    x-kind: markdown-line
+    x-comment: optional; omit until a full definition object exists
+    title: Definition
+    description: A pointer to the full definition object of the concept, when one exists.
+  maturity:
+    type: [object, 'null']
+    x-blank: true
+    x-comment: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    title: Maturity
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out'
+    additionalProperties:
+      type: [string, 'null']
+      x-template-key: FIELD.PATH
+      x-template: open

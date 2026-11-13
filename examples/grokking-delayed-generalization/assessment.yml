@@ -1,6 +1,6 @@
 # negative for an explanation derived on a toy effective theory, which misses the distribution of the delay
 
-_schema: gnomon:assessment@1
+_schema: gnomon:assessment@2
 title: "Assessment of the account through a structured representation"
 id: assess.grokking.slow-structured-representation
 type: assessment

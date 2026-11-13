@@ -1,6 +1,6 @@
 # tests prediction against a partially known empirical target; the route runs on a stylized model, bound to the phenomenon
 
-_schema: gnomon:answer@1
+_schema: gnomon:answer@3
 title: "Overshoot forecast from a network of four elements"
 id: ans.earth-tipping-subsystems.four-element-overshoot-network
 type: answer

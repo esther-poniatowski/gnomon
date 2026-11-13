@@ -1,4 +1,4 @@
-_schema: gnomon:target-system@1
+_schema: gnomon:target-system@2
 title: "Finite neural networks and their training"
 id: system.delayed-generalization-networks
 type: target-system

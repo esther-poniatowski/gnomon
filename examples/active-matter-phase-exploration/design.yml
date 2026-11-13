@@ -1,4 +1,4 @@
-_schema: gnomon:design@1
+_schema: gnomon:design@2
 title: "Sweep of the nonreciprocal coupling across system sizes"
 id: design.nonreciprocal-active-matter.coupling-sweep
 type: design

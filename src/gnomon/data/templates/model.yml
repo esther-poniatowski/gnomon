@@ -6,11 +6,13 @@
 # replace every UPPERCASE placeholder; leave a field empty while it is not filled
 # specifications follow the order of the specification note
 
-_schema: gnomon:model@1
+_schema: gnomon:model@3
 title: "SHORT NAME OF THE MODEL"
 id: mod.TOPIC.NAME
 type: model
 status: provisional              # provisional (the record is written and still under revision) | stabilized (the inquiry expects no further revision of the record) | retracted (the record is withdrawn, with all its specifications)
+sources:
+  - "POINTER TO AN EXISTING NOTE, PUBLICATION, MODEL OR DATA SET"
 
 background: bg.TOPIC.NAME        # fill when a law of the model carries the warrant `derived`
 
@@ -111,4 +113,4 @@ assumptions:                     # only the assumptions that the laws require, s
     removable:                   # controlled (a correction to the result is known) | ineliminable (the model cannot be stated without it) | unknown (neither a correction nor the ineliminability of the distortion is known)
 
 maturity:                        # optional; one maturity per specification: open | provisional | stabilized; the record status applies to every specification left out
-  FIELD.PATH: open
+  FIELD.PATH: open               # open (not fixed and still expected from the inquiry or the author) | provisional (written and still under revision) | stabilized (no further revision expected in the current state)

@@ -2,27 +2,65 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/model.contract.schema.yml
 title: Model record contract
-description: The record type `model`, bound to `gnomon:model@1`, with its closed vocabularies.
+description: The record type `model`, bound to `gnomon:model@3`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/model.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:model@1
+    const: gnomon:model@3
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: model
+    examples:
+    - model
   id:
     pattern: ^mod\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - mod.topic.name
+  title:
+    examples:
+    - SHORT NAME OF THE MODEL
   status:
+    examples:
+    - provisional
     enum:
     - provisional
     - stabilized
     - retracted
     - null
+  sources:
+    description: 'per source, a provenance pointer to existing material from which the model was adopted;
+      the content stays external and the pointer makes no evidential claim
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+    items:
+      examples:
+      - POINTER TO AN EXISTING NOTE, PUBLICATION, MODEL OR DATA SET
+  background:
+    description: 'the record from which the laws of the model are derived: the identifier of one background
+      record
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+  derives_from:
+    description: 'The parent models, such as a target system or another model, from which the operations
+      derive this model.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+    items:
+      examples:
+      - mod.TOPIC.NAME
   operations:
+    description: 'The typed operations that derive this model from its parents, in the order in which
+      they are applied.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
     items:
       propertyNames:
         enum:
@@ -38,7 +76,16 @@ properties:
         - gain
         - rests_on
       properties:
+        id:
+          description: 'A descriptive identifier of the operation, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
         kind:
+          description: 'the relation of the derived model to its parent that the operation establishes
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - restrict
           - limit
@@ -48,14 +95,72 @@ properties:
           - idealize
           - extend
           - null
+        acts_on:
+          description: 'The symbols of a parent on which the operation acts.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          items:
+            examples:
+            - SYMBOL
+        yields:
+          description: 'The symbols of this model that realize the operation.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          items:
+            examples:
+            - SYMBOL
+        retires:
+          description: 'The symbols of a parent that this model no longer carries.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          items:
+            examples:
+            - SYMBOL
+        regime:
+          description: 'The regime in which the operation holds, as an expression over declared symbols.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
         error:
+          description: 'whether the operation introduces an error into the derived model, and whether
+            that error has a known bound
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - exact
           - controlled
           - uncontrolled
           - singular
           - null
+        bound:
+          description: 'The bound on the error, for a controlled operation.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+        order:
+          description: 'The order in which the limits of the operation are taken.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+        gain:
+          description: 'The derivation or the factor that the operation makes available.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+        rests_on:
+          description: 'The result, the limit or the source that justifies the operation.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
   constituents:
+    description: 'the units that the model treats as bearers
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
     items:
       propertyNames:
         enum:
@@ -65,7 +170,57 @@ properties:
         - variant
         - extent
         - map
+      properties:
+        name:
+          description: 'the kind of unit that the constituent collects
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - KIND OF UNIT
+        symbol:
+          description: 'the symbol of the constituent, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
+        notation:
+          description: 'only when the LaTeX form differs from the symbol
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - LATEX FORM OF THE SYMBOL
+        variant:
+          description: 'symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
+        extent:
+          description: 'a set expression over declared symbols naming the members that the constituent
+            collects
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SET EXPRESSION OVER DECLARED SYMBOLS
+        map:
+          description: 'give for a unit defined from the target, such as a coarse-graining, a mode decomposition,
+            an aggregation or a quotient by a symmetry; omit for a unit of the model alone
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - EXPRESSION OVER THE CONSTITUENTS DECLARED FOR THE TARGET
   index_sets:
+    description: 'the set, its extent and its structure, in the format of a target system
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
     items:
       propertyNames:
         enum:
@@ -77,13 +232,67 @@ properties:
         - structure
         - dimensional_formula
       properties:
+        name:
+          description: 'the words that designate the index set
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - NAME OF THE SET
+        symbol:
+          description: 'the symbol of the index set, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
+        notation:
+          description: 'only when the LaTeX form differs from the symbol
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - LATEX FORM OF THE SYMBOL
+        variant:
+          description: 'symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
+        extent:
+          description: 'a set expression over declared symbols naming the members of the index set
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SET EXPRESSION OVER DECLARED SYMBOLS
         structure:
+          description: 'the role of the index set: the index along which the state evolves, or another
+            index, continuous or countable
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - evolution
           - continuum
           - discrete-set
           - null
+        dimensional_formula:
+          description: 'optional; the dimensional formula of the coordinate that the index set collects,
+            such as L for a spatial domain or T for a time axis, so that a derivative along the index
+            is checked
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
   variables:
+    description: 'per variable, its own symbol, signature and value set, and its construction: an expression
+      over the symbols of the model, or a map other than the identity from the quantities that the target
+      declares
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
     items:
       propertyNames:
         enum:
@@ -103,12 +312,67 @@ properties:
         - reading
         - shared
       properties:
+        name:
+          description: 'the words that designate the variable
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - NAME OF THE VARIABLE
+        symbol:
+          description: 'the symbol of the variable, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
+        notation:
+          description: 'only when the LaTeX form differs from the symbol
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - LATEX FORM OF THE SYMBOL
+        variant:
+          description: 'symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
         determined:
+          description: 'whether the model determines the variable (within) or receives it from outside
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - within
           - outside
           - null
+        signature:
+          description: 'one constituent kind or index set per place; empty for the model as a whole
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - &id001
+            - SYMBOL
+          items:
+            examples: *id001
+        values:
+          description: 'a set expression over declared symbols giving the values of the variable
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SET EXPRESSION OVER DECLARED SYMBOLS
         scale:
+          description: 'the scale of measurement of the variable: nominal, ordinal, interval, ratio or
+            absolute, or not applicable when the values form no scale
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - nominal
           - ordinal
@@ -117,13 +381,67 @@ properties:
           - absolute
           - not-applicable
           - null
+        dimensional_formula:
+          description: 'optional; a monomial over the base dimensions and the base scales of the problem,
+            such as M L T^-2, or 1 for a pure number
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+        expression:
+          description: 'an expression over the symbols of the model, or a map other than the identity
+            from quantities of the target
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
+        condition:
+          description: 'give when no map builds the quantity
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - EXPRESSION THAT THE QUANTITY SATISFIES
         selects:
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy:
+            the unique value, any value, or all of them
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - unique
           - any
           - all
           - null
+        held_by:
+          description: 'The law of a background or of a model, or the consequence of a derivation, that
+            establishes a value satisfying the condition; empty while the existence that the condition
+            presupposes is undischarged.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - RECORD.UNIT
+        reading:
+          description: 'the expression of the variable in words
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - THE EXPRESSION IN WORDS
+        shared:
+          description: 'true when one value holds for every tuple of the signature
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - false
   parameters:
+    description: 'the same content as for a variable, for each quantity that the model holds fixed while
+      the phenomenon unfolds
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
     items:
       propertyNames:
         enum:
@@ -142,7 +460,58 @@ properties:
         - reading
         - shared
       properties:
+        name:
+          description: 'the words that designate the parameter
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - NAME OF THE PARAMETER
+        symbol:
+          description: 'the symbol of the parameter, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
+        notation:
+          description: 'only when the LaTeX form differs from the symbol
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - LATEX FORM OF THE SYMBOL
+        variant:
+          description: 'symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
+        signature:
+          description: 'the indices that the parameter takes
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - &id002
+            - SYMBOL
+          items:
+            examples: *id002
+        values:
+          description: 'a set expression over declared symbols giving the values of the parameter
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SET EXPRESSION OVER DECLARED SYMBOLS
         scale:
+          description: 'the scale of measurement of the parameter: nominal, ordinal, interval, ratio or
+            absolute, or not applicable when the values form no scale
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - nominal
           - ordinal
@@ -151,13 +520,65 @@ properties:
           - absolute
           - not-applicable
           - null
+        dimensional_formula:
+          description: 'optional; a monomial over the base dimensions and the base scales of the problem,
+            such as M L T^-2, or 1 for a pure number
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+        expression:
+          description: 'give for a derived parameter
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
+        condition:
+          description: 'give when no map builds the quantity
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - EXPRESSION THAT THE QUANTITY SATISFIES
         selects:
+          description: 'the reading of a quantity fixed by a condition that several values may satisfy:
+            the unique value, any value, or all of them
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - unique
           - any
           - all
           - null
+        held_by:
+          description: 'The law of a background or of a model, or the consequence of a derivation, that
+            establishes a value satisfying the condition; empty while the existence that the condition
+            presupposes is undischarged.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - RECORD.UNIT
+        reading:
+          description: 'the expression of the parameter in words
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - THE EXPRESSION IN WORDS
+        shared:
+          description: 'true when one value holds for every tuple of the signature
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - false
   laws:
+    description: 'the dependences that link the terms $V$
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
     items:
       propertyNames:
         enum:
@@ -174,7 +595,44 @@ properties:
         - origin
         - range
       properties:
+        name:
+          description: 'the words that designate the law
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - NAME OF THE LAW
+        symbol:
+          description: 'the symbol of the law, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
+        variant:
+          description: 'symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
+        signature:
+          description: 'places the claim ranges over; empty for a claim about the model as a whole
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - &id003
+            - SYMBOL
+          items:
+            examples: *id003
         role:
+          description: 'the role of the law: evolution, input-output, measurement, state-constraint, distribution
+            or admissibility
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - evolution
           - input-output
@@ -183,7 +641,25 @@ properties:
           - distribution
           - admissibility
           - null
+        expression:
+          description: 'an expression over declared symbols stating the law
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS
+        reading:
+          description: 'the law in words
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - THE LAW IN WORDS
         warrant:
+          description: 'the provenance of the law: derived from other laws, posited, fitted or measured
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - derived
           - posited
@@ -191,7 +667,44 @@ properties:
           - measured
           - computed
           - null
+        requires:
+          description: 'The units on which the law rests, each by its dotted identifier, an assumption
+            or an operation of a model, a law of a background or of a model, or a posit or a consequence
+            of a derivation; a law whose descent a derivation records leaves its premises to that derivation.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          items:
+            examples:
+            - RECORD.UNIT
+        rests_on:
+          description: 'What the warrant of the law refers to beyond the units that it requires, in words,
+            such as a source or a data set.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - WHAT THE WARRANT REFERS TO BEYOND THE UNITS REQUIRED
+        origin:
+          description: 'a pointer to the source of the law: a publication, a data set or a derivation
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - 'POINTER TO THE SOURCE OF THE LAW: A PUBLICATION, A DATA SET OR A DERIVATION'
+        range:
+          description: 'omit when the law is established across the whole model
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - EXPRESSION OVER DECLARED SYMBOLS, SATISFIED WHEREVER THE LAW IS ESTABLISHED
   organization:
+    description: 'per relation, the tuples that it connects and the laws that state it, in the format
+      of a background record
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
     items:
       propertyNames:
         enum:
@@ -202,7 +715,70 @@ properties:
         - relates
         - among
         - realized_by
+      properties:
+        name:
+          description: 'the words that designate the relation
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - NAME OF THE RELATION
+        symbol:
+          description: 'the symbol of the relation, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
+        variant:
+          description: 'symbol of the target variant that the entry models; omit when the model stands
+            for every member of the class
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - SYMBOL
+        reading:
+          description: 'only content beyond the relation and the laws
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - THE ARRANGEMENT IN WORDS
+        relates:
+          description: 'for a relation among parts: the connected tuples, reach last
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - prod(SOURCE, REACH), or subset(prod(SOURCE, REACH), ADJACENCY)
+        among:
+          description: 'for a relation among laws: the laws, reach last; fill exactly one of `relates`
+            and `among`
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - &id004
+            - SYMBOL
+          items:
+            examples: *id004
+        realized_by:
+          description: 'laws stating a relation among parts; the parts are read from their expressions
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - &id005
+            - SYMBOL
+          items:
+            examples: *id005
   assumptions:
+    description: 'per assumption, its motive, the gain that it provides, and whether it is removable,
+      as the rule on idealizations defines them
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
     items:
       propertyNames:
         enum:
@@ -212,18 +788,62 @@ properties:
         - gain
         - removable
       properties:
+        id:
+          description: 'a name of the assumption, unique within the record
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - ASSUMPTION
+        assumption:
+          description: 'the assumption in words
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - THE ASSUMPTION IN WORDS
         motive:
+          description: 'the reason for making the assumption: tractability, isolation or a limit
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - tractability
           - isolation
           - limit
           - null
+        gain:
+          description: 'the derivation that the assumption makes possible, or the factor that it exposes
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
+          examples:
+          - THE DERIVATION THAT THE ASSUMPTION MAKES POSSIBLE, OR THE FACTOR THAT IT EXPOSES
         removable:
+          description: 'whether the distortion of the assumption can be removed: controlled, ineliminable
+            or unknown
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/model.md).'
           enum:
           - controlled
           - ineliminable
           - unknown
           - null
+  maturity:
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
 propertyNames:
   enum:
@@ -232,6 +852,7 @@ propertyNames:
   - id
   - type
   - status
+  - sources
   - background
   - derives_from
   - operations

@@ -1,4 +1,4 @@
-_schema: gnomon:target-system@1
+_schema: gnomon:target-system@2
 title: "One-dimensional generalized Swift-Hohenberg equation"
 id: system.swift-hohenberg-localized-states
 type: target-system

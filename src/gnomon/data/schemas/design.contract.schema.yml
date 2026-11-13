@@ -2,58 +2,168 @@
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://github.com/esther-poniatowski/gnomon/schemas/design.contract.schema.yml
 title: Design record contract
-description: The record type `design`, bound to `gnomon:design@1`, with its closed vocabularies.
+description: The record type `design`, bound to `gnomon:design@2`, with its closed vocabularies.
 allOf:
 - $ref: https://github.com/esther-poniatowski/gnomon/schemas/design.base.schema.yml
 required:
 - _schema
 properties:
   _schema:
-    const: gnomon:design@1
+    const: gnomon:design@2
     title: Schema
     description: The logical identifier of the contract that the record follows.
   type:
     const: design
+    examples:
+    - design
   id:
     pattern: ^design\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*\.[a-z][a-z0-9]*(?:-[a-z0-9]+)*$
+    examples:
+    - design.topic.name
+  title:
+    examples:
+    - SHORT NAME OF THE DESIGN
   status:
+    examples:
+    - provisional
     enum:
     - provisional
     - stabilized
     - retracted
     - null
   kind:
+    description: 'Whether the design plans an experiment on the target, a run of a simulation of a model,
+      a method that solves a task, or a scheme that derivations apply.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
     enum:
     - experiment
     - simulation-run
     - method
     - scheme
     - null
+  serves:
+    description: 'The identifier of the question or the problem that the design serves; optional for a
+      method or a scheme that serves no single problem.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+  task:
+    description: 'One sentence that states what an execution of the design must achieve.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+  applies_when:
+    description: 'The conditions under which the scheme applies, each a grammatical expression or a named
+      property.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+    items:
+      examples:
+      - CONDITION OF APPLICATION
   posits:
+    description: 'The posits that the scheme prescribes, each stated as the form or the relation assumed.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
     items:
       propertyNames:
         enum:
         - id
         - statement
+      properties:
+        id:
+          description: 'A descriptive identifier of the posit, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+        statement:
+          description: 'The form or the relation that the scheme assumes.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
   inputs:
+    description: 'The objects that an execution takes, such as systems, a sample, initial states or data.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
     items:
       propertyNames:
         enum:
         - name
         - description
+      properties:
+        name:
+          description: 'The name of the input.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+        description:
+          description: 'The content of the input, stated in one phrase.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
   steps:
+    description: 'The acts of an execution, in their order.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
     items:
       propertyNames:
         enum:
         - id
         - act
+      properties:
+        id:
+          description: 'A descriptive identifier of the step, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+        act:
+          description: 'The act that the step performs.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
   rules:
+    description: 'The rules that state the admissible moves or decisions of an execution.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
     items:
       propertyNames:
         enum:
         - id
         - rule
+      properties:
+        id:
+          description: 'A descriptive identifier of the rule, unique within the record.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+        rule:
+          description: 'The move or the decision that the rule admits or imposes.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+  output:
+    description: 'What an execution yields, such as data or consequences.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+  stopping:
+    description: 'The condition under which an execution stops.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
   failure_modes:
+    description: 'The ways in which an execution can yield a misleading output, or an application of a
+      scheme can fail, each with the step or the rule that guards against it, and for a scheme with the
+      situation that announces the failure and the patch that it calls for.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
     items:
       propertyNames:
         enum:
@@ -61,12 +171,70 @@ properties:
         - guard
         - situation
         - patch
+      properties:
+        mode:
+          description: 'The way in which an execution can yield a misleading output.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+        guard:
+          description: 'The identifier of the step or the rule that detects or prevents the failure.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+        situation:
+          description: 'The situation that announces the failure, at the boundary of the conditions of
+            application or where a posit fails.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+        patch:
+          description: 'The change of the scheme that the failure calls for.
+
+
+            [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
   protocol:
+    description: 'The intervention, the control and the observation of an experiment or of a simulation
+      run.
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
     propertyNames:
       enum:
       - intervention
       - control
       - observation
+    properties:
+      intervention:
+        description: 'The quantity that an execution sets, with its levels.
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+      control:
+        description: 'The condition against which the effect of the intervention is read.
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+      observation:
+        description: 'The observable that an execution records, with the key or the measurement procedure
+          that yields it.
+
+
+          [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/design.md).'
+  maturity:
+    description: 'optional; one maturity per specification: open | provisional | stabilized; the record
+      status applies to every specification left out
+
+
+      [Read the canonical specification](https://github.com/esther-poniatowski/gnomon/blob/main/docs/specification/maturity.md).'
+    additionalProperties:
+      examples:
+      - open
+      enum:
+      - open
+      - provisional
+      - stabilized
+      - null
 x-identifier: id
 propertyNames:
   enum:

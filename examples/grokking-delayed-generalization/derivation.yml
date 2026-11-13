@@ -1,7 +1,7 @@
 # the derivation of the timescale law of the effective theory [liu2022], reconstructed from the
 # linear relaxation of the representation under the limit of a fast decoder
 
-_schema: gnomon:derivation@1
+_schema: gnomon:derivation@2
 title: "Scale of the delay from the slowest structured mode"
 id: derivation.grokking.delay-scale
 type: derivation

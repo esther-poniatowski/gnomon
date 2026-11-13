@@ -1,14 +1,15 @@
 """
 The symbol table of a problem: the declarations collected from its records, those that no
 grammatical field reaches, and the vocabulary record of the problem, a YAML view bound to the schema
-``gnomon:view.vocabulary@2`` that a renderer displays as the other views.
+``gnomon:view.vocabulary@3`` that a renderer displays as the other views.
 """
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Iterator, Mapping
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Iterable, Iterator, Mapping
+from typing import Any
 
 import yaml
 
@@ -17,6 +18,7 @@ from ..findings import Finding, Key, finding
 from ..identifiers import PLACEHOLDER_SEGMENT, split_reference
 from ..latex import declared_notations, symbol_form
 from ..leftovers import strip_leftovers
+from ..source_state import source_state as records_source_state
 from .declarations import Declaration, declarations
 from .layout import (
     GENERATED_KINDS,
@@ -51,6 +53,8 @@ class Problem:
         The directed relation graph its target system states, one entry per edge.
     notations : dict
         The LaTeX notation that each declared symbol states, empty when it states none.
+    source_state : str
+        Identifier of the authored records from which the vocabulary was generated.
     """
 
     name: str
@@ -59,6 +63,7 @@ class Problem:
     local: dict[str, str] = field(default_factory=dict)
     relations: list[dict[str, Any]] = field(default_factory=list)
     notations: dict[str, str] = field(default_factory=dict)
+    source_state: str = ""
 
     @property
     def operators(self) -> frozenset[str]:
@@ -86,7 +91,8 @@ REACHED: frozenset[str] = frozenset({"constituents", "index_sets", "variables", 
 def problem_records(directory: Path) -> list[Mapping[str, Any]]:
     """Return the records that fill the problem of ``directory``, as the checks read them: the
     records of a generated kind, such as its table ``vocabulary.yml``, and the templates not yet
-    started are left out, and a started record is read without its leftovers of the template."""
+    started are left out, and a started record is read without its leftovers of the template.
+    """
     loaded = [
         yaml.safe_load(path.read_text(encoding="utf-8")) for path in sorted(directory.glob("*.yml"))
     ]
@@ -133,7 +139,10 @@ def symbol_uses(
             bare |= identifiers(text)
         for _, _, value in cited(record):
             bare |= {name for _, name in items_of(value) if isinstance(name, str)}
-        for path in (*PATH_REFERENCE, *TYPE_PATH_REFERENCE.get(str(record.get("type", "")), ())):
+        for path in (
+            *PATH_REFERENCE,
+            *TYPE_PATH_REFERENCE.get(str(record.get("type", "")), ()),
+        ):
             bare |= {name for _, name in reach(record, path)}
         dotted |= {named for text in _strings(record) if (named := split_reference(text))}
     return bare, dotted
@@ -173,9 +182,13 @@ def unused_declarations(directory: Path, registry: Path | None = None) -> list[t
 
 def load_problem(directory: Path, registry: Path | None = None) -> Problem:
     """Collect the vocabulary of the problem whose records fill ``directory``."""
-    problem = Problem(name=directory.resolve().name, canonical=canonical_operators(registry))
     records = problem_records(directory)
     by_id = {str(record["id"]): record for record in records if "id" in record}
+    problem = Problem(
+        name=directory.resolve().name,
+        canonical=canonical_operators(registry),
+        source_state=records_source_state(by_id),
+    )
     problem.notations = declared_notations(r for r in records if r.get("type") != "operators")
     for record in records:
         problem.declarations.extend(declarations(record))
@@ -187,12 +200,13 @@ def load_problem(directory: Path, registry: Path | None = None) -> Problem:
 def as_data(problem: Problem) -> dict[str, Any]:
     """Return the vocabulary of a problem in the record form it is stored in."""
     return {
-        "_schema": "gnomon:view.vocabulary@2",
+        "_schema": "gnomon:view.vocabulary@3",
         "id": f"vocab.{problem.name}",
         "type": "vocabulary",
         "title": f"Vocabulary of {problem.name}",
         "problem": problem.name,
         "generated_by": "gnomon vocabulary",
+        "source_state": problem.source_state,
         "symbols": [
             {
                 "symbol": entry.symbol,

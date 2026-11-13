@@ -1,4 +1,4 @@
-_schema: gnomon:phenomenon@1
+_schema: gnomon:phenomenon@2
 title: "Delayed generalization"
 statement: "A finite neural network brings its training loss under a threshold close to zero, and its test loss crosses the generalization criterion only after a positive delay."
 id: phen.grokking.delayed-generalization
