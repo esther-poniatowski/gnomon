@@ -14,7 +14,7 @@ x-assessment-test-properties: &assessment-test-properties
     - {check: unresolved-value, value: pending}
     title: Verdict
     description: The result of applying the criterion to the assessed claim.
-  evidence: &assessment-evidence
+  evidence:
     type: [string, 'null']
     x-template: '""'
     x-kind: markdown-line
@@ -120,11 +120,29 @@ properties:
             type:
             - object
             - 'null'
+            # The keys are written out: a YAML 1.2 reader, such as Ekphrasis, takes a merge key `<<` as an
+            # ordinary key. They repeat the shared test properties, with the template of the evidence.
             properties:
-              <<: *assessment-test-properties
+              verdict:
+                type: [string, 'null']
+                x-template: pending
+                x-vocabulary: tests.verdict
+                x-rules:
+                - {check: unresolved-value, value: pending}
+                title: Verdict
+                description: The result of applying the criterion to the assessed claim.
               evidence:
-                <<: *assessment-evidence
+                type: [string, 'null']
                 x-template: '"DERIVATION, SIMULATION, MEASUREMENT OR COMPARISON THAT SETTLES THE TEST"'
+                x-kind: markdown-line
+                title: Evidence
+                description: The derivation, simulation, measurement or comparison that settles the verdict.
+              holds_on:
+                type: [string, 'null']
+                x-template: '"EXPRESSION OVER DECLARED SYMBOLS"'
+                x-kind: latex
+                title: Holds on
+                description: The subdomain over which the evidence still supports the claim after a failed test.
             title: Product
             description: the verdict on whether the claim is a direct answer of the type that the question fixes, with its evidence
           scope:

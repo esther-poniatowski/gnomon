@@ -437,6 +437,34 @@ def test_the_base_schema_and_the_contract_are_valid(kind: str) -> None:
     )
 
 
+MERGE_TAG = "tag:yaml.org,2002:merge"
+SCHEMA_FILES = sorted(
+    path
+    for path in schemas.contract_path(KINDS[0]).parent.rglob("*")
+    if path.suffix in {".yml", ".yaml"}
+)
+
+
+def merge_keys(node: yaml.Node) -> list[int]:
+    """Return the line of each merge key `<<` in a composed YAML node, counted from one."""
+    found: list[int] = []
+    if isinstance(node, yaml.MappingNode):
+        for key, value in node.value:
+            if key.tag == MERGE_TAG:
+                found.append(key.start_mark.line + 1)
+            found += merge_keys(value)
+    elif isinstance(node, yaml.SequenceNode):
+        for item in node.value:
+            found += merge_keys(item)
+    return found
+
+
+@pytest.mark.parametrize("path", SCHEMA_FILES, ids=lambda path: path.name)
+def test_no_packaged_schema_holds_a_merge_key(path: Path) -> None:
+    # A YAML 1.2 reader, such as Ekphrasis, takes `<<` as an ordinary key, and Kleisis rejects it.
+    assert not merge_keys(yaml.compose(path.read_text(encoding="utf-8"))), path
+
+
 def enums(node: Mapping[str, Any], path: str = "") -> dict[str, list[Any]]:
     """Return every vocabulary that a contract writes, keyed by the path of its field."""
     found = {path: list(node["enum"])} if "enum" in node else {}
