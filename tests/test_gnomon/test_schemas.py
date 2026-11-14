@@ -462,7 +462,9 @@ def merge_keys(node: yaml.Node) -> list[int]:
 @pytest.mark.parametrize("path", SCHEMA_FILES, ids=lambda path: path.name)
 def test_no_packaged_schema_holds_a_merge_key(path: Path) -> None:
     # A YAML 1.2 reader, such as Ekphrasis, takes `<<` as an ordinary key, and Kleisis rejects it.
-    assert not merge_keys(yaml.compose(path.read_text(encoding="utf-8"))), path
+    root = yaml.compose(path.read_text(encoding="utf-8"))
+    assert root is not None, path
+    assert not merge_keys(root), path
 
 
 def enums(node: Mapping[str, Any], path: str = "") -> dict[str, list[Any]]:
