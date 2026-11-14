@@ -1,5 +1,5 @@
 # Inputs of the local schema closure; generated files remain outside this record.
-format_version: 1
+_schema: kleisis:schema-resources@2
 
 paths:
   owned_schemas: src/gnomon/data/schemas
