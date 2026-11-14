@@ -11,7 +11,6 @@ from gnomon.cli import app
 from gnomon.provisioning import ProvisioningError, provision_schemas
 
 
-
 def _mapping(path: Path) -> dict[str, object]:
     """Read one YAML mapping used by the provisioning assertions."""
     value = yaml.safe_load(path.read_text(encoding="utf-8"))
