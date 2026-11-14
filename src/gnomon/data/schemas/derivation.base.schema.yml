@@ -219,6 +219,8 @@ properties:
     title: Slots
     description: The symbols introduced by a move or a posit, and bound later by a move.
     items:
+      # The identifier of each item, a unit of the record that a logical target names.
+      x-identifier: symbol
       type: object
       properties:
         symbol:

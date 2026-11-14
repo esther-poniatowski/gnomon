@@ -196,6 +196,8 @@ properties:
     - array
     - 'null'
     items:
+      # The identifier of each item, a unit of the record that a logical target names.
+      x-identifier: symbol
       type: object
       properties:
         name:
@@ -245,6 +247,8 @@ properties:
     - array
     - 'null'
     items:
+      # The identifier of each item, a unit of the record that a logical target names.
+      x-identifier: symbol
       type: object
       properties:
         name:
@@ -300,6 +304,8 @@ properties:
     - array
     - 'null'
     items:
+      # The identifier of each item, a unit of the record that a logical target names.
+      x-identifier: symbol
       type: object
       properties:
         name:
@@ -379,6 +385,8 @@ properties:
     - array
     - 'null'
     items:
+      # The identifier of each item, a unit of the record that a logical target names.
+      x-identifier: symbol
       type: object
       properties:
         name:
@@ -536,6 +544,8 @@ properties:
     - array
     - 'null'
     items:
+      # The identifier of each item, a unit of the record that a logical target names.
+      x-identifier: symbol
       type: object
       properties:
         name:
@@ -682,6 +692,8 @@ properties:
     - array
     - 'null'
     items:
+      # The identifier of each item, a unit of the record that a logical target names.
+      x-identifier: symbol
       type: object
       properties:
         name:

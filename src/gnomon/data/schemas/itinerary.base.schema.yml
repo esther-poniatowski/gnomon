@@ -238,6 +238,8 @@ properties:
     - array
     - 'null'
     items:
+      # The identifier of each item, a unit of the record that a logical target names.
+      x-identifier: id
       type: object
       properties:
         id:

@@ -120,6 +120,8 @@ properties:
     title: Steps
     description: The acts of an execution, in their order.
     items:
+      # The identifier of each item, a unit of the record that a logical target names.
+      x-identifier: id
       type: object
       properties:
         id:

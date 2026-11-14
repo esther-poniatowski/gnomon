@@ -64,6 +64,8 @@ properties:
     examples:
     - the scale of the parameters and the scale of the loss of a learning system
     items:
+      # The identifier of each item, a unit of the record that a logical target names.
+      x-identifier: symbol
       type: object
       properties:
         symbol:
@@ -92,6 +94,8 @@ properties:
     - array
     - 'null'
     items:
+      # The identifier of each item, a unit of the record that a logical target names.
+      x-identifier: symbol
       type: object
       properties:
         name:
