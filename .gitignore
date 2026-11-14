@@ -54,3 +54,4 @@ docs/_build/
 
 ## External schemas reproduced by Kleisis from the exact sources in specs/schema-resources.yml.
 /.schema-resources/
+/.kleisis/
