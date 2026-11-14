@@ -2,6 +2,7 @@
 
 import platform
 
+import click
 import pytest
 from typer.testing import CliRunner
 
@@ -35,7 +36,8 @@ def test_no_arguments_still_show_the_root_help() -> None:
 
     assert result.exit_code == 2
     assert "Usage:" in result.stdout
-    assert "--version" in result.stdout
+    # Under GitHub Actions, Typer styles its help, so the text is compared unstyled.
+    assert "--version" in click.unstyle(result.stdout)
 
 
 def _fields(stdout: str) -> dict[str, str]:

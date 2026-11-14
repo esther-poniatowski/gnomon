@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+import click
 import pytest
 import yaml
 from jsonschema import Draft202012Validator
@@ -579,7 +580,7 @@ def test_a_json_view_result_requires_one_selected_scope(tmp_path: Path) -> None:
     )
 
     assert result.exit_code == 2
-    assert "requires --scope" in result.stderr
+    assert "requires --scope" in click.unstyle(result.stderr)
 
 
 def test_a_selected_view_names_its_authored_records_and_absent_later_kinds(
